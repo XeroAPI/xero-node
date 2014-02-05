@@ -10,7 +10,20 @@ Supports all three applications types:
 
 * Partner
 
-Support for regular callbacks and promises
+This module will be completed to support ALL Core and Payroll operations by the end of February 2014.
+
+Create an Issue for any suggestions, specifically how to tidily support Where in a simple fashion.
+
+Features
+========
+Implemented/Planned
+
+* Support all API operations
+
+* Efficient paging
+
+* Support for Private, Public, and Partner applications (look at oauth_test/server.js for 3 stage support)
+
 
 Installation
 ============
