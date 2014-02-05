@@ -1,6 +1,6 @@
 {
   "name": "node-xero",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Xero API Wrapper for all application types",
   "main": "lib/index.js",
     "directories": {

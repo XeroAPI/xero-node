@@ -10,6 +10,8 @@ Supports all three applications types:
 
 * Partner
 
+Support for regular callbacks and promises
+
 Installation
 ============
 
@@ -38,11 +40,47 @@ var ParnetApplication = require('node-xero').PartnerApplication;
 var partnerApp = new PartnerApplication({ consumerSecret: 'AAAAA', consumerKey: 'BBBBBB', privateKeyPath: './cert/privatekey.pem', sslCertPath: './cert/ssl.crt'});
 ```
 
+Examples
+========
+Smart paging:
+
+```javascript
+privateApp.core.contacts.getContacts({ pager: {start:1 /* page number */, callback:onContacts}})
+    .fail(function(err)
+    {
+        console.log('Oh no, an error');
+    })
+
+/* Called per page */
+function onContacts(err, response, cb)
+{
+    var contacts = response.data;
+    if (response.finished) // finished paging
+        ....
+    cb(); // Async support
+}
+
+```
+
+Filter support: Modified After
+```
+// No paging
+publicApp.core.contacts.getContacts({ modifiedAfter: new Date(2013,1,1) })
+    .then(function(contacts)
+    {
+        _.each(contacts,  function(contact)
+        {
+            // Do something with contact
+        })
+    })
+
+```
+
 
 Tests
 ==========
 
-'npm install' to install devDependencies and then 'npm test'
+npm test
 
 
 Release History

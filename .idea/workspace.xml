@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cb8ae2bc-54fe-4a3e-a64a-b00c7d52eb9f" name="Default" comment="" />
+    <list default="true" id="cb8ae2bc-54fe-4a3e-a64a-b00c7d52eb9f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entities/banktransaction.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/banktransactions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entities/journal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/journals.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/application.js" afterPath="$PROJECT_DIR$/lib/application.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/contact.js" afterPath="$PROJECT_DIR$/lib/entities/contact.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/contacts.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/contacts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core.js" afterPath="$PROJECT_DIR$/lib/core.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/entity.js" afterPath="$PROJECT_DIR$/lib/entities/entity.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/entity_helper.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/entity_helper.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/index.js" afterPath="$PROJECT_DIR$/lib/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/organisations.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/organisations.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/tests.js" afterPath="$PROJECT_DIR$/test/tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="node-xero.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,9 +46,7 @@
         <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.13-src/core-modules-sources/lib/_stream_passthrough.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -37,7 +54,7 @@
       <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="663">
+            <state line="24" column="17" selection-start="568" selection-end="568" vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="663">
               <folding />
             </state>
           </provider>
@@ -45,39 +62,147 @@
       </file>
       <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="51" selection-start="297" selection-end="298" vertical-scroll-proportion="0.4817073" vertical-offset="41" max-vertical-offset="969">
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="MarkdownPreviewEditor">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="0" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.6444223" vertical-offset="611" max-vertical-offset="1615">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Readme.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/oauth/Readme.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="-40.8" vertical-offset="289" max-vertical-offset="2992">
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="MarkdownPreviewEditor">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="77" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.0" vertical-offset="1309" max-vertical-offset="2992">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="tests.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/tests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="59" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
+            <state line="115" column="0" selection-start="2771" selection-end="3301" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="3485">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="oauth.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manual_tests/oauth.js">
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/node-schema-object/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schemaobject.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/node-schema-object/lib/schemaobject.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="580" column="1" selection-start="20996" selection-end="20996" vertical-scroll-proportion="0.0" vertical-offset="9460" max-vertical-offset="10489">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="should.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/should.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="816" selection-end="816" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="39542">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="should.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/lib/should.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="29" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0" vertical-offset="641" max-vertical-offset="2907">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eql.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/lib/eql.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="1768">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="util.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/lib/util.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="2040">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chain.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/chain.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eql.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/eql.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="number.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/number.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="867">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="property.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/property.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="41" selection-start="1860" selection-end="1860" vertical-scroll-proportion="0.0" vertical-offset="934" max-vertical-offset="3740">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="assert.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/assert.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="373" max-vertical-offset="1054">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="timeout.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/connect/lib/middleware/timeout.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="39" column="6" selection-start="981" selection-end="981" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1037">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oauth_test/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="35" column="30" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0" vertical-offset="161" max-vertical-offset="1428">
               <folding>
@@ -91,10 +216,8 @@
       <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="46" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-              <folding>
-                <marker date="1391301436673" expanded="true" signature="327:412" placeholder="{...}" />
-              </folding>
+            <state line="29" column="9" selection-start="981" selection-end="981" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -102,7 +225,52 @@
       <file leaf-file-name="application.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="36" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.0" vertical-offset="1360" max-vertical-offset="3655">
+            <state line="152" column="4" selection-start="3859" selection-end="3859" vertical-scroll-proportion="0.0" vertical-offset="2241" max-vertical-offset="6205">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="journal.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/entities/journal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="32" selection-start="1683" selection-end="1683" vertical-scroll-proportion="-16.32" vertical-offset="170" max-vertical-offset="1377">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="journals.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/entity_helpers/journals.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="55" column="78" selection-start="1961" selection-end="1961" vertical-scroll-proportion="-13.46" vertical-offset="262" max-vertical-offset="1411">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="banktransactions.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/entity_helpers/banktransactions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="8" selection-start="931" selection-end="931" vertical-scroll-proportion="-11.96" vertical-offset="211" max-vertical-offset="867">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="banktransaction.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/entities/banktransaction.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="77" selection-start="1657" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="730" max-vertical-offset="1428">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contact.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/entities/contact.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="75" column="76" selection-start="2325" selection-end="2389" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1921">
               <folding />
             </state>
           </provider>
@@ -129,7 +297,7 @@
       <file leaf-file-name="core.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+            <state line="21" column="47" selection-start="619" selection-end="619" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
               <folding />
             </state>
           </provider>
@@ -138,7 +306,7 @@
       <file leaf-file-name="mime.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/mime.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="15" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
+            <state line="20" column="15" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="2040">
               <folding />
             </state>
           </provider>
@@ -147,10 +315,8 @@
       <file leaf-file-name="querystring.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.13-src/core-modules-sources/lib/querystring.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="3740">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3740">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -158,7 +324,7 @@
       <file leaf-file-name="oauth.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/oauth/tests/oauth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16779">
+            <state line="2" column="0" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16779">
               <folding />
             </state>
           </provider>
@@ -176,7 +342,7 @@
       <file leaf-file-name="oauth.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/oauth/lib/oauth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="442" column="24" selection-start="15078" selection-end="15078" vertical-scroll-proportion="-13.36" vertical-offset="7180" max-vertical-offset="9758">
+            <state line="332" column="0" selection-start="11518" selection-end="11518" vertical-scroll-proportion="0.0" vertical-offset="5384" max-vertical-offset="9741">
               <folding />
             </state>
           </provider>
@@ -195,9 +361,7 @@
         <entry file="file://$PROJECT_DIR$/node_modules/lodash/dist/lodash.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="115447">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -205,7 +369,7 @@
       <file leaf-file-name="entity.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/entities/entity.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="13" selection-start="602" selection-end="602" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
+            <state line="20" column="22" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="1037">
               <folding />
             </state>
           </provider>
@@ -214,7 +378,7 @@
       <file leaf-file-name="entity_helper.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/entity_helpers/entity_helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="30" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+            <state line="18" column="0" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="561">
               <folding />
             </state>
           </provider>
@@ -223,7 +387,7 @@
       <file leaf-file-name="organisation.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/entities/organisation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="0" selection-start="1833" selection-end="2321" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1547">
+            <state line="57" column="4" selection-start="1801" selection-end="1801" vertical-scroll-proportion="0.0" vertical-offset="742" max-vertical-offset="1547">
               <folding />
             </state>
           </provider>
@@ -232,7 +396,7 @@
       <file leaf-file-name="organisations.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/entity_helpers/organisations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="50" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
+            <state line="36" column="37" selection-start="1225" selection-end="1225" vertical-scroll-proportion="0.0" vertical-offset="203" max-vertical-offset="969">
               <folding />
             </state>
           </provider>
@@ -241,99 +405,7 @@
       <file leaf-file-name="contacts.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/entity_helpers/contacts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="58" selection-start="468" selection-end="468" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/oauth/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="16" selection-start="485" selection-end="485" vertical-scroll-proportion="-7.1923075" vertical-offset="85" max-vertical-offset="799">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contact.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/entities/contact.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="0" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="1768">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shared.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/entities/shared.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="3" selection-start="448" selection-end="448" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="logger.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/logger.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="16" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2023">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dateformat.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/dateformat/lib/dateformat.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3213">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="error.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/misc/error.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="37" selection-start="323" selection-end="323" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="promise.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/misc/promise.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="19" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="q.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/q/q.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1833" column="9" selection-start="55436" selection-end="55436" vertical-scroll-proportion="0.0" vertical-offset="30850" max-vertical-offset="32997">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extend.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/misc/extend.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="5" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+            <state line="41" column="0" selection-start="785" selection-end="1230" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="867">
               <folding />
             </state>
           </provider>
@@ -346,6 +418,9 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
@@ -355,21 +430,26 @@
         <option value="$PROJECT_DIR$/lib/objects/collection.js" />
         <option value="$PROJECT_DIR$/lib/entities/organization.js" />
         <option value="$PROJECT_DIR$/lib/collections/organizations.js" />
-        <option value="$PROJECT_DIR$/node_modules/oauth/lib/oauth.js" />
         <option value="$PROJECT_DIR$/manual_tests/oauth.js" />
-        <option value="$PROJECT_DIR$/lib/index.js" />
         <option value="$PROJECT_DIR$/lib/collections/collection.js" />
         <option value="$PROJECT_DIR$/lib/collections/organisations.js" />
+        <option value="$PROJECT_DIR$/lib/entities/shared.js" />
+        <option value="$PROJECT_DIR$/lib/entities/organisation.js" />
         <option value="$PROJECT_DIR$/lib/entities/entity.js" />
         <option value="$PROJECT_DIR$/lib/entity_helpers/entity_helper.js" />
+        <option value="$PROJECT_DIR$/node_modules/node-schema-object/lib/schemaobject.js" />
+        <option value="$PROJECT_DIR$/lib/index.js" />
+        <option value="$PROJECT_DIR$/node_modules/oauth/lib/oauth.js" />
+        <option value="$PROJECT_DIR$/lib/entity_helpers/contacts.js" />
+        <option value="$PROJECT_DIR$/lib/entity_helpers/organisations.js" />
+        <option value="$PROJECT_DIR$/lib/entity_helpers/banktransactions.js" />
+        <option value="$PROJECT_DIR$/lib/entities/banktransaction.js" />
+        <option value="$PROJECT_DIR$/lib/entities/contact.js" />
+        <option value="$PROJECT_DIR$/lib/entities/journal.js" />
         <option value="$PROJECT_DIR$/lib/core.js" />
         <option value="$PROJECT_DIR$/lib/application.js" />
+        <option value="$PROJECT_DIR$/lib/entity_helpers/journals.js" />
         <option value="$PROJECT_DIR$/test/tests.js" />
-        <option value="$PROJECT_DIR$/lib/entities/shared.js" />
-        <option value="$PROJECT_DIR$/lib/entity_helpers/organisations.js" />
-        <option value="$PROJECT_DIR$/lib/entities/organisation.js" />
-        <option value="$PROJECT_DIR$/lib/entities/contact.js" />
-        <option value="$PROJECT_DIR$/lib/entity_helpers/contacts.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
@@ -384,14 +464,14 @@
     <option name="width" value="1936" />
     <option name="height" value="1186" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -471,7 +551,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="oauth" />
+              <option name="myItemId" value="should" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -489,11 +569,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="oauth" />
+              <option name="myItemId" value="should" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -511,39 +591,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="oauth" />
+              <option name="myItemId" value="should" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="node-xero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node-xero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manual_tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node-xero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node-xero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="ext" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -558,10 +614,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="misc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -601,24 +653,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node-xero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node-xero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cert" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="private" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -632,11 +666,29 @@
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="293" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="293" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="294" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="968" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="294" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="292" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="294" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="968" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FullScreen" value="false" />
+    <property name="SearchEverywhereHistory" value="" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Development\Projects\HostedPortal\Source\node-xero\lib\entities" />
       <recent name="C:\Development\Projects\HostedPortal\Source\node-xero\lib\entity_helpers" />
+      <recent name="C:\Development\Projects\HostedPortal\Source\node-xero\lib\entities" />
       <recent name="C:\Development\Projects\HostedPortal\Source\node-xero" />
       <recent name="C:\Development\Projects\HostedPortal\Source\node-xero\lib\collections" />
       <recent name="C:\Development\Projects\HostedPortal\Source\node-xero\lib" />
@@ -646,14 +698,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Mocha.Test">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -664,15 +708,23 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
       <setting name="configLocationType" value="CONFIG_FILE" />
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="CHROME" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
@@ -707,6 +759,23 @@
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="cb8ae2bc-54fe-4a3e-a64a-b00c7d52eb9f" name="Default" comment="" />
@@ -719,25 +788,25 @@
     <frame x="-8" y="-8" width="1936" height="1186" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32985783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32985783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32985783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24973376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -758,35 +827,31 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/lib/application.js</url>
-          <line>28</line>
+          <line>37</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.13-src/core-modules-sources/lib/_stream_passthrough.js">
+    <entry file="file://$PROJECT_DIR$/lib/misc/extend.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1031">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state line="1" column="0" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="1615">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="5" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+        <state line="4" column="5" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="170">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/dateformat/lib/dateformat.js">
+    <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.13-src/core-modules-sources/lib/_stream_passthrough.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3213">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1031">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -814,9 +879,7 @@
     <entry file="file://$PROJECT_DIR$/node_modules/lodash/dist/lodash.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="115447">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -834,13 +897,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/oauth/tests/oauth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16779">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/oauth/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="40" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
@@ -851,15 +907,6 @@
     <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.13-src/core-modules-sources/lib/querystring.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3740">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/oauth/lib/oauth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="442" column="24" selection-start="15078" selection-end="15078" vertical-scroll-proportion="-13.36" vertical-offset="7180" max-vertical-offset="9758">
           <folding />
         </state>
       </provider>
@@ -878,21 +925,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manual_tests/oauth.js">
+    <entry file="file://$PROJECT_DIR$/oauth_test/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="30" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0" vertical-offset="161" max-vertical-offset="1428">
           <folding>
             <marker date="1391300926927" expanded="true" signature="2065:2522" placeholder="{...}" />
             <marker date="1391300926927" expanded="true" signature="2105:2477" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="46" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-          <folding>
-            <marker date="1391301436673" expanded="true" signature="327:412" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -904,44 +942,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entities/entity.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="13" selection-start="602" selection-end="602" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entity_helpers/entity_helper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="30" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/q/q.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1833" column="9" selection-start="55436" selection-end="55436" vertical-scroll-proportion="0.0" vertical-offset="30850" max-vertical-offset="32997">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="36" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.0" vertical-offset="1360" max-vertical-offset="3655">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/tests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="59" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
           <folding />
         </state>
       </provider>
@@ -953,51 +956,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entity_helpers/organisations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="50" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entities/organisation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="0" selection-start="1833" selection-end="2321" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1547">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entities/contact.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="0" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="1768">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entity_helpers/contacts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="58" selection-start="468" selection-end="468" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/oauth/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="16" selection-start="485" selection-end="485" vertical-scroll-proportion="-7.1923075" vertical-offset="85" max-vertical-offset="799">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="663">
-          <folding />
-        </state>
+        <state line="16" column="16" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="799" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/oauth/Readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="-40.8" vertical-offset="289" max-vertical-offset="2992">
+        <state line="77" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="2992">
           <folding />
         </state>
       </provider>
@@ -1005,9 +971,228 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entities/entity.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="22" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entities/organisation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="4" selection-start="1801" selection-end="1801" vertical-scroll-proportion="0.0" vertical-offset="742" max-vertical-offset="1547">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entity_helpers/entity_helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/connect/lib/middleware/timeout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="6" selection-start="981" selection-end="981" vertical-scroll-proportion="0.0" vertical-offset="203" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/should.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="816" selection-end="816" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="39542">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/assert.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/chain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="681">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/eql.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="681">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/property.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="41" selection-start="1860" selection-end="1860" vertical-scroll-proportion="0.0" vertical-offset="934" max-vertical-offset="3740">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/node-schema-object/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="681">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="5" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/node-schema-object/lib/schemaobject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="580" column="1" selection-start="20996" selection-end="20996" vertical-scroll-proportion="0.0" vertical-offset="9460" max-vertical-offset="10489">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="9" selection-start="981" selection-end="981" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/dateformat/lib/dateformat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="41" selection-start="3662" selection-end="3662" vertical-scroll-proportion="0.0" vertical-offset="943" max-vertical-offset="3213">
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/lib/eql.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/lib/should.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="29" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0" vertical-offset="641" max-vertical-offset="2907">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/lib/ext/number.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="935">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/should/lib/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2108">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/oauth/tests/oauth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16779">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/oauth/lib/oauth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="332" column="0" selection-start="11518" selection-end="11518" vertical-scroll-proportion="0.0" vertical-offset="5384" max-vertical-offset="9741">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entity_helpers/contacts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="0" selection-start="785" selection-end="1230" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="867">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entity_helpers/organisations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="37" selection-start="1225" selection-end="1225" vertical-scroll-proportion="0.0" vertical-offset="203" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entities/banktransaction.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="77" selection-start="1657" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="730" max-vertical-offset="1428">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entity_helpers/banktransactions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="8" selection-start="931" selection-end="931" vertical-scroll-proportion="-11.96" vertical-offset="211" max-vertical-offset="867">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entities/contact.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="76" selection-start="2325" selection-end="2389" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1921">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="47" selection-start="619" selection-end="619" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entities/journal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="32" selection-start="1683" selection-end="1683" vertical-scroll-proportion="-16.32" vertical-offset="170" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="152" column="4" selection-start="3859" selection-end="3859" vertical-scroll-proportion="0.0" vertical-offset="2241" max-vertical-offset="6205">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entity_helpers/journals.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="78" selection-start="1961" selection-end="1961" vertical-scroll-proportion="-13.46" vertical-offset="262" max-vertical-offset="1411">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/tests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="0" selection-start="2771" selection-end="3301" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="3485">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="17" selection-start="568" selection-end="568" vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="663">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="51" selection-start="297" selection-end="298" vertical-scroll-proportion="0.4817073" vertical-offset="41" max-vertical-offset="969">
+        <state line="74" column="0" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.6444223" vertical-offset="611" max-vertical-offset="1615">
           <folding />
         </state>
       </provider>
