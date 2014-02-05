@@ -42,7 +42,7 @@ var partnerApp = new PartnerApplication({ consumerSecret: 'AAAAA', consumerKey: 
 
 Examples
 ========
-Smart paging:
+Efficient paging:
 
 ```javascript
 privateApp.core.contacts.getContacts({ pager: {start:1 /* page number */, callback:onContacts}})
@@ -86,5 +86,8 @@ npm test
 Release History
 ==============
 
+* 0.0.2
+    - Added journals
+    - modifiedAfter support
 * 0.0.1
     - Initial Release

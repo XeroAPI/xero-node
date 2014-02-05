@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb8ae2bc-54fe-4a3e-a64a-b00c7d52eb9f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entities/banktransaction.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/banktransactions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entities/journal.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/journals.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/application.js" afterPath="$PROJECT_DIR$/lib/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/contact.js" afterPath="$PROJECT_DIR$/lib/entities/contact.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/contacts.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/contacts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core.js" afterPath="$PROJECT_DIR$/lib/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/entity.js" afterPath="$PROJECT_DIR$/lib/entities/entity.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/entity_helper.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/entity_helper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/index.js" afterPath="$PROJECT_DIR$/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/organisations.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/organisations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/tests.js" afterPath="$PROJECT_DIR$/test/tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="node-xero.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,7 +37,7 @@
       <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="17" selection-start="568" selection-end="568" vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="663">
+            <state line="2" column="14" selection-start="39" selection-end="39" vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="663">
               <folding />
             </state>
           </provider>
@@ -66,7 +49,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="0" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.6444223" vertical-offset="611" max-vertical-offset="1615">
+            <state line="77" column="0" selection-start="1664" selection-end="1664" vertical-scroll-proportion="0.6952191" vertical-offset="611" max-vertical-offset="1666">
               <folding />
             </state>
           </provider>
@@ -1185,14 +1168,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="17" selection-start="568" selection-end="568" vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="663">
+        <state line="2" column="14" selection-start="39" selection-end="39" vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="0" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.6444223" vertical-offset="611" max-vertical-offset="1615">
+        <state line="77" column="0" selection-start="1664" selection-end="1664" vertical-scroll-proportion="0.6952191" vertical-offset="611" max-vertical-offset="1666">
           <folding />
         </state>
       </provider>
