@@ -30,7 +30,6 @@ describe('private application', function ()
             currentApp.core.organisations.getOrganisation()
                 .then(function(ret)
                 {
-                    console.log(ret.toObject({all:true}));
                     done();
                 })
                 .fail(function(err)
@@ -42,12 +41,14 @@ describe('private application', function ()
 
     describe('contacts', function()
     {
-        it.skip('get by id', function(done)
+        var contact;
+        it('get by id', function(done)
         {
             this.timeout(10000);
             currentApp.core.contacts.getContact('16c56769-c3c8-4dad-bd40-523f83bfe017')
                 .then(function(ret)
                 {
+                    contact = ret;
                     done();
                 })
                 .fail(function(err)
@@ -88,6 +89,7 @@ describe('private application', function ()
                 }
                 catch(ex)
                 {
+
                     done(ex);
                     return;
                 }
@@ -114,7 +116,68 @@ describe('private application', function ()
                 })
 
         })
-
+        it.skip('update contact', function(done)
+        {
+            this.timeout(10000);
+            // Previously retrieved contact
+            contact.FirstName = 'Jimbo';
+            contact.save()
+                .then(function()
+                {
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+        it.skip('create single contact', function(done)
+        {
+            this.timeout(10000);
+            var contact = currentApp.core.contacts.newContact({ Name: 'xemware',FirstName:'Tim',LastName:'Shnaider'});
+            contact.save()
+                .then(function(ret)
+                {
+                    console.log(ret);
+                    done();
+                })
+                .fail(function(err)
+                {
+                    console.log(err)
+                    done(wrapError(err));
+                })
+        })
+        it.skip('create multiple contacts', function(done)
+        {
+            this.timeout(10000);
+            var contacts = [];
+            contacts.push(currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(),FirstName:'Tim',LastName:'Shnaider'}));
+            contacts.push(currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(),FirstName:'Tim',LastName:'Shnaider'}));
+            currentApp.core.contacts.saveContacts(contacts)
+                .then(function(ret)
+                {
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+        it('get attachments for contacts', function(done)
+        {
+            this.timeout(10000);
+            contact.getAttachments()
+                .then(function(attachments)
+                {
+                    console.log(attachments);
+                    done();
+                })
+                .fail(function(err)
+                {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+        });
     })
 
     describe('bank transactions', function()
@@ -125,7 +188,6 @@ describe('private application', function ()
             currentApp.core.bankTransactions.getBankTransaction('63d47b99-e1ef-4b46-84db-034f2205f8fb')
                 .then(function(ret)
                 {
-                    console.log(util.inspect(ret.toObject(),null,null));
                     done();
                 })
                 .fail(function(err)
@@ -139,7 +201,6 @@ describe('private application', function ()
             currentApp.core.bankTransactions.getBankTransactions()
                 .then(function(ret)
                 {
-                    console.log('Bank Transactions: ' + ret.length);
                     done();
                 })
                 .fail(function(err)
@@ -162,22 +223,21 @@ describe('private application', function ()
                 })
 
             var recordCount = 0;
-            function onJournals(err, response, cb)
+            function onJournals(err, ret, cb)
             {
                 cb();
-                recordCount += response.data.length;
-                var firstRecord = _.first(response.data);
+                recordCount += ret.data.length;
+                var firstRecord = _.first(ret.data);
                 if (firstRecord)
                     console.log(util.inspect(firstRecord.toObject(),null,null))
                 try
                 {
 
-                    if (response.finished)
+                    if (ret.finished)
                     {
                         console.log('Journals record count:' + recordCount)
                         done();
                     }
-
                 }
                 catch(ex)
                 {
@@ -195,6 +255,6 @@ function wrapError(err)
 {
     if (err instanceof Error)
         return err;
-    else
-        return new Error(err.statusCode);
+    else if (err.statusCode)
+        return new Error(err.statusCode + ': ' + err.exception.Message);
 }
