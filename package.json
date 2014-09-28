@@ -22,7 +22,8 @@
     "log4js": "~0.6.9",
     "dateformat": "~1.0.7-1.2.3",
     "node-schema-object": "git://github.com/TimNZ/node-schema-object.git",
-    "q": "~1.0.0"
+    "q": "~1.0.0",
+    "express": "3.4.8"
   },
     "readmeFilename": "README.md",
     "devDependencies": {
