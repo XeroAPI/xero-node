@@ -7,11 +7,6 @@ app.use(express.logger());
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.cookieSession({ secret: 'sfsdfsdfsdfsdf234234234fd', cookie: { maxAge: 123467654456 } }));
-/*
-app.use(express.session({
-    secret: "skjghskdjfhbqigohqdiouk"
-}));
-*/
 // Home Page
 app.get('/', function (req, res)
 {
@@ -65,10 +60,15 @@ app.get('/organisations', function (req, res)
 {
     if (req.session.oauthAccessToken) {
         var xeroApp = new xero.PublicApplication({ authorizeCallbackUrl: 'http://localhost:3100/access',
-            consumerKey: 'RPUOKBYW6KZGS37GE7S4ULR72W58B1', consumerSecret: 'Q4XQU3S7TNBKREMUTOFCI3LESYBGZT',
+            consumerKey: 'XPKXXEIXBO4PSYDEWB9GEKCKTOJGOC', consumerSecret: 'LHAFA1V6FW9NTRVKUW8OVMGKWI4N2K',
             accessToken: req.session.oauthAccessToken, accessSecret: req.session.oauthAccessSecret});
-        console.log(xeroApp);
-        res.end();
+        xeroApp.core.organisations.getOrganisation()
+            .then(function(organisation)
+            {
+                console.log(organisation);
+                res.end();
+            })
+
     }
     else
         res.redirect('/request');
