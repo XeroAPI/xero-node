@@ -2,29 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb8ae2bc-54fe-4a3e-a64a-b00c7d52eb9f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/invoices.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entities/payitems.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/payitems.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/payroll.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entities/payroll_employee.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/payroll_employees.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/timesheets.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entity_helpers/trackingcategories.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/entities/trackingcategory.js" />
-      <change type="DELETED" beforePath="R:\CG\src\node-xero\lib\entities\employee.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/application.js" afterPath="$PROJECT_DIR$/lib/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/attachments.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/attachments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/contact.js" afterPath="$PROJECT_DIR$/lib/entities/contact.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core.js" afterPath="$PROJECT_DIR$/lib/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/entity.js" afterPath="$PROJECT_DIR$/lib/entities/entity.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/entity_helper.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/entity_helper.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/invoice.js" afterPath="$PROJECT_DIR$/lib/entities/invoice.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/organisation.js" afterPath="$PROJECT_DIR$/lib/entities/organisation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entity_helpers/organisations.js" afterPath="$PROJECT_DIR$/lib/entity_helpers/organisations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oauth_test/server.js" afterPath="$PROJECT_DIR$/oauth_test/server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/tests.js" afterPath="$PROJECT_DIR$/test/tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/entities/timesheet.js" afterPath="$PROJECT_DIR$/lib/entities/timesheet.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="node-xero.iws" />
@@ -59,21 +38,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31166667" vertical-offset="0" max-vertical-offset="1887">
+            <state vertical-scroll-proportion="-7.48" vertical-offset="0" max-vertical-offset="1887">
               <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tests.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tests.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/tests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2614" max-vertical-offset="7701">
-              <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.765" vertical-offset="2295" max-vertical-offset="7701">
+              <caret line="108" column="10" selection-start-line="108" selection-start-column="10" selection-end-line="108" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -162,8 +141,8 @@
       <file leaf-file-name="invoice.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/entities/invoice.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="2754">
-              <caret line="50" column="33" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1717" max-vertical-offset="2754">
+              <caret line="121" column="64" selection-start-line="121" selection-start-column="64" selection-end-line="121" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -283,7 +262,7 @@
         <entry file="file://$PROJECT_DIR$/lib/entities/timesheet.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1802">
-              <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
+              <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -771,6 +750,7 @@
     <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934684" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299539" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -787,7 +767,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1265,22 +1244,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entities/invoice.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="2754">
-          <caret line="50" column="33" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/tests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2614" max-vertical-offset="7701">
-          <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/application.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5657" max-vertical-offset="7871">
@@ -1305,14 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entities/timesheet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1802">
-          <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65384614" vertical-offset="17" max-vertical-offset="680">
@@ -1323,8 +1278,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31166667" vertical-offset="0" max-vertical-offset="1887">
+        <state vertical-scroll-proportion="-7.48" vertical-offset="0" max-vertical-offset="1887">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entities/invoice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1717" max-vertical-offset="2754">
+          <caret line="121" column="64" selection-start-line="121" selection-start-column="64" selection-end-line="121" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entities/timesheet.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1802">
+          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/tests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.765" vertical-offset="2295" max-vertical-offset="7701">
+          <caret line="108" column="10" selection-start-line="108" selection-start-column="10" selection-end-line="108" selection-end-column="10" />
           <folding />
         </state>
       </provider>

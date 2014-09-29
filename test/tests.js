@@ -38,7 +38,7 @@ describe('private application', function ()
                 })
         })
     })
-    describe.skip('invoices', function()
+    describe('invoices', function()
     {
 
         it.skip('get invoice', function (done)
@@ -55,7 +55,7 @@ describe('private application', function ()
                     done(wrapError(err));
                 })
         })
-        it('update invoice', function (done)
+        it.skip('update invoice', function (done)
         {
             this.timeout(10000);
             currentApp.core.invoices.getInvoice('4844798d-855a-451d-9e69-07f07596a026')
@@ -97,7 +97,7 @@ describe('private application', function ()
                     done(wrapError(err));
                 })
         })
-        it.skip('create invoice', function(done)
+        it('create invoice', function(done)
         {
             this.timeout(10000);
             var invoice = currentApp.core.invoices.newInvoice({
@@ -151,7 +151,7 @@ describe('private application', function ()
                 })
         })
     })
-    describe('timesheets', function()
+    describe.skip('timesheets', function()
     {
         it('create timesheet', function(done)
         {
@@ -161,7 +161,7 @@ describe('private application', function ()
                 StartDate: new Date(2014,8,23),
                 EndDate: new Date(2014,8,29),
                 Status: 'Draft',
-                TimesheetLines: [ { EarningTypeID: '',
+                TimesheetLines: [ { EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
                     NumberOfUnits: [5,0,0,0,0,0,0]}]
             });
             timesheet.save()
