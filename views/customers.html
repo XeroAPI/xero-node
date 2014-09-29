@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Customers{% endblock %}
+
+{% block content %}
+<h3>Customers</h3>
+<table>
+<thead>
+<tr><td>ID</td><td>Name</td><td>First name</td><td>Last name</td></tr>
+</thead>
+{% for contact in contacts %}
+<tr><td>{{ contact.ContactID }}</td><td>{{ contact.Name }}</td><td>{{ contact.FirstName }}</td><td>{{ contact.LastName }}</td></tr>
+{% endfor employees %}
+</table>
+{% endblock %}
