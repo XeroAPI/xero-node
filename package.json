@@ -1,14 +1,14 @@
 {
   "name": "node-xero",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Xero API Wrapper for all application types",
   "main": "lib/index.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "mocha"
+    },
   "keywords": [
     "xero",
     "api"
@@ -16,19 +16,19 @@
   "author": "Tim Shnaider",
   "license": "BSD",
   "dependencies": {
-    "dateformat": "~1.0.7-1.2.3",
-    "express": "3.4.8",
+    "oauth": "~0.9.11",
+    "xml2js": "",
     "lodash": "~2.4.1",
     "log4js": "~0.6.9",
+    "dateformat": "~1.0.7-1.2.3",
     "node-schema-object": "git://github.com/TimNZ/node-schema-object.git",
-    "oauth": "~0.9.11",
     "q": "~1.0.0",
-    "swig": "^1.4.2",
-    "xml2js": "~0.4.1"
+    "express": "3.4.8"
   },
-  "readmeFilename": "README.md",
-  "devDependencies": {
-    "should": "*",
-    "mocha": "*"
-  }
+    "readmeFilename": "README.md",
+    "devDependencies": {
+        "should": "*",
+        "mocha": "*"
+    }
+
 }

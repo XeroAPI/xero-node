@@ -17,16 +17,16 @@ describe('private application', function ()
     {
         it('init instance and set options', function ()
         {
-            currentApp = new xero.PrivateApplication({ consumerKey: 'NPAE62F9LLFDWMB0HMJA0MERC9EJGR', consumerSecret:'BVGO4E7TQTZIGJWQPXN7DPFJJJSXLP',
+            currentApp = new xero.PrivateApplication({ consumerKey: 'B7LJW1ATAARSDSTRHFLQH7HYZPIQRD', consumerSecret:'NVVMDB2HNIRNICQT0LLAGBEYWWQTHH',
                 privateKeyPath:'./cert/private/privatekey.pem'});
         })
     })
 
-    describe('organisations', function()
+    describe.skip('organisations', function()
     {
-        it.skip('get', function(done)
+        it('get', function(done)
         {
-            this.timeout(10000);
+            this.timeout(100000);
             currentApp.core.organisations.getOrganisation()
                 .then(function(ret)
                 {
@@ -38,14 +38,202 @@ describe('private application', function ()
                 })
         })
     })
+    describe('invoices', function()
+    {
 
-    describe('contacts', function()
+        it.skip('get invoice', function (done)
+        {
+            this.timeout(10000);
+            currentApp.core.invoices.getInvoice('4844798d-855a-451d-9e69-07f07596a026')
+                .then(function(invoice)
+                {
+                    console.log(invoice.toObject());
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+        it.skip('update invoice', function (done)
+        {
+            this.timeout(10000);
+            currentApp.core.invoices.getInvoice('4844798d-855a-451d-9e69-07f07596a026')
+                .then(function(invoice)
+                {
+                    invoice.Contact = undefined;
+                    invoice.LineItems.push({Description: 'Test',
+                        Quantity: 1,
+                        UnitAmount: 200,
+                        AccountCode: '400'})
+                    invoice.save()
+                        .then(function()
+                        {
+                            done();
+                        })
+                        .fail(function(err)
+                        {
+                            done(wrapError(err));
+                        })
+
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+
+        it.skip('get invoices', function (done)
+        {
+            this.timeout(10000);
+            currentApp.core.invoices.getInvoices()
+                .then(function(invoices)
+                {
+                    console.log(invoices[0].toObject());
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+        it('create invoice', function(done)
+        {
+            this.timeout(10000);
+            var invoice = currentApp.core.invoices.newInvoice({
+                Type: 'ACCREC',
+                Contact: {
+                    Name: 'Department of Finance'
+                },
+                DueDate: '2014-10-01',
+                LineItems: [
+                    {
+                        Description: 'Services',
+                        Quantity: 4,
+                        UnitAmount: 100,
+                        AccountCode: '400'
+                    }
+                ],
+                Status: 'AUTHORISED'
+            });
+            invoice.save()
+                .then(function()
+                {
+                    done();
+                })
+                .fail(function(err)
+                {
+                    console.log(util.inspect(err,null,null));
+                    done(wrapError(err));
+                })
+
+
+        })
+    })
+    describe('tracking categories', function()
+    {
+
+    })
+    describe.skip('payitems', function()
+    {
+        it('get payitems', function(done)
+        {
+            this.timeout(10000);
+            currentApp.payroll.payitems.getPayItems()
+                .then(function(payitems)
+                {
+                    console.log(payitems[0].EarningsTypes);
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+    })
+    describe.skip('timesheets', function()
+    {
+        it('create timesheet', function(done)
+        {
+            this.timeout(10000);
+            var timesheet = currentApp.payroll.timesheets.newTimesheet({
+                EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
+                StartDate: new Date(2014,8,23),
+                EndDate: new Date(2014,8,29),
+                Status: 'Draft',
+                TimesheetLines: [ { EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
+                    NumberOfUnits: [5,0,0,0,0,0,0]}]
+            });
+            timesheet.save()
+                .then(function()
+                {
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+
+        })
+        it.skip('get timesheets', function(done)
+        {
+            this.timeout(10000);
+            currentApp.payroll.timesheets.getTimesheets()
+                .then(function(timesheets)
+                {
+                    if (!_.isEmpty(timesheets))
+                        console.log(util.inspect(timesheets[0].toObject(), null,null));
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+    })
+
+    describe.skip('employees', function()
+    {
+        var employee;
+        it('get (no paging)', function(done)
+        {
+            this.timeout(10000);
+            currentApp.payroll.employees.getEmployees()
+                .then(function(ret)
+                {
+                    console.log(ret[0].toObject());
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+        it.skip('get by id', function(done)
+        {
+            this.timeout(10000);
+            currentApp.payroll.employees.getEmployee('065a115c-ba9c-4c03-b8e3-44c551ed8f21')
+                .then(function(ret)
+                {
+                    employee = ret;
+                    console.log(employee.toObject());
+                    done();
+                })
+                .fail(function(err)
+                {
+                    done(wrapError(err));
+                })
+        })
+
+
+    })
+    describe.skip('contacts', function()
     {
         var contact;
         it('get by id', function(done)
         {
             this.timeout(10000);
-            currentApp.core.contacts.getContact('16c56769-c3c8-4dad-bd40-523f83bfe017')
+            currentApp.core.contacts.getContact('891F1925-61E6-4955-ADF2-D87366D99DA4')
                 .then(function(ret)
                 {
                     contact = ret;
@@ -56,7 +244,7 @@ describe('private application', function ()
                     done(wrapError(err));
                 })
         })
-        it.skip('get (no paging)', function(done)
+        it('get (no paging)', function(done)
         {
             this.timeout(10000);
             currentApp.core.contacts.getContacts()
@@ -69,7 +257,7 @@ describe('private application', function ()
                     done(wrapError(err));
                 })
         })
-        it.skip('get (paging)', function(done)
+        it('get (paging)', function(done)
         {
             this.timeout(10000);
             currentApp.core.contacts.getContacts({ pager: {start:1, callback:onContacts}})
@@ -83,7 +271,7 @@ describe('private application', function ()
                 cb();
                 try
                 {
-                    response.data.length.should.equal(44,'Unexpected number of contacts returned');
+                    // response.data.length.should.equal(7,'Unexpected number of contacts returned');
                     if (response.finished)
                         done();
                 }
@@ -96,9 +284,9 @@ describe('private application', function ()
 
             }
         })
-        it.skip('get - modifiedAfter', function(done)
+        it('get - modifiedAfter', function(done)
         {
-            this.timeout(10000);
+            this.timeout(100000);
             var modifiedAfter = new Date();
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
                 .then(function(contacts)
@@ -116,7 +304,7 @@ describe('private application', function ()
                 })
 
         })
-        it.skip('update contact', function(done)
+        it('update contact', function(done)
         {
             this.timeout(10000);
             // Previously retrieved contact
@@ -131,10 +319,10 @@ describe('private application', function ()
                     done(wrapError(err));
                 })
         })
-        it.skip('create single contact', function(done)
+        it('create single contact', function(done)
         {
             this.timeout(10000);
-            var contact = currentApp.core.contacts.newContact({ Name: 'xemware',FirstName:'Tim',LastName:'Shnaider'});
+            var contact = currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(),FirstName:'Tim',LastName:'Shnaider'});
             contact.save()
                 .then(function(ret)
                 {
@@ -147,12 +335,12 @@ describe('private application', function ()
                     done(wrapError(err));
                 })
         })
-        it.skip('create multiple contacts', function(done)
+        it('create multiple contacts', function(done)
         {
             this.timeout(10000);
             var contacts = [];
-            contacts.push(currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(),FirstName:'Tim',LastName:'Shnaider'}));
-            contacts.push(currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(),FirstName:'Tim',LastName:'Shnaider'}));
+            contacts.push(currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(),FirstName:'Tim' + Math.random(),LastName:'Shnaider'}));
+            contacts.push(currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(),FirstName:'Tim' + Math.random(),LastName:'Shnaider'}));
             currentApp.core.contacts.saveContacts(contacts)
                 .then(function(ret)
                 {
@@ -163,9 +351,9 @@ describe('private application', function ()
                     done(wrapError(err));
                 })
         })
-        it('get attachments for contacts', function(done)
+        it.skip('get attachments for contacts', function(done)
         {
-            this.timeout(10000);
+            this.timeout(100000);
             contact.getAttachments()
                 .then(function(attachments)
                 {
@@ -213,7 +401,7 @@ describe('private application', function ()
 
     describe('journals', function()
     {
-        it('get (paging)', function(done)
+        it.skip('get (paging)', function(done)
         {
             this.timeout(10000);
             currentApp.core.journals.getJournals({ pager: {start:1, callback:onJournals}})
