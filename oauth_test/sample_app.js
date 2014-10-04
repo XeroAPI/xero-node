@@ -1,13 +1,16 @@
 var express = require('express'),
     xero = require('..'),
-    swig = require('swig');
-
+    swig = require('swig'),
+    LRU = require('lru-cache'),
+    fs = require('fs')
 
 function getXeroApp(session)
 {
     var config={ authorizeCallbackUrl: 'http://localhost:3100/access',
-                 consumerKey: 'RPUOKBYW6KZGS37GE7S4ULR72W58B1', 
-                 consumerSecret: 'Q4XQU3S7TNBKREMUTOFCI3LESYBGZT' };
+                 consumerKey: 'XPKXXEIXBO4PSYDEWB9GEKCKTOJGOC',
+                 consumerSecret: 'LHAFA1V6FW9NTRVKUW8OVMGKWI4N2K' };
+
+
     if (session)
     {
         if (session.oauthAccessToken && session.oauthAccessSecret)
@@ -15,8 +18,6 @@ function getXeroApp(session)
             config.accessToken=session.oauthAccessToken;
             config.accessSecret=session.oauthAccessSecret;
         }
-        else 
-            return false;
     }
     return new xero.PublicApplication(config);
 } 
@@ -27,7 +28,7 @@ var app = express();
 app.engine('html', swig.renderFile);
 
 app.set('view engine', 'html');
-app.set('views', __dirname + '/../views');
+app.set('views', __dirname + '/views');
 
 app.set('view cache', false);
 swig.setDefaults({ cache: false });
@@ -36,37 +37,48 @@ swig.setDefaults({ cache: false });
 app.use(express.logger());
 app.use(express.bodyParser());
 app.use(express.cookieParser());
-app.use(express.cookieSession({ secret: 'sfsdfsdfsdfsdf234234234fd', cookie: { maxAge: 123467654456 } }));
-// Home Page
-app.get('/', function (req, res)
-{
-    if (!req.session.authorized) {
-        res.redirect("/request");
-    }
-    else {
-        res.render('index',{});
-    }
-});
+app.use(express.session({ secret: '123456'}));
+// app.use(express.cookieSession({ secret: 'sfsdfsdfsdfsdf234234234fd', cookie: { maxAge: 123467654456 } }));
 
-// Request an OAuth Request Token, and redirects the user to authorize it
-app.get('/request', function (req, res)
+function authorizeRedirect(req,res,returnTo)
 {
-    var xeroApp = getXeroApp();
+    var xeroApp = getXeroApp(null,returnTo);
     xeroApp.getRequestToken(function (err, token, secret)
     {
         if (!err) {
             req.session.oauthRequestToken = token;
             req.session.oauthRequestSecret = secret;
-            var authoriseUrl = xeroApp.buildAuthorizeUrl(token);
+            req.session.returnto = returnTo;
+            var authoriseUrl = xeroApp.buildAuthorizeUrl(token, { scope: 'payroll.employees,payroll.payitems,payroll.timesheets' });
             res.redirect(authoriseUrl);
         }
         else {
-
+            res.redirect('/error');
         }
     })
 
+}
+
+var cache = LRU();
+
+function authorizedOperation(req,res,returnTo, callback)
+{
+    if (req.session.oauthAccessToken)
+    {
+        var xeroApp = getXeroApp(req.session);
+        callback(xeroApp);
+    }
+    else
+        authorizeRedirect(req,res,returnTo);
+}
+
+// Home Page
+app.get('/', function (req, res)
+{
+    res.render('index.html');
 });
 
+// Redirected from xero with oauth results
 app.get('/access', function (req, res)
 {
     var xeroApp = getXeroApp();
@@ -77,90 +89,179 @@ app.get('/access', function (req, res)
             {
                 req.session.oauthAccessToken = accessToken;
                 req.session.oauthAccessSecret = accessSecret;
-                res.redirect('/organisations');
+                var returnTo = req.session.returnto;
+                res.redirect(returnTo || '/');
             }
         )
     }
 });
 
-// Callback for the authorization page
-app.get('/organisations', function (req, res)
+app.get('/employees', function (req, res)
 {
-    var xeroApp = getXeroApp(req.session);
-    if (xeroApp)
+    authorizedOperation(req,res,'/employees', function(xeroApp)
     {
-        console.log(xeroApp);
-        res.end();
+        var employees = [];
+        xeroApp.payroll.employees.getEmployees({ pager: { callback: pagerCallback}})
+            .then(function()
+            {
+                res.render('employees.html', { employees: employees});
+            })
+
+        function pagerCallback(err,response, cb)
+        {
+            employees.push.apply(employees,response.data);
+            cb()
+        }
+    })
+});
+
+app.get('/error', function(req,res)
+{
+    res.render('error.html', { error: req.query.error});
+})
+
+app.get('/contacts', function (req, res)
+{
+    authorizedOperation(req,res,'/contacts', function(xeroApp)
+    {
+        var contacts = [];
+        xeroApp.core.contacts.getContacts({ pager: { callback: pagerCallback}})
+            .then(function()
+            {
+                res.render('contacts.html', { contacts: contacts});
+            })
+
+        function pagerCallback(err,response, cb)
+        {
+            contacts.push.apply(contacts,response.data);
+            cb()
+        }
+    })
+});
+
+
+app.get('/timesheets', function (req, res)
+{
+    authorizedOperation(req,res,'/timesheets', function(xeroApp)
+    {
+        xeroApp.payroll.timesheets.getTimesheets()
+            .then(function(timesheets)
+            {
+                res.render('timesheets.html', { timesheets: timesheets});
+            })
+    })
+});
+
+app.use('/createtimesheet', function (req, res)
+{
+    if (req.method == 'GET')
+    {
+        return res.render('createtimesheet.html');
+    }
+    else if (req.method == 'POST') {
+        authorizedOperation(req, res, '/createtimesheet', function (xeroApp)
+        {
+            var timesheet = xeroApp.payroll.timesheets.newTimesheet({
+                EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
+                StartDate: new Date(2014,8,23),
+                EndDate: new Date(2014,8,29),
+                Status: 'Draft',
+                TimesheetLines: [ { EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
+                    NumberOfUnits: [5,0,0,0,0,0,0]}]
+            });
+            timesheet.save()
+                .then(function (ret)
+                {
+                    res.render('createtimesheet.html', { timesheets: ret.entities})
+                })
+                .fail(function (err)
+                {
+                    res.render('createtimesheet.html', { err: err})
+                })
+
+        })
+    }
+});
+
+
+app.get('/invoices', function (req, res)
+{
+    authorizedOperation(req,res,'/invoices', function(xeroApp)
+    {
+        xeroApp.core.invoices.getInvoices()
+            .then(function(invoices)
+            {
+                res.render('invoices.html', { invoices: invoices});
+            })
+
+    })
+});
+
+app.use('/createinvoice', function (req, res)
+{
+    if (req.method == 'GET')
+    {
+        return res.render('createinvoice.html');
+    }
+    else if (req.method == 'POST') {
+        authorizedOperation(req, res, '/createinvoice', function (xeroApp)
+        {
+            var invoice = xeroApp.core.invoices.newInvoice({
+                Type: req.body.Type,
+                Contact: {
+                    Name: req.body.Contact
+                },
+                DueDate: '2014-10-01',
+                LineItems: [
+                    {
+                        Description: req.body.Description,
+                        Quantity: req.body.Quantity,
+                        UnitAmount: req.body.Amount,
+                        AccountCode: 400
+                    }
+                ],
+                Status: 'AUTHORISED'
+            });
+            invoice.save()
+                .then(function (ret)
+                {
+                    res.render('createinvoice.html', { invoices: ret.entities})
+                })
+                .fail(function (err)
+                {
+                    res.render('createinvoice.html', { err: err})
+                })
+
+        })
+    }
+});
+
+app.use('/emailinvoice', function (req, res)
+{
+    if (req.method == 'GET' && !req.query.a)
+    {
+        res.render('emailinvoice.html', { id: req.query.id});
     }
     else
-        res.redirect('/request');
-});
-
-app.use('/employees', function (req, res)
-{
-    var xeroApp = getXeroApp(req.session);
-    if (xeroApp)
     {
-        res.render('employees',{});
+        authorizedOperation(req,res,'/emailinvoice?id=' + req.query.id + '&a=1', function(xeroApp)
+        {
+            var file = fs.createWriteStream('./invoice.pdf', { encoding: 'binary'});
+            xeroApp.core.invoices.streamInvoice(req.query.id,'pdf',file);
+            file.on('finish', function()
+            {
+                // Send email with attachment
+                res.render('emailinvoice.html', { outcome: 'Email sent', id: req.query.id});
+            })
+
+        })
     }
-    else
-        res.redirect('/request');
 });
 
-app.use('/customers', function (req, res)
+app.use(function(req,res,next)
 {
-   var xeroApp = getXeroApp(req.session);
-    if (xeroApp)
-    {
-        res.render('customers',{});
-    }
-    else
-        res.redirect('/request');
-});
-
-app.get('/customer_test', function (req, res)
-{
-    var xeroApp = getXeroApp(req.session);
-    var contacts = [];
-    for (var i=1;i<=50;i++)
-    {
-        contacts.push(xeroApp.core.contacts.newContact({ ContactID: i,Name: 'user' + Math.floor(Math.random()*100+1),FirstName:'Joe',LastName:'Smith'}));
-    }
-    res.render('customers',{contacts:contacts});
-});
-
-app.use('/timesheets', function (req, res)
-{
-    var xeroApp = getXeroApp(req.session);
-    if (xeroApp)
-    {
-        res.render('timesheets',{});
-    }
-    else
-        res.redirect('/request');
-});
-
-app.use('/invoices', function (req, res)
-{
-    var xeroApp = getXeroApp(req.session);
-    if (xeroApp)
-    {
-        res.render('invoices',{});
-    }
-    else
-        res.redirect('/request');
-});
-
-app.use('/send_invoice', function (req, res)
-{
-    var xeroApp = getXeroApp(req.session);
-    if (xeroApp)
-    {
-        res.render('send_invoice',{});
-    }
-    else
-        res.redirect('/request');
-});
-
+    if (req.session)
+        delete req.session.returnto;
+})
 app.listen(3100);
 console.log("listening on http://localhost:3100");

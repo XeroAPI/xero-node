@@ -3,10 +3,13 @@
 {% block title %}Send invoice{% endblock %}
 
 {% block content %}
+
+<h2>{{ outcome }}</h2>
+
 <h3>Send invoice</h3>
 <form method="post" action="">
 
-Invoice ID<input name="Invoice" type="text">
+Invoice ID<input name="Invoice" type="text" value="{{ id }}">
 Email <input name="Email" type="email">
 
 <input type="submit" value="Submit">

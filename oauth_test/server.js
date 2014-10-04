@@ -22,7 +22,7 @@ app.get('/', function (req, res)
 app.get('/request', function (req, res)
 {
     var xeroApp = new xero.PublicApplication({ authorizeCallbackUrl: 'http://localhost:3100/access',
-        consumerKey: 'RPUOKBYW6KZGS37GE7S4ULR72W58B1', consumerSecret: 'Q4XQU3S7TNBKREMUTOFCI3LESYBGZT'})
+        consumerKey: 'XPKXXEIXBO4PSYDEWB9GEKCKTOJGOC', consumerSecret: 'LHAFA1V6FW9NTRVKUW8OVMGKWI4N2K'})
     xeroApp.getRequestToken(function (err, token, secret)
     {
         if (!err) {
