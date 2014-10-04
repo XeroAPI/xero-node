@@ -1,6 +1,6 @@
 {
   "name": "node-xero",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Xero API Wrapper for all application types",
   "main": "lib/index.js",
   "directories": {
@@ -17,17 +17,17 @@
   "license": "BSD",
   "dependencies": {
     "dateformat": "~1.0.7-1.2.3",
-    "express": "3.4.8",
     "lodash": "~2.4.1",
     "log4js": "~0.6.9",
-    "lru-cache": "^2.5.0",
     "q": "~1.0.0",
-    "swig": "^1.4.2",
     "xml2js": ""
   },
   "readmeFilename": "README.md",
   "devDependencies": {
     "should": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "swig": "^1.4.2",
+    "express": "3.4.8",
+    "nodemailer": ""
   }
 }

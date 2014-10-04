@@ -2,7 +2,9 @@ var express = require('express'),
     xero = require('..'),
     swig = require('swig'),
     LRU = require('lru-cache'),
-    fs = require('fs')
+    fs = require('fs'),
+    nodemailer = require('nodemailer')
+
 
 function getXeroApp(session)
 {
@@ -244,14 +246,31 @@ app.use('/emailinvoice', function (req, res)
     }
     else
     {
-        authorizedOperation(req,res,'/emailinvoice?id=' + req.query.id + '&a=1', function(xeroApp)
+        authorizedOperation(req,res,'/emailinvoice?id=' + req.query.id + '&a=1&email=' + encodeURIComponent(req.body.Email), function(xeroApp)
         {
-            var file = fs.createWriteStream('./invoice.pdf', { encoding: 'binary'});
+            var file = fs.createWriteStream(__dirname + '/invoice.pdf', { encoding: 'binary'});
             xeroApp.core.invoices.streamInvoice(req.query.id,'pdf',file);
             file.on('finish', function()
             {
-                // Send email with attachment
-                res.render('emailinvoice.html', { outcome: 'Email sent', id: req.query.id});
+                var transporter = nodemailer.createTransport(); // Direct
+                var mailOptions = {
+                    from: 'test@gmail.com',
+                    to: req.body.Email || req.query.email,
+                    subject: 'Test email',
+                    text: 'Email text',
+                    html: 'This is a xero invoice',
+                    attachments: [
+                        { filename: 'invoice.pdf', path: __dirname + '/invoice.pdf'}
+                    ]
+                };
+                transporter.sendMail(mailOptions, function(err,info)
+                {
+                    if (err)
+                        res.render('emailinvoice.html', { outcome: 'Error', err: err, id: req.query.id});
+                    else
+                        res.render('emailinvoice.html', { outcome: 'Email sent', id: req.query.id});
+                })
+
             })
 
         })
