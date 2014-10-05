@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block title %}Create Invoice{% endblock %}
-{{ err }}
-{% if invoices %}
-{% endif %}
 
 {% block content %}
+{% if outcome %}<h2>{{ outcome }}</h2>{% endif %}
+{% if id %}<a href="/emailinvoice?id={{id}}" class="btn btn-xs btn-primary">Email</a>{% endif %}
+
 <h3>Invoice</h3>
 <form method="post" action="">
 Invoice type <select name="Type">

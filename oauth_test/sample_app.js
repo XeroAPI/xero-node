@@ -199,6 +199,19 @@ app.get('/invoices', function (req, res)
     })
 });
 
+app.get('/items', function (req, res)
+{
+    authorizedOperation(req,res,'/items', function(xeroApp)
+    {
+        xeroApp.core.items.getItems()
+            .then(function(items)
+            {
+                res.render('items.html', { items: items});
+            })
+
+    })
+});
+
 app.use('/createinvoice', function (req, res)
 {
     if (req.method == 'GET')
@@ -219,19 +232,21 @@ app.use('/createinvoice', function (req, res)
                         Description: req.body.Description,
                         Quantity: req.body.Quantity,
                         UnitAmount: req.body.Amount,
-                        AccountCode: 400
+                        AccountCode: 400,
+                        ItemCode: 'ABC123'
                     }
                 ],
-                Status: 'AUTHORISED'
+                Status: 'DRAFT'
             });
             invoice.save()
                 .then(function (ret)
                 {
-                    res.render('createinvoice.html', { invoices: ret.entities})
+                    console.log(ret.entities[0]);
+                    res.render('createinvoice.html', { outcome: 'Invoice created', id: ret.entities[0].InvoiceID})
                 })
                 .fail(function (err)
                 {
-                    res.render('createinvoice.html', { err: err})
+                    res.render('createinvoice.html', { outcome: 'Error', err: err})
                 })
 
         })
