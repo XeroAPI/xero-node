@@ -108,6 +108,11 @@ app.get('/employees', function (req, res)
             {
                 res.render('employees.html', { employees: employees});
             })
+            .fail(function(err)
+            {
+                console.log(err);
+                res.render('employees.html', { error: err});
+            })
 
         function pagerCallback(err,response, cb)
         {
@@ -241,7 +246,6 @@ app.use('/createinvoice', function (req, res)
             invoice.save()
                 .then(function (ret)
                 {
-                    console.log(ret.entities[0]);
                     res.render('createinvoice.html', { outcome: 'Invoice created', id: ret.entities[0].InvoiceID})
                 })
                 .fail(function (err)
