@@ -1,4 +1,4 @@
-node-xero
+xero-node
 ===========
 An API wrapper for xero (http://developer.xero.com).
 
