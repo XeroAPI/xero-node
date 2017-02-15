@@ -7,7 +7,7 @@
         "test": "test"
     },
     "scripts": {
-        "test": "mocha"
+        "test": "mocha --recursive"
     },
     "keywords": [
         "xero",
@@ -24,7 +24,7 @@
     },
     "readmeFilename": "README.md",
     "devDependencies": {
-        "should": "*",
+        "chai": "^3.5.0",
         "mocha": "*",
         "swig": "^1.4.2",
         "express": "3.4.8",

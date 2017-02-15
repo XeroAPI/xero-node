@@ -1,4 +1,6 @@
-var should = require('should'),
+var chai = require('chai'),
+    should = chai.should(),
+    expect = chai.expect,
     _ = require('lodash'),
     xero = require('..'),
     util = require('util')
@@ -9,21 +11,51 @@ process.on('uncaughtException', function(err) {
 
 var currentApp;
 
-describe('private application', function() {
+/**
+ * Private Application Tests
+ * 
+ * Accounting API Tests covered:
+ * - Accounts (GET, POST, PUT, DELETE)
+ * - Attachments (GET, POST, PUT)
+ * - BankTransactions (GET, POST, PUT)
+ * - BankTransfers (GET, PUT)
+ * - Contacts (GET, PUT, POST)
+ * - Invoices (GET, PUT, POST)
+ * - Items (GET, PUT, POST, DELETE)
+ * - Journals (GET)
+ * - Organisations (GET)
+ * - Tracking Categories (GET, PUT, POST, DELETE)
+ * - Users (GET)
+ * 
+ * Payroll Tests Covered
+ * - Pay Items (GET, POST)
+ * - Payroll Employees (GET, POST)
+ * - Timesheets (GET, POST)
+ */
 
+var organisationCountry = "";
+
+describe('private application', function() {
     describe('create instance', function() {
         it('init instance and set options', function() {
             //This constructor looks in ~/.xero/config.json for settings
             currentApp = new xero.PrivateApplication();
         })
-    })
+    });
 
     describe('organisations', function() {
         it('get', function(done) {
             this.timeout(10000);
             currentApp.core.organisations.getOrganisation()
                 .then(function(ret) {
-                    (ret.toObject().Name).should.not.be.empty();
+
+                    var orgVersions = ["AU", "NZ", "GLOBAL", "UK", "US"];
+                    expect(ret.Name).to.not.equal("");
+                    expect(ret.Version).to.not.equal("");
+                    expect(ret.Version).to.be.oneOf(orgVersions);
+
+                    organisationCountry = ret.Version;
+
                     done();
                 })
                 .fail(function(err) {
@@ -31,6 +63,97 @@ describe('private application', function() {
                 })
         })
     })
+
+
+    describe('accounts', function() {
+        it('GET', function(done) {
+            this.timeout(10000);
+            currentApp.core.accounts.getAccounts()
+                .then(function(accounts) {
+
+                    var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
+                    var accountTypes = ["BANK", "CURRENT", "CURRLIAB", "DEPRECIATN", "DIRECTCOSTS", "EQUITY", "EXPENSE", "FIXED", "INVENTORY", "LIABILITY", "NONCURRENT", "OTHERINCOME", "OVERHEADS", "PREPAYMENT", "REVENUE", "SALES", "TERMLIAB", "PAYGLIABILITY", "SUPERANNUATIONEXPENSE", "SUPERANNUATIONLIABILITY", "WAGESEXPENSE", "WAGESPAYABLELIABILITY"];
+                    var accountStatusCodes = ["ACTIVE", "ARCHIVED"];
+                    var bankAccountTypes = ["BANK", "CREDITCARD", "PAYPAL"];
+
+                    accounts.forEach(function(account) {
+
+                        //Fields required for POST / PUT
+
+                        expect(account.Code).to.be.a('string');
+                        expect(account.Code).to.have.length.below(11);
+
+                        expect(account.Name).to.not.equal("");
+                        expect(account.Name).to.be.a('string');
+
+                        expect(account.Type).to.not.equal("");
+                        expect(account.Type).to.be.oneOf(accountTypes);
+
+                        if (account.Type === "BANK") {
+                            expect(account.BankAccountType).to.be.a('string');
+                            expect(account.BankAccountType).to.be.oneOf(bankAccountTypes);
+
+                            expect(account.BankAccountNumber).to.be.a('string');
+                            expect(account.BankAccountNumber).to.not.equal("");
+
+                            if (account.CurrencyCode) {
+                                expect(account.CurrencyCode).to.be.a('string');
+                                expect(account.CurrencyCode).to.not.equal("");
+                            }
+                        }
+
+                        expect(account.Status).to.be.a('string');
+                        expect(account.Status).to.be.oneOf(accountStatusCodes);
+
+                        //Description is an optional field, when not provided it should be undefined.
+                        if (account.Description) {
+                            expect(account.Description).to.be.a('string');
+                            expect(account.Description).to.have.length.below(4001);
+                        } else {
+                            expect(account.Description).to.be.undefined;
+                        }
+
+                        expect(account.TaxType).to.be.a('string');
+                        expect(account.TaxType).to.not.equal("");
+
+                        expect(account.EnablePaymentsToAccount).to.be.a('boolean');
+                        expect(account.EnablePaymentsToAccount).to.not.be.undefined;
+
+                        expect(account.ShowInExpenseClaims).to.be.a('boolean');
+                        expect(account.ShowInExpenseClaims).to.not.be.undefined;
+
+                        //Fields returned in the GET
+                        expect(account.AccountID).to.not.equal("");
+                        expect(account.Class).to.be.oneOf(accountClasses);
+
+                        if (account.SystemAccount) {
+                            expect(account.SystemAccount).to.not.equal("");
+                            expect(account.SystemAccount).to.be.a('string');
+                        }
+
+                        if (account.ReportingCode) {
+                            expect(account.ReportingCode).to.not.equal("");
+                            expect(account.ReportingCode).to.be.a('string');
+                        }
+
+                        if (account.ReportingCodeName) {
+                            expect(account.ReportingCodeName).to.not.equal("");
+                            expect(account.ReportingCodeName).to.be.a('string');
+                        }
+
+                        expect(account.HasAttachments).to.be.a('boolean');
+                        expect(account.HasAttachments).to.not.be.undefined;
+
+                        expect(account.UpdatedDateUTC).to.not.equal("");
+                        expect(account.UpdatedDateUTC).to.be.a('string');
+                    });
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                });
+        });
+    });
 
     describe.skip('invoices', function() {
 
