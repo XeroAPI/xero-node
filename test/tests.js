@@ -64,17 +64,18 @@ describe('private application', function() {
         })
     })
 
-
     describe('accounts', function() {
+
+        //Accounts supporting data
+        var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
+        var accountTypes = ["BANK", "CURRENT", "CURRLIAB", "DEPRECIATN", "DIRECTCOSTS", "EQUITY", "EXPENSE", "FIXED", "INVENTORY", "LIABILITY", "NONCURRENT", "OTHERINCOME", "OVERHEADS", "PREPAYMENT", "REVENUE", "SALES", "TERMLIAB", "PAYGLIABILITY", "SUPERANNUATIONEXPENSE", "SUPERANNUATIONLIABILITY", "WAGESEXPENSE", "WAGESPAYABLELIABILITY"];
+        var accountStatusCodes = ["ACTIVE", "ARCHIVED"];
+        var bankAccountTypes = ["BANK", "CREDITCARD", "PAYPAL"];
+
         it('GET', function(done) {
             this.timeout(10000);
             currentApp.core.accounts.getAccounts()
                 .then(function(accounts) {
-
-                    var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
-                    var accountTypes = ["BANK", "CURRENT", "CURRLIAB", "DEPRECIATN", "DIRECTCOSTS", "EQUITY", "EXPENSE", "FIXED", "INVENTORY", "LIABILITY", "NONCURRENT", "OTHERINCOME", "OVERHEADS", "PREPAYMENT", "REVENUE", "SALES", "TERMLIAB", "PAYGLIABILITY", "SUPERANNUATIONEXPENSE", "SUPERANNUATIONLIABILITY", "WAGESEXPENSE", "WAGESPAYABLELIABILITY"];
-                    var accountStatusCodes = ["ACTIVE", "ARCHIVED"];
-                    var bankAccountTypes = ["BANK", "CREDITCARD", "PAYPAL"];
 
                     accounts.forEach(function(account) {
 
@@ -153,6 +154,74 @@ describe('private application', function() {
                     done(wrapError(err));
                 });
         });
+
+        //Create a new account
+        //Get it, Update it, then delete it
+
+        var testAccountId = "";
+
+        it('POST', function(done) {
+            this.timeout(10000);
+
+            var testAccountData = {
+                Code: 'TEST',
+                Name: 'Test account from Node SDK',
+                Type: 'BANK',
+                BankAccountNumber: '083091160475048'
+            };
+
+            var account = currentApp.core.accounts.newAccount(testAccountData);
+            account.save()
+                .then(function(ret) {
+                    expect(ret.Code).to.equal(testAccountData.Code);
+                    expect(ret.Name).to.equal(testAccountData.Name);
+                    expect(ret.Type).to.equal(testAccountData.Type);
+                    expect(ret.BankAccountNumber).to.equal(testAccountData.BankAccountNumber);
+                    expect(ret.Status).to.equal(testAccountData.Status);
+                    expect(ret.Description).to.equal(testAccountData.Description);
+                    expect(ret.BankAccountType).to.equal(testAccountData.BankAccountType);
+                    expect(ret.CurrencyCode).to.equal(testAccountData.CurrencyCode);
+                    expect(ret.TaxType).to.equal(testAccountData.TaxType);
+                    expect(ret.EnablePaymentsToAccount).to.equal(testAccountData.EnablePaymentsToAccount);
+                    expect(ret.ShowInExpenseClaims).to.equal(testAccountData.ShowInExpenseClaims);
+
+                    expect(ret.AccountID).to.not.equal("");
+                    testAccountId = ret.AccountID;
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+    });
+
+    /**
+     * Bank Transaction tests!
+     * 
+     */
+    describe.skip('bank transactions', function() {
+        it.skip('get by id', function(done) {
+            this.timeout(10000);
+            currentApp.core.bankTransactions.getBankTransaction('63d47b99-e1ef-4b46-84db-034f2205f8fb')
+                .then(function(ret) {
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+        })
+        it.skip('get (no paging)', function(done) {
+            this.timeout(10000);
+            currentApp.core.bankTransactions.getBankTransactions()
+                .then(function(ret) {
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+        })
+
     });
 
     describe.skip('invoices', function() {
@@ -428,29 +497,7 @@ describe('private application', function() {
         });
     })
 
-    describe.skip('bank transactions', function() {
-        it.skip('get by id', function(done) {
-            this.timeout(10000);
-            currentApp.core.bankTransactions.getBankTransaction('63d47b99-e1ef-4b46-84db-034f2205f8fb')
-                .then(function(ret) {
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-        })
-        it.skip('get (no paging)', function(done) {
-            this.timeout(10000);
-            currentApp.core.bankTransactions.getBankTransactions()
-                .then(function(ret) {
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-        })
 
-    });
 
     describe.skip('journals', function() {
         it.skip('get (paging)', function(done) {
