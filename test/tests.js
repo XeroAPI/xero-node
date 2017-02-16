@@ -72,7 +72,7 @@ describe('private application', function() {
         var accountStatusCodes = ["ACTIVE", "ARCHIVED"];
         var bankAccountTypes = ["BANK", "CREDITCARD", "PAYPAL"];
 
-        it('GET', function(done) {
+        it('GET ALL', function(done) {
             this.timeout(10000);
             currentApp.core.accounts.getAccounts()
                 .then(function(accounts) {
@@ -159,41 +159,93 @@ describe('private application', function() {
         //Get it, Update it, then delete it
 
         var testAccountId = "";
+        var testAccountData = {
+            Code: 'TEST',
+            Name: 'Test account from Node SDK',
+            Type: 'EXPENSE'
+        };
 
-        it('POST', function(done) {
+        it('CREATE ONE', function(done) {
             this.timeout(10000);
-
-            var testAccountData = {
-                Code: 'TEST',
-                Name: 'Test account from Node SDK',
-                Type: 'BANK',
-                BankAccountNumber: '083091160475048'
-            };
-
             var account = currentApp.core.accounts.newAccount(testAccountData);
+
             account.save()
                 .then(function(ret) {
-                    expect(ret.Code).to.equal(testAccountData.Code);
-                    expect(ret.Name).to.equal(testAccountData.Name);
-                    expect(ret.Type).to.equal(testAccountData.Type);
-                    expect(ret.BankAccountNumber).to.equal(testAccountData.BankAccountNumber);
-                    expect(ret.Status).to.equal(testAccountData.Status);
-                    expect(ret.Description).to.equal(testAccountData.Description);
-                    expect(ret.BankAccountType).to.equal(testAccountData.BankAccountType);
-                    expect(ret.CurrencyCode).to.equal(testAccountData.CurrencyCode);
-                    expect(ret.TaxType).to.equal(testAccountData.TaxType);
-                    expect(ret.EnablePaymentsToAccount).to.equal(testAccountData.EnablePaymentsToAccount);
-                    expect(ret.ShowInExpenseClaims).to.equal(testAccountData.ShowInExpenseClaims);
+                    var thisAccount = ret.response.Accounts.Account;
+                    expect(thisAccount.Code).to.equal(testAccountData.Code);
+                    expect(thisAccount.Name).to.equal(testAccountData.Name);
+                    expect(thisAccount.Type).to.equal(testAccountData.Type);
+                    expect(thisAccount.BankAccountNumber).to.equal(testAccountData.BankAccountNumber);
+                    //expect(thisAccount.Status).to.equal(testAccountData.Status);
+                    //expect(thisAccount.Description).to.equal(testAccountData.Description);
+                    expect(thisAccount.BankAccountType).to.equal(testAccountData.BankAccountType);
+                    //expect(thisAccount.CurrencyCode).to.equal(testAccountData.CurrencyCode);
+                    //expect(thisAccount.TaxType).to.equal(testAccountData.TaxType);
+                    //expect(thisAccount.EnablePaymentsToAccount).to.equal(testAccountData.EnablePaymentsToAccount);
+                    //expect(thisAccount.ShowInExpenseClaims).to.equal(testAccountData.ShowInExpenseClaims);
 
-                    expect(ret.AccountID).to.not.equal("");
-                    testAccountId = ret.AccountID;
+                    expect(thisAccount.AccountID).to.not.equal("");
+                    testAccountId = thisAccount.AccountID;
+
+                    console.log("Created Acct ID: " + testAccountId);
                     done();
                 })
                 .fail(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
+                });
+        });
+
+        it('GET ONE', function(done) {
+            this.timeout(10000);
+            currentApp.core.accounts.getAccount(testAccountId)
+                .then(function(account) {
+                    expect(account.Code).to.equal(testAccountData.Code);
+                    expect(account.Name).to.equal(testAccountData.Name);
+                    expect(account.Type).to.equal(testAccountData.Type);
+                    expect(account.BankAccountNumber).to.equal(testAccountData.BankAccountNumber);
+                    //expect(account.Status).to.equal(testAccountData.Status);
+                    //expect(account.Description).to.equal(testAccountData.Description);
+                    expect(account.BankAccountType).to.equal(testAccountData.BankAccountType);
+                    //expect(account.CurrencyCode).to.equal(testAccountData.CurrencyCode);
+                    //expect(account.TaxType).to.equal(testAccountData.TaxType);
+                    //expect(account.EnablePaymentsToAccount).to.equal(testAccountData.EnablePaymentsToAccount);
+                    //expect(account.ShowInExpenseClaims).to.equal(testAccountData.ShowInExpenseClaims);
+
+                    expect(account.AccountID).to.not.equal("");
+                    done();
                 })
-        })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+
+        });
+
+        it('UPDATE ONE', function(done) {
+            this.timeout(10000);
+            currentApp.core.accounts.getAccount(testAccountId)
+                .then(function(account) {
+                    testAccountData.Name = "Updated from the SDK";
+                    account.Name = testAccountData.Name;
+
+                    account.save()
+                        .then(function(ret) {
+                            var thisAccount = ret.response.Accounts.Account;
+                            expect(thisAccount.Name).to.equal(testAccountData.Name);
+                            done();
+                        })
+                        .fail(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        });
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
     });
 
     /**
