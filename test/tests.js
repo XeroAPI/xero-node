@@ -64,7 +64,7 @@ describe('private application', function() {
         })
     })
 
-    describe.skip('accounts', function() {
+    describe('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -72,7 +72,7 @@ describe('private application', function() {
         var accountStatusCodes = ["ACTIVE", "ARCHIVED"];
         var bankAccountTypes = ["BANK", "CREDITCARD", "PAYPAL"];
 
-        it.skip('GET ALL', function(done) {
+        it('GET ALL', function(done) {
             this.timeout(10000);
             currentApp.core.accounts.getAccounts()
                 .then(function(accounts) {
@@ -346,7 +346,7 @@ describe('private application', function() {
      */
 
     describe('payments', function() {
-        this.timeout(20000);
+        this.timeout(1020000);
         it('Create Payment', function(done) {
 
             var payment = currentApp.core.payments.createPayment({
@@ -357,8 +357,7 @@ describe('private application', function() {
                     Code: '090'
                 },
                 Date: new Date().toISOString().split("T")[0],
-                Amount: '660',
-                IsReconciled: true
+                Amount: '660'
             });
 
             payment.save()
