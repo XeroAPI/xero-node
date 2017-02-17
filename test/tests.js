@@ -400,9 +400,9 @@ describe('private application', function() {
      */
     describe('bank transactions', function() {
 
-        var transactionId = "693f4474-8b93-4459-addb-66a4a04046fd";
+        var transactionId = "";
 
-        it.skip('get (no paging)', function(done) {
+        it('get (no paging)', function(done) {
             this.timeout(10000);
             currentApp.core.bankTransactions.getBankTransactions()
                 .then(function(ret) {
