@@ -65,7 +65,7 @@ describe('private application', function() {
         })
     })
 
-    describe.skip('accounts', function() {
+    describe('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -264,7 +264,7 @@ describe('private application', function() {
 
     var InvoiceID = "";
 
-    describe.skip('invoices', function() {
+    describe('invoices', function() {
 
         it('create invoice', function(done) {
             this.timeout(10000);
@@ -348,7 +348,7 @@ describe('private application', function() {
 
     var PaymentID = "";
 
-    describe.skip('payments', function() {
+    describe('payments', function() {
         this.timeout(10000);
         it('Create Payment', function(done) {
 
@@ -390,6 +390,7 @@ describe('private application', function() {
         it('Delete Payment', function(done) {
             //NOT CURRENTLY SUPPORTED.
             //Use update Payment with Payment.Status = DELETED.
+            done();
         });
 
     });
