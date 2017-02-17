@@ -16,11 +16,12 @@ var currentApp;
  * 
  * Accounting API Tests covered:
  * - Accounts (GET, POST, PUT, DELETE)
- * - Attachments (GET, POST, PUT)
+ * - Invoices (GET, PUT, POST)
+ * - Payments (GET, PUT, POST)
  * - BankTransactions (GET, POST, PUT)
+ * - Attachments (GET, POST, PUT)
  * - BankTransfers (GET, PUT)
  * - Contacts (GET, PUT, POST)
- * - Invoices (GET, PUT, POST)
  * - Items (GET, PUT, POST, DELETE)
  * - Journals (GET)
  * - Organisations (GET)
@@ -64,7 +65,7 @@ describe('private application', function() {
         })
     })
 
-    describe('accounts', function() {
+    describe.skip('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -250,7 +251,7 @@ describe('private application', function() {
             this.timeout(10000);
             currentApp.core.accounts.deleteAccount(testAccountId)
                 .then(function(account) {
-                    console.log(account);
+                    //console.log(account);
                     done();
                 })
                 .fail(function(err) {
@@ -263,14 +264,14 @@ describe('private application', function() {
 
     var InvoiceID = "";
 
-    describe('invoices', function() {
+    describe.skip('invoices', function() {
 
         it('create invoice', function(done) {
             this.timeout(10000);
             var invoice = currentApp.core.invoices.newInvoice({
                 Type: 'ACCREC',
                 Contact: {
-                    Name: 'Department of Finance'
+                    Name: 'Department of Testing'
                 },
                 DueDate: new Date().toISOString().split("T")[0],
                 LineItems: [{
@@ -298,7 +299,7 @@ describe('private application', function() {
         it('get invoices', function(done) {
             this.timeout(10000);
             currentApp.core.invoices.getInvoices()
-                .then(function() {
+                .then(function(ret) {
                     done();
                 })
                 .fail(function(err) {
@@ -345,8 +346,10 @@ describe('private application', function() {
      * 
      */
 
-    describe('payments', function() {
-        this.timeout(1020000);
+    var PaymentID = "";
+
+    describe.skip('payments', function() {
+        this.timeout(10000);
         it('Create Payment', function(done) {
 
             var payment = currentApp.core.payments.createPayment({
@@ -362,7 +365,8 @@ describe('private application', function() {
 
             payment.save()
                 .then(function(ret) {
-                    console.log(ret);
+                    PaymentID = ret.entities[0].toObject().PaymentID;
+                    expect(PaymentID).to.not.equal("");
                     done();
                 })
                 .fail(function(err) {
@@ -371,26 +375,48 @@ describe('private application', function() {
                 });
         });
 
+        it('Retrieve Payment', function(done) {
+
+            currentApp.core.payments.getPayment(PaymentID)
+                .then(function(payment) {
+                    expect(payment.PaymentID).to.not.equal("");
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+        });
+
+        it('Delete Payment', function(done) {
+            //NOT CURRENTLY SUPPORTED.
+            //Use update Payment with Payment.Status = DELETED.
+        });
+
     });
 
     /**
      * Bank Transaction tests!
      * 
      */
-    describe.skip('bank transactions', function() {
-        it.skip('get by id', function(done) {
+    describe('bank transactions', function() {
+
+        var transactionId = "693f4474-8b93-4459-addb-66a4a04046fd";
+
+        it.skip('get (no paging)', function(done) {
             this.timeout(10000);
-            currentApp.core.bankTransactions.getBankTransaction('63d47b99-e1ef-4b46-84db-034f2205f8fb')
+            currentApp.core.bankTransactions.getBankTransactions()
                 .then(function(ret) {
+                    transactionId = ret[0].BankTransactionID;
                     done();
                 })
                 .fail(function(err) {
                     done(wrapError(err));
                 })
-        })
-        it.skip('get (no paging)', function(done) {
+        });
+
+        it('get by id', function(done) {
             this.timeout(10000);
-            currentApp.core.bankTransactions.getBankTransactions()
+            currentApp.core.bankTransactions.getBankTransaction(transactionId)
                 .then(function(ret) {
                     done();
                 })
