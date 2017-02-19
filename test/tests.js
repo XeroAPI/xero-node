@@ -65,7 +65,7 @@ describe('private application', function() {
         })
     })
 
-    describe('accounts', function() {
+    describe.skip('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -277,11 +277,11 @@ describe('private application', function() {
                 LineItems: [{
                     Description: 'Services',
                     Quantity: 4,
-                    UnitAmount: 100,
+                    UnitAmount: 0.48593,
                     AccountCode: '400'
                 }]
             });
-            invoice.save()
+            invoice.save({ unitdp: 4 })
                 .then(function(ret) {
                     //(ret.entities[0].toObject().InvoiceID).should.not.be.empty();
                     console.log("Created: " + ret.entities[0].toObject().InvoiceID);
@@ -316,7 +316,7 @@ describe('private application', function() {
                     done(wrapError(err));
                 })
         })
-        it('update invoice', function(done) {
+        it.skip('update invoice', function(done) {
             this.timeout(10000);
             currentApp.core.invoices.getInvoice(InvoiceID)
                 .then(function(invoice) {
@@ -348,7 +348,7 @@ describe('private application', function() {
 
     var PaymentID = "";
 
-    describe('payments', function() {
+    describe.skip('payments', function() {
         this.timeout(10000);
         it('Create Payment', function(done) {
 
@@ -399,7 +399,7 @@ describe('private application', function() {
      * Bank Transaction tests!
      * 
      */
-    describe('bank transactions', function() {
+    describe.skip('bank transactions', function() {
 
         var transactionId = "";
 
