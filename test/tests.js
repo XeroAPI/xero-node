@@ -284,9 +284,15 @@ describe('private application', function() {
             invoice.save({ unitdp: 4 })
                 .then(function(ret) {
                     //(ret.entities[0].toObject().InvoiceID).should.not.be.empty();
-                    console.log("Created: " + ret.entities[0].toObject().InvoiceID);
+                    var invoice = ret.entities[0].toObject();
 
-                    InvoiceID = ret.entities[0].toObject().InvoiceID;
+                    InvoiceID = invoice.InvoiceID;
+
+                    expect(InvoiceID).to.not.equal("");
+                    invoice.LineItems.forEach(function(lineItem) {
+                        expect(lineItem.UnitAmount).to.match(/\.[0-9]{4}/);
+                    });
+
 
                     done();
                 })
