@@ -3,7 +3,8 @@ var chai = require('chai'),
     expect = chai.expect,
     _ = require('lodash'),
     xero = require('..'),
-    util = require('util')
+    util = require('util'),
+    Browser = require('zombie');
 
 process.on('uncaughtException', function(err) {
     console.log('uncaught', err)
@@ -36,14 +37,171 @@ var currentApp;
 
 var organisationCountry = "";
 
-describe('private application', function() {
+var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
+var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
+
+describe.skip('private application', function() {
     describe('create instance', function() {
-        it('init instance and set options', function() {
+        it('init instance and set options', function(done) {
             //This constructor looks in ~/.xero/config.json for settings
-            currentApp = new xero.PrivateApplication();
+            currentApp = new xero.PrivateApplication(privateConfigFile);
+            done();
+        })
+    });
+});
+
+describe('public application', function() {
+    describe('create instance', function() {
+        it('init instance and set options', function(done) {
+            //This constructor looks in ~/.xero/config.json for settings
+            currentApp = new xero.PublicApplication(publicConfigFile);
+            done();
         })
     });
 
+    describe('Get tokens', function() {
+
+        var authoriseUrl = "";
+        var requestToken = "";
+        var requestSecret = "";
+        var verifier = "";
+
+        var accessToken = "";
+        var accessSecret = "";
+
+
+        it('user gets a token and builds the url', function(done) {
+            currentApp.getRequestToken(function(err, token, secret) {
+                    if (!err) {
+                        authoriseUrl = currentApp.buildAuthorizeUrl(token);
+                        requestToken = token;
+                        requestSecret = secret;
+                        console.log("URL: " + authoriseUrl);
+                        console.log("token: " + requestToken);
+                        console.log("secret: " + requestSecret);
+                    } else {
+                        throw err;
+                    }
+                })
+                .then(function() {
+                    done();
+                }).fail(function(err) {
+                    done(wrapError(err));
+                });
+        });
+
+        describe('gets the request token from the url', function() {
+            this.timeout(20000);
+            var user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7';
+            const browser = new Browser({
+                userAgent: user_agent,
+                waitFor: 20000,
+                runScripts: false
+            });
+
+            browser.debug();
+
+            before(function(done) {
+                browser.visit(authoriseUrl, done);
+            });
+
+            describe('submits form', function() {
+                this.timeout(20000);
+
+                it('should login', function(done) {
+                    browser
+                        .fill('userName', '')
+                        .fill('password', '')
+                        .pressButton('Login', done);
+                });
+
+                it('should be successful', function(done) {
+                    browser.assert.success();
+                    done();
+                });
+
+                it('should see noscript page', function(done) {
+                    browser.assert.text('title', 'Working...');
+                    browser.document.forms[0].submit();
+                    browser.wait().then(function() {
+                        // just dump some debug data to see if we're on the right page
+                        //console.log(browser.dump());
+                        done();
+                    });
+
+                });
+
+                it('should see application auth page', function(done) {
+                    //console.log(browser.document.documentElement.innerHTML);
+                    browser.assert.text('title', 'Xero | Authorise Application');
+                    browser.select('select', '');
+                    browser.pressButton("Allow access for 30 mins");
+                    browser.wait().then(function() {
+                        // just dump some debug data to see if we're on the right page
+                        //console.log(browser.document.documentElement.innerHTML);
+                        done();
+                    });
+                });
+
+                it('should get a code to enter', function(done) {
+                    browser.assert.text('title', 'Xero | Authorise Application');
+                    verifier = browser.field('#pin-input').value;
+
+                    expect(verifier).to.not.equal("");
+                    expect(verifier).to.be.a('String');
+                    done();
+                });
+
+            });
+        });
+
+        describe('swaps the request token for an access token', function() {
+            this.timeout(20000);
+            it('calls the access token method', function(done) {
+                currentApp.getAccessToken(requestToken, requestSecret, verifier, function(err, accessToken, accessSecret, results) {
+
+                        if (!err) {
+                            this.accessToken = accessToken;
+                            this.accessSecret = accessSecret;
+
+                            console.log('accessToken: ' + this.accessToken);
+                            console.log('accessSecret: ' + this.accessSecret);
+                        } else {
+                            throw err;
+                        }
+                    })
+                    .then(function() {
+                        done();
+                    }).fail(function(err) {
+                        done(wrapError(err));
+                    });
+            });
+
+        });
+
+        describe('set the access token and secret in the public application', function() {
+
+            it('calls the setoptions method', function(done) {
+                var options = {
+                    accessToken: this.accessToken,
+                    accessSecret: this.accessSecret
+                };
+
+                var updatedOptions = currentApp.setOptions(options);
+
+                expect(updatedOptions.accessToken).to.equal(this.accessToken);
+                expect(updatedOptions.accessSecret).to.equal(this.accessSecret);
+                done();
+            });
+
+        })
+
+
+    });
+});
+
+
+describe('regression tests', function() {
     describe('organisations', function() {
         it('get', function(done) {
             this.timeout(10000);
@@ -65,7 +223,7 @@ describe('private application', function() {
         })
     })
 
-    describe.skip('accounts', function() {
+    describe('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -660,6 +818,8 @@ describe('private application', function() {
         })
 
     });
+
+
 });
 
 function wrapError(err) {
