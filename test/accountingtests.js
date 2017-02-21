@@ -563,7 +563,18 @@ describe('regression tests', function() {
                 });
         });
 
-        it('Retrieve Payment', function(done) {
+        it('Retrieve Payments', function(done) {
+            currentApp.core.payments.getPayments()
+                .then(function(payments) {
+                    console.log(payments);
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+        });
+
+        it('Retrieve Single Payment', function(done) {
 
             currentApp.core.payments.getPayment(PaymentID)
                 .then(function(payment) {
@@ -583,7 +594,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('bank transactions', function() {
+    describe.skip('bank transactions', function() {
 
         var sharedTransaction;
 
@@ -637,6 +648,81 @@ describe('regression tests', function() {
                     done(wrapError(err));
                 })
         });
+    });
+
+    describe('bank transfers', function() {
+
+        this.timeout(20000);
+
+        var sampleTransferID = "";
+
+        it('get (no paging)', function(done) {
+            this.timeout(10000);
+            currentApp.core.bankTransfers.getBankTransfers()
+                .then(function(bankTransfers) {
+                    _.each(bankTransfers, function(bankTransfer) {
+                        expect(bankTransfer.BankTransferID).to.not.equal("");
+                        sampleTransferID = bankTransfer.BankTransferID;
+                    });
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+        });
+
+        it('get (with paging)', function(done) {
+            this.timeout(10000);
+            currentApp.core.bankTransfers.getBankTransfers({ pager: { start: 1, callback: onTransfers } })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+
+            function onTransfers(err, response, cb) {
+                cb();
+                try {
+                    if (response.finished)
+                        done();
+                } catch (ex) {
+                    done(ex);
+                    return;
+                }
+            }
+        });
+
+        it('get single bank transfer', function(done) {
+            this.timeout(10000);
+            currentApp.core.bankTransfers.getBankTransfer(sampleTransferID)
+                .then(function(bankTransfer) {
+                    expect(bankTransfer.BankTransferID).to.equal(sampleTransferID);
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+        });
+
+        it('create sample bank transfer', function(done) {
+            this.timeout(10000);
+            var transfer = currentApp.core.bankTransfers.newBankTransfer({
+                FromBankAccount: {
+                    Code: '090'
+                },
+                ToBankAccount: {
+                    Code: '091'
+                },
+                Amount: '20.00'
+            });
+            transfer.save()
+                .then(function(bankTransfer) {
+                    expect(bankTransfer.BankTransferID).to.not.equal("");
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+        });
+
     });
 
     describe.skip('tracking categories', function() {})
