@@ -3,3 +3,5 @@
 /.idea
 *.log
 /cert
+/coverage
+.nyc_output/

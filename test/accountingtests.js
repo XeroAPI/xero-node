@@ -13,7 +13,7 @@ process.on('uncaughtException', function(err) {
 var currentApp;
 
 /**
- * Private Application Tests
+ * Application Tests
  * 
  * Accounting API Tests covered:
  * - Accounts (GET, POST, PUT, DELETE)
@@ -37,24 +37,57 @@ var currentApp;
 
 var organisationCountry = "";
 
+var APPTYPE = "PRIVATE";
 var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
 var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
+var configFile = "";
 
-describe.skip('private application', function() {
+switch (APPTYPE) {
+    case "PUBLIC":
+        configFile = publicConfigFile;
+        break;
+
+    case "PRIVATE":
+        configFile = privateConfigFile;
+        break;
+
+    default:
+        throw "No Config File Selected!!"
+}
+
+describe('create application', function() {
     describe('create instance', function() {
         it('init instance and set options', function(done) {
             //This constructor looks in ~/.xero/config.json for settings
-            currentApp = new xero.PrivateApplication(privateConfigFile);
+
+            switch (APPTYPE) {
+                case "PUBLIC":
+                    currentApp = new xero.PublicApplication(configFile);
+                    break;
+                case "PRIVATE":
+                    currentApp = new xero.PrivateApplication(configFile);
+                    break;
+                default:
+                    throw "No App Type Set!!"
+            }
+
             done();
         })
     });
 });
 
-describe('public application', function() {
+describe('get access for public application', function() {
+
+    beforeEach(function() {
+        if (APPTYPE !== "PUBLIC") {
+            this.skip();
+        }
+    });
+
     describe('create instance', function() {
         it('init instance and set options', function(done) {
             //This constructor looks in ~/.xero/config.json for settings
-            currentApp = new xero.PublicApplication(publicConfigFile);
+            currentApp = new xero.PublicApplication(configFile);
             done();
         })
     });
@@ -99,19 +132,43 @@ describe('public application', function() {
                 runScripts: false
             });
 
-            browser.debug();
+            //browser.debug();
 
             before(function(done) {
-                browser.visit(authoriseUrl, done);
+                if (APPTYPE === "PUBLIC")
+                    browser.visit(authoriseUrl, done);
+                else
+                    this.skip();
             });
 
             describe('submits form', function() {
                 this.timeout(20000);
 
+                var options = {};
+
+                before(function(done) {
+                    if (APPTYPE !== "PUBLIC") {
+                        this.skip();
+                    } else {
+                        try {
+                            console.log('configFile: ' + configFile);
+
+                            var config = require(configFile);
+                            options["XeroUsername"] = config.XeroUsername;
+                            options["XeroPassword"] = config.XeroPassword;
+                            done();
+                        } catch (e) {
+                            var err = 'Couldn\'t read config.json from [' + configFile + ']. Exiting...';
+                            console.log(err);
+                            throw e;
+                        }
+                    }
+                });
+
                 it('should login', function(done) {
                     browser
-                        .fill('userName', '')
-                        .fill('password', '')
+                        .fill('userName', options.XeroUsername)
+                        .fill('password', options.XeroPassword)
                         .pressButton('Login', done);
                 });
 
@@ -134,7 +191,7 @@ describe('public application', function() {
                 it('should see application auth page', function(done) {
                     //console.log(browser.document.documentElement.innerHTML);
                     browser.assert.text('title', 'Xero | Authorise Application');
-                    browser.select('select', '');
+                    browser.select('select', 'MWE5NzdkMDItZTAyNC00NGJkLTlmMGQtNjFiOGI4OWY2YTI4-ecmd9rxRfsM=');
                     browser.pressButton("Allow access for 30 mins");
                     browser.wait().then(function() {
                         // just dump some debug data to see if we're on the right page
@@ -157,15 +214,11 @@ describe('public application', function() {
 
         describe('swaps the request token for an access token', function() {
             this.timeout(20000);
-            it('calls the access token method', function(done) {
+            it('calls the access token method and sets the options', function(done) {
                 currentApp.getAccessToken(requestToken, requestSecret, verifier, function(err, accessToken, accessSecret, results) {
 
                         if (!err) {
-                            this.accessToken = accessToken;
-                            this.accessSecret = accessSecret;
-
-                            console.log('accessToken: ' + this.accessToken);
-                            console.log('accessSecret: ' + this.accessSecret);
+                            currentApp.setOptions({ accessToken: accessToken, accessSecret: accessSecret });
                         } else {
                             throw err;
                         }
@@ -176,33 +229,16 @@ describe('public application', function() {
                         done(wrapError(err));
                     });
             });
-
         });
-
-        describe('set the access token and secret in the public application', function() {
-
-            it('calls the setoptions method', function(done) {
-                var options = {
-                    accessToken: this.accessToken,
-                    accessSecret: this.accessSecret
-                };
-
-                var updatedOptions = currentApp.setOptions(options);
-
-                expect(updatedOptions.accessToken).to.equal(this.accessToken);
-                expect(updatedOptions.accessSecret).to.equal(this.accessSecret);
-                done();
-            });
-
-        })
-
-
     });
 });
 
-
 describe('regression tests', function() {
-    describe('organisations', function() {
+
+    var InvoiceID = "";
+    var PaymentID = "";
+
+    describe.skip('organisations', function() {
         it('get', function(done) {
             this.timeout(10000);
             currentApp.core.organisations.getOrganisation()
@@ -223,7 +259,7 @@ describe('regression tests', function() {
         })
     })
 
-    describe('accounts', function() {
+    describe.skip('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -346,7 +382,6 @@ describe('regression tests', function() {
                     expect(thisAccount.AccountID).to.not.equal("");
                     testAccountId = thisAccount.AccountID;
 
-                    console.log("Created Acct ID: " + testAccountId);
                     done();
                 })
                 .fail(function(err) {
@@ -409,7 +444,6 @@ describe('regression tests', function() {
             this.timeout(10000);
             currentApp.core.accounts.deleteAccount(testAccountId)
                 .then(function(account) {
-                    //console.log(account);
                     done();
                 })
                 .fail(function(err) {
@@ -420,9 +454,7 @@ describe('regression tests', function() {
 
     });
 
-    var InvoiceID = "";
-
-    describe('invoices', function() {
+    describe.skip('invoices', function() {
 
         it('create invoice', function(done) {
             this.timeout(10000);
@@ -434,8 +466,8 @@ describe('regression tests', function() {
                 DueDate: new Date().toISOString().split("T")[0],
                 LineItems: [{
                     Description: 'Services',
-                    Quantity: 4,
-                    UnitAmount: 0.48593,
+                    Quantity: 2,
+                    UnitAmount: 230,
                     AccountCode: '400'
                 }]
             });
@@ -448,9 +480,8 @@ describe('regression tests', function() {
 
                     expect(InvoiceID).to.not.equal("");
                     invoice.LineItems.forEach(function(lineItem) {
-                        expect(lineItem.UnitAmount).to.match(/\.[0-9]{4}/);
+                        expect(lineItem.UnitAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
                     });
-
 
                     done();
                 })
@@ -480,7 +511,7 @@ describe('regression tests', function() {
                     done(wrapError(err));
                 })
         })
-        it.skip('update invoice', function(done) {
+        it('update invoice', function(done) {
             this.timeout(10000);
             currentApp.core.invoices.getInvoice(InvoiceID)
                 .then(function(invoice) {
@@ -504,13 +535,6 @@ describe('regression tests', function() {
                 })
         })
     });
-
-    /**
-     * Payments Tests!
-     * 
-     */
-
-    var PaymentID = "";
 
     describe.skip('payments', function() {
         this.timeout(10000);
@@ -554,24 +578,46 @@ describe('regression tests', function() {
         it('Delete Payment', function(done) {
             //NOT CURRENTLY SUPPORTED.
             //Use update Payment with Payment.Status = DELETED.
-            done();
+            this.skip();
         });
 
     });
 
-    /**
-     * Bank Transaction tests!
-     * 
-     */
-    describe.skip('bank transactions', function() {
+    describe('bank transactions', function() {
 
-        var transactionId = "";
+        var sharedTransaction;
+
+        it('creates a new transaction', function(done) {
+            this.timeout(10000);
+            var transaction = currentApp.core.bankTransactions.newBankTransaction({
+                Type: "SPEND",
+                Contact: {
+                    Name: "Johnny McGibbons"
+                },
+                LineItems: [{
+                    Description: 'Annual Bank Account Fee',
+                    UnitAmount: 250,
+                    AccountCode: '404'
+                }],
+                BankAccount: {
+                    AccountID: "13918178-849A-4823-9A31-57B7EAC713D7"
+                }
+            });
+
+            transaction.save()
+                .then(function(ret) {
+                    sharedTransaction = ret.response.BankTransactions.BankTransaction.BankTransactionID;
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                })
+        });
 
         it('get (no paging)', function(done) {
             this.timeout(10000);
             currentApp.core.bankTransactions.getBankTransactions()
                 .then(function(ret) {
-                    transactionId = ret[0].BankTransactionID;
                     done();
                 })
                 .fail(function(err) {
@@ -581,101 +627,23 @@ describe('regression tests', function() {
 
         it('get by id', function(done) {
             this.timeout(10000);
-            currentApp.core.bankTransactions.getBankTransaction(transactionId)
+            currentApp.core.bankTransactions.getBankTransaction(sharedTransaction)
                 .then(function(ret) {
+                    console.log(ret);
+                    sharedTransaction = ret.toObject();
                     done();
                 })
                 .fail(function(err) {
                     done(wrapError(err));
                 })
-        })
-
+        });
     });
 
-    describe.skip('tracking categories', function() {
+    describe.skip('tracking categories', function() {})
 
-    })
-
-    describe.skip('payitems', function() {
-        it('get payitems', function(done) {
-            this.timeout(10000);
-            currentApp.payroll.payitems.getPayItems()
-                .then(function(payitems) {
-                    console.log(payitems[0].EarningsTypes);
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-        })
-    })
-    describe.skip('timesheets', function() {
-        it('create timesheet', function(done) {
-            this.timeout(10000);
-            var timesheet = currentApp.payroll.timesheets.newTimesheet({
-                EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
-                StartDate: new Date(2014, 8, 23),
-                EndDate: new Date(2014, 8, 29),
-                Status: 'Draft',
-                TimesheetLines: [{
-                    EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
-                    NumberOfUnits: [5, 0, 0, 0, 0, 0, 0]
-                }]
-            });
-            timesheet.save()
-                .then(function() {
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-
-        })
-        it.skip('get timesheets', function(done) {
-            this.timeout(10000);
-            currentApp.payroll.timesheets.getTimesheets()
-                .then(function(timesheets) {
-                    if (!_.isEmpty(timesheets))
-                        console.log(util.inspect(timesheets[0].toObject(), null, null));
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-        })
-    })
-
-    describe.skip('employees', function() {
-        var employee;
-        it('get (no paging)', function(done) {
-            this.timeout(10000);
-            currentApp.payroll.employees.getEmployees()
-                .then(function(ret) {
-                    console.log(ret[0].toObject());
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-        })
-        it.skip('get by id', function(done) {
-            this.timeout(10000);
-            currentApp.payroll.employees.getEmployee('065a115c-ba9c-4c03-b8e3-44c551ed8f21')
-                .then(function(ret) {
-                    employee = ret;
-                    console.log(employee.toObject());
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-        })
-
-
-    })
     describe.skip('contacts', function() {
         var contact;
-        it('get by id', function(done) {
+        it.skip('get by id', function(done) {
             this.timeout(10000);
             currentApp.core.contacts.getContact('891F1925-61E6-4955-ADF2-D87366D99DA4')
                 .then(function(ret) {
@@ -686,7 +654,7 @@ describe('regression tests', function() {
                     done(wrapError(err));
                 })
         })
-        it('get (no paging)', function(done) {
+        it.skip('get (no paging)', function(done) {
             this.timeout(10000);
             currentApp.core.contacts.getContacts()
                 .then(function(ret) {
@@ -696,7 +664,7 @@ describe('regression tests', function() {
                     done(wrapError(err));
                 })
         })
-        it('get (paging)', function(done) {
+        it.skip('get (paging)', function(done) {
             this.timeout(10000);
             currentApp.core.contacts.getContacts({ pager: { start: 1, callback: onContacts } })
                 .fail(function(err) {
@@ -717,7 +685,7 @@ describe('regression tests', function() {
 
             }
         })
-        it('get - modifiedAfter', function(done) {
+        it.skip('get - modifiedAfter', function(done) {
             this.timeout(100000);
             var modifiedAfter = new Date();
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
@@ -733,7 +701,12 @@ describe('regression tests', function() {
                 })
 
         })
-        it('update contact', function(done) {
+        it.skip('update contact', function(done) {
+
+            /**
+             * MASSIVE ISSUES WITH THIS TEST. DO NOT RUN.
+             */
+
             this.timeout(10000);
             // Previously retrieved contact
             contact.FirstName = 'Jimbo';
@@ -785,11 +758,9 @@ describe('regression tests', function() {
         });
     })
 
-
-
     describe.skip('journals', function() {
-        it.skip('get (paging)', function(done) {
-            this.timeout(10000);
+        it('get (paging)', function(done) {
+            this.timeout(20000);
             currentApp.core.journals.getJournals({ pager: { start: 1, callback: onJournals } })
                 .fail(function(err) {
                     done(wrapError(err));
@@ -816,7 +787,6 @@ describe('regression tests', function() {
 
             }
         })
-
     });
 
 
