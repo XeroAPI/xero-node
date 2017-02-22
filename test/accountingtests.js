@@ -259,7 +259,7 @@ describe('regression tests', function() {
         })
     })
 
-    describe.skip('accounts', function() {
+    describe('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -758,7 +758,7 @@ describe('regression tests', function() {
 
     describe.skip('tracking categories', function() {});
 
-    describe('items', function() {
+    describe.skip('items', function() {
         this.timeout(10000);
 
         var sampleItem = {
