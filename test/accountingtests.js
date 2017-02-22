@@ -259,7 +259,7 @@ describe('regression tests', function() {
         })
     })
 
-    describe('accounts', function() {
+    describe.skip('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -867,8 +867,34 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('contacts', function() {
-        var sampleContactID;
+    describe('contacts', function() {
+        var sampleContact = {
+            Name: 'Johnnies Coffee' + Math.random(),
+            FirstName: 'John',
+            LastName: 'Smith'
+        };
+
+        it('create single contact', function(done) {
+            this.timeout(10000);
+            var contact = currentApp.core.contacts.newContact(sampleContact);
+            contact.save()
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    expect(response.entities[0].ContactID).to.not.equal("");
+                    expect(response.entities[0].ContactID).to.not.equal(undefined);
+                    expect(response.entities[0].Name).to.equal(sampleContact.Name);
+                    expect(response.entities[0].FirstName).to.equal(sampleContact.FirstName);
+                    expect(response.entities[0].LastName).to.equal(sampleContact.LastName);
+
+                    sampleContact = response.entities[0];
+
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(err)
+                    done(wrapError(err));
+                })
+        })
 
         it('get (no paging)', function(done) {
             this.timeout(10000);
@@ -876,11 +902,12 @@ describe('regression tests', function() {
                 .then(function(contacts) {
                     _.each(contacts, function(contact) {
                         expect(contact.ContactID).to.not.equal("");
-                        sampleContactID = contact.ContactID;
+                        expect(contact.ContactID).to.not.equal(undefined);
                     });
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         })
@@ -888,17 +915,22 @@ describe('regression tests', function() {
             this.timeout(10000);
             currentApp.core.contacts.getContacts({ pager: { start: 1, callback: onContacts } })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
 
             function onContacts(err, response, cb) {
                 cb();
                 try {
-                    // response.data.length.should.equal(7,'Unexpected number of contacts returned');
+                    _.each(response.data, function(contact) {
+                        expect(contact.ContactID).to.not.equal("");
+                        expect(contact.ContactID).to.not.equal(undefined);
+                    });
+
                     if (response.finished)
                         done();
                 } catch (ex) {
-
+                    console.log(util.inspect(err, null, null));
                     done(ex);
                     return;
                 }
@@ -908,12 +940,13 @@ describe('regression tests', function() {
 
         it('get by id', function(done) {
             this.timeout(10000);
-            currentApp.core.contacts.getContact(sampleContactID)
+            currentApp.core.contacts.getContact(sampleContact.ContactID)
                 .then(function(contact) {
-                    expect(contact.ContactID).to.equal(sampleContactID);
+                    expect(contact.ContactID).to.equal(sampleContact.ContactID);
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         })
@@ -924,49 +957,44 @@ describe('regression tests', function() {
                 .then(function(contacts) {
                     _.each(contacts, function(contact) {
                         expect(contact.UpdatedDateUTC).to.not.equal("");
+                        expect(contact.UpdatedDateUTC).to.not.equal(undefined);
                     })
                     done();
 
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
 
         })
-        it('create single contact', function(done) {
-            this.timeout(10000);
-            var contact = currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(), FirstName: 'Tim', LastName: 'Shnaider' });
-            contact.save()
-                .then(function(ret) {
-                    done();
-                })
-                .fail(function(err) {
-                    console.log(err)
-                    done(wrapError(err));
-                })
-        })
+
         it('create multiple contacts', function(done) {
             this.timeout(10000);
             var contacts = [];
-            contacts.push(currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(), FirstName: 'Tim' + Math.random(), LastName: 'Shnaider' }));
-            contacts.push(currentApp.core.contacts.newContact({ Name: 'xemware' + Math.random(), FirstName: 'Tim' + Math.random(), LastName: 'Shnaider' }));
+            contacts.push(currentApp.core.contacts.newContact({ Name: 'Johnnies Coffee' + Math.random(), FirstName: 'John' + Math.random(), LastName: 'Smith' }));
+            contacts.push(currentApp.core.contacts.newContact({ Name: 'Johnnies Coffee' + Math.random(), FirstName: 'John' + Math.random(), LastName: 'Smith' }));
             currentApp.core.contacts.saveContacts(contacts)
-                .then(function(ret) {
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    _.each(response.entities, function(contact) {
+                        expect(contact.ContactID).to.not.equal("");
+                        expect(contact.ContactID).to.not.equal(undefined);
+                    });
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         })
-
-        //these two functions need a 'contact' to be defined.
 
         it('update contact', function(done) {
             this.timeout(10000);
 
-            currentApp.core.contacts.getContact(sampleContactID)
+            currentApp.core.contacts.getContact(sampleContact.ContactID)
                 .then(function(contact) {
-                    expect(contact.ContactID).to.equal(sampleContactID);
+                    expect(contact.ContactID).to.equal(sampleContact.ContactID);
 
                     var newName = "Updated" + Math.random();
 
@@ -996,31 +1024,33 @@ describe('regression tests', function() {
                             done();
                         })
                         .fail(function(err) {
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         })
         it('get attachments for contacts', function(done) {
             this.timeout(100000);
 
-            currentApp.core.contacts.getContact(sampleContactID)
+            currentApp.core.contacts.getContact(sampleContact.ContactID)
                 .then(function(contact) {
-                    expect(contact.ContactID).to.equal(sampleContactID);
+                    expect(contact.ContactID).to.equal(sampleContact.ContactID);
                     contact.getAttachments()
                         .then(function(attachments) {
                             console.log(attachments);
                             done();
                         })
                         .fail(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .fail(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
