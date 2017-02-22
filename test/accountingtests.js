@@ -725,7 +725,53 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('tracking categories', function() {})
+    describe.skip('tracking categories', function() {});
+
+    describe('items', function() {
+        this.timeout(10000);
+
+        it('retrieves some items (no paging)', function(done) {
+            this.timeout(10000);
+            currentApp.core.items.getItems()
+                .then(function(items) {
+                    _.each(items, function(item) {
+                        expect(item.ItemID).to.not.equal("");
+                    });
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                });
+        });
+
+        it('creates an item', function(done) {
+            this.timeout(10000);
+
+            var item = currentApp.core.items.newItem({
+                Code: 'Item-' + Math.random(),
+                Name: 'Fully Tracked Item',
+                Description: '2014 Merino Sweater',
+                PurchaseDescription: '2014 Merino Sweater',
+                PurchaseDetails: {
+                    UnitPrice: 149.00,
+                    AccountCode: '200'
+                },
+                SalesDetails: {
+                    UnitPrice: 299.00,
+                    AccountCode: '200'
+                }
+            });
+
+            item.save()
+                .then(function(item) {
+                    expect(item.ItemID).to.not.equal("");
+                    done();
+                })
+                .fail(function(err) {
+                    done(wrapError(err));
+                });
+        });
+    });
 
     describe.skip('contacts', function() {
         var sampleContactID;
