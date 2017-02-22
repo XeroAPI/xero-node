@@ -346,6 +346,7 @@ describe('regression tests', function() {
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -365,8 +366,8 @@ describe('regression tests', function() {
             var account = currentApp.core.accounts.newAccount(testAccountData);
 
             account.save()
-                .then(function(ret) {
-                    var thisAccount = ret.response.Accounts.Account;
+                .then(function(response) {
+                    var thisAccount = response.entities[0];
                     expect(thisAccount.Code).to.equal(testAccountData.Code);
                     expect(thisAccount.Name).to.equal(testAccountData.Name);
                     expect(thisAccount.Type).to.equal(testAccountData.Type);
@@ -424,8 +425,8 @@ describe('regression tests', function() {
                     account.Name = testAccountData.Name;
 
                     account.save()
-                        .then(function(ret) {
-                            var thisAccount = ret.response.Accounts.Account;
+                        .then(function(response) {
+                            var thisAccount = response.entities[0];
                             expect(thisAccount.Name).to.equal(testAccountData.Name);
                             done();
                         })
@@ -443,7 +444,8 @@ describe('regression tests', function() {
         it('DELETE ONE', function(done) {
             this.timeout(10000);
             currentApp.core.accounts.deleteAccount(testAccountId)
-                .then(function(account) {
+                .then(function(response) {
+                    expect(response.Status).to.equal("OK");
                     done();
                 })
                 .fail(function(err) {
@@ -472,13 +474,16 @@ describe('regression tests', function() {
                 }]
             });
             invoice.save({ unitdp: 4 })
-                .then(function(ret) {
-                    //(ret.entities[0].toObject().InvoiceID).should.not.be.empty();
-                    var invoice = ret.entities[0].toObject();
+                .then(function(response) {
 
+                    expect(response.entities).to.have.length.greaterThan(0);
+
+                    var invoice = response.entities[0];
                     InvoiceID = invoice.InvoiceID;
 
-                    expect(InvoiceID).to.not.equal("");
+                    expect(response.entities[0].InvoiceID).to.not.equal(undefined);
+                    expect(response.entities[0].InvoiceID).to.not.equal("");
+
                     invoice.LineItems.forEach(function(lineItem) {
                         expect(lineItem.UnitAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
                     });
@@ -494,7 +499,14 @@ describe('regression tests', function() {
         it('get invoices', function(done) {
             this.timeout(10000);
             currentApp.core.invoices.getInvoices()
-                .then(function(ret) {
+                .then(function(invoices) {
+                    expect(invoices).to.have.length.greaterThan(0);
+
+                    invoices.forEach(function(invoice) {
+                        expect(invoice.InvoiceID).to.not.equal("");
+                        expect(invoice.InvoiceID).to.not.equal(undefined);
+                    });
+
                     done();
                 })
                 .fail(function(err) {
@@ -505,6 +517,8 @@ describe('regression tests', function() {
             this.timeout(10000);
             currentApp.core.invoices.getInvoice(InvoiceID)
                 .then(function(invoice) {
+                    expect(invoice.InvoiceID).to.not.equal("");
+                    expect(invoice.InvoiceID).to.not.equal(undefined);
                     done();
                 })
                 .fail(function(err) {
@@ -523,7 +537,13 @@ describe('regression tests', function() {
                     })
                     invoice.Status = 'AUTHORISED'
                     invoice.save()
-                        .then(function(ret) {
+                        .then(function(response) {
+                            expect(response.entities).to.have.length.greaterThan(0);
+
+                            response.entities.forEach(function(invoice) {
+                                expect(invoice.InvoiceID).to.not.equal("");
+                                expect(invoice.InvoiceID).to.not.equal(undefined);
+                            });
                             done();
                         })
                         .fail(function(err) {
@@ -537,6 +557,7 @@ describe('regression tests', function() {
     });
 
     describe.skip('payments', function() {
+        /* Please note that this test pays an invoice created in the previous tests */
         this.timeout(10000);
         it('Create Payment', function(done) {
 
@@ -552,9 +573,12 @@ describe('regression tests', function() {
             });
 
             payment.save()
-                .then(function(ret) {
-                    PaymentID = ret.entities[0].toObject().PaymentID;
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+
+                    PaymentID = response.entities[0].PaymentID;
                     expect(PaymentID).to.not.equal("");
+                    expect(PaymentID).to.not.equal(undefined);
                     done();
                 })
                 .fail(function(err) {
@@ -566,10 +590,15 @@ describe('regression tests', function() {
         it('Retrieve Payments', function(done) {
             currentApp.core.payments.getPayments()
                 .then(function(payments) {
-                    console.log(payments);
+                    expect(payments).to.have.length.greaterThan(0);
+                    payments.forEach(function(payment) {
+                        expect(payment.PaymentID).to.not.equal(undefined);
+                        expect(payment.PaymentID).to.not.equal("");
+                    });
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         });
@@ -582,6 +611,7 @@ describe('regression tests', function() {
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         });
@@ -616,11 +646,15 @@ describe('regression tests', function() {
             });
 
             transaction.save()
-                .then(function(ret) {
-                    sharedTransaction = ret.response.BankTransactions.BankTransaction.BankTransactionID;
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    expect(response.entities[0].BankTransactionID).to.not.equal("");
+                    expect(response.entities[0].BankTransactionID).to.not.equal(undefined);
+                    sharedTransaction = response.entities[0].BankTransactionID;
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         });
@@ -628,10 +662,16 @@ describe('regression tests', function() {
         it('get (no paging)', function(done) {
             this.timeout(10000);
             currentApp.core.bankTransactions.getBankTransactions()
-                .then(function(ret) {
+                .then(function(bankTransactions) {
+                    expect(bankTransactions).to.have.length.greaterThan(0);
+                    bankTransactions.forEach(function(bankTransaction) {
+                        expect(bankTransaction.BankTransactionID).to.not.equal("");
+                        expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
+                    });
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         });
@@ -639,12 +679,13 @@ describe('regression tests', function() {
         it('get by id', function(done) {
             this.timeout(10000);
             currentApp.core.bankTransactions.getBankTransaction(sharedTransaction)
-                .then(function(ret) {
-                    console.log(ret);
-                    sharedTransaction = ret.toObject();
+                .then(function(bankTransaction) {
+                    expect(bankTransaction.BankTransactionID).to.not.equal("");
+                    expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         });
@@ -655,52 +696,6 @@ describe('regression tests', function() {
         this.timeout(20000);
 
         var sampleTransferID = "";
-
-        it('get (no paging)', function(done) {
-            this.timeout(10000);
-            currentApp.core.bankTransfers.getBankTransfers()
-                .then(function(bankTransfers) {
-                    _.each(bankTransfers, function(bankTransfer) {
-                        expect(bankTransfer.BankTransferID).to.not.equal("");
-                        sampleTransferID = bankTransfer.BankTransferID;
-                    });
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-        });
-
-        it('get (with paging)', function(done) {
-            this.timeout(10000);
-            currentApp.core.bankTransfers.getBankTransfers({ pager: { start: 1, callback: onTransfers } })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-
-            function onTransfers(err, response, cb) {
-                cb();
-                try {
-                    if (response.finished)
-                        done();
-                } catch (ex) {
-                    done(ex);
-                    return;
-                }
-            }
-        });
-
-        it('get single bank transfer', function(done) {
-            this.timeout(10000);
-            currentApp.core.bankTransfers.getBankTransfer(sampleTransferID)
-                .then(function(bankTransfer) {
-                    expect(bankTransfer.BankTransferID).to.equal(sampleTransferID);
-                    done();
-                })
-                .fail(function(err) {
-                    done(wrapError(err));
-                })
-        });
 
         it('create sample bank transfer', function(done) {
             this.timeout(10000);
@@ -714,11 +709,47 @@ describe('regression tests', function() {
                 Amount: '20.00'
             });
             transfer.save()
-                .then(function(bankTransfer) {
-                    expect(bankTransfer.BankTransferID).to.not.equal("");
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    expect(response.entities[0].BankTransferID).to.not.equal("");
+                    expect(response.entities[0].BankTransferID).to.not.equal(undefined);
+
+                    sampleTransferID = response.entities[0].BankTransferID;
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        it('get (no paging)', function(done) {
+            this.timeout(10000);
+            currentApp.core.bankTransfers.getBankTransfers()
+                .then(function(bankTransfers) {
+                    _.each(bankTransfers, function(bankTransfer) {
+                        expect(bankTransfer.BankTransferID).to.not.equal("");
+                        expect(bankTransfer.BankTransferID).to.not.equal(undefined);
+                    });
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        it('get single bank transfer', function(done) {
+            this.timeout(10000);
+            currentApp.core.bankTransfers.getBankTransfer(sampleTransferID)
+                .then(function(bankTransfer) {
+                    expect(bankTransfer.BankTransferID).to.not.equal("");
+                    expect(bankTransfer.BankTransferID).to.not.equal(undefined);
+                    expect(bankTransfer.BankTransferID).to.equal(sampleTransferID);
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         });
@@ -730,44 +761,107 @@ describe('regression tests', function() {
     describe('items', function() {
         this.timeout(10000);
 
+        var sampleItem = {
+            Code: 'Item-' + Math.random(),
+            Name: 'Fully Tracked Item',
+            Description: '2014 Merino Sweater',
+            PurchaseDescription: '2014 Merino Sweater',
+            PurchaseDetails: {
+                UnitPrice: 149.00,
+                AccountCode: '200'
+            },
+            SalesDetails: {
+                UnitPrice: 299.00,
+                AccountCode: '200'
+            }
+        };
+
+        it('creates an item', function(done) {
+            this.timeout(10000);
+
+            var item = currentApp.core.items.newItem(sampleItem);
+
+            item.save()
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    expect(response.entities[0].ItemID).to.not.equal("");
+                    expect(response.entities[0].ItemID).to.not.equal(undefined);
+                    sampleItem.ItemID = response.entities[0].ItemID;
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
         it('retrieves some items (no paging)', function(done) {
             this.timeout(10000);
             currentApp.core.items.getItems()
                 .then(function(items) {
                     _.each(items, function(item) {
                         expect(item.ItemID).to.not.equal("");
+                        expect(item.ItemID).to.not.equal(undefined);
                     });
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
 
-        it('creates an item', function(done) {
+        it('retrieves an item by ID', function(done) {
             this.timeout(10000);
 
-            var item = currentApp.core.items.newItem({
-                Code: 'Item-' + Math.random(),
-                Name: 'Fully Tracked Item',
-                Description: '2014 Merino Sweater',
-                PurchaseDescription: '2014 Merino Sweater',
-                PurchaseDetails: {
-                    UnitPrice: 149.00,
-                    AccountCode: '200'
-                },
-                SalesDetails: {
-                    UnitPrice: 299.00,
-                    AccountCode: '200'
-                }
-            });
-
-            item.save()
+            currentApp.core.items.getItem(sampleItem.ItemID)
                 .then(function(item) {
-                    expect(item.ItemID).to.not.equal("");
+                    expect(item.ItemID).to.equal(sampleItem.ItemID);
                     done();
                 })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
+        it('updates an item by ID', function(done) {
+            this.timeout(10000);
+
+            currentApp.core.items.getItem(sampleItem.ItemID)
+                .then(function(item) {
+                    expect(item.ItemID).to.equal(sampleItem.ItemID);
+
+                    var randomName = "Updated " + Math.random();
+
+                    item.Name = randomName;
+
+                    item.save()
+                        .then(function(response) {
+                            expect(response.entities).to.have.length.greaterThan(0);
+                            expect(response.entities[0].Name).to.equal(randomName);
+                            done();
+                        })
+                        .fail(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
+        it('deletes an item', function(done) {
+            this.timeout(10000);
+
+            currentApp.core.items.deleteItem(sampleItem.ItemID)
+                .then(function() {
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
