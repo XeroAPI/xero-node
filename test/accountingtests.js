@@ -867,7 +867,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('contacts', function() {
+    describe.skip('contacts', function() {
         var sampleContact = {
             Name: 'Johnnies Coffee' + Math.random(),
             FirstName: 'John',
@@ -1057,10 +1057,15 @@ describe('regression tests', function() {
     })
 
     describe.skip('journals', function() {
-        it('get (paging)', function(done) {
+        this.timeout(10000);
+
+        var sampleJournalId = "";
+
+        it('get (paging with callback)', function(done) {
             this.timeout(20000);
             currentApp.core.journals.getJournals({ pager: { start: 1, callback: onJournals } })
                 .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
 
@@ -1069,22 +1074,68 @@ describe('regression tests', function() {
             function onJournals(err, ret, cb) {
                 cb();
                 recordCount += ret.data.length;
-                var firstRecord = _.first(ret.data);
-                if (firstRecord)
-                    console.log(util.inspect(firstRecord.toObject(), null, null))
-                try {
+                _.each(ret.data, function(journal) {
+                    expect(journal.JournalID).to.not.equal("");
+                    expect(journal.JournalID).to.not.equal(undefined);
+                    expect(journal.JournalLines).to.have.length.greaterThan(0);
+                });
 
+                try {
                     if (ret.finished) {
                         console.log('Journals record count:' + recordCount)
                         done();
                     }
                 } catch (ex) {
+                    console.log(util.inspect(ex, null, null));
                     done(ex);
                     return;
                 }
-
             }
-        })
+        });
+
+        it('get (paging no callback)', function(done) {
+            this.timeout(20000);
+            currentApp.core.journals.getJournals({ pager: { start: 1, callback: undefined } })
+                .then(function(journals) {
+                    expect(journals).to.not.equal(undefined);
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        it('get (no paging)', function(done) {
+            this.timeout(20000);
+            currentApp.core.journals.getJournals()
+                .then(function(journals) {
+                    expect(journals).to.not.equal(undefined);
+                    expect(journals).to.be.an('Array');
+                    expect(journals).to.have.length.greaterThan(0);
+
+                    sampleJournalId = _.first(journals).JournalID;
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        it('get single journal', function(done) {
+            this.timeout(20000);
+            currentApp.core.journals.getJournal(sampleJournalId)
+                .then(function(journal) {
+                    expect(journal).to.be.an('Object');
+                    expect(journal.JournalID).to.equal(sampleJournalId);
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
     });
 });
 
