@@ -616,6 +616,26 @@ describe('regression tests', function() {
                 })
         });
 
+        it('Update Payment', function(done) {
+
+            var paymentToDelete = currentApp.core.payments.createPayment({
+                PaymentID: PaymentID,
+                Status: "DELETED"
+            });
+
+            paymentToDelete.save()
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    expect(response.entities[0].Status).to.equal("DELETED");
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+        });
+
         it('Delete Payment', function(done) {
             //NOT CURRENTLY SUPPORTED.
             //Use update Payment with Payment.Status = DELETED.
