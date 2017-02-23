@@ -776,7 +776,69 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('tracking categories', function() {});
+    describe('tracking categories', function() {
+        this.timeout(20000);
+
+        var sampleTrackingCategory = {
+            Name: "My First Category"
+        };
+
+        it('creates a tracking category', function(done) {
+
+            var myTrackingCategory = currentApp.core.trackingCategories.newTrackingCategory(sampleTrackingCategory);
+
+            myTrackingCategory.save()
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    expect(response.entities[0].TrackingCategoryID).to.not.equal("");
+                    expect(response.entities[0].TrackingCategoryID).to.not.equal(undefined);
+                    expect(response.entities[0].Name).to.equal(sampleTrackingCategory.Name);
+                    sampleTrackingCategory = response.entities[0];
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        it('adds options to the tracking category', function(done) {
+
+            sampleTrackingCategory.Options = [{
+                Name: "Option 1"
+            }, {
+                Name: "Option 2"
+            }, {
+                Name: "Option 3"
+            }, {
+                Name: "Option 4"
+            }];
+
+            sampleTrackingCategory.save()
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    expect(response.entities[0].TrackingCategoryID).to.not.equal("");
+                    expect(response.entities[0].TrackingCategoryID).to.not.equal(undefined);
+                    expect(response.entities[0].Name).to.equal(sampleTrackingCategory.Name);
+
+                    expect(response.entities[0].Options).to.have.length.greaterThan(0);
+
+                    var count = 0;
+
+                    _.each(response.entities[0].Options, function(trackingOption) {
+                        expect(trackingOption.TrackingOptionID).to.not.equal("");
+                        expect(trackingOption.TrackingOptionID).to.not.equal(undefined);
+                        expect(trackingOption.Name).to.equal(sampleTrackingCategory.Options[count++].Name);
+                    });
+
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+    });
 
     describe.skip('items', function() {
         this.timeout(10000);
