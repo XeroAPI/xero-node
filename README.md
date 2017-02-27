@@ -13,7 +13,6 @@ Create an Issue for any suggestions or alternatively fork the code and submit a 
 
 # Features
 
-
 The following endpoints are supported:
 * Accounts
 * BankTransactions
