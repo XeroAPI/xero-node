@@ -11,33 +11,9 @@ process.on('uncaughtException', function(err) {
 })
 
 var currentApp;
-
-/**
- * Application Tests
- * 
- * Accounting API Tests covered:
- * - Accounts (GET, POST, PUT, DELETE)
- * - Invoices (GET, PUT, POST)
- * - Payments (GET, PUT, POST)
- * - BankTransactions (GET, POST, PUT)
- * - Attachments (GET, POST, PUT)
- * - BankTransfers (GET, PUT)
- * - Contacts (GET, PUT, POST)
- * - Items (GET, PUT, POST, DELETE)
- * - Journals (GET)
- * - Organisations (GET)
- * - Tracking Categories (GET, PUT, POST, DELETE)
- * - Users (GET)
- * 
- * Payroll Tests Covered
- * - Pay Items (GET, POST)
- * - Payroll Employees (GET, POST)
- * - Timesheets (GET, POST)
- */
-
 var organisationCountry = "";
 
-var APPTYPE = "PRIVATE";
+var APPTYPE = "PUBLIC";
 var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
 var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
 var configFile = "";
@@ -238,7 +214,7 @@ describe('regression tests', function() {
     var InvoiceID = "";
     var PaymentID = "";
 
-    describe.skip('organisations', function() {
+    describe('organisations', function() {
         it('get', function(done) {
             this.timeout(10000);
             currentApp.core.organisations.getOrganisation()
@@ -259,7 +235,7 @@ describe('regression tests', function() {
         })
     })
 
-    describe.skip('accounts', function() {
+    describe('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -456,7 +432,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('invoices', function() {
+    describe('invoices', function() {
 
         it('create invoice', function(done) {
             this.timeout(10000);
@@ -556,7 +532,7 @@ describe('regression tests', function() {
         })
     });
 
-    describe.skip('payments', function() {
+    describe('payments', function() {
         /* Please note that this test pays an invoice created in the previous tests */
         this.timeout(10000);
         it('Create Payment', function(done) {
@@ -644,7 +620,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('bank transactions', function() {
+    describe('bank transactions', function() {
 
         var sharedTransaction;
 
@@ -711,7 +687,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('bank transfers', function() {
+    describe('bank transfers', function() {
 
         this.timeout(20000);
 
@@ -935,7 +911,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('items', function() {
+    describe('items', function() {
         this.timeout(10000);
 
         var sampleItem = {
@@ -1044,7 +1020,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('contacts', function() {
+    describe('contacts', function() {
         var sampleContact = {
             Name: 'Johnnies Coffee' + Math.random(),
             FirstName: 'John',
@@ -1233,7 +1209,7 @@ describe('regression tests', function() {
         });
     })
 
-    describe.skip('journals', function() {
+    describe('journals', function() {
         this.timeout(10000);
 
         var sampleJournalId = "";
@@ -1312,6 +1288,79 @@ describe('regression tests', function() {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
+        });
+    });
+
+    describe('users', function() {
+        this.timeout(20000);
+
+        it('retrieves a list of users', function(done) {
+
+            currentApp.core.users.getUsers()
+                .then(function(users) {
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(err)
+                    done(wrapError(err));
+                });
+        });
+    });
+
+    //These tests aren't currently working.  Attachments are not yet supported.
+    describe.skip('attachments', function() {
+        this.timeout(20000);
+
+        it('creates an attachment on an invoice', function(done) {
+
+            /**
+             * Attachments should work on the following endpoints:
+             *  Invoices
+             *  Receipts
+             *  Credit Notes
+             *  Repeating Invoices
+             *  Bank Transactions
+             *  Bank Transfers
+             *  Contacts
+             *  Accounts
+             *  Manual Journals
+             */
+
+            var attachmentData = {
+                FileName: "myimage.png",
+                MimeType: "application/png"
+            };
+
+            var rawDataFile = __dirname + "/testdata/test-attachment.png";
+
+            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(attachmentData);
+
+            currentApp.core.bankTransactions.getBankTransactions()
+                .then(function(bankTransactions) {
+
+                    expect(bankTransactions).to.have.length.greaterThan(0);
+
+                    var sampleTransaction = bankTransactions[0];
+
+                    attachmentPlaceholder.save("banktransactions/" + sampleTransaction.BankTransactionID, rawDataFile)
+                        .then(function(response) {
+                            console.log(response);
+                            done();
+                        })
+                        .fail(function(err) {
+                            console.log(err)
+                            done(wrapError(err));
+                        })
+
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(err)
+                    done(wrapError(err));
+                })
+
+
+
         });
     });
 });
