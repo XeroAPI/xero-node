@@ -802,17 +802,122 @@ describe('regression tests', function() {
                 })
         });
 
-        it('adds options to the tracking category', function(done) {
+        it('creates some options for the tracking category', function(done) {
 
-            sampleTrackingCategory.Options = [{
-                Name: "Option 1"
+            var TrackingOptions = [{
+                Name: "up"
             }, {
-                Name: "Option 2"
-            }, {
-                Name: "Option 3"
-            }, {
-                Name: "Option 4"
+                Name: "down"
             }];
+
+            sampleTrackingCategory.saveTrackingOptions(TrackingOptions)
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+
+                    _.each(response.entities, function(trackingOption) {
+                        expect(trackingOption.Name).to.not.equal("");
+                        expect(trackingOption.Name).to.not.equal(undefined);
+                        expect(trackingOption.Status).to.equal("ACTIVE")
+                    });
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        it('updates one of the options for the tracking category', function(done) {
+
+            var TrackingOptions = {
+                Name: "left"
+            };
+
+            currentApp.core.trackingCategories.getTrackingCategory(sampleTrackingCategory.TrackingCategoryID)
+                .then(function(trackingCategory) {
+                    //console.log(response.Options[0].TrackingOptionID)
+
+                    var optionIDtoUpdate = trackingCategory.Options[0].TrackingOptionID;
+
+                    trackingCategory.saveTrackingOptions(TrackingOptions, optionIDtoUpdate)
+                        .then(function(response) {
+                            expect(response.entities).to.have.length.greaterThan(0);
+                            expect(response.entities[0].Name).to.equal("left");
+                            done();
+                        })
+                        .fail(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        it('deletes the tracking category', function(done) {
+            currentApp.core.trackingCategories.deleteTrackingCategory(sampleTrackingCategory.TrackingCategoryID)
+                .then(function(response) {
+                    //console.log(response);
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        it('Uses a tracking category on an invoice - REGION', function(done) {
+            //Create an invoice with the sample tracking category attached to the line item on the invoice.
+            var invoice = currentApp.core.invoices.newInvoice({
+                Type: 'ACCREC',
+                Contact: {
+                    Name: 'Department of Testing'
+                },
+                DueDate: new Date().toISOString().split("T")[0],
+                LineItems: [{
+                    Description: 'Services',
+                    Quantity: 2,
+                    UnitAmount: 230,
+                    AccountCode: '400',
+                    Tracking: [{
+                        TrackingCategory: {
+                            Name: 'Region',
+                            Option: 'North'
+                        }
+                    }]
+                }]
+            });
+            invoice.save()
+                .then(function(response) {
+
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    expect(response.entities[0].InvoiceID).to.not.equal(undefined);
+                    expect(response.entities[0].InvoiceID).to.not.equal("");
+
+                    response.entities[0].LineItems.forEach(function(lineItem) {
+                        expect(lineItem.Tracking).to.have.length.greaterThan(0);
+                        _.each(lineItem.Tracking, function(trackingCategory) {
+                            expect(trackingCategory.TrackingCategoryID).to.not.equal(undefined);
+                            expect(trackingCategory.TrackingCategoryID).to.not.equal("");
+                            expect(trackingCategory.TrackingOptionID).to.not.equal(undefined);
+                            expect(trackingCategory.TrackingOptionID).to.not.equal("");
+                            expect(trackingCategory.Name).to.equal('Region');
+                            expect(trackingCategory.Option).to.equal('North');
+                        });
+                    });
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        //unfortunately this will only work on tracking categories that have been used.
+        it.skip('archives a tracking category', function(done) {
+            sampleTrackingCategory.Status = "ARCHIVED";
 
             sampleTrackingCategory.save()
                 .then(function(response) {
@@ -820,17 +925,7 @@ describe('regression tests', function() {
                     expect(response.entities[0].TrackingCategoryID).to.not.equal("");
                     expect(response.entities[0].TrackingCategoryID).to.not.equal(undefined);
                     expect(response.entities[0].Name).to.equal(sampleTrackingCategory.Name);
-
-                    expect(response.entities[0].Options).to.have.length.greaterThan(0);
-
-                    var count = 0;
-
-                    _.each(response.entities[0].Options, function(trackingOption) {
-                        expect(trackingOption.TrackingOptionID).to.not.equal("");
-                        expect(trackingOption.TrackingOptionID).to.not.equal(undefined);
-                        expect(trackingOption.Name).to.equal(sampleTrackingCategory.Options[count++].Name);
-                    });
-
+                    expect(response.entities[0].Status).to.equal(sampleTrackingCategory.Status);
                     done();
                 })
                 .fail(function(err) {
