@@ -1,4 +1,4 @@
-xero-node
+xero-node (v1.0.0)
 ===========
 An API wrapper for xero (http://developer.xero.com).
 
@@ -9,25 +9,72 @@ Supports all three applications types:
 * Partner
 
 
-Create an Issue for any suggestions, specifically how to tidily support Where in a simple fashion.
+Create an Issue for any suggestions or alternatively fork the code and submit a PR.
 
-Features
-========
-Implemented/Planned
+# Features
 
-* Support all API operations
-* Efficient paging
+
+The following endpoints are supported:
+* Accounts
+* BankTransactions
+* BankTransfers
+* Contacts
+* Invoices
+* Items
+* Journals
+* Organisations
+* Payments
+* TrackingCategories (and TrackingOptions)
+* Users
+
+The following features are supported:
+* Create / Read / Update / Delete (for most endpoints)
+* Search (using 'where' clause)
+* Efficient pagination with callbacks
 * Support for Private, Public, and Partner applications (look at oauth_test/server.js for 3 stage support)
 
 
-Installation
-============
+# Installation
 
     $ npm install xero-node --save
 
 
-Private Usage
-=============
+### External Config 
+
+This SDK requires the config to be externalised to ensure private keys are not committed into your codebase by mistake.
+
+The config file should be set up as follows:
+
+```javascript
+{
+    "UserAgent" : "Tester - Application for testing Xero",
+    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
+    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "PrivateKeyPath": "/some/path/to/privatekey.pem",
+    "RunscopeBucketId" : "xxxyyyzzzz"
+}
+```
+
+### Config Parameters
+
+| Parameter        | Description                                                                              | Mandatory |
+|------------------|------------------------------------------------------------------------------------------|-----------|
+| UserAgent        | The useragent that should be used with all calls to the Xero API                         | True      |
+| ConsumerKey      | The consumer key that is required with all calls to the Xero API.,                       | True      |
+| ConsumerSecret   | The secret key from the developer portal that is required to authenticate your API calls | True      |
+| PrivateKeyPath   | The filesystem path to your privatekey.pem file to sign the API calls                    | True      |
+| RunscopeBucketId | Your personal runscope bucket for debugging API calls                                    | False     |
+---
+
+`RunscopeBucketId` has been added to support debugging the SDK.  Runscope is a simple tool for Testing Complex APIs. You can use Runscope to verify that the structure and content of your API calls meets your expectations. 
+
+Sign up for a free runscope account at runscope.com and place your bucket ID in the config file to see API calls in real time.
+
+Runscope is not endorsed by or affiliated with Xero. This tool was used by the SDK creator when authoring the code only.
+
+
+## Private App Usage
+
 ```javascript
 var PrivateApplication = require('xero-node').PrivateApplication;
 var privateApp = new PrivateApplication();
@@ -39,28 +86,18 @@ var myConfigFile = "/tmp/config.json";
 var privateApp = new PrivateApplication(myConfigFile);
 ```
 
-Config file should be set up as follows:
+## Pubic Usage
 
-```javascript
-{
-    "consumerSecret" : "AAAAAA",
-    "consumerKey" : "BBBBBB",
-    "privateKey" : "/path/to/privateKey.pem"
-}
-```
-
-Pubic Usage - TO BE UPDATED (Not currently tested)
-=============
 ```javascript
 var PublicApplication = require('xero-node').PublicApplication;
-var publicApp = new PublicApplication({ consumerSecret: 'AAAAA', consumerKey: 'BBBBBB'});
+var publicApp = new PublicApplication(myConfigFile);
 ```
 
-Partner Usage - TO BE UPDATED (Not currently tested)
-=============
+## Partner Usage - (Not currently tested)
+
 ```javascript
 var ParnetApplication = require('xero-node').PartnerApplication;
-var partnerApp = new PartnerApplication({ consumerSecret: 'AAAAA', consumerKey: 'BBBBBB', privateKeyPath: './cert/privatekey.pem', sslCertPath: './cert/ssl.crt'});
+var partnerApp = new PartnerApplication(myConfigFile);
 ```
 
 Examples
@@ -69,7 +106,8 @@ Print a count of invoices:
 
 ```javascript
 //Print a count of invoices
-privateApp.core.invoices.getInvoices().then(function(invoices) {
+privateApp.core.invoices.getInvoices()
+.then(function(invoices) {
     console.log("Invoices: " + invoices.length);
 
 }).fail(function(err) {
@@ -81,12 +119,13 @@ Print the name of some filtered contacts:
 
 ```javascript
 //Print the name of a contact
-privateApp.core.contacts.getContacts({ where: 'Name.Contains("Bayside")' }).then(function(contacts) {
-
+privateApp.core.contacts.getContacts({ 
+    where: 'Name.Contains("Bayside")' 
+})
+.then(function(contacts) {
     contacts.forEach(function(contact) {
         console.log(contact.Name);
-    }, this);
-
+    });
 }).fail(function(err) {
     console.error(err);
 });
@@ -112,32 +151,29 @@ function onContacts(err, response, cb) {
 Filter support: Modified After
 ```javascript
 // No paging
-publicApp.core.contacts.getContacts({ modifiedAfter: new Date(2013,1,1) })
-    .then(function(contacts)
-    {
-        _.each(contacts,  function(contact)
-        {
-            // Do something with contact
-        })
+publicApp.core.contacts.getContacts({ 
+    modifiedAfter: new Date(2013,1,1) 
+})
+.then(function(contacts) {
+    _.each(contacts,  function(contact) {
+        // Do something with contact
     })
+})
 
 ```
 
 
-Tests
-==========
+## Tests
 
 npm test
 
-
-Release History
-==============
+## Release History
 
 * 1.0.0
     - Merged master branch from guillegette
     - Merged master branch from elliots
     - Externalised configs for private apps (keys should not live in the code)
-    - Fixed the private app 'consumerKey' Issue
+    - Fixed the private app 'consumerKey' issue
     - Fixed the logger so it correctly supports different log levels
     - Added support for runscope urls in the signature generation
 * 0.0.2
@@ -147,7 +183,7 @@ Release History
     - Initial Release
 
 
-Copyright (c) 2017 Tim Shnaider, Guillermo Gette, Andrew Connell, Elliot Shepherd, Jordan Walsh
+Copyright (c) 2017 Tim Shnaider, Guillermo Gette, Andrew Connell, Elliot Shepherd and Jordan Walsh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
