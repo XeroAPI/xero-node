@@ -13,23 +13,10 @@ process.on('uncaughtException', function(err) {
 var currentApp;
 var organisationCountry = "";
 
-var APPTYPE = "PUBLIC";
+var APPTYPE = "PRIVATE";
 var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
 var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
-var configFile = "";
-
-switch (APPTYPE) {
-    case "PUBLIC":
-        configFile = publicConfigFile;
-        break;
-
-    case "PRIVATE":
-        configFile = privateConfigFile;
-        break;
-
-    default:
-        throw "No Config File Selected!!"
-}
+var partnerConfigFile = "/Users/jordan.walsh/.xero/partner_app_config.json";
 
 describe('create application', function() {
     describe('create instance', function() {
@@ -37,11 +24,14 @@ describe('create application', function() {
             //This constructor looks in ~/.xero/config.json for settings
 
             switch (APPTYPE) {
-                case "PUBLIC":
-                    currentApp = new xero.PublicApplication(configFile);
-                    break;
                 case "PRIVATE":
-                    currentApp = new xero.PrivateApplication(configFile);
+                    currentApp = new xero.PrivateApplication(privateConfigFile);
+                    break;
+                case "PUBLIC":
+                    currentApp = new xero.PublicApplication(publicConfigFile);
+                    break;
+                case "PARTNER":
+                    currentApp = new xero.PartnerApplication(partnerConfigFile);
                     break;
                 default:
                     throw "No App Type Set!!"
@@ -52,23 +42,15 @@ describe('create application', function() {
     });
 });
 
-describe('get access for public application', function() {
-
-    beforeEach(function() {
-        if (APPTYPE !== "PUBLIC") {
-            this.skip();
-        }
-    });
-
-    describe('create instance', function() {
-        it('init instance and set options', function(done) {
-            //This constructor looks in ~/.xero/config.json for settings
-            currentApp = new xero.PublicApplication(configFile);
-            done();
-        })
-    });
+describe('get access for public or partner application', function() {
 
     describe('Get tokens', function() {
+
+        beforeEach(function() {
+            if (APPTYPE === "PRIVATE") {
+                this.skip();
+            }
+        });
 
         var authoriseUrl = "";
         var requestToken = "";
@@ -111,10 +93,11 @@ describe('get access for public application', function() {
             //browser.debug();
 
             before(function(done) {
-                if (APPTYPE === "PUBLIC")
-                    browser.visit(authoriseUrl, done);
-                else
+                if (APPTYPE === "PRIVATE") {
                     this.skip();
+                }
+
+                browser.visit(authoriseUrl, done);
             });
 
             describe('submits form', function() {
@@ -123,22 +106,24 @@ describe('get access for public application', function() {
                 var options = {};
 
                 before(function(done) {
-                    if (APPTYPE !== "PUBLIC") {
-                        this.skip();
-                    } else {
-                        try {
-                            console.log('configFile: ' + configFile);
 
-                            var config = require(configFile);
-                            options["XeroUsername"] = config.XeroUsername;
-                            options["XeroPassword"] = config.XeroPassword;
-                            done();
-                        } catch (e) {
-                            var err = 'Couldn\'t read config.json from [' + configFile + ']. Exiting...';
-                            console.log(err);
-                            throw e;
-                        }
+                    if (APPTYPE === "PRIVATE") {
+                        this.skip();
                     }
+
+                    try {
+                        console.log('configFile: ' + configFile);
+
+                        var config = require(configFile);
+                        options["XeroUsername"] = config.XeroUsername;
+                        options["XeroPassword"] = config.XeroPassword;
+                        done();
+                    } catch (e) {
+                        var err = 'Couldn\'t read config.json from [' + configFile + ']. Exiting...';
+                        console.log(err);
+                        throw e;
+                    }
+
                 });
 
                 it('should login', function(done) {
@@ -168,7 +153,14 @@ describe('get access for public application', function() {
                     //console.log(browser.document.documentElement.innerHTML);
                     browser.assert.text('title', 'Xero | Authorise Application');
                     browser.select('select', 'MWE5NzdkMDItZTAyNC00NGJkLTlmMGQtNjFiOGI4OWY2YTI4-ecmd9rxRfsM=');
-                    browser.pressButton("Allow access for 30 mins");
+
+                    if (APPTYPE === "PUBLIC") {
+                        browser.pressButton("Allow access for 30 mins");
+                    } else {
+                        //It must be a partner app
+                        browser.pressButton("Allow access");
+                    }
+
                     browser.wait().then(function() {
                         // just dump some debug data to see if we're on the right page
                         //console.log(browser.document.documentElement.innerHTML);
@@ -432,7 +424,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('invoices', function() {
+    describe.skip('invoices', function() {
 
         it('create invoice', function(done) {
             this.timeout(10000);
@@ -532,7 +524,7 @@ describe('regression tests', function() {
         })
     });
 
-    describe('payments', function() {
+    describe.skip('payments', function() {
         /* Please note that this test pays an invoice created in the previous tests */
         this.timeout(10000);
         it('Create Payment', function(done) {
@@ -620,7 +612,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('bank transactions', function() {
+    describe.skip('bank transactions', function() {
 
         var sharedTransaction;
 
@@ -687,7 +679,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('bank transfers', function() {
+    describe.skip('bank transfers', function() {
 
         this.timeout(20000);
 
@@ -752,7 +744,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('tracking categories', function() {
+    describe.skip('tracking categories', function() {
         this.timeout(20000);
 
         var sampleTrackingCategory = {
@@ -911,7 +903,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('items', function() {
+    describe.skip('items', function() {
         this.timeout(10000);
 
         var sampleItem = {
@@ -1020,7 +1012,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('contacts', function() {
+    describe.skip('contacts', function() {
         var sampleContact = {
             Name: 'Johnnies Coffee' + Math.random(),
             FirstName: 'John',
@@ -1209,7 +1201,7 @@ describe('regression tests', function() {
         });
     })
 
-    describe('journals', function() {
+    describe.skip('journals', function() {
         this.timeout(10000);
 
         var sampleJournalId = "";
@@ -1291,7 +1283,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('users', function() {
+    describe.skip('users', function() {
         this.timeout(20000);
 
         it('retrieves a list of users', function(done) {
