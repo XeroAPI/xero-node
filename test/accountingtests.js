@@ -13,10 +13,11 @@ process.on('uncaughtException', function(err) {
 var currentApp;
 var organisationCountry = "";
 
-var APPTYPE = "PRIVATE";
+var APPTYPE = "PUBLIC";
 var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
 var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
 var partnerConfigFile = "/Users/jordan.walsh/.xero/partner_app_config.json";
+var configFile = "";
 
 describe('create application', function() {
     describe('create instance', function() {
@@ -25,12 +26,15 @@ describe('create application', function() {
 
             switch (APPTYPE) {
                 case "PRIVATE":
-                    currentApp = new xero.PrivateApplication(privateConfigFile);
+                    configFile = privateConfigFile;
+                    currentApp = new xero.PrivateApplication(configFile);
                     break;
                 case "PUBLIC":
-                    currentApp = new xero.PublicApplication(publicConfigFile);
+                    configFile = publicConfigFile;
+                    currentApp = new xero.PublicApplication(publicConfigFile, { runscopeBucketId: "ei635hnc0fem" });
                     break;
                 case "PARTNER":
+                    configFile = partnerConfigFile;
                     currentApp = new xero.PartnerApplication(partnerConfigFile);
                     break;
                 default:
@@ -43,14 +47,13 @@ describe('create application', function() {
 });
 
 describe('get access for public or partner application', function() {
+    beforeEach(function() {
+        if (APPTYPE === "PRIVATE") {
+            this.skip();
+        }
+    });
 
     describe('Get tokens', function() {
-
-        beforeEach(function() {
-            if (APPTYPE === "PRIVATE") {
-                this.skip();
-            }
-        });
 
         var authoriseUrl = "";
         var requestToken = "";
@@ -90,7 +93,7 @@ describe('get access for public or partner application', function() {
                 runScripts: false
             });
 
-            //browser.debug();
+            browser.debug();
 
             before(function(done) {
                 if (APPTYPE === "PRIVATE") {

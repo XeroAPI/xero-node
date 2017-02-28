@@ -1,8 +1,4 @@
-{% extends 'layout.html' %}
-
-{% block title %}Index{% endblock %}
-
-{% block content %}
+{% extends 'layout.html' %} {% block title %}Index{% endblock %} {% block content %}
 <h3>Index</h3>
 <a href="/employees">List employees</a><br>
 <a href="/customers">List customers</a><br>
@@ -11,3 +7,6 @@
 <a href="/createtimesheet">Create Timesheet</a><br>
 <a href="/createinvoice">Create Invoice</a><br>
 <a href="/sendinvoice">Send Invoice</a><br>
+
+<h3>error</h3>
+{{ error }}

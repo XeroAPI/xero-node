@@ -1,6 +1,8 @@
 var express = require('express'),
     xero = require('..')
 
+var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
+
 // Setup the Express.js server
 var app = express();
 app.use(express.logger());
@@ -18,11 +20,10 @@ app.get('/', function(req, res) {
 
 // Request an OAuth Request Token, and redirects the user to authorize it
 app.get('/request', function(req, res) {
-    var xeroApp = new xero.PublicApplication({
+    var xeroApp = new xero.PublicApplication(publicConfigFile, {
         authorizeCallbackUrl: 'http://localhost:3100/access',
-        consumerKey: 'XPKXXEIXBO4PSYDEWB9GEKCKTOJGOC',
-        consumerSecret: 'LHAFA1V6FW9NTRVKUW8OVMGKWI4N2K'
-    })
+        runscopeBucketId: "ei635hnc0fem"
+    });
     xeroApp.getRequestToken(function(err, token, secret) {
         if (!err) {
             req.session.oauthRequestToken = token;
@@ -37,11 +38,9 @@ app.get('/request', function(req, res) {
 });
 
 app.get('/access', function(req, res) {
-    var xeroApp = new xero.PublicApplication({
+    var xeroApp = new xero.PublicApplication(publicConfigFile, {
         authorizeCallbackUrl: 'http://localhost:3100/access',
-        consumerKey: 'RPUOKBYW6KZGS37GE7S4ULR72W58B1',
-        consumerSecret: 'Q4XQU3S7TNBKREMUTOFCI3LESYBGZT'
-    })
+    });
 
     if (req.query.oauth_verifier && req.query.oauth_token == req.session.oauthRequestToken) {
         xeroApp.getAccessToken(req.session.oauthRequestToken, req.session.oauthRequestSecret, req.query.oauth_verifier,
@@ -57,10 +56,8 @@ app.get('/access', function(req, res) {
 // Callback for the authorization page
 app.get('/organisations', function(req, res) {
     if (req.session.oauthAccessToken) {
-        var xeroApp = new xero.PublicApplication({
+        var xeroApp = new xero.PublicApplication(publicConfigFile, {
             authorizeCallbackUrl: 'http://localhost:3100/access',
-            consumerKey: 'XPKXXEIXBO4PSYDEWB9GEKCKTOJGOC',
-            consumerSecret: 'LHAFA1V6FW9NTRVKUW8OVMGKWI4N2K',
             accessToken: req.session.oauthAccessToken,
             accessSecret: req.session.oauthAccessSecret
         });

@@ -5,14 +5,13 @@ var express = require('express'),
     fs = require('fs'),
     nodemailer = require('nodemailer')
 
+var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
 
 function getXeroApp(session) {
     var config = {
         authorizeCallbackUrl: 'http://localhost:3100/access',
-        consumerKey: 'XPKXXEIXBO4PSYDEWB9GEKCKTOJGOC',
-        consumerSecret: 'LHAFA1V6FW9NTRVKUW8OVMGKWI4N2K'
+        runscopeBucketId: "ei635hnc0fem"
     };
-
 
     if (session) {
         if (session.oauthAccessToken && session.oauthAccessSecret) {
@@ -20,7 +19,14 @@ function getXeroApp(session) {
             config.accessSecret = session.oauthAccessSecret;
         }
     }
-    return new xero.PublicApplication(config);
+
+    console.log(config);
+
+    var app = new xero.PublicApplication(publicConfigFile, config);
+
+    console.log(app);
+
+    return app;
 }
 
 var app = express();
@@ -108,7 +114,8 @@ app.get('/employees', function(req, res) {
 });
 
 app.get('/error', function(req, res) {
-    res.render('error.html', { error: req.query.error });
+    console.log(req.query.error);
+    res.render('index.html', { error: req.query.error });
 })
 
 app.get('/contacts', function(req, res) {
