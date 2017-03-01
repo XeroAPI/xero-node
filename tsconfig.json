@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"declarationDir": "./lib",
+		"listEmittedFiles": true,
+		"outDir": "./lib",
+		"rootDir": "./src",
+		"noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"noUnusedLocals": true,
+		"module": "commonjs",
+		"target": "es5"
+	},
+	"include": [
+		"./src/**/*"
+	],
+	"exclude": [
+		"./src/**/__tests__/*"
+	]
+}
