@@ -1,16 +1,14 @@
 var express = require('express'),
     xero = require('..'),
-    swig = require('swig'),
+    exphbs = require('express-handlebars'),
     LRU = require('lru-cache'),
     fs = require('fs'),
-    nodemailer = require('nodemailer')
-
-var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
+    nodemailer = require('nodemailer'),
+    publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
 
 function getXeroApp(session) {
     var config = {
-        authorizeCallbackUrl: 'http://localhost:3100/access',
-        runscopeBucketId: "ei635hnc0fem"
+        authorizeCallbackUrl: 'http://localhost:3100/access'
     };
 
     if (session) {
@@ -20,31 +18,26 @@ function getXeroApp(session) {
         }
     }
 
-    console.log(config);
-
-    var app = new xero.PublicApplication(publicConfigFile, config);
-
-    console.log(app);
-
-    return app;
+    return new xero.PublicApplication(publicConfigFile, config);
 }
 
 var app = express();
 
-//set up swig templating
-app.engine('html', swig.renderFile);
-
-app.set('view engine', 'html');
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main',
+    layoutsDir: __dirname + '/views/layouts',
+    partialsDir: [
+        __dirname + '/views/partials/'
+    ]
+}));
+app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
-
-app.set('view cache', false);
-swig.setDefaults({ cache: false });
-
 
 app.use(express.logger());
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.session({ secret: '123456' }));
+app.use(express.static(__dirname + '/assets'));
 // app.use(express.cookieSession({ secret: 'sfsdfsdfsdfsdf234234234fd', cookie: { maxAge: 123467654456 } }));
 
 function authorizeRedirect(req, res, returnTo) {
@@ -75,7 +68,7 @@ function authorizedOperation(req, res, returnTo, callback) {
 
 // Home Page
 app.get('/', function(req, res) {
-    res.render('index.html');
+    res.render('index');
 });
 
 // Redirected from xero with oauth results
@@ -99,11 +92,11 @@ app.get('/employees', function(req, res) {
         var employees = [];
         xeroApp.payroll.employees.getEmployees({ pager: { callback: pagerCallback } })
             .then(function() {
-                res.render('employees.html', { employees: employees });
+                res.render('employees', { employees: employees });
             })
             .fail(function(err) {
                 console.log(err);
-                res.render('employees.html', { error: err });
+                res.render('employees', { error: err });
             })
 
         function pagerCallback(err, response, cb) {
@@ -115,7 +108,7 @@ app.get('/employees', function(req, res) {
 
 app.get('/error', function(req, res) {
     console.log(req.query.error);
-    res.render('index.html', { error: req.query.error });
+    res.render('index', { error: req.query.error });
 })
 
 app.get('/contacts', function(req, res) {
@@ -123,7 +116,7 @@ app.get('/contacts', function(req, res) {
         var contacts = [];
         xeroApp.core.contacts.getContacts({ pager: { callback: pagerCallback } })
             .then(function() {
-                res.render('contacts.html', { contacts: contacts });
+                res.render('contacts', { contacts: contacts });
             })
 
         function pagerCallback(err, response, cb) {
@@ -138,14 +131,14 @@ app.get('/timesheets', function(req, res) {
     authorizedOperation(req, res, '/timesheets', function(xeroApp) {
         xeroApp.payroll.timesheets.getTimesheets()
             .then(function(timesheets) {
-                res.render('timesheets.html', { timesheets: timesheets });
+                res.render('timesheets', { timesheets: timesheets });
             })
     })
 });
 
 app.use('/createtimesheet', function(req, res) {
     if (req.method == 'GET') {
-        return res.render('createtimesheet.html');
+        return res.render('createtimesheet');
     } else if (req.method == 'POST') {
         authorizedOperation(req, res, '/createtimesheet', function(xeroApp) {
             var timesheet = xeroApp.payroll.timesheets.newTimesheet({
@@ -160,10 +153,10 @@ app.use('/createtimesheet', function(req, res) {
             });
             timesheet.save()
                 .then(function(ret) {
-                    res.render('createtimesheet.html', { timesheets: ret.entities })
+                    res.render('createtimesheet', { timesheets: ret.entities })
                 })
                 .fail(function(err) {
-                    res.render('createtimesheet.html', { err: err })
+                    res.render('createtimesheet', { err: err })
                 })
 
         })
@@ -175,7 +168,7 @@ app.get('/invoices', function(req, res) {
     authorizedOperation(req, res, '/invoices', function(xeroApp) {
         xeroApp.core.invoices.getInvoices()
             .then(function(invoices) {
-                res.render('invoices.html', { invoices: invoices });
+                res.render('invoices', { invoices: invoices });
             })
 
     })
@@ -185,7 +178,7 @@ app.get('/items', function(req, res) {
     authorizedOperation(req, res, '/items', function(xeroApp) {
         xeroApp.core.items.getItems()
             .then(function(items) {
-                res.render('items.html', { items: items });
+                res.render('items', { items: items });
             })
 
     })
@@ -193,7 +186,7 @@ app.get('/items', function(req, res) {
 
 app.use('/createinvoice', function(req, res) {
     if (req.method == 'GET') {
-        return res.render('createinvoice.html');
+        return res.render('createinvoice');
     } else if (req.method == 'POST') {
         authorizedOperation(req, res, '/createinvoice', function(xeroApp) {
             var invoice = xeroApp.core.invoices.newInvoice({
@@ -213,10 +206,10 @@ app.use('/createinvoice', function(req, res) {
             });
             invoice.save()
                 .then(function(ret) {
-                    res.render('createinvoice.html', { outcome: 'Invoice created', id: ret.entities[0].InvoiceID })
+                    res.render('createinvoice', { outcome: 'Invoice created', id: ret.entities[0].InvoiceID })
                 })
                 .fail(function(err) {
-                    res.render('createinvoice.html', { outcome: 'Error', err: err })
+                    res.render('createinvoice', { outcome: 'Error', err: err })
                 })
 
         })
@@ -225,7 +218,7 @@ app.use('/createinvoice', function(req, res) {
 
 app.use('/emailinvoice', function(req, res) {
     if (req.method == 'GET' && !req.query.a) {
-        res.render('emailinvoice.html', { id: req.query.id });
+        res.render('emailinvoice', { id: req.query.id });
     } else {
         authorizedOperation(req, res, '/emailinvoice?id=' + req.query.id + '&a=1&email=' + encodeURIComponent(req.body.Email), function(xeroApp) {
             var file = fs.createWriteStream(__dirname + '/invoice.pdf', { encoding: 'binary' });
@@ -244,9 +237,9 @@ app.use('/emailinvoice', function(req, res) {
                 };
                 transporter.sendMail(mailOptions, function(err, info) {
                     if (err)
-                        res.render('emailinvoice.html', { outcome: 'Error', err: err, id: req.query.id });
+                        res.render('emailinvoice', { outcome: 'Error', err: err, id: req.query.id });
                     else
-                        res.render('emailinvoice.html', { outcome: 'Email sent', id: req.query.id });
+                        res.render('emailinvoice', { outcome: 'Email sent', id: req.query.id });
                 })
 
             })

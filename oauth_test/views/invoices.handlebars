@@ -1,0 +1,25 @@
+<h3>Invoices</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Invoice Number</td>
+        <td>Date</td>
+        <td>Due Date</td>
+        <td>Status</td>
+        <td>Total</td>
+        <td></td>
+    </tr>
+    </thead>
+    {{#each invoices}}
+    <tr>
+        <td>{{ this.InvoiceID }}</td>
+        <td>{{ this.InvoiceNumber}}</td>
+        <td>{{ this.Date }}</td>
+        <td>{{ this.DueDate }}</td>
+        <td>{{ this.Status}}</td>
+        <td>{{ this.Total }}</td>
+        <td><a href="/emailinvoice?id={{ this.InvoiceID }}" class="btn btn-primary btn-xs">Email</a></td>
+    </tr>
+    {{/each}}
+</table> 

@@ -1,0 +1,19 @@
+<h3>Contacts</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>First name</td>
+            <td>Last name</td>
+        </tr>
+    </thead>
+    {{#each contacts}}
+    <tr>
+        <td>{{ this.ContactID }}</td>
+        <td>{{ this.Name }}</td>
+        <td>{{ this.FirstName }}</td>
+        <td>{{ this.LastName }}</td>
+    </tr>
+    {{/each}}
+</table>
