@@ -13,7 +13,7 @@ process.on('uncaughtException', function(err) {
 var currentApp;
 var organisationCountry = "";
 
-var APPTYPE = "PUBLIC";
+var APPTYPE = "PARTNER";
 var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
 var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
 var partnerConfigFile = "/Users/jordan.walsh/.xero/partner_app_config.json";
@@ -35,7 +35,7 @@ describe('create application', function() {
                     break;
                 case "PARTNER":
                     configFile = partnerConfigFile;
-                    currentApp = new xero.PartnerApplication(partnerConfigFile);
+                    currentApp = new xero.PartnerApplication(partnerConfigFile, { authorizedCallbackUrl: "" });
                     break;
                 default:
                     throw "No App Type Set!!"
