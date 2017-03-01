@@ -1,2 +1,200 @@
-<h3>Overview</h3>
-<p>This page talks about how to use the application<p>
+<h2>Xero Node.js - Sample App</h2>
+<p>An API wrapper for the Xero API (<a href="http://developer.xero.com">http://developer.xero.com</a>).</p>
+<p>Supports all three applications types:</p>
+<ul>
+  <li>Private</li>
+  <li>Public</li>
+  <li>Partner</li>
+</ul>
+<h2>
+  <a id="Features_13"></a>Features</h2>
+<p>The following endpoints are supported:</p>
+<ul>
+  <li>Accounts</li>
+  <li>BankTransactions</li>
+  <li>BankTransfers</li>
+  <li>Contacts</li>
+  <li>Invoices</li>
+  <li>Items</li>
+  <li>Journals</li>
+  <li>Organisations</li>
+  <li>Payments</li>
+  <li>TrackingCategories (and TrackingOptions)</li>
+  <li>Users</li>
+</ul>
+<p>The following features are supported:</p>
+<ul>
+  <li>Create / Read / Update / Delete (for most endpoints)</li>
+  <li>Search (using ‘where’ clause)</li>
+  <li>Efficient pagination with callbacks</li>
+</ul>
+<h1>
+  <a id="Installation_35"></a>Installation</h1>
+<pre><code>$ npm install xero-node --save
+</code></pre>
+<h3>
+  <a id="External_Config_40"></a>External Config</h3>
+<p>This SDK requires the config to be externalised to ensure private keys are not committed into your codebase by mistake.</p>
+<p>The config file should be set up as follows:</p>
+<pre><code class="language-javascript">{
+    <span class="hljs-string">"UserAgent"</span> : <span class="hljs-string">"Tester - Application for testing Xero"</span>,
+    <span class="hljs-string">"ConsumerKey"</span>: <span class="hljs-string">"AAAAAAAAAAAAAAAAAA"</span>,
+    <span class="hljs-string">"ConsumerSecret"</span>: <span class="hljs-string">"BBBBBBBBBBBBBBBBBBBB"</span>,
+    <span class="hljs-string">"PrivateKeyPath"</span>: <span class="hljs-string">"/some/path/to/privatekey.pem"</span>,
+    <span class="hljs-string">"RunscopeBucketId"</span> : <span class="hljs-string">"xxxyyyzzzz"</span>
+}
+</code></pre>
+<h3>
+  <a id="Config_Parameters_56"></a>Config Parameters</h3>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Mandatory</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>UserAgent</td>
+      <td>The useragent that should be used with all calls to the Xero API</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>ConsumerKey</td>
+      <td>The consumer key that is required with all calls to the Xero API.,</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>ConsumerSecret</td>
+      <td>The secret key from the developer portal that is required to authenticate your API calls</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>PrivateKeyPath</td>
+      <td>The filesystem path to your privatekey.pem file to sign the API calls</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>RunscopeBucketId</td>
+      <td>Your personal runscope bucket for debugging API calls</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<p><code>RunscopeBucketId</code> has been added to support debugging the SDK. Runscope is a simple tool for Testing Complex
+  APIs. You can use Runscope to verify that the structure and content of your API calls meets your expectations.</p>
+<p>Sign up for a free runscope account at <a href="http://runscope.com">runscope.com</a> and place your bucket ID in the config
+  file to see API calls in real time.</p>
+<p>Runscope is not endorsed by or affiliated with Xero. This tool was used by the SDK creator when authoring the code only.</p>
+<h2>
+  <a id="Private_App_Usage_74"></a>Private App Usage</h2>
+<pre><code class="language-javascript"><span class="hljs-keyword">var</span> PrivateApplication = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).PrivateApplication;
+<span class="hljs-keyword">var</span> privateApp = <span class="hljs-keyword">new</span> PrivateApplication();
+
+<span class="hljs-comment">// This checks the ~/.xero/config.json directory by default looking for a config file.</span>
+<span class="hljs-comment">// Alternatively a path to a JSON file can be provided as a parameter:</span>
+
+<span class="hljs-keyword">var</span> myConfigFile = <span class="hljs-string">"/tmp/config.json"</span>;
+<span class="hljs-keyword">var</span> privateApp = <span class="hljs-keyword">new</span> PrivateApplication(myConfigFile);
+</code></pre>
+<h2>
+  <a id="Pubic_Usage_87"></a>Pubic Usage</h2>
+<pre><code class="language-javascript"><span class="hljs-keyword">var</span> PublicApplication = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).PublicApplication;
+<span class="hljs-keyword">var</span> publicApp = <span class="hljs-keyword">new</span> PublicApplication(myConfigFile);
+</code></pre>
+<h2>
+  <a id="Partner_Usage__Not_currently_tested_94"></a>Partner Usage - (Not currently tested)</h2>
+<pre><code class="language-javascript"><span class="hljs-keyword">var</span> ParnetApplication = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).PartnerApplication;
+<span class="hljs-keyword">var</span> partnerApp = <span class="hljs-keyword">new</span> PartnerApplication(myConfigFile);
+</code></pre>
+<h1>
+  <a id="Examples_101"></a>Examples</h1>
+<p>Print a count of invoices:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">//Print a count of invoices</span>
+privateApp.core.invoices.getInvoices()
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">invoices</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Invoices: "</span> + invoices.length);
+
+}).fail(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+    <span class="hljs-built_in">console</span>.error(err);
+});
+</code></pre>
+<p>Print the name of some filtered contacts:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">//Print the name of a contact</span>
+privateApp.core.contacts.getContacts({ 
+    where: <span class="hljs-string">'Name.Contains("Bayside")'</span> 
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">contacts</span>) </span>{
+    contacts.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">contact</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(contact.Name);
+    });
+}).fail(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+    <span class="hljs-built_in">console</span>.error(err);
+});
+</code></pre>
+<p>Efficient paging:</p>
+<pre><code class="language-javascript">privateApp.core.contacts.getContacts({ pager: {start:<span class="hljs-number">1</span> <span class="hljs-comment">/* page number */</span>, callback:onContacts}})
+    .fail(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Oh no, an error'</span>);
+    });
+
+<span class="hljs-comment">/* Called per page */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onContacts</span>(<span class="hljs-params">err, response, cb</span>) </span>{
+    <span class="hljs-keyword">var</span> contacts = response.data;
+    <span class="hljs-keyword">if</span> (response.finished) <span class="hljs-comment">// finished paging</span>
+        ....
+    cb(); <span class="hljs-comment">// Async support</span>
+}
+</code></pre>
+<p>Filter support: Modified After</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// No paging</span>
+publicApp.core.contacts.getContacts({ 
+    modifiedAfter: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) 
+})
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">contacts</span>) </span>{
+    _.each(contacts,  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">contact</span>) </span>{
+        <span class="hljs-comment">// Do something with contact</span>
+    })
+})
+
+</code></pre>
+<h2>
+  <a id="Tests_164"></a>Tests</h2>
+<p>npm test</p>
+<h2>
+  <a id="Release_History_168"></a>Release History</h2>
+<ul>
+  <li>1.0.0
+    <ul>
+      <li>Merged master branch from guillegette</li>
+      <li>Merged master branch from elliots</li>
+      <li>Externalised configs for private apps (keys should not live in the code)</li>
+      <li>Fixed the private app ‘consumerKey’ issue</li>
+      <li>Fixed the logger so it correctly supports different log levels</li>
+      <li>Added support for runscope urls in the signature generation</li>
+    </ul>
+  </li>
+  <li>0.0.2
+    <ul>
+      <li>Added journals</li>
+      <li>modifiedAfter support</li>
+    </ul>
+  </li>
+  <li>0.0.1
+    <ul>
+      <li>Initial Release</li>
+    </ul>
+  </li>
+</ul>
+<p>Copyright © 2017 Tim Shnaider, Guillermo Gette, Andrew Connell, Elliot Shepherd and Jordan Walsh</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+  files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy,
+  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
+  is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

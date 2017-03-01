@@ -2,7 +2,6 @@
 <table class="table table-bordered table-striped table-collapsed">
     <thead>
         <tr>
-            <td>ID</td>
             <td>Name</td>
             <td>First name</td>
             <td>Last name</td>
@@ -10,8 +9,7 @@
     </thead>
     {{#each contacts}}
     <tr>
-        <td>{{ this.ContactID }}</td>
-        <td>{{ this.Name }}</td>
+        <td><a href="https://go.xero.com/Contacts/View/{{ this.ContactID }}" target="_blank">{{ this.Name }}</a></td>
         <td>{{ this.FirstName }}</td>
         <td>{{ this.LastName }}</td>
     </tr>

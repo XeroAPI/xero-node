@@ -23,13 +23,45 @@ function getXeroApp(session) {
 
 var app = express();
 
-app.engine('handlebars', exphbs({
+var exphbs = exphbs.create({
     defaultLayout: 'main',
     layoutsDir: __dirname + '/views/layouts',
     partialsDir: [
         __dirname + '/views/partials/'
-    ]
-}));
+    ],
+    helpers: {
+        ifCond: function(v1, operator, v2, options) {
+
+            switch (operator) {
+                case '==':
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case '===':
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                case '!=':
+                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                case '!==':
+                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+                case '<':
+                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                case '<=':
+                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                case '>':
+                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                case '>=':
+                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                case '&&':
+                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                case '||':
+                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
+            }
+        }
+    }
+});
+
+app.engine('handlebars', exphbs.engine);
+
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
@@ -123,6 +155,45 @@ app.get('/contacts', function(req, res) {
             contacts.push.apply(contacts, response.data);
             cb()
         }
+    })
+});
+
+app.get('/banktransactions', function(req, res) {
+    authorizedOperation(req, res, '/banktransactions', function(xeroApp) {
+        var bankTransactions = [];
+        xeroApp.core.bankTransactions.getBankTransactions({ pager: { callback: pagerCallback } })
+            .then(function() {
+                res.render('banktransactions', { bankTransactions: bankTransactions });
+            })
+
+        function pagerCallback(err, response, cb) {
+            bankTransactions.push.apply(bankTransactions, response.data);
+            cb()
+        }
+    })
+});
+
+app.get('/banktransfers', function(req, res) {
+    authorizedOperation(req, res, '/banktransfers', function(xeroApp) {
+        var bankTransfers = [];
+        xeroApp.core.bankTransfers.getBankTransfers({ pager: { callback: pagerCallback } })
+            .then(function() {
+                res.render('banktransfers', { bankTransfers: bankTransfers });
+            })
+
+        function pagerCallback(err, response, cb) {
+            bankTransfers.push.apply(bankTransfers, response.data);
+            cb()
+        }
+    })
+});
+
+app.get('/accounts', function(req, res) {
+    authorizedOperation(req, res, '/accounts', function(xeroApp) {
+        xeroApp.core.accounts.getAccounts()
+            .then(function(accounts) {
+                res.render('accounts', { accounts: accounts });
+            })
     })
 });
 
