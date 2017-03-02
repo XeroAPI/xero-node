@@ -8,8 +8,7 @@ Supports all three applications types:
 * Public
 * Partner
 
-
-Create an Issue for any suggestions or alternatively fork the code and submit a PR.
+Create an Issue in GitHub for any suggestions or alternatively fork the code and submit a PR.
 
 # Features
 
@@ -26,7 +25,14 @@ The following endpoints are supported:
 * TrackingCategories (and TrackingOptions)
 * Users
 
-The following features are supported:
+The following endpoints are included but are not currently tested or supported for use:
+* Attachments
+* Timesheets (Payroll API)
+* Employees (Payroll API)
+* PayItems (Payroll API)
+
+
+The following features are provided:
 * Create / Read / Update / Delete (for most endpoints)
 * Search (using 'where' clause)
 * Efficient pagination with callbacks
@@ -45,12 +51,32 @@ This SDK requires the config to be externalised to ensure private keys are not c
 The config file should be set up as follows:
 
 ```javascript
+//Sample Private App Config
 {
-    "UserAgent" : "Tester - Application for testing Xero",
+    "UserAgent" : "Tester (PRIVATE) - Application for testing Xero",
     "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
     "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "PrivateKeyPath": "/some/path/to/privatekey.pem",
     "RunscopeBucketId" : "xxxyyyzzzz"
+}
+
+//Sample Public App Config
+{
+    "UserAgent" : "Tester (PUBLIC) - Application for testing Xero",
+    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
+    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "AuthorizeCallbackUrl": 'http://localhost:3100/access',
+    "RunscopeBucketId" : "xxxyyyzzzz"
+}
+
+//Sample Partner App Config
+{
+    "UserAgent" : "Tester (PARTNER) - Application for testing Xero",
+    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
+    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "RunscopeBucketId" : "xxxyyyzzzz",
+    "PrivateKeyPath" : "/some/path/to/partner_privatekey.pem",
+    "SSLCertPath" : "/some/path/to/partner_publickey.cer"
 }
 ```
 
