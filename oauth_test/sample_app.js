@@ -119,6 +119,15 @@ app.get('/access', function(req, res) {
     }
 });
 
+app.get('/organisations', function(req, res) {
+    authorizedOperation(req, res, '/organisations', function(xeroApp) {
+        xeroApp.core.organisations.getOrganisations()
+            .then(function(organisations) {
+                res.render('organisations', { organisations: organisations });
+            })
+    })
+});
+
 app.get('/employees', function(req, res) {
     authorizedOperation(req, res, '/employees', function(xeroApp) {
         var employees = [];
@@ -173,6 +182,21 @@ app.get('/banktransactions', function(req, res) {
     })
 });
 
+app.get('/journals', function(req, res) {
+    authorizedOperation(req, res, '/journals', function(xeroApp) {
+        var journals = [];
+        xeroApp.core.journals.getJournals({ pager: { callback: pagerCallback } })
+            .then(function() {
+                res.render('journals', { journals: journals });
+            })
+
+        function pagerCallback(err, response, cb) {
+            journals.push.apply(journals, response.data);
+            cb()
+        }
+    })
+});
+
 app.get('/banktransfers', function(req, res) {
     authorizedOperation(req, res, '/banktransfers', function(xeroApp) {
         var bankTransfers = [];
@@ -185,6 +209,24 @@ app.get('/banktransfers', function(req, res) {
             bankTransfers.push.apply(bankTransfers, response.data);
             cb()
         }
+    })
+});
+
+app.get('/payments', function(req, res) {
+    authorizedOperation(req, res, '/payments', function(xeroApp) {
+        xeroApp.core.payments.getPayments()
+            .then(function(payments) {
+                res.render('payments', { payments: payments });
+            })
+    })
+});
+
+app.get('/trackingcategories', function(req, res) {
+    authorizedOperation(req, res, '/trackingcategories', function(xeroApp) {
+        xeroApp.core.trackingCategories.getTrackingCategories()
+            .then(function(trackingcategories) {
+                res.render('trackingcategories', { trackingcategories: trackingcategories });
+            })
     })
 });
 

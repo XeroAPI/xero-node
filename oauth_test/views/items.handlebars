@@ -2,7 +2,6 @@
 <table class="table table-bordered table-striped table-collapsed">
     <thead>
     <tr>
-        <td>ID</td>
         <td>Code</td>
         <td>Description</td>
         <td>Cost Price</td>
@@ -11,8 +10,7 @@
     </thead>
     {{#each items}}
     <tr>
-        <td>{{ this.ItemID }}</td>
-        <td>{{ this.Code }}</td>
+        <td><a href="https://go.xero.com/Accounts/Inventory/{{this.ItemID}}" target="_blank">{{this.Code }}</a></td>
         <td>{{ this.Description }}</td>
         <td>{{ this.PurchaseDetails.UnitPrice }}</td>
         <td>{{ this.SalesDetails.UnitPrice }}</td>
