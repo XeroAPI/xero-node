@@ -100,7 +100,11 @@ function authorizedOperation(req, res, returnTo, callback) {
 
 // Home Page
 app.get('/', function(req, res) {
-    res.render('index');
+    res.render('index', {
+        active: {
+            overview: true
+        }
+    });
 });
 
 // Redirected from xero with oauth results
@@ -123,7 +127,12 @@ app.get('/organisations', function(req, res) {
     authorizedOperation(req, res, '/organisations', function(xeroApp) {
         xeroApp.core.organisations.getOrganisations()
             .then(function(organisations) {
-                res.render('organisations', { organisations: organisations });
+                res.render('organisations', {
+                    organisations: organisations,
+                    active: {
+                        organisations: true
+                    }
+                });
             })
     })
 });
@@ -133,11 +142,12 @@ app.get('/employees', function(req, res) {
         var employees = [];
         xeroApp.payroll.employees.getEmployees({ pager: { callback: pagerCallback } })
             .then(function() {
-                res.render('employees', { employees: employees });
-            })
-            .fail(function(err) {
-                console.log(err);
-                res.render('employees', { error: err });
+                res.render('employees', {
+                    employees: employees,
+                    active: {
+                        employees: true
+                    }
+                });
             })
 
         function pagerCallback(err, response, cb) {
@@ -157,7 +167,12 @@ app.get('/contacts', function(req, res) {
         var contacts = [];
         xeroApp.core.contacts.getContacts({ pager: { callback: pagerCallback } })
             .then(function() {
-                res.render('contacts', { contacts: contacts });
+                res.render('contacts', {
+                    contacts: contacts,
+                    active: {
+                        contacts: true
+                    }
+                });
             })
 
         function pagerCallback(err, response, cb) {
@@ -172,7 +187,12 @@ app.get('/banktransactions', function(req, res) {
         var bankTransactions = [];
         xeroApp.core.bankTransactions.getBankTransactions({ pager: { callback: pagerCallback } })
             .then(function() {
-                res.render('banktransactions', { bankTransactions: bankTransactions });
+                res.render('banktransactions', {
+                    bankTransactions: bankTransactions,
+                    active: {
+                        banktransactions: true
+                    }
+                });
             })
 
         function pagerCallback(err, response, cb) {
@@ -187,7 +207,12 @@ app.get('/journals', function(req, res) {
         var journals = [];
         xeroApp.core.journals.getJournals({ pager: { callback: pagerCallback } })
             .then(function() {
-                res.render('journals', { journals: journals });
+                res.render('journals', {
+                    journals: journals,
+                    active: {
+                        journals: true
+                    }
+                });
             })
 
         function pagerCallback(err, response, cb) {
@@ -202,7 +227,12 @@ app.get('/banktransfers', function(req, res) {
         var bankTransfers = [];
         xeroApp.core.bankTransfers.getBankTransfers({ pager: { callback: pagerCallback } })
             .then(function() {
-                res.render('banktransfers', { bankTransfers: bankTransfers });
+                res.render('banktransfers', {
+                    bankTransfers: bankTransfers,
+                    active: {
+                        banktransfers: true
+                    }
+                });
             })
 
         function pagerCallback(err, response, cb) {
@@ -216,7 +246,12 @@ app.get('/payments', function(req, res) {
     authorizedOperation(req, res, '/payments', function(xeroApp) {
         xeroApp.core.payments.getPayments()
             .then(function(payments) {
-                res.render('payments', { payments: payments });
+                res.render('payments', {
+                    payments: payments,
+                    active: {
+                        payments: true
+                    }
+                });
             })
     })
 });
@@ -225,7 +260,12 @@ app.get('/trackingcategories', function(req, res) {
     authorizedOperation(req, res, '/trackingcategories', function(xeroApp) {
         xeroApp.core.trackingCategories.getTrackingCategories()
             .then(function(trackingcategories) {
-                res.render('trackingcategories', { trackingcategories: trackingcategories });
+                res.render('trackingcategories', {
+                    trackingcategories: trackingcategories,
+                    active: {
+                        trackingcategories: true
+                    }
+                });
             })
     })
 });
@@ -234,7 +274,12 @@ app.get('/accounts', function(req, res) {
     authorizedOperation(req, res, '/accounts', function(xeroApp) {
         xeroApp.core.accounts.getAccounts()
             .then(function(accounts) {
-                res.render('accounts', { accounts: accounts });
+                res.render('accounts', {
+                    accounts: accounts,
+                    active: {
+                        accounts: true
+                    }
+                });
             })
     })
 });
@@ -244,7 +289,12 @@ app.get('/timesheets', function(req, res) {
     authorizedOperation(req, res, '/timesheets', function(xeroApp) {
         xeroApp.payroll.timesheets.getTimesheets()
             .then(function(timesheets) {
-                res.render('timesheets', { timesheets: timesheets });
+                res.render('timesheets', {
+                    timesheets: timesheets,
+                    active: {
+                        timesheets: true
+                    }
+                });
             })
     })
 });
@@ -281,7 +331,12 @@ app.get('/invoices', function(req, res) {
     authorizedOperation(req, res, '/invoices', function(xeroApp) {
         xeroApp.core.invoices.getInvoices()
             .then(function(invoices) {
-                res.render('invoices', { invoices: invoices });
+                res.render('invoices', {
+                    invoices: invoices,
+                    active: {
+                        invoices: true
+                    }
+                });
             })
 
     })
@@ -291,7 +346,12 @@ app.get('/items', function(req, res) {
     authorizedOperation(req, res, '/items', function(xeroApp) {
         xeroApp.core.items.getItems()
             .then(function(items) {
-                res.render('items', { items: items });
+                res.render('items', {
+                    items: items,
+                    active: {
+                        items: true
+                    }
+                });
             })
 
     })
