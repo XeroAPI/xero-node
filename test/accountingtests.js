@@ -13,7 +13,7 @@ process.on('uncaughtException', function(err) {
 var currentApp;
 var organisationCountry = "";
 
-var APPTYPE = "PARTNER";
+var APPTYPE = "PRIVATE";
 var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
 var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
 var partnerConfigFile = "/Users/jordan.walsh/.xero/partner_app_config.json";
@@ -427,7 +427,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('invoices', function() {
+    describe('invoices', function() {
 
         it('create invoice', function(done) {
             this.timeout(10000);
@@ -527,7 +527,7 @@ describe('regression tests', function() {
         })
     });
 
-    describe.skip('payments', function() {
+    describe('payments', function() {
         /* Please note that this test pays an invoice created in the previous tests */
         this.timeout(10000);
         it('Create Payment', function(done) {
@@ -615,7 +615,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('bank transactions', function() {
+    describe('bank transactions', function() {
 
         var sharedTransaction;
 
@@ -682,7 +682,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('bank transfers', function() {
+    describe('bank transfers', function() {
 
         this.timeout(20000);
 
@@ -747,7 +747,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('tracking categories', function() {
+    describe('tracking categories', function() {
         this.timeout(20000);
 
         var sampleTrackingCategory = {
@@ -906,7 +906,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('items', function() {
+    describe('items', function() {
         this.timeout(10000);
 
         var sampleItem = {
@@ -1015,7 +1015,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('contacts', function() {
+    describe('contacts', function() {
         var sampleContact = {
             Name: 'Johnnies Coffee' + Math.random(),
             FirstName: 'John',
@@ -1204,7 +1204,7 @@ describe('regression tests', function() {
         });
     })
 
-    describe.skip('journals', function() {
+    describe('journals', function() {
         this.timeout(10000);
 
         var sampleJournalId = "";
@@ -1286,7 +1286,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('users', function() {
+    describe('users', function() {
         this.timeout(20000);
 
         it('retrieves a list of users', function(done) {
