@@ -209,7 +209,7 @@ describe('regression tests', function() {
     var InvoiceID = "";
     var PaymentID = "";
 
-    describe('organisations', function() {
+    describe.skip('organisations', function() {
         it('get', function(done) {
             this.timeout(10000);
             currentApp.core.organisations.getOrganisation()
@@ -230,7 +230,7 @@ describe('regression tests', function() {
         })
     })
 
-    describe('accounts', function() {
+    describe.skip('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -427,7 +427,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('invoices', function() {
+    describe.skip('invoices', function() {
 
         it('create invoice', function(done) {
             this.timeout(10000);
@@ -527,7 +527,7 @@ describe('regression tests', function() {
         })
     });
 
-    describe('payments', function() {
+    describe.skip('payments', function() {
         /* Please note that this test pays an invoice created in the previous tests */
         this.timeout(10000);
         it('Create Payment', function(done) {
@@ -615,7 +615,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('bank transactions', function() {
+    describe.skip('bank transactions', function() {
 
         var sharedTransaction;
 
@@ -682,7 +682,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('bank transfers', function() {
+    describe.skip('bank transfers', function() {
 
         this.timeout(20000);
 
@@ -747,7 +747,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('tracking categories', function() {
+    describe.skip('tracking categories', function() {
         this.timeout(20000);
 
         var sampleTrackingCategory = {
@@ -906,7 +906,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('items', function() {
+    describe.skip('items', function() {
         this.timeout(10000);
 
         var sampleItem = {
@@ -1015,7 +1015,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('contacts', function() {
+    describe.skip('contacts', function() {
         var sampleContact = {
             Name: 'Johnnies Coffee' + Math.random(),
             FirstName: 'John',
@@ -1204,7 +1204,7 @@ describe('regression tests', function() {
         });
     })
 
-    describe('journals', function() {
+    describe.skip('journals', function() {
         this.timeout(10000);
 
         var sampleJournalId = "";
@@ -1286,7 +1286,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('users', function() {
+    describe.skip('users', function() {
         this.timeout(20000);
 
         it('retrieves a list of users', function(done) {
