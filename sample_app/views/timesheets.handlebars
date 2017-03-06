@@ -1,4 +1,7 @@
 <h3>Timesheets</h3>
+{{#if error}}
+<p>An error occurred: {{error.data}}</p>
+{{else}}
 <table class="table table-bordered table-striped table-collapsed">
     <thead>
     <tr>
@@ -21,3 +24,4 @@
     </tr>
     {{/each}}
 </table>
+{{/if}}

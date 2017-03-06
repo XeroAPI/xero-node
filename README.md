@@ -65,7 +65,7 @@ The config file should be set up as follows:
     "UserAgent" : "Tester (PUBLIC) - Application for testing Xero",
     "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
     "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
-    "AuthorizeCallbackUrl": 'http://localhost:3100/access',
+    "AuthorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
     "RunscopeBucketId" : "xxxyyyzzzz"
 }
 
@@ -74,24 +74,27 @@ The config file should be set up as follows:
     "UserAgent" : "Tester (PARTNER) - Application for testing Xero",
     "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
     "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
-    "RunscopeBucketId" : "xxxyyyzzzz",
+    "AuthorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
     "PrivateKeyPath" : "/some/path/to/partner_privatekey.pem",
-    "SSLCertPath" : "/some/path/to/partner_publickey.cer"
+    "SSLCertPath" : "/some/path/to/partner_publickey.cer",
+    "RunscopeBucketId" : "xxxyyyzzzz"
 }
 ```
 
 ### Config Parameters
 
-| Parameter        | Description                                                                              | Mandatory |
-|------------------|------------------------------------------------------------------------------------------|-----------|
-| UserAgent        | The useragent that should be used with all calls to the Xero API                         | True      |
-| ConsumerKey      | The consumer key that is required with all calls to the Xero API.,                       | True      |
-| ConsumerSecret   | The secret key from the developer portal that is required to authenticate your API calls | True      |
-| PrivateKeyPath   | The filesystem path to your privatekey.pem file to sign the API calls                    | True      |
-| RunscopeBucketId | Your personal runscope bucket for debugging API calls                                    | False     |
+| Parameter            | Description                                                                              | Mandatory |
+|----------------------|------------------------------------------------------------------------------------------|-----------|
+| UserAgent            | The useragent that should be used with all calls to the Xero API                         | True      |
+| ConsumerKey          | The consumer key that is required with all calls to the Xero API.,                       | True      |
+| ConsumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      |
+| AuthorizeCallbackUrl | The callback that Xero should invoke when the authorization is successful.               | False     |
+| PrivateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     |
+| SSLCertPath          | The filesystem path to your publickey.pem file to sign the API calls                     | False     |
+| RunscopeBucketId     | Your personal runscope bucket for debugging API calls                                    | False     |
 ---
 
-`RunscopeBucketId` has been added to support debugging the SDK.  Runscope is a simple tool for Testing Complex APIs. You can use Runscope to verify that the structure and content of your API calls meets your expectations. 
+**Note:** `RunscopeBucketId` has been added to support debugging the SDK.  Runscope is a simple tool for Testing Complex APIs. You can use Runscope to verify that the structure and content of your API calls meets your expectations. 
 
 Sign up for a free runscope account at runscope.com and place your bucket ID in the config file to see API calls in real time.
 
@@ -108,21 +111,21 @@ var privateApp = new PrivateApplication();
 // Alternatively a path to a JSON file can be provided as a parameter:
 
 var myConfigFile = "/tmp/config.json";
-var privateApp = new PrivateApplication(myConfigFile);
+var xeroClient = new PrivateApplication(myConfigFile);
 ```
 
 ## Pubic Usage
 
 ```javascript
 var PublicApplication = require('xero-node').PublicApplication;
-var publicApp = new PublicApplication(myConfigFile);
+var xeroClient = new PublicApplication(myConfigFile);
 ```
 
-## Partner Usage - (Not currently tested)
+## Partner Usage
 
 ```javascript
-var ParnetApplication = require('xero-node').PartnerApplication;
-var partnerApp = new PartnerApplication(myConfigFile);
+var ParnerApplication = require('xero-node').PartnerApplication;
+var xeroClient = new PartnerApplication(myConfigFile);
 ```
 
 Examples
@@ -131,10 +134,9 @@ Print a count of invoices:
 
 ```javascript
 //Print a count of invoices
-privateApp.core.invoices.getInvoices()
+xeroClient.core.invoices.getInvoices()
 .then(function(invoices) {
     console.log("Invoices: " + invoices.length);
-
 }).fail(function(err) {
     console.error(err);
 });
@@ -144,7 +146,7 @@ Print the name of some filtered contacts:
 
 ```javascript
 //Print the name of a contact
-privateApp.core.contacts.getContacts({ 
+xeroClient.core.contacts.getContacts({ 
     where: 'Name.Contains("Bayside")' 
 })
 .then(function(contacts) {
@@ -159,7 +161,7 @@ privateApp.core.contacts.getContacts({
 Efficient paging:
 
 ```javascript
-privateApp.core.contacts.getContacts({ pager: {start:1 /* page number */, callback:onContacts}})
+xeroClient.core.contacts.getContacts({ pager: {start:1 /* page number */, callback: onContacts}})
     .fail(function(err) {
         console.log('Oh no, an error');
     });
@@ -176,17 +178,16 @@ function onContacts(err, response, cb) {
 Filter support: Modified After
 ```javascript
 // No paging
-publicApp.core.contacts.getContacts({ 
+xeroClient.core.contacts.getContacts({ 
     modifiedAfter: new Date(2013,1,1) 
 })
 .then(function(contacts) {
-    _.each(contacts,  function(contact) {
+    contacts.forEach(function(contact) {
         // Do something with contact
-    })
+    });
 })
 
 ```
-
 
 ## Tests
 

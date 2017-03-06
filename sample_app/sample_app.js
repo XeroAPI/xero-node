@@ -79,7 +79,14 @@ function authorizeRedirect(req, res, returnTo) {
             req.session.oauthRequestToken = token;
             req.session.oauthRequestSecret = secret;
             req.session.returnto = returnTo;
-            var authoriseUrl = xeroApp.buildAuthorizeUrl(token, { scope: 'payroll.employees,payroll.payitems,payroll.timesheets' });
+
+            //Note: only include this scope if payroll is required for your application.
+            var PayrollScope = 'payroll.employees,payroll.payitems,payroll.timesheets';
+            var AccountingScope = '';
+
+            var authoriseUrl = xeroApp.buildAuthorizeUrl(token, {
+                scope: PayrollScope
+            });
             res.redirect(authoriseUrl);
         } else {
             res.redirect('/error');
@@ -139,9 +146,8 @@ app.get('/organisations', function(req, res) {
 
 app.get('/employees', function(req, res) {
     authorizedOperation(req, res, '/employees', function(xeroApp) {
-        var employees = [];
-        xeroApp.payroll.employees.getEmployees({ pager: { callback: pagerCallback } })
-            .then(function() {
+        xeroApp.payroll.employees.getEmployees()
+            .then(function(employees) {
                 res.render('employees', {
                     employees: employees,
                     active: {
@@ -149,11 +155,15 @@ app.get('/employees', function(req, res) {
                     }
                 });
             })
-
-        function pagerCallback(err, response, cb) {
-            employees.push.apply(employees, response.data);
-            cb()
-        }
+            .fail(function(err) {
+                console.log(err)
+                res.render('employees', {
+                    error: err,
+                    active: {
+                        employees: true
+                    }
+                })
+            })
     })
 });
 
@@ -295,6 +305,15 @@ app.get('/timesheets', function(req, res) {
                         timesheets: true
                     }
                 });
+            })
+            .fail(function(err) {
+                console.log(err)
+                res.render('timesheets', {
+                    error: err,
+                    active: {
+                        timesheets: true
+                    }
+                })
             })
     })
 });
