@@ -230,6 +230,43 @@ describe('regression tests', function() {
         })
     })
 
+    describe('taxrates', function() {
+
+        it('gets tax rates', function(done) {
+            this.timeout(10000);
+            currentApp.core.taxrates.getTaxRates()
+                .then(function(taxRates) {
+                    expect(taxRates).to.have.length.greaterThan(0);
+                    _.each(taxRates, function(taxRate) {
+                        expect(taxRate.Name).to.not.equal("");
+                        expect(taxRate.Name).to.not.equal(undefined);
+                        expect(taxRate.TaxType).to.not.equal("");
+                        expect(taxRate.TaxType).to.not.equal(undefined);
+                        expect(taxRate.CanApplyToAssets).to.be.oneOf([true, false]);
+                        expect(taxRate.CanApplyToEquity).to.be.oneOf([true, false]);
+                        expect(taxRate.CanApplyToExpenses).to.be.oneOf([true, false]);
+                        expect(taxRate.CanApplyToLiabilities).to.be.oneOf([true, false]);
+                        expect(taxRate.CanApplyToRevenue).to.be.oneOf([true, false]);
+                        expect(taxRate.DisplayTaxRate).to.be.a('Number');
+                        expect(taxRate.Status).to.be.oneOf(['ACTIVE', 'DELETED', 'ARCHIVED']);
+                        expect(taxRate.TaxComponents).to.have.length.greaterThan(0);
+
+                        _.each(taxRate.TaxComponents, function(taxComponent) {
+                            expect(taxComponent.Name).to.not.equal("");
+                            expect(taxComponent.Name).to.not.equal(undefined);
+                            expect(taxComponent.Rate).to.be.a('Number');
+                            expect(taxComponent.IsCompound).to.be.oneOf([true, false]);
+                        });
+                    });
+                    done();
+                })
+                .fail(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+        })
+    });
+
     describe.skip('accounts', function() {
 
         //Accounts supporting data
