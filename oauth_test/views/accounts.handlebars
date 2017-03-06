@@ -1,0 +1,27 @@
+<h3>Accounts</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Code</td>
+            <td>Type</td>
+            <td>BankAccountNumber</td>
+            <td>BankAccountType</td>
+            <td>CurrencyCode</td>
+        </tr>
+    </thead>
+    {{#each accounts}}
+    <tr>
+        {{#ifCond this.Type '==' "BANK" }}
+        <td><a href="https://go.xero.com/Bank/BankTransactions.aspx?accountID={{ this.AccountID }}" target="_blank">{{this.Name}}</a></td>
+        {{else}}
+        <td>{{this.Name}}</td>
+        {{/ifCond}}
+        <td>{{ this.Code }}</td>
+        <td>{{ this.Type }}</td>
+        <td>{{ this.BankAccountNumber }}</td>
+        <td>{{ this.BankAccountType }}</td>
+        <td>{{ this.CurrencyCode }}</td>
+    </tr>
+    {{/each}}
+</table>

@@ -1,0 +1,18 @@
+<table class="table table-bordered table-striped table-collapsed">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Status</td>
+      <td>First name</td>
+      <td>Last name</td>
+    </tr>
+  </thead>
+  {{#each employees}}
+  <tr>
+    <td>{{ this.EmployeeID }}</td>
+    <td>{{ this.Status }}</td>
+    <td>{{ this.FirstName }}</td>
+    <td>{{ this.LastName }}</td>
+  </tr>
+  {{/each}}
+</table>

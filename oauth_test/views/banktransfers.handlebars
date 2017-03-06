@@ -1,0 +1,19 @@
+<h3>Bank Transfers</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Transfer Date</td>
+            <td>From Acct Name</td>
+            <td>To Acct Name</td>
+            <td>Amount</td>
+        </tr>
+    </thead>
+    {{#each bankTransfers}}
+    <tr>
+        <td>{{ this.Date }}</td>
+        <td>{{ this.FromBankAccount.Name }} (<a href="https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID={{this.FromBankTransactionID}}&&accountID={{this.FromBankAccount.AccountID}}" target="_blank">ref</a>)</td>
+        <td>{{ this.ToBankAccount.Name }} (<a href="https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID={{this.ToBankTransactionID}}&&accountID={{this.ToBankAccount.AccountID}}" target="_blank">ref</a>)</td>
+        <td>{{ this.Amount }}</td>
+    </tr>
+    {{/each}}
+</table>
