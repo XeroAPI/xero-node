@@ -669,6 +669,35 @@ describe('regression tests', function() {
 
         var sharedTransaction;
 
+        var testAccountId;
+        var testAccount;
+
+        before('create a bank account', function() {
+          const randomString = uuid.v4();
+
+          var testAccountData = {
+              Code: randomString.replace(/-/g,'').substring(0, 10),
+              Name: 'Test account from Node SDK ' + randomString,
+              Type: 'BANK',
+              BankAccountNumber: '062-021-0000000',
+          };
+
+          var account = currentApp.core.accounts.newAccount(testAccountData);
+
+          return account.save()
+          .then(function(response) {
+            var account = response.entities[0];
+            testAccount = account;
+            testAccountId = account.AccountID;
+          });
+        });
+
+        // There appears to be no way to archive a bank account via the API
+        // after('archive the test account', function() {
+        //     testAccount.Status = 'ARCHIVED';
+        //     return testAccount.save();
+        // });
+
         it('creates a new transaction', function(done) {
             var transaction = currentApp.core.bankTransactions.newBankTransaction({
                 Type: "SPEND",
@@ -681,7 +710,7 @@ describe('regression tests', function() {
                     AccountCode: '404'
                 }],
                 BankAccount: {
-                    AccountID: "13918178-849A-4823-9A31-57B7EAC713D7"
+                    AccountID: testAccountId
                 }
             });
 
