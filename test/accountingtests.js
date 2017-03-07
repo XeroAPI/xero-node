@@ -226,12 +226,12 @@ describe('regression tests', function() {
         })
     })
 
-    describe('taxrates', function() {
-
+    describe.skip('taxrates', function() {
         it('gets tax rates', function(done) {
             this.timeout(10000);
             currentApp.core.taxrates.getTaxRates()
                 .then(function(taxRates) {
+                    // This test requires that some tax rates are set up in the targeted company
                     expect(taxRates).to.have.length.greaterThan(0);
                     _.each(taxRates, function(taxRate) {
                         expect(taxRate.Name).to.not.equal("");
