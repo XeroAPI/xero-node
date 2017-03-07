@@ -251,7 +251,8 @@ describe('regression tests', function() {
                             expect(taxComponent.Name).to.not.equal("");
                             expect(taxComponent.Name).to.not.equal(undefined);
                             expect(taxComponent.Rate).to.be.a('String');
-                            expect(taxComponent.IsCompound).to.be.oneOf([true, false]);
+                            //Hacked to a string as the framework doesn't recursively translate nested objects
+                            expect(taxComponent.IsCompound).to.be.oneOf(["true", "false"]);
                         });
                     });
                     done();
@@ -598,6 +599,7 @@ describe('regression tests', function() {
                     payments.forEach(function(payment) {
                         expect(payment.PaymentID).to.not.equal(undefined);
                         expect(payment.PaymentID).to.not.equal("");
+
                     });
                     done();
                 })
@@ -1391,6 +1393,8 @@ describe('regression tests', function() {
 
         });
     });
+
+
 });
 
 function wrapError(err) {
