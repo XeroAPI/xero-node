@@ -13,7 +13,7 @@ process.on('uncaughtException', function(err) {
 var currentApp;
 var organisationCountry = "";
 
-var APPTYPE = "PARTNER";
+var APPTYPE = "PRIVATE";
 var privateConfigFile = "../private_app_config.json";
 var publicConfigFile = "../public_app_config.json";
 var partnerConfigFile = "../partner_app_config.json";
@@ -250,7 +250,7 @@ describe('regression tests', function() {
                         _.each(taxRate.TaxComponents, function(taxComponent) {
                             expect(taxComponent.Name).to.not.equal("");
                             expect(taxComponent.Name).to.not.equal(undefined);
-                            expect(taxComponent.Rate).to.be.a('Number');
+                            expect(taxComponent.Rate).to.be.a('String');
                             expect(taxComponent.IsCompound).to.be.oneOf([true, false]);
                         });
                     });
