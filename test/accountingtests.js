@@ -4,7 +4,8 @@ var chai = require('chai'),
     _ = require('lodash'),
     xero = require('..'),
     util = require('util'),
-    Browser = require('zombie');
+    Browser = require('zombie'),
+    uuid = require('uuid');
 
 process.on('uncaughtException', function(err) {
     console.log('uncaught', err)
@@ -564,6 +565,38 @@ describe('regression tests', function() {
     describe.skip('payments', function() {
         /* Please note that this test pays an invoice created in the previous tests */
         this.timeout(10000);
+
+        var testAccountId;
+        var testAccountCode;
+        var testAccount;
+
+        before('create an account to pay into', function() {
+          const randomString = uuid.v4();
+
+          var testAccountData = {
+              Code: randomString.replace(/-/g,'').substring(0, 10),
+              Name: 'Test account from Node SDK ' + randomString,
+              Type: 'SALES',
+              EnablePaymentsToAccount: true
+          };
+
+          testAccountCode = testAccountData.Code;
+
+          var account = currentApp.core.accounts.newAccount(testAccountData);
+
+          return account.save()
+          .then(function(response) {
+            var account = response.entities[0];
+            testAccountId = account.AccountID;
+            testAccount = account;
+          });
+        });
+
+        after('archive the test account', function() {
+            testAccount.Status = 'ARCHIVED';
+            return testAccount.save();
+        });
+
         it('Create Payment', function(done) {
 
             var payment = currentApp.core.payments.createPayment({
@@ -571,7 +604,7 @@ describe('regression tests', function() {
                     InvoiceID: InvoiceID
                 },
                 Account: {
-                    Code: '090'
+                    Code: testAccountCode
                 },
                 Date: new Date().toISOString().split("T")[0],
                 Amount: '660'
