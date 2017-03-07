@@ -76,7 +76,6 @@ The config file should be set up as follows:
     "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "AuthorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
     "PrivateKeyPath" : "/some/path/to/partner_privatekey.pem",
-    "SSLCertPath" : "/some/path/to/partner_publickey.cer",
     "RunscopeBucketId" : "xxxyyyzzzz"
 }
 ```
@@ -90,7 +89,6 @@ The config file should be set up as follows:
 | ConsumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      |
 | AuthorizeCallbackUrl | The callback that Xero should invoke when the authorization is successful.               | False     |
 | PrivateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     |
-| SSLCertPath          | The filesystem path to your publickey.pem file to sign the API calls                     | False     |
 | RunscopeBucketId     | Your personal runscope bucket for debugging API calls                                    | False     |
 ---
 

@@ -13,40 +13,37 @@ process.on('uncaughtException', function(err) {
 var currentApp;
 var organisationCountry = "";
 
-var APPTYPE = "PRIVATE";
-var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
-var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
-var partnerConfigFile = "/Users/jordan.walsh/.xero/partner_app_config.json";
+var APPTYPE = "PARTNER";
+var privateConfigFile = "../private_app_config.json";
+var publicConfigFile = "../public_app_config.json";
+var partnerConfigFile = "../partner_app_config.json";
 var configFile = "";
 
-describe('create application', function() {
-    describe('create instance', function() {
-        it('init instance and set options', function(done) {
-            //This constructor looks in ~/.xero/config.json for settings
+before('init instance and set options', function(done) {
+    //This constructor looks in ~/.xero/config.json for settings
 
-            switch (APPTYPE) {
-                case "PRIVATE":
-                    configFile = privateConfigFile;
-                    currentApp = new xero.PrivateApplication(configFile);
-                    break;
-                case "PUBLIC":
-                    configFile = publicConfigFile;
-                    currentApp = new xero.PublicApplication(publicConfigFile, { runscopeBucketId: "ei635hnc0fem" });
-                    break;
-                case "PARTNER":
-                    configFile = partnerConfigFile;
-                    currentApp = new xero.PartnerApplication(partnerConfigFile, { authorizedCallbackUrl: "" });
-                    break;
-                default:
-                    throw "No App Type Set!!"
-            }
+    switch (APPTYPE) {
+        case "PRIVATE":
+            configFile = privateConfigFile;
+            currentApp = new xero.PrivateApplication(configFile);
+            break;
+        case "PUBLIC":
+            configFile = publicConfigFile;
+            currentApp = new xero.PublicApplication(publicConfigFile, { runscopeBucketId: "ei635hnc0fem" });
+            break;
+        case "PARTNER":
+            configFile = partnerConfigFile;
+            currentApp = new xero.PartnerApplication(partnerConfigFile, { authorizedCallbackUrl: "" });
+            break;
+        default:
+            throw "No App Type Set!!"
+    }
 
-            done();
-        })
-    });
-});
+    done();
+})
 
 describe('get access for public or partner application', function() {
+    this.timeout(30000);
     beforeEach(function() {
         if (APPTYPE === "PRIVATE") {
             this.skip();
@@ -155,7 +152,6 @@ describe('get access for public or partner application', function() {
                 it('should see application auth page', function(done) {
                     //console.log(browser.document.documentElement.innerHTML);
                     browser.assert.text('title', 'Xero | Authorise Application');
-                    browser.select('select', 'MWE5NzdkMDItZTAyNC00NGJkLTlmMGQtNjFiOGI4OWY2YTI4-ecmd9rxRfsM=');
 
                     if (APPTYPE === "PUBLIC") {
                         browser.pressButton("Allow access for 30 mins");
