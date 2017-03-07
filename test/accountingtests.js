@@ -13,38 +13,34 @@ process.on('uncaughtException', function(err) {
 var currentApp;
 var organisationCountry = "";
 
-var APPTYPE = "PRIVATE";
+var APPTYPE = "PARTNER";
 var privateConfigFile = "../private_app_config.json";
 var publicConfigFile = "../public_app_config.json";
 var partnerConfigFile = "../partner_app_config.json";
 var configFile = "";
 
-describe('create application', function() {
-    describe('create instance', function() {
-        it('init instance and set options', function(done) {
-            //This constructor looks in ~/.xero/config.json for settings
+before('init instance and set options', function(done) {
+    //This constructor looks in ~/.xero/config.json for settings
 
-            switch (APPTYPE) {
-                case "PRIVATE":
-                    configFile = privateConfigFile;
-                    currentApp = new xero.PrivateApplication(configFile);
-                    break;
-                case "PUBLIC":
-                    configFile = publicConfigFile;
-                    currentApp = new xero.PublicApplication(publicConfigFile, { runscopeBucketId: "ei635hnc0fem" });
-                    break;
-                case "PARTNER":
-                    configFile = partnerConfigFile;
-                    currentApp = new xero.PartnerApplication(partnerConfigFile, { authorizedCallbackUrl: "" });
-                    break;
-                default:
-                    throw "No App Type Set!!"
-            }
+    switch (APPTYPE) {
+        case "PRIVATE":
+            configFile = privateConfigFile;
+            currentApp = new xero.PrivateApplication(configFile);
+            break;
+        case "PUBLIC":
+            configFile = publicConfigFile;
+            currentApp = new xero.PublicApplication(publicConfigFile, { runscopeBucketId: "ei635hnc0fem" });
+            break;
+        case "PARTNER":
+            configFile = partnerConfigFile;
+            currentApp = new xero.PartnerApplication(partnerConfigFile, { authorizedCallbackUrl: "" });
+            break;
+        default:
+            throw "No App Type Set!!"
+    }
 
-            done();
-        })
-    });
-});
+    done();
+})
 
 describe('get access for public or partner application', function() {
     beforeEach(function() {
