@@ -930,51 +930,72 @@ describe('regression tests', function() {
                 })
         });
 
-        it('Uses a tracking category on an invoice - REGION', function(done) {
-            //Create an invoice with the sample tracking category attached to the line item on the invoice.
-            var invoice = currentApp.core.invoices.newInvoice({
-                Type: 'ACCREC',
-                Contact: {
-                    Name: 'Department of Testing'
-                },
-                DueDate: new Date().toISOString().split("T")[0],
-                LineItems: [{
-                    Description: 'Services',
-                    Quantity: 2,
-                    UnitAmount: 230,
-                    AccountCode: '400',
-                    Tracking: [{
-                        TrackingCategory: {
-                            Name: 'Region',
-                            Option: 'North'
-                        }
-                    }]
-                }]
+        it('Uses a tracking category on an invoice - REGION', function() {
+            // TODO refactor this setup and teardown into hooks
+            // Create the tracking category
+
+            var trackingCategory = currentApp.core.trackingCategories.newTrackingCategory({
+                Name: uuid.v4()
             });
-            invoice.save()
-                .then(function(response) {
 
-                    expect(response.entities).to.have.length.greaterThan(0);
-                    expect(response.entities[0].InvoiceID).to.not.equal(undefined);
-                    expect(response.entities[0].InvoiceID).to.not.equal("");
+            var trackingCategoryName;
+            var trackingCategoryID;
 
-                    response.entities[0].LineItems.forEach(function(lineItem) {
-                        expect(lineItem.Tracking).to.have.length.greaterThan(0);
-                        _.each(lineItem.Tracking, function(trackingCategory) {
-                            expect(trackingCategory.TrackingCategoryID).to.not.equal(undefined);
-                            expect(trackingCategory.TrackingCategoryID).to.not.equal("");
-                            expect(trackingCategory.TrackingOptionID).to.not.equal(undefined);
-                            expect(trackingCategory.TrackingOptionID).to.not.equal("");
-                            expect(trackingCategory.Name).to.equal('Region');
-                            expect(trackingCategory.Option).to.equal('North');
+            return trackingCategory.save()
+            .then(function(response) {
+                trackingCategoryName = response.entities[0].Name;
+                trackingCategoryID = response.entities[0].TrackingCategoryID;
+                return response.entities[0].saveTrackingOptions([
+                    { Name: "North" },
+                    { Name: "South" },
+                ])
+            })
+            .then(function(response) {
+                //Create an invoice with the sample tracking category attached to the line item on the invoice.
+                var invoice = currentApp.core.invoices.newInvoice({
+                    Type: 'ACCREC',
+                    Contact: {
+                        Name: 'Department of Testing'
+                    },
+                    DueDate: new Date().toISOString().split("T")[0],
+                    LineItems: [{
+                        Description: 'Services',
+                        Quantity: 2,
+                        UnitAmount: 230,
+                        AccountCode: '400',
+                        Tracking: [{
+                            TrackingCategory: {
+                                Name: trackingCategoryName,
+                                Option: 'North'
+                            }
+                        }]
+                    }]
+                });
+                return invoice.save()
+                    .then(function(response) {
+
+                        expect(response.entities).to.have.length.greaterThan(0);
+                        expect(response.entities[0].InvoiceID).to.not.equal(undefined);
+                        expect(response.entities[0].InvoiceID).to.not.equal("");
+
+                        response.entities[0].LineItems.forEach(function(lineItem) {
+                            //expect(lineItem.Tracking).to.have.length.greaterThan(0);
+                            _.each(lineItem.Tracking, function(trackingCategory) {
+                                expect(trackingCategory.TrackingCategoryID).to.not.equal(undefined);
+                                expect(trackingCategory.TrackingCategoryID).to.not.equal("");
+                                expect(trackingCategory.TrackingOptionID).to.not.equal(undefined);
+                                expect(trackingCategory.TrackingOptionID).to.not.equal("");
+                                expect(trackingCategory.Name).to.equal(trackingCategory.Name);
+                                expect(trackingCategory.Option).to.equal('North');
+                            });
                         });
-                    });
-                    done();
-                })
-                .fail(function(err) {
-                    console.log(util.inspect(err, null, null));
-                    done(wrapError(err));
-                })
+                        return currentApp.core.trackingCategories.deleteTrackingCategory(trackingCategoryID)
+                    })
+                    .fail(function(err) {
+                        console.log(util.inspect(err, null, null));
+                        done(wrapError(err));
+                    })
+            });
         });
 
         //unfortunately this will only work on tracking categories that have been used.
