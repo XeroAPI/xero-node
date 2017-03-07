@@ -43,6 +43,7 @@ before('init instance and set options', function(done) {
 })
 
 describe('get access for public or partner application', function() {
+    this.timeout(30000);
     beforeEach(function() {
         if (APPTYPE === "PRIVATE") {
             this.skip();
