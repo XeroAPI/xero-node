@@ -14,9 +14,9 @@ var currentApp;
 var organisationCountry = "";
 
 var APPTYPE = "PRIVATE";
-var privateConfigFile = "/Users/jordan.walsh/.xero/private_app_config.json";
-var publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
-var partnerConfigFile = "/Users/jordan.walsh/.xero/partner_app_config.json";
+var privateConfigFile = "../private_app_config.json";
+var publicConfigFile = "../public_app_config.json";
+var partnerConfigFile = "../partner_app_config.json";
 var configFile = "";
 
 describe('create application', function() {
