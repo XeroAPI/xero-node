@@ -44,7 +44,6 @@ before('init instance and set options', function(done) {
 })
 
 describe('get access for public or partner application', function() {
-    this.timeout(30000);
     beforeEach(function() {
         if (APPTYPE === "PRIVATE") {
             this.skip();
@@ -83,7 +82,6 @@ describe('get access for public or partner application', function() {
         });
 
         describe('gets the request token from the url', function() {
-            this.timeout(20000);
             var user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7';
             const browser = new Browser({
                 userAgent: user_agent,
@@ -102,8 +100,6 @@ describe('get access for public or partner application', function() {
             });
 
             describe('submits form', function() {
-                this.timeout(20000);
-
                 var options = {};
 
                 before(function(done) {
@@ -181,7 +177,6 @@ describe('get access for public or partner application', function() {
         });
 
         describe('swaps the request token for an access token', function() {
-            this.timeout(20000);
             it('calls the access token method and sets the options', function(done) {
                 currentApp.getAccessToken(requestToken, requestSecret, verifier, function(err, accessToken, accessSecret, results) {
 
@@ -208,7 +203,6 @@ describe('regression tests', function() {
 
     describe.skip('organisations', function() {
         it('get', function(done) {
-            this.timeout(10000);
             currentApp.core.organisations.getOrganisation()
                 .then(function(ret) {
 
@@ -229,7 +223,6 @@ describe('regression tests', function() {
 
     describe.skip('taxrates', function() {
         it('gets tax rates', function(done) {
-            this.timeout(10000);
             currentApp.core.taxrates.getTaxRates()
                 .then(function(taxRates) {
                     // This test requires that some tax rates are set up in the targeted company
@@ -274,7 +267,6 @@ describe('regression tests', function() {
         var bankAccountTypes = ["BANK", "CREDITCARD", "PAYPAL"];
 
         it('GET ALL', function(done) {
-            this.timeout(10000);
             currentApp.core.accounts.getAccounts()
                 .then(function(accounts) {
 
@@ -368,7 +360,6 @@ describe('regression tests', function() {
         };
 
         it('CREATE ONE', function(done) {
-            this.timeout(10000);
             var account = currentApp.core.accounts.newAccount(testAccountData);
 
             account.save()
@@ -398,7 +389,6 @@ describe('regression tests', function() {
         });
 
         it('GET ONE', function(done) {
-            this.timeout(10000);
             currentApp.core.accounts.getAccount(testAccountId)
                 .then(function(account) {
                     expect(account.Code).to.equal(testAccountData.Code);
@@ -424,7 +414,6 @@ describe('regression tests', function() {
         });
 
         it('UPDATE ONE', function(done) {
-            this.timeout(10000);
             currentApp.core.accounts.getAccount(testAccountId)
                 .then(function(account) {
                     testAccountData.Name = "Updated from the SDK";
@@ -448,7 +437,6 @@ describe('regression tests', function() {
         });
 
         it('DELETE ONE', function(done) {
-            this.timeout(10000);
             currentApp.core.accounts.deleteAccount(testAccountId)
                 .then(function(response) {
                     expect(response.Status).to.equal("OK");
@@ -463,9 +451,7 @@ describe('regression tests', function() {
     });
 
     describe.skip('invoices', function() {
-
         it('create invoice', function(done) {
-            this.timeout(10000);
             var invoice = currentApp.core.invoices.newInvoice({
                 Type: 'ACCREC',
                 Contact: {
@@ -503,7 +489,6 @@ describe('regression tests', function() {
         })
 
         it('get invoices', function(done) {
-            this.timeout(10000);
             currentApp.core.invoices.getInvoices()
                 .then(function(invoices) {
                     expect(invoices).to.have.length.greaterThan(0);
@@ -520,7 +505,6 @@ describe('regression tests', function() {
                 })
         })
         it('get invoice', function(done) {
-            this.timeout(10000);
             currentApp.core.invoices.getInvoice(InvoiceID)
                 .then(function(invoice) {
                     expect(invoice.InvoiceID).to.not.equal("");
@@ -532,7 +516,6 @@ describe('regression tests', function() {
                 })
         })
         it('update invoice', function(done) {
-            this.timeout(10000);
             currentApp.core.invoices.getInvoice(InvoiceID)
                 .then(function(invoice) {
                     invoice.LineItems.push({
@@ -564,7 +547,6 @@ describe('regression tests', function() {
 
     describe.skip('payments', function() {
         /* Please note that this test pays an invoice created in the previous tests */
-        this.timeout(10000);
 
         var testAccountId;
         var testAccountCode;
@@ -688,7 +670,6 @@ describe('regression tests', function() {
         var sharedTransaction;
 
         it('creates a new transaction', function(done) {
-            this.timeout(10000);
             var transaction = currentApp.core.bankTransactions.newBankTransaction({
                 Type: "SPEND",
                 Contact: {
@@ -719,7 +700,6 @@ describe('regression tests', function() {
         });
 
         it('get (no paging)', function(done) {
-            this.timeout(10000);
             currentApp.core.bankTransactions.getBankTransactions()
                 .then(function(bankTransactions) {
                     expect(bankTransactions).to.have.length.greaterThan(0);
@@ -736,7 +716,6 @@ describe('regression tests', function() {
         });
 
         it('get by id', function(done) {
-            this.timeout(10000);
             currentApp.core.bankTransactions.getBankTransaction(sharedTransaction)
                 .then(function(bankTransaction) {
                     expect(bankTransaction.BankTransactionID).to.not.equal("");
@@ -751,13 +730,9 @@ describe('regression tests', function() {
     });
 
     describe.skip('bank transfers', function() {
-
-        this.timeout(20000);
-
         var sampleTransferID = "";
 
         it('create sample bank transfer', function(done) {
-            this.timeout(10000);
             var transfer = currentApp.core.bankTransfers.newBankTransfer({
                 FromBankAccount: {
                     Code: '090'
@@ -783,7 +758,6 @@ describe('regression tests', function() {
         });
 
         it('get (no paging)', function(done) {
-            this.timeout(10000);
             currentApp.core.bankTransfers.getBankTransfers()
                 .then(function(bankTransfers) {
                     _.each(bankTransfers, function(bankTransfer) {
@@ -799,7 +773,6 @@ describe('regression tests', function() {
         });
 
         it('get single bank transfer', function(done) {
-            this.timeout(10000);
             currentApp.core.bankTransfers.getBankTransfer(sampleTransferID)
                 .then(function(bankTransfer) {
                     expect(bankTransfer.BankTransferID).to.not.equal("");
@@ -816,8 +789,6 @@ describe('regression tests', function() {
     });
 
     describe.skip('tracking categories', function() {
-        this.timeout(20000);
-
         var sampleTrackingCategory = {
             Name: "My First Category"
         };
@@ -975,8 +946,6 @@ describe('regression tests', function() {
     });
 
     describe.skip('items', function() {
-        this.timeout(10000);
-
         var sampleItem = {
             Code: 'Item-' + Math.random(),
             Name: 'Fully Tracked Item',
@@ -993,8 +962,6 @@ describe('regression tests', function() {
         };
 
         it('creates an item', function(done) {
-            this.timeout(10000);
-
             var item = currentApp.core.items.newItem(sampleItem);
 
             item.save()
@@ -1012,7 +979,6 @@ describe('regression tests', function() {
         });
 
         it('retrieves some items (no paging)', function(done) {
-            this.timeout(10000);
             currentApp.core.items.getItems()
                 .then(function(items) {
                     _.each(items, function(item) {
@@ -1028,8 +994,6 @@ describe('regression tests', function() {
         });
 
         it('retrieves an item by ID', function(done) {
-            this.timeout(10000);
-
             currentApp.core.items.getItem(sampleItem.ItemID)
                 .then(function(item) {
                     expect(item.ItemID).to.equal(sampleItem.ItemID);
@@ -1042,8 +1006,6 @@ describe('regression tests', function() {
         });
 
         it('updates an item by ID', function(done) {
-            this.timeout(10000);
-
             currentApp.core.items.getItem(sampleItem.ItemID)
                 .then(function(item) {
                     expect(item.ItemID).to.equal(sampleItem.ItemID);
@@ -1070,8 +1032,6 @@ describe('regression tests', function() {
         });
 
         it('deletes an item', function(done) {
-            this.timeout(10000);
-
             currentApp.core.items.deleteItem(sampleItem.ItemID)
                 .then(function() {
                     done();
@@ -1091,7 +1051,6 @@ describe('regression tests', function() {
         };
 
         it('create single contact', function(done) {
-            this.timeout(10000);
             var contact = currentApp.core.contacts.newContact(sampleContact);
             contact.save()
                 .then(function(response) {
@@ -1113,7 +1072,6 @@ describe('regression tests', function() {
         })
 
         it('get (no paging)', function(done) {
-            this.timeout(10000);
             currentApp.core.contacts.getContacts()
                 .then(function(contacts) {
                     _.each(contacts, function(contact) {
@@ -1128,7 +1086,6 @@ describe('regression tests', function() {
                 })
         })
         it('get (paging)', function(done) {
-            this.timeout(10000);
             currentApp.core.contacts.getContacts({ pager: { start: 1, callback: onContacts } })
                 .fail(function(err) {
                     console.log(util.inspect(err, null, null));
@@ -1155,7 +1112,6 @@ describe('regression tests', function() {
         });
 
         it('get by id', function(done) {
-            this.timeout(10000);
             currentApp.core.contacts.getContact(sampleContact.ContactID)
                 .then(function(contact) {
                     expect(contact.ContactID).to.equal(sampleContact.ContactID);
@@ -1167,7 +1123,6 @@ describe('regression tests', function() {
                 })
         })
         it('get - modifiedAfter', function(done) {
-            this.timeout(100000);
             var modifiedAfter = new Date();
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
                 .then(function(contacts) {
@@ -1186,7 +1141,6 @@ describe('regression tests', function() {
         })
 
         it('create multiple contacts', function(done) {
-            this.timeout(10000);
             var contacts = [];
             contacts.push(currentApp.core.contacts.newContact({ Name: 'Johnnies Coffee' + Math.random(), FirstName: 'John' + Math.random(), LastName: 'Smith' }));
             contacts.push(currentApp.core.contacts.newContact({ Name: 'Johnnies Coffee' + Math.random(), FirstName: 'John' + Math.random(), LastName: 'Smith' }));
@@ -1206,8 +1160,6 @@ describe('regression tests', function() {
         })
 
         it('update contact', function(done) {
-            this.timeout(10000);
-
             currentApp.core.contacts.getContact(sampleContact.ContactID)
                 .then(function(contact) {
                     expect(contact.ContactID).to.equal(sampleContact.ContactID);
@@ -1250,8 +1202,6 @@ describe('regression tests', function() {
                 })
         })
         it('get attachments for contacts', function(done) {
-            this.timeout(100000);
-
             currentApp.core.contacts.getContact(sampleContact.ContactID)
                 .then(function(contact) {
                     expect(contact.ContactID).to.equal(sampleContact.ContactID);
@@ -1273,12 +1223,9 @@ describe('regression tests', function() {
     })
 
     describe.skip('journals', function() {
-        this.timeout(10000);
-
         var sampleJournalId = "";
 
         it('get (paging with callback)', function(done) {
-            this.timeout(20000);
             currentApp.core.journals.getJournals({ pager: { start: 1, callback: onJournals } })
                 .fail(function(err) {
                     console.log(util.inspect(err, null, null));
@@ -1310,7 +1257,6 @@ describe('regression tests', function() {
         });
 
         it('get (paging no callback)', function(done) {
-            this.timeout(20000);
             currentApp.core.journals.getJournals({ pager: { start: 1, callback: undefined } })
                 .then(function(journals) {
                     expect(journals).to.not.equal(undefined);
@@ -1323,7 +1269,6 @@ describe('regression tests', function() {
         });
 
         it('get (no paging)', function(done) {
-            this.timeout(20000);
             currentApp.core.journals.getJournals()
                 .then(function(journals) {
                     expect(journals).to.not.equal(undefined);
@@ -1340,7 +1285,6 @@ describe('regression tests', function() {
         });
 
         it('get single journal', function(done) {
-            this.timeout(20000);
             currentApp.core.journals.getJournal(sampleJournalId)
                 .then(function(journal) {
                     expect(journal).to.be.an('Object');
@@ -1355,8 +1299,6 @@ describe('regression tests', function() {
     });
 
     describe.skip('users', function() {
-        this.timeout(20000);
-
         it('retrieves a list of users', function(done) {
 
             currentApp.core.users.getUsers()
@@ -1372,8 +1314,6 @@ describe('regression tests', function() {
 
     //These tests aren't currently working.  Attachments are not yet supported.
     describe.skip('attachments', function() {
-        this.timeout(20000);
-
         it('creates an attachment on an invoice', function(done) {
 
             /**
