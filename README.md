@@ -8,7 +8,7 @@ Supports all three applications types:
 * Public
 * Partner
 
-Create an Issue in GitHub for any suggestions or alternatively fork the code and submit a PR.
+For any suggestions, fork the code and submit a PR.
 
 # Features
 
