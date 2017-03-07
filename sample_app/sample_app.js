@@ -4,7 +4,7 @@ var express = require('express'),
     LRU = require('lru-cache'),
     fs = require('fs'),
     nodemailer = require('nodemailer'),
-    publicConfigFile = "/Users/jordan.walsh/.xero/public_app_config.json";
+    publicConfigFile = "../public_app_config.json";
 
 function getXeroApp(session) {
     var config = {
