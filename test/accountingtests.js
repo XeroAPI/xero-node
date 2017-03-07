@@ -152,7 +152,6 @@ describe('get access for public or partner application', function() {
                 it('should see application auth page', function(done) {
                     //console.log(browser.document.documentElement.innerHTML);
                     browser.assert.text('title', 'Xero | Authorise Application');
-                    browser.select('select', 'MWE5NzdkMDItZTAyNC00NGJkLTlmMGQtNjFiOGI4OWY2YTI4-ecmd9rxRfsM=');
 
                     if (APPTYPE === "PUBLIC") {
                         browser.pressButton("Allow access for 30 mins");
