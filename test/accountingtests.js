@@ -5,36 +5,32 @@ var chai = require('chai'),
     xero = require('..'),
     util = require('util'),
     Browser = require('zombie'),
-    uuid = require('uuid');
+    uuid = require('uuid'),
+    fs = require('fs'),
+    metaConfig = require('../testing_config.json');
 
 process.on('uncaughtException', function(err) {
     console.log('uncaught', err)
 })
 
 var currentApp;
-var organisationCountry = "";
+var organisationCountry = '';
 
-var APPTYPE = "PRIVATE";
-var privateConfigFile = "../private_app_config.json";
-var publicConfigFile = "../public_app_config.json";
-var partnerConfigFile = "../partner_app_config.json";
-var configFile = "";
+var APPTYPE = metaConfig.APPTYPE;
+var config = metaConfig[APPTYPE.toLowerCase()];
+
+if (config.PrivateKeyPath && !config.PrivateKey) config.PrivateKey = fs.readFileSync(config.PrivateKeyPath);
 
 before('init instance and set options', function(done) {
-    //This constructor looks in ~/.xero/config.json for settings
-
     switch (APPTYPE) {
         case "PRIVATE":
-            configFile = privateConfigFile;
-            currentApp = new xero.PrivateApplication(configFile);
+            currentApp = new xero.PrivateApplication(config);
             break;
         case "PUBLIC":
-            configFile = publicConfigFile;
-            currentApp = new xero.PublicApplication(publicConfigFile, { runscopeBucketId: "ei635hnc0fem" });
+            currentApp = new xero.PublicApplication(config);
             break;
         case "PARTNER":
-            configFile = partnerConfigFile;
-            currentApp = new xero.PartnerApplication(partnerConfigFile, { authorizedCallbackUrl: "" });
+            currentApp = new xero.PartnerApplication(config);
             break;
         default:
             throw "No App Type Set!!"
@@ -100,28 +96,10 @@ describe('get access for public or partner application', function() {
             });
 
             describe('submits form', function() {
-                var options = {};
-
-                before(function(done) {
-
-                    if (APPTYPE === "PRIVATE") {
-                        this.skip();
-                    }
-
-                    try {
-                        console.log('configFile: ' + configFile);
-
-                        var config = require(configFile);
-                        options["XeroUsername"] = config.XeroUsername;
-                        options["XeroPassword"] = config.XeroPassword;
-                        done();
-                    } catch (e) {
-                        var err = 'Couldn\'t read config.json from [' + configFile + ']. Exiting...';
-                        console.log(err);
-                        throw e;
-                    }
-
-                });
+                var options = {
+                  XeroUsername: config.XeroUsername,
+                  XeroPassword: config.XeroPassword
+                };
 
                 it('should login', function(done) {
                     browser
