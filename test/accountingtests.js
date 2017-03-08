@@ -76,7 +76,7 @@ describe('get access for public or partner application', function() {
                 })
                 .then(function() {
                     done();
-                }).fail(function(err) {
+                }).catch(function(err) {
                     done(wrapError(err));
                 });
         });
@@ -188,7 +188,7 @@ describe('get access for public or partner application', function() {
                     })
                     .then(function() {
                         done();
-                    }).fail(function(err) {
+                    }).catch(function(err) {
                         done(wrapError(err));
                     });
             });
@@ -268,7 +268,7 @@ describe('regression tests', function() {
 
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     done(wrapError(err));
                 })
         })
@@ -304,7 +304,7 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(err);
                     done(wrapError(err));
                 })
@@ -396,7 +396,7 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -437,7 +437,7 @@ describe('regression tests', function() {
 
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -461,7 +461,7 @@ describe('regression tests', function() {
                     expect(account.AccountID).to.not.equal("");
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -480,12 +480,12 @@ describe('regression tests', function() {
                             expect(thisAccount.Name).to.equal(testAccountData.Name);
                             done();
                         })
-                        .fail(function(err) {
+                        .catch(function(err) {
                             console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         });
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -497,7 +497,7 @@ describe('regression tests', function() {
                     expect(response.Status).to.equal("OK");
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -537,7 +537,7 @@ describe('regression tests', function() {
 
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -555,7 +555,7 @@ describe('regression tests', function() {
 
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     done(wrapError(err));
                 })
         })
@@ -566,7 +566,7 @@ describe('regression tests', function() {
                     expect(invoice.InvoiceID).to.not.equal(undefined);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     done(wrapError(err));
                 })
         })
@@ -590,11 +590,11 @@ describe('regression tests', function() {
                             });
                             done();
                         })
-                        .fail(function(err) {
+                        .catch(function(err) {
                             done(wrapError(err));
                         })
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     done(wrapError(err));
                 })
         })
@@ -656,7 +656,7 @@ describe('regression tests', function() {
                     expect(PaymentID).to.not.equal(undefined);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -673,7 +673,7 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -686,7 +686,7 @@ describe('regression tests', function() {
                     expect(payment.PaymentID).to.not.equal("");
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -705,7 +705,7 @@ describe('regression tests', function() {
                     expect(response.entities[0].Status).to.equal("DELETED");
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -747,7 +747,7 @@ describe('regression tests', function() {
                     sharedTransaction = response.entities[0].BankTransactionID;
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -763,7 +763,7 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -776,7 +776,7 @@ describe('regression tests', function() {
                     expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -805,7 +805,7 @@ describe('regression tests', function() {
                     sampleTransferID = response.entities[0].BankTransferID;
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -820,7 +820,7 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -834,7 +834,7 @@ describe('regression tests', function() {
                     expect(bankTransfer.BankTransferID).to.equal(sampleTransferID);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -860,7 +860,7 @@ describe('regression tests', function() {
                     sampleTrackingCategory = response.entities[0];
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -885,7 +885,7 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -909,12 +909,12 @@ describe('regression tests', function() {
                             expect(response.entities[0].Name).to.equal("left");
                             done();
                         })
-                        .fail(function(err) {
+                        .catch(function(err) {
                             console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -926,7 +926,7 @@ describe('regression tests', function() {
                     //console.log(response);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -993,7 +993,7 @@ describe('regression tests', function() {
                         });
                         return currentApp.core.trackingCategories.deleteTrackingCategory(trackingCategoryID)
                     })
-                    .fail(function(err) {
+                    .catch(function(err) {
                         console.log(util.inspect(err, null, null));
                         done(wrapError(err));
                     })
@@ -1013,7 +1013,7 @@ describe('regression tests', function() {
                     expect(response.entities[0].Status).to.equal(sampleTrackingCategory.Status);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1047,7 +1047,7 @@ describe('regression tests', function() {
                     sampleItem.ItemID = response.entities[0].ItemID;
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -1062,7 +1062,7 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -1074,7 +1074,7 @@ describe('regression tests', function() {
                     expect(item.ItemID).to.equal(sampleItem.ItemID);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -1095,12 +1095,12 @@ describe('regression tests', function() {
                             expect(response.entities[0].Name).to.equal(randomName);
                             done();
                         })
-                        .fail(function(err) {
+                        .catch(function(err) {
                             console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -1111,7 +1111,7 @@ describe('regression tests', function() {
                 .then(function() {
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -1140,7 +1140,7 @@ describe('regression tests', function() {
 
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(err)
                     done(wrapError(err));
                 })
@@ -1155,14 +1155,14 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
         })
         it('get (paging)', function(done) {
             currentApp.core.contacts.getContacts({ pager: { start: 1, callback: onContacts } })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1192,7 +1192,7 @@ describe('regression tests', function() {
                     expect(contact.ContactID).to.equal(sampleContact.ContactID);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1208,7 +1208,7 @@ describe('regression tests', function() {
                     done();
 
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1228,7 +1228,7 @@ describe('regression tests', function() {
                     });
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1266,12 +1266,12 @@ describe('regression tests', function() {
                             expect(updatedContact.response.Contacts.Contact.Name).to.equal(newName);
                             done();
                         })
-                        .fail(function(err) {
+                        .catch(function(err) {
                             console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1285,12 +1285,12 @@ describe('regression tests', function() {
                             console.log(attachments);
                             done();
                         })
-                        .fail(function(err) {
+                        .catch(function(err) {
                             console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
@@ -1302,7 +1302,7 @@ describe('regression tests', function() {
 
         it('get (paging with callback)', function(done) {
             currentApp.core.journals.getJournals({ pager: { start: 1, callback: onJournals } })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1337,7 +1337,7 @@ describe('regression tests', function() {
                     expect(journals).to.not.equal(undefined);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1353,7 +1353,7 @@ describe('regression tests', function() {
                     sampleJournalId = _.first(journals).JournalID;
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1366,7 +1366,7 @@ describe('regression tests', function() {
                     expect(journal.JournalID).to.equal(sampleJournalId);
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
@@ -1380,7 +1380,7 @@ describe('regression tests', function() {
                 .then(function(users) {
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(err)
                     done(wrapError(err));
                 });
@@ -1425,14 +1425,14 @@ describe('regression tests', function() {
                             console.log(response);
                             done();
                         })
-                        .fail(function(err) {
+                        .catch(function(err) {
                             console.log(err)
                             done(wrapError(err));
                         })
 
                     done();
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     console.log(err)
                     done(wrapError(err));
                 })

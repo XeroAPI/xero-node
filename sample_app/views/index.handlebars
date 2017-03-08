@@ -113,7 +113,7 @@ privateApp.core.invoices.getInvoices()
 .then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">invoices</span>) </span>{
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Invoices: "</span> + invoices.length);
 
-}).fail(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+}).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
     <span class="hljs-built_in">console</span>.error(err);
 });
 </code></pre>
@@ -126,13 +126,13 @@ privateApp.core.contacts.getContacts({
     contacts.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">contact</span>) </span>{
         <span class="hljs-built_in">console</span>.log(contact.Name);
     });
-}).fail(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+}).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
     <span class="hljs-built_in">console</span>.error(err);
 });
 </code></pre>
 <p>Efficient paging:</p>
 <pre><code class="language-javascript">privateApp.core.contacts.getContacts({ pager: {start:<span class="hljs-number">1</span> <span class="hljs-comment">/* page number */</span>, callback:onContacts}})
-    .fail(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+    .catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Oh no, an error'</span>);
     });
 

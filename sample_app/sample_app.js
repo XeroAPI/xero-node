@@ -155,7 +155,7 @@ app.get('/employees', function(req, res) {
                     }
                 });
             })
-            .fail(function(err) {
+            .catch(function(err) {
                 console.log(err)
                 res.render('employees', {
                     error: err,
@@ -306,7 +306,7 @@ app.get('/timesheets', function(req, res) {
                     }
                 });
             })
-            .fail(function(err) {
+            .catch(function(err) {
                 console.log(err)
                 res.render('timesheets', {
                     error: err,
@@ -337,7 +337,7 @@ app.use('/createtimesheet', function(req, res) {
                 .then(function(ret) {
                     res.render('createtimesheet', { timesheets: ret.entities })
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     res.render('createtimesheet', { err: err })
                 })
 
@@ -400,7 +400,7 @@ app.use('/createinvoice', function(req, res) {
                 .then(function(ret) {
                     res.render('createinvoice', { outcome: 'Invoice created', id: ret.entities[0].InvoiceID })
                 })
-                .fail(function(err) {
+                .catch(function(err) {
                     res.render('createinvoice', { outcome: 'Error', err: err })
                 })
 
