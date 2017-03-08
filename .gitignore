@@ -7,4 +7,4 @@
 .nyc_output/
 .DS_Store
 .vscode
-*config.json
+testing_config.json
