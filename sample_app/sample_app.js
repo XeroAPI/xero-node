@@ -4,7 +4,7 @@ var express = require('express'),
     LRU = require('lru-cache'),
     fs = require('fs'),
     nodemailer = require('nodemailer'),
-    metaConfig = require('../testing_config.json');
+    metaConfig = require('./config/config.json');
 
 function getXeroApp(session) {
     var APPTYPE = metaConfig.APPTYPE;

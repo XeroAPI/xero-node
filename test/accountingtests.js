@@ -7,7 +7,7 @@ var chai = require('chai'),
     Browser = require('zombie'),
     uuid = require('uuid'),
     fs = require('fs'),
-    metaConfig = require('../testing_config.json');
+    metaConfig = require('./config/testing_config.json');
 
 process.on('uncaughtException', function(err) {
     console.log('uncaught', err)
@@ -97,8 +97,8 @@ describe('get access for public or partner application', function() {
 
             describe('submits form', function() {
                 var options = {
-                  XeroUsername: config.xeroUsername,
-                  XeroPassword: config.xeroPassword
+                    XeroUsername: config.xeroUsername,
+                    XeroPassword: config.xeroPassword
                 };
 
                 it('should login', function(done) {
@@ -182,47 +182,47 @@ describe('regression tests', function() {
     var bankAccounts = [];
 
     before('create a bank account', function() {
-      const randomString = uuid.v4();
+        const randomString = uuid.v4();
 
-      var testAccountData = {
-          Code: randomString.replace(/-/g,'').substring(0, 10),
-          Name: 'Test account from Node SDK ' + randomString,
-          Type: 'BANK',
-          BankAccountNumber: '062-021-0000000',
-      };
+        var testAccountData = {
+            Code: randomString.replace(/-/g, '').substring(0, 10),
+            Name: 'Test account from Node SDK ' + randomString,
+            Type: 'BANK',
+            BankAccountNumber: '062-021-0000000',
+        };
 
-      var account = currentApp.core.accounts.newAccount(testAccountData);
+        var account = currentApp.core.accounts.newAccount(testAccountData);
 
-      return account.save()
-      .then(function(response) {
-        var account = response.entities[0];
-        bankAccounts.push({
-          account: account,
-          id: account.AccountID
-        });
-      });
+        return account.save()
+            .then(function(response) {
+                var account = response.entities[0];
+                bankAccounts.push({
+                    account: account,
+                    id: account.AccountID
+                });
+            });
     });
 
     before('create another bank account', function() {
-      const randomString = uuid.v4();
+        const randomString = uuid.v4();
 
-      var testAccountData = {
-          Code: randomString.replace(/-/g,'').substring(0, 10),
-          Name: 'Test account from Node SDK ' + randomString,
-          Type: 'BANK',
-          BankAccountNumber: '062-021-0000000',
-      };
+        var testAccountData = {
+            Code: randomString.replace(/-/g, '').substring(0, 10),
+            Name: 'Test account from Node SDK ' + randomString,
+            Type: 'BANK',
+            BankAccountNumber: '062-021-0000000',
+        };
 
-      var account = currentApp.core.accounts.newAccount(testAccountData);
+        var account = currentApp.core.accounts.newAccount(testAccountData);
 
-      return account.save()
-      .then(function(response) {
-        var account = response.entities[0];
-        bankAccounts.push({
-          account: account,
-          id: account.AccountID
-        });
-      });
+        return account.save()
+            .then(function(response) {
+                var account = response.entities[0];
+                bankAccounts.push({
+                    account: account,
+                    id: account.AccountID
+                });
+            });
     });
 
     // There appears to be no way to archive a bank account via the API
@@ -387,7 +387,7 @@ describe('regression tests', function() {
 
         var testAccountId = "";
         var testAccountData = {
-            Code: randomString.replace(/-/g,'').substring(0, 10),
+            Code: randomString.replace(/-/g, '').substring(0, 10),
             Name: 'Test account from Node SDK ' + randomString,
             Type: 'EXPENSE'
         };
@@ -586,25 +586,25 @@ describe('regression tests', function() {
         var testAccount;
 
         before('create an account to pay into', function() {
-          const randomString = uuid.v4();
+            const randomString = uuid.v4();
 
-          var testAccountData = {
-              Code: randomString.replace(/-/g,'').substring(0, 10),
-              Name: 'Test account from Node SDK ' + randomString,
-              Type: 'SALES',
-              EnablePaymentsToAccount: true
-          };
+            var testAccountData = {
+                Code: randomString.replace(/-/g, '').substring(0, 10),
+                Name: 'Test account from Node SDK ' + randomString,
+                Type: 'SALES',
+                EnablePaymentsToAccount: true
+            };
 
-          testAccountCode = testAccountData.Code;
+            testAccountCode = testAccountData.Code;
 
-          var account = currentApp.core.accounts.newAccount(testAccountData);
+            var account = currentApp.core.accounts.newAccount(testAccountData);
 
-          return account.save()
-          .then(function(response) {
-            var account = response.entities[0];
-            testAccountId = account.AccountID;
-            testAccount = account;
-          });
+            return account.save()
+                .then(function(response) {
+                    var account = response.entities[0];
+                    testAccountId = account.AccountID;
+                    testAccount = account;
+                });
         });
 
         after('archive the test account', function() {
@@ -922,60 +922,60 @@ describe('regression tests', function() {
             var trackingCategoryID;
 
             return trackingCategory.save()
-            .then(function(response) {
-                trackingCategoryName = response.entities[0].Name;
-                trackingCategoryID = response.entities[0].TrackingCategoryID;
-                return response.entities[0].saveTrackingOptions([
-                    { Name: "North" },
-                    { Name: "South" },
-                ])
-            })
-            .then(function(response) {
-                //Create an invoice with the sample tracking category attached to the line item on the invoice.
-                var invoice = currentApp.core.invoices.newInvoice({
-                    Type: 'ACCREC',
-                    Contact: {
-                        Name: 'Department of Testing'
-                    },
-                    DueDate: new Date().toISOString().split("T")[0],
-                    LineItems: [{
-                        Description: 'Services',
-                        Quantity: 2,
-                        UnitAmount: 230,
-                        AccountCode: '400',
-                        Tracking: [{
-                            TrackingCategory: {
-                                Name: trackingCategoryName,
-                                Option: 'North'
-                            }
+                .then(function(response) {
+                    trackingCategoryName = response.entities[0].Name;
+                    trackingCategoryID = response.entities[0].TrackingCategoryID;
+                    return response.entities[0].saveTrackingOptions([
+                        { Name: "North" },
+                        { Name: "South" },
+                    ])
+                })
+                .then(function(response) {
+                    //Create an invoice with the sample tracking category attached to the line item on the invoice.
+                    var invoice = currentApp.core.invoices.newInvoice({
+                        Type: 'ACCREC',
+                        Contact: {
+                            Name: 'Department of Testing'
+                        },
+                        DueDate: new Date().toISOString().split("T")[0],
+                        LineItems: [{
+                            Description: 'Services',
+                            Quantity: 2,
+                            UnitAmount: 230,
+                            AccountCode: '400',
+                            Tracking: [{
+                                TrackingCategory: {
+                                    Name: trackingCategoryName,
+                                    Option: 'North'
+                                }
+                            }]
                         }]
-                    }]
-                });
-                return invoice.save()
-                    .then(function(response) {
+                    });
+                    return invoice.save()
+                        .then(function(response) {
 
-                        expect(response.entities).to.have.length.greaterThan(0);
-                        expect(response.entities[0].InvoiceID).to.not.equal(undefined);
-                        expect(response.entities[0].InvoiceID).to.not.equal("");
+                            expect(response.entities).to.have.length.greaterThan(0);
+                            expect(response.entities[0].InvoiceID).to.not.equal(undefined);
+                            expect(response.entities[0].InvoiceID).to.not.equal("");
 
-                        response.entities[0].LineItems.forEach(function(lineItem) {
-                            //expect(lineItem.Tracking).to.have.length.greaterThan(0);
-                            _.each(lineItem.Tracking, function(trackingCategory) {
-                                expect(trackingCategory.TrackingCategoryID).to.not.equal(undefined);
-                                expect(trackingCategory.TrackingCategoryID).to.not.equal("");
-                                expect(trackingCategory.TrackingOptionID).to.not.equal(undefined);
-                                expect(trackingCategory.TrackingOptionID).to.not.equal("");
-                                expect(trackingCategory.Name).to.equal(trackingCategory.Name);
-                                expect(trackingCategory.Option).to.equal('North');
+                            response.entities[0].LineItems.forEach(function(lineItem) {
+                                //expect(lineItem.Tracking).to.have.length.greaterThan(0);
+                                _.each(lineItem.Tracking, function(trackingCategory) {
+                                    expect(trackingCategory.TrackingCategoryID).to.not.equal(undefined);
+                                    expect(trackingCategory.TrackingCategoryID).to.not.equal("");
+                                    expect(trackingCategory.TrackingOptionID).to.not.equal(undefined);
+                                    expect(trackingCategory.TrackingOptionID).to.not.equal("");
+                                    expect(trackingCategory.Name).to.equal(trackingCategory.Name);
+                                    expect(trackingCategory.Option).to.equal('North');
+                                });
                             });
-                        });
-                        return currentApp.core.trackingCategories.deleteTrackingCategory(trackingCategoryID)
-                    })
-                    .catch(function(err) {
-                        console.log(util.inspect(err, null, null));
-                        done(wrapError(err));
-                    })
-            });
+                            return currentApp.core.trackingCategories.deleteTrackingCategory(trackingCategoryID)
+                        })
+                        .catch(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                });
         });
 
         //unfortunately this will only work on tracking categories that have been used.
