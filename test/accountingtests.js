@@ -471,7 +471,7 @@ describe('regression tests', function() {
         it('UPDATE ONE', function(done) {
             currentApp.core.accounts.getAccount(testAccountId)
                 .then(function(account) {
-                    testAccountData.Name = "Updated from the SDK";
+                    testAccountData.Name = "Updated from the SDK " + uuid.v4();
                     account.Name = testAccountData.Name;
 
                     account.save()
