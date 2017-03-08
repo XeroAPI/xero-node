@@ -5,7 +5,6 @@
         "consumerKey": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "privateKeyPath": "/some/path/to/privatekey.pem",
         "userAgent": "Tester (PARTNER) - Application for testing Xero",
-        //Only used for test purposes, not required for general usage.
         "xeroPassword": "XXXXXXXXXX",
         "xeroUsername": "foo@example.com"
     },
@@ -20,7 +19,6 @@
         "consumerKey": "AAAAAAAAAAAAAAAAAA",
         "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
         "userAgent": "Tester (PUBLIC) - Application for testing Xero",
-        //Only used for test purposes, not required for general usage.
         "xeroPassword": "XXXXXXXXXX",
         "xeroUsername": "foo@example.com"
     }
