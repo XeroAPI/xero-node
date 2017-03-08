@@ -274,7 +274,7 @@ describe('regression tests', function() {
         })
     })
 
-    describe.skip('taxrates', function() {
+    describe('taxrates', function() {
         it('gets tax rates', function(done) {
             currentApp.core.taxrates.getTaxRates()
                 .then(function(taxRates) {
