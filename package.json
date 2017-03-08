@@ -26,6 +26,7 @@
     "lru-cache": "^4.0.2",
     "nyc": "^10.1.2",
     "q": "~1.0.0",
+    "uuid": "^3.0.1",
     "xml2js": ""
   },
   "readmeFilename": "README.md",

@@ -1,6 +1,5 @@
 describe.skip('payitems', function() {
     it('get payitems', function(done) {
-        this.timeout(10000);
         currentApp.payroll.payitems.getPayItems()
             .then(function(payitems) {
                 console.log(payitems[0].EarningsTypes);
@@ -13,7 +12,6 @@ describe.skip('payitems', function() {
 })
 describe.skip('timesheets', function() {
     it('create timesheet', function(done) {
-        this.timeout(10000);
         var timesheet = currentApp.payroll.timesheets.newTimesheet({
             EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
             StartDate: new Date(2014, 8, 23),
@@ -34,7 +32,6 @@ describe.skip('timesheets', function() {
 
     })
     it.skip('get timesheets', function(done) {
-        this.timeout(10000);
         currentApp.payroll.timesheets.getTimesheets()
             .then(function(timesheets) {
                 if (!_.isEmpty(timesheets))
@@ -50,7 +47,6 @@ describe.skip('timesheets', function() {
 describe.skip('employees', function() {
     var employee;
     it('get (no paging)', function(done) {
-        this.timeout(10000);
         currentApp.payroll.employees.getEmployees()
             .then(function(ret) {
                 console.log(ret[0].toObject());
@@ -61,7 +57,6 @@ describe.skip('employees', function() {
             })
     })
     it.skip('get by id', function(done) {
-        this.timeout(10000);
         currentApp.payroll.employees.getEmployee('065a115c-ba9c-4c03-b8e3-44c551ed8f21')
             .then(function(ret) {
                 employee = ret;
