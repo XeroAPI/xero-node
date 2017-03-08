@@ -19,7 +19,7 @@ var organisationCountry = '';
 var APPTYPE = metaConfig.APPTYPE;
 var config = metaConfig[APPTYPE.toLowerCase()];
 
-if (config.PrivateKeyPath && !config.PrivateKey) config.PrivateKey = fs.readFileSync(config.PrivateKeyPath);
+if (config.privateKeyPath && !config.privateKey) config.privateKey = fs.readFileSync(config.privateKeyPath);
 
 before('init instance and set options', function(done) {
     switch (APPTYPE) {
@@ -97,8 +97,8 @@ describe('get access for public or partner application', function() {
 
             describe('submits form', function() {
                 var options = {
-                  XeroUsername: config.XeroUsername,
-                  XeroPassword: config.XeroPassword
+                  XeroUsername: config.xeroUsername,
+                  XeroPassword: config.xeroPassword
                 };
 
                 it('should login', function(done) {
