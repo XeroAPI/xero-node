@@ -4,13 +4,11 @@ var express = require('express'),
     LRU = require('lru-cache'),
     fs = require('fs'),
     nodemailer = require('nodemailer'),
-    publicConfigFile = "../public_app_config.json";
+    metaConfig = require('../testing_config.json');
 
 function getXeroApp(session) {
-    var config = {
-        authorizeCallbackUrl: 'http://localhost:3100/access',
-        runscopeBucketId: 'ei635hnc0fem'
-    };
+    var APPTYPE = metaConfig.APPTYPE;
+    var config = metaConfig[APPTYPE.toLowerCase()];
 
     if (session) {
         if (session.oauthAccessToken && session.oauthAccessSecret) {
@@ -19,7 +17,7 @@ function getXeroApp(session) {
         }
     }
 
-    return new xero.PublicApplication(publicConfigFile, config);
+    return new xero.PublicApplication(config);
 }
 
 var app = express();
@@ -141,6 +139,9 @@ app.get('/organisations', function(req, res) {
                         organisations: true
                     }
                 });
+            })
+            .catch(function(err) {
+                console.log(err);
             })
     })
 });
