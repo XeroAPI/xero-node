@@ -5,7 +5,7 @@ describe.skip('payitems', function() {
                 console.log(payitems[0].EarningsTypes);
                 done();
             })
-            .fail(function(err) {
+            .catch(function(err) {
                 done(wrapError(err));
             })
     })
@@ -26,7 +26,7 @@ describe.skip('timesheets', function() {
             .then(function() {
                 done();
             })
-            .fail(function(err) {
+            .catch(function(err) {
                 done(wrapError(err));
             })
 
@@ -38,7 +38,7 @@ describe.skip('timesheets', function() {
                     console.log(util.inspect(timesheets[0].toObject(), null, null));
                 done();
             })
-            .fail(function(err) {
+            .catch(function(err) {
                 done(wrapError(err));
             })
     })
@@ -52,7 +52,7 @@ describe.skip('employees', function() {
                 console.log(ret[0].toObject());
                 done();
             })
-            .fail(function(err) {
+            .catch(function(err) {
                 done(wrapError(err));
             })
     })
@@ -63,7 +63,7 @@ describe.skip('employees', function() {
                 console.log(employee.toObject());
                 done();
             })
-            .fail(function(err) {
+            .catch(function(err) {
                 done(wrapError(err));
             })
     })

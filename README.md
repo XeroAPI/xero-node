@@ -135,7 +135,7 @@ Print a count of invoices:
 xeroClient.core.invoices.getInvoices()
 .then(function(invoices) {
     console.log("Invoices: " + invoices.length);
-}).fail(function(err) {
+}).catch(function(err) {
     console.error(err);
 });
 ```
@@ -151,7 +151,7 @@ xeroClient.core.contacts.getContacts({
     contacts.forEach(function(contact) {
         console.log(contact.Name);
     });
-}).fail(function(err) {
+}).catch(function(err) {
     console.error(err);
 });
 ```
@@ -160,7 +160,7 @@ Efficient paging:
 
 ```javascript
 xeroClient.core.contacts.getContacts({ pager: {start:1 /* page number */, callback: onContacts}})
-    .fail(function(err) {
+    .catch(function(err) {
         console.log('Oh no, an error');
     });
 
