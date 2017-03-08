@@ -8,7 +8,8 @@ var express = require('express'),
 
 function getXeroApp(session) {
     var config = {
-        authorizeCallbackUrl: 'http://localhost:3100/access'
+        authorizeCallbackUrl: 'http://localhost:3100/access',
+        runscopeBucketId: 'ei635hnc0fem'
     };
 
     if (session) {
@@ -138,6 +139,34 @@ app.get('/organisations', function(req, res) {
                     organisations: organisations,
                     active: {
                         organisations: true
+                    }
+                });
+            })
+    })
+});
+
+app.get('/taxrates', function(req, res) {
+    authorizedOperation(req, res, '/taxrates', function(xeroApp) {
+        xeroApp.core.taxrates.getTaxRates()
+            .then(function(taxrates) {
+                res.render('taxrates', {
+                    taxrates: taxrates,
+                    active: {
+                        taxrates: true
+                    }
+                });
+            })
+    })
+});
+
+app.get('/users', function(req, res) {
+    authorizedOperation(req, res, '/users', function(xeroApp) {
+        xeroApp.core.users.getUsers()
+            .then(function(users) {
+                res.render('users', {
+                    users: users,
+                    active: {
+                        users: true
                     }
                 });
             })
@@ -350,6 +379,7 @@ app.get('/invoices', function(req, res) {
     authorizedOperation(req, res, '/invoices', function(xeroApp) {
         xeroApp.core.invoices.getInvoices()
             .then(function(invoices) {
+                console.log(invoices[0].Payments[0]);
                 res.render('invoices', {
                     invoices: invoices,
                     active: {

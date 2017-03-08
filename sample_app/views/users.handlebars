@@ -1,0 +1,21 @@
+<h3>Users</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>EmailAddress</td>
+            <td>IsSubscriber</td>
+            <td>OrganisationRole</td>
+            <td>UpdatedDateUTC</td>
+        </tr>
+    </thead>
+    {{#each users}}
+    <tr>
+        <td>{{ this.FirstName }} {{this.LastName}}</td>
+        <td>{{ this.EmailAddress }}</td>
+        <td>{{ this.IsSubscriber }}</td>
+        <td>{{ this.OrganisationRole }}</td>
+        <td>{{ this.UpdatedDateUTC }}</td>
+    </tr>
+    {{/each}}
+</table>
