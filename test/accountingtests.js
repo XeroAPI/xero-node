@@ -405,10 +405,12 @@ describe('regression tests', function() {
         //Create a new account
         //Get it, Update it, then delete it
 
+        const randomString = uuid.v4();
+
         var testAccountId = "";
         var testAccountData = {
-            Code: 'TEST',
-            Name: 'Test account from Node SDK',
+            Code: randomString.replace(/-/g,'').substring(0, 10),
+            Name: 'Test account from Node SDK ' + randomString,
             Type: 'EXPENSE'
         };
 
