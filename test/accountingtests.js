@@ -154,11 +154,43 @@ describe('get access for public or partner application', function() {
             });
         });
 
+        describe('swaps the request token for an access token', function() {
+            it('calls the access token method and sets the options', function(done) {
+                currentApp.setAccessToken(requestToken, requestSecret, verifier)
+                    .then(function() {
+                        expect(currentApp.options.accessToken).to.not.equal(undefined);
+                        expect(currentApp.options.accessToken).to.not.equal("");
+                        expect(currentApp.options.accessSecret).to.not.equal(undefined);
+                        expect(currentApp.options.accessSecret).to.not.equal("");
+                        expect(currentApp.options.sessionHandle).to.not.equal(undefined);
+                        expect(currentApp.options.sessionHandle).to.not.equal("");
+                        done();
+                    }).catch(function(err) {
+                        done(wrapError(err));
+                    });
+            });
+
+            it('refreshes the token', function(done) {
+                currentApp.refreshAccessToken()
+                    .then(function() {
+                        expect(currentApp.options.accessToken).to.not.equal(undefined);
+                        expect(currentApp.options.accessToken).to.not.equal("");
+                        expect(currentApp.options.accessSecret).to.not.equal(undefined);
+                        expect(currentApp.options.accessSecret).to.not.equal("");
+                        expect(currentApp.options.sessionHandle).to.not.equal(undefined);
+                        expect(currentApp.options.sessionHandle).to.not.equal("");
+                        done();
+                    }).catch(function(err) {
+                        done(wrapError(err));
+                    });
+            });
+        });
+
 
     });
 });
 
-describe.skip('regression tests', function() {
+describe('regression tests', function() {
 
     var InvoiceID = "";
     var PaymentID = "";
