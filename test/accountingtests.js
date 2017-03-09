@@ -85,7 +85,7 @@ describe('get access for public or partner application', function() {
                 runScripts: false
             });
 
-            browser.debug();
+            //browser.debug();
 
             before(function(done) {
                 if (APPTYPE === "PRIVATE") {
