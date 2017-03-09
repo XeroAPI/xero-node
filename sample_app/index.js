@@ -17,7 +17,19 @@ function getXeroApp(session) {
         }
     }
 
-    return new xero.PublicApplication(config);
+    if (config.privateKeyPath && !config.privateKey) config.privateKey = fs.readFileSync(config.privateKeyPath);
+
+    switch (APPTYPE) {
+        case "PUBLIC":
+            return new xero.PublicApplication(config);
+            break;
+        case "PARTNER":
+            return new xero.PartnerApplication(config);
+            break;
+        default:
+            throw "No App Type Set!!"
+    }
+
 }
 
 var app = express();
@@ -119,9 +131,10 @@ app.get('/access', function(req, res) {
 
     if (req.query.oauth_verifier && req.query.oauth_token == req.session.oauthRequestToken) {
         xeroApp.getAccessToken(req.session.oauthRequestToken, req.session.oauthRequestSecret, req.query.oauth_verifier,
-            function(err, accessToken, accessSecret, results) {
-                req.session.oauthAccessToken = accessToken;
-                req.session.oauthAccessSecret = accessSecret;
+            function(err, results) {
+                req.session.oauthAccessToken = results.oauth_token;
+                req.session.oauthAccessSecret = results.oauth_token_secret;
+                req.session.oauthSessionHandle = results.oauth_session_handle;
                 var returnTo = req.session.returnto;
                 res.redirect(returnTo || '/');
             }
