@@ -123,6 +123,20 @@ function authorizedOperation(req, res, returnTo, callback) {
     }
 }
 
+function handleErr(err, req, res, returnTo) {
+    console.log(err);
+    if (err.data && err.data.oauth_problem && err.data.oauth_problem == "token_rejected") {
+        authorizeRedirect(req, res, returnTo);
+    } else {
+        res.redirect('error');
+    }
+}
+
+app.get('/error', function(req, res) {
+    console.log(req.query.error);
+    res.render('index', { error: req.query.error });
+})
+
 // Home Page
 app.get('/', function(req, res) {
     res.render('index', {
@@ -143,7 +157,7 @@ app.get('/access', function(req, res) {
                 res.redirect(returnTo || '/');
             })
             .catch(function(err) {
-                console.log(err);
+                handleErr(err, req, res, 'error');
             })
     }
 });
@@ -160,7 +174,7 @@ app.get('/organisations', function(req, res) {
                 });
             })
             .catch(function(err) {
-                console.log(err);
+                handleErr(err, req, res, 'organisations');
             })
     })
 });
@@ -176,6 +190,9 @@ app.get('/taxrates', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'taxrates');
+            })
     })
 });
 
@@ -189,6 +206,9 @@ app.get('/users', function(req, res) {
                         users: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'users');
             })
     })
 });
@@ -205,21 +225,10 @@ app.get('/employees', function(req, res) {
                 });
             })
             .catch(function(err) {
-                console.log(err)
-                res.render('employees', {
-                    error: err,
-                    active: {
-                        employees: true
-                    }
-                })
+                handleErr(err, req, res, 'employees');
             })
     })
 });
-
-app.get('/error', function(req, res) {
-    console.log(req.query.error);
-    res.render('index', { error: req.query.error });
-})
 
 app.get('/contacts', function(req, res) {
     authorizedOperation(req, res, '/contacts', function(xeroClient) {
@@ -232,6 +241,9 @@ app.get('/contacts', function(req, res) {
                         contacts: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'contacts');
             })
 
         function pagerCallback(err, response, cb) {
@@ -253,6 +265,9 @@ app.get('/banktransactions', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'banktransactions');
+            })
 
         function pagerCallback(err, response, cb) {
             bankTransactions.push.apply(bankTransactions, response.data);
@@ -272,6 +287,9 @@ app.get('/journals', function(req, res) {
                         journals: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'journals');
             })
 
         function pagerCallback(err, response, cb) {
@@ -293,6 +311,9 @@ app.get('/banktransfers', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'banktransfers');
+            })
 
         function pagerCallback(err, response, cb) {
             bankTransfers.push.apply(bankTransfers, response.data);
@@ -312,6 +333,9 @@ app.get('/payments', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'payments');
+            })
     })
 });
 
@@ -326,6 +350,9 @@ app.get('/trackingcategories', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'trackingcategories');
+            })
     })
 });
 
@@ -339,6 +366,9 @@ app.get('/accounts', function(req, res) {
                         accounts: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'accounts');
             })
     })
 });
@@ -356,43 +386,12 @@ app.get('/timesheets', function(req, res) {
                 });
             })
             .catch(function(err) {
-                console.log(err)
-                res.render('timesheets', {
-                    error: err,
-                    active: {
-                        timesheets: true
-                    }
-                })
+                handleErr(err, req, res, 'timesheets');
             })
     })
 });
 
-app.use('/createtimesheet', function(req, res) {
-    if (req.method == 'GET') {
-        return res.render('createtimesheet');
-    } else if (req.method == 'POST') {
-        authorizedOperation(req, res, '/createtimesheet', function(xeroClient) {
-            var timesheet = xeroClient.payroll.timesheets.newTimesheet({
-                EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
-                StartDate: new Date(2014, 8, 23),
-                EndDate: new Date(2014, 8, 29),
-                Status: 'Draft',
-                TimesheetLines: [{
-                    EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
-                    NumberOfUnits: [5, 0, 0, 0, 0, 0, 0]
-                }]
-            });
-            timesheet.save()
-                .then(function(ret) {
-                    res.render('createtimesheet', { timesheets: ret.entities })
-                })
-                .catch(function(err) {
-                    res.render('createtimesheet', { err: err })
-                })
 
-        })
-    }
-});
 
 
 app.get('/invoices', function(req, res) {
@@ -406,6 +405,9 @@ app.get('/invoices', function(req, res) {
                         invoices: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'invoices');
             })
 
     })
@@ -421,6 +423,9 @@ app.get('/items', function(req, res) {
                         items: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'items');
             })
 
     })
@@ -452,6 +457,33 @@ app.use('/createinvoice', function(req, res) {
                 })
                 .catch(function(err) {
                     res.render('createinvoice', { outcome: 'Error', err: err })
+                })
+
+        })
+    }
+});
+
+app.use('/createtimesheet', function(req, res) {
+    if (req.method == 'GET') {
+        return res.render('createtimesheet');
+    } else if (req.method == 'POST') {
+        authorizedOperation(req, res, '/createtimesheet', function(xeroClient) {
+            var timesheet = xeroClient.payroll.timesheets.newTimesheet({
+                EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
+                StartDate: new Date(2014, 8, 23),
+                EndDate: new Date(2014, 8, 29),
+                Status: 'Draft',
+                TimesheetLines: [{
+                    EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
+                    NumberOfUnits: [5, 0, 0, 0, 0, 0, 0]
+                }]
+            });
+            timesheet.save()
+                .then(function(ret) {
+                    res.render('createtimesheet', { timesheets: ret.entities })
+                })
+                .catch(function(err) {
+                    res.render('createtimesheet', { err: err })
                 })
 
         })
