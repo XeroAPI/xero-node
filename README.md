@@ -82,14 +82,15 @@ The config file should be set up as follows:
 
 ### Config Parameters
 
-| Parameter            | Description                                                                              | Mandatory |
-|----------------------|------------------------------------------------------------------------------------------|-----------|
-| UserAgent            | The useragent that should be used with all calls to the Xero API                         | True      |
-| ConsumerKey          | The consumer key that is required with all calls to the Xero API.,                       | True      |
-| ConsumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      |
-| AuthorizeCallbackUrl | The callback that Xero should invoke when the authorization is successful.               | False     |
-| PrivateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     |
-| RunscopeBucketId     | Your personal runscope bucket for debugging API calls                                    | False     |
+| Parameter               | Description                                                                                     | Mandatory |
+|-------------------------|-------------------------------------------------------------------------------------------------|-----------|
+| UserAgent               | The useragent that should be used with all calls to the Xero API                                | True      |
+| ConsumerKey             | The consumer key that is required with all calls to the Xero API.,                              | True      |
+| ConsumerSecret          | The secret key from the developer portal that is required to authenticate your API calls        | True      |
+| AuthorizeCallbackUrl    | The callback that Xero should invoke when the authorization is successful.                      | False     |
+| PrivateKeyPath          | The filesystem path to your privatekey.pem file to sign the API calls                           | False     |
+| RunscopeBucketId        | Your personal runscope bucket for debugging API calls                                           | False     |
+| sendAnonymousUsageData  | Allows users to choose whether to send usage data back to Xero for debugging (default: true).   | False     |
 ---
 
 **Note:** `RunscopeBucketId` has been added to support debugging the SDK.  Runscope is a simple tool for Testing Complex APIs. You can use Runscope to verify that the structure and content of your API calls meets your expectations. 
