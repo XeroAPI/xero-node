@@ -1,0 +1,29 @@
+<h3>Tax Rates</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>TaxType</td>
+            <td>DisplayTaxRate</td>
+            <td>EffectiveRate</td>
+            <td>Status</td>
+            <td>TaxComponent</td>
+        </tr>
+    </thead>
+    <tbody>
+      {{#each taxrates}}
+      <tr>
+          <td>{{ this.Name }}</td>
+          <td>{{ this.TaxType }}</td>
+          <td>{{ this.DisplayTaxRate }}</td>
+          <td>{{ this.EffectiveRate }}</td>
+          <td>{{ this.Status }}</td>
+          <td>
+            {{#each this.TaxComponents as |taxcomponentfield|}}
+              <p>{{taxcomponentfield.Rate}}</p>
+            {{/each}}
+          </td>
+      </tr>
+      {{/each}}
+    </tbody>
+</table>

@@ -1,33 +1,45 @@
 {
-  "name": "xeroed",
-  "version": "0.2.2",
+  "name": "xero-node",
+  "version": "1.0.0",
   "description": "Xero API Wrapper for all application types",
   "main": "lib/index.js",
   "directories": {
     "test": "test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jordanwalsh23/xero-node"
+  },
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha --recursive"
   },
   "keywords": [
     "xero",
     "api"
   ],
-  "author": "Tim Shnaider",
+  "author": "Jordan Walsh",
   "license": "MIT",
   "dependencies": {
     "dateformat": "~1.0.7-1.2.3",
     "lodash": "~2.4.1",
     "log4js": "~0.6.9",
+    "lru-cache": "^4.0.2",
+    "nyc": "^10.1.2",
     "q": "~1.0.0",
+    "uuid": "^3.0.1",
     "xml2js": ""
   },
   "readmeFilename": "README.md",
   "devDependencies": {
-    "should": "*",
-    "mocha": "*",
-    "swig": "^1.4.2",
+    "chai": "^3.5.0",
+    "cli-input": "^0.2.0",
     "express": "3.4.8",
-    "nodemailer": ""
+    "express-handlebars": "^3.0.0",
+    "mocha": "*",
+    "mustache": "^2.3.0",
+    "nodemailer": "",
+    "nyc": "^10.1.2",
+    "zombie": "^5.0.5",
+    "zombie-phantom": "0.0.6"
   }
 }

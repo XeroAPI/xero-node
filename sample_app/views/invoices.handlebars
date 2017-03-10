@@ -1,0 +1,67 @@
+<h3>Invoices</h3>
+<table class="table table-bordered table-collapsed table-hover">
+    <thead>
+        <tr>
+            <th>Invoice Number</th>
+            <th>Date</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each invoices}}
+    <tr class="accordion-toggle" data-toggle="collapse" data-target="#{{this.InvoiceID}}">
+        {{#ifCond this.Type '==' 'ACCREC'}}
+        <td><a href="https://go.xero.com/AccountsReceivable/View.aspx?InvoiceID={{ this.InvoiceID }}" target="_blank">
+            {{#if this.InvoiceNumber}}
+                {{this.InvoiceNumber}}
+            {{else}}
+                {{this.InvoiceID}}
+            {{/if}}
+            </a>
+        </td>
+        {{else}}
+        <td><a href="https://go.xero.com/AccountsPayable/View.aspx?InvoiceID={{ this.InvoiceID }}" target="_blank">
+            {{#if this.InvoiceNumber}}
+                {{this.InvoiceNumber}}
+            {{else}}
+                {{this.InvoiceID}}
+            {{/if}}
+            </a>
+        </td>
+        {{/ifCond}}
+        <td>{{ this.Date }}</td>
+        <td>{{ this.DueDate }}</td>
+        <td>{{ this.Status}}</td>
+        <td>{{ this.Total }}</td>
+        <td><a href="/emailinvoice?id={{ this.InvoiceID }}" class="btn btn-primary btn-xs">Email</a></td>
+    </tr>
+    
+    {{#ifCond this.Payments.length '>' 0}}
+    <tr>
+        <td class="accordion-body collapse" id="{{this.InvoiceID}}">
+            <h5>Invoice Payments</h5>
+            <table class="table table-condensed">
+                <thead>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Reference</th>
+                </thead>
+                <tbody>
+                    {{#each this.Payments as |payment|}}
+                    <tr>
+                        <td>{{payment.Date}}</td>
+                        <td>{{payment.Amount}}</td>
+                        <td>{{payment.Reference}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    {{/ifCond}}
+    {{/each}}
+    </tbody>
+</table>

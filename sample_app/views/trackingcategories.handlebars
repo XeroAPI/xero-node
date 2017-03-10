@@ -1,0 +1,15 @@
+<h3>Tracking Categories</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Status</td>
+        </tr>
+    </thead>
+    {{#each trackingcategories}}
+    <tr>
+        <td><a href="https://go.xero.com//Setup/Tracking.aspx" target="_blank">{{ this.Name }}</a></td>
+        <td>{{ this.Status }}</td>
+    </tr>
+    {{/each}}
+</table>

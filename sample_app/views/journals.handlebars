@@ -1,0 +1,19 @@
+<h3>Journals</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Number</td>
+            <td>Journal Date</td>
+            <td>Reference</td>
+            <td># Lines</td>
+        </tr>
+    </thead>
+    {{#each journals}}
+    <tr>
+        <td>{{ this.JournalNumber }}</td>
+        <td>{{ this.JournalDate }}</td>
+        <td>{{ this.Reference }}</td>
+        <td>{{ this.JournalLines.length }}</td>
+    </tr>
+    {{/each}}
+</table>
