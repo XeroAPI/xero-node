@@ -57,24 +57,16 @@ describe('get access for public or partner application', function() {
         var accessSecret = "";
 
 
-        it('user gets a token and builds the url', function(done) {
-            currentApp.getRequestToken(function(err, token, secret) {
-                    if (!err) {
-                        authoriseUrl = currentApp.buildAuthorizeUrl(token);
-                        requestToken = token;
-                        requestSecret = secret;
-                        console.log("URL: " + authoriseUrl);
-                        console.log("token: " + requestToken);
-                        console.log("secret: " + requestSecret);
-                    } else {
-                        throw err;
-                    }
-                })
-                .then(function() {
-                    done();
-                }).catch(function(err) {
-                    done(wrapError(err));
-                });
+        it('user gets a token and builds the url', function() {
+            return currentApp.getRequestToken()
+                .then(function(res) {
+                    requestToken = res.token;
+                    requestSecret = res.secret;
+                    authoriseUrl = currentApp.buildAuthorizeUrl(requestToken);
+                    console.log("URL: " + authoriseUrl);
+                    console.log("token: " + requestToken);
+                    console.log("secret: " + requestSecret);
+            });
         });
 
         describe('gets the request token from the url', function() {
@@ -155,19 +147,10 @@ describe('get access for public or partner application', function() {
         });
 
         describe('swaps the request token for an access token', function() {
-            it('calls the access token method and sets the options', function(done) {
-                currentApp.getAccessToken(requestToken, requestSecret, verifier, function(err, accessToken, accessSecret, results) {
-
-                        if (!err) {
-                            currentApp.setOptions({ accessToken: accessToken, accessSecret: accessSecret });
-                        } else {
-                            throw err;
-                        }
-                    })
-                    .then(function() {
-                        done();
-                    }).catch(function(err) {
-                        done(wrapError(err));
+            it('calls the access token method and sets the options', function() {
+                return currentApp.getAccessToken(requestToken, requestSecret, verifier)
+                    .then(function({token, secret}) {
+                        currentApp.setOptions({ accessToken: token, accessSecret: secret });
                     });
             });
         });
