@@ -6,18 +6,42 @@ var express = require('express'),
     nodemailer = require('nodemailer'),
     metaConfig = require('./config/config.json');
 
-function getXeroApp(session) {
-    var APPTYPE = metaConfig.APPTYPE;
-    var config = metaConfig[APPTYPE.toLowerCase()];
+var xeroClient;
+var eventReceiver;
 
-    if (session) {
-        if (session.oauthAccessToken && session.oauthAccessSecret) {
-            config.accessToken = session.oauthAccessToken;
-            config.accessSecret = session.oauthAccessSecret;
+function getXeroClient(session) {
+
+    if (!xeroClient) {
+        var APPTYPE = metaConfig.APPTYPE;
+        var config = metaConfig[APPTYPE.toLowerCase()];
+
+        if (session) {
+            if (session.oauthAccessToken && session.oauthAccessSecret) {
+                config.accessToken = session.oauthAccessToken;
+                config.accessSecret = session.oauthAccessSecret;
+            }
+        }
+
+        if (config.privateKeyPath && !config.privateKey) config.privateKey = fs.readFileSync(config.privateKeyPath);
+
+        switch (APPTYPE) {
+            case "PUBLIC":
+                xeroClient = new xero.PublicApplication(config);
+                break;
+            case "PARTNER":
+                xeroClient = new xero.PartnerApplication(config);
+                eventReceiver = xeroClient.eventEmitter;
+                eventReceiver.on('xeroTokenUpdate', function(data) {
+                    //Store the data that was received from the xeroTokenRefresh event
+                    console.log("Received xero token refresh: ", data);
+                });
+                break;
+            default:
+                throw "No App Type Set!!"
         }
     }
 
-    return new xero.PublicApplication(config);
+    return xeroClient;
 }
 
 var app = express();
@@ -72,8 +96,8 @@ app.use(express.static(__dirname + '/assets'));
 // app.use(express.cookieSession({ secret: 'sfsdfsdfsdfsdf234234234fd', cookie: { maxAge: 123467654456 } }));
 
 function authorizeRedirect(req, res, returnTo) {
-    var xeroApp = getXeroApp(null, returnTo);
-    xeroApp.getRequestToken(function(err, token, secret) {
+    var xeroClient = getXeroClient(null, returnTo);
+    xeroClient.getRequestToken(function(err, token, secret) {
         if (!err) {
             req.session.oauthRequestToken = token;
             req.session.oauthRequestSecret = secret;
@@ -83,7 +107,7 @@ function authorizeRedirect(req, res, returnTo) {
             var PayrollScope = 'payroll.employees,payroll.payitems,payroll.timesheets';
             var AccountingScope = '';
 
-            var authoriseUrl = xeroApp.buildAuthorizeUrl(token, {
+            var authoriseUrl = xeroClient.buildAuthorizeUrl(token, {
                 scope: PayrollScope
             });
             res.redirect(authoriseUrl);
@@ -97,12 +121,26 @@ function authorizeRedirect(req, res, returnTo) {
 var cache = LRU();
 
 function authorizedOperation(req, res, returnTo, callback) {
-    if (req.session.oauthAccessToken) {
-        var xeroApp = getXeroApp(req.session);
-        callback(xeroApp);
-    } else
+    if (xeroClient) {
+        callback(xeroClient);
+    } else {
         authorizeRedirect(req, res, returnTo);
+    }
 }
+
+function handleErr(err, req, res, returnTo) {
+    console.log(err);
+    if (err.data && err.data.oauth_problem && err.data.oauth_problem == "token_rejected") {
+        authorizeRedirect(req, res, returnTo);
+    } else {
+        res.redirect('error');
+    }
+}
+
+app.get('/error', function(req, res) {
+    console.log(req.query.error);
+    res.render('index', { error: req.query.error });
+})
 
 // Home Page
 app.get('/', function(req, res) {
@@ -115,23 +153,23 @@ app.get('/', function(req, res) {
 
 // Redirected from xero with oauth results
 app.get('/access', function(req, res) {
-    var xeroApp = getXeroApp();
+    var xeroClient = getXeroClient();
 
     if (req.query.oauth_verifier && req.query.oauth_token == req.session.oauthRequestToken) {
-        xeroApp.getAccessToken(req.session.oauthRequestToken, req.session.oauthRequestSecret, req.query.oauth_verifier,
-            function(err, accessToken, accessSecret, results) {
-                req.session.oauthAccessToken = accessToken;
-                req.session.oauthAccessSecret = accessSecret;
+        xeroClient.setAccessToken(req.session.oauthRequestToken, req.session.oauthRequestSecret, req.query.oauth_verifier)
+            .then(function() {
                 var returnTo = req.session.returnto;
                 res.redirect(returnTo || '/');
-            }
-        )
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'error');
+            })
     }
 });
 
 app.get('/organisations', function(req, res) {
-    authorizedOperation(req, res, '/organisations', function(xeroApp) {
-        xeroApp.core.organisations.getOrganisations()
+    authorizedOperation(req, res, '/organisations', function(xeroClient) {
+        xeroClient.core.organisations.getOrganisations()
             .then(function(organisations) {
                 res.render('organisations', {
                     organisations: organisations,
@@ -141,14 +179,14 @@ app.get('/organisations', function(req, res) {
                 });
             })
             .catch(function(err) {
-                console.log(err);
+                handleErr(err, req, res, 'organisations');
             })
     })
 });
 
 app.get('/taxrates', function(req, res) {
-    authorizedOperation(req, res, '/taxrates', function(xeroApp) {
-        xeroApp.core.taxrates.getTaxRates()
+    authorizedOperation(req, res, '/taxrates', function(xeroClient) {
+        xeroClient.core.taxrates.getTaxRates()
             .then(function(taxrates) {
                 res.render('taxrates', {
                     taxrates: taxrates,
@@ -157,12 +195,15 @@ app.get('/taxrates', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'taxrates');
+            })
     })
 });
 
 app.get('/users', function(req, res) {
-    authorizedOperation(req, res, '/users', function(xeroApp) {
-        xeroApp.core.users.getUsers()
+    authorizedOperation(req, res, '/users', function(xeroClient) {
+        xeroClient.core.users.getUsers()
             .then(function(users) {
                 res.render('users', {
                     users: users,
@@ -171,12 +212,15 @@ app.get('/users', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'users');
+            })
     })
 });
 
 app.get('/employees', function(req, res) {
-    authorizedOperation(req, res, '/employees', function(xeroApp) {
-        xeroApp.payroll.employees.getEmployees()
+    authorizedOperation(req, res, '/employees', function(xeroClient) {
+        xeroClient.payroll.employees.getEmployees()
             .then(function(employees) {
                 res.render('employees', {
                     employees: employees,
@@ -186,26 +230,15 @@ app.get('/employees', function(req, res) {
                 });
             })
             .catch(function(err) {
-                console.log(err)
-                res.render('employees', {
-                    error: err,
-                    active: {
-                        employees: true
-                    }
-                })
+                handleErr(err, req, res, 'employees');
             })
     })
 });
 
-app.get('/error', function(req, res) {
-    console.log(req.query.error);
-    res.render('index', { error: req.query.error });
-})
-
 app.get('/contacts', function(req, res) {
-    authorizedOperation(req, res, '/contacts', function(xeroApp) {
+    authorizedOperation(req, res, '/contacts', function(xeroClient) {
         var contacts = [];
-        xeroApp.core.contacts.getContacts({ pager: { callback: pagerCallback } })
+        xeroClient.core.contacts.getContacts({ pager: { callback: pagerCallback } })
             .then(function() {
                 res.render('contacts', {
                     contacts: contacts,
@@ -213,6 +246,9 @@ app.get('/contacts', function(req, res) {
                         contacts: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'contacts');
             })
 
         function pagerCallback(err, response, cb) {
@@ -223,9 +259,9 @@ app.get('/contacts', function(req, res) {
 });
 
 app.get('/banktransactions', function(req, res) {
-    authorizedOperation(req, res, '/banktransactions', function(xeroApp) {
+    authorizedOperation(req, res, '/banktransactions', function(xeroClient) {
         var bankTransactions = [];
-        xeroApp.core.bankTransactions.getBankTransactions({ pager: { callback: pagerCallback } })
+        xeroClient.core.bankTransactions.getBankTransactions({ pager: { callback: pagerCallback } })
             .then(function() {
                 res.render('banktransactions', {
                     bankTransactions: bankTransactions,
@@ -233,6 +269,9 @@ app.get('/banktransactions', function(req, res) {
                         banktransactions: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'banktransactions');
             })
 
         function pagerCallback(err, response, cb) {
@@ -243,9 +282,9 @@ app.get('/banktransactions', function(req, res) {
 });
 
 app.get('/journals', function(req, res) {
-    authorizedOperation(req, res, '/journals', function(xeroApp) {
+    authorizedOperation(req, res, '/journals', function(xeroClient) {
         var journals = [];
-        xeroApp.core.journals.getJournals({ pager: { callback: pagerCallback } })
+        xeroClient.core.journals.getJournals({ pager: { callback: pagerCallback } })
             .then(function() {
                 res.render('journals', {
                     journals: journals,
@@ -253,6 +292,9 @@ app.get('/journals', function(req, res) {
                         journals: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'journals');
             })
 
         function pagerCallback(err, response, cb) {
@@ -263,9 +305,9 @@ app.get('/journals', function(req, res) {
 });
 
 app.get('/banktransfers', function(req, res) {
-    authorizedOperation(req, res, '/banktransfers', function(xeroApp) {
+    authorizedOperation(req, res, '/banktransfers', function(xeroClient) {
         var bankTransfers = [];
-        xeroApp.core.bankTransfers.getBankTransfers({ pager: { callback: pagerCallback } })
+        xeroClient.core.bankTransfers.getBankTransfers({ pager: { callback: pagerCallback } })
             .then(function() {
                 res.render('banktransfers', {
                     bankTransfers: bankTransfers,
@@ -273,6 +315,9 @@ app.get('/banktransfers', function(req, res) {
                         banktransfers: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'banktransfers');
             })
 
         function pagerCallback(err, response, cb) {
@@ -283,8 +328,8 @@ app.get('/banktransfers', function(req, res) {
 });
 
 app.get('/payments', function(req, res) {
-    authorizedOperation(req, res, '/payments', function(xeroApp) {
-        xeroApp.core.payments.getPayments()
+    authorizedOperation(req, res, '/payments', function(xeroClient) {
+        xeroClient.core.payments.getPayments()
             .then(function(payments) {
                 res.render('payments', {
                     payments: payments,
@@ -293,12 +338,15 @@ app.get('/payments', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'payments');
+            })
     })
 });
 
 app.get('/trackingcategories', function(req, res) {
-    authorizedOperation(req, res, '/trackingcategories', function(xeroApp) {
-        xeroApp.core.trackingCategories.getTrackingCategories()
+    authorizedOperation(req, res, '/trackingcategories', function(xeroClient) {
+        xeroClient.core.trackingCategories.getTrackingCategories()
             .then(function(trackingcategories) {
                 res.render('trackingcategories', {
                     trackingcategories: trackingcategories,
@@ -307,12 +355,15 @@ app.get('/trackingcategories', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'trackingcategories');
+            })
     })
 });
 
 app.get('/accounts', function(req, res) {
-    authorizedOperation(req, res, '/accounts', function(xeroApp) {
-        xeroApp.core.accounts.getAccounts()
+    authorizedOperation(req, res, '/accounts', function(xeroClient) {
+        xeroClient.core.accounts.getAccounts()
             .then(function(accounts) {
                 res.render('accounts', {
                     accounts: accounts,
@@ -321,13 +372,16 @@ app.get('/accounts', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'accounts');
+            })
     })
 });
 
 
 app.get('/timesheets', function(req, res) {
-    authorizedOperation(req, res, '/timesheets', function(xeroApp) {
-        xeroApp.payroll.timesheets.getTimesheets()
+    authorizedOperation(req, res, '/timesheets', function(xeroClient) {
+        xeroClient.payroll.timesheets.getTimesheets()
             .then(function(timesheets) {
                 res.render('timesheets', {
                     timesheets: timesheets,
@@ -337,48 +391,17 @@ app.get('/timesheets', function(req, res) {
                 });
             })
             .catch(function(err) {
-                console.log(err)
-                res.render('timesheets', {
-                    error: err,
-                    active: {
-                        timesheets: true
-                    }
-                })
+                handleErr(err, req, res, 'timesheets');
             })
     })
 });
 
-app.use('/createtimesheet', function(req, res) {
-    if (req.method == 'GET') {
-        return res.render('createtimesheet');
-    } else if (req.method == 'POST') {
-        authorizedOperation(req, res, '/createtimesheet', function(xeroApp) {
-            var timesheet = xeroApp.payroll.timesheets.newTimesheet({
-                EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
-                StartDate: new Date(2014, 8, 23),
-                EndDate: new Date(2014, 8, 29),
-                Status: 'Draft',
-                TimesheetLines: [{
-                    EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
-                    NumberOfUnits: [5, 0, 0, 0, 0, 0, 0]
-                }]
-            });
-            timesheet.save()
-                .then(function(ret) {
-                    res.render('createtimesheet', { timesheets: ret.entities })
-                })
-                .catch(function(err) {
-                    res.render('createtimesheet', { err: err })
-                })
 
-        })
-    }
-});
 
 
 app.get('/invoices', function(req, res) {
-    authorizedOperation(req, res, '/invoices', function(xeroApp) {
-        xeroApp.core.invoices.getInvoices()
+    authorizedOperation(req, res, '/invoices', function(xeroClient) {
+        xeroClient.core.invoices.getInvoices()
             .then(function(invoices) {
                 console.log(invoices[0].Payments[0]);
                 res.render('invoices', {
@@ -388,13 +411,16 @@ app.get('/invoices', function(req, res) {
                     }
                 });
             })
+            .catch(function(err) {
+                handleErr(err, req, res, 'invoices');
+            })
 
     })
 });
 
 app.get('/items', function(req, res) {
-    authorizedOperation(req, res, '/items', function(xeroApp) {
-        xeroApp.core.items.getItems()
+    authorizedOperation(req, res, '/items', function(xeroClient) {
+        xeroClient.core.items.getItems()
             .then(function(items) {
                 res.render('items', {
                     items: items,
@@ -402,6 +428,9 @@ app.get('/items', function(req, res) {
                         items: true
                     }
                 });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'items');
             })
 
     })
@@ -411,8 +440,8 @@ app.use('/createinvoice', function(req, res) {
     if (req.method == 'GET') {
         return res.render('createinvoice');
     } else if (req.method == 'POST') {
-        authorizedOperation(req, res, '/createinvoice', function(xeroApp) {
-            var invoice = xeroApp.core.invoices.newInvoice({
+        authorizedOperation(req, res, '/createinvoice', function(xeroClient) {
+            var invoice = xeroClient.core.invoices.newInvoice({
                 Type: req.body.Type,
                 Contact: {
                     Name: req.body.Contact
@@ -439,13 +468,40 @@ app.use('/createinvoice', function(req, res) {
     }
 });
 
+app.use('/createtimesheet', function(req, res) {
+    if (req.method == 'GET') {
+        return res.render('createtimesheet');
+    } else if (req.method == 'POST') {
+        authorizedOperation(req, res, '/createtimesheet', function(xeroClient) {
+            var timesheet = xeroClient.payroll.timesheets.newTimesheet({
+                EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
+                StartDate: new Date(2014, 8, 23),
+                EndDate: new Date(2014, 8, 29),
+                Status: 'Draft',
+                TimesheetLines: [{
+                    EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
+                    NumberOfUnits: [5, 0, 0, 0, 0, 0, 0]
+                }]
+            });
+            timesheet.save()
+                .then(function(ret) {
+                    res.render('createtimesheet', { timesheets: ret.entities })
+                })
+                .catch(function(err) {
+                    res.render('createtimesheet', { err: err })
+                })
+
+        })
+    }
+});
+
 app.use('/emailinvoice', function(req, res) {
     if (req.method == 'GET' && !req.query.a) {
         res.render('emailinvoice', { id: req.query.id });
     } else {
-        authorizedOperation(req, res, '/emailinvoice?id=' + req.query.id + '&a=1&email=' + encodeURIComponent(req.body.Email), function(xeroApp) {
+        authorizedOperation(req, res, '/emailinvoice?id=' + req.query.id + '&a=1&email=' + encodeURIComponent(req.body.Email), function(xeroClient) {
             var file = fs.createWriteStream(__dirname + '/invoice.pdf', { encoding: 'binary' });
-            xeroApp.core.invoices.streamInvoice(req.query.id, 'pdf', file);
+            xeroClient.core.invoices.streamInvoice(req.query.id, 'pdf', file);
             file.on('finish', function() {
                 var transporter = nodemailer.createTransport(); // Direct
                 var mailOptions = {

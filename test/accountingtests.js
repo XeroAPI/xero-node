@@ -1,6 +1,7 @@
 var chai = require('chai'),
     should = chai.should(),
     expect = chai.expect,
+    sinon = require('sinon'),
     _ = require('lodash'),
     xero = require('..'),
     util = require('util'),
@@ -14,6 +15,7 @@ process.on('uncaughtException', function(err) {
 })
 
 var currentApp;
+var eventReceiver;
 var organisationCountry = '';
 
 var APPTYPE = metaConfig.APPTYPE;
@@ -36,6 +38,8 @@ before('init instance and set options', function(done) {
             throw "No App Type Set!!"
     }
 
+    eventReceiver = currentApp.eventEmitter;
+
     done();
 })
 
@@ -47,7 +51,6 @@ describe('get access for public or partner application', function() {
     });
 
     describe('Get tokens', function() {
-
         var authoriseUrl = "";
         var requestToken = "";
         var requestSecret = "";
@@ -56,6 +59,26 @@ describe('get access for public or partner application', function() {
         var accessToken = "";
         var accessSecret = "";
 
+        //This function is used by the event emitter to receive the event when the token
+        //is automatically refreshed.  We use the 'spy' function so that we can include 
+        //some checks within the tests.
+        var spy = sinon.spy(function() {
+            console.log("Event Received. Creating new Partner App");
+
+            //Create a new application object when we receive new tokens
+            currentApp = new xero.PartnerApplication(config);
+            currentApp.setOptions(arguments[0]);
+            //Reset the event receiver so the listener stack is shared correctly.
+            eventReceiver = currentApp.eventEmitter;
+            eventReceiver.on('xeroTokenUpdate', function(data) { console.log("Event Received: ", data); });
+
+            console.log("Partner app recreated");
+        });
+
+        it('adds the event listener', function(done) {
+            eventReceiver.on('xeroTokenUpdate', spy);
+            done();
+        });
 
         it('user gets a token and builds the url', function() {
             return currentApp.getRequestToken()
@@ -77,7 +100,7 @@ describe('get access for public or partner application', function() {
                 runScripts: false
             });
 
-            browser.debug();
+            //browser.debug();
 
             before(function(done) {
                 if (APPTYPE === "PRIVATE") {
@@ -147,10 +170,44 @@ describe('get access for public or partner application', function() {
         });
 
         describe('swaps the request token for an access token', function() {
-            it('calls the access token method and sets the options', function() {
-                return currentApp.getAccessToken(requestToken, requestSecret, verifier)
-                    .then(function({ token, secret }) {
-                        currentApp.setOptions({ accessToken: token, accessSecret: secret });
+            it('calls the access token method and sets the options', function(done) {
+                currentApp.setAccessToken(requestToken, requestSecret, verifier)
+                    .then(function() {
+                        expect(currentApp.options.accessToken).to.not.equal(undefined);
+                        expect(currentApp.options.accessToken).to.not.equal("");
+                        expect(currentApp.options.accessSecret).to.not.equal(undefined);
+                        expect(currentApp.options.accessSecret).to.not.equal("");
+
+                        if (APPTYPE === "PARTNER") {
+                            expect(currentApp.options.sessionHandle).to.not.equal(undefined);
+                            expect(currentApp.options.sessionHandle).to.not.equal("");
+                        }
+
+                        done();
+                    }).catch(function(err) {
+                        done(wrapError(err));
+                    });
+            });
+
+            it('refreshes the token', function(done) {
+                if (APPTYPE !== "PARTNER") {
+                    this.skip();
+                }
+
+                //Only supported for Partner integrations
+                currentApp.refreshAccessToken()
+                    .then(function() {
+                        expect(currentApp.options.accessToken).to.not.equal(undefined);
+                        expect(currentApp.options.accessToken).to.not.equal("");
+                        expect(currentApp.options.accessSecret).to.not.equal(undefined);
+                        expect(currentApp.options.accessSecret).to.not.equal("");
+                        expect(currentApp.options.sessionHandle).to.not.equal(undefined);
+                        expect(currentApp.options.sessionHandle).to.not.equal("");
+
+                        expect(spy.called).to.equal(true);
+                        done();
+                    }).catch(function(err) {
+                        done(wrapError(err));
                     });
             });
         });
@@ -158,7 +215,6 @@ describe('get access for public or partner application', function() {
 });
 
 describe('regression tests', function() {
-
     var InvoiceID = "";
     var PaymentID = "";
 
@@ -633,7 +689,37 @@ describe('regression tests', function() {
                 .catch(function(err) {
                     done(wrapError(err));
                 })
-        })
+        });
+
+        it('saves multiple invoices', function(done) {
+            var invoices = [];
+
+            for (var i = 0; i < 10; i++) {
+                invoices.push(currentApp.core.invoices.newInvoice({
+                    Type: 'ACCREC',
+                    Contact: {
+                        Name: 'Department of Testing'
+                    },
+                    DueDate: new Date().toISOString().split("T")[0],
+                    LineItems: [{
+                        Description: 'Services',
+                        Quantity: 2,
+                        UnitAmount: 230,
+                        AccountCode: '400'
+                    }]
+                }));
+            }
+
+            currentApp.core.invoices.saveInvoices(invoices)
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(9);
+                    done();
+                })
+                .catch(function(err) {
+                    done(wrapError(err));
+                })
+
+        });
     });
 
     describe('payments', function() {
@@ -1484,6 +1570,11 @@ describe('regression tests', function() {
 function wrapError(err) {
     if (err instanceof Error)
         return err;
-    else if (err.statusCode)
-        return new Error(err.statusCode + ': ' + err.exception.Message);
+    else if (err.statusCode) {
+        var msg = err.data;
+        if (err.exception && err.exception.Message) {
+            msg = err.exception.Message;
+        }
+        return new Error(err.statusCode + ': ' + msg);
+    }
 }

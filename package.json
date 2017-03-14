@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "dateformat": "~1.0.7-1.2.3",
+    "events": "^1.1.1",
     "lodash": "~2.4.1",
     "log4js": "~0.6.9",
     "lru-cache": "^4.0.2",
@@ -39,6 +40,7 @@
     "mustache": "^2.3.0",
     "nodemailer": "",
     "nyc": "^10.1.2",
+    "sinon": "^1.17.7",
     "zombie": "^5.0.5",
     "zombie-phantom": "0.0.6"
   }
