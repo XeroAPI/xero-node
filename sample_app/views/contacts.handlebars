@@ -1,0 +1,17 @@
+<h3>Contacts</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>First name</td>
+            <td>Last name</td>
+        </tr>
+    </thead>
+    {{#each contacts}}
+    <tr>
+        <td><a href="https://go.xero.com/Contacts/View/{{ this.ContactID }}" target="_blank">{{ this.Name }}</a></td>
+        <td>{{ this.FirstName }}</td>
+        <td>{{ this.LastName }}</td>
+    </tr>
+    {{/each}}
+</table>

@@ -1,0 +1,23 @@
+<h3>Bank Transactions</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Contact Name</td>
+            <td>Transaction Date</td>
+            <td># Line Items</td>
+            <td>SubTotal</td>
+            <td>Tax</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    {{#each bankTransactions}}
+    <tr>
+        <td><a href="https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID={{this.BankTransactionID}}&accountID={{ this.BankAccount.AccountID }}" target="_blank">{{this.Contact.Name}}</a></td>
+        <td>{{ this.Date }}</td>
+        <td>{{ this.LineItems.length }}</td>
+        <td>{{ this.SubTotal }}</td>
+        <td>{{ this.TotalTax }}</td>
+        <td>{{ this.Total }}</td>
+    </tr>
+    {{/each}}
+</table>

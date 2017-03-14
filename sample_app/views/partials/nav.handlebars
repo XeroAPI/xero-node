@@ -1,0 +1,23 @@
+<div class="col-sm-3 col-md-2 sidebar">
+  <h5>Accounting API</h5>
+  <ul class="nav nav-sidebar">
+    <li class="{{#if active.overview}}active{{/if}}"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+    <li class="{{#if active.organisations}}active{{/if}}"><a href="/organisations">List Organisations</a></li>
+    <li class="{{#if active.accounts}}active{{/if}}"><a href="/accounts">List Accounts</a></li>
+    <li class="{{#if active.banktransactions}}active{{/if}}"><a href="/banktransactions">List Bank Transactions</a></li>
+    <li class="{{#if active.banktransfers}}active{{/if}}"><a href="/banktransfers">List Bank Transfers</a></li>
+    <li class="{{#if active.contacts}}active{{/if}}"><a href="/contacts">List Contacts</a></li>
+    <li class="{{#if active.invoices}}active{{/if}}"><a href="/invoices">List Invoices</a></li>
+    <li class="{{#if active.items}}active{{/if}}"><a href="/items">List Items</a></li>
+    <li class="{{#if active.journals}}active{{/if}}"><a href="/journals">List Journals</a></li>
+    <li class="{{#if active.payments}}active{{/if}}"><a href="/payments">List Payments</a></li>
+    <li class="{{#if active.taxrates}}active{{/if}}"><a href="/taxrates">List Tax Rates</a></li>
+    <li class="{{#if active.trackingcategories}}active{{/if}}"><a href="/trackingcategories">List Tracking Categories</a></li>
+    <li class="{{#if active.users}}active{{/if}}"><a href="/users">List Users</a></li>
+  </ul>
+  <h5>Payroll API - AU</h5>
+  <ul class="nav nav-sidebar">
+    <li class="{{#if active.employees}}active{{/if}}"><a href="/employees">List employees</a></li>
+    <li class="{{#if active.timesheets}}active{{/if}}"><a href="/timesheets">List timesheets</a></li>
+  </ul>
+</div>

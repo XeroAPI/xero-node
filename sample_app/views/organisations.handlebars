@@ -1,0 +1,19 @@
+<h3>Organisations</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Version</td>
+            <td>IsDemoCompany</td>
+            <td>OrganisationStatus</td>
+        </tr>
+    </thead>
+    {{#each organisations}}
+    <tr>
+        <td><a href="https://my.xero.com/Action/OrganisationLogin/{{ this.ShortCode }}" target="_blank">{{this.Name}}</a></td>
+        <td>{{ this.Version }}</td>
+        <td>{{ this.IsDemoCompany }}</td>
+        <td>{{ this.OrganisationStatus }}</td>
+    </tr>
+    {{/each}}
+</table>
