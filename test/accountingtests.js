@@ -66,7 +66,7 @@ describe('get access for public or partner application', function() {
                     console.log("URL: " + authoriseUrl);
                     console.log("token: " + requestToken);
                     console.log("secret: " + requestSecret);
-            });
+                });
         });
 
         describe('gets the request token from the url', function() {
@@ -149,7 +149,7 @@ describe('get access for public or partner application', function() {
         describe('swaps the request token for an access token', function() {
             it('calls the access token method and sets the options', function() {
                 return currentApp.getAccessToken(requestToken, requestSecret, verifier)
-                    .then(function({token, secret}) {
+                    .then(function({ token, secret }) {
                         currentApp.setOptions({ accessToken: token, accessSecret: secret });
                     });
             });
@@ -208,12 +208,23 @@ describe('regression tests', function() {
             });
     });
 
-    // There appears to be no way to archive a bank account via the API
-    // after('archive the test account', function() {
-    //     testAccount.Status = 'ARCHIVED';
-    //     return testAccount.save();
-    // });
+    // There appears to be no way to archive a bank account via the API so deleting instead
+    after('delete the test accounts', function() {
 
+        bankAccounts.forEach(function(account) {
+
+            currentApp.core.accounts.deleteAccount(account.id)
+                .then(function(response) {
+                    expect(response.Status).to.equal("OK");
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
+    });
 
     describe('organisations', function() {
         it('get', function(done) {
