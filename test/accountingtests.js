@@ -66,7 +66,7 @@ describe('get access for public or partner application', function() {
                     console.log("URL: " + authoriseUrl);
                     console.log("token: " + requestToken);
                     console.log("secret: " + requestSecret);
-            });
+                });
         });
 
         describe('gets the request token from the url', function() {
@@ -149,7 +149,7 @@ describe('get access for public or partner application', function() {
         describe('swaps the request token for an access token', function() {
             it('calls the access token method and sets the options', function() {
                 return currentApp.getAccessToken(requestToken, requestSecret, verifier)
-                    .then(function({token, secret}) {
+                    .then(function({ token, secret }) {
                         currentApp.setOptions({ accessToken: token, accessSecret: secret });
                     });
             });
@@ -215,7 +215,7 @@ describe('regression tests', function() {
     // });
 
 
-    describe('organisations', function() {
+    describe.skip('organisations', function() {
         it('get', function(done) {
             currentApp.core.organisations.getOrganisation()
                 .then(function(ret) {
@@ -236,6 +236,9 @@ describe('regression tests', function() {
     })
 
     describe('taxrates', function() {
+
+        var createdTaxRate;
+
         it('gets tax rates', function(done) {
             currentApp.core.taxrates.getTaxRates()
                 .then(function(taxRates) {
@@ -269,10 +272,71 @@ describe('regression tests', function() {
                     console.log(err);
                     done(wrapError(err));
                 })
-        })
+        });
+
+        it('creates a new tax rate', function(done) {
+            var taxrate = {
+                Name: '20% GST on Expenses',
+                TaxComponents: [{
+                    Name: 'GST',
+                    Rate: 20.1234,
+                    IsCompound: false
+                }],
+                ReportTaxType: 'INPUT'
+            }
+
+            var taxRate = currentApp.core.taxrates.newTaxRate(taxrate);
+
+            taxRate.save()
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    createdTaxRate = response.entities[0];
+
+                    expect(createdTaxRate.Name).to.equal(taxrate.Name);
+                    expect(createdTaxRate.TaxType).to.match(/TAX[0-9]{3}/);
+                    expect(createdTaxRate.CanApplyToAssets).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.CanApplyToEquity).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.CanApplyToExpenses).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.CanApplyToLiabilities).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.CanApplyToRevenue).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.DisplayTaxRate).to.equal(taxrate.TaxComponents[0].Rate);
+                    expect(createdTaxRate.EffectiveRate).to.equal(taxrate.TaxComponents[0].Rate);
+                    expect(createdTaxRate.Status).to.equal('ACTIVE');
+                    expect(createdTaxRate.ReportTaxType).to.equal(taxrate.ReportTaxType);
+
+                    createdTaxRate.TaxComponents.forEach(function(taxComponent) {
+                        expect(taxComponent.Name).to.equal(taxrate.TaxComponents[0].Name);
+
+                        //This is hacked toString() because of: https://github.com/jordanwalsh23/xero-node/issues/13
+                        expect(taxComponent.Rate).to.equal(taxrate.TaxComponents[0].Rate.toString());
+                        expect(taxComponent.IsCompound).to.equal(taxrate.TaxComponents[0].IsCompound.toString());
+                    });
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+        });
+
+        it('updates the taxrate to DELETED', function(done) {
+
+            createdTaxRate.delete()
+                .then(function(response) {
+                    expect(response.entities).to.have.lengthOf(1);
+                    expect(response.entities[0].Status).to.equal("DELETED");
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
     });
 
-    describe('accounts', function() {
+    describe.skip('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -466,7 +530,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('invoices', function() {
+    describe.skip('invoices', function() {
         it('create invoice', function(done) {
             var invoice = currentApp.core.invoices.newInvoice({
                 Type: 'ACCREC',
@@ -561,7 +625,7 @@ describe('regression tests', function() {
         })
     });
 
-    describe('payments', function() {
+    describe.skip('payments', function() {
         /* Please note that this test pays an invoice created in the previous tests */
 
         var testAccountId;
@@ -681,7 +745,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('bank transactions', function() {
+    describe.skip('bank transactions', function() {
         var sharedTransaction;
 
         it('creates a new transaction', function(done) {
@@ -744,7 +808,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('bank transfers', function() {
+    describe.skip('bank transfers', function() {
         var sampleTransferID = "";
 
         it('create sample bank transfer', function(done) {
@@ -803,7 +867,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('tracking categories', function() {
+    describe.skip('tracking categories', function() {
         var sampleTrackingCategory = {
             Name: "My First Category"
         };
@@ -981,7 +1045,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('items', function() {
+    describe.skip('items', function() {
         var sampleItem = {
             Code: 'Item-' + Math.random(),
             Name: 'Fully Tracked Item',
@@ -1079,7 +1143,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('contacts', function() {
+    describe.skip('contacts', function() {
         var sampleContact = {
             Name: 'Johnnies Coffee' + Math.random(),
             FirstName: 'John',
@@ -1258,7 +1322,7 @@ describe('regression tests', function() {
         });
     })
 
-    describe('journals', function() {
+    describe.skip('journals', function() {
         var sampleJournalId = "";
 
         it('get (paging with callback)', function(done) {
@@ -1334,7 +1398,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe('users', function() {
+    describe.skip('users', function() {
         it('retrieves a list of users', function(done) {
 
             currentApp.core.users.getUsers()
