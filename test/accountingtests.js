@@ -66,7 +66,7 @@ describe('get access for public or partner application', function() {
                     console.log("URL: " + authoriseUrl);
                     console.log("token: " + requestToken);
                     console.log("secret: " + requestSecret);
-            });
+                });
         });
 
         describe('gets the request token from the url', function() {
@@ -149,7 +149,7 @@ describe('get access for public or partner application', function() {
         describe('swaps the request token for an access token', function() {
             it('calls the access token method and sets the options', function() {
                 return currentApp.getAccessToken(requestToken, requestSecret, verifier)
-                    .then(function({token, secret}) {
+                    .then(function({ token, secret }) {
                         currentApp.setOptions({ accessToken: token, accessSecret: secret });
                     });
             });
@@ -157,7 +157,30 @@ describe('get access for public or partner application', function() {
     });
 });
 
-describe('regression tests', function() {
+describe('reporting tests', function() {
+    this.timeout(10000);
+    it('generates a Balance Sheet', function(done) {
+        currentApp.core.reports.generateReport({ id: 'BalanceSheet' })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('BalanceSheet');
+                expect(report.ReportName).to.equal('Balance Sheet');
+                expect(report.Rows).to.have.length.greaterThan(0);
+                report.Rows.forEach(function(row) {
+                    expect(row.RowType).to.be.oneOf(['Header', 'Section', 'Row', 'SummaryRow']);
+                    expect(row.Cells).to.have.length.greaterThan(0);
+                });
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+})
+
+describe.skip('regression tests', function() {
 
     var InvoiceID = "";
     var PaymentID = "";
@@ -230,6 +253,7 @@ describe('regression tests', function() {
                     done();
                 })
                 .catch(function(err) {
+                    console.log(err);
                     done(wrapError(err));
                 })
         })
