@@ -7,6 +7,7 @@ var express = require('express'),
     metaConfig = require('./config/config.json');
 
 var xeroClient;
+var eventReceiver;
 
 function getXeroClient(session) {
 
@@ -26,10 +27,14 @@ function getXeroClient(session) {
         switch (APPTYPE) {
             case "PUBLIC":
                 xeroClient = new xero.PublicApplication(config);
-                return xeroClient;
                 break;
             case "PARTNER":
                 xeroClient = new xero.PartnerApplication(config);
+                eventReceiver = xeroClient.eventEmitter;
+                eventReceiver.on('xeroTokenUpdate', function(data) {
+                    //Store the data that was received from the xeroTokenRefresh event
+                    console.log("Received xero token refresh: ", data);
+                });
                 break;
             default:
                 throw "No App Type Set!!"
