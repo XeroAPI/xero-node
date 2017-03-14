@@ -215,7 +215,7 @@ describe('regression tests', function() {
     // });
 
 
-    describe.skip('organisations', function() {
+    describe('organisations', function() {
         it('get', function(done) {
             currentApp.core.organisations.getOrganisation()
                 .then(function(ret) {
@@ -336,7 +336,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('accounts', function() {
+    describe('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -530,7 +530,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('invoices', function() {
+    describe('invoices', function() {
         it('create invoice', function(done) {
             var invoice = currentApp.core.invoices.newInvoice({
                 Type: 'ACCREC',
@@ -625,7 +625,7 @@ describe('regression tests', function() {
         })
     });
 
-    describe.skip('payments', function() {
+    describe('payments', function() {
         /* Please note that this test pays an invoice created in the previous tests */
 
         var testAccountId;
@@ -745,7 +745,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('bank transactions', function() {
+    describe('bank transactions', function() {
         var sharedTransaction;
 
         it('creates a new transaction', function(done) {
@@ -808,7 +808,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('bank transfers', function() {
+    describe('bank transfers', function() {
         var sampleTransferID = "";
 
         it('create sample bank transfer', function(done) {
@@ -867,7 +867,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('tracking categories', function() {
+    describe('tracking categories', function() {
         var sampleTrackingCategory = {
             Name: "My First Category"
         };
@@ -1045,7 +1045,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('items', function() {
+    describe('items', function() {
         var sampleItem = {
             Code: 'Item-' + Math.random(),
             Name: 'Fully Tracked Item',
@@ -1143,7 +1143,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('contacts', function() {
+    describe('contacts', function() {
         var sampleContact = {
             Name: 'Johnnies Coffee' + Math.random(),
             FirstName: 'John',
@@ -1322,7 +1322,7 @@ describe('regression tests', function() {
         });
     })
 
-    describe.skip('journals', function() {
+    describe('journals', function() {
         var sampleJournalId = "";
 
         it('get (paging with callback)', function(done) {
@@ -1398,7 +1398,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.skip('users', function() {
+    describe('users', function() {
         it('retrieves a list of users', function(done) {
 
             currentApp.core.users.getUsers()
