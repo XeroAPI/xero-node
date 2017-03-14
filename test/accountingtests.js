@@ -1,6 +1,7 @@
 var chai = require('chai'),
     should = chai.should(),
     expect = chai.expect,
+    sinon = require('sinon'),
     _ = require('lodash'),
     xero = require('..'),
     util = require('util'),
@@ -14,6 +15,7 @@ process.on('uncaughtException', function(err) {
 })
 
 var currentApp;
+var eventReceiver;
 var organisationCountry = '';
 
 var APPTYPE = metaConfig.APPTYPE;
@@ -36,6 +38,8 @@ before('init instance and set options', function(done) {
             throw "No App Type Set!!"
     }
 
+    eventReceiver = currentApp.eventEmitter;
+
     done();
 })
 
@@ -47,7 +51,6 @@ describe('get access for public or partner application', function() {
     });
 
     describe('Get tokens', function() {
-
         var authoriseUrl = "";
         var requestToken = "";
         var requestSecret = "";
@@ -56,6 +59,26 @@ describe('get access for public or partner application', function() {
         var accessToken = "";
         var accessSecret = "";
 
+        //This function is used by the event emitter to receive the event when the token
+        //is automatically refreshed.  We use the 'spy' function so that we can include 
+        //some checks within the tests.
+        var spy = sinon.spy(function() {
+            console.log("Event Received. Creating new Partner App");
+
+            //Create a new application object when we receive new tokens
+            currentApp = new xero.PartnerApplication(config);
+            currentApp.setOptions(arguments[0]);
+            //Reset the event receiver so the listener stack is shared correctly.
+            eventReceiver = currentApp.eventEmitter;
+            eventReceiver.on('xeroTokenUpdate', function(data) { console.log("Event Received: ", data); });
+
+            console.log("Partner app recreated");
+        });
+
+        it('adds the event listener', function(done) {
+            eventReceiver.on('xeroTokenUpdate', spy);
+            done();
+        });
 
         it('user gets a token and builds the url', function() {
             return currentApp.getRequestToken()
@@ -77,7 +100,7 @@ describe('get access for public or partner application', function() {
                 runScripts: false
             });
 
-            browser.debug();
+            //browser.debug();
 
             before(function(done) {
                 if (APPTYPE === "PRIVATE") {
@@ -147,15 +170,50 @@ describe('get access for public or partner application', function() {
         });
 
         describe('swaps the request token for an access token', function() {
-            it('calls the access token method and sets the options', function() {
-                return currentApp.getAccessToken(requestToken, requestSecret, verifier)
-                    .then(function({ token, secret }) {
-                        currentApp.setOptions({ accessToken: token, accessSecret: secret });
+            it('calls the access token method and sets the options', function(done) {
+                currentApp.setAccessToken(requestToken, requestSecret, verifier)
+                    .then(function() {
+                        expect(currentApp.options.accessToken).to.not.equal(undefined);
+                        expect(currentApp.options.accessToken).to.not.equal("");
+                        expect(currentApp.options.accessSecret).to.not.equal(undefined);
+                        expect(currentApp.options.accessSecret).to.not.equal("");
+
+                        if (APPTYPE === "PARTNER") {
+                            expect(currentApp.options.sessionHandle).to.not.equal(undefined);
+                            expect(currentApp.options.sessionHandle).to.not.equal("");
+                        }
+
+                        done();
+                    }).catch(function(err) {
+                        done(wrapError(err));
+                    });
+            });
+
+            it('refreshes the token', function(done) {
+                if (APPTYPE !== "PARTNER") {
+                    this.skip();
+                }
+
+                //Only supported for Partner integrations
+                currentApp.refreshAccessToken()
+                    .then(function() {
+                        expect(currentApp.options.accessToken).to.not.equal(undefined);
+                        expect(currentApp.options.accessToken).to.not.equal("");
+                        expect(currentApp.options.accessSecret).to.not.equal(undefined);
+                        expect(currentApp.options.accessSecret).to.not.equal("");
+                        expect(currentApp.options.sessionHandle).to.not.equal(undefined);
+                        expect(currentApp.options.sessionHandle).to.not.equal("");
+
+                        expect(spy.called).to.equal(true);
+                        done();
+                    }).catch(function(err) {
+                        done(wrapError(err));
                     });
             });
         });
     });
 });
+
 
 describe('reporting tests', function() {
     this.timeout(10000);
@@ -181,7 +239,6 @@ describe('reporting tests', function() {
 })
 
 describe.skip('regression tests', function() {
-
     var InvoiceID = "";
     var PaymentID = "";
 
@@ -231,12 +288,23 @@ describe.skip('regression tests', function() {
             });
     });
 
-    // There appears to be no way to archive a bank account via the API
-    // after('archive the test account', function() {
-    //     testAccount.Status = 'ARCHIVED';
-    //     return testAccount.save();
-    // });
+    // There appears to be no way to archive a bank account via the API so deleting instead
+    after('delete the test accounts', function() {
 
+        bankAccounts.forEach(function(account) {
+
+            currentApp.core.accounts.deleteAccount(account.id)
+                .then(function(response) {
+                    expect(response.Status).to.equal("OK");
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
+    });
 
     describe('organisations', function() {
         it('get', function(done) {
@@ -260,6 +328,9 @@ describe.skip('regression tests', function() {
     })
 
     describe('taxrates', function() {
+
+        var createdTaxRate;
+
         it('gets tax rates', function(done) {
             currentApp.core.taxrates.getTaxRates()
                 .then(function(taxRates) {
@@ -293,7 +364,68 @@ describe.skip('regression tests', function() {
                     console.log(err);
                     done(wrapError(err));
                 })
-        })
+        });
+
+        it('creates a new tax rate', function(done) {
+            var taxrate = {
+                Name: '20% GST on Expenses',
+                TaxComponents: [{
+                    Name: 'GST',
+                    Rate: 20.1234,
+                    IsCompound: false
+                }],
+                ReportTaxType: 'INPUT'
+            }
+
+            var taxRate = currentApp.core.taxrates.newTaxRate(taxrate);
+
+            taxRate.save()
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(0);
+                    createdTaxRate = response.entities[0];
+
+                    expect(createdTaxRate.Name).to.equal(taxrate.Name);
+                    expect(createdTaxRate.TaxType).to.match(/TAX[0-9]{3}/);
+                    expect(createdTaxRate.CanApplyToAssets).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.CanApplyToEquity).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.CanApplyToExpenses).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.CanApplyToLiabilities).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.CanApplyToRevenue).to.be.oneOf([true, false]);
+                    expect(createdTaxRate.DisplayTaxRate).to.equal(taxrate.TaxComponents[0].Rate);
+                    expect(createdTaxRate.EffectiveRate).to.equal(taxrate.TaxComponents[0].Rate);
+                    expect(createdTaxRate.Status).to.equal('ACTIVE');
+                    expect(createdTaxRate.ReportTaxType).to.equal(taxrate.ReportTaxType);
+
+                    createdTaxRate.TaxComponents.forEach(function(taxComponent) {
+                        expect(taxComponent.Name).to.equal(taxrate.TaxComponents[0].Name);
+
+                        //This is hacked toString() because of: https://github.com/jordanwalsh23/xero-node/issues/13
+                        expect(taxComponent.Rate).to.equal(taxrate.TaxComponents[0].Rate.toString());
+                        expect(taxComponent.IsCompound).to.equal(taxrate.TaxComponents[0].IsCompound.toString());
+                    });
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+        });
+
+        it('updates the taxrate to DELETED', function(done) {
+
+            createdTaxRate.delete()
+                .then(function(response) {
+                    expect(response.entities).to.have.lengthOf(1);
+                    expect(response.entities[0].Status).to.equal("DELETED");
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
     });
 
     describe('accounts', function() {
@@ -582,7 +714,37 @@ describe.skip('regression tests', function() {
                 .catch(function(err) {
                     done(wrapError(err));
                 })
-        })
+        });
+
+        it('saves multiple invoices', function(done) {
+            var invoices = [];
+
+            for (var i = 0; i < 10; i++) {
+                invoices.push(currentApp.core.invoices.newInvoice({
+                    Type: 'ACCREC',
+                    Contact: {
+                        Name: 'Department of Testing'
+                    },
+                    DueDate: new Date().toISOString().split("T")[0],
+                    LineItems: [{
+                        Description: 'Services',
+                        Quantity: 2,
+                        UnitAmount: 230,
+                        AccountCode: '400'
+                    }]
+                }));
+            }
+
+            currentApp.core.invoices.saveInvoices(invoices)
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(9);
+                    done();
+                })
+                .catch(function(err) {
+                    done(wrapError(err));
+                })
+
+        });
     });
 
     describe('payments', function() {
@@ -1433,6 +1595,11 @@ describe.skip('regression tests', function() {
 function wrapError(err) {
     if (err instanceof Error)
         return err;
-    else if (err.statusCode)
-        return new Error(err.statusCode + ': ' + err.exception.Message);
+    else if (err.statusCode) {
+        var msg = err.data;
+        if (err.exception && err.exception.Message) {
+            msg = err.exception.Message;
+        }
+        return new Error(err.statusCode + ': ' + msg);
+    }
 }
