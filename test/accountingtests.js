@@ -80,27 +80,6 @@ describe('get access for public or partner application', function() {
             done();
         });
 
-<<<<<<< HEAD
-        it('user gets a token and builds the url', function(done) {
-
-            currentApp.getRequestToken(function(err, token, secret) {
-                    if (!err) {
-                        authoriseUrl = currentApp.buildAuthorizeUrl(token);
-                        requestToken = token;
-                        requestSecret = secret;
-                        console.log("URL: " + authoriseUrl);
-                        console.log("token: " + requestToken);
-                        console.log("secret: " + requestSecret);
-                    } else {
-                        throw err;
-                    }
-                })
-                .then(function() {
-                    done();
-                }).catch(function(err) {
-                    done(wrapError(err));
-                });
-=======
         it('user gets a token and builds the url', function() {
             return currentApp.getRequestToken()
                 .then(function(res) {
@@ -110,8 +89,7 @@ describe('get access for public or partner application', function() {
                     console.log("URL: " + authoriseUrl);
                     console.log("token: " + requestToken);
                     console.log("secret: " + requestSecret);
-            });
->>>>>>> a73f23b4dbadd275af13f98669ae2aca66cac448
+                });
         });
 
         describe('gets the request token from the url', function() {
