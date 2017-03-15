@@ -436,6 +436,57 @@ app.get('/items', function(req, res) {
     })
 });
 
+app.get('/reports', function(req, res) {
+    authorizedOperation(req, res, '/reports', function(xeroClient) {
+
+        var reportkeys = {
+            '1': 'BalanceSheet',
+            '2': 'TrialBalance',
+            '3': 'ProfitAndLoss',
+            '4': 'BankStatement',
+            '5': 'BudgetSummary',
+            '6': 'ExecutiveSummary',
+            '7': 'BankSummary',
+            '8': 'AgedReceivablesByContact',
+            '9': 'AgedPayablesByContact'
+        };
+
+        var report = req.query ? req.query.r : null;
+
+        if (reportkeys[report]) {
+            var selectedReport = reportkeys[report];
+
+            var data = {
+                active: {}
+            };
+
+            data.active[selectedReport.toLowerCase()] = true;
+
+            xeroClient.core.reports.generateReport({
+                    id: selectedReport
+                })
+                .then(function(report) {
+                    data.report = report;
+                    res.render('reports', data);
+                })
+                .catch(function(err) {
+                    handleErr(err, req, res, 'reports');
+                })
+
+
+        } else {
+            res.render('index', {
+                error: {
+                    message: "Report not found"
+                },
+                active: {
+                    overview: true
+                }
+            });
+        }
+    })
+});
+
 app.use('/createinvoice', function(req, res) {
     if (req.method == 'GET') {
         return res.render('createinvoice');

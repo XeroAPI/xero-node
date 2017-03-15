@@ -217,32 +217,13 @@ describe('get access for public or partner application', function() {
 
 describe('reporting tests', function() {
     this.timeout(10000);
-    it('generates a Balance Sheet', function(done) {
+    it('Generates a Balance Sheet Report', function(done) {
         currentApp.core.reports.generateReport({ id: 'BalanceSheet' })
             .then(function(report) {
                 expect(report.ReportType).to.equal('BalanceSheet');
                 expect(report.ReportName).to.equal('Balance Sheet');
-                expect(report.Rows).to.have.length.greaterThan(0);
-                report.Rows.forEach(function(row) {
-                    console.log(row);
-                    expect(row.RowType).to.be.oneOf(['Header', 'Section', 'Row', 'SummaryRow']);
 
-                    //Each row can have some cells, each cell should have some data.
-                    if (row.Cells) {
-                        expect(row.Cells).to.have.length.greaterThan(0);
-                        row.Cells.forEach(function(cell) {
-                            //each cell can either be a string or an object
-                            expect(cell).to.not.equal(undefined);
-                            expect(cell).to.satisfy(function(c) { return typeof c === "string" || typeof c === "object" });
-                        });
-                    }
-
-
-                    if (row.Rows) {
-                        //This row has nested rows
-                    }
-
-                });
+                validateRows(report.Rows);
 
                 done();
             })
@@ -252,6 +233,181 @@ describe('reporting tests', function() {
             })
 
     });
+
+    it('Generates a Bank Statement Report', function(done) {
+        currentApp.core.reports.generateReport({
+                id: 'BankStatement',
+                params: {
+                    bankAccountID: '13918178-849a-4823-9a31-57b7eac713d7'
+                }
+            })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('BankStatement');
+                expect(report.ReportName).to.equal('Bank Statement');
+
+                validateRows(report.Rows);
+
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+    it('Generates a Trial Balance Report', function(done) {
+        currentApp.core.reports.generateReport({
+                id: 'TrialBalance'
+            })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('TrialBalance');
+                expect(report.ReportName).to.equal('Trial Balance');
+                validateRows(report.Rows);
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+    it('Generates a Profit and Loss Report', function(done) {
+        currentApp.core.reports.generateReport({
+                id: 'ProfitAndLoss'
+            })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('ProfitAndLoss');
+                expect(report.ReportName).to.equal('Profit and Loss');
+                validateRows(report.Rows);
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+    it('Generates a Budget Summary Report', function(done) {
+        currentApp.core.reports.generateReport({
+                id: 'BudgetSummary'
+            })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('BudgetSummary');
+                expect(report.ReportName).to.equal('Budget Summary');
+                validateRows(report.Rows);
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+    it('Generates an Executive Summary Report', function(done) {
+        currentApp.core.reports.generateReport({
+                id: 'ExecutiveSummary'
+            })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('ExecutiveSummary');
+                expect(report.ReportName).to.equal('Executive Summary');
+                validateRows(report.Rows);
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+    it('Generates a Bank Summary Report', function(done) {
+        currentApp.core.reports.generateReport({
+                id: 'BankSummary'
+            })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('BankSummary');
+                expect(report.ReportName).to.equal('Bank Summary');
+                validateRows(report.Rows);
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+    it('Generates an Aged Receivables Report', function(done) {
+        currentApp.core.reports.generateReport({
+                id: 'AgedReceivablesByContact',
+                params: {
+                    contactId: '58697449-85ef-46ae-83fc-6a9446f037fb'
+                }
+            })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('AgedReceivablesByContact');
+                expect(report.ReportName).to.equal('Aged Receivables By Contact');
+                validateRows(report.Rows);
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+    it('Generates an Aged Payables Report', function(done) {
+        currentApp.core.reports.generateReport({
+                id: 'AgedPayablesByContact',
+                params: {
+                    contactId: '58697449-85ef-46ae-83fc-6a9446f037fb'
+                }
+            })
+            .then(function(report) {
+                expect(report.ReportType).to.equal('AgedPayablesByContact');
+                expect(report.ReportName).to.equal('Aged Payables By Contact');
+                validateRows(report.Rows);
+                done();
+            })
+            .catch(function(err) {
+                console.log(err);
+                done(wrapError(err));
+            })
+
+    });
+
+    function validateRows(rows) {
+        expect(rows).to.have.length.greaterThan(0);
+        rows.forEach(function(row) {
+            expect(row.RowType).to.be.oneOf(['Header', 'Section', 'Row', 'SummaryRow']);
+
+            //Each row can have some cells, each cell should have some data.
+            if (row.Cells) {
+                validateCells(row);
+            }
+
+            if (row.Rows && row.Rows.length > 0) {
+                row.Rows.forEach(function(thisRow) {
+                    validateCells(thisRow);
+                })
+            }
+
+            function validateCells(row) {
+                expect(row.Cells).to.have.length.greaterThan(0);
+                row.Cells.forEach(function(cell) {
+                    //each cell can either be a string or an object
+                    expect(cell).to.not.equal(undefined);
+                    expect(cell).to.satisfy(function(c) { return typeof c === "string" || typeof c === "object" });
+                });
+            }
+
+        });
+    }
 
 })
 
