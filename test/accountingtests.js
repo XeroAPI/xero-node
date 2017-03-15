@@ -224,9 +224,26 @@ describe('reporting tests', function() {
                 expect(report.ReportName).to.equal('Balance Sheet');
                 expect(report.Rows).to.have.length.greaterThan(0);
                 report.Rows.forEach(function(row) {
+                    console.log(row);
                     expect(row.RowType).to.be.oneOf(['Header', 'Section', 'Row', 'SummaryRow']);
-                    expect(row.Cells).to.have.length.greaterThan(0);
+
+                    //Each row can have some cells, each cell should have some data.
+                    if (row.Cells) {
+                        expect(row.Cells).to.have.length.greaterThan(0);
+                        row.Cells.forEach(function(cell) {
+                            //each cell can either be a string or an object
+                            expect(cell).to.not.equal(undefined);
+                            expect(cell).to.satisfy(function(c) { return typeof c === "string" || typeof c === "object" });
+                        });
+                    }
+
+
+                    if (row.Rows) {
+                        //This row has nested rows
+                    }
+
                 });
+
                 done();
             })
             .catch(function(err) {
