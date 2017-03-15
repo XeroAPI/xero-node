@@ -466,6 +466,7 @@ app.get('/reports', function(req, res) {
                     id: selectedReport
                 })
                 .then(function(report) {
+                    console.log(report);
                     data.report = report;
                     res.render('reports', data);
                 })

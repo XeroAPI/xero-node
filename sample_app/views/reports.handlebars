@@ -1,1 +1,21 @@
 <h3>{{report.ReportName}}</h3>
+
+{{#each report.ReportTitles as |reportTitle|}}
+  <h5>{{reportTitle}}</h5>
+{{/each}}
+<br/>
+{{#if report.Rows}}
+<table class="table table-bordered table-striped table-collapsed">
+  {{#each report.Rows}}
+  <tr>
+    {{#if this.Cells}}
+      {{#each this.Cells}}
+        <td>{{this.Value}}</td>
+      {{/each}}
+    {{else}}
+      <td/>
+    {{/if}}
+  </tr>
+  {{/each}}
+</table>
+{{/if}}
