@@ -411,7 +411,7 @@ describe('reporting tests', function() {
 
 })
 
-describe.skip('regression tests', function() {
+describe('regression tests', function() {
     var InvoiceID = "";
     var PaymentID = "";
 

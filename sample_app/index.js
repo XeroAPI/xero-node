@@ -79,6 +79,17 @@ var exphbs = exphbs.create({
                 default:
                     return options.inverse(this);
             }
+        },
+        debug: function(optionalValue) {
+            console.log("Current Context");
+            console.log("====================");
+            console.log(this);
+
+            if (optionalValue) {
+                console.log("Value");
+                console.log("====================");
+                console.log(optionalValue);
+            }
         }
     }
 });
@@ -462,18 +473,70 @@ app.get('/reports', function(req, res) {
 
             data.active[selectedReport.toLowerCase()] = true;
 
-            xeroClient.core.reports.generateReport({
-                    id: selectedReport
-                })
-                .then(function(report) {
-                    console.log(report);
-                    data.report = report;
-                    res.render('reports', data);
-                })
-                .catch(function(err) {
-                    handleErr(err, req, res, 'reports');
-                })
+            /**
+             * We may need some dependent data:
+             * 
+             * BankStatement - requires a BankAccountId
+             * AgedReceivablesByContact - requires a ContactId
+             * AgedPayablesByContact - requires a ContactId
+             * 
+             */
 
+            if (selectedReport == 'BankStatement') {
+                xeroClient.core.accounts.getAccounts({ where: 'Type=="BANK"' })
+                    .then(function(accounts) {
+                        xeroClient.core.reports.generateReport({
+                                id: selectedReport,
+                                params: {
+                                    bankAccountID: accounts[0].AccountID
+                                }
+                            })
+                            .then(function(report) {
+                                data.report = report.toObject();
+                                data.colspan = data.report.Rows[0].Cells.length;
+                                res.render('reports', data);
+                            })
+                            .catch(function(err) {
+                                handleErr(err, req, res, 'reports');
+                            });
+                    })
+                    .catch(function(err) {
+                        handleErr(err, req, res, 'reports');
+                    });
+            } else if (selectedReport == 'AgedReceivablesByContact' || selectedReport == 'AgedPayablesByContact') {
+                xeroClient.core.contacts.getContacts()
+                    .then(function(contacts) {
+                        xeroClient.core.reports.generateReport({
+                                id: selectedReport,
+                                params: {
+                                    contactID: contacts[0].ContactID
+                                }
+                            })
+                            .then(function(report) {
+                                data.report = report.toObject();
+                                data.colspan = data.report.Rows[0].Cells.length;
+                                res.render('reports', data);
+                            })
+                            .catch(function(err) {
+                                handleErr(err, req, res, 'reports');
+                            });
+                    })
+                    .catch(function(err) {
+                        handleErr(err, req, res, 'reports');
+                    });
+            } else {
+                xeroClient.core.reports.generateReport({
+                        id: selectedReport
+                    })
+                    .then(function(report) {
+                        data.report = report.toObject();
+                        data.colspan = data.report.Rows[0].Cells.length;
+                        res.render('reports', data);
+                    })
+                    .catch(function(err) {
+                        handleErr(err, req, res, 'reports');
+                    });
+            }
 
         } else {
             res.render('index', {
