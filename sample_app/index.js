@@ -184,9 +184,26 @@ app.get('/organisations', function(req, res) {
     })
 });
 
+app.get('/brandingthemes', function(req, res) {
+    authorizedOperation(req, res, '/brandingthemes', function(xeroClient) {
+        xeroClient.core.brandingThemes.getBrandingThemes()
+            .then(function(brandingthemes) {
+                res.render('brandingthemes', {
+                    brandingthemes: brandingthemes,
+                    active: {
+                        brandingthemes: true
+                    }
+                });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'brandingthemes');
+            })
+    })
+});
+
 app.get('/taxrates', function(req, res) {
     authorizedOperation(req, res, '/taxrates', function(xeroClient) {
-        xeroClient.core.taxrates.getTaxRates()
+        xeroClient.core.taxRates.getTaxRates()
             .then(function(taxrates) {
                 res.render('taxrates', {
                     taxrates: taxrates,
