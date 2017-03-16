@@ -16,6 +16,18 @@
     <li class="{{#if active.trackingcategories}}active{{/if}}"><a href="/trackingcategories">List Tracking Categories</a></li>
     <li class="{{#if active.users}}active{{/if}}"><a href="/users">List Users</a></li>
   </ul>
+  <h5>Reports</h5>
+  <ul class="nav nav-sidebar">
+    <li class="{{#if active.balancesheet}}active{{/if}}"><a href="/reports?r=1">Balance Sheet Report</a></li>
+    <li class="{{#if active.trialbalance}}active{{/if}}"><a href="/reports?r=2">Trial Balance Report</a></li>
+    <li class="{{#if active.profitandloss}}active{{/if}}"><a href="/reports?r=3">Profit and Loss Report</a></li>
+    <li class="{{#if active.bankstatement}}active{{/if}}"><a href="/reports?r=4">Bank Statement Report</a></li>
+    <li class="{{#if active.budgetsummary}}active{{/if}}"><a href="/reports?r=5">Budget Summary Report</a></li>
+    <li class="{{#if active.executivesummary}}active{{/if}}"><a href="/reports?r=6">Executive Summary Report</a></li>
+    <li class="{{#if active.banksummary}}active{{/if}}"><a href="/reports?r=7">Bank Summary Report</a></li>
+    <li class="{{#if active.agedreceivablesbycontact}}active{{/if}}"><a href="/reports?r=8">Aged Receivables Report</a></li>
+    <li class="{{#if active.agedpayablesbycontact}}active{{/if}}"><a href="/reports?r=9">Aged Payables Report</a></li>
+  </ul>
   <h5>Payroll API - AU</h5>
   <ul class="nav nav-sidebar">
     <li class="{{#if active.employees}}active{{/if}}"><a href="/employees">List employees</a></li>

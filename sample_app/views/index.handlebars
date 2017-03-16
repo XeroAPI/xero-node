@@ -1,3 +1,9 @@
+{{#if error}}
+<div class="alert alert-danger">
+  <strong>Error:</strong> {{error.message}}
+</div>
+{{/if}}
+
 <h2>Xero Node.js - Sample App</h2>
 <p>An API wrapper for the Xero API (<a href="http://developer.xero.com">http://developer.xero.com</a>).</p>
 <p>Supports all three applications types:</p>
