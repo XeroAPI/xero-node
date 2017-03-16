@@ -521,6 +521,24 @@ describe('regression tests', function() {
         });
     });
 
+    describe.only('Invoice Reminders', function() {
+
+        it('get', function(done) {
+            currentApp.core.invoiceReminders.getInvoiceReminders()
+                .then(function(invoiceReminders) {
+                    expect(invoiceReminders).to.have.length.greaterThan(0);
+                    invoiceReminders.forEach(function(invoiceReminder) {
+                        expect(invoiceReminder.Enabled).to.be.oneOf([true, false]);
+                    });
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+        });
+    });
+
     describe('branding themes', function() {
 
         var brandingThemeID = "";
