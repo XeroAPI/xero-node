@@ -215,202 +215,6 @@ describe('get access for public or partner application', function() {
 });
 
 
-describe('reporting tests', function() {
-    this.timeout(10000);
-    it('Generates a Balance Sheet Report', function(done) {
-        currentApp.core.reports.generateReport({ id: 'BalanceSheet' })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('BalanceSheet');
-                expect(report.ReportName).to.equal('Balance Sheet');
-
-                validateRows(report.Rows);
-
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    it('Generates a Bank Statement Report', function(done) {
-        currentApp.core.reports.generateReport({
-                id: 'BankStatement',
-                params: {
-                    bankAccountID: '13918178-849a-4823-9a31-57b7eac713d7'
-                }
-            })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('BankStatement');
-                expect(report.ReportName).to.equal('Bank Statement');
-
-                validateRows(report.Rows);
-
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    it('Generates a Trial Balance Report', function(done) {
-        currentApp.core.reports.generateReport({
-                id: 'TrialBalance'
-            })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('TrialBalance');
-                expect(report.ReportName).to.equal('Trial Balance');
-                validateRows(report.Rows);
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    it('Generates a Profit and Loss Report', function(done) {
-        currentApp.core.reports.generateReport({
-                id: 'ProfitAndLoss'
-            })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('ProfitAndLoss');
-                expect(report.ReportName).to.equal('Profit and Loss');
-                validateRows(report.Rows);
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    it('Generates a Budget Summary Report', function(done) {
-        currentApp.core.reports.generateReport({
-                id: 'BudgetSummary'
-            })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('BudgetSummary');
-                expect(report.ReportName).to.equal('Budget Summary');
-                validateRows(report.Rows);
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    it('Generates an Executive Summary Report', function(done) {
-        currentApp.core.reports.generateReport({
-                id: 'ExecutiveSummary'
-            })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('ExecutiveSummary');
-                expect(report.ReportName).to.equal('Executive Summary');
-                validateRows(report.Rows);
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    it('Generates a Bank Summary Report', function(done) {
-        currentApp.core.reports.generateReport({
-                id: 'BankSummary'
-            })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('BankSummary');
-                expect(report.ReportName).to.equal('Bank Summary');
-                validateRows(report.Rows);
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    it('Generates an Aged Receivables Report', function(done) {
-        currentApp.core.reports.generateReport({
-                id: 'AgedReceivablesByContact',
-                params: {
-                    contactId: '58697449-85ef-46ae-83fc-6a9446f037fb'
-                }
-            })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('AgedReceivablesByContact');
-                expect(report.ReportName).to.equal('Aged Receivables By Contact');
-                validateRows(report.Rows);
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    it('Generates an Aged Payables Report', function(done) {
-        currentApp.core.reports.generateReport({
-                id: 'AgedPayablesByContact',
-                params: {
-                    contactId: '58697449-85ef-46ae-83fc-6a9446f037fb'
-                }
-            })
-            .then(function(report) {
-                expect(report.ReportType).to.equal('AgedPayablesByContact');
-                expect(report.ReportName).to.equal('Aged Payables By Contact');
-                validateRows(report.Rows);
-                done();
-            })
-            .catch(function(err) {
-                console.log(err);
-                done(wrapError(err));
-            })
-
-    });
-
-    function validateRows(rows) {
-        expect(rows).to.have.length.greaterThan(0);
-        rows.forEach(function(row) {
-            expect(row.RowType).to.be.oneOf(['Header', 'Section', 'Row', 'SummaryRow']);
-
-            //Each row can have some cells, each cell should have some data.
-            if (row.Cells) {
-                validateCells(row);
-            }
-
-            if (row.Rows && row.Rows.length > 0) {
-                row.Rows.forEach(function(thisRow) {
-                    validateCells(thisRow);
-                })
-            }
-
-            function validateCells(row) {
-                expect(row.Cells).to.have.length.greaterThan(0);
-                row.Cells.forEach(function(cell) {
-                    //each cell can either be a string or an object
-                    expect(cell).to.not.equal(undefined);
-                    expect(cell).to.satisfy(function(c) { return typeof c === "string" || typeof c === "object" });
-                });
-            }
-
-        });
-    }
-
-})
-
 describe('regression tests', function() {
     var InvoiceID = "";
     var PaymentID = "";
@@ -479,6 +283,224 @@ describe('regression tests', function() {
 
     });
 
+    describe('reporting tests', function() {
+        it('Generates a Balance Sheet Report', function(done) {
+            currentApp.core.reports.generateReport({ id: 'BalanceSheet' })
+                .then(function(report) {
+                    expect(report.ReportType).to.equal('BalanceSheet');
+                    expect(report.ReportName).to.equal('Balance Sheet');
+
+                    validateRows(report.Rows);
+
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
+        it('Generates a Bank Statement Report', function(done) {
+            currentApp.core.reports.generateReport({
+                    id: 'BankStatement',
+                    params: {
+                        bankAccountID: bankAccounts[0].id
+                    }
+                })
+                .then(function(report) {
+                    expect(report.ReportType).to.equal('BankStatement');
+                    expect(report.ReportName).to.equal('Bank Statement');
+
+                    validateRows(report.Rows);
+
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
+        it('Generates a Trial Balance Report', function(done) {
+            currentApp.core.reports.generateReport({
+                    id: 'TrialBalance'
+                })
+                .then(function(report) {
+                    expect(report.ReportType).to.equal('TrialBalance');
+                    expect(report.ReportName).to.equal('Trial Balance');
+                    validateRows(report.Rows);
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
+        it('Generates a Profit and Loss Report', function(done) {
+            currentApp.core.reports.generateReport({
+                    id: 'ProfitAndLoss'
+                })
+                .then(function(report) {
+                    expect(report.ReportType).to.equal('ProfitAndLoss');
+                    expect(report.ReportName).to.equal('Profit and Loss');
+                    validateRows(report.Rows);
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
+        it('Generates a Budget Summary Report', function(done) {
+            currentApp.core.reports.generateReport({
+                    id: 'BudgetSummary'
+                })
+                .then(function(report) {
+                    expect(report.ReportType).to.equal('BudgetSummary');
+                    expect(report.ReportName).to.equal('Budget Summary');
+                    validateRows(report.Rows);
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
+        it('Generates an Executive Summary Report', function(done) {
+            currentApp.core.reports.generateReport({
+                    id: 'ExecutiveSummary'
+                })
+                .then(function(report) {
+                    expect(report.ReportType).to.equal('ExecutiveSummary');
+                    expect(report.ReportName).to.equal('Executive Summary');
+                    validateRows(report.Rows);
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
+        it('Generates a Bank Summary Report', function(done) {
+            currentApp.core.reports.generateReport({
+                    id: 'BankSummary'
+                })
+                .then(function(report) {
+                    expect(report.ReportType).to.equal('BankSummary');
+                    expect(report.ReportName).to.equal('Bank Summary');
+                    validateRows(report.Rows);
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+
+        });
+
+
+
+        it('Generates an Aged Receivables Report', function(done) {
+
+            var someContactId = "";
+            currentApp.core.contacts.getContacts()
+                .then(function(contacts) {
+                    someContactId = _.first(contacts).ContactID;
+
+                    currentApp.core.reports.generateReport({
+                            id: 'AgedReceivablesByContact',
+                            params: {
+                                contactId: someContactId
+                            }
+                        })
+                        .then(function(report) {
+                            expect(report.ReportType).to.equal('AgedReceivablesByContact');
+                            expect(report.ReportName).to.equal('Aged Receivables By Contact');
+                            validateRows(report.Rows);
+                            done();
+                        })
+                        .catch(function(err) {
+                            throw err;
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+
+
+        });
+
+        it('Generates an Aged Payables Report', function(done) {
+
+            var someContactId = "";
+            currentApp.core.contacts.getContacts()
+                .then(function(contacts) {
+                    someContactId = _.first(contacts).ContactID;
+
+                    currentApp.core.reports.generateReport({
+                            id: 'AgedPayablesByContact',
+                            params: {
+                                contactId: someContactId
+                            }
+                        })
+                        .then(function(report) {
+                            expect(report.ReportType).to.equal('AgedPayablesByContact');
+                            expect(report.ReportName).to.equal('Aged Payables By Contact');
+                            validateRows(report.Rows);
+                            done();
+                        })
+                        .catch(function(err) {
+                            throw err;
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        });
+
+        function validateRows(rows) {
+            expect(rows).to.have.length.greaterThan(0);
+            rows.forEach(function(row) {
+                expect(row.RowType).to.be.oneOf(['Header', 'Section', 'Row', 'SummaryRow']);
+
+                //Each row can have some cells, each cell should have some data.
+                if (row.Cells) {
+                    validateCells(row);
+                }
+
+                if (row.Rows && row.Rows.length > 0) {
+                    row.Rows.forEach(function(thisRow) {
+                        validateCells(thisRow);
+                    })
+                }
+
+                function validateCells(row) {
+                    expect(row.Cells).to.have.length.greaterThan(0);
+                    row.Cells.forEach(function(cell) {
+                        //each cell can either be a string or an object
+                        expect(cell).to.not.equal(undefined);
+                        expect(cell).to.satisfy(function(c) { return typeof c === "string" || typeof c === "object" });
+                    });
+                }
+
+            });
+        }
+
+    })
+
     describe('organisations', function() {
         it('get', function(done) {
             currentApp.core.organisations.getOrganisation()
@@ -498,6 +520,232 @@ describe('regression tests', function() {
                     done(wrapError(err));
                 })
         })
+    });
+
+    describe('Credit Notes', function() {
+        var creditNoteID = "";
+        it('get', function(done) {
+            currentApp.core.creditNotes.getCreditNotes()
+                .then(function(creditNotes) {
+                    expect(creditNotes).to.have.length.greaterThan(0);
+                    creditNotes.forEach(function(creditNote) {
+                        //Check the contact
+                        if (creditNote.Contact) {
+                            expect(creditNote.Contact.ContactID).to.not.equal("");
+                            expect(creditNote.Contact.ContactID).to.not.equal(undefined);
+                            expect(creditNote.Contact.Name).to.not.equal("");
+                            expect(creditNote.Contact.Name).to.not.equal(undefined);
+                        } else {
+                            console.log("Credit note has no contact record");
+                        }
+
+                        expect(creditNote.Date).to.not.equal("");
+                        expect(creditNote.Date).to.not.equal(undefined);
+
+                        expect(creditNote.Status).to.be.oneOf(["DRAFT", "SUBMITTED", "DELETED", "AUTHORISED", "PAID", "VOIDED"]);
+                        expect(creditNote.LineAmountTypes).to.be.oneOf(["Exclusive", "Inclusive", "NoTax"]);
+
+                        expect(creditNote.SubTotal).to.be.a('Number');
+                        expect(creditNote.SubTotal).to.be.greaterThan(0);
+                        expect(creditNote.TotalTax).to.be.a('Number');
+                        expect(creditNote.TotalTax).to.be.greaterThan(0);
+                        expect(creditNote.Total).to.be.a('Number');
+                        expect(creditNote.Total).to.be.greaterThan(0);
+
+                        expect(creditNote.UpdatedDateUTC).to.not.equal("");
+                        expect(creditNote.UpdatedDateUTC).to.not.equal(undefined);
+
+                        expect(creditNote.CurrencyCode).to.not.equal("");
+                        expect(creditNote.CurrencyCode).to.not.equal(undefined);
+
+                        expect(creditNote.FullyPaidOnDate).to.not.equal("");
+                        expect(creditNote.FullyPaidOnDate).to.not.equal(undefined);
+
+                        expect(creditNote.Type).to.be.oneOf(["ACCPAYCREDIT", "ACCRECCREDIT"]);
+
+                        expect(creditNote.CreditNoteID).to.not.equal("");
+                        expect(creditNote.CreditNoteID).to.not.equal(undefined);
+
+                        //Set the variable for the next test.
+                        creditNoteID = creditNote.CreditNoteID;
+
+                        expect(creditNote.CreditNoteNumber).to.not.equal("");
+                        expect(creditNote.CreditNoteNumber).to.not.equal(undefined);
+
+                        expect(creditNote.CurrencyRate).to.be.a('Number');
+                        expect(creditNote.CurrencyRate).to.be.greaterThan(0);
+
+                        expect(creditNote.RemainingCredit).to.be.a('Number');
+                        expect(creditNote.RemainingCredit).to.be.at.least(0);
+
+                        if (creditNote.Allocations) {
+                            creditNote.Allocations.forEach(function(allocation) {
+                                expect(allocation.AppliedAmount).to.be.a('Number');
+                                expect(allocation.AppliedAmount).to.be.at.least(0);
+
+                                expect(allocation.Date).to.not.equal("");
+                                expect(allocation.Date).to.not.equal(undefined);
+
+                                if (allocation.Invoice) {
+                                    expect(allocation.Invoice.InvoiceID).to.not.equal("");
+                                    expect(allocation.Invoice.InvoiceID).to.not.equal(undefined);
+
+                                    expect(allocation.Invoice.InvoiceNumber).to.not.equal("");
+                                    expect(allocation.Invoice.InvoiceNumber).to.not.equal(undefined);
+                                } else {
+                                    console.log("Credit note allocation has no invoice record");
+                                }
+                            });
+                        } else {
+                            console.log("Credit note has no allocation records");
+                        }
+                    });
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+        });
+
+        it('get a single credit note', function(done) {
+            currentApp.core.creditNotes.getCreditNote(creditNoteID)
+                .then(function(creditNote) {
+                    //Check the contact
+                    if (creditNote.Contact) {
+                        expect(creditNote.Contact.ContactID).to.not.equal("");
+                        expect(creditNote.Contact.ContactID).to.not.equal(undefined);
+                        expect(creditNote.Contact.Name).to.not.equal("");
+                        expect(creditNote.Contact.Name).to.not.equal(undefined);
+                    } else {
+                        console.log("Credit note has no contact record");
+                    }
+
+                    expect(creditNote.Date).to.not.equal("");
+                    expect(creditNote.Date).to.not.equal(undefined);
+
+                    expect(creditNote.Status).to.be.oneOf(["DRAFT", "SUBMITTED", "DELETED", "AUTHORISED", "PAID", "VOIDED"]);
+                    expect(creditNote.LineAmountTypes).to.be.oneOf(["Exclusive", "Inclusive", "NoTax"]);
+
+                    expect(creditNote.SubTotal).to.be.a('Number');
+                    expect(creditNote.SubTotal).to.be.greaterThan(0);
+                    expect(creditNote.TotalTax).to.be.a('Number');
+                    expect(creditNote.TotalTax).to.be.greaterThan(0);
+                    expect(creditNote.Total).to.be.a('Number');
+                    expect(creditNote.Total).to.be.greaterThan(0);
+
+                    expect(creditNote.UpdatedDateUTC).to.not.equal("");
+                    expect(creditNote.UpdatedDateUTC).to.not.equal(undefined);
+
+                    expect(creditNote.CurrencyCode).to.not.equal("");
+                    expect(creditNote.CurrencyCode).to.not.equal(undefined);
+
+                    expect(creditNote.FullyPaidOnDate).to.not.equal("");
+                    expect(creditNote.FullyPaidOnDate).to.not.equal(undefined);
+
+                    expect(creditNote.Type).to.be.oneOf(["ACCPAYCREDIT", "ACCRECCREDIT"]);
+
+                    expect(creditNote.CreditNoteID).to.not.equal("");
+                    expect(creditNote.CreditNoteID).to.not.equal(undefined);
+
+                    //Set the variable for the next test.
+                    creditNoteID = creditNote.CreditNoteID;
+
+                    expect(creditNote.CreditNoteNumber).to.not.equal("");
+                    expect(creditNote.CreditNoteNumber).to.not.equal(undefined);
+
+                    expect(creditNote.CurrencyRate).to.be.a('Number');
+                    expect(creditNote.CurrencyRate).to.be.greaterThan(0);
+
+                    expect(creditNote.RemainingCredit).to.be.a('Number');
+                    expect(creditNote.RemainingCredit).to.be.at.least(0);
+
+                    if (creditNote.Allocations) {
+                        creditNote.Allocations.forEach(function(allocation) {
+                            expect(allocation.AppliedAmount).to.be.a('Number');
+                            expect(allocation.AppliedAmount).to.be.at.least(0);
+
+                            expect(allocation.Date).to.not.equal("");
+                            expect(allocation.Date).to.not.equal(undefined);
+
+                            if (allocation.Invoice) {
+                                expect(allocation.Invoice.InvoiceID).to.not.equal("");
+                                expect(allocation.Invoice.InvoiceID).to.not.equal(undefined);
+
+                                expect(allocation.Invoice.InvoiceNumber).to.not.equal("");
+                                expect(allocation.Invoice.InvoiceNumber).to.not.equal(undefined);
+                            } else {
+                                console.log("Credit note allocation has no invoice record");
+                            }
+                        });
+                    } else {
+                        console.log("Credit note has no allocation records");
+                    }
+
+                    if (creditNote.LineItems) {
+                        creditNote.LineItems.forEach(function(lineItem) {
+
+                            if (lineItem.LineItemID) {
+                                expect(lineItem.LineItemID).to.not.equal("");
+                            }
+
+                            expect(lineItem.Description).to.not.equal("");
+                            expect(lineItem.Description).to.not.equal(undefined);
+
+                            if (lineItem.Quantity) {
+                                expect(lineItem.Quantity).to.be.a('Number');
+                                expect(lineItem.Quantity).to.be.at.least(0);
+
+                                expect(lineItem.UnitAmount).to.be.a('Number');
+                                expect(lineItem.UnitAmount).to.be.at.least(0);
+
+                                expect(lineItem.ItemCode).to.be.a('String');
+                                expect(lineItem.ItemCode).to.not.equal("");
+                                expect(lineItem.ItemCode).to.not.equal(undefined);
+
+                                expect(lineItem.AccountCode).to.be.a('String');
+                                expect(lineItem.AccountCode).to.not.equal("");
+                                expect(lineItem.AccountCode).to.not.equal(undefined);
+
+                                expect(lineItem.TaxType).to.not.equal("");
+                                expect(lineItem.TaxType).to.not.equal(undefined);
+
+                                expect(lineItem.TaxAmount).to.be.a('Number');
+                                expect(lineItem.TaxAmount).to.be.at.least(0);
+
+                                expect(lineItem.LineAmount).to.be.a('Number');
+                                expect(lineItem.LineAmount).to.be.at.least(0);
+
+                                if (lineItem.Tracking) {
+                                    lineItem.Tracking.forEach(function(trackingCategory) {
+                                        expect(trackingCategory.Name).to.not.equal("");
+                                        expect(trackingCategory.Name).to.not.equal(undefined);
+
+                                        expect(trackingCategory.Option).to.not.equal("");
+                                        expect(trackingCategory.Option).to.not.equal(undefined);
+
+                                        expect(trackingCategory.TrackingCategoryID).to.not.equal("");
+                                        expect(trackingCategory.TrackingCategoryID).to.not.equal(undefined);
+
+                                        expect(trackingCategory.TrackingOptionID).to.not.equal("");
+                                        expect(trackingCategory.TrackingOptionID).to.not.equal(undefined);
+                                    });
+                                }
+                            }
+
+
+
+                        });
+                    } else {
+                        console.log("Credit note has no line item records");
+                    }
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                })
+        });
     });
 
     describe('currencies', function() {
@@ -521,7 +769,7 @@ describe('regression tests', function() {
         });
     });
 
-    describe.only('Invoice Reminders', function() {
+    describe('Invoice Reminders', function() {
 
         it('get', function(done) {
             currentApp.core.invoiceReminders.getInvoiceReminders()
@@ -538,6 +786,8 @@ describe('regression tests', function() {
                 })
         });
     });
+
+
 
     describe('branding themes', function() {
 
