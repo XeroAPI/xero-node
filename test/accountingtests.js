@@ -2113,7 +2113,6 @@ describe('regression tests', function() {
                     expect(contact.ContactID).to.equal(sampleContact.ContactID);
                     contact.getAttachments()
                         .then(function(attachments) {
-                            console.log(attachments);
                             done();
                         })
                         .catch(function(err) {
