@@ -1,0 +1,15 @@
+<h3>Currencies</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Code</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    {{#each currencies}}
+    <tr>
+        <td>{{ this.Code }}</td>
+        <td>{{ this.Description }}</td>
+    </tr>
+    {{/each}}
+</table>

@@ -1,32 +1,36 @@
-xero-node (v1.0.0)
+xero-node (v0.0.4)
 ===========
 An API wrapper for xero (http://developer.xero.com).
 
-Supports all three applications types:
+Supports the three applications types:
 
-* Private
-* Public
-* Partner
+* Private - apps connecting to a single Org
+* Public - apps that connect to any Org, but with a 30 minute limitation
+* Partner - approved apps that can automatically refresh Org tokens
 
-For any suggestions, fork the code and submit a PR.
+For any suggestions create a github issue, or fork the code and submit a PR.
 
 # Features
 
-The following endpoints are supported:
+The following Xero API functions are supported:
 * Accounts
-* BankTransactions
-* BankTransfers
+* Bank Transactions
+* Bank Transfers
+* Branding Themes
 * Contacts
+* Credit Notes
+* Currencies
 * Invoices
+* Invoice Reminders
 * Items
 * Journals
 * Organisations
 * Payments
-* TaxRates
-* TrackingCategories (and TrackingOptions)
+* Tax Rates
+* Tracking Categories (and Tracking Options)
 * Users
 
-The following endpoints are included but are not currently tested nor are they supported for use:
+The following endpoints are included but are not currently under test nor are they supported for use:
 * Attachments
 * Timesheets (Payroll API)
 * Employees (Payroll API)
@@ -37,7 +41,7 @@ The following features are provided:
 * Create / Read / Update / Delete (for most endpoints)
 * Search (using 'where' clause)
 * Efficient pagination with callbacks
-* Support for Private, Public, and Partner applications (look at oauth_test/server.js for 3 stage support)
+* Support for Private, Public, and Partner applications (look at sample_app/index.js for 3 stage support)
 
 
 # Installation
@@ -95,7 +99,7 @@ The config file should be set up as follows:
 
 **Note:** `RunscopeBucketId` has been added to support debugging the SDK.  Runscope is a simple tool for Testing Complex APIs. You can use Runscope to verify that the structure and content of your API calls meets your expectations. 
 
-Sign up for a free runscope account at runscope.com and place your bucket ID in the config file to see API calls in real time.
+Sign up for a free runscope account at http://runscope.com and place your bucket ID in the config file to monitor API calls in real time.
 
 Runscope is not endorsed by or affiliated with Xero. This tool was used by the SDK creator when authoring the code only.
 
@@ -168,7 +172,7 @@ xeroClient.core.contacts.getContacts({
         console.log(contact.Name);
     });
 }).catch(function(err) {
-    console.error(err);
+    console.log(err);
 });
 ```
 
@@ -203,13 +207,17 @@ xeroClient.core.contacts.getContacts({
 
 ```
 
+## Wiki
+
+Check the Wiki for more detailed examples of how to use each SDK function. 
+
 ## Tests
 
 npm test
 
 ## Release Change Log
 
-* 1.0.0
+* 0.0.4
     - [view](http://github.com/jordanwalsh23/xero-node/commit/0e9444051537806b5567c08080cd95b93449cbdf) Externalised the config file for private apps, fixed the log level settings, updated the tests to use 'should' library, added support for runscope urls within the signature generation 
     - [view](http://github.com/jordanwalsh23/xero-node/commit/88d22ffee782288bf375462396490dfb21e7fd15) updated readme 
     - [view](http://github.com/jordanwalsh23/xero-node/commit/fa4ed825995e8fdbfb2e257a72f34696ce5d91fe) updated tests to check each field of an account 
@@ -320,6 +328,8 @@ npm test
     - [view](http://github.com/jordanwalsh23/xero-node/commit/ae43d41b82a4f7af4db20262b25f470afe1d0e1f) reverted forced timeout of the token 
     - [view](http://github.com/jordanwalsh23/xero-node/commit/ed4d797ffec2bd27308b104d6c198166d5910b1b) Merge branch 'add_refresh_token_functionality' of github.com:jordanwalsh23/xero-node into add_refresh_token_functionality 
     - [view](http://github.com/jordanwalsh23/xero-node/commit/d2bff73444196a6441121d0fff3d85e529705a0e) Merge pull request #14 from jordanwalsh23/add_refresh_token_functionality
+* 0.0.3
+    - Merged various orphan branches
 * 0.0.2
     - Added journals
     - modifiedAfter support
@@ -327,7 +337,7 @@ npm test
     - Initial Release
 
 
-Copyright (c) 2017 Tim Shnaider, Guillermo Gette, Andrew Connell, Elliot Shepherd and Jordan Walsh
+Copyright (c) 2017 Tim Shnaider, Guillermo Gette, Andrew Connell, Elliot Shepherd, David Banham, and Jordan Walsh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
