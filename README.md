@@ -44,10 +44,20 @@ The following features are provided:
 * Support for Private, Public, and Partner applications (look at sample_app/index.js for 3 stage support)
 
 
-# Installation
+# Usage
 
-    $ npm install xero-node --save
+This package will eventually be deployed to npm, but until then you can clone and run, or install as follows:
 
+Edit your package.json and manually include this as a dependency:
+
+```javascript
+    "dependencies": {
+        ...
+        "xero-node": "XeroAPI/xero-node"
+    },
+```
+
+This will pull the latest branch from GitHub and use this within your code.  
 
 ### External Config 
 
