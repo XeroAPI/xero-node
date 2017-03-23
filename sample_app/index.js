@@ -119,7 +119,7 @@ function authorizeRedirect(req, res, returnTo) {
             var AccountingScope = '';
 
             var authoriseUrl = xeroClient.buildAuthorizeUrl(token, {
-                scope: PayrollScope
+                scope: AccountingScope
             });
             res.redirect(authoriseUrl);
         } else {
@@ -144,7 +144,7 @@ function handleErr(err, req, res, returnTo) {
     if (err.data && err.data.oauth_problem && err.data.oauth_problem == "token_rejected") {
         authorizeRedirect(req, res, returnTo);
     } else {
-        res.redirect('error');
+        res.redirect('error', err);
     }
 }
 
@@ -185,7 +185,10 @@ app.get('/organisations', function(req, res) {
                 res.render('organisations', {
                     organisations: organisations,
                     active: {
-                        organisations: true
+                        organisations: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -202,7 +205,10 @@ app.get('/brandingthemes', function(req, res) {
                 res.render('brandingthemes', {
                     brandingthemes: brandingthemes,
                     active: {
-                        brandingthemes: true
+                        brandingthemes: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -219,7 +225,10 @@ app.get('/taxrates', function(req, res) {
                 res.render('taxrates', {
                     taxrates: taxrates,
                     active: {
-                        taxrates: true
+                        taxrates: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -236,29 +245,15 @@ app.get('/users', function(req, res) {
                 res.render('users', {
                     users: users,
                     active: {
-                        users: true
+                        users: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
             .catch(function(err) {
                 handleErr(err, req, res, 'users');
-            })
-    })
-});
-
-app.get('/employees', function(req, res) {
-    authorizedOperation(req, res, '/employees', function(xeroClient) {
-        xeroClient.payroll.employees.getEmployees()
-            .then(function(employees) {
-                res.render('employees', {
-                    employees: employees,
-                    active: {
-                        employees: true
-                    }
-                });
-            })
-            .catch(function(err) {
-                handleErr(err, req, res, 'employees');
             })
     })
 });
@@ -271,7 +266,10 @@ app.get('/contacts', function(req, res) {
                 res.render('contacts', {
                     contacts: contacts,
                     active: {
-                        contacts: true
+                        contacts: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -286,6 +284,26 @@ app.get('/contacts', function(req, res) {
     })
 });
 
+app.get('/currencies', function(req, res) {
+    authorizedOperation(req, res, '/currencies', function(xeroClient) {
+        xeroClient.core.currencies.getCurrencies()
+            .then(function(currencies) {
+                res.render('currencies', {
+                    currencies: currencies,
+                    active: {
+                        currencies: true,
+                        nav: {
+                            accounting: true
+                        }
+                    }
+                });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'currencies');
+            });
+    })
+});
+
 app.get('/banktransactions', function(req, res) {
     authorizedOperation(req, res, '/banktransactions', function(xeroClient) {
         var bankTransactions = [];
@@ -294,7 +312,10 @@ app.get('/banktransactions', function(req, res) {
                 res.render('banktransactions', {
                     bankTransactions: bankTransactions,
                     active: {
-                        banktransactions: true
+                        banktransactions: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -317,7 +338,10 @@ app.get('/journals', function(req, res) {
                 res.render('journals', {
                     journals: journals,
                     active: {
-                        journals: true
+                        journals: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -340,7 +364,10 @@ app.get('/banktransfers', function(req, res) {
                 res.render('banktransfers', {
                     bankTransfers: bankTransfers,
                     active: {
-                        banktransfers: true
+                        banktransfers: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -362,7 +389,10 @@ app.get('/payments', function(req, res) {
                 res.render('payments', {
                     payments: payments,
                     active: {
-                        payments: true
+                        payments: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -379,7 +409,10 @@ app.get('/trackingcategories', function(req, res) {
                 res.render('trackingcategories', {
                     trackingcategories: trackingcategories,
                     active: {
-                        trackingcategories: true
+                        trackingcategories: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -396,7 +429,10 @@ app.get('/accounts', function(req, res) {
                 res.render('accounts', {
                     accounts: accounts,
                     active: {
-                        accounts: true
+                        accounts: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -406,36 +442,37 @@ app.get('/accounts', function(req, res) {
     })
 });
 
-
-app.get('/timesheets', function(req, res) {
-    authorizedOperation(req, res, '/timesheets', function(xeroClient) {
-        xeroClient.payroll.timesheets.getTimesheets()
-            .then(function(timesheets) {
-                res.render('timesheets', {
-                    timesheets: timesheets,
+app.get('/creditnotes', function(req, res) {
+    authorizedOperation(req, res, '/creditnotes', function(xeroClient) {
+        xeroClient.core.creditNotes.getCreditNotes()
+            .then(function(creditnotes) {
+                res.render('creditnotes', {
+                    creditnotes: creditnotes,
                     active: {
-                        timesheets: true
+                        creditnotes: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
             .catch(function(err) {
-                handleErr(err, req, res, 'timesheets');
+                handleErr(err, req, res, 'creditnotes');
             })
     })
 });
-
-
-
 
 app.get('/invoices', function(req, res) {
     authorizedOperation(req, res, '/invoices', function(xeroClient) {
         xeroClient.core.invoices.getInvoices()
             .then(function(invoices) {
-                console.log(invoices[0].Payments[0]);
                 res.render('invoices', {
                     invoices: invoices,
                     active: {
-                        invoices: true
+                        invoices: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -453,7 +490,10 @@ app.get('/items', function(req, res) {
                 res.render('items', {
                     items: items,
                     active: {
-                        items: true
+                        items: true,
+                        nav: {
+                            accounting: true
+                        }
                     }
                 });
             })
@@ -485,7 +525,11 @@ app.get('/reports', function(req, res) {
             var selectedReport = reportkeys[report];
 
             var data = {
-                active: {}
+                active: {
+                    nav: {
+                        reports: true
+                    }
+                }
             };
 
             data.active[selectedReport.toLowerCase()] = true;
@@ -594,33 +638,6 @@ app.use('/createinvoice', function(req, res) {
                 })
                 .catch(function(err) {
                     res.render('createinvoice', { outcome: 'Error', err: err })
-                })
-
-        })
-    }
-});
-
-app.use('/createtimesheet', function(req, res) {
-    if (req.method == 'GET') {
-        return res.render('createtimesheet');
-    } else if (req.method == 'POST') {
-        authorizedOperation(req, res, '/createtimesheet', function(xeroClient) {
-            var timesheet = xeroClient.payroll.timesheets.newTimesheet({
-                EmployeeID: '065a115c-ba9c-4c03-b8e3-44c551ed8f21',
-                StartDate: new Date(2014, 8, 23),
-                EndDate: new Date(2014, 8, 29),
-                Status: 'Draft',
-                TimesheetLines: [{
-                    EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
-                    NumberOfUnits: [5, 0, 0, 0, 0, 0, 0]
-                }]
-            });
-            timesheet.save()
-                .then(function(ret) {
-                    res.render('createtimesheet', { timesheets: ret.entities })
-                })
-                .catch(function(err) {
-                    res.render('createtimesheet', { err: err })
                 })
 
         })

@@ -1,0 +1,53 @@
+<h3>Credit Notes</h3>
+<table class="table table-bordered table-collapsed table-hover">
+    <thead>
+        <tr>
+            <th>Credit Note Number</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each creditnotes}}
+    <tr class="accordion-toggle" data-toggle="collapse" data-target="#{{this.CreditNoteID}}">
+        <td>
+            {{#if this.CreditNoteNumber}}
+                {{this.CreditNoteNumber}}
+            {{else}}
+                {{this.CreditNoteID}}
+            {{/if}}
+        </td>
+        <td>{{ this.Date }}</td>
+        <td>{{ this.Status}}</td>
+        <td>{{ this.Total }}</td>
+    </tr>
+    
+    {{#ifCond this.Allocations.length '>' 0}}
+    <tr>
+        <td class="accordion-body collapse" id="{{this.CreditNoteID}}">
+            <h5>Credit Note Allocations</h5>
+            <table class="table table-condensed">
+                <thead>
+                    <th>Date</th>
+                    <th>Applied Amount</th>
+                    <th>Invoice Ref</th>
+                </thead>
+                <tbody>
+                    {{#each this.Allocations as |allocation|}}
+                      {{#if allocation.AppliedAmount}}
+                        <tr>
+                            <td>{{allocation.Date}}</td>
+                            <td>{{allocation.AppliedAmount}}</td>
+                            <td>{{allocation.Invoice.InvoiceNumber}}</td>
+                        </tr>
+                      {{/if}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    {{/ifCond}}
+    {{/each}}
+    </tbody>
+</table>

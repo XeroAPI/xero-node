@@ -51,11 +51,13 @@
                 </thead>
                 <tbody>
                     {{#each this.Payments as |payment|}}
-                    <tr>
-                        <td>{{payment.Date}}</td>
-                        <td>{{payment.Amount}}</td>
-                        <td>{{payment.Reference}}</td>
-                    </tr>
+                        {{#if payment.Amount}}
+                            <tr>
+                                <td>{{payment.Date}}</td>
+                                <td>{{payment.Amount}}</td>
+                                <td>{{payment.Reference}}</td>
+                            </tr>
+                        {{/if}}
                     {{/each}}
                 </tbody>
             </table>
