@@ -1,0 +1,29 @@
+<h3>Payments</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Contact Name</td>
+            <td>Status</td>
+            <td>Amount</td>
+        </tr>
+    </thead>
+    {{#each payments}}
+    <tr>
+        {{#ifCond this.Invoice.Type '==' 'ACCREC'}}
+        <td><a href="https://go.xero.com/AccountsReceivable/View.aspx?InvoiceID={{ this.Invoice.InvoiceID }}" target="_blank">
+            {{this.Date}}
+            </a>
+        </td>
+        {{else}}
+        <td><a href="https://go.xero.com/AccountsPayable/View.aspx?InvoiceID={{ this.Invoice.InvoiceID }}" target="_blank">
+            {{this.Date}}
+            </a>
+        </td>
+        {{/ifCond}}
+        <td>{{this.Invoice.Contact.Name}} </td>
+        <td>{{this.Status}} </td>
+        <td>{{this.Amount}} </td>
+    </tr>
+    {{/each}}
+</table>

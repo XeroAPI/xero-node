@@ -3,3 +3,9 @@
 /.idea
 *.log
 /cert
+/coverage
+.nyc_output/
+.DS_Store
+.vscode
+testing_config.json
+sample_app/config/config.json

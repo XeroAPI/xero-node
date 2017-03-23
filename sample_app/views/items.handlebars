@@ -1,0 +1,19 @@
+<h3>Items</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+    <tr>
+        <td>Code</td>
+        <td>Description</td>
+        <td>Cost Price</td>
+        <td>Sale Price</td>
+    </tr>
+    </thead>
+    {{#each items}}
+    <tr>
+        <td><a href="https://go.xero.com/Accounts/Inventory/{{this.ItemID}}" target="_blank">{{this.Code }}</a></td>
+        <td>{{ this.Description }}</td>
+        <td>{{ this.PurchaseDetails.UnitPrice }}</td>
+        <td>{{ this.SalesDetails.UnitPrice }}</td>
+    </tr>
+    {{/each}}
+</table>

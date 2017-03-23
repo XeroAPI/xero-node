@@ -1,0 +1,54 @@
+<h3>{{report.ReportName}}</h3>
+
+{{#each report.ReportTitles as |reportTitle|}}
+<center>
+  <h5>{{reportTitle}}</h5>
+</center>
+{{/each}}
+<p>Report Date: {{report.ReportDate}}</p>
+{{#if report.Rows}}
+<table class="table table-bordered table-collapsed">
+  {{#each report.Rows as |row|}}
+  
+    {{#ifCond row.RowType '==' 'Header'}}
+    <tr>
+      {{#each row.Cells as |cell|}}
+        <th>{{cell.Value}}</th>
+      {{/each}}
+    </tr>
+    {{/ifCond}}
+
+    {{#ifCond row.RowType '!=' 'Header'}}
+
+      <tr>
+        <td colspan="{{../colspan}}"><strong>{{row.Title}}</strong></td>
+      </tr>
+
+      {{#if row.Rows}}
+        {{#each row.Rows as |thisRow|}}
+          <tr>
+            {{#if this.Cells}}
+              {{#each this.Cells as |thisCell|}}
+                {{#if thisCell.Value}}
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;{{thisCell.Value}}</td>
+                {{else}}
+                  {{#if thisCell.length}}
+                    {{#each thisCell}}
+                      <td><strong>{{this.Value}}</strong></td>
+                    {{/each}}
+                  {{else}}
+                    <td>&nbsp;</td>
+                  {{/if}}
+                {{/if}}
+              {{/each}}
+            {{/if}}
+          </tr>
+        {{/each}}
+      {{/if}}
+
+    {{/ifCond}}
+
+  
+  {{/each}}
+</table>
+{{/if}}

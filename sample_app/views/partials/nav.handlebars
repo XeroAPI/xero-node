@@ -1,0 +1,35 @@
+<div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li class="{{#if active.overview}}active{{/if}}"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+  </ul>
+  <h5><a href="#accounting" data-toggle="collapse" style="text-decoration: none; color: black;">Accounting API Endpoints</a></h5>
+  <ul id="accounting" class="nav nav-sidebar {{#unless active.nav.accounting}}collapse{{/unless}}">
+    <li class="{{#if active.organisations}}active{{/if}}"><a href="/organisations">List Organisations</a></li>
+    <li class="{{#if active.accounts}}active{{/if}}"><a href="/accounts">List Accounts</a></li>
+    <li class="{{#if active.banktransactions}}active{{/if}}"><a href="/banktransactions">List Bank Transactions</a></li>
+    <li class="{{#if active.banktransfers}}active{{/if}}"><a href="/banktransfers">List Bank Transfers</a></li>
+    <li class="{{#if active.brandingthemes}}active{{/if}}"><a href="/brandingthemes">List Branding Themes</a></li>
+    <li class="{{#if active.contacts}}active{{/if}}"><a href="/contacts">List Contacts</a></li>
+    <li class="{{#if active.creditnotes}}active{{/if}}"><a href="/creditnotes">List Credit Notes</a></li>
+    <li class="{{#if active.currencies}}active{{/if}}"><a href="/currencies">List Currencies</a></li>
+    <li class="{{#if active.invoices}}active{{/if}}"><a href="/invoices">List Invoices</a></li>
+    <li class="{{#if active.items}}active{{/if}}"><a href="/items">List Items</a></li>
+    <li class="{{#if active.journals}}active{{/if}}"><a href="/journals">List Journals</a></li>
+    <li class="{{#if active.payments}}active{{/if}}"><a href="/payments">List Payments</a></li>
+    <li class="{{#if active.taxrates}}active{{/if}}"><a href="/taxrates">List Tax Rates</a></li>
+    <li class="{{#if active.trackingcategories}}active{{/if}}"><a href="/trackingcategories">List Tracking Categories</a></li>
+    <li class="{{#if active.users}}active{{/if}}"><a href="/users">List Users</a></li>
+  </ul>
+  <h5 style="padding-top: 20px"><a href="#reports" data-toggle="collapse" style="text-decoration: none; color: black;">Reports API Endpoints</a></h5>
+  <ul id="reports" class="nav nav-sidebar {{#unless active.nav.reports}}collapse{{/unless}}">
+    <li class="{{#if active.balancesheet}}active{{/if}}"><a href="/reports?r=1">Balance Sheet Report</a></li>
+    <li class="{{#if active.trialbalance}}active{{/if}}"><a href="/reports?r=2">Trial Balance Report</a></li>
+    <li class="{{#if active.profitandloss}}active{{/if}}"><a href="/reports?r=3">Profit and Loss Report</a></li>
+    <li class="{{#if active.bankstatement}}active{{/if}}"><a href="/reports?r=4">Bank Statement Report</a></li>
+    <li class="{{#if active.budgetsummary}}active{{/if}}"><a href="/reports?r=5">Budget Summary Report</a></li>
+    <li class="{{#if active.executivesummary}}active{{/if}}"><a href="/reports?r=6">Executive Summary Report</a></li>
+    <li class="{{#if active.banksummary}}active{{/if}}"><a href="/reports?r=7">Bank Summary Report</a></li>
+    <li class="{{#if active.agedreceivablesbycontact}}active{{/if}}"><a href="/reports?r=8">Aged Receivables Report</a></li>
+    <li class="{{#if active.agedpayablesbycontact}}active{{/if}}"><a href="/reports?r=9">Aged Payables Report</a></li>
+  </ul>
+</div>

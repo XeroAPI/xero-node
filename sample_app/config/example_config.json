@@ -1,0 +1,15 @@
+{
+    "APPTYPE": "PARTNER",
+    "partner": {
+        "authorizeCallbackUrl": "https://example.com/xerocallback",
+        "consumerKey": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "privateKeyPath": "/some/path/to/privatekey.pem",
+        "userAgent": "Tester (PARTNER) - Application for testing Xero"
+    },
+    "public": {
+        "authorizeCallbackUrl": "https://example.com/xerocallback",
+        "consumerKey": "AAAAAAAAAAAAAAAAAA",
+        "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+        "userAgent": "Tester (PUBLIC) - Application for testing Xero"
+    }
+}

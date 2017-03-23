@@ -1,0 +1,19 @@
+<h3>Branding Themes</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>SortOrder</td>
+            <td>CreatedDateUTC</td>
+        </tr>
+    </thead>
+    {{#each brandingthemes}}
+    <tr>
+        <td>{{ this.BrandingThemeID }}</td>
+        <td>{{ this.Name }}</td>
+        <td>{{ this.SortOrder }}</td>
+        <td>{{ this.CreatedDateUTC }}</td>
+    </tr>
+    {{/each}}
+</table>
