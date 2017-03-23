@@ -14,6 +14,9 @@ process.on('uncaughtException', function(err) {
     console.log('uncaught', err)
 })
 
+//Change the log level
+xero.setLogLevel('warn');
+
 var currentApp;
 var eventReceiver;
 var organisationCountry = '';
@@ -44,6 +47,8 @@ before('init instance and set options', function(done) {
     }
 
     eventReceiver = currentApp.eventEmitter;
+
+
 
     done();
 })
@@ -1052,7 +1057,7 @@ describe('regression tests', function() {
 
                     var myInvoice = invoices[0];
                     var myContact = myInvoice.Contact;
-                    var myCreditNoteAmount = myInvoice.Total / 2; //50% of total invoice
+                    var myCreditNoteAmount = myInvoice.AmountDue / 2; //50% of total amount left
 
                     //Create the credit note.
                     var creditNoteData = {
