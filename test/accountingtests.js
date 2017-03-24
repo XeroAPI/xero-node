@@ -2030,12 +2030,28 @@ describe('regression tests', function() {
         })
         it('get - modifiedAfter', function(done) {
             var modifiedAfter = new Date();
+
+            //take 5 seconds ago as we just created a contact
+            modifiedAfter.setTime(modifiedAfter.getTime() - 5000);
+
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
                 .then(function(contacts) {
-                    _.each(contacts, function(contact) {
-                        expect(contact.UpdatedDateUTC).to.not.equal("");
-                        expect(contact.UpdatedDateUTC).to.not.equal(undefined);
-                    })
+                    expect(contacts.length).to.equal(1);
+                    done();
+
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+        })
+
+        it('get - invalid modified date', function(done) {
+
+            currentApp.core.contacts.getContacts({ modifiedAfter: 'cats' })
+                .then(function(contacts) {
+                    expect(contacts.length).to.be.greaterThan(1);
                     done();
 
                 })
