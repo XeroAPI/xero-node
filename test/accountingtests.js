@@ -924,9 +924,11 @@ describe('regression tests', function() {
                                 expect(lineItem.UnitAmount).to.be.a('Number');
                                 expect(lineItem.UnitAmount).to.be.at.least(0);
 
-                                expect(lineItem.ItemCode).to.be.a('String');
-                                expect(lineItem.ItemCode).to.not.equal("");
-                                expect(lineItem.ItemCode).to.not.equal(undefined);
+                                if (lineItem.ItemCode) {
+                                    expect(lineItem.ItemCode).to.be.a('String');
+                                    expect(lineItem.ItemCode).to.not.equal("");
+                                    expect(lineItem.ItemCode).to.not.equal(undefined);
+                                }
 
                                 expect(lineItem.AccountCode).to.be.a('String');
                                 expect(lineItem.AccountCode).to.not.equal("");
@@ -2030,12 +2032,28 @@ describe('regression tests', function() {
         })
         it('get - modifiedAfter', function(done) {
             var modifiedAfter = new Date();
+
+            //take 10 seconds ago as we just created a contact
+            modifiedAfter.setTime(modifiedAfter.getTime() - 10000);
+
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
                 .then(function(contacts) {
-                    _.each(contacts, function(contact) {
-                        expect(contact.UpdatedDateUTC).to.not.equal("");
-                        expect(contact.UpdatedDateUTC).to.not.equal(undefined);
-                    })
+                    expect(contacts.length).to.equal(1);
+                    done();
+
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+        })
+
+        it('get - invalid modified date', function(done) {
+
+            currentApp.core.contacts.getContacts({ modifiedAfter: 'cats' })
+                .then(function(contacts) {
+                    expect(contacts.length).to.be.greaterThan(1);
                     done();
 
                 })
