@@ -924,9 +924,11 @@ describe('regression tests', function() {
                                 expect(lineItem.UnitAmount).to.be.a('Number');
                                 expect(lineItem.UnitAmount).to.be.at.least(0);
 
-                                expect(lineItem.ItemCode).to.be.a('String');
-                                expect(lineItem.ItemCode).to.not.equal("");
-                                expect(lineItem.ItemCode).to.not.equal(undefined);
+                                if (lineItem.ItemCode) {
+                                    expect(lineItem.ItemCode).to.be.a('String');
+                                    expect(lineItem.ItemCode).to.not.equal("");
+                                    expect(lineItem.ItemCode).to.not.equal(undefined);
+                                }
 
                                 expect(lineItem.AccountCode).to.be.a('String');
                                 expect(lineItem.AccountCode).to.not.equal("");
@@ -2031,8 +2033,8 @@ describe('regression tests', function() {
         it('get - modifiedAfter', function(done) {
             var modifiedAfter = new Date();
 
-            //take 5 seconds ago as we just created a contact
-            modifiedAfter.setTime(modifiedAfter.getTime() - 5000);
+            //take 10 seconds ago as we just created a contact
+            modifiedAfter.setTime(modifiedAfter.getTime() - 10000);
 
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
                 .then(function(contacts) {
