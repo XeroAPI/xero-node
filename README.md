@@ -46,7 +46,11 @@ The following features are provided:
 
 # Usage
 
-This package will eventually be deployed to npm, but until then you can clone and run, or install as follows:
+From npm:
+
+`npm install xero-node --save`
+
+Master branch from Github:
 
 Edit your package.json and manually include this as a dependency:
 
