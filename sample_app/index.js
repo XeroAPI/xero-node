@@ -3,13 +3,30 @@ var express = require('express'),
     exphbs = require('express-handlebars'),
     LRU = require('lru-cache'),
     fs = require('fs'),
-    nodemailer = require('nodemailer'),
-    metaConfig = require('./config/config.json');
+    nodemailer = require('nodemailer');
 
 var xeroClient;
 var eventReceiver;
+var metaConfig = {};
 
 function getXeroClient(session) {
+
+    try {
+        metaConfig = require('./config/config.json');
+    } catch (ex) {
+        if (process && process.env && process.env.APPTYPE) {
+            //no config file found, so check the process.env.
+            metaConfig.APPTYPE = process.env.APPTYPE;
+            metaConfig[metaConfig.APPTYPE] = {
+                authorizeCallbackUrl: process.env.authorizeCallbackUrl,
+                userAgent: process.env.userAgent,
+                consumerKey: process.env.consumerKey,
+                consumerSecret: process.env.consumerSecret
+            }
+        } else {
+            throw "Config not found";
+        }
+    }
 
     if (!xeroClient) {
         var APPTYPE = metaConfig.APPTYPE;
@@ -683,5 +700,8 @@ app.use(function(req, res, next) {
     if (req.session)
         delete req.session.returnto;
 })
-app.listen(3100);
-console.log("listening on http://localhost:3100");
+
+var PORT = process.env.PORT || 3100;
+
+app.listen(PORT);
+console.log("listening on http://localhost:" + PORT);

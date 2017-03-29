@@ -11,7 +11,8 @@
         "url": "https://github.com/XeroAPI/xero-node"
     },
     "scripts": {
-        "test": "nyc mocha --recursive"
+        "test": "nyc mocha --recursive",
+        "start": "node sample_app/index.js"
     },
     "keywords": [
         "xero",
@@ -41,5 +42,8 @@
         "sinon": "^1.17.7",
         "zombie": "^5.0.5",
         "zombie-phantom": "0.0.6"
+    },
+    "engines": {
+        "node": "^6.0.0"
     }
 }
