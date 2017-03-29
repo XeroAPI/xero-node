@@ -46,11 +46,29 @@ The following features are provided:
 
 # Usage
 
-From npm:
+There are a few different ways you can include this package in your project.
 
-`npm install xero-node --save`
+### Install from NPM
 
-Master branch from Github:
+This package is not currently available on NPM.  Check back soon!
+
+### Clone and include locally
+
+1. Clone the project and store it locally.
+2. Edit your projects package.json as follows:
+
+```javascript
+    ...
+    "scripts": {
+        "preinstall": "npm install ../path/to-xero-node --save"
+    },
+    "dependencies": {
+        "xero-node": "file:../xero-node"
+    },
+    ...
+```
+
+### Include from Github
 
 Edit your package.json and manually include this as a dependency:
 
@@ -123,7 +141,7 @@ Runscope is not endorsed by or affiliated with Xero. This tool was used by the S
 ```javascript
 var xero = require('xero-node');
 var fs = require('fs');
-var config = require('/some/path/to/config.js');
+var config = require('/some/path/to/config.json');
 
 //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
 if (config.privateKeyPath && !config.privateKey) 
@@ -137,7 +155,7 @@ var xeroClient = new xero.PrivateApplication(config);
 ```javascript
 var xero = require('xero-node');
 var fs = require('fs');
-var config = require('/some/path/to/config.js');
+var config = require('/some/path/to/config.json');
 
 //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
 if (config.privateKeyPath && !config.privateKey) 
@@ -151,7 +169,7 @@ var xeroClient = new xero.PublicApplication(myConfigFile);
 ```javascript
 var xero = require('xero-node');
 var fs = require('fs');
-var config = require('/some/path/to/config.js');
+var config = require('/some/path/to/config.json');
 
 //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
 if (config.privateKeyPath && !config.privateKey) 
