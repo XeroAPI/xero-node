@@ -38,7 +38,16 @@ function getXeroClient(session) {
             }
         }
 
-        if (config.privateKeyPath && !config.privateKey) config.privateKey = fs.readFileSync(config.privateKeyPath);
+        if (config.privateKeyPath && !config.privateKey) {
+            try {
+                //Try to read from the path
+                config.privateKey = fs.readFileSync(config.privateKeyPath);
+            } catch (ex) {
+                //It's not a path, so use the consumer secret as the private key
+                config.privateKey = config.consumerSecret;
+            }
+        }
+
 
         switch (APPTYPE) {
             case "PUBLIC":
