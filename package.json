@@ -21,9 +21,12 @@
     "author": "Jordan Walsh",
     "license": "MIT",
     "dependencies": {
+        "express": "3.4.8",
+        "express-handlebars": "^3.0.0",
         "lodash": "~2.4.1",
         "log4js": "~0.6.9",
         "lru-cache": "^4.0.2",
+        "mustache": "^2.3.0",
         "nyc": "^10.1.2",
         "q": "~1.0.0",
         "uuid": "^3.0.1",
