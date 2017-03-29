@@ -44,7 +44,7 @@ function getXeroClient(session) {
                 config.privateKey = fs.readFileSync(config.privateKeyPath);
             } catch (ex) {
                 //It's not a path, so use the consumer secret as the private key
-                config.privateKey = config.consumerSecret;
+                config.privateKey = "";
             }
         }
 
