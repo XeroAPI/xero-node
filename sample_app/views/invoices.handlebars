@@ -7,7 +7,6 @@
             <th>Due Date</th>
             <th>Status</th>
             <th>Total</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +35,6 @@
         <td>{{ this.DueDate }}</td>
         <td>{{ this.Status}}</td>
         <td>{{ this.Total }}</td>
-        <td><a href="/emailinvoice?id={{ this.InvoiceID }}" class="btn btn-primary btn-xs">Email</a></td>
     </tr>
     
     {{#ifCond this.Payments.length '>' 0}}

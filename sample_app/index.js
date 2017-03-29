@@ -2,14 +2,30 @@ var express = require('express'),
     xero = require('..'),
     exphbs = require('express-handlebars'),
     LRU = require('lru-cache'),
-    fs = require('fs'),
-    nodemailer = require('nodemailer'),
-    metaConfig = require('./config/config.json');
+    fs = require('fs');
 
 var xeroClient;
 var eventReceiver;
+var metaConfig = {};
 
 function getXeroClient(session) {
+
+    try {
+        metaConfig = require('./config/config.json');
+    } catch (ex) {
+        if (process && process.env && process.env.APPTYPE) {
+            //no config file found, so check the process.env.
+            metaConfig.APPTYPE = process.env.APPTYPE;
+            metaConfig[metaConfig.APPTYPE.toLowerCase()] = {
+                authorizeCallbackUrl: process.env.authorizeCallbackUrl,
+                userAgent: process.env.userAgent,
+                consumerKey: process.env.consumerKey,
+                consumerSecret: process.env.consumerSecret
+            }
+        } else {
+            throw "Config not found";
+        }
+    }
 
     if (!xeroClient) {
         var APPTYPE = metaConfig.APPTYPE;
@@ -22,7 +38,16 @@ function getXeroClient(session) {
             }
         }
 
-        if (config.privateKeyPath && !config.privateKey) config.privateKey = fs.readFileSync(config.privateKeyPath);
+        if (config.privateKeyPath && !config.privateKey) {
+            try {
+                //Try to read from the path
+                config.privateKey = fs.readFileSync(config.privateKeyPath);
+            } catch (ex) {
+                //It's not a path, so use the consumer secret as the private key
+                config.privateKey = "";
+            }
+        }
+
 
         switch (APPTYPE) {
             case "PUBLIC":
@@ -647,41 +672,12 @@ app.use('/createinvoice', function(req, res) {
     }
 });
 
-app.use('/emailinvoice', function(req, res) {
-    if (req.method == 'GET' && !req.query.a) {
-        res.render('emailinvoice', { id: req.query.id });
-    } else {
-        authorizedOperation(req, res, '/emailinvoice?id=' + req.query.id + '&a=1&email=' + encodeURIComponent(req.body.Email), function(xeroClient) {
-            var file = fs.createWriteStream(__dirname + '/invoice.pdf', { encoding: 'binary' });
-            xeroClient.core.invoices.streamInvoice(req.query.id, 'pdf', file);
-            file.on('finish', function() {
-                var transporter = nodemailer.createTransport(); // Direct
-                var mailOptions = {
-                    from: 'test@gmail.com',
-                    to: req.body.Email || req.query.email,
-                    subject: 'Test email',
-                    text: 'Email text',
-                    html: 'This is a xero invoice',
-                    attachments: [
-                        { filename: 'invoice.pdf', path: __dirname + '/invoice.pdf' }
-                    ]
-                };
-                transporter.sendMail(mailOptions, function(err, info) {
-                    if (err)
-                        res.render('emailinvoice', { outcome: 'Error', err: err, id: req.query.id });
-                    else
-                        res.render('emailinvoice', { outcome: 'Email sent', id: req.query.id });
-                })
-
-            })
-
-        })
-    }
-});
-
 app.use(function(req, res, next) {
     if (req.session)
         delete req.session.returnto;
 })
-app.listen(3100);
-console.log("listening on http://localhost:3100");
+
+var PORT = process.env.PORT || 3100;
+
+app.listen(PORT);
+console.log("listening on http://localhost:" + PORT);
