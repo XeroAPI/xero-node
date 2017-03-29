@@ -16,7 +16,7 @@ function getXeroClient(session) {
         if (process && process.env && process.env.APPTYPE) {
             //no config file found, so check the process.env.
             metaConfig.APPTYPE = process.env.APPTYPE;
-            metaConfig[metaConfig.APPTYPE] = {
+            metaConfig[metaConfig.APPTYPE.toLowerCase()] = {
                 authorizeCallbackUrl: process.env.authorizeCallbackUrl,
                 userAgent: process.env.userAgent,
                 consumerKey: process.env.consumerKey,
