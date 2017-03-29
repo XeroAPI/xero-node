@@ -516,7 +516,8 @@ app.get('/reports', function(req, res) {
             '6': 'ExecutiveSummary',
             '7': 'BankSummary',
             '8': 'AgedReceivablesByContact',
-            '9': 'AgedPayablesByContact'
+            '9': 'AgedPayablesByContact',
+            '10': 'TenNinetyNine'
         };
 
         var report = req.query ? req.query.r : null;
@@ -591,7 +592,9 @@ app.get('/reports', function(req, res) {
                     })
                     .then(function(report) {
                         data.report = report.toObject();
-                        data.colspan = data.report.Rows[0].Cells.length;
+                        if (data.report.Rows) {
+                            data.colspan = data.report.Rows[0].Cells.length;
+                        }
                         res.render('reports', data);
                     })
                     .catch(function(err) {
