@@ -2,30 +2,30 @@
 
 This will provide an overview of how to use each of the SDK functions that have been made available within the xero-node SDK.
 
-[Getting Started? Click here first!](https://github.com/XeroAPI/xero-node/wiki/Creating-an-SDK-Client)
+[Getting Started? Click here first!](./Creating-an-SDK-Client)
 
-[Looking for a Sample App? Click here!](https://github.com/XeroAPI/xero-node/wiki/Sample-App-Setup)
+[Looking for a Sample App? Click here!](./Sample-App-Setup)
 
 The following Xero API functions are supported:
 
 **Accounting API**
-* [Accounts](https://github.com/XeroAPI/xero-node/wiki/Accounts)
-* [Bank Transactions](https://github.com/XeroAPI/xero-node/wiki/Bank-Transactions)
-* [Bank Transfers](https://github.com/XeroAPI/xero-node/wiki/Bank-Transfers)
-* [Branding Themes](https://github.com/XeroAPI/xero-node/wiki/Branding-Themes)
-* [Contacts](https://github.com/XeroAPI/xero-node/wiki/Contacts)
-* [Credit Notes (and Allocations)](https://github.com/XeroAPI/xero-node/wiki/Credit-Notes)
-* [Currencies](https://github.com/XeroAPI/xero-node/wiki/Currencies)
-* [Invoices](https://github.com/XeroAPI/xero-node/wiki/Invoices)
-* [Invoice Reminders](https://github.com/XeroAPI/xero-node/wiki/Invoice-Reminders)
-* [Items](https://github.com/XeroAPI/xero-node/wiki/Items)
-* [Journals](https://github.com/XeroAPI/xero-node/wiki/Journals)
-* [Organisations](https://github.com/XeroAPI/xero-node/wiki/Organisations)
-* [Payments](https://github.com/XeroAPI/xero-node/wiki/Payments)
-* [Reports (except BAS/GST)](https://github.com/XeroAPI/xero-node/wiki/Reports)
-* [Tax Rates](https://github.com/XeroAPI/xero-node/wiki/Tax-Rates)
-* [Tracking Categories (and Tracking Options)](https://github.com/XeroAPI/xero-node/wiki/Tracking-Categories)
-* [Users](https://github.com/XeroAPI/xero-node/wiki/Users)
+* [Accounts](./Accounts)
+* [Bank Transactions](./Bank-Transactions)
+* [Bank Transfers](./Bank-Transfers)
+* [Branding Themes](./Branding-Themes)
+* [Contacts](./Contacts)
+* [Credit Notes (and Allocations)](./Credit-Notes)
+* [Currencies](./Currencies)
+* [Invoices](./Invoices)
+* [Invoice Reminders](./Invoice-Reminders)
+* [Items](./Items)
+* [Journals](./Journals)
+* [Organisations](./Organisations)
+* [Payments](./Payments)
+* [Reports (except BAS/GST)](./Reports)
+* [Tax Rates](./Tax-Rates)
+* [Tracking Categories (and Tracking Options)](./Tracking-Categories)
+* [Users](./Users)
 
 Endpoints not currently supported:
 
