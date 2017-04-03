@@ -185,9 +185,9 @@ xeroClient.core.contacts.getContacts({
 
 ```
 
-## Wiki
+## Docs
 
-Check the Wiki for more detailed examples of how to use each SDK function. 
+Check the [`docs`](./docs) folder for more detailed examples of how to use each SDK function. 
 
 ## Tests
 
