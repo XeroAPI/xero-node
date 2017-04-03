@@ -121,7 +121,7 @@ if (config.privateKeyPath && !config.privateKey)
 var xeroClient = new xero.PrivateApplication(config);
 ```
 
-## Pubic Usage
+## Public Usage
 
 ```javascript
 var xero = require('xero-node');
