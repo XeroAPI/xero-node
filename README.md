@@ -52,6 +52,10 @@ Meanwhile, the package can be installed from Github:
 
 `npm install --save XeroAPI/xero-node`
 
+While this codebase is under development, we recommend using Yarn to ensure your builds are repeatable:
+
+`yarn add https://github.com/XeroAPI/xero-node`
+
 ### Config Parameters
 
 | Parameter            | Description                                                                              | Mandatory |
