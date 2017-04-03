@@ -101,7 +101,7 @@ Sign up for a free runscope account at http://runscope.com and place your bucket
 Runscope is not endorsed by or affiliated with Xero. This tool was used by the SDK creator when authoring the code only.
 
 
-## Private App Usage
+## App Usage
 
 ```javascript
 var xero = require('xero-node');
@@ -111,36 +111,13 @@ var config = require('/some/path/to/config.json');
 //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
 if (config.privateKeyPath && !config.privateKey) 
     config.privateKey = fs.readFileSync(config.privateKeyPath);
+
+// Available application types are:
+// xero.PrivateApplication
+// xero.PublicApplication
+// xero.PartnerApplication
 
 var xeroClient = new xero.PrivateApplication(config);
-```
-
-## Public Usage
-
-```javascript
-var xero = require('xero-node');
-var fs = require('fs');
-var config = require('/some/path/to/config.json');
-
-//Private key can either be a path or a String so check both variables and make sure the path has been parsed.
-if (config.privateKeyPath && !config.privateKey) 
-    config.privateKey = fs.readFileSync(config.privateKeyPath);
-
-var xeroClient = new xero.PublicApplication(myConfigFile);
-```
-
-## Partner Usage
-
-```javascript
-var xero = require('xero-node');
-var fs = require('fs');
-var config = require('/some/path/to/config.json');
-
-//Private key can either be a path or a String so check both variables and make sure the path has been parsed.
-if (config.privateKeyPath && !config.privateKey) 
-    config.privateKey = fs.readFileSync(config.privateKeyPath);
-    
-var xeroClient = new xero.PartnerApplication(myConfigFile);
 ```
 
 Examples
