@@ -1,4 +1,4 @@
-## Welcome to the Xero-Node Wiki!
+## Welcome to the Xero-Node Docs!
 
 This will provide an overview of how to use each of the SDK functions that have been made available within the xero-node SDK.
 

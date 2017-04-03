@@ -78,4 +78,4 @@ See `sample_app/views/reports.handlebars` for the client side component.
 
 This essentially involves traversal of a bunch of `Row` and `Cell` objects to display the data required.
 
-See the wiki page on the Sample Application to get this up and running.
+See the doc page on the Sample Application to get this up and running.
