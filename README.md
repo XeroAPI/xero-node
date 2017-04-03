@@ -46,46 +46,27 @@ The following features are provided:
 
 # Usage
 
-There are a few different ways you can include this package in your project.
+While this package is under heavy development it is not yet available on npm. Check back soon!
 
-### Install from NPM
+Meanwhile, the package can be installed from Github:
 
-This package is not currently available on NPM.  Check back soon!
+`npm install --save XeroAPI/xero-node`
 
-### Clone and include locally
+While this codebase is under development, we recommend using Yarn to ensure your builds are repeatable:
 
-1. Clone the project and store it locally.
-2. Edit your projects package.json as follows:
+`yarn add https://github.com/XeroAPI/xero-node`
 
-```javascript
-    ...
-    "scripts": {
-        "preinstall": "npm install ../path/to-xero-node --save"
-    },
-    "dependencies": {
-        "xero-node": "file:../xero-node"
-    },
-    ...
-```
+### Config Parameters
 
-### Include from Github
-
-Edit your package.json and manually include this as a dependency:
-
-```javascript
-    "dependencies": {
-        ...
-        "xero-node": "XeroAPI/xero-node"
-    },
-```
-
-This will pull the latest branch from GitHub and use this within your code.  
-
-### External Config 
-
-This SDK requires the config to be externalised to ensure private keys are not committed into your codebase by mistake.
-
-The config file should be set up as follows:
+| Parameter            | Description                                                                              | Mandatory |
+|----------------------|------------------------------------------------------------------------------------------|-----------|
+| UserAgent            | The useragent that should be used with all calls to the Xero API                         | True      |
+| ConsumerKey          | The consumer key that is required with all calls to the Xero API.,                       | True      |
+| ConsumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      |
+| AuthorizeCallbackUrl | The callback that Xero should invoke when the authorization is successful.               | False     |
+| PrivateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     |
+| RunscopeBucketId     | Your personal runscope bucket for debugging API calls                                    | False     |
+---
 
 ```javascript
 //Sample Private App Config
@@ -117,18 +98,6 @@ The config file should be set up as follows:
 }
 ```
 
-### Config Parameters
-
-| Parameter            | Description                                                                              | Mandatory |
-|----------------------|------------------------------------------------------------------------------------------|-----------|
-| UserAgent            | The useragent that should be used with all calls to the Xero API                         | True      |
-| ConsumerKey          | The consumer key that is required with all calls to the Xero API.,                       | True      |
-| ConsumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      |
-| AuthorizeCallbackUrl | The callback that Xero should invoke when the authorization is successful.               | False     |
-| PrivateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     |
-| RunscopeBucketId     | Your personal runscope bucket for debugging API calls                                    | False     |
----
-
 **Note:** `RunscopeBucketId` has been added to support debugging the SDK.  Runscope is a simple tool for Testing Complex APIs. You can use Runscope to verify that the structure and content of your API calls meets your expectations. 
 
 Sign up for a free runscope account at http://runscope.com and place your bucket ID in the config file to monitor API calls in real time.
@@ -136,7 +105,7 @@ Sign up for a free runscope account at http://runscope.com and place your bucket
 Runscope is not endorsed by or affiliated with Xero. This tool was used by the SDK creator when authoring the code only.
 
 
-## Private App Usage
+## App Usage
 
 ```javascript
 var xero = require('xero-node');
@@ -146,36 +115,13 @@ var config = require('/some/path/to/config.json');
 //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
 if (config.privateKeyPath && !config.privateKey) 
     config.privateKey = fs.readFileSync(config.privateKeyPath);
+
+// Available application types are:
+// xero.PrivateApplication
+// xero.PublicApplication
+// xero.PartnerApplication
 
 var xeroClient = new xero.PrivateApplication(config);
-```
-
-## Pubic Usage
-
-```javascript
-var xero = require('xero-node');
-var fs = require('fs');
-var config = require('/some/path/to/config.json');
-
-//Private key can either be a path or a String so check both variables and make sure the path has been parsed.
-if (config.privateKeyPath && !config.privateKey) 
-    config.privateKey = fs.readFileSync(config.privateKeyPath);
-
-var xeroClient = new xero.PublicApplication(myConfigFile);
-```
-
-## Partner Usage
-
-```javascript
-var xero = require('xero-node');
-var fs = require('fs');
-var config = require('/some/path/to/config.json');
-
-//Private key can either be a path or a String so check both variables and make sure the path has been parsed.
-if (config.privateKeyPath && !config.privateKey) 
-    config.privateKey = fs.readFileSync(config.privateKeyPath);
-    
-var xeroClient = new xero.PartnerApplication(myConfigFile);
 ```
 
 Examples
