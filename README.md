@@ -46,40 +46,11 @@ The following features are provided:
 
 # Usage
 
-There are a few different ways you can include this package in your project.
+While this package is under heavy development it is not yet available on npm. Check back soon!
 
-### Install from NPM
+Meanwhile, the package can be installed from Github:
 
-This package is not currently available on NPM.  Check back soon!
-
-### Clone and include locally
-
-1. Clone the project and store it locally.
-2. Edit your projects package.json as follows:
-
-```javascript
-    ...
-    "scripts": {
-        "preinstall": "npm install ../path/to-xero-node --save"
-    },
-    "dependencies": {
-        "xero-node": "file:../xero-node"
-    },
-    ...
-```
-
-### Include from Github
-
-Edit your package.json and manually include this as a dependency:
-
-```javascript
-    "dependencies": {
-        ...
-        "xero-node": "XeroAPI/xero-node"
-    },
-```
-
-This will pull the latest branch from GitHub and use this within your code.  
+`npm install --save XeroAPI/xero-node`
 
 ### External Config 
 
