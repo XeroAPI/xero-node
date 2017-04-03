@@ -2,30 +2,30 @@
 
 This will provide an overview of how to use each of the SDK functions that have been made available within the xero-node SDK.
 
-[Getting Started? Click here first!](./Creating-an-SDK-Client)
+[Getting Started? Click here first!](./Creating-an-SDK-Client.md)
 
-[Looking for a Sample App? Click here!](./Sample-App-Setup)
+[Looking for a Sample App? Click here!](./Sample-App-Setup.md)
 
 The following Xero API functions are supported:
 
 **Accounting API**
-* [Accounts](./Accounts)
-* [Bank Transactions](./Bank-Transactions)
-* [Bank Transfers](./Bank-Transfers)
-* [Branding Themes](./Branding-Themes)
-* [Contacts](./Contacts)
-* [Credit Notes (and Allocations)](./Credit-Notes)
-* [Currencies](./Currencies)
-* [Invoices](./Invoices)
-* [Invoice Reminders](./Invoice-Reminders)
-* [Items](./Items)
-* [Journals](./Journals)
-* [Organisations](./Organisations)
-* [Payments](./Payments)
-* [Reports (except BAS/GST)](./Reports)
-* [Tax Rates](./Tax-Rates)
-* [Tracking Categories (and Tracking Options)](./Tracking-Categories)
-* [Users](./Users)
+* [Accounts](./Accounts.md)
+* [Bank Transactions](./Bank-Transactions.md)
+* [Bank Transfers](./Bank-Transfers.md)
+* [Branding Themes](./Branding-Themes.md)
+* [Contacts](./Contacts.md)
+* [Credit Notes (and Allocations)](./Credit-Notes.md)
+* [Currencies](./Currencies.md)
+* [Invoices](./Invoices.md)
+* [Invoice Reminders](./Invoice-Reminders.md)
+* [Items](./Items.md)
+* [Journals](./Journals.md)
+* [Organisations](./Organisations.md)
+* [Payments](./Payments.md)
+* [Reports (except BAS/GST)](./Reports.md)
+* [Tax Rates](./Tax-Rates.md)
+* [Tracking Categories (and Tracking Options)](./Tracking-Categories.md)
+* [Users](./Users.md)
 
 Endpoints not currently supported:
 
