@@ -192,6 +192,8 @@ npm test
 
 ## Release Change Log
 
+* 2.0.2
+    - Merged changes from [PR#10](https://github.com/XeroAPI/xero-node/pull/10) which fixes an issue where errors were being swallowed.
 * 2.0.1
     - Updated readme to reference npm availability.
 * 2.0.0 
