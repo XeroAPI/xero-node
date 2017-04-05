@@ -26,6 +26,7 @@ The following Xero API functions are supported:
 * Journals
 * Organisations
 * Payments
+* Reports
 * Tax Rates
 * Tracking Categories (and Tracking Options)
 * Users
@@ -46,15 +47,11 @@ The following features are provided:
 
 # Usage
 
-While this package is under heavy development it is not yet available on npm. Check back soon!
+This package can be installed via npm or yarn.
 
-Meanwhile, the package can be installed from Github:
+`npm install --save xero-node`
 
-`npm install --save XeroAPI/xero-node`
-
-While this codebase is under development, we recommend using Yarn to ensure your builds are repeatable:
-
-`yarn add https://github.com/XeroAPI/xero-node`
+`yarn add xero-node`
 
 ### Config Parameters
 
@@ -195,6 +192,10 @@ npm test
 
 ## Release Change Log
 
+* 2.0.1
+    - Updated readme to reference npm availability.
+* 2.0.0 
+    - Updated package for NPM deployment. Jump to v2.0.0 under advise of NPM.
 * 0.0.4
     - [view](http://github.com/XeroAPI/xero-node/commit/0e9444051537806b5567c08080cd95b93449cbdf) Externalised the config file for private apps, fixed the log level settings, updated the tests to use 'should' library, added support for runscope urls within the signature generation 
     - [view](http://github.com/XeroAPI/xero-node/commit/88d22ffee782288bf375462396490dfb21e7fd15) updated readme 
