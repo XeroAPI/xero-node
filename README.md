@@ -69,29 +69,29 @@ This package can be installed via npm or yarn.
 //Sample Private App Config
 {
     "UserAgent" : "Tester (PRIVATE) - Application for testing Xero",
-    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
-    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
-    "PrivateKeyPath": "/some/path/to/privatekey.pem",
-    "RunscopeBucketId" : "xxxyyyzzzz"
+    "consumerKey": "AAAAAAAAAAAAAAAAAA",
+    "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "privateKeyPath": "/some/path/to/privatekey.pem",
+    "runscopeBucketId" : "xxxyyyzzzz"
 }
 
 //Sample Public App Config
 {
     "UserAgent" : "Tester (PUBLIC) - Application for testing Xero",
-    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
-    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
-    "AuthorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
-    "RunscopeBucketId" : "xxxyyyzzzz"
+    "consumerKey": "AAAAAAAAAAAAAAAAAA",
+    "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
+    "runscopeBucketId" : "xxxyyyzzzz"
 }
 
 //Sample Partner App Config
 {
     "UserAgent" : "Tester (PARTNER) - Application for testing Xero",
-    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
-    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
-    "AuthorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
-    "PrivateKeyPath" : "/some/path/to/partner_privatekey.pem",
-    "RunscopeBucketId" : "xxxyyyzzzz"
+    "consumerKey": "AAAAAAAAAAAAAAAAAA",
+    "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
+    "privateKeyPath" : "/some/path/to/partner_privatekey.pem",
+    "runscopeBucketId" : "xxxyyyzzzz"
 }
 ```
 
