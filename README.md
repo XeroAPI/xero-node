@@ -26,6 +26,7 @@ The following Xero API functions are supported:
 * Journals
 * Organisations
 * Payments
+* Reports
 * Tax Rates
 * Tracking Categories (and Tracking Options)
 * Users
@@ -46,15 +47,11 @@ The following features are provided:
 
 # Usage
 
-While this package is under heavy development it is not yet available on npm. Check back soon!
+This package can be installed via npm or yarn.
 
-Meanwhile, the package can be installed from Github:
+`npm install --save xero-node`
 
-`npm install --save XeroAPI/xero-node`
-
-While this codebase is under development, we recommend using Yarn to ensure your builds are repeatable:
-
-`yarn add https://github.com/XeroAPI/xero-node`
+`yarn add xero-node`
 
 ### Config Parameters
 
@@ -72,29 +69,29 @@ While this codebase is under development, we recommend using Yarn to ensure your
 //Sample Private App Config
 {
     "UserAgent" : "Tester (PRIVATE) - Application for testing Xero",
-    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
-    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
-    "PrivateKeyPath": "/some/path/to/privatekey.pem",
-    "RunscopeBucketId" : "xxxyyyzzzz"
+    "consumerKey": "AAAAAAAAAAAAAAAAAA",
+    "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "privateKeyPath": "/some/path/to/privatekey.pem",
+    "runscopeBucketId" : "xxxyyyzzzz"
 }
 
 //Sample Public App Config
 {
     "UserAgent" : "Tester (PUBLIC) - Application for testing Xero",
-    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
-    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
-    "AuthorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
-    "RunscopeBucketId" : "xxxyyyzzzz"
+    "consumerKey": "AAAAAAAAAAAAAAAAAA",
+    "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
+    "runscopeBucketId" : "xxxyyyzzzz"
 }
 
 //Sample Partner App Config
 {
     "UserAgent" : "Tester (PARTNER) - Application for testing Xero",
-    "ConsumerKey": "AAAAAAAAAAAAAAAAAA",
-    "ConsumerSecret": "BBBBBBBBBBBBBBBBBBBB",
-    "AuthorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
-    "PrivateKeyPath" : "/some/path/to/partner_privatekey.pem",
-    "RunscopeBucketId" : "xxxyyyzzzz"
+    "consumerKey": "AAAAAAAAAAAAAAAAAA",
+    "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
+    "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
+    "privateKeyPath" : "/some/path/to/partner_privatekey.pem",
+    "runscopeBucketId" : "xxxyyyzzzz"
 }
 ```
 
@@ -185,9 +182,9 @@ xeroClient.core.contacts.getContacts({
 
 ```
 
-## Wiki
+## Docs
 
-Check the Wiki for more detailed examples of how to use each SDK function. 
+Check the [`docs`](./docs) folder for more detailed examples of how to use each SDK function. 
 
 ## Tests
 
@@ -195,6 +192,12 @@ npm test
 
 ## Release Change Log
 
+* 2.0.2
+    - Merged changes from [PR#10](https://github.com/XeroAPI/xero-node/pull/10) which fixes an issue where errors were being swallowed.
+* 2.0.1
+    - Updated readme to reference npm availability.
+* 2.0.0 
+    - Updated package for NPM deployment. Jump to v2.0.0 under advise of NPM.
 * 0.0.4
     - [view](http://github.com/XeroAPI/xero-node/commit/0e9444051537806b5567c08080cd95b93449cbdf) Externalised the config file for private apps, fixed the log level settings, updated the tests to use 'should' library, added support for runscope urls within the signature generation 
     - [view](http://github.com/XeroAPI/xero-node/commit/88d22ffee782288bf375462396490dfb21e7fd15) updated readme 
