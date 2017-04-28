@@ -15,7 +15,7 @@ process.on('uncaughtException', function(err) {
 })
 
 //Change the log level
-xero.setLogLevel('warn');
+xero.setLogLevel('debug');
 
 var currentApp;
 var eventReceiver;
@@ -231,67 +231,67 @@ describe('regression tests', function() {
 
     var bankAccounts = [];
 
-    before('create a bank account', function() {
-        const randomString = uuid.v4();
+    // before('create a bank account', function() {
+    //     const randomString = uuid.v4();
 
-        var testAccountData = {
-            Code: randomString.replace(/-/g, '').substring(0, 10),
-            Name: 'Test account from Node SDK ' + randomString,
-            Type: 'BANK',
-            BankAccountNumber: '062-021-0000000',
-        };
+    //     var testAccountData = {
+    //         Code: randomString.replace(/-/g, '').substring(0, 10),
+    //         Name: 'Test account from Node SDK ' + randomString,
+    //         Type: 'BANK',
+    //         BankAccountNumber: '062-021-0000000',
+    //     };
 
-        var account = currentApp.core.accounts.newAccount(testAccountData);
+    //     var account = currentApp.core.accounts.newAccount(testAccountData);
 
-        return account.save()
-            .then(function(response) {
-                var account = response.entities[0];
-                bankAccounts.push({
-                    account: account,
-                    id: account.AccountID
-                });
-            });
-    });
+    //     return account.save()
+    //         .then(function(response) {
+    //             var account = response.entities[0];
+    //             bankAccounts.push({
+    //                 account: account,
+    //                 id: account.AccountID
+    //             });
+    //         });
+    // });
 
-    before('create another bank account', function() {
-        const randomString = uuid.v4();
+    // before('create another bank account', function() {
+    //     const randomString = uuid.v4();
 
-        var testAccountData = {
-            Code: randomString.replace(/-/g, '').substring(0, 10),
-            Name: 'Test account from Node SDK ' + randomString,
-            Type: 'BANK',
-            BankAccountNumber: '062-021-0000000',
-        };
+    //     var testAccountData = {
+    //         Code: randomString.replace(/-/g, '').substring(0, 10),
+    //         Name: 'Test account from Node SDK ' + randomString,
+    //         Type: 'BANK',
+    //         BankAccountNumber: '062-021-0000000',
+    //     };
 
-        var account = currentApp.core.accounts.newAccount(testAccountData);
+    //     var account = currentApp.core.accounts.newAccount(testAccountData);
 
-        return account.save()
-            .then(function(response) {
-                var account = response.entities[0];
-                bankAccounts.push({
-                    account: account,
-                    id: account.AccountID
-                });
-            });
-    });
+    //     return account.save()
+    //         .then(function(response) {
+    //             var account = response.entities[0];
+    //             bankAccounts.push({
+    //                 account: account,
+    //                 id: account.AccountID
+    //             });
+    //         });
+    // });
 
-    // There appears to be no way to archive a bank account via the API so deleting instead
-    after('delete the test accounts', function() {
+    // // There appears to be no way to archive a bank account via the API so deleting instead
+    // after('delete the test accounts', function() {
 
-        bankAccounts.forEach(function(account) {
+    //     bankAccounts.forEach(function(account) {
 
-            currentApp.core.accounts.deleteAccount(account.id)
-                .then(function(response) {
-                    expect(response.Status).to.equal("OK");
-                    done();
-                })
-                .catch(function(err) {
-                    console.log(util.inspect(err, null, null));
-                    done(wrapError(err));
-                });
-        });
+    //         currentApp.core.accounts.deleteAccount(account.id)
+    //             .then(function(response) {
+    //                 expect(response.Status).to.equal("OK");
+    //                 done();
+    //             })
+    //             .catch(function(err) {
+    //                 console.log(util.inspect(err, null, null));
+    //                 done(wrapError(err));
+    //             });
+    //     });
 
-    });
+    // });
 
     describe.skip('reporting tests', function() {
         it('Generates a Balance Sheet Report', function(done) {
@@ -2239,58 +2239,80 @@ describe('regression tests', function() {
         });
     });
 
-    //These tests aren't currently working.  Attachments are not yet supported.
-    describe.skip('attachments', function() {
-        it('creates an attachment on an invoice', function(done) {
+    /**
+     * Attachments should work on the following endpoints:
+     *  Invoices
+     *  Receipts
+     *  Credit Notes
+     *  Repeating Invoices
+     *  Bank Transactions
+     *  Bank Transfers
+     *  Contacts
+     *  Accounts
+     *  Manual Journals
+     */
+    describe.only('attachments', function() {
+        this.timeout(30500);
+        var sampleAttachment = {
+            FileName: "test-attachment.pdf",
+            MimeType: "application/pdf"
+        };
 
-            /**
-             * Attachments should work on the following endpoints:
-             *  Invoices
-             *  Receipts
-             *  Credit Notes
-             *  Repeating Invoices
-             *  Bank Transactions
-             *  Bank Transfers
-             *  Contacts
-             *  Accounts
-             *  Manual Journals
-             */
+        var sampleDataReference = __dirname + "/testdata/test-attachment.pdf";
 
-            var attachmentData = {
-                FileName: "myimage.png",
-                MimeType: "application/png"
-            };
+        it('creates an attachment on an invoice using a file reference', function(done) {
 
-            var rawDataFile = __dirname + "/testdata/test-attachment.png";
+            //Update the filename for uniqueness
+            sampleAttachment.FileName = "1-" + sampleAttachment.FileName;
 
-            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(attachmentData);
+            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(sampleAttachment);
 
-            currentApp.core.bankTransactions.getBankTransactions()
-                .then(function(bankTransactions) {
-
-                    expect(bankTransactions).to.have.length.greaterThan(0);
-
-                    var sampleTransaction = bankTransactions[0];
-
-                    attachmentPlaceholder.save("banktransactions/" + sampleTransaction.BankTransactionID, rawDataFile)
+            //Add attachment to an Invoice
+            currentApp.core.invoices.getInvoices()
+                .then(function(invoices) {
+                    var sampleInvoice = invoices[0];
+                    attachmentPlaceholder.save("Invoices/" + sampleInvoice.InvoiceID, sampleDataReference, false)
                         .then(function(response) {
-                            console.log(response);
+                            console.log("Attachment File saved to invoice: " + sampleInvoice.InvoiceID);
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err)
+                            console.log(err);
                             done(wrapError(err));
                         })
-
-                    done();
                 })
                 .catch(function(err) {
-                    console.log(err)
+                    console.log(err);
                     done(wrapError(err));
+                });
+        });
+
+        it('creates an attachment on an invoice using a file stream', function(done) {
+
+            //Update the filename for uniqueness
+            sampleAttachment.FileName = "2-" + sampleAttachment.FileName;
+
+            var dataReadStream = fs.createReadStream(sampleDataReference);
+            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(sampleAttachment);
+
+            //Add attachment to an Invoice
+            currentApp.core.invoices.getInvoices()
+                .then(function(invoices) {
+                    var sampleInvoice = invoices[0];
+                    attachmentPlaceholder.save("Invoices/" + sampleInvoice.InvoiceID, dataReadStream, true)
+                        .then(function(response) {
+                            console.log("Attachment Stream saved to invoice: " + sampleInvoice.InvoiceID);
+                            done();
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            done(wrapError(err));
+                        })
                 })
-
-
-
+                .catch(function(err) {
+                    console.log(err);
+                    done(wrapError(err));
+                });
         });
     });
 
