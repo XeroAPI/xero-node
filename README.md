@@ -14,6 +14,7 @@ For any suggestions create a github issue, or fork the code and submit a PR.
 
 The following Xero API functions are supported:
 * Accounts
+* Attachments
 * Bank Transactions
 * Bank Transfers
 * Branding Themes
@@ -32,7 +33,6 @@ The following Xero API functions are supported:
 * Users
 
 The following endpoints are included but are not currently under test nor are they supported for use:
-* Attachments
 * Timesheets (Payroll API)
 * Employees (Payroll API)
 * PayItems (Payroll API)
@@ -68,7 +68,7 @@ This package can be installed via npm or yarn.
 ```javascript
 //Sample Private App Config
 {
-    "UserAgent" : "Tester (PRIVATE) - Application for testing Xero",
+    "userAgent" : "Tester (PRIVATE) - Application for testing Xero",
     "consumerKey": "AAAAAAAAAAAAAAAAAA",
     "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "privateKeyPath": "/some/path/to/privatekey.pem",
@@ -77,7 +77,7 @@ This package can be installed via npm or yarn.
 
 //Sample Public App Config
 {
-    "UserAgent" : "Tester (PUBLIC) - Application for testing Xero",
+    "userAgent" : "Tester (PUBLIC) - Application for testing Xero",
     "consumerKey": "AAAAAAAAAAAAAAAAAA",
     "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
@@ -86,7 +86,7 @@ This package can be installed via npm or yarn.
 
 //Sample Partner App Config
 {
-    "UserAgent" : "Tester (PARTNER) - Application for testing Xero",
+    "userAgent" : "Tester (PARTNER) - Application for testing Xero",
     "consumerKey": "AAAAAAAAAAAAAAAAAA",
     "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
@@ -192,6 +192,9 @@ npm test
 
 ## Release Change Log
 
+* 2.1.0
+    - Added support for adding Attachments to Accounts, BankTransactions, BankTransfers, Contacts, CreditNotes and Invoices
+    - Fixed issues in the readme.
 * 2.0.2
     - Merged changes from [PR#10](https://github.com/XeroAPI/xero-node/pull/10) which fixes an issue where errors were being swallowed.
 * 2.0.1
