@@ -2255,7 +2255,7 @@ describe('regression tests', function() {
      *   Repeating Invoices
      */
 
-    describe.only('attachments', function() {
+    describe('attachments', function() {
         var invoiceID = '';
 
         it('creates an attachment on an invoice using a file reference', function(done) {
