@@ -192,6 +192,10 @@ npm test
 
 ## Release Change Log
 
+* 2.1.2
+    - Merged [PR#17](https://github.com/XeroAPI/xero-node/pull/17) - fix typo.
+* 2.1.1
+    - Merged [PR#16](https://github.com/XeroAPI/xero-node/pull/16) - fix typo.
 * 2.1.0
     - Added support for adding Attachments to Accounts, BankTransactions, BankTransfers, Contacts, CreditNotes and Invoices
     - Fixed issues in the readme.
