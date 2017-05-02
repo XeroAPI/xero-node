@@ -192,6 +192,10 @@ npm test
 
 ## Release Change Log
 
+* 2.1.2
+    - Merged [PR#17](https://github.com/XeroAPI/xero-node/pull/17) - fix typo.
+* 2.1.1
+    - Merged [PR#16](https://github.com/XeroAPI/xero-node/pull/16) - fix typo.
 * 2.1.0
     - Added support for adding Attachments to Accounts, BankTransactions, BankTransfers, Contacts, CreditNotes and Invoices
     - Fixed issues in the readme.
@@ -222,7 +226,7 @@ npm test
     - [view](http://github.com/XeroAPI/xero-node/commit/b5b82aedf87bfbb156f935b9a78b06cc8a82821c) updated items to support retrieving and saving 
     - [view](http://github.com/XeroAPI/xero-node/commit/5a64852bd5056dbe3d1044bb3f96fba06689af1f) updated various elements to have consistent responses on when save() is called. Updated Items tests to have 100% coverage.. woohoo 
     - [view](http://github.com/XeroAPI/xero-node/commit/efed46b222c898a1f63789ca2db1293537de752d) externalised the runscope bucket ID to the config file 
-    - [view](http://github.com/XeroAPI/xero-node/commit/251b0839f5ab641f6a5bcf120d964765beaf9fd0) fixed the saveContacts method on the contacts object and did some refactoring. This concept could be applied across all endpoints. Also removed some console.log statments from the code 
+    - [view](http://github.com/XeroAPI/xero-node/commit/251b0839f5ab641f6a5bcf120d964765beaf9fd0) fixed the saveContacts method on the contacts object and did some refactoring. This concept could be applied across all endpoints. Also removed some console.log statements from the code 
     - [view](http://github.com/XeroAPI/xero-node/commit/a2409633a78825880f85c7ac776a90262dd7b6c5) added tests for Journals 
     - [view](http://github.com/XeroAPI/xero-node/commit/882fedf9f995d2eeedfec4da9a92f360ff0e1eca) added payment tests 
     - [view](http://github.com/XeroAPI/xero-node/commit/34ab49da6e823c343b9b6298d40d39d8fcae46ab) added support for tracking categories but tracking options is not currently working 
