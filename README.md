@@ -57,12 +57,12 @@ This package can be installed via npm or yarn.
 
 | Parameter            | Description                                                                              | Mandatory |
 |----------------------|------------------------------------------------------------------------------------------|-----------|
-| UserAgent            | The useragent that should be used with all calls to the Xero API                         | True      |
-| ConsumerKey          | The consumer key that is required with all calls to the Xero API.,                       | True      |
-| ConsumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      |
+| userAgent            | The useragent that should be used with all calls to the Xero API                         | True      |
+| consumerKey          | The consumer key that is required with all calls to the Xero API.,                       | True      |
+| consumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      |
 | AuthorizeCallbackUrl | The callback that Xero should invoke when the authorization is successful.               | False     |
-| PrivateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     |
-| RunscopeBucketId     | Your personal runscope bucket for debugging API calls                                    | False     |
+| privateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     |
+| runscopeBucketId     | Your personal runscope bucket for debugging API calls                                    | False     |
 ---
 
 ```javascript
@@ -192,6 +192,8 @@ npm test
 
 ## Release Change Log
 
+* 2.1.3
+    - Merged [PR#18](https://github.com/XeroAPI/xero-node/pull/18) - set a default useragent header when not provided in the config file and warn the user.
 * 2.1.2
     - Merged [PR#17](https://github.com/XeroAPI/xero-node/pull/17) - fix typo.
 * 2.1.1
