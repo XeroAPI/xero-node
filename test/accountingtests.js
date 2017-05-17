@@ -2239,6 +2239,159 @@ describe('regression tests', function() {
         });
     });
 
+    describe('manualjournals', function(){
+        var sampleManualJournal = {
+            Narration: "Manual Journal Entry",
+            Date: new Date().toISOString().split("T")[0],
+            JournalLines: [
+                {
+                    LineAmount: "-1000.00",
+                    AccountCode: "489"
+                },
+                {
+                    LineAmount: "1000.00",
+                    AccountCode: "620"
+                }
+            ]
+        };
+        var ManualJournalID = "";
+
+        it('create manual journal', function(done) {
+            var manualjournal = currentApp.core.manualjournals.newManualJournal(sampleManualJournal);
+            manualjournal.save()
+                .then(function(response) {
+
+                    expect(response.entities).to.have.length.greaterThan(0);
+
+                    var manualJournal = response.entities[0];
+                    ManualJournalID = manualJournal.ManualJournalID;
+
+                    expect(response.entities[0].ManualJournalID).to.not.equal(undefined);
+                    expect(response.entities[0].ManualJournalID).to.not.equal("");
+                    expect(response.entities[0].Narration).to.equal(sampleManualJournal.Narration);
+
+                    invoice.JournalLines.forEach(function(journalItem) {
+                        expect(journalItem.LineAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
+                    });
+
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+
+        it('get (no paging)', function(done) {
+            currentApp.core.manualjournals.getManualJournals()
+                .then(function(manualjournals) {
+                    _.each(manualjournals, function(manualJournal) {
+                        expect(manualJournal.ManualJournalID).to.not.equal("");
+                        expect(manualJournal.ManualJournalID).to.not.equal(undefined);
+                    });
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+        it('get (paging)', function(done) {
+            currentApp.core.manualjournals.getManualJournals({ pager: { start: 1, callback: onManualJournals } })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+            function onManualJournals(err, response, cb) {
+                cb();
+                try {
+                    _.each(response.data, function(manualJournal) {
+                        expect(manualJournal.ManualJournalID).to.not.equal("");
+                        expect(manualJournal.ManualJournalID).to.not.equal(undefined);
+                    });
+
+                    if (response.finished)
+                        done();
+                } catch (ex) {
+                    console.log(util.inspect(err, null, null));
+                    done(ex);
+                    return;
+                }
+
+            }
+        });
+
+        it('get by id', function(done) {
+            currentApp.core.manualjournals.getManualJournal(ManualJournalID)
+                .then(function(manualjournal) {
+                    expect(manualjournal.ManualJournalID).to.equal(ManualJournalID);
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+        it('get - modifiedAfter', function(done) {
+            var modifiedAfter = new Date();
+
+            //take 20 seconds ago as we just created a contact
+            modifiedAfter.setTime(modifiedAfter.getTime() - 20000);
+
+            currentApp.core.manualjournals.getManualJournals({ modifiedAfter: modifiedAfter })
+                .then(function(manualjournals) {
+                    expect(manualjournals.length).to.equal(1);
+                    done();
+
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+        })
+
+        it('get - invalid modified date', function(done) {
+
+            currentApp.core.manualjournals.getManualJournals({ modifiedAfter: 'cats' })
+                .then(function(manualjournals) {
+                    expect(manualjournals.length).to.be.greaterThan(1);
+                    done();
+
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+        })
+
+        it('update Manual Journal', function(done) {
+            currentApp.core.manualjournals.getManualJournals(ManualJournalID)
+                .then(function(manualJournal) {
+                    expect(manualjournals.ManualJournalID).to.equal(ManualJournalID);
+
+                    var newNarration = "Updated" + Math.random();
+                    manualJournal.Narration = newNarration;
+
+                    manualJournal.save()
+                        .then(function(updatedManualJournal) {
+                            expect(updatedManualJournal.response.ManualJournals.ManualJournal.Narration).to.equal(newNarration);
+                            done();
+                        })
+                        .catch(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+    });
+
     /**
      * Attachments should work on the following endpoints:
      *  Invoices
