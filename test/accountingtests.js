@@ -15,7 +15,7 @@ process.on('uncaughtException', function(err) {
 })
 
 //Change the log level
-xero.setLogLevel('error');
+xero.setLogLevel('warn');
 
 var currentApp;
 var eventReceiver;
@@ -2037,8 +2037,8 @@ describe('regression tests', function() {
         it('get - modifiedAfter', function(done) {
             var modifiedAfter = new Date();
 
-            //take 10 seconds ago as we just created a contact
-            modifiedAfter.setTime(modifiedAfter.getTime() - 10000);
+            //take 20 seconds ago as we just created a contact
+            modifiedAfter.setTime(modifiedAfter.getTime() - 20000);
 
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
                 .then(function(contacts) {
