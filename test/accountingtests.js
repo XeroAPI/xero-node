@@ -2270,7 +2270,7 @@ describe('regression tests', function() {
                     expect(response.entities[0].ManualJournalID).to.not.equal("");
                     expect(response.entities[0].Narration).to.equal(sampleManualJournal.Narration);
 
-                    invoice.JournalLines.forEach(function(journalItem) {
+                    manualJournal.JournalLines.forEach(function(journalItem) {
                         expect(journalItem.LineAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
                     });
 
