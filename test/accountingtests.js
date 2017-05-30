@@ -2687,6 +2687,44 @@ describe('regression tests', function() {
                 });
         });
 
+        it('creates an attachment on a manual journal using a file reference', function(done) {
+            var attachmentTemplate = {
+                FileName: "1-test-attachment.pdf",
+                MimeType: "application/pdf"
+            };
+
+            var sampleDataReference = __dirname + "/testdata/test-attachment.pdf";
+
+            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(attachmentTemplate);
+
+            //Add attachment to an Invoice
+            currentApp.core.manualjournals.getManualJournals()
+                .then(function(manualJournals) {
+                    var sampleManualJournal = manualJournals[0];
+                    attachmentPlaceholder.save("ManualJournals/" + sampleManualJournal.ManualJournalID, sampleDataReference, false)
+                        .then(function(response) {
+                            expect(response.entities.length).to.equal(1);
+                            var thisFile = response.entities[0];
+                            expect(thisFile.AttachmentID).to.not.equal("");
+                            expect(thisFile.AttachmentID).to.not.equal(undefined);
+                            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
+                            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
+                            expect(thisFile.ContentLength).to.be.greaterThan(0);
+                            expect(thisFile.Url).to.not.equal("");
+                            expect(thisFile.Url).to.not.equal(undefined);
+                            done();
+                        })
+                        .catch(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
 
         //Using streams instead of files (attachment number 2)
         it('creates an attachment on an invoice using a file stream', function(done) {
@@ -2897,6 +2935,45 @@ describe('regression tests', function() {
                 .then(function(accounts) {
                     var sampleAccount = accounts[0];
                     attachmentPlaceholder.save("Accounts/" + sampleAccount.AccountID, dataReadStream, true)
+                        .then(function(response) {
+                            expect(response.entities.length).to.equal(1);
+                            var thisFile = response.entities[0];
+                            expect(thisFile.AttachmentID).to.not.equal("");
+                            expect(thisFile.AttachmentID).to.not.equal(undefined);
+                            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
+                            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
+                            expect(thisFile.ContentLength).to.be.greaterThan(0);
+                            expect(thisFile.Url).to.not.equal("");
+                            expect(thisFile.Url).to.not.equal(undefined);
+                            done();
+                        })
+                        .catch(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
+        it('creates an attachment on a manual journal using a file reference', function(done) {
+            var attachmentTemplate = {
+                FileName: "1-test-attachment.pdf",
+                MimeType: "application/pdf"
+            };
+
+            var sampleDataReference = __dirname + "/testdata/test-attachment.pdf";
+            var dataReadStream = fs.createReadStream(sampleDataReference);
+
+            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(attachmentTemplate);
+
+            //Add attachment to an Invoice
+            currentApp.core.manualjournals.getManualJournals()
+                .then(function(manualJournals) {
+                    var sampleManualJournal = manualJournals[0];
+                    attachmentPlaceholder.save("ManualJournals/" + sampleManualJournal.ManualJournalID, dataReadStream, true)
                         .then(function(response) {
                             expect(response.entities.length).to.equal(1);
                             var thisFile = response.entities[0];

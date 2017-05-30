@@ -50,7 +50,7 @@ var manualjournal = xeroClient.core.manualjournals.newManualJournal(sampleManual
 manualjournal.save()
     .then(function(manualJournals) {
         //Manual Journal has been created 
-        var myCreditNote = manualJournals.entities[0];
+        var myManualJournal = manualJournals.entities[0];
     })
     .catch(function(err) {
         //Some error occurred
