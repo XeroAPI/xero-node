@@ -1,0 +1,19 @@
+<h3>Manual Journals</h3>
+<table class="table table-bordered table-striped table-collapsed">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Status</td>
+            <td>Line Amount Types</td>
+            <td>Narration</td>
+        </tr>
+    </thead>
+    {{#each manualjournals}}
+    <tr>
+        <td>{{ this.Date }}</td>
+        <td>{{ this.Status }}</td>
+        <td>{{ this.LineAmountTypes }}</td>
+        <td>{{ this.Narration }}</td>
+    </tr>
+    {{/each}}
+</table>

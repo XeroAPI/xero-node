@@ -529,6 +529,32 @@ app.get('/items', function(req, res) {
     })
 });
 
+app.get('/manualjournals', function(req, res) {
+    authorizedOperation(req, res, '/manualjournals', function(xeroClient) {
+        var manualjournals = [];
+        xeroClient.core.manualjournals.getManualJournals({ pager: { callback: pagerCallback } })
+            .then(function() {
+                res.render('manualjournals', {
+                    manualjournals: manualjournals,
+                    active: {
+                        manualjournals: true,
+                        nav: {
+                            accounting: true
+                        }
+                    }
+                });
+            })
+            .catch(function(err) {
+                handleErr(err, req, res, 'manualjournals');
+            })
+
+        function pagerCallback(err, response, cb) {
+            manualjournals.push.apply(manualjournals, response.data);
+            cb()
+        }
+    })
+});
+
 app.get('/reports', function(req, res) {
     authorizedOperation(req, res, '/reports', function(xeroClient) {
 

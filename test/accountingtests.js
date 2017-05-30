@@ -549,9 +549,10 @@ describe('regression tests', function() {
                     accounts.forEach(function(account) {
 
                         //Fields required for POST / PUT
-
-                        expect(account.Code).to.be.a('string');
-                        expect(account.Code).to.have.length.below(11);
+                        if (account.Code) {
+                            expect(account.Code).to.be.a('string');
+                            expect(account.Code).to.have.length.below(11);
+                        }
 
                         expect(account.Name).to.not.equal("");
                         expect(account.Name).to.be.a('string');
@@ -572,19 +573,21 @@ describe('regression tests', function() {
                             }
                         }
 
-                        if (account.Type === "EXPENSE" && !account.SystemAccount && !expenseAccount) {
-                            //Save this for later use
-                            expenseAccount = account.Code;
-                        }
+                        if (account.Code && account.Status != "ARCHIVED") {
+                            if (account.Type === "EXPENSE" && !account.SystemAccount && !expenseAccount) {
+                                //Save this for later use
+                                expenseAccount = account.Code;
+                            }
 
-                        if (account.Type === "SALES" && !account.SystemAccount && !salesAccount) {
-                            //Save this for later use
-                            salesAccount = account.Code;
-                        }
+                            if (account.Type === "SALES" && !account.SystemAccount && !salesAccount) {
+                                //Save this for later use
+                                salesAccount = account.Code;
+                            }
 
-                        if (account.Type === "REVENUE" && !account.SystemAccount && !revenueAccount) {
-                            //Save this for later use
-                            revenueAccount = account.Code;
+                            if (account.Type === "REVENUE" && !account.SystemAccount && !revenueAccount) {
+                                //Save this for later use
+                                revenueAccount = account.Code;
+                            }
                         }
 
                         expect(account.Status).to.be.a('string');
@@ -1010,7 +1013,9 @@ describe('regression tests', function() {
                                 expect(lineItem.Description).to.equal(creditNoteData.LineItems[0].Description);
                                 expect(lineItem.Quantity).to.equal(creditNoteData.LineItems[0].Quantity);
                                 expect(lineItem.UnitAmount).to.equal(creditNoteData.LineItems[0].UnitAmount);
-                                expect(lineItem.AccountCode.toLowerCase()).to.equal(creditNoteData.LineItems[0].AccountCode.toLowerCase());
+                                if (lineItem.AccountCode) {
+                                    expect(lineItem.AccountCode.toLowerCase()).to.equal(creditNoteData.LineItems[0].AccountCode.toLowerCase());
+                                }
                             });
 
                             done();
@@ -2239,6 +2244,162 @@ describe('regression tests', function() {
         });
     });
 
+    describe('manualjournals', function() {
+        var ManualJournalID = "";
+
+        it('create manual journal', function(done) {
+
+            var sampleManualJournal = {
+                Narration: "Manual Journal Entry",
+                Date: new Date().toISOString().split("T")[0],
+                JournalLines: [{
+                        LineAmount: "-1000.00",
+                        AccountCode: salesAccount,
+                        TaxType: "INPUT"
+                    },
+                    {
+                        LineAmount: "1000.00",
+                        AccountCode: salesAccount,
+                        TaxType: "INPUT"
+                    }
+                ]
+            };
+
+            var manualjournal = currentApp.core.manualjournals.newManualJournal(sampleManualJournal);
+            manualjournal.save()
+                .then(function(response) {
+
+                    expect(response.entities).to.have.length.greaterThan(0);
+
+                    var manualJournal = response.entities[0];
+                    ManualJournalID = manualJournal.ManualJournalID;
+
+                    expect(response.entities[0].ManualJournalID).to.not.equal(undefined);
+                    expect(response.entities[0].ManualJournalID).to.not.equal("");
+                    expect(response.entities[0].Narration).to.equal(sampleManualJournal.Narration);
+
+                    manualJournal.JournalLines.forEach(function(journalItem) {
+                        expect(journalItem.LineAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
+                    });
+
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+
+        it('get (no paging)', function(done) {
+            currentApp.core.manualjournals.getManualJournals()
+                .then(function(manualjournals) {
+                    _.each(manualjournals, function(manualJournal) {
+                        expect(manualJournal.ManualJournalID).to.not.equal("");
+                        expect(manualJournal.ManualJournalID).to.not.equal(undefined);
+                    });
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+        it('get (paging)', function(done) {
+            currentApp.core.manualjournals.getManualJournals({ pager: { start: 1, callback: onManualJournals } })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+            function onManualJournals(err, response, cb) {
+                cb();
+                try {
+                    _.each(response.data, function(manualJournal) {
+                        expect(manualJournal.ManualJournalID).to.not.equal("");
+                        expect(manualJournal.ManualJournalID).to.not.equal(undefined);
+                    });
+
+                    if (response.finished)
+                        done();
+                } catch (ex) {
+                    console.log(util.inspect(err, null, null));
+                    done(ex);
+                    return;
+                }
+
+            }
+        });
+
+        it('get by id', function(done) {
+            currentApp.core.manualjournals.getManualJournal(ManualJournalID)
+                .then(function(manualjournal) {
+                    expect(manualjournal.ManualJournalID).to.equal(ManualJournalID);
+                    done();
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+        it('get - modifiedAfter', function(done) {
+            var modifiedAfter = new Date();
+
+            //take 20 seconds ago as we just created a contact
+            modifiedAfter.setTime(modifiedAfter.getTime() - 30000);
+
+            currentApp.core.manualjournals.getManualJournals({ modifiedAfter: modifiedAfter })
+                .then(function(manualjournals) {
+                    expect(manualjournals.length).to.equal(1);
+                    done();
+
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+        })
+
+        it('get - invalid modified date', function(done) {
+
+            currentApp.core.manualjournals.getManualJournals({ modifiedAfter: 'cats' })
+                .then(function(manualjournals) {
+                    expect(manualjournals.length).to.be.greaterThan(1);
+                    done();
+
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+        })
+
+        it('update Manual Journal', function(done) {
+            currentApp.core.manualjournals.getManualJournal(ManualJournalID)
+                .then(function(manualJournal) {
+                    expect(manualJournal.ManualJournalID).to.equal(ManualJournalID);
+
+                    var newNarration = "Updated" + Math.random();
+                    manualJournal.Narration = newNarration;
+
+                    manualJournal.save()
+                        .then(function(updatedManualJournal) {
+                            expect(updatedManualJournal.entities[0].Narration).to.equal(newNarration);
+                            done();
+                        })
+                        .catch(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+        })
+    });
+
     /**
      * Attachments should work on the following endpoints:
      *  Invoices
@@ -2287,12 +2448,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2364,12 +2525,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2402,12 +2563,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2440,12 +2601,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2478,12 +2639,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2516,12 +2677,50 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
+        it('creates an attachment on a manual journal using a file reference', function(done) {
+            var attachmentTemplate = {
+                FileName: "1-test-attachment.pdf",
+                MimeType: "application/pdf"
+            };
+
+            var sampleDataReference = __dirname + "/testdata/test-attachment.pdf";
+
+            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(attachmentTemplate);
+
+            //Add attachment to an Invoice
+            currentApp.core.manualjournals.getManualJournals()
+                .then(function(manualJournals) {
+                    var sampleManualJournal = manualJournals[0];
+                    attachmentPlaceholder.save("ManualJournals/" + sampleManualJournal.ManualJournalID, sampleDataReference, false)
+                        .then(function(response) {
+                            expect(response.entities.length).to.equal(1);
+                            var thisFile = response.entities[0];
+                            expect(thisFile.AttachmentID).to.not.equal("");
+                            expect(thisFile.AttachmentID).to.not.equal(undefined);
+                            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
+                            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
+                            expect(thisFile.ContentLength).to.be.greaterThan(0);
+                            expect(thisFile.Url).to.not.equal("");
+                            expect(thisFile.Url).to.not.equal(undefined);
+                            done();
+                        })
+                        .catch(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2558,12 +2757,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2597,12 +2796,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2635,12 +2834,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2673,12 +2872,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2711,12 +2910,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2749,12 +2948,51 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
+        it('creates an attachment on a manual journal using a file reference', function(done) {
+            var attachmentTemplate = {
+                FileName: "1-test-attachment.pdf",
+                MimeType: "application/pdf"
+            };
+
+            var sampleDataReference = __dirname + "/testdata/test-attachment.pdf";
+            var dataReadStream = fs.createReadStream(sampleDataReference);
+
+            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(attachmentTemplate);
+
+            //Add attachment to an Invoice
+            currentApp.core.manualjournals.getManualJournals()
+                .then(function(manualJournals) {
+                    var sampleManualJournal = manualJournals[0];
+                    attachmentPlaceholder.save("ManualJournals/" + sampleManualJournal.ManualJournalID, dataReadStream, true)
+                        .then(function(response) {
+                            expect(response.entities.length).to.equal(1);
+                            var thisFile = response.entities[0];
+                            expect(thisFile.AttachmentID).to.not.equal("");
+                            expect(thisFile.AttachmentID).to.not.equal(undefined);
+                            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
+                            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
+                            expect(thisFile.ContentLength).to.be.greaterThan(0);
+                            expect(thisFile.Url).to.not.equal("");
+                            expect(thisFile.Url).to.not.equal(undefined);
+                            done();
+                        })
+                        .catch(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2783,7 +3021,7 @@ describe('regression tests', function() {
                         .catch(done);
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
