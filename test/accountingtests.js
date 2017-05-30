@@ -293,7 +293,7 @@ describe('regression tests', function() {
 
     });
 
-    describe('reporting tests', function() {
+    describe.skip('reporting tests', function() {
         it('Generates a Balance Sheet Report', function(done) {
             currentApp.core.reports.generateReport({ id: 'BalanceSheet' })
                 .then(function(report) {
@@ -513,7 +513,7 @@ describe('regression tests', function() {
 
     })
 
-    describe('organisations', function() {
+    describe.skip('organisations', function() {
         it('get', function(done) {
             currentApp.core.organisations.getOrganisation()
                 .then(function(ret) {
@@ -534,7 +534,7 @@ describe('regression tests', function() {
         })
     });
 
-    describe('accounts', function() {
+    describe.skip('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -549,9 +549,10 @@ describe('regression tests', function() {
                     accounts.forEach(function(account) {
 
                         //Fields required for POST / PUT
-
-                        expect(account.Code).to.be.a('string');
-                        expect(account.Code).to.have.length.below(11);
+                        if (account.Code) {
+                            expect(account.Code).to.be.a('string');
+                            expect(account.Code).to.have.length.below(11);
+                        }
 
                         expect(account.Name).to.not.equal("");
                         expect(account.Name).to.be.a('string');
