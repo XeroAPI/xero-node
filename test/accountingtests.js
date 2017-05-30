@@ -293,7 +293,7 @@ describe('regression tests', function() {
 
     });
 
-    describe.skip('reporting tests', function() {
+    describe('reporting tests', function() {
         it('Generates a Balance Sheet Report', function(done) {
             currentApp.core.reports.generateReport({ id: 'BalanceSheet' })
                 .then(function(report) {
@@ -2244,24 +2244,27 @@ describe('regression tests', function() {
         });
     });
 
-    describe('manualjournals', function(){
-        var sampleManualJournal = {
-            Narration: "Manual Journal Entry",
-            Date: new Date().toISOString().split("T")[0],
-            JournalLines: [
-                {
-                    LineAmount: "-1000.00",
-                    AccountCode: "489"
-                },
-                {
-                    LineAmount: "1000.00",
-                    AccountCode: "620"
-                }
-            ]
-        };
+    describe('manualjournals', function() {
         var ManualJournalID = "";
 
         it('create manual journal', function(done) {
+
+            var sampleManualJournal = {
+                Narration: "Manual Journal Entry",
+                Date: new Date().toISOString().split("T")[0],
+                JournalLines: [{
+                        LineAmount: "-1000.00",
+                        AccountCode: salesAccount,
+                        TaxType: "INPUT"
+                    },
+                    {
+                        LineAmount: "1000.00",
+                        AccountCode: salesAccount,
+                        TaxType: "INPUT"
+                    }
+                ]
+            };
+
             var manualjournal = currentApp.core.manualjournals.newManualJournal(sampleManualJournal);
             manualjournal.save()
                 .then(function(response) {
@@ -2342,7 +2345,7 @@ describe('regression tests', function() {
             var modifiedAfter = new Date();
 
             //take 20 seconds ago as we just created a contact
-            modifiedAfter.setTime(modifiedAfter.getTime() - 20000);
+            modifiedAfter.setTime(modifiedAfter.getTime() - 30000);
 
             currentApp.core.manualjournals.getManualJournals({ modifiedAfter: modifiedAfter })
                 .then(function(manualjournals) {
@@ -2373,16 +2376,16 @@ describe('regression tests', function() {
         })
 
         it('update Manual Journal', function(done) {
-            currentApp.core.manualjournals.getManualJournals(ManualJournalID)
+            currentApp.core.manualjournals.getManualJournal(ManualJournalID)
                 .then(function(manualJournal) {
-                    expect(manualjournals.ManualJournalID).to.equal(ManualJournalID);
+                    expect(manualJournal.ManualJournalID).to.equal(ManualJournalID);
 
                     var newNarration = "Updated" + Math.random();
                     manualJournal.Narration = newNarration;
 
                     manualJournal.save()
                         .then(function(updatedManualJournal) {
-                            expect(updatedManualJournal.response.ManualJournals.ManualJournal.Narration).to.equal(newNarration);
+                            expect(updatedManualJournal.entities[0].Narration).to.equal(newNarration);
                             done();
                         })
                         .catch(function(err) {
@@ -2445,12 +2448,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2522,12 +2525,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2560,12 +2563,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2598,12 +2601,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2636,12 +2639,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2674,12 +2677,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2716,12 +2719,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2755,12 +2758,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2793,12 +2796,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2831,12 +2834,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2869,12 +2872,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2907,12 +2910,12 @@ describe('regression tests', function() {
                             done();
                         })
                         .catch(function(err) {
-                            console.log(err);
+                            console.log(util.inspect(err, null, null));
                             done(wrapError(err));
                         })
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
@@ -2941,7 +2944,7 @@ describe('regression tests', function() {
                         .catch(done);
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 });
         });
