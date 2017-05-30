@@ -513,7 +513,7 @@ describe('regression tests', function() {
 
     })
 
-    describe.skip('organisations', function() {
+    describe('organisations', function() {
         it('get', function(done) {
             currentApp.core.organisations.getOrganisation()
                 .then(function(ret) {
@@ -534,7 +534,7 @@ describe('regression tests', function() {
         })
     });
 
-    describe.skip('accounts', function() {
+    describe('accounts', function() {
 
         //Accounts supporting data
         var accountClasses = ["ASSET", "EQUITY", "EXPENSE", "LIABILITY", "REVENUE"];
@@ -573,19 +573,21 @@ describe('regression tests', function() {
                             }
                         }
 
-                        if (account.Type === "EXPENSE" && !account.SystemAccount && !expenseAccount) {
-                            //Save this for later use
-                            expenseAccount = account.Code;
-                        }
+                        if (account.Code && account.Status != "ARCHIVED") {
+                            if (account.Type === "EXPENSE" && !account.SystemAccount && !expenseAccount) {
+                                //Save this for later use
+                                expenseAccount = account.Code;
+                            }
 
-                        if (account.Type === "SALES" && !account.SystemAccount && !salesAccount) {
-                            //Save this for later use
-                            salesAccount = account.Code;
-                        }
+                            if (account.Type === "SALES" && !account.SystemAccount && !salesAccount) {
+                                //Save this for later use
+                                salesAccount = account.Code;
+                            }
 
-                        if (account.Type === "REVENUE" && !account.SystemAccount && !revenueAccount) {
-                            //Save this for later use
-                            revenueAccount = account.Code;
+                            if (account.Type === "REVENUE" && !account.SystemAccount && !revenueAccount) {
+                                //Save this for later use
+                                revenueAccount = account.Code;
+                            }
                         }
 
                         expect(account.Status).to.be.a('string');
@@ -1011,7 +1013,9 @@ describe('regression tests', function() {
                                 expect(lineItem.Description).to.equal(creditNoteData.LineItems[0].Description);
                                 expect(lineItem.Quantity).to.equal(creditNoteData.LineItems[0].Quantity);
                                 expect(lineItem.UnitAmount).to.equal(creditNoteData.LineItems[0].UnitAmount);
-                                expect(lineItem.AccountCode.toLowerCase()).to.equal(creditNoteData.LineItems[0].AccountCode.toLowerCase());
+                                if (lineItem.AccountCode) {
+                                    expect(lineItem.AccountCode.toLowerCase()).to.equal(creditNoteData.LineItems[0].AccountCode.toLowerCase());
+                                }
                             });
 
                             done();
