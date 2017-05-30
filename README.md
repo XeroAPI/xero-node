@@ -1,5 +1,8 @@
 xero-node (alpha)
 ===========
+
+[![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
+
 An API wrapper for xero (http://developer.xero.com).
 
 Supports the three applications types:
