@@ -25,6 +25,7 @@ The following Xero API functions are supported:
 * Invoice Reminders
 * Items
 * Journals
+* Manual Journals
 * Organisations
 * Payments
 * Reports
