@@ -1,5 +1,8 @@
 xero-node (alpha)
 ===========
+
+[![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
+
 An API wrapper for xero (http://developer.xero.com).
 
 Supports the three applications types:
@@ -193,6 +196,8 @@ npm test
 
 ## Release Change Log
 
+* 2.1.4
+    - Merged [PR#24](https://github.com/XeroAPI/xero-node/pull/24) - Add support for Manual Journals.
 * 2.1.3
     - Merged [PR#18](https://github.com/XeroAPI/xero-node/pull/18) - set a default useragent header when not provided in the config file and warn the user.
 * 2.1.2
