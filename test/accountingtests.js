@@ -35,7 +35,9 @@ try {
             authorizeCallbackUrl: process.env.authorizeCallbackUrl,
             userAgent: process.env.userAgent,
             consumerKey: process.env.consumerKey,
-            consumerSecret: process.env.consumerSecret
+            consumerSecret: process.env.consumerSecret,
+            privateKeyPath: process.env.privateKeyPath,
+            privateKey: process.env.privateKey
         }
     } else {
         throw "Config not found";
