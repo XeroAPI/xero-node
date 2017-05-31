@@ -25,6 +25,8 @@ var salesAccount = '';
 
 var someContactId = "";
 
+var metaConfig = {};
+
 try {
     metaConfig = require('./config/testing_config.json');
 } catch (ex) {
