@@ -7,8 +7,7 @@ var chai = require('chai'),
     util = require('util'),
     Browser = require('zombie'),
     uuid = require('uuid'),
-    fs = require('fs'),
-    metaConfig = require('./config/testing_config.json');
+    fs = require('fs');
 
 process.on('uncaughtException', function(err) {
     console.log('uncaught', err)
@@ -25,6 +24,23 @@ var revenueAccount = '';
 var salesAccount = '';
 
 var someContactId = "";
+
+try {
+    metaConfig = require('./config/testing_config.json');
+} catch (ex) {
+    if (process && process.env && process.env.APPTYPE) {
+        //no config file found, so check the process.env.
+        metaConfig.APPTYPE = process.env.APPTYPE;
+        metaConfig[metaConfig.APPTYPE.toLowerCase()] = {
+            authorizeCallbackUrl: process.env.authorizeCallbackUrl,
+            userAgent: process.env.userAgent,
+            consumerKey: process.env.consumerKey,
+            consumerSecret: process.env.consumerSecret
+        }
+    } else {
+        throw "Config not found";
+    }
+}
 
 var APPTYPE = metaConfig.APPTYPE;
 var config = metaConfig[APPTYPE.toLowerCase()];
