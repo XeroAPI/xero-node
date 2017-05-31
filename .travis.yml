@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '6'
 before_script:
-- openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./test/config/travis-ci -out ./test/config/nodejs-private.pem -d -a
+- openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in XeroAPI/xero-node/test/config/travis-ci -out XeroAPI/xero-node/test/config/nodejs-private.pem -d -a
 env:
   global:
     secure: oMn0LwxCIwZEvTa8umtIbntXIDgZf4Ki2qdeleDGkiGCZKAmD6QfVyf6q7QrhhyL4xIz5rT1JSQV7blS2jvHpWA9tTAX6Heuaypca1yz7C/01bJEhQT4n/i91v7vPYzlUrGVT/urOzK+AXusJg4DDm7yawC6Nhxk7ztU6isShWox6hB/ikMwp34RDkI6KKChaSYThzsIUGveu284KaQ0STsU+sTtraFaubgsweJ6VSdrbF+vfneiAJINh1IeRGqkLYJz91/zDiInY+vmDrgLC6qPrERg0STsAwUsyAeDN0PITssyLyVWxxTKXB6mRuWCCz0vyMy65GOMTl6JqP0Ju4POyDYQ6Q6Ehr/7DYKFp/czJHLYiLIcLHJNLLICkmzKgd5ehV/hF67nQQSD6D7HeF7+Rg/lyFhXMTJGTYw6lEKgpoUzzNF4WJMR21+gUpuebM8JYtYb0oeBKa9K6Nj9palrCArpkRPzTfIPXy8HVoqFCierzKphueP+1AYo1FxlF8tIACuxXWGJGuZglQUPI93ytjaYwEhhF+xQJnuOABTthTvn6BxHGHxgUriukPYN+5HiMDJ9nHpHTuz1c/wjtUCmeTw13rzG+zdpdJ6NIYWaAbU/vAaex5XzdrFn8gWp/cglELwl6NwDOrHwb5MyHmb/B8vekakvgiy6heiuNWk=
