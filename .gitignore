@@ -9,3 +9,6 @@
 .vscode
 testing_config.json
 sample_app/config/config.json
+*.pem
+*.pfx
+*.cer
