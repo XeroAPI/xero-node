@@ -196,6 +196,8 @@ npm test
 
 ## Release Change Log
 
+* 2.1.5
+    - Merged [PR#34](https://github.com/XeroAPI/xero-node/pull/34) - Updated lodash version as this was causing minor issues.
 * 2.1.4
     - Merged [PR#24](https://github.com/XeroAPI/xero-node/pull/24) - Add support for Manual Journals.
 * 2.1.3
