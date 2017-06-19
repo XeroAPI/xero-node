@@ -7,6 +7,7 @@
             <th>Due Date</th>
             <th>Status</th>
             <th>Total</th>
+            <th>Attachments</th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,13 @@
         <td>{{ this.DueDate }}</td>
         <td>{{ this.Status}}</td>
         <td>{{ this.Total }}</td>
+        <td>
+            {{#if this.HasAttachments }}
+                <a href="/attachments?entityID={{ this.InvoiceID }}&entityType=INVOICE">Download</a>
+            {{else}}
+                N/A
+            {{/if}}
+        </td>
     </tr>
     
     {{#ifCond this.Payments.length '>' 0}}
