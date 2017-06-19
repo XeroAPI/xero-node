@@ -508,6 +508,41 @@ app.get('/invoices', function(req, res) {
     })
 });
 
+app.get('/attachments', function(req, res) {
+    authorizedOperation(req, res, '/attachments', function(xeroClient) {
+
+        var entityID = req.query && req.query.entityID ? req.query.entityID : null;
+        var entityType = req.query && req.query.entityType ? req.query.entityType : null;
+
+        if (entityID && entityType) {
+
+            xeroClient.core.invoices.getInvoice(entityID)
+                .then(function(invoice) {
+                    invoice.getAttachments()
+                        .then(function(attachments) {
+                            //Get the reference to the attachment object
+                            var myAttachment = attachments[0];
+                            res.writeHead(200, {
+                                "Content-Type": myAttachment.MimeType,
+                                "Content-Disposition": "attachment; filename=" + myAttachment.FileName,
+                                "Content-Length": myAttachment.ContentLength
+                            });
+                            myAttachment.getContent(res);
+                        })
+                        .catch(function(err) {
+                            handleErr(err, req, res, 'invoices');
+                        })
+                })
+                .catch(function(err) {
+                    handleErr(err, req, res, 'invoices');
+                })
+
+        } else {
+            handleErr("No Attachments Found", req, res, 'index');
+        }
+    })
+});
+
 app.get('/items', function(req, res) {
     authorizedOperation(req, res, '/items', function(xeroClient) {
         xeroClient.core.items.getItems()
