@@ -1915,6 +1915,23 @@ describe('regression tests', function() {
                 });
         });
 
+        it('saves multiple items', function(done) {
+            var items = [];
+
+            for (var i = 0; i < 10; i++) {
+                items.push(currentApp.core.items.newItem(sampleItem));
+            }
+
+            currentApp.core.items.saveItems(items)
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(9);
+                    done();
+                })
+                .catch(function(err) {
+                    done(wrapError(err));
+                })
+        });
+
         it('retrieves some items (no paging)', function(done) {
             currentApp.core.items.getItems()
                 .then(function(items) {
