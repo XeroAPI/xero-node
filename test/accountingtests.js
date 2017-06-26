@@ -280,13 +280,35 @@ describe('regression tests', function() {
             Code: randomString.replace(/-/g, '').substring(0, 10),
             Name: 'Test account from Node SDK ' + randomString,
             Type: 'BANK',
-            BankAccountNumber: '062-021-0000000',
+            BankAccountNumber: '062-123-0000000',
         };
 
         var account = currentApp.core.accounts.newAccount(testAccountData);
 
         return account.save()
             .then(function(response) {
+                var account = response.entities[0];
+                bankAccounts.push({
+                    account: account,
+                    id: account.AccountID
+                });
+            });
+    });
+
+    before('create a sales account', function() {
+        const randomString = uuid.v4();
+
+        var testAccountData = {
+            Code: randomString.replace(/-/g, '').substring(0, 10),
+            Name: 'Test account from Node SDK ' + randomString,
+            Type: 'SALES'
+        };
+
+        var account = currentApp.core.accounts.newAccount(testAccountData);
+
+        return account.save()
+            .then(function(response) {
+                expect(response.entities.length).to.be.greaterThan(0);
                 var account = response.entities[0];
                 bankAccounts.push({
                     account: account,
@@ -1915,6 +1937,24 @@ describe('regression tests', function() {
                 });
         });
 
+        it('saves multiple items', function(done) {
+            var items = [];
+
+            for (var i = 0; i < 10; i++) {
+                sampleItem.Code = 'Item-' + Math.random();
+                items.push(currentApp.core.items.newItem(sampleItem));
+            }
+
+            currentApp.core.items.saveItems(items)
+                .then(function(response) {
+                    expect(response.entities).to.have.length.greaterThan(9);
+                    done();
+                })
+                .catch(function(err) {
+                    done(wrapError(err));
+                })
+        });
+
         it('retrieves some items (no paging)', function(done) {
             currentApp.core.items.getItems()
                 .then(function(items) {
@@ -2012,7 +2052,7 @@ describe('regression tests', function() {
             var modifiedAfter = new Date();
 
             //take 20 seconds ago as we just created a contact
-            modifiedAfter.setTime(modifiedAfter.getTime() - 20000);
+            modifiedAfter.setTime(modifiedAfter.getTime() - 60000);
 
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
                 .then(function(contacts) {
@@ -2310,6 +2350,24 @@ describe('regression tests', function() {
                     done(wrapError(err));
                 })
         })
+        it('get - modifiedAfter', function(done) {
+            var modifiedAfter = new Date();
+
+            //take 20 seconds ago as we just created a contact
+            modifiedAfter.setTime(modifiedAfter.getTime() - 60000);
+
+            currentApp.core.manualjournals.getManualJournals({ modifiedAfter: modifiedAfter })
+                .then(function(manualjournals) {
+                    expect(manualjournals.length).to.equal(1);
+                    done();
+
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                })
+
+        })
 
         it('get (no paging)', function(done) {
             currentApp.core.manualjournals.getManualJournals()
@@ -2361,24 +2419,6 @@ describe('regression tests', function() {
                     console.log(util.inspect(err, null, null));
                     done(wrapError(err));
                 })
-        })
-        it('get - modifiedAfter', function(done) {
-            var modifiedAfter = new Date();
-
-            //take 20 seconds ago as we just created a contact
-            modifiedAfter.setTime(modifiedAfter.getTime() - 30000);
-
-            currentApp.core.manualjournals.getManualJournals({ modifiedAfter: modifiedAfter })
-                .then(function(manualjournals) {
-                    expect(manualjournals.length).to.equal(1);
-                    done();
-
-                })
-                .catch(function(err) {
-                    console.log(util.inspect(err, null, null));
-                    done(wrapError(err));
-                })
-
         })
 
         it('get - invalid modified date', function(done) {
