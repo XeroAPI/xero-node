@@ -21,6 +21,7 @@ This helper contains the following functions:
 * `getItems([options])`
 * `getItem(id[, modifiedAfter])`
 * `deleteItem(id)`
+* `saveItems(items,[options])`
 
 ### Creating a new item
 
@@ -61,6 +62,38 @@ Some points to note with the code snippet above:
 * The `.save()` function returns a promise that can be met using the `.then()` function, and rejections can be caught using the `.catch()` function.
 * The promise that is returned by the `.save()` function contains a response object.  This has a bunch of information about the state of the response, but also contains an `entities` array.  This array is what actually contains the object that was just created. 
 * For single object saving, this `entities` array should only ever contain one element, but some objects support a multiple object save and in this case the `entities` array will contain all of the objects that were created.
+
+### Creating multiple Items in one go
+
+You can use the helper function `saveItems` to save an array of items in one go.
+
+The following code provides guidance on how to set this up:
+
+```javascript
+
+var sampleItem1 = {
+  //some item...
+};
+
+var sampleItem2 = {
+  //some item...
+};
+
+var items = [];
+
+items.push(xeroClient.core.items.newItem(sampleItem1));
+items.push(xeroClient.core.items.newItem(sampleItem2));
+
+xeroClient.core.items.saveItems(items)
+    .then(function(items) {
+        //Items have been created 
+        var item1 = items.entities[0];
+        var item2 = items.entities[1];
+    })
+    .catch(function(err) {
+        //Some error occurred
+    });
+```
 
 ### Retrieving All Items
 

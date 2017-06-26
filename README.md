@@ -196,6 +196,8 @@ npm test
 
 ## Release Change Log
 
+* 2.1.7
+    - Merged [PR#41](https://github.com/XeroAPI/xero-node/pull/41) - Added support for multiple item creation (fix for issue #39).
 * 2.1.6
     - Merged [PR#38](https://github.com/XeroAPI/xero-node/pull/38) - Fixed attachment streaming bug on partner applications.
 * 2.1.5
