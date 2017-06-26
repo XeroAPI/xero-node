@@ -196,6 +196,8 @@ npm test
 
 ## Release Change Log
 
+* 2.1.6
+    - Merged [PR#38](https://github.com/XeroAPI/xero-node/pull/38) - Fixed attachment streaming bug on partner applications.
 * 2.1.5
     - Merged [PR#34](https://github.com/XeroAPI/xero-node/pull/34) - Updated lodash version as this was causing minor issues.
 * 2.1.4
