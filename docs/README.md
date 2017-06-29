@@ -54,6 +54,6 @@ Support for the other Xero APIs is not currently available, but is coming soon.
 * Xero Practice Manager
 
 
-If you need further support, please raise an issue in Github or contact api@xero.com.
+If you need further support, please raise an issue in Github.
 
 
