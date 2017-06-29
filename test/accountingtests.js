@@ -2024,7 +2024,37 @@ describe('regression tests', function() {
         var sampleContact = {
             Name: 'Johnnies Coffee' + Math.random(),
             FirstName: 'John',
-            LastName: 'Smith'
+            LastName: 'Smith',
+            EmailAddress: 'John.Smith@example.com',
+            SkypeUserName: 'jonnysmith',
+            ContactPersons: [{
+                FirstName: 'Sally',
+                LastName: 'Smith',
+                EmailAddress: 'Sally.Smith@example.com',
+                IncludeInEmails: false
+            }],
+            Phones: [{
+                PhoneNumber: '86000000',
+                PhoneAreaCode: '03',
+                PhoneCountryCode: '61',
+                PhoneType: 'DEFAULT'
+            }, {
+                PhoneNumber: '86000001',
+                PhoneAreaCode: '03',
+                PhoneCountryCode: '61',
+                PhoneType: 'DDI'
+            }, {
+                PhoneNumber: '86000002',
+                PhoneAreaCode: '03',
+                PhoneCountryCode: '61',
+                PhoneType: 'FAX'
+            }, {
+                PhoneNumber: '20000000',
+                PhoneAreaCode: '04',
+                PhoneCountryCode: '61',
+                PhoneType: 'MOBILE'
+            }],
+            BankAccountDetails: '01-0123-0123456-00'
         };
 
         it('create single contact', function(done) {
@@ -2037,6 +2067,23 @@ describe('regression tests', function() {
                     expect(response.entities[0].Name).to.equal(sampleContact.Name);
                     expect(response.entities[0].FirstName).to.equal(sampleContact.FirstName);
                     expect(response.entities[0].LastName).to.equal(sampleContact.LastName);
+                    expect(response.entities[0].SkypeUserName).to.equal(sampleContact.SkypeUserName);
+                    expect(response.entities[0].EmailAddress).to.equal(sampleContact.EmailAddress);
+                    expect(response.entities[0].BankAccountDetails).to.equal(sampleContact.BankAccountDetails);
+
+                    response.entities[0].ContactPersons.forEach(function(contactPerson, idx) {
+                        expect(contactPerson.FirstName).to.equal(sampleContact.ContactPersons[idx].FirstName);
+                        expect(contactPerson.LastName).to.equal(sampleContact.ContactPersons[idx].LastName);
+                        expect(contactPerson.EmailAddress).to.equal(sampleContact.ContactPersons[idx].EmailAddress);
+                        expect(contactPerson.IncludeInEmails).to.equal(sampleContact.ContactPersons[idx].IncludeInEmails);
+                    });
+
+                    response.entities[0].Phones.forEach(function(phone, idx) {
+                        expect(phone.PhoneNumber).to.equal(sampleContact.Phones[idx].PhoneNumber);
+                        expect(phone.PhoneAreaCode).to.equal(sampleContact.Phones[idx].PhoneAreaCode);
+                        expect(phone.PhoneCountryCode).to.equal(sampleContact.Phones[idx].PhoneCountryCode);
+                        expect(phone.PhoneType).to.equal(sampleContact.Phones[idx].PhoneType);
+                    });
 
                     sampleContact = response.entities[0];
 
@@ -2051,7 +2098,7 @@ describe('regression tests', function() {
         it('get - modifiedAfter', function(done) {
             var modifiedAfter = new Date();
 
-            //take 20 seconds ago as we just created a contact
+            //take 60 seconds ago as we just created a contact
             modifiedAfter.setTime(modifiedAfter.getTime() - 60000);
 
             currentApp.core.contacts.getContacts({ modifiedAfter: modifiedAfter })
