@@ -24,7 +24,7 @@ This helper contains the following functions:
 The `Attachment` object also provides the following method:
 
 * `getContent(writestream)`
-* `save(ownerpath, data[, stream])`
+* `save(ownerpath, data[, stream, includeOnline])`
 
 ### Creating a new attachment using a file stream (recommended)
 
@@ -58,6 +58,7 @@ Some points to note with the code snippet above:
 * The `.save()` function returns a promise that can be met using the `.then()` function, and rejections can be caught using the `.catch()` function.
 * The promise that is returned by the `.save()` function contains a response object.  This has a bunch of information about the state of the response, but also contains an `entities` array.  This array is what actually contains the object that was just created. 
 * For single object saving, this `entities` array should only ever contain one element, but some objects support a multiple object save and in this case the `entities` array will contain all of the objects that were created.
+* The `includeOnline` parameter is only effective for invoice attachments and defaults to `false`. This is used to distinguish which attachments should be exposed to the invoice recipient via the Xero online invoice viewer.
 
 ### Creating a new attachment using a file reference
 
