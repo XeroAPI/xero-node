@@ -1281,8 +1281,7 @@ describe('regression tests', function() {
                             expect(taxComponent.Name).to.not.equal("");
                             expect(taxComponent.Name).to.not.equal(undefined);
                             expect(taxComponent.Rate).to.be.a('String');
-                            //Hacked to a string as the framework doesn't recursively translate nested objects
-                            expect(taxComponent.IsCompound).to.be.oneOf(["true", "false"]);
+                            expect(taxComponent.IsCompound).to.be.oneOf([true, false]);
                         });
                     });
                     done();
@@ -1332,7 +1331,7 @@ describe('regression tests', function() {
 
                         //This is hacked toString() because of: https://github.com/jordanwalsh23/xero-node/issues/13
                         expect(taxComponent.Rate).to.equal(taxrate.TaxComponents[0].Rate.toString());
-                        expect(taxComponent.IsCompound).to.equal(taxrate.TaxComponents[0].IsCompound.toString());
+                        expect(taxComponent.IsCompound).to.equal(taxrate.TaxComponents[0].IsCompound);
                     });
                     done();
                 })
@@ -2524,7 +2523,7 @@ describe('regression tests', function() {
      *   Repeating Invoices
      */
 
-    describe.only('attachments', function() {
+    describe('attachments', function() {
         var invoiceID = '';
 
         it('creates an attachment on an invoice using a file reference', function(done) {
