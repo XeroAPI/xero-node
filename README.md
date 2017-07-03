@@ -196,6 +196,8 @@ npm test
 
 ## Release Change Log
 
+* 2.1.8
+    - Merged [PR#44](https://github.com/XeroAPI/xero-node/pull/44) - Merge PR#43 and expose more contact fields (fix for issue #40).
 * 2.1.7
     - Merged [PR#41](https://github.com/XeroAPI/xero-node/pull/41) - Added support for multiple item creation (fix for issue #39).
 * 2.1.6
