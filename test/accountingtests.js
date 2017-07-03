@@ -2524,7 +2524,7 @@ describe('regression tests', function() {
      *   Repeating Invoices
      */
 
-    describe('attachments', function() {
+    describe.only('attachments', function() {
         var invoiceID = '';
 
         it('creates an attachment on an invoice using a file reference', function(done) {
@@ -2553,6 +2553,46 @@ describe('regression tests', function() {
                             expect(thisFile.Url).to.not.equal("");
                             expect(thisFile.Url).to.not.equal(undefined);
                             invoiceID = sampleInvoice.InvoiceID;
+                            done();
+                        })
+                        .catch(function(err) {
+                            console.log(util.inspect(err, null, null));
+                            done(wrapError(err));
+                        })
+                })
+                .catch(function(err) {
+                    console.log(util.inspect(err, null, null));
+                    done(wrapError(err));
+                });
+        });
+
+        it('creates an attachment on an invoice using a file reference and online invoice set to true', function(done) {
+            var attachmentTemplate = {
+                FileName: "1-test-attachment.pdf",
+                MimeType: "application/pdf"
+            };
+
+            var sampleDataReference = __dirname + "/testdata/test-attachment.pdf";
+
+            var attachmentPlaceholder = currentApp.core.attachments.newAttachment(attachmentTemplate);
+
+            //Add attachment to an Invoice
+            var filter = 'Type == "ACCREC"';
+            currentApp.core.invoices.getInvoices({ where: filter })
+                .then(function(invoices) {
+                    var sampleInvoice = invoices[0];
+                    attachmentPlaceholder.save("Invoices/" + sampleInvoice.InvoiceID, sampleDataReference, false, { IncludeOnline: true })
+                        .then(function(response) {
+                            expect(response.entities.length).to.equal(1);
+                            var thisFile = response.entities[0];
+                            expect(thisFile.AttachmentID).to.not.equal("");
+                            expect(thisFile.AttachmentID).to.not.equal(undefined);
+                            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
+                            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
+                            expect(thisFile.ContentLength).to.be.greaterThan(0);
+                            expect(thisFile.Url).to.not.equal("");
+                            expect(thisFile.Url).to.not.equal(undefined);
+                            expect(thisFile.IncludeOnline).to.equal(true);
                             done();
                         })
                         .catch(function(err) {
