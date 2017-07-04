@@ -97,7 +97,7 @@ This example shows how to retrieve an payment using the 'where' filter.
 ```javascript
 
 //filter payments that are type ACCREC
-var filter = 'PaymentType == ACCRECPAYMENT';
+var filter = 'PaymentType == "ACCRECPAYMENT'';
 
 xeroClient.core.payments.getPayments({where: filter})
    .then(function(payments) {
