@@ -196,6 +196,8 @@ npm test
 
 ## Release Change Log
 
+* 2.2.0
+    - Merged [PR#46](https://github.com/XeroAPI/xero-node/pull/46) - Merge PR#45 and provide library level support for boolean values (formerly this required string conversion).
 * 2.1.8
     - Merged [PR#44](https://github.com/XeroAPI/xero-node/pull/44) - Merge PR#43 and expose more contact fields (fix for issue #40).
 * 2.1.7

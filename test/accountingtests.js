@@ -1519,7 +1519,7 @@ describe('regression tests', function() {
 
         it('Create Payment', function(done) {
 
-            var payment = currentApp.core.payments.createPayment({
+            var payment = currentApp.core.payments.newPayment({
                 Invoice: {
                     InvoiceID: InvoiceID
                 },
@@ -1577,7 +1577,7 @@ describe('regression tests', function() {
 
         it('Update Payment', function(done) {
 
-            var paymentToDelete = currentApp.core.payments.createPayment({
+            var paymentToDelete = currentApp.core.payments.newPayment({
                 PaymentID: PaymentID,
                 Status: "DELETED"
             });
