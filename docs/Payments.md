@@ -16,9 +16,10 @@ The entity helper that has been created for the payments functions exists in the
 
 This helper contains the following functions:
 
-* `createPayment(data[, options])`
+* `newPayment(data[, options])`
 * `getPayments([options])`
 * `getPayment(id[, modifiedAfter])`
+* `savePayments(data[, options])`
 
 ### Creating a new payment
 
@@ -147,4 +148,36 @@ xeroClient.core.payments.getPayment(somePaymentID)
             console.log(thisPayment.Status); //'AUTHORISED'
          })
    });
+```
+
+### Creating multiple payments in one go
+
+You can use the helper function `savePayments` to save an array of payments in one go.
+
+The following code provides guidance on how to set this up:
+
+```javascript
+
+var samplePayment1 = {
+  //some item...
+};
+
+var samplePayment2 = {
+  //some item...
+};
+
+var payments = [];
+
+payments.push(xeroClient.core.payments.newPayment(samplePayment1));
+payments.push(xeroClient.core.payments.newPayment(samplePayment));
+
+xeroClient.core.items.savePayments(payments)
+    .then(function(payments) {
+        //Payments have been created
+        var payment1 = payments.entities[0];
+        var payment2 = payments.entities[1];
+    })
+    .catch(function(err) {
+        //Some error occurred
+    });
 ```
