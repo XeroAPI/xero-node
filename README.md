@@ -196,6 +196,8 @@ npm test
 
 ## Release Change Log
 
+* 2.2.1
+    - Merged [PR#49](https://github.com/XeroAPI/xero-node/pull/49) - Merge PR#49 to change `createPayment` method to be `newPayment` in line with other entities, and introduce a new savePayments method for creating multiple payments in one call.
 * 2.2.0
     - Merged [PR#46](https://github.com/XeroAPI/xero-node/pull/46) - Merge PR#45 and provide library level support for boolean values (formerly this required string conversion).
 * 2.1.8

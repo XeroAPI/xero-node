@@ -1,6 +1,6 @@
 {
   "name": "xero-node",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Xero API Wrapper for all application types",
   "main": "lib/index.js",
   "directories": {
@@ -25,7 +25,7 @@
     "express-handlebars": "^3.0.0",
     "follow-redirects": "^1.2.3",
     "lodash": "^4.17.4",
-    "log4js": "~0.6.9",
+    "log4js": "2.2.0",
     "lru-cache": "^4.0.2",
     "mustache": "^2.3.0",
     "nyc": "^10.1.2",
