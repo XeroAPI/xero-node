@@ -124,7 +124,6 @@ app.engine('handlebars', exphbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
-app.use(express.logger());
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.session({ secret: '123456' }));

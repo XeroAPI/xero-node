@@ -23,7 +23,6 @@
   "dependencies": {
     "follow-redirects": "^1.2.3",
     "lodash": "^4.17.4",
-    "log4js": "2.2.0",
     "lru-cache": "^4.0.2",
     "q": "~1.0.0",
     "uuid": "^3.0.1",
