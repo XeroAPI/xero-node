@@ -9,7 +9,7 @@ To get this sample app up and running follow these steps;
 ```
 git clone https://github.com/XeroAPI/xero-node
 cd xero-node
-npm install
+yarn install
 ```
 
 ### Modify the sample config file

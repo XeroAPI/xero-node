@@ -192,7 +192,7 @@ Check the [`docs`](./docs) folder for more detailed examples of how to use each 
 
 ## Tests
 
-npm test
+yarn test
 
 ## Release Change Log
 
