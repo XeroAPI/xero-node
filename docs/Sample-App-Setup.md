@@ -7,14 +7,14 @@ https://xero-sample-app.herokuapp.com
 To get this sample app up and running follow these steps;
 
 ```
-git clone https://github.com/XeroAPI/xero-node
-cd xero-node
+git clone https://github.com/XeroAPI/xero-node-sample-app
+cd xero-node-sample-app
 yarn install
 ```
 
 ### Modify the sample config file
 
-You'll then need to modify the config file available at `sample_app/config/example_config.json`.
+You'll then need to modify the config file available at `xero-node-sample-app/config/example_config.json`.
 
 ```javascript
 {
@@ -38,12 +38,12 @@ You'll then need to modify the config file available at `sample_app/config/examp
 * The consumerKey/Secret should be provided depending on your app type
 * The User-Agent can be left as is.
 
-Save this file as: `sample_app/config/config.json`.
+Save this file as: `xero-node-sample-app/config/config.json`.
 
 ### Running the Sample App
 
 ```
-node sample_app/index.js
+node xero-node-sample-app/index.js
 ```
 
 You should now see the prompt `listening on http://localhost:3100`.  Browse there and enjoy.
