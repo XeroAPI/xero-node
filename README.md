@@ -72,7 +72,7 @@ This package can be installed via npm or yarn.
 ```javascript
 //Sample Private App Config
 {
-    "userAgent" : "Tester (PRIVATE) - Application for testing Xero",
+    "userAgent" : "REPLACE ME",
     "consumerKey": "AAAAAAAAAAAAAAAAAA",
     "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "privateKeyPath": "/some/path/to/privatekey.pem",
@@ -81,7 +81,7 @@ This package can be installed via npm or yarn.
 
 //Sample Public App Config
 {
-    "userAgent" : "Tester (PUBLIC) - Application for testing Xero",
+    "userAgent" : "REPLACE ME",
     "consumerKey": "AAAAAAAAAAAAAAAAAA",
     "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
@@ -90,7 +90,7 @@ This package can be installed via npm or yarn.
 
 //Sample Partner App Config
 {
-    "userAgent" : "Tester (PARTNER) - Application for testing Xero",
+    "userAgent" : "REPLACE ME",
     "consumerKey": "AAAAAAAAAAAAAAAAAA",
     "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
@@ -196,6 +196,10 @@ npm test
 
 ## Release Change Log
 
+* 2.2.2
+    - Merged [PR#55](https://github.com/XeroAPI/xero-node/pull/55) - Fixed webpack warning.
+    - Merged [PR#53](https://github.com/XeroAPI/xero-node/pull/53) - Updated log4js.
+    - Merged [PR#51](https://github.com/XeroAPI/xero-node/pull/51) - Moved unecessary dependencies into dev dependencies.
 * 2.2.1
     - Merged [PR#49](https://github.com/XeroAPI/xero-node/pull/49) - Merge PR#49 to change `createPayment` method to be `newPayment` in line with other entities, and introduce a new savePayments method for creating multiple payments in one call.
 * 2.2.0
