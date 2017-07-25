@@ -46,7 +46,7 @@ The following features are provided:
 * Create / Read / Update / Delete (for most endpoints)
 * Search (using 'where' clause)
 * Efficient pagination with callbacks
-* Support for Private, Public, and Partner applications (look at sample_app/index.js for 3 stage support)
+* Support for Private, Public, and Partner applications (check out the sample app https://xero-sample-app.herokuapp.com for 3 legged oauth example)
 
 
 # Usage
@@ -196,6 +196,11 @@ npm test
 
 ## Release Change Log
 
+* 2.3.0
+    - Removed the sample application as there was an issue with clashing dependencies.  This has been moved to a separate repo: [xero-node-sample-app](https://github.com/XeroAPI/xero-node-sample-app)
+    - Merged [PR#58](https://github.com/XeroAPI/xero-node/pull/58) - Fix lodash require issue.
+    - Merged [PR#57](https://github.com/XeroAPI/xero-node/pull/57) - Give xml2js a version in package.json
+    - Merged [PR#56](https://github.com/XeroAPI/xero-node/pull/56) - Update docs issue in Payments.md.
 * 2.2.2
     - Merged [PR#55](https://github.com/XeroAPI/xero-node/pull/55) - Fixed webpack warning.
     - Merged [PR#53](https://github.com/XeroAPI/xero-node/pull/53) - Updated log4js.
