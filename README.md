@@ -194,6 +194,16 @@ Check the [`docs`](./docs) folder for more detailed examples of how to use each 
 
 npm test
 
+## Roadmap
+
+- [ ] Add ESLint rules
+- [ ] ESLint rule complaint
+- [ ] Remove log4js
+- [ ] Throw exceptions with good messaging
+- [ ] Remove lodash
+- [ ] More unit tests
+
+
 ## Release Change Log
 
 * 2.3.0
