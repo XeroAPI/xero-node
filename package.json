@@ -11,8 +11,7 @@
         "url": "https://github.com/XeroAPI/xero-node"
     },
     "scripts": {
-        "test": "nyc mocha --recursive",
-        "start": "node sample_app/index.js"
+        "test": "yarn && nyc mocha --recursive"
     },
     "keywords": [
         "xero",
@@ -23,14 +22,8 @@
     "dependencies": {
         "follow-redirects": "^1.2.3",
         "lodash": "^4.17.4",
-        "log4js": "2.2.0",
-        "lru-cache": "^4.0.2",
-        "q": "~1.0.0",
         "uuid": "^3.0.1",
-        "xml2js": "^0.4.17",
-        "chai": "^3.5.0",
-        "sinon": "^1.17.7",
-        "zombie": "^5.0.5"
+        "xml2js": "^0.4.17"
     },
     "readmeFilename": "README.md",
     "devDependencies": {
@@ -41,9 +34,11 @@
         "eslint-plugin-markdown": "^1.0.0-beta.6",
         "eslint-plugin-node": "^5.1.1",
         "eslint-plugin-prettier": "^2.1.2",
-        "mocha": "*",
         "nyc": "^10.1.2",
-        "prettier": "^1.5.3"
+        "prettier": "^1.5.3",
+        "chai": "^3.5.0",
+        "sinon": "^1.17.7",
+        "zombie": "^5.0.5"
     },
     "engines": {
         "node": ">=6.0.0"

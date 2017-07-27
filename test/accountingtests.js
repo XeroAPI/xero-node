@@ -2,10 +2,9 @@
 
 const chai = require('chai');
 const sinon = require('sinon');
-const _ = require('lodash');
+const Browser = require('zombie');
 const xero = require('..');
 const util = require('util');
-const Browser = require('zombie');
 const uuid = require('uuid');
 const fs = require('fs');
 
@@ -187,7 +186,12 @@ describe('get access for public or partner application', () => {
             browser.pressButton('Allow access for 30 mins');
           } else {
             // It must be a partner app
-            browser.pressButton('Allow access');
+            browser
+              .select(
+                'SelectedOrganisation',
+                'MjI4YTIzODctMTdkZS00YmY1LTkyYmEtODcxODQ2MWI0MTUx-fgyAbwDty0U='
+              )
+              .pressButton('Allow access');
           }
 
           browser.wait().then(() =>
@@ -232,7 +236,7 @@ describe('get access for public or partner application', () => {
 
       it('refreshes the token', done => {
         if (APPTYPE !== 'PARTNER') {
-          this.skip();
+          done();
         }
 
         // Only supported for Partner integrations
@@ -488,7 +492,7 @@ describe('regression tests', () => {
       currentApp.core.contacts
         .getContacts()
         .then(contacts => {
-          someContactId = _.first(contacts).ContactID;
+          someContactId = contacts[0].ContactID;
 
           currentApp.core.reports
             .generateReport({
@@ -517,7 +521,7 @@ describe('regression tests', () => {
       currentApp.core.contacts
         .getContacts()
         .then(contacts => {
-          someContactId = _.first(contacts).ContactID;
+          someContactId = contacts[0].ContactID;
 
           currentApp.core.reports
             .generateReport({
@@ -1112,7 +1116,7 @@ describe('regression tests', () => {
       currentApp.core.contacts
         .getContacts()
         .then(contacts => {
-          creditNoteData.Contact.ContactID = _.first(contacts).ContactID;
+          creditNoteData.Contact.ContactID = contacts[0].ContactID;
 
           const creditNote = currentApp.core.creditNotes.newCreditNote(
             creditNoteData
@@ -1345,7 +1349,7 @@ describe('regression tests', () => {
         .then(taxRates => {
           // This test requires that some tax rates are set up in the targeted company
           expect(taxRates).to.have.length.greaterThan(0);
-          _.each(taxRates, taxRate => {
+          taxRates.forEach(taxRate => {
             expect(taxRate.Name).to.not.equal('');
             expect(taxRate.Name).to.not.equal(undefined);
             expect(taxRate.TaxType).to.not.equal('');
@@ -1363,7 +1367,7 @@ describe('regression tests', () => {
             ]);
             expect(taxRate.TaxComponents).to.have.length.greaterThan(0);
 
-            _.each(taxRate.TaxComponents, taxComponent => {
+            taxRate.TaxComponents.forEach(taxComponent => {
               expect(taxComponent.Name).to.not.equal('');
               expect(taxComponent.Name).to.not.equal(undefined);
               expect(taxComponent.Rate).to.be.a('String');
@@ -1796,7 +1800,7 @@ describe('regression tests', () => {
       currentApp.core.bankTransfers
         .getBankTransfers()
         .then(bankTransfers => {
-          _.each(bankTransfers, bankTransfer => {
+          bankTransfers.forEach(bankTransfer => {
             expect(bankTransfer.BankTransferID).to.not.equal('');
             expect(bankTransfer.BankTransferID).to.not.equal(undefined);
           });
@@ -1869,7 +1873,7 @@ describe('regression tests', () => {
         .then(response => {
           expect(response.entities).to.have.length.greaterThan(0);
 
-          _.each(response.entities, trackingOption => {
+          response.entities.forEach(trackingOption => {
             expect(trackingOption.Name).to.not.equal('');
             expect(trackingOption.Name).to.not.equal(undefined);
             expect(trackingOption.Status).to.equal('ACTIVE');
@@ -1985,7 +1989,7 @@ describe('regression tests', () => {
 
           thisInvoice.LineItems.forEach(lineItem => {
             // expect(lineItem.Tracking).to.have.length.greaterThan(0);
-            _.each(lineItem.Tracking, thisTrackingCategory => {
+            lineItem.Tracking.forEach(thisTrackingCategory => {
               expect(thisTrackingCategory.TrackingCategoryID).to.not.equal(
                 undefined
               );
@@ -2093,7 +2097,7 @@ describe('regression tests', () => {
       currentApp.core.items
         .getItems()
         .then(items => {
-          _.each(items, item => {
+          items.forEach(item => {
             expect(item.ItemID).to.not.equal('');
             expect(item.ItemID).to.not.equal(undefined);
           });
@@ -2284,7 +2288,7 @@ describe('regression tests', () => {
       currentApp.core.contacts
         .getContacts()
         .then(contacts => {
-          _.each(contacts, contact => {
+          contacts.forEach(contact => {
             expect(contact.ContactID).to.not.equal('');
             expect(contact.ContactID).to.not.equal(undefined);
           });
@@ -2299,7 +2303,7 @@ describe('regression tests', () => {
       const onContacts = (err, response, cb) => {
         cb();
         try {
-          _.each(response.data, contact => {
+          response.data.forEach(contact => {
             expect(contact.ContactID).to.not.equal('');
             expect(contact.ContactID).to.not.equal(undefined);
           });
@@ -2365,7 +2369,7 @@ describe('regression tests', () => {
         .saveContacts(contacts)
         .then(response => {
           expect(response.entities).to.have.length.greaterThan(0);
-          _.each(response.entities, contact => {
+          response.entities.forEach(contact => {
             expect(contact.ContactID).to.not.equal('');
             expect(contact.ContactID).to.not.equal(undefined);
           });
@@ -2453,7 +2457,7 @@ describe('regression tests', () => {
       const onJournals = (err, ret, cb) => {
         cb();
         recordCount += ret.data.length;
-        _.each(ret.data, journal => {
+        ret.data.forEach(journal => {
           expect(journal.JournalID).to.not.equal('');
           expect(journal.JournalID).to.not.equal(undefined);
           expect(journal.JournalLines).to.have.length.at.least(0);
@@ -2499,7 +2503,7 @@ describe('regression tests', () => {
           expect(journals).to.be.an('Array');
           expect(journals).to.have.length.greaterThan(0);
 
-          sampleJournalId = _.first(journals).JournalID;
+          sampleJournalId = journals[0].JournalID;
           done();
         })
         .catch(err => {
@@ -2608,7 +2612,7 @@ describe('regression tests', () => {
       currentApp.core.manualjournals
         .getManualJournals()
         .then(manualjournals => {
-          _.each(manualjournals, manualJournal => {
+          manualjournals.forEach(manualJournal => {
             expect(manualJournal.ManualJournalID).to.not.equal('');
             expect(manualJournal.ManualJournalID).to.not.equal(undefined);
           });
@@ -2623,7 +2627,7 @@ describe('regression tests', () => {
       const onManualJournals = (err, response, cb) => {
         cb();
         try {
-          _.each(response.data, manualJournal => {
+          response.data.forEach(manualJournal => {
             expect(manualJournal.ManualJournalID).to.not.equal('');
             expect(manualJournal.ManualJournalID).to.not.equal(undefined);
           });
