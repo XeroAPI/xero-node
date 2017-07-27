@@ -1,52 +1,51 @@
 {
-  "name": "xero-node",
-  "version": "2.3.0",
-  "description": "Xero API Wrapper for all application types",
-  "main": "lib/index.js",
-  "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/XeroAPI/xero-node"
-  },
-  "scripts": {
-    "test": "nyc mocha --recursive",
-    "start": "node sample_app/index.js"
-  },
-  "keywords": [
-    "xero",
-    "api"
-  ],
-  "author": "Jordan Walsh",
-  "license": "MIT",
-  "dependencies": {
-    "follow-redirects": "^1.2.3",
-    "lodash": "^4.17.4",
-    "log4js": "2.2.0",
-    "lru-cache": "^4.0.2",
-    "q": "~1.0.0",
-    "uuid": "^3.0.1",
-    "xml2js": "^0.4.17"
-  },
-  "readmeFilename": "README.md",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^4.3.0",
-    "eslint-config-airbnb-base": "^11.3.1",
-    "eslint-config-prettier": "^2.3.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-markdown": "^1.0.0-beta.6",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-prettier": "^2.1.2",
-    "mocha": "*",
-    "nyc": "^10.1.2",
-    "prettier": "^1.5.3",
-    "sinon": "^1.17.7",
-    "zombie": "^5.0.5",
-    "zombie-phantom": "0.0.6"
-  },
-  "engines": {
-    "node": ">=6.0.0"
-  }
+    "name": "xero-node",
+    "version": "2.3.0",
+    "description": "Xero API Wrapper for all application types",
+    "main": "lib/index.js",
+    "directories": {
+        "test": "test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/XeroAPI/xero-node"
+    },
+    "scripts": {
+        "test": "nyc mocha --recursive",
+        "start": "node sample_app/index.js"
+    },
+    "keywords": [
+        "xero",
+        "api"
+    ],
+    "author": "Jordan Walsh",
+    "license": "MIT",
+    "dependencies": {
+        "follow-redirects": "^1.2.3",
+        "lodash": "^4.17.4",
+        "log4js": "2.2.0",
+        "lru-cache": "^4.0.2",
+        "q": "~1.0.0",
+        "uuid": "^3.0.1",
+        "xml2js": "^0.4.17",
+        "chai": "^3.5.0",
+        "sinon": "^1.17.7",
+        "zombie": "^5.0.5"
+    },
+    "readmeFilename": "README.md",
+    "devDependencies": {
+        "eslint": "^4.3.0",
+        "eslint-config-airbnb-base": "^11.3.1",
+        "eslint-config-prettier": "^2.3.0",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-markdown": "^1.0.0-beta.6",
+        "eslint-plugin-node": "^5.1.1",
+        "eslint-plugin-prettier": "^2.1.2",
+        "mocha": "*",
+        "nyc": "^10.1.2",
+        "prettier": "^1.5.3"
+    },
+    "engines": {
+        "node": ">=6.0.0"
+    }
 }

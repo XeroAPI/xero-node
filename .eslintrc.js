@@ -23,6 +23,7 @@ module.exports = {
         trailingComma: "es5",
         bracketSpacing: true
       }
-    ]
+    ],
+    "no-console": ["error", { allow: ["warn", "error"] }]
   }
 };
