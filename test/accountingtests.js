@@ -186,12 +186,7 @@ describe('get access for public or partner application', () => {
             browser.pressButton('Allow access for 30 mins');
           } else {
             // It must be a partner app
-            browser
-              .select(
-                'SelectedOrganisation',
-                'MjI4YTIzODctMTdkZS00YmY1LTkyYmEtODcxODQ2MWI0MTUx-fgyAbwDty0U='
-              )
-              .pressButton('Allow access');
+            browser.pressButton('Allow access');
           }
 
           browser.wait().then(() =>
@@ -237,25 +232,25 @@ describe('get access for public or partner application', () => {
       it('refreshes the token', done => {
         if (APPTYPE !== 'PARTNER') {
           done();
+        } else {
+          // Only supported for Partner integrations
+          currentApp
+            .refreshAccessToken()
+            .then(() => {
+              expect(currentApp.options.accessToken).to.not.equal(undefined);
+              expect(currentApp.options.accessToken).to.not.equal('');
+              expect(currentApp.options.accessSecret).to.not.equal(undefined);
+              expect(currentApp.options.accessSecret).to.not.equal('');
+              expect(currentApp.options.sessionHandle).to.not.equal(undefined);
+              expect(currentApp.options.sessionHandle).to.not.equal('');
+
+              expect(spy.called).to.equal(true);
+              done();
+            })
+            .catch(err => {
+              done(wrapError(err));
+            });
         }
-
-        // Only supported for Partner integrations
-        currentApp
-          .refreshAccessToken()
-          .then(() => {
-            expect(currentApp.options.accessToken).to.not.equal(undefined);
-            expect(currentApp.options.accessToken).to.not.equal('');
-            expect(currentApp.options.accessSecret).to.not.equal(undefined);
-            expect(currentApp.options.accessSecret).to.not.equal('');
-            expect(currentApp.options.sessionHandle).to.not.equal(undefined);
-            expect(currentApp.options.sessionHandle).to.not.equal('');
-
-            expect(spy.called).to.equal(true);
-            done();
-          })
-          .catch(err => {
-            done(wrapError(err));
-          });
       });
     });
   });
@@ -887,10 +882,10 @@ describe('regression tests', () => {
             expect(creditNote.CreditNoteID).to.not.equal('');
             expect(creditNote.CreditNoteID).to.not.equal(undefined);
 
-            // Set the variable for the next test.
-            creditNoteID = creditNote.CreditNoteID;
-
             if (creditNote.Status === 'AUTHORISED') {
+              // Set the variable for the next test.
+              creditNoteID = creditNote.CreditNoteID;
+
               if (creditNote.CreditNoteNumber) {
                 expect(creditNote.CreditNoteNumber).to.not.equal('');
               }
@@ -1194,6 +1189,7 @@ describe('regression tests', () => {
           where: 'Type == "ACCPAY" and Status == "AUTHORISED"',
         })
         .then(invoices => {
+          console.warn(invoices);
           expect(invoices).to.have.length.greaterThan(0);
 
           const myInvoice = invoices[0];
