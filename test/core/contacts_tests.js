@@ -40,6 +40,23 @@ describe('contacts', function() {
         done(wrapError(err));
       });
   });
+  it('get - modifiedAfter', function(done) {
+    const modifiedAfter = new Date();
+
+    // take 30 seconds ago as we just created a contact
+    modifiedAfter.setTime(modifiedAfter.getTime() - 60000);
+
+    currentApp.core.contacts
+      .getContacts({ modifiedAfter })
+      .then(function(contacts) {
+        expect(contacts.length).to.equal(1);
+        done();
+      })
+      .catch(function(err) {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
 
   it('get (no paging)', function(done) {
     currentApp.core.contacts
@@ -92,24 +109,6 @@ describe('contacts', function() {
         done(wrapError(err));
       });
   });
-  it('get - modifiedAfter', function(done) {
-    const modifiedAfter = new Date();
-
-    // take 30 seconds ago as we just created a contact
-    modifiedAfter.setTime(modifiedAfter.getTime() - 30000);
-
-    currentApp.core.contacts
-      .getContacts({ modifiedAfter })
-      .then(function(contacts) {
-        expect(contacts.length).to.equal(1);
-        done();
-      })
-      .catch(function(err) {
-        console.error(util.inspect(err, null, null));
-        done(wrapError(err));
-      });
-  });
-
   it('get - invalid modified date', function(done) {
     currentApp.core.contacts
       .getContacts({ modifiedAfter: 'cats' })
