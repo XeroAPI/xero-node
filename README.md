@@ -109,9 +109,9 @@ Runscope is not endorsed by or affiliated with Xero. This tool was used by the S
 ## App Usage
 
 ```javascript
-var xero = require('xero-node');
-var fs = require('fs');
-var config = require('/some/path/to/config.json');
+const xero = require('xero-node');
+const fs = require('fs');
+const config = require('/some/path/to/config.json');
 
 //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
 if (config.privateKeyPath && !config.privateKey) 
@@ -122,7 +122,7 @@ if (config.privateKeyPath && !config.privateKey)
 // xero.PublicApplication
 // xero.PartnerApplication
 
-var xeroClient = new xero.PrivateApplication(config);
+const xeroClient = new xero.PrivateApplication(config);
 ```
 
 Examples
@@ -132,9 +132,9 @@ Print a count of invoices:
 ```javascript
 //Print a count of invoices
 xeroClient.core.invoices.getInvoices()
-.then(function(invoices) {
+.then(invoices => {
     console.log("Invoices: " + invoices.length);
-}).catch(function(err) {
+}).catch(err => {
     console.log(err);
 });
 ```
@@ -146,11 +146,11 @@ Print the name of some filtered contacts:
 xeroClient.core.contacts.getContacts({ 
     where: 'Name.Contains("Bayside")' 
 })
-.then(function(contacts) {
-    contacts.forEach(function(contact) {
+.then(contacts => {
+    contacts.forEach(contact => {
         console.log(contact.Name);
     });
-}).catch(function(err) {
+}).catch(err => {
     console.log(err);
 });
 ```
@@ -158,18 +158,19 @@ xeroClient.core.contacts.getContacts({
 Efficient paging:
 
 ```javascript
-xeroClient.core.contacts.getContacts({ pager: {start:1 /* page number */, callback: onContacts}})
-    .catch(function(err) {
-        console.log('Oh no, an error');
-    });
-
 /* Called per page */
-function onContacts(err, response, cb) {
-    var contacts = response.data;
+const onContacts = (err, response, cb) => {
+    let contacts = response.data;
     if (response.finished) // finished paging
         ....
     cb(); // Async support
-}
+};
+
+xeroClient.core.contacts.getContacts({ pager: {start:1 /* page number */, callback: onContacts}})
+    .catch(err => {
+        console.log(`Oh no, an error: ${err}`);
+    });
+
 ```
 
 Filter support: Modified After
@@ -178,8 +179,8 @@ Filter support: Modified After
 xeroClient.core.contacts.getContacts({ 
     modifiedAfter: new Date(2013,1,1) 
 })
-.then(function(contacts) {
-    contacts.forEach(function(contact) {
+.then(contacts => {
+    contacts.forEach(contact => {
         // Do something with contact
     });
 })
@@ -201,7 +202,7 @@ Feel free to send PRs on any of these issues.
 - [x] Add ESLint rules
 - [ ] ESLint rule complaint
 - [ ] Update code to use modern ES6 syntax and style
-- [ ] Remove log4js
+- [x] Remove log4js
 - [ ] Throw exceptions with good messaging
 - [ ] Remove lodash
 - [ ] More unit tests
@@ -209,6 +210,11 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.4.0
+    - Merged [PR#64](https://github.com/XeroAPI/xero-node/pull/64) - Updated accountingtests.js to pass ESlint rules.
+    - Merged [PR#63](https://github.com/XeroAPI/xero-node/pull/63) - Add style guide and ESlint check.
+    - Merged [PR#61](https://github.com/XeroAPI/xero-node/pull/61) - Add roadmap to readme.
+    - Merged [PR#59](https://github.com/XeroAPI/xero-node/pull/59) - Remove log4js dependency. Uses console.log instead.
 * 2.3.0
     - Removed the sample application as there was an issue with clashing dependencies.  This has been moved to a separate repo: [xero-node-sample-app](https://github.com/XeroAPI/xero-node-sample-app)
     - Merged [PR#58](https://github.com/XeroAPI/xero-node/pull/58) - Fix lodash require issue.
