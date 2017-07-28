@@ -1,0 +1,13 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "settings": {
+    "import/core-modules": [ "zombie","sinon","chai" ]
+  },
+  "rules": {
+      "node/no-unpublished-require": ["error", {
+          "allowModules": [ "zombie","sinon","chai" ]
+      }]
+  }
+}

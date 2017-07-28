@@ -192,13 +192,13 @@ Check the [`docs`](./docs) folder for more detailed examples of how to use each 
 
 ## Tests
 
-npm test
+yarn test
 
 ## Roadmap
 
 Feel free to send PRs on any of these issues.
 
-- [ ] Add ESLint rules
+- [x] Add ESLint rules
 - [ ] ESLint rule complaint
 - [ ] Update code to use modern ES6 syntax and style
 - [ ] Remove log4js
