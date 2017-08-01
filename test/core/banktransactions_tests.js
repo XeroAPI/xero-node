@@ -9,13 +9,13 @@ const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
-describe('bank transactions', function() {
+describe('bank transactions', () => {
   let sharedTransaction;
   let expenseAccountId;
   let expenseAccountCode;
   let bankAccountId;
 
-  before('create an expense account for testing', function() {
+  before('create an expense account for testing', () => {
     const randomString = uuid.v4();
 
     const testAccountData = {
@@ -27,13 +27,13 @@ describe('bank transactions', function() {
 
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
-    return account.save().then(function(response) {
+    return account.save().then(response => {
       expenseAccountId = response.entities[0].AccountID;
       expenseAccountCode = response.entities[0].Code;
     });
   });
 
-  before('create a bank account for testing', function() {
+  before('create a bank account for testing', () => {
     const randomString = uuid.v4();
 
     const testAccountData = {
@@ -46,22 +46,20 @@ describe('bank transactions', function() {
 
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
-    return account.save().then(function(response) {
+    return account.save().then(response => {
       bankAccountId = response.entities[0].AccountID;
     });
   });
 
-  after('archive the expense account for testing', function() {
-    currentApp.core.accounts
-      .getAccount(expenseAccountId)
-      .then(function(response) {
-        const account = response;
-        account.Status = 'ARCHIVED';
-        return account.save();
-      });
+  after('archive the expense account for testing', () => {
+    currentApp.core.accounts.getAccount(expenseAccountId).then(response => {
+      const account = response;
+      account.Status = 'ARCHIVED';
+      return account.save();
+    });
   });
 
-  it('creates a new transaction', function(done) {
+  it('creates a new transaction', done => {
     const transaction = currentApp.core.bankTransactions.newBankTransaction({
       Type: 'SPEND',
       Contact: {
@@ -81,45 +79,45 @@ describe('bank transactions', function() {
 
     transaction
       .save()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
         expect(response.entities[0].BankTransactionID).to.not.equal('');
         expect(response.entities[0].BankTransactionID).to.not.equal(undefined);
         sharedTransaction = response.entities[0].BankTransactionID;
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('get (no paging)', function(done) {
+  it('get (no paging)', done => {
     currentApp.core.bankTransactions
       .getBankTransactions()
-      .then(function(bankTransactions) {
+      .then(bankTransactions => {
         expect(bankTransactions).to.have.length.greaterThan(0);
-        bankTransactions.forEach(function(bankTransaction) {
+        bankTransactions.forEach(bankTransaction => {
           expect(bankTransaction.BankTransactionID).to.not.equal('');
           expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('get by id', function(done) {
+  it('get by id', done => {
     currentApp.core.bankTransactions
       .getBankTransaction(sharedTransaction)
-      .then(function(bankTransaction) {
+      .then(bankTransaction => {
         expect(bankTransaction.BankTransactionID).to.not.equal('');
         expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });

@@ -9,7 +9,7 @@ const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
-describe('payments', function() {
+describe('payments', () => {
   /* Please note that this test pays an invoice created in the previous tests */
 
   let invoiceID;
@@ -18,7 +18,7 @@ describe('payments', function() {
   let testAccountCode;
   let testAccount;
 
-  before('create an account to pay into', function() {
+  before('create an account to pay into', () => {
     const randomString = uuid.v4();
 
     const testAccountData = {
@@ -32,27 +32,27 @@ describe('payments', function() {
 
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
-    return account.save().then(function(response) {
+    return account.save().then(response => {
       testAccount = response.entities[0];
     });
   });
 
-  before('get an unpaid invoice to pay', function() {
+  before('get an unpaid invoice to pay', () => {
     const filter = 'Status == "AUTHORISED"';
     return currentApp.core.invoices
       .getInvoices({ where: filter })
-      .then(function(invoices) {
+      .then(invoices => {
         invoiceID = invoices[0].InvoiceID;
         amountDue = invoices[0].AmountDue;
       });
   });
 
-  after('archive the test account', function() {
+  after('archive the test account', () => {
     testAccount.Status = 'ARCHIVED';
     return testAccount.save();
   });
 
-  it('Create Payment', function(done) {
+  it('Create Payment', done => {
     const payment = currentApp.core.payments.newPayment({
       Invoice: {
         InvoiceID: invoiceID,
@@ -66,7 +66,7 @@ describe('payments', function() {
 
     payment
       .save()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
 
         paymentId = response.entities[0].PaymentID;
@@ -74,64 +74,64 @@ describe('payments', function() {
         expect(paymentId).to.not.equal(undefined);
         done();
       })
-      .catch(function(err) {
-        console.log(util.inspect(err, null, null));
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('Retrieve Payments', function(done) {
+  it('Retrieve Payments', done => {
     currentApp.core.payments
       .getPayments()
-      .then(function(payments) {
+      .then(payments => {
         expect(payments).to.have.length.greaterThan(0);
-        payments.forEach(function(payment) {
+        payments.forEach(payment => {
           expect(payment.PaymentID).to.not.equal(undefined);
           expect(payment.PaymentID).to.not.equal('');
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('Retrieve Single Payment', function(done) {
+  it('Retrieve Single Payment', done => {
     currentApp.core.payments
       .getPayment(paymentId)
-      .then(function(payment) {
+      .then(payment => {
         expect(payment.PaymentID).to.not.equal('');
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('Update Payment', function(done) {
-    let paymentToDelete = currentApp.core.payments.newPayment({
+  it('Update Payment', done => {
+    const paymentToDelete = currentApp.core.payments.newPayment({
       PaymentID: paymentId,
       Status: 'DELETED',
     });
 
     paymentToDelete
       .save()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
         expect(response.entities[0].Status).to.equal('DELETED');
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('Delete Payment', function() {
-    // NOT CURRENTLY SUPPORTED.
+  it('Delete Payment', done => {
+    // NOT CURRENTLY SUPPORTED IN THE API.
     // Use update Payment with Payment.Status = DELETED.
-    this.skip();
+    done();
   });
 });

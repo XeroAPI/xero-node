@@ -9,14 +9,14 @@ const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
-describe('tracking categories', function() {
+describe('tracking categories', () => {
   let sampleTrackingCategory = {
     Name: 'My First Category',
   };
   let salesAccountID = '';
   let salesAccountCode = '';
 
-  before('create a sales account for testing', function() {
+  before('create a sales account for testing', () => {
     const randomString = uuid.v4();
 
     const testAccountData = {
@@ -29,30 +29,28 @@ describe('tracking categories', function() {
 
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
-    return account.save().then(function(response) {
+    return account.save().then(response => {
       salesAccountID = response.entities[0].AccountID;
       salesAccountCode = response.entities[0].Code;
     });
   });
 
-  after('archive the account for testing', function() {
-    currentApp.core.accounts
-      .getAccount(salesAccountID)
-      .then(function(response) {
-        const account = response;
-        account.Status = 'ARCHIVED';
-        return account.save();
-      });
+  after('archive the account for testing', () => {
+    currentApp.core.accounts.getAccount(salesAccountID).then(response => {
+      const account = response;
+      account.Status = 'ARCHIVED';
+      return account.save();
+    });
   });
 
-  it('creates a tracking category', function(done) {
+  it('creates a tracking category', done => {
     const myTrackingCategory = currentApp.core.trackingCategories.newTrackingCategory(
       sampleTrackingCategory
     );
 
     myTrackingCategory
       .save()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
         expect(response.entities[0].TrackingCategoryID).to.not.equal('');
         expect(response.entities[0].TrackingCategoryID).to.not.equal(undefined);
@@ -60,13 +58,13 @@ describe('tracking categories', function() {
         sampleTrackingCategory = response.entities[0];
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('creates some options for the tracking category', function(done) {
+  it('creates some options for the tracking category', done => {
     const TrackingOptions = [
       {
         Name: 'up',
@@ -78,64 +76,64 @@ describe('tracking categories', function() {
 
     sampleTrackingCategory
       .saveTrackingOptions(TrackingOptions)
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
 
-        response.entities.forEach(function(trackingOption) {
+        response.entities.forEach(trackingOption => {
           expect(trackingOption.Name).to.not.equal('');
           expect(trackingOption.Name).to.not.equal(undefined);
           expect(trackingOption.Status).to.equal('ACTIVE');
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('updates one of the options for the tracking category', function(done) {
+  it('updates one of the options for the tracking category', done => {
     const TrackingOptions = {
       Name: 'left',
     };
 
     currentApp.core.trackingCategories
       .getTrackingCategory(sampleTrackingCategory.TrackingCategoryID)
-      .then(function(trackingCategory) {
+      .then(trackingCategory => {
         const optionIDtoUpdate = trackingCategory.Options[0].TrackingOptionID;
 
         trackingCategory
           .saveTrackingOptions(TrackingOptions, optionIDtoUpdate)
-          .then(function(response) {
+          .then(response => {
             expect(response.entities).to.have.length.greaterThan(0);
             expect(response.entities[0].Name).to.equal('left');
             done();
           })
-          .catch(function(err) {
+          .catch(err => {
             console.error(util.inspect(err, null, null));
             done(wrapError(err));
           });
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('deletes the tracking category', function(done) {
+  it('deletes the tracking category', done => {
     currentApp.core.trackingCategories
       .deleteTrackingCategory(sampleTrackingCategory.TrackingCategoryID)
-      .then(function() {
+      .then(() => {
         // console.log(response)
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('Uses a tracking category on an invoice - REGION', function(done) {
+  it('Uses a tracking category on an invoice - REGION', done => {
     // TODO refactor this setup and teardown into hooks
     // Create the tracking category
 
@@ -150,7 +148,7 @@ describe('tracking categories', function() {
 
     trackingCategory
       .save()
-      .then(function(response) {
+      .then(response => {
         trackingCategoryName = response.entities[0].Name;
         trackingCategoryID = response.entities[0].TrackingCategoryID;
         response.entities[0].saveTrackingOptions([
@@ -158,7 +156,7 @@ describe('tracking categories', function() {
           { Name: 'South' },
         ]);
       })
-      .then(function() {
+      .then(() => {
         // Create an invoice with the sample tracking category attached to the line item on the invoice.
         const invoice = currentApp.core.invoices.newInvoice({
           Type: 'ACCREC',
@@ -185,33 +183,37 @@ describe('tracking categories', function() {
         });
         invoice
           .save()
-          .then(function(response) {
+          .then(response => {
             expect(response.entities).to.have.length.greaterThan(0);
             expect(response.entities[0].InvoiceID).to.not.equal(undefined);
             expect(response.entities[0].InvoiceID).to.not.equal('');
 
-            response.entities[0].LineItems.forEach(function(lineItem) {
+            response.entities[0].LineItems.forEach(lineItem => {
               // expect(lineItem.Tracking).to.have.length.greaterThan(0)
-              lineItem.Tracking.forEach(function(thisTrackingCategory) {
+              lineItem.Tracking.forEach(thisTrackingCategory => {
                 expect(thisTrackingCategory.TrackingCategoryID).to.not.equal(
                   undefined
                 );
-                expect(thisTrackingCategory.TrackingCategoryID).to.not.equal('');
+                expect(thisTrackingCategory.TrackingCategoryID).to.not.equal(
+                  ''
+                );
                 expect(thisTrackingCategory.TrackingOptionID).to.not.equal(
                   undefined
                 );
                 expect(thisTrackingCategory.TrackingOptionID).to.not.equal('');
-                expect(thisTrackingCategory.Name).to.equal(trackingCategory.Name);
+                expect(thisTrackingCategory.Name).to.equal(
+                  trackingCategory.Name
+                );
                 expect(thisTrackingCategory.Option).to.equal('North');
               });
             });
             currentApp.core.trackingCategories
               .deleteTrackingCategory(trackingCategoryID)
-              .then(function() {
+              .then(() => {
                 done();
               });
           })
-          .catch(function(err) {
+          .catch(err => {
             console.error(util.inspect(err, null, null));
             done(wrapError(err));
           });
@@ -219,12 +221,12 @@ describe('tracking categories', function() {
   });
 
   // unfortunately this will only work on tracking categories that have been used.
-  it.skip('archives a tracking category', function(done) {
+  it.skip('archives a tracking category', done => {
     sampleTrackingCategory.Status = 'ARCHIVED';
 
     sampleTrackingCategory
       .save()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
         expect(response.entities[0].TrackingCategoryID).to.not.equal('');
         expect(response.entities[0].TrackingCategoryID).to.not.equal(undefined);
@@ -234,7 +236,7 @@ describe('tracking categories', function() {
         );
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });

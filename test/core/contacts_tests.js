@@ -8,7 +8,7 @@ const util = common.util;
 
 const currentApp = common.currentApp;
 
-describe('contacts', function() {
+describe('contacts', () => {
   let sampleContact = {
     Name: `Johnnies Coffee ${Math.random()}`,
     FirstName: 'John',
@@ -17,11 +17,11 @@ describe('contacts', function() {
 
   const newName = `Updated ${Math.random()}`;
 
-  it('create single contact', function(done) {
+  it('create single contact', done => {
     const contact = currentApp.core.contacts.newContact(sampleContact);
     contact
       .save()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
         expect(response.entities[0].ContactID).to.not.equal('');
         expect(response.entities[0].ContactID).to.not.equal(undefined);
@@ -35,12 +35,12 @@ describe('contacts', function() {
 
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
-  it('get - modifiedAfter', function(done) {
+  it('get - modifiedAfter', done => {
     const modifiedAfter = new Date();
 
     // take 30 seconds ago as we just created a contact
@@ -48,32 +48,32 @@ describe('contacts', function() {
 
     currentApp.core.contacts
       .getContacts({ modifiedAfter })
-      .then(function(contacts) {
+      .then(contacts => {
         expect(contacts.length).to.equal(1);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('get (no paging)', function(done) {
+  it('get (no paging)', done => {
     currentApp.core.contacts
       .getContacts()
-      .then(function(contacts) {
-        contacts.forEach(function(contact) {
+      .then(contacts => {
+        contacts.forEach(contact => {
           expect(contact.ContactID).to.not.equal('');
           expect(contact.ContactID).to.not.equal(undefined);
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
-  it('get (paging)', function(done) {
+  it('get (paging)', done => {
     const onContacts = (err, response, cb) => {
       cb();
       try {
@@ -97,32 +97,32 @@ describe('contacts', function() {
       });
   });
 
-  it('get by id', function(done) {
+  it('get by id', done => {
     currentApp.core.contacts
       .getContact(sampleContact.ContactID)
-      .then(function(contact) {
+      .then(contact => {
         expect(contact.ContactID).to.equal(sampleContact.ContactID);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
-  it('get - invalid modified date', function(done) {
+  it('get - invalid modified date', done => {
     currentApp.core.contacts
       .getContacts({ modifiedAfter: 'cats' })
-      .then(function(contacts) {
+      .then(contacts => {
         expect(contacts.length).to.be.greaterThan(1);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('create multiple contacts', function(done) {
+  it('create multiple contacts', done => {
     const contacts = [];
 
     for (let i = 0; i < 2; i += 1) {
@@ -137,24 +137,24 @@ describe('contacts', function() {
 
     currentApp.core.contacts
       .saveContacts(contacts)
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
-        response.entities.forEach(function(contact) {
+        response.entities.forEach(contact => {
           expect(contact.ContactID).to.not.equal('');
           expect(contact.ContactID).to.not.equal(undefined);
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('update contact', function(done) {
+  it('update contact', done => {
     currentApp.core.contacts
       .getContact(sampleContact.ContactID)
-      .then(function(response) {
+      .then(response => {
         const thisContact = response;
         expect(thisContact.ContactID).to.equal(sampleContact.ContactID);
 
@@ -184,31 +184,31 @@ describe('contacts', function() {
         ];
         return thisContact.save();
       })
-      .then(function(updatedContact) {
+      .then(updatedContact => {
         expect(updatedContact.entities[0].Name).to.equal(newName);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
-  it('get attachments for contacts', function(done) {
+  it('get attachments for contacts', done => {
     currentApp.core.contacts
       .getContact(sampleContact.ContactID)
-      .then(function(contact) {
+      .then(contact => {
         expect(contact.ContactID).to.equal(sampleContact.ContactID);
         contact
           .getAttachments()
-          .then(function(attachments) {
+          .then(() => {
             done();
           })
-          .catch(function(err) {
+          .catch(err => {
             console.error(util.inspect(err, null, null));
             done(wrapError(err));
           });
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });

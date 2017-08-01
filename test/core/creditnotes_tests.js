@@ -9,12 +9,12 @@ const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
-describe('Credit Notes', function() {
+describe('Credit Notes', () => {
   let creditNoteID = '';
   let salesAccountID = '';
   let salesAccountCode = '';
 
-  before('create a sales account for testing', function() {
+  before('create a sales account for testing', () => {
     const randomString = uuid.v4();
 
     const testAccountData = {
@@ -27,28 +27,26 @@ describe('Credit Notes', function() {
 
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
-    return account.save().then(function(response) {
+    return account.save().then(response => {
       salesAccountID = response.entities[0].AccountID;
       salesAccountCode = response.entities[0].Code;
     });
   });
 
-  after('archive the account for testing', function() {
-    currentApp.core.accounts
-      .getAccount(salesAccountID)
-      .then(function(response) {
-        const account = response;
-        account.Status = 'ARCHIVED';
-        return account.save();
-      });
+  after('archive the account for testing', () => {
+    currentApp.core.accounts.getAccount(salesAccountID).then(response => {
+      const account = response;
+      account.Status = 'ARCHIVED';
+      return account.save();
+    });
   });
 
-  it('get', function(done) {
+  it('get', done => {
     currentApp.core.creditNotes
       .getCreditNotes()
-      .then(function(creditNotes) {
+      .then(creditNotes => {
         expect(creditNotes).to.have.length.greaterThan(0);
-        creditNotes.forEach(function(creditNote) {
+        creditNotes.forEach(creditNote => {
           // Check the contact
           if (creditNote.Contact) {
             expect(creditNote.Contact.ContactID).to.not.equal('');
@@ -117,7 +115,7 @@ describe('Credit Notes', function() {
             }
 
             if (creditNote.Allocations) {
-              creditNote.Allocations.forEach(function(allocation) {
+              creditNote.Allocations.forEach(allocation => {
                 if (allocation.AppliedAmount) {
                   expect(allocation.AppliedAmount).to.be.a('Number');
                   expect(allocation.AppliedAmount).to.be.at.least(0);
@@ -137,16 +135,16 @@ describe('Credit Notes', function() {
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.warn(err);
         done(wrapError(err));
       });
   });
 
-  it('get a single credit note', function(done) {
+  it('get a single credit note', done => {
     currentApp.core.creditNotes
       .getCreditNote(creditNoteID)
-      .then(function(creditNote) {
+      .then(creditNote => {
         // Check the contact
         if (creditNote.Contact) {
           expect(creditNote.Contact.ContactID).to.not.equal('');
@@ -215,7 +213,7 @@ describe('Credit Notes', function() {
           }
 
           if (creditNote.Allocations) {
-            creditNote.Allocations.forEach(function(allocation) {
+            creditNote.Allocations.forEach(allocation => {
               if (allocation.AppliedAmount) {
                 expect(allocation.AppliedAmount).to.be.a('Number');
                 expect(allocation.AppliedAmount).to.be.at.least(0);
@@ -233,7 +231,7 @@ describe('Credit Notes', function() {
           }
 
           if (creditNote.LineItems) {
-            creditNote.LineItems.forEach(function(lineItem) {
+            creditNote.LineItems.forEach(lineItem => {
               if (lineItem.LineItemID) {
                 expect(lineItem.LineItemID).to.not.equal('');
               }
@@ -268,7 +266,7 @@ describe('Credit Notes', function() {
                 expect(lineItem.LineAmount).to.be.at.least(0);
 
                 if (lineItem.Tracking) {
-                  lineItem.Tracking.forEach(function(trackingCategory) {
+                  lineItem.Tracking.forEach(trackingCategory => {
                     expect(trackingCategory.Name).to.not.equal('');
                     expect(trackingCategory.Name).to.not.equal(undefined);
 
@@ -296,13 +294,13 @@ describe('Credit Notes', function() {
         }
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.warn(err);
         done(wrapError(err));
       });
   });
 
-  it('creates a draft credit note', function(done) {
+  it('creates a draft credit note', done => {
     const creditNoteData = {
       Type: 'ACCPAYCREDIT',
       Reference: 'Test CreditNote from Node.js',
@@ -328,16 +326,16 @@ describe('Credit Notes', function() {
 
     creditNote
       .save()
-      .then(function(creditNotes) {
+      .then(creditNotes => {
         expect(creditNotes.entities).to.have.length(1);
         const thisNote = creditNotes.entities[0];
 
         creditNoteID = thisNote.CreditNoteID;
 
         expect(thisNote.Type).to.equal(creditNoteData.Type);
-        //expect(thisNote.Contact.ContactID).to.equal(creditNoteData.Contact.ContactID)
+        // expect(thisNote.Contact.ContactID).to.equal(creditNoteData.Contact.ContactID)
 
-        thisNote.LineItems.forEach(function(lineItem) {
+        thisNote.LineItems.forEach(lineItem => {
           expect(lineItem.Description).to.equal(
             creditNoteData.LineItems[0].Description
           );
@@ -354,46 +352,47 @@ describe('Credit Notes', function() {
 
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.warn(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('approves a credit note', function(done) {
-    //Get the draft credit note, update it, and save it.
+  it('approves a credit note', done => {
+    // Get the draft credit note, update it, and save it.
     currentApp.core.creditNotes
       .getCreditNote(creditNoteID)
-      .then(function(creditNote) {
+      .then(response => {
+        const creditNote = response;
         creditNote.Status = 'AUTHORISED';
         creditNote.Date = new Date().toISOString().split('T')[0];
 
         creditNote
           .save()
-          .then(function(savedCreditNote) {
+          .then(savedCreditNote => {
             expect(savedCreditNote.entities).to.have.length(1);
             const thisNote = savedCreditNote.entities[0];
             expect(thisNote.Status).to.equal('AUTHORISED');
             done();
           })
-          .catch(function(err) {
+          .catch(err => {
             console.warn(util.inspect(err, null, null));
             done(wrapError(err));
           });
       })
-      .catch(function(err) {
+      .catch(err => {
         console.warn(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('adds an allocation to a credit note', function(done) {
+  it('adds an allocation to a credit note', done => {
     currentApp.core.invoices
       .getInvoices({
         where:
           'Type == "ACCPAY" and Status == "AUTHORISED" and AmountCredited == 0',
       })
-      .then(function(invoices) {
+      .then(invoices => {
         expect(invoices).to.have.length.greaterThan(0);
 
         const myInvoice = invoices[0];
@@ -424,7 +423,7 @@ describe('Credit Notes', function() {
 
         creditNote
           .save()
-          .then(function(creditNotes) {
+          .then(creditNotes => {
             expect(creditNotes.entities).to.have.length(1);
             const thisNote = creditNotes.entities[0];
 
@@ -440,21 +439,21 @@ describe('Credit Notes', function() {
 
             thisNote
               .saveAllocations(allocations)
-              .then(function(res) {
+              .then(() => {
                 // console.warn(res)
                 done();
               })
-              .catch(function(err) {
+              .catch(err => {
                 console.warn(util.inspect(err, null, null));
                 done(wrapError(err));
               });
           })
-          .catch(function(err) {
+          .catch(err => {
             console.warn(util.inspect(err, null, null));
             done(wrapError(err));
           });
       })
-      .catch(function(err) {
+      .catch(err => {
         console.warn(util.inspect(err, null, null));
         done(wrapError(err));
       });

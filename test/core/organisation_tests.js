@@ -7,18 +7,18 @@ const wrapError = common.wrapError;
 
 const currentApp = common.currentApp;
 
-describe('organisations', function() {
-  it('get', function(done) {
+describe('organisations', () => {
+  it('get', done => {
     currentApp.core.organisations
       .getOrganisation()
-      .then(function(ret) {
+      .then(ret => {
         const orgVersions = ['AU', 'NZ', 'GLOBAL', 'UK', 'US'];
         expect(ret.Name).to.not.equal('');
         expect(ret.Version).to.not.equal('');
         expect(ret.Version).to.be.oneOf(orgVersions);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });

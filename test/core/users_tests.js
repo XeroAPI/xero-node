@@ -6,7 +6,7 @@ const wrapError = common.wrapError;
 
 const currentApp = common.currentApp;
 
-describe('users', function() {
+describe('users', () => {
   it('retrieves a list of users', done => {
     currentApp.core.users
       .getUsers()

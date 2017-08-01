@@ -9,12 +9,12 @@ const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
-describe('invoices', function() {
+describe('invoices', () => {
   let InvoiceID = '';
   let salesAccountID = '';
   let salesAccountCode = '';
 
-  before('create a sales account for testing', function() {
+  before('create a sales account for testing', () => {
     const randomString = uuid.v4();
 
     const testAccountData = {
@@ -27,23 +27,21 @@ describe('invoices', function() {
 
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
-    return account.save().then(function(response) {
+    return account.save().then(response => {
       salesAccountID = response.entities[0].AccountID;
       salesAccountCode = response.entities[0].Code;
     });
   });
 
-  after('archive the account for testing', function() {
-    currentApp.core.accounts
-      .getAccount(salesAccountID)
-      .then(function(response) {
-        const account = response;
-        account.Status = 'ARCHIVED';
-        return account.save();
-      });
+  after('archive the account for testing', () => {
+    currentApp.core.accounts.getAccount(salesAccountID).then(response => {
+      const account = response;
+      account.Status = 'ARCHIVED';
+      return account.save();
+    });
   });
 
-  it('create invoice', function(done) {
+  it('create invoice', done => {
     const invoice = currentApp.core.invoices.newInvoice({
       Type: 'ACCREC',
       Contact: {
@@ -61,16 +59,16 @@ describe('invoices', function() {
     });
     invoice
       .save({ unitdp: 4 })
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
 
-        let invoice = response.entities[0];
-        InvoiceID = invoice.InvoiceID;
+        // store the first invoice id for later use.
+        InvoiceID = response.entities[0].InvoiceID;
 
         expect(response.entities[0].InvoiceID).to.not.equal(undefined);
         expect(response.entities[0].InvoiceID).to.not.equal('');
 
-        invoice.LineItems.forEach(function(lineItem) {
+        invoice.LineItems.forEach(lineItem => {
           expect(lineItem.UnitAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
         });
 
@@ -81,58 +79,58 @@ describe('invoices', function() {
 
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('get invoices', function(done) {
+  it('get invoices', done => {
     currentApp.core.invoices
       .getInvoices()
-      .then(function(invoices) {
+      .then(invoices => {
         expect(invoices).to.have.length.greaterThan(0);
 
-        invoices.forEach(function(invoice) {
+        invoices.forEach(invoice => {
           expect(invoice.InvoiceID).to.not.equal('');
           expect(invoice.InvoiceID).to.not.equal(undefined);
         });
 
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         done(wrapError(err));
       });
   });
-  it('get invoice', function(done) {
+  it('get invoice', done => {
     currentApp.core.invoices
       .getInvoice(InvoiceID)
-      .then(function(invoice) {
+      .then(invoice => {
         expect(invoice.InvoiceID).to.equal(InvoiceID);
         done();
       })
-      .catch(function(err) {
-        console.log(util.inspect(err, null, null));
-        done(wrapError(err));
-      });
-  });
-  it('get invoice with filter', function(done) {
-    const filter = 'Status != "AUTHORISED"';
-    currentApp.core.invoices
-      .getInvoices({ where: filter })
-      .then(function(invoices) {
-        expect(invoices.length).to.be.at.least(0);
-        done();
-      })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
-  it('update invoice', function(done) {
+  it('get invoice with filter', done => {
+    const filter = 'Status != "AUTHORISED"';
+    currentApp.core.invoices
+      .getInvoices({ where: filter })
+      .then(invoices => {
+        expect(invoices.length).to.be.at.least(0);
+        done();
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+  it('update invoice', done => {
     currentApp.core.invoices
       .getInvoice(InvoiceID)
-      .then(function(response) {
+      .then(response => {
         const invoice = response;
         invoice.LineItems.push({
           Description: 'Test',
@@ -143,22 +141,22 @@ describe('invoices', function() {
         invoice.Status = 'AUTHORISED';
         return invoice.save();
       })
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
 
-        response.entities.forEach(function(invoice) {
+        response.entities.forEach(invoice => {
           expect(invoice.InvoiceID).to.not.equal('');
           expect(invoice.InvoiceID).to.not.equal(undefined);
         });
         done();
       })
-      .catch(function(err) {
-        console.log(util.inspect(err, null, null));
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('saves multiple invoices', function(done) {
+  it('saves multiple invoices', done => {
     const invoices = [];
 
     for (let i = 0; i < 10; i += 1) {
@@ -183,11 +181,11 @@ describe('invoices', function() {
 
     currentApp.core.invoices
       .saveInvoices(invoices)
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(9);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         done(wrapError(err));
       });
   });

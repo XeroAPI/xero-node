@@ -7,21 +7,21 @@ const wrapError = common.wrapError;
 
 const currentApp = common.currentApp;
 
-describe('currencies', function() {
-  it('get', function(done) {
+describe('currencies', () => {
+  it('get', done => {
     currentApp.core.currencies
       .getCurrencies()
-      .then(function(currencies) {
+      .then(currencies => {
         expect(currencies).to.have.length.greaterThan(0);
-        currencies.forEach(function(currencies) {
-          expect(currencies.Code).to.not.equal(undefined);
-          expect(currencies.Code).to.not.equal('');
-          expect(currencies.Description).to.not.equal(undefined);
-          expect(currencies.Description).to.not.equal('');
+        currencies.forEach(currency => {
+          expect(currency.Code).to.not.equal(undefined);
+          expect(currency.Code).to.not.equal('');
+          expect(currency.Description).to.not.equal(undefined);
+          expect(currency.Description).to.not.equal('');
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });

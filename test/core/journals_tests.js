@@ -8,10 +8,10 @@ const util = common.util;
 
 const currentApp = common.currentApp;
 
-describe('journals', function() {
+describe('journals', () => {
   let sampleJournalId = '';
 
-  it('get (paging with callback)', function(done) {
+  it('get (paging with callback)', done => {
     let recordCount = 0;
     const onJournals = (err, ret, cb) => {
       cb();

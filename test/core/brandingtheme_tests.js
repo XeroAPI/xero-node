@@ -7,15 +7,15 @@ const wrapError = common.wrapError;
 
 const currentApp = common.currentApp;
 
-describe('branding themes', function() {
+describe('branding themes', () => {
   let brandingThemeID = '';
 
-  it('get', function(done) {
+  it('get', done => {
     currentApp.core.brandingThemes
       .getBrandingThemes()
-      .then(function(brandingThemes) {
+      .then(brandingThemes => {
         expect(brandingThemes).to.have.length.greaterThan(0);
-        brandingThemes.forEach(function(brandingTheme) {
+        brandingThemes.forEach(brandingTheme => {
           expect(brandingTheme.BrandingThemeID).to.not.equal(undefined);
           expect(brandingTheme.BrandingThemeID).to.not.equal('');
           expect(brandingTheme.Name).to.not.equal(undefined);
@@ -25,16 +25,16 @@ describe('branding themes', function() {
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('get by ID', function(done) {
+  it('get by ID', done => {
     currentApp.core.brandingThemes
       .getBrandingTheme(brandingThemeID)
-      .then(function(brandingTheme) {
+      .then(brandingTheme => {
         expect(brandingTheme.BrandingThemeID).to.not.equal(undefined);
         expect(brandingTheme.BrandingThemeID).to.not.equal('');
         expect(brandingTheme.Name).to.not.equal(undefined);
@@ -42,7 +42,7 @@ describe('branding themes', function() {
 
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });

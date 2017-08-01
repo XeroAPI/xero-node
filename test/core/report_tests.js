@@ -11,8 +11,8 @@ const currentApp = common.currentApp;
 
 const bankAccounts = [];
 
-describe('reporting tests', function() {
-  before('create a bank account', function() {
+describe('reporting tests', () => {
+  before('create a bank account', () => {
     const randomString = uuid.v4();
 
     const testAccountData = {
@@ -24,7 +24,7 @@ describe('reporting tests', function() {
 
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
-    return account.save().then(function(response) {
+    return account.save().then(response => {
       const thisAccount = response.entities[0];
       bankAccounts.push({
         account: thisAccount,
@@ -66,10 +66,10 @@ describe('reporting tests', function() {
     });
   };
 
-  it('Generates a Balance Sheet Report', function(done) {
+  it('Generates a Balance Sheet Report', done => {
     currentApp.core.reports
       .generateReport({ id: 'BalanceSheet' })
-      .then(function(report) {
+      .then(report => {
         expect(report.ReportType).to.equal('BalanceSheet');
         expect(report.ReportName).to.equal('Balance Sheet');
 
@@ -77,13 +77,13 @@ describe('reporting tests', function() {
 
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('Generates a Bank Statement Report', function(done) {
+  it('Generates a Bank Statement Report', done => {
     currentApp.core.reports
       .generateReport({
         id: 'BankStatement',
@@ -91,7 +91,7 @@ describe('reporting tests', function() {
           bankAccountID: bankAccounts[0].id,
         },
       })
-      .then(function(report) {
+      .then(report => {
         expect(report.ReportType).to.equal('BankStatement');
         expect(report.ReportName).to.equal('Bank Statement');
 
@@ -99,101 +99,101 @@ describe('reporting tests', function() {
 
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('Generates a Trial Balance Report', function(done) {
+  it('Generates a Trial Balance Report', done => {
     currentApp.core.reports
       .generateReport({
         id: 'TrialBalance',
       })
-      .then(function(report) {
+      .then(report => {
         expect(report.ReportType).to.equal('TrialBalance');
         expect(report.ReportName).to.equal('Trial Balance');
         validateRows(report.Rows);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('Generates a Profit and Loss Report', function(done) {
+  it('Generates a Profit and Loss Report', done => {
     currentApp.core.reports
       .generateReport({
         id: 'ProfitAndLoss',
       })
-      .then(function(report) {
+      .then(report => {
         expect(report.ReportType).to.equal('ProfitAndLoss');
         expect(report.ReportName).to.equal('Profit and Loss');
         validateRows(report.Rows);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('Generates a Budget Summary Report', function(done) {
+  it('Generates a Budget Summary Report', done => {
     currentApp.core.reports
       .generateReport({
         id: 'BudgetSummary',
       })
-      .then(function(report) {
+      .then(report => {
         expect(report.ReportType).to.equal('BudgetSummary');
         expect(report.ReportName).to.equal('Budget Summary');
         validateRows(report.Rows);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('Generates an Executive Summary Report', function(done) {
+  it('Generates an Executive Summary Report', done => {
     currentApp.core.reports
       .generateReport({
         id: 'ExecutiveSummary',
       })
-      .then(function(report) {
+      .then(report => {
         expect(report.ReportType).to.equal('ExecutiveSummary');
         expect(report.ReportName).to.equal('Executive Summary');
         validateRows(report.Rows);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('Generates a Bank Summary Report', function(done) {
+  it('Generates a Bank Summary Report', done => {
     currentApp.core.reports
       .generateReport({
         id: 'BankSummary',
       })
-      .then(function(report) {
+      .then(report => {
         expect(report.ReportType).to.equal('BankSummary');
         expect(report.ReportName).to.equal('Bank Summary');
         validateRows(report.Rows);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('Generates an Aged Receivables Report', function(done) {
+  it('Generates an Aged Receivables Report', done => {
     currentApp.core.contacts
       .getContacts()
-      .then(function(contacts) {
+      .then(contacts => {
         const someContactId = contacts[0].ContactID;
 
         currentApp.core.reports
@@ -203,26 +203,26 @@ describe('reporting tests', function() {
               contactId: someContactId,
             },
           })
-          .then(function(report) {
+          .then(report => {
             expect(report.ReportType).to.equal('AgedReceivablesByContact');
             expect(report.ReportName).to.equal('Aged Receivables By Contact');
             validateRows(report.Rows);
             done();
           })
-          .catch(function(err) {
+          .catch(err => {
             throw err;
           });
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('Generates an Aged Payables Report', function(done) {
+  it('Generates an Aged Payables Report', done => {
     currentApp.core.contacts
       .getContacts()
-      .then(function(contacts) {
+      .then(contacts => {
         const someContactId = contacts[0].ContactID;
 
         currentApp.core.reports
@@ -232,17 +232,17 @@ describe('reporting tests', function() {
               contactId: someContactId,
             },
           })
-          .then(function(report) {
+          .then(report => {
             expect(report.ReportType).to.equal('AgedPayablesByContact');
             expect(report.ReportName).to.equal('Aged Payables By Contact');
             validateRows(report.Rows);
             done();
           })
-          .catch(function(err) {
+          .catch(err => {
             throw err;
           });
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });

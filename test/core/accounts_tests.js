@@ -9,7 +9,7 @@ const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
-describe('accounts', function() {
+describe('accounts', () => {
   // Accounts supporting data
   const accountClasses = ['ASSET', 'EQUITY', 'EXPENSE', 'LIABILITY', 'REVENUE'];
   const accountTypes = [
@@ -39,7 +39,7 @@ describe('accounts', function() {
   const accountStatusCodes = ['ACTIVE', 'ARCHIVED'];
   const bankAccountTypes = ['BANK', 'CREDITCARD', 'PAYPAL'];
 
-  it('GET ALL', function(done) {
+  it('GET ALL', done => {
     currentApp.core.accounts
       .getAccounts()
       .then(accounts => {
@@ -132,7 +132,7 @@ describe('accounts', function() {
     Type: 'EXPENSE',
   };
 
-  it('CREATE ONE', function(done) {
+  it('CREATE ONE', done => {
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
     account
@@ -166,7 +166,7 @@ describe('accounts', function() {
       });
   });
 
-  it('GET ONE', function(done) {
+  it('GET ONE', done => {
     currentApp.core.accounts
       .getAccount(testAccountId)
       .then(account => {
@@ -193,7 +193,7 @@ describe('accounts', function() {
       });
   });
 
-  it('UPDATE ONE', function(done) {
+  it('UPDATE ONE', done => {
     currentApp.core.accounts
       .getAccount(testAccountId)
       .then(response => {
@@ -214,7 +214,7 @@ describe('accounts', function() {
       });
   });
 
-  it('DELETE ONE', function(done) {
+  it('DELETE ONE', done => {
     currentApp.core.accounts
       .deleteAccount(testAccountId)
       .then(response => {

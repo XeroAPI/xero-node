@@ -7,23 +7,23 @@ const wrapError = common.wrapError;
 
 const currentApp = common.currentApp;
 
-describe('taxRates', function() {
+describe('taxRates', () => {
   let createdTaxRate = '';
   let organisationCountry = '';
 
-  before(function() {
-    currentApp.core.organisations.getOrganisation().then(function(ret) {
+  before(() => {
+    currentApp.core.organisations.getOrganisation().then(ret => {
       organisationCountry = ret.CountryCode;
     });
   });
 
-  it('gets tax rates', function(done) {
+  it('gets tax rates', done => {
     currentApp.core.taxRates
       .getTaxRates()
-      .then(function(taxRates) {
+      .then(taxRates => {
         // This test requires that some tax rates are set up in the targeted company
         expect(taxRates).to.have.length.greaterThan(0);
-        taxRates.forEach(function(taxRate) {
+        taxRates.forEach(taxRate => {
           expect(taxRate.Name).to.not.equal('');
           expect(taxRate.Name).to.not.equal(undefined);
           expect(taxRate.TaxType).to.not.equal('');
@@ -37,7 +37,7 @@ describe('taxRates', function() {
           expect(taxRate.Status).to.be.oneOf(['ACTIVE', 'DELETED', 'ARCHIVED']);
           expect(taxRate.TaxComponents).to.have.length.greaterThan(0);
 
-          taxRate.TaxComponents.forEach(function(taxComponent) {
+          taxRate.TaxComponents.forEach(taxComponent => {
             expect(taxComponent.Name).to.not.equal('');
             expect(taxComponent.Name).to.not.equal(undefined);
             expect(taxComponent.Rate).to.be.a('Number');
@@ -46,13 +46,13 @@ describe('taxRates', function() {
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('creates a new tax rate', function(done) {
+  it('creates a new tax rate', done => {
     const taxrate = {
       Name: '20% GST on Expenses',
       TaxComponents: [
@@ -73,7 +73,7 @@ describe('taxRates', function() {
 
     taxRate
       .save()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
         createdTaxRate = response.entities[0];
 
@@ -93,7 +93,7 @@ describe('taxRates', function() {
         expect(createdTaxRate.Status).to.equal('ACTIVE');
         expect(createdTaxRate.ReportTaxType).to.equal(taxrate.ReportTaxType);
 
-        createdTaxRate.TaxComponents.forEach(function(taxComponent) {
+        createdTaxRate.TaxComponents.forEach(taxComponent => {
           expect(taxComponent.Name).to.equal(taxrate.TaxComponents[0].Name);
           expect(taxComponent.Rate).to.equal(taxrate.TaxComponents[0].Rate);
           expect(taxComponent.IsCompound).to.equal(
@@ -102,21 +102,21 @@ describe('taxRates', function() {
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });
   });
 
-  it('updates the taxrate to DELETED', function(done) {
+  it('updates the taxrate to DELETED', done => {
     createdTaxRate
       .delete()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.lengthOf(1);
         expect(response.entities[0].Status).to.equal('DELETED');
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
         done(wrapError(err));
       });

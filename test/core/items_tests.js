@@ -9,7 +9,7 @@ const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
-describe('items', function() {
+describe('items', () => {
   let salesAccountID = '';
   let salesAccountCode = '';
   const sampleItem = {
@@ -27,7 +27,7 @@ describe('items', function() {
     },
   };
 
-  before('create a sales account for testing', function() {
+  before('create a sales account for testing', () => {
     const randomString = uuid.v4();
 
     const testAccountData = {
@@ -40,75 +40,73 @@ describe('items', function() {
 
     const account = currentApp.core.accounts.newAccount(testAccountData);
 
-    return account.save().then(function(response) {
+    return account.save().then(response => {
       salesAccountID = response.entities[0].AccountID;
       salesAccountCode = response.entities[0].Code;
     });
   });
 
-  after('archive the account for testing', function() {
-    currentApp.core.accounts
-      .getAccount(salesAccountID)
-      .then(function(response) {
-        const account = response;
-        account.Status = 'ARCHIVED';
-        return account.save();
-      });
+  after('archive the account for testing', () => {
+    currentApp.core.accounts.getAccount(salesAccountID).then(response => {
+      const account = response;
+      account.Status = 'ARCHIVED';
+      return account.save();
+    });
   });
 
-  it('creates an item', function(done) {
+  it('creates an item', done => {
     const item = currentApp.core.items.newItem(sampleItem);
 
     item
       .save()
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
         expect(response.entities[0].ItemID).to.not.equal('');
         expect(response.entities[0].ItemID).to.not.equal(undefined);
         sampleItem.ItemID = response.entities[0].ItemID;
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('retrieves some items (no paging)', function(done) {
+  it('retrieves some items (no paging)', done => {
     currentApp.core.items
       .getItems()
-      .then(function(items) {
-        items.forEach(function(item) {
+      .then(items => {
+        items.forEach(item => {
           expect(item.ItemID).to.not.equal('');
           expect(item.ItemID).to.not.equal(undefined);
         });
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('retrieves an item by ID', function(done) {
+  it('retrieves an item by ID', done => {
     currentApp.core.items
       .getItem(sampleItem.ItemID)
-      .then(function(item) {
+      .then(item => {
         expect(item.ItemID).to.equal(sampleItem.ItemID);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('updates an item by ID', function(done) {
+  it('updates an item by ID', done => {
     const randomName = `Updated ${Math.random()}`;
 
     currentApp.core.items
       .getItem(sampleItem.ItemID)
-      .then(function(response) {
+      .then(response => {
         const item = response;
         expect(item.ItemID).to.equal(sampleItem.ItemID);
 
@@ -116,24 +114,24 @@ describe('items', function() {
 
         return item.save();
       })
-      .then(function(response) {
+      .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
         expect(response.entities[0].Name).to.equal(randomName);
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });
 
-  it('deletes an item', function(done) {
+  it('deletes an item', done => {
     currentApp.core.items
       .deleteItem(sampleItem.ItemID)
-      .then(function() {
+      .then(() => {
         done();
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
