@@ -5,12 +5,12 @@ process.on('uncaughtException', err => {
 });
 
 function importTest(name, path) {
-  describe(name, function() {
+  describe(name, () => {
     require(path);
   });
 }
 
-describe('testrunner', function() {
+describe('Accounting API Tests', () => {
   // Accounting (Core) API Tests
   importTest('token_tests', `${__dirname}/core/token_tests.js`);
   importTest('organisation_tests', `${__dirname}/core/organisation_tests.js`);
@@ -44,10 +44,22 @@ describe('testrunner', function() {
   );
   importTest('users_tests', `${__dirname}/core/users_tests.js`);
   importTest('attachment_tests', `${__dirname}/core/attachment_tests.js`);
+});
+
+describe.skip('Payroll API Tests', () => {
   // //Payroll API Tests
-  // importTest('earningsrates_tests', `${__dirname}/payroll/earningsrates_tests.js`)
-  // importTest('deductiontypes_tests', `${__dirname}/payroll/deductiontypes_tests.js`)
-  // importTest('reimbursementtypes_tests', `${__dirname}/payroll/reimbursementtypes_tests.js`)
-  // importTest('leavetypes_tests', `${__dirname}/payroll/leavetypes_tests.js`)
-  // importTest('employees_tests', `${__dirname}/payroll/employees_tests.js`)
+  importTest(
+    'earningsrates_tests',
+    `${__dirname}/payroll/earningsrates_tests.js`
+  );
+  importTest(
+    'deductiontypes_tests',
+    `${__dirname}/payroll/deductiontypes_tests.js`
+  );
+  importTest(
+    'reimbursementtypes_tests',
+    `${__dirname}/payroll/reimbursementtypes_tests.js`
+  );
+  importTest('leavetypes_tests', `${__dirname}/payroll/leavetypes_tests.js`);
+  importTest('employees_tests', `${__dirname}/payroll/employees_tests.js`);
 });
