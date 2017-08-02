@@ -33,6 +33,26 @@ describe('Credit Notes', () => {
     });
   });
 
+  before('create an invoice to apply the credit note', () => {
+    const invoice = currentApp.core.invoices.newInvoice({
+      Type: 'ACCPAY',
+      Status: 'AUTHORISED',
+      Contact: {
+        Name: 'Department of Testing',
+      },
+      DueDate: new Date().toISOString().split('T')[0],
+      LineItems: [
+        {
+          Description: 'MacBook Pro',
+          Quantity: 2,
+          UnitAmount: 2000,
+          AccountCode: salesAccountCode,
+        },
+      ],
+    });
+    return invoice.save({ unitdp: 4 });
+  });
+
   after('archive the account for testing', () => {
     currentApp.core.accounts.getAccount(salesAccountID).then(response => {
       const account = response;
