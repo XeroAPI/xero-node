@@ -11,9 +11,12 @@ function importTest(name, path) {
   });
 }
 
+describe('Authorisation Tests', () => {
+  importTest('token_tests', `${__dirname}/core/token_tests.js`);
+});
+
 describe('Accounting API Tests', () => {
   // Accounting (Core) API Tests
-  importTest('token_tests', `${__dirname}/core/token_tests.js`);
   importTest('organisation_tests', `${__dirname}/core/organisation_tests.js`);
   importTest('accounts_tests', `${__dirname}/core/accounts_tests.js`);
   importTest('creditnotes_tests', `${__dirname}/core/creditnotes_tests.js`);
@@ -48,7 +51,7 @@ describe('Accounting API Tests', () => {
 });
 
 describe.skip('Payroll API Tests', () => {
-  // //Payroll API Tests
+  // //Payroll API Tests - not yet working
   importTest(
     'earningsrates_tests',
     `${__dirname}/payroll/earningsrates_tests.js`

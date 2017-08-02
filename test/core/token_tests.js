@@ -55,7 +55,9 @@ describe('get access for public or partner application', () => {
       currentApp.getRequestToken().then(res => {
         requestToken = res.token;
         requestSecret = res.secret;
-        authoriseUrl = currentApp.buildAuthorizeUrl(requestToken);
+        authoriseUrl = currentApp.buildAuthorizeUrl(requestToken, {
+          scope: 'payroll.employees,payroll.payitems,payroll.leaveapplications',
+        });
         console.warn(`URL: ${authoriseUrl}`);
         console.warn(`Request Token: ${requestToken}`);
         console.warn(`Request Secret: ${requestSecret}`);
