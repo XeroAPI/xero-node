@@ -21,8 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "follow-redirects": "^1.2.3",
-    "lodash": "^4.17.4",
-    "uuid": "^3.0.1"
+    "lodash": "^4.17.4"
   },
   "readmeFilename": "README.md",
   "devDependencies": {
@@ -38,7 +37,8 @@
     "nyc": "^10.1.2",
     "prettier": "^1.5.3",
     "sinon": "^1.17.7",
-    "zombie": "^5.0.5"
+    "zombie": "^5.0.5",
+    "uuid": "^3.0.1"
   },
   "engines": {
     "node": ">=6.0.0"
