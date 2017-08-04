@@ -9,13 +9,6 @@ const currentApp = common.currentApp;
 
 describe('taxRates', () => {
   let createdTaxRate = '';
-  let organisationCountry = '';
-
-  before(() => {
-    currentApp.core.organisations.getOrganisation().then(ret => {
-      organisationCountry = ret.CountryCode;
-    });
-  });
 
   it('gets tax rates', done => {
     currentApp.core.taxRates
@@ -64,47 +57,54 @@ describe('taxRates', () => {
       ],
     };
 
-    if (['AU', 'NZ', 'UK'].indexOf(organisationCountry) > -1) {
-      // we're an Org country that needs a report tax type so:
-      taxrate.ReportTaxType = 'INPUT';
-    }
+    currentApp.core.organisations
+      .getOrganisation()
+      .then(ret => ret.CountryCode)
+      .then(organisationCountry => {
+        if (['AU', 'NZ', 'UK'].indexOf(organisationCountry) > -1) {
+          // we're an Org country that needs a report tax type so:
+          taxrate.ReportTaxType = 'INPUT';
+        }
 
-    const taxRate = currentApp.core.taxRates.newTaxRate(taxrate);
+        const taxRate = currentApp.core.taxRates.newTaxRate(taxrate);
 
-    taxRate
-      .save()
-      .then(response => {
-        expect(response.entities).to.have.length.greaterThan(0);
-        createdTaxRate = response.entities[0];
+        taxRate
+          .save()
+          .then(response => {
+            expect(response.entities).to.have.length.greaterThan(0);
+            createdTaxRate = response.entities[0];
 
-        expect(createdTaxRate.Name).to.equal(taxrate.Name);
-        expect(createdTaxRate.TaxType).to.match(/TAX[0-9]{3}/);
-        expect(createdTaxRate.CanApplyToAssets).to.be.a('Boolean');
-        expect(createdTaxRate.CanApplyToEquity).to.be.a('Boolean');
-        expect(createdTaxRate.CanApplyToExpenses).to.be.a('Boolean');
-        expect(createdTaxRate.CanApplyToLiabilities).to.be.a('Boolean');
-        expect(createdTaxRate.CanApplyToRevenue).to.be.a('Boolean');
-        expect(createdTaxRate.DisplayTaxRate).to.equal(
-          taxrate.TaxComponents[0].Rate
-        );
-        expect(createdTaxRate.EffectiveRate).to.equal(
-          taxrate.TaxComponents[0].Rate
-        );
-        expect(createdTaxRate.Status).to.equal('ACTIVE');
-        expect(createdTaxRate.ReportTaxType).to.equal(taxrate.ReportTaxType);
+            expect(createdTaxRate.Name).to.equal(taxrate.Name);
+            expect(createdTaxRate.TaxType).to.match(/TAX[0-9]{3}/);
+            expect(createdTaxRate.CanApplyToAssets).to.be.a('Boolean');
+            expect(createdTaxRate.CanApplyToEquity).to.be.a('Boolean');
+            expect(createdTaxRate.CanApplyToExpenses).to.be.a('Boolean');
+            expect(createdTaxRate.CanApplyToLiabilities).to.be.a('Boolean');
+            expect(createdTaxRate.CanApplyToRevenue).to.be.a('Boolean');
+            expect(createdTaxRate.DisplayTaxRate).to.equal(
+              taxrate.TaxComponents[0].Rate
+            );
+            expect(createdTaxRate.EffectiveRate).to.equal(
+              taxrate.TaxComponents[0].Rate
+            );
+            expect(createdTaxRate.Status).to.equal('ACTIVE');
+            expect(createdTaxRate.ReportTaxType).to.equal(
+              taxrate.ReportTaxType
+            );
 
-        createdTaxRate.TaxComponents.forEach(taxComponent => {
-          expect(taxComponent.Name).to.equal(taxrate.TaxComponents[0].Name);
-          expect(taxComponent.Rate).to.equal(taxrate.TaxComponents[0].Rate);
-          expect(taxComponent.IsCompound).to.equal(
-            taxrate.TaxComponents[0].IsCompound
-          );
-        });
-        done();
-      })
-      .catch(err => {
-        console.error(err);
-        done(wrapError(err));
+            createdTaxRate.TaxComponents.forEach(taxComponent => {
+              expect(taxComponent.Name).to.equal(taxrate.TaxComponents[0].Name);
+              expect(taxComponent.Rate).to.equal(taxrate.TaxComponents[0].Rate);
+              expect(taxComponent.IsCompound).to.equal(
+                taxrate.TaxComponents[0].IsCompound
+              );
+            });
+            done();
+          })
+          .catch(err => {
+            console.error(err);
+            done(wrapError(err));
+          });
       });
   });
 

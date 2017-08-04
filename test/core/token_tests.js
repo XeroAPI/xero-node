@@ -16,7 +16,7 @@ let eventReceiver = currentApp.eventEmitter;
 Browser.waitDuration = '30s';
 
 describe('get access for public or partner application', () => {
-  beforeEach(() => {
+  beforeEach(function() {
     if (metaConfig.APPTYPE === 'PRIVATE') {
       this.skip();
     }
@@ -74,7 +74,7 @@ describe('get access for public or partner application', () => {
 
       // browser.debug();
 
-      before(done => {
+      before(function(done) {
         if (metaConfig.APPTYPE === 'PRIVATE') {
           this.skip();
         }

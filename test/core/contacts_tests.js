@@ -40,14 +40,14 @@ describe('contacts', () => {
         done(wrapError(err));
       });
   });
-  it('get - modifiedAfter', done => {
+  it.skip('get - modifiedAfter', done => {
     const modifiedAfter = new Date();
 
     // take 30 seconds ago as we just created a contact
-    modifiedAfter.setTime(modifiedAfter.getTime() - 60000);
+    modifiedAfter.setTime(modifiedAfter.getTime());
 
     currentApp.core.contacts
-      .getContacts({ modifiedAfter })
+      .getContacts({ modifiedAfter: modifiedAfter })
       .then(contacts => {
         expect(contacts.length).to.equal(1);
         done();

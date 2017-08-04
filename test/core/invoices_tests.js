@@ -9,6 +9,23 @@ const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
+const validateInvoice = invoice => {
+  if (!invoice) {
+    return false;
+  }
+
+  expect(invoice.InvoiceID).to.not.equal('');
+  expect(invoice.InvoiceID).to.not.equal(undefined);
+
+  invoice.LineItems.forEach(lineItem => {
+    expect(lineItem.UnitAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
+  });
+
+  expect(invoice.DueDate).to.be.a('date');
+
+  return true;
+};
+
 describe('invoices', () => {
   let InvoiceID = '';
   let salesAccountID = '';
@@ -65,17 +82,7 @@ describe('invoices', () => {
         // store the first invoice id for later use.
         InvoiceID = response.entities[0].InvoiceID;
 
-        expect(response.entities[0].InvoiceID).to.not.equal(undefined);
-        expect(response.entities[0].InvoiceID).to.not.equal('');
-
-        invoice.LineItems.forEach(lineItem => {
-          expect(lineItem.UnitAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
-        });
-
-        const dueDate = new Date(invoice.DueDate);
-        console.warn('Due Date: ', dueDate);
-
-        expect(typeof dueDate.getDate).to.equal('function');
+        expect(validateInvoice(response.entities[0])).to.equal(true);
 
         done();
       })
@@ -92,8 +99,7 @@ describe('invoices', () => {
         expect(invoices).to.have.length.greaterThan(0);
 
         invoices.forEach(invoice => {
-          expect(invoice.InvoiceID).to.not.equal('');
-          expect(invoice.InvoiceID).to.not.equal(undefined);
+          expect(validateInvoice(invoice)).to.equal(true);
         });
 
         done();
@@ -107,6 +113,7 @@ describe('invoices', () => {
       .getInvoice(InvoiceID)
       .then(invoice => {
         expect(invoice.InvoiceID).to.equal(InvoiceID);
+        expect(validateInvoice(invoice)).to.equal(true);
         done();
       })
       .catch(err => {
@@ -120,6 +127,9 @@ describe('invoices', () => {
       .getInvoices({ where: filter })
       .then(invoices => {
         expect(invoices.length).to.be.at.least(0);
+        invoices.forEach(invoice => {
+          expect(validateInvoice(invoice)).to.equal(true);
+        });
         done();
       })
       .catch(err => {
@@ -145,8 +155,7 @@ describe('invoices', () => {
         expect(response.entities).to.have.length.greaterThan(0);
 
         response.entities.forEach(invoice => {
-          expect(invoice.InvoiceID).to.not.equal('');
-          expect(invoice.InvoiceID).to.not.equal(undefined);
+          expect(validateInvoice(invoice)).to.equal(true);
         });
         done();
       })
@@ -183,6 +192,9 @@ describe('invoices', () => {
       .saveInvoices(invoices)
       .then(response => {
         expect(response.entities).to.have.length.greaterThan(9);
+        response.entities.forEach(invoice => {
+          expect(validateInvoice(invoice)).to.equal(true);
+        });
         done();
       })
       .catch(err => {
