@@ -1,49 +1,43 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
 const expect = common.expect;
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
+const createAccount = functions.createAccount;
 const util = common.util;
-const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
 const bankAccounts = [];
 
 describe('reporting tests', () => {
-  before('create a bank account', () => {
-    const randomString = uuid.v4();
-
-    const testAccountData = {
-      Code: randomString.replace(/-/g, '').substring(0, 10),
-      Name: `Test account from Node SDK ${randomString}`,
+  before('create a bank account for testing', () =>
+    createAccount({
       Type: 'BANK',
       BankAccountNumber: '062-021-0000000',
-    };
-
-    const account = currentApp.core.accounts.newAccount(testAccountData);
-
-    return account.save().then(response => {
+    }).then(response => {
       const thisAccount = response.entities[0];
       bankAccounts.push({
         account: thisAccount,
         id: thisAccount.AccountID,
       });
+    })
+  );
+
+  const validateCells = row => {
+    expect(row.Cells).to.have.length.greaterThan(0);
+    row.Cells.forEach(cell => {
+      // each cell can either be a string or an object
+      expect(cell).to.not.equal(undefined);
+      expect(cell).to.satisfy(
+        c => typeof c === 'string' || typeof c === 'object'
+      );
     });
-  });
+  };
 
   const validateRows = rows => {
-    const validateCells = row => {
-      expect(row.Cells).to.have.length.greaterThan(0);
-      row.Cells.forEach(cell => {
-        // each cell can either be a string or an object
-        expect(cell).to.not.equal(undefined);
-        expect(cell).to.satisfy(
-          c => typeof c === 'string' || typeof c === 'object'
-        );
-      });
-    };
     expect(rows).to.have.length.greaterThan(0);
     rows.forEach(row => {
       expect(row.RowType).to.be.oneOf([

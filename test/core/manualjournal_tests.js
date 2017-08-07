@@ -1,11 +1,12 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
 const expect = common.expect;
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
+const createAccount = functions.createAccount;
 const util = common.util;
-const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
@@ -14,24 +15,12 @@ describe('manualjournals', () => {
   let salesAccountID = '';
   let salesAccountCode = '';
 
-  before('create a sales account for testing', () => {
-    const randomString = uuid.v4();
-
-    const testAccountData = {
-      Code: randomString.replace(/-/g, '').substring(0, 10),
-      Name: `Test sales from Node SDK ${randomString}`,
-      Type: 'REVENUE',
-      Status: 'ACTIVE',
-      TaxType: 'OUTPUT',
-    };
-
-    const account = currentApp.core.accounts.newAccount(testAccountData);
-
-    return account.save().then(response => {
+  before('create a sales account for testing', () =>
+    createAccount({ Type: 'REVENUE' }).then(response => {
       salesAccountID = response.entities[0].AccountID;
       salesAccountCode = response.entities[0].Code;
-    });
-  });
+    })
+  );
 
   after('archive the account for testing', () => {
     currentApp.core.accounts.getAccount(salesAccountID).then(response => {

@@ -1,11 +1,12 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
 const expect = common.expect;
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
+const createAccount = functions.createAccount;
 const util = common.util;
-const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
@@ -18,24 +19,15 @@ describe('payments', () => {
   let testAccountCode;
   let testAccount;
 
-  before('create an account to pay into', () => {
-    const randomString = uuid.v4();
-
-    const testAccountData = {
-      Code: randomString.replace(/-/g, '').substring(0, 10),
-      Name: `Test account from Node SDK ${randomString}`,
+  before('create an account to pay into', () =>
+    createAccount({
       Type: 'SALES',
       EnablePaymentsToAccount: true,
-    };
-
-    testAccountCode = testAccountData.Code;
-
-    const account = currentApp.core.accounts.newAccount(testAccountData);
-
-    return account.save().then(response => {
+    }).then(response => {
+      testAccountCode = response.entities[0].Code;
       testAccount = response.entities[0];
-    });
-  });
+    })
+  );
 
   before('get an unpaid invoice to pay', () => {
     const filter = 'Status == "AUTHORISED"';

@@ -1,8 +1,9 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
 
 const currentApp = common.currentApp;
 

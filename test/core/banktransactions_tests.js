@@ -1,11 +1,12 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
 const expect = common.expect;
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
+const createAccount = functions.createAccount;
 const util = common.util;
-const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
@@ -15,41 +16,21 @@ describe('bank transactions', () => {
   let expenseAccountCode;
   let bankAccountId;
 
-  before('create an expense account for testing', () => {
-    const randomString = uuid.v4();
-
-    const testAccountData = {
-      Code: randomString.replace(/-/g, '').substring(0, 10),
-      Name: `Test expense from Node SDK ${randomString}`,
-      Type: 'EXPENSE',
-      Status: 'ACTIVE',
-    };
-
-    const account = currentApp.core.accounts.newAccount(testAccountData);
-
-    return account.save().then(response => {
+  before('create an expense account for testing', () =>
+    createAccount({ Type: 'EXPENSE' }).then(response => {
       expenseAccountId = response.entities[0].AccountID;
       expenseAccountCode = response.entities[0].Code;
-    });
-  });
+    })
+  );
 
-  before('create a bank account for testing', () => {
-    const randomString = uuid.v4();
-
-    const testAccountData = {
-      Code: randomString.replace(/-/g, '').substring(0, 10),
-      Name: `Test bank from Node SDK ${randomString}`,
+  before('create a bank account for testing', () =>
+    createAccount({
       Type: 'BANK',
-      Status: 'ACTIVE',
       BankAccountNumber: '062-021-0000000',
-    };
-
-    const account = currentApp.core.accounts.newAccount(testAccountData);
-
-    return account.save().then(response => {
+    }).then(response => {
       bankAccountId = response.entities[0].AccountID;
-    });
-  });
+    })
+  );
 
   after('archive the expense account for testing', () => {
     currentApp.core.accounts.getAccount(expenseAccountId).then(response => {

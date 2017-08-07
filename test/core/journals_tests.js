@@ -1,9 +1,10 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
 const expect = common.expect;
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
 const util = common.util;
 
 const currentApp = common.currentApp;
@@ -24,7 +25,6 @@ describe('journals', () => {
 
       try {
         if (ret.finished) {
-          console.error(`Journals record count: ${recordCount}`);
           done();
         }
       } catch (ex) {

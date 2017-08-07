@@ -14,18 +14,6 @@ const metaConfig = JSON.parse(
 
 const expect = chai.expect;
 
-const wrapError = err => {
-  if (err instanceof Error) return err;
-  else if (err.statusCode) {
-    let msg = err.data;
-    if (err.exception && err.exception.Message) {
-      msg = err.exception.Message;
-    }
-    return new Error(`${err.statusCode}: ${msg}`);
-  }
-  return new Error(`Error occurred: ${err}`);
-};
-
 process.on('uncaughtException', err => {
   console.error('uncaught', err);
 });
@@ -66,4 +54,3 @@ module.exports.xero = xero;
 module.exports.chai = chai;
 module.exports.expect = expect;
 module.exports.currentApp = currentApp;
-module.exports.wrapError = wrapError;

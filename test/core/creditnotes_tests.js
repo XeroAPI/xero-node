@@ -1,11 +1,12 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
 const expect = common.expect;
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
+const createAccount = functions.createAccount;
 const util = common.util;
-const uuid = common.uuid;
 
 const currentApp = common.currentApp;
 
@@ -14,44 +15,36 @@ describe('Credit Notes', () => {
   let salesAccountID = '';
   let salesAccountCode = '';
 
-  before('create a sales account for testing', () => {
-    const randomString = uuid.v4();
+  before('create a sales account and invoice for testing', () =>
+    createAccount({ Type: 'REVENUE' })
+      .then(response => {
+        salesAccountID = response.entities[0].AccountID;
+        salesAccountCode = response.entities[0].Code;
+      })
+      .then(() => {
+        const invoice = currentApp.core.invoices.newInvoice({
+          Type: 'ACCPAY',
+          Status: 'AUTHORISED',
+          Contact: {
+            Name: 'Department of Testing',
+          },
+          DueDate: new Date().toISOString().split('T')[0],
+          LineItems: [
+            {
+              Description: 'MacBook Pro',
+              Quantity: 2,
+              UnitAmount: 2000,
+              AccountCode: salesAccountCode,
+            },
+          ],
+        });
 
-    const testAccountData = {
-      Code: randomString.replace(/-/g, '').substring(0, 10),
-      Name: `Test sales from Node SDK ${randomString}`,
-      Type: 'REVENUE',
-      Status: 'ACTIVE',
-      TaxType: 'OUTPUT',
-    };
-
-    const account = currentApp.core.accounts.newAccount(testAccountData);
-
-    return account.save().then(response => {
-      salesAccountID = response.entities[0].AccountID;
-      salesAccountCode = response.entities[0].Code;
-    });
-  });
-
-  before('create an invoice to apply the credit note', () => {
-    const invoice = currentApp.core.invoices.newInvoice({
-      Type: 'ACCPAY',
-      Status: 'AUTHORISED',
-      Contact: {
-        Name: 'Department of Testing',
-      },
-      DueDate: new Date().toISOString().split('T')[0],
-      LineItems: [
-        {
-          Description: 'MacBook Pro',
-          Quantity: 2,
-          UnitAmount: 2000,
-          AccountCode: salesAccountCode,
-        },
-      ],
-    });
-    return invoice.save({ unitdp: 4 });
-  });
+        return invoice.save({ unitdp: 4 });
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  );
 
   after('archive the account for testing', () => {
     currentApp.core.accounts.getAccount(salesAccountID).then(response => {

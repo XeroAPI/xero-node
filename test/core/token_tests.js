@@ -1,12 +1,13 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
 const expect = common.expect;
 const sinon = common.sinon;
 const xero = common.xero;
 const Browser = common.Browser;
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
 const metaConfig = common.config;
 const config = metaConfig[metaConfig.APPTYPE.toLowerCase()];
 

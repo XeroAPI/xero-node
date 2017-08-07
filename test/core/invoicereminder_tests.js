@@ -1,9 +1,10 @@
 'use strict';
 
 const common = require('../common/common');
+const functions = require('../common/functions');
 
 const expect = common.expect;
-const wrapError = common.wrapError;
+const wrapError = functions.wrapError;
 
 describe('Invoice Reminders', () => {
   it('get', done => {
