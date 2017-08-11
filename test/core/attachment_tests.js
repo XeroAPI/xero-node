@@ -54,11 +54,7 @@ describe('attachments', () => {
       .then(invoices => {
         const sampleInvoice = invoices[0];
         attachmentPlaceholder
-          .save(
-            `Invoices/${sampleInvoice.InvoiceID}`,
-            samplePDF,
-            false
-          )
+          .save(`Invoices/${sampleInvoice.InvoiceID}`, samplePDF, false)
           .then(response => {
             expect(response.entities.length).to.equal(1);
             const thisFile = response.entities[0];
@@ -102,12 +98,9 @@ describe('attachments', () => {
       .then(invoices => {
         const sampleInvoice = invoices[0];
         attachmentPlaceholder
-          .save(
-            `Invoices/${sampleInvoice.InvoiceID}`,
-            samplePDF,
-            false,
-            { IncludeOnline: true }
-          )
+          .save(`Invoices/${sampleInvoice.InvoiceID}`, samplePDF, false, {
+            IncludeOnline: true,
+          })
           .then(response => {
             expect(response.entities.length).to.equal(1);
             const thisFile = response.entities[0];
