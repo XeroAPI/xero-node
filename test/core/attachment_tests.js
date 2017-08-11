@@ -28,6 +28,13 @@ const currentApp = common.currentApp;
 
 describe('attachments', () => {
   let invoiceID = '';
+  const files = [];
+
+  after('archive the account for testing', () => {
+    files.forEach(file => {
+      fs.unlink(file);
+    });
+  });
 
   it('creates an attachment on an invoice using a file reference', done => {
     const attachmentTemplate = {
@@ -35,7 +42,7 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -49,7 +56,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `Invoices/${sampleInvoice.InvoiceID}`,
-            sampleDataReference,
+            samplePDF,
             false
           )
           .then(response => {
@@ -82,7 +89,7 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -97,7 +104,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `Invoices/${sampleInvoice.InvoiceID}`,
-            sampleDataReference,
+            samplePDF,
             false,
             { IncludeOnline: true }
           )
@@ -125,7 +132,7 @@ describe('attachments', () => {
       });
   });
 
-  it('gets the content of an attachment as stream', done => {
+  it('gets the raw content of the attachment', done => {
     // Add attachment to an Invoice
     currentApp.core.invoices
       .getInvoice(invoiceID)
@@ -135,23 +142,7 @@ describe('attachments', () => {
 
           const first = attachments[0];
 
-          const wstream = fs.createWriteStream(
-            `${__dirname}/testdata/test1-${first.FileName}`,
-            { defaultEncoding: 'binary' }
-          );
-          wstream.on('finish', () => {
-            // Data has been written successfully
-            done();
-          });
-
-          wstream.on('error', err => {
-            console.error('data writing failed');
-            wstream.close();
-            console.error(err);
-            done(wrapError(err));
-          });
-
-          first.getContent(wstream).catch(err => {
+          first.getContent().then(done()).catch(err => {
             console.error(err);
             done(wrapError(err));
           });
@@ -163,13 +154,51 @@ describe('attachments', () => {
       });
   });
 
+  it('gets the content of an attachment as stream', () => {
+    // Add attachment to an Invoice
+    currentApp.core.invoices
+      .getInvoice(invoiceID)
+      .then(invoice => {
+        invoice.getAttachments().then(attachments => {
+          expect(attachments.length).to.be.at.least(1);
+
+          attachments.forEach((attachment, idx) => {
+            const timestamp = new Date().getMilliseconds();
+
+            const filename = `${__dirname}/testdata/test-${idx}-${timestamp}-${attachment.FileName}`;
+            files.push(filename);
+
+            const wstream = fs.createWriteStream(filename, {
+              defaultEncoding: 'binary',
+            });
+            wstream.on('finish', () => {
+              // Data has been written successfully
+            });
+
+            wstream.on('error', err => {
+              console.error('data writing failed');
+              wstream.close();
+              console.error(err);
+            });
+
+            attachment.getContent(wstream).catch(err => {
+              console.error(err);
+            });
+          });
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
+
   it('creates an attachment on a credit note using a file reference', done => {
     const attachmentTemplate = {
       FileName: '1-test-attachment.pdf',
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -183,7 +212,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `CreditNotes/${sampleCreditNote.CreditNoteID}`,
-            sampleDataReference,
+            samplePDF,
             false
           )
           .then(response => {
@@ -215,7 +244,7 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -229,7 +258,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `BankTransactions/${sampleBankTransaction.BankTransactionID}`,
-            sampleDataReference,
+            samplePDF,
             false
           )
           .then(response => {
@@ -261,7 +290,7 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -275,7 +304,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `BankTransfers/${sampleBankTransfer.BankTransferID}`,
-            sampleDataReference,
+            samplePDF,
             false
           )
           .then(response => {
@@ -307,7 +336,7 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -321,7 +350,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `Contacts/${sampleContact.ContactID}`,
-            sampleDataReference,
+            samplePDF,
             false
           )
           .then(response => {
@@ -353,7 +382,7 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -367,7 +396,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `Accounts/${sampleAccount.AccountID}`,
-            sampleDataReference,
+            samplePDF,
             false
           )
           .then(response => {
@@ -399,7 +428,7 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -413,7 +442,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `ManualJournals/${sampleManualJournal.ManualJournalID}`,
-            sampleDataReference,
+            samplePDF,
             false
           )
           .then(response => {
@@ -446,9 +475,9 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
 
-    const dataReadStream = fs.createReadStream(sampleDataReference);
+    const dataReadStream = fs.createReadStream(samplePDF);
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
     );
@@ -489,8 +518,8 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
-    const dataReadStream = fs.createReadStream(sampleDataReference);
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
     );
@@ -535,8 +564,8 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
-    const dataReadStream = fs.createReadStream(sampleDataReference);
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
     );
@@ -581,8 +610,8 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
-    const dataReadStream = fs.createReadStream(sampleDataReference);
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
     );
@@ -627,8 +656,8 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
-    const dataReadStream = fs.createReadStream(sampleDataReference);
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
     );
@@ -669,8 +698,8 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
-    const dataReadStream = fs.createReadStream(sampleDataReference);
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
     );
@@ -711,8 +740,8 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
-    const dataReadStream = fs.createReadStream(sampleDataReference);
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
 
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
@@ -758,7 +787,7 @@ describe('attachments', () => {
       MimeType: 'application/pdf',
     };
 
-    const sampleDataReference = `${__dirname}/testdata/test-attachment.pdf`;
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
     const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
       attachmentTemplate
     );
@@ -771,7 +800,7 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `Accounts/${sampleAccount.AccountID}`,
-            sampleDataReference,
+            samplePDF,
             true
           )
           .then(() => {
