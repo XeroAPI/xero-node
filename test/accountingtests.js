@@ -87,7 +87,7 @@ before('init instance and set options', done => {
 });
 
 describe('get access for public or partner application', () => {
-  beforeEach(() => {
+  beforeEach(function() {
     if (APPTYPE === 'PRIVATE') {
       this.skip();
     }
@@ -143,7 +143,7 @@ describe('get access for public or partner application', () => {
 
       // browser.debug();
 
-      before(done => {
+      before(function(done) {
         if (APPTYPE === 'PRIVATE') {
           this.skip();
         }
@@ -2712,6 +2712,13 @@ describe('regression tests', () => {
 
   describe('attachments', () => {
     let invoiceID = '';
+    const files = [];
+
+    after('delete the files that were created', () => {
+      files.forEach(file => {
+        fs.unlink(file);
+      });
+    });
 
     it('creates an attachment on an invoice using a file reference', done => {
       const attachmentTemplate = {
@@ -2747,6 +2754,7 @@ describe('regression tests', () => {
               expect(thisFile.Url).to.not.equal('');
               expect(thisFile.Url).to.not.equal(undefined);
               invoiceID = sampleInvoice.InvoiceID;
+              console.log(invoiceID);
               done();
             })
             .catch(err => {
@@ -2809,7 +2817,7 @@ describe('regression tests', () => {
         });
     });
 
-    it('gets the content of an attachment as stream', done => {
+    it('gets the content of an attachment as stream', () => {
       // Add attachment to an Invoice
       currentApp.core.invoices
         .getInvoice(invoiceID)
@@ -2817,33 +2825,30 @@ describe('regression tests', () => {
           invoice.getAttachments().then(attachments => {
             expect(attachments.length).to.be.at.least(1);
 
-            const first = attachments[0];
+            attachments.forEach((attachment, idx) => {
+              const timestamp = new Date().getMilliseconds();
 
-            const wstream = fs.createWriteStream(
-              `${__dirname}/testdata/test1-${first.FileName}`,
-              { defaultEncoding: 'binary' }
-            );
-            wstream.on('finish', () => {
-              // Data has been written successfully
-              done();
-            });
+              const filename = `${__dirname}/testdata/test-${idx}-${timestamp}-${attachment.FileName}`;
+              files.push(filename);
 
-            wstream.on('error', err => {
-              console.error('data writing failed');
-              wstream.close();
-              console.error(err);
-              done(wrapError(err));
-            });
+              const wstream = fs.createWriteStream(filename, {
+                defaultEncoding: 'binary',
+              });
 
-            first.getContent(wstream).catch(err => {
-              console.error(err);
-              done(wrapError(err));
+              wstream.on('error', err => {
+                console.error('data writing failed');
+                wstream.close();
+                throw new Error(err);
+              });
+
+              attachment.getContent(wstream).catch(err => {
+                console.error(err);
+              });
             });
           });
         })
         .catch(err => {
           console.error(err);
-          done(wrapError(err));
         });
     });
 
