@@ -203,6 +203,8 @@ Feel free to send PRs on any of these issues.
 - [ ] ESLint rule complaint
 - [ ] Update code to use modern ES6 syntax and style
 - [x] Remove log4js
+- [x] Remove xml2js dependency
+- [x] Remove console.log
 - [ ] Throw exceptions with good messaging
 - [ ] Remove lodash
 - [ ] More unit tests
@@ -210,6 +212,12 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.5.0
+    - Merged [PR#65](https://github.com/XeroAPI/xero-node/pull/65) - Removed xml2js and instead use only application/json as a content-type.
+    - Refactored e2e tests to be modular and easier to maintain
+    - Fixed various linting and code styling issues
+    - Updated extend.js to latest version of Backbone
+    - Updated Date variables in all schemas to be Date Objects instead of strings.
 * 2.4.0
     - Merged [PR#64](https://github.com/XeroAPI/xero-node/pull/64) - Updated accountingtests.js to pass ESlint rules.
     - Merged [PR#63](https://github.com/XeroAPI/xero-node/pull/63) - Add style guide and ESlint check.
