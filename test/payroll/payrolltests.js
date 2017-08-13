@@ -1,15 +1,3 @@
-describe.skip('payitems', function() {
-    it('get payitems', function(done) {
-        currentApp.payroll.payitems.getPayItems()
-            .then(function(payitems) {
-                console.log(payitems[0].EarningsTypes);
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
-})
 describe.skip('timesheets', function() {
     it('create timesheet', function(done) {
         var timesheet = currentApp.payroll.timesheets.newTimesheet({
@@ -18,7 +6,7 @@ describe.skip('timesheets', function() {
             EndDate: new Date(2014, 8, 29),
             Status: 'Draft',
             TimesheetLines: [{
-                EarningsTypeID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
+                EarningsRateID: 'a9ab82bf-c421-4840-b245-1df307c2127a',
                 NumberOfUnits: [5, 0, 0, 0, 0, 0, 0]
             }]
         });
