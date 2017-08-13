@@ -3,11 +3,11 @@
     "mocha": true
   },
   "settings": {
-    "import/core-modules": [ "zombie","sinon","chai" ]
+    "import/core-modules": [ "zombie","sinon","chai","uuid" ]
   },
   "rules": {
       "node/no-unpublished-require": ["error", {
-          "allowModules": [ "zombie","sinon","chai" ]
+          "allowModules": [ "zombie","sinon","chai","uuid" ]
       }]
   }
 }

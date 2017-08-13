@@ -6,7 +6,8 @@
         "privateKeyPath": "/some/path/to/privatekey.pem",
         "userAgent": "Tester (PARTNER) - Application for testing Xero",
         "xeroPassword": "XXXXXXXXXX",
-        "xeroUsername": "foo@example.com"
+        "xeroUsername": "foo@example.com",
+        "selectedAppId" : "some-app-id"
     },
     "private": {
         "consumerKey": "AAAAAAAAAAAAAAAAAA",
@@ -20,6 +21,7 @@
         "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
         "userAgent": "Tester (PUBLIC) - Application for testing Xero",
         "xeroPassword": "XXXXXXXXXX",
-        "xeroUsername": "foo@example.com"
+        "xeroUsername": "foo@example.com",
+        "selectedAppId" : "some-app-id"
     }
 }
