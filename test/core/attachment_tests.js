@@ -145,12 +145,17 @@ describe('attachments', () => {
             attachment
               .getContent()
               .then(content => {
-                fs.writeFile(filename, content, 'binary', err => {
-                  if (err) {
-                    console.error(err);
+                fs.writeFile(
+                  filename,
+                  Buffer.alloc(attachment.ContentLength, content, 'binary'),
+                  'binary',
+                  err => {
+                    if (err) {
+                      console.error(err);
+                    }
+                    writtenCount += 1;
                   }
-                  writtenCount += 1;
-                });
+                );
               })
               .catch(err => {
                 console.error(err);
@@ -163,11 +168,12 @@ describe('attachments', () => {
         done(wrapError(err));
       });
 
-    setInterval(() => {
-      if (writtenCount === attachmentCount) {
+    const timer = setInterval(() => {
+      if (attachmentCount > 0 && writtenCount === attachmentCount) {
+        clearInterval(timer);
         done();
       }
-    }, 2000);
+    }, 5000);
   });
 
   it('gets the content of an attachment as stream', done => {
@@ -214,11 +220,12 @@ describe('attachments', () => {
         console.error(err);
       });
 
-    setInterval(() => {
-      if (writtenCount === attachmentCount) {
+    const timer = setInterval(() => {
+      if (attachmentCount > 0 && writtenCount === attachmentCount) {
+        clearInterval(timer);
         done();
       }
-    }, 2000);
+    }, 5000);
   });
 
   it('creates an attachment on a credit note using a file reference', done => {
