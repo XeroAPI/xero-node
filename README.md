@@ -212,6 +212,8 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.5.1
+    - Merged [PR#68](https://github.com/XeroAPI/xero-node/pull/68) - Fix for Issue#67 where attachments with an '&' in the name couldn't be downloaded.
 * 2.5.0
     - Merged [PR#65](https://github.com/XeroAPI/xero-node/pull/65) - Removed xml2js and instead use only application/json as a content-type.
     - Refactored e2e tests to be modular and easier to maintain
