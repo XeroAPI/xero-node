@@ -126,6 +126,8 @@ describe('attachments', () => {
   });
 
   it('gets the raw content of the attachment', done => {
+    let attachmentCount = 0;
+    let writtenCount = 0;
     // Add attachment to an Invoice
     currentApp.core.invoices
       .getInvoice(invoiceID)
@@ -133,11 +135,31 @@ describe('attachments', () => {
         invoice.getAttachments().then(attachments => {
           expect(attachments.length).to.be.at.least(1);
 
-          const first = attachments[0];
+          attachmentCount = attachments.length;
+          attachments.forEach((attachment, idx) => {
+            const timestamp = new Date().getMilliseconds();
 
-          first.getContent().then(done()).catch(err => {
-            console.error(err);
-            done(wrapError(err));
+            const filename = `${__dirname}/testdata/test-${idx}-${timestamp}-${attachment.FileName}`;
+            files.push(filename);
+
+            attachment
+              .getContent()
+              .then(content => {
+                fs.writeFile(
+                  filename,
+                  Buffer.alloc(attachment.ContentLength, content, 'binary'),
+                  'binary',
+                  err => {
+                    if (err) {
+                      console.error(err);
+                    }
+                    writtenCount += 1;
+                  }
+                );
+              })
+              .catch(err => {
+                console.error(err);
+              });
           });
         });
       })
@@ -145,15 +167,26 @@ describe('attachments', () => {
         console.error(err);
         done(wrapError(err));
       });
+
+    const timer = setInterval(() => {
+      if (attachmentCount > 0 && writtenCount === attachmentCount) {
+        clearInterval(timer);
+        done();
+      }
+    }, 5000);
   });
 
-  it('gets the content of an attachment as stream', () => {
+  it('gets the content of an attachment as stream', done => {
+    let attachmentCount = 0;
+    let writtenCount = 0;
     // Add attachment to an Invoice
     currentApp.core.invoices
       .getInvoice(invoiceID)
       .then(invoice => {
         invoice.getAttachments().then(attachments => {
           expect(attachments.length).to.be.at.least(1);
+
+          attachmentCount = attachments.length;
 
           attachments.forEach((attachment, idx) => {
             const timestamp = new Date().getMilliseconds();
@@ -164,8 +197,11 @@ describe('attachments', () => {
             const wstream = fs.createWriteStream(filename, {
               defaultEncoding: 'binary',
             });
-            wstream.on('finish', () => {
+            wstream.on('finish', err => {
               // Data has been written successfully
+              writtenCount += 1;
+              wstream.close();
+              if (err) console.error(err);
             });
 
             wstream.on('error', err => {
@@ -183,6 +219,13 @@ describe('attachments', () => {
       .catch(err => {
         console.error(err);
       });
+
+    const timer = setInterval(() => {
+      if (attachmentCount > 0 && writtenCount === attachmentCount) {
+        clearInterval(timer);
+        done();
+      }
+    }, 5000);
   });
 
   it('creates an attachment on a credit note using a file reference', done => {
