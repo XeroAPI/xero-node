@@ -47,7 +47,8 @@ var invoiceObj = xeroClient.core.invoices.newInvoice(sampleInvoice);
 invoiceObj.save()
     .then(function(invoices) {
         //Invoice has been created 
-        var myInvoice = invoices.entities[0];
+        var [ myInvoice ] = invoices.entities;
+        console.log(myInvoice)
     })
     .catch(function(err) {
         //Some error occurred
@@ -77,7 +78,8 @@ currentApp.core.invoices.getInvoice(invoiceID)
 
         invoice.save()
             .then(function(savedInvoice) {
-                console.log(savedInvoice.entities[0].Status); //'AUTHORISED'
+                var [ mySavedInvoice ] = savedInvoice.entities
+                console.log(mySavedInvoice.Status); //'AUTHORISED'
             });
 ```
 
