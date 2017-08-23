@@ -48,6 +48,10 @@ describe('Accounting API Tests', () => {
   );
   importTest('users_tests', `${__dirname}/core/users_tests.js`);
   importTest('attachment_tests', `${__dirname}/core/attachment_tests.js`);
+  importTest(
+    'repeatinginvoice_tests',
+    `${__dirname}/core/repeatinginvoice_tests.js`
+  );
 });
 
 describe.skip('Payroll API Tests', () => {
