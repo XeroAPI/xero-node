@@ -212,6 +212,9 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.5.2
+    - Merged [PR#72](https://github.com/XeroAPI/xero-node/pull/72) - Fix for Issue#71 to add support for the repeating invoices endpoint.
+    - Merged [PR#70](https://github.com/XeroAPI/xero-node/pull/70) - Fix for Issue#69 where oauth errors were not being serialised to JSON.
 * 2.5.1
     - Merged [PR#68](https://github.com/XeroAPI/xero-node/pull/68) - Fix for Issue#67 where attachments with an '&' in the name couldn't be downloaded.
 * 2.5.0
