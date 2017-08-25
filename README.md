@@ -31,6 +31,7 @@ The following Xero API functions are supported:
 * Manual Journals
 * Organisations
 * Payments
+* Repeating Invoices
 * Reports
 * Tax Rates
 * Tracking Categories (and Tracking Options)
