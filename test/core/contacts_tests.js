@@ -16,6 +16,8 @@ describe('contacts', () => {
     LastName: 'Smith',
   };
 
+  let contactIDsList = [];
+
   const newName = `Updated ${Math.random()}`;
 
   it('create single contact', done => {
@@ -41,7 +43,7 @@ describe('contacts', () => {
         done(wrapError(err));
       });
   });
-  it.skip('get - modifiedAfter', done => {
+  it('get - modifiedAfter', done => {
     const modifiedAfter = new Date();
 
     // take 30 seconds ago as we just created a contact
@@ -66,6 +68,10 @@ describe('contacts', () => {
         contacts.forEach(contact => {
           expect(contact.ContactID).to.not.equal('');
           expect(contact.ContactID).to.not.equal(undefined);
+
+          if(contactIDsList.length < 5) {
+            contactIDsList.push(contact.ContactID);
+          }
         });
         done();
       })
@@ -110,6 +116,27 @@ describe('contacts', () => {
         done(wrapError(err));
       });
   });
+  
+  it('get list of IDs', done => {
+    currentApp.core.contacts
+      .getContacts({
+        params: {
+          IDs: contactIDsList.toString()
+        }
+      })
+      .then(contacts => {
+        contacts.forEach(contact => {
+          expect(contact.ContactID).to.be.oneOf(contactIDsList);
+        });
+        
+        done();
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+  
   it('get - invalid modified date', done => {
     currentApp.core.contacts
       .getContacts({ modifiedAfter: 'cats' })
