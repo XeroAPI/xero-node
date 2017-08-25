@@ -3,7 +3,7 @@ The following examples explain the Contacts section of the SDK.  The API documen
 ### Supported functions
 
 * Create New Contacts
-* Retrieve Contacts (all, paginated, by ID, with 'where' clause)
+* Retrieve Contacts (all, paginated, by ID, by List of IDs, or with 'where' clause)
 * Update Contacts
 
 These functions are explained further below.
@@ -114,6 +114,28 @@ xeroClient.core.contacts.getContact(myContactID)
    .then(function(contact) {
       //We've got the contact so do something useful
       console.log(contact.Name);
+   });
+```
+
+### Retrieving Contacts by list of IDs
+
+This example shows how to retrieve a list of contacts using their Xero supplied GUIDs.
+
+```javascript
+
+let myContactIDs = ['id1', 'id2', ...ids];
+
+xeroClient.core.contacts.getContacts({
+        params: {
+            IDs: myContactIDs.toString()
+        }
+    })
+   .then(function(contacts) {
+      //We've got our contacts so do something useful
+      contacts.forEach(function(contact){
+         //do something useful
+         console.log(contact.Name);
+      });
    });
 ```
 

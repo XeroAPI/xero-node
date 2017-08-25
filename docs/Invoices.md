@@ -3,7 +3,7 @@ The following examples explain the Invoices section of the SDK.  The API documen
 ### Supported functions
 
 * Create New Invoices
-* Retrieve Invoices (all, paginated, by ID, with 'where' clause)
+* Retrieve Invoices (all, paginated, by ID, by Contact IDs/Invoice Numbers/Statuses, or with 'where' clause)
 * Update Invoices
 
 These functions are explained further below.
@@ -113,6 +113,90 @@ xeroClient.core.invoices.getInvoice(myInvoiceID)
    .then(function(invoice) {
       //We've got the invoice so do something useful
       console.log(invoice.Type); //ACCPAY
+   });
+```
+
+### Retrieving Invoice by Invoice IDs List
+
+This example shows how to retrieve a list of invoices using their Xero supplied GUIDs.
+
+```javascript
+
+var myInvoiceIDs = ['id1', 'id2', ...ids];
+
+xeroClient.core.invoices.getInvoices({
+      params: {
+          IDs: myInvoiceIDs.toString()
+      }
+   })
+   .then(function(invoices) {
+      invoices.forEach(function(invoice){
+         //do something useful
+         console.log(invoice.Type); //ACCPAY
+      });
+   });
+```
+
+### Retrieving Invoice by Contact IDs List
+
+This example shows how to retrieve a list of invoices using their associated Contact GUIDs.
+
+```javascript
+
+var myContactIDs = ['id1', 'id2', ...ids];
+
+xeroClient.core.invoices.getInvoices({
+      params: {
+          ContactIDs: myContactIDs.toString()
+      }
+   })
+   .then(function(invoices) {
+      invoices.forEach(function(invoice){
+         //do something useful
+         console.log(invoice.Type); //ACCPAY
+      });
+   });
+```
+
+### Retrieving Invoice by Invoice Numbers List
+
+This example shows how to retrieve a list of invoices using their associated Invoice Numbers.
+
+```javascript
+
+var myInvoiceNumbers = ['ORC1001', 'ORC1002', ...numbers];
+
+xeroClient.core.invoices.getInvoices({
+      params: {
+          InvoiceNumbers: myInvoiceNumbers.toString()
+      }
+   })
+   .then(function(invoices) {
+      invoices.forEach(function(invoice){
+         //do something useful
+         console.log(invoice.Type); //ACCPAY
+      });
+   });
+```
+
+### Retrieving Invoices by Statuses
+
+This example shows how to retrieve a list of invoices using their statuses without requiring a 'Where' clause.
+
+```javascript
+
+var myStatuses = ['PAID', 'VOIDED'];
+
+xeroClient.core.invoices.getInvoices({
+      params: {
+          Statuses: myStatuses.toString()
+      }
+   })
+   .then(function(invoices) {
+      invoices.forEach(function(invoice){
+         //do something useful
+         console.log(invoice.Type); //ACCPAY
+      });
    });
 ```
 
