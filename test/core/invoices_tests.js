@@ -31,6 +31,10 @@ describe('invoices', () => {
   let InvoiceID = '';
   let salesAccountID = '';
   let salesAccountCode = '';
+  let invoiceIDsList = [];
+  let invoiceNumbersList = [];
+  let statusesList = [];
+  let contactIDsList = [];
 
   before('create a sales account for testing', () =>
     createAccount({ Type: 'REVENUE' }).then(response => {
@@ -89,6 +93,18 @@ describe('invoices', () => {
 
         invoices.forEach(invoice => {
           expect(validateInvoice(invoice)).to.equal(true);
+
+          if(invoiceIDsList.length < 5) {
+            invoiceIDsList.push(invoice.InvoiceID);
+          }
+
+          if(invoiceNumbersList.length < 5) {
+            invoiceNumbersList.push(invoice.InvoiceNumber);
+          }
+
+          if(contactIDsList.length < 5) {
+            contactIDsList.push(invoice.Contact.ContactID);
+          }
         });
 
         done();
@@ -110,6 +126,78 @@ describe('invoices', () => {
         done(wrapError(err));
       });
   });
+  it('get invoices by invoiceIDs', done => {
+    currentApp.core.invoices
+      .getInvoices({
+        params: {
+          IDs: invoiceIDsList.toString()
+        }
+      })
+      .then(invoices => {
+        invoices.forEach(invoice => {
+          expect(invoice.InvoiceID).to.be.oneOf(invoiceIDsList);
+        });
+        done();
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+  it('get invoices by invoice numbers', done => {
+    currentApp.core.invoices
+      .getInvoices({
+        params: {
+          InvoiceNumbers: invoiceNumbersList.toString()
+        }
+      })
+      .then(invoices => {
+        invoices.forEach(invoice => {
+          expect(invoice.InvoiceNumber).to.be.oneOf(invoiceNumbersList);
+        });
+        done();
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+  it('get invoices by contact ids', done => {
+    currentApp.core.invoices
+      .getInvoices({
+        params: {
+          ContactIDs: contactIDsList.toString()
+        }
+      })
+      .then(invoices => {
+        invoices.forEach(invoice => {
+          expect(invoice.Contact.ContactID).to.be.oneOf(contactIDsList);
+        });
+        done();
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });  
+  it('get invoices by statuses', done => {
+    currentApp.core.invoices
+      .getInvoices({
+        params: {
+          Statuses: "PAID,VOIDED"
+        }
+      })
+      .then(invoices => {
+        invoices.forEach(invoice => {
+          expect(invoice.Status).to.be.oneOf(["PAID","VOIDED"]);
+        });
+        done();
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });    
   it('get invoice with filter', done => {
     const filter = 'Status != "AUTHORISED"';
     currentApp.core.invoices
