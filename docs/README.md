@@ -10,6 +10,7 @@ The following Xero API functions are supported:
 
 **Accounting API**
 * [Accounts](./Accounts.md)
+* [Attachments](./Attachments.md)
 * [Bank Transactions](./Bank-Transactions.md)
 * [Bank Transfers](./Bank-Transfers.md)
 * [Branding Themes](./Branding-Themes.md)
@@ -20,8 +21,10 @@ The following Xero API functions are supported:
 * [Invoice Reminders](./Invoice-Reminders.md)
 * [Items](./Items.md)
 * [Journals](./Journals.md)
+* [Manual Journals](./Manual-Journals.md)
 * [Organisations](./Organisations.md)
 * [Payments](./Payments.md)
+* [Repeating Invoices](./Repeating-Invoices.md)
 * [Reports (except BAS/GST)](./Reports.md)
 * [Tax Rates](./Tax-Rates.md)
 * [Tracking Categories (and Tracking Options)](./Tracking-Categories.md)
@@ -29,18 +32,15 @@ The following Xero API functions are supported:
 
 Endpoints not currently supported:
 
-* Attachments
 * Contact Groups
 * Employees (not Payroll)
 * Expense Claims
 * Linked Transactions
-* Manual Journals
 * Overpayments
 * Prepayments
 * Purchase Orders
 * Quotes
 * Receipts
-* Repeating Invoices
 * Setup
 
 ### Other Xero APIs
