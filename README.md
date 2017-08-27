@@ -128,6 +128,9 @@ const xeroClient = new xero.PrivateApplication(config);
 
 Examples
 ========
+
+Sample app using this package: https://github.com/XeroAPI/xero-node-sample-app
+
 Print a count of invoices:
 
 ```javascript
