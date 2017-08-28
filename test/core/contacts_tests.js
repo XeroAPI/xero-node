@@ -47,7 +47,7 @@ describe('contacts', () => {
     const modifiedAfter = new Date();
 
     // take 30 seconds ago as we just created a contact
-    modifiedAfter.setTime(modifiedAfter.getTime());
+    modifiedAfter.setTime(modifiedAfter.getTime() - 10000);
 
     currentApp.core.contacts
       .getContacts({ modifiedAfter: modifiedAfter })
@@ -116,7 +116,7 @@ describe('contacts', () => {
         done(wrapError(err));
       });
   });
-  
+
   it('get list of IDs', done => {
     currentApp.core.contacts
       .getContacts({
@@ -128,7 +128,7 @@ describe('contacts', () => {
         contacts.forEach(contact => {
           expect(contact.ContactID).to.be.oneOf(contactIDsList);
         });
-        
+
         done();
       })
       .catch(err => {
@@ -136,7 +136,7 @@ describe('contacts', () => {
         done(wrapError(err));
       });
   });
-  
+
   it('get - invalid modified date', done => {
     currentApp.core.contacts
       .getContacts({ modifiedAfter: 'cats' })

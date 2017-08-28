@@ -59,6 +59,24 @@ describe('Contact Groups', () => {
       });
   });
 
+  it('get with filter', done => {
+    const filter = 'Name.Contains("Updated")';
+    common.currentApp.core.contactGroups
+      .getContactGroups({
+        where: filter,
+      })
+      .then(contactGroups => {
+        contactGroups.forEach(contactGroup => {
+          expect(contactGroup.Name.indexOf('Updated')).to.be.greaterThan(-1);
+        });
+        done();
+      })
+      .catch(err => {
+        console.error(err);
+        done(wrapError(err));
+      });
+  });
+
   it('creates a contact group', done => {
     const contactGroup = common.currentApp.core.contactGroups.newContactGroup(
       sampleContactGroup
@@ -69,6 +87,34 @@ describe('Contact Groups', () => {
       .then(response => {
         expect(validateContactGroup(response.entities[0])).to.equal(true);
         sampleContactGroup.ContactGroupID = response.entities[0].ContactGroupID;
+        done();
+      })
+      .catch(err => {
+        console.error(err);
+        done(wrapError(err));
+      });
+  });
+
+  it('create multiple contact groups', done => {
+    const contactGroups = [];
+
+    for (let i = 0; i < 2; i += 1) {
+      contactGroups.push(
+        common.currentApp.core.contactGroups.newContactGroup({
+          Name: `New Contacts ${Math.random()}`,
+          Status: 'ACTIVE',
+        })
+      );
+    }
+
+    common.currentApp.core.contactGroups
+      .saveContactGroups(contactGroups)
+      .then(response => {
+        expect(response.entities).to.have.length.greaterThan(0);
+        response.entities.forEach(contactGroup => {
+          expect(contactGroup.ContactGroupID).to.not.equal('');
+          expect(contactGroup.ContactGroupID).to.not.equal(undefined);
+        });
         done();
       })
       .catch(err => {
@@ -152,7 +198,7 @@ describe('Contact Groups', () => {
       .getContactGroup(sampleContactGroup.ContactGroupID)
       .then(contactGroup => {
         expect(validateContactGroup(contactGroup)).to.equal(true);
-        return contactGroup.deleteContacts();
+        return contactGroup.deleteAllContacts();
       })
       .then(() => {
         done();
