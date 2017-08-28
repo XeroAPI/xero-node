@@ -14,6 +14,13 @@ describe('contacts', () => {
     Name: `Johnnies Coffee ${Math.random()}`,
     FirstName: 'John',
     LastName: 'Smith',
+    Addresses: [{
+      AddressType: "POBOX",
+      AddressLine1: "P O Box 123",
+      City: "Wellington",
+      PostalCode: "6011",
+      AttentionTo: "Andrea"
+    }]
   };
 
   let contactIDsList = [];
@@ -33,6 +40,10 @@ describe('contacts', () => {
           sampleContact.FirstName
         );
         expect(response.entities[0].LastName).to.equal(sampleContact.LastName);
+
+        expect(response.entities[0].Addresses.filter((address) => {
+          return address.City == sampleContact.Addresses[0].City
+        }).length).to.equal(1);
 
         sampleContact = response.entities[0];
 
@@ -69,7 +80,7 @@ describe('contacts', () => {
           expect(contact.ContactID).to.not.equal('');
           expect(contact.ContactID).to.not.equal(undefined);
 
-          if(contactIDsList.length < 5) {
+          if (contactIDsList.length < 5) {
             contactIDsList.push(contact.ContactID);
           }
         });
@@ -116,7 +127,7 @@ describe('contacts', () => {
         done(wrapError(err));
       });
   });
-  
+
   it('get list of IDs', done => {
     currentApp.core.contacts
       .getContacts({
@@ -128,7 +139,7 @@ describe('contacts', () => {
         contacts.forEach(contact => {
           expect(contact.ContactID).to.be.oneOf(contactIDsList);
         });
-        
+
         done();
       })
       .catch(err => {
@@ -136,7 +147,7 @@ describe('contacts', () => {
         done(wrapError(err));
       });
   });
-  
+
   it('get - invalid modified date', done => {
     currentApp.core.contacts
       .getContacts({ modifiedAfter: 'cats' })
@@ -153,7 +164,7 @@ describe('contacts', () => {
   it('create multiple contacts', done => {
     const contacts = [];
 
-    for (let i = 0; i < 2; i += 1) {
+    for (let i = 0;i < 2;i += 1) {
       contacts.push(
         currentApp.core.contacts.newContact({
           Name: `Johnnies Coffee ${Math.random()}`,
@@ -214,6 +225,7 @@ describe('contacts', () => {
       })
       .then(updatedContact => {
         expect(updatedContact.entities[0].Name).to.equal(newName);
+        expect(updatedContact.entities[0].Addresses.filter((address) => {return address.City == "Melbourne"}).length).to.equal(1);
         done();
       })
       .catch(err => {
