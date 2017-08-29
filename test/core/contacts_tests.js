@@ -58,7 +58,7 @@ describe('contacts', () => {
     const modifiedAfter = new Date();
 
     // take 30 seconds ago as we just created a contact
-    modifiedAfter.setTime(modifiedAfter.getTime());
+    modifiedAfter.setTime(modifiedAfter.getTime() - 10000);
 
     currentApp.core.contacts
       .getContacts({ modifiedAfter: modifiedAfter })

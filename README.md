@@ -22,6 +22,7 @@ The following Xero API functions are supported:
 * Bank Transfers
 * Branding Themes
 * Contacts
+* Contact Groups
 * Credit Notes
 * Currencies
 * Invoices
