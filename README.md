@@ -217,6 +217,9 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.6.0
+    - Merged [PR#79](https://github.com/XeroAPI/xero-node/pull/79) - Add support for ContactGroups
+    - Merged [PR#80](https://github.com/XeroAPI/xero-node/pull/80) - Fixes Contact address deatil schema.
 * 2.5.3
     - Merged [PR#76](https://github.com/XeroAPI/xero-node/pull/76) - Updated the docs to add repeating invoices (missed from PR#72).
     - Merged [PR#75](https://github.com/XeroAPI/xero-node/pull/75) - Added documentation about invoice/contact filters.
