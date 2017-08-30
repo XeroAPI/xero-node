@@ -22,6 +22,7 @@ The following Xero API functions are supported:
 * Bank Transfers
 * Branding Themes
 * Contacts
+* Contact Groups
 * Credit Notes
 * Currencies
 * Invoices
@@ -128,6 +129,9 @@ const xeroClient = new xero.PrivateApplication(config);
 
 Examples
 ========
+
+Sample app using this package: https://github.com/XeroAPI/xero-node-sample-app
+
 Print a count of invoices:
 
 ```javascript
@@ -213,6 +217,12 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.6.0
+    - Merged [PR#79](https://github.com/XeroAPI/xero-node/pull/79) - Add support for ContactGroups
+    - Merged [PR#80](https://github.com/XeroAPI/xero-node/pull/80) - Fixes Contact address deatil schema.
+* 2.5.3
+    - Merged [PR#76](https://github.com/XeroAPI/xero-node/pull/76) - Updated the docs to add repeating invoices (missed from PR#72).
+    - Merged [PR#75](https://github.com/XeroAPI/xero-node/pull/75) - Added documentation about invoice/contact filters.
 * 2.5.2
     - Merged [PR#72](https://github.com/XeroAPI/xero-node/pull/72) - Fix for Issue#71 to add support for the repeating invoices endpoint.
     - Merged [PR#70](https://github.com/XeroAPI/xero-node/pull/70) - Fix for Issue#69 where oauth errors were not being serialised to JSON.
