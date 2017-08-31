@@ -53,6 +53,7 @@ describe('Accounting API Tests', () => {
     `${__dirname}/core/repeatinginvoice_tests.js`
   );
   importTest('contactgroups_tests', `${__dirname}/core/contactgroups_tests.js`);
+  importTest('employees_tests', `${__dirname}/core/employees_tests.js`);
 });
 
 describe.skip('Payroll API Tests', () => {
