@@ -171,4 +171,39 @@ describe('Receipts', () => {
         done(wrapError(err));
       });
   });
+
+  it('get attachments for receipts', done => {
+    const filter = 'HasAttachments == true';
+    currentApp.core.receipts
+      .getReceipts({ where: filter })
+      .then(receipts => {
+        if (receipts.length === 0) done();
+        let objectsProcessed = 0;
+        receipts.forEach(receipt => {
+          receipt
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === receipts.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
 });

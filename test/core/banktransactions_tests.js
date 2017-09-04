@@ -103,4 +103,39 @@ describe('bank transactions', () => {
         done(wrapError(err));
       });
   });
+
+  it('get attachments for bankTransactions', done => {
+    const filter = 'HasAttachments == true';
+    currentApp.core.bankTransactions
+      .getBankTransactions({ where: filter })
+      .then(bankTransactions => {
+        if (bankTransactions.length === 0) done();
+        let objectsProcessed = 0;
+        bankTransactions.forEach(transaction => {
+          transaction
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === bankTransactions.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
 });

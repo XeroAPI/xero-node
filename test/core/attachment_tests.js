@@ -18,11 +18,11 @@ const currentApp = common.currentApp;
    *  Bank Transfers
    *  Contacts
    *  Accounts
+   *  Manual Journals
    */
 
 /** Attachments are not yet supported on the following endpoints:
    *   Receipts
-   *   Manual Journals
    *   Repeating Invoices
    */
 
@@ -791,6 +791,96 @@ describe('attachments', () => {
         attachmentPlaceholder
           .save(
             `ManualJournals/${sampleManualJournal.ManualJournalID}`,
+            dataReadStream,
+            true
+          )
+          .then(response => {
+            expect(response.entities.length).to.equal(1);
+            const thisFile = response.entities[0];
+            expect(thisFile.AttachmentID).to.not.equal('');
+            expect(thisFile.AttachmentID).to.not.equal(undefined);
+            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
+            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
+            expect(thisFile.ContentLength).to.be.greaterThan(0);
+            expect(thisFile.Url).to.not.equal('');
+            expect(thisFile.Url).to.not.equal(undefined);
+            done();
+          })
+          .catch(err => {
+            console.error(util.inspect(err, null, null));
+            done(wrapError(err));
+          });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+
+  it('creates an attachment on a receipt using a file reference', done => {
+    const attachmentTemplate = {
+      FileName: '1-test-attachment.pdf',
+      MimeType: 'application/pdf',
+    };
+
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
+
+    const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
+      attachmentTemplate
+    );
+
+    // Add attachment to an Invoice
+    currentApp.core.receipts
+      .getReceipts()
+      .then(receipts => {
+        const sampleReceipt = receipts[0];
+        attachmentPlaceholder
+          .save(`Receipts/${sampleReceipt.ReceiptID}`, dataReadStream, true)
+          .then(response => {
+            expect(response.entities.length).to.equal(1);
+            const thisFile = response.entities[0];
+            expect(thisFile.AttachmentID).to.not.equal('');
+            expect(thisFile.AttachmentID).to.not.equal(undefined);
+            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
+            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
+            expect(thisFile.ContentLength).to.be.greaterThan(0);
+            expect(thisFile.Url).to.not.equal('');
+            expect(thisFile.Url).to.not.equal(undefined);
+            done();
+          })
+          .catch(err => {
+            console.error(util.inspect(err, null, null));
+            done(wrapError(err));
+          });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+
+  it('creates an attachment on a repeatinginvoice using a file reference', done => {
+    const attachmentTemplate = {
+      FileName: '1-test-attachment.pdf',
+      MimeType: 'application/pdf',
+    };
+
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
+
+    const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
+      attachmentTemplate
+    );
+
+    // Add attachment to an Invoice
+    currentApp.core.repeatinginvoices
+      .getRepeatingInvoices()
+      .then(repeatinginvoices => {
+        const sampleRepeatingInvoice = repeatinginvoices[0];
+        attachmentPlaceholder
+          .save(
+            `RepeatingInvoices/${sampleRepeatingInvoice.RepeatingInvoiceID}`,
             dataReadStream,
             true
           )

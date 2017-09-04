@@ -471,4 +471,39 @@ describe('Credit Notes', () => {
         done(wrapError(err));
       });
   });
+
+  it('get attachments for credit notes', done => {
+    const filter = 'HasAttachments == true';
+    currentApp.core.creditNotes
+      .getCreditNotes({ where: filter })
+      .then(creditNotes => {
+        if (creditNotes.length === 0) done();
+        let objectsProcessed = 0;
+        creditNotes.forEach(creditNote => {
+          creditNote
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === creditNotes.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
 });

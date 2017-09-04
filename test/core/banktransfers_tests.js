@@ -81,4 +81,39 @@ describe('bank transfers', () => {
         done(wrapError(err));
       });
   });
+
+  it('get attachments for bankTransfers', done => {
+    const filter = 'HasAttachments == true';
+    currentApp.core.bankTransfers
+      .getBankTransfers({ where: filter })
+      .then(bankTransfers => {
+        if (bankTransfers.length === 0) done();
+        let objectsProcessed = 0;
+        bankTransfers.forEach(transfer => {
+          transfer
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === bankTransfers.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
 });
