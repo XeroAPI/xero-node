@@ -5,6 +5,7 @@ const functions = require('../common/functions');
 
 const expect = common.expect;
 const wrapError = functions.wrapError;
+const util = common.util;
 
 const currentApp = common.currentApp;
 
@@ -148,6 +149,41 @@ describe('repeating invoices', () => {
       })
       .catch(err => {
         console.error(err);
+        done(wrapError(err));
+      });
+  });
+
+  it('get attachments for repeatinginvoices', done => {
+    const filter = 'HasAttachments == true';
+    currentApp.core.repeatinginvoices
+      .getRepeatingInvoices({ where: filter })
+      .then(repeatinginvoices => {
+        if (repeatinginvoices.length === 0) done();
+        let objectsProcessed = 0;
+        repeatinginvoices.forEach(repeatinginvoice => {
+          repeatinginvoice
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === repeatinginvoices.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
         done(wrapError(err));
       });
   });

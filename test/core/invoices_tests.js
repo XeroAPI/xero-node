@@ -397,4 +397,39 @@ describe('invoices', () => {
         done(wrapError(err));
       });
   });
+
+  it('get attachments for invoices', done => {
+    const filter = 'HasAttachments == true';
+    currentApp.core.invoices
+      .getInvoices({ where: filter })
+      .then(invoices => {
+        if (invoices.length === 0) done();
+        let objectsProcessed = 0;
+        invoices.forEach(invoice => {
+          invoice
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === invoices.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
 });

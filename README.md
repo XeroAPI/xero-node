@@ -25,6 +25,7 @@ The following Xero API functions are supported:
 * Contact Groups
 * Credit Notes
 * Currencies
+* Employees
 * Invoices
 * Invoice Reminders
 * Items
@@ -32,6 +33,7 @@ The following Xero API functions are supported:
 * Manual Journals
 * Organisations
 * Payments
+* Receipts
 * Repeating Invoices
 * Reports
 * Tax Rates
