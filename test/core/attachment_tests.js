@@ -19,11 +19,8 @@ const currentApp = common.currentApp;
    *  Contacts
    *  Accounts
    *  Manual Journals
-   */
-
-/** Attachments are not yet supported on the following endpoints:
-   *   Receipts
-   *   Repeating Invoices
+   *  Receipts
+   *  Repeating Invoices
    */
 
 describe('attachments', () => {
