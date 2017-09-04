@@ -14,16 +14,30 @@ describe('contacts', () => {
     Name: `Johnnies Coffee ${Math.random()}`,
     FirstName: 'John',
     LastName: 'Smith',
-    Addresses: [{
-      AddressType: "POBOX",
-      AddressLine1: "P O Box 123",
-      City: "Wellington",
-      PostalCode: "6011",
-      AttentionTo: "Andrea"
-    }]
+    Addresses: [
+      {
+        AddressType: 'POBOX',
+        AddressLine1: 'P O Box 123',
+        City: 'Wellington',
+        PostalCode: '6011',
+        AttentionTo: 'Andrea',
+      },
+    ],
+    SalesTrackingCategories: [
+      {
+        TrackingCategoryName: 'Region',
+        TrackingOptionName: 'South',
+      },
+    ],
+    PurchasesTrackingCategories: [
+      {
+        TrackingCategoryName: 'Region',
+        TrackingOptionName: 'North',
+      },
+    ],
   };
 
-  let contactIDsList = [];
+  const contactIDsList = [];
 
   const newName = `Updated ${Math.random()}`;
 
@@ -41,9 +55,11 @@ describe('contacts', () => {
         );
         expect(response.entities[0].LastName).to.equal(sampleContact.LastName);
 
-        expect(response.entities[0].Addresses.filter((address) => {
-          return address.City == sampleContact.Addresses[0].City
-        }).length).to.equal(1);
+        expect(
+          response.entities[0].Addresses.filter(
+            address => address.City === sampleContact.Addresses[0].City
+          ).length
+        ).to.equal(1);
 
         sampleContact = response.entities[0];
 
@@ -55,13 +71,13 @@ describe('contacts', () => {
       });
   });
   it('get - modifiedAfter', done => {
-    const modifiedAfter = new Date();
+    const modifiedDate = new Date();
 
     // take 30 seconds ago as we just created a contact
-    modifiedAfter.setTime(modifiedAfter.getTime() - 10000);
+    modifiedDate.setTime(modifiedDate.getTime() - 10000);
 
     currentApp.core.contacts
-      .getContacts({ modifiedAfter: modifiedAfter })
+      .getContacts({ modifiedAfter: modifiedDate })
       .then(contacts => {
         expect(contacts.length).to.equal(1);
         done();
@@ -132,8 +148,8 @@ describe('contacts', () => {
     currentApp.core.contacts
       .getContacts({
         params: {
-          IDs: contactIDsList.toString()
-        }
+          IDs: contactIDsList.toString(),
+        },
       })
       .then(contacts => {
         contacts.forEach(contact => {
