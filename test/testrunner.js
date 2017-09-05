@@ -46,7 +46,7 @@ describe('Accounting API Tests', () => {
   //   `${__dirname}/core/trackingcategories_tests.js`
   // );
   // importTest('items_tests', `${__dirname}/core/items_tests.js`);
-  importTest('contacts_tests', `${__dirname}/core/contacts_tests.js`);
+  // importTest('contacts_tests', `${__dirname}/core/contacts_tests.js`);
   // importTest('attachment_tests', `${__dirname}/core/attachment_tests.js`);
   // importTest('journals_tests', `${__dirname}/core/journals_tests.js`);
   // importTest(
@@ -61,6 +61,7 @@ describe('Accounting API Tests', () => {
   // importTest('contactgroups_tests', `${__dirname}/core/contactgroups_tests.js`);
   // importTest('employees_tests', `${__dirname}/core/employees_tests.js`);
   // importTest('receipts_tests', `${__dirname}/core/receipts_tests.js`);
+  importTest('expenseclaims_tests', `${__dirname}/core/expenseclaims_tests.js`);
 });
 
 describe.skip('Payroll API Tests', () => {
