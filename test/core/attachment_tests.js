@@ -21,7 +21,20 @@ const currentApp = common.currentApp;
    *  Manual Journals
    *  Receipts
    *  Repeating Invoices
+   *  Purchase Orders
    */
+
+const validateAttachment = attachment => {
+  if (!attachment) return false;
+
+  expect(attachment.AttachmentID).to.not.equal('');
+  expect(attachment.AttachmentID).to.not.equal(undefined);
+  expect(attachment.ContentLength).to.be.greaterThan(0);
+  expect(attachment.Url).to.not.equal('');
+  expect(attachment.Url).to.not.equal(undefined);
+
+  return true;
+};
 
 describe('attachments', () => {
   let invoiceID = '';
@@ -54,14 +67,7 @@ describe('attachments', () => {
           .save(`Invoices/${sampleInvoice.InvoiceID}`, samplePDF, false)
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             invoiceID = sampleInvoice.InvoiceID;
             done();
           })
@@ -100,15 +106,8 @@ describe('attachments', () => {
           })
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
-            expect(thisFile.IncludeOnline).to.equal(true);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
+            expect(response.entities[0].IncludeOnline).to.equal(true);
             done();
           })
           .catch(err => {
@@ -250,14 +249,7 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -296,14 +288,7 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -342,14 +327,7 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -381,21 +359,10 @@ describe('attachments', () => {
       .then(contacts => {
         const sampleContact = contacts[0];
         attachmentPlaceholder
-          .save(
-            `Contacts/${sampleContact.ContactID}`,
-            samplePDF,
-            false
-          )
+          .save(`Contacts/${sampleContact.ContactID}`, samplePDF, false)
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -427,21 +394,10 @@ describe('attachments', () => {
       .then(accounts => {
         const sampleAccount = accounts[0];
         attachmentPlaceholder
-          .save(
-            `Accounts/${sampleAccount.AccountID}`,
-            samplePDF,
-            false
-          )
+          .save(`Accounts/${sampleAccount.AccountID}`, samplePDF, false)
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -480,14 +436,7 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -524,14 +473,7 @@ describe('attachments', () => {
           .save(`Invoices/${sampleInvoice.InvoiceID}`, dataReadStream, true)
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -570,14 +512,7 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -616,14 +551,7 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -662,14 +590,7 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -704,14 +625,7 @@ describe('attachments', () => {
           .save(`Contacts/${sampleContact.ContactID}`, dataReadStream, true)
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -746,14 +660,7 @@ describe('attachments', () => {
           .save(`Accounts/${sampleAccount.AccountID}`, dataReadStream, true)
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -793,14 +700,7 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -832,24 +732,16 @@ describe('attachments', () => {
       .getReceipts()
       .then(receipts => {
         const sampleReceipt = receipts[0];
-        attachmentPlaceholder
-          .save(`Receipts/${sampleReceipt.ReceiptID}`, dataReadStream, true)
-          .then(response => {
-            expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
-            done();
-          })
-          .catch(err => {
-            console.error(util.inspect(err, null, null));
-            done(wrapError(err));
-          });
+        return attachmentPlaceholder.save(
+          `Receipts/${sampleReceipt.ReceiptID}`,
+          dataReadStream,
+          true
+        );
+      })
+      .then(response => {
+        expect(response.entities.length).to.equal(1);
+        expect(validateAttachment(response.entities[0])).to.equal(true);
+        done();
       })
       .catch(err => {
         console.error(util.inspect(err, null, null));
@@ -883,14 +775,47 @@ describe('attachments', () => {
           )
           .then(response => {
             expect(response.entities.length).to.equal(1);
-            const thisFile = response.entities[0];
-            expect(thisFile.AttachmentID).to.not.equal('');
-            expect(thisFile.AttachmentID).to.not.equal(undefined);
-            expect(thisFile.FileName).to.equal(attachmentTemplate.FileName);
-            expect(thisFile.MimeType).to.equal(attachmentTemplate.MimeType);
-            expect(thisFile.ContentLength).to.be.greaterThan(0);
-            expect(thisFile.Url).to.not.equal('');
-            expect(thisFile.Url).to.not.equal(undefined);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
+            done();
+          })
+          .catch(err => {
+            console.error(util.inspect(err, null, null));
+            done(wrapError(err));
+          });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+
+  it('creates an attachment on a purchaseorder using a file reference', done => {
+    const attachmentTemplate = {
+      FileName: '1-test-attachment.pdf',
+      MimeType: 'application/pdf',
+    };
+
+    const samplePDF = `${__dirname}/testdata/test-attachment.pdf`;
+    const dataReadStream = fs.createReadStream(samplePDF);
+
+    const attachmentPlaceholder = currentApp.core.attachments.newAttachment(
+      attachmentTemplate
+    );
+
+    // Add attachment to an Invoice
+    currentApp.core.purchaseOrders
+      .getPurchaseOrders()
+      .then(purchaseOrders => {
+        const samplePurchaseOrder = purchaseOrders[0];
+        attachmentPlaceholder
+          .save(
+            `RepeatingInvoices/${samplePurchaseOrder.PurchaseOrderID}`,
+            dataReadStream,
+            true
+          )
+          .then(response => {
+            expect(response.entities.length).to.equal(1);
+            expect(validateAttachment(response.entities[0])).to.equal(true);
             done();
           })
           .catch(err => {
@@ -921,11 +846,7 @@ describe('attachments', () => {
       .then(accounts => {
         const sampleAccount = accounts[0];
         attachmentPlaceholder
-          .save(
-            `Accounts/${sampleAccount.AccountID}`,
-            samplePDF,
-            true
-          )
+          .save(`Accounts/${sampleAccount.AccountID}`, samplePDF, true)
           .then(() => {
             done(new Error('Expected method to reject.'));
           })

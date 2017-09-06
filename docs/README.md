@@ -27,6 +27,7 @@ The following Xero API functions are supported:
 * [Manual Journals](./Manual-Journals.md)
 * [Organisations](./Organisations.md)
 * [Payments](./Payments.md)
+* [Purchase Orders] (./Purchase-Orders.md)
 * [Receipts](./Receipts.md)
 * [Repeating Invoices](./Repeating-Invoices.md)
 * [Reports (except BAS/GST)](./Reports.md)
@@ -39,7 +40,6 @@ Endpoints not currently supported:
 * Linked Transactions
 * Overpayments
 * Prepayments
-* Purchase Orders
 * Setup
 
 ### Other Xero APIs
@@ -54,5 +54,3 @@ Support for the other Xero APIs is not currently available, but is coming soon.
 
 
 If you need further support, please raise an issue in Github.
-
-

@@ -128,6 +128,7 @@ xeroClient.core.invoices.getInvoice(invoiceID)
   *  Manual Journals
   *  Receipts
   *  Repeating Invoices
+  *  Purchase Orders
 
 ### Retrieving the content of an attachment
 
