@@ -15,8 +15,10 @@ The following Xero API functions are supported:
 * [Bank Transfers](./Bank-Transfers.md)
 * [Branding Themes](./Branding-Themes.md)
 * [Contacts](./Contacts.md)
+* [Contact Groups](./Contact-Groups.md)
 * [Credit Notes (and Allocations)](./Credit-Notes.md)
 * [Currencies](./Currencies.md)
+* [Employees](./Employees.md)
 * [Invoices](./Invoices.md)
 * [Invoice Reminders](./Invoice-Reminders.md)
 * [Items](./Items.md)
@@ -32,14 +34,11 @@ The following Xero API functions are supported:
 
 Endpoints not currently supported:
 
-* Contact Groups
-* Employees (not Payroll)
 * Expense Claims
 * Linked Transactions
 * Overpayments
 * Prepayments
 * Purchase Orders
-* Quotes
 * Receipts
 * Setup
 
