@@ -82,6 +82,39 @@ describe('bank transfers', () => {
       });
   });
 
+  it('create multiple bank transfers', done => {
+    const banktransfers = [];
+
+    for (let i = 0; i < 2; i += 1) {
+      banktransfers.push(
+        currentApp.core.bankTransfers.newBankTransfer({
+          FromBankAccount: {
+            Code: bankAccounts[0].Code,
+          },
+          ToBankAccount: {
+            Code: bankAccounts[1].Code,
+          },
+          Amount: `${Math.random()}`,
+        })
+      );
+    }
+
+    currentApp.core.bankTransfers
+      .saveBankTransfers(banktransfers)
+      .then(response => {
+        expect(response.entities).to.have.length.greaterThan(0);
+        response.entities.forEach(banktransfer => {
+          expect(banktransfer.BankTransferID).to.not.equal('');
+          expect(banktransfer.BankTransferID).to.not.equal(undefined);
+        });
+        done();
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+
   it('get attachments for bankTransfers', done => {
     const filter = 'HasAttachments == true';
     currentApp.core.bankTransfers

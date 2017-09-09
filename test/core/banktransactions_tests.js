@@ -138,4 +138,44 @@ describe('bank transactions', () => {
         done(wrapError(err));
       });
   });
+
+  it('create multiple banktransactions', done => {
+    const banktransactions = [];
+
+    for (let i = 0; i < 2; i += 1) {
+      banktransactions.push(
+        currentApp.core.bankTransactions.newBankTransaction({
+          Type: 'SPEND',
+          Contact: {
+            Name: 'Johnny McGibbons',
+          },
+          LineItems: [
+            {
+              Description: 'Annual Bank Account Fee',
+              UnitAmount: Math.random(),
+              AccountCode: expenseAccountCode,
+            },
+          ],
+          BankAccount: {
+            AccountID: bankAccountId,
+          },
+        })
+      );
+    }
+
+    currentApp.core.bankTransactions
+      .saveBankTransactions(banktransactions)
+      .then(response => {
+        expect(response.entities).to.have.length.greaterThan(0);
+        response.entities.forEach(bankTransaction => {
+          expect(bankTransaction.BankTransactionID).to.not.equal('');
+          expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
+        });
+        done();
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
 });
