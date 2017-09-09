@@ -26,6 +26,7 @@ The following Xero API functions are supported:
 * [Manual Journals](./Manual-Journals.md)
 * [Organisations](./Organisations.md)
 * [Payments](./Payments.md)
+* [Receipts](./Receipts.md)
 * [Repeating Invoices](./Repeating-Invoices.md)
 * [Reports (except BAS/GST)](./Reports.md)
 * [Tax Rates](./Tax-Rates.md)
@@ -39,7 +40,6 @@ Endpoints not currently supported:
 * Overpayments
 * Prepayments
 * Purchase Orders
-* Receipts
 * Setup
 
 ### Other Xero APIs

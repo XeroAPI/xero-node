@@ -227,4 +227,39 @@ describe('accounts', () => {
         done(wrapError(err));
       });
   });
+
+  it('get attachments for accounts', done => {
+    const filter = 'HasAttachments == true';
+    currentApp.core.accounts
+      .getAccounts({ where: filter })
+      .then(accounts => {
+        if (accounts.length === 0) done();
+        let objectsProcessed = 0;
+        accounts.forEach(account => {
+          account
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === accounts.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
+      })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
 });

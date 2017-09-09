@@ -164,7 +164,7 @@ describe('contacts', () => {
   it('create multiple contacts', done => {
     const contacts = [];
 
-    for (let i = 0;i < 2;i += 1) {
+    for (let i = 0; i < 2; i += 1) {
       contacts.push(
         currentApp.core.contacts.newContact({
           Name: `Johnnies Coffee ${Math.random()}`,
@@ -225,7 +225,11 @@ describe('contacts', () => {
       })
       .then(updatedContact => {
         expect(updatedContact.entities[0].Name).to.equal(newName);
-        expect(updatedContact.entities[0].Addresses.filter((address) => {return address.City == "Melbourne"}).length).to.equal(1);
+        expect(
+          updatedContact.entities[0].Addresses.filter(
+            address => address.City === 'Melbourne'
+          ).length
+        ).to.equal(1);
         done();
       })
       .catch(err => {
@@ -234,19 +238,33 @@ describe('contacts', () => {
       });
   });
   it('get attachments for contacts', done => {
+    const filter = 'HasAttachments == true';
     currentApp.core.contacts
-      .getContact(sampleContact.ContactID)
-      .then(contact => {
-        expect(contact.ContactID).to.equal(sampleContact.ContactID);
-        contact
-          .getAttachments()
-          .then(() => {
-            done();
-          })
-          .catch(err => {
-            console.error(util.inspect(err, null, null));
-            done(wrapError(err));
-          });
+      .getContacts({ where: filter })
+      .then(contacts => {
+        if (contacts.length === 0) done();
+        let objectsProcessed = 0;
+        contacts.forEach(contact => {
+          contact
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === contacts.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
       })
       .catch(err => {
         console.error(util.inspect(err, null, null));

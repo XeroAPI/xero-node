@@ -16,6 +16,12 @@ describe('Authorisation Tests', () => {
 });
 
 describe('Accounting API Tests', () => {
+  beforeEach(done => {
+    setTimeout(() => {
+      done();
+    }, 200);
+  });
+
   // Accounting (Core) API Tests
   importTest('organisation_tests', `${__dirname}/core/organisation_tests.js`);
   importTest('accounts_tests', `${__dirname}/core/accounts_tests.js`);
@@ -41,19 +47,20 @@ describe('Accounting API Tests', () => {
   );
   importTest('items_tests', `${__dirname}/core/items_tests.js`);
   importTest('contacts_tests', `${__dirname}/core/contacts_tests.js`);
+  importTest('attachment_tests', `${__dirname}/core/attachment_tests.js`);
   importTest('journals_tests', `${__dirname}/core/journals_tests.js`);
   importTest(
     'manualjournals_tests',
     `${__dirname}/core/manualjournal_tests.js`
   );
   importTest('users_tests', `${__dirname}/core/users_tests.js`);
-  importTest('attachment_tests', `${__dirname}/core/attachment_tests.js`);
   importTest(
     'repeatinginvoice_tests',
     `${__dirname}/core/repeatinginvoice_tests.js`
   );
   importTest('contactgroups_tests', `${__dirname}/core/contactgroups_tests.js`);
   importTest('employees_tests', `${__dirname}/core/employees_tests.js`);
+  importTest('receipts_tests', `${__dirname}/core/receipts_tests.js`);
 });
 
 describe.skip('Payroll API Tests', () => {
