@@ -117,7 +117,7 @@ describe('bank transactions', () => {
           LineItems: [
             {
               Description: 'Annual Bank Account Fee',
-              UnitAmount: Math.random(),
+              UnitAmount: 0.01,
               AccountCode: expenseAccountCode,
             },
           ],
@@ -143,6 +143,7 @@ describe('bank transactions', () => {
         done(wrapError(err));
       });
   });
+
   it('get attachments for bankTransactions', done => {
     const filter = 'HasAttachments == true';
     currentApp.core.bankTransactions
