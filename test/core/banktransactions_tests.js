@@ -10,6 +10,40 @@ const util = common.util;
 
 const currentApp = common.currentApp;
 
+const validateBankTransaction = bankTransaction => {
+  if (!bankTransaction) return false;
+
+  expect(bankTransaction.BankTransactionID).to.not.equal('');
+  expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
+
+  bankTransaction.LineItems.forEach(lineItem => {
+    expect(lineItem.LineItemID).to.be.a('String');
+    expect(lineItem.UnitAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
+    expect(lineItem.UnitAmount).to.be.a('Number');
+
+    if (lineItem.TaxType) {
+      expect(lineItem.TaxType).to.be.a('String');
+    }
+
+    expect(lineItem.TaxAmount).to.be.a('Number');
+    expect(lineItem.LineAmount).to.be.a('Number');
+
+    if (lineItem.AccountCode) {
+      expect(lineItem.AccountCode).to.be.a('String');
+    }
+
+    expect(lineItem.Quantity).to.be.a('Number');
+
+    lineItem.Tracking.forEach(trackingCategory => {
+      expect(trackingCategory.TrackingCategoryID).to.be.a('String');
+      expect(trackingCategory.Name).to.be.a('String');
+      expect(trackingCategory.Option).to.be.a('String');
+    });
+  });
+
+  return true;
+};
+
 describe('bank transactions', () => {
   let sharedTransaction;
   let expenseAccountId;
@@ -51,6 +85,12 @@ describe('bank transactions', () => {
           Description: 'Annual Bank Account Fee',
           UnitAmount: 250,
           AccountCode: expenseAccountCode,
+          Tracking: [
+            {
+              Name: 'Region',
+              Option: 'South',
+            },
+          ],
         },
       ],
       BankAccount: {
@@ -62,8 +102,7 @@ describe('bank transactions', () => {
       .save()
       .then(response => {
         expect(response.entities).to.have.length.greaterThan(0);
-        expect(response.entities[0].BankTransactionID).to.not.equal('');
-        expect(response.entities[0].BankTransactionID).to.not.equal(undefined);
+        expect(validateBankTransaction(response.entities[0])).to.equal(true);
         sharedTransaction = response.entities[0].BankTransactionID;
         done();
       })
@@ -79,8 +118,7 @@ describe('bank transactions', () => {
       .then(bankTransactions => {
         expect(bankTransactions).to.have.length.greaterThan(0);
         bankTransactions.forEach(bankTransaction => {
-          expect(bankTransaction.BankTransactionID).to.not.equal('');
-          expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
+          expect(validateBankTransaction(bankTransaction)).to.equal(true);
         });
         done();
       })
@@ -94,8 +132,7 @@ describe('bank transactions', () => {
     currentApp.core.bankTransactions
       .getBankTransaction(sharedTransaction)
       .then(bankTransaction => {
-        expect(bankTransaction.BankTransactionID).to.not.equal('');
-        expect(bankTransaction.BankTransactionID).to.not.equal(undefined);
+        expect(validateBankTransaction(bankTransaction)).to.equal(true);
         done();
       })
       .catch(err => {

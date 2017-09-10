@@ -162,10 +162,8 @@ describe('tracking categories', () => {
               AccountCode: salesAccountCode,
               Tracking: [
                 {
-                  TrackingCategory: {
-                    Name: trackingCategoryName,
-                    Option: 'North',
-                  },
+                  Name: trackingCategoryName,
+                  Option: 'North',
                 },
               ],
             },
@@ -179,7 +177,7 @@ describe('tracking categories', () => {
             expect(response.entities[0].InvoiceID).to.not.equal('');
 
             response.entities[0].LineItems.forEach(lineItem => {
-              // expect(lineItem.Tracking).to.have.length.greaterThan(0)
+              expect(lineItem.Tracking).to.have.length.greaterThan(0);
               lineItem.Tracking.forEach(thisTrackingCategory => {
                 expect(thisTrackingCategory.TrackingCategoryID).to.not.equal(
                   undefined

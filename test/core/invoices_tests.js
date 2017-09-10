@@ -15,14 +15,104 @@ const validateInvoice = invoice => {
     return false;
   }
 
-  expect(invoice.InvoiceID).to.not.equal('');
-  expect(invoice.InvoiceID).to.not.equal(undefined);
+  expect(invoice.Type).to.be.a('String');
+  expect(invoice.Date).to.be.a('Date');
+  expect(invoice.DueDate).to.be.a('Date');
+  expect(invoice.LineAmountTypes).to.be.a('String');
+  expect(invoice.InvoiceNumber).to.be.a('String');
 
-  invoice.LineItems.forEach(lineItem => {
-    expect(lineItem.UnitAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
+  if (invoice.Reference) {
+    expect(invoice.Reference).to.be.a('String');
+  }
+
+  if (invoice.BrandingThemeID) {
+    expect(invoice.BrandingThemeID).to.be.a('String');
+  }
+
+  if (invoice.Url) {
+    expect(invoice.Url).to.be.a('String');
+  }
+
+  expect(invoice.CurrencyCode).to.be.a('String');
+
+  if (invoice.CurrencyRate) {
+    expect(invoice.CurrencyRate).to.be.a('Number');
+  }
+
+  expect(invoice.Status).to.be.a('String');
+
+  if (invoice.SentToContact) {
+    expect(invoice.SentToContact).to.be.a('Boolean');
+  }
+
+  if (invoice.ExpectedPaymentDate) {
+    expect(invoice.ExpectedPaymentDate).to.be.a('String');
+  }
+
+  if (invoice.PlannedPaymentDate) {
+    expect(invoice.PlannedPaymentDate).to.be.a('String');
+  }
+
+  expect(invoice.SubTotal).to.be.a('Number');
+  expect(invoice.TotalTax).to.be.a('Number');
+  expect(invoice.Total).to.be.a('Number');
+
+  if (invoice.TotalDiscount) {
+    expect(invoice.TotalDiscount).to.be.a('String');
+  }
+
+  expect(invoice.InvoiceID).to.be.a('String');
+
+  if (invoice.HasAttachments) {
+    expect(invoice.HasAttachments).to.be.a('Boolean');
+  }
+
+  expect(invoice.AmountDue).to.be.a('Number');
+  expect(invoice.AmountPaid).to.be.a('Number');
+
+  if (invoice.FullyPaidOnDate) {
+    expect(invoice.FullyPaidOnDate).to.be.a('Date');
+  }
+
+  if (invoice.AmountCredited) {
+    expect(invoice.AmountCredited).to.be.a('Number');
+  }
+
+  expect(invoice.UpdatedDateUTC).to.be.a('Date');
+
+  // Arrays
+  invoice.Payments.forEach(payment => {
+    expect(payment.PaymentID).to.be.a('String');
   });
 
-  expect(invoice.DueDate).to.be.a('date');
+  invoice.LineItems.forEach(lineItem => {
+    expect(lineItem.LineItemID).to.be.a('String');
+    expect(lineItem.UnitAmount).to.match(/[0-9]+\.?[0-9]{0,4}/);
+    expect(lineItem.UnitAmount).to.be.a('Number');
+
+    if (lineItem.TaxType) {
+      expect(lineItem.TaxType).to.be.a('String');
+    }
+
+    expect(lineItem.TaxAmount).to.be.a('Number');
+    expect(lineItem.LineAmount).to.be.a('Number');
+
+    if (lineItem.AccountCode) {
+      expect(lineItem.AccountCode).to.be.a('String');
+    }
+
+    expect(lineItem.Quantity).to.be.a('Number');
+
+    lineItem.Tracking.forEach(trackingCategory => {
+      expect(trackingCategory.TrackingCategoryID).to.be.a('String');
+      expect(trackingCategory.Name).to.be.a('String');
+      expect(trackingCategory.Option).to.be.a('String');
+    });
+  });
+
+  invoice.CreditNotes.forEach(creditNote => {
+    expect(creditNote.CreditNoteID).to.be.a('String');
+  });
 
   return true;
 };
@@ -31,10 +121,9 @@ describe('invoices', () => {
   let InvoiceID = '';
   let salesAccountID = '';
   let salesAccountCode = '';
-  let invoiceIDsList = [];
-  let invoiceNumbersList = [];
-  let statusesList = [];
-  let contactIDsList = [];
+  const invoiceIDsList = [];
+  const invoiceNumbersList = [];
+  const contactIDsList = [];
 
   before('create a sales account for testing', () =>
     createAccount({ Type: 'REVENUE' }).then(response => {
@@ -64,6 +153,12 @@ describe('invoices', () => {
           Quantity: 2,
           UnitAmount: 230,
           AccountCode: salesAccountCode,
+          Tracking: [
+            {
+              Name: 'Region',
+              Option: 'North',
+            },
+          ],
         },
       ],
     });
@@ -94,15 +189,15 @@ describe('invoices', () => {
         invoices.forEach(invoice => {
           expect(validateInvoice(invoice)).to.equal(true);
 
-          if(invoiceIDsList.length < 5) {
+          if (invoiceIDsList.length < 5) {
             invoiceIDsList.push(invoice.InvoiceID);
           }
 
-          if(invoiceNumbersList.length < 5) {
+          if (invoiceNumbersList.length < 5) {
             invoiceNumbersList.push(invoice.InvoiceNumber);
           }
 
-          if(contactIDsList.length < 5) {
+          if (contactIDsList.length < 5) {
             contactIDsList.push(invoice.Contact.ContactID);
           }
         });
@@ -113,6 +208,30 @@ describe('invoices', () => {
         done(wrapError(err));
       });
   });
+
+  it('get all (paging)', done => {
+    const onInvoices = (err, response, cb) => {
+      cb();
+      try {
+        response.data.forEach(invoice => {
+          expect(validateInvoice(invoice)).to.equal(true);
+        });
+
+        if (response.finished) done();
+      } catch (ex) {
+        console.error(util.inspect(err, null, null));
+        done(ex);
+      }
+    };
+
+    currentApp.core.invoices
+      .getInvoices({ pager: { start: 1, callback: onInvoices } })
+      .catch(err => {
+        console.error(util.inspect(err, null, null));
+        done(wrapError(err));
+      });
+  });
+
   it('get invoice', done => {
     currentApp.core.invoices
       .getInvoice(InvoiceID)
@@ -130,8 +249,8 @@ describe('invoices', () => {
     currentApp.core.invoices
       .getInvoices({
         params: {
-          IDs: invoiceIDsList.toString()
-        }
+          IDs: invoiceIDsList.toString(),
+        },
       })
       .then(invoices => {
         invoices.forEach(invoice => {
@@ -148,8 +267,8 @@ describe('invoices', () => {
     currentApp.core.invoices
       .getInvoices({
         params: {
-          InvoiceNumbers: invoiceNumbersList.toString()
-        }
+          InvoiceNumbers: invoiceNumbersList.toString(),
+        },
       })
       .then(invoices => {
         invoices.forEach(invoice => {
@@ -166,8 +285,8 @@ describe('invoices', () => {
     currentApp.core.invoices
       .getInvoices({
         params: {
-          ContactIDs: contactIDsList.toString()
-        }
+          ContactIDs: contactIDsList.toString(),
+        },
       })
       .then(invoices => {
         invoices.forEach(invoice => {
@@ -184,12 +303,12 @@ describe('invoices', () => {
     currentApp.core.invoices
       .getInvoices({
         params: {
-          Statuses: "PAID,VOIDED"
-        }
+          Statuses: 'PAID,VOIDED',
+        },
       })
       .then(invoices => {
         invoices.forEach(invoice => {
-          expect(invoice.Status).to.be.oneOf(["PAID","VOIDED"]);
+          expect(invoice.Status).to.be.oneOf(['PAID', 'VOIDED']);
         });
         done();
       })
