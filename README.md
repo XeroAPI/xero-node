@@ -221,6 +221,14 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.7.0
+    - Merged [PR#84](https://github.com/XeroAPI/xero-node/pull/84) - Add support for Employees
+    - Merged [PR#85](https://github.com/XeroAPI/xero-node/pull/85) - Fix for BankTransactions
+    - Merged [PR#88](https://github.com/XeroAPI/xero-node/pull/88) - Add support for Receipts' Endpoint 
+    - Merged [PR#89](https://github.com/XeroAPI/xero-node/pull/89) - Fix issue for Tracking Categories
+    - Merged [PR#90](https://github.com/XeroAPI/xero-node/pull/90) - Add support for Expense Claims
+    - Merged [PR#92](https://github.com/XeroAPI/xero-node/pull/92) - Add support for Purchase Orders 
+    - Merged [PR#94](https://github.com/XeroAPI/xero-node/pull/94) - Issue 87
 * 2.6.0
     - Merged [PR#79](https://github.com/XeroAPI/xero-node/pull/79) - Add support for ContactGroups
     - Merged [PR#80](https://github.com/XeroAPI/xero-node/pull/80) - Fixes Contact address deatil schema.
