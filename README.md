@@ -26,6 +26,7 @@ The following Xero API functions are supported:
 * Credit Notes
 * Currencies
 * Employees
+* Expense Claims
 * Invoices
 * Invoice Reminders
 * Items

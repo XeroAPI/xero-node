@@ -18,6 +18,7 @@ The following Xero API functions are supported:
 * [Contact Groups](./Contact-Groups.md)
 * [Credit Notes (and Allocations)](./Credit-Notes.md)
 * [Currencies](./Currencies.md)
+* [Expense Claims](./Expense-Claims.md)
 * [Employees](./Employees.md)
 * [Invoices](./Invoices.md)
 * [Invoice Reminders](./Invoice-Reminders.md)
@@ -35,7 +36,6 @@ The following Xero API functions are supported:
 
 Endpoints not currently supported:
 
-* Expense Claims
 * Linked Transactions
 * Overpayments
 * Prepayments
