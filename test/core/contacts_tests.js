@@ -14,16 +14,30 @@ describe('contacts', () => {
     Name: `Johnnies Coffee ${Math.random()}`,
     FirstName: 'John',
     LastName: 'Smith',
-    Addresses: [{
-      AddressType: "POBOX",
-      AddressLine1: "P O Box 123",
-      City: "Wellington",
-      PostalCode: "6011",
-      AttentionTo: "Andrea"
-    }]
+    Addresses: [
+      {
+        AddressType: 'POBOX',
+        AddressLine1: 'P O Box 123',
+        City: 'Wellington',
+        PostalCode: '6011',
+        AttentionTo: 'Andrea',
+      },
+    ],
+    SalesTrackingCategories: [
+      {
+        TrackingCategoryName: 'Region',
+        TrackingOptionName: 'South',
+      },
+    ],
+    PurchasesTrackingCategories: [
+      {
+        TrackingCategoryName: 'Region',
+        TrackingOptionName: 'North',
+      },
+    ],
   };
 
-  let contactIDsList = [];
+  const contactIDsList = [];
 
   const newName = `Updated ${Math.random()}`;
 
@@ -41,9 +55,11 @@ describe('contacts', () => {
         );
         expect(response.entities[0].LastName).to.equal(sampleContact.LastName);
 
-        expect(response.entities[0].Addresses.filter((address) => {
-          return address.City == sampleContact.Addresses[0].City
-        }).length).to.equal(1);
+        expect(
+          response.entities[0].Addresses.filter(
+            address => address.City === sampleContact.Addresses[0].City
+          ).length
+        ).to.equal(1);
 
         sampleContact = response.entities[0];
 
@@ -55,13 +71,13 @@ describe('contacts', () => {
       });
   });
   it('get - modifiedAfter', done => {
-    const modifiedAfter = new Date();
+    const modifiedDate = new Date();
 
     // take 30 seconds ago as we just created a contact
-    modifiedAfter.setTime(modifiedAfter.getTime() - 10000);
+    modifiedDate.setTime(modifiedDate.getTime() - 10000);
 
     currentApp.core.contacts
-      .getContacts({ modifiedAfter: modifiedAfter })
+      .getContacts({ modifiedAfter: modifiedDate })
       .then(contacts => {
         expect(contacts.length).to.equal(1);
         done();
@@ -120,6 +136,10 @@ describe('contacts', () => {
       .getContact(sampleContact.ContactID)
       .then(contact => {
         expect(contact.ContactID).to.equal(sampleContact.ContactID);
+        expect(contact.SalesTrackingCategories[0].TrackingCategoryName).to.be.a('String');
+        expect(contact.SalesTrackingCategories[0].TrackingOptionName).to.be.a('String');
+        expect(contact.PurchasesTrackingCategories[0].TrackingCategoryName).to.be.a('String');
+        expect(contact.PurchasesTrackingCategories[0].TrackingOptionName).to.be.a('String');
         done();
       })
       .catch(err => {
@@ -132,8 +152,8 @@ describe('contacts', () => {
     currentApp.core.contacts
       .getContacts({
         params: {
-          IDs: contactIDsList.toString()
-        }
+          IDs: contactIDsList.toString(),
+        },
       })
       .then(contacts => {
         contacts.forEach(contact => {
@@ -164,7 +184,7 @@ describe('contacts', () => {
   it('create multiple contacts', done => {
     const contacts = [];
 
-    for (let i = 0;i < 2;i += 1) {
+    for (let i = 0; i < 2; i += 1) {
       contacts.push(
         currentApp.core.contacts.newContact({
           Name: `Johnnies Coffee ${Math.random()}`,
@@ -225,7 +245,11 @@ describe('contacts', () => {
       })
       .then(updatedContact => {
         expect(updatedContact.entities[0].Name).to.equal(newName);
-        expect(updatedContact.entities[0].Addresses.filter((address) => {return address.City == "Melbourne"}).length).to.equal(1);
+        expect(
+          updatedContact.entities[0].Addresses.filter(
+            address => address.City === 'Melbourne'
+          ).length
+        ).to.equal(1);
         done();
       })
       .catch(err => {
@@ -234,19 +258,33 @@ describe('contacts', () => {
       });
   });
   it('get attachments for contacts', done => {
+    const filter = 'HasAttachments == true';
     currentApp.core.contacts
-      .getContact(sampleContact.ContactID)
-      .then(contact => {
-        expect(contact.ContactID).to.equal(sampleContact.ContactID);
-        contact
-          .getAttachments()
-          .then(() => {
-            done();
-          })
-          .catch(err => {
-            console.error(util.inspect(err, null, null));
-            done(wrapError(err));
-          });
+      .getContacts({ where: filter })
+      .then(contacts => {
+        if (contacts.length === 0) done();
+        let objectsProcessed = 0;
+        contacts.forEach(contact => {
+          contact
+            .getAttachments()
+            .then(attachments => {
+              objectsProcessed += 1;
+              attachments.forEach((attachment, index) => {
+                expect(attachment.AttachmentID).to.not.equal('');
+                expect(attachment.AttachmentID).to.not.equal(undefined);
+
+                if (
+                  objectsProcessed === contacts.length &&
+                  index === attachments.length - 1
+                ) {
+                  done();
+                }
+              });
+            })
+            .catch(err => {
+              console.error(util.inspect(err, null, null));
+            });
+        });
       })
       .catch(err => {
         console.error(util.inspect(err, null, null));

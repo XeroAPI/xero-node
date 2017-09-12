@@ -15,8 +15,11 @@ The following Xero API functions are supported:
 * [Bank Transfers](./Bank-Transfers.md)
 * [Branding Themes](./Branding-Themes.md)
 * [Contacts](./Contacts.md)
+* [Contact Groups](./Contact-Groups.md)
 * [Credit Notes (and Allocations)](./Credit-Notes.md)
 * [Currencies](./Currencies.md)
+* [Expense Claims](./Expense-Claims.md)
+* [Employees](./Employees.md)
 * [Invoices](./Invoices.md)
 * [Invoice Reminders](./Invoice-Reminders.md)
 * [Items](./Items.md)
@@ -24,6 +27,8 @@ The following Xero API functions are supported:
 * [Manual Journals](./Manual-Journals.md)
 * [Organisations](./Organisations.md)
 * [Payments](./Payments.md)
+* [Purchase Orders] (./Purchase-Orders.md)
+* [Receipts](./Receipts.md)
 * [Repeating Invoices](./Repeating-Invoices.md)
 * [Reports (except BAS/GST)](./Reports.md)
 * [Tax Rates](./Tax-Rates.md)
@@ -32,15 +37,9 @@ The following Xero API functions are supported:
 
 Endpoints not currently supported:
 
-* Contact Groups
-* Employees (not Payroll)
-* Expense Claims
 * Linked Transactions
 * Overpayments
 * Prepayments
-* Purchase Orders
-* Quotes
-* Receipts
 * Setup
 
 ### Other Xero APIs
@@ -55,5 +54,3 @@ Support for the other Xero APIs is not currently available, but is coming soon.
 
 
 If you need further support, please raise an issue in Github.
-
-

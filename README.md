@@ -25,6 +25,8 @@ The following Xero API functions are supported:
 * Contact Groups
 * Credit Notes
 * Currencies
+* Employees
+* Expense Claims
 * Invoices
 * Invoice Reminders
 * Items
@@ -32,6 +34,8 @@ The following Xero API functions are supported:
 * Manual Journals
 * Organisations
 * Payments
+* Purchase Orders
+* Receipts
 * Repeating Invoices
 * Reports
 * Tax Rates
@@ -217,6 +221,14 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.7.0
+    - Merged [PR#84](https://github.com/XeroAPI/xero-node/pull/84) - Add support for Employees
+    - Merged [PR#85](https://github.com/XeroAPI/xero-node/pull/85) - Fix for BankTransactions
+    - Merged [PR#88](https://github.com/XeroAPI/xero-node/pull/88) - Add support for Receipts' Endpoint 
+    - Merged [PR#89](https://github.com/XeroAPI/xero-node/pull/89) - Fix issue for Tracking Categories
+    - Merged [PR#90](https://github.com/XeroAPI/xero-node/pull/90) - Add support for Expense Claims
+    - Merged [PR#92](https://github.com/XeroAPI/xero-node/pull/92) - Add support for Purchase Orders 
+    - Merged [PR#94](https://github.com/XeroAPI/xero-node/pull/94) - Issue 87
 * 2.6.0
     - Merged [PR#79](https://github.com/XeroAPI/xero-node/pull/79) - Add support for ContactGroups
     - Merged [PR#80](https://github.com/XeroAPI/xero-node/pull/80) - Fixes Contact address deatil schema.
@@ -441,4 +453,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

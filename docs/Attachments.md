@@ -100,7 +100,7 @@ xeroClient.core.invoices.getInvoice(sampleInvoiceID)
 
 ### Retrieving All Attachments
 
-This example shows how to retrieve all attachments in a single call.
+This example shows how to retrieve attachments from an object in a single call.
 
 ```javascript
 
@@ -116,6 +116,19 @@ xeroClient.core.invoices.getInvoice(invoiceID)
 ```
 
 * When using the getAttachments method, as no object is being saved there is no `entities` array.  Instead you are provided an array of attachment objects that you can use directly in your application.
+
+* Attachments (and the `getAttachments()` function) are supported on the following entities: 
+
+  *  Accounts
+  *  Bank Transactions
+  *  Bank Transfers
+  *  Contacts
+  *  Credit Notes
+  *  Invoices
+  *  Manual Journals
+  *  Receipts
+  *  Repeating Invoices
+  *  Purchase Orders
 
 ### Retrieving the content of an attachment
 

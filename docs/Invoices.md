@@ -5,6 +5,7 @@ The following examples explain the Invoices section of the SDK.  The API documen
 * Create New Invoices
 * Retrieve Invoices (all, paginated, by ID, by Contact IDs/Invoice Numbers/Statuses, or with 'where' clause)
 * Update Invoices
+* Get Invoice Attachments
 
 These functions are explained further below.
 
