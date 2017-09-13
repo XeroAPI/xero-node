@@ -129,7 +129,7 @@ describe('Receipts', () => {
   it('create multiple Receipts', done => {
     const Receipts = [];
 
-    for (let i = 0; i < 2; i += 1) {
+    for (let i = 0; i < 10; i += 1) {
       const newReceipt = {};
       Object.assign(newReceipt, sampleReceipt);
       newReceipt.ReceiptID = undefined;
