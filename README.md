@@ -224,6 +224,8 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.9.0
+    - Merged [PR#98](https://github.com/XeroAPI/xero-node/pull/98) - Add support for redirectOnError
 * ~~2.7.0~~ Released as 2.8.0
     - Merged [PR#84](https://github.com/XeroAPI/xero-node/pull/84) - Add support for Employees
     - Merged [PR#85](https://github.com/XeroAPI/xero-node/pull/85) - Fix for BankTransactions
