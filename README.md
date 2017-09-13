@@ -70,9 +70,10 @@ This package can be installed via npm or yarn.
 | userAgent            | The useragent that should be used with all calls to the Xero API                         | True      |
 | consumerKey          | The consumer key that is required with all calls to the Xero API.,                       | True      |
 | consumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      |
-| AuthorizeCallbackUrl | The callback that Xero should invoke when the authorization is successful.               | False     |
+| authorizeCallbackUrl | The callback that Xero should invoke when the authorization is successful.               | False     |
 | privateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     |
 | runscopeBucketId     | Your personal runscope bucket for debugging API calls                                    | False     |
+| redirectOnError      | Whether the Xero Auth process should redirect to your app in the event the user clicks 'Cancel'   | False     |
 ---
 
 ```javascript
@@ -91,7 +92,8 @@ This package can be installed via npm or yarn.
     "consumerKey": "AAAAAAAAAAAAAAAAAA",
     "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
-    "runscopeBucketId" : "xxxyyyzzzz"
+    "runscopeBucketId" : "xxxyyyzzzz",
+    "redirectOnError" : true
 }
 
 //Sample Partner App Config
@@ -101,7 +103,8 @@ This package can be installed via npm or yarn.
     "consumerSecret": "BBBBBBBBBBBBBBBBBBBB",
     "authorizeCallbackUrl": 'https://www.mywebsite.com/xerocallback',
     "privateKeyPath" : "/some/path/to/partner_privatekey.pem",
-    "runscopeBucketId" : "xxxyyyzzzz"
+    "runscopeBucketId" : "xxxyyyzzzz",
+    "redirectOnError" : true
 }
 ```
 
