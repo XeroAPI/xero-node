@@ -10,7 +10,7 @@ These functions are explained further below.
 
 The entity helper that has been created for the Repeating Invoices functions exists in the following place:
 
-`client.core.repeatingInvoices`
+`client.core.repeatinginvoices`
 
 This helper contains the following functions:
 
@@ -22,7 +22,7 @@ This example shows how to retrieve the Repeating Invoices.
 
 ```javascript
 
-xeroClient.core.repeatingInvoices.getRepeatingInvoices()
+xeroClient.core.repeatinginvoices.getRepeatingInvoices()
    .then(function(repeatingInvoices) {
       //We've got the Repeating Invoices
       repeatingInvoices.forEach(function(invoice){
@@ -40,7 +40,7 @@ This example shows how to retrieve a repeating invoice using the Xero supplied G
 
 var myRepeatingInvoiceID = '288762e4-67a9-442d-9956-9a14e9d8826e';
 
-xeroClient.core.repeatingInvoices.getRepeatingInvoice(myRepeatingInvoiceID)
+xeroClient.core.repeatinginvoices.getRepeatingInvoice(myRepeatingInvoiceID)
    .then(function(invoice) {
       //We've got the invoice so do something useful
       console.log(invoice.Type); //ACCPAY
@@ -56,7 +56,7 @@ This example shows how to retrieve a repeating invoice using the 'where' filter.
 //filter invoices that have status == 'AUTHORISED'
 var filter = 'Status == "AUTHORISED"';
 
-xeroClient.core.repeatingInvoices.getRepeatingInvoices({where: filter})
+xeroClient.core.repeatinginvoices.getRepeatingInvoices({where: filter})
    .then(function(invoices) {
       //We've got some invoices
       invoices.forEach(function(invoice){

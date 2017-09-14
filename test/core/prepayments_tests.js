@@ -8,32 +8,21 @@ const util = common.util;
 const wrapError = functions.wrapError;
 const createAccount = functions.createAccount;
 
-const validateOverpayment = overpayment => {
-  if (!overpayment) return false;
+const validatePrepayment = prepayment => {
+  if (!prepayment) return false;
 
-  expect(overpayment.OverpaymentID).to.be.a('String');
+  expect(prepayment.PrepaymentID).to.be.a('String');
+  expect(prepayment.Type).to.be.a('String');
+  expect(prepayment.Type).to.be.a('String');
 
-  // Contact
-  expect(overpayment.Contact.ContactID).to.be.a('String');
-  expect(overpayment.Contact.Name).to.be.a('String');
-
-  expect(overpayment.Date).to.be.a('Date');
-  expect(overpayment.Status).to.be.a('String');
-  expect(overpayment.LineAmountTypes).to.be.a('String');
-  expect(overpayment.SubTotal).to.be.a('Number');
-  expect(overpayment.TotalTax).to.be.a('Number');
-  expect(overpayment.Total).to.be.a('Number');
-  expect(overpayment.CurrencyCode).to.be.a('String');
-  expect(overpayment.Type).to.be.a('String');
-
-  if (overpayment.CurrencyRate) {
-    expect(overpayment.CurrencyRate).to.be.a('Number');
+  if (prepayment.Reference) {
+    expect(prepayment.Reference).to.be.a('String');
   }
 
-  expect(overpayment.RemainingCredit).to.be.a('Number');
+  expect(prepayment.RemainingCredit).to.be.a('Number');
 
-  if (overpayment.Allocations) {
-    overpayment.Allocations.forEach(allocation => {
+  if (prepayment.Allocations) {
+    prepayment.Allocations.forEach(allocation => {
       expect(allocation.Amount).to.be.a('Number');
       expect(allocation.Date).to.be.a('Date');
       expect(allocation.Invoice.InvoiceID).to.be.a('String');
@@ -42,16 +31,43 @@ const validateOverpayment = overpayment => {
     });
   }
 
-  expect(overpayment.HasAttachments).to.be.a('Boolean');
+  if (prepayment.Payments) {
+    prepayment.Payments.forEach(payment => {
+      expect(payment.Amount).to.be.a('Number');
+    });
+  }
+
+  expect(prepayment.HasAttachments).to.be.a('Boolean');
+  expect(prepayment.Date).to.be.a('Date');
+  expect(prepayment.Status).to.be.a('String');
+  expect(prepayment.LineAmountTypes).to.be.a('String');
+
+  if (prepayment.LineItems) {
+    prepayment.LineItems.forEach(lineItem => {
+      expect(lineItem.UnitAmount).to.be.a('Number');
+    });
+  }
+
+  expect(prepayment.SubTotal).to.be.a('Number');
+  expect(prepayment.TotalTax).to.be.a('Number');
+  expect(prepayment.Total).to.be.a('Number');
+
+  if (prepayment.UpdatedDate) {
+    expect(prepayment.UpdatedDate).to.be.a('Date');
+  }
+
+  expect(prepayment.CurrencyCode).to.be.a('String');
 
   return true;
 };
 
-describe('Overpayments', () => {
-  let spendOverpaymentID;
-  let receiveOverpaymentID;
+describe('Prepayments', () => {
+  let spendPrepaymentID;
+  let receivePrepaymentID;
   let receiveInvoiceID;
   let bankAccountId;
+  let salesAccountCode;
+  let salesAccountID;
   const myAllocationAmount = 250;
 
   before('create a bank account for testing', () =>
@@ -62,6 +78,23 @@ describe('Overpayments', () => {
       bankAccountId = response.entities[0].AccountID;
     })
   );
+
+  before('create a sales account for testing', () =>
+    createAccount({ Type: 'REVENUE' }).then(response => {
+      salesAccountID = response.entities[0].AccountID;
+      salesAccountCode = response.entities[0].Code;
+    })
+  );
+
+  after('archive the account for testing', () => {
+    common.currentApp.core.accounts
+      .getAccount(salesAccountID)
+      .then(response => {
+        const account = response;
+        account.Status = 'ARCHIVED';
+        return account.save();
+      });
+  });
 
   before('get an invoice for allocation', done => {
     const filter = `Type == "ACCREC" && Status = "AUTHORISED" && AmountDue >= ${myAllocationAmount}`;
@@ -87,18 +120,19 @@ describe('Overpayments', () => {
     });
   });
 
-  before('creates a new receive overpayment transaction', done => {
+  before('creates a new receive prepayment transaction', done => {
     const transaction = common.currentApp.core.bankTransactions.newBankTransaction(
       {
-        Type: 'RECEIVE-OVERPAYMENT',
+        Type: 'RECEIVE-PREPAYMENT',
         Contact: {
           Name: 'Johnny McGibbons',
         },
-        LineAmountTypes: 'NoTax',
+        LineAmountTypes: 'Inclusive',
         LineItems: [
           {
-            Description: 'Overpayment for services',
+            Description: 'Prepayment for services',
             UnitAmount: myAllocationAmount,
+            AccountCode: salesAccountCode,
             Tracking: [
               {
                 Name: 'Region',
@@ -116,7 +150,7 @@ describe('Overpayments', () => {
     transaction
       .save()
       .then(response => {
-        receiveOverpaymentID = response.entities[0].OverpaymentID;
+        receivePrepaymentID = response.entities[0].PrepaymentID;
         done();
       })
       .catch(err => {
@@ -125,18 +159,19 @@ describe('Overpayments', () => {
       });
   });
 
-  before('creates a new spend overpayment transaction', done => {
+  before('creates a new spend prepayment transaction', done => {
     const transaction = common.currentApp.core.bankTransactions.newBankTransaction(
       {
-        Type: 'SPEND-OVERPAYMENT',
+        Type: 'SPEND-PREPAYMENT',
         Contact: {
           Name: 'Johnny McGibbons',
         },
-        LineAmountTypes: 'NoTax',
+        LineAmountTypes: 'Inclusive',
         LineItems: [
           {
             Description: 'Forgot to cancel annual sub payment',
             UnitAmount: myAllocationAmount,
+            AccountCode: salesAccountCode,
             Tracking: [
               {
                 Name: 'Region',
@@ -154,7 +189,7 @@ describe('Overpayments', () => {
     transaction
       .save()
       .then(response => {
-        spendOverpaymentID = response.entities[0].OverpaymentID;
+        spendPrepaymentID = response.entities[0].PrepaymentID;
         done();
       })
       .catch(err => {
@@ -164,11 +199,11 @@ describe('Overpayments', () => {
   });
 
   it('get all', done => {
-    common.currentApp.core.overpayments
-      .getOverpayments()
-      .then(overpayments => {
-        overpayments.forEach(overpayment => {
-          expect(validateOverpayment(overpayment)).to.equal(true);
+    common.currentApp.core.prepayments
+      .getPrepayments()
+      .then(prepayments => {
+        prepayments.forEach(prepayment => {
+          expect(validatePrepayment(prepayment)).to.equal(true);
         });
         done();
       })
@@ -179,10 +214,10 @@ describe('Overpayments', () => {
   });
 
   it('get one', done => {
-    common.currentApp.core.overpayments
-      .getOverpayment(receiveOverpaymentID)
-      .then(overpayment => {
-        expect(validateOverpayment(overpayment)).to.equal(true);
+    common.currentApp.core.prepayments
+      .getPrepayment(receivePrepaymentID)
+      .then(prepayment => {
+        expect(validatePrepayment(prepayment)).to.equal(true);
         done();
       })
       .catch(err => {
@@ -191,11 +226,11 @@ describe('Overpayments', () => {
       });
   });
 
-  it('allocate overpayment to invoice', done => {
-    common.currentApp.core.overpayments
-      .getOverpayment(receiveOverpaymentID)
-      .then(overpayment => {
-        expect(validateOverpayment(overpayment)).to.equal(true);
+  it('allocate prepayment to invoice', done => {
+    common.currentApp.core.prepayments
+      .getPrepayment(receivePrepaymentID)
+      .then(prepayment => {
+        expect(validatePrepayment(prepayment)).to.equal(true);
 
         // Now apply the allocation to the original invoice.
         const allocations = [
@@ -207,13 +242,13 @@ describe('Overpayments', () => {
           },
         ];
 
-        return overpayment.saveAllocations(allocations);
+        return prepayment.saveAllocations(allocations);
       })
       .then(allocations => {
         expect(allocations.entities.length).to.be.greaterThan(0);
         expect(allocations.entities[0].Amount).to.equal(myAllocationAmount);
-        expect(allocations.entities[0].Overpayment.OverpaymentID).to.equal(
-          receiveOverpaymentID
+        expect(allocations.entities[0].Prepayment.PrepaymentID).to.equal(
+          receivePrepaymentID
         );
         done();
       })
@@ -223,10 +258,10 @@ describe('Overpayments', () => {
       });
   });
 
-  it('refund overpayment with payment', done => {
+  it('refund prepayment with payment', done => {
     const samplePayment = {
-      Overpayment: {
-        OverpaymentID: spendOverpaymentID,
+      Prepayment: {
+        PrepaymentID: spendPrepaymentID,
       },
       Account: {
         AccountID: bankAccountId,
@@ -241,7 +276,7 @@ describe('Overpayments', () => {
       .save()
       .then(payments => {
         expect(payments.entities.length).to.be.greaterThan(0);
-        expect(payments.entities[0].Overpayment.Total).to.equal(
+        expect(payments.entities[0].Prepayment.Total).to.equal(
           samplePayment.Amount
         );
         done();
