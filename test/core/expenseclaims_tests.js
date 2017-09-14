@@ -111,8 +111,8 @@ describe('ExpenseClaims', () => {
         sampleExpenseClaim.Receipts.length = 0;
         let numberOfReceipts = receipts.length;
 
-        if (numberOfReceipts > 5) {
-          numberOfReceipts = 5;
+        if (numberOfReceipts > 3) {
+          numberOfReceipts = 3;
         }
 
         for (let i = 0; i < numberOfReceipts; i += 1) {

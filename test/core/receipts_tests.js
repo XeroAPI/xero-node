@@ -129,6 +129,15 @@ describe('Receipts', () => {
   it('create multiple Receipts', done => {
     const Receipts = [];
 
+    sampleReceipt.LineItems = [
+      {
+        Description: 'Services',
+        Quantity: 2,
+        UnitAmount: 230,
+        AccountCode: salesAccountCode,
+      },
+    ];
+
     for (let i = 0; i < 10; i += 1) {
       const newReceipt = {};
       Object.assign(newReceipt, sampleReceipt);
