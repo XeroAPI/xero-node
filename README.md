@@ -33,6 +33,7 @@ The following Xero API functions are supported:
 * Journals
 * Manual Journals
 * Organisations
+* Overpayments
 * Payments
 * Purchase Orders
 * Receipts

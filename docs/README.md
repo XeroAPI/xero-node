@@ -26,6 +26,7 @@ The following Xero API functions are supported:
 * [Journals](./Journals.md)
 * [Manual Journals](./Manual-Journals.md)
 * [Organisations](./Organisations.md)
+* [Overpayments](./Overpayments.md)
 * [Payments](./Payments.md)
 * [Purchase Orders] (./Purchase-Orders.md)
 * [Receipts](./Receipts.md)
@@ -38,7 +39,6 @@ The following Xero API functions are supported:
 Endpoints not currently supported:
 
 * Linked Transactions
-* Overpayments
 * Prepayments
 * Setup
 
