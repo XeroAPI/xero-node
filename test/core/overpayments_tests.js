@@ -79,14 +79,6 @@ describe('Overpayments', () => {
       });
   });
 
-  after('archive the bank account for testing', () => {
-    common.currentApp.core.accounts.getAccount(bankAccountId).then(response => {
-      const account = response;
-      account.Status = 'ARCHIVED';
-      return account.save();
-    });
-  });
-
   before('creates a new receive overpayment transaction', done => {
     const transaction = common.currentApp.core.bankTransactions.newBankTransaction(
       {

@@ -24,6 +24,7 @@ The following Xero API functions are supported:
 * [Invoice Reminders](./Invoice-Reminders.md)
 * [Items](./Items.md)
 * [Journals](./Journals.md)
+* [Linked Transactions](./Linked-Transactions.md)
 * [Manual Journals](./Manual-Journals.md)
 * [Organisations](./Organisations.md)
 * [Overpayments](./Overpayments.md)
@@ -36,10 +37,6 @@ The following Xero API functions are supported:
 * [Tax Rates](./Tax-Rates.md)
 * [Tracking Categories (and Tracking Options)](./Tracking-Categories.md)
 * [Users](./Users.md)
-
-Endpoints not currently supported:
-
-* Linked Transactions
 
 ### Other Xero APIs
 

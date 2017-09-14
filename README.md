@@ -32,6 +32,7 @@ The following Xero API functions are supported:
 * Items
 * Journals
 * Manual Journals
+* Linked Transactions
 * Organisations
 * Overpayments
 * Payments
