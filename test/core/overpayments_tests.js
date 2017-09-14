@@ -13,6 +13,41 @@ const validateOverpayment = overpayment => {
 
   expect(overpayment.OverpaymentID).to.be.a('String');
 
+  // Contact
+  expect(overpayment.Contact.ContactID).to.be.a('String');
+  expect(overpayment.Contact.Name).to.be.a('String');
+
+  expect(overpayment.Date).to.be.a('Date');
+  expect(overpayment.Status).to.be.a('String');
+  expect(overpayment.LineAmountTypes).to.be.a('String');
+  expect(overpayment.SubTotal).to.be.a('Number');
+  expect(overpayment.TotalTax).to.be.a('Number');
+  expect(overpayment.Total).to.be.a('Number');
+  expect(overpayment.CurrencyCode).to.be.a('String');
+  expect(overpayment.Type).to.be.a('String');
+
+  if (overpayment.CurrencyRate) {
+    expect(overpayment.CurrencyRate).to.be.a('Number');
+  }
+
+  expect(overpayment.RemainingCredit).to.be.a('Number');
+
+  if (overpayment.Allocations) {
+    overpayment.Allocations.forEach(allocation => {
+      expect(allocation.Amount).to.be.a('Number');
+      expect(allocation.Date).to.be.a('Date');
+      expect(allocation.Invoice.InvoiceID).to.be.a('String');
+      expect(allocation.Invoice.InvoiceNumber).to.be.a('String');
+      expect(allocation.Invoice.InvoiceNumber).to.be.a('String');
+    });
+  }
+
+  expect(overpayment.HasAttachments).to.be.a('Boolean');
+
+
+
+
+
   return true;
 };
 
