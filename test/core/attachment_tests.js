@@ -809,7 +809,7 @@ describe('attachments', () => {
         const samplePurchaseOrder = purchaseOrders[0];
         attachmentPlaceholder
           .save(
-            `RepeatingInvoices/${samplePurchaseOrder.PurchaseOrderID}`,
+            `PurchaseOrders/${samplePurchaseOrder.PurchaseOrderID}`,
             dataReadStream,
             true
           )

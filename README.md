@@ -35,6 +35,7 @@ The following Xero API functions are supported:
 * Organisations
 * Overpayments
 * Payments
+* Prepayments
 * Purchase Orders
 * Receipts
 * Repeating Invoices

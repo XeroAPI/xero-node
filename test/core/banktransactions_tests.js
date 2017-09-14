@@ -219,7 +219,7 @@ describe('bank transactions', () => {
   it('create multiple banktransactions', done => {
     const banktransactions = [];
 
-    for (let i = 0; i < 2; i += 1) {
+    for (let i = 0; i < 5; i += 1) {
       banktransactions.push(
         currentApp.core.bankTransactions.newBankTransaction({
           Type: 'SPEND',
@@ -229,7 +229,7 @@ describe('bank transactions', () => {
           LineItems: [
             {
               Description: 'Annual Bank Account Fee',
-              UnitAmount: Math.random(),
+              UnitAmount: Math.random() * 100,
               AccountCode: expenseAccountCode,
             },
           ],
