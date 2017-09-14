@@ -66,6 +66,7 @@ describe('Accounting API Tests', () => {
     `${__dirname}/core/purchaseorders_tests.js`
   );
   importTest('attachment_tests', `${__dirname}/core/attachment_tests.js`);
+  importTest('overpayments_tests', `${__dirname}/core/overpayments_tests.js`);
 });
 
 describe.skip('Payroll API Tests', () => {
