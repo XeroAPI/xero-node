@@ -227,6 +227,9 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.10.1
+    - Merged [PR#109](https://github.com/XeroAPI/xero-node/pull/109) - Fix undefined data on checkExpiry failure
+    - Merged [PR#108](https://github.com/XeroAPI/xero-node/pull/108) - Fix serialization of credit note properties
 * 2.10.0
     - Merged [PR#104](https://github.com/XeroAPI/xero-node/pull/98) - Add support for linked transactions
     - Merged [PR#103](https://github.com/XeroAPI/xero-node/pull/103) - Add support for Prepayments
