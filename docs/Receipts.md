@@ -94,7 +94,7 @@ var data = [{
   Contact: {
     ContactID: '...'
   },
-  Reference: 'Services 1,
+  Reference: 'Services 1',
   LineItems: [{
     Description: 'Services',
     Quantity: 1,
