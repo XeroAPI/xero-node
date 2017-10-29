@@ -27,15 +27,13 @@ This code assumes you've already created a client using the xero-node sdk.
 
 ```javascript
 
-var sampleEmployee = {
+var employee = xeroClient.core.employees.newEmployee({
     Status: 'ACTIVE',
     FirstName: 'John',
     LastName: 'Smith'
-};
+});
 
-var employeeObj = xeroClient.core.employees.newEmployee(sampleEmployee);
-
-employeeObj.save()
+employee.save()
     .then(function(employees) {
         //Employee has been created 
         var myEmployee = employees.entities[0];
