@@ -1,3 +1,12 @@
+'use strict';
+
+const { isEmpty } = require('lodash');
+const common = require('../common/common');
+
+const wrapError = common.wrapError;
+const util = common.util;
+const currentApp = common.currentApp;
+
 describe.skip('timesheets', () => {
   it('create timesheet', done => {
     const timesheet = currentApp.payroll.timesheets.newTimesheet({
@@ -25,7 +34,7 @@ describe.skip('timesheets', () => {
     currentApp.payroll.timesheets
       .getTimesheets()
       .then(timesheets => {
-        if (!_.isEmpty(timesheets))
+        if (!isEmpty(timesheets))
           console.log(util.inspect(timesheets[0].toObject(), null, null));
         done();
       })

@@ -1,16 +1,16 @@
-const common = require('../common/common'),
-  mocha = common.mocha,
-  expect = common.expect,
-  xero = common.xero,
-  wrapError = common.wrapError,
-  uuid = common.uuid;
+'use strict';
 
+const common = require('../common/common');
+
+const expect = common.expect;
+const wrapError = common.wrapError;
+const uuid = common.uuid;
 const currentApp = common.currentApp;
 
 describe('deduction types', () => {
-  let expenseAccountID = '',
-    expenseAccountCode = '',
-    deductionTypeID = '';
+  let expenseAccountID = '';
+  let expenseAccountCode = '';
+  let deductionTypeID = '';
 
   before('create an expense account for testing', () => {
     const randomString = uuid.v4();

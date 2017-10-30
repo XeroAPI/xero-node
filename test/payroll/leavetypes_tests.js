@@ -1,10 +1,9 @@
-const common = require('../common/common'),
-  mocha = common.mocha,
-  expect = common.expect,
-  xero = common.xero,
-  wrapError = common.wrapError,
-  uuid = common.uuid;
+'use strict';
 
+const common = require('../common/common');
+
+const expect = common.expect;
+const wrapError = common.wrapError;
 const currentApp = common.currentApp;
 
 describe('leave types', () => {
