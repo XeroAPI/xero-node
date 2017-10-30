@@ -1,153 +1,156 @@
-const common = require("../common/common"),
-    mocha = common.mocha,
-    expect = common.expect,
-    xero = common.xero,
-    wrapError = common.wrapError,
-    uuid = common.uuid
+const common = require('../common/common'),
+  mocha = common.mocha,
+  expect = common.expect,
+  xero = common.xero,
+  wrapError = common.wrapError,
+  uuid = common.uuid;
 
-let currentApp = common.currentApp
+const currentApp = common.currentApp;
 
-describe('leave types', function() {
+describe('leave types', () => {
+  let leaveTypeID = '';
 
-    let leaveTypeID = ''
+  it('get leave types', done => {
+    currentApp.payroll.payitems
+      .getLeaveTypes()
+      .then(leaveTypes => {
+        expect(leaveTypes.length).to.be.at.least(1);
 
-    it('get leave types', function(done) {
-        currentApp.payroll.payitems.getLeaveTypes()
-            .then(function(leaveTypes) {
-                expect(leaveTypes.length).to.be.at.least(1)
+        leaveTypes.forEach(leaveType => {
+          expect(leaveType.LeaveTypeID).to.not.equal(undefined);
+          expect(leaveType.LeaveTypeID).to.not.equal('');
 
-                leaveTypes.forEach((leaveType) => {
-                    expect(leaveType.LeaveTypeID).to.not.equal(undefined)
-                    expect(leaveType.LeaveTypeID).to.not.equal('')
+          expect(leaveType.Name).to.not.equal(undefined);
+          expect(leaveType.Name).to.not.equal('');
 
-                    expect(leaveType.Name).to.not.equal(undefined)
-                    expect(leaveType.Name).to.not.equal('')
+          expect(leaveType.TypeOfUnits).to.not.equal(undefined);
+          expect(leaveType.TypeOfUnits).to.not.equal('');
 
-                    expect(leaveType.TypeOfUnits).to.not.equal(undefined)
-                    expect(leaveType.TypeOfUnits).to.not.equal('')
+          expect(leaveType.IsPaidLeave).to.be.a('Boolean');
 
-                    expect(leaveType.IsPaidLeave).to.be.a('Boolean')
+          expect(leaveType.ShowOnPayslip).to.be.a('Boolean');
+        });
 
-                    expect(leaveType.ShowOnPayslip).to.be.a('Boolean')
-                })
+        done();
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
 
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
+  it('creates a new leave type', done => {
+    const sampleLeaveType = {
+      Name: 'Super Duper Leave',
+      TypeOfUnits: 'Hours',
+      IsPaidLeave: true,
+      ShowOnPayslip: true,
+    };
 
-    it('creates a new leave type', function(done) {
-        let sampleLeaveType = {
-            Name: 'Super Duper Leave',
-            TypeOfUnits: 'Hours',
-            IsPaidLeave: true,
-            ShowOnPayslip: true
-        }
+    const leaveType = currentApp.payroll.payitems.newLeaveType(sampleLeaveType);
 
-        let leaveType = currentApp.payroll.payitems.newLeaveType(sampleLeaveType);
+    leaveType
+      .save()
+      .then(leaveTypes => {
+        expect(leaveTypes.entities.length).to.be.at.least(1);
 
-        leaveType.save()
-            .then(function(leaveTypes) {
-                expect(leaveTypes.entities.length).to.be.at.least(1)
+        leaveTypes.entities.forEach(leaveType => {
+          expect(leaveType.LeaveTypeID).to.not.equal(undefined);
+          expect(leaveType.LeaveTypeID).to.not.equal('');
 
-                leaveTypes.entities.forEach((leaveType) => {
-                    expect(leaveType.LeaveTypeID).to.not.equal(undefined)
-                    expect(leaveType.LeaveTypeID).to.not.equal('')
+          expect(leaveType.Name).to.not.equal(undefined);
+          expect(leaveType.Name).to.not.equal('');
 
-                    expect(leaveType.Name).to.not.equal(undefined)
-                    expect(leaveType.Name).to.not.equal('')
+          expect(leaveType.TypeOfUnits).to.not.equal(undefined);
+          expect(leaveType.TypeOfUnits).to.not.equal('');
 
-                    expect(leaveType.TypeOfUnits).to.not.equal(undefined)
-                    expect(leaveType.TypeOfUnits).to.not.equal('')
+          expect(leaveType.IsPaidLeave).to.be.a('Boolean');
 
-                    expect(leaveType.IsPaidLeave).to.be.a('Boolean')
+          expect(leaveType.ShowOnPayslip).to.be.a('Boolean');
 
-                    expect(leaveType.ShowOnPayslip).to.be.a('Boolean')
+          leaveTypeID = leaveType.LeaveTypeID;
+        });
 
-                    leaveTypeID = leaveType.LeaveTypeID
+        done();
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
 
-                })
+  it('gets a single leave type', done => {
+    currentApp.payroll.payitems
+      .getLeaveType(leaveTypeID)
+      .then(leaveType => {
+        expect(leaveType.LeaveTypeID).to.not.equal(undefined);
+        expect(leaveType.LeaveTypeID).to.not.equal('');
 
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
+        expect(leaveType.Name).to.not.equal(undefined);
+        expect(leaveType.Name).to.not.equal('');
 
-    it('gets a single leave type', function(done) {
-        currentApp.payroll.payitems.getLeaveType(leaveTypeID)
-            .then(function(leaveType) {
+        expect(leaveType.TypeOfUnits).to.not.equal(undefined);
+        expect(leaveType.TypeOfUnits).to.not.equal('');
 
-                expect(leaveType.LeaveTypeID).to.not.equal(undefined)
-                expect(leaveType.LeaveTypeID).to.not.equal('')
+        expect(leaveType.IsPaidLeave).to.be.a('Boolean');
 
-                expect(leaveType.Name).to.not.equal(undefined)
-                expect(leaveType.Name).to.not.equal('')
+        expect(leaveType.ShowOnPayslip).to.be.a('Boolean');
 
-                expect(leaveType.TypeOfUnits).to.not.equal(undefined)
-                expect(leaveType.TypeOfUnits).to.not.equal('')
+        done();
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
 
-                expect(leaveType.IsPaidLeave).to.be.a('Boolean')
+  it('updates a leave type', done => {
+    currentApp.payroll.payitems
+      .getLeaveType(leaveTypeID)
+      .then(leaveType => {
+        // earningsRate.EarningsRateID should contain some value
+        const updatedID = leaveType.LeaveTypeID;
+        const updatedName = 'UPDATED!!!';
 
-                expect(leaveType.ShowOnPayslip).to.be.a('Boolean')
+        leaveType.Name = updatedName;
 
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
+        // We use the new method for both new and updated objects
+        const updatedLeaveType = currentApp.payroll.payitems.newLeaveType(
+          leaveType
+        );
 
-    it('updates a leave type', function(done) {
-        currentApp.payroll.payitems.getLeaveType(leaveTypeID)
-            .then(function(leaveType) {
+        updatedLeaveType
+          .save()
+          .then(leaveTypes => {
+            expect(leaveTypes.entities.length).to.be.at.least(1);
 
-                //earningsRate.EarningsRateID should contain some value
-                var updatedID = leaveType.LeaveTypeID
-                var updatedName = "UPDATED!!!"
+            leaveTypes.entities.forEach(leaveType => {
+              if (leaveType.LeaveTypeID === updatedID) {
+                expect(leaveType.Name).to.equal(updatedName);
+              }
+            });
 
-                leaveType.Name = updatedName
+            done();
+          })
+          .catch(err => {
+            done(wrapError(err));
+          });
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
 
-                //We use the new method for both new and updated objects
-                let updatedLeaveType = currentApp.payroll.payitems.newLeaveType(leaveType);
+  it('deletes a leave type', done => {
+    currentApp.payroll.payitems
+      .deleteLeaveType(leaveTypeID)
+      .then(leaveTypes => {
+        expect(leaveTypes.entities.length).to.be.at.least(1);
 
-                updatedLeaveType.save()
-                    .then(function(leaveTypes) {
-                        expect(leaveTypes.entities.length).to.be.at.least(1)
-
-                        leaveTypes.entities.forEach(function(leaveType) {
-                            if (leaveType.LeaveTypeID === updatedID) {
-                                expect(leaveType.Name).to.equal(updatedName)
-                            }
-                        })
-
-                        done();
-                    })
-                    .catch(function(err) {
-                        done(wrapError(err));
-                    })
-
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
-
-    it('deletes a leave type', function(done) {
-        currentApp.payroll.payitems.deleteLeaveType(leaveTypeID)
-            .then(function(leaveTypes) {
-                expect(leaveTypes.entities.length).to.be.at.least(1)
-
-                leaveTypes.entities.forEach(function(leaveType) {
-                    expect(leaveType.LeaveTypeID).to.not.equal(leaveTypeID)
-                })
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
-})
+        leaveTypes.entities.forEach(leaveType => {
+          expect(leaveType.LeaveTypeID).to.not.equal(leaveTypeID);
+        });
+        done();
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
+});
