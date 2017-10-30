@@ -30,7 +30,7 @@ The following Xero API functions are supported:
 * [Overpayments](./Overpayments.md)
 * [Payments](./Payments.md)
 * [Prepayments](./Prepayments.md)
-* [Purchase Orders] (./Purchase-Orders.md)
+* [Purchase Orders](./Purchase-Orders.md)
 * [Receipts](./Receipts.md)
 * [Repeating Invoices](./Repeating-Invoices.md)
 * [Reports (except BAS/GST)](./Reports.md)
