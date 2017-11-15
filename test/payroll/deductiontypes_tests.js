@@ -1,189 +1,192 @@
-const common = require("../common/common"),
-    mocha = common.mocha,
-    expect = common.expect,
-    xero = common.xero,
-    wrapError = common.wrapError,
-    uuid = common.uuid
+const common = require('../common/common'),
+  mocha = common.mocha,
+  expect = common.expect,
+  xero = common.xero,
+  wrapError = common.wrapError,
+  uuid = common.uuid;
 
-let currentApp = common.currentApp
+const currentApp = common.currentApp;
 
-describe('deduction types', function() {
+describe('deduction types', () => {
+  let expenseAccountID = '',
+    expenseAccountCode = '',
+    deductionTypeID = '';
 
-    let expenseAccountID = '',
-        expenseAccountCode = '',
-        deductionTypeID = ''
+  before('create an expense account for testing', () => {
+    const randomString = uuid.v4();
 
-    before('create an expense account for testing', function() {
-        const randomString = uuid.v4()
+    const testAccountData = {
+      Code: randomString.replace(/-/g, '').substring(0, 10),
+      Name: `Test expense from Node SDK ${randomString}`,
+      Type: 'EXPENSE',
+      Status: 'ACTIVE',
+    };
 
-        var testAccountData = {
-            Code: randomString.replace(/-/g, '').substring(0, 10),
-            Name: 'Test expense from Node SDK ' + randomString,
-            Type: 'EXPENSE',
-            Status: 'ACTIVE'
-        }
+    const account = currentApp.core.accounts.newAccount(testAccountData);
 
-        var account = currentApp.core.accounts.newAccount(testAccountData)
+    return account.save().then(response => {
+      expenseAccountID = response.entities[0].AccountID;
+      expenseAccountCode = response.entities[0].Code;
+    });
+  });
 
-        return account.save()
-            .then(function(response) {
-                expenseAccountID = response.entities[0].AccountID
-                expenseAccountCode = response.entities[0].Code
-            })
-    })
+  after('archive the account for testing', () => {
+    currentApp.core.accounts.getAccount(expenseAccountID).then(account => {
+      account.Status = 'ARCHIVED';
+      return account.save();
+    });
+  });
 
-    after('archive the account for testing', function() {
-        currentApp.core.accounts.getAccount(expenseAccountID)
-            .then(function(account) {
-                account.Status = 'ARCHIVED'
-                return account.save()
-            })
-    })
+  it('get deduction types', done => {
+    currentApp.payroll.payitems
+      .getDeductionTypes()
+      .then(deductionTypes => {
+        expect(deductionTypes.length).to.be.at.least(1);
 
-    it('get deduction types', function(done) {
-        currentApp.payroll.payitems.getDeductionTypes()
-            .then(function(deductionTypes) {
-                expect(deductionTypes.length).to.be.at.least(1)
+        deductionTypes.forEach(deductionType => {
+          expect(deductionType.DeductionTypeID).to.not.equal(undefined);
+          expect(deductionType.DeductionTypeID).to.not.equal('');
 
-                deductionTypes.forEach((deductionType) => {
-                    expect(deductionType.DeductionTypeID).to.not.equal(undefined)
-                    expect(deductionType.DeductionTypeID).to.not.equal('')
+          expect(deductionType.Name).to.not.equal(undefined);
+          expect(deductionType.Name).to.not.equal('');
 
-                    expect(deductionType.Name).to.not.equal(undefined)
-                    expect(deductionType.Name).to.not.equal('')
+          expect(deductionType.DeductionCategory).to.not.equal(undefined);
+          expect(deductionType.DeductionCategory).to.not.equal('');
 
-                    expect(deductionType.DeductionCategory).to.not.equal(undefined)
-                    expect(deductionType.DeductionCategory).to.not.equal('')
+          expect(deductionType.AccountCode).to.not.equal(undefined);
+          expect(deductionType.AccountCode).to.not.equal('');
 
-                    expect(deductionType.AccountCode).to.not.equal(undefined)
-                    expect(deductionType.AccountCode).to.not.equal('')
+          expect(deductionType.ReducesTax).to.be.a('Boolean');
+          expect(deductionType.ReducesSuper).to.be.a('Boolean');
+        });
 
-                    expect(deductionType.ReducesTax).to.be.a('Boolean')
-                    expect(deductionType.ReducesSuper).to.be.a('Boolean')
+        done();
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
 
-                })
+  it('creates a new deduction type', done => {
+    const sampleDeductionType = {
+      Name: 'Super Duper Deduction',
+      AccountCode: expenseAccountCode,
+      ReducesTax: false,
+      ReducesSuper: false,
+    };
 
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
+    const deductionType = currentApp.payroll.payitems.newDeductionType(
+      sampleDeductionType
+    );
 
-    it('creates a new deduction type', function(done) {
-        let sampleDeductionType = {
-            Name: 'Super Duper Deduction',
-            AccountCode: expenseAccountCode,
-            ReducesTax: false,
-            ReducesSuper: false
-        }
+    deductionType
+      .save()
+      .then(deductionTypes => {
+        expect(deductionTypes.entities.length).to.be.at.least(1);
 
-        let deductionType = currentApp.payroll.payitems.newDeductionType(sampleDeductionType);
+        deductionTypes.entities.forEach(deductionType => {
+          expect(deductionType.DeductionTypeID).to.not.equal(undefined);
+          expect(deductionType.DeductionTypeID).to.not.equal('');
 
-        deductionType.save()
-            .then(function(deductionTypes) {
-                expect(deductionTypes.entities.length).to.be.at.least(1)
+          expect(deductionType.DeductionCategory).to.not.equal(undefined);
+          expect(deductionType.DeductionCategory).to.not.equal('');
 
-                deductionTypes.entities.forEach((deductionType) => {
-                    expect(deductionType.DeductionTypeID).to.not.equal(undefined)
-                    expect(deductionType.DeductionTypeID).to.not.equal('')
+          deductionTypeID = deductionType.DeductionTypeID;
 
-                    expect(deductionType.DeductionCategory).to.not.equal(undefined)
-                    expect(deductionType.DeductionCategory).to.not.equal('')
+          expect(deductionType.Name).to.not.equal(undefined);
+          expect(deductionType.Name).to.not.equal('');
 
-                    deductionTypeID = deductionType.DeductionTypeID
+          expect(deductionType.AccountCode).to.not.equal(undefined);
+          expect(deductionType.AccountCode).to.not.equal('');
 
-                    expect(deductionType.Name).to.not.equal(undefined)
-                    expect(deductionType.Name).to.not.equal('')
+          expect(deductionType.ReducesTax).to.be.a('Boolean');
+          expect(deductionType.ReducesSuper).to.be.a('Boolean');
+        });
 
-                    expect(deductionType.AccountCode).to.not.equal(undefined)
-                    expect(deductionType.AccountCode).to.not.equal('')
+        done();
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
 
-                    expect(deductionType.ReducesTax).to.be.a('Boolean')
-                    expect(deductionType.ReducesSuper).to.be.a('Boolean')
-                })
+  it('gets a single deduction type', done => {
+    currentApp.payroll.payitems
+      .getDeductionType(deductionTypeID)
+      .then(deductionType => {
+        expect(deductionType.DeductionTypeID).to.not.equal(undefined);
+        expect(deductionType.DeductionTypeID).to.not.equal('');
 
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
+        expect(deductionType.Name).to.not.equal(undefined);
+        expect(deductionType.Name).to.not.equal('');
 
-    it('gets a single deduction type', function(done) {
-        currentApp.payroll.payitems.getDeductionType(deductionTypeID)
-            .then(function(deductionType) {
+        expect(deductionType.DeductionCategory).to.not.equal(undefined);
+        expect(deductionType.DeductionCategory).to.not.equal('');
 
-                expect(deductionType.DeductionTypeID).to.not.equal(undefined)
-                expect(deductionType.DeductionTypeID).to.not.equal('')
+        expect(deductionType.AccountCode).to.not.equal(undefined);
+        expect(deductionType.AccountCode).to.not.equal('');
 
-                expect(deductionType.Name).to.not.equal(undefined)
-                expect(deductionType.Name).to.not.equal('')
+        expect(deductionType.ReducesTax).to.be.a('Boolean');
+        expect(deductionType.ReducesSuper).to.be.a('Boolean');
 
-                expect(deductionType.DeductionCategory).to.not.equal(undefined)
-                expect(deductionType.DeductionCategory).to.not.equal('')
+        done();
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
 
-                expect(deductionType.AccountCode).to.not.equal(undefined)
-                expect(deductionType.AccountCode).to.not.equal('')
+  it('updates a deduction type', done => {
+    currentApp.payroll.payitems
+      .getDeductionType(deductionTypeID)
+      .then(deductionType => {
+        // earningsRate.EarningsRateID should contain some value
+        const updatedID = deductionType.DeductionTypeID;
+        const updatedName = 'UPDATED!!!';
 
-                expect(deductionType.ReducesTax).to.be.a('Boolean')
-                expect(deductionType.ReducesSuper).to.be.a('Boolean')
+        deductionType.Name = updatedName;
 
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
+        // We use the new method for both new and updated objects
+        const updatedDeductionType = currentApp.payroll.payitems.newDeductionType(
+          deductionType
+        );
 
-    it('updates a deduction type', function(done) {
-        currentApp.payroll.payitems.getDeductionType(deductionTypeID)
-            .then(function(deductionType) {
+        updatedDeductionType
+          .save()
+          .then(deductionTypes => {
+            expect(deductionTypes.entities.length).to.be.at.least(1);
 
-                //earningsRate.EarningsRateID should contain some value
-                var updatedID = deductionType.DeductionTypeID
-                var updatedName = "UPDATED!!!"
+            deductionTypes.entities.forEach(deductionType => {
+              if (deductionType.DeductionTypeID === updatedID) {
+                expect(deductionType.Name).to.equal(updatedName);
+              }
+            });
 
-                deductionType.Name = updatedName
+            done();
+          })
+          .catch(err => {
+            done(wrapError(err));
+          });
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
 
-                //We use the new method for both new and updated objects
-                let updatedDeductionType = currentApp.payroll.payitems.newDeductionType(deductionType);
+  it('deletes a deduction type', done => {
+    currentApp.payroll.payitems
+      .deleteDeductionType(deductionTypeID)
+      .then(deductionTypes => {
+        expect(deductionTypes.entities.length).to.be.at.least(1);
 
-                updatedDeductionType.save()
-                    .then(function(deductionTypes) {
-                        expect(deductionTypes.entities.length).to.be.at.least(1)
+        deductionTypes.entities.forEach(deductionType => {
+          expect(deductionType.DeductionTypeID).to.not.equal(deductionTypeID);
+        });
 
-                        deductionTypes.entities.forEach(function(deductionType) {
-                            if (deductionType.DeductionTypeID === updatedID) {
-                                expect(deductionType.Name).to.equal(updatedName)
-                            }
-                        })
-
-                        done();
-                    })
-                    .catch(function(err) {
-                        done(wrapError(err));
-                    })
-
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
-
-    it('deletes a deduction type', function(done) {
-        currentApp.payroll.payitems.deleteDeductionType(deductionTypeID)
-            .then(function(deductionTypes) {
-                expect(deductionTypes.entities.length).to.be.at.least(1)
-
-                deductionTypes.entities.forEach(function(deductionType) {
-                    expect(deductionType.DeductionTypeID).to.not.equal(deductionTypeID)
-                })
-
-                done();
-            })
-            .catch(function(err) {
-                done(wrapError(err));
-            })
-    })
-})
+        done();
+      })
+      .catch(err => {
+        done(wrapError(err));
+      });
+  });
+});

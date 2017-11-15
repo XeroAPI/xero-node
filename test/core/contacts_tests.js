@@ -136,10 +136,18 @@ describe('contacts', () => {
       .getContact(sampleContact.ContactID)
       .then(contact => {
         expect(contact.ContactID).to.equal(sampleContact.ContactID);
-        expect(contact.SalesTrackingCategories[0].TrackingCategoryName).to.be.a('String');
-        expect(contact.SalesTrackingCategories[0].TrackingOptionName).to.be.a('String');
-        expect(contact.PurchasesTrackingCategories[0].TrackingCategoryName).to.be.a('String');
-        expect(contact.PurchasesTrackingCategories[0].TrackingOptionName).to.be.a('String');
+        expect(contact.SalesTrackingCategories[0].TrackingCategoryName).to.be.a(
+          'String'
+        );
+        expect(contact.SalesTrackingCategories[0].TrackingOptionName).to.be.a(
+          'String'
+        );
+        expect(
+          contact.PurchasesTrackingCategories[0].TrackingCategoryName
+        ).to.be.a('String');
+        expect(
+          contact.PurchasesTrackingCategories[0].TrackingOptionName
+        ).to.be.a('String');
         done();
       })
       .catch(err => {

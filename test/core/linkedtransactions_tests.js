@@ -162,7 +162,8 @@ describe('Linked Transactions', () => {
       .save()
       .then(linkedTransactions => {
         expect(linkedTransactions.entities.length).to.be.greaterThan(0);
-        linkedTransactionID = linkedTransactions.entities[0].LinkedTransactionID;
+        linkedTransactionID =
+          linkedTransactions.entities[0].LinkedTransactionID;
         done();
       })
       .catch(err => {
