@@ -36,6 +36,7 @@ describe('taxRates', () => {
             expect(taxComponent.Name).to.not.equal(undefined);
             expect(taxComponent.Rate).to.be.a('Number');
             expect(taxComponent.IsCompound).to.be.a('Boolean');
+            expect(taxComponent.IsNonRecoverable).to.be.a('Boolean');
           });
         });
         done();
@@ -98,6 +99,9 @@ describe('taxRates', () => {
               expect(taxComponent.Rate).to.equal(taxrate.TaxComponents[0].Rate);
               expect(taxComponent.IsCompound).to.equal(
                 taxrate.TaxComponents[0].IsCompound
+              );
+              expect(taxComponent.IsNonRecoverable).to.equal(
+                taxrate.TaxComponents[0].IsNonRecoverable
               );
             });
             done();
