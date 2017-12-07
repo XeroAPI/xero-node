@@ -227,6 +227,9 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.10.2
+    - Merged #149 - Add IsNonRecoverable property to TaxComponent
+    - Merged #128 - First pass fixes for eslint errors
 * 2.10.1
     - Merged [PR#109](https://github.com/XeroAPI/xero-node/pull/109) - Fix undefined data on checkExpiry failure
     - Merged [PR#108](https://github.com/XeroAPI/xero-node/pull/108) - Fix serialization of credit note properties
