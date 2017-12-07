@@ -227,6 +227,8 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.12.0
+    - Merged #139 - Options on Manual Journals and using ManualJournalID
 * 2.11.0
     - Merged #149 - Add IsNonRecoverable property to TaxComponent
     - Merged #128 - First pass fixes for eslint errors
