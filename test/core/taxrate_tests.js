@@ -100,9 +100,7 @@ describe('taxRates', () => {
               expect(taxComponent.IsCompound).to.equal(
                 taxrate.TaxComponents[0].IsCompound
               );
-              expect(taxComponent.IsNonRecoverable).to.equal(
-                taxrate.TaxComponents[0].IsNonRecoverable
-              );
+              expect(taxComponent.IsNonRecoverable).to.equal(false);
             });
             done();
           })
