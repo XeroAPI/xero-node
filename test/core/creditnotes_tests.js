@@ -145,6 +145,10 @@ describe('Credit Notes', () => {
               console.warn('Credit note has no allocation records');
             }
           }
+
+          if (creditNote.Reference) {
+            expect(creditNote.Reference).to.be.a('String');
+          }
         });
         done();
       })
@@ -305,6 +309,10 @@ describe('Credit Notes', () => {
             console.warn('Credit note has no line item records');
           }
         }
+
+        if (creditNote.Reference) {
+          expect(creditNote.Reference).to.be.a('String');
+        }
         done();
       })
       .catch(err => {
@@ -362,6 +370,8 @@ describe('Credit Notes', () => {
             creditNoteData.LineItems[0].AccountCode.toLowerCase()
           );
         });
+
+        expect(thisNote.Reference).to.equal(creditNoteData.Reference);
 
         done();
       })
