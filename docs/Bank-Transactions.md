@@ -16,7 +16,7 @@ The entity helper that has been created for the bank transactions functions exis
 This helper contains the following functions:
 
 * `newBankTransaction(data[, options])`
-* `newBankTransactions(data)`
+* `saveBankTransactions(data)`
 * `getBankTransaction(id[, modifiedAfter])`
 * `getBankTransactions([options])`
 
@@ -97,7 +97,7 @@ var bankTransactions = [];
 bankTransactions.push(xeroClient.core.bankTransactions.newBankTransaction(data[0]));
 bankTransactions.push(xeroClient.core.bankTransactions.newBankTransaction(data[1]));
 
-xeroClient.core.bankTransactions.newBankTransactions(bankTransactions)
+xeroClient.core.bankTransactions.saveBankTransactions(bankTransactions)
     .then(function(response) {
         //Bank Transactions have been created 
         console.log(response.entities[0].Contact.Name); // 'Johnny McGibbons'
