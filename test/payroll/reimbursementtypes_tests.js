@@ -1,9 +1,9 @@
-const common = require("../common/common"),
-    mocha = common.mocha,
-    expect = common.expect,
-    xero = common.xero,
-    wrapError = common.wrapError,
-    uuid = common.uuid
+const common = require("../common/common");
+const mocha = common.mocha;
+const expect = common.expect;
+const xero = common.xero;
+const wrapError = common.wrapError;
+const uuid = common.uuid;
 
 let currentApp = common.currentApp
 

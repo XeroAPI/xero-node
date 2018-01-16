@@ -1,11 +1,10 @@
-const common = require('../common/common'),
-  mocha = common.mocha,
-  expect = common.expect,
-  xero = common.xero,
-  wrapError = common.wrapError,
-  uuid = common.uuid,
-  util = common.util;
+'use strict';
 
+const common = require('../common/common');
+
+const expect = common.expect;
+const wrapError = common.wrapError;
+const util = common.util;
 const currentApp = common.currentApp;
 
 describe('employees', () => {
