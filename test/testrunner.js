@@ -72,6 +72,7 @@ describe('Accounting API Tests', () => {
     'linkedtransactions_tests',
     `${__dirname}/core/linkedtransactions_tests.js`
   );
+  importTest('error_tests', `${__dirname}/core/error_tests.js`);
 });
 
 describe.skip('Payroll API Tests', () => {
