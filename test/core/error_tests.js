@@ -11,7 +11,7 @@ const currentApp = common.currentApp;
 
 const nonExistentId = '0B283B87-E2AC-4924-AF49-74CF65A763DA';
 
-describe.only('errors', () => {
+describe('errors', () => {
 
   describe('PUT endpoints', () => {
 
