@@ -1,5 +1,8 @@
 /node_modules
 /dumb_tests
+**/lib
+/lib
+lib/**/*
 /.idea
 *.log
 /cert
