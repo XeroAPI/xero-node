@@ -2,7 +2,7 @@
   "name": "xero-node",
   "version": "2.15.0",
   "description": "Xero API Wrapper for all application types",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "directories": {
     "test": "test"
   },
@@ -11,7 +11,8 @@
     "url": "https://github.com/XeroAPI/xero-node"
   },
   "scripts": {
-    "test": "nyc mocha"
+    "test": "nyc mocha",
+    "build": "babel src -d lib"
   },
   "keywords": [
     "xero",
@@ -25,6 +26,8 @@
   },
   "readmeFilename": "README.md",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^3.5.0",
     "eslint": "^4.3.0",
     "eslint-config-airbnb-base": "^11.3.1",
@@ -37,8 +40,8 @@
     "nyc": "^10.1.2",
     "prettier": "^1.5.3",
     "sinon": "^1.17.7",
-    "zombie": "^5.0.5",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "zombie": "^5.0.5"
   },
   "engines": {
     "node": ">=6.0.0"
