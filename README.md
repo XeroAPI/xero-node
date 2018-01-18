@@ -228,6 +228,8 @@ Feel free to send PRs on any of these issues.
 ## Release Change Log
 
 
+* 2.15.0
+    - Adds 'statusCode' property to errors returned from API calls #153
 * 2.14.0
     - Make npm the default over yarn #136
 * 2.13.0
