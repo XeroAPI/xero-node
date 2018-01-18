@@ -227,6 +227,9 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+
+* 2.14.0
+    - Make npm the default over yarn #136
 * 2.13.0
     - Merged Fixed Payroll Timesheet Entity Helper #148
     - Merged Fixed bug in Payroll Employee Entity #147
