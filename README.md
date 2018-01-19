@@ -202,6 +202,18 @@ xeroClient.core.contacts.getContacts({
 
 ```
 
+
+Get and Save an Invoice as a PDF:
+```javascript
+var invoiceId = "924XXXXXXXXXXX56f";       
+  xeroClient.core.invoices.getInvoice(invoiceId, null, null, null,null,"application/pdf")
+    .then(function(data) {
+      fs.writeFile(data.FileName, data.PdfContentRaw, 'binary', function(){
+        // Do something with the file
+      });
+    })
+```
+
 ## Docs
 
 Check the [`docs`](./docs) folder for more detailed examples of how to use each SDK function. 
