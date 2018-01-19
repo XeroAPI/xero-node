@@ -240,6 +240,8 @@ Feel free to send PRs on any of these issues.
 ## Release Change Log
 
 
+* 2.16.0
+    - Merge PDF Download code from PR 119 #156 (Resolves #119 and #120)
 * 2.15.0
     - Adds 'statusCode' property to errors returned from API calls #153
 * 2.14.0
