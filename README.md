@@ -208,7 +208,7 @@ Check the [`docs`](./docs) folder for more detailed examples of how to use each 
 
 ## Tests
 
-`yarn test`
+`npm test`
 
 ## Roadmap
 
@@ -227,6 +227,17 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+
+* 2.15.0
+    - Adds 'statusCode' property to errors returned from API calls #153
+* 2.14.0
+    - Make npm the default over yarn #136
+* 2.13.0
+    - Merged Fixed Payroll Timesheet Entity Helper #148
+    - Merged Fixed bug in Payroll Employee Entity #147
+    - Merged Fix error references #145
+    - Merged Reference field added to creditnote schema #143
+    - Merged Added unitdp to GetInvoice #142
 * 2.12.0
     - Merged #139 - Options on Manual Journals and using ManualJournalID
 * 2.11.0

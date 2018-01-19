@@ -71,21 +71,6 @@ xeroClient.core.taxRates.getTaxRates()
 
 * When using the getTaxRates method, as no object is being saved there is no `entities` array.  Instead you are provided an array of tax rate objects that you can use directly in your application.
 
-### Retrieving Tax Rate by ID
-
-This example shows how to retrieve an tax rate using the Xero supplied GUID.
-
-```javascript
-
-var myTaxRateID = '288762e4-67a9-442d-9956-9a14e9d8826e';
-
-xeroClient.core.taxRates.getTaxRate(myTaxRateID)
-   .then(function(taxrate) {
-      //We've got the tax rate so do something useful
-      console.log(taxrate.Name);
-   });
-```
-
 ### Retrieving Tax Rates with filters
 
 This example shows how to retrieve an tax rate using the 'where' filter.
@@ -130,9 +115,9 @@ This example shows how to update an tax rate that's been retrieved via the SDK.
 
 ```javascript
 
-var someTaxRateID = '75520d2e-e19d-4f36-b19b-e3b9000b2daa';
+var someTaxRateName = 'tax001';
 
-xeroClient.core.taxRates.getTaxRate(someTaxRateID)
+xeroClient.core.taxRates.getTaxRate(someTaxRateName)
    .then(function(taxrate) {
       //We've got the tax rate so now let's change Name
       taxrate.Name = '50% Mwahaha';
