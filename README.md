@@ -214,6 +214,23 @@ var invoiceId = "924XXXXXXXXXXX56f";
     })
 ```
 
+
+Void a Credit Note:
+```javascript
+  var CreditNoteID = '7adXXXXXXXXXXXXXXXX2cda';
+
+  var data = {
+    CreditNoteID: CreditNoteID,
+    Status: 'VOIDED'
+  };
+
+  var creditnote = xeroClient.core.creditNotes.newCreditNote(data,null);
+  creditnote.save()
+    .then(function(ret) {
+      // Do something with the file
+    })
+```
+
 ## Docs
 
 Check the [`docs`](./docs) folder for more detailed examples of how to use each SDK function. 
