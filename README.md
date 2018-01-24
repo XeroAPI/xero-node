@@ -256,7 +256,8 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
-
+* 2.17.0
+    - Merge #157 CreditNote Entity Update and ContactPersons fixed on Contact Entity (not including any RSA checking)
 * 2.16.0
     - Merge PDF Download code from PR 119 #156 (Resolves #119 and #120)
 * 2.15.0
