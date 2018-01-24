@@ -21,8 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "follow-redirects": "^1.2.3",
-    "lodash": "^4.17.4",
-    "node-rsa": "^0.4.2"
+    "lodash": "^4.17.4"
   },
   "readmeFilename": "README.md",
   "devDependencies": {
