@@ -11,7 +11,7 @@ const currentApp = common.currentApp;
 
 const nonExistentId = '0B283B87-E2AC-4924-AF49-74CF65A763DA';
 
-describe('errors', () => {
+describe('endpoint errors', () => {
 
   describe('PUT endpoints', () => {
 
@@ -67,12 +67,12 @@ describe('errors', () => {
     it('throws an error with data and statusCode 404 when a non-existing ID is specified', () => {
       return currentApp.core.contacts
         .getContact(nonExistentId)
-        .then(response => { throw new Error('expected to throw'); })
+        .then(response => { fail('expected to throw, but it did not');})
         .catch(err => {
           expect(err).to.be.instanceof(Error);
           expect(err.message).to.contain('GET call failed');
           expect(err.data).to.be.an('object');
-          expect(err.statusCode).to.equal(404);
+          expect(err.statusCode).to.contain('404');
         });
     });
 
