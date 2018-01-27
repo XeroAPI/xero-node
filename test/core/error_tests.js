@@ -67,7 +67,7 @@ describe('endpoint errors', () => {
     it('throws an error with data and statusCode 404 when a non-existing ID is specified', () => {
       return currentApp.core.contacts
         .getContact(nonExistentId)
-        .then(response => { fail('expected to throw, but it did not');})
+        .then(response => { throw new Error('expected to throw'); })
         .catch(err => {
           expect(err).to.be.instanceof(Error);
           expect(err.message).to.contain('GET call failed');
