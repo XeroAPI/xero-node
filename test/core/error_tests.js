@@ -2,6 +2,7 @@
 
 const common = require('../common/common');
 const functions = require('../common/functions');
+const xero = require('../..');
 
 const expect = common.expect;
 const wrapError = functions.wrapError;
@@ -78,4 +79,47 @@ describe('errors', () => {
 
   });
 
+});
+
+describe('when private key is invalid', () => {
+
+  it('throws an error for private apps', () => {
+    const config = JSON.parse(
+      fs.readFileSync(`./test/config/testing_config.json`)
+    );
+
+    config.privateKeyPath = "`${__dirname}/../test/core/testdata/invalid_privatekey.pemx";
+
+    //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
+    if (config.privateKeyPath && !config.privateKey)
+      config.privateKey = fs.readFileSync(config.privateKeyPath);
+
+    try {
+      const xeroClient = new xero.PrivateApplication(config)
+      throw new Error('expected to throw');
+    } catch (error) {
+      expect(error).to.be.instanceof(Error);
+      expect(error.message).to.contain('Your Private Key does not appear to be valid');
+    }
+  });
+
+  it('throws an error for Partner apps', () => {
+    const config = JSON.parse(
+      fs.readFileSync(`./test/config/testing_config.json`)
+    );
+
+    config.privateKeyPath = "`${__dirname}/../test/core/testdata/invalid_privatekey.pemx";
+
+    //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
+    if (config.privateKeyPath && !config.privateKey)
+      config.privateKey = fs.readFileSync(config.privateKeyPath);
+
+    try {
+      const xeroClient = new xero.PartnerApplication(config)
+      throw new Error('expected to throw');
+    } catch (error) {
+      expect(error).to.be.instanceof(Error);
+      expect(error.message).to.contain('Your Private Key does not appear to be valid');
+    }
+  });
 });
