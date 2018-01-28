@@ -81,34 +81,45 @@ describe('errors', () => {
 
 });
 
-describe.only('private keys', () => {
+describe('when private key is invalid', () => {
 
-  describe('throws an exception when key is invalid', () => {
+  it('throws an error for private apps', () => {
+    const config = JSON.parse(
+      fs.readFileSync(`./test/config/testing_config.json`)
+    );
 
+    config.privateKeyPath = "`${__dirname}/../test/core/testdata/invalid_privatekey.pemx";
 
-    it('throws an error with data and statusCode 400 when a bad request is made', () => {
-      const config = JSON.parse(
-        fs.readFileSync(`./test/config/testing_config.json`)
-      );
+    //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
+    if (config.privateKeyPath && !config.privateKey)
+      config.privateKey = fs.readFileSync(config.privateKeyPath);
 
-      config.privateKeyPath = "`${__dirname}/../test/core/testdata/invalid_privatekey.pemx";
+    try {
+      const xeroClient = new xero.PrivateApplication(config)
+      throw new Error('expected to throw');
+    } catch (error) {
+      expect(error).to.be.instanceof(Error);
+      expect(error.message).to.contain('Your Private Key does not appear to be valid');
+    }
+  });
 
+  it('throws an error for Partner apps', () => {
+    const config = JSON.parse(
+      fs.readFileSync(`./test/config/testing_config.json`)
+    );
 
-      //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
-      if (config.privateKeyPath && !config.privateKey)
-        config.privateKey = fs.readFileSync(config.privateKeyPath);
+    config.privateKeyPath = "`${__dirname}/../test/core/testdata/invalid_privatekey.pemx";
 
-      const xeroClient = new xero.PrivateApplication(config);
+    //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
+    if (config.privateKeyPath && !config.privateKey)
+      config.privateKey = fs.readFileSync(config.privateKeyPath);
 
-      // try {
-      console.log('getting');
-
-      return xeroClient.core.invoices.getInvoices()
-        .then(response => { throw new Error('expected to throw'); })
-        .catch(err => {
-          expect(err).to.be.instanceof(Error);
-          expect(err.message).to.contain('Your Private Key does not appear to be valid');
-        });
-    });
+    try {
+      const xeroClient = new xero.PartnerApplication(config)
+      throw new Error('expected to throw');
+    } catch (error) {
+      expect(error).to.be.instanceof(Error);
+      expect(error.message).to.contain('Your Private Key does not appear to be valid');
+    }
   });
 });
