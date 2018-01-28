@@ -2,6 +2,7 @@
 
 const common = require('../common/common');
 const functions = require('../common/functions');
+const xero = require('../..');
 
 const expect = common.expect;
 const wrapError = functions.wrapError;
@@ -78,4 +79,36 @@ describe('errors', () => {
 
   });
 
+});
+
+describe.only('private keys', () => {
+
+  describe('throws an exception when key is invalid', () => {
+
+
+    it('throws an error with data and statusCode 400 when a bad request is made', () => {
+      const config = JSON.parse(
+        fs.readFileSync(`./test/config/testing_config.json`)
+      );
+
+      config.privateKeyPath = "`${__dirname}/../test/core/testdata/invalid_privatekey.pemx";
+
+
+      //Private key can either be a path or a String so check both variables and make sure the path has been parsed.
+      if (config.privateKeyPath && !config.privateKey)
+        config.privateKey = fs.readFileSync(config.privateKeyPath);
+
+      const xeroClient = new xero.PrivateApplication(config);
+
+      // try {
+      console.log('getting');
+
+      return xeroClient.core.invoices.getInvoices()
+        .then(response => { throw new Error('expected to throw'); })
+        .catch(err => {
+          expect(err).to.be.instanceof(Error);
+          expect(err.message).to.contain('Your Private Key does not appear to be valid');
+        });
+    });
+  });
 });
