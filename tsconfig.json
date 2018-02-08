@@ -1,20 +1,24 @@
 {
 	"compilerOptions": {
-		"declaration": true,
-		"declarationDir": "./lib",
-		"listEmittedFiles": true,
 		"outDir": "./lib",
-		"rootDir": "./src",
+		"rootDir": "./src/",
+		"declaration": true,
 		"noImplicitAny": true,
-		"suppressImplicitAnyIndexErrors": true,
 		"noUnusedLocals": true,
 		"module": "commonjs",
-		"target": "es5"
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"target": "es5",
+		"lib": [
+			"dom",
+			"es6",
+			"es2015.promise"
+		]
 	},
 	"include": [
 		"./src/**/*"
 	],
 	"exclude": [
-		"./src/**/__tests__/*"
+		"./**/__tests__/**"
 	]
 }

@@ -50,17 +50,33 @@ export class XeroAPIClient {
 		);
 	}
 
-	get(endpoint: string, args?: any) {
+	public async get(endpoint: string, args?: any) {
 		this.checkAuthentication();
-		this.oauth.get(
-			API_BASE + API_BASE_PATH + endpoint,	// url
-			this.oauthToken,						// oauth_token
-			this.oauthSecret,						// oauth_token_secret
-			(err: any, data: any, httpResponse: any) => {
-				console.log('err', err);
-				console.log('data', data);
-			}
-		);
+
+		if (args && args.Id) {
+			endpoint = endpoint + '/' + args.Id;
+		}
+
+		return new Promise<any>((resolve, reject) => {
+			this.oauth.get(
+				API_BASE + API_BASE_PATH + endpoint,	// url
+				this.oauthToken,						// oauth_token
+				this.oauthSecret,						// oauth_token_secret
+				(err: any, data: string, httpResponse: any) => {
+
+					if (err) {
+						console.log('There was an err');
+						reject(err);
+					} else {
+						const toReturn = JSON.parse(data);
+						toReturn.httpResponse = httpResponse;
+						return resolve(toReturn);
+					}
+				}
+			);
+
+		});
+
 	}
 
 	private checkAuthentication() {
