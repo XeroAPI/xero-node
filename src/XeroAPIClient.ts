@@ -1,5 +1,6 @@
 
 import { OAuth } from 'oauth';
+import { AccountingResponse } from './interfaces/AccountingResponse';
 
 const API_BASE = 'https://api.xero.com';
 const API_BASE_PATH = '/api.xro/2.0/';
@@ -37,7 +38,7 @@ export class OAuthClient {
 	public async get(endpoint: string, args?: any) {
 		// this.checkAuthentication();
 
-		return new Promise<any>((resolve, reject) => {
+		return new Promise<AccountingResponse>((resolve, reject) => {
 			this.oauth.get(
 				API_BASE + API_BASE_PATH + endpoint,	// url
 				this.options.oauthToken,						// oauth_token
@@ -48,8 +49,8 @@ export class OAuthClient {
 						console.log(`There was an err <${httpResponse.statusCode}>`);
 						reject(err);
 					} else {
-						const toReturn = JSON.parse(data);
-						toReturn.httpResponse = httpResponse;
+						const toReturn = JSON.parse(data) as AccountingResponse;
+						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
 						return resolve(toReturn);
 					}
 				}
