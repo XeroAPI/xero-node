@@ -29,7 +29,7 @@ describe('invoice endpoint', () => {
 		expect(isUUID(result.Id)).toBeTruthy();
 	});
 
-	it('invoice[0].Id is a Guid', async () => {
+	it('invoice[0].InvoiceID is a Guid', async () => {
 		expect(isUUID(result.Invoices[0].InvoiceID)).toBeTruthy();
 	});
 });
