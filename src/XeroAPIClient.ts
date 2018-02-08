@@ -50,12 +50,21 @@ export class XeroAPIClient {
 		);
 	}
 
-	public async get(endpoint: string, args?: any) {
-		this.checkAuthentication();
+	// tslint:disable-next-line:member-ordering
+	public invoice = {
+		get: async (args?: any) => {
 
-		if (args && args.Id) {
-			endpoint = endpoint + '/' + args.Id;
+			let endpoint = 'invoice';
+			if (args.Id){
+				endpoint = endpoint + '/' + args.Id;
+			}
+
+			return this.xero_get(endpoint, args);
 		}
+	};
+
+	private async xero_get(endpoint: string, args?: any) {
+		this.checkAuthentication();
 
 		return new Promise<any>((resolve, reject) => {
 			this.oauth.get(
@@ -65,7 +74,7 @@ export class XeroAPIClient {
 				(err: any, data: string, httpResponse: any) => {
 
 					if (err) {
-						console.log('There was an err');
+						console.log(`There was an err <${httpResponse.statusCode}>`);
 						reject(err);
 					} else {
 						const toReturn = JSON.parse(data);

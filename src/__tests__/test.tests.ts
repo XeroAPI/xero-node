@@ -1,5 +1,5 @@
 
-import { XeroAPIClient } from '../client';
+import { XeroAPIClient } from '../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -17,8 +17,7 @@ describe('invoice endpoint', () => {
 	let result: any = null;
 
 	beforeAll(async () => {
-
-		result = await xero.get('invoice', { Id: '0e64a623-c2a1-446a-93ed-eb897f118cbc' }) as any;
+		result = await xero.invoice.get({ Id: '0e64a623-c2a1-446a-93ed-eb897f118cbc' }) as any;
 	});
 
 	it('The invoice is defined', () => {
