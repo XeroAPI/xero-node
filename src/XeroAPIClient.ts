@@ -34,7 +34,7 @@ export class OAuthClient {
 		);
 	}
 
-	public async xero_get(endpoint: string, args?: any) {
+	public async get(endpoint: string, args?: any) {
 		// this.checkAuthentication();
 
 		return new Promise<any>((resolve, reject) => {
@@ -104,7 +104,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.Id;
 			}
 
-			return this.oauth.xero_get(endpoint, args);
+			return this.oauth.get(endpoint, args);
 		}
 	};
 
