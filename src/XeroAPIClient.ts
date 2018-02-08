@@ -41,8 +41,8 @@ export class XeroAPIClient {
 		get: async (args?: any): Promise<AccountingResponse> => {
 
 			let endpoint = 'invoice';
-			if (args.Id) {
-				endpoint = endpoint + '/' + args.Id;
+			if (args.InvoiceId) {
+				endpoint = endpoint + '/' + args.InvoiceId;
 			}
 
 			return this.oauth.get<AccountingResponse>(endpoint, args);

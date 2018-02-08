@@ -18,7 +18,7 @@ describe('invoice endpoint', () => {
 	let result: AccountingResponse;
 
 	beforeAll(async () => {
-		result = await xero.invoice.get({ Id: '0e64a623-c2a1-446a-93ed-eb897f118cbc' });
+		result = await xero.invoice.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' });
 	});
 
 	it('The invoice is defined', () => {
