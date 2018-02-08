@@ -1,4 +1,6 @@
 import { OAuthClient } from './OAuthClient';
+import { AccountingResponse } from './interfaces/AccountingResponse';
+
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
 	consumerKey: string;
@@ -9,7 +11,7 @@ export interface IXeroClientConfiguration {
 }
 
 export class XeroAPIClient {
-	private oauth: any;
+	private oauth: OAuthClient;
 	private oauthToken: string;
 	private oauthSecret: string;
 
@@ -36,14 +38,14 @@ export class XeroAPIClient {
 
 	// tslint:disable-next-line:member-ordering
 	public invoice = {
-		get: async (args?: any) => {
+		get: async (args?: any): Promise<AccountingResponse> => {
 
 			let endpoint = 'invoice';
 			if (args.Id) {
 				endpoint = endpoint + '/' + args.Id;
 			}
 
-			return this.oauth.get(endpoint, args);
+			return this.oauth.get<AccountingResponse>(endpoint, args);
 		}
 	};
 
