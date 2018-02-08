@@ -40,6 +40,7 @@ export class XeroAPIClient {
 	public invoice = {
 		get: async (args?: any): Promise<AccountingResponse> => {
 
+			// TODO: Support invoice number
 			let endpoint = 'invoice';
 			if (args.InvoiceId) {
 				endpoint = endpoint + '/' + args.InvoiceId;

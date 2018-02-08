@@ -14,14 +14,14 @@ const xero = new XeroAPIClient({
 	privateKey: privateKey
 });
 
-describe('invoice endpoint', () => {
+describe('when getting invoices', () => {
 	let result: AccountingResponse;
 
 	beforeAll(async () => {
 		result = await xero.invoice.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' });
 	});
 
-	it('The invoice is defined', () => {
+	it('the invoice is defined', () => {
 		expect(result).not.toBeNull();
 	});
 
