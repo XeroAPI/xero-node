@@ -36,14 +36,29 @@ export class XeroAPIClient {
 		});
 	}
 
-	// tslint:disable-next-line:member-ordering
-	public invoice = {
+	public invoices = {
 		get: async (args?: any): Promise<AccountingResponse> => {
 
 			// TODO: Support invoice number
-			let endpoint = 'invoice';
-			if (args.InvoiceId) {
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			let endpoint = 'invoices';
+			if (args && args.InvoiceId) {
 				endpoint = endpoint + '/' + args.InvoiceId;
+			}
+
+			return this.oauth.get<AccountingResponse>(endpoint, args);
+		}
+	};
+
+	public contactgroups = {
+		get: async (args?: any): Promise<AccountingResponse> => {
+
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			let endpoint = 'contactgroups';
+			if (args.ContactGroupID) {
+				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
 
 			return this.oauth.get<AccountingResponse>(endpoint, args);
