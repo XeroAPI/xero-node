@@ -14,44 +14,47 @@ const xero = new XeroAPIClient({
 	privateKey: privateKey
 });
 
-describe('when getting single invoices', () => {
-	let result: AccountingResponse;
+describe('invoices', () => {
+	describe('and getting single invoices', () => {
+		let result: AccountingResponse;
 
-	beforeAll(async () => {
-		result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' });
+		beforeAll(async () => {
+			result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' });
+		});
+
+		it('the invoice is defined', () => {
+			expect(result).not.toBeNull();
+		});
+
+		it('invoice.Id is a Guid and is actually the Id of the request', async () => {
+			expect(isUUID(result.Id)).toBeTruthy();
+		});
+
+		it('invoice[0].InvoiceID is a Guid', async () => {
+			expect(isUUID(result.Invoices[0].InvoiceID)).toBeTruthy();
+		});
 	});
 
-	it('the invoice is defined', () => {
-		expect(result).not.toBeNull();
+	describe('and getting multiple invoices', () => {
+		let result: AccountingResponse;
+
+		beforeAll(async () => {
+			result = await xero.invoices.get();
+		});
+
+		it('the invoice is defined', () => {
+			expect(result).not.toBeNull();
+		});
+
+		it('invoice.Id is a Guid and is actually the Id of the request', async () => {
+			expect(isUUID(result.Id)).toBeTruthy();
+		});
+
+		it('there is more than one invoice', async () => {
+			expect(result.Invoices.length).toBeGreaterThan(1);
+		});
 	});
 
-	it('invoice.Id is a Guid and is actually the Id of the request', async () => {
-		expect(isUUID(result.Id)).toBeTruthy();
-	});
-
-	it('invoice[0].InvoiceID is a Guid', async () => {
-		expect(isUUID(result.Invoices[0].InvoiceID)).toBeTruthy();
-	});
-});
-
-describe('when getting multiple invoices', () => {
-	let result: AccountingResponse;
-
-	beforeAll(async () => {
-		result = await xero.invoices.get();
-	});
-
-	it('the invoice is defined', () => {
-		expect(result).not.toBeNull();
-	});
-
-	it('invoice.Id is a Guid and is actually the Id of the request', async () => {
-		expect(isUUID(result.Id)).toBeTruthy();
-	});
-
-	it('there is more than one invoice', async () => {
-		expect(result.Invoices.length).toBeGreaterThan(1);
-	});
 });
 
 function isUUID(s: string) {
