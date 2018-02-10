@@ -46,6 +46,7 @@ export class OAuthClient implements IOAuthClient {
 				this.options.oauthToken,						// oauth_token
 				this.options.oauthSecret,						// oauth_token_secret
 				(err: any, data: string, httpResponse: any) => {
+					// data is the body of the response
 
 					if (err) {
 						console.log(`There was an err <${httpResponse.statusCode}>`);
