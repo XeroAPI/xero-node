@@ -15,97 +15,105 @@ const xero = new XeroAPIClient({
 });
 
 describe('/invoices', () => {
-	describe('and getting single invoices', () => {
-		let result: AccountingResponse<Invoice>;
+	describe('and GETing', () => {
+		describe('a single invoices', () => {
+			let result: AccountingResponse<Invoice>;
 
-		beforeAll(async () => {
-			result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' });
+			beforeAll(async () => {
+				result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' });
+			});
+
+			it('the invoice is defined', () => {
+				expect(result).not.toBeNull();
+			});
+
+			it('invoice.Id is a Guid and is actually the Id of the request', async () => {
+				expect(isUUID(result.Id)).toBeTruthy();
+			});
+
+			it('invoice[0].InvoiceID is a Guid', async () => {
+				expect(isUUID(result.Invoices[0].InvoiceID)).toBeTruthy();
+			});
 		});
 
-		it('the invoice is defined', () => {
-			expect(result).not.toBeNull();
+		describe('multiple invoices', () => {
+			let result: AccountingResponse<Invoice>;
+
+			beforeAll(async () => {
+				result = await xero.invoices.get();
+			});
+
+			it('the response is defined', () => {
+				expect(result).not.toBeNull();
+			});
+
+			it('response.Id is a Guid and is actually the Id of the request', async () => {
+				expect(isUUID(result.Id)).toBeTruthy();
+			});
+
+			it('there is more than one invoice', async () => {
+				expect(result.Invoices.length).toBeGreaterThan(1);
+			});
 		});
 
-		it('invoice.Id is a Guid and is actually the Id of the request', async () => {
-			expect(isUUID(result.Id)).toBeTruthy();
-		});
-
-		it('invoice[0].InvoiceID is a Guid', async () => {
-			expect(isUUID(result.Invoices[0].InvoiceID)).toBeTruthy();
-		});
 	});
 
-	describe('and getting multiple invoices', () => {
-		let result: AccountingResponse<Invoice>;
-
-		beforeAll(async () => {
-			result = await xero.invoices.get();
-		});
-
-		it('the response is defined', () => {
-			expect(result).not.toBeNull();
-		});
-
-		it('response.Id is a Guid and is actually the Id of the request', async () => {
-			expect(isUUID(result.Id)).toBeTruthy();
-		});
-
-		it('there is more than one invoice', async () => {
-			expect(result.Invoices.length).toBeGreaterThan(1);
-		});
-	});
 });
 
 describe('/contactgroups', () => {
-	describe('and getting all ContactGroups', () => {
-		let result: AccountingResponse<ContactGroups>;
 
-		beforeAll(async () => {
-			result = await xero.contactgroups.get();
+	describe('and GETing', () => {
+
+		describe('all ContactGroups', () => {
+			let result: AccountingResponse<ContactGroups>;
+
+			beforeAll(async () => {
+				result = await xero.contactgroups.get();
+			});
+
+			it('the response is defined', () => {
+				expect(result).not.toBeNull();
+			});
+
+			it('response.Id is a Guid and is actually the Id of the request', async () => {
+				expect(isUUID(result.Id)).toBeTruthy();
+			});
+
+			it('contactgroups has a length greater than 0', async () => {
+				expect(result.ContactGroups.length).toBeGreaterThan(0);
+			});
 		});
 
-		it('the response is defined', () => {
-			expect(result).not.toBeNull();
-		});
+		describe('a single ContactGroup', () => {
+			let result: AccountingResponse<ContactGroups>;
 
-		it('response.Id is a Guid and is actually the Id of the request', async () => {
-			expect(isUUID(result.Id)).toBeTruthy();
-		});
+			beforeAll(async () => {
+				result = await xero.contactgroups.get({ ContactGroupId: 'fb64fc23-d0f4-4236-a031-709d391df9e4' });
+			});
 
-		it('contactgroups has a length greater than 0', async () => {
-			expect(result.ContactGroups.length).toBeGreaterThan(0);
-		});
-	});
+			it('the response is defined', () => {
+				expect(result).not.toBeNull();
+			});
 
-	describe('and getting a single ContactGroup', () => {
-		let result: AccountingResponse<ContactGroups>;
+			it('response.Id is a Guid and is actually the Id of the request', async () => {
+				expect(isUUID(result.Id)).toBeTruthy();
+			});
 
-		beforeAll(async () => {
-			result = await xero.contactgroups.get({ ContactGroupId: 'fb64fc23-d0f4-4236-a031-709d391df9e4'});
-		});
+			it('contactgroups has a length of 1', async () => {
+				expect(result.ContactGroups.length).toBe(1);
+			});
 
-		it('the response is defined', () => {
-			expect(result).not.toBeNull();
-		});
+			it('it has the name New Contacts 0.5082412871686646', async () => {
+				expect(result.ContactGroups[0].Name).toBe('New Contacts 0.5082412871686646');
+			});
 
-		it('response.Id is a Guid and is actually the Id of the request', async () => {
-			expect(isUUID(result.Id)).toBeTruthy();
-		});
+			it('it has 2 contacts', async () => {
+				expect(result.ContactGroups[0].Contacts.length).toBe(2);
+			});
 
-		it('contactgroups has a length of 1', async () => {
-			expect(result.ContactGroups.length).toBe(1);
-		});
-
-		it('it has the name New Contacts 0.5082412871686646', async () => {
-			expect(result.ContactGroups[0].Name).toBe('New Contacts 0.5082412871686646');
-		});
-
-		it('it has 2 contacts', async () => {
-			expect(result.ContactGroups[0].Contacts.length).toBe(2);
-		});
-
-		it('first contact is call 123 Collins', async () => {
-			expect(result.ContactGroups[0].Contacts[0].Name).toBe('132 Collins');
+			it('first contact is call 123 Collins', async () => {
+				expect(result.ContactGroups[0].Contacts[0].Name).toBe('132 Collins');
+			});
 		});
 	});
 

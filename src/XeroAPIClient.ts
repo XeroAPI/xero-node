@@ -61,7 +61,6 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupId;
 			}
 
-			console.log('Calling: ', endpoint);
 			return this.oauth.get<AccountingResponse<ContactGroups>>(endpoint, args);
 		}
 	};
