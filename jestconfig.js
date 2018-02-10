@@ -6,7 +6,7 @@ let jestConfig = {
 		".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
 	},
 	"testMatch": [
-		"<rootDir>/src/**/__tests__/**/*.(ts|tsx)",
+		"<rootDir>/src/**/__tests__/**/*tests.(ts|tsx)",
 		"<rootDir>/src/**/__integration_tests__/**/*.(ts|tsx)"
 	],
 	"moduleFileExtensions": [

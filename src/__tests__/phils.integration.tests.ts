@@ -3,6 +3,7 @@ import { XeroAPIClient } from '../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 import { AccountingResponse, ContactGroups, Invoice } from '../interfaces/AccountingResponse';
+import { isUUID } from './test-helpers';
 
 const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
@@ -118,7 +119,3 @@ describe('/contactgroups', () => {
 	});
 
 });
-
-function isUUID(s: string) {
-	return s.match(`^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`);
-}
