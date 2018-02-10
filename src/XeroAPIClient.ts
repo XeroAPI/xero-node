@@ -47,6 +47,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceId;
 			}
 
+			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
 			return this.oauth.get<AccountingResponse<Invoice>>(endpoint, args);
 		}
 	};
