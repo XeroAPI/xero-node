@@ -41,6 +41,10 @@ describe('/invoices', () => {
 			it('there is more than one invoice', async () => {
 				expect(result.Invoices.length).toBeGreaterThan(1);
 			});
+
+			it('matches the expected response', async () => {
+				expect(result).toMatchObject(multipleInvoices);
+			});
 		});
 
 	});
