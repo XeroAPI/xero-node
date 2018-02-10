@@ -1,5 +1,5 @@
 import { OAuthClient } from './OAuthClient';
-import { AccountingResponse } from './interfaces/AccountingResponse';
+import { AccountingResponse, Invoice, ContactGroups } from './interfaces/AccountingResponse';
 
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
@@ -37,7 +37,7 @@ export class XeroAPIClient {
 	}
 
 	public invoices = {
-		get: async (args?: any): Promise<AccountingResponse> => {
+		get: async (args?: any): Promise<AccountingResponse<Invoice>> => {
 
 			// TODO: Support invoice number
 			// TODO: Support for where arg
@@ -47,21 +47,22 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceId;
 			}
 
-			return this.oauth.get<AccountingResponse>(endpoint, args);
+			return this.oauth.get<AccountingResponse<Invoice>>(endpoint, args);
 		}
 	};
 
 	public contactgroups = {
-		get: async (args?: any): Promise<AccountingResponse> => {
+		get: async (args?: any): Promise<AccountingResponse<ContactGroups>> => {
 
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
 			let endpoint = 'contactgroups';
-			if (args.ContactGroupID) {
-				endpoint = endpoint + '/' + args.ContactGroupID;
+			if (args && args.ContactGroupId) {
+				endpoint = endpoint + '/' + args.ContactGroupId;
 			}
 
-			return this.oauth.get<AccountingResponse>(endpoint, args);
+			console.log('Calling: ', endpoint);
+			return this.oauth.get<AccountingResponse<ContactGroups>>(endpoint, args);
 		}
 	};
 

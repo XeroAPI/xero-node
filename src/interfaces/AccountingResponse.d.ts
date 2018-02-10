@@ -1,10 +1,22 @@
-﻿export interface AccountingResponse {
+﻿// export interface AccountingResponse {
+// 	Id: string;
+// 	Status: string;
+// 	ProviderName: string;
+// 	DateTimeUTC: string;
+// 	Invoice?: (Invoice)[] | null;
+// }
+
+export interface AccountingResponse<T> {
 	Id: string;
 	Status: string;
 	ProviderName: string;
 	DateTimeUTC: string;
-	Invoices?: (Invoice)[] | null;
+	Invoices?: T[];
+	Contacts?: T[];
+	ContactGroups?: T[];
+	// All other types
 }
+
 export interface Invoice {
 	Type: string;
 	InvoiceID: string;
@@ -54,6 +66,15 @@ export interface Contact {
 	ContactPersons?: (null)[] | null;
 	HasValidationErrors: boolean;
 }
+
+export interface ContactGroups {
+	ContactGroupID: string;
+	Name: string;
+	Status: string;
+	Contacts?: (Contact)[] | null;
+	HasValidationErrors: boolean;
+}
+
 export interface Addresse {
 	AddressType: string;
 	AddressLine1: string;
