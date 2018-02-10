@@ -13,7 +13,11 @@ export interface IOAuthClientConfiguration {
 	oauthSecret: string;
 }
 
-export class OAuthClient {
+export interface IOAuthClient {
+	get<T>(endpoint: string, args?: any): Promise<T>;
+}
+
+export class OAuthClient implements IOAuthClient {
 	private oauth: typeof OAuth;
 
 	constructor(private options: IOAuthClientConfiguration) {
@@ -33,7 +37,7 @@ export class OAuthClient {
 		);
 	}
 
-	public async get<T>(endpoint: string, args?: any) {
+	public async get<T>(endpoint: string, args?: any): Promise<T> {
 		// this.checkAuthentication();
 
 		return new Promise<T>((resolve, reject) => {
@@ -55,6 +59,5 @@ export class OAuthClient {
 			);
 
 		});
-
 	}
 }

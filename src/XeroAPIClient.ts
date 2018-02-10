@@ -1,4 +1,4 @@
-import { OAuthClient } from './OAuthClient';
+import { OAuthClient, IOAuthClient } from './OAuthClient';
 import { AccountingResponse, Invoice, ContactGroups } from './interfaces/AccountingResponse';
 
 export interface IXeroClientConfiguration {
@@ -11,11 +11,10 @@ export interface IXeroClientConfiguration {
 }
 
 export class XeroAPIClient {
-	private oauth: OAuthClient;
 	private oauthToken: string;
 	private oauthSecret: string;
 
-	constructor(private options: IXeroClientConfiguration) {
+	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient) {
 		if (!this.options) {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
 		}
@@ -28,12 +27,14 @@ export class XeroAPIClient {
 			consumerSecret = this.options.privateKey;
 		}
 
-		this.oauth = new OAuthClient({
-			consumerKey: this.options.consumerKey,
-			consumerSecret: consumerSecret,
-			oauthToken: this.oauthToken,
-			oauthSecret: this.oauthSecret
-		});
+		if (!this._oauthClient) {
+			this._oauthClient = new OAuthClient({
+				consumerKey: this.options.consumerKey,
+				consumerSecret: consumerSecret,
+				oauthToken: this.oauthToken,
+				oauthSecret: this.oauthSecret
+			});
+		}
 	}
 
 	public invoices = {
@@ -48,7 +49,7 @@ export class XeroAPIClient {
 			}
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
-			return this.oauth.get<AccountingResponse<Invoice>>(endpoint, args);
+			return this._oauthClient.get<AccountingResponse<Invoice>>(endpoint, args);
 		}
 	};
 
@@ -62,7 +63,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupId;
 			}
 
-			return this.oauth.get<AccountingResponse<ContactGroups>>(endpoint, args);
+			return this._oauthClient.get<AccountingResponse<ContactGroups>>(endpoint, args);
 		}
 	};
 
