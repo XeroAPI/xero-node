@@ -34,15 +34,15 @@ describe('/invoices', () => {
 				expect(result).not.toBeNull();
 			});
 
-			it('response.Id is a Guid and is actually the Id of the request', async () => {
+			it('response.Id is a Guid and is actually the Id of the request',  () => {
 				expect(isUUID(result.Id)).toBeTruthy();
 			});
 
-			it('there is more than one invoice', async () => {
+			it('there is more than one invoice',  () => {
 				expect(result.Invoices.length).toBeGreaterThan(1);
 			});
 
-			it('matches the expected response', async () => {
+			it('matches the expected response',  () => {
 				expect(result).toMatchObject(multipleInvoices);
 			});
 
@@ -81,7 +81,7 @@ describe('/contactgroups', () => {
 				expect(result).not.toBeNull();
 			});
 
-			it('matches the expected response', async () => {
+			it('matches the expected response',  () => {
 				expect(result).toMatchObject(allContactGroups);
 			});
 
@@ -118,7 +118,7 @@ describe('/contactgroups', () => {
 				expect(result).not.toBeNull();
 			});
 
-			it('matches the expected response', async () => {
+			it('matches the expected response',  () => {
 				expect(result).toMatchObject(createResponse);
 			});
 
