@@ -1,4 +1,4 @@
-import { IOAuthClientConfiguration, IOAuthClient } from '../OAuthClient';
+import { IOAuthClient } from '../OAuthClient';
 
 export class InMemoryOAuthClient implements IOAuthClient {
 
@@ -10,7 +10,7 @@ export class InMemoryOAuthClient implements IOAuthClient {
 		});
 	}
 
-	public returnsWithNextGet(returnThis){
+	public returnsWithNextGet(returnThis: any){
 		this.returnsWith = returnThis;
 	}
 }

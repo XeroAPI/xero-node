@@ -20,6 +20,10 @@
 		"no-string-literal": false,
 		"no-var-requires": false,
 		"object-literal-shorthand": false,
-		"member-access": [false]
+		"member-access": [false],
+		"no-implicit-dependencies": [
+			true,
+			"dev"
+		]
 	}
 }
