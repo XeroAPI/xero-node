@@ -5,19 +5,19 @@ import * as fs from 'fs';
 import { InMemoryOAuthClient } from './InMenoryOAuthClient';
 import { multipleInvoices } from './invoice.response.examples';
 import { isUUID } from './test-helpers';
-import { allContactGroups } from './contactgroups.response.examples';
+import { allContactGroups, createResponse } from './contactgroups.response.examples';
 
 describe('/invoices', () => {
-	describe('and GETing', () => {
+	describe('and getting', () => {
 		describe('multiple invoices', () => {
 			let result: AccountingResponse<Invoice>;
+			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {
 
 				const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
 				const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
-				const inMemoryOAuthClient = new InMemoryOAuthClient();
 				inMemoryOAuthClient.returnsWithNextGet(multipleInvoices);
 
 				const xeroClient = new XeroAPIClient({
@@ -45,22 +45,26 @@ describe('/invoices', () => {
 			it('matches the expected response', async () => {
 				expect(result).toMatchObject(multipleInvoices);
 			});
+
+			it('called the correct URL', () => {
+				inMemoryOAuthClient.calledThisURL('invoices');
+			});
 		});
 
 	});
 });
 
 describe('/contactgroups', () => {
-	describe('and GETing', () => {
+	describe('and getting', () => {
 		describe('all contact groups', () => {
 			let result: AccountingResponse<ContactGroups>;
+			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {
 
 				const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
 				const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
-				const inMemoryOAuthClient = new InMemoryOAuthClient();
 				inMemoryOAuthClient.returnsWithNextGet(allContactGroups);
 
 				const xeroClient = new XeroAPIClient({
@@ -79,6 +83,47 @@ describe('/contactgroups', () => {
 
 			it('matches the expected response', async () => {
 				expect(result).toMatchObject(allContactGroups);
+			});
+
+			it('called the correct URL', () => {
+				inMemoryOAuthClient.calledThisURL('contactgroups');
+			});
+		});
+
+	});
+
+	describe('and creating', () => {
+		describe('a contact groups', () => {
+			let result: AccountingResponse<ContactGroups>;
+			const inMemoryOAuthClient = new InMemoryOAuthClient();
+
+			beforeAll(async () => {
+
+				const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
+				const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
+
+				inMemoryOAuthClient.returnsWithNextGet(createResponse);
+
+				const xeroClient = new XeroAPIClient({
+					appType: 'private',
+					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+					privateKey: privateKey
+				}, inMemoryOAuthClient);
+
+				result = await xeroClient.contactgroups.get();
+			});
+
+			it('the response is defined', () => {
+				expect(result).not.toBeNull();
+			});
+
+			it('matches the expected response', async () => {
+				expect(result).toMatchObject(createResponse);
+			});
+
+			it('called the correct URL', () => {
+				inMemoryOAuthClient.calledThisURL('contactgroups');
 			});
 		});
 

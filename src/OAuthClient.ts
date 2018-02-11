@@ -15,6 +15,7 @@ export interface IOAuthClientConfiguration {
 
 export interface IOAuthClient {
 	get<T>(endpoint: string, args?: any): Promise<T>;
+	put<T>(endpoint: string, args?: any): Promise<T>;
 }
 
 export class OAuthClient implements IOAuthClient {
@@ -45,6 +46,31 @@ export class OAuthClient implements IOAuthClient {
 				API_BASE + API_BASE_PATH + endpoint,	// url
 				this.options.oauthToken,						// oauth_token
 				this.options.oauthSecret,						// oauth_token_secret
+				(err: any, data: string, httpResponse: any) => {
+					// data is the body of the response
+
+					if (err) {
+						console.log(`There was an err <${httpResponse.statusCode}>`);
+						reject(err);
+					} else {
+						const toReturn = JSON.parse(data) as T;
+						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
+						return resolve(toReturn);
+					}
+				}
+			);
+
+		});
+	}
+
+	public async put<T>(endpoint: string, args?: any): Promise<T> {
+		// this.checkAuthentication();
+
+		return new Promise<T>((resolve, reject) => {
+			this.oauth.put(
+				API_BASE + API_BASE_PATH + endpoint,	// url
+				this.options.oauthToken,				// oauth_token
+				this.options.oauthSecret,				// oauth_token_secret
 				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 
