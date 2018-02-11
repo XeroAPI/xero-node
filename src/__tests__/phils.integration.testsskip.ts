@@ -15,7 +15,7 @@ const xero = new XeroAPIClient({
 	privateKey: privateKey
 });
 
-describe.skip('phils integration tests', () => {
+describe('phils integration tests', () => {
 	describe('/invoices', () => {
 		describe('and GETing', () => {
 			describe('a single invoices', () => {
