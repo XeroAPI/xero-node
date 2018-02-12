@@ -1,11 +1,11 @@
-import { AccountingResponse, Invoice, ContactGroup } from '../interfaces/AccountingResponse';
-import { XeroAPIClient } from '../XeroAPIClient';
+import { AccountingResponse, Invoice, ContactGroup } from '../../interfaces/AccountingResponse';
+import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 import { InMemoryOAuthClient } from './InMenoryOAuthClient';
-import { multipleInvoices } from './invoice.response.examples';
-import { isUUID } from './test-helpers';
-import { allContactGroups, createResponse } from './contactgroups.response.examples';
+import { multipleInvoices } from './response-examples/invoice.response.examples';
+import { isUUID } from '../test-helpers';
+import { allContactGroups, createResponse } from './response-examples/contactgroups.response.examples';
 
 describe('/invoices', () => {
 	describe('and getting', () => {
