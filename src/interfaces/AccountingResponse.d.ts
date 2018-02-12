@@ -64,15 +64,15 @@ export interface Contact {
 	SalesTrackingCategories?: (null)[] | null;
 	PurchasesTrackingCategories?: (null)[] | null;
 	ContactPersons?: (null)[] | null;
-	HasValidationErrors: boolean;
+	HasValidationErrors?: boolean;
 }
 
-export interface ContactGroups {
-	ContactGroupID: string;
+export interface ContactGroup {
+	ContactGroupID?: string;
 	Name: string;
 	Status: string;
 	Contacts?: (Contact)[] | null;
-	HasValidationErrors: boolean;
+	HasValidationErrors?: boolean;
 }
 
 export interface Addresse {
