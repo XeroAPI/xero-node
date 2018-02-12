@@ -1,9 +1,9 @@
 
-import { XeroAPIClient } from '../XeroAPIClient';
+import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { AccountingResponse, ContactGroups, Invoice } from '../interfaces/AccountingResponse';
-import { isUUID } from './test-helpers';
+import { AccountingResponse, Invoice, ContactGroup } from '../../interfaces/AccountingResponse';
+import { isUUID } from '../test-helpers';
 
 const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
@@ -67,7 +67,7 @@ describe('phils integration tests', () => {
 		describe('and GETing', () => {
 
 			describe('all ContactGroups', () => {
-				let result: AccountingResponse<ContactGroups>;
+				let result: AccountingResponse<ContactGroup>;
 
 				beforeAll(async () => {
 					result = await xero.contactgroups.get();
@@ -87,7 +87,7 @@ describe('phils integration tests', () => {
 			});
 
 			describe('a single ContactGroup', () => {
-				let result: AccountingResponse<ContactGroups>;
+				let result: AccountingResponse<ContactGroup>;
 
 				beforeAll(async () => {
 					result = await xero.contactgroups.get({ ContactGroupId: 'fb64fc23-d0f4-4236-a031-709d391df9e4' });
