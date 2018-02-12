@@ -15,7 +15,7 @@ export interface IOAuthClientConfiguration {
 
 export interface IOAuthClient {
 	get<T>(endpoint: string, args?: any): Promise<T>;
-	put<T>(endpoint: string, args?: any): Promise<T>;
+	put<T>(endpoint: string, body: object, args?: any): Promise<T>;
 }
 
 export class OAuthClient implements IOAuthClient {
@@ -63,14 +63,15 @@ export class OAuthClient implements IOAuthClient {
 		});
 	}
 
-	public async put<T>(endpoint: string, args?: any): Promise<T> {
+	public async put<T>(endpoint: string, body: object, args?: any): Promise<T> {
 		// this.checkAuthentication();
-
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.put(
 				API_BASE + API_BASE_PATH + endpoint,	// url
 				this.options.oauthToken,				// oauth_token
 				this.options.oauthSecret,				// oauth_token_secret
+				JSON.stringify(body), 		// Had to do this not sure if there is another way
+				'application/json',
 				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 

@@ -74,7 +74,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupId;
 			}
 
-			return this._oauthClient.put<AccountingResponse<ContactGroup>>(endpoint, args);
+			return this._oauthClient.put<AccountingResponse<ContactGroup>>(endpoint, contactGroup, args);
 		}
 	};
 

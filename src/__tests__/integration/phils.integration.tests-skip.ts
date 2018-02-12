@@ -62,7 +62,7 @@ describe('phils integration tests', () => {
 
 	});
 
-	describe('/contactgroups', () => {
+	describe.only('/contactgroups', () => {
 
 		describe('and GETing', () => {
 
@@ -117,6 +117,35 @@ describe('phils integration tests', () => {
 					expect(result.ContactGroups[0].Contacts[0].Name).toBe('132 Collins');
 				});
 			});
+		});
+
+		describe('and Creating', () => {
+
+			let result: AccountingResponse<ContactGroup> = null;
+
+			beforeAll(async () => {
+				const contactGroup: ContactGroup = {
+					Name: 'NewContactGroup' + new Date().getTime(),
+					Status: 'ACTIVE'
+				};
+
+				result = await xero.contactgroups.create(contactGroup);
+			});
+
+			it('result is defined', () => {
+				expect(result).not.toBeNull();
+			});
+
+			it('we have a new ContactGroupID', () => {
+				expect(isUUID(result.ContactGroups[0].ContactGroupID)).toBeTruthy();
+			});
+
+			// it('can be deleted and is no longer there', async () => {
+
+			// 	let id = result.ContactGroups[0].ContactGroupID;
+
+			// 	let deleteResult = xero.contactgroups.delete({ ContactGroupID: id });
+			// });
 		});
 
 	});
