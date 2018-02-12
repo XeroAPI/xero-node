@@ -1,5 +1,5 @@
 import { OAuthClient, IOAuthClient } from './OAuthClient';
-import { AccountingResponse, Invoice, ContactGroups } from './interfaces/AccountingResponse';
+import { AccountingResponse, Invoice, ContactGroup } from './interfaces/AccountingResponse';
 
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
@@ -54,7 +54,7 @@ export class XeroAPIClient {
 	};
 
 	public contactgroups = {
-		get: async (args?: any): Promise<AccountingResponse<ContactGroups>> => {
+		get: async (args?: any): Promise<AccountingResponse<ContactGroup>> => {
 
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -63,7 +63,18 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupId;
 			}
 
-			return this._oauthClient.get<AccountingResponse<ContactGroups>>(endpoint, args);
+			return this._oauthClient.get<AccountingResponse<ContactGroup>>(endpoint, args);
+		},
+		create: async (contactGroup: ContactGroup, args?: any): Promise<AccountingResponse<ContactGroup>> => {
+			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			let endpoint = 'contactgroups';
+			if (args && args.ContactGroupId) {
+				endpoint = endpoint + '/' + args.ContactGroupId;
+			}
+
+			return this._oauthClient.put<AccountingResponse<ContactGroup>>(endpoint, args);
 		}
 	};
 

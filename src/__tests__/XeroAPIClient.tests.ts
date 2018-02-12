@@ -1,4 +1,4 @@
-import { AccountingResponse, Invoice, ContactGroups } from '../interfaces/AccountingResponse';
+import { AccountingResponse, Invoice, ContactGroup } from '../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -34,15 +34,15 @@ describe('/invoices', () => {
 				expect(result).not.toBeNull();
 			});
 
-			it('response.Id is a Guid and is actually the Id of the request',  () => {
+			it('response.Id is a Guid and is actually the Id of the request', () => {
 				expect(isUUID(result.Id)).toBeTruthy();
 			});
 
-			it('there is more than one invoice',  () => {
+			it('there is more than one invoice', () => {
 				expect(result.Invoices.length).toBeGreaterThan(1);
 			});
 
-			it('matches the expected response',  () => {
+			it('matches the expected response', () => {
 				expect(result).toMatchObject(multipleInvoices);
 			});
 
@@ -57,7 +57,7 @@ describe('/invoices', () => {
 describe('/contactgroups', () => {
 	describe('and getting', () => {
 		describe('all contact groups', () => {
-			let result: AccountingResponse<ContactGroups>;
+			let result: AccountingResponse<ContactGroup>;
 			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {
@@ -81,7 +81,7 @@ describe('/contactgroups', () => {
 				expect(result).not.toBeNull();
 			});
 
-			it('matches the expected response',  () => {
+			it('matches the expected response', () => {
 				expect(result).toMatchObject(allContactGroups);
 			});
 
@@ -94,7 +94,7 @@ describe('/contactgroups', () => {
 
 	describe('and creating', () => {
 		describe('a contact groups', () => {
-			let result: AccountingResponse<ContactGroups>;
+			let result: AccountingResponse<ContactGroup>;
 			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {
@@ -111,14 +111,19 @@ describe('/contactgroups', () => {
 					privateKey: privateKey
 				}, inMemoryOAuthClient);
 
-				result = await xeroClient.contactgroups.get();
+				const contactGroup: ContactGroup = {
+					Name: 'NewContactGroup',
+					Status: 'ACTIVE'
+				};
+
+				result = await xeroClient.contactgroups.create(contactGroup);
 			});
 
 			it('the response is defined', () => {
 				expect(result).not.toBeNull();
 			});
 
-			it('matches the expected response',  () => {
+			it('matches the expected response', () => {
 				expect(result).toMatchObject(createResponse);
 			});
 
