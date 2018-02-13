@@ -91,8 +91,12 @@ export class OAuthClient implements IOAuthClient {
 					// data is the body of the response
 
 					if (err) {
-						console.log(`There was an err <${httpResponse.statusCode}>`);
-						reject(err);
+						const toReturn: IHttpError = {
+							statusCode: httpResponse.statusCode,
+							error: err,
+							body: data
+						};
+						reject(toReturn);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?

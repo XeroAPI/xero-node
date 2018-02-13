@@ -20,7 +20,16 @@ export class InMemoryOAuth {
 		oauthToken: string,
 		oauthSecret: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
+		callback(this.returnErr, this.returnData, this.returnHttpResponse);
+	}
 
+	public put(
+		url: string,
+		oauthToken: string,
+		oauthSecret: string,
+		body: string,
+		contentType: string,
+		callback: (err: any, data: string, httpResponse: any) => void) {
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
