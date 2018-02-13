@@ -61,11 +61,6 @@ export class OAuthClient implements IOAuthClient {
 					// data is the body of the response
 
 					if (err) {
-						// console.log(`There was an err httpResponse.StatusCode<${httpResponse.statusCode}>`);
-						// console.log('---------');
-						// console.log(`err: `, err);
-						// console.log('---------');
-						// console.log(`data: `, data);
 						const toReturn: IHttpError = {
 							statusCode: httpResponse.statusCode,
 							error: err,
@@ -120,8 +115,12 @@ export class OAuthClient implements IOAuthClient {
 					// data is the body of the response
 
 					if (err) {
-						console.log(`There was an err <${httpResponse.statusCode}>`);
-						reject(err);
+						const toReturn: IHttpError = {
+							statusCode: httpResponse.statusCode,
+							error: err,
+							body: data
+						};
+						reject(toReturn);
 					} else {
 						let toReturn: T = null;
 						if (data) {

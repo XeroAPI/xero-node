@@ -2,9 +2,9 @@ import { OAuth } from 'oauth';
 
 export class InMemoryOAuth {
 
-	private returnGetErr = null;
-	private returnGetData = null;
-	private returnGetHttpResponse = null;
+	private returnErr = null;
+	private returnData = null;
+	private returnHttpResponse = null;
 
 	public get(
 		url: string,
@@ -12,12 +12,21 @@ export class InMemoryOAuth {
 		oauthSecret: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
 
-		callback(this.returnGetErr, this.returnGetData, this.returnGetHttpResponse);
+		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
-	public callbackForNextGet(returnGetErr: any, returnGetData: string, returnGetHttpResponse) {
-		this.returnGetErr = returnGetErr;
-		this.returnGetData = returnGetData;
-		this.returnGetHttpResponse = returnGetHttpResponse;
+	public delete(
+		url: string,
+		oauthToken: string,
+		oauthSecret: string,
+		callback: (err: any, data: string, httpResponse: any) => void) {
+
+		callback(this.returnErr, this.returnData, this.returnHttpResponse);
+	}
+
+	public callbackResultsForNextCall(returnGetErr: any, returnGetData: string, returnGetHttpResponse) {
+		this.returnErr = returnGetErr;
+		this.returnData = returnGetData;
+		this.returnHttpResponse = returnGetHttpResponse;
 	}
 }
