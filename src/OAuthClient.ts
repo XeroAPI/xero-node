@@ -20,24 +20,32 @@ export interface IOAuthClient {
 	put<T>(endpoint: string, body: object, args?: any): Promise<T>;
 }
 
-export class OAuthClient implements IOAuthClient {
-	private oauth: typeof OAuth;
+export interface IHttpError {
+	status: number;
+	body: string;
+	error: Error;
+}
 
-	constructor(private options: IOAuthClientConfiguration) {
-		this.oauth = new OAuth(
-			OAUTH_BASE + OAUTH_REQUEST_TOKEN_PATH, 	// requestTokenUrl
-			OAUTH_BASE + OAUTH_ACCESS_TOKEN_PATH, 	// accessTokenUrl
-			this.options.consumerKey, 				// consumerKey
-			this.options.consumerSecret,							// consumerSecret
-			'1.0A',									// version
-			null,									// authorize_callback
-			'RSA-SHA1',								// signatureMethod
-			null,									// nonceSize
-			{										// customHeaders
-				'Accept': 'application/json',
-				'User-Agent': 'NodeJS-XeroAPIClient'
-			}
-		);
+export class OAuthClient implements IOAuthClient {
+
+	constructor(private options: IOAuthClientConfiguration, private oauth?: typeof OAuth) {
+		if (!this.oauth) {
+			this.oauth = new OAuth(
+				OAUTH_BASE + OAUTH_REQUEST_TOKEN_PATH, 	// requestTokenUrl
+				OAUTH_BASE + OAUTH_ACCESS_TOKEN_PATH, 	// accessTokenUrl
+				this.options.consumerKey, 				// consumerKey
+				this.options.consumerSecret,							// consumerSecret
+				'1.0A',									// version
+				null,									// authorize_callback
+				'RSA-SHA1',								// signatureMethod
+				null,									// nonceSize
+				{										// customHeaders
+					'Accept': 'application/json',
+					'User-Agent': 'NodeJS-XeroAPIClient'
+				}
+			);
+		}
+
 	}
 
 	public async get<T>(endpoint: string, args?: any): Promise<T> {
@@ -53,6 +61,9 @@ export class OAuthClient implements IOAuthClient {
 
 					if (err) {
 						console.log(`There was an err <${httpResponse.statusCode}>`);
+						// let toReturn: IHttpError = {
+						// 	statusCode = httpResponse.statusCode
+						// };
 						reject(err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
