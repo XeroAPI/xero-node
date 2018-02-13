@@ -20,10 +20,11 @@ export interface IOAuthClient {
 	put<T>(endpoint: string, body: object, args?: any): Promise<T>;
 }
 
+// TODO: Do we call this?
 export interface IHttpError {
-	status: number;
+	statusCode: number;
 	body: string;
-	error: Error;
+	error: object;
 }
 
 export class OAuthClient implements IOAuthClient {
@@ -56,15 +57,21 @@ export class OAuthClient implements IOAuthClient {
 				API_BASE + API_BASE_PATH + endpoint,	// url
 				this.options.oauthToken,						// oauth_token
 				this.options.oauthSecret,						// oauth_token_secret
-				(err: any, data: string, httpResponse: any) => {
+				(err: object, data: string, httpResponse: any) => {
 					// data is the body of the response
 
 					if (err) {
-						console.log(`There was an err <${httpResponse.statusCode}>`);
-						// let toReturn: IHttpError = {
-						// 	statusCode = httpResponse.statusCode
-						// };
-						reject(err);
+						// console.log(`There was an err httpResponse.StatusCode<${httpResponse.statusCode}>`);
+						// console.log('---------');
+						// console.log(`err: `, err);
+						// console.log('---------');
+						// console.log(`data: `, data);
+						const toReturn: IHttpError = {
+							statusCode: httpResponse.statusCode,
+							error: err,
+							body: data
+						};
+						reject(toReturn);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?

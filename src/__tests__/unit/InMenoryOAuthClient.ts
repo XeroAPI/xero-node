@@ -1,4 +1,4 @@
-import { IOAuthClient } from '../OAuthClient';
+import { IOAuthClient } from '../../OAuthClient';
 
 export class InMemoryOAuthClient implements IOAuthClient {
 
@@ -18,6 +18,10 @@ export class InMemoryOAuthClient implements IOAuthClient {
 		return new Promise<T>((resolve, reject) => {
 			resolve(this.returnGetWith as T);
 		});
+	}
+
+	public async delete<T>(endpoint: string, args?: any): Promise<T> {
+		throw new Error('Method not implemented.');
 	}
 
 	public returnsWithNextGet(returnThis: any){

@@ -142,20 +142,24 @@ describe('phils integration tests', () => {
 			});
 
 			it('can be deleted and is no longer there', async () => {
+				expect.assertions(4);
 
 				const id = result.ContactGroups[0].ContactGroupID;
 
 				const deleteResult = await xero.contactgroups.delete({ ContactGroupID: id });
 
-				expect(deleteResult).toBeNull();
-
 				// TODO: What do we want the delete result to be?
+				expect(deleteResult).toBeNull();
 
 				try {
 					const getResult = await xero.contactgroups.get({ ContactGroupID: id });
 				} catch (error) {
-					// TODO: What do we want a 404 to look like?
-					console.log('err: ', error);
+					expect(error.statusCode).toBe(404);
+					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+					expect(error.error).toMatchObject({
+						statusCode: 404,
+						data: 'The resource you\'re looking for cannot be found'
+					});
 				}
 			});
 		});
