@@ -62,7 +62,7 @@ describe('phils integration tests', () => {
 
 	});
 
-	describe.only('/contactgroups', () => {
+	describe('/contactgroups', () => {
 
 		describe('and GETing', () => {
 
@@ -86,7 +86,8 @@ describe('phils integration tests', () => {
 				});
 			});
 
-			describe('a single ContactGroup', () => {
+			// Covered by tests below
+			describe.skip('a single ContactGroup', () => {
 				let result: AccountingResponse<ContactGroup>;
 
 				beforeAll(async () => {
@@ -140,12 +141,23 @@ describe('phils integration tests', () => {
 				expect(isUUID(result.ContactGroups[0].ContactGroupID)).toBeTruthy();
 			});
 
-			// it('can be deleted and is no longer there', async () => {
+			it('can be deleted and is no longer there', async () => {
 
-			// 	let id = result.ContactGroups[0].ContactGroupID;
+				const id = result.ContactGroups[0].ContactGroupID;
 
-			// 	let deleteResult = xero.contactgroups.delete({ ContactGroupID: id });
-			// });
+				const deleteResult = await xero.contactgroups.delete({ ContactGroupID: id });
+
+				expect(deleteResult).toBeNull();
+
+				// TODO: What do we want the delete result to be?
+
+				try {
+					const getResult = await xero.contactgroups.get({ ContactGroupID: id });
+				} catch (error) {
+					// TODO: What do we want a 404 to look like?
+					console.log('err: ', error);
+				}
+			});
 		});
 
 	});

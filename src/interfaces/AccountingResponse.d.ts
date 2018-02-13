@@ -69,8 +69,8 @@ export interface Contact {
 
 export interface ContactGroup {
 	ContactGroupID?: string;
-	Name: string;
-	Status: string;
+	Name?: string;
+	Status?: string;
 	Contacts?: (Contact)[] | null;
 	HasValidationErrors?: boolean;
 }
