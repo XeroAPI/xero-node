@@ -179,7 +179,7 @@ describe('accounts', () => {
     const account = currentApp.core.accounts.newAccount(testBankAccountData);
 
     // make sure things are serialized
-    expect(JSON.parse(JSON.stringify(account))).containSubset({
+    expect(JSON.parse(JSON.stringify(account))).to.deep.equal({
       Code: "SOMECODE",
       Name: "Test account from Node SDK",
       Type: "BANK",
