@@ -167,6 +167,27 @@ describe('accounts', () => {
       });
   });
 
+  it('BANK ACCOUNT FIELDS SERIALIZED', () => {
+    const testBankAccountData = {
+      Code: "SOMECODE",
+      Name: "Test account from Node SDK",
+      Type: "BANK",
+      CurrencyCode: "CAD",
+      BankAccountNumber: "123452",
+    };
+
+    const account = currentApp.core.accounts.newAccount(testBankAccountData);
+
+    // make sure things are serialized
+    expect(JSON.parse(JSON.stringify(account))).to.deep.equal({
+      Code: "SOMECODE",
+      Name: "Test account from Node SDK",
+      Type: "BANK",
+      CurrencyCode: "CAD",
+      BankAccountNumber: "123452",
+    });
+  });
+
   it('GET ONE', done => {
     currentApp.core.accounts
       .getAccount(testAccountId)
