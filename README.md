@@ -256,6 +256,10 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.18.0
+    - PR#171 Preserve CurrencyCode when serializing an Accout
+    - Remove NYC as cost > benefit
+    - Removes content type checking from #156 as it was failing a test
 * 2.17.0
     - Merge #157 CreditNote Entity Update and ContactPersons fixed on Contact Entity (not including any RSA checking)
 * 2.16.0
