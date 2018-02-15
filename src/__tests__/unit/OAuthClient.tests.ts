@@ -23,7 +23,7 @@ describe('OAuthClient', () => {
 
 					const oAuth = new OAuthClient(testConfig, inMemoryOAuth);
 
-					expect.assertions(3);
+					expect.assertions(2);
 
 					try {
 						await oAuth.get('a/404/endpoint');
@@ -48,7 +48,7 @@ describe('OAuthClient', () => {
 
 					const oAuth = new OAuthClient(testConfig, inMemoryOAuth);
 
-					expect.assertions(3);
+					expect.assertions(2);
 
 					try {
 						await oAuth.delete('a/404/endpoint');
@@ -73,7 +73,7 @@ describe('OAuthClient', () => {
 
 					const oAuth = new OAuthClient(testConfig, inMemoryOAuth);
 
-					expect.assertions(3);
+					expect.assertions(2);
 
 					try {
 						await oAuth.put('a/404/endpoint', { phil: 'washere' });
