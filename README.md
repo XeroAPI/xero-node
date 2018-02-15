@@ -257,6 +257,8 @@ Feel free to send PRs on any of these issues.
 ## Release Change Log
 
 * 2.18.0
+    - Fix missing 'OrganisationID' after called organisation.toJSON() #173
+* 2.18.0
     - PR#171 Preserve CurrencyCode when serializing an Accout
     - Remove NYC as cost > benefit
     - Removes content type checking from #156 as it was failing a test
