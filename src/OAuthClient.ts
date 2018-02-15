@@ -24,7 +24,6 @@ export interface IOAuthClient {
 export interface IHttpError {
 	statusCode: number;
 	body: string;
-	error: object; // TODO: maybe remote
 }
 
 export class OAuthClient implements IOAuthClient {
@@ -63,7 +62,6 @@ export class OAuthClient implements IOAuthClient {
 					if (err) {
 						const toReturn: IHttpError = {
 							statusCode: httpResponse.statusCode,
-							error: err,
 							body: data
 						};
 						reject(toReturn);
@@ -93,7 +91,6 @@ export class OAuthClient implements IOAuthClient {
 					if (err) {
 						const toReturn: IHttpError = {
 							statusCode: httpResponse.statusCode,
-							error: err,
 							body: data
 						};
 						reject(toReturn);
@@ -121,7 +118,6 @@ export class OAuthClient implements IOAuthClient {
 					if (err) {
 						const toReturn: IHttpError = {
 							statusCode: httpResponse.statusCode,
-							error: err,
 							body: data
 						};
 						reject(toReturn);
