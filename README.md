@@ -256,7 +256,7 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
-* 2.18.0
+* 2.19.0
     - Fix missing 'OrganisationID' after called organisation.toJSON() #173
 * 2.18.0
     - PR#171 Preserve CurrencyCode when serializing an Accout
