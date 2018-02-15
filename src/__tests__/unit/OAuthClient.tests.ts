@@ -30,10 +30,6 @@ describe('OAuthClient', () => {
 					} catch (error) {
 						expect(error.statusCode).toBe(404);
 						expect(error.body).toBe('The resource you\'re looking for cannot be found');
-						expect(error.error).toMatchObject({
-							statusCode: 404,
-							data: 'The resource you\'re looking for cannot be found'
-						});
 					}
 				});
 			});
@@ -59,10 +55,6 @@ describe('OAuthClient', () => {
 					} catch (error) {
 						expect(error.statusCode).toBe(404);
 						expect(error.body).toBe('The resource you\'re looking for cannot be found');
-						expect(error.error).toMatchObject({
-							statusCode: 404,
-							data: 'The resource you\'re looking for cannot be found'
-						});
 					}
 				});
 			});
@@ -88,10 +80,6 @@ describe('OAuthClient', () => {
 					} catch (error) {
 						expect(error.statusCode).toBe(404);
 						expect(error.body).toBe('The resource you\'re looking for cannot be found');
-						expect(error.error).toMatchObject({
-							statusCode: 404,
-							data: 'The resource you\'re looking for cannot be found'
-						});
 					}
 				});
 			});
