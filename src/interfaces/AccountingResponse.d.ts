@@ -55,7 +55,7 @@ export interface Contact {
 	LastName: string;
 	EmailAddress: string;
 	BankAccountDetails: string;
-	Addresses?: (Addresse)[] | null;
+	Addresses?: (Address)[] | null;
 	Phones?: (Phone)[] | null;
 	UpdatedDateUTC: string;
 	ContactGroups?: (null)[] | null;
@@ -75,7 +75,7 @@ export interface ContactGroup {
 	HasValidationErrors?: boolean;
 }
 
-export interface Addresse {
+export interface Address {
 	AddressType: string;
 	AddressLine1: string;
 	AddressLine2: string;

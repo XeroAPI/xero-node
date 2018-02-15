@@ -24,7 +24,7 @@ export interface IOAuthClient {
 export interface IHttpError {
 	statusCode: number;
 	body: string;
-	error: object;
+	error: object; // TODO: maybe remote
 }
 
 export class OAuthClient implements IOAuthClient {
