@@ -2,16 +2,22 @@ import { OAuth } from 'oauth';
 
 export class InMemoryOAuth {
 
+	[x: string]: any;
 	private returnErr = null;
 	private returnData = null;
 	private returnHttpResponse = null;
+	private lastCalledUrl = '';
+
+	public lastCalledThisURL(url: string) {
+		expect(this.lastCalledUrl).toBe(url);
+	}
 
 	public get(
 		url: string,
 		oauthToken: string,
 		oauthSecret: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
-
+		this.lastCalledUrl = url;
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
@@ -20,6 +26,7 @@ export class InMemoryOAuth {
 		oauthToken: string,
 		oauthSecret: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
+		this.lastCalledUrl = url;
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
@@ -30,6 +37,7 @@ export class InMemoryOAuth {
 		body: string,
 		contentType: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
+		this.lastCalledUrl = url;
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 

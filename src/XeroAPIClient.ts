@@ -14,7 +14,7 @@ export class XeroAPIClient {
 	private oauthToken: string;
 	private oauthSecret: string;
 
-	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient) {
+	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauth?: any) {
 		if (!this.options) {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
 		}
@@ -33,7 +33,7 @@ export class XeroAPIClient {
 				consumerSecret: consumerSecret,
 				oauthToken: this.oauthToken,
 				oauthSecret: this.oauthSecret
-			});
+			}, this._oauth);
 		}
 	}
 
@@ -50,7 +50,15 @@ export class XeroAPIClient {
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
 			return this._oauthClient.get<AccountingResponse<Invoice>>(endpoint, args);
-		}
+		},
+		create: async (invoice: Invoice, args?: any): Promise<AccountingResponse<Invoice>> => {
+			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			const endpoint = 'invoices';
+
+			return this._oauthClient.put<AccountingResponse<Invoice>>(endpoint, invoice, args);
+		},
 	};
 
 	public contactgroups = {
@@ -60,7 +68,7 @@ export class XeroAPIClient {
 			// TODO: Summerize errors?
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
-				endpoint = endpoint + '/' + args.ContactGroupId;
+				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
 
 			return this._oauthClient.get<AccountingResponse<ContactGroup>>(endpoint, args);
@@ -76,6 +84,7 @@ export class XeroAPIClient {
 
 			return this._oauthClient.put<AccountingResponse<ContactGroup>>(endpoint, contactGroup, args);
 		},
+		// TODO: This is actually delete the CONTACT on contactgroup
 		delete: async (contactGroup: ContactGroup, args?: any): Promise<AccountingResponse<ContactGroup>> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg

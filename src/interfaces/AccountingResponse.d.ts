@@ -19,48 +19,48 @@ export interface AccountingResponse<T> {
 
 export interface Invoice {
 	Type: string;
-	InvoiceID: string;
-	InvoiceNumber: string;
-	Reference: string;
+	InvoiceID?: string;
+	InvoiceNumber?: string;
+	Reference?: string;
 	Prepayments?: (null)[] | null;
 	Overpayments?: (null)[] | null;
-	CISDeduction: number;
-	AmountDue: number;
-	AmountPaid: number;
-	AmountCredited: number;
-	SentToContact: boolean;
-	HasErrors: boolean;
-	IsDiscounted: boolean;
-	HasAttachments: boolean;
+	CISDeduction?: number;
+	AmountDue?: number;
+	AmountPaid?: number;
+	AmountCredited?: number;
+	SentToContact?: boolean;
+	HasErrors?: boolean;
+	IsDiscounted?: boolean;
+	HasAttachments?: boolean;
 	Attachments?: (null)[] | null;
-	Contact: Contact;
-	DateString: string;
-	Date: string;
-	DueDateString: string;
-	DueDate: string;
-	Status: string;
-	LineAmountTypes: string;
-	LineItems?: (LineItem)[] | null;
-	SubTotal: number;
-	TotalTax: number;
-	Total: number;
-	UpdatedDateUTC: string;
-	CurrencyCode: string;
+	Contact?: Contact;
+	DateString?: string;
+	Date?: string;
+	DueDateString?: string;
+	DueDate?: string;
+	Status?: string;
+	LineAmountTypes?: string;
+	LineItems?: LineItem[];
+	SubTotal?: number;
+	TotalTax?: number;
+	Total?: number;
+	UpdatedDateUTC?: string;
+	CurrencyCode?: string;
 }
 export interface Contact {
-	ContactID: string;
-	ContactStatus: string;
-	Name: string;
-	FirstName: string;
-	LastName: string;
-	EmailAddress: string;
-	BankAccountDetails: string;
+	ContactID?: string;
+	ContactStatus?: string;
+	Name?: string;
+	FirstName?: string;
+	LastName?: string;
+	EmailAddress?: string;
+	BankAccountDetails?: string;
 	Addresses?: (Address)[] | null;
 	Phones?: (Phone)[] | null;
-	UpdatedDateUTC: string;
+	UpdatedDateUTC?: string;
 	ContactGroups?: (null)[] | null;
-	IsSupplier: boolean;
-	IsCustomer: boolean;
+	IsSupplier?: boolean;
+	IsCustomer?: boolean;
 	SalesTrackingCategories?: (null)[] | null;
 	PurchasesTrackingCategories?: (null)[] | null;
 	ContactPersons?: (null)[] | null;
@@ -94,20 +94,20 @@ export interface Phone {
 	PhoneCountryCode: string;
 }
 export interface LineItem {
-	Description: string;
-	UnitAmount: number;
-	TaxType: string;
-	TaxAmount: number;
-	LineAmount: number;
-	AccountCode: string;
+	Description?: string;
+	UnitAmount?: number;
+	TaxType?: string;
+	TaxAmount?: number;
+	LineAmount?: number;
+	AccountCode?: string;
 	Tracking?: (Tracking)[] | null;
-	Quantity: number;
-	LineItemID: string;
+	Quantity?: number;
+	LineItemID?: string;
 	ValidationErrors?: (null)[] | null;
 }
 export interface Tracking {
-	Name: string;
-	Option: string;
-	TrackingCategoryID: string;
-	TrackingOptionID: string;
+	Name?: string;
+	Option?: string;
+	TrackingCategoryID?: string;
+	TrackingOptionID?: string;
 }
