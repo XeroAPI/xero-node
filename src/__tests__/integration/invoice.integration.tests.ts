@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { AccountingResponse, Invoice } from '../../interfaces/AccountingResponse';
 import { isUUID } from '../test-helpers';
-import { createInvoiceRequest } from '../unit/response-examples/invoice.request.examples';
+import { createInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
 
 const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');

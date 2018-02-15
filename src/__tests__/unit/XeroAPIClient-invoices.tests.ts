@@ -7,7 +7,7 @@ import { multipleInvoices, singleInvoice } from './response-examples/invoice.res
 import { isUUID } from '../test-helpers';
 import { OAuthClient } from '../../OAuthClient';
 import { InMemoryOAuth } from './InMenoryOAuth';
-import { createInvoiceRequest } from './response-examples/invoice.request.examples';
+import { createInvoiceRequest } from './request-examples/invoice.request.examples';
 
 describe('/invoices', () => {
 	describe('and getting', () => {
