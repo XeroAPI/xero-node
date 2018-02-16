@@ -29,11 +29,11 @@ describe('phils integration tests', () => {
 					fs.writeFileSync(invoiceLocation, result, 'binary');
 
 					// TODO: OR
-					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' }, { 'content-type': 'application/json' });
+					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' }, { 'Accept': 'application/pdf' });
 					// TODO: OR
-					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc', contentType: 'application/json' });
+					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc', Accept: 'application/pdf' });
 					// TODO: OR
-					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc'}, { headers = [{contentType: 'application/json'}] });
+					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc'}, { headers = [{Accept: 'application/pdf'}] });
 				});
 
 				it('the invoice is defined', () => {
