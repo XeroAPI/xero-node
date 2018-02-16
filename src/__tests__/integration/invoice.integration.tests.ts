@@ -19,12 +19,15 @@ const xero = new XeroAPIClient({
 describe('phils integration tests', () => {
 	describe('/invoices', () => {
 		describe('and GETing', () => {
-			describe.skip('a single invoice as PDF', () => {
-				let result: AccountingResponse<Invoice>;
+			describe('a single invoice as PDF', () => {
+				let result: AccountingResponse<Invoice> | string;
+				const invoiceLocation = (__dirname + '/invoice-result.pdf');
 
 				beforeAll(async () => {
 					const invoice = await xero.invoices.create(createInvoiceRequest);
-					result = await xero.invoices.get({ InvoiceId: invoice.Invoices[0].InvoiceID, contentType: 'application/json'  });
+					result = await xero.invoices.get({ InvoiceId: invoice.Invoices[0].InvoiceID, Accept: 'application/pdf' });
+					fs.writeFileSync(invoiceLocation, result, 'binary');
+
 					// TODO: OR
 					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' }, { 'content-type': 'application/json' });
 					// TODO: OR
@@ -37,17 +40,18 @@ describe('phils integration tests', () => {
 					expect(result).not.toBeNull();
 				});
 
-				it('invoice.Id is a Guid and is actually the Id of the request', async () => {
-					expect(isUUID(result.Id)).toBeTruthy();
+				it('invoice can be saved as local file', async () => {
+					const invoiceBuffer = fs.readFileSync(invoiceLocation);
+					expect(invoiceBuffer.byteLength).toBeGreaterThan(5000); // Lets hopw all PDFs a bigger than 5000
 				});
 
-				it('invoice[0].InvoiceID is a Guid', async () => {
-					expect(isUUID(result.Invoices[0].InvoiceID)).toBeTruthy();
+				it('invoice is then deleted', () => {
+					fs.unlinkSync(invoiceLocation);
 				});
 			});
 
 			describe('a single invoices', () => {
-				let result: AccountingResponse<Invoice>;
+				let result: AccountingResponse<Invoice> & string;
 
 				beforeAll(async () => {
 					const invoice = await xero.invoices.create(createInvoiceRequest);
@@ -69,7 +73,7 @@ describe('phils integration tests', () => {
 			});
 
 			describe('multiple invoices', () => {
-				let result: AccountingResponse<Invoice>;
+				let result: AccountingResponse<Invoice> & string;
 
 				beforeAll(async () => {
 					result = await xero.invoices.get();

@@ -30,7 +30,33 @@ export class OAuthClient implements IOAuthClient {
 
 	constructor(private options: IOAuthClientConfiguration, private oauth?: typeof OAuth) {
 		if (!this.oauth) {
-			this.oauth = new OAuth(
+			this.oauth = this.oAuthFactory();
+		}
+
+	}
+
+	private oAuthFactory() {
+		return new OAuth(
+			OAUTH_BASE + OAUTH_REQUEST_TOKEN_PATH, 	// requestTokenUrl
+			OAUTH_BASE + OAUTH_ACCESS_TOKEN_PATH, 	// accessTokenUrl
+			this.options.consumerKey, 				// consumerKey
+			this.options.consumerSecret,							// consumerSecret
+			'1.0A',									// version
+			null,									// authorize_callback
+			'RSA-SHA1',								// signatureMethod
+			null,									// nonceSize
+			{										// customHeaders
+				'Accept': 'application/json',
+				'User-Agent': 'NodeJS-XeroAPIClient'
+			}
+		);
+	}
+
+	public async get<T>(endpoint: string, args?: any): Promise<T> {
+		// this.checkAuthentication();
+		// TODO: Refactor
+		if (args && args.Accept) {
+			const oauth = new OAuth(
 				OAUTH_BASE + OAUTH_REQUEST_TOKEN_PATH, 	// requestTokenUrl
 				OAUTH_BASE + OAUTH_ACCESS_TOKEN_PATH, 	// accessTokenUrl
 				this.options.consumerKey, 				// consumerKey
@@ -40,16 +66,31 @@ export class OAuthClient implements IOAuthClient {
 				'RSA-SHA1',								// signatureMethod
 				null,									// nonceSize
 				{										// customHeaders
-					'Accept': 'application/json',
+					'Accept': args.Accept,
 					'User-Agent': 'NodeJS-XeroAPIClient'
 				}
 			);
+
+			return new Promise<T>((resolve, reject) => {
+				const request = oauth.get(
+					API_BASE + API_BASE_PATH + endpoint,	// url
+					this.options.oauthToken,						// oauth_token
+					this.options.oauthSecret);
+
+				let allChunks: any = null;
+
+				request.addListener('response', function(response: any) {
+					response.setEncoding('binary');
+					response.addListener('data', function(chunk: any) {
+						allChunks = allChunks + chunk;
+					});
+					response.addListener('end', function() {
+						resolve(allChunks);
+					});
+				});
+				request.end();
+			});
 		}
-
-	}
-
-	public async get<T>(endpoint: string, args?: any): Promise<T> {
-		// this.checkAuthentication();
 
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.get(

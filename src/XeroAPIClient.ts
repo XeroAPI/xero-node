@@ -38,7 +38,8 @@ export class XeroAPIClient {
 	}
 
 	public invoices = {
-		get: async (args?: any): Promise<AccountingResponse<Invoice>> => {
+		get: async (args?: any): Promise<AccountingResponse<Invoice> & string> => {
+			// is a string when args.accept = application/pdf
 
 			// TODO: Support invoice number
 			// TODO: Support for where arg
@@ -49,7 +50,7 @@ export class XeroAPIClient {
 			}
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
-			return this._oauthClient.get<AccountingResponse<Invoice>>(endpoint, args);
+			return this._oauthClient.get<AccountingResponse<Invoice> & string>(endpoint, args);
 		},
 		create: async (invoice: Invoice, args?: any): Promise<AccountingResponse<Invoice>> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts

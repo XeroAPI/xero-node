@@ -2,3 +2,4 @@ node_modules
 *.tgz
 lib/**/*
 npm-debug.log
+*.pdf
