@@ -15,7 +15,7 @@ const xero = new XeroAPIClient({
 	privateKey: privateKey
 });
 
-describe('phils integration tests', () => {
+describe.only('phils integration tests', () => {
 	describe('/contactgroups', () => {
 
 		describe('and GETing', () => {
@@ -80,16 +80,17 @@ describe('phils integration tests', () => {
 					}
 				});
 
-				it('when deleted, then all contacts are gone', async () => {
+				it('when deleting all contacts, then all contacts are gone', async () => {
 					// TODO: Add contact to group
 					const id = result.ContactGroups[0].ContactGroupID;
 
-					const deleteResult = await xero.contactgroups.delete({ ContactGroupID: id });
-					// TODO: What do we want the delete result to be?
+					const deleteResult = await xero.contactgroups.deleteContacts({ ContactGroupID: id });
+						// TODO: What do we want the delete result to be?
 					expect(deleteResult).toBeNull();
 
 					const getResult = await xero.contactgroups.get({ ContactGroupID: id });
 					expect(getResult.ContactGroups[0].Contacts.length).toBe(0);
+					expect(getResult.ContactGroups[0].Status).toBe('ACTIVE');
 				});
 			});
 

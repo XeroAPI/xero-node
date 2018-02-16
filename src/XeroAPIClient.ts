@@ -86,13 +86,16 @@ export class XeroAPIClient {
 			return this._oauthClient.put<AccountingResponse<ContactGroup>>(endpoint, contactGroup, args);
 		},
 		// TODO: This is actually delete the CONTACT on contactgroup
-		delete: async (contactGroup: ContactGroup, args?: any): Promise<AccountingResponse<ContactGroup>> => {
+		deleteContacts: async (args?: any): Promise<AccountingResponse<ContactGroup>> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
 			let endpoint = 'contactgroups';
-			if (contactGroup && contactGroup.ContactGroupID) {
-				endpoint = endpoint + '/' + contactGroup.ContactGroupID + '/contacts';
+			if (args && args.ContactGroupID) {
+				endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
+			}
+			if (args && args.ContactGroupID && args.ContactID) {
+				endpoint = endpoint + '/' + args.ContactID;
 			}
 
 			return this._oauthClient.delete<AccountingResponse<ContactGroup>>(endpoint, args);
