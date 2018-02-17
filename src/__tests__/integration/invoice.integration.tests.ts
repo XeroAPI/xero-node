@@ -20,20 +20,13 @@ describe('phils integration tests', () => {
 	describe('/invoices', () => {
 		describe('and GETing', () => {
 			describe('a single invoice as PDF', () => {
-				let result: AccountingResponse<Invoice> | string;
+				let result: string;
 				const invoiceLocation = (__dirname + '/invoice-result.pdf');
 
 				beforeAll(async () => {
 					const invoice = await xero.invoices.create(createInvoiceRequest);
-					result = await xero.invoices.get({ InvoiceId: invoice.Invoices[0].InvoiceID, Accept: 'application/pdf' });
+					result = await xero.invoices.getPDF({ InvoiceId: invoice.Invoices[0].InvoiceID});
 					fs.writeFileSync(invoiceLocation, result, 'binary');
-
-					// TODO: OR
-					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc' }, { 'Accept': 'application/pdf' });
-					// TODO: OR
-					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc', Accept: 'application/pdf' });
-					// TODO: OR
-					// result = await xero.invoices.get({ InvoiceId: '0e64a623-c2a1-446a-93ed-eb897f118cbc'}, { headers = [{Accept: 'application/pdf'}] });
 				});
 
 				it('the invoice is defined', () => {
@@ -51,7 +44,7 @@ describe('phils integration tests', () => {
 			});
 
 			describe('a single invoices', () => {
-				let result: AccountingResponse<Invoice> & string;
+				let result: AccountingResponse<Invoice>;
 
 				beforeAll(async () => {
 					const invoice = await xero.invoices.create(createInvoiceRequest);
@@ -73,7 +66,7 @@ describe('phils integration tests', () => {
 			});
 
 			describe('multiple invoices', () => {
-				let result: AccountingResponse<Invoice> & string;
+				let result: AccountingResponse<Invoice>;
 
 				beforeAll(async () => {
 					result = await xero.invoices.get();

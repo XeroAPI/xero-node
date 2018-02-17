@@ -38,9 +38,7 @@ export class XeroAPIClient {
 	}
 
 	public invoices = {
-		get: async (args?: any): Promise<AccountingResponse<Invoice> & string> => {
-			// is a string when args.accept = application/pdf
-
+		get: async (args?: any): Promise<AccountingResponse<Invoice>> => {
 			// TODO: Support invoice number
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -50,7 +48,23 @@ export class XeroAPIClient {
 			}
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
-			return this._oauthClient.get<AccountingResponse<Invoice> & string>(endpoint, args);
+			return this._oauthClient.get<AccountingResponse<Invoice>>(endpoint, args);
+		},
+		getPDF: async (args?: any): Promise<string> => {
+			// is a string when args.accept = application/pdf
+			args.Accept = 'application/pdf';
+
+			// TODO: Support invoice number
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			// TODO: Refactor duplication
+			let endpoint = 'invoices';
+			if (args && args.InvoiceId) {
+				endpoint = endpoint + '/' + args.InvoiceId;
+			}
+
+			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
+			return this._oauthClient.get<string>(endpoint, args);
 		},
 		create: async (invoice: Invoice, args?: any): Promise<AccountingResponse<Invoice>> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
