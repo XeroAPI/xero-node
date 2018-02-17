@@ -54,16 +54,24 @@ export interface Contact {
 	FirstName?: string;
 	LastName?: string;
 	EmailAddress?: string;
+	DefaultCurrency?: string;
 	BankAccountDetails?: string;
 	Addresses?: (Address)[] | null;
 	Phones?: (Phone)[] | null;
 	UpdatedDateUTC?: string;
+	Balances?: any; // TODO: something here
 	ContactGroups?: (null)[] | null;
 	IsSupplier?: boolean;
 	IsCustomer?: boolean;
 	SalesTrackingCategories?: (null)[] | null;
 	PurchasesTrackingCategories?: (null)[] | null;
 	ContactPersons?: (null)[] | null;
+	HasAttachments?: boolean;
+	AccountsReceivableTaxType?: string;
+	AccountsPayableTaxType?: string;
+	TaxNumber?: string;
+	Attachments?: any; // TODO: something here
+	SkypeUserName?: string;
 	HasValidationErrors?: boolean;
 }
 
@@ -76,22 +84,22 @@ export interface ContactGroup {
 }
 
 export interface Address {
-	AddressType: string;
-	AddressLine1: string;
-	AddressLine2: string;
-	AddressLine3: string;
-	AddressLine4: string;
-	City: string;
-	Region: string;
-	PostalCode: string;
-	Country: string;
-	AttentionTo: string;
+	AddressType?: string;
+	AddressLine1?: string;
+	AddressLine2?: string;
+	AddressLine3?: string;
+	AddressLine4?: string;
+	City?: string;
+	Region?: string;
+	PostalCode?: string;
+	Country?: string;
+	AttentionTo?: string;
 }
 export interface Phone {
-	PhoneType: string;
-	PhoneNumber: string;
-	PhoneAreaCode: string;
-	PhoneCountryCode: string;
+	PhoneType?: string;
+	PhoneNumber?: string;
+	PhoneAreaCode?: string;
+	PhoneCountryCode?: string;
 }
 export interface LineItem {
 	Description?: string;
