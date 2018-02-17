@@ -54,7 +54,8 @@ export class OAuthClient implements IOAuthClient {
 
 	public async get<T>(endpoint: string, args?: any): Promise<T> {
 		// this.checkAuthentication();
-		// TODO: Refactor duplication out
+
+		// TODO: Refactor duplication out this is for PDF
 		if (args && args.Accept) {
 			const oauth = new OAuth(
 				OAUTH_BASE + OAUTH_REQUEST_TOKEN_PATH, 	// requestTokenUrl

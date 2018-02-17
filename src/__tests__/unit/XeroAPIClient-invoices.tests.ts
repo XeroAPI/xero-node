@@ -56,6 +56,7 @@ describe('/invoices', () => {
 	});
 
 	describe('and creating', () => {
+		// TODO: This test actually mocks out the oauth lib and therefore runs all our code. We should migrate all tests to this?
 		let result: AccountingResponse<Invoice>;
 		const inMemoryOAuth = new InMemoryOAuth();
 

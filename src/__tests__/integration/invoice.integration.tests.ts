@@ -25,7 +25,7 @@ describe('phils integration tests', () => {
 
 				beforeAll(async () => {
 					const invoice = await xero.invoices.create(createInvoiceRequest);
-					result = await xero.invoices.getPDF({ InvoiceId: invoice.Invoices[0].InvoiceID});
+					result = await xero.invoices.getPDF({ InvoiceId: invoice.Invoices[0].InvoiceID });
 					fs.writeFileSync(invoiceLocation, result, 'binary');
 				});
 
