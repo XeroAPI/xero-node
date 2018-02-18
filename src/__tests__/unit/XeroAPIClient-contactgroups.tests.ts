@@ -2,7 +2,6 @@ import { AccountingResponse, ContactGroup, ContactGroupsResponse } from '../../i
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { InMemoryOAuthClient } from './InMenoryOAuthClient';
 import { isUUID } from '../test-helpers';
 import { allContactGroups, createResponse } from './response-examples/contactgroups.response.examples';
 import { InMemoryOAuth } from './InMenoryOAuth';
@@ -14,17 +13,17 @@ describe('/contactgroups', () => {
 	describe('and getting', () => {
 		describe('all contact groups', () => {
 			let result: ContactGroupsResponse;
-			const inMemoryOAuthClient = new InMemoryOAuthClient();
+			const inMemoryOAuth = new InMemoryOAuth();
 
 			beforeAll(async () => {
-				inMemoryOAuthClient.returnsWithNextGet(allContactGroups);
+				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(allContactGroups), { statusCode: 200 });
 
 				const xeroClient = new XeroAPIClient({
 					appType: 'private',
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 					privateKey: privateKey
-				}, inMemoryOAuthClient);
+				}, null, inMemoryOAuth);
 
 				result = await xeroClient.contactgroups.get();
 			});
@@ -38,7 +37,7 @@ describe('/contactgroups', () => {
 			});
 
 			it('called the correct URL', () => {
-				inMemoryOAuthClient.calledThisURL('contactgroups');
+				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/contactgroups');
 			});
 		});
 
@@ -47,17 +46,17 @@ describe('/contactgroups', () => {
 	describe('and creating', () => {
 		describe('a contact groups', () => {
 			let result: ContactGroupsResponse;
-			const inMemoryOAuthClient = new InMemoryOAuthClient();
+			const inMemoryOAuth = new InMemoryOAuth();
 
 			beforeAll(async () => {
-				inMemoryOAuthClient.returnsWithNextGet(createResponse);
+				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(createResponse), {stausCode: 200});
 
 				const xeroClient = new XeroAPIClient({
 					appType: 'private',
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 					privateKey: privateKey
-				}, inMemoryOAuthClient);
+				}, null, inMemoryOAuth);
 
 				const contactGroup: ContactGroup = {
 					Name: 'NewContactGroup',
@@ -76,7 +75,7 @@ describe('/contactgroups', () => {
 			});
 
 			it('called the correct URL', () => {
-				inMemoryOAuthClient.calledThisURL('contactgroups');
+				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/contactgroups');
 			});
 		});
 

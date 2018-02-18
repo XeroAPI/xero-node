@@ -2,7 +2,6 @@ import { InvoicesResponse, Invoice } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { InMemoryOAuthClient } from './InMenoryOAuthClient';
 import { multipleInvoices, singleInvoice } from './response-examples/invoice.response.examples';
 import { isUUID } from '../test-helpers';
 import { OAuthClient } from '../../OAuthClient';
@@ -13,21 +12,21 @@ describe('/invoices', () => {
 	describe('and getting', () => {
 		describe('multiple invoices', () => {
 			let result: InvoicesResponse;
-			const inMemoryOAuthClient = new InMemoryOAuthClient();
+			const inMemoryOAuth = new InMemoryOAuth();
 
 			beforeAll(async () => {
 
 				const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
 				const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
-				inMemoryOAuthClient.returnsWithNextGet(multipleInvoices);
+				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(multipleInvoices), { statusCode: 200 });
 
 				const xeroClient = new XeroAPIClient({
 					appType: 'private',
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 					privateKey: privateKey
-				}, inMemoryOAuthClient);
+				}, null, inMemoryOAuth);
 
 				result = await xeroClient.invoices.get();
 			});
@@ -49,7 +48,7 @@ describe('/invoices', () => {
 			});
 
 			it('called the correct URL', () => {
-				inMemoryOAuthClient.calledThisURL('invoices');
+				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/invoices');
 			});
 		});
 
