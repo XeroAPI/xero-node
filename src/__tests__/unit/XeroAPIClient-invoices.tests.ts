@@ -7,7 +7,7 @@ import { multipleInvoices, singleInvoice } from './response-examples/invoice.res
 import { isUUID } from '../test-helpers';
 import { OAuthClient } from '../../OAuthClient';
 import { InMemoryOAuth } from './InMenoryOAuth';
-import { createInvoiceRequest } from './request-examples/invoice.request.examples';
+import { createSingleInvoiceRequest } from './request-examples/invoice.request.examples';
 
 describe('/invoices', () => {
 	describe('and getting', () => {
@@ -74,7 +74,7 @@ describe('/invoices', () => {
 				privateKey: privateKey
 			}, null, inMemoryOAuth);
 
-			result = await xeroClient.invoices.create(createInvoiceRequest);
+			result = await xeroClient.invoices.create(createSingleInvoiceRequest);
 		});
 
 		it('the response is defined', () => {
