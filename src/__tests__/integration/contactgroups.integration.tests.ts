@@ -2,7 +2,7 @@
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { AccountingResponse, ContactGroup } from '../../interfaces/AccountingResponse';
+import { ContactGroupsResponse, ContactGroup } from '../../interfaces/AccountingResponse';
 import { isUUID } from '../test-helpers';
 
 const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
@@ -15,13 +15,13 @@ const xero = new XeroAPIClient({
 	privateKey: privateKey
 });
 
-describe.skip('phils integration tests', () => {
+describe('phils integration tests', () => {
 	describe('/contactgroups', () => {
 
 		describe('and GETing', () => {
 
 			describe('all ContactGroups', () => {
-				let result: AccountingResponse<ContactGroup>;
+				let result: ContactGroupsResponse;
 
 				beforeAll(async () => {
 					result = await xero.contactgroups.get();
@@ -42,7 +42,7 @@ describe.skip('phils integration tests', () => {
 
 			describe('and Creating and Getting', () => {
 
-				let result: AccountingResponse<ContactGroup> = null;
+				let result: ContactGroupsResponse = null;
 				const uniqueName = 'NewContactGroup' + new Date().getTime();
 
 				beforeAll(async () => {
@@ -85,7 +85,7 @@ describe.skip('phils integration tests', () => {
 					const id = result.ContactGroups[0].ContactGroupID;
 
 					const deleteResult = await xero.contactgroups.deleteContacts({ ContactGroupID: id });
-						// TODO: What do we want the delete result to be?
+					// TODO: What do we want the delete result to be?
 					expect(deleteResult).toBeNull();
 
 					const getResult = await xero.contactgroups.get({ ContactGroupID: id });

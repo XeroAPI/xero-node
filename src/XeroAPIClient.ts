@@ -1,5 +1,5 @@
 import { OAuthClient, IOAuthClient } from './OAuthClient';
-import { AccountingResponse, Invoice, ContactGroup } from './interfaces/AccountingResponse';
+import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse } from './interfaces/AccountingResponse';
 
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
@@ -42,7 +42,7 @@ export class XeroAPIClient {
 	}
 
 	public invoices = {
-		get: async (args?: any): Promise<AccountingResponse<Invoice>> => {
+		get: async (args?: any): Promise<InvoicesResponse> => {
 			// TODO: Support invoice number
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -52,7 +52,7 @@ export class XeroAPIClient {
 			}
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
-			return this.get<AccountingResponse<Invoice>>(endpoint, args);
+			return this.get<InvoicesResponse>(endpoint, args);
 		},
 		getPDF: async (args?: any): Promise<string> => {
 			// is a string when args.accept = application/pdf
@@ -70,18 +70,18 @@ export class XeroAPIClient {
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
 			return this.get<string>(endpoint, args);
 		},
-		create: async (invoice: Invoice, args?: any): Promise<AccountingResponse<Invoice>> => {
+		create: async (invoice: Invoice, args?: any): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
 			const endpoint = 'invoices';
 
-			return this._oauthClient.put<AccountingResponse<Invoice>>(endpoint, invoice, args);
+			return this._oauthClient.put<InvoicesResponse>(endpoint, invoice, args);
 		},
 	};
 
 	public contactgroups = {
-		get: async (args?: any): Promise<AccountingResponse<ContactGroup>> => {
+		get: async (args?: any): Promise<ContactGroupsResponse> => {
 
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -90,9 +90,9 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
 
-			return this.get<AccountingResponse<ContactGroup>>(endpoint, args);
+			return this.get<ContactGroupsResponse>(endpoint, args);
 		},
-		create: async (contactGroup: ContactGroup, args?: any): Promise<AccountingResponse<ContactGroup>> => {
+		create: async (contactGroup: ContactGroup, args?: any): Promise<ContactGroupsResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -101,10 +101,10 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupId;
 			}
 
-			return this._oauthClient.put<AccountingResponse<ContactGroup>>(endpoint, contactGroup, args);
+			return this._oauthClient.put<ContactGroupsResponse>(endpoint, contactGroup, args);
 		},
 		// TODO: This is actually delete the CONTACT on contactgroup
-		deleteContacts: async (args?: any): Promise<AccountingResponse<ContactGroup>> => {
+		deleteContacts: async (args?: any): Promise<ContactGroupsResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -116,7 +116,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactID;
 			}
 
-			return this._oauthClient.delete<AccountingResponse<ContactGroup>>(endpoint, args);
+			return this._oauthClient.delete<ContactGroupsResponse>(endpoint, args);
 		}
 	};
 

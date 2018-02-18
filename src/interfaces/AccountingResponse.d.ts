@@ -1,20 +1,20 @@
-﻿// export interface AccountingResponse {
-// 	Id: string;
-// 	Status: string;
-// 	ProviderName: string;
-// 	DateTimeUTC: string;
-// 	Invoice?: (Invoice)[] | null;
-// }
+﻿export interface InvoicesResponse extends AccountingResponse {
+	Invoices: Invoice[];
+}
 
-export interface AccountingResponse<T> {
+export interface ContactGroupsResponse extends AccountingResponse {
+	ContactGroups: ContactGroup[];
+}
+
+export interface ContactsResponse extends AccountingResponse {
+	Contacts: Contact[];
+}
+
+interface AccountingResponse {
 	Id: string;
 	Status: string;
 	ProviderName: string;
 	DateTimeUTC: string;
-	Invoices?: T[];
-	Contacts?: T[];
-	ContactGroups?: T[];
-	// All other types
 }
 
 export interface Invoice {
@@ -22,8 +22,8 @@ export interface Invoice {
 	InvoiceID?: string;
 	InvoiceNumber?: string;
 	Reference?: string;
-	Prepayments?: (null)[] | null;
-	Overpayments?: (null)[] | null;
+	Prepayments?: any[];
+	Overpayments?: any[];
 	CISDeduction?: number;
 	AmountDue?: number;
 	AmountPaid?: number;
@@ -32,7 +32,7 @@ export interface Invoice {
 	HasErrors?: boolean;
 	IsDiscounted?: boolean;
 	HasAttachments?: boolean;
-	Attachments?: (null)[] | null;
+	Attachments?: any[];
 	Contact?: Contact;
 	DateString?: string;
 	Date?: string;
@@ -56,16 +56,16 @@ export interface Contact {
 	EmailAddress?: string;
 	DefaultCurrency?: string;
 	BankAccountDetails?: string;
-	Addresses?: (Address)[] | null;
-	Phones?: (Phone)[] | null;
+	Addresses?: Address[];
+	Phones?: Phone[];
 	UpdatedDateUTC?: string;
 	Balances?: any; // TODO: something here
-	ContactGroups?: (null)[] | null;
+	ContactGroups?: any[];
 	IsSupplier?: boolean;
 	IsCustomer?: boolean;
-	SalesTrackingCategories?: (null)[] | null;
-	PurchasesTrackingCategories?: (null)[] | null;
-	ContactPersons?: (null)[] | null;
+	SalesTrackingCategories?: any[];
+	PurchasesTrackingCategories?: any[];
+	ContactPersons?: any[];
 	HasAttachments?: boolean;
 	AccountsReceivableTaxType?: string;
 	AccountsPayableTaxType?: string;
@@ -79,7 +79,7 @@ export interface ContactGroup {
 	ContactGroupID?: string;
 	Name?: string;
 	Status?: string;
-	Contacts?: (Contact)[] | null;
+	Contacts?: Contact[];
 	HasValidationErrors?: boolean;
 }
 
@@ -108,10 +108,10 @@ export interface LineItem {
 	TaxAmount?: number;
 	LineAmount?: number;
 	AccountCode?: string;
-	Tracking?: (Tracking)[] | null;
+	Tracking?: Tracking[];
 	Quantity?: number;
 	LineItemID?: string;
-	ValidationErrors?: (null)[] | null;
+	ValidationErrors?: any[];
 }
 export interface Tracking {
 	Name?: string;

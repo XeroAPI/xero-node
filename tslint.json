@@ -1,6 +1,10 @@
 {
 	"extends": "tslint:latest",
 	"rules": {
+		"interface-name": [
+			false,
+			"never-prefix"
+		],
 		"member-ordering": [false],
 		"max-line-length": [false],
 		"max-classes-per-file": [false],

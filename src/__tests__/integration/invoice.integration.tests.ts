@@ -2,7 +2,7 @@
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { AccountingResponse, Invoice } from '../../interfaces/AccountingResponse';
+import { Invoice, InvoicesResponse } from '../../interfaces/AccountingResponse';
 import { isUUID } from '../test-helpers';
 import { createInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
 
@@ -44,7 +44,7 @@ describe('phils integration tests', () => {
 			});
 
 			describe('a single invoices', () => {
-				let result: AccountingResponse<Invoice>;
+				let result: InvoicesResponse;
 
 				beforeAll(async () => {
 					const invoice = await xero.invoices.create(createInvoiceRequest);
@@ -66,7 +66,7 @@ describe('phils integration tests', () => {
 			});
 
 			describe('multiple invoices', () => {
-				let result: AccountingResponse<Invoice>;
+				let result: InvoicesResponse;
 
 				beforeAll(async () => {
 					result = await xero.invoices.get();

@@ -1,4 +1,4 @@
-import { AccountingResponse, ContactGroup } from '../../interfaces/AccountingResponse';
+import { AccountingResponse, ContactGroup, ContactGroupsResponse } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -9,7 +9,7 @@ import { allContactGroups, createResponse } from './response-examples/contactgro
 describe('/contactgroups', () => {
 	describe('and getting', () => {
 		describe('all contact groups', () => {
-			let result: AccountingResponse<ContactGroup>;
+			let result: ContactGroupsResponse;
 			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {
@@ -46,7 +46,7 @@ describe('/contactgroups', () => {
 
 	describe('and creating', () => {
 		describe('a contact groups', () => {
-			let result: AccountingResponse<ContactGroup>;
+			let result: ContactGroupsResponse;
 			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {

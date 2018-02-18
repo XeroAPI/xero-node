@@ -1,4 +1,4 @@
-import { AccountingResponse, Invoice } from '../../interfaces/AccountingResponse';
+import { InvoicesResponse, Invoice } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -12,7 +12,7 @@ import { createInvoiceRequest } from './request-examples/invoice.request.example
 describe('/invoices', () => {
 	describe('and getting', () => {
 		describe('multiple invoices', () => {
-			let result: AccountingResponse<Invoice>;
+			let result: InvoicesResponse;
 			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {
@@ -57,7 +57,7 @@ describe('/invoices', () => {
 
 	describe('and creating', () => {
 		// TODO: This test actually mocks out the oauth lib and therefore runs all our code. We should migrate all tests to this?
-		let result: AccountingResponse<Invoice>;
+		let result: InvoicesResponse;
 		const inMemoryOAuth = new InMemoryOAuth();
 
 		beforeAll(async () => {
