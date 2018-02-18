@@ -37,6 +37,10 @@ export class XeroAPIClient {
 		}
 	}
 
+	private get<T>(endpoint: string, args?: any): Promise<T>{
+		return this._oauthClient.get<T>(endpoint, args);
+	}
+
 	public invoices = {
 		get: async (args?: any): Promise<AccountingResponse<Invoice>> => {
 			// TODO: Support invoice number
@@ -48,7 +52,7 @@ export class XeroAPIClient {
 			}
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
-			return this._oauthClient.get<AccountingResponse<Invoice>>(endpoint, args);
+			return this.get<AccountingResponse<Invoice>>(endpoint, args);
 		},
 		getPDF: async (args?: any): Promise<string> => {
 			// is a string when args.accept = application/pdf
@@ -64,7 +68,7 @@ export class XeroAPIClient {
 			}
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
-			return this._oauthClient.get<string>(endpoint, args);
+			return this.get<string>(endpoint, args);
 		},
 		create: async (invoice: Invoice, args?: any): Promise<AccountingResponse<Invoice>> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -86,7 +90,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
 
-			return this._oauthClient.get<AccountingResponse<ContactGroup>>(endpoint, args);
+			return this.get<AccountingResponse<ContactGroup>>(endpoint, args);
 		},
 		create: async (contactGroup: ContactGroup, args?: any): Promise<AccountingResponse<ContactGroup>> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
