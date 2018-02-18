@@ -5,6 +5,10 @@ import * as fs from 'fs';
 import { InMemoryOAuthClient } from './InMenoryOAuthClient';
 import { isUUID } from '../test-helpers';
 import { allContactGroups, createResponse } from './response-examples/contactgroups.response.examples';
+import { InMemoryOAuth } from './InMenoryOAuth';
+
+const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
+const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 describe('/contactgroups', () => {
 	describe('and getting', () => {
@@ -13,10 +17,6 @@ describe('/contactgroups', () => {
 			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {
-
-				const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
-				const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
-
 				inMemoryOAuthClient.returnsWithNextGet(allContactGroups);
 
 				const xeroClient = new XeroAPIClient({
@@ -50,10 +50,6 @@ describe('/contactgroups', () => {
 			const inMemoryOAuthClient = new InMemoryOAuthClient();
 
 			beforeAll(async () => {
-
-				const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
-				const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
-
 				inMemoryOAuthClient.returnsWithNextGet(createResponse);
 
 				const xeroClient = new XeroAPIClient({

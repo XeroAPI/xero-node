@@ -94,7 +94,7 @@ describe('/invoices', () => {
 		});
 
 		it('called the correct URL', () => {
-			inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/invoices');
+			inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/invoices?summarizeErrors=false');
 		});
 	});
 });

@@ -42,6 +42,25 @@ const createResponse = {
 	}
 };
 
+const createValidationResponse = {
+	ApiException: {
+		ErrorNumber: '10',
+		Type: 'ValidationException',
+		Message: 'A validation exception occurred',
+		Elements: {
+			DataContractBase: {
+				ValidationErrors: {
+					ValidationError: {
+						Message: 'A contact group with name \'Preferred Suppliers\' cannot be created. An contact group by that name already exists.'
+					}
+				},
+				ContactGroupID: '00000000-0000-0000-0000-000000000000',
+				Name: 'Preferred Suppliers',
+			}
+		}
+	}
+};
+
 export {
 	allContactGroups, createResponse
 };

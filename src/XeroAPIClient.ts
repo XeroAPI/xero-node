@@ -37,7 +37,7 @@ export class XeroAPIClient {
 		}
 	}
 
-	private get<T>(endpoint: string, args?: any): Promise<T>{
+	private get<T>(endpoint: string, args?: any): Promise<T> {
 		return this._oauthClient.get<T>(endpoint, args);
 	}
 
@@ -69,12 +69,12 @@ export class XeroAPIClient {
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
 			return this.get<string>(endpoint, args);
-		},
-		create: async (invoice: Invoice, args?: any): Promise<InvoicesResponse> => {
+		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
+		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: any): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
-			const endpoint = 'invoices';
+			const endpoint = 'invoices?summarizeErrors=false';
 
 			return this._oauthClient.put<InvoicesResponse>(endpoint, invoice, args);
 		},

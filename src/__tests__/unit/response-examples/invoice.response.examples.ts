@@ -255,11 +255,12 @@ const singleInvoice = {
 	]
 };
 
-const createInvoiceValidationError = {
-	ErrorNumber: 10,
-	Type: 'ValidationException',
-	Message: 'A validation exception occurred',
-	Elements: [
+const createInvoiceWithValidationError = {
+	Id: '83a0044f-bbf9-4242-a1df-00e9402fe6ea',
+	Status: 'OK',
+	ProviderName: 'Node - Private',
+	DateTimeUTC: '\/Date(1518938572217)\/',
+	Invoices: [
 		{
 			Type: 'IMNOTAREALTYPE',
 			InvoiceID: '00000000-0000-0000-0000-000000000000',
@@ -296,6 +297,7 @@ const createInvoiceValidationError = {
 				}
 			],
 			CurrencyCode: 'AUD',
+			StatusAttributeString: 'ERROR',
 			ValidationErrors: [
 				{
 					Message: 'Invoice not of valid type for creation'

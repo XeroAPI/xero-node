@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { Invoice, InvoicesResponse } from '../../interfaces/AccountingResponse';
 import { isUUID } from '../test-helpers';
-import { createInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
+import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
 
 const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
@@ -24,7 +24,7 @@ describe('phils integration tests', () => {
 				const invoiceLocation = (__dirname + '/invoice-result.pdf');
 
 				beforeAll(async () => {
-					const invoice = await xero.invoices.create(createInvoiceRequest);
+					const invoice = await xero.invoices.create(createSingleInvoiceRequest);
 					result = await xero.invoices.getPDF({ InvoiceId: invoice.Invoices[0].InvoiceID });
 					fs.writeFileSync(invoiceLocation, result, 'binary');
 				});
@@ -47,7 +47,7 @@ describe('phils integration tests', () => {
 				let result: InvoicesResponse;
 
 				beforeAll(async () => {
-					const invoice = await xero.invoices.create(createInvoiceRequest);
+					const invoice = await xero.invoices.create(createSingleInvoiceRequest);
 
 					result = await xero.invoices.get({ InvoiceId: invoice.Invoices[0].InvoiceID });
 				});
@@ -84,8 +84,38 @@ describe('phils integration tests', () => {
 					expect(result.Invoices.length).toBeGreaterThan(1);
 				});
 			});
+		});
+
+		describe('and creating', () => {
+			describe('multiple invoices', () => {
+				let multipleResult: InvoicesResponse = null;
+
+				beforeAll(async () => {
+					multipleResult = await xero.invoices.create(createMultipleInvoiceRequest);
+				});
+
+				it('successfully creates multiple at the sametime', () => {
+					expect(multipleResult.Invoices.length).toBe(2);
+					expect(isUUID(multipleResult.Invoices[0].InvoiceID)).toBeTruthy();
+					expect(isUUID(multipleResult.Invoices[1].InvoiceID)).toBeTruthy();
+				});
+			});
 
 		});
+
+		// describe('and validation errors', async () => {
+		// 	const invalidInvoice = createInvoiceRequest;
+		// 	invalidInvoice.Type = 'ImNotARealType';
+
+		// 	expect.assertions(1);
+
+		// 	try {
+		// 		await xero.invoices.create(invalidInvoice);
+
+		// 	} catch (error) {
+		// 		expect(error).toMatchObject({});
+		// 	}
+		// });
 
 	});
 });
