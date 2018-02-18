@@ -255,6 +255,59 @@ const singleInvoice = {
 	]
 };
 
+const createInvoiceValidationError = {
+	ErrorNumber: 10,
+	Type: 'ValidationException',
+	Message: 'A validation exception occurred',
+	Elements: [
+		{
+			Type: 'IMNOTAREALTYPE',
+			InvoiceID: '00000000-0000-0000-0000-000000000000',
+			Payments: [],
+			CreditNotes: [],
+			Prepayments: [],
+			Overpayments: [],
+			HasErrors: true,
+			IsDiscounted: false,
+			Contact: {
+				ContactID: '899985a6-f05c-40e7-a18b-28eb760df75b',
+				Name: 'Martin Hudson',
+				Addresses: [],
+				Phones: [],
+				ContactGroups: [],
+				ContactPersons: [],
+				HasValidationErrors: false,
+				ValidationErrors: []
+			},
+			DateString: '2018-02-15T00:00:00',
+			Date: '\/Date(1518652800000+0000)\/',
+			DueDateString: '2018-02-22T00:00:00',
+			DueDate: '\/Date(1519257600000+0000)\/',
+			Status: 'DRAFT',
+			LineAmountTypes: 'Exclusive',
+			LineItems: [
+				{
+					Description: 'Monthly rental for property at 56a Wilkins Avenue',
+					UnitAmount: 395.0,
+					AccountCode: '200',
+					Tracking: [],
+					Quantity: 4.3400,
+					ValidationErrors: []
+				}
+			],
+			CurrencyCode: 'AUD',
+			ValidationErrors: [
+				{
+					Message: 'Invoice not of valid type for creation'
+				},
+				{
+					Message: 'An error occurred in Xero. Check the API Status page http://status.developer.xero.com for current service status. Contact the API support team at api@xero.com for more assistance.'
+				}
+			]
+		}
+	]
+};
+
 export {
 	multipleInvoices,
 	singleInvoice
