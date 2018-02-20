@@ -10,6 +10,11 @@ export interface IXeroClientConfiguration {
 	userAgent?: string;
 }
 
+const API_BASE = 'https://api.xero.com';
+const API_BASE_PATH = '/api.xro/2.0/';
+const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
+const OAUTH_ACCESS_TOKEN_PATH = '/oauth/Authorize';
+
 export class XeroAPIClient {
 	private oauthToken: string;
 	private oauthSecret: string;
@@ -32,7 +37,12 @@ export class XeroAPIClient {
 				consumerKey: this.options.consumerKey,
 				consumerSecret: consumerSecret,
 				oauthToken: this.oauthToken,
-				oauthSecret: this.oauthSecret
+				oauthSecret: this.oauthSecret,
+				apiBaseUrl: API_BASE,
+				apiBasePath: API_BASE_PATH,
+				oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
+				oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH
+
 			}, this._oauth);
 		}
 	}

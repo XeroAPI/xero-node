@@ -1,17 +1,15 @@
 import { OAuth } from 'oauth';
 
-// TODO: Move this to XeroAPIClient
-const API_BASE = 'https://api.xero.com';
-const API_BASE_PATH = '/api.xro/2.0/';
-const OAUTH_BASE = 'https://api.xero.com';
-const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
-const OAUTH_ACCESS_TOKEN_PATH = '/oauth/Authorize';
-
 export interface IOAuthClientConfiguration {
 	consumerKey: string;
 	consumerSecret: string;
 	oauthToken: string;
 	oauthSecret: string;
+
+	apiBaseUrl: string;
+	apiBasePath: string;
+	oauthRequestTokenPath: string;
+	oauthAccessTokenPath: string;
 }
 
 export interface IOAuthClient {
@@ -32,13 +30,12 @@ export class OAuthClient implements IOAuthClient {
 		if (!this.oauth) {
 			this.oauth = this.oAuthFactory();
 		}
-
 	}
 
 	private oAuthFactory() {
 		return new OAuth(
-			OAUTH_BASE + OAUTH_REQUEST_TOKEN_PATH, 	// requestTokenUrl
-			OAUTH_BASE + OAUTH_ACCESS_TOKEN_PATH, 	// accessTokenUrl
+			this.options.apiBaseUrl + this.options.oauthRequestTokenPath, 	// requestTokenUrl
+			this.options.apiBaseUrl + this.options.oauthAccessTokenPath, 	// accessTokenUrl
 			this.options.consumerKey, 				// consumerKey
 			this.options.consumerSecret,							// consumerSecret
 			'1.0A',									// version
@@ -58,8 +55,8 @@ export class OAuthClient implements IOAuthClient {
 		// TODO: Refactor duplication out this is for PDF
 		if (args && args.Accept) {
 			const oauth = new OAuth(
-				OAUTH_BASE + OAUTH_REQUEST_TOKEN_PATH, 	// requestTokenUrl
-				OAUTH_BASE + OAUTH_ACCESS_TOKEN_PATH, 	// accessTokenUrl
+				this.options.apiBaseUrl + this.options.oauthRequestTokenPath, 	// requestTokenUrl
+				this.options.apiBaseUrl + this.options.oauthAccessTokenPath, 	// accessTokenUrl
 				this.options.consumerKey, 				// consumerKey
 				this.options.consumerSecret,							// consumerSecret
 				'1.0A',									// version
@@ -74,7 +71,7 @@ export class OAuthClient implements IOAuthClient {
 
 			return new Promise<T>((resolve, reject) => {
 				const request = oauth.get(
-					API_BASE + API_BASE_PATH + endpoint,	// url
+					this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
 					this.options.oauthToken,						// oauth_token
 					this.options.oauthSecret);
 
@@ -95,7 +92,7 @@ export class OAuthClient implements IOAuthClient {
 
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.get(
-				API_BASE + API_BASE_PATH + endpoint,	// url
+				this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
 				this.options.oauthToken,						// oauth_token
 				this.options.oauthSecret,						// oauth_token_secret
 				(err: object, data: string, httpResponse: any) => {
@@ -122,7 +119,7 @@ export class OAuthClient implements IOAuthClient {
 		// this.checkAuthentication();
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.put(
-				API_BASE + API_BASE_PATH + endpoint,	// url
+				this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
 				this.options.oauthToken,				// oauth_token
 				this.options.oauthSecret,				// oauth_token_secret
 				JSON.stringify(body), 		// Had to do this not sure if there is another way
@@ -151,7 +148,7 @@ export class OAuthClient implements IOAuthClient {
 		// this.checkAuthentication();
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.delete(
-				API_BASE + API_BASE_PATH + endpoint,	// url
+				this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
 				this.options.oauthToken,				// oauth_token
 				this.options.oauthSecret,				// oauth_token_secret
 				(err: any, data: string, httpResponse: any) => {
