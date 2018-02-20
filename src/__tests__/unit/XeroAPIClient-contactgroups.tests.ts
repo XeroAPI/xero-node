@@ -75,7 +75,7 @@ describe('/contactgroups', () => {
 			});
 
 			it('called the correct URL', () => {
-				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/contactgroups');
+				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/contactgroups?summarizeErrors=false');
 			});
 		});
 
