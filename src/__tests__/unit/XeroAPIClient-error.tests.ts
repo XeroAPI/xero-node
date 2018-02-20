@@ -8,6 +8,7 @@ import { singleInvoice } from './response-examples/invoice.response.examples';
 describe('client', () => {
 	describe('and private key errors', () => {
 		it('throws when using invalid private key', () => {
+			// TODO: Needed or nah?
 		});
 	});
 

@@ -16,106 +16,104 @@ const xero = new XeroAPIClient({
 	privateKey: privateKey
 });
 
-describe('phils integration tests', () => {
-	describe('/invoices', () => {
-		describe('and GETing', () => {
-			describe('a single invoice as PDF', () => {
-				let result: string;
-				const invoiceLocation = (__dirname + '/invoice-result.pdf');
+describe('/invoices integration tests', () => {
+	describe('and GETing', () => {
+		describe('a single invoice as PDF', () => {
+			let result: string;
+			const invoiceLocation = (__dirname + '/invoice-result.pdf');
 
-				beforeAll(async () => {
-					const invoice = await xero.invoices.create(createSingleInvoiceRequest);
-					result = await xero.invoices.getPDF({ InvoiceId: invoice.Invoices[0].InvoiceID });
-					fs.writeFileSync(invoiceLocation, result, 'binary');
-				});
-
-				it('the invoice is defined', () => {
-					expect(result).not.toBeNull();
-				});
-
-				it('invoice can be saved as local file', async () => {
-					const invoiceBuffer = fs.readFileSync(invoiceLocation);
-					expect(invoiceBuffer.byteLength).toBeGreaterThan(5000); // Lets hopw all PDFs a bigger than 5000
-				});
-
-				it('invoice is then deleted', () => {
-					fs.unlinkSync(invoiceLocation);
-				});
+			beforeAll(async () => {
+				const invoice = await xero.invoices.create(createSingleInvoiceRequest);
+				result = await xero.invoices.getPDF({ InvoiceId: invoice.Invoices[0].InvoiceID });
+				fs.writeFileSync(invoiceLocation, result, 'binary');
 			});
 
-			describe('a single invoices', () => {
-				let result: InvoicesResponse;
-
-				beforeAll(async () => {
-					const invoice = await xero.invoices.create(createSingleInvoiceRequest);
-
-					result = await xero.invoices.get({ InvoiceId: invoice.Invoices[0].InvoiceID });
-				});
-
-				it('the invoice is defined', () => {
-					expect(result).not.toBeNull();
-				});
-
-				it('invoice.Id is a Guid and is actually the Id of the request', async () => {
-					expect(isUUID(result.Id)).toBeTruthy();
-				});
-
-				it('invoice[0].InvoiceID is a Guid', async () => {
-					expect(isUUID(result.Invoices[0].InvoiceID)).toBeTruthy();
-				});
+			it('the invoice is defined', () => {
+				expect(result).not.toBeNull();
 			});
 
-			describe('multiple invoices', () => {
-				let result: InvoicesResponse;
+			it('invoice can be saved as local file', async () => {
+				const invoiceBuffer = fs.readFileSync(invoiceLocation);
+				expect(invoiceBuffer.byteLength).toBeGreaterThan(5000); // Lets hopw all PDFs a bigger than 5000
+			});
 
-				beforeAll(async () => {
-					result = await xero.invoices.get();
-				});
-
-				it('the response is defined', () => {
-					expect(result).not.toBeNull();
-				});
-
-				it('response.Id is a Guid and is actually the Id of the request', async () => {
-					expect(isUUID(result.Id)).toBeTruthy();
-				});
-
-				it('there is more than one invoice', async () => {
-					expect(result.Invoices.length).toBeGreaterThan(1);
-				});
+			it('invoice is then deleted', () => {
+				fs.unlinkSync(invoiceLocation);
 			});
 		});
 
-		describe('and creating', () => {
-			describe('multiple invoices', () => {
-				let multipleResult: InvoicesResponse = null;
+		describe('a single invoices', () => {
+			let result: InvoicesResponse;
 
-				beforeAll(async () => {
-					multipleResult = await xero.invoices.create(createMultipleInvoiceRequest);
-				});
+			beforeAll(async () => {
+				const invoice = await xero.invoices.create(createSingleInvoiceRequest);
 
-				it('successfully creates multiple at the sametime', () => {
-					expect(multipleResult.Invoices.length).toBe(2);
-					expect(isUUID(multipleResult.Invoices[0].InvoiceID)).toBeTruthy();
-					expect(isUUID(multipleResult.Invoices[1].InvoiceID)).toBeTruthy();
-				});
+				result = await xero.invoices.get({ InvoiceId: invoice.Invoices[0].InvoiceID });
 			});
 
+			it('the invoice is defined', () => {
+				expect(result).not.toBeNull();
+			});
+
+			it('invoice.Id is a Guid and is actually the Id of the request', async () => {
+				expect(isUUID(result.Id)).toBeTruthy();
+			});
+
+			it('invoice[0].InvoiceID is a Guid', async () => {
+				expect(isUUID(result.Invoices[0].InvoiceID)).toBeTruthy();
+			});
 		});
 
-		// describe('and validation errors', async () => {
-		// 	const invalidInvoice = createInvoiceRequest;
-		// 	invalidInvoice.Type = 'ImNotARealType';
+		describe('multiple invoices', () => {
+			let result: InvoicesResponse;
 
-		// 	expect.assertions(1);
+			beforeAll(async () => {
+				result = await xero.invoices.get();
+			});
 
-		// 	try {
-		// 		await xero.invoices.create(invalidInvoice);
+			it('the response is defined', () => {
+				expect(result).not.toBeNull();
+			});
 
-		// 	} catch (error) {
-		// 		expect(error).toMatchObject({});
-		// 	}
-		// });
+			it('response.Id is a Guid and is actually the Id of the request', async () => {
+				expect(isUUID(result.Id)).toBeTruthy();
+			});
+
+			it('there is more than one invoice', async () => {
+				expect(result.Invoices.length).toBeGreaterThan(1);
+			});
+		});
+	});
+
+	describe('and creating', () => {
+		describe('multiple invoices', () => {
+			let multipleResult: InvoicesResponse = null;
+
+			beforeAll(async () => {
+				multipleResult = await xero.invoices.create(createMultipleInvoiceRequest);
+			});
+
+			it('successfully creates multiple at the sametime', () => {
+				expect(multipleResult.Invoices.length).toBe(2);
+				expect(isUUID(multipleResult.Invoices[0].InvoiceID)).toBeTruthy();
+				expect(isUUID(multipleResult.Invoices[1].InvoiceID)).toBeTruthy();
+			});
+		});
 
 	});
+
+	// describe('and validation errors', async () => {
+	// 	const invalidInvoice = createInvoiceRequest;
+	// 	invalidInvoice.Type = 'ImNotARealType';
+
+	// 	expect.assertions(1);
+
+	// 	try {
+	// 		await xero.invoices.create(invalidInvoice);
+
+	// 	} catch (error) {
+	// 		expect(error).toMatchObject({});
+	// 	}
+	// });
+
 });
