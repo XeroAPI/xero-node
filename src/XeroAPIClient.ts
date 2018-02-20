@@ -111,6 +111,8 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupId;
 			}
 
+			endpoint += '?summarizeErrors=false';
+
 			return this._oauthClient.put<ContactGroupsResponse>(endpoint, contactGroup, args);
 		},
 		// TODO: This is actually delete the CONTACT on contactgroup
