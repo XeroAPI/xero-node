@@ -29,7 +29,6 @@ export interface Invoice {
 	AmountPaid?: number;
 	AmountCredited?: number;
 	SentToContact?: boolean;
-	HasErrors?: boolean;
 	IsDiscounted?: boolean;
 	HasAttachments?: boolean;
 	Attachments?: any[];
@@ -46,7 +45,16 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
+	ValidationErrors?: ValidationError[]
+	HasErrors?: boolean;
 }
+
+// TODO: Are last two common therefore we can put on common interface?
+
+export interface ValidationError {
+	message: string;
+}
+
 export interface Contact {
 	ContactID?: string;
 	ContactStatus?: string;

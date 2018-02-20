@@ -8,7 +8,8 @@
     "build-watch": "tsc --watch",
     "lint": "tslint ./src/**/*.ts",
     "test-watch": "jest --config ./jestconfig.js --watch",
-    "test": "jest --config ./jestconfig.js"
+    "test": "jest --config ./jestconfig.js",
+    "scratch": "ts-node ./src/scratch.ts --watch"
   },
   "author": "Xero <api@xero.com>",
   "repository": "https://github.com/dupski/node-xero.git",
