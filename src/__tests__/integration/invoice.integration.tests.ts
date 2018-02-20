@@ -9,6 +9,7 @@ import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../uni
 const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
+// TODO: Let them pass in the privateKey and privateKey path
 const data = require('./config.json');
 const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
 
