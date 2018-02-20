@@ -6,7 +6,11 @@ describe('OAuthClient', () => {
 		consumerKey: 'ck',
 		consumerSecret: 'cs',
 		oauthSecret: 'os',
-		oauthToken: 'ot'
+		oauthToken: 'ot',
+		apiBaseUrl: 'abu',
+		apiBasePath: 'abp',
+		oauthRequestTokenPath: 'ortp',
+		oauthAccessTokenPath: 'oatp'
 	};
 
 	describe('when it errors', () => {
