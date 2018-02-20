@@ -9,12 +9,8 @@ import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../uni
 const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
-const xero = new XeroAPIClient({
-	appType: 'private',
-	consumerKey: 'I5Y2QCJQA5GOHXCXEC9ZOMNHK8FMUE',
-	consumerSecret: 'BTONRDFRULI7WSDNFWVTARWNOSPRUC',
-	privateKey: privateKey
-});
+const data = require('./config.json');
+const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
 
 describe('/invoices integration tests', () => {
 	describe('and GETing', () => {
