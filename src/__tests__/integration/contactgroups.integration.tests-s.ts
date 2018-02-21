@@ -87,6 +87,8 @@ describe('/contactgroups inegration tests', () => {
 				expect(getResult.ContactGroups[0].Contacts.length).toBe(0);
 				expect(getResult.ContactGroups[0].Status).toBe('ACTIVE');
 			});
+
+			// TODO: Delete the CG by updating it's status to DELETED
 		});
 
 	});

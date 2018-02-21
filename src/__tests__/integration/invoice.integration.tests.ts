@@ -48,6 +48,7 @@ describe('/invoices integration tests', () => {
 				result = await xero.invoices.get({ InvoiceId: invoice.Invoices[0].InvoiceID });
 			});
 
+			// TODO: Make these tests generic and paramatised so that we can reuse across multiple endpoints
 			it('the invoice is defined', () => {
 				expect(result).not.toBeNull();
 			});

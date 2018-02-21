@@ -23,6 +23,8 @@ export interface Invoice {
 	InvoiceNumber?: string;
 	Reference?: string;
 	Prepayments?: any[];
+	Payments?: any[];
+	CreditNotes?: any[];
 	Overpayments?: any[];
 	CISDeduction?: number;
 	AmountDue?: number;
@@ -45,6 +47,7 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
+	StatusAttributeString?: string, // Have asked Arr about this
 	ValidationErrors?: ValidationError[]
 	HasErrors?: boolean;
 }
