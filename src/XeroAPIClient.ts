@@ -1,5 +1,5 @@
 import { OAuthClient, IOAuthClient } from './OAuthClient';
-import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse } from './interfaces/AccountingResponse';
+import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency } from './interfaces/AccountingResponse';
 
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
@@ -129,6 +129,17 @@ export class XeroAPIClient {
 			}
 
 			return this._oauthClient.delete<ContactGroupsResponse>(endpoint, args);
+		}
+	};
+
+	public currencies = {
+		get: async (args?: any): Promise<CurrenciesResponse> => {
+			const endpoint = 'currencies';
+			return this.get<CurrenciesResponse>(endpoint, args);
+		},
+		create: async (currency: Currency, args?: any): Promise<CurrenciesResponse> => {
+			const endpoint = 'currencies';
+			return this._oauthClient.put<CurrenciesResponse>(endpoint, currency);
 		}
 	};
 
