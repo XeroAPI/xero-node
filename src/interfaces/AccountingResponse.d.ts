@@ -10,6 +10,10 @@ export interface ContactsResponse extends AccountingResponse {
 	Contacts: Contact[];
 }
 
+export interface CurrenciesResponse extends AccountingResponse {
+	Currencies: Currency[];
+}
+
 interface AccountingResponse {
 	Id: string;
 	Status: string;
@@ -47,8 +51,8 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
-	StatusAttributeString?: string, // Have asked Arr about this
-	ValidationErrors?: ValidationError[]
+	StatusAttributeString?: string; // Have asked Arr about this
+	ValidationErrors?: ValidationError[];
 	HasErrors?: boolean;
 }
 
@@ -92,6 +96,11 @@ export interface ContactGroup {
 	Status?: string;
 	Contacts?: Contact[];
 	HasValidationErrors?: boolean;
+}
+
+export interface Currency {
+	Code?: string;
+	Description: string;
 }
 
 export interface Address {
