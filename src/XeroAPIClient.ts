@@ -135,7 +135,7 @@ export class XeroAPIClient {
 	public currencies = {
 		get: async (args?: any): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
-			return this.get<any>(endpoint, args);
+			return this.get<CurrenciesResponse>(endpoint, args);
 		},
 		create: async (currency: Currency, args?: any): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';

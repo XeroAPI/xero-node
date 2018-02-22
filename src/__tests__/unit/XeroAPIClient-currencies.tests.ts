@@ -11,7 +11,7 @@ const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 describe('/contactgroups', () => {
 	describe('and getting', () => {
-		describe('all contact groups', () => {
+		describe('all currencies', () => {
 			let result: CurrenciesResponse;
 			const inMemoryOAuth = new InMemoryOAuth();
 
@@ -44,7 +44,7 @@ describe('/contactgroups', () => {
 	});
 
 	describe('and creating', () => {
-		describe('a contact groups', () => {
+		describe('a currency', () => {
 			let result: CurrenciesResponse;
 			const inMemoryOAuth = new InMemoryOAuth();
 
