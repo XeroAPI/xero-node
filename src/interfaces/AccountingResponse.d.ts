@@ -100,7 +100,7 @@ export interface ContactGroup {
 
 export interface Currency {
 	Code?: string;
-	Description: string;
+	Description?: string;
 }
 
 export interface Address {
