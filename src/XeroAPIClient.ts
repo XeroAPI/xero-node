@@ -51,6 +51,10 @@ export class XeroAPIClient {
 		return this._oauthClient.get<T>(endpoint, args);
 	}
 
+	private post<T>(endpoint: string, args?: any): Promise<T> {
+		return this._oauthClient.post<T>(endpoint, args);
+	}
+
 	public invoices = {
 		get: async (args?: any): Promise<InvoicesResponse> => {
 			// TODO: Support invoice number
