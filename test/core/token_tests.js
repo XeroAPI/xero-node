@@ -171,15 +171,24 @@ describe('get access for public or partner application', () => {
           done();
         } else {
           // Only supported for Partner integrations
+          let old_accessToken = currentApp.options.accessToken;
+          let old_accessSecret = currentApp.options.accessSecret;
+          let old_sessionHandle = currentApp.options.sessionHandle;
+
           currentApp
             .refreshAccessToken()
             .then(() => {
+              debugger;
               expect(currentApp.options.accessToken).to.not.equal(undefined);
               expect(currentApp.options.accessToken).to.not.equal('');
               expect(currentApp.options.accessSecret).to.not.equal(undefined);
               expect(currentApp.options.accessSecret).to.not.equal('');
               expect(currentApp.options.sessionHandle).to.not.equal(undefined);
               expect(currentApp.options.sessionHandle).to.not.equal('');
+
+              expect(currentApp.options.accessToken).to.not.equal(old_accessToken);
+              expect(currentApp.options.accessSecret).to.not.equal(old_accessSecret);
+              expect(currentApp.options.sessionHandle).to.equal(old_sessionHandle);
 
               expect(spy.called).to.equal(true);
               done();
