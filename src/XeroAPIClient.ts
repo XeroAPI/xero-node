@@ -1,5 +1,5 @@
 import { OAuthClient, IOAuthClient } from './OAuthClient';
-import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency } from './interfaces/AccountingResponse';
+import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse } from './interfaces/AccountingResponse';
 
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
@@ -144,6 +144,39 @@ export class XeroAPIClient {
 		create: async (currency: Currency, args?: any): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
 			return this._oauthClient.put<CurrenciesResponse>(endpoint, currency);
+		}
+	};
+
+	public contacts = {
+		get: async (args?: any): Promise<ContactsResponse> => {
+			const endpoint = 'contacts';
+			return this.get<ContactsResponse>(endpoint, args);
+		}
+	};
+
+	public reports = {
+		get: async (args?: any): Promise<any> => {
+			let endpoint = 'Reports';
+			if (!args || !args.ReportID) {
+				throw Error('required args: ReportID');
+			}
+			if ((args.ReportID == 'AgedPayablesByContact' || args.ReportID == 'AgedReceivablesByContact') && !args.ContactID) {
+				throw Error('required args for AgedPayablesByContact report: ContactID');
+			}
+			if (args.ReportID == 'BankStatement' && !args.bankAccountID) {
+				throw Error('required args for BankStatement report: bankAccountID');
+			}
+
+			// TODO construct query string in a shared function
+			const query = Object.keys(args).map((key: string) => {
+				if (key != 'ReportID' && key != 'Accept') {
+					return key + '=' + args[key];
+				}
+			}).filter((x) => x).join('&');
+
+			endpoint = endpoint + '/' + args.ReportID + '?' + query;
+
+			return this.get<any>(endpoint, args);
 		}
 	};
 
