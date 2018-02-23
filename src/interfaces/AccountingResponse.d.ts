@@ -14,6 +14,10 @@ export interface CurrenciesResponse extends AccountingResponse {
 	Currencies: Currency[];
 }
 
+export interface EmployeesResponse extends Employee {
+	Employees: Employee[];
+}
+
 interface AccountingResponse {
 	Id: string;
 	Status: string;
@@ -138,4 +142,10 @@ export interface Tracking {
 	Option?: string;
 	TrackingCategoryID?: string;
 	TrackingOptionID?: string;
+}
+export interface Employee {
+	Status?: "Active" | "Archive";
+	FirstName: string;
+	LastName: string;
+	ExternalLink?: any
 }
