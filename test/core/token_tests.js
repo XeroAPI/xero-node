@@ -178,7 +178,6 @@ describe('get access for public or partner application', () => {
           currentApp
             .refreshAccessToken()
             .then(() => {
-              debugger;
               expect(currentApp.options.accessToken).to.not.equal(undefined);
               expect(currentApp.options.accessToken).to.not.equal('');
               expect(currentApp.options.accessSecret).to.not.equal(undefined);
