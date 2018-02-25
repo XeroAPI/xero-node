@@ -9,7 +9,7 @@ import { InMemoryOAuth } from './InMenoryOAuth';
 const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
-describe('/contactgroups', () => {
+describe('/currencies', () => {
 	describe('and getting', () => {
 		describe('all currencies', () => {
 			let result: CurrenciesResponse;

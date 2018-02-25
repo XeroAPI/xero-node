@@ -16,6 +16,7 @@ export interface IOAuthClient {
 	get<T>(endpoint: string, args?: any): Promise<T>;
 	delete<T>(endpoint: string, args?: any): Promise<T>;
 	put<T>(endpoint: string, body: object, args?: any): Promise<T>;
+	post<T>(endpoint: string, body: object, args?: any): Promise<T>;
 }
 
 // TODO: Do we call this?
@@ -52,6 +53,7 @@ export class OAuthClient implements IOAuthClient {
 	public async get<T>(endpoint: string, args?: any): Promise<T> {
 		// this.checkAuthentication();
 
+		// TODO make this accept Accept: application/json
 		// TODO: Refactor duplication out this is for PDF
 		if (args && args.Accept) {
 			const oauth = new OAuth(
@@ -119,6 +121,35 @@ export class OAuthClient implements IOAuthClient {
 		// this.checkAuthentication();
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.put(
+				this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
+				this.options.oauthToken,				// oauth_token
+				this.options.oauthSecret,				// oauth_token_secret
+				JSON.stringify(body), 		// Had to do this not sure if there is another way
+				'application/json',
+				(err: any, data: string, httpResponse: any) => {
+					// data is the body of the response
+
+					if (err) {
+						const toReturn: IHttpError = {
+							statusCode: httpResponse.statusCode,
+							body: data
+						};
+						reject(toReturn);
+					} else {
+						const toReturn = JSON.parse(data) as T;
+						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
+						return resolve(toReturn);
+					}
+				}
+			);
+
+		});
+	}
+
+	public async post<T>(endpoint: string, body: object, args?: any): Promise<T> {
+		// this.checkAuthentication();
+		return new Promise<T>((resolve, reject) => {
+			this.oauth.post(
 				this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
 				this.options.oauthToken,				// oauth_token
 				this.options.oauthSecret,				// oauth_token_secret
