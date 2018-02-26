@@ -31,6 +31,10 @@ export class XeroAPIClient {
 			this.oauthSecret = this.options.privateKey;
 			consumerSecret = this.options.privateKey;
 		}
+		else if (this.options.appType == 'public') {
+			// this.oauthToken = this.options.consumerKey;
+			// this.oauthSecret = this.options.privateKey;
+		}
 
 		if (!this._oauthClient) {
 			this._oauthClient = new OAuthClient({
@@ -46,6 +50,12 @@ export class XeroAPIClient {
 			}, this._oauth);
 		}
 	}
+
+	public oauth10a = {
+		getUnauthorisedRequestToken: async () => this._oauthClient.getUnauthorisedRequestToken(),
+		buildAuthorizeUrl: (unauthorisedRequestToken: string) => `https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`,
+		getAccessToken: (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<string> => this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier)
+	};
 
 	private get<T>(endpoint: string, args?: any): Promise<T> {
 		return this._oauthClient.get<T>(endpoint, args);
