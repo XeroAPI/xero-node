@@ -54,7 +54,11 @@ export class XeroAPIClient {
 	public oauth10a = {
 		getUnauthorisedRequestToken: async () => this._oauthClient.getUnauthorisedRequestToken(),
 		buildAuthorizeUrl: (unauthorisedRequestToken: string) => `https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`,
-		getAccessToken: (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<string> => this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier)
+		getAccessToken: (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
+			const token = this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier);
+			// Set token store
+			return token;
+		}
 	};
 
 	private get<T>(endpoint: string, args?: any): Promise<T> {
