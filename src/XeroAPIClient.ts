@@ -55,6 +55,14 @@ export class XeroAPIClient {
 		return this._oauthClient.post<T>(endpoint, body, args);
 	}
 
+	private put<T>(endpoint: string, body?: object, args?: any): Promise<T> {
+		return this._oauthClient.put<T>(endpoint, body, args);
+	}
+
+	private delete<T>(endpoint: string, body?: object, args?: any): Promise<T> {
+		return this._oauthClient.delete<T>(endpoint, args);
+	}
+
 	public accounts = {
 		get: async (args?: any): Promise<AccountsResponse> => {
 			// TODO: Support for where arg
@@ -104,7 +112,7 @@ export class XeroAPIClient {
 			// TODO: Summerize errors?
 			const endpoint = 'invoices?summarizeErrors=false';
 
-			return this._oauthClient.put<InvoicesResponse>(endpoint, invoice, args);
+			return this.put<InvoicesResponse>(endpoint, invoice, args);
 		},
 	};
 
@@ -131,7 +139,7 @@ export class XeroAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this._oauthClient.put<ContactGroupsResponse>(endpoint, contactGroup, args);
+			return this.put<ContactGroupsResponse>(endpoint, contactGroup, args);
 		},
 		update: async (contactGroup: ContactGroup, args?: any): Promise<ContactGroupsResponse> => {
 			let endpoint = 'contactgroups';
@@ -141,7 +149,7 @@ export class XeroAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this._oauthClient.post<ContactGroupsResponse>(endpoint, contactGroup, args);
+			return this.post<ContactGroupsResponse>(endpoint, contactGroup, args);
 		},
 		// TODO: This is actually delete the CONTACT on contactgroup
 		deleteContacts: async (args?: any): Promise<ContactGroupsResponse> => {
@@ -156,7 +164,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactID;
 			}
 
-			return this._oauthClient.delete<ContactGroupsResponse>(endpoint, args);
+			return this.delete<ContactGroupsResponse>(endpoint, args);
 		}
 	};
 
@@ -167,7 +175,7 @@ export class XeroAPIClient {
 		},
 		create: async (currency: Currency, args?: any): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
-			return this._oauthClient.put<CurrenciesResponse>(endpoint, currency);
+			return this.put<CurrenciesResponse>(endpoint, currency);
 		}
 	};
 
@@ -199,6 +207,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ReportID + '?' + query;
 			}
 
+			// TODO: Add interface here
 			return this.get<any>(endpoint, args);
 		}
 	};
@@ -206,11 +215,8 @@ export class XeroAPIClient {
 	public purchaseorders = {
 		post: async (body?: object, args?: any): Promise<any> => {
 			const endpoint = 'purchaseorders?summarizeErrors=true';
+			// TODO: Add interface here
 			return this.post<any>(endpoint, body, args);
 		}
 	};
-
-	// private checkAuthentication() {
-	// 	// TODO
-	// }
 }
