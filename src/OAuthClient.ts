@@ -41,7 +41,7 @@ export class OAuthClient implements IOAuthClient {
 			this.options.consumerSecret,							// consumerSecret
 			'1.0A',									// version
 			null,									// authorize_callback
-			'RSA-SHA1',								// signatureMethod
+			'RSA-SHA1',								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. ""HMAC-SHA1" for public
 			null,									// nonceSize
 			{										// customHeaders
 				'Accept': 'application/json',

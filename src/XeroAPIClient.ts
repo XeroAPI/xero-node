@@ -13,7 +13,7 @@ export interface IXeroClientConfiguration {
 const API_BASE = 'https://api.xero.com';
 const API_BASE_PATH = '/api.xro/2.0/';
 const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
-const OAUTH_ACCESS_TOKEN_PATH = '/oauth/Authorize';
+const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
 
 export class XeroAPIClient {
 	private oauthToken: string;
@@ -152,7 +152,7 @@ export class XeroAPIClient {
 			return this.post<ContactGroupsResponse>(endpoint, contactGroup, args);
 		},
 		contacts: {
-			delete: async (args: { ContactGroupID: string, ContactID?: string}): Promise<ContactGroupsResponse> => {
+			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactGroupsResponse> => {
 				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 				// TODO: Support for where arg
 				// TODO: Summerize errors?
