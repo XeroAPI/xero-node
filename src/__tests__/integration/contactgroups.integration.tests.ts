@@ -78,7 +78,7 @@ describe('/contactgroups integration tests', () => {
 				// TODO: Add contact to group
 				const id = createResult.ContactGroups[0].ContactGroupID;
 
-				const deleteResult = await xero.contactgroups.deleteContacts({ ContactGroupID: id });
+				const deleteResult = await xero.contactgroups.contacts.delete({ ContactGroupID: id });
 				// TODO: What do we want the delete result to be?
 				expect(deleteResult).toBeNull();
 
