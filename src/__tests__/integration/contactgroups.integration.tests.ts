@@ -11,7 +11,7 @@ const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 const data = require('./config.json');
 const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
 
-describe('/contactgroups inegration tests', () => {
+describe('/contactgroups integration tests', () => {
 
 	describe('and GETing', () => {
 
@@ -35,9 +35,9 @@ describe('/contactgroups inegration tests', () => {
 			});
 		});
 
-		describe('and Creating and Getting', () => {
+		describe('and Creating and Getting, then deleting', () => {
 
-			let result: ContactGroupsResponse = null;
+			let createResult: ContactGroupsResponse = null;
 			const uniqueName = 'NewContactGroup' + new Date().getTime();
 
 			beforeAll(async () => {
@@ -46,25 +46,24 @@ describe('/contactgroups inegration tests', () => {
 					Status: 'ACTIVE'
 				};
 
-				result = await xero.contactgroups.create(contactGroup);
+				createResult = await xero.contactgroups.create(contactGroup);
 			});
 
 			it('can be retrieved', async () => {
-				const id = result.ContactGroups[0].ContactGroupID;
+				const id = createResult.ContactGroups[0].ContactGroupID;
 				const response = await xero.contactgroups.get({ ContactGroupID: id });
 				expect(response.ContactGroups[0].Name).toBe(uniqueName);
 			});
 
 			it('result is defined', () => {
-				expect(result).not.toBeNull();
+				expect(createResult).not.toBeNull();
 			});
 
 			it('we have a new ContactGroupID', () => {
-				expect(isUUID(result.ContactGroups[0].ContactGroupID)).toBeTruthy();
+				expect(isUUID(createResult.ContactGroups[0].ContactGroupID)).toBeTruthy();
 			});
 
 			it('404 throws and error as expected when contactgoup does not exist', async () => {
-				// TODO: Add contact to group
 				expect.assertions(2);
 
 				try {
@@ -77,7 +76,7 @@ describe('/contactgroups inegration tests', () => {
 
 			it('when deleting all contacts, then all contacts are gone', async () => {
 				// TODO: Add contact to group
-				const id = result.ContactGroups[0].ContactGroupID;
+				const id = createResult.ContactGroups[0].ContactGroupID;
 
 				const deleteResult = await xero.contactgroups.deleteContacts({ ContactGroupID: id });
 				// TODO: What do we want the delete result to be?
@@ -88,7 +87,24 @@ describe('/contactgroups inegration tests', () => {
 				expect(getResult.ContactGroups[0].Status).toBe('ACTIVE');
 			});
 
-			// TODO: Delete the CG by updating it's status to DELETED
+			it('deletes the contact group', async () => {
+				expect.assertions(5);
+				createResult.ContactGroups[0].Status = 'DELETED';
+
+				const deleteResult = await xero.contactgroups
+					.update(createResult.ContactGroups[0]);
+
+				expect(deleteResult).not.toBeNull();
+				expect(deleteResult.ContactGroups.length).toBe(1);
+				expect(deleteResult.ContactGroups[0].Status).toBe('DELETED');
+				expect(deleteResult.ContactGroups[0].ContactGroupID).toBe(createResult.ContactGroups[0].ContactGroupID);
+
+				try {
+					const getResult = await xero.contactgroups.get({ ContactGroupID: createResult.Id });
+				} catch (error) {
+					expect(error.statusCode).toBe(404);
+				}
+			});
 		});
 
 	});

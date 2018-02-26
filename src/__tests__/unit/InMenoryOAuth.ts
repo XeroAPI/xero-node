@@ -21,6 +21,17 @@ export class InMemoryOAuth {
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
+	public post(
+		url: string,
+		oauthToken: string,
+		oauthSecret: string,
+		body: any,
+		contentType: string,
+		callback: (err: any, data: string, httpResponse: any) => void) {
+		this.lastCalledUrl = url;
+		callback(this.returnErr, this.returnData, this.returnHttpResponse);
+	}
+
 	public delete(
 		url: string,
 		oauthToken: string,

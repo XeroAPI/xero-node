@@ -61,6 +61,14 @@ const createValidationResponse = {
 	}
 };
 
+const updateDeleted = {
+	ContactGroups: [{
+		ContactGroupID: '4ceb0357-73ba-45e4-a288-57418e0a3587',
+		Name: 'NewContactGroup1518685751864',
+		Status: 'DELETED'
+	}]
+};
+
 export {
-	allContactGroups, createResponse
+	allContactGroups, createResponse, updateDeleted
 };
