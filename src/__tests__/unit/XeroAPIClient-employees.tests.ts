@@ -1,4 +1,3 @@
-import { Employee } from './../../interfaces/AccountingResponse.d';
 import { AccountingResponse, Employee, EmployeesResponse } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';

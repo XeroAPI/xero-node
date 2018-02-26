@@ -144,8 +144,8 @@ export interface Tracking {
 	TrackingOptionID?: string;
 }
 export interface Employee {
-	Status?: "Active" | "Archive";
+	Status?: 'Active' | 'Archive';
 	FirstName: string;
 	LastName: string;
-	ExternalLink?: any
+	ExternalLink?: any;
 }
