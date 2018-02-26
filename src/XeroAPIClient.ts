@@ -1,5 +1,5 @@
 import { OAuthClient, IOAuthClient } from './OAuthClient';
-import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse } from './interfaces/AccountingResponse';
+import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse } from './interfaces/AccountingResponse';
 
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
@@ -51,9 +51,23 @@ export class XeroAPIClient {
 		return this._oauthClient.get<T>(endpoint, args);
 	}
 
-	private post<T>(endpoint: string, args?: any): Promise<T> {
-		return this._oauthClient.post<T>(endpoint, args);
+	private post<T>(endpoint: string, body?: object, args?: any): Promise<T> {
+		return this._oauthClient.post<T>(endpoint, body, args);
 	}
+
+	public accounts = {
+		get: async (args?: any): Promise<AccountsResponse> => {
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			let endpoint = 'accounts';
+			if (args && args.AccountID) {
+				endpoint = endpoint + '/' + args.AccountID;
+			}
+
+			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
+			return this.get<AccountsResponse>(endpoint, args);
+		}
+	};
 
 	public invoices = {
 		get: async (args?: any): Promise<InvoicesResponse> => {
@@ -157,26 +171,32 @@ export class XeroAPIClient {
 	public reports = {
 		get: async (args?: any): Promise<any> => {
 			let endpoint = 'Reports';
-			if (!args || !args.ReportID) {
-				throw Error('required args: ReportID');
-			}
-			if ((args.ReportID == 'AgedPayablesByContact' || args.ReportID == 'AgedReceivablesByContact') && !args.ContactID) {
-				throw Error('required args for AgedPayablesByContact report: ContactID');
-			}
-			if (args.ReportID == 'BankStatement' && !args.bankAccountID) {
-				throw Error('required args for BankStatement report: bankAccountID');
-			}
-
-			// TODO construct query string in a shared function
-			const query = Object.keys(args).map((key: string) => {
-				if (key != 'ReportID' && key != 'Accept') {
-					return key + '=' + args[key];
+			if (args) {
+				if ((args.ReportID == 'AgedPayablesByContact' || args.ReportID == 'AgedReceivablesByContact') && !args.ContactID) {
+					throw Error('required args for AgedPayablesByContact report: ContactID');
 				}
-			}).filter((x) => x).join('&');
+				if (args.ReportID == 'BankStatement' && !args.bankAccountID) {
+					throw Error('required args for BankStatement report: bankAccountID');
+				}
 
-			endpoint = endpoint + '/' + args.ReportID + '?' + query;
+				// TODO construct query string in a shared function
+				const query = Object.keys(args).map((key: string) => {
+					if (key != 'ReportID' && key != 'Accept') {
+						return key + '=' + args[key];
+					}
+				}).filter((x) => x).join('&');
+
+				endpoint = endpoint + '/' + args.ReportID + '?' + query;
+			}
 
 			return this.get<any>(endpoint, args);
+		}
+	};
+
+	public purchaseorders = {
+		post: async (body?: object, args?: any): Promise<any> => {
+			const endpoint = 'purchaseorders?summarizeErrors=true';
+			return this.post<any>(endpoint, body, args);
 		}
 	};
 

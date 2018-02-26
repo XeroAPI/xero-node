@@ -14,6 +14,10 @@ export interface CurrenciesResponse extends AccountingResponse {
 	Currencies: Currency[];
 }
 
+export interface AccountsResponse extends AccountingResponse {
+	Accounts: Account[];
+}
+
 interface AccountingResponse {
 	Id: string;
 	Status: string;
