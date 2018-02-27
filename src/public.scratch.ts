@@ -8,23 +8,23 @@ const data = require('./public_config.json');
 const xero = new XeroAPIClient(data);
 
 (async function() {
-	const unauthRT = await xero.oauth10a.getUnauthorisedRequestToken();
-	const url = xero.oauth10a.buildAuthorizeUrl(unauthRT.oauth_token);
+	const unauthorisedRequestToken = await xero.oauth10a.getUnauthorisedRequestToken();
+	const url = xero.oauth10a.buildAuthorizeUrl(unauthorisedRequestToken.oauth_token);
 
 	opn(url);
 
 	console.log(url);
 
 	console.log('working');
-	let pin = 'temp';
-	pin = 'temp2'; // Replace in debug with your pin
+	const pin = 'temp';
 	// const pin = await readLine('PIN: ');
 	// tslint:disable-next-line:no-debugger
-	debugger;
+	debugger; // You need to set pin to the pin that the Auth page gave you. Or if not running in debugger use the line above.
 
-	const access = await xero.oauth10a.getAccessToken(unauthRT, pin);
+	const access = await xero.oauth10a.getAccessToken(unauthorisedRequestToken, pin);
 
-	console.log('fin', access);
+	const inv = await xero.contacts.get();
+	console.log(inv);
 })();
 
 export async function readLine(stringPrompt: string): Promise<string> {

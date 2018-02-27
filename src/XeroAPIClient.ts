@@ -16,11 +16,9 @@ const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
 const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
 
 export class XeroAPIClient {
-	private oauthToken: string;
-	private oauthSecret: string;
 
 	// TODO make IState
-	private _state: any;
+	private _state: any = {};
 
 	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauth?: any) {
 		if (!this.options) {
@@ -30,8 +28,8 @@ export class XeroAPIClient {
 		this._state = {
 			consumerKey: this.options.consumerKey,
 			consumerSecret: this.options.consumerSecret,
-			oauthToken: this.oauthToken,
-			oauthSecret: this.oauthSecret,
+			oauthToken: null,
+			oauthSecret: null,
 			apiBaseUrl: API_BASE,
 			apiBasePath: API_BASE_PATH,
 			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
@@ -49,7 +47,6 @@ export class XeroAPIClient {
 		}
 		else if (this.options.appType == 'public') {
 			this._state.signatureMethod = 'HMAC-SHA1';
-			// TODO: any others here>
 		}
 
 		if (!this._oauthClient) {
@@ -63,6 +60,7 @@ export class XeroAPIClient {
 
 	public set state(state: any) {
 		this._state = { ...this.state, ...state };
+		this._oauthClient = new OAuthClient(this._state, this._oauth);
 	}
 
 	// TODO: Rename methods have them update state etc
@@ -72,9 +70,10 @@ export class XeroAPIClient {
 	public oauth10a = {
 		getUnauthorisedRequestToken: async () => this._oauthClient.getUnauthorisedRequestToken(),
 		buildAuthorizeUrl: (unauthorisedRequestToken: string) => `https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`,
-		getAccessToken: (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
-			const token = this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier);
+		getAccessToken: async (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
+			const token = await this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier);
 			// Set this instate
+			this.state = { oauthToken: token.oauth_token, oauthSecret: token.oauth_token_secret };
 			return token;
 		}
 	};
