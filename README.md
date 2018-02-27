@@ -2,7 +2,7 @@
 
 NodeJS Client for the Xero API, supporting Public, Private and Partner Apps
 
-## Current Status: PRE-PRE-ALPHA. 
+## Current Status: PRE-PRE-ALPHA.
 
 Ideas we want to achieve.
 
@@ -17,7 +17,9 @@ We want to make this wrapper as thin as possible. This means:
 
 	`xero.contacts.contactGroups.create(contact)`
 
-	This will help with documentation, as API docs == SDK interface. There has been one decision here. That rather than using verbs `.put()`, `.post` etc will use actions. Example `get()`, `create()`,`delete()`, `update()`. This will abstract away the Accounting Apis funny `PUT` vs `POST`.
+	This will help with documentation, as API docs == SDK interface.
+
+	That rather than using verbs `.put()`, `.post` etc will use actions. Example `get()`, `create()`,`delete()`, `update()`. This will abstract away the Accounting Apis funny `PUT` vs `POST`.
 
 2. Simple Partner flows. Rather than automatically refreshing tokens we will expose methods which show when it will expire and ability to refresh
 
@@ -28,5 +30,7 @@ We want to make this wrapper as thin as possible. This means:
 4. Unit tests
 
 5. Oauth2 ready. The Oauth lib we are using us OAuth2 ready. Design decision will be made with this in mind. The current SDK forked and changed the Oauth lib, which makes things hard.
+
+6. Typescript. This will aid in self-generated docs etc.
 
 
