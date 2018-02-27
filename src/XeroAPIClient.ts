@@ -1,5 +1,6 @@
 import { OAuthClient, IOAuthClient } from './OAuthClient';
-import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, Employee, EmployeesResponse } from './interfaces/AccountingResponse';
+import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse, Employee, EmployeesResponse } from './interfaces/AccountingResponse';
+
 
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
@@ -13,43 +14,110 @@ export interface IXeroClientConfiguration {
 const API_BASE = 'https://api.xero.com';
 const API_BASE_PATH = '/api.xro/2.0/';
 const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
-const OAUTH_ACCESS_TOKEN_PATH = '/oauth/Authorize';
+const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
 
 export class XeroAPIClient {
-	private oauthToken: string;
-	private oauthSecret: string;
 
-	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauth?: any) {
+	// TODO make IState and can this be the same as options? Private might stuff that up
+	private _state: any = {};
+
+	// TODO: should an option be OAuthVersion ??? Either make it mandatory now - or later
+	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauthLib?: any) {
 		if (!this.options) {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
 		}
 		// TODO: Check options for each app type
 
-		let consumerSecret = this.options.consumerSecret;
+		this._state = {
+			consumerKey: this.options.consumerKey,
+			consumerSecret: this.options.consumerSecret,
+			oauthToken: null,
+			oauthSecret: null
+		};
+
 		if (this.options.appType == 'private') {
-			this.oauthToken = this.options.consumerKey;
-			this.oauthSecret = this.options.privateKey;
-			consumerSecret = this.options.privateKey;
+			this._state.oauthToken = this.options.consumerKey;
+			this._state.oauthSecret = this.options.privateKey;
+			this._state.consumerSecret = this.options.privateKey;
+			this._state.signatureMethod = 'RSA-SHA1';
+		}
+		else if (this.options.appType == 'public') {
+			this._state.signatureMethod = 'HMAC-SHA1';
 		}
 
 		if (!this._oauthClient) {
-			this._oauthClient = new OAuthClient({
-				consumerKey: this.options.consumerKey,
-				consumerSecret: consumerSecret,
-				oauthToken: this.oauthToken,
-				oauthSecret: this.oauthSecret,
-				apiBaseUrl: API_BASE,
-				apiBasePath: API_BASE_PATH,
-				oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
-				oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH
-
-			}, this._oauth);
+			this._oauthClient = this.OAuthClientFactory();
 		}
 	}
+
+	public get state(): any {
+		return this._state;
+	}
+
+	// TODO? Rename to credentialState? Or credential.state like PyXero?
+	public set state(newState: any) {
+		this._state = { ...this.state, ...newState };
+		this._oauthClient = this.OAuthClientFactory();
+	}
+
+	private OAuthClientFactory() {
+		const defaultState = {
+			apiBaseUrl: API_BASE,
+			apiBasePath: API_BASE_PATH,
+			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
+			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
+			Accept: 'application/json',
+			userAgent: 'NodeJS-XeroAPIClient.' + this._state.consumerKey // TODO add package.json version here
+		};
+
+		return this._oauthClient = new OAuthClient({ ...this._state, ...defaultState }, this._oauthLib);
+	}
+
+	// TODO: Rename methods have them update state etc
+	// TODO: think about if the top two could be the same method
+	// TODO: think about the method names. Will these be the same for OAuth2. Will we need seperate methods? That's
+	// why at the moment I have kept them on tha oauth10a object.
+	public oauth10a = {
+		getUnauthorisedRequestToken: async () => this._oauthClient.getUnauthorisedRequestToken(),
+		buildAuthorizeUrl: (unauthorisedRequestToken: string) => `https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`, // TODO Check for callback URL
+		getAccessToken: async (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
+			const token = await this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier);
+			// Set this instate
+			this.state = { oauthToken: token.oauth_token, oauthSecret: token.oauth_token_secret };
+			return token;
+		}
+	};
 
 	private get<T>(endpoint: string, args?: any): Promise<T> {
 		return this._oauthClient.get<T>(endpoint, args);
 	}
+
+	private post<T>(endpoint: string, body?: object, args?: any): Promise<T> {
+		return this._oauthClient.post<T>(endpoint, body, args);
+	}
+
+	private put<T>(endpoint: string, body?: object, args?: any): Promise<T> {
+		return this._oauthClient.put<T>(endpoint, body, args);
+	}
+
+	private delete<T>(endpoint: string, body?: object, args?: any): Promise<T> {
+		return this._oauthClient.delete<T>(endpoint, args);
+	}
+
+	// TODO all these endoints could be moved the their own folders.
+	public accounts = {
+		get: async (args?: any): Promise<AccountsResponse> => {
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			let endpoint = 'accounts';
+			if (args && args.AccountID) {
+				endpoint = endpoint + '/' + args.AccountID;
+			}
+
+			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
+			return this.get<AccountsResponse>(endpoint, args);
+		}
+	};
 
 	public invoices = {
 		get: async (args?: any): Promise<InvoicesResponse> => {
@@ -65,7 +133,7 @@ export class XeroAPIClient {
 			return this.get<InvoicesResponse>(endpoint, args);
 		},
 		getPDF: async (args?: any): Promise<string> => {
-			// is a string when args.accept = application/pdf
+			// is a string when args.Accept = application/pdf
 			args.Accept = 'application/pdf';
 
 			// TODO: Support invoice number
@@ -77,7 +145,6 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceId;
 			}
 
-			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
 			return this.get<string>(endpoint, args);
 		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
 		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: any): Promise<InvoicesResponse> => {
@@ -86,12 +153,12 @@ export class XeroAPIClient {
 			// TODO: Summerize errors?
 			const endpoint = 'invoices?summarizeErrors=false';
 
-			return this._oauthClient.put<InvoicesResponse>(endpoint, invoice, args);
+			return this.put<InvoicesResponse>(endpoint, invoice, args);
 		},
 	};
 
 	public contactgroups = {
-		get: async (args?: any): Promise<ContactGroupsResponse> => {
+		get: async (args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
 
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -113,22 +180,33 @@ export class XeroAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this._oauthClient.put<ContactGroupsResponse>(endpoint, contactGroup, args);
+			return this.put<ContactGroupsResponse>(endpoint, contactGroup, args);
 		},
-		// TODO: This is actually delete the CONTACT on contactgroup
-		deleteContacts: async (args?: any): Promise<ContactGroupsResponse> => {
-			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-			// TODO: Support for where arg
-			// TODO: Summerize errors?
+		update: async (contactGroup: ContactGroup, args?: any): Promise<ContactGroupsResponse> => {
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
-				endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
-			}
-			if (args && args.ContactGroupID && args.ContactID) {
-				endpoint = endpoint + '/' + args.ContactID;
+				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
 
-			return this._oauthClient.delete<ContactGroupsResponse>(endpoint, args);
+			endpoint += '?summarizeErrors=false';
+
+			return this.post<ContactGroupsResponse>(endpoint, contactGroup, args);
+		},
+		contacts: {
+			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactGroupsResponse> => {
+				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
+				// TODO: Support for where arg
+				// TODO: Summerize errors?
+				let endpoint = 'contactgroups';
+				if (args && args.ContactGroupID) {
+					endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
+				}
+				if (args && args.ContactGroupID && args.ContactID) {
+					endpoint = endpoint + '/' + args.ContactID;
+				}
+
+				return this.delete<ContactGroupsResponse>(endpoint, args);
+			}
 		}
 	};
 
@@ -139,7 +217,7 @@ export class XeroAPIClient {
 		},
 		create: async (currency: Currency, args?: any): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
-			return this._oauthClient.put<CurrenciesResponse>(endpoint, currency);
+			return this.put<CurrenciesResponse>(endpoint, currency);
 		}
 	};
 
@@ -161,4 +239,45 @@ export class XeroAPIClient {
 	// private checkAuthentication() {
 	// 	// TODO
 	// }
+	public contacts = {
+		get: async (args?: any): Promise<ContactsResponse> => {
+			const endpoint = 'contacts';
+			return this.get<ContactsResponse>(endpoint, args);
+		}
+	};
+
+	public reports = {
+		get: async (args?: any): Promise<any> => {
+			let endpoint = 'Reports';
+			if (args) {
+				// TODO: Check if raw API errors make sense and remove these?
+				if ((args.ReportID == 'AgedPayablesByContact' || args.ReportID == 'AgedReceivablesByContact') && !args.ContactID) {
+					throw Error('required args for AgedPayablesByContact report: ContactID');
+				}
+				if (args.ReportID == 'BankStatement' && !args.bankAccountID) {
+					throw Error('required args for BankStatement report: bankAccountID');
+				}
+
+				// TODO construct query string in a shared function
+				const query = Object.keys(args).map((key: string) => {
+					if (key != 'ReportID' && key != 'Accept') {
+						return key + '=' + args[key];
+					}
+				}).filter((x) => x).join('&');
+
+				endpoint = endpoint + '/' + args.ReportID + '?' + query;
+			}
+
+			// TODO: Add interface here
+			return this.get<any>(endpoint, args);
+		}
+	};
+
+	public purchaseorders = {
+		post: async (body?: object, args?: any): Promise<any> => {
+			const endpoint = 'purchaseorders?summarizeErrors=true';
+			// TODO: Add interface here
+			return this.post<any>(endpoint, body, args);
+		}
+	};
 }
