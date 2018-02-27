@@ -46,3 +46,5 @@ We want to make this wrapper as thin as possible. This means:
 - [ ] Public Sample App
 - [ ] Public App can take a call back URL
 - [ ] Partner Sample App
+- [ ] CI
+- [ ] TSDoc?
