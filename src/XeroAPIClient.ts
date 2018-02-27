@@ -58,8 +58,8 @@ export class XeroAPIClient {
 		return this._state;
 	}
 
-	public set state(state: any) {
-		this._state = { ...this.state, ...state };
+	public set state(newState: any) {
+		this._state = { ...this.state, ...newState };
 		this._oauthClient = new OAuthClient(this._state, this._oauth);
 	}
 

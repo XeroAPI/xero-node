@@ -54,12 +54,19 @@ describe('internal state', () => {
 			signatureMethod: 'RSA-SHA1',
 		};
 
-		beforeAll(() => {
+		it('matches what it was set to', () => {
 			xeroClient.state = newState;
+			expect(xeroClient.state).toEqual(newState);
 		});
 
-		it('matches what it was set to', () => {
-			expect(xeroClient.state).toEqual(newState);
+		it('only overrides the provided keys', () => {
+			xeroClient.state = newState;
+			xeroClient.state = { oauthSecret: 'something new' };
+
+			expect(xeroClient.state).not.toEqual(newState);
+			expect(xeroClient.state.oauthSecret).toEqual('something new');
+			expect(xeroClient.state.oauthToken).toEqual(newState.oauthToken);
+
 		});
 	});
 });
