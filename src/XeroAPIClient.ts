@@ -39,7 +39,7 @@ export class XeroAPIClient {
 			accept: 'application/json'
 		};
 
-		// TODO: Can we remove signatureMethod from state?
+		// TODO: Can we remove signatureMethod from state? Could also remove the URLs from state
 
 		if (this.options.appType == 'private') {
 			this._state.oauthToken = this.options.consumerKey;
