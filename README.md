@@ -21,7 +21,7 @@ We want to make this wrapper as thin as possible. This means:
 
 	That rather than using verbs `.put()`, `.post` etc will use actions. Example `get()`, `create()`,`delete()`, `update()`. This will abstract away the Accounting Apis funny `PUT` vs `POST`.
 
-2. Simple Partner flows. Rather than automatically refreshing tokens we will expose methods which show when it will expire and ability to refresh
+2. Simple Partner flows. Rather than automatically refreshing tokens we will expose methods which show when it will expire and ability to refresh. KISS.
 
 3. Abstracted away OAuth lib. This will allow us to swap it out if we needed. We won't bleed the OAuth libs exception types into the SDK. This will make it easier for us to extend to Payroll etc
 
