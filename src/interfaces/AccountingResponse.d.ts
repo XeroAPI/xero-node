@@ -10,6 +10,10 @@ export interface ContactsResponse extends AccountingResponse {
 	Contacts: Contact[];
 }
 
+export interface ReportsResponse extends AccountingResponse {
+	Reports: any[];
+}
+
 export interface CurrenciesResponse extends AccountingResponse {
 	Currencies: Currency[];
 }
@@ -146,9 +150,43 @@ export interface Tracking {
 	TrackingCategoryID?: string;
 	TrackingOptionID?: string;
 }
+
 export interface Employee {
 	Status?: 'Active' | 'Archive';
 	FirstName: string;
 	LastName: string;
 	ExternalLink?: any;
+
+
+export interface Report {
+	ReportID: string;
+	ReportName: string;
+	ReportType: string;
+	ReportTitles?: string[];
+	ReportDate: string;
+	UpdatedDateUTC: string;
+	Attributes?: {
+		Name: string;
+		Description: string;
+		Value: string;
+	}[];
+	Fields?: Field[];
+	Rows: Row[];
+}
+export interface Field {
+	FieldID: string;
+	Description: string;
+	Value: string;
+}
+export interface Row {
+	RowType: string;
+	Cells: Cell[];
+}
+export interface Cell
+{
+	Value?: string;
+	Attibutes?: {
+		Value: string;
+		Id: string;
+	}[];
 }
