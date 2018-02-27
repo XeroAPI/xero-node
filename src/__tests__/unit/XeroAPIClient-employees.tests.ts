@@ -1,8 +1,7 @@
-import { AccountingResponse, Employee, EmployeesResponse } from '../../interfaces/AccountingResponse';
+import { Employee, EmployeesResponse } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { isUUID } from '../test-helpers';
 import { InMemoryOAuth } from './InMenoryOAuth';
 import { allEmployeesResponse, createResponse } from './response-examples/employees.response.examples';
 

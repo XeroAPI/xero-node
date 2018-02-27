@@ -1,9 +1,7 @@
-import { AccountingResponse, Invoice } from '../../interfaces/AccountingResponse';
 import { InMemoryOAuth } from './InMenoryOAuth';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { singleInvoice } from './response-examples/invoice.response.examples';
 
 describe('client', () => {
 	describe('and private key errors', () => {
@@ -14,7 +12,7 @@ describe('client', () => {
 
 	describe('and 404 errors', () => {
 		const inMemoryOAuth = new InMemoryOAuth();
-		let xeroClient = null;
+		let xeroClient: XeroAPIClient = null;
 
 		beforeAll(async () => {
 

@@ -3,14 +3,17 @@ import { InMemoryOAuth } from './InMenoryOAuth';
 
 describe('OAuthClient', () => {
 	const testConfig: IOAuthClientConfiguration = {
-		ConsumerKey: 'ck',
-		ConsumerSecret: 'cs',
+		consumerKey: 'ck',
+		consumerSecret: 'cs',
 		oauthSecret: 'os',
 		oauthToken: 'ot',
 		apiBaseUrl: 'abu',
 		apiBasePath: 'abp',
 		oauthRequestTokenPath: 'ortp',
 		oauthAccessTokenPath: 'oatp',
+		signatureMethod: 'sigm',
+		accept: 'acceps',
+		userAgent: 'ua'
 	};
 
 	describe('when it errors', () => {

@@ -1,10 +1,8 @@
-import { OAuthClient, IOAuthClient, IOAuthClientConfiguration } from './../../OAuthClient';
 import { IXeroClientConfiguration, XeroAPIClient } from '../../XeroAPIClient';
-import { InMemoryOAuth } from './InMenoryOAuth';
 
 describe('OAuthClient App Types', () => {
 	let xeroClientConfig: IXeroClientConfiguration;
-	let testXeroAPIClient;
+	let testXeroAPIClient: XeroAPIClient;
 	describe('For Private Apps', () => {
 		beforeAll(() => {
 			xeroClientConfig = {

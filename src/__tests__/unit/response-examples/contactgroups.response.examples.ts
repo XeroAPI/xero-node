@@ -1,4 +1,4 @@
-const allContactGroups = {
+export const allContactGroups = {
 	Id: '021c4c92-2c05-4516-b7af-50286f8c147a',
 	Status: 'OK',
 	ProviderName: 'Xero API Previewer',
@@ -8,7 +8,7 @@ const allContactGroups = {
 			ContactGroupID: '3567ace4-1dc9-40b3-b364-9b55d5841b22',
 			Name: 'Contractors',
 			Status: 'ACTIVE',
-			Contacts: [],
+			Contacts: [] as any[],
 			HasValidationErrors: false
 		},
 		{
@@ -28,7 +28,7 @@ const allContactGroups = {
 	]
 };
 
-const createResponse = {
+export const createResponse = {
 	Id: '610ca62d-6084-4aa2-adee-d77759eb0a84',
 	Status: 'OK',
 	ProviderName: 'Xero API Previewer',
@@ -42,7 +42,7 @@ const createResponse = {
 	}
 };
 
-const createValidationResponse = {
+export const createValidationResponse = {
 	ApiException: {
 		ErrorNumber: '10',
 		Type: 'ValidationException',
@@ -61,14 +61,10 @@ const createValidationResponse = {
 	}
 };
 
-const updateDeleted = {
+export const updateDeleted = {
 	ContactGroups: [{
 		ContactGroupID: '4ceb0357-73ba-45e4-a288-57418e0a3587',
 		Name: 'NewContactGroup1518685751864',
 		Status: 'DELETED'
 	}]
-};
-
-export {
-	allContactGroups, createResponse, updateDeleted
 };

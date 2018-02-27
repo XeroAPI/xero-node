@@ -1,6 +1,6 @@
 import { ContactsResponse } from '../../../interfaces/AccountingResponse';
 
-const getSingle: ContactsResponse = {
+export const getSingle: ContactsResponse = {
 	Id: '1ab1ca3d-9305-4473-bfa2-82cd5985e736',
 	Status: 'OK',
 	ProviderName: 'Xero API Previewer',
@@ -66,7 +66,7 @@ const getSingle: ContactsResponse = {
 	]
 };
 
-const getAll: ContactsResponse = {
+export const getAll: ContactsResponse = {
 	Id: '7232c7ce-75b5-4eb7-8a1b-7ca33a10e2ba',
 	Status: 'OK',
 	ProviderName: 'Xero API Previewer',

@@ -1,7 +1,6 @@
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { OAuthClient } from '../../OAuthClient';
 import { InMemoryOAuth } from './InMenoryOAuth';
 
 const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
