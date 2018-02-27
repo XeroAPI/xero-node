@@ -25,15 +25,10 @@ describe('internal state', () => {
 			const retrievedState = xeroClient.state;
 
 			expect(retrievedState).toEqual({
-				apiBasePath: '/api.xro/2.0/',
-				apiBaseUrl: 'https://api.xero.com',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: privateKey,
-				oauthAccessTokenPath: '/oauth/AccessToken',
-				oauthRequestTokenPath: '/oauth/RequestToken',
 				oauthSecret: privateKey,
 				oauthToken: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-				accept: 'application/json',
 				signatureMethod: 'RSA-SHA1',
 			});
 		});
@@ -42,16 +37,12 @@ describe('internal state', () => {
 	describe('when set', () => {
 
 		const newState = {
-			apiBasePath: 'test1',
-			apiBaseUrl: 'test2',
 			consumerKey: 'test3',
 			consumerSecret: 'test4',
-			oauthAccessTokenPath: 'test5',
-			oauthRequestTokenPath: 'test6',
 			oauthSecret: 'test7',
 			oauthToken: 'test8',
-			accept: 'application/json',
-			signatureMethod: 'RSA-SHA1',
+			signatureMethod: 'test9',
+
 		};
 
 		it('matches what it was set to', () => {

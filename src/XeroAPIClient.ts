@@ -25,19 +25,13 @@ export class XeroAPIClient {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
 		}
 		// TODO: Check options for each app type
+
 		this._state = {
 			consumerKey: this.options.consumerKey,
 			consumerSecret: this.options.consumerSecret,
 			oauthToken: null,
-			oauthSecret: null,
-			apiBaseUrl: API_BASE,
-			apiBasePath: API_BASE_PATH,
-			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
-			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
-			accept: 'application/json'
+			oauthSecret: null
 		};
-
-		// TODO: Can we remove signatureMethod from state? Could also remove the URLs from state
 
 		if (this.options.appType == 'private') {
 			this._state.oauthToken = this.options.consumerKey;
@@ -49,8 +43,16 @@ export class XeroAPIClient {
 			this._state.signatureMethod = 'HMAC-SHA1';
 		}
 
+		const defaultState = {
+			apiBaseUrl: API_BASE,
+			apiBasePath: API_BASE_PATH,
+			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
+			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
+			accept: 'application/json'
+		};
+
 		if (!this._oauthClient) {
-			this._oauthClient = new OAuthClient(this._state, this._oauth);
+			this._oauthClient = new OAuthClient({ ...this._state, ...defaultState }, this._oauth);
 		}
 	}
 
