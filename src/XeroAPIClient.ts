@@ -21,7 +21,6 @@ export class XeroAPIClient {
 	private _state: any = {};
 
 	// TODO: should an option be OAuthVersion ??? Either make it mandatory now - or later
-	// TODO: State and options need to be the same thing
 	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauth?: any) {
 		if (!this.options) {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
