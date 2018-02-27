@@ -24,7 +24,8 @@ const xero = new XeroAPIClient(data);
 	const access = await xero.oauth10a.getAccessToken(unauthorisedRequestToken, pin);
 
 	const inv = await xero.contacts.get();
-	console.log(inv);
+	console.log('Invoice', inv);
+	console.log('State', xero.state);
 })();
 
 export async function readLine(stringPrompt: string): Promise<string> {

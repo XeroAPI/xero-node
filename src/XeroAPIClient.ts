@@ -21,6 +21,7 @@ export class XeroAPIClient {
 	private _state: any = {};
 
 	// TODO: should an option be OAuthVersion ??? Either make it mandatory now - or later
+	// TODO: State and options need to be the same thing
 	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauth?: any) {
 		if (!this.options) {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
@@ -44,17 +45,8 @@ export class XeroAPIClient {
 			this._state.signatureMethod = 'HMAC-SHA1';
 		}
 
-		const defaultState = {
-			apiBaseUrl: API_BASE,
-			apiBasePath: API_BASE_PATH,
-			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
-			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
-			accept: 'application/json',
-			userAgent: 'NodeJS-XeroAPIClient.' + this._state.consumerKey // TODO add package.json version here
-		};
-
 		if (!this._oauthClient) {
-			this._oauthClient = new OAuthClient({ ...this._state, ...defaultState }, this._oauth);
+			this._oauthClient = this.OAuthClientFactory();
 		}
 	}
 
@@ -65,7 +57,20 @@ export class XeroAPIClient {
 	// TODO? Rename to credentialState? Or credential.state like PyXero?
 	public set state(newState: any) {
 		this._state = { ...this.state, ...newState };
-		this._oauthClient = new OAuthClient(this._state, this._oauth);
+		this._oauthClient = this.OAuthClientFactory();
+	}
+
+	private OAuthClientFactory() {
+		const defaultState = {
+			apiBaseUrl: API_BASE,
+			apiBasePath: API_BASE_PATH,
+			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
+			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
+			Accept: 'application/json',
+			userAgent: 'NodeJS-XeroAPIClient.' + this._state.consumerKey // TODO add package.json version here
+		};
+
+		return this._oauthClient = new OAuthClient({ ...this._state, ...defaultState }, this._oauth);
 	}
 
 	// TODO: Rename methods have them update state etc
@@ -128,7 +133,7 @@ export class XeroAPIClient {
 			return this.get<InvoicesResponse>(endpoint, args);
 		},
 		getPDF: async (args?: any): Promise<string> => {
-			// is a string when args.accept = application/pdf
+			// is a string when args.Accept = application/pdf
 			args.Accept = 'application/pdf';
 
 			// TODO: Support invoice number
