@@ -34,3 +34,15 @@ We want to make this wrapper as thin as possible. This means:
 6. Typescript. This will aid in self-generated docs etc.
 
 
+# There are LOTS of // TODOs - Feel free to pick one off
+
+- [ ] Standard Error types
+	- We said there would be two (APIException, OAuthException)
+	- Make interfaces for them
+	- Need to throw these at the right time
+- [ ] Scopes
+- [ ] All Endpoints
+- [ ] Partner Auth
+- [ ] Public Sample App
+- [ ] Public App can take a call back URL
+- [ ] Partner Sample App
