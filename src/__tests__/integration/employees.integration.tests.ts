@@ -10,7 +10,7 @@ const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 const data = require('./config.json');
 const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
 
-describe('/currencies integration tests', () => {
+describe('/employees integration tests', () => {
 	describe('and creating and getting', () => {
 		let result: EmployeesResponse;
 
