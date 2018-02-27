@@ -1,8 +1,7 @@
-import { AccountingResponse, Currency, CurrenciesResponse } from '../../interfaces/AccountingResponse';
+import { Currency, CurrenciesResponse } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { isUUID } from '../test-helpers';
 import { allCurrenciesResponse, createResponse } from './response-examples/currencies.response.examples';
 import { InMemoryOAuth } from './InMenoryOAuth';
 

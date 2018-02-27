@@ -1,5 +1,5 @@
 import { URLSearchParams } from 'url';
-import { OAuthClient, IOAuthClient } from './OAuthClient';
+import { OAuthClient, IOAuthClient, IOAuthClientConfiguration } from './OAuthClient';
 import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse, Employee, EmployeesResponse, ReportsResponse } from './interfaces/AccountingResponse';
 
 export interface IXeroClientConfiguration {
@@ -61,12 +61,12 @@ export class XeroAPIClient {
 	}
 
 	private OAuthClientFactory() {
-		const defaultState = {
+		const defaultState: Partial<IOAuthClientConfiguration> = {
 			apiBaseUrl: API_BASE,
 			apiBasePath: API_BASE_PATH,
 			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
 			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
-			Accept: 'application/json',
+			accept: 'application/json',
 			userAgent: 'NodeJS-XeroAPIClient.' + this._state.consumerKey // TODO add package.json version here
 		};
 

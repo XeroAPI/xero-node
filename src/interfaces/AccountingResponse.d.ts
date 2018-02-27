@@ -49,6 +49,7 @@ export interface Invoice {
 	SentToContact?: boolean;
 	IsDiscounted?: boolean;
 	HasAttachments?: boolean;
+	FullyPaidOnDate?: string;
 	Attachments?: any[];
 	Contact?: Contact;
 	DateString?: string;
@@ -71,7 +72,7 @@ export interface Invoice {
 // TODO: Are last two common therefore we can put on common interface?
 
 export interface ValidationError {
-	message: string;
+	Message: string;
 }
 
 export interface Contact {
@@ -100,6 +101,7 @@ export interface Contact {
 	Attachments?: any; // TODO: something here
 	SkypeUserName?: string;
 	HasValidationErrors?: boolean;
+	ValidationErrors?: ValidationError[];
 }
 
 export interface ContactGroup {

@@ -2,7 +2,7 @@
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Invoice, InvoicesResponse } from '../../interfaces/AccountingResponse';
+import { InvoicesResponse } from '../../interfaces/AccountingResponse';
 import { isUUID } from '../test-helpers';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
 

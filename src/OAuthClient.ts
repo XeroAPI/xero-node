@@ -12,7 +12,7 @@ export interface IOAuthClientConfiguration {
 	oauthAccessTokenPath: string;
 
 	signatureMethod: string;
-	Accept: string;
+	accept: string;
 	userAgent: string;
 }
 
@@ -50,7 +50,7 @@ export class OAuthClient implements IOAuthClient {
 			options.signatureMethod,								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
 			null,									// nonceSize
 			{										// customHeaders
-				'Accept': options.Accept,
+				'Accept': options.accept,
 				'User-Agent': options.userAgent
 			}
 		);
@@ -94,7 +94,7 @@ export class OAuthClient implements IOAuthClient {
 
 		if (args && args.Accept) {
 			// Temp for getting PDFs
-			const oauth = this.oAuthFactory({ ...this.options, ...{ Accept: args.Accept } });
+			const oauth = this.oAuthFactory({ ...this.options, ...{ accept: args.Accept } });
 
 			return new Promise<T>((resolve, reject) => {
 				const request = oauth.get(
