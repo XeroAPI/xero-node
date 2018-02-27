@@ -1,3 +1,4 @@
+import { URLSearchParams } from 'url';
 import { OAuthClient, IOAuthClient } from './OAuthClient';
 import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse, Employee, EmployeesResponse, ReportsResponse } from './interfaces/AccountingResponse';
 
@@ -249,14 +250,11 @@ export class XeroAPIClient {
 		get: async (args?: any): Promise<ReportsResponse> => {
 			let endpoint = 'Reports';
 			if (args) {
-				// TODO construct query string in a shared function
-				const query = Object.keys(args).map((key: string) => {
-					if (key != 'ReportID' && key != 'Accept') {
-						return key + '=' + args[key];
-					}
-				}).filter((x) => x).join('&');
+				const query = new URLSearchParams(args);
+				query.delete('Accept');
+				query.delete('ReportID');
 
-				endpoint = endpoint + '/' + args.ReportID + '?' + query;
+				endpoint = endpoint + '/' + args.ReportID + '?' + query.toString();
 			}
 
 			return this.get<ReportsResponse>(endpoint, args);
