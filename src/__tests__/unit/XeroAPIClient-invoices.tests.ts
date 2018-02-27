@@ -21,10 +21,10 @@ describe('/invoices', () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(multipleInvoices), { statusCode: 200 });
 
 				const xeroClient = new XeroAPIClient({
-					appType: 'private',
-					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-					privateKey: privateKey
+					AppType: 'private',
+					ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+					PrivateKeyCert: privateKey
 				}, null, inMemoryOAuth);
 
 				result = await xeroClient.invoices.get();
@@ -63,10 +63,10 @@ describe('/invoices', () => {
 					inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(singleInvoice), 201);
 
 					const xeroClient = new XeroAPIClient({
-						appType: 'private',
-						consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-						consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-						privateKey: privateKey
+						AppType: 'private',
+						ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+						ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+						PrivateKeyCert: privateKey
 					}, null, inMemoryOAuth);
 
 					result = await xeroClient.invoices.create(createSingleInvoiceRequest);

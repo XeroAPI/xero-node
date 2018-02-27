@@ -7,8 +7,8 @@
     "build": "npm run lint && tsc",
     "build-watch": "tsc --watch",
     "lint": "tslint ./src/**/*.ts",
-    "test-watch": "jest --config ./jestconfig.js --watch",
-    "test": "jest --config ./jestconfig.js",
+    "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
+    "test": "tsc --noEmit && jest --config ./jestconfig.js",
     "scratch": "ts-node ./src/scratch.ts --watch"
   },
   "author": "Xero <api@xero.com>",

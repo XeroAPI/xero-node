@@ -2,7 +2,7 @@
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Invoice, InvoicesResponse } from '../../interfaces/AccountingResponse';
+import { InvoicesResponse } from '../../interfaces/AccountingResponse';
 import { isUUID } from '../test-helpers';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
 
@@ -10,8 +10,8 @@ const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 // TODO: Let them pass in the privateKey and privateKey path
-const data = require('./config.json');
-const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
+const data = require('./xero.json');
+const xero = new XeroAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
 
 describe('/invoices integration tests', () => {
 	jest.setTimeout(20000);

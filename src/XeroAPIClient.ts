@@ -1,13 +1,22 @@
 import { OAuthClient, IOAuthClient } from './OAuthClient';
 import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse } from './interfaces/AccountingResponse';
 
+/**
+ * TODO: Add support for the following keys:
+ *
+ * - PrivateKeyPassword
+ * - CallbackPath
+ */
+
 export interface IXeroClientConfiguration {
-	appType: 'public' | 'private' | 'partner';
-	consumerKey: string;
-	consumerSecret: string;
-	privateKey?: string;
-	callbackUrl?: string;
-	userAgent?: string;
+	AppType: 'public' | 'private' | 'partner';
+	ConsumerKey: string;
+	ConsumerSecret: string;
+	PrivateKeyCert?: string;
+	PrivateKeyPassword?: string;
+	CallbackBaseUrl?: string;
+	CallbackPath?: string;
+	UserAgent?: string;
 }
 
 const API_BASE = 'https://api.xero.com';
@@ -28,19 +37,19 @@ export class XeroAPIClient {
 		// TODO: Check options for each app type
 
 		this._state = {
-			consumerKey: this.options.consumerKey,
-			consumerSecret: this.options.consumerSecret,
+			consumerKey: this.options.ConsumerKey,
+			consumerSecret: this.options.ConsumerSecret,
 			oauthToken: null,
 			oauthSecret: null
 		};
 
-		if (this.options.appType == 'private') {
-			this._state.oauthToken = this.options.consumerKey;
-			this._state.oauthSecret = this.options.privateKey;
-			this._state.consumerSecret = this.options.privateKey;
+		if (this.options.AppType == 'private') {
+			this._state.oauthToken = this.options.ConsumerKey;
+			this._state.oauthSecret = this.options.PrivateKeyCert;
+			this._state.consumerSecret = this.options.PrivateKeyCert;
 			this._state.signatureMethod = 'RSA-SHA1';
 		}
-		else if (this.options.appType == 'public') {
+		else if (this.options.AppType == 'public') {
 			this._state.signatureMethod = 'HMAC-SHA1';
 		}
 

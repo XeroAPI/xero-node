@@ -1,11 +1,10 @@
-import { OAuth } from 'oauth';
 
 export class InMemoryOAuth {
 
 	[x: string]: any;
-	private returnErr = null;
-	private returnData = null;
-	private returnHttpResponse = null;
+	private returnErr: any = null;
+	private returnData: any = null;
+	private returnHttpResponse: any = null;
 	private lastCalledUrl = '';
 
 	public lastCalledThisURL(url: string) {
@@ -52,7 +51,7 @@ export class InMemoryOAuth {
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
-	public callbackResultsForNextCall(returnGetErr: any, returnGetData: string, returnGetHttpResponse) {
+	public callbackResultsForNextCall(returnGetErr: any, returnGetData: string, returnGetHttpResponse: any) {
 		this.returnErr = returnGetErr;
 		this.returnData = returnGetData;
 		this.returnHttpResponse = returnGetHttpResponse;

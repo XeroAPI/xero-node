@@ -19,10 +19,10 @@ describe('/contactgroups', () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(allCurrenciesResponse), { statusCode: 200 });
 
 				const xeroClient = new XeroAPIClient({
-					appType: 'private',
-					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-					privateKey: privateKey
+					AppType: 'private',
+					ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+					PrivateKeyCert: privateKey
 				}, null, inMemoryOAuth);
 
 				result = await xeroClient.currencies.get();
@@ -52,10 +52,10 @@ describe('/contactgroups', () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(createResponse), {stausCode: 200});
 
 				const xeroClient = new XeroAPIClient({
-					appType: 'private',
-					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-					privateKey: privateKey
+					AppType: 'private',
+					ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+					PrivateKeyCert: privateKey
 				}, null, inMemoryOAuth);
 
 				const currency: Currency = {

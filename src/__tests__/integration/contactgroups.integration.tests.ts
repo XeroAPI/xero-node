@@ -8,7 +8,7 @@ import { isUUID } from '../test-helpers';
 const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
-const data = require('./config.json');
+const data = require('./xero.json');
 const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
 
 describe('/contactgroups integration tests', () => {
@@ -67,7 +67,7 @@ describe('/contactgroups integration tests', () => {
 				expect.assertions(2);
 
 				try {
-					const getResult = await xero.contactgroups.get({ ContactGroupID: 'b780e528-57f5-4fd1-83c1-b82e4990fc01' }); // Is randome guid
+					await xero.contactgroups.get({ ContactGroupID: 'b780e528-57f5-4fd1-83c1-b82e4990fc01' }); // Is randome guid
 				} catch (error) {
 					expect(error.statusCode).toBe(404);
 					expect(error.body).toBe('The resource you\'re looking for cannot be found');
@@ -100,7 +100,7 @@ describe('/contactgroups integration tests', () => {
 				expect(deleteResult.ContactGroups[0].ContactGroupID).toBe(createResult.ContactGroups[0].ContactGroupID);
 
 				try {
-					const getResult = await xero.contactgroups.get({ ContactGroupID: createResult.Id });
+					await xero.contactgroups.get({ ContactGroupID: createResult.Id });
 				} catch (error) {
 					expect(error.statusCode).toBe(404);
 				}

@@ -3,7 +3,7 @@ import * as  prompt from 'prompt';
 import * as opn from 'opn';
 
 // TODO: Let them pass in the privateKey and privateKey path
-const data = require('./public_config.json');
+const data = require('./xero_public.json');
 
 const xero = new XeroAPIClient(data);
 
@@ -21,7 +21,7 @@ const xero = new XeroAPIClient(data);
 	// tslint:disable-next-line:no-debugger
 	debugger; // You need to set pin to the pin that the Auth page gave you. Or if not running in debugger use the line above.
 
-	const access = await xero.oauth10a.getAccessToken(unauthorisedRequestToken, pin);
+	xero.oauth10a.getAccessToken(unauthorisedRequestToken, pin);
 
 	const inv = await xero.contacts.get();
 	console.log('Invoice', inv);
