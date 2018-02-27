@@ -49,6 +49,7 @@ export class XeroAPIClient {
 		}
 		else if (this.options.appType == 'public') {
 			this._state.signatureMethod = 'HMAC-SHA1';
+			// TODO: any others here>
 		}
 
 		if (!this._oauthClient) {
@@ -65,12 +66,15 @@ export class XeroAPIClient {
 	}
 
 	// TODO: Rename methods have them update state etc
+	// TODO: think about if the top two could be the same method
+	// TODO: think about the method names. Will these be the same for OAuth2. Will we need seperate methods? That's
+	// why at the moment I have kept them on tha oauth10a object.
 	public oauth10a = {
 		getUnauthorisedRequestToken: async () => this._oauthClient.getUnauthorisedRequestToken(),
 		buildAuthorizeUrl: (unauthorisedRequestToken: string) => `https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`,
 		getAccessToken: (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
 			const token = this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier);
-			// Set token store
+			// Set this instate
 			return token;
 		}
 	};
@@ -91,6 +95,7 @@ export class XeroAPIClient {
 		return this._oauthClient.delete<T>(endpoint, args);
 	}
 
+	// TODO all these endoints could be moved the their own folders.
 	public accounts = {
 		get: async (args?: any): Promise<AccountsResponse> => {
 			// TODO: Support for where arg
