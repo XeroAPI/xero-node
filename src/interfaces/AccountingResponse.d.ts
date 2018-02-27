@@ -20,6 +20,7 @@ export interface CurrenciesResponse extends AccountingResponse {
 
 export interface EmployeesResponse extends Employee {
 	Employees: Employee[];
+}
 
 export interface AccountsResponse extends AccountingResponse {
 	Accounts: Account[];
@@ -156,7 +157,7 @@ export interface Employee {
 	FirstName: string;
 	LastName: string;
 	ExternalLink?: any;
-
+}
 
 export interface Report {
 	ReportID: string;

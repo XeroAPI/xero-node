@@ -1,10 +1,10 @@
-import { IOAuthClientConfiguration, OAuthClient, IHttpError } from '../../OAuthClient';
+import { IOAuthClientConfiguration, OAuthClient } from '../../OAuthClient';
 import { InMemoryOAuth } from './InMenoryOAuth';
 
 describe('OAuthClient', () => {
 	const testConfig: IOAuthClientConfiguration = {
-		consumerKey: 'ck',
-		consumerSecret: 'cs',
+		ConsumerKey: 'ck',
+		ConsumerSecret: 'cs',
 		oauthSecret: 'os',
 		oauthToken: 'ot',
 		apiBaseUrl: 'abu',
