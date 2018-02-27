@@ -90,8 +90,8 @@ export class OAuthClient implements IOAuthClient {
 
 	public async get<T>(endpoint: string, args?: any): Promise<T> {
 		// this.checkAuthentication();
-
 		// TODO make this Accept Accept: application/json
+
 		if (args && args.Accept) {
 			// Temp for getting PDFs
 			const oauth = this.oAuthFactory({ ...this.options, ...{ Accept: args.Accept } });

@@ -1,5 +1,6 @@
 import { OAuthClient, IOAuthClient } from './OAuthClient';
-import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse } from './interfaces/AccountingResponse';
+import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse, Employee, EmployeesResponse } from './interfaces/AccountingResponse';
+
 
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
@@ -220,6 +221,24 @@ export class XeroAPIClient {
 		}
 	};
 
+	public employees = {
+		get: async (args?: any): Promise<EmployeesResponse> => {
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			let endpoint = 'employees';
+			if (args && args.EmployeeID){
+				endpoint = endpoint  + '/' + args.EmployeeID;
+			}
+			return this.get<any>(endpoint, args);
+		},
+		create: async (employee: Employee, args?: any): Promise<EmployeesResponse> => {
+			const endpoint = 'employees';
+			return this._oauthClient.put<any>(endpoint, employee);
+		}
+	};
+	// private checkAuthentication() {
+	// 	// TODO
+	// }
 	public contacts = {
 		get: async (args?: any): Promise<ContactsResponse> => {
 			const endpoint = 'contacts';
