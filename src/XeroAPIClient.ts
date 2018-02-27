@@ -19,33 +19,57 @@ export class XeroAPIClient {
 	private oauthToken: string;
 	private oauthSecret: string;
 
+	// TODO make IState
+	private _state: any;
+
 	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauth?: any) {
 		if (!this.options) {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
 		}
 		// TODO: Check options for each app type
+		this._state = {
+			consumerKey: this.options.consumerKey,
+			consumerSecret: this.options.consumerSecret,
+			oauthToken: this.oauthToken,
+			oauthSecret: this.oauthSecret,
+			apiBaseUrl: API_BASE,
+			apiBasePath: API_BASE_PATH,
+			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
+			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH
+		};
 
-		let consumerSecret = this.options.consumerSecret;
 		if (this.options.appType == 'private') {
-			this.oauthToken = this.options.consumerKey;
-			this.oauthSecret = this.options.privateKey;
-			consumerSecret = this.options.privateKey;
+			this._state.oauthToken = this.options.consumerKey;
+			this._state.oauthSecret = this.options.privateKey;
+			this._state.consumerSecret = this.options.privateKey;
+		}
+		else if (this.options.appType == 'public') {
+			// this.oauthToken = this.options.consumerKey;
+			// this.oauthSecret = this.options.privateKey;
 		}
 
 		if (!this._oauthClient) {
-			this._oauthClient = new OAuthClient({
-				consumerKey: this.options.consumerKey,
-				consumerSecret: consumerSecret,
-				oauthToken: this.oauthToken,
-				oauthSecret: this.oauthSecret,
-				apiBaseUrl: API_BASE,
-				apiBasePath: API_BASE_PATH,
-				oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
-				oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH
-
-			}, this._oauth);
+			this._oauthClient = new OAuthClient(this._state, this._oauth);
 		}
 	}
+
+	public get state(): any {
+		return this._state;
+	}
+
+	public set state(state: any) {
+		this._state = state;
+	}
+
+	public oauth10a = {
+		getUnauthorisedRequestToken: async () => this._oauthClient.getUnauthorisedRequestToken(),
+		buildAuthorizeUrl: (unauthorisedRequestToken: string) => `https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`,
+		getAccessToken: (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
+			const token = this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier);
+			// Set token store
+			return token;
+		}
+	};
 
 	private get<T>(endpoint: string, args?: any): Promise<T> {
 		return this._oauthClient.get<T>(endpoint, args);

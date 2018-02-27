@@ -17,6 +17,8 @@ export interface IOAuthClient {
 	delete<T>(endpoint: string, args?: any): Promise<T>;
 	put<T>(endpoint: string, body: object, args?: any): Promise<T>;
 	post<T>(endpoint: string, body: object, args?: any): Promise<T>;
+	getUnauthorisedRequestToken(): Promise<{ oauth_token: string, oauth_token_secret: string }>;
+	SwapRequestTokenforAccessToken(authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }>;
 }
 
 // TODO: Do we call this?
@@ -41,13 +43,46 @@ export class OAuthClient implements IOAuthClient {
 			this.options.consumerSecret,							// consumerSecret
 			'1.0A',									// version
 			null,									// authorize_callback
-			'RSA-SHA1',								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. ""HMAC-SHA1" for public
+			// 'HMAC-SHA1',								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
+			'RSA-SHA1',								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
 			null,									// nonceSize
 			{										// customHeaders
 				'Accept': 'application/json',
 				'User-Agent': 'NodeJS-XeroAPIClient'
 			}
 		);
+	}
+
+	public async getUnauthorisedRequestToken(): Promise<{ oauth_token: string, oauth_token_secret: string }> {
+		return new Promise<{ oauth_token: string, oauth_token_secret: string }>((resolve, reject) => {
+			this.oauth.getOAuthRequestToken((err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
+				// Callback sig:    callback(null, oauth_token, oauth_token_secret,  results );
+				if (err) {
+					// TODO: something here F
+					reject(err as any);
+				} else {
+					// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
+					return resolve({ oauth_token, oauth_token_secret });
+				}
+			});
+		});
+	}
+
+	public async SwapRequestTokenforAccessToken(authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> {
+		return new Promise<{ oauth_token: string, oauth_token_secret: string }>((resolve, reject) => {
+			this.oauth.getOAuthAccessToken(authedRT.oauth_token, authedRT.oauth_token_secret, oauth_verifier, (err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
+				// getOAuthAccessToken = function(oauth_token, oauth_token_secret, oauth_verifier, callback)
+				// callback sig  callback(err, results);
+
+				if (err) {
+					// TODO: something here
+					reject(err);
+				} else {
+					// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
+					return resolve({ oauth_token, oauth_token_secret });
+				}
+			});
+		});
 	}
 
 	public async get<T>(endpoint: string, args?: any): Promise<T> {
