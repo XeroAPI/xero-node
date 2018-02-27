@@ -2,7 +2,7 @@ import { XeroAPIClient } from './XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 
-const privateKeyFile = path.resolve('C:\\Dev\\privatekey.pem');
+const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 // TODO: Let them pass in the privateKey and privateKey path
