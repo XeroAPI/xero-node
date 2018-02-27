@@ -10,7 +10,7 @@ describe('OAuthClient', () => {
 		apiBaseUrl: 'abu',
 		apiBasePath: 'abp',
 		oauthRequestTokenPath: 'ortp',
-		oauthAccessTokenPath: 'oatp'
+		oauthAccessTokenPath: 'oatp',
 	};
 
 	describe('when it errors', () => {
