@@ -17,7 +17,7 @@ const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
 
 export class XeroAPIClient {
 
-	// TODO make IState
+	// TODO make IState and can this be the same as options? Private might stuff that up
 	private _state: any = {};
 
 	// TODO: should an option be OAuthVersion ??? Either make it mandatory now - or later
