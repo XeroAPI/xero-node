@@ -13,6 +13,7 @@ export interface IOAuthClientConfiguration {
 
 	signatureMethod: string;
 	accept: string;
+	userAgent: string;
 }
 
 export interface IOAuthClient {
@@ -50,7 +51,7 @@ export class OAuthClient implements IOAuthClient {
 			null,									// nonceSize
 			{										// customHeaders
 				'Accept': options.accept,
-				'User-Agent': 'NodeJS-XeroAPIClient'
+				'User-Agent': options.userAgent
 			}
 		);
 	}

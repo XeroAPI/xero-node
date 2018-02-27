@@ -20,6 +20,7 @@ export class XeroAPIClient {
 	// TODO make IState
 	private _state: any = {};
 
+	// TODO: should an option be OAuthVersion ??? Either make it mandatory now - or later
 	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauth?: any) {
 		if (!this.options) {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
@@ -48,7 +49,8 @@ export class XeroAPIClient {
 			apiBasePath: API_BASE_PATH,
 			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
 			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
-			accept: 'application/json'
+			accept: 'application/json',
+			userAgent: 'NodeJS-XeroAPIClient.' + this._state.consumerKey // TODO add package.json version here
 		};
 
 		if (!this._oauthClient) {
