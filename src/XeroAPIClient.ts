@@ -45,7 +45,7 @@ export class XeroAPIClient {
 			this._state.oauthToken = this.options.consumerKey;
 			this._state.oauthSecret = this.options.privateKey;
 			this._state.consumerSecret = this.options.privateKey;
-			this._state.signatureMethod =	'RSA-SHA1';
+			this._state.signatureMethod = 'RSA-SHA1';
 		}
 		else if (this.options.appType == 'public') {
 			this._state.signatureMethod = 'HMAC-SHA1';
@@ -61,7 +61,7 @@ export class XeroAPIClient {
 	}
 
 	public set state(state: any) {
-		this._state = state;
+		this._state = { ...this.state, ...state };
 	}
 
 	// TODO: Rename methods have them update state etc

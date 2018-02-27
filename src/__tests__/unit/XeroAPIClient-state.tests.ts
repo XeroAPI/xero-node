@@ -49,7 +49,9 @@ describe('internal state', () => {
 			oauthAccessTokenPath: 'test5',
 			oauthRequestTokenPath: 'test6',
 			oauthSecret: 'test7',
-			oauthToken: 'test8'
+			oauthToken: 'test8',
+			accept: 'application/json',
+			signatureMethod: 'RSA-SHA1',
 		};
 
 		beforeAll(() => {
