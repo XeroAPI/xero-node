@@ -21,7 +21,7 @@ export class XeroAPIClient {
 	private _state: any = {};
 
 	// TODO: should an option be OAuthVersion ??? Either make it mandatory now - or later
-	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauth?: any) {
+	constructor(private options: IXeroClientConfiguration, private _oauthClient?: IOAuthClient, private _oauthLib?: any) {
 		if (!this.options) {
 			throw new Error('XeroAPIClient: options must be passed when creating a new instance');
 		}
@@ -69,7 +69,7 @@ export class XeroAPIClient {
 			userAgent: 'NodeJS-XeroAPIClient.' + this._state.consumerKey // TODO add package.json version here
 		};
 
-		return this._oauthClient = new OAuthClient({ ...this._state, ...defaultState }, this._oauth);
+		return this._oauthClient = new OAuthClient({ ...this._state, ...defaultState }, this._oauthLib);
 	}
 
 	// TODO: Rename methods have them update state etc
@@ -144,7 +144,6 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceId;
 			}
 
-			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
 			return this.get<string>(endpoint, args);
 		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
 		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: any): Promise<InvoicesResponse> => {
@@ -232,6 +231,7 @@ export class XeroAPIClient {
 		get: async (args?: any): Promise<any> => {
 			let endpoint = 'Reports';
 			if (args) {
+				// TODO: Check if raw API errors make sense and remove these?
 				if ((args.ReportID == 'AgedPayablesByContact' || args.ReportID == 'AgedReceivablesByContact') && !args.ContactID) {
 					throw Error('required args for AgedPayablesByContact report: ContactID');
 				}
