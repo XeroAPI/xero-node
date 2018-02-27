@@ -64,6 +64,7 @@ export class XeroAPIClient {
 		this._state = state;
 	}
 
+	// TODO: Rename methods have them update state etc
 	public oauth10a = {
 		getUnauthorisedRequestToken: async () => this._oauthClient.getUnauthorisedRequestToken(),
 		buildAuthorizeUrl: (unauthorisedRequestToken: string) => `https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`,
