@@ -14,6 +14,8 @@ const data = require('./config.json');
 const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
 
 describe('/invoices integration tests', () => {
+	jest.setTimeout(20000);
+
 	describe('and GETing', () => {
 		describe('a single invoice as PDF', () => {
 			let result: string;
