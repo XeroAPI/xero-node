@@ -6,7 +6,7 @@ import { Invoice, InvoicesResponse } from '../../interfaces/AccountingResponse';
 import { isUUID } from '../test-helpers';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
 
-const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
+const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 // TODO: Let them pass in the privateKey and privateKey path

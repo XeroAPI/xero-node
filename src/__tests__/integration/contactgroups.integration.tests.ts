@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import { ContactGroupsResponse, ContactGroup } from '../../interfaces/AccountingResponse';
 import { isUUID } from '../test-helpers';
 
-const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
+const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 const data = require('./config.json');
