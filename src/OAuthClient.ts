@@ -10,6 +10,9 @@ export interface IOAuthClientConfiguration {
 	apiBasePath: string;
 	oauthRequestTokenPath: string;
 	oauthAccessTokenPath: string;
+
+	signatureMethod: string;
+	accept: string;
 }
 
 export interface IOAuthClient {
@@ -31,23 +34,22 @@ export class OAuthClient implements IOAuthClient {
 
 	constructor(private options: IOAuthClientConfiguration, private oauth?: typeof OAuth) {
 		if (!this.oauth) {
-			this.oauth = this.oAuthFactory();
+			this.oauth = this.oAuthFactory(this.options);
 		}
 	}
 
-	private oAuthFactory() {
+	private oAuthFactory(options: IOAuthClientConfiguration) {
 		return new OAuth(
-			this.options.apiBaseUrl + this.options.oauthRequestTokenPath, 	// requestTokenUrl
-			this.options.apiBaseUrl + this.options.oauthAccessTokenPath, 	// accessTokenUrl
-			this.options.consumerKey, 				// consumerKey
-			this.options.consumerSecret,							// consumerSecret
+			options.apiBaseUrl + options.oauthRequestTokenPath, 	// requestTokenUrl
+			options.apiBaseUrl + options.oauthAccessTokenPath, 	// accessTokenUrl
+			options.consumerKey, 				// consumerKey
+			options.consumerSecret,							// consumerSecret
 			'1.0A',									// version
 			null,									// authorize_callback
-			// 'HMAC-SHA1',								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
-			'RSA-SHA1',								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
+			options.signatureMethod,								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
 			null,									// nonceSize
 			{										// customHeaders
-				'Accept': 'application/json',
+				'Accept': options.accept,
 				'User-Agent': 'NodeJS-XeroAPIClient'
 			}
 		);
@@ -89,22 +91,9 @@ export class OAuthClient implements IOAuthClient {
 		// this.checkAuthentication();
 
 		// TODO make this accept Accept: application/json
-		// TODO: Refactor duplication out this is for PDF
 		if (args && args.Accept) {
-			const oauth = new OAuth(
-				this.options.apiBaseUrl + this.options.oauthRequestTokenPath, 	// requestTokenUrl
-				this.options.apiBaseUrl + this.options.oauthAccessTokenPath, 	// accessTokenUrl
-				this.options.consumerKey, 				// consumerKey
-				this.options.consumerSecret,							// consumerSecret
-				'1.0A',									// version
-				null,									// authorize_callback
-				'RSA-SHA1',								// signatureMethod
-				null,									// nonceSize
-				{										// customHeaders
-					'Accept': args.Accept,
-					'User-Agent': 'NodeJS-XeroAPIClient'
-				}
-			);
+			// Temp for getting PDFs
+			const oauth = this.oAuthFactory({ ...this.options, ...{ accept: args.Accept } });
 
 			return new Promise<T>((resolve, reject) => {
 				const request = oauth.get(

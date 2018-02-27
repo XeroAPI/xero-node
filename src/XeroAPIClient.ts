@@ -35,17 +35,20 @@ export class XeroAPIClient {
 			apiBaseUrl: API_BASE,
 			apiBasePath: API_BASE_PATH,
 			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
-			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH
+			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
+			accept: 'application/json'
 		};
+
+		// TODO: Can we remove signatureMethod from state?
 
 		if (this.options.appType == 'private') {
 			this._state.oauthToken = this.options.consumerKey;
 			this._state.oauthSecret = this.options.privateKey;
 			this._state.consumerSecret = this.options.privateKey;
+			this._state.signatureMethod =	'RSA-SHA1';
 		}
 		else if (this.options.appType == 'public') {
-			// this.oauthToken = this.options.consumerKey;
-			// this.oauthSecret = this.options.privateKey;
+			this._state.signatureMethod = 'HMAC-SHA1';
 		}
 
 		if (!this._oauthClient) {
