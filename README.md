@@ -9,7 +9,7 @@ Supports the three applications types:
 
 * Private - apps connecting to a single Org
 * Public - apps that connect to any Org, but with a 30 minute limitation
-* Partner - approved apps that can automatically refresh Org tokens
+* Partner - approved apps that can automatically refresh Org tokens. See (https://github.com/XeroAPI/xero-node/blob/master/docs/PartnerSetup.md)
 
 For any suggestions create a github issue, or fork the code and submit a PR.
 
