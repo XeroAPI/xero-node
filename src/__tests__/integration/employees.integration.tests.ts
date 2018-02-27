@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { EmployeesResponse } from '../../interfaces/AccountingResponse';
 
-const privateKeyFile = path.resolve('C:\\Dev\\xero-node-v3\\privatekey.pem');
+const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 // TODO: Let them pass in the privateKey and privateKey path
