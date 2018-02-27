@@ -166,11 +166,11 @@ export interface Report {
 	ReportTitles?: string[];
 	ReportDate: string;
 	UpdatedDateUTC: string;
-	Attributes?: {
+	Attributes?: Array<{
 		Name: string;
 		Description: string;
 		Value: string;
-	}[];
+	}>;
 	Fields?: Field[];
 	Rows: Row[];
 }
@@ -186,8 +186,8 @@ export interface Row {
 export interface Cell
 {
 	Value?: string;
-	Attibutes?: {
+	Attibutes?: Array<{
 		Value: string;
 		Id: string;
-	}[];
+	}>;
 }
