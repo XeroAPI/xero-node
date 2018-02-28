@@ -6,9 +6,16 @@ export class InMemoryOAuthLib {
 	private returnData: any = null;
 	private returnHttpResponse: any = null;
 	private lastCalledUrl = '';
+	private returnOauthToken: string = null;
+	private returnOauthSecret: string = null;
 
 	public lastCalledThisURL(url: string) {
 		expect(this.lastCalledUrl).toBe(url);
+	}
+
+	public setTokenSecret(oauth_token: string, oauth_secret: string){
+		this.returnOauthToken = oauth_token;
+		this.returnOauthSecret = oauth_secret;
 	}
 
 	public get(
@@ -55,5 +62,10 @@ export class InMemoryOAuthLib {
 		this.returnErr = returnGetErr;
 		this.returnData = returnGetData;
 		this.returnHttpResponse = returnGetHttpResponse;
+	}
+
+	public getOAuthRequestToken(
+		callback: (err: any, oauth_token: string, oauth_token_secret: string, result: any) => any) {
+		callback(null, this.returnOauthToken, this.returnOauthSecret, null);
 	}
 }
