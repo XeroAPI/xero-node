@@ -88,20 +88,20 @@ export class XeroAPIClient {
 		}
 	};
 
-	private get<T>(endpoint: string, args?: any): Promise<T> {
-		return this._oauthClient.get<T>(endpoint, args);
+	private get<T>(endpoint: string, acceptType?: string): Promise<T> {
+		return this._oauthClient.get<T>(endpoint, acceptType);
 	}
 
-	private post<T>(endpoint: string, body?: object, args?: any): Promise<T> {
-		return this._oauthClient.post<T>(endpoint, body, args);
+	private post<T>(endpoint: string, body?: object): Promise<T> {
+		return this._oauthClient.post<T>(endpoint, body);
 	}
 
-	private put<T>(endpoint: string, body?: object, args?: any): Promise<T> {
-		return this._oauthClient.put<T>(endpoint, body, args);
+	private put<T>(endpoint: string, body?: object): Promise<T> {
+		return this._oauthClient.put<T>(endpoint, body);
 	}
 
-	private delete<T>(endpoint: string, body?: object, args?: any): Promise<T> {
-		return this._oauthClient.delete<T>(endpoint, args);
+	private delete<T>(endpoint: string): Promise<T> {
+		return this._oauthClient.delete<T>(endpoint);
 	}
 
 	// TODO all these endoints could be moved the their own folders.
@@ -115,7 +115,7 @@ export class XeroAPIClient {
 			}
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
-			return this.get<AccountsResponse>(endpoint, args);
+			return this.get<AccountsResponse>(endpoint);
 		}
 	};
 
@@ -130,12 +130,9 @@ export class XeroAPIClient {
 			}
 
 			// TODO: I think we want to not return the oauth.get HTTP object incase we change oauth lib
-			return this.get<InvoicesResponse>(endpoint, args);
+			return this.get<InvoicesResponse>(endpoint);
 		},
 		getPDF: async (args?: any): Promise<string> => {
-			// is a string when args.Accept = application/pdf
-			args.Accept = 'application/pdf';
-
 			// TODO: Support invoice number
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -145,7 +142,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceId;
 			}
 
-			return this.get<string>(endpoint, args);
+			return this.get<string>(endpoint, 'application/pdf');
 		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
 		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: any): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -153,12 +150,12 @@ export class XeroAPIClient {
 			// TODO: Summerize errors?
 			const endpoint = 'invoices?summarizeErrors=false';
 
-			return this.put<InvoicesResponse>(endpoint, invoice, args);
+			return this.put<InvoicesResponse>(endpoint, invoice);
 		},
 	};
 
 	public contactgroups = {
-		get: async (args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
+		get: async (args?: { ContactGroupID: string, Accept?: string }): Promise<ContactGroupsResponse> => {
 
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -167,7 +164,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
 
-			return this.get<ContactGroupsResponse>(endpoint, args);
+			return this.get<ContactGroupsResponse>(endpoint);
 		},
 		create: async (contactGroup: ContactGroup, args?: any): Promise<ContactGroupsResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -180,7 +177,7 @@ export class XeroAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this.put<ContactGroupsResponse>(endpoint, contactGroup, args);
+			return this.put<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		update: async (contactGroup: ContactGroup, args?: any): Promise<ContactGroupsResponse> => {
 			let endpoint = 'contactgroups';
@@ -190,10 +187,10 @@ export class XeroAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this.post<ContactGroupsResponse>(endpoint, contactGroup, args);
+			return this.post<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		contacts: {
-			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactGroupsResponse> => {
+			delete: async (args: { ContactGroupID: string, ContactID?: string, Accept?: string }): Promise<ContactGroupsResponse> => {
 				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 				// TODO: Support for where arg
 				// TODO: Summerize errors?
@@ -205,7 +202,7 @@ export class XeroAPIClient {
 					endpoint = endpoint + '/' + args.ContactID;
 				}
 
-				return this.delete<ContactGroupsResponse>(endpoint, args);
+				return this.delete<ContactGroupsResponse>(endpoint);
 			}
 		}
 	};
@@ -213,7 +210,7 @@ export class XeroAPIClient {
 	public currencies = {
 		get: async (args?: any): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
-			return this.get<CurrenciesResponse>(endpoint, args);
+			return this.get<CurrenciesResponse>(endpoint);
 		},
 		create: async (currency: Currency, args?: any): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
@@ -229,7 +226,7 @@ export class XeroAPIClient {
 			if (args && args.EmployeeID){
 				endpoint = endpoint  + '/' + args.EmployeeID;
 			}
-			return this.get<any>(endpoint, args);
+			return this.get<any>(endpoint);
 		},
 		create: async (employee: Employee, args?: any): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
@@ -242,7 +239,7 @@ export class XeroAPIClient {
 	public contacts = {
 		get: async (args?: any): Promise<ContactsResponse> => {
 			const endpoint = 'contacts';
-			return this.get<ContactsResponse>(endpoint, args);
+			return this.get<ContactsResponse>(endpoint);
 		}
 	};
 
@@ -257,7 +254,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ReportID + '?' + query.toString();
 			}
 
-			return this.get<ReportsResponse>(endpoint, args);
+			return this.get<ReportsResponse>(endpoint);
 		}
 	};
 
@@ -265,7 +262,7 @@ export class XeroAPIClient {
 		post: async (body?: object, args?: any): Promise<any> => {
 			const endpoint = 'purchaseorders?summarizeErrors=true';
 			// TODO: Add interface here
-			return this.post<any>(endpoint, body, args);
+			return this.post<any>(endpoint, body);
 		}
 	};
 }
