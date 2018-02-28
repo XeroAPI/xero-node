@@ -1,0 +1,315 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>xero-node</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">xero-node</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> xero-node</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="node-xero">node-xero</h1>
+				<p>NodeJS Client for the Xero API, supporting Public, Private and Partner Apps</p>
+				<h2 id="current-status-pre-pre-alpha-">Current Status: PRE-PRE-ALPHA.</h2>
+				<p>Ideas we want to achieve.</p>
+				<p>We want to make this wrapper as thin as possible. This means:</p>
+				<ol>
+					<li><p>An interface that matches the api endpoints.
+						eg:</p>
+						<p> <code>PUT https://api.xero.com/api.xro/2.0/ContactGroups/b05466c8-dc54-4ff8-8f17-9d7008a2e44b/Contacts</code></p>
+						<p> Will become</p>
+						<p> <code>xero.contacts.contactGroups.create(contact)</code></p>
+						<p> This will help with documentation, as API docs == SDK interface.</p>
+						<p> That rather than using verbs <code>.put()</code>, <code>.post</code> etc will use actions. Example <code>get()</code>, <code>create()</code>,<code>delete()</code>, <code>update()</code>. This will abstract away the Accounting Apis funny <code>PUT</code> vs <code>POST</code>.</p>
+					</li>
+					<li><p>Simple Partner flows. Rather than automatically refreshing tokens we will expose methods which show when it will expire and ability to refresh. KISS.</p>
+					</li>
+					<li><p>Abstracted away OAuth lib. This will allow us to swap it out if we needed. We won&#39;t bleed the OAuth libs exception types into the SDK. This will make it easier for us to extend to Payroll etc</p>
+					</li>
+					<li><p>No entity validation. The user will pass in JSON and get JSON out. There will be no manipulation of data along the way. Again the public docs will show what will be returned. Helper methods if asked for will be provided by a separate module. This will reduce maintenance costs.</p>
+					</li>
+					<li><p>Unit tests</p>
+					</li>
+					<li><p>Oauth2 ready. The Oauth lib we are using us OAuth2 ready. Design decision will be made with this in mind. The current SDK forked and changed the Oauth lib, which makes things hard.</p>
+					</li>
+					<li><p>Typescript. This will aid in self-generated docs etc.</p>
+					</li>
+				</ol>
+				<h1 id="there-are-lots-of-todos-feel-free-to-pick-one-off">There are LOTS of // TODOs - Feel free to pick one off</h1>
+				<ul>
+					<li>[ ] Standard Error types<ul>
+							<li>We said there would be two (APIException, OAuthException)</li>
+							<li>Make interfaces for them</li>
+							<li>Need to throw these at the right time</li>
+						</ul>
+					</li>
+					<li>[ ] Scopes</li>
+					<li>[ ] All Endpoints</li>
+					<li>[ ] Partner Auth</li>
+					<li>[ ] Public Sample App</li>
+					<li>[ ] Public App can take a call back URL</li>
+					<li>[ ] Partner Sample App</li>
+					<li>[ ] CI</li>
+					<li>[ ] TSDoc?</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-not-exported">
+						<a href="modules/_oauth_.html">"oauth"</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-not-exported">
+						<a href="modules/_opn_.html">"opn"</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-not-exported">
+						<a href="modules/_prompt_.html">"prompt"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/oauthclient.html" class="tsd-kind-icon">OAuth<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/xeroapiclient.html" class="tsd-kind-icon">XeroAPIClient</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="interfaces/accountingresponse.html" class="tsd-kind-icon">Accounting<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accountsresponse.html" class="tsd-kind-icon">Accounts<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/address.html" class="tsd-kind-icon">Address</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cell.html" class="tsd-kind-icon">Cell</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contact.html" class="tsd-kind-icon">Contact</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contactgroup.html" class="tsd-kind-icon">Contact<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contactgroupsresponse.html" class="tsd-kind-icon">Contact<wbr>Groups<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contactsresponse.html" class="tsd-kind-icon">Contacts<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/currenciesresponse.html" class="tsd-kind-icon">Currencies<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/currency.html" class="tsd-kind-icon">Currency</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/employee.html" class="tsd-kind-icon">Employee</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/employeesresponse.html" class="tsd-kind-icon">Employees<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/field.html" class="tsd-kind-icon">Field</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ihttperror.html" class="tsd-kind-icon">IHttp<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ioauthclient.html" class="tsd-kind-icon">IOAuth<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ioauthclientconfiguration.html" class="tsd-kind-icon">IOAuth<wbr>Client<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixeroclientconfiguration.html" class="tsd-kind-icon">IXero<wbr>Client<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invoice.html" class="tsd-kind-icon">Invoice</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invoicesresponse.html" class="tsd-kind-icon">Invoices<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/lineitem.html" class="tsd-kind-icon">Line<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/phone.html" class="tsd-kind-icon">Phone</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/report.html" class="tsd-kind-icon">Report</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/reportsresponse.html" class="tsd-kind-icon">Reports<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/row.html" class="tsd-kind-icon">Row</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tracking.html" class="tsd-kind-icon">Tracking</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/validationerror.html" class="tsd-kind-icon">Validation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#api_base" class="tsd-kind-icon">API_<wbr>BASE</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#api_base_path" class="tsd-kind-icon">API_<wbr>BASE_<wbr>PATH</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#oauth_access_token_path" class="tsd-kind-icon">OAUTH_<wbr>ACCESS_<wbr>TOKEN_<wbr>PATH</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#oauth_request_token_path" class="tsd-kind-icon">OAUTH_<wbr>REQUEST_<wbr>TOKEN_<wbr>PATH</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#data" class="tsd-kind-icon">data</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#privatekey" class="tsd-kind-icon">private<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#privatekeyfile" class="tsd-kind-icon">private<wbr>Key<wbr>File</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#xero" class="tsd-kind-icon">xero</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#main" class="tsd-kind-icon">main</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#readline" class="tsd-kind-icon">read<wbr>Line</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
