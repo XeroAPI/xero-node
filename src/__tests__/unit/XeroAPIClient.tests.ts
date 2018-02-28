@@ -98,7 +98,7 @@ describe('XeroAPIClient', () => {
 		});
 
 		it('it builds the authorise url', () => {
-			expect(testXeroAPIClient.oauth10a.buildAuthoriseUrl(unauthRequestToken.oauth_token)).toEqual(`https://api.xero.com/oauth/Authorize?oauth_token=${unauthRequestToken.oauth_token}`);
+			expect(testXeroAPIClient.oauth10a.buildAuthorizeUrl(unauthRequestToken.oauth_token)).toEqual(`https://api.xero.com/oauth/Authorize?oauth_token=${unauthRequestToken.oauth_token}`);
 		});
 
 		it('it returns the access token', () => {
