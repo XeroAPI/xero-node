@@ -1,5 +1,5 @@
 {
-  "name": "node-xero",
+  "name": "xero-node",
   "version": "0.0.1",
   "description": "NodeJS Client for the Xero API, supporting Public, Private and Partner Apps",
   "main": "lib/index.js",
@@ -9,10 +9,11 @@
     "lint": "tslint ./src/**/*.ts",
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
-    "scratch": "ts-node ./src/scratch.ts --watch"
+    "scratch": "ts-node ./src/scratch.ts",
+    "typedoc": "typedoc --mode file --exclude **/__tests__/** --includeDeclarations --excludeExternals --target ES6 --out docs/ src/"
   },
   "author": "Xero <api@xero.com>",
-  "repository": "https://github.com/dupski/node-xero.git",
+  "repository": "https://github.com/XeroAPI/xero-node.git",
   "license": "MIT",
   "typings": "lib/index.d.ts",
   "dependencies": {
@@ -29,6 +30,7 @@
     "ts-jest": "^22.0.3",
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
+    "typedoc": "^0.10.0",
     "typescript": "^2.7.1"
   }
 }
