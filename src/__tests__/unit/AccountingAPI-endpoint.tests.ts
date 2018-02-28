@@ -5,6 +5,17 @@ import { validTestCertPath } from '../test-helpers';
 const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
 const aGuid = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
 
+interface IEndPoingDetails {
+	endpoint: string;
+	action: string;
+	expectedPath: string;
+	args?: any;
+}
+
+interface IFixture {
+	[key: string]: IEndPoingDetails[];
+}
+
 describe('Endpoint: ', () => {
 	const inMemoryOAuthLib = new InMemoryOAuthLib();
 
@@ -18,52 +29,63 @@ describe('Endpoint: ', () => {
 	// TODO: figure out contactgroups.contacts
 	// TODO: Double check when an endpoint and take an ID and add a line for it
 
-	[{ endpoint: 'invoices', action: 'get', expectedPath: 'invoices' },
-	{ endpoint: 'invoices', action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
-	{ endpoint: 'contactgroups', action: 'get', expectedPath: 'contactgroups' },
-	{ endpoint: 'contactgroups', action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
-	{ endpoint: 'contactgroups', action: 'update', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
-	{ endpoint: 'currencies', action: 'get', expectedPath: `currencies` },
-	{ endpoint: 'currencies', action: 'create', expectedPath: `currencies` },
-	].map((fixture) => {
+	const verbMap: { [key: string]: string } = {
+		create: 'put',
+		delete: 'delete',
+		update: 'post',
+		get: 'get'
+	};
 
-		let result: any;
+	const fixtures: IFixture = {
+		invoices: [
+			{ endpoint: 'invoices', action: 'get', expectedPath: 'invoices' },
+			{ endpoint: 'invoices', action: 'create', expectedPath: 'invoices?summarizeErrors=false' }
+		],
+		contactgroups: [
+			{ endpoint: 'contactgroups', action: 'get', expectedPath: 'contactgroups' },
+			{ endpoint: 'contactgroups', action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
+			{ endpoint: 'contactgroups', action: 'update', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
+		],
+		currencies: [
+			{ endpoint: 'currencies', action: 'get', expectedPath: `currencies` },
+			{ endpoint: 'currencies', action: 'create', expectedPath: `currencies` },
+		]
+	};
 
-		describe(`${fixture.endpoint} & ${fixture.action} calls`, () => {
+	Object.keys(fixtures).map((endpoint: string) => {
+		(fixtures[endpoint] as any).map((fixture: IEndPoingDetails) => {
 
-			const mockedResponse = JSON.stringify({ a: 'response' });
+			describe(`${fixture.endpoint} & ${fixture.action} calls`, () => {
+				let result: any;
 
-			const hasRequestBody = (fixture.action == 'create' || fixture.action == 'update');
-			const mockedRequest = hasRequestBody ? { a: 'request' } : null;
+				const mockedResponse = JSON.stringify({ a: 'response' });
 
-			beforeAll(async () => {
-				inMemoryOAuthLib.reset();
-				inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: 200 });
-				result = await (xeroClient as any)[fixture.endpoint][fixture.action](mockedRequest, fixture.args);
-			});
+				const hasRequestBody = (fixture.action == 'create' || fixture.action == 'update');
+				const mockedRequest = hasRequestBody ? { a: 'request' } : null;
 
-			it(`calls the ${fixture.expectedPath} endpoint`, () => {
-				inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + fixture.expectedPath);
-			});
+				beforeAll(async () => {
+					inMemoryOAuthLib.reset();
+					inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: 200 });
+					result = await (xeroClient as any)[fixture.endpoint][fixture.action](mockedRequest, fixture.args);
+				});
 
-			const verbMap: { [key: string]: string } = {
-				create: 'put',
-				delete: 'delete',
-				update: 'post',
-				get: 'get'
-			};
+				it(`calls the ${fixture.expectedPath} endpoint`, () => {
+					inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + fixture.expectedPath);
+				});
 
-			it(`calls the ${verbMap[fixture.action]} verb`, () => {
-				inMemoryOAuthLib.lastCalledThisVerb(verbMap[fixture.action]);
-			});
+				it(`calls the ${verbMap[fixture.action]} verb`, () => {
+					inMemoryOAuthLib.lastCalledThisVerb(verbMap[fixture.action]);
+				});
 
-			it('requested with expected body', () => {
-				inMemoryOAuthLib.lastRequestedHadBody(mockedRequest);
-			});
+				it('requested with expected body', () => {
+					inMemoryOAuthLib.lastRequestedHadBody(mockedRequest);
+				});
 
-			it('matches the expected response', () => {
-				expect(result).toMatchObject(JSON.parse(mockedResponse));
+				it('matches the expected response', () => {
+					expect(result).toMatchObject(JSON.parse(mockedResponse));
+				});
 			});
 		});
+
 	});
 });
