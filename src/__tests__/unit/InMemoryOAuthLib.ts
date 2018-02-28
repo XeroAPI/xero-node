@@ -45,11 +45,11 @@ export class InMemoryOAuthLib {
 	}
 
 	public lastRequestedHadBody(expectedBody: any) {
-		expect(this.lastRequestedBody).toMatch(expectedBody);
-	}
-
-	public lastRequestHadNoBody() {
-		expect(this.lastRequestedBody).toBeNull();
+		if (expectedBody) {
+			expect(this.lastRequestedBody).toMatch(JSON.stringify(expectedBody));
+		} else {
+			expect(this.lastRequestedBody).toBeNull();
+		}
 	}
 
 	public get(

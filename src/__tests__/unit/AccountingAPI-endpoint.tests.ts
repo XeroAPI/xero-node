@@ -46,15 +46,9 @@ describe('Endpoint: ', () => {
 				inMemoryOAuthLib.lastCalledThisVerb(fixture.expectedVerb);
 			});
 
-			if (fixture.hasRequestBody) {
-				it(`requested with the expected body`, () => {
-					inMemoryOAuthLib.lastRequestedHadBody(JSON.stringify(mockedRequest));
-				});
-			} else {
-				it(`sent request with empty body`, () => {
-					inMemoryOAuthLib.lastRequestHadNoBody();
-				});
-			}
+			it('requested with expected body', () => {
+				inMemoryOAuthLib.lastRequestedHadBody(mockedRequest);
+			});
 
 			it('matches the expected response', () => {
 				expect(result).toMatchObject(JSON.parse(mockedResponse));
