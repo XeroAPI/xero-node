@@ -71,6 +71,7 @@ describe('XeroAPIClient', () => {
 
 	describe('XeroApiClient OAuth10a', () => {
 		let unauthRequestToken: any;
+		let accessToken: any;
 		const inMemoryOAuthLib = new InMemoryOAuthLib();
 		let oauthToken: string;
 		let oauthSecret: string;
@@ -86,7 +87,9 @@ describe('XeroAPIClient', () => {
 			oauthToken = testXeroAPIClient.state.oauthToken;
 			oauthSecret = testXeroAPIClient.state.oauthSecret;
 			inMemoryOAuthLib.setTokenSecret(oauthToken, oauthSecret);
+			inMemoryOAuthLib.swapToAuthTokenSecret(`access+${oauthToken}`, `access+${oauthSecret}`);
 			unauthRequestToken = await testXeroAPIClient.oauth10a.getUnauthorisedRequestToken();
+			accessToken = await testXeroAPIClient.oauth10a.getAccessToken(unauthRequestToken, null);
 		});
 
 		it('it returns the request token', () => {
@@ -95,6 +98,10 @@ describe('XeroAPIClient', () => {
 
 		it('it builds the authorise url', () => {
 			expect(testXeroAPIClient.oauth10a.buildAuthoriseUrl(unauthRequestToken.oauth_token)).toEqual(`https://api.xero.com/oauth/Authorize?oauth_token=${unauthRequestToken.oauth_token}`);
+		});
+
+		it('it returns the access token', () => {
+			expect(accessToken).toMatchObject({oauth_token: `access+${oauthToken}`, oauth_token_secret: `access+${oauthSecret}`});
 		});
 	});
 });
