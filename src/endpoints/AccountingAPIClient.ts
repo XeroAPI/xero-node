@@ -56,7 +56,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 	};
 
 	public contactgroups = {
-		get: async (args?: { ContactGroupID: string, Accept?: string }): Promise<ContactGroupsResponse> => {
+		get: async (args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
 
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -91,7 +91,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 			return this.post<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		contacts: {
-			delete: async (args: { ContactGroupID: string, ContactID?: string, Accept?: string }): Promise<ContactGroupsResponse> => {
+			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactGroupsResponse> => {
 				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 				// TODO: Support for where arg
 				// TODO: Summerize errors?

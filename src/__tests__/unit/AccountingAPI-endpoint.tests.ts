@@ -3,11 +3,13 @@ import { InMemoryOAuthLib } from './InMemoryOAuthLib';
 import { validTestCertPath } from '../test-helpers';
 
 const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
-const aGuid = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
+const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
+const guid2 = '857c9e3f-640a-4df2-99fd-dd0e52a785e7';
 
 interface IEndPointDetails {
 	action: string;
 	expectedPath: string;
+	subResource?: string;
 	args?: any;
 }
 
@@ -43,8 +45,9 @@ describe('Endpoint: ', () => {
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
 			{ action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
-			{ action: 'update', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
-			{ action: 'update', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
+			{ action: 'update', expectedPath: `contactgroups/${guid1}?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
+			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts/${guid2}`, args: { ContactGroupID: guid1, ContactID: guid2 } },
+			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts`, args: { ContactGroupID: guid1 } },
 		],
 		currencies: [
 			{ action: 'get', expectedPath: `currencies` },
@@ -59,7 +62,7 @@ describe('Endpoint: ', () => {
 	Object.keys(fixtures).map((endpoint: string) => {
 		(fixtures[endpoint] as any).map((fixture: IEndPointDetails) => {
 
-			describe(`${endpoint} & ${fixture.action} calls`, () => {
+			describe(`${endpoint} ${fixture.subResource} & ${fixture.action} calls`, () => {
 				let result: any;
 
 				const mockedResponse = JSON.stringify({ a: 'response' });
@@ -70,7 +73,17 @@ describe('Endpoint: ', () => {
 				beforeAll(async () => {
 					inMemoryOAuthLib.reset();
 					inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: 200 });
-					result = await (xeroClient as any)[endpoint][fixture.action](mockedRequest, fixture.args);
+
+					// tslint:disable-next-line:prefer-conditional-expression
+					if (fixture.subResource) {
+						mockedRequest
+							? result = await (xeroClient as any)[endpoint][fixture.subResource][fixture.action](mockedRequest, fixture.args)
+							: result = await (xeroClient as any)[endpoint][fixture.subResource][fixture.action](fixture.args);
+					} else {
+						mockedRequest
+							? result = await (xeroClient as any)[endpoint][fixture.action](mockedRequest, fixture.args)
+							: result = await (xeroClient as any)[endpoint][fixture.action](fixture.args);
+					}
 				});
 
 				it(`calls the ${fixture.expectedPath} endpoint`, () => {
