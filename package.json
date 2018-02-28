@@ -9,7 +9,7 @@
     "lint": "tslint ./src/**/*.ts",
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
-    "scratch": "ts-node ./src/scratch.ts --watch",
+    "scratch": "ts-node ./src/scratch.ts",
     "typedoc": "typedoc --mode file --exclude **/__tests__/** --includeDeclarations --excludeExternals --target ES6 --out docs/ src/"
   },
   "author": "Xero <api@xero.com>",
