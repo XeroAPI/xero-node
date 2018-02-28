@@ -88,8 +88,13 @@ describe('XeroAPIClient', () => {
 			inMemoryOAuthLib.setTokenSecret(oauthToken, oauthSecret);
 			unauthRequestToken = await testXeroAPIClient.oauth10a.getUnauthorisedRequestToken();
 		});
-		it('getUnauthorisedRequestToken returns the request token', () => {
+
+		it('it returns the request token', () => {
 			expect(unauthRequestToken).toMatchObject({oauth_token: oauthToken, oauth_token_secret: oauthSecret});
+		});
+
+		it('it builds the authorise url', () => {
+			expect(testXeroAPIClient.oauth10a.buildAuthoriseUrl(unauthRequestToken.oauth_token)).toEqual(`https://api.xero.com/oauth/Authorize?oauth_token=${unauthRequestToken.oauth_token}`);
 		});
 	});
 });

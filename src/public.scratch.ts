@@ -9,7 +9,7 @@ const xero = new XeroAPIClient(data);
 
 (async function() {
 	const unauthorisedRequestToken = await xero.oauth10a.getUnauthorisedRequestToken();
-	const url = xero.oauth10a.buildAuthorizeUrl(unauthorisedRequestToken.oauth_token);
+	const url = xero.oauth10a.buildAuthoriseUrl(unauthorisedRequestToken.oauth_token);
 
 	opn(url);
 
