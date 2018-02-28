@@ -1,7 +1,8 @@
-import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { InMemoryOAuthLib } from './InMenoryOAuthLib';
+import { InMemoryOAuthLib } from './InMemoryOAuthLib';
+import { TestAPIClient } from './TestAPIClient';
+import { XeroAPIClient } from '../../XeroAPIClient';
 
 const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
@@ -11,7 +12,7 @@ describe('internal state', () => {
 	let xeroClient: XeroAPIClient;
 
 	beforeAll(async () => {
-		xeroClient = new XeroAPIClient({
+		xeroClient = new TestAPIClient({
 			AppType: 'private',
 			ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 			ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',

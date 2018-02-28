@@ -1,5 +1,5 @@
 import { IOAuthClientConfiguration, OAuthClient } from '../../OAuthClient';
-import { InMemoryOAuthLib } from './InMenoryOAuthLib';
+import { InMemoryOAuthLib } from './InMemoryOAuthLib';
 
 describe('OAuthClient', () => {
 	const testConfig: IOAuthClientConfiguration = {

@@ -1,5 +1,5 @@
-import { InMemoryOAuthLib } from './InMenoryOAuthLib';
-import { XeroAPIClient } from '../../XeroAPIClient';
+import { InMemoryOAuthLib } from './InMemoryOAuthLib';
+import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -12,7 +12,7 @@ describe('client', () => {
 
 	describe('and 404 errors', () => {
 		const inMemoryOAuth = new InMemoryOAuthLib();
-		let xeroClient: XeroAPIClient = null;
+		let xeroClient: AccountingAPIClient = null;
 
 		beforeAll(async () => {
 
@@ -25,7 +25,7 @@ describe('client', () => {
 			}, `The resource you're looking for cannot be found`, { statusCode: 404 });
 
 			// TODO: Move to test utils: GetTestClient() or something
-			xeroClient = new XeroAPIClient({
+			xeroClient = new AccountingAPIClient({
 				AppType: 'private',
 				ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',

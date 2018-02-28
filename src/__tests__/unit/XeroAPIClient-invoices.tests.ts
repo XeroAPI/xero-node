@@ -1,10 +1,10 @@
 import { InvoicesResponse } from '../../interfaces/AccountingResponse';
-import { XeroAPIClient } from '../../XeroAPIClient';
+import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 import { multipleInvoices, singleInvoice } from './response-examples/invoice.response.examples';
 import { isUUID } from '../test-helpers';
-import { InMemoryOAuthLib } from './InMenoryOAuthLib';
+import { InMemoryOAuthLib } from './InMemoryOAuthLib';
 import { createSingleInvoiceRequest } from './request-examples/invoice.request.examples';
 
 const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
@@ -19,7 +19,7 @@ describe('/invoices', () => {
 			beforeAll(async () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(multipleInvoices), { statusCode: 200 });
 
-				const xeroClient = new XeroAPIClient({
+				const xeroClient = new AccountingAPIClient({
 					AppType: 'private',
 					ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
@@ -61,7 +61,7 @@ describe('/invoices', () => {
 				beforeAll(async () => {
 					inMemoryOAuthLib.callbackResultsForNextCall(null, JSON.stringify(singleInvoice), 201);
 
-					const xeroClient = new XeroAPIClient({
+					const xeroClient = new AccountingAPIClient({
 						AppType: 'private',
 						ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 						ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',

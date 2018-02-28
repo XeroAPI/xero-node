@@ -1,5 +1,6 @@
 import { IXeroClientConfiguration, XeroAPIClient } from '../../XeroAPIClient';
-import { InMemoryOAuthLib } from './InMenoryOAuthLib';
+import { InMemoryOAuthLib } from './InMemoryOAuthLib';
+import { TestAPIClient } from './TestAPIClient';
 
 describe('XeroAPIClient', () => {
 	let xeroClientConfig: IXeroClientConfiguration;
@@ -14,7 +15,7 @@ describe('XeroAPIClient', () => {
 					PrivateKeyCert: 'shhhhhhh',
 					UserAgent: 'xero-node-v3-unit-test'
 				};
-				testXeroAPIClient = new XeroAPIClient(xeroClientConfig);
+				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 			});
 
 			it('sets the options for Private Apps', () => {
@@ -34,7 +35,7 @@ describe('XeroAPIClient', () => {
 					ConsumerSecret: 'myConsumerSecret',
 					UserAgent: 'xero-node-v3-unit-test'
 				};
-				testXeroAPIClient = new XeroAPIClient(xeroClientConfig);
+				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 			});
 
 			it('sets the options for Public Apps', () => {
@@ -55,7 +56,7 @@ describe('XeroAPIClient', () => {
 					PrivateKeyCert: 'shhhhhhh',
 					UserAgent: 'xero-node-v3-unit-test'
 				};
-				testXeroAPIClient = new XeroAPIClient(xeroClientConfig);
+				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 			});
 
 			it('sets the options for Partner Apps', () => {
@@ -83,7 +84,7 @@ describe('XeroAPIClient', () => {
 				PrivateKeyCert: 'shhhhhhh',
 				UserAgent: 'xero-node-v3-unit-test'
 			};
-			testXeroAPIClient = new XeroAPIClient(xeroClientConfig, null, inMemoryOAuthLib);
+			testXeroAPIClient = new TestAPIClient(xeroClientConfig, null, inMemoryOAuthLib);
 			oauthToken = testXeroAPIClient.state.oauthToken;
 			oauthSecret = testXeroAPIClient.state.oauthSecret;
 			inMemoryOAuthLib.setTokenSecret(oauthToken, oauthSecret);

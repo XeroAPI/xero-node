@@ -1,11 +1,15 @@
-import { XeroAPIClient } from './XeroAPIClient';
+
+import * as path from 'path';
+import * as fs from 'fs';
 import * as  prompt from 'prompt';
 import * as opn from 'opn';
+import { AccountingAPIClient } from './endpoints/AccountingAPIClient';
 
-// TODO: Let them pass in the privateKey and privateKey path
+const privateKeyFile = path.resolve(__dirname, '..', 'privatekey.pem');
+const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
+
 const data = require('./xero_public.json');
-
-const xero = new XeroAPIClient(data);
+const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
 
 (async function() {
 	const unauthorisedRequestToken = await xero.oauth10a.getUnauthorisedRequestToken();
