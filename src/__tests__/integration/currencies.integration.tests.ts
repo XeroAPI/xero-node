@@ -1,14 +1,10 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
-import * as fs from 'fs';
 import { CurrenciesResponse } from '../../interfaces/AccountingAPI';
-
-const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
-const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 // TODO: Let them pass in the privateKey and privateKey path
 const data = require('./xero.json');
-const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
+const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } });
 
 describe('/currencies integration tests', () => {
 	describe('and creating and getting', () => {

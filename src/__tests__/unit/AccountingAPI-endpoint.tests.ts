@@ -1,10 +1,6 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import * as path from 'path';
-import * as fs from 'fs';
 import { InMemoryOAuthLib } from './InMemoryOAuthLib';
-
-const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
-const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
+import { validTestCertPath } from '../test-helpers';
 
 const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
 const aGuid = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
@@ -16,7 +12,7 @@ describe('Endpoint: ', () => {
 		AppType: 'private',
 		ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 		ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-		PrivateKeyCert: privateKey
+		PrivateKeyCert: validTestCertPath
 	}, null, inMemoryOAuthLib);
 
 	// TODO: figure out contactgroups.contacts

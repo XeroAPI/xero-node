@@ -3,7 +3,7 @@ import * as  prompt from 'prompt';
 import * as opn from 'opn';
 import { AccountingAPIClient } from './endpoints/AccountingAPIClient';
 
-const data = require('./xero_public.json');
+const data = require('./xero_partner.json');
 const xero = new AccountingAPIClient(data);
 
 (async function() {

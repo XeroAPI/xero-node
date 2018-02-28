@@ -1,6 +1,10 @@
 import { IXeroClientConfiguration, XeroAPIClient } from '../../XeroAPIClient';
 import { InMemoryOAuthLib } from './InMemoryOAuthLib';
 import { TestAPIClient } from './TestAPIClient';
+import { getStringFromFile } from '../../utils';
+import { validTestCertPath } from '../test-helpers';
+
+const cert = getStringFromFile('./src/__tests__/unit/test-privatekey.pem');
 
 describe('XeroAPIClient', () => {
 	let xeroClientConfig: IXeroClientConfiguration;
@@ -12,7 +16,7 @@ describe('XeroAPIClient', () => {
 					AppType: 'private',
 					ConsumerKey: 'myConsumerKey',
 					ConsumerSecret: 'myConsumerSecret',
-					PrivateKeyCert: 'shhhhhhh',
+					PrivateKeyCert: validTestCertPath,
 					UserAgent: 'xero-node-v3-unit-test'
 				};
 				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
@@ -20,9 +24,9 @@ describe('XeroAPIClient', () => {
 
 			it('sets the options for Private Apps', () => {
 				expect(testXeroAPIClient.state.oauthToken).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.oauthSecret).toEqual(xeroClientConfig.PrivateKeyCert);
+				expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
 				expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.consumerSecret).toEqual(xeroClientConfig.PrivateKeyCert);
+				expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
 				expect(testXeroAPIClient.state.signatureMethod).toEqual('RSA-SHA1');
 			});
 		});
@@ -53,7 +57,7 @@ describe('XeroAPIClient', () => {
 					AppType: 'partner',
 					ConsumerKey: 'myConsumerKey',
 					ConsumerSecret: 'myConsumerSecret',
-					PrivateKeyCert: 'shhhhhhh',
+					PrivateKeyCert: validTestCertPath,
 					UserAgent: 'xero-node-v3-unit-test'
 				};
 				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
@@ -61,9 +65,9 @@ describe('XeroAPIClient', () => {
 
 			it('sets the options for Partner Apps', () => {
 				expect(testXeroAPIClient.state.oauthToken).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.oauthSecret).toEqual(xeroClientConfig.PrivateKeyCert);
+				expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
 				expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.consumerSecret).toEqual(xeroClientConfig.PrivateKeyCert);
+				expect(testXeroAPIClient.state.consumerSecret).toEqual(cert);
 				expect(testXeroAPIClient.state.signatureMethod).toEqual('RSA-SHA1');
 			});
 		});
@@ -81,7 +85,7 @@ describe('XeroAPIClient', () => {
 				AppType: 'private',
 				ConsumerKey: 'myConsumerKey',
 				ConsumerSecret: 'myConsumerSecret',
-				PrivateKeyCert: 'shhhhhhh',
+				PrivateKeyCert: validTestCertPath,
 				UserAgent: 'xero-node-v3-unit-test'
 			};
 			testXeroAPIClient = new TestAPIClient(xeroClientConfig, null, inMemoryOAuthLib);
@@ -94,7 +98,7 @@ describe('XeroAPIClient', () => {
 		});
 
 		it('it returns the request token', () => {
-			expect(unauthRequestToken).toMatchObject({oauth_token: oauthToken, oauth_token_secret: oauthSecret});
+			expect(unauthRequestToken).toMatchObject({ oauth_token: oauthToken, oauth_token_secret: oauthSecret });
 		});
 
 		it('it builds the authorise url', () => {
@@ -102,7 +106,7 @@ describe('XeroAPIClient', () => {
 		});
 
 		it('it returns the access token', () => {
-			expect(accessToken).toMatchObject({oauth_token: `access+${oauthToken}`, oauth_token_secret: `access+${oauthSecret}`});
+			expect(accessToken).toMatchObject({ oauth_token: `access+${oauthToken}`, oauth_token_secret: `access+${oauthSecret}` });
 		});
 	});
 });

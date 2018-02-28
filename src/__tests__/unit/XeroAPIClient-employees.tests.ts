@@ -1,12 +1,8 @@
 import { Employee, EmployeesResponse } from '../../interfaces/AccountingAPI';
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import * as path from 'path';
-import * as fs from 'fs';
 import { InMemoryOAuthLib } from './InMemoryOAuthLib';
 import { allEmployeesResponse, createResponse } from './response-examples/employees.response.examples';
-
-const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
-const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
+import { validTestCertPath } from '../test-helpers';
 
 describe('/employees', () => {
 	describe('and getting', () => {
@@ -21,7 +17,7 @@ describe('/employees', () => {
 					AppType: 'private',
 					ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-					PrivateKeyCert: privateKey
+					PrivateKeyCert: validTestCertPath
 				}, null, inMemoryOAuth);
 
 				result = await xeroClient.employees.get();
@@ -54,7 +50,7 @@ describe('/employees', () => {
 					AppType: 'private',
 					ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-					PrivateKeyCert: privateKey
+					PrivateKeyCert: validTestCertPath
 				}, null, inMemoryOAuth);
 
 				const employee: Employee = {

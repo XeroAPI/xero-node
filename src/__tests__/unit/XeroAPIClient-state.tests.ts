@@ -1,11 +1,7 @@
-import * as path from 'path';
-import * as fs from 'fs';
 import { InMemoryOAuthLib } from './InMemoryOAuthLib';
 import { TestAPIClient } from './TestAPIClient';
 import { XeroAPIClient } from '../../XeroAPIClient';
-
-const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
-const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
+import { validTestCertPath, testCertString } from '../test-helpers';
 
 describe('internal state', () => {
 	const inMemoryOAuth = new InMemoryOAuthLib();
@@ -16,7 +12,7 @@ describe('internal state', () => {
 			AppType: 'private',
 			ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 			ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-			PrivateKeyCert: privateKey
+			PrivateKeyCert: validTestCertPath
 		}, null, inMemoryOAuth);
 	});
 
@@ -26,8 +22,8 @@ describe('internal state', () => {
 
 			expect(retrievedState).toEqual({
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-				consumerSecret: privateKey,
-				oauthSecret: privateKey,
+				consumerSecret: testCertString(),
+				oauthSecret: testCertString(),
 				oauthToken: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				signatureMethod: 'RSA-SHA1',
 			});

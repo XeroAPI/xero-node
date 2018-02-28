@@ -1,15 +1,11 @@
 
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
-import * as fs from 'fs';
 import { ContactGroupsResponse, ContactGroup } from '../../interfaces/AccountingAPI';
 import { isUUID } from '../test-helpers';
 
-const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
-const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
-
 const data = require('./xero.json');
-const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
+const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } });
 
 describe('/contactgroups integration tests', () => {
 

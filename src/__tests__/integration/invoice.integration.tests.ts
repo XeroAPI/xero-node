@@ -2,16 +2,13 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { InvoicesResponse } from '../../interfaces/AccountingAPI';
 import { isUUID } from '../test-helpers';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
-
-const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
-const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
+import { InvoicesResponse } from '../../interfaces/AccountingAPI';
 
 // TODO: Let them pass in the privateKey and privateKey path
 const data = require('./xero.json');
-const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
+const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } });
 
 describe('/invoices integration tests', () => {
 	jest.setTimeout(20000);

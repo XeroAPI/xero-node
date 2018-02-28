@@ -1,4 +1,5 @@
 import { OAuthClient, IOAuthClient, IOAuthClientConfiguration } from './OAuthClient';
+import { getStringFromFile } from './utils';
 
 /**
  * TODO: Add support for the following keys:
@@ -35,6 +36,8 @@ export class XeroAPIClient {
 		}
 		// TODO: Check options for each app type
 
+		const cert = options.PrivateKeyCert ? getStringFromFile(options.PrivateKeyCert) : null ;
+
 		this._state = {
 			consumerKey: this.options.ConsumerKey,
 			consumerSecret: this.options.ConsumerSecret,
@@ -44,8 +47,8 @@ export class XeroAPIClient {
 
 		if (this.options.AppType == 'private') {
 			this._state.oauthToken = this.options.ConsumerKey;
-			this._state.oauthSecret = this.options.PrivateKeyCert;
-			this._state.consumerSecret = this.options.PrivateKeyCert;
+			this._state.oauthSecret = cert;
+			this._state.consumerSecret = cert;
 			this._state.signatureMethod = 'RSA-SHA1';
 		}
 		else if (this.options.AppType == 'public') {
@@ -53,8 +56,8 @@ export class XeroAPIClient {
 		}
 		else if (this.options.AppType == 'partner') {
 			this._state.oauthToken = this.options.ConsumerKey;
-			this._state.oauthSecret = this.options.PrivateKeyCert;
-			this._state.consumerSecret = this.options.PrivateKeyCert;
+			this._state.oauthSecret = cert;
+			this._state.consumerSecret = cert;
 			this._state.signatureMethod = 'RSA-SHA1';
 		}
 

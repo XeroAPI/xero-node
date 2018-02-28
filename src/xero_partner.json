@@ -1,0 +1,8 @@
+{
+	"AppType": "partner",
+	"ConsumerKey": "HKJKUNNQIXLTO910C2IYFYMBJ4GN0L",
+	"ConsumerSecret": "HJCXRIBUF5OGTLL4JIR2DPY1U5UGOA",
+	"CallbackBaseUrl": null,
+	"UserAgent": "Tester",
+	"PrivateKeyCert": "./privatekey.pem"
+}
