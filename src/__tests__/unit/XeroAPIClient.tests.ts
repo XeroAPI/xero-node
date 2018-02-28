@@ -47,20 +47,20 @@ describe('OAuthClient App Types', () => {
 	describe('For Partner Apps', () => {
 		beforeAll(() => {
 			xeroClientConfig = {
-				appType: 'partner',
-				consumerKey: 'myConsumerKey',
-				consumerSecret: 'myConsumerSecret',
-				privateKey: 'shhhhhhh',
-				userAgent: 'xero-node-v3-unit-test'
+				AppType: 'partner',
+				ConsumerKey: 'myConsumerKey',
+				ConsumerSecret: 'myConsumerSecret',
+				PrivateKeyCert: 'shhhhhhh',
+				UserAgent: 'xero-node-v3-unit-test'
 			};
 			testXeroAPIClient = new XeroAPIClient(xeroClientConfig);
 		});
 
 		it('sets the options for Partner Apps', () => {
-			expect(testXeroAPIClient.state.oauthToken).toEqual(xeroClientConfig.consumerKey);
-			expect(testXeroAPIClient.state.oauthSecret).toEqual(xeroClientConfig.privateKey);
-			expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.consumerKey);
-			expect(testXeroAPIClient.state.consumerSecret).toEqual(xeroClientConfig.privateKey);
+			expect(testXeroAPIClient.state.oauthToken).toEqual(xeroClientConfig.ConsumerKey);
+			expect(testXeroAPIClient.state.oauthSecret).toEqual(xeroClientConfig.PrivateKeyCert);
+			expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
+			expect(testXeroAPIClient.state.consumerSecret).toEqual(xeroClientConfig.PrivateKeyCert);
 			expect(testXeroAPIClient.state.signatureMethod).toEqual('RSA-SHA1');
 		});
 	});

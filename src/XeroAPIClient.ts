@@ -53,10 +53,10 @@ export class XeroAPIClient {
 		else if (this.options.AppType == 'public') {
 			this._state.signatureMethod = 'HMAC-SHA1';
 		}
-		else if (this.options.appType == 'partner') {
-			this._state.oauthToken = this.options.consumerKey;
-			this._state.oauthSecret = this.options.privateKey;
-			this._state.consumerSecret = this.options.privateKey;
+		else if (this.options.AppType == 'partner') {
+			this._state.oauthToken = this.options.ConsumerKey;
+			this._state.oauthSecret = this.options.PrivateKeyCert;
+			this._state.consumerSecret = this.options.PrivateKeyCert;
 			this._state.signatureMethod = 'RSA-SHA1';
 		}
 
