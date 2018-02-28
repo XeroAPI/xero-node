@@ -49,6 +49,10 @@ describe('Endpoint: ', () => {
 		currencies: [
 			{ action: 'get', expectedPath: `currencies` },
 			{ action: 'create', expectedPath: `currencies` },
+		],
+		employees: [
+			{ action: 'get', expectedPath: 'employees' },
+			{ action: 'create', expectedPath: 'employees' }
 		]
 	};
 
