@@ -17,13 +17,14 @@ describe('Endpoint: ', () => {
 
 	// TODO: figure out contactgroups.contacts
 	// TODO: Double check when an endpoint and take an ID and add a line for it
-	[{ hasResponse: true, hasRequestBody: false, endpoint: 'invoices', action: 'get', expectedVerb: 'get', expectedPath: 'invoices' },
-	{ hasResponse: true, hasRequestBody: true, endpoint: 'invoices', action: 'create', expectedVerb: 'put', expectedPath: 'invoices?summarizeErrors=false' },
-	{ hasResponse: true, hasRequestBody: false, endpoint: 'contactgroups', action: 'get', expectedVerb: 'get', expectedPath: 'contactgroups' },
-	{ hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'create', expectedVerb: 'put', expectedPath: 'contactgroups?summarizeErrors=false' },
-	{ hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'update', expectedVerb: 'post', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
-	{ hasResponse: true, hasRequestBody: false, endpoint: 'currencies', action: 'get', expectedVerb: 'get', expectedPath: `currencies` },
-	{ hasResponse: true, hasRequestBody: true, endpoint: 'currencies', action: 'create', expectedVerb: 'put', expectedPath: `currencies` },
+
+	[{ hasResponse: true, hasRequestBody: false, endpoint: 'invoices', action: 'get', expectedPath: 'invoices' },
+	{ hasResponse: true, hasRequestBody: true, endpoint: 'invoices', action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
+	{ hasResponse: true, hasRequestBody: false, endpoint: 'contactgroups', action: 'get', expectedPath: 'contactgroups' },
+	{ hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
+	{ hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'update', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
+	{ hasResponse: true, hasRequestBody: false, endpoint: 'currencies', action: 'get', expectedPath: `currencies` },
+	{ hasResponse: true, hasRequestBody: true, endpoint: 'currencies', action: 'create', expectedPath: `currencies` },
 	].map((fixture) => {
 
 		let result: any;
@@ -42,8 +43,15 @@ describe('Endpoint: ', () => {
 				inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + fixture.expectedPath);
 			});
 
-			it(`calls the ${fixture.expectedVerb} verb`, () => {
-				inMemoryOAuthLib.lastCalledThisVerb(fixture.expectedVerb);
+			const verbMap: { [key: string]: string } = {
+				create: 'put',
+				delete: 'delete',
+				update: 'post',
+				get: 'get'
+			};
+
+			it(`calls the ${verbMap[fixture.action]} verb`, () => {
+				inMemoryOAuthLib.lastCalledThisVerb(verbMap[fixture.action]);
 			});
 
 			it('requested with expected body', () => {
