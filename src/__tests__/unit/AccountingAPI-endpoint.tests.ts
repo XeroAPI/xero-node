@@ -27,9 +27,6 @@ describe('Endpoint: ', () => {
 		PrivateKeyCert: validTestCertPath
 	}, null, inMemoryOAuthLib);
 
-	// TODO: figure out contactgroups.contacts
-	// TODO: Double check when an endpoint and take an ID and add a line for it
-
 	const actionToVerbMap: { [key: string]: string } = {
 		create: 'put',
 		delete: 'delete',
