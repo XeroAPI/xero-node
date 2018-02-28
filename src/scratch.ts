@@ -2,12 +2,12 @@ import { XeroAPIClient } from './XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 
-const privateKeyFile = path.resolve('C:\\keys\\privatekey.pem');
+const privateKeyFile = path.resolve(__dirname, '..', 'privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 // TODO: Let them pass in the privateKey and privateKey path
-const data = require('./config.json');
-const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
+const data = require('./xero.json');
+const xero = new XeroAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
 
 async function main() {
 	const bungInvoice = {
