@@ -1,10 +1,9 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import * as path from 'path';
 import { CurrenciesResponse } from '../../interfaces/AccountingAPI';
+import { getConfig } from './integration.helpers';
 
-// TODO: Let them pass in the privateKey and privateKey path
-const data = require('./xero.json');
-const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } });
+const data = getConfig();
+const xero = new AccountingAPIClient(data);
 
 describe('/currencies integration tests', () => {
 	describe('and creating and getting', () => {

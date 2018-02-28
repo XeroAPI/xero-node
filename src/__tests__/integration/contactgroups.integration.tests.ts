@@ -1,11 +1,11 @@
 
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import * as path from 'path';
 import { ContactGroupsResponse, ContactGroup } from '../../interfaces/AccountingAPI';
 import { isUUID } from '../test-helpers';
+import { getConfig } from './integration.helpers';
 
-const data = require('./xero.json');
-const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } });
+const data = getConfig();
+const xero = new AccountingAPIClient(data);
 
 describe('/contactgroups integration tests', () => {
 

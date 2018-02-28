@@ -1,14 +1,13 @@
 
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import * as path from 'path';
 import * as fs from 'fs';
 import { isUUID } from '../test-helpers';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
 import { InvoicesResponse } from '../../interfaces/AccountingAPI';
+import { getConfig } from './integration.helpers';
 
-// TODO: Let them pass in the privateKey and privateKey path
-const data = require('./xero.json');
-const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } });
+const data = getConfig();
+const xero = new AccountingAPIClient(data);
 
 describe('/invoices integration tests', () => {
 	jest.setTimeout(20000);

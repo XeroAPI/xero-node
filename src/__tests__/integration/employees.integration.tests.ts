@@ -1,9 +1,9 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import * as path from 'path';
 import { EmployeesResponse } from '../../interfaces/AccountingAPI';
+import { getConfig } from './integration.helpers';
 
-const data = require('./xero.json');
-const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } });
+const data = getConfig();
+const xero = new AccountingAPIClient(data);
 
 describe('/employees integration tests', () => {
 	describe('and creating and getting', () => {
