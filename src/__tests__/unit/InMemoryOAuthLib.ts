@@ -11,27 +11,45 @@ export class InMemoryOAuthLib {
 	private returnOauthSecret: string = null;
 	private returnAuthorisedToken: string = null;
 	private returnAuthorisedSecret: string = null;
+	private lastRequestedBody: string = null;
 
 	public lastCalledThisURL(url: string) {
 		expect(this.lastCalledUrl).toBe(url);
+	}
+
+	public reset() {
+		this.returnErr = null;
+		this.returnData = null;
+		this.returnHttpResponse = null;
+		this.lastCalledUrl = '';
+		this.lastRequestedBody = null;
+		this.lastCalledVerb = '';
+		this.returnOauthToken = null;
+		this.returnOauthSecret = null;
+		this.returnAuthorisedToken = null;
+		this.returnAuthorisedSecret = null;
 	}
 
 	public lastCalledThisVerb(verb: string) {
 		expect(this.lastCalledVerb).toBe(verb);
 	}
 
-	public setTokenSecret(oauth_token: string, oauth_secret: string){
+	public setTokenSecret(oauth_token: string, oauth_secret: string) {
 		this.returnOauthToken = oauth_token;
 		this.returnOauthSecret = oauth_secret;
 	}
 
-	public swapToAuthTokenSecret(oauth_token: string, oauth_secret: string){
+	public swapToAuthTokenSecret(oauth_token: string, oauth_secret: string) {
 		this.returnAuthorisedToken = oauth_token;
 		this.returnAuthorisedSecret = oauth_secret;
 	}
 
-	public lastRequestedHadBody(expectedBody: any){
+	public lastRequestedHadBody(expectedBody: any) {
 		expect(this.lastRequestedBody).toMatch(expectedBody);
+	}
+
+	public lastRequestHadNoBody() {
+		expect(this.lastRequestedBody).toBeNull();
 	}
 
 	public get(
@@ -95,7 +113,7 @@ export class InMemoryOAuthLib {
 		authedToken: string,
 		authedSecret: string,
 		oauthVerifier: any,
-		callback: (err: any, oauth_token: string, oauth_token_secret: string, result: any) => any){
+		callback: (err: any, oauth_token: string, oauth_token_secret: string, result: any) => any) {
 		callback(null, this.returnAuthorisedToken, this.returnAuthorisedSecret, null);
 	}
 }

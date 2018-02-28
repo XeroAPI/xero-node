@@ -114,6 +114,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 			return this.get<CurrenciesResponse>(endpoint);
 		},
 		create: async (currency: Currency, args?: any): Promise<CurrenciesResponse> => {
+			// TODO: Do we need to add summerazieErrors?
 			const endpoint = 'currencies';
 			return this.put<CurrenciesResponse>(endpoint, currency);
 		}
@@ -124,8 +125,8 @@ export class AccountingAPIClient extends XeroAPIClient {
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
 			let endpoint = 'employees';
-			if (args && args.EmployeeID){
-				endpoint = endpoint  + '/' + args.EmployeeID;
+			if (args && args.EmployeeID) {
+				endpoint = endpoint + '/' + args.EmployeeID;
 			}
 			return this.get<any>(endpoint);
 		},

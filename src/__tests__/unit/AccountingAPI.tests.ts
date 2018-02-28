@@ -19,12 +19,16 @@ describe('Endpoint: ', () => {
 		PrivateKeyCert: privateKey
 	}, null, inMemoryOAuthLib);
 
-	const endpoints = [{ statusCode: 200, hasResponse: true, hasRequestBody: false, endpoint: 'invoices', action: 'get', expectedUrl: 'invoices', expectedVerb: 'get' },
-	{ statusCode: 200, hasResponse: true, hasRequestBody: true, endpoint: 'invoices', action: 'create', expectedUrl: 'invoices?summarizeErrors=false', expectedVerb: 'put' },
-	{ statusCode: 200, hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'get', expectedUrl: 'contactgroups', expectedVerb: 'get' }
-	];
-
-	endpoints.map((test) => {
+	// TODO: figure out contactgroups.contacts
+	// TODO: Double check when an endpoint and take an ID and add a line for it
+	[{ statusCode: 200, hasResponse: true, hasRequestBody: false, endpoint: 'invoices', action: 'get', expectedVerb: 'get', expectedUrl: 'invoices' },
+	{ statusCode: 201, hasResponse: true, hasRequestBody: true, endpoint: 'invoices', action: 'create', expectedVerb: 'put', expectedUrl: 'invoices?summarizeErrors=false' },
+	{ statusCode: 200, hasResponse: true, hasRequestBody: false, endpoint: 'contactgroups', action: 'get', expectedVerb: 'get', expectedUrl: 'contactgroups' },
+	{ statusCode: 201, hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'create', expectedVerb: 'put', expectedUrl: 'contactgroups?summarizeErrors=false' },
+	{ statusCode: 200, hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'update', expectedVerb: 'post', expectedUrl: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
+	{ statusCode: 200, hasResponse: true, hasRequestBody: false, endpoint: 'currencies', action: 'get', expectedVerb: 'get', expectedUrl: `currencies` },
+	{ statusCode: 200, hasResponse: true, hasRequestBody: true, endpoint: 'currencies', action: 'create', expectedVerb: 'put', expectedUrl: `currencies` },
+	].map((test) => {
 
 		let result: any;
 
@@ -33,8 +37,9 @@ describe('Endpoint: ', () => {
 			const mockedRequest = { a: 'request' };
 
 			beforeAll(async () => {
+				inMemoryOAuthLib.reset();
 				inMemoryOAuthLib.callbackResultsForNextCall(null, test.hasResponse ? JSON.stringify(mockedResponse) : null, { statusCode: test.statusCode });
-				result = await (xeroClient as any)[test.endpoint][test.action](test.hasRequestBody ? mockedRequest : null);
+				result = await (xeroClient as any)[test.endpoint][test.action](test.hasRequestBody ? mockedRequest : null, test.args ? test.args : null);
 			});
 
 			it('called the correct URL', () => {
@@ -48,6 +53,10 @@ describe('Endpoint: ', () => {
 			if (test.hasRequestBody) {
 				it(`requested with the expected body`, () => {
 					inMemoryOAuthLib.lastRequestedHadBody(JSON.stringify(mockedRequest));
+				});
+			} else {
+				it(`sent request with empty body`, () => {
+					inMemoryOAuthLib.lastRequestHadNoBody();
 				});
 			}
 
