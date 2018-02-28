@@ -17,13 +17,13 @@ describe('Endpoint: ', () => {
 
 	// TODO: figure out contactgroups.contacts
 	// TODO: Double check when an endpoint and take an ID and add a line for it
-	[{ statusCode: 200, hasResponse: true, hasRequestBody: false, endpoint: 'invoices', action: 'get', expectedVerb: 'get', expectedPath: 'invoices' },
-	{ statusCode: 201, hasResponse: true, hasRequestBody: true, endpoint: 'invoices', action: 'create', expectedVerb: 'put', expectedPath: 'invoices?summarizeErrors=false' },
-	{ statusCode: 200, hasResponse: true, hasRequestBody: false, endpoint: 'contactgroups', action: 'get', expectedVerb: 'get', expectedPath: 'contactgroups' },
-	{ statusCode: 201, hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'create', expectedVerb: 'put', expectedPath: 'contactgroups?summarizeErrors=false' },
-	{ statusCode: 200, hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'update', expectedVerb: 'post', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
-	{ statusCode: 200, hasResponse: true, hasRequestBody: false, endpoint: 'currencies', action: 'get', expectedVerb: 'get', expectedPath: `currencies` },
-	{ statusCode: 200, hasResponse: true, hasRequestBody: true, endpoint: 'currencies', action: 'create', expectedVerb: 'put', expectedPath: `currencies` },
+	[{ hasResponse: true, hasRequestBody: false, endpoint: 'invoices', action: 'get', expectedVerb: 'get', expectedPath: 'invoices' },
+	{ hasResponse: true, hasRequestBody: true, endpoint: 'invoices', action: 'create', expectedVerb: 'put', expectedPath: 'invoices?summarizeErrors=false' },
+	{ hasResponse: true, hasRequestBody: false, endpoint: 'contactgroups', action: 'get', expectedVerb: 'get', expectedPath: 'contactgroups' },
+	{ hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'create', expectedVerb: 'put', expectedPath: 'contactgroups?summarizeErrors=false' },
+	{ hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'update', expectedVerb: 'post', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
+	{ hasResponse: true, hasRequestBody: false, endpoint: 'currencies', action: 'get', expectedVerb: 'get', expectedPath: `currencies` },
+	{ hasResponse: true, hasRequestBody: true, endpoint: 'currencies', action: 'create', expectedVerb: 'put', expectedPath: `currencies` },
 	].map((fixture) => {
 
 		let result: any;
@@ -34,7 +34,7 @@ describe('Endpoint: ', () => {
 
 			beforeAll(async () => {
 				inMemoryOAuthLib.reset();
-				inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: fixture.statusCode });
+				inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: 200 });
 				result = await (xeroClient as any)[fixture.endpoint][fixture.action](mockedRequest, fixture.args);
 			});
 
