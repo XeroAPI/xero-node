@@ -12,15 +12,15 @@ export interface IOAuthClientConfiguration {
 	oauthAccessTokenPath: string;
 
 	signatureMethod: string;
-	Accept: string;
+	accept: string;
 	userAgent: string;
 }
 
 export interface IOAuthClient {
-	get<T>(endpoint: string, args?: any): Promise<T>;
-	delete<T>(endpoint: string, args?: any): Promise<T>;
-	put<T>(endpoint: string, body: object, args?: any): Promise<T>;
-	post<T>(endpoint: string, body: object, args?: any): Promise<T>;
+	get<T>(endpoint: string, acceptType?: string): Promise<T>;
+	delete<T>(endpoint: string): Promise<T>;
+	put<T>(endpoint: string, body: object): Promise<T>;
+	post<T>(endpoint: string, body: object): Promise<T>;
 	getUnauthorisedRequestToken(): Promise<{ oauth_token: string, oauth_token_secret: string }>;
 	SwapRequestTokenforAccessToken(authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }>;
 }
@@ -50,7 +50,7 @@ export class OAuthClient implements IOAuthClient {
 			options.signatureMethod,								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
 			null,									// nonceSize
 			{										// customHeaders
-				'Accept': options.Accept,
+				'Accept': options.accept,
 				'User-Agent': options.userAgent
 			}
 		);
@@ -88,16 +88,14 @@ export class OAuthClient implements IOAuthClient {
 		});
 	}
 
-	public async get<T>(endpoint: string, args?: any): Promise<T> {
-		// this.checkAuthentication();
-		// TODO make this Accept Accept: application/json
-
-		if (args && args.Accept) {
+	public async get<T>(endpoint: string, acceptType?: string): Promise<T> {
+		// TODO this.checkAuthentication();
+		if (acceptType == 'application/pdf') {
 			// Temp for getting PDFs
-			const oauth = this.oAuthFactory({ ...this.options, ...{ Accept: args.Accept } });
+			const oauthForPdf = this.oAuthFactory({ ...this.options, ...{ accept: acceptType } });
 
 			return new Promise<T>((resolve, reject) => {
-				const request = oauth.get(
+				const request = oauthForPdf.get(
 					this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
 					this.options.oauthToken,						// oauth_token
 					this.options.oauthSecret);
@@ -115,34 +113,33 @@ export class OAuthClient implements IOAuthClient {
 				});
 				request.end();
 			});
-		}
+		} else { // TODO avoid duplicate code
+			return new Promise<T>((resolve, reject) => {
+				this.oauth.get(
+					this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
+					this.options.oauthToken,						// oauth_token
+					this.options.oauthSecret,						// oauth_token_secret
+					(err: object, data: string, httpResponse: any) => {
+						// data is the body of the response
 
-		return new Promise<T>((resolve, reject) => {
-			this.oauth.get(
-				this.options.apiBaseUrl + this.options.apiBasePath + endpoint, // url
-				this.options.oauthToken,						// oauth_token
-				this.options.oauthSecret,						// oauth_token_secret
-				(err: object, data: string, httpResponse: any) => {
-					// data is the body of the response
-
-					if (err) {
-						const toReturn: IHttpError = {
-							statusCode: httpResponse.statusCode,
-							body: data
-						};
-						reject(toReturn);
-					} else {
-						const toReturn = JSON.parse(data) as T;
-						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
-						return resolve(toReturn);
+						if (err) {
+							const toReturn: IHttpError = {
+								statusCode: httpResponse.statusCode,
+								body: data
+							};
+							reject(toReturn);
+						} else {
+							const toReturn = JSON.parse(data) as T;
+							// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
+							return resolve(toReturn);
+						}
 					}
-				}
-			);
-
-		});
+				);
+			});
+		}
 	}
 
-	public async put<T>(endpoint: string, body: object, args?: any): Promise<T> {
+	public async put<T>(endpoint: string, body: object): Promise<T> {
 		// this.checkAuthentication();
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.put(
@@ -171,7 +168,7 @@ export class OAuthClient implements IOAuthClient {
 		});
 	}
 
-	public async post<T>(endpoint: string, body: object, args?: any): Promise<T> {
+	public async post<T>(endpoint: string, body: object): Promise<T> {
 		// this.checkAuthentication();
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.post(
@@ -200,7 +197,7 @@ export class OAuthClient implements IOAuthClient {
 		});
 	}
 
-	public async delete<T>(endpoint: string, args?: any): Promise<T> {
+	public async delete<T>(endpoint: string): Promise<T> {
 		// this.checkAuthentication();
 		return new Promise<T>((resolve, reject) => {
 			this.oauth.delete(

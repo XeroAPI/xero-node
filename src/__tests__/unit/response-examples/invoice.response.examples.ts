@@ -1,4 +1,6 @@
-const multipleInvoices = {
+import { InvoicesResponse } from '../../../interfaces/AccountingResponse';
+
+export const multipleInvoices: InvoicesResponse = {
 	Id: '431b0b6a-81bf-4286-82f3-73e6f8c78fd3',
 	Status: 'OK',
 	ProviderName: 'Xero API Previewer',
@@ -112,7 +114,7 @@ const multipleInvoices = {
 	]
 };
 
-const singleInvoice = {
+export const singleInvoice: InvoicesResponse = {
 	Id: '964a6253-5544-45ad-84e1-73751c9300e1',
 	Status: 'OK',
 	ProviderName: 'Xero API Previewer',
@@ -255,7 +257,7 @@ const singleInvoice = {
 	]
 };
 
-const createInvoiceWithValidationError = {
+export const createInvoiceWithValidationError: InvoicesResponse = {
 	Id: '83a0044f-bbf9-4242-a1df-00e9402fe6ea',
 	Status: 'OK',
 	ProviderName: 'Node - Private',
@@ -308,9 +310,4 @@ const createInvoiceWithValidationError = {
 			]
 		}
 	]
-};
-
-export {
-	multipleInvoices,
-	singleInvoice
 };

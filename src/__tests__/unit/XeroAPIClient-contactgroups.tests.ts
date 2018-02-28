@@ -1,8 +1,7 @@
-import { AccountingResponse, ContactGroup, ContactGroupsResponse } from '../../interfaces/AccountingResponse';
+import { ContactGroup, ContactGroupsResponse } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { isUUID } from '../test-helpers';
 import { allContactGroups, createResponse, updateDeleted } from './response-examples/contactgroups.response.examples';
 import { InMemoryOAuth } from './InMenoryOAuth';
 
