@@ -1,5 +1,5 @@
 
-export class InMemoryOAuth {
+export class InMemoryOAuthLib {
 
 	[x: string]: any;
 	private returnErr: any = null;

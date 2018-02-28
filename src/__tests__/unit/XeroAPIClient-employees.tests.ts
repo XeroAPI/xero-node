@@ -2,7 +2,7 @@ import { Employee, EmployeesResponse } from '../../interfaces/AccountingResponse
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { InMemoryOAuth } from './InMenoryOAuth';
+import { InMemoryOAuthLib } from './InMenoryOAuthLib';
 import { allEmployeesResponse, createResponse } from './response-examples/employees.response.examples';
 
 const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
@@ -12,7 +12,7 @@ describe('/employees', () => {
 	describe('and getting', () => {
 		describe('all employees', () => {
 			let result: EmployeesResponse;
-			const inMemoryOAuth = new InMemoryOAuth();
+			const inMemoryOAuth = new InMemoryOAuthLib();
 
 			beforeAll(async () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(allEmployeesResponse), { statusCode: 200 });
@@ -45,7 +45,7 @@ describe('/employees', () => {
 	describe('and creating', () => {
 		describe('an employee', () => {
 			let result: EmployeesResponse;
-			const inMemoryOAuth = new InMemoryOAuth();
+			const inMemoryOAuth = new InMemoryOAuthLib();
 
 			beforeAll(async () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(createResponse), {stausCode: 200});

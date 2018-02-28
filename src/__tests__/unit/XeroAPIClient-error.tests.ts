@@ -1,4 +1,4 @@
-import { InMemoryOAuth } from './InMenoryOAuth';
+import { InMemoryOAuthLib } from './InMenoryOAuthLib';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -11,7 +11,7 @@ describe('client', () => {
 	});
 
 	describe('and 404 errors', () => {
-		const inMemoryOAuth = new InMemoryOAuth();
+		const inMemoryOAuth = new InMemoryOAuthLib();
 		let xeroClient: XeroAPIClient = null;
 
 		beforeAll(async () => {
