@@ -1,5 +1,5 @@
-import { OAuthClient, IOAuthClient } from './OAuthClient';
-import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse } from './interfaces/AccountingResponse';
+import { OAuthClient, IOAuthClient, IOAuthClientConfiguration } from './OAuthClient';
+import { Invoice, ContactGroup, ContactGroupsResponse, InvoicesResponse, CurrenciesResponse, Currency, ContactsResponse, AccountsResponse, Employee, EmployeesResponse, ReportsResponse } from './interfaces/AccountingResponse';
 
 /**
  * TODO: Add support for the following keys:
@@ -69,12 +69,12 @@ export class XeroAPIClient {
 	}
 
 	private OAuthClientFactory() {
-		const defaultState = {
+		const defaultState: Partial<IOAuthClientConfiguration> = {
 			apiBaseUrl: API_BASE,
 			apiBasePath: API_BASE_PATH,
 			oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
 			oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
-			Accept: 'application/json',
+			accept: 'application/json',
 			userAgent: 'NodeJS-XeroAPIClient.' + this._state.consumerKey // TODO add package.json version here
 		};
 
@@ -229,6 +229,24 @@ export class XeroAPIClient {
 		}
 	};
 
+	public employees = {
+		get: async (args?: any): Promise<EmployeesResponse> => {
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			let endpoint = 'employees';
+			if (args && args.EmployeeID){
+				endpoint = endpoint  + '/' + args.EmployeeID;
+			}
+			return this.get<any>(endpoint, args);
+		},
+		create: async (employee: Employee, args?: any): Promise<EmployeesResponse> => {
+			const endpoint = 'employees';
+			return this._oauthClient.put<any>(endpoint, employee);
+		}
+	};
+	// private checkAuthentication() {
+	// 	// TODO
+	// }
 	public contacts = {
 		get: async (args?: any): Promise<ContactsResponse> => {
 			const endpoint = 'contacts';
@@ -237,17 +255,9 @@ export class XeroAPIClient {
 	};
 
 	public reports = {
-		get: async (args?: any): Promise<any> => {
+		get: async (args?: any): Promise<ReportsResponse> => {
 			let endpoint = 'Reports';
 			if (args) {
-				// TODO: Check if raw API errors make sense and remove these?
-				if ((args.ReportID == 'AgedPayablesByContact' || args.ReportID == 'AgedReceivablesByContact') && !args.ContactID) {
-					throw Error('required args for AgedPayablesByContact report: ContactID');
-				}
-				if (args.ReportID == 'BankStatement' && !args.bankAccountID) {
-					throw Error('required args for BankStatement report: bankAccountID');
-				}
-
 				// TODO construct query string in a shared function
 				const query = Object.keys(args).map((key: string) => {
 					if (key != 'ReportID' && key != 'Accept') {
@@ -258,8 +268,7 @@ export class XeroAPIClient {
 				endpoint = endpoint + '/' + args.ReportID + '?' + query;
 			}
 
-			// TODO: Add interface here
-			return this.get<any>(endpoint, args);
+			return this.get<ReportsResponse>(endpoint, args);
 		}
 	};
 

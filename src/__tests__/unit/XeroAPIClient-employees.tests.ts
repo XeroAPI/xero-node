@@ -1,21 +1,21 @@
-import { Currency, CurrenciesResponse } from '../../interfaces/AccountingResponse';
+import { Employee, EmployeesResponse } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { allCurrenciesResponse, createResponse } from './response-examples/currencies.response.examples';
 import { InMemoryOAuth } from './InMenoryOAuth';
+import { allEmployeesResponse, createResponse } from './response-examples/employees.response.examples';
 
 const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
-describe('/currencies', () => {
+describe('/employees', () => {
 	describe('and getting', () => {
-		describe('all currencies', () => {
-			let result: CurrenciesResponse;
+		describe('all employees', () => {
+			let result: EmployeesResponse;
 			const inMemoryOAuth = new InMemoryOAuth();
 
 			beforeAll(async () => {
-				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(allCurrenciesResponse), { statusCode: 200 });
+				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(allEmployeesResponse), { statusCode: 200 });
 
 				const xeroClient = new XeroAPIClient({
 					AppType: 'private',
@@ -24,7 +24,7 @@ describe('/currencies', () => {
 					PrivateKeyCert: privateKey
 				}, null, inMemoryOAuth);
 
-				result = await xeroClient.currencies.get();
+				result = await xeroClient.employees.get();
 			});
 
 			it('the response is defined', () => {
@@ -32,19 +32,19 @@ describe('/currencies', () => {
 			});
 
 			it('matches the expected response', () => {
-				expect(result).toMatchObject(allCurrenciesResponse);
+				expect(result).toMatchObject(allEmployeesResponse);
 			});
 
 			it('called the correct URL', () => {
-				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/currencies');
+				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/employees');
 			});
 		});
 
 	});
 
 	describe('and creating', () => {
-		describe('a currency', () => {
-			let result: CurrenciesResponse;
+		describe('an employee', () => {
+			let result: EmployeesResponse;
 			const inMemoryOAuth = new InMemoryOAuth();
 
 			beforeAll(async () => {
@@ -57,11 +57,12 @@ describe('/currencies', () => {
 					PrivateKeyCert: privateKey
 				}, null, inMemoryOAuth);
 
-				const currency: Currency = {
-					Code: 'HKD'
+				const employee: Employee = {
+					FirstName: 'Bryan',
+					LastName: 'Tee'
 				};
 
-				result = await xeroClient.currencies.create(currency);
+				result = await xeroClient.employees.create(employee);
 			});
 
 			it('the response is defined', () => {
@@ -73,7 +74,7 @@ describe('/currencies', () => {
 			});
 
 			it('called the correct URL', () => {
-				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/currencies');
+				inMemoryOAuth.lastCalledThisURL('https://api.xero.com/api.xro/2.0/employees');
 			});
 		});
 

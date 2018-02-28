@@ -1,10 +1,9 @@
-import { InvoicesResponse, Invoice } from '../../interfaces/AccountingResponse';
+import { InvoicesResponse } from '../../interfaces/AccountingResponse';
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 import { multipleInvoices, singleInvoice } from './response-examples/invoice.response.examples';
 import { isUUID } from '../test-helpers';
-import { OAuthClient } from '../../OAuthClient';
 import { InMemoryOAuth } from './InMenoryOAuth';
 import { createSingleInvoiceRequest } from './request-examples/invoice.request.examples';
 

@@ -21,7 +21,7 @@ const xero = new XeroAPIClient(data);
 	// tslint:disable-next-line:no-debugger
 	debugger; // You need to set pin to the pin that the Auth page gave you. Or if not running in debugger use the line above.
 
-	xero.oauth10a.getAccessToken(unauthorisedRequestToken, pin);
+	await xero.oauth10a.getAccessToken(unauthorisedRequestToken, pin);
 
 	const inv = await xero.contacts.get();
 	console.log('Invoice', inv);

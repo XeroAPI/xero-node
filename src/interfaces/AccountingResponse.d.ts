@@ -10,8 +10,16 @@ export interface ContactsResponse extends AccountingResponse {
 	Contacts: Contact[];
 }
 
+export interface ReportsResponse extends AccountingResponse {
+	Reports: any[];
+}
+
 export interface CurrenciesResponse extends AccountingResponse {
 	Currencies: Currency[];
+}
+
+export interface EmployeesResponse extends Employee {
+	Employees: Employee[];
 }
 
 export interface AccountsResponse extends AccountingResponse {
@@ -41,6 +49,7 @@ export interface Invoice {
 	SentToContact?: boolean;
 	IsDiscounted?: boolean;
 	HasAttachments?: boolean;
+	FullyPaidOnDate?: string;
 	Attachments?: any[];
 	Contact?: Contact;
 	DateString?: string;
@@ -63,7 +72,7 @@ export interface Invoice {
 // TODO: Are last two common therefore we can put on common interface?
 
 export interface ValidationError {
-	message: string;
+	Message: string;
 }
 
 export interface Contact {
@@ -92,6 +101,7 @@ export interface Contact {
 	Attachments?: any; // TODO: something here
 	SkypeUserName?: string;
 	HasValidationErrors?: boolean;
+	ValidationErrors?: ValidationError[];
 }
 
 export interface ContactGroup {
@@ -142,4 +152,44 @@ export interface Tracking {
 	Option?: string;
 	TrackingCategoryID?: string;
 	TrackingOptionID?: string;
+}
+
+export interface Employee {
+	Status?: 'Active' | 'Archive';
+	FirstName: string;
+	LastName: string;
+	ExternalLink?: any;
+}
+
+export interface Report {
+	ReportID: string;
+	ReportName: string;
+	ReportType: string;
+	ReportTitles?: string[];
+	ReportDate: string;
+	UpdatedDateUTC: string;
+	Attributes?: Array<{
+		Name: string;
+		Description: string;
+		Value: string;
+	}>;
+	Fields?: Field[];
+	Rows: Row[];
+}
+export interface Field {
+	FieldID: string;
+	Description: string;
+	Value: string;
+}
+export interface Row {
+	RowType: string;
+	Cells: Cell[];
+}
+export interface Cell
+{
+	Value?: string;
+	Attibutes?: Array<{
+		Value: string;
+		Id: string;
+	}>;
 }

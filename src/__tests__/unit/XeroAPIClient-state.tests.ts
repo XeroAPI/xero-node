@@ -1,7 +1,6 @@
 import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { OAuthClient } from '../../OAuthClient';
 import { InMemoryOAuth } from './InMenoryOAuth';
 
 const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
@@ -16,7 +15,7 @@ describe('internal state', () => {
 			AppType: 'private',
 			ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 			ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-			privateKey: privateKey
+			PrivateKeyCert: privateKey
 		}, null, inMemoryOAuth);
 	});
 
