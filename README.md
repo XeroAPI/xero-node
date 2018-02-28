@@ -2,6 +2,8 @@
 
 NodeJS Client for the Xero API, supporting Public, Private and Partner Apps
 
+API Reference: [here](./docs/index.html) or [here](../docs/index.html).
+
 ## Current Status: PRE-PRE-ALPHA.
 
 Ideas we want to achieve.
@@ -47,4 +49,4 @@ We want to make this wrapper as thin as possible. This means:
 - [ ] Public App can take a call back URL
 - [ ] Partner Sample App
 - [ ] CI
-- [ ] TSDoc?
+- [x] TSDoc
