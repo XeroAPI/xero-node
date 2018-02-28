@@ -6,6 +6,7 @@ export class InMemoryOAuthLib {
 	private returnData: any = null;
 	private returnHttpResponse: any = null;
 	private lastCalledUrl = '';
+	private lastCalledVerb = '';
 	private returnOauthToken: string = null;
 	private returnOauthSecret: string = null;
 	private returnAuthorisedToken: string = null;
@@ -13,6 +14,10 @@ export class InMemoryOAuthLib {
 
 	public lastCalledThisURL(url: string) {
 		expect(this.lastCalledUrl).toBe(url);
+	}
+
+	public lastCalledThisVerb(verb: string) {
+		expect(this.lastCalledVerb).toBe(verb);
 	}
 
 	public setTokenSecret(oauth_token: string, oauth_secret: string){
@@ -25,12 +30,17 @@ export class InMemoryOAuthLib {
 		this.returnAuthorisedSecret = oauth_secret;
 	}
 
+	public lastRequestedHadBody(expectedBody: any){
+		expect(this.lastRequestedBody).toMatch(expectedBody);
+	}
+
 	public get(
 		url: string,
 		oauthToken: string,
 		oauthSecret: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
+		this.lastCalledVerb = 'get';
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
@@ -42,6 +52,8 @@ export class InMemoryOAuthLib {
 		contentType: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
+		this.lastCalledVerb = 'post';
+		this.lastRequestedBody = body;
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
@@ -51,6 +63,7 @@ export class InMemoryOAuthLib {
 		oauthSecret: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
+		this.lastCalledVerb = 'delete';
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
@@ -62,6 +75,8 @@ export class InMemoryOAuthLib {
 		contentType: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
+		this.lastRequestedBody = body;
+		this.lastCalledVerb = 'put';
 		callback(this.returnErr, this.returnData, this.returnHttpResponse);
 	}
 
