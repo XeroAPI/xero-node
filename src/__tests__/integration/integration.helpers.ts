@@ -1,7 +1,17 @@
 import * as path from 'path';
 
 export function getConfig(){
-	const data = require('./xero.json');
-	const config = { ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } };
-	return config;
+	try {
+		const data = require('./config.json');
+		return { ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } };
+
+	} catch (error) {
+		return {
+			AppType: 'private',
+			ConsumerKey: process.env.ConsumerKey,
+			ConsumerSecret: process.env.ConsumerSecret,
+			CallbackBaseUrl: null,
+			UserAgent: 'Tester'
+		};
+	}
 }
