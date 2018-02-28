@@ -24,29 +24,29 @@ describe('Endpoint: ', () => {
 	{ statusCode: 200, hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'update', expectedVerb: 'post', expectedUrl: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
 	{ statusCode: 200, hasResponse: true, hasRequestBody: false, endpoint: 'currencies', action: 'get', expectedVerb: 'get', expectedUrl: `currencies` },
 	{ statusCode: 200, hasResponse: true, hasRequestBody: true, endpoint: 'currencies', action: 'create', expectedVerb: 'put', expectedUrl: `currencies` },
-	].map((test) => {
+	].map((fixture) => {
 
 		let result: any;
 
-		describe(`${test.endpoint} & ${test.action} calls`, () => {
-			const mockedResponse = { a: 'response' };
-			const mockedRequest = { a: 'request' };
+		describe(`${fixture.endpoint} & ${fixture.action} calls`, () => {
+			const mockedResponse = fixture.hasResponse ? JSON.stringify({ a: 'response' }) : null;
+			const mockedRequest = fixture.hasRequestBody ? { a: 'request' } : null;
 
 			beforeAll(async () => {
 				inMemoryOAuthLib.reset();
-				inMemoryOAuthLib.callbackResultsForNextCall(null, test.hasResponse ? JSON.stringify(mockedResponse) : null, { statusCode: test.statusCode });
-				result = await (xeroClient as any)[test.endpoint][test.action](test.hasRequestBody ? mockedRequest : null, test.args ? test.args : null);
+				inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: fixture.statusCode });
+				result = await (xeroClient as any)[fixture.endpoint][fixture.action](mockedRequest, fixture.args);
 			});
 
 			it('called the correct URL', () => {
-				inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + test.expectedUrl);
+				inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + fixture.expectedUrl);
 			});
 
-			it(`calls the ${test.expectedVerb} verb`, () => {
-				inMemoryOAuthLib.lastCalledThisVerb(test.expectedVerb);
+			it(`calls the ${fixture.expectedVerb} verb`, () => {
+				inMemoryOAuthLib.lastCalledThisVerb(fixture.expectedVerb);
 			});
 
-			if (test.hasRequestBody) {
+			if (fixture.hasRequestBody) {
 				it(`requested with the expected body`, () => {
 					inMemoryOAuthLib.lastRequestedHadBody(JSON.stringify(mockedRequest));
 				});
@@ -57,7 +57,7 @@ describe('Endpoint: ', () => {
 			}
 
 			it('matches the expected response', () => {
-				expect(result).toMatchObject(mockedResponse);
+				expect(result).toMatchObject(JSON.parse(mockedResponse));
 			});
 		});
 	});
