@@ -3,7 +3,7 @@ import { XeroAPIClient } from '../../XeroAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
 import { allCurrenciesResponse, createResponse } from './response-examples/currencies.response.examples';
-import { InMemoryOAuth } from './InMenoryOAuth';
+import { InMemoryOAuthLib } from './InMenoryOAuthLib';
 
 const privateKeyFile = path.resolve(__dirname + '/test-privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
@@ -12,7 +12,7 @@ describe('/currencies', () => {
 	describe('and getting', () => {
 		describe('all currencies', () => {
 			let result: CurrenciesResponse;
-			const inMemoryOAuth = new InMemoryOAuth();
+			const inMemoryOAuth = new InMemoryOAuthLib();
 
 			beforeAll(async () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(allCurrenciesResponse), { statusCode: 200 });
@@ -45,7 +45,7 @@ describe('/currencies', () => {
 	describe('and creating', () => {
 		describe('a currency', () => {
 			let result: CurrenciesResponse;
-			const inMemoryOAuth = new InMemoryOAuth();
+			const inMemoryOAuth = new InMemoryOAuthLib();
 
 			beforeAll(async () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(createResponse), {stausCode: 200});

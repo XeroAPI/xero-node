@@ -1,5 +1,5 @@
 import { IOAuthClientConfiguration, OAuthClient } from '../../OAuthClient';
-import { InMemoryOAuth } from './InMenoryOAuth';
+import { InMemoryOAuthLib } from './InMenoryOAuthLib';
 
 describe('OAuthClient', () => {
 	const testConfig: IOAuthClientConfiguration = {
@@ -20,7 +20,7 @@ describe('OAuthClient', () => {
 		describe('on GETS', () => {
 			describe('with 404s', () => {
 				it('the error object conforms', async () => {
-					const inMemoryOAuth = new InMemoryOAuth();
+					const inMemoryOAuth = new InMemoryOAuthLib();
 
 					// This is what the API returns
 					inMemoryOAuth.callbackResultsForNextCall({
@@ -45,7 +45,7 @@ describe('OAuthClient', () => {
 		describe('on DELETES', () => {
 			describe('with 404s', () => {
 				it('the error object conforms', async () => {
-					const inMemoryOAuth = new InMemoryOAuth();
+					const inMemoryOAuth = new InMemoryOAuthLib();
 
 					// This is what the API returns
 					inMemoryOAuth.callbackResultsForNextCall({
@@ -70,7 +70,7 @@ describe('OAuthClient', () => {
 		describe('on PUT', () => {
 			describe('with 404s', () => {
 				it('the error object conforms', async () => {
-					const inMemoryOAuth = new InMemoryOAuth();
+					const inMemoryOAuth = new InMemoryOAuthLib();
 
 					// This is what the API returns
 					inMemoryOAuth.callbackResultsForNextCall({
