@@ -18,20 +18,23 @@ describe('Endpoint: ', () => {
 	// TODO: figure out contactgroups.contacts
 	// TODO: Double check when an endpoint and take an ID and add a line for it
 
-	[{ hasResponse: true, hasRequestBody: false, endpoint: 'invoices', action: 'get', expectedPath: 'invoices' },
-	{ hasResponse: true, hasRequestBody: true, endpoint: 'invoices', action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
-	{ hasResponse: true, hasRequestBody: false, endpoint: 'contactgroups', action: 'get', expectedPath: 'contactgroups' },
-	{ hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
-	{ hasResponse: true, hasRequestBody: true, endpoint: 'contactgroups', action: 'update', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
-	{ hasResponse: true, hasRequestBody: false, endpoint: 'currencies', action: 'get', expectedPath: `currencies` },
-	{ hasResponse: true, hasRequestBody: true, endpoint: 'currencies', action: 'create', expectedPath: `currencies` },
+	[{ endpoint: 'invoices', action: 'get', expectedPath: 'invoices' },
+	{ endpoint: 'invoices', action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
+	{ endpoint: 'contactgroups', action: 'get', expectedPath: 'contactgroups' },
+	{ endpoint: 'contactgroups', action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
+	{ endpoint: 'contactgroups', action: 'update', expectedPath: `contactgroups/${aGuid}?summarizeErrors=false`, args: { ContactGroupID: aGuid } },
+	{ endpoint: 'currencies', action: 'get', expectedPath: `currencies` },
+	{ endpoint: 'currencies', action: 'create', expectedPath: `currencies` },
 	].map((fixture) => {
 
 		let result: any;
 
 		describe(`${fixture.endpoint} & ${fixture.action} calls`, () => {
-			const mockedResponse = fixture.hasResponse ? JSON.stringify({ a: 'response' }) : null;
-			const mockedRequest = fixture.hasRequestBody ? { a: 'request' } : null;
+
+			const mockedResponse = JSON.stringify({ a: 'response' });
+
+			const hasRequestBody = (fixture.action == 'create' || fixture.action == 'update');
+			const mockedRequest = hasRequestBody ? { a: 'request' } : null;
 
 			beforeAll(async () => {
 				inMemoryOAuthLib.reset();
