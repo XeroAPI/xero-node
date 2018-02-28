@@ -1,7 +1,7 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { CurrenciesResponse } from '../../interfaces/AccountingResponse';
+import { CurrenciesResponse } from '../../interfaces/AccountingAPI';
 
 const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');

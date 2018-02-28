@@ -2,7 +2,7 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { InvoicesResponse } from '../../interfaces/AccountingResponse';
+import { InvoicesResponse } from '../../interfaces/AccountingAPI';
 import { isUUID } from '../test-helpers';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
 

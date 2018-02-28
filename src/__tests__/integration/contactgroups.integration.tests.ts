@@ -2,7 +2,7 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
-import { ContactGroupsResponse, ContactGroup } from '../../interfaces/AccountingResponse';
+import { ContactGroupsResponse, ContactGroup } from '../../interfaces/AccountingAPI';
 import { isUUID } from '../test-helpers';
 
 const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');

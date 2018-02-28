@@ -1,4 +1,4 @@
-import { ContactGroup, ContactGroupsResponse } from '../../interfaces/AccountingResponse';
+import { ContactGroup, ContactGroupsResponse } from '../../interfaces/AccountingAPI';
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as path from 'path';
 import * as fs from 'fs';
