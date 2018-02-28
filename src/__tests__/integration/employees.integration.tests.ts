@@ -7,8 +7,9 @@ const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
 // TODO: Let them pass in the privateKey and privateKey path
+
 const data = require('./xero.json');
-const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
+const xero = new XeroAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
 
 describe('/employees integration tests', () => {
 	describe('and creating and getting', () => {
