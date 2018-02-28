@@ -8,14 +8,14 @@ import { isUUID } from '../test-helpers';
 const privateKeyFile = path.resolve(__dirname, '..', '..', '..', 'privatekey.pem');
 const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 
-const data = require('./config.json');
-const xero = new XeroAPIClient({ ...data, ...{ privateKey: privateKey } });
+const data = require('./xero.json');
+const xero = new XeroAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
 
 describe('/contactgroups integration tests', () => {
 
 	describe('and GETing', () => {
 
-		describe.only('all ContactGroups', () => {
+		describe('all ContactGroups', () => {
 			let result: ContactGroupsResponse;
 
 			beforeAll(async () => {

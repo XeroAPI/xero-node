@@ -18,10 +18,10 @@ describe('/employees', () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(allEmployeesResponse), { statusCode: 200 });
 
 				const xeroClient = new XeroAPIClient({
-					appType: 'private',
-					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-					privateKey: privateKey
+					AppType: 'private',
+					ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+					PrivateKeyCert: privateKey
 				}, null, inMemoryOAuth);
 
 				result = await xeroClient.employees.get();
@@ -51,10 +51,10 @@ describe('/employees', () => {
 				inMemoryOAuth.callbackResultsForNextCall(null, JSON.stringify(createResponse), {stausCode: 200});
 
 				const xeroClient = new XeroAPIClient({
-					appType: 'private',
-					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-					consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-					privateKey: privateKey
+					AppType: 'private',
+					ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+					PrivateKeyCert: privateKey
 				}, null, inMemoryOAuth);
 
 				const employee: Employee = {

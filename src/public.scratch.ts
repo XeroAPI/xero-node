@@ -3,7 +3,7 @@ import * as  prompt from 'prompt';
 import * as opn from 'opn';
 
 // TODO: Let them pass in the privateKey and privateKey path
-const data = require('./public_config.json');
+const data = require('./xero_public.json');
 
 const xero = new XeroAPIClient(data);
 

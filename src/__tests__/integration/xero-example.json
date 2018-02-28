@@ -1,0 +1,7 @@
+{
+	"AppType": "private",
+	"ConsumerKey": "CONSUMERKEY",
+	"ConsumerSecret": "CONSTUMERSECRET",
+	"CallbackBaseUrl": null,
+	"UserAgent": "Tester"
+}
