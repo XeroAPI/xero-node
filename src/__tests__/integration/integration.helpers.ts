@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-export function getConfig(){
+export function getConfig() {
 	try {
 		const data = require('./config.json');
 		return { ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } };
@@ -11,7 +11,8 @@ export function getConfig(){
 			ConsumerKey: process.env.ConsumerKey,
 			ConsumerSecret: process.env.ConsumerSecret,
 			CallbackBaseUrl: null,
-			UserAgent: 'Tester'
+			UserAgent: 'Tester',
+			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
 	}
 }
