@@ -37,7 +37,9 @@ describe('Endpoint: ', () => {
 	const fixtures: IFixture = {
 		invoices: [
 			{ action: 'get', expectedPath: 'invoices' },
-			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' }
+			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
+			{ action: 'update', expectedPath: `invoices/${guid1}?summarizeErrors=false`, args: { InvoiceID: guid1 } },
+			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` }
 		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
