@@ -120,3 +120,6 @@ Replace the `example-config.json` with `config.json` in the [integration test di
 5. Writing the SDK in Typescript will allow us to provide TS types for the API's contracts, and it's what we use internally at Xero. This will also aid in self-generated docs.
 
 # There are LOTS of TODOs in code and on our Kanban board - Feel free to pick one off
+
+## Maintainers
+@philals @iamam34 @bryanlloydtee @dannyvincent @dupski
