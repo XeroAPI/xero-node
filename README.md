@@ -21,7 +21,7 @@ API Reference: [here](https://philals.github.io/xero-node-v3/).
 
     Matching SDK methods names to endpoints, allows consumers to read the official API documentation and translate it to SDK method calls quickly.
 
-    That rather than using HTTP verbs (`.put()`, `.post()` etc) the SDK will use actions. Example `get()`, `create()`,`delete()`, `update()`. This will abstract away the Xero's funny `PUT` vs `POST` (https://developer.xero.com/documentation/api/requests-and-responses).
+    That rather than using HTTP verbs (`.put()`, `.post()` etc) the SDK will use actions. Example `get()`, `create()`,`delete()`, `update()`. This will abstract away the Xero's [funny](https://developer.xero.com/documentation/api/requests-and-responses) `PUT` vs `POST`.
 
 2. A simple and single OAuth flows. Rather than automatically refreshing tokens, the SDK we will expose methods which allow the OAuth methods eg Refreshing Tokens etc. Consideration is also being made to OAuth2.
 
