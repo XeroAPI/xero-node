@@ -40,7 +40,7 @@ Please see the `example-config.json`.
 | CallbackBaseUrl | The callback that Xero should invoke when the authorization is successful.               	  | False     | null |
 | PrivateKeyCert       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     | null |
 | redirectOnError      | Whether Xero Auth should redirect to your app in the event the user clicks 'Cancel'      | False     | true |
-npm 
+npm
 ```javascript
 //Sample Private App Config
 {
@@ -122,3 +122,36 @@ Replace the `example-config.json` with `config.json` in the [integration test di
 
 ## Maintainers
 @philals @iamam34 @bryanlloydtee @dannyvincent @dupski
+
+## Endpoint completion
+
+- [ ] attachments
+- [ ] accounts
+- [ ] bankstatements
+- [ ] banktransactions
+- [ ] bank-transfers
+- [ ] branding-themes
+- [ ] contacts
+- [ ] contactgroups
+- [ ] credit-notes
+- [ ] currencies
+- [ ] employees
+- [ ] expense-claims
+- [ ] invoices
+- [ ] invoice-reminders
+- [ ] items
+- [ ] journals
+- [ ] linked-transactions
+- [ ] manual-journals
+- [ ] organisation
+- [ ] overpayments
+- [ ] payments
+- [ ] prepayments
+- [ ] purchase-orders
+- [ ] receipts
+- [ ] repeating-invoices
+- [ ] reports
+- [ ] tax-rates
+- [ ] tracking-categories
+- [ ] users
+- [ ] types
