@@ -18,9 +18,6 @@ jobs:
 
     steps:
       - checkout
-      - run:
-        name: Create Key
-        command: 'npm run create-key'
 
       # Download and cache dependencies
       - restore_cache:
@@ -29,6 +26,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      - run: npm run create-key
       - run: npm install
 
       - save_cache:
