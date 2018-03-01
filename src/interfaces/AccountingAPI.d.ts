@@ -33,13 +33,23 @@ interface AccountingResponse {
 	DateTimeUTC: string;
 }
 
+export interface Payment {
+	PaymentID?: string;
+	Date?: Date;
+	Amount?: number;
+	Reference?: string;
+	CurrencyRate?: number;
+	HasAccount?: boolean;
+	HasValidationErrors?: boolean;
+}
+
 export interface Invoice {
-	Type: string;
+	Type?: string;
 	InvoiceID?: string;
 	InvoiceNumber?: string;
 	Reference?: string;
 	Prepayments?: any[];
-	Payments?: any[];
+	Payments?: Payment[];
 	CreditNotes?: any[];
 	Overpayments?: any[];
 	CISDeduction?: number;
@@ -50,7 +60,6 @@ export interface Invoice {
 	IsDiscounted?: boolean;
 	HasAttachments?: boolean;
 	FullyPaidOnDate?: string;
-	Attachments?: any[];
 	Contact?: Contact;
 	DateString?: string;
 	Date?: string;
