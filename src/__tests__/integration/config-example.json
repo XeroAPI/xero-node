@@ -3,5 +3,6 @@
 	"ConsumerKey": "CONSUMERKEY",
 	"ConsumerSecret": "CONSTUMERSECRET",
 	"CallbackBaseUrl": null,
-	"UserAgent": "Tester"
+	"UserAgent": "Tester",
+	"PrivateKeyCert": "./privatekey.pem"
 }

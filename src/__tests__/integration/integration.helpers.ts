@@ -2,10 +2,11 @@ import * as path from 'path';
 
 export function getConfig() {
 	try {
-		const data = require('./config.json');
-		return { ...data, ...{ PrivateKeyCert: path.resolve(__dirname, '..', '..', '..', 'privatekey.pem') } };
+		const config = require('./config.json');
+		return config;
 
 	} catch (error) {
+		// Using ENV VARS in CircleCI
 		return {
 			AppType: 'private',
 			ConsumerKey: process.env.ConsumerKey,

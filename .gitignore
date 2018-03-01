@@ -4,3 +4,4 @@ lib/**/*
 npm-debug.log
 *.pdf
 config.json
+privatekey.pem
