@@ -7,8 +7,8 @@ export class InMemoryOAuthLib {
 	private returnHttpResponse: any = null;
 	private lastCalledUrl = '';
 	private lastCalledVerb = '';
-	private returnOauthToken: string = null;
-	private returnOauthSecret: string = null;
+	private return_oauth_token: string = null;
+	private return_oauth_secret: string = null;
 	private returnAuthorisedToken: string = null;
 	private returnAuthorisedSecret: string = null;
 	private lastRequestedBody: string = null;
@@ -24,8 +24,8 @@ export class InMemoryOAuthLib {
 		this.lastCalledUrl = '';
 		this.lastRequestedBody = null;
 		this.lastCalledVerb = '';
-		this.returnOauthToken = null;
-		this.returnOauthSecret = null;
+		this.return_oauth_token = null;
+		this.return_oauth_secret = null;
 		this.returnAuthorisedToken = null;
 		this.returnAuthorisedSecret = null;
 	}
@@ -34,12 +34,7 @@ export class InMemoryOAuthLib {
 		expect(this.lastCalledVerb).toBe(verb);
 	}
 
-	public setTokenSecret(oauth_token: string, oauth_secret: string) {
-		this.returnOauthToken = oauth_token;
-		this.returnOauthSecret = oauth_secret;
-	}
-
-	public swapToAuthTokenSecret(oauth_token: string, oauth_secret: string) {
+	public set_SwapRequestTokenforAccessToken(oauth_token: string, oauth_secret: string) {
 		this.returnAuthorisedToken = oauth_token;
 		this.returnAuthorisedSecret = oauth_secret;
 	}
@@ -104,9 +99,14 @@ export class InMemoryOAuthLib {
 		this.returnHttpResponse = returnGetHttpResponse;
 	}
 
+	public set_getOAuthRequestToken(oauth_token: string, oauth_secret: string) {
+		this.return_oauth_token = oauth_token;
+		this.return_oauth_secret = oauth_secret;
+	}
+
 	public getOAuthRequestToken(
 		callback: (err: any, oauth_token: string, oauth_token_secret: string, result: any) => any) {
-		callback(null, this.returnOauthToken, this.returnOauthSecret, null);
+		callback(null, this.return_oauth_token, this.return_oauth_secret, null);
 	}
 
 	public getOAuthAccessToken(
