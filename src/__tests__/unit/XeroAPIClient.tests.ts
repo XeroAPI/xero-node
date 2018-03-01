@@ -4,72 +4,68 @@ import { TestAPIClient } from './TestAPIClient';
 import { getStringFromFile } from '../../utils';
 import { validTestCertPath } from '../test-helpers';
 
-const cert = getStringFromFile('./src/__tests__/unit/test-privatekey.pem');
+const cert = getStringFromFile(validTestCertPath);
 
 describe('XeroAPIClient', () => {
 	let xeroClientConfig: IXeroClientConfiguration;
 	let testXeroAPIClient: XeroAPIClient;
-	describe('OAuthClient App Types', () => {
-		describe('For Private Apps', () => {
-			beforeAll(() => {
-				xeroClientConfig = {
-					AppType: 'private',
-					ConsumerKey: 'myConsumerKey',
-					ConsumerSecret: 'myConsumerSecret',
-					PrivateKeyCert: validTestCertPath
-				};
-				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
-			});
-
-			it('sets the options for Private Apps', () => {
-				expect(testXeroAPIClient.state.oauthToken).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
-				expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
-				expect(testXeroAPIClient.state.signatureMethod).toEqual('RSA-SHA1');
-			});
+	describe('when using a private app', () => {
+		beforeAll(() => {
+			xeroClientConfig = {
+				AppType: 'private',
+				ConsumerKey: 'myConsumerKey',
+				ConsumerSecret: 'myConsumerSecret',
+				PrivateKeyCert: validTestCertPath
+			};
+			testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 		});
 
-		describe('For Public Apps', () => {
-			beforeAll(() => {
-				xeroClientConfig = {
-					AppType: 'public',
-					ConsumerKey: 'myConsumerKey',
-					ConsumerSecret: 'myConsumerSecret'
+		it('sets correct options', () => {
+			expect(testXeroAPIClient.state.oauthToken).toEqual(xeroClientConfig.ConsumerKey);
+			expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
+			expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
+			expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
+			expect(testXeroAPIClient.state.signatureMethod).toEqual('RSA-SHA1');
+		});
+	});
 
-				};
-				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
-			});
-
-			it('sets the options for Public Apps', () => {
-				expect(testXeroAPIClient.state.oauthToken).toBeNull();
-				expect(testXeroAPIClient.state.oauthSecret).toBeNull();
-				expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.consumerSecret).toEqual(xeroClientConfig.ConsumerSecret);
-				expect(testXeroAPIClient.state.signatureMethod).toEqual('HMAC-SHA1');
-			});
+	describe('when using a public app', () => {
+		beforeAll(() => {
+			xeroClientConfig = {
+				AppType: 'public',
+				ConsumerKey: 'myConsumerKey',
+				ConsumerSecret: 'myConsumerSecret'
+			};
+			testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 		});
 
-		describe('For Partner Apps', () => {
-			beforeAll(() => {
-				xeroClientConfig = {
-					AppType: 'partner',
-					ConsumerKey: 'myConsumerKey',
-					ConsumerSecret: 'myConsumerSecret',
-					PrivateKeyCert: validTestCertPath
-				};
-				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
-			});
+		it('sets correct options', () => {
+			expect(testXeroAPIClient.state.oauthToken).toBeNull();
+			expect(testXeroAPIClient.state.oauthSecret).toBeNull();
+			expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
+			expect(testXeroAPIClient.state.consumerSecret).toEqual(xeroClientConfig.ConsumerSecret);
+			expect(testXeroAPIClient.state.signatureMethod).toEqual('HMAC-SHA1');
+		});
+	});
 
-			it('sets the options for Partner Apps', () => {
-				expect(testXeroAPIClient.state.oauthToken).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
-				expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
-				expect(testXeroAPIClient.state.consumerSecret).toEqual(cert);
-				expect(testXeroAPIClient.state.signatureMethod).toEqual('RSA-SHA1');
-			});
+	describe('when using a partner app', () => {
+		beforeAll(() => {
+			xeroClientConfig = {
+				AppType: 'partner',
+				ConsumerKey: 'myConsumerKey',
+				ConsumerSecret: 'myConsumerSecret',
+				PrivateKeyCert: validTestCertPath
+			};
+			testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 		});
 
+		it('sets correct options', () => {
+			expect(testXeroAPIClient.state.oauthToken).toEqual(xeroClientConfig.ConsumerKey);
+			expect(testXeroAPIClient.state.oauthSecret).toEqual(cert);
+			expect(testXeroAPIClient.state.consumerKey).toEqual(xeroClientConfig.ConsumerKey);
+			expect(testXeroAPIClient.state.consumerSecret).toEqual(cert);
+			expect(testXeroAPIClient.state.signatureMethod).toEqual('RSA-SHA1');
+		});
 	});
 
 	describe('XeroApiClient OAuth10a', () => {
