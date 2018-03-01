@@ -1,16 +1,12 @@
 import * as path from 'path';
-import * as fs from 'fs';
 import { AccountingAPIClient } from './endpoints/AccountingAPIClient';
 
-const privateKeyFile = path.resolve(__dirname, '..', 'privatekey.pem');
-const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
+(async function() {
+	const data = require('./xero.json');
+	const privateKeyFile = path.resolve(__dirname, '..', 'privatekey.pem');
+	const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: privateKeyFile } });
 
-// TODO: Let them pass in the privateKey and privateKey path
-const data = require('./xero.json');
-const xero = new AccountingAPIClient({ ...data, ...{ PrivateKeyCert: privateKey } });
-
-async function main() {
-	const bungInvoice = {
+	const invalidInvoice = {
 		Type: 'ACaCREC',
 		Contact: {
 			Name: 'Martin Hudson'
@@ -27,16 +23,14 @@ async function main() {
 	};
 
 	try {
-		const res = await xero.invoices.create(bungInvoice);
-		console.log('SUCCESS: ', res);
-		console.log('HasErrors: ', res.Invoices[0].HasErrors);
-		console.log('ValidationErrors: ', res.Invoices[0].ValidationErrors);
-		console.log('LineItems: ', res.Invoices[0].LineItems);
+		const res = await xero.invoices.create(invalidInvoice);
+		console.log('RESPONSE =', res);
+		console.log('HasErrors =', res.Invoices[0].HasErrors);
+		console.log('ValidationErrors =', res.Invoices[0].ValidationErrors);
+		console.log('LineItems =', res.Invoices[0].LineItems);
 
 	} catch (error) {
-		console.log('error: ', error);
+		console.log('error =', error);
 	}
 
-}
-
-main();
+})();
