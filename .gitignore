@@ -6,3 +6,4 @@ npm-debug.log
 config.json
 privatekey.pem
 *.scratch.ts
+scratch.ts
