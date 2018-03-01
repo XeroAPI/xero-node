@@ -17,10 +17,10 @@ jobs:
     working_directory: ~/repo
 
     steps:
-			- checkout
-			- run:
-				name: Create Key
-				command: 'npm run create-key'
+      - checkout
+      - run:
+        name: Create Key
+        command: 'npm run create-key'
 
       # Download and cache dependencies
       - restore_cache:
