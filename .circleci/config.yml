@@ -16,12 +16,11 @@ jobs:
 
     working_directory: ~/repo
 
-    dependencies:
-      pre:
-        - bash ./.circleci/create_private_key.sh
-
     steps:
-      - checkout
+			- checkout
+			- run:
+				name: Create Key
+				command: 'npm run create-key'
 
       # Download and cache dependencies
       - restore_cache:
