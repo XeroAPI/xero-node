@@ -3,7 +3,8 @@ node_modules
 lib/**/*
 npm-debug.log
 *.pdf
-config.json
+*config.json
 privatekey.pem
 *.scratch.ts
 scratch.ts
+scratch*
