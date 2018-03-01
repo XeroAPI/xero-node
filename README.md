@@ -15,7 +15,7 @@ Supports the three applications types:
 * Public - apps that connect to any Org, but with a 30 minute limitation
 * Partner - approved apps that can automatically refresh Org tokens.
 
-API Reference: [here](https://philals.github.io/xero-node-v3/).
+Auto generated API Reference: [here](https://philals.github.io/xero-node-v3/).
 
 # Features
 
