@@ -40,7 +40,7 @@ Please see the `example-config.json`.
 | CallbackBaseUrl | The callback that Xero should invoke when the authorization is successful.               	  | False     | null |
 | PrivateKeyCert       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     | null |
 | redirectOnError      | Whether Xero Auth should redirect to your app in the event the user clicks 'Cancel'      | False     | true |
-
+npm 
 ```javascript
 //Sample Private App Config
 {
