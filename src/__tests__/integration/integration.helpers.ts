@@ -1,6 +1,8 @@
 import * as path from 'path';
 
 export function getConfig() {
+	jest.setTimeout(20000);
+
 	try {
 		const config = require('./config.json');
 		return config;

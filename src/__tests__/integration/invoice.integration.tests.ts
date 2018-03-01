@@ -10,8 +10,6 @@ const data = getConfig();
 const xero = new AccountingAPIClient(data);
 
 describe('/invoices integration tests', () => {
-	jest.setTimeout(20000);
-
 	describe('and GETing', () => {
 		describe('a single invoice as PDF', () => {
 			let result: string;
