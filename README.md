@@ -1,4 +1,5 @@
-[![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)[![CircleCI](https://circleci.com/gh/philals/xero-node-v3/tree/master.svg?style=svg&circle-token=0a866212b40b6ecaa44f2f4fe98401b536a44038)](https://circleci.com/gh/philals/xero-node-v3/tree/master)
+[![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
+[![CircleCI](https://circleci.com/gh/philals/xero-node-v3/tree/master.svg?style=svg&circle-token=0a866212b40b6ecaa44f2f4fe98401b536a44038)](https://circleci.com/gh/philals/xero-node-v3/tree/master)
 
 # node-xero
 ## Current Status: PRE-PRE-ALPHA.
@@ -79,9 +80,7 @@ Examples
 
 Sample app using this package: https://github.com/XeroAPI/xero-node-sample-app
 
-The best location for examples are the [example tests](https://github.com/philals/xero-node-v3/tree/master/src/__tests__/integration).
-
-Print a count of invoices:
+The best location for examples are the [example tests](https://github.com/philals/xero-node-v3/tree/master/src/__tests__/integration). However, here are a few:
 
 ```javascript
 //Print a count of invoices
