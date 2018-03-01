@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/philals/xero-node-v3/tree/master.svg?style=svg&circle-token=0a866212b40b6ecaa44f2f4fe98401b536a44038)](https://circleci.com/gh/philals/xero-node-v3/tree/master)
 
-# node-xero!
+# node-xero
 
 NodeJS Client for the Xero API, supporting Public, Private and Partner Apps
 
@@ -8,34 +8,30 @@ API Reference: [here](https://philals.github.io/xero-node-v3/).
 
 ## Current Status: PRE-PRE-ALPHA.
 
-Ideas we want to achieve.
+### Project philosophies
 
-We want to make this wrapper as thin as possible. This means:
+1. A simple and intuitive interface.
+   eg:
 
-1. An interface that matches the api endpoints.
-    eg:
+    `PUT https://api.xero.com/api.xro/2.0/ContactGroups/b05466c8-dc54-4ff8-8f17-9d7008a2e44b/Contacts`
 
-	`PUT https://api.xero.com/api.xro/2.0/ContactGroups/b05466c8-dc54-4ff8-8f17-9d7008a2e44b/Contacts`
+    Will become:
 
-	Will become
+    `xero.contacts.contactGroups.create(contact)`
 
-	`xero.contacts.contactGroups.create(contact)`
+    Matching SDK methods names to endpoints, allows consumers to read the official API documentation and translate it to SDK method calls quickly.
 
-	This will help with documentation, as API docs == SDK interface.
+    That rather than using HTTP verbs (`.put()`, `.post()` etc) the SDK will use actions. Example `get()`, `create()`,`delete()`, `update()`. This will abstract away the Xero's funny `PUT` vs `POST` (https://developer.xero.com/documentation/api/requests-and-responses).
 
-	That rather than using verbs `.put()`, `.post` etc will use actions. Example `get()`, `create()`,`delete()`, `update()`. This will abstract away the Accounting Apis funny `PUT` vs `POST`.
+2. A simple and single OAuth flows. Rather than automatically refreshing tokens, the SDK we will expose methods which allow the OAuth methods eg Refreshing Tokens etc. Consideration is also being made to OAuth2.
 
-2. Simple Partner flows. Rather than automatically refreshing tokens we will expose methods which show when it will expire and ability to refresh. KISS.
+3. Abstracted underlyting OAuth/HTTP lib. This will allow swapping it out if we needed. The SDK won't bleed the OAuth libs exception types onto the consumer when it hits a 500/400 etc. Having a OAuth/HTTP layer will allow reuse and extension to other APIs (Payroll, Expenses etc).
 
-3. Abstracted away OAuth lib. This will allow us to swap it out if we needed. We won't bleed the OAuth libs exception types into the SDK. This will make it easier for us to extend to Payroll etc
-
-5. No entity validation. The user will pass in JSON and get JSON out. There will be no manipulation of data along the way. Again the public docs will show what will be returned. Helper methods if asked for will be provided by a separate module. This will reduce maintenance costs.
+5. Minimal to no entity/request/response validation. A consumer will pass in JSON and get JSON out. There will be no manipulation of data along the way. Helper methods if asked for will be provided by a separate module. This will reduce maintenance costs.
 
 4. Unit tests
 
-5. Oauth2 ready. The Oauth lib we are using us OAuth2 ready. Design decision will be made with this in mind. The current SDK forked and changed the Oauth lib, which makes things hard.
-
-6. Typescript. This will aid in self-generated docs etc.
+5. Writing the SDK in Typescript will allow us to provide TS types for the API's contracts, and it's what we use internally at Xero. This will also aid in self-generated docs.
 
 
 # There are LOTS of TODOs in code and on our Kanban board - Feel free to pick one off
