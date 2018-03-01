@@ -16,7 +16,6 @@ export interface IXeroClientConfiguration {
 	PrivateKeyPassword?: string;
 	CallbackBaseUrl?: string;
 	CallbackPath?: string;
-	UserAgent?: string;
 }
 
 const API_BASE = 'https://api.xero.com';
@@ -96,9 +95,8 @@ export class XeroAPIClient {
 	public oauth10a = {
 		getUnauthorisedRequestToken: async () => this._oauthClient.getUnauthorisedRequestToken(),
 		buildAuthoriseUrl: (unauthorisedRequestToken: string) => `https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`, // TODO Check for callback URL
-		getAccessToken: async (authedRT: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
-			const token = await this._oauthClient.SwapRequestTokenforAccessToken(authedRT, oauth_verifier);
-			// Set this instate
+		getAccessToken: async (authorisedRequestToken: { oauth_token: string, oauth_token_secret: string }, oauth_verifier: string): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
+			const token = await this._oauthClient.SwapRequestTokenforAccessToken(authorisedRequestToken, oauth_verifier);
 			this.state = { oauthToken: token.oauth_token, oauthSecret: token.oauth_token_secret };
 			return token;
 		}

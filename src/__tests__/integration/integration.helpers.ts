@@ -12,7 +12,6 @@ export function getConfig() {
 			ConsumerKey: process.env.ConsumerKey,
 			ConsumerSecret: process.env.ConsumerSecret,
 			CallbackBaseUrl: null,
-			UserAgent: 'Tester',
 			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
 	}

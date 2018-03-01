@@ -16,8 +16,7 @@ describe('XeroAPIClient', () => {
 					AppType: 'private',
 					ConsumerKey: 'myConsumerKey',
 					ConsumerSecret: 'myConsumerSecret',
-					PrivateKeyCert: validTestCertPath,
-					UserAgent: 'xero-node-v3-unit-test'
+					PrivateKeyCert: validTestCertPath
 				};
 				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 			});
@@ -36,8 +35,8 @@ describe('XeroAPIClient', () => {
 				xeroClientConfig = {
 					AppType: 'public',
 					ConsumerKey: 'myConsumerKey',
-					ConsumerSecret: 'myConsumerSecret',
-					UserAgent: 'xero-node-v3-unit-test'
+					ConsumerSecret: 'myConsumerSecret'
+
 				};
 				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 			});
@@ -57,8 +56,7 @@ describe('XeroAPIClient', () => {
 					AppType: 'partner',
 					ConsumerKey: 'myConsumerKey',
 					ConsumerSecret: 'myConsumerSecret',
-					PrivateKeyCert: validTestCertPath,
-					UserAgent: 'xero-node-v3-unit-test'
+					PrivateKeyCert: validTestCertPath
 				};
 				testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 			});
@@ -85,8 +83,7 @@ describe('XeroAPIClient', () => {
 				AppType: 'private',
 				ConsumerKey: 'myConsumerKey',
 				ConsumerSecret: 'myConsumerSecret',
-				PrivateKeyCert: validTestCertPath,
-				UserAgent: 'xero-node-v3-unit-test'
+				PrivateKeyCert: validTestCertPath
 			};
 			testXeroAPIClient = new TestAPIClient(xeroClientConfig, null, inMemoryOAuthLib);
 			oauthToken = testXeroAPIClient.state.oauthToken;
