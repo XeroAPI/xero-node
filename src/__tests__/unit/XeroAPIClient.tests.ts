@@ -7,16 +7,16 @@ import { validTestCertPath } from '../test-helpers';
 const cert = getStringFromFile(validTestCertPath);
 
 describe('XeroAPIClient', () => {
-	let xeroClientConfig: IXeroClientConfiguration;
 	let testXeroAPIClient: XeroAPIClient;
 	describe('when using a private app', () => {
+		const xeroClientConfig: IXeroClientConfiguration = {
+			AppType: 'private',
+			ConsumerKey: 'myConsumerKey',
+			ConsumerSecret: 'myConsumerSecret',
+			PrivateKeyCert: validTestCertPath
+		};
+
 		beforeAll(() => {
-			xeroClientConfig = {
-				AppType: 'private',
-				ConsumerKey: 'myConsumerKey',
-				ConsumerSecret: 'myConsumerSecret',
-				PrivateKeyCert: validTestCertPath
-			};
 			testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 		});
 
@@ -30,12 +30,14 @@ describe('XeroAPIClient', () => {
 	});
 
 	describe('when using a public app', () => {
+		const xeroClientConfig: IXeroClientConfiguration = {
+			AppType: 'public',
+			ConsumerKey: 'myConsumerKey',
+			ConsumerSecret: 'myConsumerSecret'
+		};
+
 		beforeAll(() => {
-			xeroClientConfig = {
-				AppType: 'public',
-				ConsumerKey: 'myConsumerKey',
-				ConsumerSecret: 'myConsumerSecret'
-			};
+
 			testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 		});
 
@@ -49,13 +51,13 @@ describe('XeroAPIClient', () => {
 	});
 
 	describe('when using a partner app', () => {
+		const xeroClientConfig: IXeroClientConfiguration = {
+			AppType: 'partner',
+			ConsumerKey: 'myConsumerKey',
+			ConsumerSecret: 'myConsumerSecret',
+			PrivateKeyCert: validTestCertPath
+		};
 		beforeAll(() => {
-			xeroClientConfig = {
-				AppType: 'partner',
-				ConsumerKey: 'myConsumerKey',
-				ConsumerSecret: 'myConsumerSecret',
-				PrivateKeyCert: validTestCertPath
-			};
 			testXeroAPIClient = new TestAPIClient(xeroClientConfig);
 		});
 
@@ -68,19 +70,22 @@ describe('XeroAPIClient', () => {
 		});
 	});
 
-	describe('XeroApiClient OAuth10a', () => {
+	describe('XeroApiClient\'s OAuth10a functions', () => {
 		let unauthRequestToken: any;
 		let accessToken: any;
 		const inMemoryOAuthLib = new InMemoryOAuthLib();
 		let oauthToken: string;
 		let oauthSecret: string;
+
 		beforeAll(async () => {
-			xeroClientConfig = {
+
+			const xeroClientConfig: IXeroClientConfiguration = {
 				AppType: 'private',
 				ConsumerKey: 'myConsumerKey',
 				ConsumerSecret: 'myConsumerSecret',
 				PrivateKeyCert: validTestCertPath
 			};
+
 			testXeroAPIClient = new TestAPIClient(xeroClientConfig, null, inMemoryOAuthLib);
 			oauthToken = testXeroAPIClient.state.oauthToken;
 			oauthSecret = testXeroAPIClient.state.oauthSecret;
