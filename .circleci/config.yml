@@ -17,7 +17,8 @@ jobs:
     working_directory: ~/repo
 
     dependencies:
-      - bash ./.circleci/create_private_key.sh
+      pre:
+        - bash ./.circleci/create_private_key.sh
 
     steps:
       - checkout
