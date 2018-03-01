@@ -39,7 +39,8 @@ describe('Endpoint: ', () => {
 			{ action: 'get', expectedPath: 'invoices' },
 			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `invoices/${guid1}?summarizeErrors=false`, args: { InvoiceID: guid1 } },
-			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` }
+			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=false`, args: { InvoiceNumber: 'INV-123' } },
 		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },

@@ -54,7 +54,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 
 			return this.put<InvoicesResponse>(endpoint, invoice);
 		},
-		update: async (invoice: Invoice, args: { InvoiceID: string }): Promise<InvoicesResponse> => {
+		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string  }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -62,6 +62,10 @@ export class AccountingAPIClient extends XeroAPIClient {
 
 			if (args && args.InvoiceID) {
 				endpoint += `/${args.InvoiceID}`;
+			}
+
+			if (args && args.InvoiceNumber) {
+				endpoint += `/${args.InvoiceNumber}`;
 			}
 
 			endpoint += '?summarizeErrors=false';
