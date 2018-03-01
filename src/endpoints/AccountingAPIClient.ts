@@ -10,7 +10,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 	}
 
 	public accounts = {
-		get: async (args?: any): Promise<AccountsResponse> => {
+		get: async (args?: { AccountID: string }): Promise<AccountsResponse> => {
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
 			let endpoint = 'accounts';
@@ -23,30 +23,30 @@ export class AccountingAPIClient extends XeroAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: any): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID: string }): Promise<InvoicesResponse> => {
 			// TODO: Support invoice number
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
 			let endpoint = 'invoices';
-			if (args && args.InvoiceId) {
-				endpoint = endpoint + '/' + args.InvoiceId;
+			if (args && args.InvoiceID) {
+				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
 			return this.get<InvoicesResponse>(endpoint);
 		},
-		getPDF: async (args?: any): Promise<string> => {
+		getPDF: async (args?: { InvoiceID: string }): Promise<string> => {
 			// TODO: Support invoice number
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
 			// TODO: Refactor duplication
 			let endpoint = 'invoices';
-			if (args && args.InvoiceId) {
-				endpoint = endpoint + '/' + args.InvoiceId;
+			if (args && args.InvoiceID) {
+				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
 			return this.get<string>(endpoint, 'application/pdf');
 		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
-		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: any): Promise<InvoicesResponse> => {
+		create: async (invoice: Invoice | { Invoices: Invoice[] }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -68,20 +68,15 @@ export class AccountingAPIClient extends XeroAPIClient {
 
 			return this.get<ContactGroupsResponse>(endpoint);
 		},
-		create: async (contactGroup: ContactGroup, args?: any): Promise<ContactGroupsResponse> => {
+		create: async (contactGroup: ContactGroup): Promise<ContactGroupsResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
-			let endpoint = 'contactgroups';
-			if (args && args.ContactGroupID) {
-				endpoint = endpoint + '/' + args.ContactGroupId;
-			}
-
-			endpoint += '?summarizeErrors=false';
+			const endpoint = 'contactgroups?summarizeErrors=false';
 
 			return this.put<ContactGroupsResponse>(endpoint, contactGroup);
 		},
-		update: async (contactGroup: ContactGroup, args?: any): Promise<ContactGroupsResponse> => {
+		update: async (contactGroup: ContactGroup, args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
 				endpoint = endpoint + '/' + args.ContactGroupID;
@@ -110,11 +105,11 @@ export class AccountingAPIClient extends XeroAPIClient {
 	};
 
 	public currencies = {
-		get: async (args?: any): Promise<CurrenciesResponse> => {
+		get: async (): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
 			return this.get<CurrenciesResponse>(endpoint);
 		},
-		create: async (currency: Currency, args?: any): Promise<CurrenciesResponse> => {
+		create: async (currency: Currency): Promise<CurrenciesResponse> => {
 			// TODO: Do we need to add summerazieErrors?
 			const endpoint = 'currencies';
 			return this.put<CurrenciesResponse>(endpoint, currency);
@@ -122,23 +117,24 @@ export class AccountingAPIClient extends XeroAPIClient {
 	};
 
 	public employees = {
-		get: async (args?: any): Promise<EmployeesResponse> => {
+		get: async (args?: { EmployeeID: string }): Promise<EmployeesResponse> => {
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
 			let endpoint = 'employees';
 			if (args && args.EmployeeID) {
 				endpoint = endpoint + '/' + args.EmployeeID;
 			}
+			// TODO: Type
 			return this.get<any>(endpoint);
 		},
-		create: async (employee: Employee, args?: any): Promise<EmployeesResponse> => {
+		create: async (employee: Employee): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
 			return this.put<any>(endpoint, employee);
 		}
 	};
 
 	public contacts = {
-		get: async (args?: any): Promise<ContactsResponse> => {
+		get: async (): Promise<ContactsResponse> => {
 			const endpoint = 'contacts';
 			return this.get<ContactsResponse>(endpoint);
 		}
@@ -148,8 +144,8 @@ export class AccountingAPIClient extends XeroAPIClient {
 		get: async (args?: any): Promise<ReportsResponse> => {
 			let endpoint = 'Reports';
 			if (args) {
+				// TODO: Type this with an interface for args
 				const query = new URLSearchParams(args);
-				query.delete('Accept');
 				query.delete('ReportID');
 
 				endpoint = endpoint + '/' + args.ReportID + '?' + query.toString();
@@ -160,7 +156,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 	};
 
 	public purchaseorders = {
-		post: async (body?: object, args?: any): Promise<any> => {
+		create: async (body?: object): Promise<any> => {
 			const endpoint = 'purchaseorders?summarizeErrors=true';
 			// TODO: Add interface here
 			return this.post<any>(endpoint, body);

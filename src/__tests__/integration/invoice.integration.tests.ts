@@ -19,7 +19,7 @@ describe('/invoices integration tests', () => {
 
 			beforeAll(async () => {
 				const invoice = await xero.invoices.create(createSingleInvoiceRequest);
-				result = await xero.invoices.getPDF({ InvoiceId: invoice.Invoices[0].InvoiceID });
+				result = await xero.invoices.getPDF({ InvoiceID: invoice.Invoices[0].InvoiceID });
 				fs.writeFileSync(invoiceLocation, result, 'binary');
 			});
 
@@ -43,7 +43,7 @@ describe('/invoices integration tests', () => {
 			beforeAll(async () => {
 				const invoice = await xero.invoices.create(createSingleInvoiceRequest);
 
-				result = await xero.invoices.get({ InvoiceId: invoice.Invoices[0].InvoiceID });
+				result = await xero.invoices.get({ InvoiceID: invoice.Invoices[0].InvoiceID });
 			});
 
 			// TODO: Make these tests generic and paramatised so that we can reuse across multiple endpoints
