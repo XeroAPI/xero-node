@@ -57,7 +57,7 @@ describe('Endpoint: ', () => {
 	};
 
 	Object.keys(fixtures).map((endpoint: string) => {
-		(fixtures[endpoint] as any).map((fixture: IEndPointDetails) => {
+		(fixtures[endpoint]).map((fixture: IEndPointDetails) => {
 
 			describe(`${endpoint} ${fixture.subResource} & ${fixture.action} calls`, () => {
 				let result: any;
@@ -65,7 +65,7 @@ describe('Endpoint: ', () => {
 				const mockedResponse = JSON.stringify({ a: 'response' });
 
 				const hasRequestBody = (fixture.action == 'create' || fixture.action == 'update');
-				const mockedRequest = hasRequestBody ? { a: 'request' } : null;
+				const mockedRequestBody = hasRequestBody ? { a: 'request' } : null;
 
 				beforeAll(async () => {
 					inMemoryOAuthLib.reset();
@@ -73,12 +73,12 @@ describe('Endpoint: ', () => {
 
 					// tslint:disable-next-line:prefer-conditional-expression
 					if (fixture.subResource) {
-						mockedRequest
-							? result = await (xeroClient as any)[endpoint][fixture.subResource][fixture.action](mockedRequest, fixture.args)
+						mockedRequestBody
+							? result = await (xeroClient as any)[endpoint][fixture.subResource][fixture.action](mockedRequestBody, fixture.args)
 							: result = await (xeroClient as any)[endpoint][fixture.subResource][fixture.action](fixture.args);
 					} else {
-						mockedRequest
-							? result = await (xeroClient as any)[endpoint][fixture.action](mockedRequest, fixture.args)
+						mockedRequestBody
+							? result = await (xeroClient as any)[endpoint][fixture.action](mockedRequestBody, fixture.args)
 							: result = await (xeroClient as any)[endpoint][fixture.action](fixture.args);
 					}
 				});
@@ -92,7 +92,7 @@ describe('Endpoint: ', () => {
 				});
 
 				it('requested with expected body', () => {
-					inMemoryOAuthLib.lastRequestedHadBody(mockedRequest);
+					inMemoryOAuthLib.lastRequestedHadBody(mockedRequestBody);
 				});
 
 				it('matches the expected response', () => {

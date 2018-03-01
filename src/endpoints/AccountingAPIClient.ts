@@ -1,6 +1,7 @@
 import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse } from '../interfaces/AccountingAPI';
 import { XeroAPIClient, IXeroClientConfiguration } from '../XeroAPIClient';
 import { IOAuthClient } from '../OAuthClient';
+import { URLSearchParams } from 'url';
 
 export class AccountingAPIClient extends XeroAPIClient {
 
