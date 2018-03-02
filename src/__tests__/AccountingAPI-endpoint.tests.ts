@@ -1,9 +1,9 @@
-import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
-import { validTestCertPath } from '../test-helpers';
-import { mapConfig, mapState } from '../../config-helper';
-import { OAuth1HttpClient } from '../../OAuth1HttpClient';
-import { IXeroClientConfiguration } from '../../BaseAPIClient';
+import { IXeroClientConfiguration } from '../internals/BaseAPIClient';
+import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
+import { AccountingAPIClient } from '../AccountingAPIClient';
+import { mapState, mapConfig } from '../internals/config-helper';
+import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
+import { InMemoryOAuthLib } from '../internals/__tests__/helpers/InMemoryOAuthLib';
 
 const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
 const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';

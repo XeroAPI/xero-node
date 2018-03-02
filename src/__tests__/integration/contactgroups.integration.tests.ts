@@ -1,8 +1,8 @@
 
-import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import { ContactGroupsResponse, ContactGroup } from '../../interfaces/AccountingAPI';
-import { isUUID } from '../test-helpers';
+import { AccountingAPIClient } from '../../AccountingAPIClient';
+import { ContactGroupsResponse, ContactGroup } from '../../AccountingAPI-types';
 import { getConfig } from './integration.helpers';
+import { isUUID } from '../integration-test-helpers';
 
 const data = getConfig();
 const xero = new AccountingAPIClient(data);

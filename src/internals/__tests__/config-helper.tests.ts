@@ -1,6 +1,6 @@
-import { validTestCertPath, testCertString } from '../test-helpers';
-import { IXeroClientConfiguration } from '../../BaseAPIClient';
-import { mapConfig, mapState } from '../../config-helper';
+import { IXeroClientConfiguration } from '../BaseAPIClient';
+import { mapConfig, mapState } from '../config-helper';
+import { validTestCertPath, testCertString } from './helpers/privateKey-helpers';
 
 describe('config-helper', () => {
 	describe('Private apps', () => {

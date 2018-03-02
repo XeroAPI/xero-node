@@ -1,6 +1,6 @@
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse } from '../interfaces/AccountingAPI';
-import { IXeroClientConfiguration, BaseAPIClient } from '../BaseAPIClient';
-import { IOAuth1HttpClient } from '../OAuth1HttpClient';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse } from './AccountingAPI-types';
+import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
+import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { URLSearchParams } from 'url';
 
 export class AccountingAPIClient extends BaseAPIClient {

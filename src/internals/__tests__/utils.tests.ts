@@ -1,5 +1,5 @@
-import { getStringFromFile } from '../../utils';
-import { validTestCertPath } from '../test-helpers';
+import { getStringFromFile } from '../utils';
+import { validTestCertPath } from './helpers/privateKey-helpers';
 
 describe('getStringFromFile', () => {
 	it('returns string from file', () => {

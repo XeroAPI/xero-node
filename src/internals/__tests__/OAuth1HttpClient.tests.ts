@@ -1,5 +1,5 @@
 import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
-import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from '../../OAuth1HttpClient';
+import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from '../OAuth1HttpClient';
 
 describe('OAuth1HttpClient', () => {
 
