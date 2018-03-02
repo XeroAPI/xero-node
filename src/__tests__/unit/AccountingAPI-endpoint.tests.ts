@@ -27,7 +27,7 @@ describe('Endpoint: ', () => {
 		AppType: 'private',
 		ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 		ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-		PrivateKeyCert: validTestCertPath
+		PrivateKeyCert: validTestCertPath()
 	};
 	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLib);
 	oauthHttpClient.setState(mapState(xeroConfig));
