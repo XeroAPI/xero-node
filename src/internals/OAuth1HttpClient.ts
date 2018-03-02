@@ -54,17 +54,17 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		}
 	}
 
-	private oAuthFactory(config: IOAuth1Configuration) {
+	private oAuthFactory(config: IOAuth1Configuration): typeof OAuth {
 		return new OAuth(
 			config.apiBaseUrl + config.oauthRequestTokenPath, 	// requestTokenUrl
 			config.apiBaseUrl + config.oauthAccessTokenPath, 	// accessTokenUrl
-			config.consumerKey, 				// consumerKey
-			config.consumerSecret,							// consumerSecret
-			'1.0A',									// version
-			null,									// authorize_callback
+			config.consumerKey, 								// consumerKey
+			config.consumerSecret,								// consumerSecret
+			'1.0A',												// version
+			null,												// authorize_callback
 			config.signatureMethod,								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
-			null,									// nonceSize
-			{										// customHeaders
+			null,												// nonceSize
+			{													// customHeaders
 				'Accept': config.accept,
 				'User-Agent': config.userAgent
 			}
