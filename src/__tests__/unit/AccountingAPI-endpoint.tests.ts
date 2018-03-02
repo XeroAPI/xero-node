@@ -1,5 +1,5 @@
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
-import { InMemoryOAuthLib } from './InMemoryOAuthLib';
+import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
 import { validTestCertPath } from '../test-helpers';
 import { mapConfig, mapState } from '../../config-helper';
 import { OAuth1HttpClient } from '../../OAuth1HttpClient';

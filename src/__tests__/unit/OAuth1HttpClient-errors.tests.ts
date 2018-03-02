@@ -1,5 +1,5 @@
 import { IOAuth1Configuration, OAuth1HttpClient, IOAuth1State, IOAuth1HttpClient } from '../../OAuth1HttpClient';
-import { InMemoryOAuthLib } from './InMemoryOAuthLib';
+import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
 
 describe('OAuthClient', () => {
 	const oauthConfig: IOAuth1Configuration = {

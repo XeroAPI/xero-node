@@ -1,9 +1,11 @@
-import { InMemoryOAuthLib } from './InMemoryOAuthLib';
+import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
 import { validTestCertPath } from '../test-helpers';
 import { IXeroClientConfiguration } from '../../BaseAPIClient';
 import { OAuth1HttpClient } from '../../OAuth1HttpClient';
 import { mapConfig, mapState } from '../../config-helper';
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
+
+// TODO: Double check that there is not duplication with the Oauth1Http-errors tests. And maybe remove this one
 
 describe('BaseAPIClient errors', () => {
 
