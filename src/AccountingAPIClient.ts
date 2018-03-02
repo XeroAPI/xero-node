@@ -1,4 +1,4 @@
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { URLSearchParams } from 'url';
@@ -19,6 +19,16 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 
 			return this.http.get<AccountsResponse>(endpoint);
+		}
+	};
+
+	public attachments = {
+		get: async (args?: { endpoint: string, id: string }): Promise<AttachmentsResponse> => {
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			const endpoint = `${args.endpoint}/${args.id}/attachments`;
+
+			return this.http.get<AttachmentsResponse>(endpoint);
 		}
 	};
 

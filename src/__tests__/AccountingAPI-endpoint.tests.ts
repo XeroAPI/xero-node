@@ -64,6 +64,9 @@ describe('Endpoint: ', () => {
 		employees: [
 			{ action: 'get', expectedPath: 'employees' },
 			{ action: 'create', expectedPath: 'employees' }
+		],
+		attachments: [
+			{ action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { endpoint: 'invoices', id: guid1} }
 		]
 	};
 

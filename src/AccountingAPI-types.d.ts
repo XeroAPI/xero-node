@@ -1,4 +1,16 @@
-﻿export interface InvoicesResponse extends AccountingResponse {
+﻿export interface AttachmentsResponse extends AccountingResponse {
+	Attachments: Attachment[];
+}
+
+export interface Attachment {
+	AttachmentID: string;
+	FileName: string;
+	Url: string;
+	MimeType: string;
+	ContentLength: string;
+}
+
+export interface InvoicesResponse extends AccountingResponse {
 	Invoices: Invoice[];
 }
 
@@ -248,8 +260,7 @@ export interface Row {
 	RowType: string;
 	Cells: Cell[];
 }
-export interface Cell
-{
+export interface Cell {
 	Value?: string;
 	Attibutes?: Array<{
 		Value: string;
