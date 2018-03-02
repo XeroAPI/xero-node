@@ -43,7 +43,6 @@ export interface Payment {
 	HasValidationErrors?: boolean;
 }
 
-
 export interface Prepayment {
 	Contact: Contact;
 	Date: string;
@@ -62,7 +61,6 @@ export interface Prepayment {
 	Allocations: Allocation[];
 	HasAttachments: string;
 }
-
 
 export interface Allocation {
 	AppliedAmount: string;
@@ -156,7 +154,6 @@ export interface Contact {
 	AccountsReceivableTaxType?: string;
 	AccountsPayableTaxType?: string;
 	TaxNumber?: string;
-	Attachments?: any; // TODO: something here
 	SkypeUserName?: string;
 	HasValidationErrors?: boolean;
 	ValidationErrors?: ValidationError[];

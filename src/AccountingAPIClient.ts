@@ -1,12 +1,12 @@
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse } from '../interfaces/AccountingAPI';
-import { XeroAPIClient, IXeroClientConfiguration } from '../XeroAPIClient';
-import { IOAuthClient } from '../OAuthClient';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse } from './AccountingAPI-types';
+import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
+import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { URLSearchParams } from 'url';
 
-export class AccountingAPIClient extends XeroAPIClient {
+export class AccountingAPIClient extends BaseAPIClient {
 
-	public constructor(options: IXeroClientConfiguration, _oauthClient?: IOAuthClient, _oauthLib?: any) {
-		super(options, _oauthClient, _oauthLib);
+	public constructor(options: IXeroClientConfiguration, _oauth1Client?: IOAuth1HttpClient) {
+		super(options, _oauth1Client);
 	}
 
 	public accounts = {
@@ -18,7 +18,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 				endpoint = endpoint + '/' + args.AccountID;
 			}
 
-			return this.get<AccountsResponse>(endpoint);
+			return this.http.get<AccountsResponse>(endpoint);
 		}
 	};
 
@@ -32,7 +32,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
-			return this.get<InvoicesResponse>(endpoint);
+			return this.http.get<InvoicesResponse>(endpoint);
 		},
 		getPDF: async (args?: { InvoiceID: string }): Promise<string> => {
 			// TODO: Support invoice number
@@ -44,7 +44,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
-			return this.get<string>(endpoint, 'application/pdf');
+			return this.http.get<string>(endpoint, 'application/pdf');
 		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
 		create: async (invoice: Invoice | { Invoices: Invoice[] }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -52,7 +52,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 			// TODO: Summerize errors?
 			const endpoint = 'invoices?summarizeErrors=false';
 
-			return this.put<InvoicesResponse>(endpoint, invoice);
+			return this.http.put<InvoicesResponse>(endpoint, invoice);
 		},
 		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string  }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -70,7 +70,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this.post<InvoicesResponse>(endpoint, invoice);
+			return this.http.post<InvoicesResponse>(endpoint, invoice);
 		}
 	};
 
@@ -84,7 +84,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
 
-			return this.get<ContactGroupsResponse>(endpoint);
+			return this.http.get<ContactGroupsResponse>(endpoint);
 		},
 		create: async (contactGroup: ContactGroup): Promise<ContactGroupsResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -92,7 +92,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 			// TODO: Summerize errors?
 			const endpoint = 'contactgroups?summarizeErrors=false';
 
-			return this.put<ContactGroupsResponse>(endpoint, contactGroup);
+			return this.http.put<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		update: async (contactGroup: ContactGroup, args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
 			let endpoint = 'contactgroups';
@@ -102,7 +102,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this.post<ContactGroupsResponse>(endpoint, contactGroup);
+			return this.http.post<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		contacts: {
 			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactGroupsResponse> => {
@@ -117,7 +117,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 					endpoint = endpoint + '/' + args.ContactID;
 				}
 
-				return this.delete<ContactGroupsResponse>(endpoint);
+				return this.http.delete<ContactGroupsResponse>(endpoint);
 			}
 		}
 	};
@@ -125,12 +125,12 @@ export class AccountingAPIClient extends XeroAPIClient {
 	public currencies = {
 		get: async (): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
-			return this.get<CurrenciesResponse>(endpoint);
+			return this.http.get<CurrenciesResponse>(endpoint);
 		},
 		create: async (currency: Currency): Promise<CurrenciesResponse> => {
 			// TODO: Do we need to add summerazieErrors?
 			const endpoint = 'currencies';
-			return this.put<CurrenciesResponse>(endpoint, currency);
+			return this.http.put<CurrenciesResponse>(endpoint, currency);
 		}
 	};
 
@@ -143,18 +143,18 @@ export class AccountingAPIClient extends XeroAPIClient {
 				endpoint = endpoint + '/' + args.EmployeeID;
 			}
 			// TODO: Type
-			return this.get<any>(endpoint);
+			return this.http.get<any>(endpoint);
 		},
 		create: async (employee: Employee): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
-			return this.put<any>(endpoint, employee);
+			return this.http.put<any>(endpoint, employee);
 		}
 	};
 
 	public contacts = {
 		get: async (): Promise<ContactsResponse> => {
 			const endpoint = 'contacts';
-			return this.get<ContactsResponse>(endpoint);
+			return this.http.get<ContactsResponse>(endpoint);
 		}
 	};
 
@@ -169,7 +169,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 				endpoint = endpoint + '/' + args.ReportID + '?' + query.toString();
 			}
 
-			return this.get<ReportsResponse>(endpoint);
+			return this.http.get<ReportsResponse>(endpoint);
 		}
 	};
 
@@ -177,7 +177,7 @@ export class AccountingAPIClient extends XeroAPIClient {
 		create: async (body?: object): Promise<any> => {
 			const endpoint = 'purchaseorders?summarizeErrors=true';
 			// TODO: Add interface here
-			return this.post<any>(endpoint, body);
+			return this.http.post<any>(endpoint, body);
 		}
 	};
 }

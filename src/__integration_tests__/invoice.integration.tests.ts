@@ -1,10 +1,10 @@
 
-import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
 import * as fs from 'fs';
-import { isUUID } from '../test-helpers';
-import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../unit/request-examples/invoice.request.examples';
-import { InvoicesResponse } from '../../interfaces/AccountingAPI';
-import { getConfig } from './integration.helpers';
+import { AccountingAPIClient } from '../AccountingAPIClient';
+import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from './request-body/invoice.request.examples';
+import { InvoicesResponse } from '../AccountingAPI-types';
+import { getConfig } from './helpers/integration.helpers';
+import { isUUID } from './helpers/test-assertions';
 
 const data = getConfig();
 const xero = new AccountingAPIClient(data);

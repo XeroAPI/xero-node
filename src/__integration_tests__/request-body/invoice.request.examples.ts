@@ -1,4 +1,4 @@
-import { Invoice } from '../../../interfaces/AccountingAPI';
+import { Invoice } from '../../AccountingAPI-types';
 
 const createSingleInvoiceRequest: Invoice = {
 	Type: 'ACCREC',

@@ -1,8 +1,9 @@
-import { getStringFromFile } from '../../utils';
+import { getStringFromFile } from '../utils';
+import { validTestCertPath } from './helpers/privateKey-helpers';
 
 describe('getStringFromFile', () => {
 	it('returns string from file', () => {
-		const result = getStringFromFile('./src/__tests__/unit/test-privatekey.pem');
+		const result = getStringFromFile(validTestCertPath());
 		expect(result).toContain('-----BEGIN RSA PRIVATE KEY-----');
 		expect(result).toContain('-----END RSA PRIVATE KEY-----');
 		expect(result).toContain('VrppKCesvPJmo/4y77Dsxt5ukPEAO3nWrwJAWTzBH0ZeYlGxe8KpTEKW6ZifQb1P');

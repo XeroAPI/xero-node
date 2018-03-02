@@ -1,4 +1,4 @@
-import { InvoicesResponse } from '../../../interfaces/AccountingAPI';
+import { InvoicesResponse } from '../../AccountingAPI-types';
 
 export const multipleInvoices: InvoicesResponse = {
 	Id: '431b0b6a-81bf-4286-82f3-73e6f8c78fd3',
@@ -72,8 +72,6 @@ export const multipleInvoices: InvoicesResponse = {
 				{
 					CreditNoteID: '7df8949c-b71f-40c0-bbcf-39f2f450f286',
 					CreditNoteNumber: '03391',
-					ID: '7df8949c-b71f-40c0-bbcf-39f2f450f286',
-					AppliedAmount: 218.90,
 					DateString: '2017-10-31T00:00:00',
 					Date: '\/Date(1509408000000+0000)\/',
 					LineItems: [],
@@ -146,22 +144,6 @@ export const singleInvoice: InvoicesResponse = {
 			HasErrors: false,
 			IsDiscounted: false,
 			HasAttachments: true,
-			Attachments: [
-				{
-					AttachmentID: 'd7a1b807-2b26-4da8-bb51-9cfff5fc2233',
-					FileName: '2-test-attachment.pdf',
-					Url: 'https://api.xero.com/api.xro/2.0/Invoices/0032f627-3156-4d30-9b1c-4d3b994dc921/Attachments/2-test-attachment.pdf',
-					MimeType: 'application/pdf',
-					ContentLength: 19967
-				},
-				{
-					AttachmentID: '4261e621-432c-4aba-9d7d-93af7bce89fa',
-					FileName: '1-test-attachment.pdf',
-					Url: 'https://api.xero.com/api.xro/2.0/Invoices/0032f627-3156-4d30-9b1c-4d3b994dc921/Attachments/1-test-attachment.pdf',
-					MimeType: 'application/pdf',
-					ContentLength: 19967
-				}
-			],
 			Contact: {
 				ContactID: 'd6a384fb-f46f-41a3-8ac7-b7bc9e0b5efa',
 				ContactStatus: 'ACTIVE',
