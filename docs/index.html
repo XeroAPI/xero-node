@@ -62,51 +62,169 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p><a href="https://circleci.com/gh/philals/xero-node-v3/tree/master"><img src="https://circleci.com/gh/philals/xero-node-v3/tree/master.svg?style=svg&amp;circle-token=0a866212b40b6ecaa44f2f4fe98401b536a44038" alt="CircleCI"></a></p>
+				<p><a href="https://badge.fury.io/js/xero-node"><img src="https://badge.fury.io/js/xero-node.svg" alt="npm version"></a>
+				<a href="https://circleci.com/gh/philals/xero-node-v3/tree/master"><img src="https://circleci.com/gh/philals/xero-node-v3/tree/master.svg?style=svg&amp;circle-token=0a866212b40b6ecaa44f2f4fe98401b536a44038" alt="CircleCI"></a></p>
 				<h1 id="node-xero">node-xero</h1>
-				<p>NodeJS Client for the Xero API, supporting Public, Private and Partner Apps</p>
-				<p>API Reference: <a href="./docs/index.html">here</a> or <a href="../docs/index.html">here</a>.</p>
 				<h2 id="current-status-pre-pre-alpha-">Current Status: PRE-PRE-ALPHA.</h2>
-				<p>Ideas we want to achieve.</p>
-				<p>We want to make this wrapper as thin as possible. This means:</p>
+				<p>NodeJS Client for the Xero API, supporting Public, Private and Partner Apps.</p>
+				<p>An API wrapper for xero (<a href="http://developer.xero.com)">http://developer.xero.com)</a>.</p>
+				<p>Supports the three applications types:</p>
+				<ul>
+					<li>Private - apps connecting to a single Org</li>
+					<li>Public - apps that connect to any Org, but with a 30 minute limitation</li>
+					<li>Partner - approved apps that can automatically refresh Org tokens.</li>
+				</ul>
+				<p>Auto generated API Reference: <a href="https://philals.github.io/xero-node-v3/">here</a>.</p>
+				<h1 id="features">Features</h1>
+				<ul>
+					<li>By 3.0.0 the SDK will<ul>
+							<li>support for all <a href="&#39;https://developer.xero.com/documentation/api/api-overview&#39;">accounting endpoints</a></li>
+							<li>have a generic methods for calling any unsupported endpoints</li>
+						</ul>
+					</li>
+				</ul>
+				<h1 id="usage">Usage</h1>
+				<p>This package can be installed via npm.</p>
+				<p><code>npm install --save xero-node</code></p>
+				<h3 id="config-parameters">Config Parameters</h3>
+				<p>Please see the <code>example-config.json</code>.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Parameter</th>
+							<th>Description</th>
+							<th>Mandatory</th>
+							<th>Default</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>ConsumerKey</td>
+							<td>The consumer key that is required with all calls to the Xero API.,</td>
+							<td>True</td>
+							<td>-</td>
+						</tr>
+						<tr>
+							<td>ConsumerSecret</td>
+							<td>The secret key from the developer portal that is required to authenticate your API calls</td>
+							<td>True</td>
+							<td>-</td>
+						</tr>
+						<tr>
+							<td>CallbackBaseUrl</td>
+							<td>The callback that Xero should invoke when the authorization is successful.</td>
+							<td>False</td>
+							<td>null</td>
+						</tr>
+						<tr>
+							<td>PrivateKeyCert</td>
+							<td>The filesystem path to your privatekey.pem file to sign the API calls</td>
+							<td>False</td>
+							<td>null</td>
+						</tr>
+						<tr>
+							<td>redirectOnError</td>
+							<td>Whether Xero Auth should redirect to your app in the event the user clicks &#39;Cancel&#39;</td>
+							<td>False</td>
+							<td>true</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>npm</p>
+				<pre><code class="lang-javascript"><span class="hljs-comment">//Sample Private App Config</span>
+{
+    <span class="hljs-string">"ConsumerKey"</span>: <span class="hljs-string">"AAAAAAAAAAAAAAAAAA"</span>,
+    <span class="hljs-string">"ConsumerSecret"</span>: <span class="hljs-string">"BBBBBBBBBBBBBBBBBBBB"</span>,
+    <span class="hljs-string">"PrivateKeyCert"</span>: <span class="hljs-string">"/some/path/to/privatekey.pem"</span>
+}
+
+<span class="hljs-comment">//Sample Public App Config</span>
+{
+    <span class="hljs-string">"ConsumerKey"</span>: <span class="hljs-string">"AAAAAAAAAAAAAAAAAA"</span>,
+    <span class="hljs-string">"ConsumerSecret"</span>: <span class="hljs-string">"BBBBBBBBBBBBBBBBBBBB"</span>,
+    <span class="hljs-string">"CallbackBaseUrl"</span>: <span class="hljs-string">'https://www.mywebsite.com/xerocallback'</span>
+}
+
+<span class="hljs-comment">//Sample Partner App Config</span>
+{
+    <span class="hljs-string">"ConsumerKey"</span>: <span class="hljs-string">"AAAAAAAAAAAAAAAAAA"</span>,
+    <span class="hljs-string">"ConsumerSecret"</span>: <span class="hljs-string">"BBBBBBBBBBBBBBBBBBBB"</span>,
+    <span class="hljs-string">"CallbackBaseUrl"</span>: <span class="hljs-string">'https://www.mywebsite.com/xerocallback'</span>,
+    <span class="hljs-string">"PrivateKeyCert"</span> : <span class="hljs-string">"/some/path/to/partner_privatekey.pem"</span>
+}
+</code></pre>
+				<h2 id="app-usage">App Usage</h2>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> xero = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).AccountingAPIClient;
+<span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'/some/path/to/config.json'</span>);
+
+<span class="hljs-keyword">const</span> xeroClient = <span class="hljs-keyword">new</span> xero(config);
+</code></pre>
+				<h1 id="examples">Examples</h1>
+				<p>Sample app using this package: <a href="https://github.com/XeroAPI/xero-node-sample-app">https://github.com/XeroAPI/xero-node-sample-app</a></p>
+				<p>The best location for examples are the <a href="https://github.com/philals/xero-node-v3/tree/master/src/__tests__/integration">example tests</a>. However, here are a few:</p>
+				<pre><code class="lang-javascript"><span class="hljs-comment">//Print a count of invoices</span>
+<span class="hljs-keyword">let</span> invoices = xero.invoices.get()
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Invoices: "</span> + invoices.length);
+</code></pre>
+				<h2 id="tests">Tests</h2>
+				<p>Replace the <code>example-config.json</code> with <code>config.json</code> in the <a href="https://github.com/philals/xero-node-v3/tree/master/src/__tests__/integration">integration test directory</a>. Overwrite the example config values with your own from the <a href="&#39;https://developer.xero.com/myapps&#39;">Developer Portal</a>. Then run:</p>
+				<p><code>npm test</code></p>
+				<h3 id="project-philosophies">Project philosophies</h3>
 				<ol>
-					<li><p>An interface that matches the api endpoints.
+					<li><p>A simple and intuitive interface.
 						eg:</p>
 						<p> <code>PUT https://api.xero.com/api.xro/2.0/ContactGroups/b05466c8-dc54-4ff8-8f17-9d7008a2e44b/Contacts</code></p>
-						<p> Will become</p>
+						<p> Will become:</p>
 						<p> <code>xero.contacts.contactGroups.create(contact)</code></p>
-						<p> This will help with documentation, as API docs == SDK interface.</p>
-						<p> That rather than using verbs <code>.put()</code>, <code>.post</code> etc will use actions. Example <code>get()</code>, <code>create()</code>,<code>delete()</code>, <code>update()</code>. This will abstract away the Accounting Apis funny <code>PUT</code> vs <code>POST</code>.</p>
+						<p> Matching SDK methods names to endpoints, allows consumers to read the official API documentation and translate it to SDK method calls quickly.</p>
+						<p> That rather than using HTTP verbs (<code>.put()</code>, <code>.post()</code> etc) the SDK will use actions. Example <code>get()</code>, <code>create()</code>,<code>delete()</code>, <code>update()</code>. This will abstract away the Xero&#39;s <a href="https://developer.xero.com/documentation/api/requests-and-responses">funny</a> <code>PUT</code> vs <code>POST</code>.</p>
 					</li>
-					<li><p>Simple Partner flows. Rather than automatically refreshing tokens we will expose methods which show when it will expire and ability to refresh. KISS.</p>
+					<li><p>A simple and single OAuth flows. Rather than automatically refreshing tokens, the SDK we will expose methods which allow the OAuth methods eg Refreshing Tokens etc. Consideration is also being made to OAuth2.</p>
 					</li>
-					<li><p>Abstracted away OAuth lib. This will allow us to swap it out if we needed. We won&#39;t bleed the OAuth libs exception types into the SDK. This will make it easier for us to extend to Payroll etc</p>
+					<li><p>Abstracted underlyting OAuth/HTTP lib. This will allow swapping it out if we needed. The SDK won&#39;t bleed the OAuth libs exception types onto the consumer when it hits a 500/400 etc. Having a OAuth/HTTP layer will allow reuse and extension to other APIs (Payroll, Expenses etc).</p>
 					</li>
-					<li><p>No entity validation. The user will pass in JSON and get JSON out. There will be no manipulation of data along the way. Again the public docs will show what will be returned. Helper methods if asked for will be provided by a separate module. This will reduce maintenance costs.</p>
+					<li><p>Minimal to no entity/request/response validation. A consumer will pass in JSON and get JSON out. There will be no manipulation of data along the way. Helper methods if asked for will be provided by a separate module. This will reduce maintenance costs.</p>
 					</li>
 					<li><p>Unit tests</p>
 					</li>
-					<li><p>Oauth2 ready. The Oauth lib we are using us OAuth2 ready. Design decision will be made with this in mind. The current SDK forked and changed the Oauth lib, which makes things hard.</p>
-					</li>
-					<li><p>Typescript. This will aid in self-generated docs etc.</p>
+					<li><p>Writing the SDK in Typescript will allow us to provide TS types for the API&#39;s contracts, and it&#39;s what we use internally at Xero. This will also aid in self-generated docs.</p>
 					</li>
 				</ol>
-				<h1 id="there-are-lots-of-todos-feel-free-to-pick-one-off">There are LOTS of // TODOs - Feel free to pick one off</h1>
+				<h1 id="there-are-lots-of-todos-in-code-and-on-our-kanban-board-feel-free-to-pick-one-off">There are LOTS of TODOs in code and on our Kanban board - Feel free to pick one off</h1>
+				<h2 id="maintainers">Maintainers</h2>
+				<p>@philals @iamam34 @bryanlloydtee @dannyvincent @dupski</p>
+				<h2 id="endpoint-completion">Endpoint completion</h2>
 				<ul>
-					<li>[ ] Standard Error types<ul>
-							<li>We said there would be two (APIException, OAuthException)</li>
-							<li>Make interfaces for them</li>
-							<li>Need to throw these at the right time</li>
-						</ul>
-					</li>
-					<li>[ ] Scopes</li>
-					<li>[ ] All Endpoints</li>
-					<li>[ ] Partner Auth</li>
-					<li>[ ] Public Sample App</li>
-					<li>[ ] Public App can take a call back URL</li>
-					<li>[ ] Partner Sample App</li>
-					<li>[ ] CI</li>
-					<li>[x] TSDoc</li>
+					<li>[ ] attachments</li>
+					<li>[ ] accounts</li>
+					<li>[ ] bankstatements</li>
+					<li>[ ] banktransactions</li>
+					<li>[ ] bank-transfers</li>
+					<li>[ ] branding-themes</li>
+					<li>[ ] contacts</li>
+					<li>[ ] contactgroups</li>
+					<li>[ ] credit-notes</li>
+					<li>[ ] currencies</li>
+					<li>[ ] employees</li>
+					<li>[ ] expense-claims</li>
+					<li>[ ] invoices</li>
+					<li>[ ] invoice-reminders</li>
+					<li>[ ] items</li>
+					<li>[ ] journals</li>
+					<li>[ ] linked-transactions</li>
+					<li>[ ] manual-journals</li>
+					<li>[ ] organisation</li>
+					<li>[ ] overpayments</li>
+					<li>[ ] payments</li>
+					<li>[ ] prepayments</li>
+					<li>[ ] purchase-orders</li>
+					<li>[ ] receipts</li>
+					<li>[ ] repeating-invoices</li>
+					<li>[ ] reports</li>
+					<li>[ ] tax-rates</li>
+					<li>[ ] tracking-categories</li>
+					<li>[ ] users</li>
+					<li>[ ] types</li>
 				</ul>
 			</div>
 		</div>
@@ -116,13 +234,16 @@
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module tsd-is-not-exported">
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external tsd-is-not-exported">
 						<a href="modules/_oauth_.html">"oauth"</a>
 					</li>
-					<li class=" tsd-kind-module tsd-is-not-exported">
+					<li class=" tsd-kind-module tsd-is-external tsd-is-not-exported">
 						<a href="modules/_opn_.html">"opn"</a>
 					</li>
-					<li class=" tsd-kind-module tsd-is-not-exported">
+					<li class=" tsd-kind-module tsd-is-external tsd-is-not-exported">
 						<a href="modules/_prompt_.html">"prompt"</a>
 					</li>
 				</ul>
@@ -132,11 +253,11 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/accountingapiclient.html" class="tsd-kind-icon">AccountingAPIClient</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/oauthclient.html" class="tsd-kind-icon">OAuth<wbr>Client</a>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/baseapiclient.html" class="tsd-kind-icon">BaseAPIClient</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/xeroapiclient.html" class="tsd-kind-icon">XeroAPIClient</a>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/oauth1httpclient.html" class="tsd-kind-icon">OAuth1<wbr>Http<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="interfaces/accountingresponse.html" class="tsd-kind-icon">Accounting<wbr>Response</a>
@@ -146,6 +267,9 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/address.html" class="tsd-kind-icon">Address</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/allocation.html" class="tsd-kind-icon">Allocation</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/cell.html" class="tsd-kind-icon">Cell</a>
@@ -163,6 +287,9 @@
 						<a href="interfaces/contactsresponse.html" class="tsd-kind-icon">Contacts<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/creditnote.html" class="tsd-kind-icon">Credit<wbr>Note</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/currenciesresponse.html" class="tsd-kind-icon">Currencies<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -177,16 +304,28 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/field.html" class="tsd-kind-icon">Field</a>
 					</li>
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/ihttpclient.html" class="tsd-kind-icon">IHttp<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/ihttperror.html" class="tsd-kind-icon">IHttp<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/ioauthclient.html" class="tsd-kind-icon">IOAuth<wbr>Client</a>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/ioauth1client.html" class="tsd-kind-icon">IOAuth1<wbr>Client</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/ioauthclientconfiguration.html" class="tsd-kind-icon">IOAuth<wbr>Client<wbr>Configuration</a>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/ioauth1configuration.html" class="tsd-kind-icon">IOAuth1<wbr>Configuration</a>
 					</li>
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/ioauth1httpclient.html" class="tsd-kind-icon">IOAuth1<wbr>Http<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/ioauth1state.html" class="tsd-kind-icon">IOAuth1<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/itoken.html" class="tsd-kind-icon">IToken</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/ixeroclientconfiguration.html" class="tsd-kind-icon">IXero<wbr>Client<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -199,7 +338,13 @@
 						<a href="interfaces/lineitem.html" class="tsd-kind-icon">Line<wbr>Item</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/payment.html" class="tsd-kind-icon">Payment</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/phone.html" class="tsd-kind-icon">Phone</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/prepayment.html" class="tsd-kind-icon">Prepayment</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/report.html" class="tsd-kind-icon">Report</a>
@@ -216,23 +361,14 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/validationerror.html" class="tsd-kind-icon">Validation<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#api_base" class="tsd-kind-icon">API_<wbr>BASE</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#api_base_path" class="tsd-kind-icon">API_<wbr>BASE_<wbr>PATH</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#oauth_access_token_path" class="tsd-kind-icon">OAUTH_<wbr>ACCESS_<wbr>TOKEN_<wbr>PATH</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#oauth_request_token_path" class="tsd-kind-icon">OAUTH_<wbr>REQUEST_<wbr>TOKEN_<wbr>PATH</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#config" class="tsd-kind-icon">config</a>
-					</li>
-					<li class=" tsd-kind-function">
+					<li class=" tsd-kind-function tsd-is-external">
 						<a href="globals.html#getstringfromfile" class="tsd-kind-icon">get<wbr>String<wbr>From<wbr>File</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#mapconfig" class="tsd-kind-icon">map<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#mapstate" class="tsd-kind-icon">map<wbr>State</a>
 					</li>
 				</ul>
 			</nav>

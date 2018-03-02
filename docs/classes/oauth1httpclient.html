@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>OAuthClient | xero-node</title>
+	<title>OAuth1HttpClient | xero-node</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,28 +54,32 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="oauthclient.html">OAuthClient</a>
+					<a href="oauth1httpclient.html">OAuth1HttpClient</a>
 				</li>
 			</ul>
-			<h1>Class OAuthClient</h1>
+			<h1>Class OAuth1HttpClient</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">OAuthClient</span>
+						<span class="target">OAuth1HttpClient</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/ioauthclient.html" class="tsd-signature-type">IOAuthClient</a></li>
+					<li><a href="../interfaces/ioauth1httpclient.html" class="tsd-signature-type">IOAuth1HttpClient</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -85,26 +89,40 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="oauthclient.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="oauth1httpclient.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="oauthclient.html#oauth" class="tsd-kind-icon">oauth</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="oauthclient.html#options" class="tsd-kind-icon">options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="oauth1httpclient.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="oauth1httpclient.html#oauthlib" class="tsd-kind-icon">oauth<wbr>Lib</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="oauth1httpclient.html#state" class="tsd-kind-icon">state</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="oauthclient.html#swaprequesttokenforaccesstoken" class="tsd-kind-icon">Swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="oauthclient.html#delete" class="tsd-kind-icon">delete</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="oauthclient.html#get" class="tsd-kind-icon">get</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="oauthclient.html#getunauthorisedrequesttoken" class="tsd-kind-icon">get<wbr>Unauthorised<wbr>Request<wbr>Token</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="oauthclient.html#oauthfactory" class="tsd-kind-icon">o<wbr>Auth<wbr>Factory</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="oauthclient.html#post" class="tsd-kind-icon">post</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="oauthclient.html#put" class="tsd-kind-icon">put</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="oauth1httpclient.html#buildauthoriseurl" class="tsd-kind-icon">build<wbr>Authorise<wbr>Url</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="oauth1httpclient.html#delete" class="tsd-kind-icon">delete</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="oauth1httpclient.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="oauth1httpclient.html#getunauthorisedrequesttoken" class="tsd-kind-icon">get<wbr>Unauthorised<wbr>Request<wbr>Token</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="oauth1httpclient.html#oauthfactory" class="tsd-kind-icon">o<wbr>Auth<wbr>Factory</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="oauth1httpclient.html#post" class="tsd-kind-icon">post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="oauth1httpclient.html#put" class="tsd-kind-icon">put</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="oauth1httpclient.html#setstate" class="tsd-kind-icon">set<wbr>State</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="oauth1httpclient.html#swaprequesttokenforaccesstoken" class="tsd-kind-icon">swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Object literals</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-private"><a href="oauth1httpclient.html#_state" class="tsd-kind-icon">_state</a></li>
 							</ul>
 						</section>
 					</div>
@@ -116,25 +134,25 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new OAuth<wbr>Client<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/ioauthclientconfiguration.html" class="tsd-signature-type">IOAuthClientConfiguration</a>, oauth<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="oauthclient.html" class="tsd-signature-type">OAuthClient</a></li>
+						<li class="tsd-signature tsd-kind-icon">new OAuth1<wbr>Http<wbr>Client<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/ioauth1configuration.html" class="tsd-signature-type">IOAuth1Configuration</a>, oauthLib<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="oauth1httpclient.html" class="tsd-signature-type">OAuth1HttpClient</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L34">OAuthClient.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L56">internals/OAuth1HttpClient.ts:56</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <a href="../interfaces/ioauthclientconfiguration.html" class="tsd-signature-type">IOAuthClientConfiguration</a></h5>
+									<h5>config: <a href="../interfaces/ioauth1configuration.html" class="tsd-signature-type">IOAuth1Configuration</a></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> oauth: <span class="tsd-signature-type">any</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> oauthLib: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="oauthclient.html" class="tsd-signature-type">OAuthClient</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="oauth1httpclient.html" class="tsd-signature-type">OAuth1HttpClient</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -142,59 +160,69 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="oauth" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> oauth</h3>
-					<div class="tsd-signature tsd-kind-icon">oauth<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="config" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> config</h3>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ioauth1configuration.html" class="tsd-signature-type">IOAuth1Configuration</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L36">OAuthClient.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L58">internals/OAuth1HttpClient.ts:58</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="options" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> options</h3>
-					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ioauthclientconfiguration.html" class="tsd-signature-type">IOAuthClientConfiguration</a></div>
+					<a name="oauthlib" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> oauth<wbr>Lib</h3>
+					<div class="tsd-signature tsd-kind-icon">oauth<wbr>Lib<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L36">OAuthClient.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L58">internals/OAuth1HttpClient.ts:58</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="swaprequesttokenforaccesstoken" class="tsd-anchor"></a>
-					<h3>Swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">Swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span>authedRT<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, oauth_verifier<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="state" class="tsd-anchor"></a>
+					<h3>state</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/ioauth1state.html" class="tsd-signature-type">IOAuth1State</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L74">OAuthClient.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L264">internals/OAuth1HttpClient.ts:264</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/ioauth1state.html" class="tsd-signature-type">IOAuth1State</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="buildauthoriseurl" class="tsd-anchor"></a>
+					<h3>build<wbr>Authorise<wbr>Url</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">build<wbr>Authorise<wbr>Url<span class="tsd-signature-symbol">(</span>unauthorisedRequestToken<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ioauth1httpclient.html">IOAuth1HttpClient</a>.<a href="../interfaces/ioauth1httpclient.html#buildauthoriseurl">buildAuthoriseUrl</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L96">internals/OAuth1HttpClient.ts:96</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>authedRT: <span class="tsd-signature-type">object</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>oauth_<wbr>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>oauth_<wbr>token_<wbr>secret<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<h5>oauth_verifier: <span class="tsd-signature-type">string</span></h5>
+									<h5>unauthorisedRequestToken: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -207,9 +235,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/ioauthclient.html">IOAuthClient</a>.<a href="../interfaces/ioauthclient.html#delete">delete</a></p>
+								<p>Implementation of <a href="../interfaces/ioauth1httpclient.html">IOAuth1HttpClient</a>.<a href="../interfaces/ioauth1httpclient.html#delete">delete</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L200">OAuthClient.ts:200</a></li>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L233">internals/OAuth1HttpClient.ts:233</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -237,9 +265,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/ioauthclient.html">IOAuthClient</a>.<a href="../interfaces/ioauthclient.html#get">get</a></p>
+								<p>Implementation of <a href="../interfaces/ioauth1httpclient.html">IOAuth1HttpClient</a>.<a href="../interfaces/ioauth1httpclient.html#get">get</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L91">OAuthClient.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L124">internals/OAuth1HttpClient.ts:124</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -270,9 +298,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/ioauthclient.html">IOAuthClient</a>.<a href="../interfaces/ioauthclient.html#getunauthorisedrequesttoken">getUnauthorisedRequestToken</a></p>
+								<p>Implementation of <a href="../interfaces/ioauth1httpclient.html">IOAuth1HttpClient</a>.<a href="../interfaces/ioauth1httpclient.html#getunauthorisedrequesttoken">getUnauthorisedRequestToken</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L59">OAuthClient.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L81">internals/OAuth1HttpClient.ts:81</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -283,19 +311,19 @@
 					<a name="oauthfactory" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> o<wbr>Auth<wbr>Factory</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">o<wbr>Auth<wbr>Factory<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/ioauthclientconfiguration.html" class="tsd-signature-type">IOAuthClientConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">o<wbr>Auth<wbr>Factory<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/ioauth1configuration.html" class="tsd-signature-type">IOAuth1Configuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L42">OAuthClient.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L64">internals/OAuth1HttpClient.ts:64</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <a href="../interfaces/ioauthclientconfiguration.html" class="tsd-signature-type">IOAuthClientConfiguration</a></h5>
+									<h5>config: <a href="../interfaces/ioauth1configuration.html" class="tsd-signature-type">IOAuth1Configuration</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -311,9 +339,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/ioauthclient.html">IOAuthClient</a>.<a href="../interfaces/ioauthclient.html#post">post</a></p>
+								<p>Implementation of <a href="../interfaces/ioauth1httpclient.html">IOAuth1HttpClient</a>.<a href="../interfaces/ioauth1httpclient.html#post">post</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L171">OAuthClient.ts:171</a></li>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L204">internals/OAuth1HttpClient.ts:204</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -344,9 +372,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/ioauthclient.html">IOAuthClient</a>.<a href="../interfaces/ioauthclient.html#put">put</a></p>
+								<p>Implementation of <a href="../interfaces/ioauth1httpclient.html">IOAuth1HttpClient</a>.<a href="../interfaces/ioauth1httpclient.html#put">put</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/c759b61/src/OAuthClient.ts#L142">OAuthClient.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L175">internals/OAuth1HttpClient.ts:175</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -368,6 +396,90 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setstate" class="tsd-anchor"></a>
+					<h3>set<wbr>State</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>State<span class="tsd-signature-symbol">(</span>newState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ioauth1state.html" class="tsd-signature-type">IOAuth1State</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ioauth1httpclient.html">IOAuth1HttpClient</a>.<a href="../interfaces/ioauth1httpclient.html#setstate">setState</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L268">internals/OAuth1HttpClient.ts:268</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>newState: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ioauth1state.html" class="tsd-signature-type">IOAuth1State</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="swaprequesttokenforaccesstoken" class="tsd-anchor"></a>
+					<h3>swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span>authedRT<span class="tsd-signature-symbol">: </span><a href="../interfaces/itoken.html" class="tsd-signature-type">IToken</a>, oauth_verifier<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/itoken.html" class="tsd-signature-type">IToken</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ioauth1httpclient.html">IOAuth1HttpClient</a>.<a href="../interfaces/ioauth1httpclient.html#swaprequesttokenforaccesstoken">swapRequestTokenforAccessToken</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L100">internals/OAuth1HttpClient.ts:100</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>authedRT: <a href="../interfaces/itoken.html" class="tsd-signature-type">IToken</a></h5>
+								</li>
+								<li>
+									<h5>oauth_verifier: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/itoken.html" class="tsd-signature-type">IToken</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class tsd-is-private">
+					<a name="_state" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _state</h3>
+					<div class="tsd-signature tsd-kind-icon">_state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L53">internals/OAuth1HttpClient.ts:53</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="_state.accesstoken" class="tsd-anchor"></a>
+						<h3>access<wbr>Token</h3>
+						<div class="tsd-signature tsd-kind-icon">access<wbr>Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L55">internals/OAuth1HttpClient.ts:55</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="_state.requesttoken" class="tsd-anchor"></a>
+						<h3>request<wbr>Token</h3>
+						<div class="tsd-signature tsd-kind-icon">request<wbr>Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/OAuth1HttpClient.ts#L54">internals/OAuth1HttpClient.ts:54</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -380,147 +492,57 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="accountingapiclient.html" class="tsd-kind-icon">AccountingAPIClient</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="oauthclient.html" class="tsd-kind-icon">OAuth<wbr>Client</a>
+					<li class="current tsd-kind-class tsd-is-external">
+						<a href="oauth1httpclient.html" class="tsd-kind-icon">OAuth1<wbr>Http<wbr>Client</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="oauthclient.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="oauth1httpclient.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="oauthclient.html#oauth" class="tsd-kind-icon">oauth</a>
+								<a href="oauth1httpclient.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="oauthclient.html#options" class="tsd-kind-icon">options</a>
+								<a href="oauth1httpclient.html#oauthlib" class="tsd-kind-icon">oauth<wbr>Lib</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="oauth1httpclient.html#state" class="tsd-kind-icon">state</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="oauthclient.html#swaprequesttokenforaccesstoken" class="tsd-kind-icon">Swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</a>
+								<a href="oauth1httpclient.html#buildauthoriseurl" class="tsd-kind-icon">build<wbr>Authorise<wbr>Url</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="oauthclient.html#delete" class="tsd-kind-icon">delete</a>
+								<a href="oauth1httpclient.html#delete" class="tsd-kind-icon">delete</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="oauthclient.html#get" class="tsd-kind-icon">get</a>
+								<a href="oauth1httpclient.html#get" class="tsd-kind-icon">get</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="oauthclient.html#getunauthorisedrequesttoken" class="tsd-kind-icon">get<wbr>Unauthorised<wbr>Request<wbr>Token</a>
+								<a href="oauth1httpclient.html#getunauthorisedrequesttoken" class="tsd-kind-icon">get<wbr>Unauthorised<wbr>Request<wbr>Token</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="oauthclient.html#oauthfactory" class="tsd-kind-icon">o<wbr>Auth<wbr>Factory</a>
+								<a href="oauth1httpclient.html#oauthfactory" class="tsd-kind-icon">o<wbr>Auth<wbr>Factory</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="oauthclient.html#post" class="tsd-kind-icon">post</a>
+								<a href="oauth1httpclient.html#post" class="tsd-kind-icon">post</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="oauthclient.html#put" class="tsd-kind-icon">put</a>
+								<a href="oauth1httpclient.html#put" class="tsd-kind-icon">put</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="oauth1httpclient.html#setstate" class="tsd-kind-icon">set<wbr>State</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="oauth1httpclient.html#swaprequesttokenforaccesstoken" class="tsd-kind-icon">swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-private">
+								<a href="oauth1httpclient.html#_state" class="tsd-kind-icon">_state</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="xeroapiclient.html" class="tsd-kind-icon">XeroAPIClient</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-not-exported">
-						<a href="../interfaces/accountingresponse.html" class="tsd-kind-icon">Accounting<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/accountsresponse.html" class="tsd-kind-icon">Accounts<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/address.html" class="tsd-kind-icon">Address</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/cell.html" class="tsd-kind-icon">Cell</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/contact.html" class="tsd-kind-icon">Contact</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/contactgroup.html" class="tsd-kind-icon">Contact<wbr>Group</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/contactgroupsresponse.html" class="tsd-kind-icon">Contact<wbr>Groups<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/contactsresponse.html" class="tsd-kind-icon">Contacts<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/currenciesresponse.html" class="tsd-kind-icon">Currencies<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/currency.html" class="tsd-kind-icon">Currency</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/employee.html" class="tsd-kind-icon">Employee</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/employeesresponse.html" class="tsd-kind-icon">Employees<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/field.html" class="tsd-kind-icon">Field</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/ihttperror.html" class="tsd-kind-icon">IHttp<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/ioauthclient.html" class="tsd-kind-icon">IOAuth<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/ioauthclientconfiguration.html" class="tsd-kind-icon">IOAuth<wbr>Client<wbr>Configuration</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/ixeroclientconfiguration.html" class="tsd-kind-icon">IXero<wbr>Client<wbr>Configuration</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/invoice.html" class="tsd-kind-icon">Invoice</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/invoicesresponse.html" class="tsd-kind-icon">Invoices<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/lineitem.html" class="tsd-kind-icon">Line<wbr>Item</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/phone.html" class="tsd-kind-icon">Phone</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/report.html" class="tsd-kind-icon">Report</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/reportsresponse.html" class="tsd-kind-icon">Reports<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/row.html" class="tsd-kind-icon">Row</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/tracking.html" class="tsd-kind-icon">Tracking</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/validationerror.html" class="tsd-kind-icon">Validation<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#api_base" class="tsd-kind-icon">API_<wbr>BASE</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#api_base_path" class="tsd-kind-icon">API_<wbr>BASE_<wbr>PATH</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#oauth_access_token_path" class="tsd-kind-icon">OAUTH_<wbr>ACCESS_<wbr>TOKEN_<wbr>PATH</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#oauth_request_token_path" class="tsd-kind-icon">OAUTH_<wbr>REQUEST_<wbr>TOKEN_<wbr>PATH</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#config" class="tsd-kind-icon">config</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#getstringfromfile" class="tsd-kind-icon">get<wbr>String<wbr>From<wbr>File</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

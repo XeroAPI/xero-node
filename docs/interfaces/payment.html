@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IXeroClientConfiguration | xero-node</title>
+	<title>Payment | xero-node</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,25 +54,21 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="ixeroclientconfiguration.html">IXeroClientConfiguration</a>
+					<a href="payment.html">Payment</a>
 				</li>
 			</ul>
-			<h1>Interface IXeroClientConfiguration</h1>
+			<h1>Interface Payment</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IXeroClientConfiguration</span>
+						<span class="target">Payment</span>
 					</li>
 				</ul>
 			</section>
@@ -83,13 +79,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ixeroclientconfiguration.html#apptype" class="tsd-kind-icon">App<wbr>Type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ixeroclientconfiguration.html#callbackbaseurl" class="tsd-kind-icon">Callback<wbr>Base<wbr>Url</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ixeroclientconfiguration.html#callbackpath" class="tsd-kind-icon">Callback<wbr>Path</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ixeroclientconfiguration.html#consumerkey" class="tsd-kind-icon">Consumer<wbr>Key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ixeroclientconfiguration.html#consumersecret" class="tsd-kind-icon">Consumer<wbr>Secret</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ixeroclientconfiguration.html#privatekeycert" class="tsd-kind-icon">Private<wbr>Key<wbr>Cert</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ixeroclientconfiguration.html#privatekeypassword" class="tsd-kind-icon">Private<wbr>Key<wbr>Password</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#amount" class="tsd-kind-icon">Amount</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#currencyrate" class="tsd-kind-icon">Currency<wbr>Rate</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#date" class="tsd-kind-icon">Date</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#hasaccount" class="tsd-kind-icon">Has<wbr>Account</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#hasvalidationerrors" class="tsd-kind-icon">Has<wbr>Validation<wbr>Errors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#paymentid" class="tsd-kind-icon">PaymentID</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#reference" class="tsd-kind-icon">Reference</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,72 +94,72 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="apptype" class="tsd-anchor"></a>
-					<h3>App<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">App<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"public"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"private"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"partner"</span></div>
+					<a name="amount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Amount</h3>
+					<div class="tsd-signature tsd-kind-icon">Amount<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/BaseAPIClient.ts#L13">internals/BaseAPIClient.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/AccountingAPI-types.d.ts#L39">AccountingAPI-types.d.ts:39</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="callbackbaseurl" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Callback<wbr>Base<wbr>Url</h3>
-					<div class="tsd-signature tsd-kind-icon">Callback<wbr>Base<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="currencyrate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Currency<wbr>Rate</h3>
+					<div class="tsd-signature tsd-kind-icon">Currency<wbr>Rate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/BaseAPIClient.ts#L18">internals/BaseAPIClient.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/AccountingAPI-types.d.ts#L41">AccountingAPI-types.d.ts:41</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="callbackpath" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Callback<wbr>Path</h3>
-					<div class="tsd-signature tsd-kind-icon">Callback<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="date" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Date</h3>
+					<div class="tsd-signature tsd-kind-icon">Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/BaseAPIClient.ts#L19">internals/BaseAPIClient.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/AccountingAPI-types.d.ts#L38">AccountingAPI-types.d.ts:38</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="consumerkey" class="tsd-anchor"></a>
-					<h3>Consumer<wbr>Key</h3>
-					<div class="tsd-signature tsd-kind-icon">Consumer<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="hasaccount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Has<wbr>Account</h3>
+					<div class="tsd-signature tsd-kind-icon">Has<wbr>Account<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/BaseAPIClient.ts#L14">internals/BaseAPIClient.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/AccountingAPI-types.d.ts#L42">AccountingAPI-types.d.ts:42</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="consumersecret" class="tsd-anchor"></a>
-					<h3>Consumer<wbr>Secret</h3>
-					<div class="tsd-signature tsd-kind-icon">Consumer<wbr>Secret<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="hasvalidationerrors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Has<wbr>Validation<wbr>Errors</h3>
+					<div class="tsd-signature tsd-kind-icon">Has<wbr>Validation<wbr>Errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/BaseAPIClient.ts#L15">internals/BaseAPIClient.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/AccountingAPI-types.d.ts#L43">AccountingAPI-types.d.ts:43</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="privatekeycert" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Private<wbr>Key<wbr>Cert</h3>
-					<div class="tsd-signature tsd-kind-icon">Private<wbr>Key<wbr>Cert<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="paymentid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> PaymentID</h3>
+					<div class="tsd-signature tsd-kind-icon">PaymentID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/BaseAPIClient.ts#L16">internals/BaseAPIClient.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/AccountingAPI-types.d.ts#L37">AccountingAPI-types.d.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="privatekeypassword" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Private<wbr>Key<wbr>Password</h3>
-					<div class="tsd-signature tsd-kind-icon">Private<wbr>Key<wbr>Password<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="reference" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Reference</h3>
+					<div class="tsd-signature tsd-kind-icon">Reference<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/internals/BaseAPIClient.ts#L17">internals/BaseAPIClient.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/a8c92a0/src/AccountingAPI-types.d.ts#L40">AccountingAPI-types.d.ts:40</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -181,29 +177,29 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-is-external">
-						<a href="ixeroclientconfiguration.html" class="tsd-kind-icon">IXero<wbr>Client<wbr>Configuration</a>
+					<li class="current tsd-kind-interface">
+						<a href="payment.html" class="tsd-kind-icon">Payment</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ixeroclientconfiguration.html#apptype" class="tsd-kind-icon">App<wbr>Type</a>
+								<a href="payment.html#amount" class="tsd-kind-icon">Amount</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ixeroclientconfiguration.html#callbackbaseurl" class="tsd-kind-icon">Callback<wbr>Base<wbr>Url</a>
+								<a href="payment.html#currencyrate" class="tsd-kind-icon">Currency<wbr>Rate</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ixeroclientconfiguration.html#callbackpath" class="tsd-kind-icon">Callback<wbr>Path</a>
+								<a href="payment.html#date" class="tsd-kind-icon">Date</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ixeroclientconfiguration.html#consumerkey" class="tsd-kind-icon">Consumer<wbr>Key</a>
+								<a href="payment.html#hasaccount" class="tsd-kind-icon">Has<wbr>Account</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ixeroclientconfiguration.html#consumersecret" class="tsd-kind-icon">Consumer<wbr>Secret</a>
+								<a href="payment.html#hasvalidationerrors" class="tsd-kind-icon">Has<wbr>Validation<wbr>Errors</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ixeroclientconfiguration.html#privatekeycert" class="tsd-kind-icon">Private<wbr>Key<wbr>Cert</a>
+								<a href="payment.html#paymentid" class="tsd-kind-icon">PaymentID</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ixeroclientconfiguration.html#privatekeypassword" class="tsd-kind-icon">Private<wbr>Key<wbr>Password</a>
+								<a href="payment.html#reference" class="tsd-kind-icon">Reference</a>
 							</li>
 						</ul>
 					</li>
