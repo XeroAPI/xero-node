@@ -1,6 +1,5 @@
-import { IXeroClientConfiguration } from '../../XeroAPIClient';
+import { IXeroClientConfiguration, BaseAPIClient } from '../../BaseAPIClient';
 import { IOAuth1HttpClient } from '../../OAuth1HttpClient';
-import { BaseAPIClient } from '../../BaseAPIClient';
 
 export class TestAPIClient extends BaseAPIClient {
 	public constructor(xeroConfig: IXeroClientConfiguration, _oauthClient?: IOAuth1HttpClient) {

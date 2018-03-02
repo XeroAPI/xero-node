@@ -3,7 +3,7 @@ import { InMemoryOAuthLib } from './InMemoryOAuthLib';
 import { validTestCertPath } from '../test-helpers';
 import { mapConfig, mapState } from '../../config-helper';
 import { OAuth1HttpClient } from '../../OAuth1HttpClient';
-import { IXeroClientConfiguration } from '../../XeroAPIClient';
+import { IXeroClientConfiguration } from '../../BaseAPIClient';
 
 const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
 const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
@@ -20,7 +20,7 @@ interface IFixture {
 	[key: string]: IEndPointDetails[];
 }
 
-describe.skip('Endpoint: ', () => {
+describe('Endpoint: ', () => {
 	const inMemoryOAuthLib = new InMemoryOAuthLib();
 
 	const xeroConfig: IXeroClientConfiguration = {

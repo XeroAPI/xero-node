@@ -1,4 +1,4 @@
-import { IXeroClientConfiguration } from './XeroAPIClient';
+import { IXeroClientConfiguration } from './BaseAPIClient';
 import { getStringFromFile } from './utils';
 import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
 

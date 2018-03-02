@@ -1,6 +1,22 @@
 import { IHttpClient, IOAuth1Client, IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration } from './OAuth1HttpClient';
-import { IXeroClientConfiguration } from './XeroAPIClient';
 import { mapConfig, mapState } from './config-helper';
+
+/**
+ * TODO: Add support for the following keys:
+ *
+ * - PrivateKeyPassword
+ * - CallbackPath
+ */
+
+export interface IXeroClientConfiguration {
+	AppType: 'public' | 'private' | 'partner';
+	ConsumerKey: string;
+	ConsumerSecret: string;
+	PrivateKeyCert?: string;
+	PrivateKeyPassword?: string;
+	CallbackBaseUrl?: string;
+	CallbackPath?: string;
+}
 
 export abstract class BaseAPIClient {
 

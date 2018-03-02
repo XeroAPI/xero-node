@@ -1,6 +1,6 @@
 import { InMemoryOAuthLib } from './InMemoryOAuthLib';
 import { validTestCertPath } from '../test-helpers';
-import { IXeroClientConfiguration } from '../../XeroAPIClient';
+import { IXeroClientConfiguration } from '../../BaseAPIClient';
 import { OAuth1HttpClient } from '../../OAuth1HttpClient';
 import { mapConfig, mapState } from '../../config-helper';
 import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
