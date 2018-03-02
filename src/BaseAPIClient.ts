@@ -4,6 +4,9 @@ import { mapConfig, mapState } from './config-helper';
 
 export abstract class BaseAPIClient {
 
+	public readonly http: IHttpClient;
+	public readonly oauth1: IOAuth1Client;
+
 	public constructor(xeroConfig: IXeroClientConfiguration, private _oauth1httpClient?: IOAuth1HttpClient) {
 		if (!xeroConfig) {
 			throw new Error('Config must be passed in when creating a new instance');
@@ -30,8 +33,4 @@ export abstract class BaseAPIClient {
 			swapRequestTokenforAccessToken: this._oauth1httpClient.swapRequestTokenforAccessToken
 		};
 	}
-
-	public readonly http: IHttpClient;
-
-	public readonly oauth1: IOAuth1Client;
 }
