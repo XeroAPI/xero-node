@@ -1,16 +1,19 @@
 import { OAuth } from 'oauth';
 import { IHttpClient } from './BaseAPIClient';
 
+/** @internalapi */
 export interface IToken {
 	oauth_token: string;
 	oauth_token_secret: string;
 }
 
+/** @internalapi */
 export interface IOAuth1State {
 	requestToken: IToken;
 	accessToken: IToken;
 }
 
+/** @internalapi */
 export interface IOAuth1Configuration {
 	consumerKey: string;
 	consumerSecret: string;
@@ -25,6 +28,7 @@ export interface IOAuth1Configuration {
 	userAgent: string;
 }
 
+/** @internalapi */
 export interface IOAuth1Client {
 	readonly state: IOAuth1State;
 	setState(state: Partial<IOAuth1State>): void;
@@ -33,14 +37,17 @@ export interface IOAuth1Client {
 	swapRequestTokenforAccessToken(authedRT: IToken, oauth_verifier: string): Promise<IToken>;
 }
 
+/** @internalapi */
 export interface IOAuth1HttpClient extends IHttpClient, IOAuth1Client { }
 
+/** @internalapi */
 // TODO: Do we call this?
 export interface IHttpError {
 	statusCode: number;
 	body: string;
 }
 
+/** @internalapi */
 export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	private _state: IOAuth1State = {

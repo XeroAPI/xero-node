@@ -8,6 +8,7 @@ import { mapConfig, mapState } from './config-helper';
  * - CallbackPath
  */
 
+/** @internalapi */
 export interface IXeroClientConfiguration {
 	AppType: 'public' | 'private' | 'partner';
 	ConsumerKey: string;
@@ -18,6 +19,7 @@ export interface IXeroClientConfiguration {
 	CallbackPath?: string;
 }
 
+/** @internalapi */
 export interface IHttpClient {
 	get<T>(endpoint: string, acceptType?: string): Promise<T>;
 	delete<T>(endpoint: string): Promise<T>;
@@ -25,6 +27,7 @@ export interface IHttpClient {
 	post<T>(endpoint: string, body: object): Promise<T>;
 }
 
+/** @internalapi */
 export abstract class BaseAPIClient {
 
 	public readonly http: IHttpClient;

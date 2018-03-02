@@ -2,6 +2,7 @@ import { IXeroClientConfiguration } from './BaseAPIClient';
 import { getStringFromFile } from './utils';
 import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
 
+/** @internalapi */
 export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1State> {
 	const cert = xeroConfig.PrivateKeyCert ? getStringFromFile(xeroConfig.PrivateKeyCert) : null; // TODO don't read twice
 
@@ -17,6 +18,7 @@ export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1S
 	}
 }
 
+/** @internalapi */
 export function mapConfig(xeroConfig: IXeroClientConfiguration): IOAuth1Configuration {
 	const API_BASE = 'https://api.xero.com';
 	const API_BASE_PATH = '/api.xro/2.0/';

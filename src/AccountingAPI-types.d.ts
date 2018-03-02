@@ -262,7 +262,7 @@ export interface Row {
 }
 export interface Cell {
 	Value?: string;
-	Attibutes?: Array<{
+	Attributes?: Array<{
 		Value: string;
 		Id: string;
 	}>;
