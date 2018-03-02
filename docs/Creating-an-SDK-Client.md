@@ -89,7 +89,7 @@ var config = require('/some/path/to/config.js');
 if (config.privateKeyPath && !config.privateKey) 
     config.privateKey = fs.readFileSync(config.privateKeyPath);
 
-var xeroClient = new xero.PublicApplication(myConfigFile);
+var xeroClient = new xero.PublicApplication(config);
 ```
 
 ## Partner Usage
@@ -103,7 +103,7 @@ var config = require('/some/path/to/config.js');
 if (config.privateKeyPath && !config.privateKey) 
     config.privateKey = fs.readFileSync(config.privateKeyPath);
     
-var xeroClient = new xero.PartnerApplication(myConfigFile);
+var xeroClient = new xero.PartnerApplication(config);
 ```
 
 Now that you've got your Xero client, you can make some calls!
