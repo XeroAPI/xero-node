@@ -35,7 +35,7 @@ interface AccountingResponse {
 
 export interface Payment {
 	PaymentID?: string;
-	Date?: Date;
+	Date?: string;
 	Amount?: number;
 	Reference?: string;
 	CurrencyRate?: number;
@@ -43,14 +43,63 @@ export interface Payment {
 	HasValidationErrors?: boolean;
 }
 
+
+export interface Prepayment {
+	Contact: Contact;
+	Date: string;
+	Status: string;
+	LineAmountTypes: string;
+	SubTotal: string;
+	TotalTax: string;
+	Total: string;
+	UpdatedDateUTC: string;
+	CurrencyCode: string;
+	FullyPaidOnDate: string;
+	Type: string;
+	PrepaymentID: string;
+	CurrencyRate: string;
+	RemainingCredit: string;
+	Allocations: Allocation[];
+	HasAttachments: string;
+}
+
+
+export interface Allocation {
+	AppliedAmount: string;
+	Date: string;
+	Invoice: Invoice;
+}
+
+export interface CreditNote {
+	Contact?: Contact;
+	DateString?: string;
+	Date?: string;
+	DueDate?: string;
+	Status?: string;
+	LineAmountTypes?: string;
+	LineItems?: LineItem[];
+	SubTotal?: number;
+	TotalTax?: number;
+	Total?: number;
+	UpdatedDateUTC?: string;
+	CurrencyCode?: string;
+	FullyPaidOnDate?: string;
+	Type?: string;
+	RemainingCredit?: number;
+	Allocations?: Allocation[];
+	HasAttachments?: boolean;
+	CreditNoteID?: string;
+	CreditNoteNumber?: string;
+}
+
 export interface Invoice {
 	Type?: string;
 	InvoiceID?: string;
 	InvoiceNumber?: string;
 	Reference?: string;
-	Prepayments?: any[];
+	Prepayments?: Prepayment[];
 	Payments?: Payment[];
-	CreditNotes?: any[];
+	CreditNotes?: CreditNote[];
 	Overpayments?: any[];
 	CISDeduction?: number;
 	AmountDue?: number;
