@@ -1,6 +1,6 @@
 import { getConfig } from './integration.helpers';
-import { AccountingAPIClient } from '../../AccountingAPIClient';
-import { CurrenciesResponse } from '../../AccountingAPI-types';
+import { AccountingAPIClient } from '../AccountingAPIClient';
+import { CurrenciesResponse } from '../AccountingAPI-types';
 
 const data = getConfig();
 const xero = new AccountingAPIClient(data);

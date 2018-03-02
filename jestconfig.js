@@ -7,7 +7,7 @@ let jestConfig = {
 	},
 	"testMatch": [
 		"<rootDir>/src/**/__tests__/**/*tests.(ts|tsx)",
-		"<rootDir>/src/**/__integration_tests__/**/*.(ts|tsx)"
+		"<rootDir>/src/**/__integration_tests__/**/*tests.(ts|tsx)"
 	],
 	"moduleFileExtensions": [
 		"ts",

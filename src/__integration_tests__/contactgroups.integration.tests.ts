@@ -1,6 +1,6 @@
 
-import { AccountingAPIClient } from '../../AccountingAPIClient';
-import { ContactGroupsResponse, ContactGroup } from '../../AccountingAPI-types';
+import { AccountingAPIClient } from '../AccountingAPIClient';
+import { ContactGroupsResponse, ContactGroup } from '../AccountingAPI-types';
 import { getConfig } from './integration.helpers';
 import { isUUID } from './helpers/integration-test-helpers';
 
