@@ -1,4 +1,5 @@
 import { OAuth } from 'oauth';
+import { IHttpClient } from './BaseAPIClient';
 
 export interface IToken {
 	oauth_token: string;
@@ -22,13 +23,6 @@ export interface IOAuth1Configuration {
 	signatureMethod: string;
 	accept: string;
 	userAgent: string;
-}
-
-export interface IHttpClient {
-	get<T>(endpoint: string, acceptType?: string): Promise<T>;
-	delete<T>(endpoint: string): Promise<T>;
-	put<T>(endpoint: string, body: object): Promise<T>;
-	post<T>(endpoint: string, body: object): Promise<T>;
 }
 
 export interface IOAuth1Client {

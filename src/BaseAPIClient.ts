@@ -1,4 +1,4 @@
-import { IHttpClient, IOAuth1Client, IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration } from './OAuth1HttpClient';
+import { IOAuth1Client, IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration } from './OAuth1HttpClient';
 import { mapConfig, mapState } from './config-helper';
 
 /**
@@ -16,6 +16,13 @@ export interface IXeroClientConfiguration {
 	PrivateKeyPassword?: string;
 	CallbackBaseUrl?: string;
 	CallbackPath?: string;
+}
+
+export interface IHttpClient {
+	get<T>(endpoint: string, acceptType?: string): Promise<T>;
+	delete<T>(endpoint: string): Promise<T>;
+	put<T>(endpoint: string, body: object): Promise<T>;
+	post<T>(endpoint: string, body: object): Promise<T>;
 }
 
 export abstract class BaseAPIClient {
