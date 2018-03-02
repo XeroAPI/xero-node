@@ -8,29 +8,30 @@ export abstract class BaseAPIClient {
 		if (!xeroConfig) {
 			throw new Error('Config must be passed in when creating a new instance');
 		}
-		// tslint:disable-next-line:no-debugger
-		debugger;
 
 		if (!this._oauth1httpClient) {
 			const oauthConfig: IOAuth1Configuration = mapConfig(xeroConfig);
 			this._oauth1httpClient = new OAuth1HttpClient(oauthConfig);
 			this._oauth1httpClient.setState(mapState(xeroConfig)); // only affects private and partner apps
 		}
+
+		this.http = {
+			get: this._oauth1httpClient.get,
+			put: this._oauth1httpClient.put,
+			post: this._oauth1httpClient.post,
+			delete: this._oauth1httpClient.delete
+		};
+
+		this.oauth1 = {
+			state: this._oauth1httpClient.state,
+			setState: this._oauth1httpClient.setState,
+			getUnauthorisedRequestToken: this._oauth1httpClient.getUnauthorisedRequestToken,
+			buildAuthoriseUrl: this._oauth1httpClient.buildAuthoriseUrl,
+			swapRequestTokenforAccessToken: this._oauth1httpClient.swapRequestTokenforAccessToken
+		};
 	}
 
-	public readonly http: IHttpClient = {
-		get: this._oauth1httpClient.get,
-		put: this._oauth1httpClient.put,
-		post: this._oauth1httpClient.post,
-		delete: this._oauth1httpClient.delete
-	};
+	public readonly http: IHttpClient;
 
-	public readonly oauth1: IOAuth1Client = {
-		state: this._oauth1httpClient.state,
-		setState: this._oauth1httpClient.setState,
-		getUnauthorisedRequestToken: this._oauth1httpClient.getUnauthorisedRequestToken,
-		buildAuthoriseUrl: this._oauth1httpClient.buildAuthoriseUrl,
-		swapRequestTokenforAccessToken: this._oauth1httpClient.swapRequestTokenforAccessToken
-	};
-
+	public readonly oauth1: IOAuth1Client;
 }
