@@ -18,7 +18,7 @@ export interface CurrenciesResponse extends AccountingResponse {
 	Currencies: Currency[];
 }
 
-export interface EmployeesResponse extends Employee {
+export interface EmployeesResponse extends AccountingResponse {
 	Employees: Employee[];
 }
 
