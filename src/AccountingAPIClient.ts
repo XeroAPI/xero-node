@@ -54,7 +54,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.http.put<InvoicesResponse>(endpoint, invoice);
 		},
-		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string  }): Promise<InvoicesResponse> => {
+		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -71,6 +71,18 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += '?summarizeErrors=false';
 
 			return this.http.post<InvoicesResponse>(endpoint, invoice);
+		},
+		onlineInvoice: {
+			get: async (args?: { InvoiceID: string }): Promise<string> => {
+				let endpoint = 'invoices';
+				if (args && args.InvoiceID) {
+					endpoint = endpoint + '/' + args.InvoiceID;
+				}
+
+				endpoint += '/onlineinvoice';
+
+				return this.http.get<any>(endpoint);
+			}
 		}
 	};
 

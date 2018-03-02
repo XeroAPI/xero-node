@@ -26,6 +26,14 @@ export interface AccountsResponse extends AccountingResponse {
 	Accounts: Account[];
 }
 
+export interface OnlineInvoicesResponse extends AccountingResponse {
+	OnlineInvoices: OnlineInvoice[];
+}
+
+export interface OnlineInvoice {
+	OnlineInvoiceUrl: string;
+}
+
 interface AccountingResponse {
 	Id: string;
 	Status: string;
