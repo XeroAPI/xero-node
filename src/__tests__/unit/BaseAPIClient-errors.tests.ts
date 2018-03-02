@@ -1,9 +1,9 @@
 import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
 import { validTestCertPath } from '../test-helpers';
-import { IXeroClientConfiguration } from '../../BaseAPIClient';
+import { IXeroClientConfiguration, BaseAPIClient } from '../../BaseAPIClient';
 import { OAuth1HttpClient } from '../../OAuth1HttpClient';
 import { mapConfig, mapState } from '../../config-helper';
-import { AccountingAPIClient } from '../../endpoints/AccountingAPIClient';
+import { TestAPIClient } from './helpers/TestAPIClient';
 
 // TODO: Double check that there is not duplication with the Oauth1Http-errors tests. And maybe remove this one
 
@@ -11,7 +11,7 @@ describe('BaseAPIClient errors', () => {
 
 	describe('HTTP 404', () => {
 		const inMemoryOAuthLib = new InMemoryOAuthLib();
-		let xeroClient: AccountingAPIClient;
+		let xeroClient: BaseAPIClient;
 
 		beforeAll(async () => {
 			inMemoryOAuthLib.callbackResultsForNextCall({
@@ -29,13 +29,13 @@ describe('BaseAPIClient errors', () => {
 
 			const oauthClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLib);
 			oauthClient.setState(mapState(xeroConfig));
-			xeroClient = new AccountingAPIClient(xeroConfig, oauthClient);
+			xeroClient = new TestAPIClient(xeroConfig, oauthClient);
 		});
 
 		it('error is expected', async () => {
 			expect.assertions(1);
 			try {
-				await xeroClient.invoices.get();
+				await xeroClient.http.get('endpoint');
 			} catch (error){
 				expect(error).toMatchObject({
 					statusCode: 404,
