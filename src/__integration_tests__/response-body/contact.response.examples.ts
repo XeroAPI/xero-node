@@ -60,7 +60,6 @@ export const getSingle: ContactsResponse = {
 			IsCustomer: true,
 			ContactPersons: [],
 			HasAttachments: false,
-			Attachments: [],
 			HasValidationErrors: false
 		}
 	]
