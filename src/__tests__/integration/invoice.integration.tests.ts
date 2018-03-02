@@ -2,9 +2,9 @@
 import * as fs from 'fs';
 import { getConfig } from './integration.helpers';
 import { AccountingAPIClient } from '../../AccountingAPIClient';
-import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from '../request-examples/invoice.request.examples';
+import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from './request-examples/invoice.request.examples';
 import { InvoicesResponse } from '../../AccountingAPI-types';
-import { isUUID } from '../integration-test-helpers';
+import { isUUID } from './helpers/integration-test-helpers';
 
 const data = getConfig();
 const xero = new AccountingAPIClient(data);
