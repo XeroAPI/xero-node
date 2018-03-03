@@ -1,3 +1,16 @@
+import { IOAuth1Configuration } from '../../OAuth1HttpClient';
+
+export class InMemoryOAuthLibFactoryFactory {
+	public constructor(public inMemoryOAuthLib?: InMemoryOAuthLib) {
+	}
+
+	public newFactory(): (config?: IOAuth1Configuration) => InMemoryOAuthLib {
+		return (config?: IOAuth1Configuration) => {
+			this.inMemoryOAuthLib = new InMemoryOAuthLib(config);
+			return this.inMemoryOAuthLib;
+		};
+	}
+}
 
 export class InMemoryOAuthLib {
 
@@ -12,6 +25,9 @@ export class InMemoryOAuthLib {
 	private returnAuthorisedToken: string = null;
 	private returnAuthorisedSecret: string = null;
 	private lastRequestedBody: string = null;
+
+	constructor(config?: IOAuth1Configuration) {
+	}
 
 	public lastCalledThisURL(url: string) {
 		expect(this.lastCalledUrl).toBe(url);

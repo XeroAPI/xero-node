@@ -48,9 +48,14 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		accessToken: null,
 	};
 
-	constructor(private config: IOAuth1Configuration, private oauthLib?: typeof OAuth) {
-		if (!this.oauthLib) {
+	private oauthLib: typeof OAuth;
+
+	constructor(private config: IOAuth1Configuration, private oauthLibFactory?: any) {
+		// tslint:disable-next-line:prefer-conditional-expression
+		if (!this.oauthLibFactory) {
 			this.oauthLib = this.oAuthFactory(this.config);
+		} else {
+			this.oauthLib = oauthLibFactory(config);
 		}
 	}
 
