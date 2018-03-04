@@ -1,4 +1,4 @@
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { URLSearchParams } from 'url';
@@ -19,6 +19,16 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 
 			return this.http.get<AccountsResponse>(endpoint);
+		}
+	};
+
+	public attachments = {
+		get: async (args?: { endpoint: string, id: string }): Promise<AttachmentsResponse> => {
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			const endpoint = `${args.endpoint}/${args.id}/attachments`;
+
+			return this.http.get<AttachmentsResponse>(endpoint);
 		}
 	};
 
@@ -54,7 +64,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.http.put<InvoicesResponse>(endpoint, invoice);
 		},
-		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string  }): Promise<InvoicesResponse> => {
+		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -71,6 +81,18 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += '?summarizeErrors=false';
 
 			return this.http.post<InvoicesResponse>(endpoint, invoice);
+		},
+		onlineInvoice: {
+			get: async (args?: { InvoiceID: string }): Promise<string> => {
+				let endpoint = 'invoices';
+				if (args && args.InvoiceID) {
+					endpoint = endpoint + '/' + args.InvoiceID;
+				}
+
+				endpoint += '/onlineinvoice';
+
+				return this.http.get<any>(endpoint);
+			}
 		}
 	};
 

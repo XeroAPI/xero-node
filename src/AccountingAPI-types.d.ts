@@ -1,4 +1,16 @@
-﻿export interface InvoicesResponse extends AccountingResponse {
+﻿export interface AttachmentsResponse extends AccountingResponse {
+	Attachments: Attachment[];
+}
+
+export interface Attachment {
+	AttachmentID: string;
+	FileName: string;
+	Url: string;
+	MimeType: string;
+	ContentLength: string;
+}
+
+export interface InvoicesResponse extends AccountingResponse {
 	Invoices: Invoice[];
 }
 
@@ -18,12 +30,20 @@ export interface CurrenciesResponse extends AccountingResponse {
 	Currencies: Currency[];
 }
 
-export interface EmployeesResponse extends Employee {
+export interface EmployeesResponse extends AccountingResponse {
 	Employees: Employee[];
 }
 
 export interface AccountsResponse extends AccountingResponse {
 	Accounts: Account[];
+}
+
+export interface OnlineInvoicesResponse extends AccountingResponse {
+	OnlineInvoices: OnlineInvoice[];
+}
+
+export interface OnlineInvoice {
+	OnlineInvoiceUrl: string;
 }
 
 interface AccountingResponse {
@@ -240,8 +260,7 @@ export interface Row {
 	RowType: string;
 	Cells: Cell[];
 }
-export interface Cell
-{
+export interface Cell {
 	Value?: string;
 	Attibutes?: Array<{
 		Value: string;

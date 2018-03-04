@@ -48,23 +48,28 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		accessToken: null,
 	};
 
-	constructor(private config: IOAuth1Configuration, private oauthLib?: typeof OAuth) {
-		if (!this.oauthLib) {
+	private oauthLib: typeof OAuth;
+
+	constructor(private config: IOAuth1Configuration, private oauthLibFactory?: any) {
+		// tslint:disable-next-line:prefer-conditional-expression
+		if (!this.oauthLibFactory) {
 			this.oauthLib = this.oAuthFactory(this.config);
+		} else {
+			this.oauthLib = oauthLibFactory(config);
 		}
 	}
 
-	private oAuthFactory(config: IOAuth1Configuration) {
+	private oAuthFactory(config: IOAuth1Configuration): typeof OAuth {
 		return new OAuth(
 			config.apiBaseUrl + config.oauthRequestTokenPath, 	// requestTokenUrl
 			config.apiBaseUrl + config.oauthAccessTokenPath, 	// accessTokenUrl
-			config.consumerKey, 				// consumerKey
-			config.consumerSecret,							// consumerSecret
-			'1.0A',									// version
-			null,									// authorize_callback
+			config.consumerKey, 								// consumerKey
+			config.consumerSecret,								// consumerSecret
+			'1.0A',												// version
+			null,												// authorize_callback
 			config.signatureMethod,								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
-			null,									// nonceSize
-			{										// customHeaders
+			null,												// nonceSize
+			{													// customHeaders
 				'Accept': config.accept,
 				'User-Agent': config.userAgent
 			}

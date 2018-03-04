@@ -5,13 +5,13 @@ import { getConfig } from './helpers/integration.helpers';
 const data = getConfig();
 const xero = new AccountingAPIClient(data);
 
-describe('/employees integration tests', () => {
-	describe('and creating and getting', () => {
+describe('/employees', () => {
+	describe('and creating then getting', () => {
 		let result: EmployeesResponse;
 
 		beforeAll(async () => {
 			try {
-				await xero.employees.create({FirstName: 'Bryan', LastName: 'Tee'});
+				await xero.employees.create({ FirstName: 'Bryan', LastName: 'Tee' });
 			}
 			// You can't delete employees
 			catch (e) {
@@ -21,12 +21,8 @@ describe('/employees integration tests', () => {
 			result = await xero.employees.get();
 		});
 
-		it('the response is defined', () => {
-			expect(result).not.toBeNull();
-		});
-
-		it('employee created can be fetched', async () => {
-			expect(result.Employees.find((emp) => emp.FirstName == 'Bryan')).toMatchObject({
+		it('there is an employee with expected name', async () => {
+			expect(result.Employees.find((emp) => (emp.FirstName == 'Bryan' && emp.LastName == 'Tee'))).toMatchObject({
 				FirstName: 'Bryan',
 				LastName: 'Tee'
 			});

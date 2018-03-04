@@ -3,7 +3,7 @@ import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { mapState, mapConfig } from '../internals/config-helper';
 import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
-import { InMemoryOAuthLib } from '../internals/__tests__/helpers/InMemoryOAuthLib';
+import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/InMemoryOAuthLib';
 
 const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
 const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
@@ -21,7 +21,7 @@ interface IFixture {
 }
 
 describe('Endpoint: ', () => {
-	const inMemoryOAuthLib = new InMemoryOAuthLib();
+	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
 	const xeroConfig: IXeroClientConfiguration = {
 		AppType: 'private',
@@ -29,7 +29,7 @@ describe('Endpoint: ', () => {
 		ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 		PrivateKeyCert: validTestCertPath()
 	};
-	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLib);
+	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLibFF.newFactory());
 	oauthHttpClient.setState(mapState(xeroConfig));
 	const xeroClient = new AccountingAPIClient(xeroConfig, oauthHttpClient);
 
@@ -43,6 +43,8 @@ describe('Endpoint: ', () => {
 	const fixtures: IFixture = {
 		invoices: [
 			{ action: 'get', expectedPath: 'invoices' },
+			{ action: 'get', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1 } },
+			{ subResource: 'onlineInvoice', action: 'get', expectedPath: `invoices/${guid1}/onlineinvoice`, args: { InvoiceID: guid1 } },
 			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `invoices/${guid1}?summarizeErrors=false`, args: { InvoiceID: guid1 } },
 			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` },
@@ -62,6 +64,9 @@ describe('Endpoint: ', () => {
 		employees: [
 			{ action: 'get', expectedPath: 'employees' },
 			{ action: 'create', expectedPath: 'employees' }
+		],
+		attachments: [
+			{ action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { endpoint: 'invoices', id: guid1 } }
 		]
 	};
 
@@ -77,8 +82,8 @@ describe('Endpoint: ', () => {
 				const mockedRequestBody = hasRequestBody ? { a: 'request' } : null;
 
 				beforeAll(async () => {
-					inMemoryOAuthLib.reset();
-					inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: 200 });
+					inMemoryOAuthLibFF.inMemoryOAuthLib.reset();
+					inMemoryOAuthLibFF.inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: 200 });
 
 					// tslint:disable-next-line:prefer-conditional-expression
 					if (fixture.subResource) {
@@ -93,15 +98,15 @@ describe('Endpoint: ', () => {
 				});
 
 				it(`calls the ${fixture.expectedPath} endpoint`, () => {
-					inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + fixture.expectedPath);
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + fixture.expectedPath);
 				});
 
 				it(`calls the ${actionToVerbMap[fixture.action]} verb`, () => {
-					inMemoryOAuthLib.lastCalledThisVerb(actionToVerbMap[fixture.action]);
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisVerb(actionToVerbMap[fixture.action]);
 				});
 
 				it('requested with expected body', () => {
-					inMemoryOAuthLib.lastRequestedHadBody(mockedRequestBody);
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastRequestedHadBody(mockedRequestBody);
 				});
 
 				it('matches the expected response', () => {
