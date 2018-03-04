@@ -1,7 +1,7 @@
-import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
+import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IOAuth1HttpClient } from '../OAuth1HttpClient';
 
-describe('OAuthClient', () => {
+describe('OAuthClient and erros', () => {
 	const oauthConfig: IOAuth1Configuration = {
 		consumerKey: 'ck',
 		consumerSecret: 'cs',
@@ -25,64 +25,64 @@ describe('OAuthClient', () => {
 		}
 	};
 
-	describe('when it errors', () => {
+	describe('with 404s', () => {
 
-		describe('with 404s', () => {
+		let oAuthHttpClient: IOAuth1HttpClient;
 
-			let oAuthHttpClient: IOAuth1HttpClient;
+		beforeEach(() => {
+			const inMemoryOAuthFF = new InMemoryOAuthLibFactoryFactory();
 
-			beforeEach(() => {
-				const inMemoryOAuth = new InMemoryOAuthLib();
+			// This is what the API returns
+			inMemoryOAuthFF.inMemoryOAuthLib.callbackResultsForNextCall({
+				statusCode: 404,
+				data: 'The resource you\'re looking for cannot be found'
+			}, `The resource you're looking for cannot be found`, { statusCode: 404 });
 
-				// This is what the API returns
-				inMemoryOAuth.callbackResultsForNextCall({
-					statusCode: 404,
-					data: 'The resource you\'re looking for cannot be found'
-				}, `The resource you're looking for cannot be found`, { statusCode: 404 });
+			oAuthHttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthFF.newFactory());
 
-				oAuthHttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuth);
-				oAuthHttpClient.setState(oauthState);
+			oAuthHttpClient.setState(oauthState);
+		});
+
+		describe('on GETS', () => {
+			it('the error object conforms', async () => {
+
+				expect.assertions(2);
+
+				try {
+					await oAuthHttpClient.get('a/404/endpoint');
+				} catch (error) {
+					expect(error.statusCode).toBe(404);
+					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+				}
+			});
+		});
+
+		describe('on DELETES', () => {
+			it('the error object conforms', async () => {
+				expect.assertions(2);
+
+				try {
+					await oAuthHttpClient.delete('a/404/endpoint');
+				} catch (error) {
+					expect(error.statusCode).toBe(404);
+					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+				}
 			});
 
-			describe('on GETS', () => {
-				it('the error object conforms', async () => {
+		});
 
-					expect.assertions(2);
+		describe('on PUT', () => {
+			it('the error object conforms', async () => {
+				expect.assertions(2);
 
-					try {
-						await oAuthHttpClient.get('a/404/endpoint');
-					} catch (error) {
-						expect(error.statusCode).toBe(404);
-						expect(error.body).toBe('The resource you\'re looking for cannot be found');
-					}
-				});
+				try {
+					await oAuthHttpClient.put('a/404/endpoint', { phil: 'washere' });
+				} catch (error) {
+					expect(error.statusCode).toBe(404);
+					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+				}
 			});
-			describe('on DELETES', () => {
-				it('the error object conforms', async () => {
-					expect.assertions(2);
 
-					try {
-						await oAuthHttpClient.delete('a/404/endpoint');
-					} catch (error) {
-						expect(error.statusCode).toBe(404);
-						expect(error.body).toBe('The resource you\'re looking for cannot be found');
-					}
-				});
-
-			});
-			describe('on PUT', () => {
-				it('the error object conforms', async () => {
-					expect.assertions(2);
-
-					try {
-						await oAuthHttpClient.put('a/404/endpoint', { phil: 'washere' });
-					} catch (error) {
-						expect(error.statusCode).toBe(404);
-						expect(error.body).toBe('The resource you\'re looking for cannot be found');
-					}
-				});
-
-			});
 		});
 	});
 });

@@ -1,9 +1,9 @@
-import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
+import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from '../OAuth1HttpClient';
 
 describe('OAuth1HttpClient', () => {
 
-	const inMemoryOAuthLib = new InMemoryOAuthLib();
+	const inMemoryOAuthLib = new InMemoryOAuthLibFactoryFactory();
 	let oauth1HttpClient: OAuth1HttpClient;
 
 	const oauthConfig: IOAuth1Configuration = {
@@ -19,7 +19,7 @@ describe('OAuth1HttpClient', () => {
 	};
 
 	beforeEach(() => {
-		oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib);
+		oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
 	});
 
 	describe('set state', () => {
@@ -62,7 +62,7 @@ describe('OAuth1HttpClient', () => {
 
 	describe('and getting unauthorisedRequestTokens', () => {
 		it('it returns expected the request token', async () => {
-			inMemoryOAuthLib.set_getOAuthRequestToken('aaa', 'bbb');
+			inMemoryOAuthLib.inMemoryOAuthLib.set_getOAuthRequestToken('aaa', 'bbb');
 			const unauthRequestToken = await oauth1HttpClient.getUnauthorisedRequestToken();
 
 			expect(unauthRequestToken).toMatchObject({ oauth_token: 'aaa', oauth_token_secret: 'bbb' });
@@ -73,7 +73,7 @@ describe('OAuth1HttpClient', () => {
 
 	describe('and swapping request for access token', () => {
 		it('returns expected accessToken', async () => {
-			inMemoryOAuthLib.set_SwapRequestTokenforAccessToken(`access+token`, `access+secret`);
+			inMemoryOAuthLib.inMemoryOAuthLib.set_SwapRequestTokenforAccessToken(`access+token`, `access+secret`);
 			const accessToken = await oauth1HttpClient.swapRequestTokenforAccessToken({ oauth_token: 'aaa', oauth_token_secret: 'bbb' }, '1234');
 
 			expect(accessToken).toMatchObject({ oauth_token: `access+token`, oauth_token_secret: `access+secret` });

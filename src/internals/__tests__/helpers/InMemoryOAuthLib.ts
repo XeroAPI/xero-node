@@ -1,12 +1,16 @@
 import { IOAuth1Configuration } from '../../OAuth1HttpClient';
 
 export class InMemoryOAuthLibFactoryFactory {
-	public constructor(public inMemoryOAuthLib?: InMemoryOAuthLib) {
+
+	public inMemoryOAuthLib?: InMemoryOAuthLib;
+
+	public constructor() {
+		this.inMemoryOAuthLib = new InMemoryOAuthLib();
 	}
 
 	public newFactory(): (config?: IOAuth1Configuration) => InMemoryOAuthLib {
 		return (config?: IOAuth1Configuration) => {
-			this.inMemoryOAuthLib = new InMemoryOAuthLib(config);
+			this.inMemoryOAuthLib.setConfig(config);
 			return this.inMemoryOAuthLib;
 		};
 	}
@@ -26,7 +30,12 @@ export class InMemoryOAuthLib {
 	private returnAuthorisedSecret: string = null;
 	private lastRequestedBody: string = null;
 
-	constructor(config?: IOAuth1Configuration) {
+	constructor(private config?: IOAuth1Configuration) {
+	}
+
+	public setConfig(config?: IOAuth1Configuration){
+		this.config = config;
+		(this.config as any)['key'] = 'test';
 	}
 
 	public lastCalledThisURL(url: string) {

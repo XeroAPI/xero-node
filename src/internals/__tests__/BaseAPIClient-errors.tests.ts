@@ -1,4 +1,4 @@
-import { InMemoryOAuthLib } from './helpers/InMemoryOAuthLib';
+import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 import { TestAPIClient } from './helpers/TestAPIClient';
 import { BaseAPIClient, IXeroClientConfiguration } from '../BaseAPIClient';
 import { OAuth1HttpClient } from '../OAuth1HttpClient';
@@ -10,11 +10,11 @@ import { validTestCertPath } from './helpers/privateKey-helpers';
 describe('BaseAPIClient errors', () => {
 
 	describe('HTTP 404', () => {
-		const inMemoryOAuthLib = new InMemoryOAuthLib();
+		const inMemoryOAuthLib = new InMemoryOAuthLibFactoryFactory();
 		let xeroClient: BaseAPIClient;
 
 		beforeAll(async () => {
-			inMemoryOAuthLib.callbackResultsForNextCall({
+			inMemoryOAuthLib.inMemoryOAuthLib.callbackResultsForNextCall({
 				statusCode: 404,
 				data: 'The resource you\'re looking for cannot be found'
 			}, `The resource you're looking for cannot be found`, { statusCode: 404 });
@@ -27,7 +27,7 @@ describe('BaseAPIClient errors', () => {
 			};
 			// TODO: Move to test utils: GetTestClient() or something
 
-			const oauthClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLib);
+			const oauthClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLib.newFactory());
 			oauthClient.setState(mapState(xeroConfig));
 			xeroClient = new TestAPIClient(xeroConfig, oauthClient);
 		});
