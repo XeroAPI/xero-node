@@ -27,7 +27,7 @@ describe('/invoices integration tests', () => {
 
 			it('invoice can be saved as local file', async () => {
 				const invoiceBuffer = fs.readFileSync(invoiceLocation);
-				expect(invoiceBuffer.byteLength).toBeGreaterThan(5000); // Lets hopw all PDFs a bigger than 5000
+				expect(invoiceBuffer.byteLength).toBeGreaterThan(3000); // Let's hope all PDFs are bigger than 3000
 			});
 
 			it('invoice is then deleted', () => {
