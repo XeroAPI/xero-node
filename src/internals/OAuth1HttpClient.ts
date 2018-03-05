@@ -54,30 +54,27 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	private oauthLib: typeof OAuth;
 
-	constructor(private config: IOAuth1Configuration, private oauthLibFactory?: any) {
-		// tslint:disable-next-line:prefer-conditional-expression
-		if (!this.oauthLibFactory) {
-			this.oauthLib = this.oAuthFactory(this.config);
-		} else {
-			this.oauthLib = oauthLibFactory(config);
+	constructor(private config: IOAuth1Configuration, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
+		if (!this.oAuthLibFactory) {
+			this.oAuthLibFactory = () => {
+				return new OAuth(
+					config.apiBaseUrl + config.oauthRequestTokenPath, 	// requestTokenUrl
+					config.apiBaseUrl + config.oauthAccessTokenPath, 	// accessTokenUrl
+					config.consumerKey, 								// consumerKey
+					config.consumerSecret,								// consumerSecret
+					'1.0A',												// version
+					null,												// authorize_callback
+					config.signatureMethod,								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
+					null,												// nonceSize
+					{													// customHeaders
+						'Accept': config.accept,
+						'User-Agent': config.userAgent
+					}
+				);
+			};
 		}
-	}
 
-	private oAuthFactory(config: IOAuth1Configuration): typeof OAuth {
-		return new OAuth(
-			config.apiBaseUrl + config.oauthRequestTokenPath, 	// requestTokenUrl
-			config.apiBaseUrl + config.oauthAccessTokenPath, 	// accessTokenUrl
-			config.consumerKey, 								// consumerKey
-			config.consumerSecret,								// consumerSecret
-			'1.0A',												// version
-			null,												// authorize_callback
-			config.signatureMethod,								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
-			null,												// nonceSize
-			{													// customHeaders
-				'Accept': config.accept,
-				'User-Agent': config.userAgent
-			}
-		);
+		this.oauthLib = this.oAuthLibFactory(this.config);
 	}
 
 	public getUnauthorisedRequestToken = async (): Promise<{ oauth_token: string, oauth_token_secret: string }> => {
@@ -131,7 +128,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		// TODO this.checkAuthentication();
 		if (acceptType == 'application/pdf') {
 			// Temp for getting PDFs
-			const oauthForPdf = this.oAuthFactory({ ...this.config, ...{ accept: acceptType } });
+			const oauthForPdf = this.oAuthLibFactory({ ...this.config, ...{ accept: acceptType } });
 
 			return new Promise<T>((resolve, reject) => {
 				const request = oauthForPdf.get(
