@@ -4,23 +4,26 @@ import { AccountingAPIClient } from '../AccountingAPIClient';
 import { mapState, mapConfig } from '../internals/config-helper';
 import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
 import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/InMemoryOAuthLib';
+import { InMemoryOAuth1HttpClient } from './helpers/InMemoryOAuth1HttpClient';
+import * as fs from 'fs';
+import * as path from 'path';
 
 const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
 const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
 const guid2 = '857c9e3f-640a-4df2-99fd-dd0e52a785e7';
 
-interface IEndPointDetails {
+export interface IEndPointDetails {
 	action: string;
 	expectedPath: string;
 	subResource?: string;
 	args?: any;
 }
 
-interface IFixture {
+export interface IFixture {
 	[key: string]: IEndPointDetails[];
 }
 
-describe('Endpoint: ', () => {
+describe.skip('Endpoint: ', () => {
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
 	const xeroConfig: IXeroClientConfiguration = {
@@ -111,6 +114,71 @@ describe('Endpoint: ', () => {
 
 				it('matches the expected response', () => {
 					expect(result).toMatchObject(JSON.parse(mockedResponse));
+				});
+			});
+		});
+
+	});
+});
+
+describe('Endpoints with attachments on them: ', () => {
+	const xeroConfig: IXeroClientConfiguration = {
+		AppType: 'private',
+		ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+		ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+		PrivateKeyCert: validTestCertPath()
+	};
+
+	const inMemoryOAuth1HttpClient = new InMemoryOAuth1HttpClient();
+	const tempAttachmentLocation = path.resolve(__dirname, 'temp-image.jpg');
+
+	const fixtures: IFixture = {
+		invoices: [
+			{ action: 'saveAttachment', expectedPath: `invoices/${guid1}/Attachments/${guid2}`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation } }
+		]
+	};
+
+	const actionToVerbMap: { [key: string]: string } = {
+		saveAttachment: 'writeResponseToStream'
+	};
+
+	Object.keys(fixtures).map((endpoint: string) => {
+		(fixtures[endpoint]).map((fixture: IEndPointDetails) => {
+
+			describe(`${endpoint} attachments & ${fixture.action} calls`, () => {
+				let result: any;
+
+				beforeAll(async () => {
+					// inMemoryOAuth1HttpClient.reset();
+					const streamToUse = fs.createReadStream(path.resolve(__dirname, 'helpers/bean.jpg'));
+					inMemoryOAuth1HttpClient.setWriteResponseToStreamResult(streamToUse);
+					const xeroClient = new AccountingAPIClient(xeroConfig, inMemoryOAuth1HttpClient);
+
+					result = await (xeroClient as any)[endpoint]['attachments'][fixture.action](fixture.args);
+				});
+
+				it(`calls the ${actionToVerbMap[fixture.action]} method`, () => {
+					inMemoryOAuth1HttpClient.lastCalledMethodWas(actionToVerbMap[fixture.action]);
+				});
+
+				it('calls HTTPClient with expected endpoint', () => {
+					inMemoryOAuth1HttpClient.lastCalledEndpointArgsWas(actionToVerbMap[fixture.action]);
+				})
+
+				it('calls HTTP lib with expected mimeType', () => {
+
+				})
+
+				it('result is null', () => {
+					expect(result).toBeUndefined();
+				});
+
+				it('saves attachment to disk', async () => {
+					expect(fs.existsSync(tempAttachmentLocation)).toBeTruthy();
+					const stat = fs.statSync(tempAttachmentLocation);
+					expect(stat.size).toBe(23951);
+					// clean up
+					fs.unlinkSync(tempAttachmentLocation);
 				});
 			});
 		});
