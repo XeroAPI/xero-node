@@ -3,6 +3,7 @@
 
 import { IOAuth1Client, IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration } from './OAuth1HttpClient';
 import { mapConfig, mapState } from './config-helper';
+import * as  fs from 'fs';
 
 /**
  * TODO: Add support for the following keys:
@@ -25,6 +26,7 @@ export interface IHttpClient {
 	delete<T>(endpoint: string): Promise<T>;
 	put<T>(endpoint: string, body: object): Promise<T>;
 	post<T>(endpoint: string, body: object): Promise<T>;
+	writeResponseToStream(endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void>;
 }
 
 export abstract class BaseAPIClient {
@@ -47,7 +49,8 @@ export abstract class BaseAPIClient {
 			get: this._oauth1httpClient.get,
 			put: this._oauth1httpClient.put,
 			post: this._oauth1httpClient.post,
-			delete: this._oauth1httpClient.delete
+			delete: this._oauth1httpClient.delete,
+			writeResponseToStream: this._oauth1httpClient.writeResponseToStream
 		};
 
 		this.oauth1 = {

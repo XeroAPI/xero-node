@@ -2,11 +2,12 @@ import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, Con
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { URLSearchParams } from 'url';
+import * as fs from 'fs';
 
 export class AccountingAPIClient extends BaseAPIClient {
 
-	public constructor(options: IXeroClientConfiguration, _oauth1Client?: IOAuth1HttpClient) {
-		super(options, _oauth1Client);
+	public constructor(options: IXeroClientConfiguration, _oAuth1HttpClient?: IOAuth1HttpClient) {
+		super(options, _oAuth1HttpClient);
 	}
 
 	public accounts = {
@@ -93,8 +94,40 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				return this.http.get<any>(endpoint);
 			}
-		}
+		},
+		attachments: this.attachEndpoint('invoices')
 	};
+
+	private attachEndpoint(path: string) {
+		return {
+			get: async (args?: { entityID: string }): Promise<AttachmentsResponse> => {
+				// TODO: Support invoice number
+				// TODO: Support for where arg
+				// TODO: Summerize errors?
+				// TODO: Refactor duplication
+				const endpoint = `${path}/${args.entityID}/attachments`;
+
+				return this.http.get<AttachmentsResponse>(endpoint);
+			},
+			saveAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToSave: string }) => {
+				// TODO: Support invoice number
+				// TODO: Support for where arg
+				// TODO: Summerize errors?
+				// TODO: Refactor duplication
+				let endpoint = `${path}/${args.entityID}/attachments`;
+
+				if (args.fileName) {
+					endpoint += `/${args.fileName}`;
+				}
+				// tslint:disable-next-line:no-debugger
+				debugger;
+
+				const writeStream = fs.createWriteStream(args.pathToSave);
+
+				await this.http.writeResponseToStream(endpoint, args.mimeType, writeStream);
+			},
+		};
+	}
 
 	public contactgroups = {
 		get: async (args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {

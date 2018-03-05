@@ -3,6 +3,7 @@
 
 import { OAuth } from 'oauth';
 import { IHttpClient } from './BaseAPIClient';
+import * as fs from 'fs';
 
 export interface IToken {
 	oauth_token: string;
@@ -122,6 +123,10 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return token;
 	}
 
+	public writeResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
+		throw new Error('Method not implemented.');
+	}
+
 	public get = async <T>(endpoint: string, acceptType?: string): Promise<T> => {
 		// TODO this.checkAuthentication();
 		if (acceptType == 'application/pdf') {
@@ -137,7 +142,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				let allChunks: any = null;
 
 				request.addListener('response', function(response: any) {
-					response.setEncoding('binary');
+					// response.setEncoding('binary');
 					response.addListener('data', function(chunk: any) {
 						allChunks = allChunks + chunk;
 					});
