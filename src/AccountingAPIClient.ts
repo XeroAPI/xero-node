@@ -186,7 +186,8 @@ export class AccountingAPIClient extends BaseAPIClient {
 		get: async (): Promise<ContactsResponse> => {
 			const endpoint = 'contacts';
 			return this.http.get<ContactsResponse>(endpoint);
-		}
+		},
+		attachments: this.generateAttachmentsEndpoint('contacts')
 	};
 
 	public reports = {

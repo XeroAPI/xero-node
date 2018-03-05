@@ -142,9 +142,22 @@ describe('Endpoints with attachments on them: ', () => {
 
 	const tempAttachmentLocation = path.resolve(__dirname, 'temp-image.jpg');
 
+	// Invoices [x]
+	// Receipts [ ]
+	// Credit Notes [ ]
+	// Repeating Invoices [ ]
+	// Bank Transactions [ ]
+	// Bank Transfers [ ]
+	// Contacts [x]
+	// Accounts [ ]
+	// Manual Journals [ ]
+
 	const fixtures: IFixture = {
 		invoices: [
 			{ action: 'saveAttachment', expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+		],
+		contacts: [
+			{ action: 'saveAttachment', expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
 		]
 	};
 
