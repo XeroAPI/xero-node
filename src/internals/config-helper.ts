@@ -1,3 +1,6 @@
+/** @internalapi */
+/** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
+
 import { IXeroClientConfiguration } from './BaseAPIClient';
 import { getStringFromFile } from './utils';
 import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';

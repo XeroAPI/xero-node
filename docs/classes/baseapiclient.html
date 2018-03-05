@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IXeroClientConfiguration | xero-node</title>
+	<title>BaseAPIClient | xero-node</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,32 +54,26 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="ixeroclientconfiguration.html">IXeroClientConfiguration</a>
+					<a href="baseapiclient.html">BaseAPIClient</a>
 				</li>
 			</ul>
-			<h1>Interface IXeroClientConfiguration</h1>
+			<h1>Class BaseAPIClient</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>TODO: Add support for the following keys:</p>
-					</div>
-					<ul>
-						<li>PrivateKeyPassword</li>
-						<li>CallbackPath</li>
-					</ul>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IXeroClientConfiguration</span>
+						<span class="target">BaseAPIClient</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="accountingapiclient.html" class="tsd-signature-type">AccountingAPIClient</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -88,89 +82,80 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="baseapiclient.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ixeroclientconfiguration.html#apptype" class="tsd-kind-icon">App<wbr>Type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ixeroclientconfiguration.html#callbackbaseurl" class="tsd-kind-icon">Callback<wbr>Base<wbr>Url</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ixeroclientconfiguration.html#callbackpath" class="tsd-kind-icon">Callback<wbr>Path</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ixeroclientconfiguration.html#consumerkey" class="tsd-kind-icon">Consumer<wbr>Key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ixeroclientconfiguration.html#consumersecret" class="tsd-kind-icon">Consumer<wbr>Secret</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ixeroclientconfiguration.html#privatekeycert" class="tsd-kind-icon">Private<wbr>Key<wbr>Cert</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ixeroclientconfiguration.html#privatekeypassword" class="tsd-kind-icon">Private<wbr>Key<wbr>Password</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="baseapiclient.html#_oauth1httpclient" class="tsd-kind-icon">_oauth1http<wbr>Client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="baseapiclient.html#http" class="tsd-kind-icon">http</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="baseapiclient.html#oauth1" class="tsd-kind-icon">oauth1</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>BaseAPIClient<span class="tsd-signature-symbol">(</span>xeroConfig<span class="tsd-signature-symbol">: </span><a href="../interfaces/ixeroclientconfiguration.html" class="tsd-signature-type">IXeroClientConfiguration</a>, _oauth1httpClient<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ioauth1httpclient.html" class="tsd-signature-type">IOAuth1HttpClient</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="baseapiclient.html" class="tsd-signature-type">BaseAPIClient</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L33">internals/BaseAPIClient.ts:33</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>xeroConfig: <a href="../interfaces/ixeroclientconfiguration.html" class="tsd-signature-type">IXeroClientConfiguration</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> _oauth1httpClient: <a href="../interfaces/ioauth1httpclient.html" class="tsd-signature-type">IOAuth1HttpClient</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="baseapiclient.html" class="tsd-signature-type">BaseAPIClient</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="apptype" class="tsd-anchor"></a>
-					<h3>App<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">App<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"public"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"private"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"partner"</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_oauth1httpclient" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> _oauth1http<wbr>Client</h3>
+					<div class="tsd-signature tsd-kind-icon">_oauth1http<wbr>Client<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ioauth1httpclient.html" class="tsd-signature-type">IOAuth1HttpClient</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L14">internals/BaseAPIClient.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L35">internals/BaseAPIClient.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="callbackbaseurl" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Callback<wbr>Base<wbr>Url</h3>
-					<div class="tsd-signature tsd-kind-icon">Callback<wbr>Base<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="http" class="tsd-anchor"></a>
+					<h3>http</h3>
+					<div class="tsd-signature tsd-kind-icon">http<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ihttpclient.html" class="tsd-signature-type">IHttpClient</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L19">internals/BaseAPIClient.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L32">internals/BaseAPIClient.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="callbackpath" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Callback<wbr>Path</h3>
-					<div class="tsd-signature tsd-kind-icon">Callback<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="oauth1" class="tsd-anchor"></a>
+					<h3>oauth1</h3>
+					<div class="tsd-signature tsd-kind-icon">oauth1<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ioauth1client.html" class="tsd-signature-type">IOAuth1Client</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L20">internals/BaseAPIClient.ts:20</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="consumerkey" class="tsd-anchor"></a>
-					<h3>Consumer<wbr>Key</h3>
-					<div class="tsd-signature tsd-kind-icon">Consumer<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L15">internals/BaseAPIClient.ts:15</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="consumersecret" class="tsd-anchor"></a>
-					<h3>Consumer<wbr>Secret</h3>
-					<div class="tsd-signature tsd-kind-icon">Consumer<wbr>Secret<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L16">internals/BaseAPIClient.ts:16</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="privatekeycert" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Private<wbr>Key<wbr>Cert</h3>
-					<div class="tsd-signature tsd-kind-icon">Private<wbr>Key<wbr>Cert<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L17">internals/BaseAPIClient.ts:17</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="privatekeypassword" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Private<wbr>Key<wbr>Password</h3>
-					<div class="tsd-signature tsd-kind-icon">Private<wbr>Key<wbr>Password<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L18">internals/BaseAPIClient.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L33">internals/BaseAPIClient.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -188,29 +173,20 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-is-external">
-						<a href="ixeroclientconfiguration.html" class="tsd-kind-icon">IXero<wbr>Client<wbr>Configuration</a>
+					<li class="current tsd-kind-class tsd-is-external">
+						<a href="baseapiclient.html" class="tsd-kind-icon">BaseAPIClient</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ixeroclientconfiguration.html#apptype" class="tsd-kind-icon">App<wbr>Type</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+								<a href="baseapiclient.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ixeroclientconfiguration.html#callbackbaseurl" class="tsd-kind-icon">Callback<wbr>Base<wbr>Url</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="baseapiclient.html#_oauth1httpclient" class="tsd-kind-icon">_oauth1http<wbr>Client</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ixeroclientconfiguration.html#callbackpath" class="tsd-kind-icon">Callback<wbr>Path</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="baseapiclient.html#http" class="tsd-kind-icon">http</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ixeroclientconfiguration.html#consumerkey" class="tsd-kind-icon">Consumer<wbr>Key</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ixeroclientconfiguration.html#consumersecret" class="tsd-kind-icon">Consumer<wbr>Secret</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ixeroclientconfiguration.html#privatekeycert" class="tsd-kind-icon">Private<wbr>Key<wbr>Cert</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ixeroclientconfiguration.html#privatekeypassword" class="tsd-kind-icon">Private<wbr>Key<wbr>Password</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="baseapiclient.html#oauth1" class="tsd-kind-icon">oauth1</a>
 							</li>
 						</ul>
 					</li>

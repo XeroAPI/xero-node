@@ -10,7 +10,7 @@
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
     "scratch": "ts-node ./src/scratch.ts",
-    "typedoc": "typedoc --mode file --exclude **/__tests__/** --includeDeclarations --excludeExternals --target ES6 --out docs/ src/",
+    "typedoc": "typedoc --mode file --external-aliases internalapi --exclude **/*_tests__/** --includeDeclarations --excludeExternals --target ES6 --out docs/ src/",
     "create-key": "node ./.circleci/create_private_key.js"
   },
   "author": "Xero <api@xero.com>",
@@ -32,6 +32,7 @@
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "typedoc": "^0.10.0",
+    "typedoc-plugin-internal-external": "^1.0.10",
     "typescript": "^2.7.1"
   }
 }
