@@ -39,8 +39,6 @@ export abstract class BaseAPIClient {
 			throw new Error('Config must be passed in when creating a new instance');
 		}
 
-		// tslint:disable-next-line:no-debugger
-		debugger;
 		if (!this._oauth1httpClient) {
 			const oauthConfig: IOAuth1Configuration = mapConfig(xeroConfig);
 			this._oauth1httpClient = new OAuth1HttpClient(oauthConfig);

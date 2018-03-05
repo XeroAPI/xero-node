@@ -123,7 +123,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return token;
 	}
 
-	writeResponseToStream(endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> {
+	public writeResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
 		throw new Error('Method not implemented.');
 	}
 
