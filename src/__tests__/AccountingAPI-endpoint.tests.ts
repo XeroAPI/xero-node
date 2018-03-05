@@ -1,10 +1,9 @@
 import { IXeroClientConfiguration } from '../internals/BaseAPIClient';
-import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
+import { OAuth1HttpClient, IOAuth1HttpClient } from '../internals/OAuth1HttpClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { mapState, mapConfig } from '../internals/config-helper';
 import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
 import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/InMemoryOAuthLib';
-import { InMemoryOAuth1HttpClient } from './helpers/InMemoryOAuth1HttpClient';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -23,7 +22,7 @@ export interface IFixture {
 	[key: string]: IEndPointDetails[];
 }
 
-describe.skip('Endpoint: ', () => {
+describe('Endpoint: ', () => {
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
 	const xeroConfig: IXeroClientConfiguration = {
@@ -129,17 +128,30 @@ describe('Endpoints with attachments on them: ', () => {
 		PrivateKeyCert: validTestCertPath()
 	};
 
-	const inMemoryOAuth1HttpClient = new InMemoryOAuth1HttpClient();
+	const writeResponseToStreamSpy = jest.fn();
+	const oAuth1HttpClient: IOAuth1HttpClient = {
+		get: undefined,
+		put: undefined,
+		post: undefined,
+		delete: undefined,
+		writeResponseToStream: writeResponseToStreamSpy,
+		state: undefined,
+		setState: undefined,
+		getUnauthorisedRequestToken: undefined,
+		buildAuthoriseUrl: undefined,
+		swapRequestTokenforAccessToken: undefined
+	};
+
 	const tempAttachmentLocation = path.resolve(__dirname, 'temp-image.jpg');
 
 	const fixtures: IFixture = {
 		invoices: [
-			{ action: 'saveAttachment', expectedPath: `invoices/${guid1}/Attachments/${guid2}`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation } }
+			{ action: 'saveAttachment', expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
 		]
 	};
 
-	const actionToVerbMap: { [key: string]: string } = {
-		saveAttachment: 'writeResponseToStream'
+	const actionToSpyMap: { [key: string]: jest.Mock<{}> } = {
+		saveAttachment: writeResponseToStreamSpy
 	};
 
 	Object.keys(fixtures).map((endpoint: string) => {
@@ -149,27 +161,42 @@ describe('Endpoints with attachments on them: ', () => {
 				let result: any;
 
 				beforeAll(async () => {
-					// inMemoryOAuth1HttpClient.reset();
+					jest.resetAllMocks();
+
 					const streamToUse = fs.createReadStream(path.resolve(__dirname, 'helpers/bean.jpg'));
-					inMemoryOAuth1HttpClient.setWriteResponseToStreamResult(streamToUse);
-					const xeroClient = new AccountingAPIClient(xeroConfig, inMemoryOAuth1HttpClient);
+					writeResponseToStreamSpy.mockImplementation((endpointPath: string, mimeType: string, writeStream: fs.WriteStream) => {
+						return new Promise<void>((resolve, reject) => {
+							streamToUse.pipe(writeStream);
+							streamToUse.on('end', () => {
+								resolve();
+							});
+						});
+					});
+
+					const xeroClient = new AccountingAPIClient(xeroConfig, oAuth1HttpClient);
 
 					result = await (xeroClient as any)[endpoint]['attachments'][fixture.action](fixture.args);
 				});
 
-				it(`calls the ${actionToVerbMap[fixture.action]} method`, () => {
-					inMemoryOAuth1HttpClient.lastCalledMethodWas(actionToVerbMap[fixture.action]);
+				it(`calls the underlying HTTPClient method`, () => {
+					expect(actionToSpyMap[fixture.action]).toHaveBeenCalledTimes(1);
 				});
 
-				it('calls HTTPClient with expected endpoint', () => {
-					inMemoryOAuth1HttpClient.lastCalledEndpointArgsWas(actionToVerbMap[fixture.action]);
-				})
+				it(`calls HTTPClient with endpoint=${fixture.expectedPath}`, () => {
+					expect(actionToSpyMap[fixture.action].mock.calls[0][0]).toEqual(fixture.expectedPath);
+				});
 
-				it('calls HTTP lib with expected mimeType', () => {
+				it(`calls HTTPClient with mimeType=${fixture.args.mimeType}`, () => {
+					expect(actionToSpyMap[fixture.action].mock.calls[0][1]).toEqual(fixture.args.mimeType);
+				});
 
-				})
+				it(`calls HTTPClient with writeStream path=${tempAttachmentLocation}`, () => {
+					const writeStream = actionToSpyMap[fixture.action].mock.calls[0][2];
+					expect(writeStream).toHaveProperty('path');
+					expect(writeStream.path).toEqual(tempAttachmentLocation);
+				});
 
-				it('result is null', () => {
+				it('result is undefined', () => {
 					expect(result).toBeUndefined();
 				});
 
@@ -177,11 +204,12 @@ describe('Endpoints with attachments on them: ', () => {
 					expect(fs.existsSync(tempAttachmentLocation)).toBeTruthy();
 					const stat = fs.statSync(tempAttachmentLocation);
 					expect(stat.size).toBe(23951);
-					// clean up
+				});
+
+				afterAll(() => {
 					fs.unlinkSync(tempAttachmentLocation);
 				});
 			});
 		});
-
 	});
 });
