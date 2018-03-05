@@ -1,3 +1,6 @@
+/** @internalapi */
+/** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
+
 import { OAuth } from 'oauth';
 import { IHttpClient } from './BaseAPIClient';
 import * as fs from 'fs';

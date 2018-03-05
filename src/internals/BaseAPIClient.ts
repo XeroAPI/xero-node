@@ -1,3 +1,6 @@
+/** @internalapi */
+/** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
+
 import { IOAuth1Client, IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration } from './OAuth1HttpClient';
 import { mapConfig, mapState } from './config-helper';
 import * as  fs from 'fs';
@@ -8,7 +11,6 @@ import * as  fs from 'fs';
  * - PrivateKeyPassword
  * - CallbackPath
  */
-
 export interface IXeroClientConfiguration {
 	AppType: 'public' | 'private' | 'partner';
 	ConsumerKey: string;
