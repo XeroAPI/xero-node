@@ -23,16 +23,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	public attachments = {
-		get: async (args?: { endpoint: string, id: string }): Promise<AttachmentsResponse> => {
-			// TODO: Support for where arg
-			// TODO: Summerize errors?
-			const endpoint = `${args.endpoint}/${args.id}/attachments`;
-
-			return this.http.get<AttachmentsResponse>(endpoint);
-		}
-	};
-
 	public invoices = {
 		get: async (args?: { InvoiceID: string }): Promise<InvoicesResponse> => {
 			// TODO: Support invoice number
@@ -95,33 +85,17 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.http.get<any>(endpoint);
 			}
 		},
-		attachments: this.attachEndpoint('invoices')
+		attachments: this.generateAttachmentsEndpoint('invoices')
 	};
 
-	private attachEndpoint(path: string) {
+	private generateAttachmentsEndpoint(path: string) {
 		return {
-			get: async (args?: { entityID: string }): Promise<AttachmentsResponse> => {
-				// TODO: Support invoice number
-				// TODO: Support for where arg
-				// TODO: Summerize errors?
-				// TODO: Refactor duplication
-				const endpoint = `${path}/${args.entityID}/attachments`;
-
+			get: async (args?: { EntityID: string }): Promise<AttachmentsResponse> => {
+				const endpoint = `${path}/${args.EntityID}/attachments`;
 				return this.http.get<AttachmentsResponse>(endpoint);
 			},
 			saveAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToSave: string }) => {
-				// TODO: Support invoice number
-				// TODO: Support for where arg
-				// TODO: Summerize errors?
-				// TODO: Refactor duplication
-				let endpoint = `${path}/${args.entityID}/attachments`;
-
-				if (args.fileName) {
-					endpoint += `/${args.fileName}`;
-				}
-				// tslint:disable-next-line:no-debugger
-				debugger;
-
+				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
 				const writeStream = fs.createWriteStream(args.pathToSave);
 
 				await this.http.writeResponseToStream(endpoint, args.mimeType, writeStream);
