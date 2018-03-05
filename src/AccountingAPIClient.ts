@@ -35,7 +35,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.http.get<InvoicesResponse>(endpoint);
 		},
-		getPDF: async (args?: { InvoiceID: string }): Promise<string> => {
+		getPDF: async (args?: { InvoiceID: string, pathToSave: string }): Promise<void> => {
 			// TODO: Support invoice number
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -45,7 +45,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
-			return this.http.get<string>(endpoint, 'application/pdf');
+			const writeStream = fs.createWriteStream(args.pathToSave);
+
+			return this.http.writeResponseToStream(endpoint, 'application/pdf', writeStream);
 		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
 		create: async (invoice: Invoice | { Invoices: Invoice[] }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts

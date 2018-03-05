@@ -5,6 +5,7 @@ import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from './requ
 import { InvoicesResponse } from '../AccountingAPI-types';
 import { getConfig } from './helpers/integration.helpers';
 import { isUUID } from './helpers/test-assertions';
+import * as path from 'path';
 
 const data = getConfig();
 const xero = new AccountingAPIClient(data);
@@ -12,26 +13,20 @@ const xero = new AccountingAPIClient(data);
 describe('/invoices integration tests', () => {
 	describe('and GETing', () => {
 		describe('a single invoice as PDF', () => {
-			let result: string;
-			const invoiceLocation = (__dirname + '/invoice-result.pdf');
+			const tempInvoiceLocation = path.resolve(__dirname,  './temp_result.pdf');
 
 			beforeAll(async () => {
 				const invoice = await xero.invoices.create(createSingleInvoiceRequest);
-				result = await xero.invoices.getPDF({ InvoiceID: invoice.Invoices[0].InvoiceID });
-				fs.writeFileSync(invoiceLocation, result, 'binary');
+				await xero.invoices.getPDF({ InvoiceID: invoice.Invoices[0].InvoiceID, pathToSave: tempInvoiceLocation });
 			});
 
-			it('the invoice is defined', () => {
-				expect(result).not.toBeNull();
-			});
-
-			it('invoice can be saved as local file', async () => {
-				const invoiceBuffer = fs.readFileSync(invoiceLocation);
+			it('invoice is saved as local file', async () => {
+				const invoiceBuffer = fs.readFileSync(tempInvoiceLocation);
 				expect(invoiceBuffer.byteLength).toBeGreaterThan(3000); // Let's hope all PDFs are bigger than 3000
 			});
 
-			it('invoice is then deleted', () => {
-				fs.unlinkSync(invoiceLocation);
+			afterAll(() => {
+				fs.unlinkSync(tempInvoiceLocation);
 			});
 		});
 

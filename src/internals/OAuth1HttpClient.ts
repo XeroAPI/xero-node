@@ -56,19 +56,19 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	constructor(private config: IOAuth1Configuration, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
 		if (!this.oAuthLibFactory) {
-			this.oAuthLibFactory = () => {
+			this.oAuthLibFactory = (passedInConfig: IOAuth1Configuration) => {
 				return new OAuth(
-					config.apiBaseUrl + config.oauthRequestTokenPath, 	// requestTokenUrl
-					config.apiBaseUrl + config.oauthAccessTokenPath, 	// accessTokenUrl
-					config.consumerKey, 								// consumerKey
-					config.consumerSecret,								// consumerSecret
-					'1.0A',												// version
-					null,												// authorize_callback
-					config.signatureMethod,								// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
-					null,												// nonceSize
-					{													// customHeaders
-						'Accept': config.accept,
-						'User-Agent': config.userAgent
+					passedInConfig.apiBaseUrl + passedInConfig.oauthRequestTokenPath, 	// requestTokenUrl
+					passedInConfig.apiBaseUrl + passedInConfig.oauthAccessTokenPath, 	// accessTokenUrl
+					passedInConfig.consumerKey, 										// consumerKey
+					passedInConfig.consumerSecret,										// consumerSecret
+					'1.0A',																// version
+					null,																// authorize_callback
+					passedInConfig.signatureMethod,										// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
+					null,																// nonceSize
+					{																	// customHeaders
+						'Accept': passedInConfig.accept,
+						'User-Agent': passedInConfig.userAgent
 					}
 				);
 			};
@@ -121,58 +121,51 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public writeResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
-		throw new Error('Method not implemented.');
+		const oauthForPdf = this.oAuthLibFactory({ ...this.config, ...{ accept: mimeType } });
+
+		return new Promise<void>((resolve, reject) => {
+			const request = oauthForPdf.get(
+				this.config.apiBaseUrl + this.config.apiBasePath + endpoint,
+				this._state.accessToken.oauth_token,
+				this._state.accessToken.oauth_token_secret);
+
+			request.addListener('response', function(response: any) {
+				response.addListener('data', function(chunk: any) {
+					writeStream.write(chunk);
+				});
+				response.addListener('end', function() {
+					writeStream.end();
+					writeStream.close();
+					resolve();
+				});
+			});
+			request.end();
+		});
 	}
 
 	public get = async <T>(endpoint: string, acceptType?: string): Promise<T> => {
-		// TODO this.checkAuthentication();
-		if (acceptType == 'application/pdf') {
-			// Temp for getting PDFs
-			const oauthForPdf = this.oAuthLibFactory({ ...this.config, ...{ accept: acceptType } });
+		return new Promise<T>((resolve, reject) => {
+			this.oauthLib.get(
+				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
+				this._state.accessToken.oauth_token,
+				this._state.accessToken.oauth_token_secret,
+				(err: object, data: string, httpResponse: any) => {
+					// data is the body of the response
 
-			return new Promise<T>((resolve, reject) => {
-				const request = oauthForPdf.get(
-					this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-					this._state.accessToken.oauth_token,
-					this._state.accessToken.oauth_token_secret);
-
-				let allChunks: any = null;
-
-				request.addListener('response', function(response: any) {
-					// response.setEncoding('binary');
-					response.addListener('data', function(chunk: any) {
-						allChunks = allChunks + chunk;
-					});
-					response.addListener('end', function() {
-						resolve(allChunks);
-					});
-				});
-				request.end();
-			});
-		} else { // TODO avoid duplicate code
-			return new Promise<T>((resolve, reject) => {
-				this.oauthLib.get(
-					this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-					this._state.accessToken.oauth_token,
-					this._state.accessToken.oauth_token_secret,
-					(err: object, data: string, httpResponse: any) => {
-						// data is the body of the response
-
-						if (err) {
-							const toReturn: IHttpError = {
-								statusCode: httpResponse.statusCode,
-								body: data
-							};
-							reject(toReturn);
-						} else {
-							const toReturn = JSON.parse(data) as T;
-							// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
-							return resolve(toReturn);
-						}
+					if (err) {
+						const toReturn: IHttpError = {
+							statusCode: httpResponse.statusCode,
+							body: data
+						};
+						reject(toReturn);
+					} else {
+						const toReturn = JSON.parse(data) as T;
+						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
+						return resolve(toReturn);
 					}
-				);
-			});
-		}
+				}
+			);
+		});
 	}
 
 	public put = async <T>(endpoint: string, body: object): Promise<T> => {
