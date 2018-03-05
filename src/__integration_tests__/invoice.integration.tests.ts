@@ -17,7 +17,7 @@ describe('/invoices integration tests', () => {
 
 			beforeAll(async () => {
 				const invoice = await xero.invoices.create(createSingleInvoiceRequest);
-				await xero.invoices.getPDF({ InvoiceID: invoice.Invoices[0].InvoiceID, pathToSave: tempInvoiceLocation });
+				await xero.invoices.savePDF({ InvoiceID: invoice.Invoices[0].InvoiceID, savePath: tempInvoiceLocation });
 			});
 
 			it('invoice is saved as local file', async () => {

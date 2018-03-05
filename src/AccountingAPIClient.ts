@@ -35,7 +35,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.http.get<InvoicesResponse>(endpoint);
 		},
-		getPDF: async (args?: { InvoiceID: string, pathToSave: string }): Promise<void> => {
+		savePDF: async (args?: { InvoiceID: string, savePath: string }): Promise<void> => {
 			// TODO: Support invoice number
 			// TODO: Support for where arg
 			// TODO: Summerize errors?
@@ -45,7 +45,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
-			const writeStream = fs.createWriteStream(args.pathToSave);
+			const writeStream = fs.createWriteStream(args.savePath);
 
 			return this.http.writeResponseToStream(endpoint, 'application/pdf', writeStream);
 		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
