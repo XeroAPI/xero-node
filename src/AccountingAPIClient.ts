@@ -24,7 +24,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, createdByMyApp: boolean }): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID?: string, where?: string, InvoiceNumber?: string, createdByMyApp: boolean }): Promise<InvoicesResponse> => {
 			// TODO: Support Modified After header
 			// TODO: Support for where arg
 			let endpoint = 'invoices';
@@ -38,6 +38,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			if (args && args.createdByMyApp) {
 				endpoint = endpoint + '?createdByMyApp=true';
+			}
+
+			if (args && args.where) {
+				endpoint = endpoint + `?where=${ encodeURIComponent(args.where)}`;
 			}
 
 			return this.http.get<InvoicesResponse>(endpoint);
