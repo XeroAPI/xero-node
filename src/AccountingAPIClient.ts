@@ -25,26 +25,30 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, where?: string, InvoiceNumber?: string, createdByMyApp: boolean, queryParams?: string }): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID?: string, order?: string, where?: string, InvoiceNumber?: string, createdByMyApp: boolean, queryParams?: string }): Promise<InvoicesResponse> => {
 			// TODO: Support Modified After header
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
-			let queryObj: any = {};
-
 			if (args && args.InvoiceNumber) {
 				endpoint = endpoint + '/' + args.InvoiceNumber;
 			}
 
 			if (args) {
+				let queryObj: any = {};
+
 				if (args.createdByMyApp) {
 					queryObj.createdByMyApp = true;
 				}
 
 				if (args.where) {
 					queryObj.where = args.where;
+				}
+
+				if (args.order) {
+					queryObj.order = args.order;
 				}
 
 				if (args.queryParams) {
