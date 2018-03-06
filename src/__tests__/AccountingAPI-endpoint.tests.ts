@@ -53,6 +53,7 @@ describe('Endpoint: ', () => {
 			{ action: 'get', expectedPath: `invoices?Statuses=DRAFT%2CSUBMITTED`, args: { queryParams: 'Statuses=DRAFT,SUBMITTED' } },
 			{ action: 'get', expectedPath: `invoices?order=something`, args: { order: 'something' } },
 			{ action: 'get', expectedPath: `invoices?page=3`, args: { page: 3 } },
+			{ action: 'get', expectedPath: `invoices?createdByMyApp=true&where=Type%3D%3D%22ACCREC%22&page=5&Statuses=DELETED`, args: { page: 5, queryParams: 'Statuses=DELETED', where: `Type=="ACCREC"`, createdByMyApp: true } },
 			{ subResource: 'attachments', action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { EntityID: guid1 } },
 			{ subResource: 'onlineInvoice', action: 'get', expectedPath: `invoices/${guid1}/onlineinvoice`, args: { InvoiceID: guid1 } },
 			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
