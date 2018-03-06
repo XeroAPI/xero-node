@@ -3,6 +3,7 @@ import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClie
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { URLSearchParams } from 'url';
 import * as fs from 'fs';
+import * as querystring from 'querystring';
 
 export class AccountingAPIClient extends BaseAPIClient {
 
@@ -26,22 +27,29 @@ export class AccountingAPIClient extends BaseAPIClient {
 	public invoices = {
 		get: async (args?: { InvoiceID?: string, where?: string, InvoiceNumber?: string, createdByMyApp: boolean }): Promise<InvoicesResponse> => {
 			// TODO: Support Modified After header
-			// TODO: Support for where arg
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
+			const queryObj: any = {};
+
 			if (args && args.InvoiceNumber) {
 				endpoint = endpoint + '/' + args.InvoiceNumber;
 			}
 
-			if (args && args.createdByMyApp) {
-				endpoint = endpoint + '?createdByMyApp=true';
-			}
+			if (args){
+				if (args.createdByMyApp) {
+					queryObj.createdByMyApp = true;
+				}
 
-			if (args && args.where) {
-				endpoint = endpoint + `?where=${ encodeURIComponent(args.where)}`;
+				if (args.where) {
+					queryObj.where = args.where;
+				}
+
+				if (Object.keys(queryObj).length > 0){
+					endpoint += '?' + querystring.stringify(queryObj);
+				}
 			}
 
 			return this.http.get<InvoicesResponse>(endpoint);
