@@ -2,7 +2,7 @@ import * as path from 'path';
 
 export function getConfig() {
 	if (jest) {
-		jest.setTimeout(20000);
+		jest.setTimeout(30000);
 	}
 
 	try {
