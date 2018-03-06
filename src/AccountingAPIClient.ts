@@ -24,10 +24,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string }): Promise<InvoicesResponse> => {
-			// TODO: Support invoice number
+		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, createdByMyApp: boolean }): Promise<InvoicesResponse> => {
+			// TODO: Support Modified After header
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
@@ -35,6 +34,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			if (args && args.InvoiceNumber) {
 				endpoint = endpoint + '/' + args.InvoiceNumber;
+			}
+
+			if (args && args.createdByMyApp) {
+				endpoint = endpoint + '?createdByMyApp=true';
 			}
 
 			return this.http.get<InvoicesResponse>(endpoint);
