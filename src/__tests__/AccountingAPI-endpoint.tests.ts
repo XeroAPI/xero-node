@@ -46,6 +46,7 @@ describe('Endpoint: ', () => {
 		invoices: [
 			{ action: 'get', expectedPath: 'invoices' },
 			{ action: 'get', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1 } },
+			{ action: 'get', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123' } },
 			{ subResource: 'attachments', action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { EntityID: guid1 } },
 			{ subResource: 'onlineInvoice', action: 'get', expectedPath: `invoices/${guid1}/onlineinvoice`, args: { InvoiceID: guid1 } },
 			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
