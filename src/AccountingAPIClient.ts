@@ -25,20 +25,20 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, where?: string, InvoiceNumber?: string, createdByMyApp: boolean }): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID?: string, where?: string, InvoiceNumber?: string, createdByMyApp: boolean, queryParams?: string }): Promise<InvoicesResponse> => {
 			// TODO: Support Modified After header
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
 			}
 
-			const queryObj: any = {};
+			let queryObj: any = {};
 
 			if (args && args.InvoiceNumber) {
 				endpoint = endpoint + '/' + args.InvoiceNumber;
 			}
 
-			if (args){
+			if (args) {
 				if (args.createdByMyApp) {
 					queryObj.createdByMyApp = true;
 				}
@@ -47,7 +47,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 					queryObj.where = args.where;
 				}
 
-				if (Object.keys(queryObj).length > 0){
+				if (args.queryParams) {
+					queryObj = { ...queryObj, ...querystring.parse(args.queryParams) };
+				}
+
+				if (Object.keys(queryObj).length > 0) {
 					endpoint += '?' + querystring.stringify(queryObj);
 				}
 			}
