@@ -145,7 +145,8 @@ describe('Endpoints with attachments on them: ', () => {
 		setState: undefined,
 		getUnauthorisedRequestToken: undefined,
 		buildAuthoriseUrl: undefined,
-		swapRequestTokenforAccessToken: undefined
+		swapRequestTokenforAccessToken: undefined,
+		refreshAccessToken: undefined
 	};
 
 	const tempAttachmentLocation = path.resolve(__dirname, 'temp-image.jpg');

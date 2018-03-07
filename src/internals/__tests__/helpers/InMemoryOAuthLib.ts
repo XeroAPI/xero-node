@@ -28,12 +28,13 @@ export class InMemoryOAuthLib {
 	private return_oauth_secret: string = null;
 	private returnAuthorisedToken: string = null;
 	private returnAuthorisedSecret: string = null;
+	private returnSessionHandle: string = null;
 	private lastRequestedBody: string = null;
 
 	constructor(private config?: IOAuth1Configuration) {
 	}
 
-	public setConfig(config?: IOAuth1Configuration){
+	public setConfig(config?: IOAuth1Configuration) {
 		this.config = config;
 		(this.config as any)['key'] = 'test';
 	}
@@ -53,15 +54,17 @@ export class InMemoryOAuthLib {
 		this.return_oauth_secret = null;
 		this.returnAuthorisedToken = null;
 		this.returnAuthorisedSecret = null;
+		this.returnSessionHandle = null;
 	}
 
 	public lastCalledThisVerb(verb: string) {
 		expect(this.lastCalledVerb).toBe(verb);
 	}
 
-	public set_SwapRequestTokenforAccessToken(oauth_token: string, oauth_secret: string) {
+	public set_SwapRequestTokenforAccessToken(oauth_token: string, oauth_secret: string, sessionHandle?: string) {
 		this.returnAuthorisedToken = oauth_token;
 		this.returnAuthorisedSecret = oauth_secret;
+		this.returnSessionHandle = sessionHandle;
 	}
 
 	public lastRequestedHadBody(expectedBody: any) {
@@ -139,6 +142,6 @@ export class InMemoryOAuthLib {
 		authedSecret: string,
 		oauthVerifier: any,
 		callback: (err: any, oauth_token: string, oauth_token_secret: string, result: any) => any) {
-		callback(null, this.returnAuthorisedToken, this.returnAuthorisedSecret, null);
+		callback(null, this.returnAuthorisedToken, this.returnAuthorisedSecret, { oauth_session_handle: this.returnSessionHandle });
 	}
 }

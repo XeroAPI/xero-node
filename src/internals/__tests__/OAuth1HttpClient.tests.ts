@@ -1,6 +1,18 @@
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from '../OAuth1HttpClient';
 
+const defaultState: IOAuth1State = {
+	requestToken: {
+		oauth_token: 'test3',
+		oauth_token_secret: 'test4'
+	},
+	accessToken: {
+		oauth_token: 'test7',
+		oauth_token_secret: 'test8'
+	},
+	oauth_session_handle: 'test9'
+};
+
 describe('OAuth1HttpClient', () => {
 
 	const inMemoryOAuthLib = new InMemoryOAuthLibFactoryFactory();
@@ -18,67 +30,124 @@ describe('OAuth1HttpClient', () => {
 		userAgent: 'ua'
 	};
 
-	beforeEach(() => {
-		oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
-	});
+	describe('and setting state', () => {
 
-	describe('set state', () => {
-
-		const defaultState: IOAuth1State = {
-			requestToken: {
-				oauth_token: 'test3',
-				oauth_token_secret: 'test4'
-			},
-			accessToken: {
-				oauth_token: 'test7',
-				oauth_token_secret: 'test8'
-			}
-		};
+		beforeEach(() => {
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
+			oauth1HttpClient.setState(defaultState);
+		});
 
 		it('matches what it was set to', () => {
-			oauth1HttpClient.setState(defaultState);
 			expect(oauth1HttpClient.state).toEqual(defaultState);
 		});
 
-		it('only overrides the provided keys', () => {
-			oauth1HttpClient.setState(defaultState);
+		it('only overrides the accessToken keys', () => {
 			oauth1HttpClient.setState({
 				accessToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
 			});
 
 			expect(oauth1HttpClient.state).not.toEqual(defaultState);
-			expect(oauth1HttpClient.state.requestToken).toEqual({ oauth_token: 'test3', oauth_token_secret: 'test4' });
-			expect(oauth1HttpClient.state.accessToken).toEqual({ oauth_token: 'something new', oauth_token_secret: 'something borrowed' });
+			expect(oauth1HttpClient.state).toEqual({
+				requestToken: {
+					oauth_token: 'test3',
+					oauth_token_secret: 'test4'
+				},
+				accessToken: {
+					oauth_token: 'something new',
+					oauth_token_secret: 'something borrowed'
+				},
+				oauth_session_handle: 'test9'
+			});
+		});
+
+		it('only overrides the requestToken keys', () => {
+			oauth1HttpClient.setState({ oauth_session_handle: 'yoyo' });
+
+			expect(oauth1HttpClient.state).not.toEqual(defaultState);
+			expect(oauth1HttpClient.state).toEqual({
+				requestToken: {
+					oauth_token: 'test3',
+					oauth_token_secret: 'test4'
+				},
+				accessToken: {
+					oauth_token: 'test7',
+					oauth_token_secret: 'test8'
+				},
+				oauth_session_handle: 'yoyo'
+			});
+		});
+
+		it('only overrides the oauth_session_handle keys', () => {
+			oauth1HttpClient.setState({
+				requestToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
+			});
+
+			expect(oauth1HttpClient.state).not.toEqual(defaultState);
+			expect(oauth1HttpClient.state).toEqual({
+				requestToken: {
+					oauth_token: 'something new',
+					oauth_token_secret: 'something borrowed'
+				},
+				accessToken: {
+					oauth_token: 'test7',
+					oauth_token_secret: 'test8'
+				},
+				oauth_session_handle: 'test9'
+			});
 		});
 
 	});
 
 	describe('and building authorise url', () => {
+		beforeEach(async () => {
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
+			oauth1HttpClient.setState(defaultState);
+		});
+
 		it('it builds the authorise url', () => {
-			const unauthorisedRequestToken = '123';
-			expect(oauth1HttpClient.buildAuthoriseUrl(unauthorisedRequestToken)).toEqual(`https://api.xero.com/oauth/Authorize?oauth_token=${unauthorisedRequestToken}`);
+			expect(oauth1HttpClient.buildAuthoriseUrl()).toEqual(`https://api.xero.com/oauth/Authorize?oauth_token=test3`);
 		});
 	});
 
 	describe('and getting unauthorisedRequestTokens', () => {
-		it('it returns expected the request token', async () => {
+		beforeEach(async () => {
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
 			inMemoryOAuthLib.inMemoryOAuthLib.set_getOAuthRequestToken('aaa', 'bbb');
-			const unauthRequestToken = await oauth1HttpClient.getUnauthorisedRequestToken();
-
-			expect(unauthRequestToken).toMatchObject({ oauth_token: 'aaa', oauth_token_secret: 'bbb' });
+			await oauth1HttpClient.getUnauthorisedRequestToken();
 		});
 
-		it('sets expected state');
+		it('sets expected state', () => {
+			const state = oauth1HttpClient.state;
+			expect(state.requestToken.oauth_token).toBe('aaa');
+			expect(state.requestToken.oauth_token_secret).toBe('bbb');
+		});
 	});
 
 	describe('and swapping request for access token', () => {
-		it('returns expected accessToken', async () => {
+		beforeAll(async () => {
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
+			oauth1HttpClient.setState(defaultState);
 			inMemoryOAuthLib.inMemoryOAuthLib.set_SwapRequestTokenforAccessToken(`access+token`, `access+secret`);
-			const accessToken = await oauth1HttpClient.swapRequestTokenforAccessToken({ oauth_token: 'aaa', oauth_token_secret: 'bbb' }, '1234');
-
-			expect(accessToken).toMatchObject({ oauth_token: `access+token`, oauth_token_secret: `access+secret` });
+			await oauth1HttpClient.swapRequestTokenforAccessToken('1234');
 		});
 
-		it('sets expected state');
+		it('sets expected state', () => {
+			expect(oauth1HttpClient.state.accessToken).toMatchObject({ oauth_token: 'access+token', oauth_token_secret: 'access+secret', });
+		});
+	});
+
+	// TODO: Skipped as we need to mock out the _private method we are now using
+	describe.skip('and refreshing authorized request token', () => {
+		beforeAll(async () => {
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
+			oauth1HttpClient.setState(defaultState);
+
+			inMemoryOAuthLib.inMemoryOAuthLib.set_SwapRequestTokenforAccessToken(`access+token`, `access+secret`, 'session+handle');
+			await oauth1HttpClient.refreshAccessToken();
+		});
+
+		it('sets expected state', () => {
+			expect(oauth1HttpClient.state.oauth_session_handle).toBe('session+handle');
+		});
 	});
 });

@@ -22,7 +22,8 @@ describe('OAuthClient and erros', () => {
 		accessToken: {
 			oauth_token: 'atoken',
 			oauth_token_secret: 'asecret',
-		}
+		},
+		oauth_session_handle: 'sessionHandle'
 	};
 
 	describe('with 404s', () => {
