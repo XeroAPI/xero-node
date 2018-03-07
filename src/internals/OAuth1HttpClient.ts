@@ -124,8 +124,6 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public refreshAccessToken = async () => {
 		const refreshResult = await new Promise<{ token: IToken, oAuthSessionHandle: string }>((resolve, reject) => {
-			console.log('this.state.accessToken.oauth_token: ', this.state.accessToken.oauth_token);
-
 			// We're accessing this "private" method as the lib does not allow refresh with oauth_session_handle.
 			this.oauthLib._performSecureRequest(this.state.accessToken.oauth_token,
 				this.state.accessToken.oauth_token_secret, 'POST', this.config.apiBaseUrl + this.config.oauthAccessTokenPath, { oauth_session_handle: this.state.oauth_session_handle }, null, null,
