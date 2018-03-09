@@ -6,7 +6,7 @@ export function getConfig() {
 	}
 
 	try {
-		const config = require('../config.json');
+		const config = require('../private-config.json');
 		return config;
 
 	} catch (error) {
