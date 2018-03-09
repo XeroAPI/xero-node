@@ -37,7 +37,8 @@ export function mapConfig(xeroConfig: IXeroClientConfiguration): IOAuth1Configur
 		userAgent: 'NodeJS-XeroAPIClient.' + xeroConfig.ConsumerKey, // TODO add package.json version here
 		consumerKey: xeroConfig.ConsumerKey,
 		consumerSecret: xeroConfig.ConsumerSecret,
-		signatureMethod: undefined
+		signatureMethod: undefined,
+		callbackUrl: xeroConfig.CallbackUrl ? xeroConfig.CallbackUrl : null
 	};
 
 	if (xeroConfig.AppType == 'private') {

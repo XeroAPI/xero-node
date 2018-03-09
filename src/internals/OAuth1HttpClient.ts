@@ -29,6 +29,7 @@ export interface IOAuth1Configuration {
 	signatureMethod: string;
 	accept: string;
 	userAgent: string;
+	callbackUrl: string;
 }
 
 export interface IOAuth1Client {
@@ -67,7 +68,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					passedInConfig.consumerKey, 										// consumerKey
 					passedInConfig.consumerSecret,										// consumerSecret
 					'1.0A',																// version
-					null,																// authorize_callback
+					config.callbackUrl,													// authorize_callback
 					passedInConfig.signatureMethod,										// signatureMethod. Neesds to ve "RSA-SHA1" for Private. "HMAC-SHA1" for public
 					null,																// nonceSize
 					{																	// customHeaders

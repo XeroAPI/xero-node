@@ -27,6 +27,7 @@ describe('OAuth1HttpClient', () => {
 		oauthAccessTokenPath: 'oatp',
 		signatureMethod: 'sigm',
 		accept: 'acceps',
+		callbackUrl: 'https://fakeurl.com/fake',
 		userAgent: 'ua'
 	};
 

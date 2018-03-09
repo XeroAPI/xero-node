@@ -17,8 +17,7 @@ export interface IXeroClientConfiguration {
 	ConsumerSecret: string;
 	PrivateKeyCert?: string;
 	PrivateKeyPassword?: string;
-	CallbackBaseUrl?: string;
-	CallbackPath?: string;
+	CallbackUrl?: string;
 }
 
 export interface IHttpClient {

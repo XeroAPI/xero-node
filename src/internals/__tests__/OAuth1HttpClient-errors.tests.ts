@@ -10,6 +10,7 @@ describe('OAuthClient and erros', () => {
 		oauthRequestTokenPath: 'ortp',
 		oauthAccessTokenPath: 'oatp',
 		signatureMethod: 'sigm',
+		callbackUrl: 'http://sdf.sdf',
 		accept: 'acceps',
 		userAgent: 'ua'
 	};
