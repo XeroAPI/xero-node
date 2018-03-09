@@ -137,6 +137,25 @@ export class InMemoryOAuthLib {
 		callback(null, this.return_oauth_token, this.return_oauth_secret, null);
 	}
 
+	public set__performSecureRequest(oauth_token: string, oauth_secret: string, sessionHandle?: string) {
+		this.returnAuthorisedToken = oauth_token;
+		this.returnAuthorisedSecret = oauth_secret;
+		this.returnSessionHandle = sessionHandle;
+	}
+
+	public _performSecureRequest(
+		oauth_token: string,
+		oauth_token_secret: string,
+		verb: string,
+		oauthAccessTokenPath: string,
+		extraParams: any,
+		something: any,
+		something2: any,
+		callback: (err: any, response: any) => any) {
+		console.log('_performSecureRequest called', this.returnSessionHandle);
+		callback(null, `oauth_session_handle=${this.returnSessionHandle}&oauth_token_secret=${this.returnAuthorisedSecret}&oauth_token=${this.returnAuthorisedToken}`);
+	}
+
 	public getOAuthAccessToken(
 		authedToken: string,
 		authedSecret: string,

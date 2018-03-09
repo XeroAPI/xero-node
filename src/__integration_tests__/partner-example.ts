@@ -33,6 +33,10 @@ import { readLine } from './helpers/integration.helpers';
 		const inv3 = await accounting1.invoices.get();
 		console.log('Number of invoices (3): ', inv3.Invoices.length);
 
+		await accounting1.oauth1.refreshAccessToken();
+		// Now we can make the same request
+		const inv4 = await accounting1.invoices.get();
+		console.log('Number of invoices (4): ', inv3.Invoices.length);
 	} catch (error) {
 		console.log('ERROR: ', error);
 	}

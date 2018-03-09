@@ -136,18 +136,21 @@ describe('OAuth1HttpClient', () => {
 		});
 	});
 
-	// TODO: Skipped as we need to mock out the _private method we are now using
-	describe.skip('and refreshing authorized request token', () => {
+	describe('and refreshing authorized request token', () => {
 		beforeAll(async () => {
 			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
 			oauth1HttpClient.setState(defaultState);
 
-			inMemoryOAuthLib.inMemoryOAuthLib.set_SwapRequestTokenforAccessToken(`access+token`, `access+secret`, 'session+handle');
+			inMemoryOAuthLib.inMemoryOAuthLib.set__performSecureRequest(`access#token`, `access#secret`, 'session#handle');
 			await oauth1HttpClient.refreshAccessToken();
 		});
 
 		it('sets expected state', () => {
-			expect(oauth1HttpClient.state.oauth_session_handle).toBe('session+handle');
+			expect(oauth1HttpClient.state.oauth_session_handle).toBe('session#handle');
+			expect(oauth1HttpClient.state.accessToken).toMatchObject({
+				oauth_token: `access#token`,
+				oauth_token_secret: `access#secret`
+			});
 		});
 	});
 });
