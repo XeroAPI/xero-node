@@ -1,4 +1,14 @@
+import * as  prompt from 'prompt';
 import * as path from 'path';
+
+export async function readLine(stringPrompt: string): Promise<string> {
+	return new Promise<string>((resolve, reject) => {
+		prompt.start();
+		prompt.get([stringPrompt], function(err: Error, result: any) {
+			resolve(result[stringPrompt]);
+		});
+	});
+}
 
 export function getConfig() {
 	if (jest) {
