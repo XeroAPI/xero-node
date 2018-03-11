@@ -74,7 +74,7 @@ import * as puppeteer from 'puppeteer';
 		// Now we can make the same request
 		const inv4 = await accounting1.invoices.get();
 		console.log('Number of invoices (4): ', inv4.Invoices.length);
-		page.close();
+		browser.close();
 	} catch (error) {
 		console.log('ERROR: ', error);
 	}
