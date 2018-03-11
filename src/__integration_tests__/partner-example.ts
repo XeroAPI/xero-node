@@ -21,7 +21,7 @@ import * as puppeteer from 'puppeteer';
 		await accounting1.oauth1.getUnauthorisedRequestToken();
 		const url = await accounting1.oauth1.buildAuthoriseUrl();
 
-		const browser = await puppeteer.launch({ headless: false });
+		const browser = await puppeteer.launch({ headless: true });
 		const page = await browser.newPage();
 		await page.goto(url);
 
