@@ -152,7 +152,6 @@ export class InMemoryOAuthLib {
 		something: any,
 		something2: any,
 		callback: (err: any, response: any) => any) {
-		console.log('_performSecureRequest called', this.returnSessionHandle);
 		callback(null, `oauth_session_handle=${this.returnSessionHandle}&oauth_token_secret=${this.returnAuthorisedSecret}&oauth_token=${this.returnAuthorisedToken}`);
 	}
 
