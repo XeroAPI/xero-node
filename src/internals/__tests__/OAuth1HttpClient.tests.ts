@@ -106,7 +106,7 @@ describe('OAuth1HttpClient', () => {
 		});
 
 		it('it builds the authorise url', () => {
-			expect(oauth1HttpClient.buildAuthoriseUrl()).toEqual(`https://api.xero.com/oauth/Authorize?oauth_token=test3`);
+			expect(oauth1HttpClient.buildAuthoriseUrl()).toEqual(`abu/oauth/Authorize?oauth_token=test3`);
 		});
 	});
 

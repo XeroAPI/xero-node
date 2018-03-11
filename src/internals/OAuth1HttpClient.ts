@@ -98,7 +98,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public buildAuthoriseUrl = () => {
-		return `https://api.xero.com/oauth/Authorize?oauth_token=${this.state.requestToken.oauth_token}`; // TODO Check for callback URL
+		return `${this.config.apiBaseUrl}/oauth/Authorize?oauth_token=${this.state.requestToken.oauth_token}`; // TODO Check for callback URL
 	}
 
 	public swapRequestTokenforAccessToken = async (oauth_verifier: string) => {
