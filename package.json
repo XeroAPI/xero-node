@@ -18,6 +18,7 @@
   "license": "MIT",
   "typings": "lib/index.d.ts",
   "dependencies": {
+    "fs": "0.0.1-security",
     "oauth": "^0.9.15"
   },
   "devDependencies": {

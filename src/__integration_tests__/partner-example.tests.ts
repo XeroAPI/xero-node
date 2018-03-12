@@ -1,21 +1,24 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import * as puppeteer from 'puppeteer';
+import { getConfig } from './helpers/integration.helpers';
+import { IOAuth1State } from '../internals/OAuth1HttpClient';
 
-// TODO: Turn this into a Jest test
-// TODO: Have it run in CI
+// set Jest Timeout to 30 seconds
+getConfig();
 
 describe('Partner Example Tests', () => {
 	const USERNAME_SELECTOR = '#email';
 	const PASSWORD_SELECTOR = '#password';
 	const LOGIN_BUTTON_SELECTOR = '#submitButton';
-	// const AUTH_BUTTON_SELECTOR = '#submit-button';
+	const AUTH_BUTTON_SELECTOR = '#submit-button';
 	const password_config = require('./password-config.json');
 	const config = require('./partner-config-example.json');
+	console.log(config);
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
-	let browser;
+	let browser: any;
 	let page;
-
+	let pin: string;
 	// Needs your Xero password so that it can auth an Org
 
 
@@ -25,16 +28,17 @@ describe('Partner Example Tests', () => {
 	// 		"password": "passwordHere"
 	// }
 
-	/* TODO: find out why when getting the state of the request token returns
-      a null, but still able to build the authorise url properly */
-	it('it returns the authorised url', async () => {
-		await accounting1.oauth1.getUnauthorisedRequestToken();
-		authUrl = await accounting1.oauth1.buildAuthoriseUrl();
-		expect(authUrl).not.toBeNull();
-	});
+	beforeAll(async () => {
+		try{
+			await accounting1.oauth1.getUnauthorisedRequestToken();
+			authUrl = accounting1.oauth1.buildAuthoriseUrl();
+		}
+		catch(error) {
+			console.log('THIS', error)
+		}
 
-	it('it shows the Authorise App screen when accessing the Authorise Url', async () => {
-		console.log(authUrl);
+		console.log('authUrl: ', authUrl)
+
 		browser = await puppeteer.launch({ headless: false });
 		page = await browser.newPage();
 		await page.goto(authUrl);
@@ -48,52 +52,70 @@ describe('Partner Example Tests', () => {
 		await page.click(LOGIN_BUTTON_SELECTOR);
 		await page.waitForNavigation();
 		await page.waitForNavigation();
-	});
-		// await page.click(AUTH_BUTTON_SELECTOR);
-		// await page.waitForNavigation();
+
+		await page.click(AUTH_BUTTON_SELECTOR);
+		await page.waitForNavigation();
 	
-		// await delay(2500);
+		await delay(2500);
+
+		pin = await page.evaluate(() => {
+			const PIN_SELECTOR = '#pin-input';
+			const query = (document.querySelector(PIN_SELECTOR) as any).value;
+			return query;
+		});
+	});
+
+	afterAll(() => {
+		browser.close();
+	})
+
+	it('it returns the authorised url', async () => {
+		expect(authUrl).toContain('xero.com');
+	});
+
+	it('it returns a PIN when the user allows access to the app', async () => {
+		expect(pin).not.toBeNull();
+	});
+
+	it('it can make a successful API call', async () => {
+		await accounting1.oauth1.swapRequestTokenforAccessToken(pin);
+		const inv1 = await accounting1.invoices.get();
+		expect(inv1.Status).toEqual('OK');
+	});
+
+	it('it can still make a successfull API call after refreshing the access token', async () => {
+		await accounting1.oauth1.refreshAccessToken();
+		const inv2 = await accounting1.invoices.get();
+		expect(inv2.Status).toEqual('OK');
+	});
+
+	describe('OAuth State', () => {
+		let state: IOAuth1State;
+		let accounting2: AccountingAPIClient;
+		it('it allows you to keep copy of the state', async () => {
+			state = await accounting1.oauth1.getState();
+			expect(state.accessToken).not.toBeNull();
+			expect(state.oauth_session_handle).not.toBeNull();
+			expect(state.requestToken).not.toBeNull();
+		  })
+		  
+		  it('it allows you to restore a new instance of the client next time your user logs in', async () => {
+			accounting2 = new AccountingAPIClient(config);
+			accounting2.oauth1.setState(state);
+			expect(accounting2.oauth1.getState()).toMatchObject(state);
+		  });
+
+		  it('it lets you make API calls using the restored state', async () => {
+			const inv3 = await accounting2.invoices.get();
+			console.log('Number of invoices (3): ', inv3.Invoices.length);
+		  });
+	})
 
 });
 
 
-	
-
-
-
-	// const pin = await page.evaluate(() => {
-	// 	const PIN_SELECTOR = '#pin-input';
-	// 	const query = (document.querySelector(PIN_SELECTOR) as any).value;
-	// 	return query;
-	// });
-
-	// await accounting1.oauth1.swapRequestTokenforAccessToken(pin);
-	// const inv1 = await accounting1.invoices.get();
-	// console.log('Number of invoices (1): ', inv1.Invoices.length);
-
-	// await accounting1.oauth1.refreshAccessToken();
-	// const inv2 = await accounting1.invoices.get();
-	// console.log('Number of invoices (2): ', inv2.Invoices.length);
-
-	// // Save state into your datastore
-	// const state = await accounting1.oauth1.state;
-	// // Restore a new instance of the Client next time your user logs in
-
-	// const accounting2 = new AccountingAPIClient(config);
-	// accounting2.oauth1.setState(state);
-
-	// // Now we can make the same request
-	// const inv3 = await accounting1.invoices.get();
-	// console.log('Number of invoices (3): ', inv3.Invoices.length);
-
-	// await accounting1.oauth1.refreshAccessToken();
-	// // Now we can make the same request
-	// const inv4 = await accounting1.invoices.get();
-	// console.log('Number of invoices (4): ', inv4.Invoices.length);
-
-
-// function delay(timeout: number) {
-// 	return new Promise((resolve) => {
-// 		setTimeout(resolve, timeout);
-// 	});
-// }
+function delay(timeout: number) {
+	return new Promise((resolve) => {
+		setTimeout(resolve, timeout);
+	});
+}
