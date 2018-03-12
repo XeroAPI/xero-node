@@ -5,7 +5,7 @@ import * as puppeteer from 'puppeteer';
 // TODO: Have it run in CI
 
 (async function main() {
-	const config = require('../partner-config.json');
+	const config = require('./partner-config.json');
 	// Needs your Xero password so that it can auth an Org
 	const password_config = require('./password-config.json');
 
