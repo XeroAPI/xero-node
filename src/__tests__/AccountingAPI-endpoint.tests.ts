@@ -1,9 +1,10 @@
 import { IXeroClientConfiguration } from '../internals/BaseAPIClient';
-import { OAuth1HttpClient, IOAuth1HttpClient } from '../internals/OAuth1HttpClient';
+import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { mapState, mapConfig } from '../internals/config-helper';
 import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
 import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/InMemoryOAuthLib';
+import { IOAuth1State, IOAuth1HttpClient } from '../../lib/internals/OAuth1HttpClient';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -22,15 +23,16 @@ export interface IFixture {
 	[key: string]: IEndPointDetails[];
 }
 
+const xeroConfig: IXeroClientConfiguration = {
+	AppType: 'private',
+	ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+	ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+	PrivateKeyCert: validTestCertPath()
+};
+
 describe('Endpoint: ', () => {
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
-	const xeroConfig: IXeroClientConfiguration = {
-		AppType: 'private',
-		ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-		ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-		PrivateKeyCert: validTestCertPath()
-	};
 	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLibFF.newFactory());
 	oauthHttpClient.setState(mapState(xeroConfig));
 	const xeroClient = new AccountingAPIClient(xeroConfig, oauthHttpClient);
@@ -127,13 +129,6 @@ describe('Endpoint: ', () => {
 });
 
 describe('Endpoints with attachments on them: ', () => {
-	const xeroConfig: IXeroClientConfiguration = {
-		AppType: 'private',
-		ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-		ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-		PrivateKeyCert: validTestCertPath()
-	};
-
 	const writeResponseToStreamSpy = jest.fn();
 	const oAuth1HttpClient: IOAuth1HttpClient = {
 		get: undefined,
@@ -231,5 +226,97 @@ describe('Endpoints with attachments on them: ', () => {
 				});
 			});
 		});
+	});
+});
+
+describe('AccountingAPIClient', () => {
+	// Added these as there was some weird this stuff happeneing. Could be temp.
+	let accountClient: AccountingAPIClient;
+
+	const defaultState: IOAuth1State = {
+		requestToken: {
+			oauth_token: 'test3',
+			oauth_token_secret: 'test4'
+		},
+		accessToken: {
+			oauth_token: 'test7',
+			oauth_token_secret: 'test8'
+		},
+		oauth_session_handle: 'test9'
+	};
+
+	const xeroPartnerConfig: IXeroClientConfiguration = {
+		AppType: 'partner',
+		ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+		ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+		PrivateKeyCert: validTestCertPath()
+	};
+
+	describe('and setting state', () => {
+
+		beforeEach(() => {
+			accountClient = new AccountingAPIClient(xeroPartnerConfig);
+			accountClient.oauth1.setState(defaultState);
+		});
+
+		it('matches what it was set to', () => {
+			expect(accountClient.oauth1.state).toMatchObject(defaultState);
+		});
+
+		it('only overrides the accessToken keys', () => {
+			accountClient.oauth1.setState({
+				accessToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
+			});
+
+			expect(accountClient.oauth1.state).not.toEqual(defaultState);
+			expect(accountClient.oauth1.state).toEqual({
+				requestToken: {
+					oauth_token: 'test3',
+					oauth_token_secret: 'test4'
+				},
+				accessToken: {
+					oauth_token: 'something new',
+					oauth_token_secret: 'something borrowed'
+				},
+				oauth_session_handle: 'test9'
+			});
+		});
+
+		it('only overrides the requestToken keys', () => {
+			accountClient.oauth1.setState({ oauth_session_handle: 'yoyo' });
+
+			expect(accountClient.oauth1.state).not.toEqual(defaultState);
+			expect(accountClient.oauth1.state).toEqual({
+				requestToken: {
+					oauth_token: 'test3',
+					oauth_token_secret: 'test4'
+				},
+				accessToken: {
+					oauth_token: 'test7',
+					oauth_token_secret: 'test8'
+				},
+				oauth_session_handle: 'yoyo'
+			});
+		});
+
+		it('only overrides the oauth_session_handle keys', () => {
+			accountClient.oauth1.setState({
+				requestToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
+			});
+
+			expect(accountClient.oauth1.state).not.toEqual(defaultState);
+			expect(accountClient.oauth1.state).toEqual({
+				requestToken: {
+					oauth_token: 'something new',
+					oauth_token_secret: 'something borrowed'
+				},
+				accessToken: {
+					oauth_token: 'test7',
+					oauth_token_secret: 'test8'
+				},
+				oauth_session_handle: 'test9'
+			});
+		});
+
 	});
 });

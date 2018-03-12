@@ -33,7 +33,7 @@ export interface IOAuth1Configuration {
 }
 
 export interface IOAuth1Client {
-	readonly state: IOAuth1State;
+	state: IOAuth1State;
 	setState(state: Partial<IOAuth1State>): void;
 	getUnauthorisedRequestToken(): Promise<void>;
 	buildAuthoriseUrl(): string;
@@ -51,15 +51,17 @@ export interface IHttpError {
 
 export class OAuth1HttpClient implements IOAuth1HttpClient {
 
-	private _state: IOAuth1State = {
-		requestToken: null,
-		accessToken: null,
-		oauth_session_handle: null
-	};
+	public state: IOAuth1State;
 
 	private oauthLib: typeof OAuth;
 
 	constructor(private config: IOAuth1Configuration, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
+		this.state = {
+			requestToken: null,
+			accessToken: null,
+			oauth_session_handle: null
+		};
+
 		if (!this.oAuthLibFactory) {
 			this.oAuthLibFactory = function(passedInConfig: IOAuth1Configuration) {
 				return new OAuth(
@@ -153,8 +155,8 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return new Promise<void>((resolve, reject) => {
 			const request = oauthForPdf.get(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint,
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret);
+				this.state.accessToken.oauth_token,
+				this.state.accessToken.oauth_token_secret);
 
 			request.addListener('response', function(response: any) {
 				response.addListener('data', function(chunk: any) {
@@ -174,8 +176,8 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.get(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this.state.accessToken.oauth_token,
+				this.state.accessToken.oauth_token_secret,
 				(err: object, data: string, httpResponse: any) => {
 					// data is the body of the response
 
@@ -200,8 +202,8 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.put(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this.state.accessToken.oauth_token,
+				this.state.accessToken.oauth_token_secret,
 				JSON.stringify(body), 		// Had to do this not sure if there is another way
 				'application/json',
 				(err: any, data: string, httpResponse: any) => {
@@ -229,8 +231,8 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.post(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this.state.accessToken.oauth_token,
+				this.state.accessToken.oauth_token_secret,
 				JSON.stringify(body), 		// Had to do this not sure if there is another way
 				'application/json',
 				(err: any, data: string, httpResponse: any) => {
@@ -254,12 +256,11 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public delete = async <T>(endpoint: string): Promise<T> => {
-		// this.checkAuthentication();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.delete(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this.state.accessToken.oauth_token,
+				this.state.accessToken.oauth_token_secret,
 				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 
@@ -280,15 +281,10 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					}
 				}
 			);
-
 		});
 	}
 
-	public get state(): IOAuth1State {
-		return this._state;
-	}
-
 	public setState(newState: Partial<IOAuth1State>) {
-		this._state = { ...this.state, ...newState };
+		this.state = { ...this.state, ...newState };
 	}
 }

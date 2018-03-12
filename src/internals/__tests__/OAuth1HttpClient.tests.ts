@@ -25,7 +25,7 @@ describe('OAuth1HttpClient', () => {
 		apiBasePath: 'abp',
 		oauthRequestTokenPath: 'ortp',
 		oauthAccessTokenPath: 'oatp',
-		signatureMethod: 'sigm',
+		signatureMethod: 'RSA-SHA1',
 		accept: 'acceps',
 		callbackUrl: 'https://fakeurl.com/fake',
 		userAgent: 'ua'
@@ -34,7 +34,7 @@ describe('OAuth1HttpClient', () => {
 	describe('and setting state', () => {
 
 		beforeEach(() => {
-			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig);
 			oauth1HttpClient.setState(defaultState);
 		});
 
