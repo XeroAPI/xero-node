@@ -1,7 +1,7 @@
 {
 	"AppType": "partner",
-	"ConsumerKey": "CONSUMERKEY",
-	"ConsumerSecret": "CONSTUMERSECRET",
+	"ConsumerKey": "4UYMMFO9TZVWKD3QXP3CJKNS2WF9RD",
+	"ConsumerSecret": "IEQU8HAKWJFTIBJLEWL0LWA79YDQHJ",
 	"CallbackBaseUrl": null,
 	"PrivateKeyCert": "./privatekey.pem"
 }

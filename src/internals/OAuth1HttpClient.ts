@@ -104,7 +104,16 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public buildAuthoriseUrl = () => {
+<<<<<<< HEAD
 		return `${this.config.apiBaseUrl}/oauth/Authorize?oauth_token=${this._state.requestToken.oauth_token}`; // TODO Check for callback URL
+=======
+		if(this.state.requestToken && this.state.requestToken.oauth_token){
+			return `${this.config.apiBaseUrl}/oauth/Authorize?oauth_token=${this.state.requestToken.oauth_token}`; // TODO Check for callback URL
+		}
+		else {
+			return null;
+		}
+>>>>>>> Partner Example Test sreturns the auth url
 	}
 
 	public swapRequestTokenforAccessToken = async (oauth_verifier: string) => {
