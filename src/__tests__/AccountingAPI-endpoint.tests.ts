@@ -1,10 +1,9 @@
 import { IXeroClientConfiguration } from '../internals/BaseAPIClient';
-import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
+import { OAuth1HttpClient, IOAuth1State, IOAuth1HttpClient } from '../internals/OAuth1HttpClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { mapState, mapConfig } from '../internals/config-helper';
 import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
 import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/InMemoryOAuthLib';
-import { IOAuth1State, IOAuth1HttpClient } from '../../lib/internals/OAuth1HttpClient';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -136,8 +135,8 @@ describe('Endpoints with attachments on them: ', () => {
 		post: undefined,
 		delete: undefined,
 		writeResponseToStream: writeResponseToStreamSpy,
-		state: undefined,
 		setState: undefined,
+		getState: undefined,
 		getUnauthorisedRequestToken: undefined,
 		buildAuthoriseUrl: undefined,
 		swapRequestTokenforAccessToken: undefined,
@@ -260,7 +259,7 @@ describe('AccountingAPIClient', () => {
 		});
 
 		it('matches what it was set to', () => {
-			expect(accountClient.oauth1.state).toMatchObject(defaultState);
+			expect(accountClient.oauth1.getState()).toMatchObject(defaultState);
 		});
 
 		it('only overrides the accessToken keys', () => {
@@ -268,8 +267,8 @@ describe('AccountingAPIClient', () => {
 				accessToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
 			});
 
-			expect(accountClient.oauth1.state).not.toEqual(defaultState);
-			expect(accountClient.oauth1.state).toEqual({
+			expect(accountClient.oauth1.getState()).not.toEqual(defaultState);
+			expect(accountClient.oauth1.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'test3',
 					oauth_token_secret: 'test4'
@@ -285,8 +284,8 @@ describe('AccountingAPIClient', () => {
 		it('only overrides the requestToken keys', () => {
 			accountClient.oauth1.setState({ oauth_session_handle: 'yoyo' });
 
-			expect(accountClient.oauth1.state).not.toEqual(defaultState);
-			expect(accountClient.oauth1.state).toEqual({
+			expect(accountClient.oauth1.getState()).not.toEqual(defaultState);
+			expect(accountClient.oauth1.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'test3',
 					oauth_token_secret: 'test4'
@@ -304,8 +303,8 @@ describe('AccountingAPIClient', () => {
 				requestToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
 			});
 
-			expect(accountClient.oauth1.state).not.toEqual(defaultState);
-			expect(accountClient.oauth1.state).toEqual({
+			expect(accountClient.oauth1.getState()).not.toEqual(defaultState);
+			expect(accountClient.oauth1.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'something new',
 					oauth_token_secret: 'something borrowed'

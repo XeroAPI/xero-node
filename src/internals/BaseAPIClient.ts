@@ -53,8 +53,8 @@ export abstract class BaseAPIClient {
 		};
 
 		this.oauth1 = {
-			state: this._oauth1httpClient.state,
-			setState: this._oauth1httpClient.setState,
+			getState: () => this._oauth1httpClient.getState(),
+			setState: (state) => this._oauth1httpClient.setState(state),
 			getUnauthorisedRequestToken: this._oauth1httpClient.getUnauthorisedRequestToken,
 			buildAuthoriseUrl: this._oauth1httpClient.buildAuthoriseUrl,
 			swapRequestTokenforAccessToken: this._oauth1httpClient.swapRequestTokenforAccessToken,

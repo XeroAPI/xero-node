@@ -60,7 +60,7 @@ import * as puppeteer from 'puppeteer';
 		console.log('Number of invoices (2): ', inv2.Invoices.length);
 
 		// Save state into your datastore
-		const state = await accounting1.oauth1.state;
+		const state = await accounting1.oauth1.getState();
 		// Restore a new instance of the Client next time your user logs in
 
 		const accounting2 = new AccountingAPIClient(config);

@@ -39,7 +39,7 @@ describe('OAuth1HttpClient', () => {
 		});
 
 		it('matches what it was set to', () => {
-			expect(oauth1HttpClient.state).toEqual(defaultState);
+			expect(oauth1HttpClient.getState()).toEqual(defaultState);
 		});
 
 		it('only overrides the accessToken keys', () => {
@@ -47,8 +47,8 @@ describe('OAuth1HttpClient', () => {
 				accessToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
 			});
 
-			expect(oauth1HttpClient.state).not.toEqual(defaultState);
-			expect(oauth1HttpClient.state).toEqual({
+			expect(oauth1HttpClient.getState()).not.toEqual(defaultState);
+			expect(oauth1HttpClient.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'test3',
 					oauth_token_secret: 'test4'
@@ -64,8 +64,8 @@ describe('OAuth1HttpClient', () => {
 		it('only overrides the requestToken keys', () => {
 			oauth1HttpClient.setState({ oauth_session_handle: 'yoyo' });
 
-			expect(oauth1HttpClient.state).not.toEqual(defaultState);
-			expect(oauth1HttpClient.state).toEqual({
+			expect(oauth1HttpClient.getState()).not.toEqual(defaultState);
+			expect(oauth1HttpClient.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'test3',
 					oauth_token_secret: 'test4'
@@ -83,8 +83,8 @@ describe('OAuth1HttpClient', () => {
 				requestToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
 			});
 
-			expect(oauth1HttpClient.state).not.toEqual(defaultState);
-			expect(oauth1HttpClient.state).toEqual({
+			expect(oauth1HttpClient.getState()).not.toEqual(defaultState);
+			expect(oauth1HttpClient.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'something new',
 					oauth_token_secret: 'something borrowed'
@@ -118,7 +118,7 @@ describe('OAuth1HttpClient', () => {
 		});
 
 		it('sets expected state', () => {
-			const state = oauth1HttpClient.state;
+			const state = oauth1HttpClient.getState();
 			expect(state.requestToken.oauth_token).toBe('aaa');
 			expect(state.requestToken.oauth_token_secret).toBe('bbb');
 		});
@@ -133,7 +133,7 @@ describe('OAuth1HttpClient', () => {
 		});
 
 		it('sets expected state', () => {
-			expect(oauth1HttpClient.state.accessToken).toMatchObject({ oauth_token: 'access+token', oauth_token_secret: 'access+secret', });
+			expect(oauth1HttpClient.getState().accessToken).toMatchObject({ oauth_token: 'access+token', oauth_token_secret: 'access+secret', });
 		});
 	});
 
@@ -147,8 +147,8 @@ describe('OAuth1HttpClient', () => {
 		});
 
 		it('sets expected state', () => {
-			expect(oauth1HttpClient.state.oauth_session_handle).toBe('session#handle');
-			expect(oauth1HttpClient.state.accessToken).toMatchObject({
+			expect(oauth1HttpClient.getState().oauth_session_handle).toBe('session#handle');
+			expect(oauth1HttpClient.getState().accessToken).toMatchObject({
 				oauth_token: `access#token`,
 				oauth_token_secret: `access#secret`
 			});
