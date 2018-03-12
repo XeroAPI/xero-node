@@ -3,11 +3,11 @@ import * as fs from 'fs';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from './request-body/invoice.request.examples';
 import { InvoicesResponse } from '../AccountingAPI-types';
-import { getConfig } from './helpers/integration.helpers';
+import { getPrivateConfig } from './helpers/integration.helpers';
 import { isUUID } from './helpers/test-assertions';
 import * as path from 'path';
 
-const data = getConfig();
+const data = getPrivateConfig();
 const xero = new AccountingAPIClient(data);
 
 describe('/invoices integration tests', () => {

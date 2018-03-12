@@ -1,10 +1,9 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import * as puppeteer from 'puppeteer';
-import { getConfig } from './helpers/integration.helpers';
+import { getPartnerConfig } from './helpers/integration.helpers';
 import { IOAuth1State } from '../internals/OAuth1HttpClient';
 
-// set Jest Timeout to 30 seconds
-getConfig();
+getPartnerConfig();
 
 describe('Partner Example Tests', () => {
 	const USERNAME_SELECTOR = '#email';

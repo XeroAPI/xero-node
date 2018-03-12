@@ -10,10 +10,8 @@ export async function readLine(stringPrompt: string): Promise<string> {
 	});
 }
 
-export function getConfig() {
-	if (jest) {
-		jest.setTimeout(30000);
-	}
+export function getPrivateConfig() {
+	setJestTimeout();
 
 	try {
 		const config = require('../private-config.json');
@@ -28,5 +26,30 @@ export function getConfig() {
 			CallbackBaseUrl: null,
 			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
+	}
+}
+
+export function getPartnerConfig() {
+	setJestTimeout();
+
+	try {
+		const config = require('../private-config.json');
+		return config;
+
+	} catch (error) {
+		// Using ENV VARS in CircleCI
+		return {
+			AppType: 'partner',
+			ConsumerKey: process.env.ConsumerKey,
+			ConsumerSecret: process.env.ConsumerSecret,
+			CallbackBaseUrl: null,
+			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
+		};
+	}
+}
+
+function setJestTimeout() {
+	if (jest) {
+		jest.setTimeout(30000);
 	}
 }

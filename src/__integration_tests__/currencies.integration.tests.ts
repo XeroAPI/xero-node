@@ -1,8 +1,8 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { CurrenciesResponse } from '../AccountingAPI-types';
-import { getConfig } from './helpers/integration.helpers';
+import { getPrivateConfig } from './helpers/integration.helpers';
 
-const data = getConfig();
+const data = getPrivateConfig();
 const xero = new AccountingAPIClient(data);
 
 describe('/currencies integration tests', () => {
