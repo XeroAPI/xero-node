@@ -19,9 +19,9 @@ export function getPrivateConfig() {
 	} catch (error) {
 		// Using ENV VARS in CircleCI
 		return {
-			AppType: 'partner',
-			ConsumerKey: process.env.PrivateConsumerKey,
-			ConsumerSecret: process.env.PrivateConsumerSecret,
+			AppType: 'private',
+			ConsumerKey: process.env.ConsumerKey,
+			ConsumerSecret: process.env.ConsumerSecret,
 			CallbackBaseUrl: null,
 			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
