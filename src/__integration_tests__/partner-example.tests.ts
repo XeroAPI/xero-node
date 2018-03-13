@@ -42,7 +42,9 @@ describe('Partner Example Tests', () => {
 			headless: true,
 		});
 		page = await browser.newPage();
-		await page.goto(authUrl);
+		await page.goto(authUrl, {
+			timeout: 0
+		});
 	
 		await page.click(USERNAME_SELECTOR);
 		await page.keyboard.type(password_config.userName);
