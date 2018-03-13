@@ -19,8 +19,11 @@ export function getPrivateConfig() {
 	} catch (error) {
 		// Using ENV VARS in CircleCI
 		return {
-			userName: process.env.UserName,
-			password: process.env.Password
+			AppType: 'partner',
+			ConsumerKey: process.env.ConsumerKey,
+			ConsumerSecret: process.env.ConsumerSecret,
+			CallbackBaseUrl: null,
+			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
 	}
 }
@@ -33,11 +36,8 @@ export function getLoginConfig() {
 	} catch (error) {
 		// Using ENV VARS in CircleCI
 		return {
-			AppType: 'partner',
-			ConsumerKey: process.env.ConsumerKey,
-			ConsumerSecret: process.env.ConsumerSecret,
-			CallbackBaseUrl: null,
-			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
+			userName: process.env.UserName,
+			password: process.env.Password
 		};
 	}
 	
