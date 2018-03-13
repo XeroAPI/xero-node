@@ -126,14 +126,22 @@ describe('OAuth1HttpClient', () => {
 
 	describe('and swapping request for access token', () => {
 		beforeAll(async () => {
+			inMemoryOAuthLib.inMemoryOAuthLib.reset();
 			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
 			oauth1HttpClient.setState(defaultState);
-			inMemoryOAuthLib.inMemoryOAuthLib.set_SwapRequestTokenforAccessToken(`access+token`, `access+secret`);
+			inMemoryOAuthLib.inMemoryOAuthLib.set_SwapRequestTokenforAccessToken(`access+token`, `access+secret`, '1800');
 			await oauth1HttpClient.swapRequestTokenforAccessToken('1234');
 		});
 
 		it('sets expected state', () => {
-			expect(oauth1HttpClient.getState().accessToken).toMatchObject({ oauth_token: 'access+token', oauth_token_secret: 'access+secret', });
+			expect(oauth1HttpClient.getState().accessToken)
+				.toMatchObject({ oauth_token: 'access+token', oauth_token_secret: 'access+secret' });
+
+			const timeObject = new Date();
+			const expDate = new Date(timeObject.getTime() + (1800 * 1000));
+
+			expect(oauth1HttpClient.getState().oauth_expires_at).toEqual(expDate);
+
 		});
 	});
 
