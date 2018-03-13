@@ -60,6 +60,6 @@ export function getPartnerAppConfig() {
 
 export function setJestTimeout() {
 	if (jest) {
-		jest.setTimeout(120000);
+		jest.setTimeout(300000);
 	}
 }
