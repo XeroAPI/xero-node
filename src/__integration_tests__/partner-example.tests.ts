@@ -54,6 +54,8 @@ describe('Partner Example Tests', () => {
 			await page.click(USERNAME_SELECTOR);
 			await page.keyboard.type(password_config.userName);
 
+			console.log('password_config: ',password_config)
+
 			await page.click(PASSWORD_SELECTOR);
 			await page.keyboard.type(password_config.password);
 
