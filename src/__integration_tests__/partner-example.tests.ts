@@ -1,17 +1,17 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import * as puppeteer from 'puppeteer';
-import { getPartnerConfig } from './helpers/integration.helpers';
+import { getPartnerAppConfig, getLoginConfig, setJestTimeout } from './helpers/integration.helpers';
 import { IOAuth1State } from '../internals/OAuth1HttpClient';
 
-getPartnerConfig();
+setJestTimeout();
 
 describe('Partner Example Tests', () => {
 	const USERNAME_SELECTOR = '#email';
 	const PASSWORD_SELECTOR = '#password';
 	const LOGIN_BUTTON_SELECTOR = '#submitButton';
 	const AUTH_BUTTON_SELECTOR = '#submit-button';
-	const password_config = require('./password-config.json');
-	const config = require('./partner-config-example.json');
+	const password_config = getLoginConfig();
+	const config = getPartnerAppConfig();
 	console.log(config);
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
