@@ -9,6 +9,7 @@
     "lint": "tslint ./src/**/*.ts",
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
+    "test-auth": "tsc --noEmit && jest ./src/__integration_tests__/partner-example.tests.ts --config ./jestconfig.js",
     "scratch": "ts-node ./src/scratch.ts",
     "typedoc": "typedoc --mode file --external-aliases internalapi --exclude **/*_tests__/** --includeDeclarations --excludeExternals --target ES6 --out docs/ src/",
     "create-key": "node ./.circleci/create_private_key.js"
@@ -18,6 +19,7 @@
   "license": "MIT",
   "typings": "lib/index.d.ts",
   "dependencies": {
+    "fs": "0.0.1-security",
     "oauth": "^0.9.15"
   },
   "devDependencies": {

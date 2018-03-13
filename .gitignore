@@ -8,3 +8,5 @@ privatekey.pem
 *.scratch.ts
 scratch.ts
 scratch*
+partner-config-example.json
+password-config.json

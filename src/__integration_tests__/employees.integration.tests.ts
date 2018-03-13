@@ -1,8 +1,8 @@
 import { EmployeesResponse } from '../AccountingAPI-types';
 import { AccountingAPIClient } from '../AccountingAPIClient';
-import { getConfig } from './helpers/integration.helpers';
+import { getPrivateConfig } from './helpers/integration.helpers';
 
-const data = getConfig();
+const data = getPrivateConfig();
 const xero = new AccountingAPIClient(data);
 
 describe('/employees', () => {

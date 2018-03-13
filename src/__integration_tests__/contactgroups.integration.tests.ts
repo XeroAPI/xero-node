@@ -1,10 +1,10 @@
 
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { ContactGroupsResponse, ContactGroup } from '../AccountingAPI-types';
-import { getConfig } from './helpers/integration.helpers';
+import { getPrivateConfig } from './helpers/integration.helpers';
 import { isUUID } from './helpers/test-assertions';
 
-const data = getConfig();
+const data = getPrivateConfig();
 const xero = new AccountingAPIClient(data);
 
 describe('/contactgroups integration tests', () => {
