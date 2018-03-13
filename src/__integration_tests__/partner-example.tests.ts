@@ -43,7 +43,7 @@ describe('Partner Example Tests', () => {
 		});
 		page = await browser.newPage();
 		await page.goto(authUrl, {
-			timeout: 0
+			timeout: 3000000
 		});
 	
 		await page.click(USERNAME_SELECTOR);
