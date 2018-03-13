@@ -41,7 +41,6 @@ import * as puppeteer from 'puppeteer';
 		await page.waitForNavigation();
 
 		await page.click(AUTH_BUTTON_SELECTOR);
-		await page.waitForNavigation();
 
 		await delay(2500);
 
@@ -50,6 +49,8 @@ import * as puppeteer from 'puppeteer';
 			const query = (document.querySelector(PIN_SELECTOR) as any).value;
 			return query;
 		});
+
+		browser.close();
 
 		await accounting1.oauth1.swapRequestTokenforAccessToken(pin);
 		const inv1 = await accounting1.invoices.get();
@@ -61,6 +62,7 @@ import * as puppeteer from 'puppeteer';
 
 		// Save state into your datastore
 		const state = await accounting1.oauth1.getState();
+		console.log('This is how to check when token is close to expired: ', state.oauth_expires_at);
 		// Restore a new instance of the Client next time your user logs in
 
 		const accounting2 = new AccountingAPIClient(config);
@@ -74,7 +76,6 @@ import * as puppeteer from 'puppeteer';
 		// Now we can make the same request
 		const inv4 = await accounting1.invoices.get();
 		console.log('Number of invoices (4): ', inv4.Invoices.length);
-		browser.close();
 	} catch (error) {
 		console.log('ERROR: ', error);
 	}

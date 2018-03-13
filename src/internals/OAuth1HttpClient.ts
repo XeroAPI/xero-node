@@ -15,6 +15,7 @@ export interface IOAuth1State {
 	requestToken: IToken;
 	accessToken: IToken;
 	oauth_session_handle: string;
+	oauth_expires_at?: Date;
 }
 
 export interface IOAuth1Configuration {
@@ -108,7 +109,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public swapRequestTokenforAccessToken = async (oauth_verifier: string) => {
-		const swapResult = await new Promise<{ token: IToken, oAuthSessionHandle: string }>((resolve, reject) => {
+		const swapResult = await new Promise<{ token: IToken, oAuthSessionHandle: string, oauth_expires_in: string }>((resolve, reject) => {
 			this.oauthLib.getOAuthAccessToken(this._state.requestToken.oauth_token, this._state.requestToken.oauth_token_secret, oauth_verifier, (err: any, oauthToken: string, oauthSecret: string, results: any) => {
 				// results are : {oauth_expires_in: "1800", oauth_session_handle: "QVRNIFVKZO994AEQQLHN", oauth_authorization_expires_in: "315360000", xero_org_muid: "zfI4JWUAyKgcyGT4zOMyf0"}
 
@@ -121,12 +122,24 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 						oauth_token: oauthToken,
 						oauth_token_secret: oauthSecret
 					};
-					return resolve({ token: newAccessToken, oAuthSessionHandle: results.oauth_session_handle });
+					return resolve({
+						token: newAccessToken,
+						oAuthSessionHandle: results.oauth_session_handle,
+						oauth_expires_in: results.oauth_expires_in
+					});
 				}
 			});
 		});
 
-		this.setState({ accessToken: swapResult.token, oauth_session_handle: swapResult.oAuthSessionHandle });
+		const timeObject = new Date();
+		const expDate = new Date(timeObject.getTime() + (parseInt(swapResult.oauth_expires_in, 10) * 1000));
+
+		this.setState({
+			accessToken: swapResult.token,
+			oauth_session_handle:
+				swapResult.oAuthSessionHandle,
+			oauth_expires_at: expDate
+		});
 	}
 
 	public refreshAccessToken = async () => {
@@ -288,7 +301,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public getState(){
+	public getState() {
 		return this._state;
 	}
 
