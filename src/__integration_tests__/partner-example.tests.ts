@@ -46,6 +46,8 @@ describe('Partner Example Tests', () => {
 			});
 			page = await browser.newPage();
 
+			page.on('console', (msg: any) => console.log('PAGE LOG:', msg.text()));
+
 			await page.goto(authUrl);
 
 			console.log('GONE TO: ', authUrl);
