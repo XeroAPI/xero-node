@@ -44,11 +44,8 @@ export function getLoginConfig() {
 }
 
 export function getPartnerAppConfig() {
-	try {
-		const config = require('../partner-config-example.json');
-		return config;
-
-	} catch (error) {
+	const config = require('../partner-config-example.json');
+	if(config.ConsumerKey == 'key' || config.ConsumerSecret == 'secret') {
 		// Using ENV VARS in CircleCI
 		return {
 			AppType: 'partner',
@@ -58,6 +55,7 @@ export function getPartnerAppConfig() {
 			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
 	}
+	return config;
 }
 
 export function setJestTimeout() {
