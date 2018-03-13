@@ -42,7 +42,7 @@ describe('Partner Example Tests', () => {
 			headless: true,
 		});
 		page = await browser.newPage();
-		page.setDefaultNavigationTimeout(180000);
+		page.setDefaultNavigationTimeout(300000);
 		await page.goto(authUrl);
 	
 		await page.click(USERNAME_SELECTOR);
