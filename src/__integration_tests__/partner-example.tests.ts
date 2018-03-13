@@ -12,7 +12,6 @@ describe('Partner Example Tests', () => {
 	const AUTH_BUTTON_SELECTOR = '#submit-button';
 	const password_config = getLoginConfig();
 	const config = getPartnerAppConfig();
-	console.log(config);
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
 	let browser: any;
@@ -34,11 +33,8 @@ describe('Partner Example Tests', () => {
 			authUrl = accounting1.oauth1.buildAuthoriseUrl();
 		}
 		catch (error) {
-			console.log('THIS', error)
+			console.log('Error in Getting Unauthorise Token', error)
 		}
-
-		console.log('authUrl: ', authUrl)
-
 
 		try {
 			browser = await puppeteer.launch({
@@ -46,21 +42,17 @@ describe('Partner Example Tests', () => {
 			});
 			page = await browser.newPage();
 
-			page.on('console', (msg: any) => console.log('PAGE LOG:', msg.text()));
-
 			await page.goto(authUrl);
 
-			console.log('GONE TO: ', authUrl);
 			await page.click(USERNAME_SELECTOR);
 			await page.keyboard.type(password_config.userName);
 
-			console.log('password_config: ',password_config)
 
 			await page.click(PASSWORD_SELECTOR);
 			await page.keyboard.type(password_config.password);
 
 		} catch (error) {
-			console.log('In new catch err: ', error);
+			console.log('Error in Puppeteer: ', error);
 		}
 
 
@@ -76,7 +68,6 @@ describe('Partner Example Tests', () => {
 			const query = (document.querySelector(PIN_SELECTOR) as any).value;
 			return query;
 		});
-		console.log('pin', pin);
 	});
 
 	afterAll(() => {
