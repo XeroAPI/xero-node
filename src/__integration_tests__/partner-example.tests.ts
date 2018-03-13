@@ -38,7 +38,13 @@ describe('Partner Example Tests', () => {
 
 		console.log('authUrl: ', authUrl)
 
-		browser = await puppeteer.launch({ headless: true });
+		browser = await puppeteer.launch({
+			headless: true,
+			args: [
+				'--no-sandbox',
+				'--disable-setuid-sandbox'
+        	] 
+		});
 		page = await browser.newPage();
 		await page.goto(authUrl);
 	
