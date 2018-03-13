@@ -16,7 +16,7 @@ describe('Partner Example Tests', () => {
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
 	let browser: any;
-	let page;
+	let page: any;
 	let pin: string;
 
 	// Needs your Xero password so that it can auth an Org
@@ -29,33 +29,39 @@ describe('Partner Example Tests', () => {
 	// }
 
 	beforeAll(async () => {
-		try{
+		try {
 			await accounting1.oauth1.getUnauthorisedRequestToken();
 			authUrl = accounting1.oauth1.buildAuthoriseUrl();
 		}
-		catch(error) {
+		catch (error) {
 			console.log('THIS', error)
 		}
 
 		console.log('authUrl: ', authUrl)
 
-		browser = await puppeteer.launch({
-			headless: true,
-		});
-		page = await browser.newPage();
-		page.setDefaultNavigationTimeout(60000);
+
+		try {
+			browser = await puppeteer.launch({
+				headless: true,
+			});
+			page = await browser.newPage();
+			page.setDefaultNavigationTimeout(60000);
+		} catch (error) {
+			console.log('In new catch err: ', error);
+		}
+
 		await page.goto(authUrl);
 		await page.click(USERNAME_SELECTOR);
 		await page.keyboard.type(password_config.userName);
-	
+
 		await page.click(PASSWORD_SELECTOR);
 		await page.keyboard.type(password_config.password);
-	
+
 		await page.click(LOGIN_BUTTON_SELECTOR);
 		await page.waitForNavigation();
 		await page.waitForNavigation();
 		await page.click(AUTH_BUTTON_SELECTOR);
-	
+
 		await delay(2500);
 
 		pin = await page.evaluate(() => {
@@ -98,18 +104,18 @@ describe('Partner Example Tests', () => {
 			expect(state.accessToken).not.toBeNull();
 			expect(state.oauth_session_handle).not.toBeNull();
 			expect(state.requestToken).not.toBeNull();
-		  })
-		  
-		  it('it allows you to restore a new instance of the client next time your user logs in', async () => {
+		})
+
+		it('it allows you to restore a new instance of the client next time your user logs in', async () => {
 			accounting2 = new AccountingAPIClient(config);
 			accounting2.oauth1.setState(state);
 			expect(accounting2.oauth1.getState()).toMatchObject(state);
-		  });
+		});
 
-		  it('it lets you make API calls using the restored state', async () => {
+		it('it lets you make API calls using the restored state', async () => {
 			const inv3 = await accounting2.invoices.get();
 			expect(inv3.Status).toEqual('OK');
-		  });
+		});
 	})
 
 });
