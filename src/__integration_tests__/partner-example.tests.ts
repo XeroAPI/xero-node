@@ -65,6 +65,7 @@ describe('Partner Example Tests', () => {
 			const query = (document.querySelector(PIN_SELECTOR) as any).value;
 			return query;
 		});
+		console.log('pin', pin);
 	});
 
 	afterAll(() => {
