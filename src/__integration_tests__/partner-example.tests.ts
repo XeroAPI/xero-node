@@ -106,7 +106,7 @@ describe('Partner Example Tests', () => {
 
 		  it('it lets you make API calls using the restored state', async () => {
 			const inv3 = await accounting2.invoices.get();
-			console.log('Number of invoices (3): ', inv3.Invoices.length);
+			expect(inv3.Status).toEqual('OK');
 		  });
 	})
 

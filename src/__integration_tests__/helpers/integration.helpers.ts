@@ -20,8 +20,8 @@ export function getPrivateConfig() {
 		// Using ENV VARS in CircleCI
 		return {
 			AppType: 'partner',
-			ConsumerKey: process.env.ConsumerKey,
-			ConsumerSecret: process.env.ConsumerSecret,
+			ConsumerKey: process.env.PrivateConsumerKey,
+			ConsumerSecret: process.env.PrivateConsumerSecret,
 			CallbackBaseUrl: null,
 			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
@@ -49,8 +49,8 @@ export function getPartnerAppConfig() {
 		// Using ENV VARS in CircleCI
 		return {
 			AppType: 'partner',
-			ConsumerKey: process.env.ConsumerKey,
-			ConsumerSecret: process.env.ConsumerSecret,
+			ConsumerKey: process.env.PartnerConsumerKey,
+			ConsumerSecret: process.env.PartnerConsumerSecret,
 			CallbackBaseUrl: null,
 			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
