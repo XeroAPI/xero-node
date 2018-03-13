@@ -39,7 +39,7 @@ describe('Partner Example Tests', () => {
 		console.log('authUrl: ', authUrl)
 
 		browser = await puppeteer.launch({
-			headless: true,
+			headless: false,
 		});
 		page = await browser.newPage();
 		page.setDefaultNavigationTimeout(300000);
