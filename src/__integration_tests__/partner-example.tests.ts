@@ -18,6 +18,7 @@ describe('Partner Example Tests', () => {
 	let browser: any;
 	let page;
 	let pin: string;
+
 	// Needs your Xero password so that it can auth an Org
 
 
@@ -39,12 +40,11 @@ describe('Partner Example Tests', () => {
 		console.log('authUrl: ', authUrl)
 
 		browser = await puppeteer.launch({
-			headless: false,
+			headless: true,
 		});
 		page = await browser.newPage();
 		page.setDefaultNavigationTimeout(60000);
 		await page.goto(authUrl);
-	
 		await page.click(USERNAME_SELECTOR);
 		await page.keyboard.type(password_config.userName);
 	
@@ -54,7 +54,6 @@ describe('Partner Example Tests', () => {
 		await page.click(LOGIN_BUTTON_SELECTOR);
 		await page.waitForNavigation();
 		await page.waitForNavigation();
-
 		await page.click(AUTH_BUTTON_SELECTOR);
 	
 		await delay(2500);
