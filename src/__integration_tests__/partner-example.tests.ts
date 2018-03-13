@@ -20,7 +20,6 @@ describe('Partner Example Tests', () => {
 
 	// Needs your Xero password so that it can auth an Org
 
-
 	// password-config must be in this format
 	// {
 	// 	"userName": "email here",
@@ -28,33 +27,21 @@ describe('Partner Example Tests', () => {
 	// }
 
 	beforeAll(async () => {
-		try {
-			await accounting1.oauth1.getUnauthorisedRequestToken();
-			authUrl = accounting1.oauth1.buildAuthoriseUrl();
-		}
-		catch (error) {
-			console.log('Error in Getting Unauthorise Token', error)
-		}
+		await accounting1.oauth1.getUnauthorisedRequestToken();
+		authUrl = accounting1.oauth1.buildAuthoriseUrl();
 
-		try {
-			browser = await puppeteer.launch({
-				headless: true,
-			});
-			page = await browser.newPage();
+		// Direct user to the authorise URL
+		browser = await puppeteer.launch({
+			headless: true,
+		});
+		page = await browser.newPage();
+		await page.goto(authUrl);
 
-			await page.goto(authUrl);
-
-			await page.click(USERNAME_SELECTOR);
-			await page.keyboard.type(password_config.userName);
-
-
-			await page.click(PASSWORD_SELECTOR);
-			await page.keyboard.type(password_config.password);
-
-		} catch (error) {
-			console.log('Error in Puppeteer: ', error);
-		}
-
+		// /user logs into Xero and Auths your app
+		await page.click(USERNAME_SELECTOR);
+		await page.keyboard.type(password_config.userName);
+		await page.click(PASSWORD_SELECTOR);
+		await page.keyboard.type(password_config.password);
 
 		await page.click(LOGIN_BUTTON_SELECTOR);
 		await page.waitForNavigation();
@@ -63,16 +50,16 @@ describe('Partner Example Tests', () => {
 
 		await delay(2500);
 
+		// The pin is usually sent to your callback url, in this example,
+		// callback url is set to null
 		pin = await page.evaluate(() => {
 			const PIN_SELECTOR = '#pin-input';
 			const query = (document.querySelector(PIN_SELECTOR) as any).value;
 			return query;
 		});
-	});
 
-	afterAll(() => {
 		browser.close();
-	})
+	});
 
 	it('it returns the authorised url', async () => {
 		expect(authUrl).toContain('xero.com');
@@ -97,15 +84,20 @@ describe('Partner Example Tests', () => {
 	describe('OAuth State', () => {
 		let state: IOAuth1State;
 		let accounting2: AccountingAPIClient;
-		it('it allows you to keep copy of the state', async () => {
+		it('it allows you to keep copy of the state in your own dadtastore', async () => {
+			// Saves your state to your datastore
 			state = await accounting1.oauth1.getState();
 			expect(state.accessToken).not.toBeNull();
 			expect(state.oauth_session_handle).not.toBeNull();
 			expect(state.requestToken).not.toBeNull();
-		})
+
+			// This is how you can check when you have to refresh your Access Token
+			expect(typeof state.oauth_expires_at.getDate).toBe('function');
+		});
 
 		it('it allows you to restore a new instance of the client next time your user logs in', async () => {
 			accounting2 = new AccountingAPIClient(config);
+			// Get state from your data store
 			accounting2.oauth1.setState(state);
 			expect(accounting2.oauth1.getState()).toMatchObject(state);
 		});
@@ -114,10 +106,8 @@ describe('Partner Example Tests', () => {
 			const inv3 = await accounting2.invoices.get();
 			expect(inv3.Status).toEqual('OK');
 		});
-	})
-
+	});
 });
-
 
 function delay(timeout: number) {
 	return new Promise((resolve) => {
