@@ -140,7 +140,9 @@ describe('OAuth1HttpClient', () => {
 			const timeObject = new Date();
 			const expDate = new Date(timeObject.getTime() + (1800 * 1000));
 
-			expect(oauth1HttpClient.getState().oauth_expires_at).toEqual(expDate);
+			// Removes seconds from dates...
+
+			expect(oauth1HttpClient.getState().oauth_expires_at.setSeconds(0, 0)).toEqual(expDate.setSeconds(0, 0));
 
 		});
 	});
