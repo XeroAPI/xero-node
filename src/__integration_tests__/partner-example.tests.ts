@@ -45,17 +45,20 @@ describe('Partner Example Tests', () => {
 				headless: true,
 			});
 			page = await browser.newPage();
-			page.setDefaultNavigationTimeout(60000);
+
+			await page.goto(authUrl);
+
+			console.log('GONE TO: ', authUrl);
+			await page.click(USERNAME_SELECTOR);
+			await page.keyboard.type(password_config.userName);
+
+			await page.click(PASSWORD_SELECTOR);
+			await page.keyboard.type(password_config.password);
+
 		} catch (error) {
 			console.log('In new catch err: ', error);
 		}
 
-		await page.goto(authUrl);
-		await page.click(USERNAME_SELECTOR);
-		await page.keyboard.type(password_config.userName);
-
-		await page.click(PASSWORD_SELECTOR);
-		await page.keyboard.type(password_config.password);
 
 		await page.click(LOGIN_BUTTON_SELECTOR);
 		await page.waitForNavigation();
