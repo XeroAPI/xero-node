@@ -1,7 +1,6 @@
 import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
-import { URLSearchParams } from 'url';
 import * as fs from 'fs';
 import * as querystring from 'querystring';
 
@@ -225,11 +224,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 		get: async (args?: any): Promise<ReportsResponse> => {
 			let endpoint = 'Reports';
 			if (args) {
-				// TODO: Type this with an interface for args
-				const query = new URLSearchParams(args);
-				query.delete('ReportID');
+				const reportId = args.ReportID;
 
-				endpoint = endpoint + '/' + args.ReportID + '?' + query.toString();
+				// TODO: Type this with an interface for args
+				args.delete('ReportID');
+				const query = querystring.stringify(args);
+
+				endpoint = endpoint + '/' + reportId + '?' + query.toString();
 			}
 
 			return this.oauth1Client.get<ReportsResponse>(endpoint);
