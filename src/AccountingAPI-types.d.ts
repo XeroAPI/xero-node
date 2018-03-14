@@ -42,6 +42,10 @@ export interface OnlineInvoicesResponse extends AccountingResponse {
 	OnlineInvoices: OnlineInvoice[];
 }
 
+export interface OrganisationResponse extends Organisation {
+	Organisations: Organisation[];
+}
+
 export interface OnlineInvoice {
 	OnlineInvoiceUrl: string;
 }
@@ -221,6 +225,29 @@ export interface LineItem {
 	Quantity?: number;
 	LineItemID?: string;
 	ValidationErrors?: any[];
+}
+export interface Organisation {
+	APIKey: string;
+	Name: string;
+	LegalName: string;
+	PaysTax: boolean;
+	Version: string;
+	OrganisationType: string;
+	BaseCurrency: string;
+	CountryCode: string;
+	IsDemoCompany: boolean;
+	OrganisationStatus: string;
+	FinancialYearEndDay: string;
+	FinancialYearEndMonth: string;
+	SalesTaxBasis: string;
+	DefaultSalesTax: string;
+	DefaultPurchases: string;
+	CreatedDateUTC: string;
+	OrganisationEntityType: string;
+	Timezone: string;
+	ShortCode: string;
+	OrganisationID: string;
+	LineOfBusiness: string;
 }
 export interface Tracking {
 	Name?: string;
