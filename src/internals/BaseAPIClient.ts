@@ -30,7 +30,7 @@ export interface IHttpClient {
 
 export abstract class BaseAPIClient {
 
-	public constructor(xeroConfig: IXeroClientConfiguration, public readonly oauth1Client?: IOAuth1HttpClient) {
+	public constructor(xeroConfig: IXeroClientConfiguration, public readonly oauth1Client: IOAuth1HttpClient = null) {
 		if (!xeroConfig) {
 			throw new Error('Config must be passed in when creating a new instance');
 		}

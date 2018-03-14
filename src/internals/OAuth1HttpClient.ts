@@ -5,6 +5,8 @@ import { OAuth } from 'oauth';
 import { IHttpClient } from './BaseAPIClient';
 import * as fs from 'fs';
 import * as querystring from 'querystring';
+import * as http from 'http';
+import * as https from 'https';
 
 export interface IToken {
 	oauth_token: string;
@@ -34,6 +36,7 @@ export interface IOAuth1Configuration {
 }
 
 export interface IOAuth1Client {
+	agent?: http.Agent;
 	getState(): IOAuth1State;
 	setState(state: Partial<IOAuth1State>): void;
 	getUnauthorisedRequestToken(): Promise<void>;
@@ -59,6 +62,8 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	};
 
 	private oauthLib: typeof OAuth;
+
+	public agent: http.Agent;
 
 	constructor(private config: IOAuth1Configuration, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
 		this._state = {
@@ -87,6 +92,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		}
 
 		this.oauthLib = this.oAuthLibFactory(this.config);
+		this.oauthLib._createClient = this._createHttpClientWithProxySupport.bind(this);
 	}
 
 	public getUnauthorisedRequestToken = async (): Promise<void> => {
@@ -307,5 +313,27 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public setState(newState: Partial<IOAuth1State>) {
 		this._state = { ...this._state, ...newState };
+	}
+
+	// Monkey-patched OAuthLib _createClient function to add proxy support
+	private _createHttpClientWithProxySupport(
+			port: number,
+			hostname: string,
+			method: string,
+			path: string,
+			headers: any,
+			sslEnabled?: boolean) {
+		const options: http.RequestOptions = {
+			host: hostname,
+			port: port,
+			path: path,
+			method: method,
+			headers: headers
+		};
+		const httpModel: any = sslEnabled ? https : http;
+		if (this.agent) {
+			options.agent = this.agent;
+		}
+		return httpModel.request(options);
 	}
 }
