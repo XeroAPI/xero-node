@@ -1,5 +1,0 @@
-language: node_js
-node_js:
-- '6'
-before_script:
-- openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./test/config/travis-ci -out ./test/config/nodejs-private.pem -d -a
