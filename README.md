@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
-[![CircleCI](https://circleci.com/gh/philals/xero-node-v3/tree/master.svg?style=svg&circle-token=0a866212b40b6ecaa44f2f4fe98401b536a44038)](https://circleci.com/gh/philals/xero-node-v3/tree/master)
+[![CircleCI](https://circleci.com/gh/XeroAPI/xero-node/tree/v3.svg?style=svg)](https://circleci.com/gh/XeroAPI/xero-node/tree/v3)
 
 # node-xero
 
