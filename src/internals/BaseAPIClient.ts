@@ -20,6 +20,13 @@ export interface IXeroClientConfiguration {
 	CallbackUrl?: string;
 }
 
+/**
+ * Options specific to the API in use
+ */
+export interface IApiConfiguration {
+	tenantType?: string;
+}
+
 export interface IHttpClient {
 	get<T>(endpoint: string, acceptType?: string): Promise<T>;
 	delete<T>(endpoint: string): Promise<T>;
@@ -30,13 +37,13 @@ export interface IHttpClient {
 
 export abstract class BaseAPIClient {
 
-	public constructor(xeroConfig: IXeroClientConfiguration, public readonly oauth1Client: IOAuth1HttpClient = null) {
+	public constructor(xeroConfig: IXeroClientConfiguration, apiConfig: IApiConfiguration = {}, public readonly oauth1Client: IOAuth1HttpClient = null) {
 		if (!xeroConfig) {
 			throw new Error('Config must be passed in when creating a new instance');
 		}
 
 		if (!this.oauth1Client) {
-			const oauthConfig: IOAuth1Configuration = mapConfig(xeroConfig);
+			const oauthConfig: IOAuth1Configuration = mapConfig(xeroConfig, apiConfig);
 			this.oauth1Client = new OAuth1HttpClient(oauthConfig);
 			this.oauth1Client.setState(mapState(xeroConfig)); // only affects private and partner apps
 		}

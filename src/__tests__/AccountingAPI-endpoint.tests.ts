@@ -32,7 +32,7 @@ const xeroConfig: IXeroClientConfiguration = {
 describe('Endpoint: ', () => {
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
-	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLibFF.newFactory());
+	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig, {}), inMemoryOAuthLibFF.newFactory());
 	oauthHttpClient.setState(mapState(xeroConfig));
 	const xeroClient = new AccountingAPIClient(xeroConfig, oauthHttpClient);
 

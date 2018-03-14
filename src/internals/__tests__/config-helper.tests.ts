@@ -13,13 +13,14 @@ describe('config-helper', () => {
 		};
 
 		it('maps config correctly', () => {
-			const retrievedState = mapConfig(xeroConfig);
+			const retrievedState = mapConfig(xeroConfig, {});
 
 			expect(retrievedState).toEqual({
 				accept: 'application/json',
 				userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: testCertString(),
+				tenantType: null,
 				signatureMethod: 'RSA-SHA1',
 				apiBasePath: '/api.xro/2.0/',
 				callbackUrl: null,
@@ -51,13 +52,14 @@ describe('config-helper', () => {
 		};
 
 		it('maps config correctly', () => {
-			const retrievedState = mapConfig(xeroConfig);
+			const retrievedState = mapConfig(xeroConfig, {});
 
 			expect(retrievedState).toEqual({
 				accept: 'application/json',
 				userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+				tenantType: null,
 				signatureMethod: 'HMAC-SHA1',
 				apiBasePath: '/api.xro/2.0/',
 				callbackUrl: null,
@@ -84,13 +86,14 @@ describe('config-helper', () => {
 		};
 
 		it('maps config correctly', () => {
-			const retrievedState = mapConfig(xeroConfig);
+			const retrievedState = mapConfig(xeroConfig, {});
 
 			expect(retrievedState).toEqual({
 				accept: 'application/json',
 				userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: testCertString(),
+				tenantType: null,
 				signatureMethod: 'RSA-SHA1',
 				apiBasePath: '/api.xro/2.0/',
 				callbackUrl: null,

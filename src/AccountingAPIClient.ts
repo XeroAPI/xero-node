@@ -7,7 +7,7 @@ import * as querystring from 'querystring';
 export class AccountingAPIClient extends BaseAPIClient {
 
 	public constructor(options: IXeroClientConfiguration, _oAuth1HttpClient?: IOAuth1HttpClient) {
-		super(options, _oAuth1HttpClient);
+		super(options, {}, _oAuth1HttpClient);
 	}
 
 	public accounts = {
