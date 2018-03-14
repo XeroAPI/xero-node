@@ -7,6 +7,7 @@ import * as fs from 'fs';
 import * as querystring from 'querystring';
 import * as http from 'http';
 import * as https from 'https';
+import { XeroHttpError } from '../Errors';
 
 export interface IToken {
 	oauth_token: string;
@@ -46,12 +47,6 @@ export interface IOAuth1Client {
 }
 
 export interface IOAuth1HttpClient extends IHttpClient, IOAuth1Client { }
-
-// TODO: Do we call this?
-export interface IHttpError {
-	statusCode: number;
-	body: string;
-}
 
 export class OAuth1HttpClient implements IOAuth1HttpClient {
 
@@ -205,11 +200,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						const toReturn: IHttpError = {
-							statusCode: httpResponse.statusCode,
-							body: data
-						};
-						reject(toReturn);
+						reject(new XeroHttpError(httpResponse.statusCode, data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
@@ -233,11 +224,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						const toReturn: IHttpError = {
-							statusCode: httpResponse.statusCode,
-							body: data
-						};
-						reject(toReturn);
+						reject(new XeroHttpError(httpResponse.statusCode, data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
@@ -262,11 +249,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						const toReturn: IHttpError = {
-							statusCode: httpResponse.statusCode,
-							body: data
-						};
-						reject(toReturn);
+						reject(new XeroHttpError(httpResponse.statusCode, data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
@@ -288,11 +271,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						const toReturn: IHttpError = {
-							statusCode: httpResponse.statusCode,
-							body: data
-						};
-						reject(toReturn);
+						reject(new XeroHttpError(httpResponse.statusCode, data));
 					} else {
 						let toReturn: T = null;
 						if (data) {
