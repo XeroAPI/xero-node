@@ -30,7 +30,7 @@ export function getPrivateConfig() {
 
 export function getLoginConfig() {
 	try {
-		const config = require('../password-config.json');
+		const config = require('../xero-login.json');
 		return config;
 
 	} catch (error) {
@@ -40,12 +40,12 @@ export function getLoginConfig() {
 			password: process.env.Password
 		};
 	}
-	
+
 }
 
 export function getPartnerAppConfig() {
-	const config = require('../partner-config-example.json');
-	if(config.ConsumerKey == 'key' || config.ConsumerSecret == 'secret') {
+	const config = require('../partner-config.json');
+	if (config.ConsumerKey == 'key' || config.ConsumerSecret == 'secret') {
 		// Using ENV VARS in CircleCI
 		return {
 			AppType: 'partner',

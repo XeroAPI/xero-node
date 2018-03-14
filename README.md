@@ -2,10 +2,8 @@
 [![CircleCI](https://circleci.com/gh/philals/xero-node-v3/tree/master.svg?style=svg&circle-token=0a866212b40b6ecaa44f2f4fe98401b536a44038)](https://circleci.com/gh/philals/xero-node-v3/tree/master)
 
 # node-xero
-## Current Status: PRE-PRE-ALPHA.
 
 NodeJS Client for the Xero API, supporting Public, Private and Partner Apps.
-
 
 An API wrapper for xero (http://developer.xero.com).
 

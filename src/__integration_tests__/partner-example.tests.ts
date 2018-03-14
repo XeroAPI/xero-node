@@ -18,14 +18,6 @@ describe('Partner Example Tests', () => {
 	let page: any;
 	let pin: string;
 
-	// Needs your Xero password so that it can auth an Org
-
-	// password-config must be in this format
-	// {
-	// 	"userName": "email here",
-	// 		"password": "passwordHere"
-	// }
-
 	beforeAll(async () => {
 		await accounting1.oauth1.getUnauthorisedRequestToken();
 		authUrl = accounting1.oauth1.buildAuthoriseUrl();
