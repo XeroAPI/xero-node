@@ -1,7 +1,8 @@
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IOAuth1HttpClient } from '../OAuth1HttpClient';
+import { XeroHttpError } from '../../Errors';
 
-describe('OAuthClient and erros', () => {
+describe('OAuthClient and errors', () => {
 	const oauthConfig: IOAuth1Configuration = {
 		consumerKey: 'ck',
 		consumerSecret: 'cs',
@@ -48,11 +49,12 @@ describe('OAuthClient and erros', () => {
 		describe('on GETS', () => {
 			it('the error object conforms', async () => {
 
-				expect.assertions(2);
+				expect.assertions(3);
 
 				try {
 					await oAuthHttpClient.get('a/404/endpoint');
 				} catch (error) {
+					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
 					expect(error.body).toBe('The resource you\'re looking for cannot be found');
 				}
@@ -61,11 +63,12 @@ describe('OAuthClient and erros', () => {
 
 		describe('on DELETES', () => {
 			it('the error object conforms', async () => {
-				expect.assertions(2);
+				expect.assertions(3);
 
 				try {
 					await oAuthHttpClient.delete('a/404/endpoint');
 				} catch (error) {
+					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
 					expect(error.body).toBe('The resource you\'re looking for cannot be found');
 				}
@@ -75,11 +78,12 @@ describe('OAuthClient and erros', () => {
 
 		describe('on PUT', () => {
 			it('the error object conforms', async () => {
-				expect.assertions(2);
+				expect.assertions(3);
 
 				try {
 					await oAuthHttpClient.put('a/404/endpoint', { phil: 'washere' });
 				} catch (error) {
+					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
 					expect(error.body).toBe('The resource you\'re looking for cannot be found');
 				}
