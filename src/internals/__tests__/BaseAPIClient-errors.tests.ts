@@ -38,7 +38,7 @@ describe('BaseAPIClient errors', () => {
 				await xeroClient.oauth1Client.get('endpoint');
 			} catch (error){
 				expect(error.statusCode).toEqual(404);
-				expect(error.body).toEqual('The resource you\'re looking for cannot be found');
+				expect(error.data).toEqual('The resource you\'re looking for cannot be found');
 			}
 		});
 	});

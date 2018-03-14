@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import * as querystring from 'querystring';
 import * as http from 'http';
 import * as https from 'https';
-import { XeroHttpError } from '../XeroErrors';
+import { XeroHttpError, XeroAuthError } from '../XeroErrors';
 
 export interface IToken {
 	oauth_token: string;
@@ -90,19 +90,24 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		this.oauthLib._createClient = this._createHttpClientWithProxySupport.bind(this);
 	}
 
-	public getUnauthorisedRequestToken = async (): Promise<void> => {
-		const requestTokenResult = await new Promise<{ oauth_token: string, oauth_token_secret: string }>((resolve, reject) => {
-			this.oauthLib.getOAuthRequestToken((err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
-				// Callback sig:    callback(null, oauth_token, oauth_token_secret,  results );
-				if (err) {
-					// TODO: some better err here
-					reject(err as any);
-				} else {
-					return resolve({ oauth_token, oauth_token_secret });
+	public getUnauthorisedRequestToken = async () => {
+		return new Promise<void>((resolve, reject) => {
+			this.oauthLib.getOAuthRequestToken(
+				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
+					if (err) {
+						reject(new XeroAuthError(err));
+					} else {
+						this.setState({
+							requestToken: {
+								oauth_token,
+								oauth_token_secret
+							}
+						});
+						resolve();
+					}
 				}
-			});
+			);
 		});
-		this.setState({ requestToken: requestTokenResult });
 	}
 
 	public buildAuthoriseUrl = () => {
@@ -110,61 +115,60 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public swapRequestTokenforAccessToken = async (oauth_verifier: string) => {
-		const swapResult = await new Promise<{ token: IToken, oAuthSessionHandle: string, oauth_expires_in: string }>((resolve, reject) => {
-			this.oauthLib.getOAuthAccessToken(this._state.requestToken.oauth_token, this._state.requestToken.oauth_token_secret, oauth_verifier, (err: any, oauthToken: string, oauthSecret: string, results: any) => {
-				// results are : {oauth_expires_in: "1800", oauth_session_handle: "QVRNIFVKZO994AEQQLHN", oauth_authorization_expires_in: "315360000", xero_org_muid: "zfI4JWUAyKgcyGT4zOMyf0"}
+		return new Promise<void>((resolve, reject) => {
+			this.oauthLib.getOAuthAccessToken(
+				this._state.requestToken.oauth_token,
+				this._state.requestToken.oauth_token_secret,
+				oauth_verifier,
+				(err: any, oauth_token: string, oauth_token_secret: string, results: {oauth_expires_in: number, oauth_session_handle: string, oauth_authorization_expires_in: string, xero_org_muid: string}) => {
+					if (err) {
+						reject(new XeroAuthError(err));
+					} else {
+						const currentMilliseconds = new Date().getTime();
+						const expDate = new Date(currentMilliseconds + (results.oauth_expires_in * 1000));
 
-				if (err) {
-					// TODO: somet better err here
-					reject(err);
-				} else {
-					// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
-					const newAccessToken: IToken = {
-						oauth_token: oauthToken,
-						oauth_token_secret: oauthSecret
-					};
-					return resolve({
-						token: newAccessToken,
-						oAuthSessionHandle: results.oauth_session_handle,
-						oauth_expires_in: results.oauth_expires_in
-					});
+						this.setState({
+							accessToken: {
+								oauth_token: oauth_token,
+								oauth_token_secret: oauth_token_secret
+							},
+							oauth_session_handle: results.oauth_session_handle,
+							oauth_expires_at: expDate
+						});
+						resolve();
+					}
 				}
-			});
+			);
 		});
 
-		const timeObject = new Date();
-		const expDate = new Date(timeObject.getTime() + (parseInt(swapResult.oauth_expires_in, 10) * 1000));
-
-		this.setState({
-			accessToken: swapResult.token,
-			oauth_session_handle:
-				swapResult.oAuthSessionHandle,
-			oauth_expires_at: expDate
-		});
 	}
 
 	public refreshAccessToken = async () => {
-		const refreshResult = await new Promise<{ token: IToken, oAuthSessionHandle: string }>((resolve, reject) => {
+		return new Promise<void>((resolve, reject) => {
 			// We're accessing this "private" method as the lib does not allow refresh with oauth_session_handle.
-			this.oauthLib._performSecureRequest(this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret, 'POST', this.config.apiBaseUrl + this.config.oauthAccessTokenPath, { oauth_session_handle: this._state.oauth_session_handle }, null, null,
-				(err: any, response: string) => {
-
-					const results = querystring.parse(response);
+			this.oauthLib._performSecureRequest(
+				this._state.accessToken.oauth_token,
+				this._state.accessToken.oauth_token_secret,
+				'POST',
+				this.config.apiBaseUrl + this.config.oauthAccessTokenPath,
+				{ oauth_session_handle: this._state.oauth_session_handle },
+				null,
+				null,
+				(err: any, data: string) => {
+					const results = querystring.parse(data);
 					if (err) {
-						// TODO: better error here
-						reject(err);
+						reject(new XeroAuthError(data));
 					} else {
 						const newAccessToken: IToken = {
 							oauth_token: results.oauth_token as string,
 							oauth_token_secret: results.oauth_token_secret as string
 						};
-						return resolve({ token: newAccessToken, oAuthSessionHandle: results.oauth_session_handle as string });
+						this.setState({ accessToken: newAccessToken, oauth_session_handle: results.oauth_session_handle as string });
+						resolve();
 					}
-				});
+				}
+			);
 		});
-
-		this.setState({ accessToken: refreshResult.token, oauth_session_handle: refreshResult.oAuthSessionHandle });
 	}
 
 	public writeResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
@@ -296,12 +300,12 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	// Monkey-patched OAuthLib _createClient function to add proxy support
 	private _createHttpClientWithProxySupport(
-			port: number,
-			hostname: string,
-			method: string,
-			path: string,
-			headers: any,
-			sslEnabled?: boolean) {
+		port: number,
+		hostname: string,
+		method: string,
+		path: string,
+		headers: any,
+		sslEnabled?: boolean) {
 		const options: http.RequestOptions = {
 			host: hostname,
 			port: port,

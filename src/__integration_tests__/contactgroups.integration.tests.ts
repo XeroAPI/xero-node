@@ -66,7 +66,7 @@ describe('/contactgroups integration tests', () => {
 					await xero.contactgroups.get({ ContactGroupID: 'b780e528-57f5-4fd1-83c1-b82e4990fc01' }); // Is randome guid
 				} catch (error) {
 					expect(error.statusCode).toBe(404);
-					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
 			});
 

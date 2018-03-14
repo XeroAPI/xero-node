@@ -56,7 +56,7 @@ describe('OAuthClient and errors', () => {
 				} catch (error) {
 					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
-					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
 			});
 		});
@@ -70,7 +70,7 @@ describe('OAuthClient and errors', () => {
 				} catch (error) {
 					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
-					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
 			});
 
@@ -85,7 +85,7 @@ describe('OAuthClient and errors', () => {
 				} catch (error) {
 					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
-					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
 			});
 
