@@ -1,0 +1,12 @@
+node_modules
+*.tgz
+lib/**/*
+npm-debug.log
+*.pdf
+*config.json
+privatekey.pem
+*.scratch.ts
+scratch.ts
+scratch*
+partner-config.json
+xero-login.json
