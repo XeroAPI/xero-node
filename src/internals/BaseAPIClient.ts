@@ -30,35 +30,16 @@ export interface IHttpClient {
 
 export abstract class BaseAPIClient {
 
-	public readonly http: IHttpClient;
-	public readonly oauth1: IOAuth1Client;
-
-	public constructor(xeroConfig: IXeroClientConfiguration, private _oauth1httpClient?: IOAuth1HttpClient) {
+	public constructor(xeroConfig: IXeroClientConfiguration, public readonly oauth1Client?: IOAuth1HttpClient) {
 		if (!xeroConfig) {
 			throw new Error('Config must be passed in when creating a new instance');
 		}
 
-		if (!this._oauth1httpClient) {
+		if (!this.oauth1Client) {
 			const oauthConfig: IOAuth1Configuration = mapConfig(xeroConfig);
-			this._oauth1httpClient = new OAuth1HttpClient(oauthConfig);
-			this._oauth1httpClient.setState(mapState(xeroConfig)); // only affects private and partner apps
+			this.oauth1Client = new OAuth1HttpClient(oauthConfig);
+			this.oauth1Client.setState(mapState(xeroConfig)); // only affects private and partner apps
 		}
 
-		this.http = {
-			get: this._oauth1httpClient.get,
-			put: this._oauth1httpClient.put,
-			post: this._oauth1httpClient.post,
-			delete: this._oauth1httpClient.delete,
-			writeResponseToStream: this._oauth1httpClient.writeResponseToStream
-		};
-
-		this.oauth1 = {
-			getState: () => this._oauth1httpClient.getState(),
-			setState: (state) => this._oauth1httpClient.setState(state),
-			getUnauthorisedRequestToken: this._oauth1httpClient.getUnauthorisedRequestToken,
-			buildAuthoriseUrl: this._oauth1httpClient.buildAuthoriseUrl,
-			swapRequestTokenforAccessToken: this._oauth1httpClient.swapRequestTokenforAccessToken,
-			refreshAccessToken: this._oauth1httpClient.refreshAccessToken
-		};
 	}
 }

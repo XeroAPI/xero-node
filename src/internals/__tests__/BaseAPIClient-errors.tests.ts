@@ -35,7 +35,7 @@ describe('BaseAPIClient errors', () => {
 		it('error is expected', async () => {
 			expect.assertions(1);
 			try {
-				await xeroClient.http.get('endpoint');
+				await xeroClient.oauth1Client.get('endpoint');
 			} catch (error){
 				expect(error).toMatchObject({
 					statusCode: 404,

@@ -19,8 +19,8 @@ describe('Partner Example Tests', () => {
 	let pin: string;
 
 	beforeAll(async () => {
-		await accounting1.oauth1.getUnauthorisedRequestToken();
-		authUrl = accounting1.oauth1.buildAuthoriseUrl();
+		await accounting1.oauth1Client.getUnauthorisedRequestToken();
+		authUrl = accounting1.oauth1Client.buildAuthoriseUrl();
 
 		// Direct user to the authorise URL
 		browser = await puppeteer.launch({
@@ -62,13 +62,13 @@ describe('Partner Example Tests', () => {
 	});
 
 	it('it can make a successful API call', async () => {
-		await accounting1.oauth1.swapRequestTokenforAccessToken(pin);
+		await accounting1.oauth1Client.swapRequestTokenforAccessToken(pin);
 		const inv1 = await accounting1.invoices.get();
 		expect(inv1.Status).toEqual('OK');
 	});
 
 	it('it can still make a successfull API call after refreshing the access token', async () => {
-		await accounting1.oauth1.refreshAccessToken();
+		await accounting1.oauth1Client.refreshAccessToken();
 		const inv2 = await accounting1.invoices.get();
 		expect(inv2.Status).toEqual('OK');
 	});
@@ -78,7 +78,7 @@ describe('Partner Example Tests', () => {
 		let accounting2: AccountingAPIClient;
 		it('it allows you to keep copy of the state in your own dadtastore', async () => {
 			// Saves your state to your datastore
-			state = await accounting1.oauth1.getState();
+			state = await accounting1.oauth1Client.getState();
 			expect(state.accessToken).not.toBeNull();
 			expect(state.oauth_session_handle).not.toBeNull();
 			expect(state.requestToken).not.toBeNull();
@@ -90,8 +90,8 @@ describe('Partner Example Tests', () => {
 		it('it allows you to restore a new instance of the client next time your user logs in', async () => {
 			accounting2 = new AccountingAPIClient(config);
 			// Get state from your data store
-			accounting2.oauth1.setState(state);
-			expect(accounting2.oauth1.getState()).toMatchObject(state);
+			accounting2.oauth1Client.setState(state);
+			expect(accounting2.oauth1Client.getState()).toMatchObject(state);
 		});
 
 		it('it lets you make API calls using the restored state', async () => {

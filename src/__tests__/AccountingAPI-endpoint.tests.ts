@@ -255,20 +255,20 @@ describe('AccountingAPIClient', () => {
 
 		beforeEach(() => {
 			accountClient = new AccountingAPIClient(xeroPartnerConfig);
-			accountClient.oauth1.setState(defaultState);
+			accountClient.oauth1Client.setState(defaultState);
 		});
 
 		it('matches what it was set to', () => {
-			expect(accountClient.oauth1.getState()).toMatchObject(defaultState);
+			expect(accountClient.oauth1Client.getState()).toMatchObject(defaultState);
 		});
 
 		it('only overrides the accessToken keys', () => {
-			accountClient.oauth1.setState({
+			accountClient.oauth1Client.setState({
 				accessToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
 			});
 
-			expect(accountClient.oauth1.getState()).not.toEqual(defaultState);
-			expect(accountClient.oauth1.getState()).toEqual({
+			expect(accountClient.oauth1Client.getState()).not.toEqual(defaultState);
+			expect(accountClient.oauth1Client.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'test3',
 					oauth_token_secret: 'test4'
@@ -282,10 +282,10 @@ describe('AccountingAPIClient', () => {
 		});
 
 		it('only overrides the requestToken keys', () => {
-			accountClient.oauth1.setState({ oauth_session_handle: 'yoyo' });
+			accountClient.oauth1Client.setState({ oauth_session_handle: 'yoyo' });
 
-			expect(accountClient.oauth1.getState()).not.toEqual(defaultState);
-			expect(accountClient.oauth1.getState()).toEqual({
+			expect(accountClient.oauth1Client.getState()).not.toEqual(defaultState);
+			expect(accountClient.oauth1Client.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'test3',
 					oauth_token_secret: 'test4'
@@ -299,12 +299,12 @@ describe('AccountingAPIClient', () => {
 		});
 
 		it('only overrides the oauth_session_handle keys', () => {
-			accountClient.oauth1.setState({
+			accountClient.oauth1Client.setState({
 				requestToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
 			});
 
-			expect(accountClient.oauth1.getState()).not.toEqual(defaultState);
-			expect(accountClient.oauth1.getState()).toEqual({
+			expect(accountClient.oauth1Client.getState()).not.toEqual(defaultState);
+			expect(accountClient.oauth1Client.getState()).toEqual({
 				requestToken: {
 					oauth_token: 'something new',
 					oauth_token_secret: 'something borrowed'

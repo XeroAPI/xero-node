@@ -20,7 +20,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.AccountID;
 			}
 
-			return this.http.get<AccountsResponse>(endpoint);
+			return this.oauth1Client.get<AccountsResponse>(endpoint);
 		}
 	};
 
@@ -64,7 +64,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				}
 			}
 
-			return this.http.get<InvoicesResponse>(endpoint);
+			return this.oauth1Client.get<InvoicesResponse>(endpoint);
 		},
 		savePDF: async (args?: { InvoiceID: string, savePath: string }): Promise<void> => {
 			// TODO: Support invoice number
@@ -78,7 +78,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			const writeStream = fs.createWriteStream(args.savePath);
 
-			return this.http.writeResponseToStream(endpoint, 'application/pdf', writeStream);
+			return this.oauth1Client.writeResponseToStream(endpoint, 'application/pdf', writeStream);
 		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
 		create: async (invoice: Invoice | { Invoices: Invoice[] }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -86,7 +86,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			// TODO: Summerize errors?
 			const endpoint = 'invoices?summarizeErrors=false';
 
-			return this.http.put<InvoicesResponse>(endpoint, invoice);
+			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
 		},
 		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -104,7 +104,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this.http.post<InvoicesResponse>(endpoint, invoice);
+			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoice);
 		},
 		onlineInvoice: {
 			get: async (args?: { InvoiceID: string }): Promise<string> => {
@@ -115,7 +115,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				endpoint += '/onlineinvoice';
 
-				return this.http.get<any>(endpoint);
+				return this.oauth1Client.get<any>(endpoint);
 			}
 		},
 		attachments: this.generateAttachmentsEndpoint('invoices')
@@ -125,13 +125,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 		return {
 			get: async (args?: { EntityID: string }): Promise<AttachmentsResponse> => {
 				const endpoint = `${path}/${args.EntityID}/attachments`;
-				return this.http.get<AttachmentsResponse>(endpoint);
+				return this.oauth1Client.get<AttachmentsResponse>(endpoint);
 			},
 			saveAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToSave: string }) => {
 				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
 				const writeStream = fs.createWriteStream(args.pathToSave);
 
-				await this.http.writeResponseToStream(endpoint, args.mimeType, writeStream);
+				await this.oauth1Client.writeResponseToStream(endpoint, args.mimeType, writeStream);
 			},
 		};
 	}
@@ -146,7 +146,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
 
-			return this.http.get<ContactGroupsResponse>(endpoint);
+			return this.oauth1Client.get<ContactGroupsResponse>(endpoint);
 		},
 		create: async (contactGroup: ContactGroup): Promise<ContactGroupsResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
@@ -154,7 +154,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			// TODO: Summerize errors?
 			const endpoint = 'contactgroups?summarizeErrors=false';
 
-			return this.http.put<ContactGroupsResponse>(endpoint, contactGroup);
+			return this.oauth1Client.put<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		update: async (contactGroup: ContactGroup, args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
 			let endpoint = 'contactgroups';
@@ -164,7 +164,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			endpoint += '?summarizeErrors=false';
 
-			return this.http.post<ContactGroupsResponse>(endpoint, contactGroup);
+			return this.oauth1Client.post<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		contacts: {
 			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactGroupsResponse> => {
@@ -179,7 +179,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 					endpoint = endpoint + '/' + args.ContactID;
 				}
 
-				return this.http.delete<ContactGroupsResponse>(endpoint);
+				return this.oauth1Client.delete<ContactGroupsResponse>(endpoint);
 			}
 		}
 	};
@@ -187,12 +187,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 	public currencies = {
 		get: async (): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies';
-			return this.http.get<CurrenciesResponse>(endpoint);
+			return this.oauth1Client.get<CurrenciesResponse>(endpoint);
 		},
 		create: async (currency: Currency): Promise<CurrenciesResponse> => {
 			// TODO: Do we need to add summerazieErrors?
 			const endpoint = 'currencies';
-			return this.http.put<CurrenciesResponse>(endpoint, currency);
+			return this.oauth1Client.put<CurrenciesResponse>(endpoint, currency);
 		}
 	};
 
@@ -205,18 +205,18 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.EmployeeID;
 			}
 			// TODO: Type
-			return this.http.get<any>(endpoint);
+			return this.oauth1Client.get<any>(endpoint);
 		},
 		create: async (employee: Employee): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
-			return this.http.put<any>(endpoint, employee);
+			return this.oauth1Client.put<any>(endpoint, employee);
 		}
 	};
 
 	public contacts = {
 		get: async (): Promise<ContactsResponse> => {
 			const endpoint = 'contacts';
-			return this.http.get<ContactsResponse>(endpoint);
+			return this.oauth1Client.get<ContactsResponse>(endpoint);
 		},
 		attachments: this.generateAttachmentsEndpoint('contacts')
 	};
@@ -232,7 +232,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.ReportID + '?' + query.toString();
 			}
 
-			return this.http.get<ReportsResponse>(endpoint);
+			return this.oauth1Client.get<ReportsResponse>(endpoint);
 		}
 	};
 
@@ -240,7 +240,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		create: async (body?: object): Promise<any> => {
 			const endpoint = 'purchaseorders?summarizeErrors=true';
 			// TODO: Add interface here
-			return this.http.post<any>(endpoint, body);
+			return this.oauth1Client.post<any>(endpoint, body);
 		}
 	};
 }
