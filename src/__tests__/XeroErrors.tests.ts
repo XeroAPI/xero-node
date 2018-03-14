@@ -1,4 +1,4 @@
-import { XeroAuthError } from '../Errors';
+import { XeroAuthError } from '../XeroErrors';
 import { isError } from 'util';
 
 function doSomethingBad() {

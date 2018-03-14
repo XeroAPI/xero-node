@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import * as querystring from 'querystring';
 import * as http from 'http';
 import * as https from 'https';
-import { XeroHttpError } from '../Errors';
+import { XeroHttpError } from '../XeroErrors';
 
 export interface IToken {
 	oauth_token: string;

@@ -1,6 +1,6 @@
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IOAuth1HttpClient } from '../OAuth1HttpClient';
-import { XeroHttpError } from '../../Errors';
+import { XeroHttpError } from '../../XeroErrors';
 
 describe('OAuthClient and errors', () => {
 	const oauthConfig: IOAuth1Configuration = {
