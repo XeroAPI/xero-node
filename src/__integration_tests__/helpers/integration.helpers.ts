@@ -17,7 +17,7 @@ export function getPrivateConfig() {
 		return config;
 
 	} catch (error) {
-		// Using ENV VARS in CircleCI
+		console.log('Using ENV VARS in CircleCI because', error.message);
 		return {
 			AppType: 'private',
 			ConsumerKey: process.env.ConsumerKey,
@@ -34,7 +34,7 @@ export function getLoginConfig() {
 		return config;
 
 	} catch (error) {
-		// Using ENV VARS in CircleCI
+		console.log('Using ENV VARS in CircleCI because', error.message);
 		return {
 			userName: process.env.UserName,
 			password: process.env.Password
@@ -48,8 +48,8 @@ export function getPartnerAppConfig() {
 		const config = require('../partner-config.json');
 		return config;
 	}
-	catch (e) {
-		// Using ENV VARS in CircleCI
+	catch (error) {
+		console.log('Using ENV VARS in CircleCI because', error.message);
 		return {
 			AppType: 'partner',
 			ConsumerKey: process.env.PartnerConsumerKey,

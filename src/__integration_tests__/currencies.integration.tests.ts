@@ -26,16 +26,10 @@ describe('/currencies integration tests', () => {
 		});
 
 		it('currency created can be fetched', async () => {
-			expect.assertions(1);
-			for (const cur of result.Currencies) {
-				if (cur.Code == 'PHP') {
-					expect(result.Currencies).toMatchObject({
-						Code: 'PHP',
-						Description: 'Philippine Peso'
-					});
-					break;
-				}
-			}
+			expect(result.Currencies).toContainEqual({
+				Code: 'PHP',
+				Description: 'Philippine Peso'
+			});
 		});
 	});
 
