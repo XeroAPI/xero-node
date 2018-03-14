@@ -8,15 +8,24 @@ import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
 export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1State> {
 	const cert = xeroConfig.PrivateKeyCert ? getStringFromFile(xeroConfig.PrivateKeyCert) : null; // TODO don't read twice
 
-	if (xeroConfig.AppType == 'private' || xeroConfig.AppType == 'partner') {
+	if (xeroConfig.AppType == 'private') {
 		return {
 			accessToken: {
 				oauth_token: xeroConfig.ConsumerKey,
 				oauth_token_secret: cert,
 			}
 		};
-	} else {
+	} else if (xeroConfig.AppType == 'public') {
 		return {};
+	} else if (xeroConfig.AppType == 'partner') {
+		return {
+			requestToken: {
+				oauth_token: xeroConfig.ConsumerKey,
+				oauth_token_secret: cert,
+			}
+		};
+	} else {
+		throw new Error(`Unrecognised app type: ${xeroConfig.AppType} (expected private|public|partner)`);
 	}
 }
 
