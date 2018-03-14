@@ -22,10 +22,16 @@ describe('/employees', () => {
 		});
 
 		it('there is an employee with expected name', async () => {
-			expect(result.Employees.find((emp) => (emp.FirstName == 'Bryan' && emp.LastName == 'Tee'))).toMatchObject({
-				FirstName: 'Bryan',
-				LastName: 'Tee'
-			});
+			expect.assertions(1);
+			for (const emp of result.Employees) {
+				if (emp.FirstName == 'Bryan' && emp.LastName == 'Tee') {
+					expect(emp).toMatchObject({
+						FirstName: 'Bryan',
+						LastName: 'Tee'
+					});
+					break;
+				}
+			}
 		});
 	});
 

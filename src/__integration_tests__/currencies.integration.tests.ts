@@ -11,7 +11,7 @@ describe('/currencies integration tests', () => {
 
 		beforeAll(async () => {
 			try {
-				await xero.currencies.create({Code: 'PHP'});
+				await xero.currencies.create({ Code: 'PHP' });
 			}
 			// You can't delete currencies
 			catch (e) {
@@ -26,10 +26,16 @@ describe('/currencies integration tests', () => {
 		});
 
 		it('currency created can be fetched', async () => {
-			expect(result.Currencies.find((cur) => cur.Code == 'PHP')).toMatchObject({
-				Code: 'PHP',
-				Description: 'Philippine Peso'
-			});
+			expect.assertions(1);
+			for (const cur of result.Currencies) {
+				if (cur.Code == 'PHP') {
+					expect(result.Currencies).toMatchObject({
+						Code: 'PHP',
+						Description: 'Philippine Peso'
+					});
+					break;
+				}
+			}
 		});
 	});
 
