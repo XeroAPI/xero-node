@@ -16,6 +16,7 @@ describe('Invoices endpoint', () => {
 		const tmpDownloadFile = path.resolve(__dirname, './temp_result.pdf');
 
 		beforeAll(() => {
+			setJestTimeout();
 			const config = getPrivateConfig();
 			xero = new AccountingAPIClient(config);
 		});

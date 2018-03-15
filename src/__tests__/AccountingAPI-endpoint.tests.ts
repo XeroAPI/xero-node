@@ -157,15 +157,15 @@ describe('Endpoints with attachments on them: ', () => {
 
 	const fixtures: IFixture = {
 		invoices: [
-			{ action: 'saveAttachment', expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ action: 'downloadAttachment', expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
 		],
 		contacts: [
-			{ action: 'saveAttachment', expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ action: 'downloadAttachment', expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
 		]
 	};
 
 	const actionToSpyMap: { [key: string]: jest.Mock<{}> } = {
-		saveAttachment: writeResponseToStreamSpy
+		downloadAttachment: writeResponseToStreamSpy
 	};
 
 	Object.keys(fixtures).map((endpoint: string) => {
