@@ -26,7 +26,8 @@ export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1S
 
 export function mapConfig(xeroConfig: IXeroClientConfiguration, apiConfig: IApiConfiguration): IOAuth1Configuration {
 
-	const API_BASE = process.env.API_BASE ? process.env.API_BASE : 'https://api.xero.com';
+	// the logic for API_BASE can be used for testing against a mock server
+	const API_BASE = process.env.XERO_API_BASE ? process.env.XERO_API_BASE : 'https://api.xero.com';
 	const API_BASE_PATH = '/api.xro/2.0/';
 	const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
 	const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
