@@ -18,12 +18,7 @@ export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1S
 	} else if (xeroConfig.AppType == 'public') {
 		return {};
 	} else if (xeroConfig.AppType == 'partner') {
-		return {
-			requestToken: {
-				oauth_token: xeroConfig.ConsumerKey,
-				oauth_token_secret: cert,
-			}
-		};
+		return {};
 	} else {
 		throw new Error(`Unrecognised app type: ${xeroConfig.AppType} (expected private|public|partner)`);
 	}
@@ -60,6 +55,8 @@ export function mapConfig(xeroConfig: IXeroClientConfiguration): IOAuth1Configur
 	else if (xeroConfig.AppType == 'partner') {
 		oauthConfig.consumerSecret = cert;
 		oauthConfig.signatureMethod = 'RSA-SHA1';
+	} else {
+		throw new Error(`Unrecognised app type: ${xeroConfig.AppType} (expected private|public|partner)`);
 	}
 
 	return oauthConfig;
