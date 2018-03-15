@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import * as querystring from 'querystring';
 import * as http from 'http';
 import * as https from 'https';
-import { XeroHttpError, XeroAuthError } from '../XeroErrors';
+import { XeroError } from '../XeroError';
 
 export interface IToken {
 	oauth_token: string;
@@ -100,7 +100,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 			this.oauthLib.getOAuthRequestToken(
 				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
 					if (err) {
-						reject(new XeroAuthError(err.statusCode, err.data));
+						reject(new XeroError(err.statusCode, err.data));
 					} else {
 						this.setState({
 							requestToken: {
@@ -127,7 +127,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				oauth_verifier,
 				(err: any, oauth_token: string, oauth_token_secret: string, results: {oauth_expires_in: number, oauth_session_handle: string, oauth_authorization_expires_in: string, xero_org_muid: string}) => {
 					if (err) {
-						reject(new XeroAuthError(err.statusCode, err.data));
+						reject(new XeroError(err.statusCode, err.data));
 					} else {
 						const currentMilliseconds = new Date().getTime();
 						const expDate = new Date(currentMilliseconds + (results.oauth_expires_in * 1000));
@@ -161,7 +161,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				null,
 				(err: any, data: string) => {
 					if (err) {
-						reject(new XeroAuthError(err.statusCode, err.data));
+						reject(new XeroError(err.statusCode, err.data));
 					} else {
 						const results = querystring.parse(data);
 						const newAccessToken: IToken = {
@@ -177,9 +177,9 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public writeResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
-		const oauthForPdf = this.oAuthLibFactory({ ...this.config, ...{ accept: mimeType } });
-
 		return new Promise<void>((resolve, reject) => {
+			this.assertAccessTokenIsSet();
+			const oauthForPdf = this.oAuthLibFactory({ ...this.config, ...{ accept: mimeType } });
 			const request = oauthForPdf.get(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint,
 				this._state.accessToken.oauth_token,
@@ -210,7 +210,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroHttpError(httpResponse.statusCode, data));
+						reject(new XeroError(httpResponse.statusCode, data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
@@ -235,7 +235,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroHttpError(httpResponse.statusCode, data));
+						reject(new XeroError(httpResponse.statusCode, data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
@@ -260,7 +260,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroHttpError(httpResponse.statusCode, data));
+						reject(new XeroError(httpResponse.statusCode, data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
@@ -283,7 +283,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroHttpError(httpResponse.statusCode, data));
+						reject(new XeroError(httpResponse.statusCode, data));
 					} else {
 						let toReturn: T = null;
 						if (data) {

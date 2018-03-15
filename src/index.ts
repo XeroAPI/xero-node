@@ -1,3 +1,3 @@
 
 export { AccountingAPIClient } from './AccountingAPIClient';
-export * from './XeroErrors';
+export * from './XeroError';

@@ -1,6 +1,6 @@
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IOAuth1HttpClient } from '../OAuth1HttpClient';
-import { XeroHttpError } from '../../XeroErrors';
+import { XeroError } from '../../XeroError';
 
 describe('OAuthClient and errors', () => {
 	const oauthConfig: IOAuth1Configuration = {
@@ -55,7 +55,7 @@ describe('OAuthClient and errors', () => {
 				try {
 					await oAuthHttpClient.get('a/404/endpoint');
 				} catch (error) {
-					expect(error).toBeInstanceOf(XeroHttpError);
+					expect(error).toBeInstanceOf(XeroError);
 					expect(error.statusCode).toBe(404);
 					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
@@ -69,7 +69,7 @@ describe('OAuthClient and errors', () => {
 				try {
 					await oAuthHttpClient.delete('a/404/endpoint');
 				} catch (error) {
-					expect(error).toBeInstanceOf(XeroHttpError);
+					expect(error).toBeInstanceOf(XeroError);
 					expect(error.statusCode).toBe(404);
 					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
@@ -84,7 +84,7 @@ describe('OAuthClient and errors', () => {
 				try {
 					await oAuthHttpClient.put('a/404/endpoint', { phil: 'washere' });
 				} catch (error) {
-					expect(error).toBeInstanceOf(XeroHttpError);
+					expect(error).toBeInstanceOf(XeroError);
 					expect(error.statusCode).toBe(404);
 					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}

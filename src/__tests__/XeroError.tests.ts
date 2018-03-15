@@ -1,4 +1,4 @@
-import { XeroAuthError, XeroHttpError } from '../XeroErrors';
+import { XeroError } from '../XeroError';
 import { isError } from 'util';
 
 interface IFixture {
@@ -8,15 +8,14 @@ interface IFixture {
 }
 
 // tests based on https://gist.github.com/justmoon/15511f92e5216fa2624b
-describe('XeroErrors', () => {
+describe('XeroError', () => {
 	const fixtures: IFixture[] = [
-		{ type: XeroAuthError, expectedMessage: 'XeroAuthError: token_rejected (Fix the problem)', throwFn: () => { throw new XeroAuthError(502, 'oauth_problem=token_rejected&oauth_problem_advice=Fix%20the%20problem'); } },
-		{ type: XeroAuthError, expectedMessage: 'XeroAuthError: statusCode=502', throwFn: () => { throw new XeroAuthError(502, 'It went bad!'); } },
-		{ type: XeroHttpError, expectedMessage: 'XeroHttpError: statusCode=502', throwFn: () => { throw new XeroHttpError(502, 'It went bad!'); } }
+		{ type: XeroError, expectedMessage: 'XeroError: token_rejected (Fix the problem)', throwFn: () => { throw new XeroError(502, 'oauth_problem=token_rejected&oauth_problem_advice=Fix%20the%20problem'); } },
+		{ type: XeroError, expectedMessage: 'XeroError: statusCode=404 (It went bad!)', throwFn: () => { throw new XeroError(404, 'It went bad!'); } }
 	];
 	fixtures.map((fixture: IFixture) => {
 		describe(fixture.type.name, () => {
-			let error: XeroAuthError;
+			let error: XeroError;
 
 			beforeAll(() => {
 				try {
