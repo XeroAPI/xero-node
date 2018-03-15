@@ -41,7 +41,7 @@ export function mapConfig(xeroConfig: IXeroClientConfiguration, apiConfig: IApiC
 		userAgent: 'NodeJS-XeroAPIClient.' + xeroConfig.ConsumerKey, // TODO add package.json version here
 		consumerKey: xeroConfig.ConsumerKey,
 		consumerSecret: xeroConfig.ConsumerSecret,
-		tenantType: null,
+		tenantType: apiConfig.tenantType || null,
 		signatureMethod: undefined,
 		callbackUrl: xeroConfig.CallbackUrl ? xeroConfig.CallbackUrl : null
 	};
