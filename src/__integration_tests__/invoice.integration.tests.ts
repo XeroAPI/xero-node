@@ -3,7 +3,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from './request-body/invoice.request.examples';
-import { getPrivateConfig } from './helpers/integration.helpers';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
+
+setJestTimeout();
 
 describe('Invoices endpoint', () => {
 	describe('as Private app', () => {
@@ -21,21 +23,21 @@ describe('Invoices endpoint', () => {
 		it('create single', async () => {
 			const response = await xero.invoices.create(createSingleInvoiceRequest);
 
+			invoiceIds = invoiceIds.concat(response.Invoices.map((invoice) => invoice.InvoiceID));
+
 			expect(response.Invoices.length).toBe(1);
 			expect(response.Invoices[0].InvoiceID).toBeTruthy();
-
-			invoiceIds = invoiceIds.concat(response.Invoices.map((invoice) => invoice.InvoiceID));
 		});
 
 		// skip: we don't ever delete invoices from Xero, so let's limit the number we create
 		it.skip('create multiple', async () => {
 			const response = await xero.invoices.create(createMultipleInvoiceRequest);
 
+			invoiceIds = invoiceIds.concat(response.Invoices.map((invoice) => invoice.InvoiceID));
+
 			expect(response.Invoices.length).toBe(createMultipleInvoiceRequest.Invoices.length);
 			expect(response.Invoices[0].InvoiceID).toBeTruthy();
 			expect(response.Invoices[1].InvoiceID).toBeTruthy();
-
-			invoiceIds = invoiceIds.concat(response.Invoices.map((invoice) => invoice.InvoiceID));
 		});
 
 		it('get all', async () => {
@@ -70,19 +72,21 @@ describe('Invoices endpoint', () => {
 
 				const response = await xero.invoices.create(createInvalidInvoiceRequest);
 
+				invoiceIds = invoiceIds.concat(response.Invoices.map((invoice) => invoice.InvoiceID));
+
 				expect(response.Invoices).toHaveLength(1);
 				expect(response.Invoices[0].HasErrors).toBeTruthy();
 				expect(response.Invoices[0].ValidationErrors.length).toBeGreaterThanOrEqual(1);
 			});
 		});
 
-		afterAll(() => {
+		afterAll(async () => {
 			// delete the file
 			fs.unlinkSync(tmpDownloadFile);
 
 			// archive the invoices
 			const updateRequestBody = invoiceIds.map((invoiceId) => ({ InvoiceID: invoiceId, Status: 'DELETED' }));
-			xero.invoices.updateMultiple(updateRequestBody);
+			await xero.invoices.updateMultiple(updateRequestBody);
 		});
 	});
 });
