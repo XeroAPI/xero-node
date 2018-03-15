@@ -105,6 +105,16 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoice);
 		},
+		updateMultiple: async (invoices: Invoice[]): Promise<InvoicesResponse> => {
+			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
+			// TODO: Support for where arg
+			// TODO: Summerize errors?
+			let endpoint = `invoices`;
+
+			endpoint += '?summarizeErrors=false';
+
+			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoices);
+		},
 		onlineInvoice: {
 			get: async (args?: { InvoiceID: string }): Promise<string> => {
 				let endpoint = 'invoices';
