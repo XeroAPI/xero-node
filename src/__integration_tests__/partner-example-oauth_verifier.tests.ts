@@ -5,7 +5,7 @@ import { IOAuth1State } from '../internals/OAuth1HttpClient';
 
 setJestTimeout();
 
-describe('Partner Example Tests', () => {
+describe('Partner Example Tests using oauth_verifier', () => {
 	const USERNAME_SELECTOR = '#email';
 	const PASSWORD_SELECTOR = '#password';
 	const LOGIN_BUTTON_SELECTOR = '#submitButton';
@@ -16,7 +16,7 @@ describe('Partner Example Tests', () => {
 	let authUrl: string;
 	let browser: any;
 	let page: any;
-	let pin: string;
+	let oauth_verifier: string;
 
 	beforeAll(async () => {
 		await accounting1.oauth1Client.getUnauthorisedRequestToken();
@@ -44,7 +44,7 @@ describe('Partner Example Tests', () => {
 
 		// The pin is usually sent to your callback url, in this example,
 		// callback url is set to null
-		pin = await page.evaluate(() => {
+		oauth_verifier = await page.evaluate(() => {
 			const PIN_SELECTOR = '#pin-input';
 			const query = (document.querySelector(PIN_SELECTOR) as any).value;
 			return query;
@@ -58,11 +58,11 @@ describe('Partner Example Tests', () => {
 	});
 
 	it('it returns a PIN when the user allows access to the app', async () => {
-		expect(pin).not.toBeNull();
+		expect(oauth_verifier).not.toBeNull();
 	});
 
 	it('it can make a successful API call', async () => {
-		await accounting1.oauth1Client.swapRequestTokenforAccessToken(pin);
+		await accounting1.oauth1Client.swapRequestTokenforAccessToken(oauth_verifier);
 		const inv1 = await accounting1.invoices.get();
 		expect(inv1.Status).toEqual('OK');
 	});
