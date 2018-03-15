@@ -16,11 +16,11 @@ export function getPrivateConfig() {
 		return config;
 	} else {
 		return {
-			AppType: 'private',
-			ConsumerKey: process.env.ConsumerKey,
-			ConsumerSecret: process.env.ConsumerSecret,
-			CallbackBaseUrl: null,
-			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
+			appType: 'private',
+			consumerKey: process.env.ConsumerKey,
+			consumerSecret: process.env.ConsumerSecret,
+			callbackUrl: null,
+			privateKeyPath: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
 	}
 }
@@ -44,11 +44,11 @@ export function getPartnerAppConfig() {
 		return config;
 	} else {
 		return {
-			AppType: 'partner',
-			ConsumerKey: process.env.PartnerConsumerKey,
-			ConsumerSecret: process.env.PartnerConsumerSecret,
-			CallbackBaseUrl: null,
-			PrivateKeyCert: path.resolve(__dirname, '.', 'privatekey.pem')
+			appType: 'partner',
+			consumerKey: process.env.PartnerConsumerKey,
+			consumerSecret: process.env.PartnerConsumerSecret,
+			callbackUrl: null,
+			privateKeyPath: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
 	}
 }

@@ -20,10 +20,10 @@ describe('BaseAPIClient errors', () => {
 			}, `The resource you're looking for cannot be found`, { statusCode: 404 });
 
 			const xeroConfig: IXeroClientConfiguration = {
-				AppType: 'private',
-				ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-				ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-				PrivateKeyCert: validTestCertPath()
+				appType: 'private',
+				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+				privateKeyPath: validTestCertPath()
 			};
 			// TODO: Move to test utils: GetTestClient() or something
 

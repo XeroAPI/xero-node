@@ -23,10 +23,10 @@ export interface IFixture {
 }
 
 const xeroConfig: IXeroClientConfiguration = {
-	AppType: 'private',
-	ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-	ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-	PrivateKeyCert: validTestCertPath()
+	appType: 'private',
+	consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+	consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+	privateKeyPath: validTestCertPath()
 };
 
 describe('Endpoint: ', () => {
@@ -245,10 +245,10 @@ describe('AccountingAPIClient', () => {
 	};
 
 	const xeroPartnerConfig: IXeroClientConfiguration = {
-		AppType: 'partner',
-		ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-		ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-		PrivateKeyCert: validTestCertPath()
+		appType: 'partner',
+		consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+		consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+		privateKeyPath: validTestCertPath()
 	};
 
 	describe('and setting state', () => {

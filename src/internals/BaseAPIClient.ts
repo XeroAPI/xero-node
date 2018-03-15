@@ -12,12 +12,12 @@ import * as  fs from 'fs';
  * - CallbackPath
  */
 export interface IXeroClientConfiguration {
-	AppType: 'public' | 'private' | 'partner';
-	ConsumerKey: string;
-	ConsumerSecret: string;
-	PrivateKeyCert?: string;
-	PrivateKeyPassword?: string;
-	CallbackUrl?: string;
+	appType: 'public' | 'private' | 'partner';
+	consumerKey: string;
+	consumerSecret: string;
+	privateKeyPath?: string;
+	privateKeyPassword?: string;
+	callbackUrl?: string;
 }
 
 /**

@@ -1,7 +1,7 @@
 {
-	"AppType": "partner",
-	"ConsumerKey": "key",
-	"ConsumerSecret": "secret",
-	"CallbackBaseUrl": null,
-	"PrivateKeyCert": "./privatekey.pem"
+	"appType": "partner",
+	"consumerKey": "key",
+	"consumerSecret": "secret",
+	"callbackUrl": null,
+	"privateKeyPath": "./privatekey.pem"
 }

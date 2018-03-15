@@ -61,10 +61,10 @@ Sample configuration files for various application types are in the [integration
 
 | Parameter            | Description                                                                              | Mandatory | Default |
 |----------------------|------------------------------------------------------------------------------------------|-----------|---------|
-| ConsumerKey          | The consumer key that is required with all calls to the Xero API                         | True      | - |
-| ConsumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      | - |
-| CallbackBaseUrl      | The callback that Xero should invoke when the authorization is successful               	  | False     | null |
-| PrivateKeyCert       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     | null |
+| consumerKey          | The consumer key that is required with all calls to the Xero API                         | True      | - |
+| consumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      | - |
+| callbackBaseUrl      | The callback that Xero should invoke when the authorization is successful               	  | False     | null |
+| privateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     | null |
 | redirectOnError      | Whether Xero Auth should redirect to your app in the event the user clicks 'Cancel'      | False     | true |
 
 # Usage

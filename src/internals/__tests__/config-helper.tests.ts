@@ -6,10 +6,10 @@ describe('config-helper', () => {
 	describe('Private apps', () => {
 
 		const xeroConfig: IXeroClientConfiguration = {
-			AppType: 'private',
-			ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-			ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-			PrivateKeyCert: validTestCertPath()
+			appType: 'private',
+			consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+			consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+			privateKeyPath: validTestCertPath()
 		};
 
 		it('maps config correctly', () => {
@@ -45,10 +45,10 @@ describe('config-helper', () => {
 	describe('Public apps', () => {
 
 		const xeroConfig: IXeroClientConfiguration = {
-			AppType: 'public',
-			ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-			ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-			PrivateKeyCert: validTestCertPath()
+			appType: 'public',
+			consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+			consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+			privateKeyPath: validTestCertPath()
 		};
 
 		it('maps config correctly', () => {
@@ -79,10 +79,10 @@ describe('config-helper', () => {
 	describe('Partner apps', () => {
 
 		const xeroConfig: IXeroClientConfiguration = {
-			AppType: 'partner',
-			ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-			ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-			PrivateKeyCert: validTestCertPath()
+			appType: 'partner',
+			consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+			consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+			privateKeyPath: validTestCertPath()
 		};
 
 		it('maps config correctly', () => {
@@ -113,10 +113,10 @@ describe('config-helper', () => {
 	describe('API Config', () => {
 
 		const xeroConfig: IXeroClientConfiguration = {
-			AppType: 'partner',
-			ConsumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-			ConsumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-			PrivateKeyCert: validTestCertPath()
+			appType: 'partner',
+			consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+			consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+			privateKeyPath: validTestCertPath()
 		};
 		const apiConfig: IApiConfiguration = {
 			tenantType: 'PRACTICE'
