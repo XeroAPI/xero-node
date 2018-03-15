@@ -31,7 +31,6 @@ export class InMemoryOAuthLib {
 	private returnSessionHandle: string = null;
 	private lastRequestedBody: string = null;
 	private returnOauth_expires_in: string = null;
-	private getOAuthRequestToken_extraArgs: any = null;
 
 	constructor(private config?: IOAuth1Configuration) {
 	}
@@ -62,10 +61,6 @@ export class InMemoryOAuthLib {
 
 	public lastCalledThisVerb(verb: string) {
 		expect(this.lastCalledVerb).toBe(verb);
-	}
-
-	public getOAuthRequestToken_wasCalledWithArgs(args: any) {
-		expect(this.getOAuthRequestToken_extraArgs).toEqual(args);
 	}
 
 	public set_SwapRequestTokenforAccessToken(oauth_token: string, oauth_secret: string, oauth_expires_in: string, sessionHandle?: string) {
@@ -141,10 +136,8 @@ export class InMemoryOAuthLib {
 	}
 
 	public getOAuthRequestToken(
-		extraArgs: any,
 		callback: (err: any, oauth_token: string, oauth_token_secret: string, result: any) => any) {
-			this.getOAuthRequestToken_extraArgs = extraArgs;
-			callback(null, this.return_oauth_token, this.return_oauth_secret, null);
+		callback(null, this.return_oauth_token, this.return_oauth_secret, null);
 	}
 
 	public set__performSecureRequest(oauth_token: string, oauth_secret: string, sessionHandle?: string) {

@@ -70,8 +70,12 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 		if (!this.oAuthLibFactory) {
 			this.oAuthLibFactory = function(passedInConfig: IOAuth1Configuration) {
+				let requestTokenPath = passedInConfig.oauthRequestTokenPath;
+				if (passedInConfig.tenantType) {
+					requestTokenPath += `?tenantType=${passedInConfig.tenantType}`;
+				}
 				return new OAuth(
-					passedInConfig.apiBaseUrl + passedInConfig.oauthRequestTokenPath, 	// requestTokenUrl
+					passedInConfig.apiBaseUrl + requestTokenPath, 	// requestTokenUrl
 					passedInConfig.apiBaseUrl + passedInConfig.oauthAccessTokenPath, 	// accessTokenUrl
 					passedInConfig.consumerKey, 										// consumerKey
 					passedInConfig.consumerSecret,										// consumerSecret
@@ -93,11 +97,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public getUnauthorisedRequestToken = async () => {
 		return new Promise<void>((resolve, reject) => {
-			const args: any = {};
-			if (this.config.tenantType) {
-				args.tenantType = this.config.tenantType;
-			}
-			this.oauthLib.getOAuthRequestToken(args,
+			this.oauthLib.getOAuthRequestToken(
 				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
 					if (err) {
 						reject(new XeroAuthError(err.statusCode, err.data));
