@@ -1,4 +1,12 @@
-﻿export interface AttachmentsResponse extends AccountingResponse {
+﻿
+export interface AccountingResponse {
+	Id: string;
+	Status: string;
+	ProviderName: string;
+	DateTimeUTC: string;
+}
+
+export interface AttachmentsResponse extends AccountingResponse {
 	Attachments: Attachment[];
 }
 
@@ -48,13 +56,6 @@ export interface OrganisationResponse extends Organisation {
 
 export interface OnlineInvoice {
 	OnlineInvoiceUrl: string;
-}
-
-interface AccountingResponse {
-	Id: string;
-	Status: string;
-	ProviderName: string;
-	DateTimeUTC: string;
 }
 
 export interface Payment {
