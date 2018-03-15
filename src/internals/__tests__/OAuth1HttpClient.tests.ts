@@ -118,6 +118,10 @@ describe('OAuth1HttpClient', () => {
 			await oauth1HttpClient.getUnauthorisedRequestToken();
 		});
 
+		it('passes expected URL args', () => {
+			inMemoryOAuthLib.inMemoryOAuthLib.getOAuthRequestToken_wasCalledWithArgs({});
+		});
+
 		it('sets expected state', () => {
 			const state = oauth1HttpClient.getState();
 			expect(state.requestToken.oauth_token).toBe('aaa');
