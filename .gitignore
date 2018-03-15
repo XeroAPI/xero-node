@@ -11,3 +11,4 @@ scratch*
 partner-config.json
 xero-login.json
 oAuthState.json
+*.orig
