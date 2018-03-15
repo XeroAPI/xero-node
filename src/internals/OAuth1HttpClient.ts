@@ -95,7 +95,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 			this.oauthLib.getOAuthRequestToken(
 				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
 					if (err) {
-						reject(new XeroAuthError(err));
+						reject(new XeroAuthError(err.statusCode, err.data));
 					} else {
 						this.setState({
 							requestToken: {
@@ -122,7 +122,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				oauth_verifier,
 				(err: any, oauth_token: string, oauth_token_secret: string, results: {oauth_expires_in: number, oauth_session_handle: string, oauth_authorization_expires_in: string, xero_org_muid: string}) => {
 					if (err) {
-						reject(new XeroAuthError(err));
+						reject(new XeroAuthError(err.statusCode, err.data));
 					} else {
 						const currentMilliseconds = new Date().getTime();
 						const expDate = new Date(currentMilliseconds + (results.oauth_expires_in * 1000));
@@ -155,10 +155,10 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				null,
 				null,
 				(err: any, data: string) => {
-					const results = querystring.parse(data);
 					if (err) {
-						reject(new XeroAuthError(data));
+						reject(new XeroAuthError(err.statusCode, err.data));
 					} else {
+						const results = querystring.parse(data);
 						const newAccessToken: IToken = {
 							oauth_token: results.oauth_token as string,
 							oauth_token_secret: results.oauth_token_secret as string
@@ -196,6 +196,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public get = async <T>(endpoint: string, acceptType?: string): Promise<T> => {
 		return new Promise<T>((resolve, reject) => {
+			this.assertAccessTokenIsSet();
 			this.oauthLib.get(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
 				this._state.accessToken.oauth_token,
@@ -217,6 +218,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public put = async <T>(endpoint: string, body: object): Promise<T> => {
 		// this.checkAuthentication();
+		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.put(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
@@ -241,7 +243,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public post = async <T>(endpoint: string, body: object): Promise<T> => {
-		// this.checkAuthentication();
+		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.post(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
@@ -266,6 +268,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public delete = async <T>(endpoint: string): Promise<T> => {
+		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.delete(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
@@ -296,6 +299,12 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public setState(newState: Partial<IOAuth1State>) {
 		this._state = { ...this._state, ...newState };
+	}
+
+	private assertAccessTokenIsSet() {
+		if (!this._state.accessToken) {
+			throw new Error('Missing access token. Acquire a new access token by following the oauth flow or call setState() to use an existing token.');
+		}
 	}
 
 	// Monkey-patched OAuthLib _createClient function to add proxy support
