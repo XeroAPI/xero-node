@@ -9,7 +9,6 @@ import * as  fs from 'fs';
  * TODO: Add support for the following keys:
  *
  * - PrivateKeyPassword
- * - CallbackPath
  */
 export interface IXeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';

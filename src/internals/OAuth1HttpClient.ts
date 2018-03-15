@@ -116,7 +116,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public buildAuthoriseUrl = () => {
-		return `${this.config.apiBaseUrl}/oauth/Authorize?oauth_token=${this._state.requestToken.oauth_token}`; // TODO Check for callback URL
+		return `${this.config.apiBaseUrl}/oauth/Authorize?oauth_token=${this._state.requestToken.oauth_token}`;
 	}
 
 	public swapRequestTokenforAccessToken = async (oauth_verifier: string) => {
@@ -222,7 +222,6 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public put = async <T>(endpoint: string, body: object): Promise<T> => {
-		// this.checkAuthentication();
 		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.put(
@@ -238,7 +237,6 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 						reject(new XeroError(httpResponse.statusCode, data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
-						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
 						return resolve(toReturn);
 					}
 				}
@@ -263,7 +261,6 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 						reject(new XeroError(httpResponse.statusCode, data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
-						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
 						return resolve(toReturn);
 					}
 				}
@@ -289,8 +286,6 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 						if (data) {
 							toReturn = JSON.parse(data) as T;
 						}
-
-						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
 						return resolve(toReturn);
 					}
 				}

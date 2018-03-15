@@ -13,7 +13,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 	public accounts = {
 		get: async (args?: { AccountID: string }): Promise<AccountsResponse> => {
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
 			let endpoint = 'accounts';
 			if (args && args.AccountID) {
 				endpoint = endpoint + '/' + args.AccountID;
@@ -68,8 +67,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 		savePDF: async (args?: { InvoiceID: string, savePath: string }): Promise<void> => {
 			// TODO: Support invoice number
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
-			// TODO: Refactor duplication
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
@@ -82,7 +79,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 		create: async (invoice: Invoice | { Invoices: Invoice[] }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
 			const endpoint = 'invoices?summarizeErrors=false';
 
 			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
@@ -90,7 +86,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
 			let endpoint = `invoices`;
 
 			if (args && args.InvoiceID) {
@@ -108,7 +103,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 		updateMultiple: async (invoices: Invoice[]): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
 			let endpoint = `invoices`;
 
 			endpoint += '?summarizeErrors=false';
@@ -149,7 +143,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 		get: async (args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
 
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
 				endpoint = endpoint + '/' + args.ContactGroupID;
@@ -160,7 +153,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 		create: async (contactGroup: ContactGroup): Promise<ContactGroupsResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
 			const endpoint = 'contactgroups?summarizeErrors=false';
 
 			return this.oauth1Client.put<ContactGroupsResponse>(endpoint, contactGroup);
@@ -179,7 +171,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactGroupsResponse> => {
 				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 				// TODO: Support for where arg
-				// TODO: Summerize errors?
 				let endpoint = 'contactgroups';
 				if (args && args.ContactGroupID) {
 					endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
@@ -199,7 +190,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.get<CurrenciesResponse>(endpoint);
 		},
 		create: async (currency: Currency): Promise<CurrenciesResponse> => {
-			// TODO: Do we need to add summerazieErrors?
 			const endpoint = 'currencies';
 			return this.oauth1Client.put<CurrenciesResponse>(endpoint, currency);
 		}
@@ -208,7 +198,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 	public employees = {
 		get: async (args?: { EmployeeID: string }): Promise<EmployeesResponse> => {
 			// TODO: Support for where arg
-			// TODO: Summerize errors?
 			let endpoint = 'employees';
 			if (args && args.EmployeeID) {
 				endpoint = endpoint + '/' + args.EmployeeID;
