@@ -11,7 +11,7 @@
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
     "test-auth": "tsc --noEmit && jest ./src/__integration_tests__/partner-example.tests.ts --config ./jestconfig.js",
     "scratch": "ts-node ./src/scratch.ts",
-    "typedoc": "typedoc --mode file --external-aliases internalapi --exclude **/*_tests__/** --includeDeclarations --excludeExternals --target ES6 --out docs/ src/",
+    "typedoc": "typedoc --mode file --external-aliases internalapi --exclude **/*_tests__/** --includeDeclarations --excludeExternals --out docs/ src/",
     "create-key": "node ./.circleci/create_private_key.js"
   },
   "author": "Xero <api@xero.com>",

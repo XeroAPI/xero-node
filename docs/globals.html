@@ -79,6 +79,9 @@
 								<li class="tsd-kind-class"><a href="classes/accountingapiclient.html" class="tsd-kind-icon">AccountingAPIClient</a></li>
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/baseapiclient.html" class="tsd-kind-icon">BaseAPIClient</a></li>
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/oauth1httpclient.html" class="tsd-kind-icon">OAuth1<wbr>Http<wbr>Client</a></li>
+								<li class="tsd-kind-class"><a href="classes/practiceapiclient.html" class="tsd-kind-icon">PracticeAPIClient</a></li>
+								<li class="tsd-kind-class"><a href="classes/xeroautherror.html" class="tsd-kind-icon">Xero<wbr>Auth<wbr>Error</a></li>
+								<li class="tsd-kind-class"><a href="classes/xerohttperror.html" class="tsd-kind-icon">Xero<wbr>Http<wbr>Error</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -101,8 +104,8 @@
 								<li class="tsd-kind-interface"><a href="interfaces/employee.html" class="tsd-kind-icon">Employee</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/employeesresponse.html" class="tsd-kind-icon">Employees<wbr>Response</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/field.html" class="tsd-kind-icon">Field</a></li>
+								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/iapiconfiguration.html" class="tsd-kind-icon">IApi<wbr>Configuration</a></li>
 								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/ihttpclient.html" class="tsd-kind-icon">IHttp<wbr>Client</a></li>
-								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/ihttperror.html" class="tsd-kind-icon">IHttp<wbr>Error</a></li>
 								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/ioauth1client.html" class="tsd-kind-icon">IOAuth1<wbr>Client</a></li>
 								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/ioauth1configuration.html" class="tsd-kind-icon">IOAuth1<wbr>Configuration</a></li>
 								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/ioauth1httpclient.html" class="tsd-kind-icon">IOAuth1<wbr>Http<wbr>Client</a></li>
@@ -147,7 +150,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/utils.ts#L7">internals/utils.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/utils.ts#L7">internals/utils.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -164,19 +167,22 @@
 					<a name="mapconfig" class="tsd-anchor"></a>
 					<h3>map<wbr>Config</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">map<wbr>Config<span class="tsd-signature-symbol">(</span>xeroConfig<span class="tsd-signature-symbol">: </span><a href="interfaces/ixeroclientconfiguration.html" class="tsd-signature-type">IXeroClientConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/ioauth1configuration.html" class="tsd-signature-type">IOAuth1Configuration</a></li>
+						<li class="tsd-signature tsd-kind-icon">map<wbr>Config<span class="tsd-signature-symbol">(</span>xeroConfig<span class="tsd-signature-symbol">: </span><a href="interfaces/ixeroclientconfiguration.html" class="tsd-signature-type">IXeroClientConfiguration</a>, apiConfig<span class="tsd-signature-symbol">: </span><a href="interfaces/iapiconfiguration.html" class="tsd-signature-type">IApiConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/ioauth1configuration.html" class="tsd-signature-type">IOAuth1Configuration</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/config-helper.ts#L23">internals/config-helper.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/config-helper.ts#L27">internals/config-helper.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>xeroConfig: <a href="interfaces/ixeroclientconfiguration.html" class="tsd-signature-type">IXeroClientConfiguration</a></h5>
+								</li>
+								<li>
+									<h5>apiConfig: <a href="interfaces/iapiconfiguration.html" class="tsd-signature-type">IApiConfiguration</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="interfaces/ioauth1configuration.html" class="tsd-signature-type">IOAuth1Configuration</a></h4>
@@ -193,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/config-helper.ts#L8">internals/config-helper.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/config-helper.ts#L8">internals/config-helper.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -238,6 +244,15 @@
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/oauth1httpclient.html" class="tsd-kind-icon">OAuth1<wbr>Http<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/practiceapiclient.html" class="tsd-kind-icon">PracticeAPIClient</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/xeroautherror.html" class="tsd-kind-icon">Xero<wbr>Auth<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/xerohttperror.html" class="tsd-kind-icon">Xero<wbr>Http<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="interfaces/accountingresponse.html" class="tsd-kind-icon">Accounting<wbr>Response</a>
@@ -291,10 +306,10 @@
 						<a href="interfaces/field.html" class="tsd-kind-icon">Field</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="interfaces/ihttpclient.html" class="tsd-kind-icon">IHttp<wbr>Client</a>
+						<a href="interfaces/iapiconfiguration.html" class="tsd-kind-icon">IApi<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="interfaces/ihttperror.html" class="tsd-kind-icon">IHttp<wbr>Error</a>
+						<a href="interfaces/ihttpclient.html" class="tsd-kind-icon">IHttp<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/ioauth1client.html" class="tsd-kind-icon">IOAuth1<wbr>Client</a>

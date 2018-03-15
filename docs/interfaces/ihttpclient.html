@@ -88,6 +88,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external"><a href="ihttpclient.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external"><a href="ihttpclient.html#post" class="tsd-kind-icon">post</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external"><a href="ihttpclient.html#put" class="tsd-kind-icon">put</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ihttpclient.html#writeresponsetostream" class="tsd-kind-icon">write<wbr>Response<wbr>ToStream</a></li>
 							</ul>
 						</section>
 					</div>
@@ -105,7 +106,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L25">internals/BaseAPIClient.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L32">internals/BaseAPIClient.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -134,7 +135,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L24">internals/BaseAPIClient.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L31">internals/BaseAPIClient.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -166,7 +167,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L27">internals/BaseAPIClient.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L34">internals/BaseAPIClient.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -198,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/BaseAPIClient.ts#L26">internals/BaseAPIClient.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L33">internals/BaseAPIClient.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -217,6 +218,35 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+					<a name="writeresponsetostream" class="tsd-anchor"></a>
+					<h3>write<wbr>Response<wbr>ToStream</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Response<wbr>ToStream<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, mimeType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, writeStream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WriteStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L35">internals/BaseAPIClient.ts:35</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>endpoint: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>mimeType: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>writeStream: <span class="tsd-signature-type">WriteStream</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -248,6 +278,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external">
 								<a href="ihttpclient.html#put" class="tsd-kind-icon">put</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+								<a href="ihttpclient.html#writeresponsetostream" class="tsd-kind-icon">write<wbr>Response<wbr>ToStream</a>
 							</li>
 						</ul>
 					</li>
