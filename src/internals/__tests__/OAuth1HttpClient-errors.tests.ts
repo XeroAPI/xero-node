@@ -6,6 +6,7 @@ describe('OAuthClient and errors', () => {
 	const oauthConfig: IOAuth1Configuration = {
 		consumerKey: 'ck',
 		consumerSecret: 'cs',
+		tenantType: null,
 		apiBaseUrl: 'abu',
 		apiBasePath: 'abp',
 		oauthRequestTokenPath: 'ortp',

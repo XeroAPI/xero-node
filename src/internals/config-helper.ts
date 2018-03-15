@@ -1,7 +1,7 @@
 /** @internalapi */
 /** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
 
-import { IXeroClientConfiguration } from './BaseAPIClient';
+import { IXeroClientConfiguration, IApiConfiguration } from './BaseAPIClient';
 import { getStringFromFile } from './utils';
 import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
 
@@ -24,7 +24,7 @@ export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1S
 	}
 }
 
-export function mapConfig(xeroConfig: IXeroClientConfiguration): IOAuth1Configuration {
+export function mapConfig(xeroConfig: IXeroClientConfiguration, apiConfig: IApiConfiguration): IOAuth1Configuration {
 	const API_BASE = 'https://api.xero.com';
 	const API_BASE_PATH = '/api.xro/2.0/';
 	const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
@@ -41,6 +41,7 @@ export function mapConfig(xeroConfig: IXeroClientConfiguration): IOAuth1Configur
 		userAgent: 'NodeJS-XeroAPIClient.' + xeroConfig.ConsumerKey, // TODO add package.json version here
 		consumerKey: xeroConfig.ConsumerKey,
 		consumerSecret: xeroConfig.ConsumerSecret,
+		tenantType: null,
 		signatureMethod: undefined,
 		callbackUrl: xeroConfig.CallbackUrl ? xeroConfig.CallbackUrl : null
 	};

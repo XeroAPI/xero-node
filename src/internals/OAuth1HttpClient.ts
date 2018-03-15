@@ -24,6 +24,7 @@ export interface IOAuth1State {
 export interface IOAuth1Configuration {
 	consumerKey: string;
 	consumerSecret: string;
+	tenantType: string;
 
 	apiBaseUrl: string;
 	apiBasePath: string;
@@ -58,7 +59,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	private oauthLib: typeof OAuth;
 
-	public agent: http.Agent;
+	public agent: http.Agent = null;
 
 	constructor(private config: IOAuth1Configuration, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
 		this._state = {

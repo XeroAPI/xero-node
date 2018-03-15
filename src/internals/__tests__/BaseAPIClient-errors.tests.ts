@@ -27,7 +27,7 @@ describe('BaseAPIClient errors', () => {
 			};
 			// TODO: Move to test utils: GetTestClient() or something
 
-			const oauthClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLib.newFactory());
+			const oauthClient = new OAuth1HttpClient(mapConfig(xeroConfig, {}), inMemoryOAuthLib.newFactory());
 			oauthClient.setState(mapState(xeroConfig));
 			xeroClient = new TestAPIClient(xeroConfig, oauthClient);
 		});
