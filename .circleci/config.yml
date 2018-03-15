@@ -38,4 +38,14 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm test
+			- run:
+					command: npm run test-ci
+					environment:
+						JEST_JUNIT_OUTPUT: "reports/junit/test-results.xml"
+						JEST_JUNIT_CLASSNAME: "{classname}"
+						JEST_JUNIT_TITLE: "{title}"
+						JEST_JUNIT_ANCESTOR_SEPARATOR: " > "
+			- store_test_results:
+					path: reports/junit
+			- store_artifacts:
+          path: reports/junit

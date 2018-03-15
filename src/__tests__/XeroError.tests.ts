@@ -2,7 +2,6 @@ import { XeroError } from '../XeroError';
 import { isError } from 'util';
 
 interface IFixture {
-	type: any;
 	expectedMessage: string;
 	throwFn: () => never;
 }
@@ -10,11 +9,11 @@ interface IFixture {
 // tests based on https://gist.github.com/justmoon/15511f92e5216fa2624b
 describe('XeroError', () => {
 	const fixtures: IFixture[] = [
-		{ type: XeroError, expectedMessage: 'XeroError: token_rejected (Fix the problem)', throwFn: () => { throw new XeroError(502, 'oauth_problem=token_rejected&oauth_problem_advice=Fix%20the%20problem'); } },
-		{ type: XeroError, expectedMessage: 'XeroError: statusCode=404 (It went bad!)', throwFn: () => { throw new XeroError(404, 'It went bad!'); } }
+		{ expectedMessage: 'XeroError: token_rejected (Fix the problem)', throwFn: () => { throw new XeroError(502, 'oauth_problem=token_rejected&oauth_problem_advice=Fix%20the%20problem'); } },
+		{ expectedMessage: 'XeroError: statusCode=404 (It went bad!)', throwFn: () => { throw new XeroError(404, 'It went bad!'); } }
 	];
 	fixtures.map((fixture: IFixture) => {
-		describe(fixture.type.name, () => {
+		describe(fixture.expectedMessage, () => {
 			let error: XeroError;
 
 			beforeAll(() => {
@@ -25,8 +24,8 @@ describe('XeroError', () => {
 				}
 			});
 
-			it(`instanceof ${fixture.type.name}`, () => {
-				expect(error instanceof fixture.type).toBe(true);
+			it(`instanceof XeroError`, () => {
+				expect(error instanceof XeroError).toBe(true);
 			});
 
 			it('instanceof Error', () => {
