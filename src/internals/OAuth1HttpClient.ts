@@ -93,7 +93,11 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public getUnauthorisedRequestToken = async () => {
 		return new Promise<void>((resolve, reject) => {
-			this.oauthLib.getOAuthRequestToken(
+			const args: any = {};
+			if (this.config.tenantType) {
+				args.tenantType = this.config.tenantType;
+			}
+			this.oauthLib.getOAuthRequestToken(args,
 				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
 					if (err) {
 						reject(new XeroAuthError(err.statusCode, err.data));
