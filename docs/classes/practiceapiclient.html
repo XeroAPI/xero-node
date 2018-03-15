@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IHttpError | xero-node</title>
+	<title>PracticeAPIClient | xero-node</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="ihttperror.html">IHttpError</a>
+					<a href="practiceapiclient.html">PracticeAPIClient</a>
 				</li>
 			</ul>
-			<h1>Interface IHttpError</h1>
+			<h1>Class PracticeAPIClient</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IHttpError</span>
+						<a href="baseapiclient.html" class="tsd-signature-type">BaseAPIClient</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">PracticeAPIClient</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -76,35 +81,61 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-external">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="practiceapiclient.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ihttperror.html#body" class="tsd-kind-icon">body</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="ihttperror.html#statuscode" class="tsd-kind-icon">status<wbr>Code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="practiceapiclient.html#oauth1client" class="tsd-kind-icon">oauth1<wbr>Client</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-external">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="body" class="tsd-anchor"></a>
-					<h3>body</h3>
-					<div class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/OAuth1HttpClient.ts#L44">internals/OAuth1HttpClient.ts:44</a></li>
-						</ul>
-					</aside>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>PracticeAPIClient<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/ixeroclientconfiguration.html" class="tsd-signature-type">IXeroClientConfiguration</a>, _oAuth1HttpClient<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ioauth1httpclient.html" class="tsd-signature-type">IOAuth1HttpClient</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="practiceapiclient.html" class="tsd-signature-type">PracticeAPIClient</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="baseapiclient.html">BaseAPIClient</a>.<a href="baseapiclient.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/PracticeAPIClient.ts#L4">PracticeAPIClient.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/ixeroclientconfiguration.html" class="tsd-signature-type">IXeroClientConfiguration</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> _oAuth1HttpClient: <a href="../interfaces/ioauth1httpclient.html" class="tsd-signature-type">IOAuth1HttpClient</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="practiceapiclient.html" class="tsd-signature-type">PracticeAPIClient</a></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="statuscode" class="tsd-anchor"></a>
-					<h3>status<wbr>Code</h3>
-					<div class="tsd-signature tsd-kind-icon">status<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="oauth1client" class="tsd-anchor"></a>
+					<h3>oauth1<wbr>Client</h3>
+					<div class="tsd-signature tsd-kind-icon">oauth1<wbr>Client<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ioauth1httpclient.html" class="tsd-signature-type">IOAuth1HttpClient</a></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="baseapiclient.html">BaseAPIClient</a>.<a href="baseapiclient.html#oauth1client">oauth1Client</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/philals/xero-node-v3/blob/57c6b1c/src/internals/OAuth1HttpClient.ts#L43">internals/OAuth1HttpClient.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L40">internals/BaseAPIClient.ts:40</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -122,14 +153,14 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-is-external">
-						<a href="ihttperror.html" class="tsd-kind-icon">IHttp<wbr>Error</a>
+					<li class="current tsd-kind-class">
+						<a href="practiceapiclient.html" class="tsd-kind-icon">PracticeAPIClient</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ihttperror.html#body" class="tsd-kind-icon">body</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="practiceapiclient.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="ihttperror.html#statuscode" class="tsd-kind-icon">status<wbr>Code</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="practiceapiclient.html#oauth1client" class="tsd-kind-icon">oauth1<wbr>Client</a>
 							</li>
 						</ul>
 					</li>
