@@ -21,6 +21,7 @@ describe('OAuth1HttpClient', () => {
 	const oauthConfig: IOAuth1Configuration = {
 		consumerKey: 'ck',
 		consumerSecret: 'cs',
+		tenantType: null,
 		apiBaseUrl: 'abu',
 		apiBasePath: 'abp',
 		oauthRequestTokenPath: 'ortp',

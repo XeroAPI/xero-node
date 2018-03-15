@@ -1,10 +1,12 @@
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IOAuth1HttpClient } from '../OAuth1HttpClient';
+import { XeroHttpError } from '../../XeroErrors';
 
-describe('OAuthClient and erros', () => {
+describe('OAuthClient and errors', () => {
 	const oauthConfig: IOAuth1Configuration = {
 		consumerKey: 'ck',
 		consumerSecret: 'cs',
+		tenantType: null,
 		apiBaseUrl: 'abu',
 		apiBasePath: 'abp',
 		oauthRequestTokenPath: 'ortp',
@@ -48,26 +50,28 @@ describe('OAuthClient and erros', () => {
 		describe('on GETS', () => {
 			it('the error object conforms', async () => {
 
-				expect.assertions(2);
+				expect.assertions(3);
 
 				try {
 					await oAuthHttpClient.get('a/404/endpoint');
 				} catch (error) {
+					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
-					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
 			});
 		});
 
 		describe('on DELETES', () => {
 			it('the error object conforms', async () => {
-				expect.assertions(2);
+				expect.assertions(3);
 
 				try {
 					await oAuthHttpClient.delete('a/404/endpoint');
 				} catch (error) {
+					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
-					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
 			});
 
@@ -75,13 +79,14 @@ describe('OAuthClient and erros', () => {
 
 		describe('on PUT', () => {
 			it('the error object conforms', async () => {
-				expect.assertions(2);
+				expect.assertions(3);
 
 				try {
 					await oAuthHttpClient.put('a/404/endpoint', { phil: 'washere' });
 				} catch (error) {
+					expect(error).toBeInstanceOf(XeroHttpError);
 					expect(error.statusCode).toBe(404);
-					expect(error.body).toBe('The resource you\'re looking for cannot be found');
+					expect(error.data).toBe('The resource you\'re looking for cannot be found');
 				}
 			});
 

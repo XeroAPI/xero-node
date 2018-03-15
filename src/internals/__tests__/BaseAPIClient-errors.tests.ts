@@ -27,7 +27,7 @@ describe('BaseAPIClient errors', () => {
 			};
 			// TODO: Move to test utils: GetTestClient() or something
 
-			const oauthClient = new OAuth1HttpClient(mapConfig(xeroConfig), inMemoryOAuthLib.newFactory());
+			const oauthClient = new OAuth1HttpClient(mapConfig(xeroConfig, {}), inMemoryOAuthLib.newFactory());
 			oauthClient.setState(mapState(xeroConfig));
 			xeroClient = new TestAPIClient(xeroConfig, oauthClient);
 		});
@@ -38,7 +38,7 @@ describe('BaseAPIClient errors', () => {
 				await xeroClient.oauth1Client.get('endpoint');
 			} catch (error){
 				expect(error.statusCode).toEqual(404);
-				expect(error.body).toEqual('The resource you\'re looking for cannot be found');
+				expect(error.data).toEqual('The resource you\'re looking for cannot be found');
 			}
 		});
 	});

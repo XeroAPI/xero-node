@@ -11,13 +11,10 @@ export async function readLine(stringPrompt: string): Promise<string> {
 }
 
 export function getPrivateConfig() {
-
-	try {
+	if (!process.env.CI) {
 		const config = require('../private-config.json');
 		return config;
-
-	} catch (error) {
-		console.log('Using ENV VARS in CircleCI because', error.message);
+	} else {
 		return {
 			AppType: 'private',
 			ConsumerKey: process.env.ConsumerKey,
@@ -29,12 +26,10 @@ export function getPrivateConfig() {
 }
 
 export function getLoginConfig() {
-	try {
+	if (!process.env.CI) {
 		const config = require('../xero-login.json');
 		return config;
-
-	} catch (error) {
-		console.log('Using ENV VARS in CircleCI because', error.message);
+	} else {
 		return {
 			userName: process.env.UserName,
 			password: process.env.Password
@@ -44,12 +39,10 @@ export function getLoginConfig() {
 }
 
 export function getPartnerAppConfig() {
-	try {
+	if (!process.env.CI) {
 		const config = require('../partner-config.json');
 		return config;
-	}
-	catch (error) {
-		console.log('Using ENV VARS in CircleCI because', error.message);
+	} else {
 		return {
 			AppType: 'partner',
 			ConsumerKey: process.env.PartnerConsumerKey,

@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
-[![CircleCI](https://circleci.com/gh/philals/xero-node-v3/tree/master.svg?style=svg&circle-token=0a866212b40b6ecaa44f2f4fe98401b536a44038)](https://circleci.com/gh/philals/xero-node-v3/tree/master)
+[![CircleCI](https://circleci.com/gh/XeroAPI/xero-node/tree/v3.svg?style=svg)](https://circleci.com/gh/XeroAPI/xero-node/tree/v3)
 
 # node-xero
 
@@ -112,7 +112,7 @@ Replace the `example-config.json` with `config.json` in the [integration test di
 
 5. Minimal to no entity/request/response validation. A consumer will pass in JSON and get JSON out. There will be no manipulation of data along the way. Helper methods if asked for will be provided by a separate module. This will reduce maintenance costs.
 
-4. Unit tests
+4. Unit tests!
 
 5. Writing the SDK in Typescript will allow us to provide TS types for the API's contracts, and it's what we use internally at Xero. This will also aid in self-generated docs.
 
