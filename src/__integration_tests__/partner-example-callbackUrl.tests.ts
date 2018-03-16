@@ -13,7 +13,7 @@ describe('Partner Example Tests with callbackUrl', () => {
 	const AUTH_BUTTON_SELECTOR = '#submit-button';
 	const password_config = getLoginConfig();
 	const config = getPartnerAppConfig();
-	config.callbackUrl = 'http://localhost/oauth/callbackurl'; // Note you MUST add localhost as a callback domain in https://developer.xero.com/myapps
+	config.callbackUrl = 'https://developer.xero.com/xero-node-test/callbackurl'; // Note you MUST add localhost as a callback domain in https://developer.xero.com/myapps
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
 	let page: any;
