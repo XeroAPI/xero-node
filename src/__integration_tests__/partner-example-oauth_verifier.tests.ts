@@ -5,7 +5,8 @@ import { IOAuth1State } from '../internals/OAuth1HttpClient';
 
 setJestTimeout();
 
-describe('Partner Example Tests using oauth_verifier', () => {
+// Skipped as we cannot run this and the other example in parallel as one de-auths the other
+describe.skip('Partner Example Tests using oauth_verifier', () => {
 	const USERNAME_SELECTOR = '#email';
 	const PASSWORD_SELECTOR = '#password';
 	const LOGIN_BUTTON_SELECTOR = '#submitButton';
@@ -14,7 +15,6 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	const config = getPartnerAppConfig();
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
-	let browser: any;
 	let page: any;
 	let oauth_verifier: string;
 
@@ -23,7 +23,7 @@ describe('Partner Example Tests using oauth_verifier', () => {
 		authUrl = accounting1.oauth1Client.buildAuthoriseUrl();
 
 		// Direct user to the authorise URL
-		browser = await puppeteer.launch({
+		const browser = await puppeteer.launch({
 			headless: true,
 		});
 		page = await browser.newPage();

@@ -16,7 +16,6 @@ describe('Partner Example Tests with callbackUrl', () => {
 	config.callbackUrl = 'http://localhost/oauth/callbackurl'; // Note you MUST add localhost as a callback domain in https://developer.xero.com/myapps
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
-	let browser: any;
 	let page: any;
 	let oauth_verifier: string;
 
@@ -25,7 +24,7 @@ describe('Partner Example Tests with callbackUrl', () => {
 		authUrl = accounting1.oauth1Client.buildAuthoriseUrl();
 
 		// Direct user to the authorise URL
-		browser = await puppeteer.launch({
+		const browser = await puppeteer.launch({
 			headless: true,
 		});
 		page = await browser.newPage();
@@ -79,7 +78,7 @@ describe('Partner Example Tests with callbackUrl', () => {
 
 		describe('OAuth State', () => {
 			let state: IOAuth1State;
-			let accounting2: AccountingAPIClient;
+			let accounting2_callback: AccountingAPIClient;
 			it('it allows you to keep copy of the state in your own dadtastore', async () => {
 				// Saves your state to your datastore
 				state = await accounting1.oauth1Client.getState();
@@ -92,14 +91,14 @@ describe('Partner Example Tests with callbackUrl', () => {
 			});
 
 			it('it allows you to restore a new instance of the client next time your user logs in', async () => {
-				accounting2 = new AccountingAPIClient(config);
+				accounting2_callback = new AccountingAPIClient(config);
 				// Get state from your data store
-				accounting2.oauth1Client.setState(state);
-				expect(accounting2.oauth1Client.getState()).toMatchObject(state);
+				accounting2_callback.oauth1Client.setState(state);
+				expect(accounting2_callback.oauth1Client.getState()).toMatchObject(state);
 			});
 
 			it('it lets you make API calls using the restored state', async () => {
-				const inv3 = await accounting2.invoices.get();
+				const inv3 = await accounting2_callback.invoices.get();
 				expect(inv3.Status).toEqual('OK');
 			});
 		});
