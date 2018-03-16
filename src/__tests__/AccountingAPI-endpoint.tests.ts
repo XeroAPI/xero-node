@@ -1,35 +1,24 @@
 import { IXeroClientConfiguration } from '../internals/BaseAPIClient';
-import { OAuth1HttpClient, IOAuth1State, IOAuth1HttpClient } from '../internals/OAuth1HttpClient';
+import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { mapState, mapConfig } from '../internals/config-helper';
 import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
 import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/InMemoryOAuthLib';
-import * as fs from 'fs';
-import * as path from 'path';
+import { IFixture, IEndPointDetails } from './helpers/IFixture';
 
-const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
-const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
-const guid2 = '857c9e3f-640a-4df2-99fd-dd0e52a785e7';
+describe('AccountingAPI endpoints', () => {
 
-export interface IEndPointDetails {
-	action: string;
-	expectedPath: string;
-	subResource?: string;
-	args?: any;
-}
+	const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
+	const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
+	const guid2 = '857c9e3f-640a-4df2-99fd-dd0e52a785e7';
 
-export interface IFixture {
-	[key: string]: IEndPointDetails[];
-}
+	const xeroConfig: IXeroClientConfiguration = {
+		appType: 'private',
+		consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+		consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+		privateKeyPath: validTestCertPath()
+	};
 
-const xeroConfig: IXeroClientConfiguration = {
-	appType: 'private',
-	consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-	consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-	privateKeyPath: validTestCertPath()
-};
-
-describe('AccountingAPI', () => {
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
 	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig, {}), inMemoryOAuthLibFF.newFactory());
@@ -121,199 +110,6 @@ describe('AccountingAPI', () => {
 				it('matches the expected response', () => {
 					expect(result).toMatchObject(JSON.parse(mockedResponse));
 				});
-			});
-		});
-
-	});
-});
-
-describe('Endpoints with attachments', () => {
-	const writeResponseToStreamSpy = jest.fn();
-	const oAuth1HttpClient: IOAuth1HttpClient = {
-		get: undefined,
-		put: undefined,
-		post: undefined,
-		delete: undefined,
-		writeResponseToStream: writeResponseToStreamSpy,
-		setState: undefined,
-		getState: undefined,
-		getUnauthorisedRequestToken: undefined,
-		buildAuthoriseUrl: undefined,
-		swapRequestTokenforAccessToken: undefined,
-		refreshAccessToken: undefined
-	};
-
-	const tempAttachmentLocation = path.resolve(__dirname, 'temp-image.jpg');
-
-	// Invoices [x]
-	// Receipts [ ]
-	// Credit Notes [ ]
-	// Repeating Invoices [ ]
-	// Bank Transactions [ ]
-	// Bank Transfers [ ]
-	// Contacts [x]
-	// Accounts [ ]
-	// Manual Journals [ ]
-
-	const fixtures: IFixture = {
-		invoices: [
-			{ action: 'downloadAttachment', expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
-		],
-		contacts: [
-			{ action: 'downloadAttachment', expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
-		]
-	};
-
-	const actionToSpyMap: { [key: string]: jest.Mock<{}> } = {
-		downloadAttachment: writeResponseToStreamSpy
-	};
-
-	Object.keys(fixtures).map((endpoint: string) => {
-		(fixtures[endpoint]).map((fixture: IEndPointDetails) => {
-
-			describe(`${endpoint} attachments & ${fixture.action} calls`, () => {
-				let result: any;
-
-				beforeAll(async () => {
-					jest.resetAllMocks();
-
-					const streamToUse = fs.createReadStream(path.resolve(__dirname, 'helpers/bean.jpg'));
-					writeResponseToStreamSpy.mockImplementation((endpointPath: string, mimeType: string, writeStream: fs.WriteStream) => {
-						return new Promise<void>((resolve, reject) => {
-							streamToUse.pipe(writeStream);
-							streamToUse.on('end', () => {
-								resolve();
-							});
-						});
-					});
-
-					const xeroClient = new AccountingAPIClient(xeroConfig, oAuth1HttpClient);
-
-					result = await (xeroClient as any)[endpoint]['attachments'][fixture.action](fixture.args);
-				});
-
-				it(`calls the underlying HTTPClient method`, () => {
-					expect(actionToSpyMap[fixture.action]).toHaveBeenCalledTimes(1);
-				});
-
-				it(`calls HTTPClient with endpoint=${fixture.expectedPath}`, () => {
-					expect(actionToSpyMap[fixture.action].mock.calls[0][0]).toEqual(fixture.expectedPath);
-				});
-
-				it(`calls HTTPClient with mimeType=${fixture.args.mimeType}`, () => {
-					expect(actionToSpyMap[fixture.action].mock.calls[0][1]).toEqual(fixture.args.mimeType);
-				});
-
-				it(`calls HTTPClient with writeStream path=${tempAttachmentLocation}`, () => {
-					const writeStream = actionToSpyMap[fixture.action].mock.calls[0][2];
-					expect(writeStream).toHaveProperty('path');
-					expect(writeStream.path).toEqual(tempAttachmentLocation);
-				});
-
-				it('result is undefined', () => {
-					expect(result).toBeUndefined();
-				});
-
-				it('saves attachment to disk', async () => {
-					expect(fs.existsSync(tempAttachmentLocation)).toBeTruthy();
-					const stat = fs.statSync(tempAttachmentLocation);
-					expect(stat.size).toBe(23951);
-				});
-
-				afterAll(() => {
-					fs.unlinkSync(tempAttachmentLocation);
-				});
-			});
-		});
-	});
-});
-
-describe('AccountingAPIClient', () => {
-	// Added these as there was some weird this stuff happeneing. Could be temp.
-	let accountClient: AccountingAPIClient;
-
-	const defaultState: IOAuth1State = {
-		requestToken: {
-			oauth_token: 'test3',
-			oauth_token_secret: 'test4'
-		},
-		accessToken: {
-			oauth_token: 'test7',
-			oauth_token_secret: 'test8'
-		},
-		oauth_session_handle: 'test9'
-	};
-
-	const xeroPartnerConfig: IXeroClientConfiguration = {
-		appType: 'partner',
-		consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-		consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-		privateKeyPath: validTestCertPath()
-	};
-
-	describe('and setting state', () => {
-
-		beforeEach(() => {
-			accountClient = new AccountingAPIClient(xeroPartnerConfig);
-			accountClient.oauth1Client.setState(defaultState);
-		});
-
-		it('matches what it was set to', () => {
-			expect(accountClient.oauth1Client.getState()).toMatchObject(defaultState);
-		});
-
-		it('only overrides the accessToken keys', () => {
-			accountClient.oauth1Client.setState({
-				accessToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
-			});
-
-			expect(accountClient.oauth1Client.getState()).not.toEqual(defaultState);
-			expect(accountClient.oauth1Client.getState()).toEqual({
-				requestToken: {
-					oauth_token: 'test3',
-					oauth_token_secret: 'test4'
-				},
-				accessToken: {
-					oauth_token: 'something new',
-					oauth_token_secret: 'something borrowed'
-				},
-				oauth_session_handle: 'test9'
-			});
-		});
-
-		it('only overrides the requestToken keys', () => {
-			accountClient.oauth1Client.setState({ oauth_session_handle: 'yoyo' });
-
-			expect(accountClient.oauth1Client.getState()).not.toEqual(defaultState);
-			expect(accountClient.oauth1Client.getState()).toEqual({
-				requestToken: {
-					oauth_token: 'test3',
-					oauth_token_secret: 'test4'
-				},
-				accessToken: {
-					oauth_token: 'test7',
-					oauth_token_secret: 'test8'
-				},
-				oauth_session_handle: 'yoyo'
-			});
-		});
-
-		it('only overrides the oauth_session_handle keys', () => {
-			accountClient.oauth1Client.setState({
-				requestToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
-			});
-
-			expect(accountClient.oauth1Client.getState()).not.toEqual(defaultState);
-			expect(accountClient.oauth1Client.getState()).toEqual({
-				requestToken: {
-					oauth_token: 'something new',
-					oauth_token_secret: 'something borrowed'
-				},
-				accessToken: {
-					oauth_token: 'test7',
-					oauth_token_secret: 'test8'
-				},
-				oauth_session_handle: 'test9'
 			});
 		});
 
