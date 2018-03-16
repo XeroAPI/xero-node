@@ -49,8 +49,6 @@ describe('Partner Example Tests with callbackUrl', () => {
 
 		const pageUrl = page.url(); // This is the URL that your customer gets redirected back to
 
-		console.log('pageUrl: ', pageUrl);
-
 		const querystrings = querystring.parse(pageUrl);
 		oauth_verifier = querystrings.oauth_verifier as string;
 
