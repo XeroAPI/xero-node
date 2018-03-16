@@ -37,10 +37,7 @@ describe('OAuthClient and errors', () => {
 			const inMemoryOAuthFF = new InMemoryOAuthLibFactoryFactory();
 
 			// This is what the API returns
-			inMemoryOAuthFF.inMemoryOAuthLib.callbackResultsForNextCall({
-				statusCode: 404,
-				data: 'The resource you\'re looking for cannot be found'
-			}, `The resource you're looking for cannot be found`, { statusCode: 404 });
+			inMemoryOAuthFF.inMemoryOAuthLib.setResponse(true, `The resource you're looking for cannot be found`, { statusCode: 404 });
 
 			oAuthHttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthFF.newFactory());
 

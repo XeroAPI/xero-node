@@ -19,7 +19,7 @@ export class InMemoryOAuthLibFactoryFactory {
 export class InMemoryOAuthLib {
 
 	[x: string]: any;
-	private returnErr: any = null;
+	private isErr: boolean = null;
 	private returnData: any = null;
 	private returnHttpResponse: any = null;
 	private lastCalledUrl = '';
@@ -45,7 +45,7 @@ export class InMemoryOAuthLib {
 	}
 
 	public reset() {
-		this.returnErr = null;
+		this.isErr = undefined;
 		this.returnData = null;
 		this.returnHttpResponse = null;
 		this.lastCalledUrl = '';
@@ -85,7 +85,7 @@ export class InMemoryOAuthLib {
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
 		this.lastCalledVerb = 'get';
-		callback(this.returnErr, this.returnData, this.returnHttpResponse);
+		callback(this.isErr, this.returnData, this.returnHttpResponse);
 	}
 
 	public post(
@@ -98,7 +98,7 @@ export class InMemoryOAuthLib {
 		this.lastCalledUrl = url;
 		this.lastCalledVerb = 'post';
 		this.lastRequestedBody = body;
-		callback(this.returnErr, this.returnData, this.returnHttpResponse);
+		callback(this.isErr, this.returnData, this.returnHttpResponse);
 	}
 
 	public delete(
@@ -108,7 +108,7 @@ export class InMemoryOAuthLib {
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
 		this.lastCalledVerb = 'delete';
-		callback(this.returnErr, this.returnData, this.returnHttpResponse);
+		callback(this.isErr, this.returnData, this.returnHttpResponse);
 	}
 
 	public put(
@@ -121,11 +121,11 @@ export class InMemoryOAuthLib {
 		this.lastCalledUrl = url;
 		this.lastRequestedBody = body;
 		this.lastCalledVerb = 'put';
-		callback(this.returnErr, this.returnData, this.returnHttpResponse);
+		callback(this.isErr, this.returnData, this.returnHttpResponse);
 	}
 
-	public callbackResultsForNextCall(returnGetErr: any, returnGetData: string, returnGetHttpResponse: any) {
-		this.returnErr = returnGetErr;
+	public setResponse(isErr: boolean, returnGetData: string, returnGetHttpResponse: any) {
+		this.isErr = true;
 		this.returnData = returnGetData;
 		this.returnHttpResponse = returnGetHttpResponse;
 	}

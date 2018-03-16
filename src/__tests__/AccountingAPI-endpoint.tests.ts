@@ -86,7 +86,7 @@ describe('AccountingAPI endpoints', () => {
 
 				beforeAll(async () => {
 					inMemoryOAuthLibFF.inMemoryOAuthLib.reset();
-					inMemoryOAuthLibFF.inMemoryOAuthLib.callbackResultsForNextCall(null, mockedResponse, { statusCode: 200 });
+					inMemoryOAuthLibFF.inMemoryOAuthLib.setResponse(false, mockedResponse, { statusCode: 200 });
 
 					// tslint:disable-next-line:prefer-conditional-expression
 					if (fixture.subResource) {
