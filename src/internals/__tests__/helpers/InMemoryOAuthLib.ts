@@ -31,6 +31,7 @@ export class InMemoryOAuthLib {
 	private returnSessionHandle: string = null;
 	private lastRequestedBody: string = null;
 	private returnOauth_expires_in: string = null;
+	public _headers: any;
 
 	constructor(private config?: IOAuth1Configuration) {
 	}

@@ -165,4 +165,113 @@ describe('OAuth1HttpClient', () => {
 			});
 		});
 	});
+
+	describe('and using custom headers', () => {
+		const defaultHeaders = {
+			'Accept': 'application/json',
+			'User-Agent': 'ua'
+		};
+
+		describe('on get()', () => {
+
+			it('uses default custom header', () => {
+				oauth1HttpClient.get('someEndpoing');
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual(defaultHeaders);
+			});
+
+			it('adds a custom headers when passed in', () => {
+				oauth1HttpClient.get('someEndpoing', { randomHeader: 'valuehere' });
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual({ ...defaultHeaders, ...{ randomHeader: 'valuehere' } });
+			});
+
+			it('then is back to default for next call', () => {
+				oauth1HttpClient.get('someEndpoing');
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual(defaultHeaders);
+			});
+
+			it('can override default Accept type', () => {
+				oauth1HttpClient.get('someEndpoing', { Accept: 'application/pea' });
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual({
+					'Accept': 'application/pea',
+					'User-Agent': 'ua'
+				});
+			});
+		});
+
+		describe('on put()', () => {
+			it('uses default custom header', () => {
+				oauth1HttpClient.put('someEndpoing', {});
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual(defaultHeaders);
+			});
+
+			it('adds a custom headers when passed in', () => {
+				oauth1HttpClient.put('someEndpoing', {}, { randomHeader: 'valuehere' });
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual({ ...defaultHeaders, ...{ randomHeader: 'valuehere' } });
+			});
+
+			it('then is back to default for next call', () => {
+				oauth1HttpClient.put('someEndpoing', {});
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual(defaultHeaders);
+			});
+
+			it('can override default Accept type', () => {
+				oauth1HttpClient.put('someEndpoing', {}, { Accept: 'application/pea' });
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual({
+					'Accept': 'application/pea',
+					'User-Agent': 'ua'
+				});
+			});
+		});
+
+		describe('on post()', () => {
+			it('uses default custom header', () => {
+				oauth1HttpClient.post('someEndpoing', {});
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual(defaultHeaders);
+			});
+
+			it('adds a custom headers when passed in', () => {
+				oauth1HttpClient.post('someEndpoing', {}, { randomHeader: 'valuehere' });
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual({ ...defaultHeaders, ...{ randomHeader: 'valuehere' } });
+			});
+
+			it('then is back to default for next call', () => {
+				oauth1HttpClient.post('someEndpoing', {});
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual(defaultHeaders);
+			});
+
+			it('can override default Accept type', () => {
+				oauth1HttpClient.post('someEndpoing', {}, { Accept: 'application/pea' });
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual({
+					'Accept': 'application/pea',
+					'User-Agent': 'ua'
+				});
+			});
+		});
+
+		describe('on delete()', () => {
+
+			it('uses default custom header', () => {
+				oauth1HttpClient.delete('someEndpoing');
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual(defaultHeaders);
+			});
+
+			it('adds a custom headers when passed in', () => {
+				oauth1HttpClient.delete('someEndpoing', { randomHeader: 'valuehere' });
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual({ ...defaultHeaders, ...{ randomHeader: 'valuehere' } });
+			});
+
+			it('then is back to default for next call', () => {
+				oauth1HttpClient.delete('someEndpoing');
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual(defaultHeaders);
+			});
+
+			it('can override default Accept type', () => {
+				oauth1HttpClient.delete('someEndpoing', { Accept: 'application/pea' });
+				expect(inMemoryOAuthLib.inMemoryOAuthLib._headers).toEqual({
+					'Accept': 'application/pea',
+					'User-Agent': 'ua'
+				});
+			});
+		});
+	});
 });

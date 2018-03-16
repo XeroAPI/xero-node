@@ -61,6 +61,15 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public agent: http.Agent = null;
 
+	private _defaultHeaders = {
+		'Accept': 'application/json',
+		'User-Agent': this.config.userAgent
+	};
+
+	private resetToDefaultHeaders() {
+		this.oauthLib._headers = this._defaultHeaders;
+	}
+
 	constructor(private config: IOAuth1Configuration, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
 		this._state = {
 			requestToken: null,
@@ -96,6 +105,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public getUnauthorisedRequestToken = async () => {
+		this.resetToDefaultHeaders();
 		return new Promise<void>((resolve, reject) => {
 			this.oauthLib.getOAuthRequestToken(
 				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
@@ -120,12 +130,13 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public swapRequestTokenforAccessToken = async (oauth_verifier: string) => {
+		this.resetToDefaultHeaders();
 		return new Promise<void>((resolve, reject) => {
 			this.oauthLib.getOAuthAccessToken(
 				this._state.requestToken.oauth_token,
 				this._state.requestToken.oauth_token_secret,
 				oauth_verifier,
-				(err: any, oauth_token: string, oauth_token_secret: string, results: {oauth_expires_in: number, oauth_session_handle: string, oauth_authorization_expires_in: string, xero_org_muid: string}) => {
+				(err: any, oauth_token: string, oauth_token_secret: string, results: { oauth_expires_in: number, oauth_session_handle: string, oauth_authorization_expires_in: string, xero_org_muid: string }) => {
 					if (err) {
 						reject(new XeroError(err.statusCode, err.data));
 					} else {
@@ -177,6 +188,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public writeResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
+		this.resetToDefaultHeaders();
 		return new Promise<void>((resolve, reject) => {
 			this.assertAccessTokenIsSet();
 			const oauthForPdf = this.oAuthLibFactory({ ...this.config, ...{ accept: mimeType } });
@@ -199,7 +211,9 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public get = async <T>(endpoint: string): Promise<T> => {
+	public get = async <T>(endpoint: string, customHeaders?: any): Promise<T> => {
+		this.resetToDefaultHeaders();
+		this.oauthLib._headers = {...this._defaultHeaders, ...customHeaders};
 		return new Promise<T>((resolve, reject) => {
 			this.assertAccessTokenIsSet();
 			this.oauthLib.get(
@@ -221,7 +235,9 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public put = async <T>(endpoint: string, body: object): Promise<T> => {
+	public put = async <T>(endpoint: string, body: object, customHeaders?: any): Promise<T> => {
+		this.resetToDefaultHeaders();
+		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
 		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.put(
@@ -245,7 +261,9 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public post = async <T>(endpoint: string, body: object): Promise<T> => {
+	public post = async <T>(endpoint: string, body: object, customHeaders?: any): Promise<T> => {
+		this.resetToDefaultHeaders();
+		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
 		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.post(
@@ -269,7 +287,9 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public delete = async <T>(endpoint: string): Promise<T> => {
+	public delete = async <T>(endpoint: string, customHeaders?: any): Promise<T> => {
+		this.resetToDefaultHeaders();
+		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
 		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.delete(
