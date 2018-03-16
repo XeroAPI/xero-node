@@ -125,7 +125,7 @@ export class InMemoryOAuthLib {
 	}
 
 	public setResponse(isErr: boolean, returnGetData: string, returnGetHttpResponse: any) {
-		this.isErr = true;
+		this.isErr = isErr;
 		this.returnData = returnGetData;
 		this.returnHttpResponse = returnGetHttpResponse;
 	}
