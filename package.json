@@ -11,6 +11,7 @@
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
     "test-auth": "tsc --noEmit && jest ./src/__integration_tests__/partner-example.tests.ts --config ./jestconfig.js",
+    "test-ci": "tsc --noEmit && jest --config ./jestconfig.js --ci --testResultsProcessor=jest-junit",
     "scratch": "ts-node ./src/scratch.ts",
     "typedoc": "typedoc --mode file --external-aliases internalapi --exclude **/*_tests__/** --includeDeclarations --excludeExternals --out docs/ src/",
     "create-key": "node ./.circleci/create_private_key.js"
@@ -29,6 +30,7 @@
     "@types/node": "^9.4.0",
     "@types/puppeteer": "^1.1.0",
     "jest": "^22.1.4",
+    "jest-junit": "^3.6.0",
     "nodemon": "^1.14.12",
     "opn": "^5.2.0",
     "prompt": "^1.0.0",

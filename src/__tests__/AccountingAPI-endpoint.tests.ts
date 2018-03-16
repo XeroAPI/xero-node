@@ -29,7 +29,7 @@ const xeroConfig: IXeroClientConfiguration = {
 	privateKeyPath: validTestCertPath()
 };
 
-describe('Endpoint: ', () => {
+describe('AccountingAPI', () => {
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
 	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig, {}), inMemoryOAuthLibFF.newFactory());
@@ -82,7 +82,7 @@ describe('Endpoint: ', () => {
 	Object.keys(fixtures).map((endpoint: string) => {
 		(fixtures[endpoint]).map((fixture: IEndPointDetails) => {
 
-			describe(`${endpoint} ${fixture.subResource} & ${fixture.action} calls`, () => {
+			describe(`${endpoint} ${fixture.subResource || ''}.${fixture.action}(${fixture.args ? Object.keys(fixture.args) : ''})`, () => {
 				let result: any;
 
 				const mockedResponse = JSON.stringify({ a: 'response' });
@@ -127,7 +127,7 @@ describe('Endpoint: ', () => {
 	});
 });
 
-describe('Endpoints with attachments on them: ', () => {
+describe('Endpoints with attachments', () => {
 	const writeResponseToStreamSpy = jest.fn();
 	const oAuth1HttpClient: IOAuth1HttpClient = {
 		get: undefined,

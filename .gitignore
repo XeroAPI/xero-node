@@ -12,3 +12,4 @@ partner-config.json
 xero-login.json
 oAuthState.json
 *.orig
+*junit.xml
