@@ -51,6 +51,11 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=false`, args: { InvoiceNumber: 'INV-123' } },
 		],
+		organisation: [
+			{ action: 'get', expectedPath: 'organisation' },
+			{ action: 'get', expectedPath: `organisation/${guid1}`, args: { OrganisationID: guid1 } },
+			{ subResource: 'getCISSetting', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
+		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
 			{ action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },

@@ -50,8 +50,12 @@ export interface OnlineInvoicesResponse extends AccountingResponse {
 	OnlineInvoices: OnlineInvoice[];
 }
 
-export interface OrganisationResponse extends Organisation {
+export interface OrganisationResponse {
 	Organisations: Organisation[];
+}
+
+export interface OrganisationCISSettingResponse {
+	CISSettings: OrgCISSetting[];
 }
 
 export interface OnlineInvoice {
@@ -249,6 +253,10 @@ export interface Organisation {
 	ShortCode: string;
 	OrganisationID: string;
 	LineOfBusiness: string;
+}
+export interface OrgCISSetting {
+	CISContractorEnabled: boolean,
+	CISSubContractorEnabled: boolean
 }
 export interface Tracking {
 	Name?: string;

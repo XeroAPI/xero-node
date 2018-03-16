@@ -1,4 +1,4 @@
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import * as fs from 'fs';
@@ -208,6 +208,29 @@ export class AccountingAPIClient extends BaseAPIClient {
 		create: async (employee: Employee): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
 			return this.oauth1Client.put<any>(endpoint, employee);
+		}
+	};
+
+	public organisation = {
+		get: async (args?: { OrganisationID: string }): Promise<OrganisationResponse> => {
+			// TODO: Support for where arg
+			let endpoint = 'organisation';
+			if (args && args.OrganisationID) {
+				endpoint = endpoint + '/' + args.OrganisationID;
+			}
+			// TODO: Type
+			return this.oauth1Client.get<any>(endpoint);
+		},
+		getCISSetting: {
+			get: async (args: { OrganisationID: string }): Promise<OrganisationResponse> => {
+				// TODO: Support for where arg
+				let endpoint = 'organisation';
+				if (args && args.OrganisationID) {
+					endpoint = endpoint + '/' + args.OrganisationID +'/CISSettings';
+				}
+				// TODO: Type
+				return this.oauth1Client.get<any>(endpoint);
+			}
 		}
 	};
 
