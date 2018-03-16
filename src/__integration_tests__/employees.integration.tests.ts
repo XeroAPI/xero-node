@@ -14,11 +14,11 @@ describe('Employees endpoint', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
-	// need to work out how to delete/archive employees so we can clean up
+	// need to work out how to delete/archive employees so we can create unique contacts and clean up
 	it.skip('create single', async () => {
 		const response = await xero.employees.create({
 			FirstName: 'Bryan',
-			LastName: 'Tee' + Math.random().toPrecision(4).toString()
+			LastName: 'Tee'
 		});
 
 		collectEmployeesToArchive(response);
