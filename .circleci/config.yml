@@ -41,11 +41,11 @@ jobs:
       - run:
           command: npm run test-ci
           environment:
-            JEST_JUNIT_OUTPUT: jest/test-results.xml
+            JEST_JUNIT_OUTPUT: artifacts/jest/test-results.xml
             JEST_JUNIT_CLASSNAME: "{classname}"
             JEST_JUNIT_TITLE: "{title}"
             JEST_JUNIT_ANCESTOR_SEPARATOR: " > "
       - store_test_results:
-          path: jest
+          path: artifacts
       - store_artifacts:
-          path: jest
+          path: artifacts
