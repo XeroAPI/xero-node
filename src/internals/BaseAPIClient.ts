@@ -27,7 +27,7 @@ export interface IApiConfiguration {
 }
 
 export interface IHttpClient {
-	get<T>(endpoint: string, acceptType?: string): Promise<T>;
+	get<T>(endpoint: string): Promise<T>;
 	delete<T>(endpoint: string): Promise<T>;
 	put<T>(endpoint: string, body: object): Promise<T>;
 	post<T>(endpoint: string, body: object): Promise<T>;

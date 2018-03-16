@@ -199,7 +199,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public get = async <T>(endpoint: string, acceptType?: string): Promise<T> => {
+	public get = async <T>(endpoint: string): Promise<T> => {
 		return new Promise<T>((resolve, reject) => {
 			this.assertAccessTokenIsSet();
 			this.oauthLib.get(
