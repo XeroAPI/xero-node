@@ -266,9 +266,10 @@ export interface Tracking {
 }
 
 export interface Employee {
-	Status?: 'Active' | 'Archive';
-	FirstName: string;
-	LastName: string;
+	EmployeeID?: string;
+	Status?: string;
+	FirstName?: string;
+	LastName?: string;
 	ExternalLink?: any;
 }
 

@@ -208,6 +208,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 		create: async (employee: Employee): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
 			return this.oauth1Client.put<any>(endpoint, employee);
+		},
+		updateMultiple: async (employees: { Employees: Employee[] }): Promise<EmployeesResponse> => {
+			const endpoint = 'employees';
+			return this.oauth1Client.post<any>(endpoint, employees);
 		}
 	};
 
@@ -226,7 +230,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				// TODO: Support for where arg
 				let endpoint = 'organisation';
 				if (args && args.OrganisationID) {
-					endpoint = endpoint + '/' + args.OrganisationID +'/CISSettings';
+					endpoint = endpoint + '/' + args.OrganisationID + '/CISSettings';
 				}
 				// TODO: Type
 				return this.oauth1Client.get<any>(endpoint);
