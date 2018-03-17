@@ -79,6 +79,18 @@ export class InMemoryOAuthLib {
 		}
 	}
 
+	public lastHadThisHeader(expectedHeader: any) {
+		if (expectedHeader) {
+			expect(this._headers).toEqual({
+				...{
+					'Accept': 'application/json',
+					'User-Agent': 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C'
+				// tslint:disable-next-line:align
+				}, ...expectedHeader
+			});
+		}
+	}
+
 	public get(
 		url: string,
 		oauthToken: string,

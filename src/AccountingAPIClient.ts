@@ -23,7 +23,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, page?: number, order?: string, where?: string, InvoiceNumber?: string, createdByMyApp?: boolean, queryParams?: string }): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, page?: number, order?: string, where?: string, createdByMyApp?: boolean, queryParams?: string, headers?: { [key: string]: string } }): Promise<InvoicesResponse> => {
 			// TODO: Support Modified After header
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
@@ -62,7 +62,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				}
 			}
 
-			return this.oauth1Client.get<InvoicesResponse>(endpoint);
+			return this.oauth1Client.get<InvoicesResponse>(endpoint, (args && args.headers) ? args.headers : null);
 		},
 		savePDF: async (args?: { InvoiceID: string, savePath: string }): Promise<void> => {
 			// TODO: Support invoice number

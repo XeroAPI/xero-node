@@ -211,9 +211,9 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public get = async <T>(endpoint: string, customHeaders?: any): Promise<T> => {
+	public get = async <T>(endpoint: string, customHeaders?: { [key: string]: string }): Promise<T> => {
 		this.resetToDefaultHeaders();
-		this.oauthLib._headers = {...this._defaultHeaders, ...customHeaders};
+		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
 		return new Promise<T>((resolve, reject) => {
 			this.assertAccessTokenIsSet();
 			this.oauthLib.get(
@@ -235,7 +235,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public put = async <T>(endpoint: string, body: object, customHeaders?: any): Promise<T> => {
+	public put = async <T>(endpoint: string, body: object, customHeaders?: { [key: string]: string }): Promise<T> => {
 		this.resetToDefaultHeaders();
 		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
 		this.assertAccessTokenIsSet();
@@ -261,7 +261,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public post = async <T>(endpoint: string, body: object, customHeaders?: any): Promise<T> => {
+	public post = async <T>(endpoint: string, body: object, customHeaders?: { [key: string]: string }): Promise<T> => {
 		this.resetToDefaultHeaders();
 		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
 		this.assertAccessTokenIsSet();
@@ -287,7 +287,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public delete = async <T>(endpoint: string, customHeaders?: any): Promise<T> => {
+	public delete = async <T>(endpoint: string, customHeaders?: { [key: string]: string }): Promise<T> => {
 		this.resetToDefaultHeaders();
 		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
 		this.assertAccessTokenIsSet();

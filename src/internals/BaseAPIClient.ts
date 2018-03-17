@@ -27,10 +27,10 @@ export interface IApiConfiguration {
 }
 
 export interface IHttpClient {
-	get<T>(endpoint: string): Promise<T>;
-	delete<T>(endpoint: string): Promise<T>;
-	put<T>(endpoint: string, body: object): Promise<T>;
-	post<T>(endpoint: string, body: object): Promise<T>;
+	get<T>(endpoint: string, headers?: { [key: string]: string }): Promise<T>;
+	delete<T>(endpoint: string, headers?: { [key: string]: string }): Promise<T>;
+	put<T>(endpoint: string, body: object, headers?: { [key: string]: string }): Promise<T>;
+	post<T>(endpoint: string, body: object, headers?: { [key: string]: string }): Promise<T>;
 	writeResponseToStream(endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void>;
 }
 
