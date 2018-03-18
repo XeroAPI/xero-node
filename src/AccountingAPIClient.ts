@@ -162,7 +162,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 				if (Object.keys(queryObj).length > 0) {
 					endpoint += '?' + querystring.stringify(queryObj);
 				}
-
 			}
 
 			return this.oauth1Client.get<ContactGroupsResponse>(endpoint);
@@ -212,8 +211,26 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public currencies = {
-		get: async (): Promise<CurrenciesResponse> => {
-			const endpoint = 'currencies';
+		get: async (args: { where?: string, order?: string }): Promise<CurrenciesResponse> => {
+			let endpoint = 'currencies';
+
+			if (args) {
+				const queryObj: any = {};
+
+				if (args.where) {
+					queryObj.where = args.where;
+				}
+
+				if (args.order) {
+					queryObj.order = args.order;
+				}
+
+				if (Object.keys(queryObj).length > 0) {
+					endpoint += '?' + querystring.stringify(queryObj);
+				}
+
+			}
+
 			return this.oauth1Client.get<CurrenciesResponse>(endpoint);
 		},
 		create: async (currency: Currency): Promise<CurrenciesResponse> => {

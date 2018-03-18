@@ -58,8 +58,8 @@ describe('AccountingAPI endpoints', () => {
 		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
-			{ action: 'get', expectedPath: 'contactgroups?where=Type%3D%3D%22BANK%22', args: { where: 'Type=="BANK"'} },
-			{ action: 'get', expectedPath: 'contactgroups?order=EmailAddress%20DESC', args: { order: 'EmailAddress DESC'} },
+			{ action: 'get', expectedPath: 'contactgroups?where=Type%3D%3D%22BANK%22', args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: 'contactgroups?order=EmailAddress%20DESC', args: { order: 'EmailAddress DESC' } },
 			{ action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `contactgroups/${guid1}?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
 			{ action: 'update', expectedPath: `contactgroups?summarizeErrors=false` },
@@ -69,6 +69,8 @@ describe('AccountingAPI endpoints', () => {
 		],
 		currencies: [
 			{ action: 'get', expectedPath: `currencies` },
+			{ action: 'get', expectedPath: `currencies?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: `currencies?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
 			{ action: 'create', expectedPath: `currencies` },
 		],
 		employees: [
