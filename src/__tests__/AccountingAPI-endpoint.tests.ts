@@ -79,8 +79,8 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `employees?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
 			{ action: 'get', expectedPath: `employees?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
 			{ action: 'get', expectedPath: `employees`, args: { headers: { imaheader: 'headerValue' } },
-
 			{ action: 'create', expectedPath: 'employees' }
+			{ action: 'update', expectedPath: 'employees' }
 		]
 	};
 

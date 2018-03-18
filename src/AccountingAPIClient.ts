@@ -75,10 +75,8 @@ export class AccountingAPIClient extends BaseAPIClient {
 			const writeStream = fs.createWriteStream(args.savePath);
 
 			return this.oauth1Client.writeResponseToStream(endpoint, 'application/pdf', writeStream);
-		}, // TODO: Something about { Invoices: Invoice[] } ??? Maybes
+		},
 		create: async (invoice: Invoice | { Invoices: Invoice[] }): Promise<InvoicesResponse> => {
-			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-			// TODO: Support for where arg
 			const endpoint = 'invoices?summarizeErrors=false';
 
 			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
@@ -267,13 +265,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 			// TODO: Type
 			return this.oauth1Client.get<any>(endpoint, (args && args.headers) ? args.headers : null);
 		},
-		create: async (employee: Employee): Promise<EmployeesResponse> => {
+		create: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
 			return this.oauth1Client.put<any>(endpoint, employee);
 		},
-		updateMultiple: async (employees: { Employees: Employee[] }): Promise<EmployeesResponse> => {
+		update: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
-			return this.oauth1Client.post<any>(endpoint, employees);
+			return this.oauth1Client.post<any>(endpoint, employee);
 		}
 	};
 
