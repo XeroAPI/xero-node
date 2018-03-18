@@ -224,7 +224,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroError(err.statusCode, err.data));
+						reject(new XeroError(err.statusCode, err.data, httpResponse.headers));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
@@ -250,7 +250,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroError(err.statusCode, err.data));
+						reject(new XeroError(err.statusCode, err.data, httpResponse.headers));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -276,7 +276,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroError(err.statusCode, err.data));
+						reject(new XeroError(err.statusCode, err.data, httpResponse.headers));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -300,7 +300,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroError(err.statusCode, err.data));
+						reject(new XeroError(err.statusCode, err.data, httpResponse.headers));
 					} else {
 						let toReturn: T = null;
 						if (data) {

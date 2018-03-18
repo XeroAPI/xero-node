@@ -3,8 +3,11 @@ import * as querystring from 'querystring';
 export class XeroError extends Error {
 	public readonly statusCode: number;
 	public readonly data: any;
-	constructor(statusCode: number, data: string) {
+	public readonly headers: any;
+
+	constructor(statusCode: number, data: string, headers?: any) {
 		const queryobj = querystring.parse(data);
+
 		if (queryobj.oauth_problem && queryobj.oauth_problem_advice) {
 			super(`XeroError: ${queryobj.oauth_problem} (${queryobj.oauth_problem_advice})`);
 		} else {
@@ -16,5 +19,6 @@ export class XeroError extends Error {
 
 		this.statusCode = statusCode;
 		this.data = data;
+		this.headers = headers;
 	}
 }

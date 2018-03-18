@@ -3,25 +3,37 @@ import { isError } from 'util';
 
 interface IFixture {
 	expectedMessage: string;
-	throwFn: () => never;
+	statusCode: number;
+	data: string;
+	headers?: any;
 }
 
 // tests based on https://gist.github.com/justmoon/15511f92e5216fa2624b
 describe('XeroError', () => {
 	const fixtures: IFixture[] = [
-		{ expectedMessage: 'XeroError: token_rejected (Fix the problem)', throwFn: () => { throw new XeroError(502, 'oauth_problem=token_rejected&oauth_problem_advice=Fix%20the%20problem'); } },
-		{ expectedMessage: 'XeroError: statusCode=404 (It went bad!)', throwFn: () => { throw new XeroError(404, 'It went bad!'); } }
+		{
+			expectedMessage: 'XeroError: token_rejected (Fix the problem)',
+			statusCode: 502,
+			data: 'oauth_problem=token_rejected&oauth_problem_advice=Fix%20the%20problem'
+		},
+		{
+			expectedMessage: 'XeroError: statusCode=404 (It went bad!)',
+			statusCode: 404,
+			data: 'It went bad!'
+		},
+		{
+			expectedMessage: 'XeroError: rate limit exceeded (please wait before retrying the xero api)',
+			statusCode: 503,
+			data: 'oauth_problem=rate%20limit%20exceeded&oauth_problem_advice=please%20wait%20before%20retrying%20the%20xero%20api',
+			headers: { 'x-rate-limit-problem': 'Minute' }
+		}
 	];
 	fixtures.map((fixture: IFixture) => {
 		describe(fixture.expectedMessage, () => {
 			let error: XeroError;
 
 			beforeAll(() => {
-				try {
-					fixture.throwFn();
-				} catch (err) {
-					error = err;
-				}
+				error = new XeroError(fixture.statusCode, fixture.data, fixture.headers);
 			});
 
 			it(`instanceof XeroError`, () => {
@@ -36,7 +48,7 @@ describe('XeroError', () => {
 				expect(isError(error)).toBe(true);
 			});
 
-			it('message is set', () => {
+			it('message is as expected', () => {
 				expect(error.message).toEqual(fixture.expectedMessage);
 			});
 
@@ -49,7 +61,19 @@ describe('XeroError', () => {
 			});
 
 			it('stack records thrown location', () => {
-				expect(error.stack.split('\n')[2]).toContain('throwFn');
+				expect(error.stack.split('\n')[2]).toContain('XeroError.tests.');
+			});
+
+			it('statusCode is set', () => {
+				expect(error.statusCode).toEqual(fixture.statusCode);
+			});
+
+			it('data is set', () => {
+				expect(error.data).toEqual(fixture.data);
+			});
+
+			it('headers is set', () => {
+				expect(error.headers).toEqual(fixture.headers);
 			});
 		});
 	});
