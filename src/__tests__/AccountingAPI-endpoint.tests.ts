@@ -58,6 +58,7 @@ describe('AccountingAPI endpoints', () => {
 		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
+			{ action: 'get', expectedPath: 'contactgroups?where=Type%3D%3D%22BANK%22', args: { where: 'Type=="BANK"'} },
 			{ action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `contactgroups/${guid1}?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
 			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts/${guid2}`, args: { ContactGroupID: guid1, ContactID: guid2 } },

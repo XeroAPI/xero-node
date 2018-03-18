@@ -140,12 +140,24 @@ export class AccountingAPIClient extends BaseAPIClient {
 	}
 
 	public contactgroups = {
-		get: async (args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
+		get: async (args?: { ContactGroupID: string, where: string }): Promise<ContactGroupsResponse> => {
 
 			// TODO: Support for where arg
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
 				endpoint = endpoint + '/' + args.ContactGroupID;
+			}
+
+			if (args) {
+				const queryObj: any = {};
+
+				if (args.where) {
+					queryObj.where = args.where;
+				}
+
+				if (Object.keys(queryObj).length > 0) {
+					endpoint += '?' + querystring.stringify(queryObj);
+				}
 			}
 
 			return this.oauth1Client.get<ContactGroupsResponse>(endpoint);
