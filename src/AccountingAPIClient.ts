@@ -216,13 +216,8 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public organisation = {
-		get: async (args?: { OrganisationID: string }): Promise<OrganisationResponse> => {
-			// TODO: Support for where arg
-			let endpoint = 'organisation';
-			if (args && args.OrganisationID) {
-				endpoint = endpoint + '/' + args.OrganisationID;
-			}
-			// TODO: Type
+		get: async (): Promise<OrganisationResponse> => {
+			const endpoint = 'organisation';
 			return this.oauth1Client.get<any>(endpoint);
 		},
 		getCISSetting: {
