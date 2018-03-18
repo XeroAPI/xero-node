@@ -6,7 +6,8 @@ import { IOAuth1State } from '../internals/OAuth1HttpClient';
 
 setJestTimeout();
 
-describe('Partner Example Tests with callbackUrl', () => {
+// We cannot run this and the other example in parallel as one de-auths the other
+describe.skip('Partner Example Tests with callbackUrl', () => {
 	const USERNAME_SELECTOR = '#email';
 	const PASSWORD_SELECTOR = '#password';
 	const LOGIN_BUTTON_SELECTOR = '#submitButton';

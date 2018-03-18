@@ -19,11 +19,11 @@ export class InMemoryOAuthLibFactoryFactory {
 export class InMemoryOAuthLib {
 
 	[x: string]: any;
-	private isErr: boolean = null;
+	private err: boolean = null;
 	private returnData: any = null;
 	private returnHttpResponse: any = null;
 	private lastCalledUrl = '';
-	private lastCalledVerb = '';
+	private lastCalledMethod = '';
 	private return_oauth_token: string = null;
 	private return_oauth_secret: string = null;
 	private returnAuthorisedToken: string = null;
@@ -46,12 +46,12 @@ export class InMemoryOAuthLib {
 	}
 
 	public reset() {
-		this.isErr = undefined;
+		this.err = undefined;
 		this.returnData = null;
 		this.returnHttpResponse = null;
 		this.lastCalledUrl = '';
 		this.lastRequestedBody = null;
-		this.lastCalledVerb = '';
+		this.lastCalledMethod = '';
 		this.return_oauth_token = null;
 		this.return_oauth_secret = null;
 		this.returnAuthorisedToken = null;
@@ -60,8 +60,8 @@ export class InMemoryOAuthLib {
 		this.oauth_expires_in = null;
 	}
 
-	public lastCalledThisVerb(verb: string) {
-		expect(this.lastCalledVerb).toBe(verb);
+	public lastCalledThisMethod(verb: string) {
+		expect(this.lastCalledMethod).toBe(verb);
 	}
 
 	public set_SwapRequestTokenforAccessToken(oauth_token: string, oauth_secret: string, oauth_expires_in: string, sessionHandle?: string) {
@@ -85,23 +85,23 @@ export class InMemoryOAuthLib {
 				...{
 					'Accept': 'application/json',
 					'User-Agent': 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C'
-				// tslint:disable-next-line:align
+					// tslint:disable-next-line:align
 				}, ...expectedHeader
 			});
 		}
 	}
 
-	public get(
+	public async get(
 		url: string,
 		oauthToken: string,
 		oauthSecret: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
-		this.lastCalledVerb = 'get';
-		callback(this.isErr, this.returnData, this.returnHttpResponse);
+		this.lastCalledMethod = 'get';
+		callback(this.err, this.returnData, this.returnHttpResponse);
 	}
 
-	public post(
+	public async post(
 		url: string,
 		oauthToken: string,
 		oauthSecret: string,
@@ -109,22 +109,22 @@ export class InMemoryOAuthLib {
 		contentType: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
-		this.lastCalledVerb = 'post';
+		this.lastCalledMethod = 'post';
 		this.lastRequestedBody = body;
-		callback(this.isErr, this.returnData, this.returnHttpResponse);
+		callback(this.err, this.returnData, this.returnHttpResponse);
 	}
 
-	public delete(
+	public async delete(
 		url: string,
 		oauthToken: string,
 		oauthSecret: string,
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
-		this.lastCalledVerb = 'delete';
-		callback(this.isErr, this.returnData, this.returnHttpResponse);
+		this.lastCalledMethod = 'delete';
+		callback(this.err, this.returnData, this.returnHttpResponse);
 	}
 
-	public put(
+	public async put(
 		url: string,
 		oauthToken: string,
 		oauthSecret: string,
@@ -133,12 +133,12 @@ export class InMemoryOAuthLib {
 		callback: (err: any, data: string, httpResponse: any) => void) {
 		this.lastCalledUrl = url;
 		this.lastRequestedBody = body;
-		this.lastCalledVerb = 'put';
-		callback(this.isErr, this.returnData, this.returnHttpResponse);
+		this.lastCalledMethod = 'put';
+		callback(this.err, this.returnData, this.returnHttpResponse);
 	}
 
 	public setResponse(isErr: boolean, returnGetData: string, returnGetHttpResponse: any) {
-		this.isErr = isErr;
+		this.err = isErr ? { ...returnGetHttpResponse, data: returnGetData } : undefined;
 		this.returnData = returnGetData;
 		this.returnHttpResponse = returnGetHttpResponse;
 	}
@@ -148,9 +148,10 @@ export class InMemoryOAuthLib {
 		this.return_oauth_secret = oauth_secret;
 	}
 
-	public getOAuthRequestToken(
+	public async getOAuthRequestToken(
 		callback: (err: any, oauth_token: string, oauth_token_secret: string, result: any) => any) {
-		callback(null, this.return_oauth_token, this.return_oauth_secret, null);
+		this.lastCalledMethod = 'getOAuthRequestToken';
+		callback(this.err, this.return_oauth_token, this.return_oauth_secret, null);
 	}
 
 	public set__performSecureRequest(oauth_token: string, oauth_secret: string, sessionHandle?: string) {
@@ -159,7 +160,7 @@ export class InMemoryOAuthLib {
 		this.returnSessionHandle = sessionHandle;
 	}
 
-	public _performSecureRequest(
+	public async _performSecureRequest(
 		oauth_token: string,
 		oauth_token_secret: string,
 		verb: string,
@@ -168,15 +169,17 @@ export class InMemoryOAuthLib {
 		something: any,
 		something2: any,
 		callback: (err: any, response: any) => any) {
-		callback(null, `oauth_session_handle=${this.returnSessionHandle}&oauth_token_secret=${this.returnAuthorisedSecret}&oauth_token=${this.returnAuthorisedToken}`);
+		this.lastCalledMethod = '_performSecureRequest';
+		callback(this.err, `oauth_session_handle=${this.returnSessionHandle}&oauth_token_secret=${this.returnAuthorisedSecret}&oauth_token=${this.returnAuthorisedToken}`);
 	}
 
-	public getOAuthAccessToken(
+	public async getOAuthAccessToken(
 		authedToken: string,
 		authedSecret: string,
 		oauthVerifier: any,
 		callback: (err: any, oauth_token: string, oauth_token_secret: string, result: any) => any) {
-		callback(null,
+		this.lastCalledMethod = 'getOAuthAccessToken';
+		callback(this.err,
 			this.returnAuthorisedToken,
 			this.returnAuthorisedSecret,
 			{ oauth_session_handle: this.returnSessionHandle, oauth_expires_in: this.returnOauth_expires_in }

@@ -111,7 +111,7 @@ describe('AccountingAPI endpoints', () => {
 				});
 
 				it(`calls the ${actionToVerbMap[fixture.action]} verb`, () => {
-					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisVerb(actionToVerbMap[fixture.action]);
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisMethod(actionToVerbMap[fixture.action]);
 				});
 
 				if (fixture.args && fixture.args.headers) {

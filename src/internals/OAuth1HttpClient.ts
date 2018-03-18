@@ -220,11 +220,11 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
 				this._state.accessToken.oauth_token,
 				this._state.accessToken.oauth_token_secret,
-				(err: object, data: string, httpResponse: any) => {
+				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroError(httpResponse.statusCode, data));
+						reject(new XeroError(err.statusCode, err.data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						// toReturn.httpResponse = httpResponse; // We could add http data - do we want to?
@@ -250,7 +250,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroError(httpResponse.statusCode, data));
+						reject(new XeroError(err.statusCode, err.data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -276,7 +276,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroError(httpResponse.statusCode, data));
+						reject(new XeroError(err.statusCode, err.data));
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -300,7 +300,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(new XeroError(httpResponse.statusCode, data));
+						reject(new XeroError(err.statusCode, err.data));
 					} else {
 						let toReturn: T = null;
 						if (data) {

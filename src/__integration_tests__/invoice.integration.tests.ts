@@ -19,6 +19,7 @@ describe('Invoices endpoint', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
+	// TODO: we don't ever delete invoices from Xero, so let's limit the number we create... but we need an id to retrieve in the next test
 	it('create single', async () => {
 		const response = await xero.invoices.create(createSingleInvoiceRequest);
 
