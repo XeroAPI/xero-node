@@ -1,4 +1,4 @@
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import * as fs from 'fs';
@@ -163,7 +163,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 					endpoint += '?' + querystring.stringify(queryObj);
 				}
 
-
 			}
 
 			return this.oauth1Client.get<ContactGroupsResponse>(endpoint);
@@ -198,6 +197,16 @@ export class AccountingAPIClient extends BaseAPIClient {
 				}
 
 				return this.oauth1Client.delete<ContactGroupsResponse>(endpoint);
+			},
+			create: async (contact: Contact, args: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
+				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
+				// TODO: Support for where arg
+				let endpoint = 'contactgroups';
+				if (args && args.ContactGroupID) {
+					endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
+				}
+
+				return this.oauth1Client.put<ContactGroupsResponse>(endpoint, contact);
 			}
 		}
 	};
