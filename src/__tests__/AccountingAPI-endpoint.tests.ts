@@ -75,6 +75,9 @@ describe('AccountingAPI endpoints', () => {
 		],
 		employees: [
 			{ action: 'get', expectedPath: 'employees' },
+			{ action: 'get', expectedPath: `employees/${guid1}`, args: { EmployeeID: guid1} },
+			{ action: 'get', expectedPath: `employees?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: `employees?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
 			{ action: 'create', expectedPath: 'employees' }
 		]
 	};

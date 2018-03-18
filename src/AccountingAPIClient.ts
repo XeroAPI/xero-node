@@ -240,12 +240,31 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public employees = {
-		get: async (args?: { EmployeeID: string }): Promise<EmployeesResponse> => {
+		get: async (args?: { EmployeeID?: string, where?: string, order?: string }): Promise<EmployeesResponse> => {
 			// TODO: Support for where arg
 			let endpoint = 'employees';
 			if (args && args.EmployeeID) {
 				endpoint = endpoint + '/' + args.EmployeeID;
 			}
+
+			if (args) {
+				const queryObj: any = {};
+
+				if (args.where) {
+					queryObj.where = args.where;
+				}
+
+				if (args.order) {
+					queryObj.order = args.order;
+				}
+
+				if (Object.keys(queryObj).length > 0) {
+					endpoint += '?' + querystring.stringify(queryObj);
+				}
+
+			}
+
+
 			// TODO: Type
 			return this.oauth1Client.get<any>(endpoint);
 		},
