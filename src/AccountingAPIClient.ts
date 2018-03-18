@@ -155,9 +155,15 @@ export class AccountingAPIClient extends BaseAPIClient {
 					queryObj.where = args.where;
 				}
 
+				if (args.order) {
+					queryObj.order = args.order;
+				}
+
 				if (Object.keys(queryObj).length > 0) {
 					endpoint += '?' + querystring.stringify(queryObj);
 				}
+
+
 			}
 
 			return this.oauth1Client.get<ContactGroupsResponse>(endpoint);
