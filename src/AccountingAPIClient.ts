@@ -140,7 +140,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	}
 
 	public contactgroups = {
-		get: async (args?: { ContactGroupID: string, where: string }): Promise<ContactGroupsResponse> => {
+		get: async (args?: { ContactGroupID?: string, where?: string, order?: string }): Promise<ContactGroupsResponse> => {
 
 			// TODO: Support for where arg
 			let endpoint = 'contactgroups';
@@ -211,7 +211,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public currencies = {
-		get: async (args: { where?: string, order?: string }): Promise<CurrenciesResponse> => {
+		get: async (args?: { where?: string, order?: string }): Promise<CurrenciesResponse> => {
 			let endpoint = 'currencies';
 
 			if (args) {
