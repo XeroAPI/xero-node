@@ -50,7 +50,7 @@ export interface OnlineInvoicesResponse extends AccountingResponse {
 	OnlineInvoices: OnlineInvoice[];
 }
 
-export interface OrganisationResponse {
+export interface OrganisationResponse extends AccountingResponse {
 	Organisations: Organisation[];
 }
 
@@ -255,8 +255,8 @@ export interface Organisation {
 	LineOfBusiness: string;
 }
 export interface OrgCISSetting {
-	CISContractorEnabled: boolean,
-	CISSubContractorEnabled: boolean
+	CISContractorEnabled: boolean;
+	CISSubContractorEnabled: boolean;
 }
 export interface Tracking {
 	Name?: string;

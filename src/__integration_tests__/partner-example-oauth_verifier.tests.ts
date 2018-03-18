@@ -63,13 +63,13 @@ describe.skip('Partner Example Tests using oauth_verifier', () => {
 
 	it('it can make a successful API call', async () => {
 		await accounting1.oauth1Client.swapRequestTokenforAccessToken(oauth_verifier);
-		const inv1 = await accounting1.invoices.get();
+		const inv1 = await accounting1.organisation.get();
 		expect(inv1.Status).toEqual('OK');
 	});
 
 	it('it can still make a successfull API call after refreshing the access token', async () => {
 		await accounting1.oauth1Client.refreshAccessToken();
-		const inv2 = await accounting1.invoices.get();
+		const inv2 = await accounting1.organisation.get();
 		expect(inv2.Status).toEqual('OK');
 	});
 
@@ -95,7 +95,7 @@ describe.skip('Partner Example Tests using oauth_verifier', () => {
 		});
 
 		it('it lets you make API calls using the restored state', async () => {
-			const inv3 = await accounting2.invoices.get();
+			const inv3 = await accounting2.organisation.get();
 			expect(inv3.Status).toEqual('OK');
 		});
 	});
