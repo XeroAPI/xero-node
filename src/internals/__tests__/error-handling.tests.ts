@@ -2,8 +2,7 @@ import { TestAPIClient } from './helpers/TestAPIClient';
 import { BaseAPIClient, IXeroClientConfiguration } from '../BaseAPIClient';
 import { validTestCertPath } from './helpers/privateKey-helpers';
 import { XeroError } from '../../XeroError';
-import { IOAuth1Configuration, IOAuth1State } from '../../../lib/internals/OAuth1HttpClient';
-import { OAuth1HttpClient } from '../OAuth1HttpClient';
+import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from '../OAuth1HttpClient';
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 
 describe('HTTP errors', () => {
