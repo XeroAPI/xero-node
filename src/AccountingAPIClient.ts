@@ -1,8 +1,7 @@
+import * as fs from 'fs';
 import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
-import * as fs from 'fs';
-import * as querystring from 'querystring';
 import { generateQueryString } from './internals/utils';
 
 export class AccountingAPIClient extends BaseAPIClient {
@@ -61,12 +60,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.writeResponseToStream(endpoint, 'application/pdf', writeStream);
 		},
-		create: async (invoice: Invoice | { Invoices: Invoice[] }): Promise<InvoicesResponse> => {
-			const endpoint = 'invoices?summarizeErrors=false';
+		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: { summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
+			const endpoint = 'invoices' + generateQueryString(args, true);
 
 			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
 		},
-		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
+		update: async (invoices: Invoice | Invoice[], args?: { InvoiceID?: string, InvoiceNumber?: string, where?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
 			let endpoint = `invoices`;
 
 			if (args && args.InvoiceID) {
@@ -77,17 +76,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				delete args.InvoiceNumber;
 			}
 
-			args = { summarizeErrors: false, ...args };
-			endpoint += generateQueryString(args);
-
-			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoice);
-		},
-		updateMultiple: async (invoices: Invoice[], args?: { where?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
-			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-			let endpoint = `invoices`;
-
-			args = { summarizeErrors: false, ...args };
-			endpoint += generateQueryString(args);
+			endpoint += generateQueryString(args, true);
 
 			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoices);
 		},
@@ -96,6 +85,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				let endpoint = 'invoices';
 				if (args && args.InvoiceID) {
 					endpoint = endpoint + '/' + args.InvoiceID;
+					delete args.InvoiceID;
 				}
 
 				endpoint += '/onlineinvoice';
@@ -132,7 +122,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 	public contactgroups = {
 		get: async (args?: { ContactGroupID?: string, where?: string, order?: string }): Promise<ContactGroupsResponse> => {
 
-			// TODO: Support for where arg
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
 				endpoint = endpoint + '/' + args.ContactGroupID;
@@ -143,25 +132,23 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<ContactGroupsResponse>(endpoint);
 		},
-		create: async (contactGroup: ContactGroup, args?: { summarizeErrors: boolean }): Promise<ContactGroupsResponse> => {
-			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-			let endpoint = 'contactgroups?summarizeErrors=false';
-			endpoint += generateQueryString(args);
+		create: async (contactGroups: ContactGroup | ContactGroup[], args?: { summarizeErrors?: boolean }): Promise<ContactGroupsResponse> => {
+			const endpoint = 'contactgroups' + generateQueryString(args, true);
 
-			return this.oauth1Client.put<ContactGroupsResponse>(endpoint, contactGroup);
+			return this.oauth1Client.put<ContactGroupsResponse>(endpoint, contactGroups);
 		},
-		update: async (contactGroup: ContactGroup, args?: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
+		update: async (contactGroups: ContactGroup | ContactGroup[], args?: { ContactGroupID: string, summarizeErrors?: boolean }): Promise<ContactGroupsResponse> => {
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
 				endpoint = endpoint + '/' + args.ContactGroupID;
+				delete args.ContactGroupID;
 			}
-			endpoint += generateQueryString({ summarizeErrors: false });
+			endpoint += generateQueryString(args, true);
 
-			return this.oauth1Client.post<ContactGroupsResponse>(endpoint, contactGroup);
+			return this.oauth1Client.post<ContactGroupsResponse>(endpoint, contactGroups);
 		},
 		contacts: {
 			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactsResponse> => {
-				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 				let endpoint = 'contactgroups';
 				if (args && args.ContactGroupID) {
 					endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
@@ -171,18 +158,17 @@ export class AccountingAPIClient extends BaseAPIClient {
 						delete args.ContactID;
 					}
 				}
-				endpoint += generateQueryString(args);
+				endpoint += generateQueryString(args, true);
 
 				return this.oauth1Client.delete<ContactsResponse>(endpoint);
 			},
 			create: async (contact: Contact, args: { ContactGroupID: string }): Promise<ContactsResponse> => {
-				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 				let endpoint = 'contactgroups';
 				if (args && args.ContactGroupID) {
 					endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
 					delete args.ContactGroupID;
 				}
-				endpoint += generateQueryString(args);
+				endpoint += generateQueryString(args, true);
 
 				return this.oauth1Client.put<ContactsResponse>(endpoint, contact);
 			}
@@ -191,24 +177,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 	public currencies = {
 		get: async (args?: { where?: string, order?: string }): Promise<CurrenciesResponse> => {
-			let endpoint = 'currencies';
-
-			if (args) {
-				const queryObj: any = {};
-
-				if (args.where) {
-					queryObj.where = args.where;
-				}
-
-				if (args.order) {
-					queryObj.order = args.order;
-				}
-
-				if (Object.keys(queryObj).length > 0) {
-					endpoint += '?' + querystring.stringify(queryObj);
-				}
-
-			}
+			const endpoint = 'currencies' + generateQueryString(args);
 
 			return this.oauth1Client.get<CurrenciesResponse>(endpoint);
 		},
@@ -220,68 +189,48 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 	public employees = {
 		get: async (args?: { EmployeeID?: string, where?: string, order?: string, headers?: { [key: string]: string } }): Promise<EmployeesResponse> => {
-			// TODO: Support for where arg
 			let endpoint = 'employees';
 			if (args && args.EmployeeID) {
 				endpoint = endpoint + '/' + args.EmployeeID;
+				delete args.EmployeeID;
 			}
-
-			if (args) {
-				const queryObj: any = {};
-
-				if (args.where) {
-					queryObj.where = args.where;
-				}
-
-				if (args.order) {
-					queryObj.order = args.order;
-				}
-
-				if (Object.keys(queryObj).length > 0) {
-					endpoint += '?' + querystring.stringify(queryObj);
-				}
-
+			let headers;
+			if (args && args.headers) {
+				headers = args.headers;
+				delete args.headers;
 			}
+			endpoint += generateQueryString(args);
 
-			// TODO: Type
-			return this.oauth1Client.get<any>(endpoint, (args && args.headers) ? args.headers : null);
+			return this.oauth1Client.get<EmployeesResponse>(endpoint, headers);
 		},
 		create: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
-			return this.oauth1Client.put<any>(endpoint, employee);
+			return this.oauth1Client.put<EmployeesResponse>(endpoint, employee);
 		},
 		update: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
-			return this.oauth1Client.post<any>(endpoint, employee);
+			return this.oauth1Client.post<EmployeesResponse>(endpoint, employee);
 		}
 	};
 
 	public users = {
 		get: async (args?: { UserID?: string, where?: string, order?: string, headers?: { [key: string]: string } }): Promise<UsersResponse> => {
-			// TODO: Support Modified After header
 			let endpoint = 'users';
 			if (args && args.UserID) {
 				endpoint = endpoint + '/' + args.UserID;
+				delete args.UserID;
 			}
 
-			if (args) {
-				const queryObj: any = {};
-
-				if (args.where) {
-					queryObj.where = args.where;
-				}
-
-				if (args.order) {
-					queryObj.order = args.order;
-				}
-
-				if (Object.keys(queryObj).length > 0) {
-					endpoint += '?' + querystring.stringify(queryObj);
-				}
-
+			// TODO: Support Modified After header
+			let headers;
+			if (args && args.headers) {
+				headers = args.headers;
+				delete args.headers;
 			}
 
-			return this.oauth1Client.get<UsersResponse>(endpoint, (args && args.headers) ? args.headers : null);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<UsersResponse>(endpoint, headers);
 		}
 	};
 
@@ -291,13 +240,14 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.get<OrganisationResponse>(endpoint);
 		},
 		CISSettings: {
-			get: async (args: { OrganisationID: string }): Promise<OrganisationResponse> => {
-				// TODO: Support for where arg
+			get: async (args: { OrganisationID: string, where?: string }): Promise<OrganisationResponse> => {
 				let endpoint = 'organisation';
 				if (args && args.OrganisationID) {
 					endpoint = endpoint + '/' + args.OrganisationID + '/CISSettings';
+					delete args.OrganisationID;
 				}
-				// TODO: Type
+				endpoint += generateQueryString(args);
+
 				return this.oauth1Client.get<OrganisationResponse>(endpoint);
 			}
 		}
@@ -308,8 +258,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 			const endpoint = 'contacts';
 			return this.oauth1Client.get<ContactsResponse>(endpoint);
 		},
-		create: async (body?: object): Promise<ContactsResponse> => {
-			const endpoint = 'contacts?summarizeErrors=true';
+		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
+			let endpoint = 'contacts';
+			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.post<ContactsResponse>(endpoint, body);
 		},
 		attachments: this.generateAttachmentsEndpoint('contacts')
@@ -320,11 +271,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 			let endpoint = 'reports';
 			if (args) {
 				const reportId = args.ReportID;
-
 				delete args.ReportID; // we don't want the ReportID in the querystring
-				const query = querystring.stringify(args);
 
-				endpoint = endpoint + '/' + reportId + (query ? '?' + query.toString() : '');
+				endpoint = endpoint + '/' + reportId + generateQueryString(args);
 			}
 
 			return this.oauth1Client.get<ReportsResponse>(endpoint);
@@ -332,8 +281,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public purchaseorders = {
-		create: async (body?: object): Promise<any> => {
-			const endpoint = 'purchaseorders?summarizeErrors=true';
+		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<any> => {
+			let endpoint = 'purchaseorders';
+			endpoint += generateQueryString(args, true);
 			// TODO: Add interface here
 			return this.oauth1Client.post<any>(endpoint, body);
 		}

@@ -5,13 +5,17 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as querystring from 'querystring';
 
-export function getStringFromFile(location: string){
+export function getStringFromFile(location: string) {
 	const privateKeyFile = path.resolve(location);
 	const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 	return privateKey;
 }
 
-export function generateQueryString(args: { [key: string]: any }): string {
+export function generateQueryString(args: { [key: string]: any }, addSummarizeErrorsParam: boolean = false): string {
+	args = { ...args };
+	if (addSummarizeErrorsParam && args.summarizeErrors == undefined) {
+		args.summarizeErrors = false;
+	}
 	if (args && Object.keys(args).length > 0) {
 		return '?' + querystring.stringify(args);
 	} else {

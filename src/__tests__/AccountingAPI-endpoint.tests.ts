@@ -72,9 +72,9 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `contactgroups/${guid1}?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
 			{ action: 'update', expectedPath: `contactgroups?summarizeErrors=false` },
-			{ subResource: 'contacts', action: 'create', expectedPath: `contactgroups/${guid1}/contacts`, args: { ContactGroupID: guid1 } },
-			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts/${guid2}`, args: { ContactGroupID: guid1, ContactID: guid2 } },
-			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts`, args: { ContactGroupID: guid1 } },
+			{ subResource: 'contacts', action: 'create', expectedPath: `contactgroups/${guid1}/contacts?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
+			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts/${guid2}?summarizeErrors=false`, args: { ContactGroupID: guid1, ContactID: guid2 } },
+			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
 		],
 		currencies: [
 			{ action: 'get', expectedPath: `currencies` },
