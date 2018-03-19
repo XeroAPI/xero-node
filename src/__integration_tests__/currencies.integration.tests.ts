@@ -1,11 +1,17 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { CurrenciesResponse } from '../AccountingAPI-types';
-import { getPrivateConfig } from './helpers/integration.helpers';
-
-const data = getPrivateConfig();
-const xero = new AccountingAPIClient(data);
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('/currencies', () => {
+	let xero: AccountingAPIClient;
+	// let _idsToDelete: string[] = [];
+
+	beforeAll(async () => {
+		setJestTimeout();
+		const config = getPrivateConfig();
+		xero = new AccountingAPIClient(config);
+	});
+
 	describe('and creating and getting', () => {
 		let result: CurrenciesResponse;
 

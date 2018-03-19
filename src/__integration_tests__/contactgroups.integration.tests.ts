@@ -3,14 +3,16 @@ import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers'
 import { isUUID } from './helpers/test-assertions';
 import { getOrCreateContactGroupId, getOrCreateContactId, getOrCreateContactIdInContactGroup } from './helpers/entityId.helpers';
 
-setJestTimeout();
-
-const data = getPrivateConfig();
-const xero = new AccountingAPIClient(data);
-
 describe('/contactgroups', () => {
 
+	let xero: AccountingAPIClient;
 	let _idsToDelete: string[] = [];
+
+	beforeAll(async () => {
+		setJestTimeout();
+		const config = getPrivateConfig();
+		xero = new AccountingAPIClient(config);
+	});
 
 	it('get all', async () => {
 		const response = await xero.contactgroups.get();
