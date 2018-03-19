@@ -1,7 +1,7 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
-describe('Invoices endpoint', () => {
+describe('/organisations', () => {
 
 	let xero: AccountingAPIClient;
 

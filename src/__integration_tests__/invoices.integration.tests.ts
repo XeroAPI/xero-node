@@ -6,7 +6,7 @@ import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from './requ
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { InvoicesResponse } from '../AccountingAPI-types';
 
-describe('Invoices endpoint', () => {
+describe('/invoices', () => {
 
 	let xero: AccountingAPIClient;
 
@@ -50,16 +50,16 @@ describe('Invoices endpoint', () => {
 	});
 
 	it('get single', async () => {
-		const response = await xero.invoices.get({ InvoiceID: await invoiceIdThatExists() });
+		const response = await xero.invoices.get({ InvoiceID: await getIdThatExists() });
 
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
 		expect(response.Invoices).toHaveLength(1);
-		expect(response.Invoices[0].InvoiceID).toBe(await invoiceIdThatExists());
+		expect(response.Invoices[0].InvoiceID).toBe(await getIdThatExists());
 	});
 
 	it('get single as pdf', async () => {
-		const response = await xero.invoices.savePDF({ InvoiceID: await invoiceIdThatExists(), savePath: tmpDownloadFile });
+		const response = await xero.invoices.savePDF({ InvoiceID: await getIdThatExists(), savePath: tmpDownloadFile });
 
 		expect(response).toBeUndefined();
 		const invoiceBuffer = fs.readFileSync(tmpDownloadFile);
@@ -93,13 +93,11 @@ describe('Invoices endpoint', () => {
 		invoiceIdsToArchive = invoiceIdsToArchive.concat(response.Invoices.map((invoice) => invoice.InvoiceID));
 	}
 
-	async function invoiceIdThatExists() {
-		const getResponse = await xero.invoices.get();
-		if (getResponse.Invoices.length > 0) {
-			return getResponse.Invoices[0].InvoiceID;
-		} else {
-			const createResponse = await xero.invoices.create(createSingleInvoiceRequest);
-			return createResponse.Invoices[0].InvoiceID;
+	async function getIdThatExists() {
+		let response = await xero.invoices.get();
+		if (response.Invoices.length <= 0) {
+			response = await xero.invoices.create(createSingleInvoiceRequest);
 		}
+		return response.Invoices[0].InvoiceID;
 	}
 });

@@ -5,7 +5,7 @@ import { getPrivateConfig } from './helpers/integration.helpers';
 const data = getPrivateConfig();
 const xero = new AccountingAPIClient(data);
 
-describe('/currencies integration tests', () => {
+describe('/currencies', () => {
 	describe('and creating and getting', () => {
 		let result: CurrenciesResponse;
 

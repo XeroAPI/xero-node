@@ -2,7 +2,7 @@ import { EmployeesResponse } from '../AccountingAPI-types';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
-describe('Employees endpoint', () => {
+describe('/employees', () => {
 
 	let xero: AccountingAPIClient;
 
@@ -27,12 +27,21 @@ describe('Employees endpoint', () => {
 		expect(response.Employees[0].FirstName).toEqual('Bryan');
 	});
 
+	it('get single', async () => {
+		const response = await xero.employees.get({ EmployeeID: await getIdThatExists() });
+
+		expect(response).toBeDefined();
+		expect(response.Id).toBeTruthy();
+		expect(response.Employees.length).toBe(1);
+		expect(response.Employees[0].EmployeeID).toBeTruthy();
+	});
+
 	it('get all', async () => {
 		const response = await xero.employees.get();
 
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
-		expect(response.Employees.length).toBeGreaterThanOrEqual(1);
+		expect(response.Employees.length).toBeGreaterThan(0);
 		expect(response.Employees[0].EmployeeID).toBeTruthy();
 	});
 
@@ -66,5 +75,13 @@ describe('Employees endpoint', () => {
 
 	function collectEmployeesToArchive(response: EmployeesResponse) {
 		employeeIdsToArchive = employeeIdsToArchive.concat(response.Employees.map((employee) => employee.EmployeeID));
+	}
+
+	async function getIdThatExists() {
+		let response = await xero.employees.get();
+		if (response.Employees.length <= 0) {
+			response = await xero.employees.create({ FirstName: 'Bryan', LastName: 'Dubb-liu' });
+		}
+		return response.Employees[0].EmployeeID;
 	}
 });
