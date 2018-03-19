@@ -82,6 +82,13 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: 'employees' },
 			{ action: 'update', expectedPath: 'employees' }
 		],
+		users: [
+			{ action: 'get', expectedPath: 'users' },
+			{ action: 'get', expectedPath: `users/${guid1}`, args: { UserID: guid1 } },
+			{ action: 'get', expectedPath: `users?where=IsSubscriber%3D%3Dtrue`, args: { where: 'IsSubscriber==true' } },
+			{ action: 'get', expectedPath: `users?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
+			{ action: 'get', expectedPath: `users`, args: { headers: { imaheader: 'headerValue' } } },
+		],
 		reports: [
 			{ action: 'get', expectedPath: 'reports' },
 			{ action: 'get', expectedPath: `reports/${guid1}`, args: { ReportID: guid1 }},

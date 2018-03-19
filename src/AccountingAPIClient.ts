@@ -1,4 +1,4 @@
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import * as fs from 'fs';
@@ -280,6 +280,35 @@ export class AccountingAPIClient extends BaseAPIClient {
 		update: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
 			return this.oauth1Client.post<any>(endpoint, employee);
+		}
+	};
+
+	public users = {
+		get: async (args?: { UserID?: string, where?: string, order?: string, headers?: { [key: string]: string } }): Promise<UsersResponse> => {
+			// TODO: Support Modified After header
+			let endpoint = 'users';
+			if (args && args.UserID) {
+				endpoint = endpoint + '/' + args.UserID;
+			}
+
+			if (args) {
+				const queryObj: any = {};
+
+				if (args.where) {
+					queryObj.where = args.where;
+				}
+
+				if (args.order) {
+					queryObj.order = args.order;
+				}
+
+				if (Object.keys(queryObj).length > 0) {
+					endpoint += '?' + querystring.stringify(queryObj);
+				}
+
+			}
+
+			return this.oauth1Client.get<UsersResponse>(endpoint, (args && args.headers) ? args.headers : null);
 		}
 	};
 
