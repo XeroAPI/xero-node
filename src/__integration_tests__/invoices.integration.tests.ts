@@ -20,7 +20,6 @@ describe('/invoices', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
-	// TODO: we don't ever delete invoices from Xero, so let's limit the number we create... but we need an id to retrieve in the next test
 	it('create single', async () => {
 		const response = await xero.invoices.create(createSingleInvoiceRequest);
 
@@ -30,8 +29,7 @@ describe('/invoices', () => {
 		expect(response.Invoices[0].InvoiceID).toBeTruthy();
 	});
 
-	// skip: we don't ever delete invoices from Xero, so let's limit the number we create
-	it.skip('create multiple', async () => {
+	it('create multiple', async () => {
 		const response = await xero.invoices.create(createMultipleInvoiceRequest);
 
 		collectInvoicesToArchive(response);

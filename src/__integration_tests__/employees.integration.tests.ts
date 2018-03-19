@@ -1,6 +1,7 @@
 import { EmployeesResponse } from '../AccountingAPI-types';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
+import { getOrCreateEmployeeId } from './helpers/entityId.helpers';
 
 describe('/employees', () => {
 
@@ -14,11 +15,10 @@ describe('/employees', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
-	// need to work out how to delete/archive employees so we can create unique contacts and clean up
-	it.skip('create single', async () => {
+	it('create single', async () => {
 		const response = await xero.employees.create({
 			FirstName: 'Bryan',
-			LastName: 'Tee'
+			LastName: 'Tee' + Date.now()
 		});
 
 		collectEmployeesToArchive(response);
@@ -28,7 +28,7 @@ describe('/employees', () => {
 	});
 
 	it('get single', async () => {
-		const response = await xero.employees.get({ EmployeeID: await getIdThatExists() });
+		const response = await xero.employees.get({ EmployeeID: await getOrCreateEmployeeId(xero) });
 
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
@@ -45,13 +45,12 @@ describe('/employees', () => {
 		expect(response.Employees[0].EmployeeID).toBeTruthy();
 	});
 
-	// looks like archiving an employee doesn't work through the API
+	// skip: looks like archiving an employee doesn't work through the API, this test always fails
 	it.skip('update', async () => {
 		const response = await xero.employees.updateMultiple({
 			Employees: [
 				{
-					FirstName: 'Bryan',
-					LastName: 'Tee',
+					EmployeeID: await getOrCreateEmployeeId(xero),
 					Status: 'ARCHIVED'
 				}
 			]
@@ -75,13 +74,5 @@ describe('/employees', () => {
 
 	function collectEmployeesToArchive(response: EmployeesResponse) {
 		employeeIdsToArchive = employeeIdsToArchive.concat(response.Employees.map((employee) => employee.EmployeeID));
-	}
-
-	async function getIdThatExists() {
-		let response = await xero.employees.get();
-		if (response.Employees.length <= 0) {
-			response = await xero.employees.create({ FirstName: 'Bryan', LastName: 'Dubb-liu' });
-		}
-		return response.Employees[0].EmployeeID;
 	}
 });

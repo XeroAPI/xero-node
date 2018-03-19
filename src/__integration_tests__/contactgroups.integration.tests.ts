@@ -2,7 +2,6 @@ import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { isUUID } from './helpers/test-assertions';
 import { getOrCreateContactGroupId, getOrCreateContactId, getOrCreateContactIdInContactGroup } from './helpers/entityId.helpers';
-import { XeroError } from '..';
 
 setJestTimeout();
 
