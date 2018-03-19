@@ -184,7 +184,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.post<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		contacts: {
-			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactGroupsResponse> => {
+			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactsResponse> => {
 				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 				// TODO: Support for where arg
 				let endpoint = 'contactgroups';
@@ -195,9 +195,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 					endpoint = endpoint + '/' + args.ContactID;
 				}
 
-				return this.oauth1Client.delete<ContactGroupsResponse>(endpoint);
+				return this.oauth1Client.delete<ContactsResponse>(endpoint);
 			},
-			create: async (contact: Contact, args: { ContactGroupID: string }): Promise<ContactGroupsResponse> => {
+			create: async (contact: Contact, args: { ContactGroupID: string }): Promise<ContactsResponse> => {
 				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
 				// TODO: Support for where arg
 				let endpoint = 'contactgroups';
@@ -205,7 +205,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 					endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
 				}
 
-				return this.oauth1Client.put<ContactGroupsResponse>(endpoint, contact);
+				return this.oauth1Client.put<ContactsResponse>(endpoint, contact);
 			}
 		}
 	};
@@ -281,6 +281,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 		get: async (): Promise<ContactsResponse> => {
 			const endpoint = 'contacts';
 			return this.oauth1Client.get<ContactsResponse>(endpoint);
+		},
+		create: async (body?: object): Promise<ContactsResponse> => {
+			const endpoint = 'contacts?summarizeErrors=true';
+			return this.oauth1Client.post<ContactsResponse>(endpoint, body);
 		},
 		attachments: this.generateAttachmentsEndpoint('contacts')
 	};

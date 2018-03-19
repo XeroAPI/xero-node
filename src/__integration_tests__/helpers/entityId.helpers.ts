@@ -14,6 +14,24 @@ export async function getOrCreateContactGroupId(xero: AccountingAPIClient) {
 	if (response.ContactGroups.length <= 0) {
 		response = await xero.contactgroups.create({ Name: 'xero-node test' });
 	}
-	const id = response.ContactGroups[0].ContactGroupID;
-	return id;
+	return response.ContactGroups[0].ContactGroupID;
+}
+
+export async function getOrCreateContactId(xero: AccountingAPIClient) {
+	let response = await xero.contacts.get();
+	if (response.Contacts.length <= 0) {
+		response = await xero.contacts.create({ FirstName: 'xero-node test', LastName: 'Tee' });
+	}
+	return response.Contacts[0].ContactID;
+}
+
+export async function getOrCreateContactGroupContactId(xero: AccountingAPIClient, contactGroupId: string) {
+	const getResponse = await xero.contactgroups.get({ ContactGroupID: contactGroupId });
+	if (getResponse.ContactGroups[0].Contacts.length <= 0) {
+		const contactId = await getOrCreateContactId(xero);
+		const createResponse = await xero.contactgroups.contacts.create({ ContactID: contactId }, { ContactGroupID: contactGroupId });
+		return createResponse.Contacts[0].ContactID;
+	} else {
+		return getResponse.ContactGroups[0].Contacts[0].ContactID;
+	}
 }

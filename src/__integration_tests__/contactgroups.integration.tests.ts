@@ -1,7 +1,10 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
-import { getPrivateConfig } from './helpers/integration.helpers';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { isUUID } from './helpers/test-assertions';
-import { getOrCreateContactGroupId } from './helpers/entityId.helpers';
+import { getOrCreateContactGroupId, getOrCreateContactId, getOrCreateContactIdInContactGroup } from './helpers/entityId.helpers';
+import { XeroError } from '..';
+
+setJestTimeout();
 
 const data = getPrivateConfig();
 const xero = new AccountingAPIClient(data);
@@ -55,24 +58,33 @@ describe('/contactgroups', () => {
 	describe('contacts', async () => {
 
 		it('add to group', async () => {
-			const contactsResponse = await xero.contacts.get();
-			const contactId = contactsResponse.Contacts[0].ContactID;
-
+			const contactId = await getOrCreateContactId(xero);
 			const response = await xero.contactgroups.contacts.create({ ContactID: contactId }, { ContactGroupID: await getOrCreateContactGroupId(xero) });
 
 			expect(response.Contacts.length).toBe(1);
 		});
 
 		it('delete all from group', async () => {
-			const response = await xero.contactgroups.contacts.delete({ ContactGroupID: await getOrCreateContactGroupId(xero) });
+			const contactGroupId = await getOrCreateContactGroupId(xero);
 
-			expect(response.Contacts.length).toBe(0);
+			const response = await xero.contactgroups.contacts.delete({ ContactGroupID: contactGroupId });
+			expect(response).toBeNull();
+
+			const getResponse = await xero.contactgroups.get({ ContactGroupID: contactGroupId });
+			expect(getResponse.ContactGroups[0].Contacts.length).toBe(0);
 		});
 
-		it('delete all from group', async () => {
-			const response = await xero.contactgroups.contacts.delete({ ContactGroupID: await getOrCreateContactGroupId(xero) });
+		it('delete single from group', async () => {
+			const contactGroupId = await getOrCreateContactGroupId(xero);
+			const contactId = await getOrCreateContactIdInContactGroup(xero, contactGroupId);
 
-			expect(response.Contacts.length).toBe(0);
+			expect.assertions(2);
+
+			const response = await xero.contactgroups.contacts.delete({ ContactGroupID: contactGroupId, ContactID: contactId });
+			expect(response).toBeNull();
+
+			const getResponse = await xero.contactgroups.get({ ContactGroupID: contactGroupId });
+			expect(getResponse.ContactGroups[0].Contacts.map((contact) => contact.ContactID)).not.toContainEqual(contactId);
 		});
 
 	});
