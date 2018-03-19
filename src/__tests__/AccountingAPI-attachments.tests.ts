@@ -17,12 +17,15 @@ const xeroConfig: IXeroClientConfiguration = {
 
 describe('AccountingAPI attachments', () => {
 	const writeResponseToStreamSpy = jest.fn();
+	const readStreamToRequestSpy = jest.fn();
+
 	const oAuth1HttpClient: IOAuth1HttpClient = {
 		get: undefined,
 		put: undefined,
 		post: undefined,
 		delete: undefined,
 		writeResponseToStream: writeResponseToStreamSpy,
+		readStreamToRequest: readStreamToRequestSpy,
 		setState: undefined,
 		getState: undefined,
 		getUnauthorisedRequestToken: undefined,
@@ -32,6 +35,7 @@ describe('AccountingAPI attachments', () => {
 	};
 
 	const tempAttachmentLocation = path.resolve(__dirname, 'temp-image.jpg');
+	const localAttachmentLocation = path.resolve(__dirname, 'helpers', 'bean.jpg');
 
 	// Invoices [x]
 	// Receipts [ ]
@@ -45,21 +49,13 @@ describe('AccountingAPI attachments', () => {
 
 	const fixtures: IFixture = {
 		invoices: [
-			{ action: 'downloadAttachment', expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
-		],
-		contacts: [
-			{ action: 'downloadAttachment', expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
 		]
-	};
-
-	const actionToSpyMap: { [key: string]: jest.Mock<{}> } = {
-		downloadAttachment: writeResponseToStreamSpy
 	};
 
 	Object.keys(fixtures).map((endpoint: string) => {
 		(fixtures[endpoint]).map((fixture: IEndPointDetails) => {
-
-			describe(`${endpoint} attachments & ${fixture.action} calls`, () => {
+			describe(`${endpoint} attachments & downloadAttachment calls`, () => {
 				let result: any;
 
 				beforeAll(async () => {
@@ -77,23 +73,23 @@ describe('AccountingAPI attachments', () => {
 
 					const xeroClient = new AccountingAPIClient(xeroConfig, oAuth1HttpClient);
 
-					result = await (xeroClient as any)[endpoint]['attachments'][fixture.action](fixture.args);
+					result = await (xeroClient as any)[endpoint]['attachments'].downloadAttachment(fixture.args);
 				});
 
 				it(`calls the underlying HTTPClient method`, () => {
-					expect(actionToSpyMap[fixture.action]).toHaveBeenCalledTimes(1);
+					expect(writeResponseToStreamSpy).toHaveBeenCalledTimes(1);
 				});
 
 				it(`calls HTTPClient with endpoint=${fixture.expectedPath}`, () => {
-					expect(actionToSpyMap[fixture.action].mock.calls[0][0]).toEqual(fixture.expectedPath);
+					expect(writeResponseToStreamSpy.mock.calls[0][0]).toEqual(fixture.expectedPath);
 				});
 
 				it(`calls HTTPClient with mimeType=${fixture.args.mimeType}`, () => {
-					expect(actionToSpyMap[fixture.action].mock.calls[0][1]).toEqual(fixture.args.mimeType);
+					expect(writeResponseToStreamSpy.mock.calls[0][1]).toEqual(fixture.args.mimeType);
 				});
 
 				it(`calls HTTPClient with writeStream path=${tempAttachmentLocation}`, () => {
-					const writeStream = actionToSpyMap[fixture.action].mock.calls[0][2];
+					const writeStream = writeResponseToStreamSpy.mock.calls[0][2];
 					expect(writeStream).toHaveProperty('path');
 					expect(writeStream.path).toEqual(tempAttachmentLocation);
 				});
@@ -110,6 +106,51 @@ describe('AccountingAPI attachments', () => {
 
 				afterAll(() => {
 					fs.unlinkSync(tempAttachmentLocation);
+				});
+			});
+
+			describe(`${endpoint} attachments & uploading attachment`, () => {
+				let response: any;
+
+				beforeAll(async () => {
+					jest.resetAllMocks();
+
+					readStreamToRequestSpy.mockImplementation((endpointPath: string, mimeType: string, writeStream: fs.WriteStream) => {
+						return new Promise<void>((resolve, reject) => {
+							resolve();
+						});
+					});
+
+					const xeroClient = new AccountingAPIClient(xeroConfig, oAuth1HttpClient);
+
+					response = await (xeroClient as any)[endpoint]['attachments'].uploadAttachment({
+						entityID: fixture.args.entityID,
+						mimeType: fixture.args.mimeType,
+						fileName: fixture.args.fileName,
+						pathToUpload: localAttachmentLocation
+					});
+				});
+
+				it(`calls the underlying HTTPClient method`, () => {
+					expect(readStreamToRequestSpy).toHaveBeenCalledTimes(1);
+				});
+
+				it(`calls HTTPClient with endpoint=${fixture.expectedPath}`, () => {
+					expect(readStreamToRequestSpy.mock.calls[0][0]).toEqual(fixture.expectedPath);
+				});
+
+				it(`calls HTTPClient with mimeType=${fixture.args.mimeType}`, () => {
+					expect(readStreamToRequestSpy.mock.calls[0][1]).toEqual(fixture.args.mimeType);
+				});
+
+				it(`calls HTTPClient with readStream path=${localAttachmentLocation}`, () => {
+					const readStream = readStreamToRequestSpy.mock.calls[0][2];
+					expect(readStream).toHaveProperty('path');
+					expect(readStream.path).toEqual(localAttachmentLocation);
+				});
+
+				it('result is undefined', () => {
+					expect(response).toBeUndefined();
 				});
 			});
 		});

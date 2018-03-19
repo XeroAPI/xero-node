@@ -134,6 +134,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				await this.oauth1Client.writeResponseToStream(endpoint, args.mimeType, writeStream);
 			},
+			uploadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToUpload: string }) => {
+				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
+				const readStream = fs.createReadStream(args.pathToUpload);
+
+				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, readStream);
+			},
 		};
 	}
 

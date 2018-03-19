@@ -1,5 +1,5 @@
 export interface IEndPointDetails {
-	action: string;
+	action?: string;
 	expectedPath: string;
 	subResource?: string;
 	args?: any;

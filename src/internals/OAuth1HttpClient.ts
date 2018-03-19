@@ -8,6 +8,7 @@ import * as querystring from 'querystring';
 import * as http from 'http';
 import * as https from 'https';
 import { XeroError } from '../XeroError';
+import { AttachmentsResponse } from '../AccountingAPI-types';
 
 export interface IToken {
 	oauth_token: string;
@@ -208,6 +209,43 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				});
 			});
 			request.end();
+		});
+	}
+
+	public readStreamToRequest = (endpoint: string, mimeType: string, readStream: fs.ReadStream): Promise<AttachmentsResponse> => {
+		this.resetToDefaultHeaders();
+		return new Promise<AttachmentsResponse>((resolve, reject) => {
+			this.assertAccessTokenIsSet();
+
+			this.resetToDefaultHeaders();
+
+			const bufs: any = [];
+
+			readStream
+				.on('data', (chunk) => {
+					bufs.push(chunk);
+				})
+				.on('end', () => {
+					this.oauthLib._headers = {
+						...this._defaultHeaders, ...{ 'Content-Type': mimeType }
+					};
+
+					this.oauthLib.post(
+						this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
+						this._state.accessToken.oauth_token,
+						this._state.accessToken.oauth_token_secret,
+						Buffer.concat(bufs),
+						mimeType,
+						(err: any, data: string, httpResponse: any) => {
+							if (err) {
+								reject(new XeroError(httpResponse.statusCode, data));
+							} else {
+								const toReturn = JSON.parse(data) as AttachmentsResponse;
+								return resolve(toReturn);
+							}
+						}
+					);
+				});
 		});
 	}
 

@@ -4,6 +4,7 @@
 import { IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration } from './OAuth1HttpClient';
 import { mapConfig, mapState } from './config-helper';
 import * as  fs from 'fs';
+import { AttachmentsResponse } from '../AccountingAPI-types';
 
 /**
  * TODO: Add support for the following keys:
@@ -32,6 +33,7 @@ export interface IHttpClient {
 	put<T>(endpoint: string, body: object, headers?: { [key: string]: string }): Promise<T>;
 	post<T>(endpoint: string, body: object, headers?: { [key: string]: string }): Promise<T>;
 	writeResponseToStream(endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void>;
+	readStreamToRequest(endpoint: string, mimeType: string, readStream: fs.ReadStream): Promise<AttachmentsResponse>;
 }
 
 export abstract class BaseAPIClient {
