@@ -17,7 +17,7 @@ describe('XeroError', () => {
 			data: 'oauth_problem=token_rejected&oauth_problem_advice=Fix%20the%20problem'
 		},
 		{
-			expectedMessage: 'XeroError: statusCode=404 (It went bad!)',
+			expectedMessage: 'XeroError: statusCode=404 data=It went bad!',
 			statusCode: 404,
 			data: 'It went bad!'
 		},

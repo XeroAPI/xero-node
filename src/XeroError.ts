@@ -11,7 +11,7 @@ export class XeroError extends Error {
 		if (queryobj.oauth_problem && queryobj.oauth_problem_advice) {
 			super(`XeroError: ${queryobj.oauth_problem} (${queryobj.oauth_problem_advice})`);
 		} else {
-			super(`XeroError: statusCode=${statusCode} (${data})`);
+			super(`XeroError: statusCode=${statusCode} data=${data}`);
 		}
 
 		// https://github.com/Microsoft/TypeScript/issues/13965#issuecomment-278570200
