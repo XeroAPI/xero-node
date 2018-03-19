@@ -47,7 +47,7 @@ describe('/employees', () => {
 
 	// skip: looks like archiving an employee doesn't work through the API, this test always fails
 	it.skip('update', async () => {
-		const response = await xero.employees.updateMultiple({
+		const response = await xero.employees.update({
 			Employees: [
 				{
 					EmployeeID: await getOrCreateEmployeeId(xero),
