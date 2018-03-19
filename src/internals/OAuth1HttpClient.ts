@@ -212,7 +212,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public readStreamToRequest = (endpoint: string, mimeType: string, readStream: fs.ReadStream): Promise<AttachmentsResponse> => {
+	public readStreamToRequest = (endpoint: string, mimeType: string, size: number, readStream: fs.ReadStream): Promise<AttachmentsResponse> => {
 		this.resetToDefaultHeaders();
 		return new Promise<AttachmentsResponse>((resolve, reject) => {
 			this.assertAccessTokenIsSet();
@@ -227,7 +227,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				})
 				.on('end', () => {
 					this.oauthLib._headers = {
-						...this._defaultHeaders, ...{ 'Content-Type': mimeType }
+						...this._defaultHeaders, ...{ 'Content-Type': mimeType, 'Content-Length': size }
 					};
 
 					this.oauthLib.post(

@@ -33,7 +33,7 @@ export interface IHttpClient {
 	put<T>(endpoint: string, body: object, headers?: { [key: string]: string }): Promise<T>;
 	post<T>(endpoint: string, body: object, headers?: { [key: string]: string }): Promise<T>;
 	writeResponseToStream(endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void>;
-	readStreamToRequest(endpoint: string, mimeType: string, readStream: fs.ReadStream): Promise<AttachmentsResponse>;
+	readStreamToRequest(endpoint: string, mimeType: string, size: number, readStream: fs.ReadStream): Promise<AttachmentsResponse>;
 }
 
 export abstract class BaseAPIClient {

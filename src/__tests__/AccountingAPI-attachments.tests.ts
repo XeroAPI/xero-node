@@ -115,7 +115,7 @@ describe('AccountingAPI attachments', () => {
 				beforeAll(async () => {
 					jest.resetAllMocks();
 
-					readStreamToRequestSpy.mockImplementation((endpointPath: string, mimeType: string, writeStream: fs.WriteStream) => {
+					readStreamToRequestSpy.mockImplementation((endpointPath: string, mimeType: string, size: number, writeStream: fs.WriteStream) => {
 						return new Promise<void>((resolve, reject) => {
 							resolve();
 						});
@@ -143,8 +143,12 @@ describe('AccountingAPI attachments', () => {
 					expect(readStreamToRequestSpy.mock.calls[0][1]).toEqual(fixture.args.mimeType);
 				});
 
+				it(`calls HTTPClient with correct size`, () => {
+					expect(readStreamToRequestSpy.mock.calls[0][2]).toEqual(23951);
+				});
+
 				it(`calls HTTPClient with readStream path=${localAttachmentLocation}`, () => {
-					const readStream = readStreamToRequestSpy.mock.calls[0][2];
+					const readStream = readStreamToRequestSpy.mock.calls[0][3];
 					expect(readStream).toHaveProperty('path');
 					expect(readStream.path).toEqual(localAttachmentLocation);
 				});

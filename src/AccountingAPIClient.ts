@@ -138,7 +138,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
 				const readStream = fs.createReadStream(args.pathToUpload);
 
-				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, readStream);
+				const fileSize = fs.statSync(args.pathToUpload).size;
+
+				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, fileSize, readStream);
 			},
 		};
 	}
