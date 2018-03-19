@@ -36,7 +36,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			let headers;
 			if (args && args.headers) {
-				// TODO: Support Modified After header
 				headers = args.headers;
 				delete args.headers; // remove from query string
 			}
@@ -221,7 +220,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 				delete args.UserID;
 			}
 
-			// TODO: Support Modified After header
 			let headers;
 			if (args && args.headers) {
 				headers = args.headers;
