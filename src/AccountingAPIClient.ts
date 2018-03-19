@@ -3,6 +3,7 @@ import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClie
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import * as fs from 'fs';
 import * as querystring from 'querystring';
+import { generateQueryString } from './internals/utils';
 
 export class AccountingAPIClient extends BaseAPIClient {
 
@@ -17,63 +18,44 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.AccountID;
 				delete args.AccountID; // remove from query string
 			}
-			if (args && Object.keys(args).length > 0) {
-				endpoint += '?' + querystring.stringify(args);
-			}
+			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<AccountsResponse>(endpoint);
 		}
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, page?: number, order?: string, where?: string, createdByMyApp?: boolean, queryParams?: string, headers?: { [key: string]: string } }): Promise<InvoicesResponse> => {
-			// TODO: Support Modified After header
+		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, page?: number, order?: string, where?: string, createdByMyApp?: boolean, headers?: { [key: string]: string } }): Promise<InvoicesResponse> => {
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
-			}
-
-			if (args && args.InvoiceNumber) {
+				delete args.InvoiceID;
+			} else if (args && args.InvoiceNumber) {
 				endpoint = endpoint + '/' + args.InvoiceNumber;
+				delete args.InvoiceNumber;
 			}
 
-			if (args) {
-				let queryObj: any = {};
-
-				if (args.createdByMyApp) {
-					queryObj.createdByMyApp = true;
-				}
-
-				if (args.where) {
-					queryObj.where = args.where;
-				}
-
-				if (args.order) {
-					queryObj.order = args.order;
-				}
-
-				if (args.page) {
-					queryObj.page = args.page;
-				}
-
-				if (args.queryParams) {
-					queryObj = { ...queryObj, ...querystring.parse(args.queryParams) };
-				}
-
-				if (Object.keys(queryObj).length > 0) {
-					endpoint += '?' + querystring.stringify(queryObj);
-				}
+			let headers;
+			if (args && args.headers) {
+				// TODO: Support Modified After header
+				headers = args.headers;
+				delete args.headers; // remove from query string
 			}
 
-			return this.oauth1Client.get<InvoicesResponse>(endpoint, (args && args.headers) ? args.headers : null);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<InvoicesResponse>(endpoint, headers);
 		},
-		savePDF: async (args?: { InvoiceID: string, savePath: string }): Promise<void> => {
-			// TODO: Support invoice number
-			// TODO: Support for where arg
+		savePDF: async (args?: { InvoiceID: string, InvoiceNumber?: string, savePath: string }): Promise<void> => {
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
+				delete args.InvoiceID;
+			} else if (args && args.InvoiceNumber) {
+				endpoint = endpoint + '/' + args.InvoiceNumber;
+				delete args.InvoiceNumber;
 			}
+			endpoint += generateQueryString(args);
 
 			const writeStream = fs.createWriteStream(args.savePath);
 
@@ -84,29 +66,28 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
 		},
-		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string }): Promise<InvoicesResponse> => {
-			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-			// TODO: Support for where arg
+		update: async (invoice: Invoice, args?: { InvoiceID?: string, InvoiceNumber?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
 			let endpoint = `invoices`;
 
 			if (args && args.InvoiceID) {
-				endpoint += `/${args.InvoiceID}`;
+				endpoint = endpoint + '/' + args.InvoiceID;
+				delete args.InvoiceID;
+			} else if (args && args.InvoiceNumber) {
+				endpoint = endpoint + '/' + args.InvoiceNumber;
+				delete args.InvoiceNumber;
 			}
 
-			if (args && args.InvoiceNumber) {
-				endpoint += `/${args.InvoiceNumber}`;
-			}
-
-			endpoint += '?summarizeErrors=false';
+			args = { summarizeErrors: false, ...args };
+			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoice);
 		},
-		updateMultiple: async (invoices: Invoice[]): Promise<InvoicesResponse> => {
+		updateMultiple: async (invoices: Invoice[], args?: { where?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-			// TODO: Support for where arg
 			let endpoint = `invoices`;
 
-			endpoint += '?summarizeErrors=false';
+			args = { summarizeErrors: false, ...args };
+			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoices);
 		},
@@ -155,30 +136,17 @@ export class AccountingAPIClient extends BaseAPIClient {
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
 				endpoint = endpoint + '/' + args.ContactGroupID;
+				delete args.ContactGroupID;
 			}
 
-			if (args) {
-				const queryObj: any = {};
-
-				if (args.where) {
-					queryObj.where = args.where;
-				}
-
-				if (args.order) {
-					queryObj.order = args.order;
-				}
-
-				if (Object.keys(queryObj).length > 0) {
-					endpoint += '?' + querystring.stringify(queryObj);
-				}
-			}
+			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<ContactGroupsResponse>(endpoint);
 		},
-		create: async (contactGroup: ContactGroup): Promise<ContactGroupsResponse> => {
+		create: async (contactGroup: ContactGroup, args?: { summarizeErrors: boolean }): Promise<ContactGroupsResponse> => {
 			// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-			// TODO: Support for where arg
-			const endpoint = 'contactgroups?summarizeErrors=false';
+			let endpoint = 'contactgroups?summarizeErrors=false';
+			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.put<ContactGroupsResponse>(endpoint, contactGroup);
 		},
@@ -187,32 +155,34 @@ export class AccountingAPIClient extends BaseAPIClient {
 			if (args && args.ContactGroupID) {
 				endpoint = endpoint + '/' + args.ContactGroupID;
 			}
-
-			endpoint += '?summarizeErrors=false';
+			endpoint += generateQueryString({ summarizeErrors: false });
 
 			return this.oauth1Client.post<ContactGroupsResponse>(endpoint, contactGroup);
 		},
 		contacts: {
 			delete: async (args: { ContactGroupID: string, ContactID?: string }): Promise<ContactsResponse> => {
 				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-				// TODO: Support for where arg
 				let endpoint = 'contactgroups';
 				if (args && args.ContactGroupID) {
 					endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
+					delete args.ContactGroupID;
+					if (args.ContactID) {
+						endpoint = endpoint + '/' + args.ContactID;
+						delete args.ContactID;
+					}
 				}
-				if (args && args.ContactGroupID && args.ContactID) {
-					endpoint = endpoint + '/' + args.ContactID;
-				}
+				endpoint += generateQueryString(args);
 
 				return this.oauth1Client.delete<ContactsResponse>(endpoint);
 			},
 			create: async (contact: Contact, args: { ContactGroupID: string }): Promise<ContactsResponse> => {
 				// To add contacts to a contact group use the following url /ContactGroups/ContactGroupID/Contacts
-				// TODO: Support for where arg
 				let endpoint = 'contactgroups';
 				if (args && args.ContactGroupID) {
 					endpoint = endpoint + '/' + args.ContactGroupID + '/contacts';
+					delete args.ContactGroupID;
 				}
+				endpoint += generateQueryString(args);
 
 				return this.oauth1Client.put<ContactsResponse>(endpoint, contact);
 			}

@@ -44,18 +44,22 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123' } },
 			{ action: 'get', expectedPath: `invoices/${guid1}?createdByMyApp=true`, args: { InvoiceID: guid1, createdByMyApp: true } },
 			{ action: 'get', expectedPath: `invoices?where=Type%3D%3D%22ACCPAY%22`, args: { where: `Type=="ACCPAY"` } },
-			{ action: 'get', expectedPath: `invoices?createdByMyApp=true&where=Type%3D%3D%22ACCPAY%22`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
-			{ action: 'get', expectedPath: `invoices?Statuses=DRAFT%2CSUBMITTED`, args: { queryParams: 'Statuses=DRAFT,SUBMITTED' } },
+			{ action: 'get', expectedPath: `invoices?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
+			{ action: 'get', expectedPath: `invoices?Statuses=DRAFT%2CSUBMITTED`, args: { Statuses: 'DRAFT,SUBMITTED' } },
 			{ action: 'get', expectedPath: `invoices?order=something`, args: { order: 'something' } },
 			{ action: 'get', expectedPath: `invoices?page=3`, args: { page: 3 } },
 			{ action: 'get', expectedPath: `invoices?page=3`, args: { page: 3, headers: { imaheader: 'headerValue' } } },
-			{ action: 'get', expectedPath: `invoices?createdByMyApp=true&where=Type%3D%3D%22ACCREC%22&page=5&Statuses=DELETED`, args: { page: 5, queryParams: 'Statuses=DELETED', where: `Type=="ACCREC"`, createdByMyApp: true } },
+			{ action: 'get', expectedPath: `invoices?createdByMyApp=true&where=Type%3D%3D%22ACCREC%22&page=5&Statuses=DELETED`, args: { createdByMyApp: true, where: `Type=="ACCREC"`, page: 5, Statuses: 'DELETED' } },
 			{ subResource: 'attachments', action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { EntityID: guid1 } },
 			{ subResource: 'onlineInvoice', action: 'get', expectedPath: `invoices/${guid1}/onlineinvoice`, args: { InvoiceID: guid1 } },
 			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `invoices/${guid1}?summarizeErrors=false`, args: { InvoiceID: guid1 } },
 			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=false`, args: { InvoiceNumber: 'INV-123' } },
+			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { InvoiceNumber: 'INV-123', summarizeErrors: true } },
+			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { summarizeErrors: true, InvoiceNumber: 'INV-123'} },
+			// { action: 'savePDF', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1, savePath: '/dev/null'} },
+			// { action: 'savePDF', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123', savePath: '/dev/null' } },
 		],
 		organisation: [
 			{ action: 'get', expectedPath: 'organisation' },
@@ -118,7 +122,6 @@ describe('AccountingAPI endpoints', () => {
 					inMemoryOAuthLibFF.inMemoryOAuthLib.reset();
 					inMemoryOAuthLibFF.inMemoryOAuthLib.setResponse(false, mockedResponse, { statusCode: 200 });
 
-					// tslint:disable-next-line:prefer-conditional-expression
 					if (fixture.subResource) {
 						mockedRequestBody
 							? result = await (xeroClient as any)[endpoint][fixture.subResource][fixture.action](mockedRequestBody, fixture.args)
