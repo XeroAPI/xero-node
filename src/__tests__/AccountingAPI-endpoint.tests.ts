@@ -7,8 +7,6 @@ import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/I
 import { IFixture, IEndPointDetails } from './helpers/IFixture';
 
 describe('AccountingAPI endpoints', () => {
-
-	const accountingBaseUrl = 'https://api.xero.com/api.xro/2.0/';
 	const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
 	const guid2 = '857c9e3f-640a-4df2-99fd-dd0e52a785e7';
 
@@ -21,7 +19,9 @@ describe('AccountingAPI endpoints', () => {
 
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
-	const oauthHttpClient = new OAuth1HttpClient(mapConfig(xeroConfig, {}), inMemoryOAuthLibFF.newFactory());
+	const oauthConfig = mapConfig(xeroConfig, {});
+	const accountingBaseUrl = oauthConfig.apiBaseUrl + oauthConfig.apiBasePath;
+	const oauthHttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLibFF.newFactory());
 	oauthHttpClient.setState(mapState(xeroConfig));
 	const xeroClient = new AccountingAPIClient(xeroConfig, oauthHttpClient);
 
