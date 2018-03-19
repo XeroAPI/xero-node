@@ -13,7 +13,7 @@ describe('Invoices endpoint', () => {
 	let invoiceIdsToArchive: string[] = [];
 	const tmpDownloadFile = path.resolve(__dirname, './temp_result.pdf');
 
-	beforeAll(() => {
+	beforeAll(async () => {
 		setJestTimeout();
 		const config = getPrivateConfig();
 		xero = new AccountingAPIClient(config);
@@ -50,16 +50,16 @@ describe('Invoices endpoint', () => {
 	});
 
 	it('get single', async () => {
-		const response = await xero.invoices.get({ InvoiceID: invoiceIdsToArchive[0] });
+		const response = await xero.invoices.get({ InvoiceID: await invoiceIdThatExists() });
 
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
 		expect(response.Invoices).toHaveLength(1);
-		expect(response.Invoices[0].InvoiceID).toBe(invoiceIdsToArchive[0]);
+		expect(response.Invoices[0].InvoiceID).toBe(await invoiceIdThatExists());
 	});
 
 	it('get single as pdf', async () => {
-		const response = await xero.invoices.savePDF({ InvoiceID: invoiceIdsToArchive[0], savePath: tmpDownloadFile });
+		const response = await xero.invoices.savePDF({ InvoiceID: await invoiceIdThatExists(), savePath: tmpDownloadFile });
 
 		expect(response).toBeUndefined();
 		const invoiceBuffer = fs.readFileSync(tmpDownloadFile);
@@ -91,5 +91,15 @@ describe('Invoices endpoint', () => {
 
 	function collectInvoicesToArchive(response: InvoicesResponse) {
 		invoiceIdsToArchive = invoiceIdsToArchive.concat(response.Invoices.map((invoice) => invoice.InvoiceID));
+	}
+
+	async function invoiceIdThatExists() {
+		const getResponse = await xero.invoices.get();
+		if (getResponse.Invoices.length > 0) {
+			return getResponse.Invoices[0].InvoiceID;
+		} else {
+			const createResponse = await xero.invoices.create(createSingleInvoiceRequest);
+			return createResponse.Invoices[0].InvoiceID;
+		}
 	}
 });
