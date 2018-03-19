@@ -61,6 +61,10 @@ export interface OrganisationCISSettingResponse {
 	CISSettings: OrgCISSetting[];
 }
 
+export interface TrackingCategoriesResponse extends AccountingResponse {
+	TrackingCategories?: TrackingCategory[];
+}
+
 export interface OnlineInvoice {
 	OnlineInvoiceUrl: string;
 }
@@ -316,4 +320,17 @@ export interface Cell {
 		Value: string;
 		Id: string;
 	}>;
+}
+
+export interface TrackingCategory {
+	Name?: string;
+	Status?: string;
+	TrackingCategoryID?: string;
+	Options: TrackingOption[];
+}
+
+export interface TrackingOption {
+	TrackingOptionID?: string;
+	Name?: string;
+	Status?: string;
 }
