@@ -54,7 +54,7 @@ describe('AccountingAPI endpoints', () => {
 		],
 		organisation: [
 			{ action: 'get', expectedPath: 'organisation' },
-			{ subResource: 'getCISSetting', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
+			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
 		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
