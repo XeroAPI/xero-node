@@ -269,7 +269,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			let endpoint = 'reports';
 			if (args) {
 				const reportId = args.ReportID;
-				delete args.ReportID; // we don't want the ReportID in the querystring
+				delete args.ReportID; // remove from querystring
 
 				endpoint = endpoint + '/' + reportId + generateQueryString(args);
 			}
