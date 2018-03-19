@@ -11,7 +11,7 @@ describe('/organisations', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
-	it('get single organisation', async () => {
+	it('get current organisation', async () => {
 		const response = await xero.organisation.get();
 
 		expect(response.Organisations.length).toBe(1);
