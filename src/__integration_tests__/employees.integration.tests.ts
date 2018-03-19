@@ -64,7 +64,7 @@ describe('/employees', () => {
 	});
 
 	afterAll(async () => {
-		await xero.employees.updateMultiple({
+		await xero.employees.update({
 			Employees: employeeIdsToArchive.map((employeeId) => ({
 				EmployeeID: employeeId,
 				Status: 'ARCHIVED'
