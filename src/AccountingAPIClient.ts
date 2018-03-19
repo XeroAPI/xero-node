@@ -278,7 +278,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	public organisation = {
 		get: async (): Promise<OrganisationResponse> => {
 			const endpoint = 'organisation';
-			return this.oauth1Client.get<any>(endpoint);
+			return this.oauth1Client.get<OrganisationResponse>(endpoint);
 		},
 		getCISSetting: {
 			get: async (args: { OrganisationID: string }): Promise<OrganisationResponse> => {
@@ -288,7 +288,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 					endpoint = endpoint + '/' + args.OrganisationID + '/CISSettings';
 				}
 				// TODO: Type
-				return this.oauth1Client.get<any>(endpoint);
+				return this.oauth1Client.get<OrganisationResponse>(endpoint);
 			}
 		}
 	};
@@ -306,16 +306,15 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public reports = {
-		get: async (args?: any): Promise<ReportsResponse> => {
-			let endpoint = 'Reports';
+		get: async (args?: { ReportID: string }): Promise<ReportsResponse> => {
+			let endpoint = 'reports';
 			if (args) {
 				const reportId = args.ReportID;
 
-				// TODO: Type this with an interface for args
-				args.delete('ReportID');
+				delete args.ReportID; // we don't want the ReportID in the querystring
 				const query = querystring.stringify(args);
 
-				endpoint = endpoint + '/' + reportId + '?' + query.toString();
+				endpoint = endpoint + '/' + reportId + (query ? '?' + query.toString() : '');
 			}
 
 			return this.oauth1Client.get<ReportsResponse>(endpoint);

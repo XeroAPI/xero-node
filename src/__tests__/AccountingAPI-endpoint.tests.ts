@@ -81,6 +81,13 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `employees`, args: { headers: { imaheader: 'headerValue' } } },
 			{ action: 'create', expectedPath: 'employees' },
 			{ action: 'update', expectedPath: 'employees' }
+		],
+		reports: [
+			{ action: 'get', expectedPath: 'reports' },
+			{ action: 'get', expectedPath: `reports/${guid1}`, args: { ReportID: guid1 }},
+			{ action: 'get', expectedPath: 'reports/TrialBalance', args: { ReportID: 'TrialBalance' } },
+			{ action: 'get', expectedPath: 'reports/TenNinetyNine?reportYear=2013', args: { ReportID: 'TenNinetyNine', reportYear: 2013 } },
+			{ action: 'get', expectedPath: 'reports/ProfitAndLoss?fromDate=2010-01-01&toDate=2011-01-01', args: { ReportID: 'ProfitAndLoss', fromDate: '2010-01-01', toDate: '2011-01-01' } }
 		]
 	};
 
