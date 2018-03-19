@@ -4,7 +4,6 @@ import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers'
 
 describe('/currencies', () => {
 	let xero: AccountingAPIClient;
-	// let _idsToDelete: string[] = [];
 
 	beforeAll(async () => {
 		setJestTimeout();
@@ -12,31 +11,29 @@ describe('/currencies', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
-	describe('and creating and getting', () => {
-		let result: CurrenciesResponse;
+	it('create', async () => {
+		expect.assertions(1);
 
-		beforeAll(async () => {
-			try {
-				await xero.currencies.create({ Code: 'PHP' });
-			}
-			// You can't delete currencies
-			catch (e) {
-				// Do Nothing
-			}
-
-			result = await xero.currencies.get();
-		});
-
-		it('the response is defined', () => {
-			expect(result).not.toBeNull();
-		});
-
-		it('currency created can be fetched', async () => {
-			expect(result.Currencies).toContainEqual({
+		let response: CurrenciesResponse;
+		try {
+			response = await xero.currencies.create({ Code: 'PHP' });
+			expect(response.Currencies).toContainEqual({
 				Code: 'PHP',
 				Description: 'Philippine Peso'
 			});
-		});
+		} catch (err) {
+			// you can't re-subscribe to a currency you're already subscribed to
+			expect(err.statusCode).toBe(400);
+			return;
+		}
 	});
 
+	it('get all', async () => {
+		const response = await xero.currencies.get();
+		expect(response).not.toBeNull();
+		expect(response.Currencies).toContainEqual({
+			Code: 'PHP',
+			Description: 'Philippine Peso'
+		});
+	});
 });
