@@ -11,11 +11,14 @@ export class AccountingAPIClient extends BaseAPIClient {
 	}
 
 	public accounts = {
-		get: async (args?: { AccountID: string }): Promise<AccountsResponse> => {
-			// TODO: Support for where arg
+		get: async (args?: { AccountID?: string, where?: string, order?: string }): Promise<AccountsResponse> => {
 			let endpoint = 'accounts';
 			if (args && args.AccountID) {
 				endpoint = endpoint + '/' + args.AccountID;
+				delete args.AccountID; // remove from query string
+			}
+			if (args && Object.keys(args).length > 0) {
+				endpoint += '?' + querystring.stringify(args);
 			}
 
 			return this.oauth1Client.get<AccountsResponse>(endpoint);
