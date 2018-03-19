@@ -42,6 +42,9 @@ export interface EmployeesResponse extends AccountingResponse {
 	Employees: Employee[];
 }
 
+export interface UsersResponse extends AccountingResponse {
+	Users: User[];
+}
 export interface AccountsResponse extends AccountingResponse {
 	Accounts: Account[];
 }
@@ -271,6 +274,16 @@ export interface Employee {
 	FirstName?: string;
 	LastName?: string;
 	ExternalLink?: any;
+}
+
+export interface User {
+	UserID?: string;
+	EmailAddress?: string;
+	FirstName?: string;
+	LastName?: string;
+	UpdatedDateUTC?: string;
+	IsSubscriber?: boolean;
+	OrganisationRole?: string;
 }
 
 export interface Report {
