@@ -41,6 +41,10 @@ export interface EmployeesResponse extends AccountingResponse {
 	Employees: Employee[];
 }
 
+export interface ExpenseClaimsResponse extends AccountingResponse {
+	ExpenseClaims: ExpenseClaim[];
+}
+
 export interface UsersResponse extends AccountingResponse {
 	Users: User[];
 }
@@ -317,6 +321,20 @@ export interface Employee {
 	ExternalLink?: any;
 }
 
+export interface ExpenseClaim {
+	ExpenseClaimID?: string;
+	Status?: string;
+	UpdatedDateUTC?: string;
+	User?: User;
+	Receipts?: Receipt[];
+	Payments?: Payment[];
+	Total?: number;
+	AmountDue?: number;
+	AmountPaid?: number;
+	PaymentDueDate?: string;
+	ReportingDate?: string;
+}
+
 export interface User {
 	UserID?: string;
 	EmailAddress?: string;
@@ -325,6 +343,24 @@ export interface User {
 	UpdatedDateUTC?: string;
 	IsSubscriber?: boolean;
 	OrganisationRole?: string;
+}
+
+export interface Receipt {
+	ReceiptID?: string;
+	ReceiptNumber?: number;
+	Status?: string;
+	User?: User;
+	Reference?: string;
+	Contact?: Contact;
+	Date?: string;
+	UpdatedDateUTC?: string;
+	LineAmountTypes?: string;
+	LineItems?: LineItem[];
+	SubTotal?: number;
+	TotalTax?: number;
+	Total?: number;
+	HasAttachments?: boolean;
+	Url?: string;
 }
 
 export interface Report {

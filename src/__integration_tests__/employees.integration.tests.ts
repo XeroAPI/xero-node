@@ -48,12 +48,8 @@ describe('/employees', () => {
 	// skip: looks like archiving an employee doesn't work through the API, this test always fails
 	it.skip('update', async () => {
 		const response = await xero.employees.update({
-			Employees: [
-				{
-					EmployeeID: await getOrCreateEmployeeId(xero),
-					Status: 'ARCHIVED'
-				}
-			]
+			EmployeeID: await getOrCreateEmployeeId(xero),
+			Status: 'ARCHIVED'
 		});
 
 		expect(response).toBeDefined();
@@ -64,12 +60,10 @@ describe('/employees', () => {
 	});
 
 	afterAll(async () => {
-		await xero.employees.update({
-			Employees: employeeIdsToArchive.map((employeeId) => ({
-				EmployeeID: employeeId,
-				Status: 'ARCHIVED'
-			}))
-		});
+		await xero.employees.update(employeeIdsToArchive.map((employeeId) => ({
+			EmployeeID: employeeId,
+			Status: 'ARCHIVED'
+		})));
 	});
 
 	function collectEmployeesToArchive(response: EmployeesResponse) {

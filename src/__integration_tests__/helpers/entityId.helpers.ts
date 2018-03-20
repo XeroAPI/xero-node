@@ -43,3 +43,11 @@ export async function getOrCreateEmployeeId(xero: AccountingAPIClient) {
 	}
 	return response.Employees[0].EmployeeID;
 }
+
+export async function getOrCreateExpenseClaimId(xero: AccountingAPIClient) {
+	let response = await xero.expenseclaims.get();
+	if (response.ExpenseClaims.length <= 0) {
+		response = await xero.expenseclaims.create({ AmountDue: 1 });
+	}
+	return response.ExpenseClaims[0].ExpenseClaimID;
+}

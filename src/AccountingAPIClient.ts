@@ -1,6 +1,6 @@
 
 import * as fs from 'fs';
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer, TrackingCategoriesResponse, TrackingCategory, TrackingOption, TaxRatesResponse, TaxRate } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer, TrackingCategoriesResponse, TrackingCategory, TrackingOption, TaxRatesResponse, ExpenseClaimsResponse, ExpenseClaim, TaxRate } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -214,7 +214,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public currencies = {
-		get: async (args?: { } & QueryArgs): Promise<CurrenciesResponse> => {
+		get: async (args?: QueryArgs): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies' + generateQueryString(args);
 
 			return this.oauth1Client.get<CurrenciesResponse>(endpoint);
@@ -238,13 +238,38 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<EmployeesResponse>(endpoint, header);
 		},
-		create: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
+		create: async (employees: Employee | Employee[]): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
-			return this.oauth1Client.put<EmployeesResponse>(endpoint, employee);
+			return this.oauth1Client.put<EmployeesResponse>(endpoint, employees);
 		},
-		update: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
+		update: async (employees: Employee | Employee[]): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
-			return this.oauth1Client.post<EmployeesResponse>(endpoint, employee);
+			return this.oauth1Client.post<EmployeesResponse>(endpoint, employees);
+		}
+	};
+
+	public expenseclaims = {
+		get: async (args?: { ExpenseClaimID?: string } & QueryArgs & HeaderArgs): Promise<ExpenseClaimsResponse> => {
+			let endpoint = 'expenseclaims';
+			if (args && args.ExpenseClaimID) {
+				endpoint = endpoint + '/' + args.ExpenseClaimID;
+				delete args.ExpenseClaimID;
+			}
+			endpoint += generateQueryString(args);
+			return this.oauth1Client.get<ExpenseClaimsResponse>(endpoint);
+		},
+		create: async (expenseClaims: ExpenseClaim | ExpenseClaim[]): Promise<ExpenseClaimsResponse> => {
+			const endpoint = 'expenseclaims' + generateQueryString(null, true);
+			return this.oauth1Client.put<ExpenseClaimsResponse>(endpoint, expenseClaims);
+		},
+		update: async (expenseClaims: ExpenseClaim | ExpenseClaim[], args?: { ExpenseClaimID?: string }): Promise<ExpenseClaimsResponse> => {
+			let endpoint = 'expenseclaims';
+			if (args && args.ExpenseClaimID) {
+				endpoint = endpoint + '/' + args.ExpenseClaimID;
+				delete args.ExpenseClaimID;
+			}
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.post<ExpenseClaimsResponse>(endpoint, expenseClaims);
 		}
 	};
 
