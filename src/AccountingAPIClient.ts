@@ -1,6 +1,10 @@
 
 import * as fs from 'fs';
+<<<<<<< HEAD
 import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TrackingCategory, TrackingOption } from './AccountingAPI-types';
+=======
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer } from './AccountingAPI-types';
+>>>>>>> Adds bankTransfers
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -348,7 +352,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<BankTransfersResponse>(endpoint, headers);
+		},
+		create: async (bankTransfer: BankTransfer & BankTransfer[], args?: { summarizeErrors: boolean }): Promise<BankTransfersResponse> => {
+			let endpoint = 'banktransfers';
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.put<BankTransfersResponse>(endpoint, bankTransfer);
 		}
+
 	};
 
 	public organisation = {

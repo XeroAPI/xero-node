@@ -120,6 +120,13 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `trackingcategories/${guid1}`, args: { TrackingCategoryID: guid1 } },
 			{ subResource: 'trackingOptions', action: 'create', expectedPath: `trackingcategories/${guid1}/Options`, args: { TrackingCategoryID: guid1 } },
 			{ subResource: 'trackingOptions', action: 'update', expectedPath: `trackingcategories/${guid1}/Options/${guid2}`, args: { TrackingCategoryID: guid1, TrackingOptionID: guid2 } }
+		],
+		bankTransfers: [
+			{ action: 'get', expectedPath: 'banktransfers' },
+			{ action: 'get', expectedPath: `banktransfers/${guid1}`, args: { BankTransferID: guid1 } },
+			{ action: 'get', expectedPath: `banktransfers?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: 'banktransfers' },
+			{ action: 'create', expectedPath: `banktransfers?summarizeErrors=false` },
 		]
 	};
 

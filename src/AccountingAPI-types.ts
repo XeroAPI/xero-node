@@ -73,26 +73,26 @@ export interface OnlineInvoice {
 }
 
 export interface BankTransfersResponse {
-	BankTransfers: BankTransfers[];
+	BankTransfers: BankTransfer[];
 }
 
-export interface BankTransfers {
-	BankTransferID: string;
-	CreatedDateUTCString: string;
-	CreatedDateUTC: string;
-	DateString: string;
-	Date: string;
-	FromBankAccout: {
-		AccountID: string;
-		Name: string;
+export interface BankTransfer {
+	BankTransferID?: string;
+	CreatedDateUTCString?: string;
+	CreatedDateUTC?: string;
+	DateString?: string;
+	Date?: string;
+	FromBankAccout?: {
+		AccountID?: string;
+		Name?: string;
 	};
-	ToBankAccount: {
-		AccountID: string;
-		Name: string;
+	ToBankAccount?: {
+		AccountID?: string;
+		Name?: string;
 	};
-	Amount: number;
-	FromBankTransactionID: string;
-	ToBankTransactionID: string;
+	Amount?: number;
+	FromBankTransactionID?: string;
+	ToBankTransactionID?: string;
 }
 
 export interface Payment {
