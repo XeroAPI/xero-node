@@ -1,5 +1,4 @@
-﻿
-export interface AccountingResponse {
+﻿export interface AccountingResponse {
 	Id: string;
 	Status: string;
 	ProviderName: string;
@@ -46,7 +45,7 @@ export interface UsersResponse extends AccountingResponse {
 	Users: User[];
 }
 export interface AccountsResponse extends AccountingResponse {
-	Accounts: Account[];
+	Accounts: any[];
 }
 
 export interface OnlineInvoicesResponse extends AccountingResponse {
@@ -179,7 +178,7 @@ export interface Contact {
 	Addresses?: Address[];
 	Phones?: Phone[];
 	UpdatedDateUTC?: string;
-	Balances?: any; // TODO: something here
+	Balances?: any;
 	ContactGroups?: any[];
 	IsSupplier?: boolean;
 	IsCustomer?: boolean;

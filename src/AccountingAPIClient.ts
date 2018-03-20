@@ -4,6 +4,17 @@ import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClie
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
 
+export interface QueryArgs {
+	where?: string;
+	order?: string;
+}
+
+export interface HeaderArgs {
+	headers?: {
+		'If-Modified-Since': string
+	};
+}
+
 export class AccountingAPIClient extends BaseAPIClient {
 
 	public constructor(options: IXeroClientConfiguration, _oAuth1HttpClient?: IOAuth1HttpClient) {
@@ -11,7 +22,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	}
 
 	public accounts = {
-		get: async (args?: { AccountID?: string, where?: string, order?: string }): Promise<AccountsResponse> => {
+		get: async (args?: { AccountID?: string } & QueryArgs & HeaderArgs): Promise<AccountsResponse> => {
 			let endpoint = 'accounts';
 			if (args && args.AccountID) {
 				endpoint = endpoint + '/' + args.AccountID;
@@ -20,7 +31,29 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<AccountsResponse>(endpoint);
-		}
+		},
+		create: async (account: Account): Promise<AccountsResponse> => {
+			// from docs: You can only add accounts one at a time (i.e. you'll need to do multiple API calls to add many accounts)
+			const endpoint = 'accounts';
+			return this.oauth1Client.put<AccountsResponse>(endpoint, account);
+		},
+		update: async (account: Account, args?: { AccountID?: string }): Promise<AccountsResponse> => {
+			// from docs: You can only update accounts one at a time (i.e. you’ll need to do multiple API calls to update many accounts)
+			let endpoint = 'accounts';
+			if (args && args.AccountID) {
+				endpoint = endpoint + '/' + args.AccountID;
+				delete args.AccountID; // remove from query string
+			}
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.post<AccountsResponse>(endpoint, account);
+		},
+		delete: async (args: { AccountID: string }): Promise<AccountsResponse> => {
+			// from docs: If an account is not able to be deleted (e.g. ssystem accounts and accounts used on transactions) you can update the status to ARCHIVED.
+			const endpoint = 'accounts/' + args.AccountID;
+			return this.oauth1Client.delete<AccountsResponse>(endpoint);
+		},
+		attachments: this.generateAttachmentsEndpoint('accounts')
 	};
 
 	public invoices = {

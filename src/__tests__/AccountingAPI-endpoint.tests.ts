@@ -35,8 +35,11 @@ describe('AccountingAPI endpoints', () => {
 	const fixtures: IFixture = {
 		accounts: [
 			{ action: 'get', expectedPath: 'accounts' },
-			{ action: 'get', expectedPath: `accounts/${guid1}`, args: { AccountID: guid1 } },
-			{ action: 'get', expectedPath: 'accounts?order=TaxType', args: { order: 'TaxType' } },
+			{ action: 'get', expectedPath: `accounts/${guid1}?order=TaxType`, args: { AccountID: guid1, order: 'TaxType' } },
+			{ action: 'create', expectedPath: `accounts` },
+			{ action: 'update', expectedPath: `accounts/${guid1}`, args: { AccountID: guid1 } },
+			{ action: 'delete', expectedPath: `accounts/${guid1}`, args: { AccountID: guid1 } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `accounts/${guid1}/attachments`, args: { EntityID: guid1 } }
 		],
 		invoices: [
 			{ action: 'get', expectedPath: 'invoices' },
