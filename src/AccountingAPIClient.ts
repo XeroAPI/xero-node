@@ -214,7 +214,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public contacts = {
-		get: async (args: { includeArchived: boolean, IDs: string }): Promise<ContactsResponse> => {
+		get: async (args?: { includeArchived?: boolean, IDs?: string }): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
 			endpoint += generateQueryString(args, false);
 
