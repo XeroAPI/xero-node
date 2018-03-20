@@ -1,10 +1,6 @@
 
 import * as fs from 'fs';
-<<<<<<< HEAD
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TrackingCategory, TrackingOption } from './AccountingAPI-types';
-=======
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer } from './AccountingAPI-types';
->>>>>>> Adds bankTransfers
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer, TrackingCategoriesResponse, TrackingCategory, TrackingOption } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -271,7 +267,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			const endpoint = 'trackingcategories';
 			return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingCategory);
 		},
-		update: async (trackingCategory: TrackingCategory | TrackingCategory[], args?: {TrackingCategoryID: string}): Promise<TrackingCategoriesResponse> => {
+		update: async (trackingCategory: TrackingCategory | TrackingCategory[], args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
 			let endpoint = 'trackingcategories';
 			if (args && args.TrackingCategoryID) {
 				endpoint = endpoint + '/' + args.TrackingCategoryID;
@@ -281,23 +277,23 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.post<TrackingCategoriesResponse>(endpoint, trackingCategory);
 		},
 		trackingOptions: {
-			create: async (trackingOption: TrackingOption |TrackingOption[],  args?: {TrackingCategoryID: string}): Promise<TrackingCategoriesResponse> => {
+			create: async (trackingOption: TrackingOption | TrackingOption[], args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
 				let endpoint = 'trackingcategories';
 				if (args && args.TrackingCategoryID) {
 					endpoint = endpoint + '/' + args.TrackingCategoryID + '/Options';
 					delete args.TrackingCategoryID;
 				}
-	
+
 				return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingOption);
 			},
-			update: async (trackingOption: TrackingOption |TrackingOption[], args?: {TrackingCategoryID: string, TrackingOptionID: string}): Promise<TrackingCategoriesResponse> => {
+			update: async (trackingOption: TrackingOption | TrackingOption[], args?: { TrackingCategoryID: string, TrackingOptionID: string }): Promise<TrackingCategoriesResponse> => {
 				let endpoint = 'trackingcategories';
 				if (args && args.TrackingCategoryID && args.TrackingOptionID) {
 					endpoint = endpoint + '/' + args.TrackingCategoryID + '/Options/' + args.TrackingOptionID;
 					delete args.TrackingCategoryID;
 					delete args.TrackingOptionID;
 				}
-	
+
 				return this.oauth1Client.post<TrackingCategoriesResponse>(endpoint, trackingOption);
 			}
 		}
