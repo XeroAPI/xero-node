@@ -385,7 +385,7 @@ export interface TrackingCategory {
 	Name?: string;
 	Status?: string;
 	TrackingCategoryID?: string;
-	Options: TrackingOption[];
+	Options?: TrackingOption[];
 }
 
 export interface TrackingOption {

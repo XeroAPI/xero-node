@@ -261,7 +261,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<TrackingCategoriesResponse>(endpoint, headers);
 		},
-		create: async (trackingCategory: TrackingCategory | { TrackingCategories: TrackingCategory[] }): Promise<any> => {
+		create: async (trackingCategory: TrackingCategory | { TrackingCategories: TrackingCategory[] }): Promise<TrackingCategoriesResponse> => {
 			const endpoint = 'trackingcategories';
 			return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingCategory);
 		},
