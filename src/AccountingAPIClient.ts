@@ -1,5 +1,6 @@
+
 import * as fs from 'fs';
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, TrackingCategoriesResponse, TrackingCategory, TrackingOption } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -242,6 +243,59 @@ export class AccountingAPIClient extends BaseAPIClient {
 		update: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
 			return this.oauth1Client.post<EmployeesResponse>(endpoint, employee);
+		}
+	};
+
+	public trackingCategories = {
+		get: async (args?: { TrackingCategoryID?: string, where?: string, order?: string, includeArchived?: boolean, headers?: { [key: string]: string } }): Promise<TrackingCategoriesResponse> => {
+			// TODO: Support for where arg
+			let endpoint = 'trackingcategories';
+			if (args && args.TrackingCategoryID) {
+				endpoint = endpoint + '/' + args.TrackingCategoryID;
+			}
+
+			let headers;
+			if (args && args.headers) {
+				headers = args.headers;
+				delete args.headers;
+			}
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<TrackingCategoriesResponse>(endpoint, headers);
+		},
+		create: async (trackingCategory: TrackingCategory | TrackingCategory[]): Promise<any> => {
+			const endpoint = 'trackingcategories';
+			return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingCategory);
+		},
+		update: async (trackingCategory: TrackingCategory | TrackingCategory[], args?: {TrackingCategoryID: string}): Promise<TrackingCategoriesResponse> => {
+			let endpoint = 'trackingcategories';
+			if (args && args.TrackingCategoryID) {
+				endpoint = endpoint + '/' + args.TrackingCategoryID;
+				delete args.TrackingCategoryID;
+			}
+
+			return this.oauth1Client.post<TrackingCategoriesResponse>(endpoint, trackingCategory);
+		},
+		trackingOptions: {
+			create: async (trackingOption: TrackingOption |TrackingOption[],  args?: {TrackingCategoryID: string}): Promise<TrackingCategoriesResponse> => {
+				let endpoint = 'trackingcategories';
+				if (args && args.TrackingCategoryID) {
+					endpoint = endpoint + '/' + args.TrackingCategoryID + '/Options';
+					delete args.TrackingCategoryID;
+				}
+	
+				return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingOption);
+			},
+			update: async (trackingOption: TrackingOption |TrackingOption[], args?: {TrackingCategoryID: string, TrackingOptionID: string}): Promise<TrackingCategoriesResponse> => {
+				let endpoint = 'trackingcategories';
+				if (args && args.TrackingCategoryID && args.TrackingOptionID) {
+					endpoint = endpoint + '/' + args.TrackingCategoryID + '/Options/' + args.TrackingOptionID;
+					delete args.TrackingCategoryID;
+					delete args.TrackingOptionID;
+				}
+	
+				return this.oauth1Client.post<TrackingCategoriesResponse>(endpoint, trackingOption);
+			}
 		}
 	};
 
