@@ -16,7 +16,7 @@ const xeroConfig: IXeroClientConfiguration = {
 };
 
 describe('AccountingAPI attachments', () => {
-	const writeResponseToStreamSpy = jest.fn();
+	const writeUTF8ResponseToStreamSpy = jest.fn();
 	const readStreamToRequestSpy = jest.fn();
 
 	const oAuth1HttpClient: IOAuth1HttpClient = {
@@ -24,7 +24,7 @@ describe('AccountingAPI attachments', () => {
 		put: undefined,
 		post: undefined,
 		delete: undefined,
-		writeResponseToStream: writeResponseToStreamSpy,
+		writeUTF8ResponseToStream: writeUTF8ResponseToStreamSpy,
 		readStreamToRequest: readStreamToRequestSpy,
 		setState: undefined,
 		getState: undefined,
@@ -62,7 +62,7 @@ describe('AccountingAPI attachments', () => {
 					jest.resetAllMocks();
 
 					const streamToUse = fs.createReadStream(path.resolve(__dirname, 'helpers/bean.jpg'));
-					writeResponseToStreamSpy.mockImplementation((endpointPath: string, mimeType: string, writeStream: fs.WriteStream) => {
+					writeUTF8ResponseToStreamSpy.mockImplementation((endpointPath: string, mimeType: string, writeStream: fs.WriteStream) => {
 						return new Promise<void>((resolve, reject) => {
 							streamToUse.pipe(writeStream);
 							streamToUse.on('end', () => {
@@ -77,19 +77,19 @@ describe('AccountingAPI attachments', () => {
 				});
 
 				it(`calls the underlying HTTPClient method`, () => {
-					expect(writeResponseToStreamSpy).toHaveBeenCalledTimes(1);
+					expect(writeUTF8ResponseToStreamSpy).toHaveBeenCalledTimes(1);
 				});
 
 				it(`calls HTTPClient with endpoint=${fixture.expectedPath}`, () => {
-					expect(writeResponseToStreamSpy.mock.calls[0][0]).toEqual(fixture.expectedPath);
+					expect(writeUTF8ResponseToStreamSpy.mock.calls[0][0]).toEqual(fixture.expectedPath);
 				});
 
 				it(`calls HTTPClient with mimeType=${fixture.args.mimeType}`, () => {
-					expect(writeResponseToStreamSpy.mock.calls[0][1]).toEqual(fixture.args.mimeType);
+					expect(writeUTF8ResponseToStreamSpy.mock.calls[0][1]).toEqual(fixture.args.mimeType);
 				});
 
 				it(`calls HTTPClient with writeStream path=${tempAttachmentLocation}`, () => {
-					const writeStream = writeResponseToStreamSpy.mock.calls[0][2];
+					const writeStream = writeUTF8ResponseToStreamSpy.mock.calls[0][2];
 					expect(writeStream).toHaveProperty('path');
 					expect(writeStream.path).toEqual(tempAttachmentLocation);
 				});

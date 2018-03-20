@@ -188,7 +188,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public writeResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
+	public writeUTF8ResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
 		this.resetToDefaultHeaders();
 		return new Promise<void>((resolve, reject) => {
 			this.assertAccessTokenIsSet();

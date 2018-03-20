@@ -57,7 +57,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			const writeStream = fs.createWriteStream(args.savePath);
 
-			return this.oauth1Client.writeResponseToStream(endpoint, 'application/pdf', writeStream);
+			return this.oauth1Client.writeUTF8ResponseToStream(endpoint, 'application/pdf', writeStream);
 		},
 		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: { summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
 			const endpoint = 'invoices' + generateQueryString(args, true);
@@ -105,7 +105,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
 				const writeStream = fs.createWriteStream(args.pathToSave);
 
-				await this.oauth1Client.writeResponseToStream(endpoint, args.mimeType, writeStream);
+				await this.oauth1Client.writeUTF8ResponseToStream(endpoint, args.mimeType, writeStream);
 			},
 			uploadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToUpload: string }) => {
 				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
