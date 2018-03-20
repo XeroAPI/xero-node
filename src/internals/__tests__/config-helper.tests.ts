@@ -4,42 +4,44 @@ import { validTestCertPath, testCertString } from './helpers/privateKey-helpers'
 
 describe('config-helper', () => {
 	describe('Private apps', () => {
-
-		const xeroConfig: IXeroClientConfiguration = {
-			appType: 'private',
-			consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-			consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-			privateKeyPath: validTestCertPath()
-		};
-
-		it('maps config correctly', () => {
-			const retrievedState = mapConfig(xeroConfig, {});
-
-			expect(retrievedState).toEqual({
-				accept: 'application/json',
-				userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+		describe('with cert as a path', () => {
+			const xeroConfigWithCertPath: IXeroClientConfiguration = {
+				appType: 'private',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-				consumerSecret: testCertString(),
-				tenantType: null,
-				signatureMethod: 'RSA-SHA1',
-				apiBasePath: '/api.xro/2.0/',
-				callbackUrl: null,
-				apiBaseUrl: 'https://api.xero.com',
-				oauthAccessTokenPath: '/oauth/AccessToken',
-				oauthRequestTokenPath: '/oauth/RequestToken',
+				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+				privateKeyPath: validTestCertPath()
+			};
+
+			it('maps config correctly', () => {
+				const retrievedState = mapConfig(xeroConfigWithCertPath, {});
+
+				expect(retrievedState).toEqual({
+					accept: 'application/json',
+					userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					consumerSecret: testCertString(),
+					tenantType: null,
+					signatureMethod: 'RSA-SHA1',
+					apiBasePath: '/api.xro/2.0/',
+					callbackUrl: null,
+					apiBaseUrl: 'https://api.xero.com',
+					oauthAccessTokenPath: '/oauth/AccessToken',
+					oauthRequestTokenPath: '/oauth/RequestToken',
+				});
+			});
+
+			it('maps state correctly', () => {
+				const retrievedState = mapState(xeroConfigWithCertPath);
+
+				expect(retrievedState).toEqual({
+					accessToken: {
+						oauth_token: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+						oauth_token_secret: testCertString()
+					}
+				});
 			});
 		});
 
-		it('maps state correctly', () => {
-			const retrievedState = mapState(xeroConfig);
-
-			expect(retrievedState).toEqual({
-				accessToken: {
-					oauth_token: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-					oauth_token_secret: testCertString()
-				}
-			});
-		});
 	});
 
 	describe('Public apps', () => {

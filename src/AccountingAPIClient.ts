@@ -213,6 +213,21 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
+	public contacts = {
+		get: async (args: { includeArchived: boolean, IDs: string }): Promise<ContactsResponse> => {
+			let endpoint = 'contacts';
+			endpoint += generateQueryString(args, false);
+
+			return this.oauth1Client.get<ContactsResponse>(endpoint);
+		},
+		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
+			let endpoint = 'contacts';
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.post<ContactsResponse>(endpoint, body);
+		},
+		attachments: this.generateAttachmentsEndpoint('contacts')
+	};
+
 	public currencies = {
 		get: async (args?: QueryArgs): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies' + generateQueryString(args);
@@ -394,19 +409,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.oauth1Client.get<OrganisationResponse>(endpoint);
 			}
 		}
-	};
-
-	public contacts = {
-		get: async (): Promise<ContactsResponse> => {
-			const endpoint = 'contacts';
-			return this.oauth1Client.get<ContactsResponse>(endpoint);
-		},
-		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
-			let endpoint = 'contacts';
-			endpoint += generateQueryString(args, true);
-			return this.oauth1Client.post<ContactsResponse>(endpoint, body);
-		},
-		attachments: this.generateAttachmentsEndpoint('contacts')
 	};
 
 	public reports = {

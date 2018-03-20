@@ -68,6 +68,13 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: 'organisation' },
 			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
 		],
+		contacts: [
+			{ action: 'get', expectedPath: 'contacts' },
+			{ action: 'get', expectedPath: `contacts?IDs=${guid1}%2C${guid2}`, args: { IDs: `${guid1},${guid2}`} },
+			{ action: 'get', expectedPath: `contacts?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: `contacts?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
+			{ action: 'get', expectedPath: `contacts?includeArchived=true`, args: { includeArchived: true } },
+		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
 			{ action: 'get', expectedPath: 'contactgroups?where=Type%3D%3D%22BANK%22', args: { where: 'Type=="BANK"' } },
