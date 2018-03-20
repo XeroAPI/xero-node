@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -262,6 +262,18 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<UsersResponse>(endpoint, headers);
+		}
+	};
+
+	public brandingThemes = {
+		get: async (args?: { BrandingThemeID?: string }): Promise<BrandingThemesResponse> => {
+			let endpoint = 'brandingthemes';
+			if (args && args.BrandingThemeID) {
+				endpoint = endpoint + '/' + args.BrandingThemeID;
+				delete args.BrandingThemeID;
+			}
+
+			return this.oauth1Client.get<BrandingThemesResponse>(endpoint);
 		}
 	};
 

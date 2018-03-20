@@ -60,7 +60,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=false`, args: { InvoiceNumber: 'INV-123' } },
 			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { InvoiceNumber: 'INV-123', summarizeErrors: true } },
-			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { summarizeErrors: true, InvoiceNumber: 'INV-123'} },
+			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { summarizeErrors: true, InvoiceNumber: 'INV-123' } },
 			// { action: 'savePDF', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1, savePath: '/dev/null'} },
 			// { action: 'savePDF', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123', savePath: '/dev/null' } },
 		],
@@ -107,6 +107,10 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: 'reports/TrialBalance', args: { ReportID: 'TrialBalance' } },
 			{ action: 'get', expectedPath: 'reports/TenNinetyNine?reportYear=2013', args: { ReportID: 'TenNinetyNine', reportYear: 2013 } },
 			{ action: 'get', expectedPath: 'reports/ProfitAndLoss?fromDate=2010-01-01&toDate=2011-01-01', args: { ReportID: 'ProfitAndLoss', fromDate: '2010-01-01', toDate: '2011-01-01' } }
+		],
+		brandingThemes: [
+			{ action: 'get', expectedPath: 'brandingthemes' },
+			{ action: 'get', expectedPath: `brandingthemes/${guid1}`, args: { BrandingThemeID: guid1 } },
 		]
 	};
 

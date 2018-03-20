@@ -60,6 +60,10 @@ export interface OrganisationCISSettingResponse {
 	CISSettings: OrgCISSetting[];
 }
 
+export interface BrandingThemesResponse {
+	BrandingThemes: BrandingTheme[];
+}
+
 export interface TrackingCategoriesResponse extends AccountingResponse {
 	TrackingCategories?: TrackingCategory[];
 }
@@ -76,6 +80,13 @@ export interface Payment {
 	CurrencyRate?: number;
 	HasAccount?: boolean;
 	HasValidationErrors?: boolean;
+}
+
+export interface BrandingTheme {
+	BrandingThemeID: string;
+	Name: string;
+	SortOrder: number;
+	CreatedDateUTC: string;
 }
 
 export interface Prepayment {
