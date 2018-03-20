@@ -11,15 +11,24 @@ export interface QueryArgs {
 }
 
 export interface HeaderArgs {
-	headers?: {
-		'If-Modified-Since': string
-	};
+	'If-Modified-Since'?: string;
 }
 
 export class AccountingAPIClient extends BaseAPIClient {
 
 	public constructor(options: IXeroClientConfiguration, _oAuth1HttpClient?: IOAuth1HttpClient) {
 		super(options, {}, _oAuth1HttpClient);
+	}
+
+	private generateHeader(args: HeaderArgs) {
+		if (args && args['If-Modified-Since']) {
+			const toReturn = {
+				'If-Modified-Since': args['If-Modified-Since']
+			};
+
+			delete args['If-Modified-Since'];
+			return toReturn;
+		}
 	}
 
 	public accounts = {
@@ -29,9 +38,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.AccountID;
 				delete args.AccountID; // remove from query string
 			}
+			const header = this.generateHeader(args);
 			endpoint += generateQueryString(args);
 
-			return this.oauth1Client.get<AccountsResponse>(endpoint);
+			return this.oauth1Client.get<AccountsResponse>(endpoint, header);
 		},
 		create: async (account: Account): Promise<AccountsResponse> => {
 			// from docs: You can only add accounts one at a time (i.e. you'll need to do multiple API calls to add many accounts)
@@ -58,7 +68,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, page?: number, order?: string, where?: string, createdByMyApp?: boolean, headers?: { [key: string]: string } }): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, page?: number, createdByMyApp?: boolean } & HeaderArgs & QueryArgs): Promise<InvoicesResponse> => {
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
@@ -68,15 +78,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 				delete args.InvoiceNumber;
 			}
 
-			let headers;
-			if (args && args.headers) {
-				headers = args.headers;
-				delete args.headers; // remove from query string
-			}
-
+			const header = this.generateHeader(args);
 			endpoint += generateQueryString(args);
 
-			return this.oauth1Client.get<InvoicesResponse>(endpoint, headers);
+			return this.oauth1Client.get<InvoicesResponse>(endpoint, header);
 		},
 		savePDF: async (args?: { InvoiceID: string, InvoiceNumber?: string, savePath: string }): Promise<void> => {
 			let endpoint = 'invoices';
@@ -221,20 +226,17 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public employees = {
-		get: async (args?: { EmployeeID?: string, where?: string, order?: string, headers?: { [key: string]: string } }): Promise<EmployeesResponse> => {
+		get: async (args?: { EmployeeID?: string } & QueryArgs & HeaderArgs): Promise<EmployeesResponse> => {
 			let endpoint = 'employees';
 			if (args && args.EmployeeID) {
 				endpoint = endpoint + '/' + args.EmployeeID;
 				delete args.EmployeeID;
 			}
-			let headers;
-			if (args && args.headers) {
-				headers = args.headers;
-				delete args.headers;
-			}
+			const header = this.generateHeader(args);
+
 			endpoint += generateQueryString(args);
 
-			return this.oauth1Client.get<EmployeesResponse>(endpoint, headers);
+			return this.oauth1Client.get<EmployeesResponse>(endpoint, header);
 		},
 		create: async (employee: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
@@ -247,18 +249,14 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public trackingCategories = {
-		get: async (args?: { TrackingCategoryID?: string, where?: string, order?: string, includeArchived?: boolean, headers?: { [key: string]: string } }): Promise<TrackingCategoriesResponse> => {
+		get: async (args?: { TrackingCategoryID?: string, where?: string, order?: string, includeArchived?: boolean } & HeaderArgs): Promise<TrackingCategoriesResponse> => {
 			// TODO: Support for where arg
 			let endpoint = 'trackingcategories';
 			if (args && args.TrackingCategoryID) {
 				endpoint = endpoint + '/' + args.TrackingCategoryID;
 			}
 
-			let headers;
-			if (args && args.headers) {
-				headers = args.headers;
-				delete args.headers;
-			}
+			const headers = this.generateHeader(args);
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<TrackingCategoriesResponse>(endpoint, headers);
@@ -308,18 +306,14 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public users = {
-		get: async (args?: { UserID?: string, where?: string, order?: string, headers?: { [key: string]: string } }): Promise<UsersResponse> => {
+		get: async (args?: { UserID?: string, where?: string, order?: string } & HeaderArgs): Promise<UsersResponse> => {
 			let endpoint = 'users';
 			if (args && args.UserID) {
 				endpoint = endpoint + '/' + args.UserID;
 				delete args.UserID;
 			}
 
-			let headers;
-			if (args && args.headers) {
-				headers = args.headers;
-				delete args.headers;
-			}
+			const headers = this.generateHeader(args);
 
 			endpoint += generateQueryString(args);
 
@@ -347,15 +341,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 				delete args.BankTransferID;
 			}
 
-			let headers;
-			if (args && args.headers) {
-				headers = args.headers;
-				delete args.headers; // remove from query string
-			}
-
 			endpoint += generateQueryString(args);
 
-			return this.oauth1Client.get<BankTransfersResponse>(endpoint, headers);
+			return this.oauth1Client.get<BankTransfersResponse>(endpoint, this.generateHeader(args));
 		},
 		create: async (bankTransfer: BankTransfer & BankTransfer[], args?: { summarizeErrors: boolean }): Promise<BankTransfersResponse> => {
 			let endpoint = 'banktransfers';
