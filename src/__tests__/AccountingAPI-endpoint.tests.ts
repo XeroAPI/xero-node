@@ -138,6 +138,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `banktransfers?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
 			{ action: 'get', expectedPath: 'banktransfers' },
 			{ action: 'create', expectedPath: `banktransfers?summarizeErrors=false` },
+			{ subResource: 'attachments', action: 'get', expectedPath: `banktransfers/${guid1}/attachments`, args: { EntityID: guid1 } }
 		]
 	};
 

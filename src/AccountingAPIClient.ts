@@ -373,8 +373,8 @@ export class AccountingAPIClient extends BaseAPIClient {
 			let endpoint = 'banktransfers';
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.put<BankTransfersResponse>(endpoint, bankTransfers);
-		}
-
+		},
+		attachments: this.generateAttachmentsEndpoint('banktransfers')
 	};
 
 	public organisation = {
