@@ -16,7 +16,7 @@ export interface IXeroClientConfiguration {
 	consumerKey: string;
 	consumerSecret: string;
 	privateKeyPath?: string;
-	privateKeyPassword?: string;
+	privateKeyString?: string;
 	callbackUrl?: string;
 }
 

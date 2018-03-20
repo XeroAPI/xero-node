@@ -6,7 +6,11 @@ import { getStringFromFile } from './utils';
 import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
 
 export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1State> {
-	const cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null; // TODO don't read twice
+	let cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null; // TODO don't read twice
+
+	if (xeroConfig.privateKeyString) {
+		cert = xeroConfig.privateKeyString;
+	}
 
 	if (xeroConfig.appType == 'private') {
 		return {
@@ -32,7 +36,11 @@ export function mapConfig(xeroConfig: IXeroClientConfiguration, apiConfig: IApiC
 	const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
 	const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
 
-	const cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null;
+	let cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null;
+
+	if (xeroConfig.privateKeyString) {
+		cert = xeroConfig.privateKeyString;
+	}
 
 	const oauthConfig: IOAuth1Configuration = {
 		apiBaseUrl: API_BASE,
