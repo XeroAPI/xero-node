@@ -1,6 +1,6 @@
 
 import * as fs from 'fs';
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer, TrackingCategoriesResponse, TrackingCategory, TrackingOption, TaxRatesResponse } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer, TrackingCategoriesResponse, TrackingCategory, TrackingOption, TaxRatesResponse, TaxRate } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -408,6 +408,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 			endpoint += generateQueryString(args);
 			return this.oauth1Client.get<TaxRatesResponse>(endpoint);
+		},
+		create: async (body?: TaxRate): Promise<TaxRatesResponse> => {
+			const endpoint = 'taxrates';
+			return this.oauth1Client.post<TaxRatesResponse>(endpoint, body);
 		}
 	};
 

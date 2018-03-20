@@ -1,5 +1,6 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
+import { TaxRate } from '../AccountingAPI-types';
 
 describe('/taxrates', () => {
 	let xero: AccountingAPIClient;
@@ -10,22 +11,22 @@ describe('/taxrates', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
-	// it('create', async () => {
-	// 	expect.assertions(1);
-
-	// 	let response: any;
-	// 	try {
-	// 		response = await xero.currencies.create({ Code: 'PHP' });
-	// 		expect(response.Currencies).toContainEqual({
-	// 			Code: 'PHP',
-	// 			Description: 'Philippine Peso'
-	// 		});
-	// 	} catch (err) {
-	// 		// you can't re-subscribe to a currency you're already subscribed to
-	// 		expect(err.statusCode).toBe(400);
-	// 		return;
-	// 	}
-	// });
+	it('create', async () => {
+		const rate: TaxRate = {
+			Name: 'Node Tax',
+			TaxType: 'INPUT',
+			TaxComponents: [{
+				Name: 'Tech Debt Tax',
+				Rate: 17.5,
+				IsCompound: false,
+				IsNonRecoverable: false
+			}]
+		};
+		const response = await xero.taxRates.create(rate);
+		expect(response.TaxRates).toBeInstanceOf(Array);
+		expect(response.TaxRates[0]).toHaveProperty('Name', 'Node Tax');
+		expect(response.TaxRates[0]).toHaveProperty('TaxType', 'INPUT');
+	});
 
 	it('get all', async () => {
 		const response = await xero.taxRates.get();
