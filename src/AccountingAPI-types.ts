@@ -90,7 +90,7 @@ export interface BankTransfer {
 	CreatedDateUTC?: string;
 	DateString?: string;
 	Date?: string;
-	FromBankAccout?: {
+	FromBankAccount?: {
 		AccountID?: string;
 		Name?: string;
 	};

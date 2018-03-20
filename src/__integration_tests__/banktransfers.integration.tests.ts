@@ -1,10 +1,9 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
-import { BankTransfersResponse } from '../AccountingAPI-types';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
+import { getOrCreateBankTransferId } from './helpers/entityId.helpers';
 
 describe('/banktransfers', () => {
 	let xero: AccountingAPIClient;
-	let response: BankTransfersResponse;
 
 	beforeAll(async () => {
 		setJestTimeout();
@@ -13,16 +12,13 @@ describe('/banktransfers', () => {
 	});
 
 	it('can get all', async () => {
-		expect.assertions(1);
-
-		response = await xero.bankTransfers.get();
-		expect(response.BankTransfers[0].BankTransferID).toBeDefined();
+		const response = await xero.bankTransfers.get();
+		expect(response.BankTransfers).toBeDefined();
 	});
 
 	it('can get single', async () => {
-		expect.assertions(1);
-
-		const newResponse = await xero.bankTransfers.get({ BankTransferID: response.BankTransfers[0].BankTransferID});
+		const bankTransferId = await getOrCreateBankTransferId(xero);
+		const newResponse = await xero.bankTransfers.get({ BankTransferID: bankTransferId });
 		expect(newResponse.BankTransfers[0].Amount).toBeDefined();
 	});
 

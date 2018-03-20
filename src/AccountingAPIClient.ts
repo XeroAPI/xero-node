@@ -43,12 +43,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<AccountsResponse>(endpoint, header);
 		},
-		create: async (account: Account): Promise<AccountsResponse> => {
+		create: async (account: any): Promise<AccountsResponse> => {
 			// from docs: You can only add accounts one at a time (i.e. you'll need to do multiple API calls to add many accounts)
 			const endpoint = 'accounts';
 			return this.oauth1Client.put<AccountsResponse>(endpoint, account);
 		},
-		update: async (account: Account, args?: { AccountID?: string }): Promise<AccountsResponse> => {
+		update: async (account: any, args?: { AccountID?: string }): Promise<AccountsResponse> => {
 			// from docs: You can only update accounts one at a time (i.e. you’ll need to do multiple API calls to update many accounts)
 			let endpoint = 'accounts';
 			if (args && args.AccountID) {
@@ -365,15 +365,14 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.BankTransferID;
 				delete args.BankTransferID;
 			}
-
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<BankTransfersResponse>(endpoint, this.generateHeader(args));
 		},
-		create: async (bankTransfer: BankTransfer & BankTransfer[], args?: { summarizeErrors: boolean }): Promise<BankTransfersResponse> => {
+		create: async (bankTransfers: BankTransfer | BankTransfer[], args?: { summarizeErrors: boolean }): Promise<BankTransfersResponse> => {
 			let endpoint = 'banktransfers';
 			endpoint += generateQueryString(args, true);
-			return this.oauth1Client.put<BankTransfersResponse>(endpoint, bankTransfer);
+			return this.oauth1Client.put<BankTransfersResponse>(endpoint, bankTransfers);
 		}
 
 	};

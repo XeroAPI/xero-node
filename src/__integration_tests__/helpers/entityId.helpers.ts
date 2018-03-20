@@ -8,6 +8,27 @@ export async function getOrCreateInvoiceId(xero: AccountingAPIClient) {
 	}
 	return response.Invoices[0].InvoiceID;
 }
+export async function getOrCreateAccountId(xero: AccountingAPIClient, args?: any) {
+	let response = await xero.accounts.get(args);
+	if (response.Accounts.length <= 0) {
+		response = await xero.accounts.create({ Name: 'AmyTest', Code: 200, Type: 'BANK', BankAccountNumber: '00-12345-678-00' });
+	}
+	return response.Accounts[0].AccountID;
+}
+
+export async function getOrCreateBankTransferId(xero: AccountingAPIClient) {
+	let response = await xero.bankTransfers.get();
+	if (response.BankTransfers.length <= 0) {
+		const fromAccountId = await getOrCreateAccountId(xero, { where: 'Type=="BANK"' });
+		const toAccountId = await getOrCreateAccountId(xero, { where: `Type=="BANK"&&AccountID!=GUID("${fromAccountId}")` });
+		response = await xero.bankTransfers.create({
+			FromBankAccount: { AccountID: fromAccountId },
+			ToBankAccount: { AccountID: toAccountId },
+			Amount: 123
+		});
+	}
+	return response.BankTransfers[0].BankTransferID;
+}
 
 export async function getOrCreateContactGroupId(xero: AccountingAPIClient) {
 	let response = await xero.contactgroups.get();
