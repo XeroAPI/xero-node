@@ -15,6 +15,7 @@ describe('/taxrates', () => {
 		const rate: TaxRate = {
 			Name: 'Node Tax',
 			TaxType: 'INPUT',
+			ReportTaxType: 'INPUT',
 			TaxComponents: [{
 				Name: 'Tech Debt Tax',
 				Rate: 17.5,
@@ -22,10 +23,9 @@ describe('/taxrates', () => {
 				IsNonRecoverable: false
 			}]
 		};
-		const response = await xero.taxRates.create(rate);
+		const response = await xero.taxRates.update(rate);
 		expect(response.TaxRates).toBeInstanceOf(Array);
 		expect(response.TaxRates[0]).toHaveProperty('Name', 'Node Tax');
-		expect(response.TaxRates[0]).toHaveProperty('TaxType', 'INPUT');
 	});
 
 	it('get all', async () => {

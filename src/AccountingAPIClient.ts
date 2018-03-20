@@ -411,6 +411,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 		},
 		create: async (body?: TaxRate): Promise<TaxRatesResponse> => {
 			const endpoint = 'taxrates';
+			return this.oauth1Client.put<TaxRatesResponse>(endpoint, body);
+		},
+		update: async (body?: TaxRate): Promise<TaxRatesResponse> => {
+			const endpoint = 'taxrates';
 			return this.oauth1Client.post<TaxRatesResponse>(endpoint, body);
 		}
 	};

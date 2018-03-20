@@ -369,6 +369,7 @@ export interface TaxComponent {
 export interface TaxRate {
 	Name?: string;
 	TaxType?: string;
+	ReportTaxType?: string;
 	CanApplyToAssets?: boolean;
 	CanApplyToEquity?: boolean;
 	CanApplyToExpenses?: boolean;
