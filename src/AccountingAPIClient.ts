@@ -258,11 +258,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 			return this.oauth1Client.get<ExpenseClaimsResponse>(endpoint);
 		},
-		create: async (expenseClaims: ExpenseClaim | ExpenseClaim[]): Promise<ExpenseClaimsResponse> => {
-			const endpoint = 'expenseclaims' + generateQueryString(null, true);
+		create: async (expenseClaims: ExpenseClaim | ExpenseClaim[], args?: {summarizeErrors?: boolean}): Promise<ExpenseClaimsResponse> => {
+			const endpoint = 'expenseclaims' + generateQueryString(args, true);
 			return this.oauth1Client.put<ExpenseClaimsResponse>(endpoint, expenseClaims);
 		},
-		update: async (expenseClaims: ExpenseClaim | ExpenseClaim[], args?: { ExpenseClaimID?: string }): Promise<ExpenseClaimsResponse> => {
+		update: async (expenseClaims: ExpenseClaim | ExpenseClaim[], args?: { ExpenseClaimID?: string, summarizeErrors?: boolean }): Promise<ExpenseClaimsResponse> => {
 			let endpoint = 'expenseclaims';
 			if (args && args.ExpenseClaimID) {
 				endpoint = endpoint + '/' + args.ExpenseClaimID;

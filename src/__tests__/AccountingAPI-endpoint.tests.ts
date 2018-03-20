@@ -101,6 +101,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: `expenseclaims?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `expenseclaims?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `expenseclaims/${guid1}?summarizeErrors=false`, args: { ExpenseClaimID: guid1 } },
+			{ action: 'update', expectedPath: `expenseclaims/${guid1}?summarizeErrors=true`, args: { ExpenseClaimID: guid1, summarizeErrors: true } },
 		],
 		users: [
 			{ action: 'get', expectedPath: 'users' },
