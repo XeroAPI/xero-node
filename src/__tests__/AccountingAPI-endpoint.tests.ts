@@ -118,8 +118,10 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: 'trackingcategories?order=Name%20DESC', args: { order: 'Name DESC' } },
 			{ action: 'create', expectedPath: 'trackingcategories' },
 			{ action: 'update', expectedPath: `trackingcategories/${guid1}`, args: { TrackingCategoryID: guid1 } },
+			{ action: 'delete', expectedPath: `trackingcategories/${guid1}`, args: { TrackingCategoryID: guid1 } },
 			{ subResource: 'trackingOptions', action: 'create', expectedPath: `trackingcategories/${guid1}/Options`, args: { TrackingCategoryID: guid1 } },
-			{ subResource: 'trackingOptions', action: 'update', expectedPath: `trackingcategories/${guid1}/Options/${guid2}`, args: { TrackingCategoryID: guid1, TrackingOptionID: guid2 } }
+			{ subResource: 'trackingOptions', action: 'update', expectedPath: `trackingcategories/${guid1}/Options/${guid2}`, args: { TrackingCategoryID: guid1, TrackingOptionID: guid2 } },
+			{ subResource: 'trackingOptions', action: 'delete', expectedPath: `trackingcategories/${guid1}/Options/${guid2}`, args: { TrackingCategoryID: guid1, TrackingOptionID: guid2 } }
 		],
 		bankTransfers: [
 			{ action: 'get', expectedPath: 'banktransfers' },

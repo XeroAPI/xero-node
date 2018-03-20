@@ -301,7 +301,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.oauth1Client.post<TrackingCategoriesResponse>(endpoint, trackingOption);
 			},
 			delete: async (args: { TrackingCategoryID: string, TrackingOptionID: string}): Promise<any> => {
-				const endpoint = 'trackingcategories/' + args.TrackingCategoryID + '/option/' + args.TrackingOptionID;
+				const endpoint = 'trackingcategories/' + args.TrackingCategoryID + '/Options/' + args.TrackingOptionID;
 				return this.oauth1Client.delete<any>(endpoint);
 			},
 		}
