@@ -110,7 +110,7 @@ describe('AccountingAPI endpoints', () => {
 		],
 		brandingThemes: [
 			{ action: 'get', expectedPath: 'brandingthemes' },
-			{ action: 'get', expectedPath: `brandingthemes/${guid1}`, args: { BrandingThemeID: guid1 } }
+			{ action: 'get', expectedPath: `brandingthemes/${guid1}`, args: { BrandingThemeID: guid1 } },
 		],
 		trackingCategories: [
 			{ action: 'get', expectedPath: 'trackingcategories' },
