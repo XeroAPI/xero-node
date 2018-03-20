@@ -14,20 +14,20 @@ describe('/contactgroups', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
-	it('get all', async () => {
-		const response = await xero.contactgroups.get();
-
-		expect(response).not.toBeNull();
-		expect(isUUID(response.Id)).toBeTruthy();
-		expect(response.ContactGroups.length).toBeGreaterThan(0);
-	});
-
 	it('get single', async () => {
 		const response = await xero.contactgroups.get({ ContactGroupID: await getOrCreateContactGroupId(xero) });
 
 		expect(response).not.toBeNull();
 		expect(isUUID(response.Id)).toBeTruthy();
 		expect(response.ContactGroups.length).toBe(1);
+	});
+
+	it('get all', async () => {
+		const response = await xero.contactgroups.get();
+
+		expect(response).not.toBeNull();
+		expect(isUUID(response.Id)).toBeTruthy();
+		expect(response.ContactGroups.length).toBeGreaterThan(0);
 	});
 
 	it('create', async () => {
@@ -47,7 +47,7 @@ describe('/contactgroups', () => {
 
 	it('delete', async () => {
 		const response = await xero.contactgroups.update({
-			ContactGroupID: await getOrCreateContactGroupId(xero),
+			ContactGroupID: await getOrCreateContactGroupId(xero, false),
 			Status: 'DELETED'
 		});
 

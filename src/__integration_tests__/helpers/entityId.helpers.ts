@@ -1,74 +1,115 @@
 import { AccountingAPIClient } from '../../AccountingAPIClient';
 import { createSingleInvoiceRequest } from '../request-body/invoice.request.examples';
 
+const inMemoryCache: {
+	invoiceId?: string,
+	accountId?: string,
+	bankTransferId?: string,
+	contactGroupId?: string,
+	contactId?: string,
+	contactIdInContactGroup?: string,
+	employeeId?: string,
+	expenseClaimId?: string,
+} = {};
+
 export async function getOrCreateInvoiceId(xero: AccountingAPIClient) {
-	let response = await xero.invoices.get();
-	if (response.Invoices.length <= 0) {
-		response = await xero.invoices.create(createSingleInvoiceRequest);
+	if (!inMemoryCache.invoiceId) {
+		let response = await xero.invoices.get();
+		if (response.Invoices.length <= 0) {
+			response = await xero.invoices.create(createSingleInvoiceRequest);
+		}
+		inMemoryCache.invoiceId = response.Invoices[0].InvoiceID;
 	}
-	return response.Invoices[0].InvoiceID;
+	return inMemoryCache.invoiceId;
 }
+
 export async function getOrCreateAccountId(xero: AccountingAPIClient, args?: any) {
-	let response = await xero.accounts.get(args);
-	if (response.Accounts.length <= 0) {
-		response = await xero.accounts.create({ Name: 'AmyTest', Code: 200, Type: 'BANK', BankAccountNumber: '00-12345-678-00' });
+	if (!inMemoryCache.accountId || args) {
+		let response = await xero.accounts.get(args);
+		if (response.Accounts.length <= 0) {
+			response = await xero.accounts.create({ Name: 'AmyTest', Code: 200, Type: 'BANK', BankAccountNumber: '00-12345-678-00' });
+		}
+		inMemoryCache.accountId = response.Accounts[0].AccountID;
 	}
-	return response.Accounts[0].AccountID;
+	return inMemoryCache.accountId;
 }
 
 export async function getOrCreateBankTransferId(xero: AccountingAPIClient) {
-	let response = await xero.bankTransfers.get();
-	if (response.BankTransfers.length <= 0) {
-		const fromAccountId = await getOrCreateAccountId(xero, { where: 'Type=="BANK"' });
-		const toAccountId = await getOrCreateAccountId(xero, { where: `Type=="BANK"&&AccountID!=GUID("${fromAccountId}")` });
-		response = await xero.bankTransfers.create({
-			FromBankAccount: { AccountID: fromAccountId },
-			ToBankAccount: { AccountID: toAccountId },
-			Amount: 123
-		});
+	if (!inMemoryCache.bankTransferId) {
+		let response = await xero.bankTransfers.get();
+		if (response.BankTransfers.length <= 0) {
+			const fromAccountId = await getOrCreateAccountId(xero, { where: 'Type=="BANK"' });
+			const toAccountId = await getOrCreateAccountId(xero, { where: `Type=="BANK"&&AccountID!=GUID("${fromAccountId}")` });
+			response = await xero.bankTransfers.create({
+				FromBankAccount: { AccountID: fromAccountId },
+				ToBankAccount: { AccountID: toAccountId },
+				Amount: 123
+			});
+		}
+		inMemoryCache.bankTransferId = response.BankTransfers[0].BankTransferID;
 	}
-	return response.BankTransfers[0].BankTransferID;
+	return inMemoryCache.bankTransferId;
 }
 
-export async function getOrCreateContactGroupId(xero: AccountingAPIClient) {
-	let response = await xero.contactgroups.get();
-	if (response.ContactGroups.length <= 0) {
-		response = await xero.contactgroups.create({ Name: 'xero-node test' });
+export async function getOrCreateContactGroupId(xero: AccountingAPIClient, useCache: boolean = true) {
+	if (!inMemoryCache.contactGroupId || !useCache) {
+		let response = await xero.contactgroups.get();
+		if (response.ContactGroups.length <= 0) {
+			response = await xero.contactgroups.create({ Name: 'xero-node test' });
+		}
+		const contactGroupId = response.ContactGroups[0].ContactGroupID;
+		if (!useCache) {
+			return contactGroupId;
+		} else {
+			inMemoryCache.contactGroupId = contactGroupId;
+		}
 	}
-	return response.ContactGroups[0].ContactGroupID;
+	return inMemoryCache.contactGroupId;
 }
 
 export async function getOrCreateContactId(xero: AccountingAPIClient) {
-	let response = await xero.contacts.get();
-	if (response.Contacts.length <= 0) {
-		response = await xero.contacts.create({ FirstName: 'xero-node test', LastName: 'Tee' + Date.now() });
+	if (!inMemoryCache.contactId) {
+		let response = await xero.contacts.get();
+		if (response.Contacts.length <= 0) {
+			response = await xero.contacts.create({ FirstName: 'xero-node test', LastName: 'Tee' + Date.now() });
+		}
+		inMemoryCache.contactId = response.Contacts[0].ContactID;
 	}
-	return response.Contacts[0].ContactID;
+	return inMemoryCache.contactId;
 }
 
 export async function getOrCreateContactIdInContactGroup(xero: AccountingAPIClient, contactGroupId: string) {
-	const getResponse = await xero.contactgroups.get({ ContactGroupID: contactGroupId });
-	if (getResponse.ContactGroups[0].Contacts.length <= 0) {
-		const contactId = await getOrCreateContactId(xero);
-		const createResponse = await xero.contactgroups.contacts.create({ ContactID: contactId }, { ContactGroupID: contactGroupId });
-		return createResponse.Contacts[0].ContactID;
-	} else {
-		return getResponse.ContactGroups[0].Contacts[0].ContactID;
+	if (!inMemoryCache.contactIdInContactGroup) {
+		const getResponse = await xero.contactgroups.get({ ContactGroupID: contactGroupId });
+		if (getResponse.ContactGroups[0].Contacts.length <= 0) {
+			const contactId = await getOrCreateContactId(xero);
+			const createResponse = await xero.contactgroups.contacts.create({ ContactID: contactId }, { ContactGroupID: contactGroupId });
+			inMemoryCache.contactIdInContactGroup = createResponse.Contacts[0].ContactID;
+		} else {
+			inMemoryCache.contactIdInContactGroup = getResponse.ContactGroups[0].Contacts[0].ContactID;
+		}
 	}
+	return inMemoryCache.contactIdInContactGroup;
 }
 
 export async function getOrCreateEmployeeId(xero: AccountingAPIClient) {
-	let response = await xero.employees.get();
-	if (response.Employees.length <= 0) {
-		response = await xero.employees.create({ FirstName: 'Bryan', LastName: 'Dubb-liu' });
+	if (!inMemoryCache.employeeId) {
+		let response = await xero.employees.get();
+		if (response.Employees.length <= 0) {
+			response = await xero.employees.create({ FirstName: 'Bryan', LastName: 'Dubb-liu' });
+		}
+		inMemoryCache.employeeId = response.Employees[0].EmployeeID;
 	}
-	return response.Employees[0].EmployeeID;
+	return inMemoryCache.employeeId;
 }
 
 export async function getOrCreateExpenseClaimId(xero: AccountingAPIClient) {
-	let response = await xero.expenseclaims.get();
-	if (response.ExpenseClaims.length <= 0) {
-		response = await xero.expenseclaims.create({ AmountDue: 1 });
+	if (!inMemoryCache.expenseClaimId) {
+		let response = await xero.expenseclaims.get();
+		if (response.ExpenseClaims.length <= 0) {
+			response = await xero.expenseclaims.create({ AmountDue: 1 });
+		}
+		inMemoryCache.expenseClaimId = response.ExpenseClaims[0].ExpenseClaimID;
 	}
-	return response.ExpenseClaims[0].ExpenseClaimID;
+	return inMemoryCache.expenseClaimId;
 }
