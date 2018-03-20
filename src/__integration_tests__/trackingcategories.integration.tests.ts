@@ -35,7 +35,7 @@ describe('/trackingcategories', () => {
 		const response = await xero.trackingCategories.get();
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
-		expect(response.TrackingCategories.length).toBe(1);
+		expect(response.TrackingCategories.length).toBeGreaterThan(0);
 		expect(response.TrackingCategories[0].TrackingCategoryID).toBeTruthy();
 	});
 
