@@ -158,7 +158,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	}
 
 	public contactgroups = {
-		get: async (args?: { ContactGroupID?: string, where?: string, order?: string }): Promise<ContactGroupsResponse> => {
+		get: async (args?: { ContactGroupID?: string } & QueryArgs): Promise<ContactGroupsResponse> => {
 
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
@@ -214,7 +214,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public currencies = {
-		get: async (args?: { where?: string, order?: string }): Promise<CurrenciesResponse> => {
+		get: async (args?: { } & QueryArgs): Promise<CurrenciesResponse> => {
 			const endpoint = 'currencies' + generateQueryString(args);
 
 			return this.oauth1Client.get<CurrenciesResponse>(endpoint);
@@ -249,7 +249,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public trackingCategories = {
-		get: async (args?: { TrackingCategoryID?: string, where?: string, order?: string, includeArchived?: boolean } & HeaderArgs): Promise<TrackingCategoriesResponse> => {
+		get: async (args?: { TrackingCategoryID?: string, includeArchived?: boolean } & HeaderArgs & QueryArgs): Promise<TrackingCategoriesResponse> => {
 			// TODO: Support for where arg
 			let endpoint = 'trackingcategories';
 			if (args && args.TrackingCategoryID) {
@@ -306,7 +306,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public users = {
-		get: async (args?: { UserID?: string, where?: string, order?: string } & HeaderArgs): Promise<UsersResponse> => {
+		get: async (args?: { UserID?: string } & HeaderArgs & QueryArgs): Promise<UsersResponse> => {
 			let endpoint = 'users';
 			if (args && args.UserID) {
 				endpoint = endpoint + '/' + args.UserID;
