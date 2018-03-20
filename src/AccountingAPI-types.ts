@@ -64,6 +64,10 @@ export interface BrandingThemesResponse {
 	BrandingThemes: BrandingTheme[];
 }
 
+export interface TaxRatesResponse extends AccountingResponse {
+	TaxRates?: TaxRate[];
+}
+
 export interface TrackingCategoriesResponse extends AccountingResponse {
 	TrackingCategories?: TrackingCategory[];
 }
@@ -353,6 +357,27 @@ export interface Cell {
 		Value: string;
 		Id: string;
 	}>;
+}
+
+export interface TaxComponent {
+	Name?: string;
+	Rate?: number;
+	IsCompound?: boolean;
+	IsNonRecoverable?: boolean;
+}
+
+export interface TaxRate {
+	Name?: string;
+	TaxType?: string;
+	CanApplyToAssets?: boolean;
+	CanApplyToEquity?: boolean;
+	CanApplyToExpenses?: boolean;
+	CanApplyToLiabilities?: boolean;
+	CanApplyToRevenue?: boolean;
+	DisplayTaxRate?: number;
+	EffectiveRate?: number;
+	Status?: string;
+	TaxComponents?: TaxComponent[];
 }
 
 export interface TrackingCategory {
