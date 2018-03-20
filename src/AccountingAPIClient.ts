@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -274,6 +274,26 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 
 			return this.oauth1Client.get<BrandingThemesResponse>(endpoint);
+		}
+	};
+
+	public bankTransfers = {
+		get: async (args?: { BankTransferID?: string } & HeaderArgs & QueryArgs): Promise<BankTransfersResponse> => {
+			let endpoint = 'banktransfers';
+			if (args && args.BankTransferID) {
+				endpoint = endpoint + '/' + args.BankTransferID;
+				delete args.BankTransferID;
+			}
+
+			let headers;
+			if (args && args.headers) {
+				headers = args.headers;
+				delete args.headers; // remove from query string
+			}
+
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<BankTransfersResponse>(endpoint, headers);
 		}
 	};
 

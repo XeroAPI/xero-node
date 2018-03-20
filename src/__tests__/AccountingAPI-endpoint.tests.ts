@@ -111,6 +111,13 @@ describe('AccountingAPI endpoints', () => {
 		brandingThemes: [
 			{ action: 'get', expectedPath: 'brandingthemes' },
 			{ action: 'get', expectedPath: `brandingthemes/${guid1}`, args: { BrandingThemeID: guid1 } },
+		],
+		bankTransfers: [
+			{ action: 'get', expectedPath: 'banktransfers' },
+			{ action: 'get', expectedPath: `banktransfers/${guid1}`, args: { BankTransferID: guid1 } },
+			{ action: 'get', expectedPath: `banktransfers?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: 'banktransfers' },
+			{ action: 'get', expectedPath: `banktransfers`, args: { headers: { imaheader: 'headerValue' } } },
 		]
 	};
 
