@@ -261,11 +261,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<TrackingCategoriesResponse>(endpoint, headers);
 		},
-		create: async (trackingCategory: TrackingCategory | TrackingCategory[]): Promise<any> => {
+		create: async (trackingCategory: TrackingCategory | { TrackingCategories: TrackingCategory[] }): Promise<any> => {
 			const endpoint = 'trackingcategories';
 			return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingCategory);
 		},
-		update: async (trackingCategory: TrackingCategory | TrackingCategory[], args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
+		update: async (trackingCategory: TrackingCategory | { TrackingCategories: TrackingCategory[] }, args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
 			let endpoint = 'trackingcategories';
 			if (args && args.TrackingCategoryID) {
 				endpoint = endpoint + '/' + args.TrackingCategoryID;
@@ -279,7 +279,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.delete<any>(endpoint);
 		},
 		trackingOptions: {
-			create: async (trackingOption: TrackingOption | TrackingOption[], args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
+			create: async (trackingOption: TrackingOption | { Options: TrackingOption[] }, args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
 				let endpoint = 'trackingcategories';
 				if (args && args.TrackingCategoryID) {
 					endpoint = endpoint + '/' + args.TrackingCategoryID + '/Options';
@@ -288,7 +288,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingOption);
 			},
-			update: async (trackingOption: TrackingOption | TrackingOption[], args?: { TrackingCategoryID: string, TrackingOptionID: string }): Promise<TrackingCategoriesResponse> => {
+			update: async (trackingOption: TrackingOption | { Options: TrackingOption[] }, args?: { TrackingCategoryID: string, TrackingOptionID: string }): Promise<TrackingCategoriesResponse> => {
 				let endpoint = 'trackingcategories';
 				if (args && args.TrackingCategoryID && args.TrackingOptionID) {
 					endpoint = endpoint + '/' + args.TrackingCategoryID + '/Options/' + args.TrackingOptionID;
