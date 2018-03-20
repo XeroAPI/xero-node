@@ -7,6 +7,7 @@ import * as fs from 'fs';
 import * as querystring from 'querystring';
 import * as http from 'http';
 import * as https from 'https';
+import * as URL from 'url';
 import { XeroError } from '../XeroError';
 import { AttachmentsResponse } from '../AccountingAPI-types';
 
@@ -211,6 +212,99 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 			request.end();
 		});
 	}
+
+	public writeBinaryResponseToStream = (endpoint: string, mimeType: string, writeStream: fs.WriteStream): Promise<void> => {
+		this.resetToDefaultHeaders();
+		return new Promise<void>((resolve, reject) => {
+			this.assertAccessTokenIsSet();
+			const forPDF = this.oAuthLibFactory({ ...this.config, ...{ accept: mimeType } });
+			this._OURperformSecureRequest(
+				this._state.accessToken.oauth_token,
+				this._state.accessToken.oauth_token_secret,
+				'GET',
+				this.config.apiBaseUrl + this.config.apiBasePath + endpoint,
+				(err: any, data: string, httpResponse: any) => {
+					// data is the body of the response
+
+					if (err) {
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+					} else {
+						const buffer = new Buffer(data, 'binary');
+
+						writeStream.write(buffer, () => {
+							writeStream.close();
+							return resolve();
+						});
+					}
+				}, forPDF);
+		});
+	}
+
+	private _OURperformSecureRequest = function(oauth_token: any, oauth_token_secret: any, method: any, url: any, callback: any, oauthForBinary: any) {
+		// This code was copied out from the lib as it does not support binary downloads.
+
+		const orderedParameters: any = oauthForBinary._prepareParameters(oauth_token, oauth_token_secret, method, url, null);
+
+		const parsedUrl = URL.parse(url, false);
+		if (parsedUrl.protocol == 'http:' && !parsedUrl.port) { parsedUrl.port = '80'; }
+		if (parsedUrl.protocol == 'https:' && !parsedUrl.port) { parsedUrl.port = '443'; }
+
+		const headers: any = {};
+		const authorization = oauthForBinary._buildAuthorizationHeaders(orderedParameters);
+		headers['Authorization'] = authorization;
+
+		headers['Host'] = parsedUrl.host;
+
+		for (const key in this._headers) {
+			if (this._headers.hasOwnProperty(key)) {
+				headers[key] = this._headers[key];
+			}
+		}
+
+		headers['Content-length'] = 0;
+
+		let path;
+		if (!parsedUrl.pathname || parsedUrl.pathname == '') { parsedUrl.pathname = '/'; }
+		// tslint:disable-next-line:prefer-conditional-expression
+		if (parsedUrl.query) { path = parsedUrl.pathname + '?' + parsedUrl.query; }
+		else { path = parsedUrl.pathname; }
+
+		let request;
+		// tslint:disable-next-line:prefer-conditional-expression
+		if (parsedUrl.protocol == 'https:') {
+			request = oauthForBinary._createClient(parsedUrl.port, parsedUrl.hostname, method, path, headers, true);
+		}
+		else {
+			request = oauthForBinary._createClient(parsedUrl.port, parsedUrl.hostname, method, path, headers);
+		}
+
+		let data = '';
+
+		function passBackControl(response: any) {
+			if (response.statusCode >= 200 && response.statusCode <= 299) {
+				callback(null, data, response);
+			}
+		}
+
+		request.on('response', function(response: any) {
+			response.setEncoding('binary');
+			response.on('data', function(chunk: any) {
+				data += chunk;
+			});
+			response.on('end', function() {
+				passBackControl(response);
+			});
+			// response.on('close', function() {
+			//     passBackControl(response);
+			// });
+		});
+
+		request.on('error', function(err: Error) {
+			callback(err);
+		});
+
+		request.end();
+	};
 
 	public readStreamToRequest = (endpoint: string, mimeType: string, size: number, readStream: fs.ReadStream): Promise<AttachmentsResponse> => {
 		this.resetToDefaultHeaders();

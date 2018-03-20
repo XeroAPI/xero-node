@@ -35,17 +35,16 @@ describe('attachments', () => {
 	});
 
 	it('can download the same attachment', async () => {
-		// TODO: This is not working
+		await xero.invoices.attachments.downloadAttachment({
+			entityID: anInvoice.InvoiceID,
+			mimeType: 'image/jpg',
+			fileName: 'anUploadedImage.jpg',
+			pathToSave: tempAttachementPath
+		});
 
-		// await xero.invoices.attachments.downloadAttachment({
-		// 	entityID: anInvoice.InvoiceID,
-		// 	mimeType: 'image/jpg',
-		// 	fileName: 'anUploadedImage.jpg',
-		// 	pathToSave: tempAttachementPath
-		// });
-
-		// const file = fs.statSync(tempAttachementPath);
-		// expect(file.size).toBe(15960);
+		const tempFile = fs.statSync(tempAttachementPath);
+		const realFile = fs.statSync(attachementPath);
+		expect(tempFile.size).toBe(realFile.size);
 	});
 
 	it('get the attachment details', async () => {

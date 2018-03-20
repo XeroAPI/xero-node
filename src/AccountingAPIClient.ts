@@ -105,7 +105,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
 				const writeStream = fs.createWriteStream(args.pathToSave);
 
-				await this.oauth1Client.writeUTF8ResponseToStream(endpoint, args.mimeType, writeStream);
+				await this.oauth1Client.writeBinaryResponseToStream(endpoint, args.mimeType, writeStream);
 			},
 			uploadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToUpload: string }) => {
 				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
