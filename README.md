@@ -1,6 +1,6 @@
-xero-node (alpha)
 
-We're creating a new version. Please see here: https://github.com/XeroAPI/xero-node/issues/183
+
+xero-node. We're creating a new version. Please see here: https://github.com/XeroAPI/xero-node/issues/183. Please give it a spin!
 ===========
 
 [![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
