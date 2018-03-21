@@ -27,7 +27,7 @@ describe('users', () => {
 
 		expect(singleResponse).toBeDefined();
 		expect(singleResponse.Id).toBeTruthy();
-		expect(singleResponse.Users.length).toBeGreaterThan(0);
+		expect(singleResponse.Users.length).toBe(1);
 		expect(singleResponse.Users[0].UserID).toBeTruthy();
 	});
 
