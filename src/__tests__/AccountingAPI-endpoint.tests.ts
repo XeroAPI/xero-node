@@ -148,6 +148,8 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: `prepayments?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `prepayments?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `prepayments/${guid1}?summarizeErrors=true`, args: { PrepaymentID: guid1, summarizeErrors: true } },
+			{ subResource: 'allocations', action: 'create', expectedPath: `prepayments/${guid1}/allocations`, args: { PrepaymentID: guid1 } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `prepayments/${guid1}/attachments`, args: { EntityID: guid1 } },
 		],
 		users: [
 			{ action: 'get', expectedPath: 'users' },
