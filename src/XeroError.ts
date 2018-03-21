@@ -10,6 +10,7 @@ export class XeroError extends Error {
 		const queryobj = querystring.parse(data);
 		if (queryobj.oauth_problem && queryobj.oauth_problem_advice) {
 			if (statusCode == 503 && headers && headers['x-rate-limit-problem']) {
+				console.log(headers);
 				message += ' ' + headers['x-rate-limit-problem'];
 			}
 			message += ` ${queryobj.oauth_problem} (${queryobj.oauth_problem_advice})`;
