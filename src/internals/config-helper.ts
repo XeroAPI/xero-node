@@ -4,6 +4,7 @@
 import { IXeroClientConfiguration, IApiConfiguration } from './BaseAPIClient';
 import { getStringFromFile } from './utils';
 import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
+const version = require('../../package.json').version;
 
 export function mapState(xeroConfig: IXeroClientConfiguration): IOAuth1State {
 	let cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null; // TODO don't read twice
@@ -46,7 +47,7 @@ export function mapConfig(xeroConfig: IXeroClientConfiguration, apiConfig: IApiC
 		oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
 		oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
 		accept: 'application/json',
-		userAgent: 'NodeJS-XeroAPIClient.' + xeroConfig.consumerKey, // TODO add package.json version here
+		userAgent: 'NodeJS-XeroAPIClient.' + version + '.' + xeroConfig.consumerKey, // TODO add package.json version here
 		consumerKey: xeroConfig.consumerKey,
 		consumerSecret: xeroConfig.consumerSecret,
 		tenantType: apiConfig.tenantType || null,

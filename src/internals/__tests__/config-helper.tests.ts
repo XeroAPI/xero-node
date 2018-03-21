@@ -1,6 +1,7 @@
 import { IXeroClientConfiguration, IApiConfiguration } from '../BaseAPIClient';
 import { mapConfig, mapState } from '../config-helper';
 import { validTestCertPath, testCertString } from './helpers/privateKey-helpers';
+const version = require('../../../package.json').version;
 
 describe('config-helper', () => {
 	describe('Private apps', () => {
@@ -17,7 +18,7 @@ describe('config-helper', () => {
 
 				expect(retrievedState).toEqual({
 					accept: 'application/json',
-					userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					userAgent: `NodeJS-XeroAPIClient.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: null,
@@ -53,7 +54,7 @@ describe('config-helper', () => {
 
 				expect(retrievedState).toEqual({
 					accept: 'application/json',
-					userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					userAgent: `NodeJS-XeroAPIClient.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: null,
@@ -92,7 +93,7 @@ describe('config-helper', () => {
 
 			expect(retrievedState).toEqual({
 				accept: 'application/json',
-				userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+				userAgent: `NodeJS-XeroAPIClient.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				tenantType: null,
@@ -126,8 +127,8 @@ describe('config-helper', () => {
 				const retrievedState = mapConfig(xeroConfig, {});
 
 				expect(retrievedState).toEqual({
+					userAgent: `NodeJS-XeroAPIClient.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
 					accept: 'application/json',
-					userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: null,
@@ -160,7 +161,7 @@ describe('config-helper', () => {
 
 				expect(retrievedState).toEqual({
 					accept: 'application/json',
-					userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					userAgent: `NodeJS-XeroAPIClient.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: null,
@@ -200,7 +201,7 @@ describe('config-helper', () => {
 
 				expect(retrievedState).toEqual({
 					accept: 'application/json',
-					userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					userAgent: `NodeJS-XeroAPIClient.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: 'PRACTICE',
@@ -230,7 +231,7 @@ describe('config-helper', () => {
 
 				expect(retrievedState).toEqual({
 					accept: 'application/json',
-					userAgent: 'NodeJS-XeroAPIClient.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					userAgent: `NodeJS-XeroAPIClient.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: 'PRACTICE',
