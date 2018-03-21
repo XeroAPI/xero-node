@@ -21,6 +21,10 @@ export interface BankTransactionsResponse extends AccountingResponse {
 	BankTransactions: BankTransaction[];
 }
 
+export interface AllocationsResponse extends AccountingResponse {
+	BankTransactions: Allocation[];
+}
+
 export interface InvoicesResponse extends AccountingResponse {
 	Invoices: Invoice[];
 }
@@ -60,7 +64,7 @@ export interface AccountsResponse extends AccountingResponse {
 	Accounts: any[];
 }
 
-export interface CreditNotesResponse extends AccountingResponse{
+export interface CreditNotesResponse extends AccountingResponse {
 	CreditNotes: CreditNote[];
 }
 
@@ -227,9 +231,9 @@ export interface Prepayment {
 }
 
 export interface Allocation {
-	AppliedAmount: string;
-	Date: string;
-	Invoice: Invoice;
+	AppliedAmount?: number;
+	Date?: string;
+	Invoice?: Invoice;
 }
 
 export interface CreditNote {

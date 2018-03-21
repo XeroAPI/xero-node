@@ -7,6 +7,7 @@ import {
 	AccountsResponse, BankTransaction, BankTransactionsResponse,
 	InvoicesResponse, Invoice, CreditNotesResponse,
 	CreditNote,
+	AllocationsResponse,
 	ContactGroupsResponse, ContactGroup,
 	CurrenciesResponse, Currency,
 	EmployeesResponse, Employee,
@@ -341,6 +342,19 @@ export class AccountingAPIClient extends BaseAPIClient {
 		update: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: { summarizeErrors?: boolean }): Promise<CreditNotesResponse> => {
 			const endpoint = 'creditnotes' + generateQueryString(args, true);
 			return this.oauth1Client.post<CreditNotesResponse>(endpoint, creditNote);
+		},
+		allocations: {
+			create: async (allocation: Allocation, args?: { CreditNoteID?: string }): Promise<AllocationsResponse> => {
+				let endpoint = 'creditnotes';
+				if (args && args.CreditNoteID) {
+					endpoint = endpoint + '/' + args.CreditNoteID;
+					delete args.CreditNoteID; // remove from query string
+				}
+				endpoint += '/allocations';
+				endpoint += generateQueryString(args);
+
+				return this.oauth1Client.put<AllocationsResponse>(endpoint, allocation);
+			},
 		},
 		attachments: this.generateAttachmentsEndpoint('creditnotes')
 	};

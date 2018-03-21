@@ -52,6 +52,7 @@ describe('AccountingAPI endpoints', () => {
 		],
 		creditNotes: [
 			{ action: 'get', expectedPath: 'creditnotes' },
+			{ subResource: 'allocations', action: 'create', expectedPath: `creditnotes/${guid1}/allocations`, args: { CreditNoteID: guid1 } },
 			{ action: 'get', expectedPath: `creditnotes?page=3`, args: { page: 3 } },
 			{ action: 'get', expectedPath: `creditnotes?order=something`, args: { order: 'something' } },
 			{ action: 'get', expectedPath: `creditnotes?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
