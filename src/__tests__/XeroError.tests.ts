@@ -22,7 +22,7 @@ describe('XeroError', () => {
 			data: 'It went bad!'
 		},
 		{
-			expectedMessage: 'XeroError: rate limit exceeded (please wait before retrying the xero api)',
+			expectedMessage: 'XeroError: Minute rate limit exceeded (please wait before retrying the xero api)',
 			statusCode: 503,
 			data: 'oauth_problem=rate%20limit%20exceeded&oauth_problem_advice=please%20wait%20before%20retrying%20the%20xero%20api',
 			headers: { 'x-rate-limit-problem': 'Minute' }
