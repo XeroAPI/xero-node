@@ -215,7 +215,8 @@ export class AccountingAPIClient extends BaseAPIClient {
 	public banktransactions = {
 		create: async (bankTransactions: any): Promise<any> => {
 			return null; // TODO
-		}
+		},
+		attachments: this.generateAttachmentsEndpoint('banktransactions')
 	};
 
 	public contactgroups = {
@@ -318,6 +319,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 		},
 		attachments: this.generateAttachmentsEndpoint('contacts')
+	};
+
+	public creditNotes = {
+		attachments: this.generateAttachmentsEndpoint('creditnotes')
 	};
 
 	public currencies = {
@@ -534,6 +539,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 		attachments: this.generateAttachmentsEndpoint('banktransfers')
 	};
 
+	public manualJournals = {
+		attachments: this.generateAttachmentsEndpoint('manualjournals')
+	};
+
 	public organisation = {
 		get: async (): Promise<OrganisationResponse> => {
 			const endpoint = 'organisation';
@@ -632,6 +641,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<ReportsResponse>(endpoint);
 		}
+	};
+
+	public repeatingInvoices = {
+		attachments: this.generateAttachmentsEndpoint('repeatinginvoices')
 	};
 
 	public taxRates = {

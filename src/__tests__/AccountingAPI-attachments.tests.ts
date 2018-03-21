@@ -40,7 +40,7 @@ describe('AccountingAPI attachments', () => {
 	// Receipts [ ]
 	// Credit Notes [ ]
 	// Repeating Invoices [ ]
-	// Bank Transactions [ ]
+	// Bank Transactions [x]
 	// Bank Transfers [ ]
 	// Contacts [x]
 	// Accounts [ ]
@@ -52,6 +52,24 @@ describe('AccountingAPI attachments', () => {
 		],
 		bankTransactions: [
 			{ expectedPath: `banktransactions/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+		],
+		creditNotes: [
+			{ expectedPath: `creditnotes/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+		],
+		repeatingInvoices: [
+			{ expectedPath: `repeatinginvoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+		],
+		bankTransfers: [
+			{ expectedPath: `banktransfers/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+		],
+		contacts: [
+			{ expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+		],
+		accounts: [
+			{ expectedPath: `accounts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+		],
+		manualJournals: [
+			{ expectedPath: `manualjournals/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
 		]
 	};
 
