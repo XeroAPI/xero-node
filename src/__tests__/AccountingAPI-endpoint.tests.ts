@@ -132,7 +132,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: 'payments' },
 			{ action: 'get', expectedPath: `payments/${guid1}`, args: { PaymentID: guid1 } },
 			{ action: 'get', expectedPath: `payments/${guid1}?order=UpdatedDateUTC`, args: { PaymentID: guid1, order: 'UpdatedDateUTC' } },
-			{ action: 'get', expectedPath: `users`, args: { 'If-Modified-Since': 'headerValue' } },
+			{ action: 'get', expectedPath: `payments`, args: { 'If-Modified-Since': 'headerValue' } },
 			{ action: 'create', expectedPath: `payments?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `payments?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `payments/${guid1}?summarizeErrors=true`, args: { PaymentID: guid1, summarizeErrors: true } },
