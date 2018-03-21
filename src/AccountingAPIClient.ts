@@ -244,8 +244,19 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<ContactsResponse>(endpoint, header);
 		},
-		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
+		create: async (body?: Contact | Contact[], args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.put<ContactsResponse>(endpoint, body);
+		},
+		update: async (body?: Contact | Contact[], args?: { ContactID: string, summarizeErrors: boolean }): Promise<ContactsResponse> => {
+			let endpoint = 'contacts';
+
+			if (args && args.ContactID) {
+				endpoint = endpoint + '/' + args.ContactID;
+				delete args.ContactID;
+			}
+
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.post<ContactsResponse>(endpoint, body);
 		},

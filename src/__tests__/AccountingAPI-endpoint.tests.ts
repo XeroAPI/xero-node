@@ -80,6 +80,10 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `contacts?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
 			{ action: 'get', expectedPath: `contacts?page=2`, args: { page: 2 } },
 			{ subResource: 'CISsettings', action: 'get', expectedPath: `contacts/${guid1}/cissettings`, args: { ContactID: guid1 } },
+			{ action: 'update', expectedPath: `contacts/${guid1}?summarizeErrors=false`, args: { ContactID: guid1 } },
+			{ action: 'update', expectedPath: `contacts/${guid1}?summarizeErrors=true`, args: { summarizeErrors: true, ContactID: guid1 } },
+			{ action: 'create', expectedPath: `contacts?summarizeErrors=false` },
+			{ action: 'create', expectedPath: `contacts?summarizeErrors=true`, args: { summarizeErrors: true } },
 		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
