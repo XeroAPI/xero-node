@@ -140,6 +140,15 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `payments?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `payments/${guid1}?summarizeErrors=true`, args: { PaymentID: guid1, summarizeErrors: true } },
 		],
+		prepayments: [
+			{ action: 'get', expectedPath: 'prepayments' },
+			{ action: 'get', expectedPath: `prepayments/${guid1}`, args: { PrepaymentID: guid1 } },
+			{ action: 'get', expectedPath: `prepayments/${guid1}?order=UpdatedDateUTC`, args: { PrepaymentID: guid1, order: 'UpdatedDateUTC' } },
+			{ action: 'get', expectedPath: `prepayments`, args: { 'If-Modified-Since': 'headerValue' } },
+			{ action: 'create', expectedPath: `prepayments?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `prepayments?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `prepayments/${guid1}?summarizeErrors=true`, args: { PrepaymentID: guid1, summarizeErrors: true } },
+		],
 		users: [
 			{ action: 'get', expectedPath: 'users' },
 			{ action: 'get', expectedPath: `users/${guid1}`, args: { UserID: guid1 } },

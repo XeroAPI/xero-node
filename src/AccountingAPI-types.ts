@@ -56,22 +56,6 @@ export interface AccountsResponse extends AccountingResponse {
 	Accounts: any[];
 }
 
-export interface OnlineInvoicesResponse extends AccountingResponse {
-	OnlineInvoices: OnlineInvoice[];
-}
-
-export interface OrganisationResponse extends AccountingResponse {
-	Organisations: Organisation[];
-}
-
-export interface OrganisationCISSettingResponse {
-	CISSettings: OrgCISSetting[];
-}
-
-export interface PaymentsResponse {
-	Payments: Payment[];
-}
-
 export interface BrandingThemesResponse {
 	BrandingThemes: BrandingTheme[];
 }
@@ -81,7 +65,27 @@ export interface JournalsResponse extends AccountingResponse {
 export interface ItemsResponse extends AccountingResponse {
 	Items: Item[];
 }
-
+export interface ItemsResponse extends AccountingResponse {
+	Items: Item[];
+}
+export interface OnlineInvoicesResponse extends AccountingResponse {
+	OnlineInvoices: OnlineInvoice[];
+}
+export interface OrganisationResponse extends AccountingResponse {
+	Organisations: Organisation[];
+}
+export interface OrganisationCISSettingResponse {
+	CISSettings: OrgCISSetting[];
+}
+export interface OverpaymentsResponse {
+	Overpayments: Overpayment[];
+}
+export interface PaymentsResponse {
+	Payments: Payment[];
+}
+export interface PrepaymentsResponse {
+	Prepayments: Prepayment[];
+}
 export interface TaxRatesResponse extends AccountingResponse {
 	TaxRates?: TaxRate[];
 }
@@ -121,6 +125,7 @@ export interface Payment {
 	PaymentID?: string;
 	Date?: string;
 	Amount?: number;
+	BankAmount?: number;
 	Reference?: string;
 	CurrencyRate?: number;
 	IsReconciled?: boolean;
@@ -162,25 +167,30 @@ export interface Overpayment {
 	Allocations?: Allocation[];
 	Payments?: Payment[];
 	HasAttachments?: boolean;
+	HasValidationErrors?: boolean;
+	ValidationErrors?: ValidationError[];
 }
 
 export interface Prepayment {
-	Contact: Contact;
-	Date: string;
-	Status: string;
-	LineAmountTypes: string;
-	SubTotal: string;
-	TotalTax: string;
-	Total: string;
-	UpdatedDateUTC: string;
-	CurrencyCode: string;
-	FullyPaidOnDate: string;
-	Type: string;
-	PrepaymentID: string;
-	CurrencyRate: string;
-	RemainingCredit: string;
-	Allocations: Allocation[];
-	HasAttachments: string;
+	PrepaymentID?: string;
+	Type?: string;
+	Contact?: Contact;
+	Date?: string;
+	Status?: string;
+	LineAmountTypes?: string;
+	LineItems?: LineItem[];
+	SubTotal?: number;
+	TotalTax?: number;
+	Total?: number;
+	UpdatedDateUTC?: string;
+	CurrencyCode?: string;
+	CurrencyRate?: number;
+	RemainingCredit?: number;
+	Allocations?: Allocation[];
+	Reference?: string;
+	HasAttachments?: boolean;
+	HasValidationErrors?: boolean;
+	ValidationErrors?: ValidationError[];
 }
 
 export interface Allocation {
