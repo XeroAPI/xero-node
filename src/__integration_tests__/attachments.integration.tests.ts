@@ -67,7 +67,7 @@ describe('attachments', () => {
 
 		// archive the invoices
 		const updateRequestBody = invoiceIdsToArchive.map((invoiceId) => ({ InvoiceID: invoiceId, Status: 'DELETED' }));
-		await xero.invoices.update(updateRequestBody);
+		await xero.invoices.update({ Invoices: updateRequestBody });
 	});
 
 	function collectInvoicesToArchive(response: InvoicesResponse) {

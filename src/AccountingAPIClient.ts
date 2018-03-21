@@ -45,7 +45,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		super(options, authState, {}, _oAuth1HttpClient);
 	}
 
-	private generateHeader(args: HeaderArgs) {
+	private generateHeader (args: HeaderArgs) {
 		if (args && args['If-Modified-Since']) {
 			const toReturn = {
 				'If-Modified-Since': args['If-Modified-Since']
@@ -128,7 +128,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
 		},
-		update: async (invoices: Invoice | Invoice[], args?: { InvoiceID?: string, InvoiceNumber?: string, where?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
+		update: async (invoices: Invoice | { Invoices: Invoice[] }, args?: { InvoiceID?: string, InvoiceNumber?: string, where?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
 			let endpoint = `invoices`;
 
 			if (args && args.InvoiceID) {
@@ -166,7 +166,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	private generateAttachmentsEndpoint(path: string) {
+	private generateAttachmentsEndpoint (path: string) {
 		return {
 			get: async (args?: { EntityID: string }): Promise<AttachmentsResponse> => {
 				const endpoint = `${path}/${args.EntityID}/attachments`;
@@ -208,12 +208,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<ContactGroupsResponse>(endpoint);
 		},
-		create: async (contactGroups: ContactGroup | ContactGroup[], args?: { summarizeErrors?: boolean }): Promise<ContactGroupsResponse> => {
+		create: async (contactGroups: ContactGroup | { ContactGroups: ContactGroup[] }, args?: { summarizeErrors?: boolean }): Promise<ContactGroupsResponse> => {
 			const endpoint = 'contactgroups' + generateQueryString(args, true);
 
 			return this.oauth1Client.put<ContactGroupsResponse>(endpoint, contactGroups);
 		},
-		update: async (contactGroups: ContactGroup | ContactGroup[], args?: { ContactGroupID: string, summarizeErrors?: boolean }): Promise<ContactGroupsResponse> => {
+		update: async (contactGroups: ContactGroup | { ContactGroups: ContactGroup[] }, args?: { ContactGroupID: string, summarizeErrors?: boolean }): Promise<ContactGroupsResponse> => {
 			let endpoint = 'contactgroups';
 			if (args && args.ContactGroupID) {
 				endpoint = endpoint + '/' + args.ContactGroupID;
@@ -270,7 +270,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.put<ContactsResponse>(endpoint, body);
 		},
-		update: async (body?: Contact | Contact[], args?: { ContactID: string, summarizeErrors: boolean }): Promise<ContactsResponse> => {
+		update: async (body?: Contact | { Contacts: Contact[] }, args?: { ContactID: string, summarizeErrors: boolean }): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
 
 			if (args && args.ContactID) {
@@ -322,11 +322,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<EmployeesResponse>(endpoint, header);
 		},
-		create: async (employees: Employee | Employee[]): Promise<EmployeesResponse> => {
+		create: async (employees: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
 			return this.oauth1Client.put<EmployeesResponse>(endpoint, employees);
 		},
-		update: async (employees: Employee | Employee[]): Promise<EmployeesResponse> => {
+		update: async (employees: Employee | { Employees: Employee[] }): Promise<EmployeesResponse> => {
 			const endpoint = 'employees';
 			return this.oauth1Client.post<EmployeesResponse>(endpoint, employees);
 		}
@@ -342,11 +342,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 			return this.oauth1Client.get<ExpenseClaimsResponse>(endpoint);
 		},
-		create: async (expenseClaims: ExpenseClaim | ExpenseClaim[], args?: { summarizeErrors?: boolean }): Promise<ExpenseClaimsResponse> => {
+		create: async (expenseClaims: ExpenseClaim | { ExpenseClaims: ExpenseClaim[] }, args?: { summarizeErrors?: boolean }): Promise<ExpenseClaimsResponse> => {
 			const endpoint = 'expenseclaims' + generateQueryString(args, true);
 			return this.oauth1Client.put<ExpenseClaimsResponse>(endpoint, expenseClaims);
 		},
-		update: async (expenseClaims: ExpenseClaim | ExpenseClaim[], args?: { ExpenseClaimID?: string, summarizeErrors?: boolean }): Promise<ExpenseClaimsResponse> => {
+		update: async (expenseClaims: ExpenseClaim | { ExpenseClaims: ExpenseClaim[] }, args?: { ExpenseClaimID?: string, summarizeErrors?: boolean }): Promise<ExpenseClaimsResponse> => {
 			let endpoint = 'expenseclaims';
 			if (args && args.ExpenseClaimID) {
 				endpoint = endpoint + '/' + args.ExpenseClaimID;
@@ -372,11 +372,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<ItemsResponse>(endpoint, headers);
 		},
-		create: async (items: Item | Item[], args?: { summarizeErrors?: boolean }): Promise<ItemsResponse> => {
+		create: async (items: Item | { Items: Item[] }, args?: { summarizeErrors?: boolean }): Promise<ItemsResponse> => {
 			const endpoint = 'items' + generateQueryString(args, true);
 			return this.oauth1Client.put<ItemsResponse>(endpoint, items);
 		},
-		update: async (items: Item | Item[], args?: { ItemID?: string, summarizeErrors?: boolean }): Promise<ItemsResponse> => {
+		update: async (items: Item | { Items: Item[] }, args?: { ItemID?: string, summarizeErrors?: boolean }): Promise<ItemsResponse> => {
 			let endpoint = 'items';
 			if (args && args.ItemID) {
 				endpoint = endpoint + '/' + args.ItemID;
@@ -404,11 +404,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<TrackingCategoriesResponse>(endpoint, headers);
 		},
-		create: async (trackingCategory: TrackingCategory | TrackingCategory[]): Promise<TrackingCategoriesResponse> => {
+		create: async (trackingCategory: TrackingCategory | { TrackingCategorys: TrackingCategory[] }): Promise<TrackingCategoriesResponse> => {
 			const endpoint = 'trackingcategories';
 			return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingCategory);
 		},
-		update: async (trackingCategory: TrackingCategory | TrackingCategory[], args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
+		update: async (trackingCategory: TrackingCategory | { TrackingCategorys: TrackingCategory[] }, args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
 			let endpoint = 'trackingcategories';
 			if (args && args.TrackingCategoryID) {
 				endpoint = endpoint + '/' + args.TrackingCategoryID;
@@ -422,7 +422,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.delete<any>(endpoint);
 		},
 		trackingOptions: {
-			create: async (trackingOption: TrackingOption | TrackingOption[], args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
+			create: async (trackingOption: TrackingOption | { TrackingOptions: TrackingOption[] }, args?: { TrackingCategoryID: string }): Promise<TrackingCategoriesResponse> => {
 				let endpoint = 'trackingcategories';
 				if (args && args.TrackingCategoryID) {
 					endpoint = endpoint + '/' + args.TrackingCategoryID + '/Options';
@@ -431,7 +431,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				return this.oauth1Client.put<TrackingCategoriesResponse>(endpoint, trackingOption);
 			},
-			update: async (trackingOption: TrackingOption | TrackingOption[], args?: { TrackingCategoryID: string, TrackingOptionID: string }): Promise<TrackingCategoriesResponse> => {
+			update: async (trackingOption: TrackingOption | { TrackingOptions: TrackingOption[] }, args?: { TrackingCategoryID: string, TrackingOptionID: string }): Promise<TrackingCategoriesResponse> => {
 				let endpoint = 'trackingcategories';
 				if (args && args.TrackingCategoryID && args.TrackingOptionID) {
 					endpoint = endpoint + '/' + args.TrackingCategoryID + '/Options/' + args.TrackingOptionID;
@@ -503,7 +503,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<BankTransfersResponse>(endpoint, this.generateHeader(args));
 		},
-		create: async (bankTransfers: BankTransfer | BankTransfer[], args?: { summarizeErrors: boolean }): Promise<BankTransfersResponse> => {
+		create: async (bankTransfers: BankTransfer | { BankTransfers: BankTransfer[] }, args?: { summarizeErrors: boolean }): Promise<BankTransfersResponse> => {
 			let endpoint = 'banktransfers';
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.put<BankTransfersResponse>(endpoint, bankTransfers);
@@ -542,11 +542,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<PaymentsResponse>(endpoint, headers);
 		},
-		create: async (payments: Payment | Payment[], args?: { summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
+		create: async (payments: Payment | { Payments: Payment[] }, args?: { summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
 			const endpoint = 'payments' + generateQueryString(args, true);
 			return this.oauth1Client.put<PaymentsResponse>(endpoint, payments);
 		},
-		update: async (payments: Payment | Payment[], args?: { PaymentID: string, summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
+		update: async (payments: Payment | { Payments: Payment[] }, args?: { PaymentID: string, summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
 			let endpoint = 'payments';
 			if (args && args.PaymentID) {
 				endpoint = endpoint + '/' + args.PaymentID;

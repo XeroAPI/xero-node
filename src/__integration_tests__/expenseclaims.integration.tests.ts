@@ -56,10 +56,15 @@ describe('/expenseclaims', () => {
 	});
 
 	afterAll(async () => {
-		await xero.expenseclaims.update(idsToArchive.map((id) => ({
+
+		const expenseClaimsToUpdate = idsToArchive.map((id) => ({
 			ExpenseClaimID: id,
 			Status: 'VOIDED'
-		})));
+		}));
+
+		await xero.expenseclaims.update({
+			ExpenseClaims: expenseClaimsToUpdate
+		});
 	});
 
 	function collectIdsToArchive(response: ExpenseClaimsResponse) {

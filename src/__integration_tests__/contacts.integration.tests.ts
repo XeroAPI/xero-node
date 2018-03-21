@@ -31,17 +31,21 @@ describe('/contacts', () => {
 	});
 
 	it('gets a contact by ID', async () => {
-		const response = await xero.contacts.get({ ContactID: contactIdsToArchive[0]});
+		const response = await xero.contacts.get({ ContactID: contactIdsToArchive[0] });
 
 		expect(response.Contacts[0].ContactID).toBeDefined();
 	});
 
 	afterAll(async () => {
 		// And this is how you update
-		await xero.contacts.update(contactIdsToArchive.map((contactId) => ({
+		const contactsToUpdate = contactIdsToArchive.map((contactId) => ({
 			ContactID: contactId,
 			Status: 'ARCHIVED'
-		})));
+		}));
+
+		await xero.contacts.update({
+			Contacts: contactsToUpdate
+		});
 	});
 
 	function collectContactsToArchive(response: ContactsResponse) {

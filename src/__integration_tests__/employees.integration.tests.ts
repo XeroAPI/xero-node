@@ -2,6 +2,7 @@ import { EmployeesResponse } from '../AccountingAPI-types';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { getOrCreateEmployeeId } from './helpers/entityId.helpers';
+import { Employee } from '../../lib/AccountingAPI-types';
 
 describe('/employees', () => {
 
@@ -60,10 +61,14 @@ describe('/employees', () => {
 	});
 
 	afterAll(async () => {
-		await xero.employees.update(employeeIdsToArchive.map((employeeId) => ({
+		const employeeToUpdate: Employee[] = employeeIdsToArchive.map((employeeId) => ({
 			EmployeeID: employeeId,
 			Status: 'ARCHIVED'
-		})));
+		}));
+
+		await xero.employees.update({
+			Employees: employeeToUpdate
+		});
 	});
 
 	function collectEmployeesToArchive(response: EmployeesResponse) {
