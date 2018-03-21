@@ -21,6 +21,10 @@ export interface InvoicesResponse extends AccountingResponse {
 	Invoices: Invoice[];
 }
 
+export interface InvoiceRemindersResponse extends AccountingResponse {
+	InvoiceReminders: InvoiceReminder[];
+}
+
 export interface ContactGroupsResponse extends AccountingResponse {
 	ContactGroups: ContactGroup[];
 }
@@ -240,6 +244,10 @@ export interface Invoice {
 	StatusAttributeString?: string; // Have asked Arr about this
 	ValidationErrors?: ValidationError[];
 	HasErrors?: boolean;
+}
+
+export interface InvoiceReminder {
+	Enabled?: boolean;
 }
 
 // TODO: Are last two common therefore we can put on common interface?
