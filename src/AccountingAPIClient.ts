@@ -3,11 +3,10 @@ import * as fs from 'fs';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
-import { CreditNote } from '../lib/AccountingAPI-types';
-import { CreditNotesResponse } from './AccountingAPI-types';
 import {
 	AccountsResponse, BankTransaction, BankTransactionsResponse,
-	InvoicesResponse, Invoice,
+	InvoicesResponse, Invoice, CreditNotesResponse,
+	CreditNote,
 	ContactGroupsResponse, ContactGroup,
 	CurrenciesResponse, Currency,
 	EmployeesResponse, Employee,
