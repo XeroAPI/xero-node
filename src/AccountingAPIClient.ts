@@ -246,7 +246,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<ContactsResponse>(endpoint, header);
 		},
-		create: async (body?: Contact | Contact[], args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
+		create: async (body: Contact | { Contacts: Contact[] }, args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.put<ContactsResponse>(endpoint, body);
