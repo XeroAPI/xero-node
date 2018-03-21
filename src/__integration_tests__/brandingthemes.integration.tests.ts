@@ -1,10 +1,9 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
-import { BrandingThemesResponse } from '../AccountingAPI-types';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('/brandingthemes', () => {
 	let xero: AccountingAPIClient;
-	let response: BrandingThemesResponse;
+	let existingId: string;
 
 	beforeAll(async () => {
 		setJestTimeout();
@@ -13,16 +12,14 @@ describe('/brandingthemes', () => {
 	});
 
 	it('can get all', async () => {
-		expect.assertions(1);
-
-		response = await xero.brandingThemes.get();
+		const response = await xero.brandingThemes.get();
 		expect(response.BrandingThemes[0].Name).toBeDefined();
+
+		existingId = response.BrandingThemes[0].BrandingThemeID;
 	});
 
 	it('can get single', async () => {
-		expect.assertions(1);
-
-		const newResponse = await xero.brandingThemes.get({ BrandingThemeID: response.BrandingThemes[0].BrandingThemeID});
+		const newResponse = await xero.brandingThemes.get({ BrandingThemeID: existingId });
 		expect(newResponse.BrandingThemes[0].Name).toBeDefined();
 	});
 
