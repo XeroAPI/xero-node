@@ -48,7 +48,17 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `banktransactions?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
 			{ action: 'create', expectedPath: 'banktransactions' },
 			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=false' },
-			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=true', args: { summarizeErrors: true}  },
+			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=true', args: { summarizeErrors: true}  }
+		],
+		creditNotes: [
+			{ action: 'get', expectedPath: 'creditnotes' },
+			{ action: 'get', expectedPath: `creditnotes?page=3`, args: { page: 3 } },
+			{ action: 'get', expectedPath: `creditnotes?order=something`, args: { order: 'something' } },
+			{ action: 'get', expectedPath: `creditnotes?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
+			{ action: 'get', expectedPath: `creditnotes?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
+			{ action: 'create', expectedPath: 'creditnotes' },
+			{ action: 'update', expectedPath: 'creditnotes?summarizeErrors=false' },
+			{ action: 'update', expectedPath: 'creditnotes?summarizeErrors=true', args: { summarizeErrors: true } }
 		],
 		invoices: [
 			{ action: 'get', expectedPath: 'invoices' },

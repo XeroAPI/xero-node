@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
+import { CreditNote } from '../lib/AccountingAPI-types';
+import { CreditNotesResponse } from './AccountingAPI-types';
 import {
 	AccountsResponse, BankTransaction, BankTransactionsResponse,
 	InvoicesResponse, Invoice,
@@ -322,6 +324,25 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public creditNotes = {
+		get: async (args?: { CreditNoteID?: string } & QueryArgs & HeaderArgs): Promise<CreditNotesResponse> => {
+			let endpoint = 'creditnotes';
+			if (args && args.CreditNoteID) {
+				endpoint = endpoint + '/' + args.CreditNoteID;
+				delete args.CreditNoteID; // remove from query string
+			}
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<CreditNotesResponse>(endpoint, header);
+		},
+		create: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }): Promise<CreditNotesResponse> => {
+			const endpoint = 'creditnotes';
+			return this.oauth1Client.put<CreditNotesResponse>(endpoint, creditNote);
+		},
+		update: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: { summarizeErrors?: boolean }): Promise<CreditNotesResponse> => {
+			const endpoint = 'creditnotes' + generateQueryString(args, true);
+			return this.oauth1Client.post<CreditNotesResponse>(endpoint, creditNote);
+		},
 		attachments: this.generateAttachmentsEndpoint('creditnotes')
 	};
 

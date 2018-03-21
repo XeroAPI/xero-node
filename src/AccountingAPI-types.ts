@@ -60,6 +60,10 @@ export interface AccountsResponse extends AccountingResponse {
 	Accounts: any[];
 }
 
+export interface CreditNotesResponse extends AccountingResponse{
+	CreditNotes: CreditNote[];
+}
+
 export interface BrandingThemesResponse extends AccountingResponse {
 	BrandingThemes: BrandingTheme[];
 }
