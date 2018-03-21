@@ -11,7 +11,7 @@ describe('/taxrates', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
-	it('create', async () => {
+	it('update', async () => {
 		const rate: TaxRate = {
 			Name: 'Node Tax',
 			TaxType: 'INPUT',

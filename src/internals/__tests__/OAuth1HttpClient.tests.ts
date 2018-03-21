@@ -1,15 +1,14 @@
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
-import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from '../OAuth1HttpClient';
+import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IToken } from '../OAuth1HttpClient';
+
+const requestToken: IToken = {
+	oauth_token: 'test3',
+	oauth_token_secret: 'test4'
+};
 
 const defaultState: IOAuth1State = {
-	requestToken: {
-		oauth_token: 'test3',
-		oauth_token_secret: 'test4'
-	},
-	accessToken: {
-		oauth_token: 'test7',
-		oauth_token_secret: 'test8'
-	},
+	oauth_token: 'test7',
+	oauth_token_secret: 'test8',
 	oauth_session_handle: 'test9'
 };
 
@@ -35,66 +34,38 @@ describe('OAuth1HttpClient', () => {
 	describe('and setting state', () => {
 
 		beforeEach(() => {
-			oauth1HttpClient = new OAuth1HttpClient(oauthConfig);
-			oauth1HttpClient.setState(defaultState);
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, defaultState);
 		});
 
 		it('matches what it was set to', () => {
-			expect(oauth1HttpClient.getState()).toEqual(defaultState);
+			expect((oauth1HttpClient as any)._state).toEqual(defaultState);
 		});
 
 		it('only overrides the accessToken keys', () => {
-			oauth1HttpClient.setState({
-				accessToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
+			const client: any = oauth1HttpClient;
+			client.setState({
+				oauth_token: 'something new', oauth_token_secret: 'something borrowed'
 			});
 
-			expect(oauth1HttpClient.getState()).not.toEqual(defaultState);
-			expect(oauth1HttpClient.getState()).toEqual({
-				requestToken: {
-					oauth_token: 'test3',
-					oauth_token_secret: 'test4'
-				},
-				accessToken: {
-					oauth_token: 'something new',
-					oauth_token_secret: 'something borrowed'
-				},
+			expect(client._state).not.toEqual(defaultState);
+			expect(client._state).toEqual({
+				oauth_token: 'something new',
+				oauth_token_secret: 'something borrowed',
 				oauth_session_handle: 'test9'
-			});
-		});
-
-		it('only overrides the requestToken keys', () => {
-			oauth1HttpClient.setState({ oauth_session_handle: 'yoyo' });
-
-			expect(oauth1HttpClient.getState()).not.toEqual(defaultState);
-			expect(oauth1HttpClient.getState()).toEqual({
-				requestToken: {
-					oauth_token: 'test3',
-					oauth_token_secret: 'test4'
-				},
-				accessToken: {
-					oauth_token: 'test7',
-					oauth_token_secret: 'test8'
-				},
-				oauth_session_handle: 'yoyo'
 			});
 		});
 
 		it('only overrides the oauth_session_handle keys', () => {
-			oauth1HttpClient.setState({
-				requestToken: { oauth_token: 'something new', oauth_token_secret: 'something borrowed' }
+			const client: any = oauth1HttpClient;
+			client.setState({
+				oauth_session_handle: 'yoyo'
 			});
 
-			expect(oauth1HttpClient.getState()).not.toEqual(defaultState);
-			expect(oauth1HttpClient.getState()).toEqual({
-				requestToken: {
-					oauth_token: 'something new',
-					oauth_token_secret: 'something borrowed'
-				},
-				accessToken: {
-					oauth_token: 'test7',
-					oauth_token_secret: 'test8'
-				},
-				oauth_session_handle: 'test9'
+			expect(client._state).not.toEqual(defaultState);
+			expect(client._state).toEqual({
+				oauth_token: 'test7',
+				oauth_token_secret: 'test8',
+				oauth_session_handle: 'yoyo'
 			});
 		});
 
@@ -102,67 +73,73 @@ describe('OAuth1HttpClient', () => {
 
 	describe('and building authorise url', () => {
 		beforeEach(async () => {
-			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
-			oauth1HttpClient.setState(defaultState);
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, defaultState, inMemoryOAuthLib.newFactory());
 		});
 
 		it('it builds the authorise url', () => {
-			expect(oauth1HttpClient.buildAuthoriseUrl()).toEqual(`abu/oauth/Authorize?oauth_token=test3`);
+			expect(oauth1HttpClient.buildAuthoriseUrl(requestToken)).toEqual(`abu/oauth/Authorize?oauth_token=test3`);
 		});
 	});
 
-	describe('and getting unauthorisedRequestTokens', () => {
+	describe('and getting RequestTokens', () => {
+		let token: IToken;
+
 		beforeEach(async () => {
-			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, defaultState, inMemoryOAuthLib.newFactory());
 			inMemoryOAuthLib.inMemoryOAuthLib.set_getOAuthRequestToken('aaa', 'bbb');
-			await oauth1HttpClient.getUnauthorisedRequestToken();
+			token = await oauth1HttpClient.getRequestToken();
 		});
 
-		it('sets expected state', () => {
-			const state = oauth1HttpClient.getState();
-			expect(state.requestToken.oauth_token).toBe('aaa');
-			expect(state.requestToken.oauth_token_secret).toBe('bbb');
+		it('token is returned', () => {
+			expect(token.oauth_token).toBe('aaa');
+			expect(token.oauth_token_secret).toBe('bbb');
 		});
 	});
 
 	describe('and swapping request for access token', () => {
+		let authState: IOAuth1State;
+
 		beforeAll(async () => {
 			inMemoryOAuthLib.inMemoryOAuthLib.reset();
-			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
-			oauth1HttpClient.setState(defaultState);
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, defaultState, inMemoryOAuthLib.newFactory());
 			inMemoryOAuthLib.inMemoryOAuthLib.set_SwapRequestTokenforAccessToken(`access+token`, `access+secret`, '1800');
-			await oauth1HttpClient.swapRequestTokenforAccessToken('1234');
+			authState = await oauth1HttpClient.swapRequestTokenforAccessToken(requestToken, '1234');
 		});
 
-		it('sets expected state', () => {
-			expect(oauth1HttpClient.getState().accessToken)
-				.toMatchObject({ oauth_token: 'access+token', oauth_token_secret: 'access+secret' });
+		it('returns and sets expected state', () => {
+			const expectedState = { oauth_token: 'access+token', oauth_token_secret: 'access+secret' };
+			const client = (oauth1HttpClient as any);
+			expect(authState).toMatchObject(expectedState);
+			expect(client._state).toMatchObject(expectedState);
 
 			const timeObject = new Date();
 			const expDate = new Date(timeObject.getTime() + (1800 * 1000));
 
 			// Removes seconds from dates...
 
-			expect(oauth1HttpClient.getState().oauth_expires_at.setSeconds(0, 0)).toEqual(expDate.setSeconds(0, 0));
+			expect(client._state.oauth_expires_at.setSeconds(0, 0)).toEqual(expDate.setSeconds(0, 0));
 
 		});
 	});
 
 	describe('and refreshing authorized request token', () => {
+		let authState: IOAuth1State;
+
 		beforeAll(async () => {
-			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLib.newFactory());
-			oauth1HttpClient.setState(defaultState);
+			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, defaultState, inMemoryOAuthLib.newFactory());
 
 			inMemoryOAuthLib.inMemoryOAuthLib.set__performSecureRequest(`access#token`, `access#secret`, 'session#handle');
-			await oauth1HttpClient.refreshAccessToken();
+			authState = await oauth1HttpClient.refreshAccessToken();
 		});
 
-		it('sets expected state', () => {
-			expect(oauth1HttpClient.getState().oauth_session_handle).toBe('session#handle');
-			expect(oauth1HttpClient.getState().accessToken).toMatchObject({
+		it('returns sets expected state', () => {
+			const expectedState: IOAuth1State = {
 				oauth_token: `access#token`,
-				oauth_token_secret: `access#secret`
-			});
+				oauth_token_secret: `access#secret`,
+				oauth_session_handle: 'session#handle'
+			};
+			expect(authState).toMatchObject(expectedState);
+			expect((oauth1HttpClient as any)._state).toMatchObject(expectedState);
 		});
 	});
 

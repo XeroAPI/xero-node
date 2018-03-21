@@ -5,7 +5,7 @@ import { IXeroClientConfiguration, IApiConfiguration } from './BaseAPIClient';
 import { getStringFromFile } from './utils';
 import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
 
-export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1State> {
+export function mapState(xeroConfig: IXeroClientConfiguration): IOAuth1State {
 	let cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null; // TODO don't read twice
 
 	if (xeroConfig.privateKeyString) {
@@ -14,15 +14,13 @@ export function mapState(xeroConfig: IXeroClientConfiguration): Partial<IOAuth1S
 
 	if (xeroConfig.appType == 'private') {
 		return {
-			accessToken: {
-				oauth_token: xeroConfig.consumerKey,
-				oauth_token_secret: cert,
-			}
+			oauth_token: xeroConfig.consumerKey,
+			oauth_token_secret: cert
 		};
 	} else if (xeroConfig.appType == 'public') {
-		return {};
+		return null;
 	} else if (xeroConfig.appType == 'partner') {
-		return {};
+		return null;
 	} else {
 		throw new Error(`Unrecognised app type: ${xeroConfig.appType} (expected private|public|partner)`);
 	}

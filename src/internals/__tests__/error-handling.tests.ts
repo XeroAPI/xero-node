@@ -2,7 +2,7 @@ import { TestAPIClient } from './helpers/TestAPIClient';
 import { BaseAPIClient, IXeroClientConfiguration } from '../BaseAPIClient';
 import { validTestCertPath } from './helpers/privateKey-helpers';
 import { XeroError } from '../../XeroError';
-import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from '../OAuth1HttpClient';
+import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IToken } from '../OAuth1HttpClient';
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 
 describe('HTTP errors', () => {
@@ -11,48 +11,44 @@ describe('HTTP errors', () => {
 	const inMemoryOAuthFF = new InMemoryOAuthLibFactoryFactory();
 	let xeroClient: BaseAPIClient;
 
+	const oauthConfig: IOAuth1Configuration = {
+		consumerKey: 'ck',
+		consumerSecret: 'cs',
+		tenantType: null,
+		apiBaseUrl: 'abu',
+		apiBasePath: 'abp',
+		oauthRequestTokenPath: 'ortp',
+		oauthAccessTokenPath: 'oatp',
+		signatureMethod: 'sigm',
+		callbackUrl: 'http://sdf.sdf',
+		accept: 'acceps',
+		userAgent: 'ua'
+	};
+	const requestToken: IToken = {
+		oauth_token: 'reqtoken',
+		oauth_token_secret: 'reqsecret',
+	};
+	const oauthState: IOAuth1State = {
+		oauth_token: 'atoken',
+		oauth_token_secret: 'asecret',
+		oauth_session_handle: 'sessionHandle'
+	};
+	const xeroConfig: IXeroClientConfiguration = {
+		appType: 'private',
+		consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+		consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+		privateKeyPath: validTestCertPath()
+	};
+
 	beforeAll(async () => {
-		const oauthConfig: IOAuth1Configuration = {
-			consumerKey: 'ck',
-			consumerSecret: 'cs',
-			tenantType: null,
-			apiBaseUrl: 'abu',
-			apiBasePath: 'abp',
-			oauthRequestTokenPath: 'ortp',
-			oauthAccessTokenPath: 'oatp',
-			signatureMethod: 'sigm',
-			callbackUrl: 'http://sdf.sdf',
-			accept: 'acceps',
-			userAgent: 'ua'
-		};
-		const oauthState: IOAuth1State = {
-			requestToken: {
-				oauth_token: 'reqtoken',
-				oauth_token_secret: 'reqsecret',
-			},
-			accessToken: {
-				oauth_token: 'atoken',
-				oauth_token_secret: 'asecret',
-			},
-			oauth_session_handle: 'sessionHandle'
-		};
-		const xeroConfig: IXeroClientConfiguration = {
-			appType: 'private',
-			consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-			consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
-			privateKeyPath: validTestCertPath()
-		};
-
-		const oAuth1HttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthFF.newFactory());
-		oAuth1HttpClient.setState(oauthState);
-
-		xeroClient = new TestAPIClient(xeroConfig, oAuth1HttpClient);
+		const oAuth1HttpClient = new OAuth1HttpClient(oauthConfig, oauthState, inMemoryOAuthFF.newFactory());
+		xeroClient = new TestAPIClient(xeroConfig, null, oAuth1HttpClient);
 	});
 
 	interface IFixture {
 		verb: string;
 		underlyingMethod?: string;
-		methodUnderTest: () => Promise<void>;
+		methodUnderTest: () => Promise<any>;
 	}
 
 	const fixtures: IFixture[] = [
@@ -61,8 +57,8 @@ describe('HTTP errors', () => {
 		{ verb: 'post', methodUnderTest: () => xeroClient.oauth1Client.post('/any-endpoint', { body: 'b' }) },
 		{ verb: 'delete', methodUnderTest: () => xeroClient.oauth1Client.delete('/any-endpoint') },
 		// TODO { verb: 'writeUTF8ResponseToStream', underlyingMethod: 'get', methodUnderTest: () => xeroClient.oauth1Client.writeUTF8ResponseToStream('/any-endpoint', 'mime/type', null) },
-		{ verb: 'getUnauthorisedRequestToken', underlyingMethod: 'getOAuthRequestToken', methodUnderTest: () => xeroClient.oauth1Client.getUnauthorisedRequestToken() },
-		{ verb: 'swapRequestTokenforAccessToken', underlyingMethod: 'getOAuthAccessToken', methodUnderTest: () => xeroClient.oauth1Client.swapRequestTokenforAccessToken('any-token') },
+		{ verb: 'getUnauthorisedRequestToken', underlyingMethod: 'getOAuthRequestToken', methodUnderTest: () => xeroClient.oauth1Client.getRequestToken() },
+		{ verb: 'swapRequestTokenforAccessToken', underlyingMethod: 'getOAuthAccessToken', methodUnderTest: () => xeroClient.oauth1Client.swapRequestTokenforAccessToken(requestToken, 'any-token') },
 		{ verb: 'refreshAccessToken', underlyingMethod: '_performSecureRequest', methodUnderTest: () => xeroClient.oauth1Client.refreshAccessToken() }
 	];
 

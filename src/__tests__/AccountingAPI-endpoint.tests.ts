@@ -21,9 +21,8 @@ describe('AccountingAPI endpoints', () => {
 
 	const oauthConfig = mapConfig(xeroConfig, {});
 	const accountingBaseUrl = oauthConfig.apiBaseUrl + oauthConfig.apiBasePath;
-	const oauthHttpClient = new OAuth1HttpClient(oauthConfig, inMemoryOAuthLibFF.newFactory());
-	oauthHttpClient.setState(mapState(xeroConfig));
-	const xeroClient = new AccountingAPIClient(xeroConfig, oauthHttpClient);
+	const oauthHttpClient = new OAuth1HttpClient(oauthConfig, mapState(xeroConfig), inMemoryOAuthLibFF.newFactory());
+	const xeroClient = new AccountingAPIClient(xeroConfig, null, oauthHttpClient);
 
 	const actionToVerbMap: { [key: string]: string } = {
 		create: 'put',

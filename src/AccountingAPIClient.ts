@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
-import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
+import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
 import {
 	AccountsResponse,
@@ -35,8 +35,8 @@ export interface HeaderArgs {
 
 export class AccountingAPIClient extends BaseAPIClient {
 
-	public constructor(options: IXeroClientConfiguration, _oAuth1HttpClient?: IOAuth1HttpClient) {
-		super(options, {}, _oAuth1HttpClient);
+	public constructor(options: IXeroClientConfiguration, authState?: IOAuth1State, _oAuth1HttpClient?: IOAuth1HttpClient) {
+		super(options, authState, {}, _oAuth1HttpClient);
 	}
 
 	private generateHeader(args: HeaderArgs) {

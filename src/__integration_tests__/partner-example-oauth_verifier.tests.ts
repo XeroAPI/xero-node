@@ -1,7 +1,7 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import * as puppeteer from 'puppeteer';
 import { getPartnerAppConfig, getLoginConfig, setJestTimeout } from './helpers/integration.helpers';
-import { IOAuth1State } from '../internals/OAuth1HttpClient';
+import { IOAuth1State, IToken } from '../internals/OAuth1HttpClient';
 
 setJestTimeout();
 
@@ -15,12 +15,14 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	const config = getPartnerAppConfig();
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
+	let requestToken: IToken;
+	let authState: IOAuth1State;
 	let page: any;
 	let oauth_verifier: string;
 
 	beforeAll(async () => {
-		await accounting1.oauth1Client.getUnauthorisedRequestToken();
-		authUrl = accounting1.oauth1Client.buildAuthoriseUrl();
+		requestToken = await accounting1.oauth1Client.getRequestToken();
+		authUrl = accounting1.oauth1Client.buildAuthoriseUrl(requestToken);
 
 		// Direct user to the authorise URL
 		const browser = await puppeteer.launch({
@@ -62,7 +64,7 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	});
 
 	it('it can make a successful API call', async () => {
-		await accounting1.oauth1Client.swapRequestTokenforAccessToken(oauth_verifier);
+		authState = await accounting1.oauth1Client.swapRequestTokenforAccessToken(requestToken, oauth_verifier);
 		const inv1 = await accounting1.organisation.get();
 		expect(inv1.Status).toEqual('OK');
 	});
@@ -74,24 +76,19 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	});
 
 	describe('OAuth State', () => {
-		let state: IOAuth1State;
 		let accounting2: AccountingAPIClient;
 		it('it allows you to keep copy of the state in your own dadtastore', async () => {
 			// Saves your state to your datastore
-			state = await accounting1.oauth1Client.getState();
-			expect(state.accessToken).not.toBeNull();
-			expect(state.oauth_session_handle).not.toBeNull();
-			expect(state.requestToken).not.toBeNull();
+			expect(authState).not.toBeNull();
+			expect(authState.oauth_session_handle).not.toBeNull();
+			expect(requestToken).not.toBeNull();
 
 			// This is how you can check when you have to refresh your Access Token
-			expect(typeof state.oauth_expires_at.getDate).toBe('function');
+			expect(typeof authState.oauth_expires_at.getDate).toBe('function');
 		});
 
 		it('it allows you to restore a new instance of the client next time your user logs in', async () => {
-			accounting2 = new AccountingAPIClient(config);
-			// Get state from your data store
-			accounting2.oauth1Client.setState(state);
-			expect(accounting2.oauth1Client.getState()).toMatchObject(state);
+			accounting2 = new AccountingAPIClient(config, authState);
 		});
 
 		it('it lets you make API calls using the restored state', async () => {

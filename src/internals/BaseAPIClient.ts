@@ -1,7 +1,7 @@
 /** @internalapi */
 /** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
 
-import { IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration } from './OAuth1HttpClient';
+import { IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
 import { mapConfig, mapState } from './config-helper';
 import * as  fs from 'fs';
 import { AttachmentsResponse } from '../AccountingAPI-types';
@@ -39,15 +39,17 @@ export interface IHttpClient {
 
 export abstract class BaseAPIClient {
 
-	public constructor(xeroConfig: IXeroClientConfiguration, apiConfig: IApiConfiguration = {}, public readonly oauth1Client: IOAuth1HttpClient = null) {
+	public constructor(xeroConfig: IXeroClientConfiguration, authState: IOAuth1State = null, apiConfig: IApiConfiguration = {}, public readonly oauth1Client: IOAuth1HttpClient = null) {
 		if (!xeroConfig) {
 			throw new Error('Config must be passed in when creating a new instance');
 		}
 
 		if (!this.oauth1Client) {
 			const oauthConfig: IOAuth1Configuration = mapConfig(xeroConfig, apiConfig);
-			this.oauth1Client = new OAuth1HttpClient(oauthConfig);
-			this.oauth1Client.setState(mapState(xeroConfig)); // only affects private and partner apps
+			if (!authState) {
+				authState = mapState(xeroConfig);
+			}
+			this.oauth1Client = new OAuth1HttpClient(oauthConfig, authState);
 		}
 
 	}

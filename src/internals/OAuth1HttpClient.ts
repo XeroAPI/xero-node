@@ -16,10 +16,8 @@ export interface IToken {
 	oauth_token_secret: string;
 }
 
-export interface IOAuth1State {
-	requestToken: IToken;
-	accessToken: IToken;
-	oauth_session_handle: string;
+export interface IOAuth1State extends IToken {
+	oauth_session_handle?: string;
 	oauth_expires_at?: Date;
 }
 
@@ -41,23 +39,17 @@ export interface IOAuth1Configuration {
 
 export interface IOAuth1Client {
 	agent?: http.Agent;
-	getState(): IOAuth1State;
-	setState(state: Partial<IOAuth1State>): void;
-	getUnauthorisedRequestToken(): Promise<void>;
-	buildAuthoriseUrl(): string;
-	swapRequestTokenforAccessToken(oauth_verifier: string): Promise<void>;
-	refreshAccessToken(): Promise<void>;
+	getRequestToken(): Promise<IToken>;
+	buildAuthoriseUrl(requestToken: IToken): string;
+	swapRequestTokenforAccessToken(requestToken: IToken, oauth_verifier: string): Promise<IOAuth1State>;
+	refreshAccessToken(): Promise<IOAuth1State>;
 }
 
 export interface IOAuth1HttpClient extends IHttpClient, IOAuth1Client { }
 
 export class OAuth1HttpClient implements IOAuth1HttpClient {
 
-	private _state: IOAuth1State = {
-		requestToken: null,
-		accessToken: null,
-		oauth_session_handle: null
-	};
+	private _state: IOAuth1State = null;
 
 	private oauthLib: typeof OAuth;
 
@@ -72,12 +64,10 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		this.oauthLib._headers = this._defaultHeaders;
 	}
 
-	constructor(private config: IOAuth1Configuration, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
-		this._state = {
-			requestToken: null,
-			accessToken: null,
-			oauth_session_handle: null
-		};
+	constructor(private config: IOAuth1Configuration, authState?: IOAuth1State, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
+		if (authState) {
+			this._state = authState;
+		}
 
 		if (!this.oAuthLibFactory) {
 			this.oAuthLibFactory = function(passedInConfig: IOAuth1Configuration) {
@@ -106,37 +96,34 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		this.oauthLib._createClient = this._createHttpClientWithProxySupport.bind(this);
 	}
 
-	public getUnauthorisedRequestToken = async () => {
+	public getRequestToken = async () => {
 		this.resetToDefaultHeaders();
-		return new Promise<void>((resolve, reject) => {
+		return new Promise<IToken>((resolve, reject) => {
 			this.oauthLib.getOAuthRequestToken(
 				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
 					if (err) {
 						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
 					} else {
-						this.setState({
-							requestToken: {
-								oauth_token,
-								oauth_token_secret
-							}
+						resolve({
+							oauth_token,
+							oauth_token_secret
 						});
-						resolve();
 					}
 				}
 			);
 		});
 	}
 
-	public buildAuthoriseUrl = () => {
-		return `${this.config.apiBaseUrl}/oauth/Authorize?oauth_token=${this._state.requestToken.oauth_token}`;
+	public buildAuthoriseUrl = (requestToken: IToken) => {
+		return `${this.config.apiBaseUrl}/oauth/Authorize?oauth_token=${requestToken.oauth_token}`;
 	}
 
-	public swapRequestTokenforAccessToken = async (oauth_verifier: string) => {
+	public swapRequestTokenforAccessToken = async (requestToken: IToken, oauth_verifier: string) => {
 		this.resetToDefaultHeaders();
-		return new Promise<void>((resolve, reject) => {
+		return new Promise<IOAuth1State>((resolve, reject) => {
 			this.oauthLib.getOAuthAccessToken(
-				this._state.requestToken.oauth_token,
-				this._state.requestToken.oauth_token_secret,
+				requestToken.oauth_token,
+				requestToken.oauth_token_secret,
 				oauth_verifier,
 				(err: any, oauth_token: string, oauth_token_secret: string, results: { oauth_expires_in: number, oauth_session_handle: string, oauth_authorization_expires_in: string, xero_org_muid: string }) => {
 					if (err) {
@@ -144,16 +131,14 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					} else {
 						const currentMilliseconds = new Date().getTime();
 						const expDate = new Date(currentMilliseconds + (results.oauth_expires_in * 1000));
-
-						this.setState({
-							accessToken: {
-								oauth_token: oauth_token,
-								oauth_token_secret: oauth_token_secret
-							},
+						const oauthState: IOAuth1State = {
+							oauth_token: oauth_token,
+							oauth_token_secret: oauth_token_secret,
 							oauth_session_handle: results.oauth_session_handle,
 							oauth_expires_at: expDate
-						});
-						resolve();
+						};
+						this.setState(oauthState);
+						resolve(oauthState);
 					}
 				}
 			);
@@ -162,11 +147,11 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public refreshAccessToken = async () => {
-		return new Promise<void>((resolve, reject) => {
+		return new Promise<IOAuth1State>((resolve, reject) => {
 			// We're accessing this "private" method as the lib does not allow refresh with oauth_session_handle.
 			this.oauthLib._performSecureRequest(
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this._state.oauth_token,
+				this._state.oauth_token_secret,
 				'POST',
 				this.config.apiBaseUrl + this.config.oauthAccessTokenPath,
 				{ oauth_session_handle: this._state.oauth_session_handle },
@@ -177,12 +162,13 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
 					} else {
 						const results = querystring.parse(data);
-						const newAccessToken: IToken = {
-							oauth_token: results.oauth_token as string,
-							oauth_token_secret: results.oauth_token_secret as string
-						};
-						this.setState({ accessToken: newAccessToken, oauth_session_handle: results.oauth_session_handle as string });
-						resolve();
+						const oauthState: IOAuth1State = {
+							oauth_token: results.oauth_token,
+							oauth_token_secret: results.oauth_token_secret,
+							oauth_session_handle: results.oauth_session_handle,
+						} as any;
+						this.setState(oauthState);
+						resolve(oauthState);
 					}
 				}
 			);
@@ -196,8 +182,8 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 			const oauthForPdf = this.oAuthLibFactory({ ...this.config, ...{ accept: mimeType } });
 			const request = oauthForPdf.get(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint,
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret);
+				this._state.oauth_token,
+				this._state.oauth_token_secret);
 
 			request.addListener('response', function(response: any) {
 				response.addListener('data', function(chunk: any) {
@@ -219,8 +205,8 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 			this.assertAccessTokenIsSet();
 			const forPDF = this.oAuthLibFactory({ ...this.config, ...{ accept: mimeType } });
 			this._OURperformSecureRequest(
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this._state.oauth_token,
+				this._state.oauth_token_secret,
 				'GET',
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint,
 				(err: any, data: string, httpResponse: any) => {
@@ -326,13 +312,13 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 					this.oauthLib.post(
 						this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-						this._state.accessToken.oauth_token,
-						this._state.accessToken.oauth_token_secret,
+						this._state.oauth_token,
+						this._state.oauth_token_secret,
 						Buffer.concat(bufs),
 						mimeType,
 						(err: any, data: string, httpResponse: any) => {
 							if (err) {
-								reject(new XeroError(httpResponse.statusCode, data, httpResponse.headers));
+								reject(new XeroError(httpResponse.statusCode, data));
 							} else {
 								const toReturn = JSON.parse(data) as AttachmentsResponse;
 								return resolve(toReturn);
@@ -350,13 +336,13 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 			this.assertAccessTokenIsSet();
 			this.oauthLib.get(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this._state.oauth_token,
+				this._state.oauth_token_secret,
 				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -373,15 +359,15 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.put(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this._state.oauth_token,
+				this._state.oauth_token_secret,
 				JSON.stringify(body), 		// Had to do this not sure if there is another way
 				'application/json',
 				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -399,15 +385,15 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.post(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this._state.oauth_token,
+				this._state.oauth_token_secret,
 				JSON.stringify(body), 		// Had to do this not sure if there is another way
 				'application/json',
 				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -425,13 +411,13 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.delete(
 				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
-				this._state.accessToken.oauth_token,
-				this._state.accessToken.oauth_token_secret,
+				this._state.oauth_token,
+				this._state.oauth_token_secret,
 				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
 					} else {
 						let toReturn: T = null;
 						if (data) {
@@ -444,16 +430,12 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public getState() {
-		return this._state;
-	}
-
-	public setState(newState: Partial<IOAuth1State>) {
+	private setState(newState: Partial<IOAuth1State>) {
 		this._state = { ...this._state, ...newState };
 	}
 
 	private assertAccessTokenIsSet() {
-		if (!this._state.accessToken) {
+		if (!this._state.oauth_token) {
 			throw new Error('Missing access token. Acquire a new access token by following the oauth flow or call setState() to use an existing token.');
 		}
 	}

@@ -27,9 +27,7 @@ describe('AccountingAPI attachments', () => {
 		writeUTF8ResponseToStream: undefined,
 		writeBinaryResponseToStream: writeBinaryResponseToStreamSpy,
 		readStreamToRequest: readStreamToRequestSpy,
-		setState: undefined,
-		getState: undefined,
-		getUnauthorisedRequestToken: undefined,
+		getRequestToken: undefined,
 		buildAuthoriseUrl: undefined,
 		swapRequestTokenforAccessToken: undefined,
 		refreshAccessToken: undefined
@@ -72,7 +70,7 @@ describe('AccountingAPI attachments', () => {
 						});
 					});
 
-					const xeroClient = new AccountingAPIClient(xeroConfig, oAuth1HttpClient);
+					const xeroClient = new AccountingAPIClient(xeroConfig, null, oAuth1HttpClient);
 
 					result = await (xeroClient as any)[endpoint]['attachments'].downloadAttachment(fixture.args);
 				});
@@ -122,7 +120,7 @@ describe('AccountingAPI attachments', () => {
 						});
 					});
 
-					const xeroClient = new AccountingAPIClient(xeroConfig, oAuth1HttpClient);
+					const xeroClient = new AccountingAPIClient(xeroConfig, null, oAuth1HttpClient);
 
 					response = await (xeroClient as any)[endpoint]['attachments'].uploadAttachment({
 						entityID: fixture.args.entityID,
