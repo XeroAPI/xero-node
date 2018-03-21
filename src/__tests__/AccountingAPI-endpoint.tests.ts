@@ -125,6 +125,13 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `users?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
 			{ action: 'get', expectedPath: `users`, args: { 'If-Modified-Since': 'headerValue' } },
 		],
+		journals: [
+			{ action: 'get', expectedPath: 'journals' },
+			{ action: 'get', expectedPath: `journals/${guid1}`, args: { Recordfilter: guid1 } },
+			{ action: 'get', expectedPath: `journals?offset=2`, args: { offset: '2' } },
+			{ action: 'get', expectedPath: `journals?paymentsOnly=true`, args: { paymentsOnly: true } },
+			{ action: 'get', expectedPath: `journals`, args: { 'If-Modified-Since': 'headerValue' } },
+		],
 		reports: [
 			{ action: 'get', expectedPath: 'reports' },
 			{ action: 'get', expectedPath: `reports/${guid1}`, args: { ReportID: guid1 } },

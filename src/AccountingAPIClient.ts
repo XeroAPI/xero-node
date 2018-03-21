@@ -19,7 +19,7 @@ import {
 	TrackingCategoriesResponse, TrackingCategory, TrackingOption,
 	TaxRatesResponse, TaxRate,
 	ExpenseClaimsResponse, ExpenseClaim,
-	ItemsResponse, Item
+	ItemsResponse, Item, JournalsResponse
 } from './AccountingAPI-types';
 
 export interface QueryArgs {
@@ -409,6 +409,22 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<UsersResponse>(endpoint, headers);
+		}
+	};
+
+	public journals = {
+		get: async (args?: { Recordfilter?: string, offset?: string, paymentsOnly?: boolean } & HeaderArgs): Promise<JournalsResponse> => {
+			let endpoint = 'journals';
+			if (args && args.Recordfilter) {
+				endpoint = endpoint + '/' + args.Recordfilter;
+				delete args.Recordfilter;
+			}
+
+			const headers = this.generateHeader(args);
+
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<JournalsResponse>(endpoint, headers);
 		}
 	};
 
