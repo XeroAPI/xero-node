@@ -14,13 +14,15 @@ describe('/trackingcategories', () => {
 	});
 
 	it('create single', async () => {
-		createResponse = await xero.trackingCategories.create({
-			Name: 'Phil Test Category 1'
-		});
-
-		if (createResponse.Status == '400') {
-			const response = await xero.trackingCategories.get();
-			await xero.trackingCategories.delete({TrackingCategoryID: response.TrackingCategories[0].TrackingCategoryID});
+		try {
+			createResponse = await xero.trackingCategories.create({
+				Name: 'Phil Test Category 1'
+			});
+		} catch (error) {
+			if (createResponse.Status == '400') {
+				const response = await xero.trackingCategories.get();
+				await xero.trackingCategories.delete({TrackingCategoryID: response.TrackingCategories[0].TrackingCategoryID});
+			}
 		}
 
 		expect(createResponse.TrackingCategories.length).toBe(1);
