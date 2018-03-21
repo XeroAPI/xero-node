@@ -12,7 +12,6 @@ describe('/brandingthemes', () => {
 
 	it('can get all', async () => {
 		const response = await xero.invoiceReminders.get();
-		console.log(response);
 		expect(response.InvoiceReminders[0].Enabled).toBeDefined();
 
 	});
