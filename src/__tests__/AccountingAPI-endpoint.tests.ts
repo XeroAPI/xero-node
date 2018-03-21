@@ -130,6 +130,12 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `items?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `items/${guid1}?summarizeErrors=true`, args: { ItemID: guid1, summarizeErrors: true } },
 		],
+		overpayments: [
+			{ action: 'get', expectedPath: 'overpayments' },
+			{ action: 'get', expectedPath: `overpayments/${guid1}?order=Date`, args: { OverpaymentID: guid1, order: 'Date' } },
+			{ action: 'get', expectedPath: `overpayments?page=5`, args: { page: 5 }},
+			{ action: 'update', expectedPath: `overpayments/${guid1}/allocations`, args: { OverpaymentID: guid1 } }
+		],
 		payments: [
 			{ action: 'get', expectedPath: 'payments' },
 			{ action: 'get', expectedPath: `payments/${guid1}`, args: { PaymentID: guid1 } },

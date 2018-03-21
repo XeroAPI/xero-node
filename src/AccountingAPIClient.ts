@@ -23,7 +23,7 @@ import {
 	InvoiceRemindersResponse,
 	JournalsResponse,
 	PaymentsResponse, Payment,
-	PrepaymentsResponse, Allocation
+	PrepaymentsResponse, Allocation, OverpaymentsResponse
 } from './AccountingAPI-types';
 
 export interface QueryArgs {
@@ -579,6 +579,22 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 		},
 		attachments: this.generateAttachmentsEndpoint('prepayments')
+	};
+
+	public overpayments = {
+		get: async (args?: { OverpaymentID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<OverpaymentsResponse> => {
+			let endpoint = 'overpayments';
+			if (args && args.OverpaymentID) {
+				endpoint += '/' + args.OverpaymentID;
+				delete args.OverpaymentID;
+			}
+			endpoint += generateQueryString(args);
+			return this.oauth1Client.get<OverpaymentsResponse>(endpoint);
+		},
+		update: async (body: Allocation[], args: { OverpaymentID: string }): Promise<OverpaymentsResponse> => {
+			const endpoint = `overpayments/${args.OverpaymentID}/allocations`;
+			return this.oauth1Client.post<OverpaymentsResponse>(endpoint, body);
+		}
 	};
 
 	public reports = {
