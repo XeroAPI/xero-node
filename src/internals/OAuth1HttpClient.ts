@@ -332,7 +332,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 						mimeType,
 						(err: any, data: string, httpResponse: any) => {
 							if (err) {
-								reject(new XeroError(httpResponse.statusCode, data));
+								reject(new XeroError(httpResponse.statusCode, data, httpResponse.headers));
 							} else {
 								const toReturn = JSON.parse(data) as AttachmentsResponse;
 								return resolve(toReturn);
@@ -356,7 +356,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -381,7 +381,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -407,7 +407,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -431,7 +431,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
 					} else {
 						let toReturn: T = null;
 						if (data) {
