@@ -189,6 +189,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 		};
 	}
 
+	public banktransactions = {
+		create: async (bankTransactions: any): Promise<any> => {
+			return null; // TODO
+		}
+	};
+
 	public contactgroups = {
 		get: async (args?: { ContactGroupID?: string } & QueryArgs): Promise<ContactGroupsResponse> => {
 

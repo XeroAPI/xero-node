@@ -56,7 +56,7 @@ export interface AccountsResponse extends AccountingResponse {
 	Accounts: any[];
 }
 
-export interface BrandingThemesResponse {
+export interface BrandingThemesResponse extends AccountingResponse {
 	BrandingThemes: BrandingTheme[];
 }
 export interface JournalsResponse extends AccountingResponse {
@@ -74,16 +74,16 @@ export interface OnlineInvoicesResponse extends AccountingResponse {
 export interface OrganisationResponse extends AccountingResponse {
 	Organisations: Organisation[];
 }
-export interface OrganisationCISSettingResponse {
+export interface OrganisationCISSettingResponse extends AccountingResponse {
 	CISSettings: OrgCISSetting[];
 }
-export interface OverpaymentsResponse {
+export interface OverpaymentsResponse extends AccountingResponse {
 	Overpayments: Overpayment[];
 }
-export interface PaymentsResponse {
+export interface PaymentsResponse extends AccountingResponse {
 	Payments: Payment[];
 }
-export interface PrepaymentsResponse {
+export interface PrepaymentsResponse extends AccountingResponse {
 	Prepayments: Prepayment[];
 }
 export interface TaxRatesResponse extends AccountingResponse {
