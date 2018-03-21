@@ -19,10 +19,8 @@ describe('/trackingcategories', () => {
 				Name: 'Phil Test Category 1'
 			});
 		} catch (error) {
-			if (createResponse.Status == '400') {
-				const response = await xero.trackingCategories.get();
-				await xero.trackingCategories.delete({TrackingCategoryID: response.TrackingCategories[0].TrackingCategoryID});
-			}
+			const response = await xero.trackingCategories.get();
+			await xero.trackingCategories.delete({TrackingCategoryID: response.TrackingCategories[0].TrackingCategoryID});
 		}
 
 		expect(createResponse.TrackingCategories.length).toBe(1);
