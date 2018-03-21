@@ -110,6 +110,14 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `expenseclaims/${guid1}?summarizeErrors=false`, args: { ExpenseClaimID: guid1 } },
 			{ action: 'update', expectedPath: `expenseclaims/${guid1}?summarizeErrors=true`, args: { ExpenseClaimID: guid1, summarizeErrors: true } },
 		],
+		items: [
+			{ action: 'get', expectedPath: 'items' },
+			{ action: 'get', expectedPath: `items/${guid1}`, args: { ItemID: guid1 } },
+			{ action: 'get', expectedPath: `items/${guid1}?order=UpdatedDateUTC`, args: { ItemID: guid1 , order: 'UpdatedDateUTC' } },
+			{ action: 'create', expectedPath: `items?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `items?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `items/${guid1}?summarizeErrors=true`, args: { ItemID: guid1, summarizeErrors: true } },
+		],
 		users: [
 			{ action: 'get', expectedPath: 'users' },
 			{ action: 'get', expectedPath: `users/${guid1}`, args: { UserID: guid1 } },

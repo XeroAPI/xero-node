@@ -1,6 +1,6 @@
 
 import * as fs from 'fs';
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer, TrackingCategoriesResponse, TrackingCategory, TrackingOption, TaxRatesResponse, ExpenseClaimsResponse, ExpenseClaim, TaxRate } from './AccountingAPI-types';
+import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer, TrackingCategoriesResponse, TrackingCategory, TrackingOption, TaxRatesResponse, ExpenseClaimsResponse, ExpenseClaim, TaxRate, ItemsResponse, Item } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -285,6 +285,39 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.post<ExpenseClaimsResponse>(endpoint, expenseClaims);
+		}
+	};
+
+	public items = {
+		get: async (args?: { ItemID?: string, Code?: string } & QueryArgs & HeaderArgs): Promise<ItemsResponse> => {
+			let endpoint = 'items';
+			if (args && args.ItemID) {
+				endpoint = endpoint + '/' + args.ItemID;
+				delete args.ItemID;
+			} else if (args && args.Code) {
+				endpoint = endpoint + '/' + args.Code;
+				delete args.Code;
+			}
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<ItemsResponse>(endpoint);
+		},
+		create: async (items: Item | Item[], args?: { summarizeErrors?: boolean }): Promise<ItemsResponse> => {
+			const endpoint = 'items' + generateQueryString(args, true);
+			return this.oauth1Client.put<ItemsResponse>(endpoint, items);
+		},
+		update: async (items: Item | Item[], args?: { ItemID?: string, summarizeErrors?: boolean }): Promise<ItemsResponse> => {
+			let endpoint = 'items';
+			if (args && args.ItemID) {
+				endpoint = endpoint + '/' + args.ItemID;
+				delete args.ItemID;
+			}
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.post<ItemsResponse>(endpoint, items);
+		},
+		delete: async (args: { ItemID: string }): Promise<ItemsResponse> => {
+			const endpoint = 'items' + '/' + args.ItemID;
+			return this.oauth1Client.delete<ItemsResponse>(endpoint);
 		}
 	};
 

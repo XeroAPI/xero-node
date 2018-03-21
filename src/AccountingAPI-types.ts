@@ -67,9 +67,11 @@ export interface OrganisationCISSettingResponse {
 export interface BrandingThemesResponse {
 	BrandingThemes: BrandingTheme[];
 }
-
 export interface JournalsResponse extends AccountingResponse {
 	Journals: Journal[];
+}
+export interface ItemsResponse extends AccountingResponse {
+	Items: Item[];
 }
 
 export interface TaxRatesResponse extends AccountingResponse {
@@ -272,7 +274,7 @@ export interface Journal {
 	CreatedDateUTC?: string;
 	SourceID?: string;
 	SourceType?: string;
-	JournalLines?: JournalLine[]
+	JournalLines?: JournalLine[];
 }
 export interface JournalLine {
 	JournalLineID?: string;
@@ -329,6 +331,31 @@ export interface OrgCISSetting {
 	CISContractorEnabled: boolean;
 	CISSubContractorEnabled: boolean;
 }
+
+export interface Item {
+	ItemID?: string;
+	Code?: string;
+	Name?: string;
+	QuantityOnHand?: number;
+	TotalCostPool?: number;
+	IsSold?: boolean;
+	Description?: string;
+	SalesDetails?: PurchaseAndSalesDetails;
+	IsPurchased?: boolean;
+	PurchaseDescription?: string;
+	PurchaseDetails?: PurchaseAndSalesDetails;
+	IsTrackedAsInventory?: boolean;
+	InventoryAssetAccountCode?: string;
+	UpdatedDateUTC?: string;
+}
+
+export interface PurchaseAndSalesDetails {
+	UnitPrice: number;
+	AccountCode: string;
+	COGSAccountCode?: string;
+	TaxType?: string;
+}
+
 export interface Tracking {
 	Name?: string;
 	Option?: string;
