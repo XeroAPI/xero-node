@@ -128,18 +128,25 @@ describe('OAuth1HttpClient', () => {
 		beforeAll(async () => {
 			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, defaultState, inMemoryOAuthLib.newFactory());
 
-			inMemoryOAuthLib.inMemoryOAuthLib.set__performSecureRequest(`access#token`, `access#secret`, 'session#handle');
+			inMemoryOAuthLib.inMemoryOAuthLib.set__performSecureRequest(`access#token`, `access#secret`, 'session#handle', '1800');
 			authState = await oauth1HttpClient.refreshAccessToken();
 		});
 
 		it('returns sets expected state', () => {
+			const currentMilliseconds = new Date().getTime();
+			const expDate = new Date(currentMilliseconds + (1800 * 1000));
+
 			const expectedState: IOAuth1State = {
 				oauth_token: `access#token`,
 				oauth_token_secret: `access#secret`,
-				oauth_session_handle: 'session#handle'
+				oauth_session_handle: 'session#handle',
 			};
+
 			expect(authState).toMatchObject(expectedState);
 			expect((oauth1HttpClient as any)._state).toMatchObject(expectedState);
+			// Removes seconds from dates...
+
+			expect(authState.oauth_expires_at.setSeconds(0, 0)).toEqual(expDate.setSeconds(0, 0));
 		});
 	});
 

@@ -30,7 +30,7 @@ export class InMemoryOAuthLib {
 	private returnAuthorisedSecret: string = null;
 	private returnSessionHandle: string = null;
 	private lastRequestedBody: string = null;
-	private returnOauth_expires_in: string = null;
+	private oauth_expires_in: string = null;
 	public _headers: any;
 
 	constructor(private config?: IOAuth1Configuration) {
@@ -68,7 +68,7 @@ export class InMemoryOAuthLib {
 		this.returnAuthorisedToken = oauth_token;
 		this.returnAuthorisedSecret = oauth_secret;
 		this.returnSessionHandle = sessionHandle;
-		this.returnOauth_expires_in = oauth_expires_in;
+		this.oauth_expires_in = oauth_expires_in;
 	}
 
 	public lastRequestedHadBody(expectedBody: any) {
@@ -154,10 +154,11 @@ export class InMemoryOAuthLib {
 		callback(this.err, this.return_oauth_token, this.return_oauth_secret, null);
 	}
 
-	public set__performSecureRequest(oauth_token: string, oauth_secret: string, sessionHandle?: string) {
+	public set__performSecureRequest(oauth_token: string, oauth_secret: string, sessionHandle?: string, sessionExpires?: string) {
 		this.returnAuthorisedToken = oauth_token;
 		this.returnAuthorisedSecret = oauth_secret;
 		this.returnSessionHandle = sessionHandle;
+		this.oauth_expires_in = sessionExpires;
 	}
 
 	public async _performSecureRequest(
@@ -170,7 +171,7 @@ export class InMemoryOAuthLib {
 		something2: any,
 		callback: (err: any, response: any) => any) {
 		this.lastCalledMethod = '_performSecureRequest';
-		callback(this.err, `oauth_session_handle=${this.returnSessionHandle}&oauth_token_secret=${this.returnAuthorisedSecret}&oauth_token=${this.returnAuthorisedToken}`);
+		callback(this.err, `oauth_session_handle=${this.returnSessionHandle}&oauth_token_secret=${this.returnAuthorisedSecret}&oauth_token=${this.returnAuthorisedToken}&oauth_expires_in=${this.oauth_expires_in}`);
 	}
 
 	public async getOAuthAccessToken(
@@ -182,7 +183,7 @@ export class InMemoryOAuthLib {
 		callback(this.err,
 			this.returnAuthorisedToken,
 			this.returnAuthorisedSecret,
-			{ oauth_session_handle: this.returnSessionHandle, oauth_expires_in: this.returnOauth_expires_in }
+			{ oauth_session_handle: this.returnSessionHandle, oauth_expires_in: this.oauth_expires_in }
 		);
 	}
 }
