@@ -68,6 +68,10 @@ export interface BrandingThemesResponse {
 	BrandingThemes: BrandingTheme[];
 }
 
+export interface JournalsResponse extends AccountingResponse {
+	Journals: Journal[];
+}
+
 export interface TaxRatesResponse extends AccountingResponse {
 	TaxRates?: TaxRate[];
 }
@@ -260,6 +264,25 @@ export interface Address {
 	PostalCode?: string;
 	Country?: string;
 	AttentionTo?: string;
+}
+export interface Journal {
+	JournalID?: string;
+	JournalDate?: string;
+	JournalNumber?: string;
+	CreatedDateUTC?: string;
+	SourceID?: string;
+	SourceType?: string;
+	JournalLines?: JournalLine[]
+}
+export interface JournalLine {
+	JournalLineID?: string;
+	AccountID?: string;
+	AccountCode?: string;
+	AccountType?: string;
+	AccountName?: string;
+	NetAmount?: string;
+	GrossAmount?: string;
+	TaxAmount?: string;
 }
 export interface Phone {
 	PhoneType?: string;
