@@ -45,7 +45,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		super(options, authState, {}, _oAuth1HttpClient);
 	}
 
-	private generateHeader (args: HeaderArgs) {
+	private generateHeader(args: HeaderArgs) {
 		if (args && args['If-Modified-Since']) {
 			const toReturn = {
 				'If-Modified-Since': args['If-Modified-Since']
@@ -166,7 +166,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	private generateAttachmentsEndpoint (path: string) {
+	private generateAttachmentsEndpoint(path: string) {
 		return {
 			get: async (args?: { EntityID: string }): Promise<AttachmentsResponse> => {
 				const endpoint = `${path}/${args.EntityID}/attachments`;

@@ -70,7 +70,7 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	});
 
 	it('it can still make a successfull API call after refreshing the access token', async () => {
-		await accounting1.oauth1Client.refreshAccessToken();
+		authState = await accounting1.oauth1Client.refreshAccessToken();
 		const inv2 = await accounting1.organisation.get();
 		expect(inv2.Status).toEqual('OK');
 	});

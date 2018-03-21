@@ -161,12 +161,16 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					if (err) {
 						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
 					} else {
-						const results = querystring.parse(data);
+						const results = querystring.parse(data) as any;
+						const currentMilliseconds = new Date().getTime();
+						const expDate = new Date(currentMilliseconds + (results.oauth_expires_in * 1000));
+
 						const oauthState: IOAuth1State = {
 							oauth_token: results.oauth_token,
 							oauth_token_secret: results.oauth_token_secret,
 							oauth_session_handle: results.oauth_session_handle,
-						} as any;
+							oauth_expires_at: expDate
+						};
 						this.setState(oauthState);
 						resolve(oauthState);
 					}
