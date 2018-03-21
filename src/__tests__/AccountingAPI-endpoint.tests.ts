@@ -40,6 +40,13 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'delete', expectedPath: `accounts/${guid1}`, args: { AccountID: guid1 } },
 			{ subResource: 'attachments', action: 'get', expectedPath: `accounts/${guid1}/attachments`, args: { EntityID: guid1 } }
 		],
+		bankTransactions: [
+			{ action: 'get', expectedPath: 'banktransactions' },
+			{ action: 'get', expectedPath: `banktransactions?page=3`, args: { page: 3 } },
+			{ action: 'get', expectedPath: `banktransactions?order=something`, args: { order: 'something' } },
+			{ action: 'get', expectedPath: `banktransactions?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
+			{ action: 'get', expectedPath: `banktransactions?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
+		],
 		invoices: [
 			{ action: 'get', expectedPath: 'invoices' },
 			{ action: 'get', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1 } },

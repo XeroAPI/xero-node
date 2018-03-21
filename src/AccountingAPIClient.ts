@@ -4,7 +4,7 @@ import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClie
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
 import {
-	AccountsResponse,
+	AccountsResponse, BankTransactionsResponse,
 	InvoicesResponse, Invoice,
 	ContactGroupsResponse, ContactGroup,
 	CurrenciesResponse, Currency,
@@ -90,6 +90,20 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.delete<AccountsResponse>(endpoint);
 		},
 		attachments: this.generateAttachmentsEndpoint('accounts')
+	};
+
+	public bankTransactions = {
+		get: async (args?: { BankTransactionID?: string } & QueryArgs & HeaderArgs): Promise<BankTransactionsResponse> => {
+			let endpoint = 'banktransactions';
+			if (args && args.BankTransactionID) {
+				endpoint = endpoint + '/' + args.BankTransactionID;
+				delete args.BankTransactionID; // remove from query string
+			}
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<BankTransactionsResponse>(endpoint, header);
+		},
 	};
 
 	public invoices = {
