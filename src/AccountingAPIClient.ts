@@ -315,9 +315,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.Code;
 				delete args.Code;
 			}
+			const headers = this.generateHeader(args);
 			endpoint += generateQueryString(args);
 
-			return this.oauth1Client.get<ItemsResponse>(endpoint);
+			return this.oauth1Client.get<ItemsResponse>(endpoint, headers);
 		},
 		create: async (items: Item | Item[], args?: { summarizeErrors?: boolean }): Promise<ItemsResponse> => {
 			const endpoint = 'items' + generateQueryString(args, true);
