@@ -1,5 +1,6 @@
 import * as  prompt from 'prompt';
 import * as path from 'path';
+import { IXeroClientConfiguration } from '../../internals/BaseAPIClient';
 
 export async function readLine(stringPrompt: string): Promise<string> {
 	return new Promise<string>((resolve, reject) => {
@@ -10,15 +11,15 @@ export async function readLine(stringPrompt: string): Promise<string> {
 	});
 }
 
-export function getPrivateConfig() {
+export function getPrivateConfig(testPartition?: string): IXeroClientConfiguration {
 	if (!process.env.CI) {
-		const config = require('../private-config.json');
+		const config: IXeroClientConfiguration = require(`../${(testPartition || '')}private-config.json`);
 		return config;
 	} else {
 		return {
 			appType: 'private',
-			consumerKey: process.env.ConsumerKey,
-			consumerSecret: process.env.ConsumerSecret,
+			consumerKey: process.env['PrivateConsumerKey' + (testPartition || '')],
+			consumerSecret: process.env['PrivateConsumerKey' + (testPartition || '')],
 			callbackUrl: null,
 			privateKeyPath: path.resolve(__dirname, '.', 'privatekey.pem')
 		};
