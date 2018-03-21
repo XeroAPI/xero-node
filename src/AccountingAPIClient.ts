@@ -231,11 +231,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public contacts = {
-		get: async (args?: { includeArchived?: boolean, IDs?: string }): Promise<ContactsResponse> => {
+		get: async (args?: { includeArchived?: boolean, IDs?: string } & HeaderArgs & QueryArgs): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
-			endpoint += generateQueryString(args, false);
 
-			return this.oauth1Client.get<ContactsResponse>(endpoint);
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<ContactsResponse>(endpoint, header);
 		},
 		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';

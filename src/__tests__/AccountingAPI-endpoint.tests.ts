@@ -70,10 +70,14 @@ describe('AccountingAPI endpoints', () => {
 		],
 		contacts: [
 			{ action: 'get', expectedPath: 'contacts' },
-			{ action: 'get', expectedPath: `contacts?IDs=${guid1}%2C${guid2}`, args: { IDs: `${guid1},${guid2}`} },
+			{ action: 'get', expectedPath: `contacts?IDs=${guid1}%2C${guid2}`, args: { IDs: `${guid1},${guid2}` } },
 			{ action: 'get', expectedPath: `contacts?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
 			{ action: 'get', expectedPath: `contacts?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
 			{ action: 'get', expectedPath: `contacts?includeArchived=true`, args: { includeArchived: true } },
+			{ action: 'get', expectedPath: `contacts`, args: { 'If-Modified-Since': 'headerValue' } },
+			{ action: 'get', expectedPath: `contacts?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: `contacts?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
+			{ action: 'get', expectedPath: `contacts?page=2`, args: { page: 2 } },
 		],
 		contactgroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
@@ -113,7 +117,7 @@ describe('AccountingAPI endpoints', () => {
 		items: [
 			{ action: 'get', expectedPath: 'items' },
 			{ action: 'get', expectedPath: `items/${guid1}`, args: { ItemID: guid1 } },
-			{ action: 'get', expectedPath: `items/${guid1}?order=UpdatedDateUTC`, args: { ItemID: guid1 , order: 'UpdatedDateUTC' } },
+			{ action: 'get', expectedPath: `items/${guid1}?order=UpdatedDateUTC`, args: { ItemID: guid1, order: 'UpdatedDateUTC' } },
 			{ action: 'create', expectedPath: `items?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `items?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `items/${guid1}?summarizeErrors=true`, args: { ItemID: guid1, summarizeErrors: true } },
