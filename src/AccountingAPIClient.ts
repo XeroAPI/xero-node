@@ -19,7 +19,9 @@ import {
 	TrackingCategoriesResponse, TrackingCategory, TrackingOption,
 	TaxRatesResponse, TaxRate,
 	ExpenseClaimsResponse, ExpenseClaim,
-	ItemsResponse, Item, JournalsResponse
+	ItemsResponse, Item,
+	JournalsResponse,
+	PaymentsResponse, Payment
 } from './AccountingAPI-types';
 
 export interface QueryArgs {
@@ -506,6 +508,34 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				return this.oauth1Client.get<OrganisationResponse>(endpoint);
 			}
+		}
+	};
+
+	public payments = {
+		get: async (args?: { PaymentID: string } & QueryArgs & HeaderArgs): Promise<PaymentsResponse> => {
+			let endpoint = 'payments';
+			if (args && args.PaymentID) {
+				endpoint = endpoint + '/' + args.PaymentID;
+				delete args.PaymentID;
+			}
+			const headers = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<PaymentsResponse>(endpoint, headers);
+		},
+		create: async (payments: Payment | Payment[], args?: { summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
+			const endpoint = 'payments' + generateQueryString(args, true);
+			return this.oauth1Client.put<PaymentsResponse>(endpoint, payments);
+		},
+		update: async (payments: Payment | Payment[], args?: { PaymentID: string, summarizeErrors?: boolean }): Promise<TaxRatesResponse> => {
+			let endpoint = 'payments';
+			if (args && args.PaymentID) {
+				endpoint = endpoint + '/' + args.PaymentID;
+				delete args.PaymentID;
+			}
+			endpoint += generateQueryString(args, true);
+
+			return this.oauth1Client.post<TaxRatesResponse>(endpoint, payments);
 		}
 	};
 

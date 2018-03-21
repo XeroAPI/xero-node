@@ -64,6 +64,10 @@ export interface OrganisationCISSettingResponse {
 	CISSettings: OrgCISSetting[];
 }
 
+export interface PaymentsResponse {
+	Payments: Payment[];
+}
+
 export interface BrandingThemesResponse {
 	BrandingThemes: BrandingTheme[];
 }
@@ -115,8 +119,18 @@ export interface Payment {
 	Amount?: number;
 	Reference?: string;
 	CurrencyRate?: number;
+	IsReconciled?: boolean;
+	Status?: string;
+	PaymentType?: string;
 	HasAccount?: boolean;
+	Account?: any;
+	Invoice?: Invoice;
+	CreditNote?: CreditNote;
+	Prepayment?: Prepayment;
+	Overpayment?: Overpayment;
+	UpdatedDateUTC?: string;
 	HasValidationErrors?: boolean;
+	ValidationErrors?: ValidationError[];
 }
 
 export interface BrandingTheme {
@@ -124,6 +138,26 @@ export interface BrandingTheme {
 	Name: string;
 	SortOrder: number;
 	CreatedDateUTC: string;
+}
+
+export interface Overpayment {
+	OverpaymentID?: string;
+	Type?: string;
+	Contact?: Contact;
+	Date?: string;
+	Status?: string;
+	LineAmountTypes?: string;
+	LineItems?: LineItem[];
+	SubTotal?: number;
+	TotalTax?: number;
+	Total?: number;
+	UpdatedDateUTC?: string;
+	CurrencyCode?: string;
+	CurrencyRate?: number;
+	RemainingCredit?: number;
+	Allocations?: Allocation[];
+	Payments?: Payment[];
+	HasAttachments?: boolean;
 }
 
 export interface Prepayment {
@@ -181,7 +215,7 @@ export interface Invoice {
 	Prepayments?: Prepayment[];
 	Payments?: Payment[];
 	CreditNotes?: CreditNote[];
-	Overpayments?: any[];
+	Overpayments?: Overpayment[];
 	CISDeduction?: number;
 	AmountDue?: number;
 	AmountPaid?: number;
@@ -227,11 +261,11 @@ export interface Contact {
 	Phones?: Phone[];
 	UpdatedDateUTC?: string;
 	Balances?: any;
-	ContactGroups?: any[];
+	ContactGroups?: ContactGroup[];
 	IsSupplier?: boolean;
 	IsCustomer?: boolean;
-	SalesTrackingCategories?: any[];
-	PurchasesTrackingCategories?: any[];
+	SalesTrackingCategories?: Tracking[];
+	PurchasesTrackingCategories?: Tracking[];
 	ContactPersons?: any[];
 	HasAttachments?: boolean;
 	AccountsReceivableTaxType?: string;
