@@ -23,12 +23,16 @@ import {
 	InvoiceRemindersResponse,
 	JournalsResponse,
 	PaymentsResponse, Payment,
-	PrepaymentsResponse, Prepayment, Allocation
+	PrepaymentsResponse, Allocation
 } from './AccountingAPI-types';
 
 export interface QueryArgs {
 	where?: string;
 	order?: string;
+}
+
+export interface PagingArgs {
+	page?: number;
 }
 
 export interface HeaderArgs {
@@ -549,7 +553,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public prepayments = {
-		get: async (args?: { PrepaymentID: string } & QueryArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
+		get: async (args?: { PrepaymentID: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
 			let endpoint = 'prepayments';
 			if (args && args.PrepaymentID) {
 				endpoint = endpoint + '/' + args.PrepaymentID;
@@ -559,20 +563,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<PrepaymentsResponse>(endpoint, headers);
-		},
-		create: async (prepayments: Prepayment | { Prepayments: Prepayment[] }, args?: { summarizeErrors?: boolean }): Promise<PrepaymentsResponse> => {
-			const endpoint = 'prepayments' + generateQueryString(args, true);
-			return this.oauth1Client.put<PrepaymentsResponse>(endpoint, prepayments);
-		},
-		update: async (prepayments: Prepayment | { Prepayments: Prepayment[] }, args?: { PrepaymentID: string, summarizeErrors?: boolean }): Promise<PrepaymentsResponse> => {
-			let endpoint = 'prepayments';
-			if (args && args.PrepaymentID) {
-				endpoint = endpoint + '/' + args.PrepaymentID;
-				delete args.PrepaymentID;
-			}
-			endpoint += generateQueryString(args, true);
-
-			return this.oauth1Client.post<PrepaymentsResponse>(endpoint, prepayments);
 		},
 		allocations: {
 			create: async (allocations: Allocation | { Allocations: Allocation[] }, args: { PrepaymentID: string }): Promise<PrepaymentsResponse> => {
