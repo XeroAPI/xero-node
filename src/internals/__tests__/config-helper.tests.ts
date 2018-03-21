@@ -34,10 +34,8 @@ describe('config-helper', () => {
 				const retrievedState = mapState(xeroConfigWithCertPath);
 
 				expect(retrievedState).toEqual({
-					accessToken: {
-						oauth_token: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-						oauth_token_secret: testCertString()
-					}
+					oauth_token: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					oauth_token_secret: testCertString()
 				});
 			});
 		});
@@ -72,10 +70,8 @@ describe('config-helper', () => {
 				const retrievedState = mapState(xeroConfigWithCertPath);
 
 				expect(retrievedState).toEqual({
-					accessToken: {
-						oauth_token: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
-						oauth_token_secret: testCertString()
-					}
+					oauth_token: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					oauth_token_secret: testCertString()
 				});
 			});
 		});
@@ -112,7 +108,7 @@ describe('config-helper', () => {
 		it('maps state correctly', () => {
 			const retrievedState = mapState(xeroConfig);
 
-			expect(retrievedState).toEqual({});
+			expect(retrievedState).toEqual(null);
 		});
 	});
 
@@ -147,7 +143,7 @@ describe('config-helper', () => {
 			it('maps state correctly', () => {
 				const retrievedState = mapState(xeroConfig);
 
-				expect(retrievedState).toEqual({});
+				expect(retrievedState).toEqual(null);
 			});
 		});
 
@@ -180,7 +176,7 @@ describe('config-helper', () => {
 			it('maps state correctly', () => {
 				const retrievedState = mapState(xeroConfig);
 
-				expect(retrievedState).toEqual({});
+				expect(retrievedState).toEqual(null);
 			});
 		});
 
