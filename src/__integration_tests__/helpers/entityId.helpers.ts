@@ -11,6 +11,7 @@ const inMemoryCache: {
 	expenseClaimId?: string,
 	invoiceId?: string,
 	itemId?: string,
+	paymentId?: string,
 } = {};
 
 export async function getOrCreateAccountId(xero: AccountingAPIClient, args?: any) {
@@ -124,4 +125,19 @@ export async function getOrCreateItemId(xero: AccountingAPIClient) {
 		inMemoryCache.itemId = response.Items[0].ItemID;
 	}
 	return inMemoryCache.itemId;
+}
+
+export async function getOrCreatePaymentId(xero: AccountingAPIClient) {
+	if (!inMemoryCache.paymentId) {
+		let response = await xero.payments.get();
+		if (response.Payments.length <= 0) {
+			response = await xero.payments.create({
+				Invoice: { InvoiceID: await getOrCreateInvoiceId(xero) },
+				Account: { AccountID: await getOrCreateAccountId(xero) },
+				Amount: 123
+			});
+		}
+		inMemoryCache.paymentId = response.Payments[0].PaymentID;
+	}
+	return inMemoryCache.paymentId;
 }
