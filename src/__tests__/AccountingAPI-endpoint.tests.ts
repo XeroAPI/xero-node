@@ -64,6 +64,9 @@ describe('AccountingAPI endpoints', () => {
 			// { action: 'savePDF', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1, savePath: '/dev/null'} },
 			// { action: 'savePDF', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123', savePath: '/dev/null' } },
 		],
+		invoiceReminders: [
+			{ action: 'get', expectedPath: 'invoicereminders/settings' },
+		],
 		organisation: [
 			{ action: 'get', expectedPath: 'organisation' },
 			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }

@@ -21,7 +21,7 @@ import {
 	ExpenseClaimsResponse, ExpenseClaim,
 	ItemsResponse, Item,
 	JournalsResponse,
-	PaymentsResponse, Payment
+	PaymentsResponse, Payment, InvoiceRemindersResponse
 } from './AccountingAPI-types';
 
 export interface QueryArgs {
@@ -151,6 +151,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 		},
 		attachments: this.generateAttachmentsEndpoint('invoices')
+	};
+
+	public invoiceReminders = {
+		get: async (): Promise<InvoiceRemindersResponse> => {
+			let endpoint = 'invoicereminders/settings';
+			return this.oauth1Client.get<InvoiceRemindersResponse>(endpoint);
+		}
 	};
 
 	private generateAttachmentsEndpoint(path: string) {
