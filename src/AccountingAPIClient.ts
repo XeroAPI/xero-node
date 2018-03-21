@@ -20,13 +20,19 @@ import {
 	TaxRatesResponse, TaxRate,
 	ExpenseClaimsResponse, ExpenseClaim,
 	ItemsResponse, Item,
+	InvoiceRemindersResponse,
 	JournalsResponse,
-	PaymentsResponse, Payment
+	PaymentsResponse, Payment,
+	PrepaymentsResponse, Allocation
 } from './AccountingAPI-types';
 
 export interface QueryArgs {
 	where?: string;
 	order?: string;
+}
+
+export interface PagingArgs {
+	page?: number;
 }
 
 export interface HeaderArgs {
@@ -153,6 +159,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 		attachments: this.generateAttachmentsEndpoint('invoices')
 	};
 
+	public invoiceReminders = {
+		get: async (): Promise<InvoiceRemindersResponse> => {
+			const endpoint = 'invoicereminders/settings';
+			return this.oauth1Client.get<InvoiceRemindersResponse>(endpoint);
+		}
+	};
+
 	private generateAttachmentsEndpoint(path: string) {
 		return {
 			get: async (args?: { EntityID: string }): Promise<AttachmentsResponse> => {
@@ -175,6 +188,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 			},
 		};
 	}
+
+	public banktransactions = {
+		create: async (bankTransactions: any): Promise<any> => {
+			return null; // TODO
+		}
+	};
 
 	public contactgroups = {
 		get: async (args?: { ContactGroupID?: string } & QueryArgs): Promise<ContactGroupsResponse> => {
@@ -527,7 +546,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			const endpoint = 'payments' + generateQueryString(args, true);
 			return this.oauth1Client.put<PaymentsResponse>(endpoint, payments);
 		},
-		update: async (payments: Payment | Payment[], args?: { PaymentID: string, summarizeErrors?: boolean }): Promise<TaxRatesResponse> => {
+		update: async (payments: Payment | Payment[], args?: { PaymentID: string, summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
 			let endpoint = 'payments';
 			if (args && args.PaymentID) {
 				endpoint = endpoint + '/' + args.PaymentID;
@@ -535,8 +554,31 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 			endpoint += generateQueryString(args, true);
 
-			return this.oauth1Client.post<TaxRatesResponse>(endpoint, payments);
+			return this.oauth1Client.post<PaymentsResponse>(endpoint, payments);
 		}
+	};
+
+	public prepayments = {
+		get: async (args?: { PrepaymentID: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
+			let endpoint = 'prepayments';
+			if (args && args.PrepaymentID) {
+				endpoint = endpoint + '/' + args.PrepaymentID;
+				delete args.PrepaymentID;
+			}
+			const headers = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<PrepaymentsResponse>(endpoint, headers);
+		},
+		allocations: {
+			create: async (allocations: Allocation | { Allocations: Allocation[] }, args: { PrepaymentID: string }): Promise<PrepaymentsResponse> => {
+				const endpoint = `prepayments/${args.PrepaymentID}/allocations`;
+				delete args.PrepaymentID;
+
+				return this.oauth1Client.put<PrepaymentsResponse>(endpoint, allocations);
+			}
+		},
+		attachments: this.generateAttachmentsEndpoint('prepayments')
 	};
 
 	public reports = {

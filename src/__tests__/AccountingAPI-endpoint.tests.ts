@@ -63,6 +63,9 @@ describe('AccountingAPI endpoints', () => {
 			// { action: 'savePDF', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1, savePath: '/dev/null'} },
 			// { action: 'savePDF', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123', savePath: '/dev/null' } },
 		],
+		invoiceReminders: [
+			{ action: 'get', expectedPath: 'invoicereminders/settings' },
+		],
 		organisation: [
 			{ action: 'get', expectedPath: 'organisation' },
 			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
@@ -135,6 +138,14 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: `payments?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `payments?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `payments/${guid1}?summarizeErrors=true`, args: { PaymentID: guid1, summarizeErrors: true } },
+		],
+		prepayments: [
+			{ action: 'get', expectedPath: 'prepayments' },
+			{ action: 'get', expectedPath: `prepayments/${guid1}`, args: { PrepaymentID: guid1 } },
+			{ action: 'get', expectedPath: `prepayments/${guid1}?order=UpdatedDateUTC`, args: { PrepaymentID: guid1, order: 'UpdatedDateUTC' } },
+			{ action: 'get', expectedPath: `prepayments?page=5`, args: { 'page': 5, 'If-Modified-Since': 'headerValue' } },
+			{ subResource: 'allocations', action: 'create', expectedPath: `prepayments/${guid1}/allocations`, args: { PrepaymentID: guid1 } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `prepayments/${guid1}/attachments`, args: { EntityID: guid1 } },
 		],
 		users: [
 			{ action: 'get', expectedPath: 'users' },
