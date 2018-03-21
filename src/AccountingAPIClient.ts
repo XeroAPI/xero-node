@@ -104,13 +104,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<BankTransactionsResponse>(endpoint, header);
 		},
-		create: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }): Promise<AccountsResponse> => {
+		create: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }): Promise<BankTransactionsResponse> => {
 			const endpoint = 'banktransactions';
-			return this.oauth1Client.put<AccountsResponse>(endpoint, bankTransaction);
+			return this.oauth1Client.put<BankTransactionsResponse>(endpoint, bankTransaction);
 		},
-		update: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }, args?: { summarizeErrors?: boolean }): Promise<AccountsResponse> => {
+		update: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }, args?: { summarizeErrors?: boolean }): Promise<BankTransactionsResponse> => {
 			const endpoint = 'banktransactions' + generateQueryString(args, true);
-			return this.oauth1Client.post<AccountsResponse>(endpoint, bankTransaction);
+			return this.oauth1Client.post<BankTransactionsResponse>(endpoint, bankTransaction);
 		},
 		attachments: this.generateAttachmentsEndpoint('banktransactions')
 	};

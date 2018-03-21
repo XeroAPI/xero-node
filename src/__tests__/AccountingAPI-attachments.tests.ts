@@ -36,16 +36,6 @@ describe('AccountingAPI attachments', () => {
 	const tempAttachmentLocation = path.resolve(__dirname, 'temp-image.jpg');
 	const localAttachmentLocation = path.resolve(__dirname, 'helpers', 'bean.jpg');
 
-	// Invoices [x]
-	// Receipts [ ]
-	// Credit Notes [ ]
-	// Repeating Invoices [ ]
-	// Bank Transactions [x]
-	// Bank Transfers [ ]
-	// Contacts [x]
-	// Accounts [ ]
-	// Manual Journals [ ]
-
 	const fixtures: IFixture = {
 		invoices: [
 			{ expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
