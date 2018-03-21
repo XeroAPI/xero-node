@@ -6,7 +6,7 @@ import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IToken } from '..
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 
 describe('HTTP errors', () => {
-	const testError = new XeroError(101, 'the sky is blue');
+	const testError = new XeroError(101, 'the sky is blue', null);
 
 	const inMemoryOAuthFF = new InMemoryOAuthLibFactoryFactory();
 	let xeroClient: BaseAPIClient;

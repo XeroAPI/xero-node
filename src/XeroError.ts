@@ -5,13 +5,12 @@ export class XeroError extends Error {
 	public readonly data: any;
 	public readonly headers: any;
 
-	constructor(statusCode: number, data: string, headers?: any) {
+	constructor(statusCode: number, data: string, headers: any) {
 		let message: string = 'XeroError:';
 		const queryobj = querystring.parse(data);
 		if (queryobj.oauth_problem && queryobj.oauth_problem_advice) {
-			if (statusCode == 503 && headers && headers['x-rate-limit-problem']) {
-				console.log(headers);
-				message += ' ' + headers['x-rate-limit-problem'];
+			if (statusCode == 503 && headers) {
+				message += ' ' + (headers['x-rate-limit-problem'] || headers['X-Rate-Limit-Problem'] || '');
 			}
 			message += ` ${queryobj.oauth_problem} (${queryobj.oauth_problem_advice})`;
 		} else {

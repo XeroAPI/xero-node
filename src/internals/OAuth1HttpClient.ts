@@ -102,7 +102,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 			this.oauthLib.getOAuthRequestToken(
 				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, null) : err);
 					} else {
 						resolve({
 							oauth_token,
@@ -127,7 +127,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				oauth_verifier,
 				(err: any, oauth_token: string, oauth_token_secret: string, results: { oauth_expires_in: number, oauth_session_handle: string, oauth_authorization_expires_in: string, xero_org_muid: string }) => {
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, null) : err);
 					} else {
 						const currentMilliseconds = new Date().getTime();
 						const expDate = new Date(currentMilliseconds + (results.oauth_expires_in * 1000));
@@ -157,9 +157,9 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				{ oauth_session_handle: this._state.oauth_session_handle },
 				null,
 				null,
-				(err: any, data: string) => {
+				(err: any, data: string, response: any) => {
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, response ? response.headers : null) : err);
 					} else {
 						const results = querystring.parse(data) as any;
 						const currentMilliseconds = new Date().getTime();
@@ -217,7 +217,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
 					} else {
 						const buffer = new Buffer(data, 'binary');
 
@@ -273,6 +273,8 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		function passBackControl(response: any) {
 			if (response.statusCode >= 200 && response.statusCode <= 299) {
 				callback(null, data, response);
+			} else {
+				callback({ statusCode: response.statusCode, data: data }, data, response);
 			}
 		}
 
@@ -322,7 +324,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 						mimeType,
 						(err: any, data: string, httpResponse: any) => {
 							if (err) {
-								reject(new XeroError(httpResponse.statusCode, data));
+								reject(new XeroError(httpResponse.statusCode, data, httpResponse ? httpResponse.headers : null));
 							} else {
 								const toReturn = JSON.parse(data) as AttachmentsResponse;
 								return resolve(toReturn);
@@ -346,7 +348,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse ? httpResponse.headers : null) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -371,7 +373,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse ? httpResponse.headers : null) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -397,7 +399,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse ? httpResponse.headers : null) : err);
 					} else {
 						const toReturn = JSON.parse(data) as T;
 						return resolve(toReturn);
@@ -421,7 +423,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					// data is the body of the response
 
 					if (err) {
-						reject(err.statusCode ? new XeroError(err.statusCode, err.data) : err);
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse ? httpResponse.headers : null) : err);
 					} else {
 						let toReturn: T = null;
 						if (data) {
