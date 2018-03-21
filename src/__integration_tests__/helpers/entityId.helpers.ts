@@ -2,7 +2,6 @@ import { AccountingAPIClient } from '../../AccountingAPIClient';
 import { createSingleInvoiceRequest } from '../request-body/invoice.request.examples';
 
 const inMemoryCache: {
-	invoiceId?: string,
 	accountId?: string,
 	bankTransferId?: string,
 	contactGroupId?: string,
@@ -10,18 +9,9 @@ const inMemoryCache: {
 	contactIdInContactGroup?: string,
 	employeeId?: string,
 	expenseClaimId?: string,
+	invoiceId?: string,
+	itemId?: string,
 } = {};
-
-export async function getOrCreateInvoiceId(xero: AccountingAPIClient) {
-	if (!inMemoryCache.invoiceId) {
-		let response = await xero.invoices.get();
-		if (response.Invoices.length <= 0) {
-			response = await xero.invoices.create(createSingleInvoiceRequest);
-		}
-		inMemoryCache.invoiceId = response.Invoices[0].InvoiceID;
-	}
-	return inMemoryCache.invoiceId;
-}
 
 export async function getOrCreateAccountId(xero: AccountingAPIClient, args?: any) {
 	if (!inMemoryCache.accountId || args) {
@@ -112,4 +102,26 @@ export async function getOrCreateExpenseClaimId(xero: AccountingAPIClient) {
 		inMemoryCache.expenseClaimId = response.ExpenseClaims[0].ExpenseClaimID;
 	}
 	return inMemoryCache.expenseClaimId;
+}
+
+export async function getOrCreateInvoiceId(xero: AccountingAPIClient) {
+	if (!inMemoryCache.invoiceId) {
+		let response = await xero.invoices.get();
+		if (response.Invoices.length <= 0) {
+			response = await xero.invoices.create(createSingleInvoiceRequest);
+		}
+		inMemoryCache.invoiceId = response.Invoices[0].InvoiceID;
+	}
+	return inMemoryCache.invoiceId;
+}
+
+export async function getOrCreateItemId(xero: AccountingAPIClient) {
+	if (!inMemoryCache.itemId) {
+		let response = await xero.items.get();
+		if (response.Items.length <= 0) {
+			response = await xero.items.create({ Code: 'Item-1' });
+		}
+		inMemoryCache.itemId = response.Items[0].ItemID;
+	}
+	return inMemoryCache.itemId;
 }

@@ -1,9 +1,26 @@
 
 import * as fs from 'fs';
-import { AccountsResponse, InvoicesResponse, Invoice, ContactGroupsResponse, ContactGroup, CurrenciesResponse, EmployeesResponse, Currency, Employee, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, Contact, UsersResponse, BrandingThemesResponse, BankTransfersResponse, BankTransfer, TrackingCategoriesResponse, TrackingCategory, TrackingOption, TaxRatesResponse, ExpenseClaimsResponse, ExpenseClaim, TaxRate, ItemsResponse, Item } from './AccountingAPI-types';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
+import {
+	AccountsResponse,
+	InvoicesResponse, Invoice,
+	ContactGroupsResponse, ContactGroup,
+	CurrenciesResponse, Currency,
+	EmployeesResponse, Employee,
+	ContactsResponse, Contact,
+	ReportsResponse,
+	AttachmentsResponse,
+	OrganisationResponse,
+	UsersResponse,
+	BrandingThemesResponse,
+	BankTransfersResponse, BankTransfer,
+	TrackingCategoriesResponse, TrackingCategory, TrackingOption,
+	TaxRatesResponse, TaxRate,
+	ExpenseClaimsResponse, ExpenseClaim,
+	ItemsResponse, Item
+} from './AccountingAPI-types';
 
 export interface QueryArgs {
 	where?: string;
@@ -273,7 +290,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 			return this.oauth1Client.get<ExpenseClaimsResponse>(endpoint);
 		},
-		create: async (expenseClaims: ExpenseClaim | ExpenseClaim[], args?: {summarizeErrors?: boolean}): Promise<ExpenseClaimsResponse> => {
+		create: async (expenseClaims: ExpenseClaim | ExpenseClaim[], args?: { summarizeErrors?: boolean }): Promise<ExpenseClaimsResponse> => {
 			const endpoint = 'expenseclaims' + generateQueryString(args, true);
 			return this.oauth1Client.put<ExpenseClaimsResponse>(endpoint, expenseClaims);
 		},
@@ -371,7 +388,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				return this.oauth1Client.post<TrackingCategoriesResponse>(endpoint, trackingOption);
 			},
-			delete: async (args: { TrackingCategoryID: string, TrackingOptionID: string}): Promise<any> => {
+			delete: async (args: { TrackingCategoryID: string, TrackingOptionID: string }): Promise<any> => {
 				const endpoint = 'trackingcategories/' + args.TrackingCategoryID + '/Options/' + args.TrackingOptionID;
 				return this.oauth1Client.delete<any>(endpoint);
 			},
