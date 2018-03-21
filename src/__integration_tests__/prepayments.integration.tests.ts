@@ -1,11 +1,9 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { PrepaymentsResponse } from '../AccountingAPI-types';
 
 describe.skip('/prepayments', () => {
 	let xero: AccountingAPIClient;
 	let existingId: string;
-	const idsToArchive: string[] = [];
 
 	beforeAll(() => {
 		setJestTimeout();
