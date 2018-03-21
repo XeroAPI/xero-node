@@ -231,16 +231,47 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public contacts = {
-		get: async (args?: { includeArchived?: boolean, IDs?: string }): Promise<ContactsResponse> => {
+		get: async (args?: { ContactID?: string, includeArchived?: boolean, IDs?: string } & HeaderArgs & QueryArgs): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
-			endpoint += generateQueryString(args, false);
 
-			return this.oauth1Client.get<ContactsResponse>(endpoint);
+			if (args && args.ContactID) {
+				endpoint = endpoint + '/' + args.ContactID;
+				delete args.ContactID;
+			}
+
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<ContactsResponse>(endpoint, header);
 		},
-		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
+		create: async (body?: Contact | Contact[], args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
 			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.put<ContactsResponse>(endpoint, body);
+		},
+		update: async (body?: Contact | Contact[], args?: { ContactID: string, summarizeErrors: boolean }): Promise<ContactsResponse> => {
+			let endpoint = 'contacts';
+
+			if (args && args.ContactID) {
+				endpoint = endpoint + '/' + args.ContactID;
+				delete args.ContactID;
+			}
+
+			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.post<ContactsResponse>(endpoint, body);
+		},
+		CISsettings: {
+			get: async (args?: { ContactID: string }): Promise<string> => {
+				let endpoint = 'contacts';
+				if (args && args.ContactID) {
+					endpoint = endpoint + '/' + args.ContactID;
+					delete args.ContactID;
+				}
+
+				endpoint += '/cissettings';
+
+				return this.oauth1Client.get<any>(endpoint);
+			}
 		},
 		attachments: this.generateAttachmentsEndpoint('contacts')
 	};
