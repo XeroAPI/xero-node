@@ -4,7 +4,7 @@ import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClie
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
 import {
-	AccountsResponse, BankTransactionsResponse,
+	AccountsResponse, BankTransaction, BankTransactionsResponse,
 	InvoicesResponse, Invoice,
 	ContactGroupsResponse, ContactGroup,
 	CurrenciesResponse, Currency,
@@ -104,6 +104,15 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<BankTransactionsResponse>(endpoint, header);
 		},
+		create: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }): Promise<AccountsResponse> => {
+			const endpoint = 'banktransactions';
+			return this.oauth1Client.put<AccountsResponse>(endpoint, bankTransaction);
+		},
+		update: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }, args?: { summarizeErrors?: boolean }): Promise<AccountsResponse> => {
+			const endpoint = 'banktransactions' + generateQueryString(args, true);
+			return this.oauth1Client.post<AccountsResponse>(endpoint, bankTransaction);
+		},
+		attachments: this.generateAttachmentsEndpoint('banktransactions')
 	};
 
 	public invoices = {

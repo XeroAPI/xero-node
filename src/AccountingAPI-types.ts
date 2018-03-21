@@ -107,28 +107,28 @@ export interface BankTransfersResponse {
 }
 
 export interface BankTransaction {
-	Contact: Contact;
-	DateString: string;
-	Date: string;
-	Status: string;
-	LineAmountTypes: string;
-	LineItems: LineItem[];
-	SubTotal: number;
-	TotalTax: number;
-	Total: number;
-	UpdatedDateUTC: string;
-	CurrencyCode: string;
-	BankTransactionID: string;
-	BankAccount: BankAccount;
-	Type: string;
-	Reference: string;
-	IsReconciled: boolean;
+	Contact?: Contact;
+	DateString?: string;
+	Date?: string;
+	Status?: string;
+	LineAmountTypes?: string;
+	LineItems?: LineItem[];
+	SubTotal?: number;
+	TotalTax?: number;
+	Total?: number;
+	UpdatedDateUTC?: string;
+	CurrencyCode?: string;
+	BankTransactionID?: string;
+	BankAccount?: BankAccount;
+	Type?: string;
+	Reference?: string;
+	IsReconciled?: boolean;
 }
 
 export interface BankAccount {
-	AccountID: string;
-	Code: string;
-	Name: string;
+	AccountID?: string;
+	Code?: string;
+	Name?: string;
 }
 
 export interface BankTransfer {

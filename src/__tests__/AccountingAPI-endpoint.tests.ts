@@ -46,6 +46,9 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `banktransactions?order=something`, args: { order: 'something' } },
 			{ action: 'get', expectedPath: `banktransactions?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
 			{ action: 'get', expectedPath: `banktransactions?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
+			{ action: 'create', expectedPath: 'banktransactions' },
+			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=false' },
+			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=true', args: { summarizeErrors: true}  },
 		],
 		invoices: [
 			{ action: 'get', expectedPath: 'invoices' },

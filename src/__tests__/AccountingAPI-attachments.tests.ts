@@ -49,6 +49,9 @@ describe('AccountingAPI attachments', () => {
 	const fixtures: IFixture = {
 		invoices: [
 			{ expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+		],
+		bankTransactions: [
+			{ expectedPath: `banktransactions/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
 		]
 	};
 
