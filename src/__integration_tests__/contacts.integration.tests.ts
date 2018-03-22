@@ -10,7 +10,7 @@ describe('/contacts', () => {
 
 	beforeAll(() => {
 		setJestTimeout();
-		const config = getPrivateConfig();
+		const config = getPrivateConfig('1');
 		xero = new AccountingAPIClient(config);
 	});
 
