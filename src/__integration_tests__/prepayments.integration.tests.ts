@@ -1,7 +1,7 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
-describe.skip('/prepayments', () => {
+describe('/prepayments', () => {
 	let xero: AccountingAPIClient;
 	let existingId: string;
 
@@ -12,7 +12,7 @@ describe.skip('/prepayments', () => {
 	});
 
 	it('create via banktransactions endpoint', async () => {
-		const response = await xero.banktransactions.create({
+		const response = await xero.bankTransactions.create({
 			Type: 'RECEIVE-PREPAYMENT',
 			Contact: { ContactID: '6d42f03b-181f-43e3-93fb-2025c012de92' },
 			BankAccount: { Code: '090' },
@@ -32,10 +32,10 @@ describe.skip('/prepayments', () => {
 			]
 		});
 
-		expect(response.Payments.length).toBe(1);
-		expect(response.Payments[0].Code).toEqual('090');
+		expect(response.BankTransactions.length).toBe(1);
+		expect(response.BankTransactions[0].BankAccount.Code).toEqual('090');
 
-		existingId = response.Payments[0].PaymentID;
+		existingId = response.BankTransactions[0].BankTransactionID;
 	});
 
 	it('get all', async () => {

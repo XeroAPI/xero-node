@@ -118,13 +118,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 		attachments: this.generateAttachmentsEndpoint('banktransactions')
 	};
 
-	public banktransactions = {
-		create: async (bankTransactions: any): Promise<any> => {
-			return null; // TODO
-		},
-		attachments: this.generateAttachmentsEndpoint('banktransactions')
-	};
-
 	public bankTransfers = {
 		get: async (args?: { BankTransferID?: string } & HeaderArgs & QueryArgs): Promise<BankTransfersResponse> => {
 			let endpoint = 'banktransfers';
