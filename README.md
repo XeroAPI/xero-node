@@ -3,7 +3,7 @@
 
 # node-xero
 
-NodeJS Client for the [Xero API](http://developer.xero.com).
+NodeJS Client for the [Xero API](http://developer.xero.com). Works with ES5, ES6 and TypeScript.
 
 Supports all application types:
 
@@ -11,42 +11,15 @@ Supports all application types:
 * Public - apps that can connect to any organisation, but only for 30 minutes at a time
 * Partner - approved apps that can automatically refresh tokens
 
+Version 3 has been rebuilt fron the ground-up using TypeScript to make it
+more maintainable and take advantage of modern JavaScript features.
+
 <!-- [API Reference](https://xeroapi.github.io/xero-node/). -->
 
 # Features
 
 - v3.0.0
 	- all [accounting endpoints](https://developer.xero.com/documentation/api/api-overview)
-		- [ ] attachments
-		- [ ] accounts
-		- [ ] bankstatements
-		- [ ] banktransactions
-		- [ ] bank-transfers
-		- [ ] branding-themes
-		- [ ] contacts
-		- [ ] contactgroups
-		- [ ] credit-notes
-		- [ ] currencies
-		- [ ] employees
-		- [ ] expense-claims
-		- [ ] invoices
-		- [ ] invoice-reminders
-		- [ ] items
-		- [ ] journals
-		- [ ] linked-transactions
-		- [ ] manual-journals
-		- [ ] organisation
-		- [ ] overpayments
-		- [ ] payments
-		- [ ] prepayments
-		- [ ] purchase-orders
-		- [ ] receipts
-		- [ ] repeating-invoices
-		- [ ] reports
-		- [ ] tax-rates
-		- [ ] tracking-categories
-		- [ ] users
-		- [ ] types
 	- generic methods (`get`, `put`, `post`, `delete`) for calling any unsupported endpoints
 
 # Installation
@@ -55,32 +28,104 @@ This SDK is published as an npm package called `xero-node`.
 
 ```npm install --save xero-node```
 
-### Configuration
+# Usage Example for Private Apps
 
-Sample configuration files for various application types are in the [integration test directory](src/__integration_tests__).
+Create a `config.json` file:
 
-| Parameter            | Description                                                                              | Mandatory | Default |
-|----------------------|------------------------------------------------------------------------------------------|-----------|---------|
-| consumerKey          | The consumer key that is required with all calls to the Xero API                         | True      | - |
-| consumerSecret       | The secret key from the developer portal that is required to authenticate your API calls | True      | - |
-| callbackBaseUrl      | The callback that Xero should invoke when the authorization is successful               	  | False     | null |
-| privateKeyPath       | The filesystem path to your privatekey.pem file to sign the API calls                    | False     | null |
-| redirectOnError      | Whether Xero Auth should redirect to your app in the event the user clicks 'Cancel'      | False     | true |
+```json
+{
+	"appType": "private",
+	"consumerKey": "your_consumer_key",
+	"consumerSecret": "your_consumer_secret",
+	"callbackUrl": null,
+	"privateKeyPath": "C:\\keys\\your_private_key.pem"
+}
+```
 
-# Usage
+Then add the following JavaScript (example works in NodeJS version 8 and above):
 
 ```javascript
 const XeroClient = require('xero-node').AccountingAPIClient;
-const config = require('/some/path/to/config.json');
+const config = require('./config.json');
 
-const xeroClient = new XeroClient(config);
+(async () => {
 
-//Print a count of invoices
-let invoices = xeroClient.invoices.get()
-console.log("Number of Invoices: " + invoices.length);
+    // You can initialise Private apps directly from your configuration
+    let xero = new XeroClient(config);
+
+    const result = await xero.invoices.get();
+
+    console.log('Number of invoices:', result.Invoices.length);
+
+})();
+
 ```
 
-### Examples
+# Usage Example for Public and Partner Apps
+
+Create a `config.json` file:
+
+```json
+{
+	"appType": "public",
+	"consumerKey": "your_consumer_key",
+	"consumerSecret": "your_consumer_secret",
+	"callbackUrl": null,
+	"privateKeyPath": "C:\\keys\\your_private_key.pem"
+}
+```
+
+Then add the following JavaScript (example works in NodeJS version 8 and above):
+
+```javascript
+const XeroClient = require('xero-node').AccountingAPIClient;
+const config = require('./config.json');
+
+(async () => {
+
+    let xero = new XeroClient(config);
+
+    // Create request token and get an authorisation URL
+    const requestToken = await xero.oauth1Client.getRequestToken();
+    console.log('Received Request Token:', requestToken);
+
+    authUrl = xero.oauth1Client.buildAuthoriseUrl(requestToken);
+    console.log('Authorisation URL:', authUrl);
+
+    // Send the user to the Authorisation URL to authorise the connection
+
+    // Once the user has authorised your app, swap Request token for Access token
+    const oauth_verifier = 123456;
+    const savedRequestToken = {
+        oauth_token: 'aaa',
+        oauth_token_secret: 'bbb'
+    };
+    const accessToken = await xero.oauth1Client.swapRequestTokenforAccessToken(savedRequestToken, oauth_verifier);
+    console.log('Received Access Token:', accessToken);
+
+    // You should now store the access token securely for the user.
+
+    // You can make API calls straight away
+    const result = await xero.invoices.get();
+    console.log('Number of invoices:', result.Invoices.length);
+
+    // When making future calls, you can initialise the Xero client direectly with the stored access token:
+
+    const storedAccessToken = {
+        oauth_token: 'aaa',
+        oauth_token_secret: 'bbb',
+        oauth_session_handle: 'ccc',
+        oauth_expires_at: '2018-01-01T01:02:03'
+    };
+    const xero2 = new XeroClient(config, storedAccessToken);
+    const invoices = await xero2.invoices.get();
+    console.log('Number of invoices:', invoices.Invoices.length);
+
+})();
+
+```
+
+### Further Examples
 
 - [Integration tests](src/__integration_tests__)
 - [Sample app](https://github.com/XeroAPI/xero-node-sample-app)
