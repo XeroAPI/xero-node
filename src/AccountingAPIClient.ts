@@ -47,6 +47,29 @@ export class AccountingAPIClient extends BaseAPIClient {
 		super(options, authState, {}, _oAuth1HttpClient);
 	}
 
+	private generateAttachmentsEndpoint(path: string) {
+		return {
+			get: async (args?: { EntityID: string }): Promise<AttachmentsResponse> => {
+				const endpoint = `${path}/${args.EntityID}/attachments`;
+				return this.oauth1Client.get<AttachmentsResponse>(endpoint);
+			},
+			downloadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToSave: string }) => {
+				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
+				const writeStream = fs.createWriteStream(args.pathToSave);
+
+				await this.oauth1Client.writeBinaryResponseToStream(endpoint, args.mimeType, writeStream);
+			},
+			uploadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToUpload: string }) => {
+				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
+				const readStream = fs.createReadStream(args.pathToUpload);
+
+				const fileSize = fs.statSync(args.pathToUpload).size;
+
+				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, fileSize, readStream);
+			},
+		};
+	}
+
 	private generateHeader(args: HeaderArgs) {
 		if (args && args['If-Modified-Since']) {
 			const toReturn = {
@@ -117,144 +140,42 @@ export class AccountingAPIClient extends BaseAPIClient {
 		attachments: this.generateAttachmentsEndpoint('banktransactions')
 	};
 
-	public invoices = {
-		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, page?: number, createdByMyApp?: boolean } & HeaderArgs & QueryArgs): Promise<InvoicesResponse> => {
-			let endpoint = 'invoices';
-			if (args && args.InvoiceID) {
-				endpoint = endpoint + '/' + args.InvoiceID;
-				delete args.InvoiceID;
-			} else if (args && args.InvoiceNumber) {
-				endpoint = endpoint + '/' + args.InvoiceNumber;
-				delete args.InvoiceNumber;
-			}
-
-			const header = this.generateHeader(args);
-			endpoint += generateQueryString(args);
-
-			return this.oauth1Client.get<InvoicesResponse>(endpoint, header);
-		},
-		savePDF: async (args?: { InvoiceID: string, InvoiceNumber?: string, savePath: string }): Promise<void> => {
-			let endpoint = 'invoices';
-			if (args && args.InvoiceID) {
-				endpoint = endpoint + '/' + args.InvoiceID;
-				delete args.InvoiceID;
-			} else if (args && args.InvoiceNumber) {
-				endpoint = endpoint + '/' + args.InvoiceNumber;
-				delete args.InvoiceNumber;
-			}
-			endpoint += generateQueryString(args);
-
-			const writeStream = fs.createWriteStream(args.savePath);
-
-			return this.oauth1Client.writeUTF8ResponseToStream(endpoint, 'application/pdf', writeStream);
-		},
-		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: { summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
-			const endpoint = 'invoices' + generateQueryString(args, true);
-
-			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
-		},
-		update: async (invoices: Invoice | { Invoices: Invoice[] }, args?: { InvoiceID?: string, InvoiceNumber?: string, where?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
-			let endpoint = `invoices`;
-
-			if (args && args.InvoiceID) {
-				endpoint = endpoint + '/' + args.InvoiceID;
-				delete args.InvoiceID;
-			} else if (args && args.InvoiceNumber) {
-				endpoint = endpoint + '/' + args.InvoiceNumber;
-				delete args.InvoiceNumber;
-			}
-
-			endpoint += generateQueryString(args, true);
-
-			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoices);
-		},
-		onlineInvoice: {
-			get: async (args?: { InvoiceID: string }): Promise<string> => {
-				let endpoint = 'invoices';
-				if (args && args.InvoiceID) {
-					endpoint = endpoint + '/' + args.InvoiceID;
-					delete args.InvoiceID;
-				}
-
-				endpoint += '/onlineinvoice';
-
-				return this.oauth1Client.get<any>(endpoint);
-			}
-		},
-		attachments: this.generateAttachmentsEndpoint('invoices')
-	};
-
-	public invoiceReminders = {
-		get: async (): Promise<InvoiceRemindersResponse> => {
-			const endpoint = 'invoicereminders/settings';
-			return this.oauth1Client.get<InvoiceRemindersResponse>(endpoint);
-		}
-	};
-
-	private generateAttachmentsEndpoint(path: string) {
-		return {
-			get: async (args?: { EntityID: string }): Promise<AttachmentsResponse> => {
-				const endpoint = `${path}/${args.EntityID}/attachments`;
-				return this.oauth1Client.get<AttachmentsResponse>(endpoint);
-			},
-			downloadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToSave: string }) => {
-				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
-				const writeStream = fs.createWriteStream(args.pathToSave);
-
-				await this.oauth1Client.writeBinaryResponseToStream(endpoint, args.mimeType, writeStream);
-			},
-			uploadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToUpload: string }) => {
-				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
-				const readStream = fs.createReadStream(args.pathToUpload);
-
-				const fileSize = fs.statSync(args.pathToUpload).size;
-
-				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, fileSize, readStream);
-			},
-		};
-	}
-
-	public linkedTransactions = {
-		get: async (args?: { LinkedTransactionID?: string } & QueryArgs & HeaderArgs): Promise<LinkedTransactionsResponse> => {
-			let endpoint = 'linkedtransactions';
-			if (args && args.LinkedTransactionID) {
-				endpoint = endpoint + '/' + args.LinkedTransactionID;
-				delete args.LinkedTransactionID; // remove from query string
-			}
-			const header = this.generateHeader(args);
-			endpoint += generateQueryString(args);
-
-			return this.oauth1Client.get<LinkedTransactionsResponse>(endpoint, header);
-		},
-		create: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }): Promise<LinkedTransactionsResponse> => {
-			const endpoint = 'linkedtransactions';
-			return this.oauth1Client.put<LinkedTransactionsResponse>(endpoint, linkedTransaction);
-		},
-		update: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }, args?: { LinkedTransactionID?: string, summarizeErrors?: boolean }): Promise<LinkedTransactionsResponse> => {
-			let endpoint = 'linkedtransactions';
-			if (args && args.LinkedTransactionID) {
-				endpoint = endpoint + '/' + args.LinkedTransactionID;
-				delete args.LinkedTransactionID; // remove from query string
-			}
-			endpoint += generateQueryString(args, true);
-			return this.oauth1Client.post<LinkedTransactionsResponse>(endpoint, linkedTransaction);
-		},
-		delete: async (args?: { LinkedTransactionID?: string}): Promise<void> => {
-			let endpoint = 'linkedtransactions';
-			if (args && args.LinkedTransactionID) {
-				endpoint = endpoint + '/' + args.LinkedTransactionID;
-				delete args.LinkedTransactionID; // remove from query string
-			}
-			endpoint += generateQueryString(args, false);
-			return this.oauth1Client.delete<void>(endpoint);
-		},
-	};
-
 	public banktransactions = {
 		create: async (bankTransactions: any): Promise<any> => {
 			return null; // TODO
 		},
 		attachments: this.generateAttachmentsEndpoint('banktransactions')
+	};
+
+	public bankTransfers = {
+		get: async (args?: { BankTransferID?: string } & HeaderArgs & QueryArgs): Promise<BankTransfersResponse> => {
+			let endpoint = 'banktransfers';
+			if (args && args.BankTransferID) {
+				endpoint = endpoint + '/' + args.BankTransferID;
+				delete args.BankTransferID;
+			}
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<BankTransfersResponse>(endpoint, this.generateHeader(args));
+		},
+		create: async (bankTransfers: BankTransfer | { BankTransfers: BankTransfer[] }, args?: { summarizeErrors: boolean }): Promise<BankTransfersResponse> => {
+			let endpoint = 'banktransfers';
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.put<BankTransfersResponse>(endpoint, bankTransfers);
+		},
+		attachments: this.generateAttachmentsEndpoint('banktransfers')
+	};
+
+	public brandingThemes = {
+		get: async (args?: { BrandingThemeID?: string }): Promise<BrandingThemesResponse> => {
+			let endpoint = 'brandingthemes';
+			if (args && args.BrandingThemeID) {
+				endpoint = endpoint + '/' + args.BrandingThemeID;
+				delete args.BrandingThemeID;
+			}
+
+			return this.oauth1Client.get<BrandingThemesResponse>(endpoint);
+		}
 	};
 
 	public contactgroups = {
@@ -455,6 +376,80 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
+	public invoiceReminders = {
+		get: async (): Promise<InvoiceRemindersResponse> => {
+			const endpoint = 'invoicereminders/settings';
+			return this.oauth1Client.get<InvoiceRemindersResponse>(endpoint);
+		}
+	};
+
+	public invoices = {
+		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, page?: number, createdByMyApp?: boolean } & HeaderArgs & QueryArgs): Promise<InvoicesResponse> => {
+			let endpoint = 'invoices';
+			if (args && args.InvoiceID) {
+				endpoint = endpoint + '/' + args.InvoiceID;
+				delete args.InvoiceID;
+			} else if (args && args.InvoiceNumber) {
+				endpoint = endpoint + '/' + args.InvoiceNumber;
+				delete args.InvoiceNumber;
+			}
+
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<InvoicesResponse>(endpoint, header);
+		},
+		savePDF: async (args?: { InvoiceID: string, InvoiceNumber?: string, savePath: string }): Promise<void> => {
+			let endpoint = 'invoices';
+			if (args && args.InvoiceID) {
+				endpoint = endpoint + '/' + args.InvoiceID;
+				delete args.InvoiceID;
+			} else if (args && args.InvoiceNumber) {
+				endpoint = endpoint + '/' + args.InvoiceNumber;
+				delete args.InvoiceNumber;
+			}
+			endpoint += generateQueryString(args);
+
+			const writeStream = fs.createWriteStream(args.savePath);
+
+			return this.oauth1Client.writeUTF8ResponseToStream(endpoint, 'application/pdf', writeStream);
+		},
+		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: { summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
+			const endpoint = 'invoices' + generateQueryString(args, true);
+
+			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
+		},
+		update: async (invoices: Invoice | { Invoices: Invoice[] }, args?: { InvoiceID?: string, InvoiceNumber?: string, where?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
+			let endpoint = `invoices`;
+
+			if (args && args.InvoiceID) {
+				endpoint = endpoint + '/' + args.InvoiceID;
+				delete args.InvoiceID;
+			} else if (args && args.InvoiceNumber) {
+				endpoint = endpoint + '/' + args.InvoiceNumber;
+				delete args.InvoiceNumber;
+			}
+
+			endpoint += generateQueryString(args, true);
+
+			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoices);
+		},
+		onlineInvoice: {
+			get: async (args?: { InvoiceID: string }): Promise<string> => {
+				let endpoint = 'invoices';
+				if (args && args.InvoiceID) {
+					endpoint = endpoint + '/' + args.InvoiceID;
+					delete args.InvoiceID;
+				}
+
+				endpoint += '/onlineinvoice';
+
+				return this.oauth1Client.get<any>(endpoint);
+			}
+		},
+		attachments: this.generateAttachmentsEndpoint('invoices')
+	};
+
 	public items = {
 		get: async (args?: { ItemID?: string, Code?: string } & QueryArgs & HeaderArgs): Promise<ItemsResponse> => {
 			let endpoint = 'items';
@@ -486,6 +481,197 @@ export class AccountingAPIClient extends BaseAPIClient {
 		delete: async (args: { ItemID: string }): Promise<ItemsResponse> => {
 			const endpoint = 'items' + '/' + args.ItemID;
 			return this.oauth1Client.delete<ItemsResponse>(endpoint);
+		}
+	};
+
+	public journals = {
+		get: async (args?: { Recordfilter?: string, offset?: string, paymentsOnly?: boolean } & HeaderArgs): Promise<JournalsResponse> => {
+			let endpoint = 'journals';
+			if (args && args.Recordfilter) {
+				endpoint = endpoint + '/' + args.Recordfilter;
+				delete args.Recordfilter;
+			}
+
+			const headers = this.generateHeader(args);
+
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<JournalsResponse>(endpoint, headers);
+		}
+	};
+
+	public linkedTransactions = {
+		get: async (args?: { LinkedTransactionID?: string } & QueryArgs & HeaderArgs): Promise<LinkedTransactionsResponse> => {
+			let endpoint = 'linkedtransactions';
+			if (args && args.LinkedTransactionID) {
+				endpoint = endpoint + '/' + args.LinkedTransactionID;
+				delete args.LinkedTransactionID; // remove from query string
+			}
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<LinkedTransactionsResponse>(endpoint, header);
+		},
+		create: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }): Promise<LinkedTransactionsResponse> => {
+			const endpoint = 'linkedtransactions';
+			return this.oauth1Client.put<LinkedTransactionsResponse>(endpoint, linkedTransaction);
+		},
+		update: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }, args?: { LinkedTransactionID?: string, summarizeErrors?: boolean }): Promise<LinkedTransactionsResponse> => {
+			let endpoint = 'linkedtransactions';
+			if (args && args.LinkedTransactionID) {
+				endpoint = endpoint + '/' + args.LinkedTransactionID;
+				delete args.LinkedTransactionID; // remove from query string
+			}
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.post<LinkedTransactionsResponse>(endpoint, linkedTransaction);
+		},
+		delete: async (args?: { LinkedTransactionID?: string}): Promise<void> => {
+			let endpoint = 'linkedtransactions';
+			if (args && args.LinkedTransactionID) {
+				endpoint = endpoint + '/' + args.LinkedTransactionID;
+				delete args.LinkedTransactionID; // remove from query string
+			}
+			endpoint += generateQueryString(args, false);
+			return this.oauth1Client.delete<void>(endpoint);
+		},
+	};
+
+	public manualJournals = {
+		attachments: this.generateAttachmentsEndpoint('manualjournals')
+	};
+
+	public organisation = {
+		get: async (): Promise<OrganisationResponse> => {
+			const endpoint = 'organisation';
+			return this.oauth1Client.get<OrganisationResponse>(endpoint);
+		},
+		CISSettings: {
+			get: async (args: { OrganisationID: string, where?: string }): Promise<OrganisationResponse> => {
+				let endpoint = 'organisation';
+				if (args && args.OrganisationID) {
+					endpoint = endpoint + '/' + args.OrganisationID + '/CISSettings';
+					delete args.OrganisationID;
+				}
+				endpoint += generateQueryString(args);
+
+				return this.oauth1Client.get<OrganisationResponse>(endpoint);
+			}
+		}
+	};
+
+	public overpayments = {
+		get: async (args?: { OverpaymentID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<OverpaymentsResponse> => {
+			let endpoint = 'overpayments';
+			if (args && args.OverpaymentID) {
+				endpoint += '/' + args.OverpaymentID;
+				delete args.OverpaymentID;
+			}
+			endpoint += generateQueryString(args);
+			return this.oauth1Client.get<OverpaymentsResponse>(endpoint);
+		},
+		allocations: {
+			create: async (body: Allocation[], args: { OverpaymentID: string }): Promise<OverpaymentsResponse> => {
+				const endpoint = `overpayments/${args.OverpaymentID}/allocations`;
+				return this.oauth1Client.put<OverpaymentsResponse>(endpoint, body);
+			}
+		}
+	};
+
+	public payments = {
+		get: async (args?: { PaymentID: string } & QueryArgs & HeaderArgs): Promise<PaymentsResponse> => {
+			let endpoint = 'payments';
+			if (args && args.PaymentID) {
+				endpoint = endpoint + '/' + args.PaymentID;
+				delete args.PaymentID;
+			}
+			const headers = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<PaymentsResponse>(endpoint, headers);
+		},
+		create: async (payments: Payment | { Payments: Payment[] }, args?: { summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
+			const endpoint = 'payments' + generateQueryString(args, true);
+			return this.oauth1Client.put<PaymentsResponse>(endpoint, payments);
+		},
+		update: async (payments: Payment | { Payments: Payment[] }, args?: { PaymentID: string, summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
+			let endpoint = 'payments';
+			if (args && args.PaymentID) {
+				endpoint = endpoint + '/' + args.PaymentID;
+				delete args.PaymentID;
+			}
+			endpoint += generateQueryString(args, true);
+
+			return this.oauth1Client.post<PaymentsResponse>(endpoint, payments);
+		}
+	};
+
+	public prepayments = {
+		get: async (args?: { PrepaymentID: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
+			let endpoint = 'prepayments';
+			if (args && args.PrepaymentID) {
+				endpoint = endpoint + '/' + args.PrepaymentID;
+				delete args.PrepaymentID;
+			}
+			const headers = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<PrepaymentsResponse>(endpoint, headers);
+		},
+		allocations: {
+			create: async (allocations: Allocation | { Allocations: Allocation[] }, args: { PrepaymentID: string }): Promise<PrepaymentsResponse> => {
+				const endpoint = `prepayments/${args.PrepaymentID}/allocations`;
+				delete args.PrepaymentID;
+
+				return this.oauth1Client.put<PrepaymentsResponse>(endpoint, allocations);
+			}
+		},
+		attachments: this.generateAttachmentsEndpoint('prepayments')
+	};
+
+	public purchaseorders = {
+		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<any> => {
+			let endpoint = 'purchaseorders';
+			endpoint += generateQueryString(args, true);
+			// TODO: Add interface here
+			return this.oauth1Client.post<any>(endpoint, body);
+		}
+	};
+
+	public repeatingInvoices = {
+		attachments: this.generateAttachmentsEndpoint('repeatinginvoices')
+	};
+
+	public reports = {
+		get: async (args?: { ReportID: string }): Promise<ReportsResponse> => {
+			let endpoint = 'reports';
+			if (args) {
+				const reportId = args.ReportID;
+				delete args.ReportID; // remove from querystring
+
+				endpoint = endpoint + '/' + reportId + generateQueryString(args);
+			}
+
+			return this.oauth1Client.get<ReportsResponse>(endpoint);
+		}
+	};
+
+	public taxRates = {
+		get: async (args?: { TaxType?: string } & QueryArgs): Promise<TaxRatesResponse> => {
+			let endpoint = 'taxrates';
+			if (args && args.TaxType) {
+				endpoint += '/' + args.TaxType;
+				delete args.TaxType;
+			}
+			endpoint += generateQueryString(args);
+			return this.oauth1Client.get<TaxRatesResponse>(endpoint);
+		},
+		create: async (body?: TaxRate): Promise<TaxRatesResponse> => {
+			const endpoint = 'taxrates';
+			return this.oauth1Client.put<TaxRatesResponse>(endpoint, body);
+		},
+		update: async (body?: TaxRate): Promise<TaxRatesResponse> => {
+			const endpoint = 'taxrates';
+			return this.oauth1Client.post<TaxRatesResponse>(endpoint, body);
 		}
 	};
 
@@ -559,192 +745,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<UsersResponse>(endpoint, headers);
-		}
-	};
-
-	public journals = {
-		get: async (args?: { Recordfilter?: string, offset?: string, paymentsOnly?: boolean } & HeaderArgs): Promise<JournalsResponse> => {
-			let endpoint = 'journals';
-			if (args && args.Recordfilter) {
-				endpoint = endpoint + '/' + args.Recordfilter;
-				delete args.Recordfilter;
-			}
-
-			const headers = this.generateHeader(args);
-
-			endpoint += generateQueryString(args);
-
-			return this.oauth1Client.get<JournalsResponse>(endpoint, headers);
-		}
-	};
-
-	public brandingThemes = {
-		get: async (args?: { BrandingThemeID?: string }): Promise<BrandingThemesResponse> => {
-			let endpoint = 'brandingthemes';
-			if (args && args.BrandingThemeID) {
-				endpoint = endpoint + '/' + args.BrandingThemeID;
-				delete args.BrandingThemeID;
-			}
-
-			return this.oauth1Client.get<BrandingThemesResponse>(endpoint);
-		}
-	};
-
-	public bankTransfers = {
-		get: async (args?: { BankTransferID?: string } & HeaderArgs & QueryArgs): Promise<BankTransfersResponse> => {
-			let endpoint = 'banktransfers';
-			if (args && args.BankTransferID) {
-				endpoint = endpoint + '/' + args.BankTransferID;
-				delete args.BankTransferID;
-			}
-			endpoint += generateQueryString(args);
-
-			return this.oauth1Client.get<BankTransfersResponse>(endpoint, this.generateHeader(args));
-		},
-		create: async (bankTransfers: BankTransfer | { BankTransfers: BankTransfer[] }, args?: { summarizeErrors: boolean }): Promise<BankTransfersResponse> => {
-			let endpoint = 'banktransfers';
-			endpoint += generateQueryString(args, true);
-			return this.oauth1Client.put<BankTransfersResponse>(endpoint, bankTransfers);
-		},
-		attachments: this.generateAttachmentsEndpoint('banktransfers')
-	};
-
-	public manualJournals = {
-		attachments: this.generateAttachmentsEndpoint('manualjournals')
-	};
-
-	public organisation = {
-		get: async (): Promise<OrganisationResponse> => {
-			const endpoint = 'organisation';
-			return this.oauth1Client.get<OrganisationResponse>(endpoint);
-		},
-		CISSettings: {
-			get: async (args: { OrganisationID: string, where?: string }): Promise<OrganisationResponse> => {
-				let endpoint = 'organisation';
-				if (args && args.OrganisationID) {
-					endpoint = endpoint + '/' + args.OrganisationID + '/CISSettings';
-					delete args.OrganisationID;
-				}
-				endpoint += generateQueryString(args);
-
-				return this.oauth1Client.get<OrganisationResponse>(endpoint);
-			}
-		}
-	};
-
-	public payments = {
-		get: async (args?: { PaymentID: string } & QueryArgs & HeaderArgs): Promise<PaymentsResponse> => {
-			let endpoint = 'payments';
-			if (args && args.PaymentID) {
-				endpoint = endpoint + '/' + args.PaymentID;
-				delete args.PaymentID;
-			}
-			const headers = this.generateHeader(args);
-			endpoint += generateQueryString(args);
-
-			return this.oauth1Client.get<PaymentsResponse>(endpoint, headers);
-		},
-		create: async (payments: Payment | { Payments: Payment[] }, args?: { summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
-			const endpoint = 'payments' + generateQueryString(args, true);
-			return this.oauth1Client.put<PaymentsResponse>(endpoint, payments);
-		},
-		update: async (payments: Payment | { Payments: Payment[] }, args?: { PaymentID: string, summarizeErrors?: boolean }): Promise<PaymentsResponse> => {
-			let endpoint = 'payments';
-			if (args && args.PaymentID) {
-				endpoint = endpoint + '/' + args.PaymentID;
-				delete args.PaymentID;
-			}
-			endpoint += generateQueryString(args, true);
-
-			return this.oauth1Client.post<PaymentsResponse>(endpoint, payments);
-		}
-	};
-
-	public prepayments = {
-		get: async (args?: { PrepaymentID: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
-			let endpoint = 'prepayments';
-			if (args && args.PrepaymentID) {
-				endpoint = endpoint + '/' + args.PrepaymentID;
-				delete args.PrepaymentID;
-			}
-			const headers = this.generateHeader(args);
-			endpoint += generateQueryString(args);
-
-			return this.oauth1Client.get<PrepaymentsResponse>(endpoint, headers);
-		},
-		allocations: {
-			create: async (allocations: Allocation | { Allocations: Allocation[] }, args: { PrepaymentID: string }): Promise<PrepaymentsResponse> => {
-				const endpoint = `prepayments/${args.PrepaymentID}/allocations`;
-				delete args.PrepaymentID;
-
-				return this.oauth1Client.put<PrepaymentsResponse>(endpoint, allocations);
-			}
-		},
-		attachments: this.generateAttachmentsEndpoint('prepayments')
-	};
-
-	public overpayments = {
-		get: async (args?: { OverpaymentID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<OverpaymentsResponse> => {
-			let endpoint = 'overpayments';
-			if (args && args.OverpaymentID) {
-				endpoint += '/' + args.OverpaymentID;
-				delete args.OverpaymentID;
-			}
-			endpoint += generateQueryString(args);
-			return this.oauth1Client.get<OverpaymentsResponse>(endpoint);
-		},
-		allocations: {
-			create: async (body: Allocation[], args: { OverpaymentID: string }): Promise<OverpaymentsResponse> => {
-				const endpoint = `overpayments/${args.OverpaymentID}/allocations`;
-				return this.oauth1Client.put<OverpaymentsResponse>(endpoint, body);
-			}
-		}
-	};
-
-	public reports = {
-		get: async (args?: { ReportID: string }): Promise<ReportsResponse> => {
-			let endpoint = 'reports';
-			if (args) {
-				const reportId = args.ReportID;
-				delete args.ReportID; // remove from querystring
-
-				endpoint = endpoint + '/' + reportId + generateQueryString(args);
-			}
-
-			return this.oauth1Client.get<ReportsResponse>(endpoint);
-		}
-	};
-
-	public repeatingInvoices = {
-		attachments: this.generateAttachmentsEndpoint('repeatinginvoices')
-	};
-
-	public taxRates = {
-		get: async (args?: { TaxType?: string } & QueryArgs): Promise<TaxRatesResponse> => {
-			let endpoint = 'taxrates';
-			if (args && args.TaxType) {
-				endpoint += '/' + args.TaxType;
-				delete args.TaxType;
-			}
-			endpoint += generateQueryString(args);
-			return this.oauth1Client.get<TaxRatesResponse>(endpoint);
-		},
-		create: async (body?: TaxRate): Promise<TaxRatesResponse> => {
-			const endpoint = 'taxrates';
-			return this.oauth1Client.put<TaxRatesResponse>(endpoint, body);
-		},
-		update: async (body?: TaxRate): Promise<TaxRatesResponse> => {
-			const endpoint = 'taxrates';
-			return this.oauth1Client.post<TaxRatesResponse>(endpoint, body);
-		}
-	};
-
-	public purchaseorders = {
-		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<any> => {
-			let endpoint = 'purchaseorders';
-			endpoint += generateQueryString(args, true);
-			// TODO: Add interface here
-			return this.oauth1Client.post<any>(endpoint, body);
 		}
 	};
 }
