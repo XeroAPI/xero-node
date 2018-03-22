@@ -693,9 +693,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 			return this.oauth1Client.get<OverpaymentsResponse>(endpoint);
 		},
-		create: async (body: Allocation[], args: { OverpaymentID: string }): Promise<OverpaymentsResponse> => {
-			const endpoint = `overpayments/${args.OverpaymentID}/allocations`;
-			return this.oauth1Client.put<OverpaymentsResponse>(endpoint, body);
+		allocations: {
+			create: async (body: Allocation[], args: { OverpaymentID: string }): Promise<OverpaymentsResponse> => {
+				const endpoint = `overpayments/${args.OverpaymentID}/allocations`;
+				return this.oauth1Client.put<OverpaymentsResponse>(endpoint, body);
+			}
 		}
 	};
 

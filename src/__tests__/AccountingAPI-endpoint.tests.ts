@@ -172,8 +172,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: 'overpayments' },
 			{ action: 'get', expectedPath: `overpayments/${guid1}?order=Date`, args: { OverpaymentID: guid1, order: 'Date' } },
 			{ action: 'get', expectedPath: `overpayments?page=5`, args: { page: 5 }},
-			{ action: 'create', expectedPath: `overpayments/${guid1}/allocations`, args: { OverpaymentID: guid1 } },
-			{ action: 'get', expectedPath: `overpayments?page=5`, args: { page: 5 } },
+			{ subResource: 'allocations', action: 'create', expectedPath: `overpayments/${guid1}/allocations`, args: { OverpaymentID: guid1 } }
 		],
 		payments: [
 			{ action: 'get', expectedPath: 'payments' },
