@@ -212,6 +212,16 @@ describe('AccountingAPI endpoints', () => {
 			{ subResource: 'attachments', action: 'get', expectedPath: `prepayments/${guid1}/attachments`, args: { EntityID: guid1 } },
 		],
 		// TODO purchaseOrders
+		receipts: [
+			{ action: 'get', expectedPath: 'receipts' },
+			{ action: 'get', expectedPath: `receipts/${guid1}`, args: { ReceiptID: guid1 } },
+			{ action: 'get', expectedPath: `receipts/${guid1}?order=UpdatedDateUTC`, args: { ReceiptID: guid1, order: 'UpdatedDateUTC' } },
+			{ action: 'get', expectedPath: `receipts?order=UpdatedDateUTC`, args: { 'order': 'UpdatedDateUTC', 'If-Modified-Since': 'headerValue' } },
+			{ action: 'create', expectedPath: 'receipts?summarizeErrors=false' },
+			{ action: 'update', expectedPath: `receipts?summarizeErrors=true`, args: { summarizeErrors: true } },
+			{ action: 'update', expectedPath: `receipts/${guid1}?summarizeErrors=false`, args: { ReceiptID: guid1 } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `receipts/${guid1}/attachments`, args: { EntityID: guid1 } },
+		],
 		// TODO repeatingInvoices
 		reports: [
 			{ action: 'get', expectedPath: 'reports' },

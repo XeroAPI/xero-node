@@ -1,4 +1,4 @@
-﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment } from './AccountingAPI-models';
+﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment, Receipt } from './AccountingAPI-models';
 
 export interface AccountingAPIResponse {
 	Id: string;
@@ -102,6 +102,11 @@ export interface PrepaymentsResponse extends AccountingAPIResponse {
 }
 
 // TODO purchase orders
+
+export interface ReceiptsResponse extends AccountingAPIResponse {
+	Receipts: Receipt[];
+}
+
 // TODO repeating invoices
 
 export interface ReportsResponse extends AccountingAPIResponse {

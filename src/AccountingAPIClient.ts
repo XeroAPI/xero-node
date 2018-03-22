@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
-import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse } from './AccountingAPI-responses';
-import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
+import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse } from './AccountingAPI-responses';
+import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt } from './AccountingAPI-models';
 
 export interface QueryArgs {
 	where?: string;
@@ -606,6 +606,33 @@ export class AccountingAPIClient extends BaseAPIClient {
 			// TODO: Add interface here
 			return this.oauth1Client.post<any>(endpoint, body);
 		}
+	};
+
+	public receipts = {
+		get: async (args?: { ReceiptID?: string } & QueryArgs & HeaderArgs): Promise<ReceiptsResponse> => {
+			let endpoint = 'receipts';
+			if (args && args.ReceiptID) {
+				endpoint += '/' + args.ReceiptID;
+				delete args.ReceiptID;
+			}
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+			return this.oauth1Client.get<ReceiptsResponse>(endpoint, header);
+		},
+		create: async (receipts?: Receipt | Receipt[], args?: {summarizeErrors?: boolean}): Promise<ReceiptsResponse> => {
+			const endpoint = 'receipts' + generateQueryString(args, true);
+			return this.oauth1Client.put<ReceiptsResponse>(endpoint, receipts);
+		},
+		update: async (receipts?: Receipt | Receipt[], args?: {ReceiptID?: string, summarizeErrors?: boolean}): Promise<ReceiptsResponse> => {
+			let endpoint = 'receipts';
+			if (args && args.ReceiptID) {
+				endpoint += '/' + args.ReceiptID;
+				delete args.ReceiptID;
+			}
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.post<ReceiptsResponse>(endpoint, receipts);
+		},
+		attachments: this.generateAttachmentsEndpoint('receipts')
 	};
 
 	public repeatingInvoices = {
