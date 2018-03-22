@@ -35,7 +35,7 @@ describe('/prepayments', () => {
 		expect(response.BankTransactions.length).toBe(1);
 		expect(response.BankTransactions[0].BankAccount.Code).toEqual('090');
 
-		existingId = response.BankTransactions[0].BankTransactionID;
+		existingId = response.BankTransactions[0].PrepaymentID;
 	});
 
 	it('get all', async () => {
