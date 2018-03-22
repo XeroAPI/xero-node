@@ -438,8 +438,10 @@ export interface Receipt {
 	SubTotal?: number;
 	TotalTax?: number;
 	Total?: number;
-	HasAttachments?: boolean;
 	Url?: string;
+	HasAttachments?: boolean;
+	HasValidationErrors?: boolean;
+	ValidationErrors?: ValidationError[];
 }
 
 export interface Report {

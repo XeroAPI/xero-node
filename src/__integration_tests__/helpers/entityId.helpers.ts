@@ -12,6 +12,8 @@ const inMemoryCache: {
 	invoiceId?: string,
 	itemId?: string,
 	paymentId?: string,
+	receiptId?: string,
+	userId?: string,
 } = {};
 
 export async function getOrCreateAccountId(xero: AccountingAPIClient, args?: any) {
@@ -140,4 +142,37 @@ export async function getOrCreatePaymentId(xero: AccountingAPIClient) {
 		inMemoryCache.paymentId = response.Payments[0].PaymentID;
 	}
 	return inMemoryCache.paymentId;
+}
+
+export async function getOrCreateReceiptId(xero: AccountingAPIClient) {
+	if (!inMemoryCache.receiptId) {
+		let response = await xero.receipts.get();
+		if (response.Receipts.length <= 0) {
+			response = await xero.receipts.create({
+				Date: '2018-03-22',
+				Contact: { ContactID: await getOrCreateContactId(xero) },
+				LineItems: [
+					{
+						Description: 'Coffee with client to discuss support contract',
+						UnitAmount: 13.80,
+						AccountCode: '420'
+					}
+				],
+				User: { UserID: await getOrCreateUserId(xero) }
+			});
+		}
+		inMemoryCache.receiptId = response.Receipts[0].ReceiptID;
+	}
+	return inMemoryCache.receiptId;
+}
+
+export async function getOrCreateUserId(xero: AccountingAPIClient) {
+	if (!inMemoryCache.userId) {
+		const response = await xero.users.get();
+		if (response.Users.length <= 0) {
+			throw new Error('No users available');
+		}
+		inMemoryCache.userId = response.Users[0].UserID;
+	}
+	return inMemoryCache.userId;
 }
