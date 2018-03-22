@@ -51,62 +51,28 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=false' },
 			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=true', args: { summarizeErrors: true } }
 		],
-		creditNotes: [
-			{ action: 'get', expectedPath: 'creditnotes' },
-			{ subResource: 'allocations', action: 'create', expectedPath: `creditnotes/${guid1}/allocations`, args: { CreditNoteID: guid1 } },
-			{ action: 'get', expectedPath: `creditnotes?page=3`, args: { page: 3 } },
-			{ action: 'get', expectedPath: `creditnotes?order=something`, args: { order: 'something' } },
-			{ action: 'get', expectedPath: `creditnotes?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
-			{ action: 'get', expectedPath: `creditnotes?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
-			{ action: 'create', expectedPath: 'creditnotes' },
-			{ action: 'update', expectedPath: 'creditnotes?summarizeErrors=false' },
-			{ action: 'update', expectedPath: 'creditnotes?summarizeErrors=true', args: { summarizeErrors: true } }
+		bankTransfers: [
+			{ action: 'get', expectedPath: 'banktransfers' },
+			{ action: 'get', expectedPath: `banktransfers/${guid1}`, args: { BankTransferID: guid1 } },
+			{ action: 'get', expectedPath: `banktransfers?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: 'banktransfers' },
+			{ action: 'create', expectedPath: `banktransfers?summarizeErrors=false` },
+			{ subResource: 'attachments', action: 'get', expectedPath: `banktransfers/${guid1}/attachments`, args: { EntityID: guid1 } }
 		],
-		invoices: [
-			{ action: 'get', expectedPath: 'invoices' },
-			{ action: 'get', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1 } },
-			{ action: 'get', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123' } },
-			{ action: 'get', expectedPath: `invoices/${guid1}?createdByMyApp=true`, args: { InvoiceID: guid1, createdByMyApp: true } },
-			{ action: 'get', expectedPath: `invoices?where=Type%3D%3D%22ACCPAY%22`, args: { where: `Type=="ACCPAY"` } },
-			{ action: 'get', expectedPath: `invoices?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
-			{ action: 'get', expectedPath: `invoices?Statuses=DRAFT%2CSUBMITTED`, args: { Statuses: 'DRAFT,SUBMITTED' } },
-			{ action: 'get', expectedPath: `invoices?order=something`, args: { order: 'something' } },
-			{ action: 'get', expectedPath: `invoices?page=3`, args: { page: 3 } },
-			{ action: 'get', expectedPath: `invoices?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
-			{ action: 'get', expectedPath: `invoices?createdByMyApp=true&where=Type%3D%3D%22ACCREC%22&page=5&Statuses=DELETED`, args: { createdByMyApp: true, where: `Type=="ACCREC"`, page: 5, Statuses: 'DELETED' } },
-			{ subResource: 'attachments', action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { EntityID: guid1 } },
-			{ subResource: 'onlineInvoice', action: 'get', expectedPath: `invoices/${guid1}/onlineinvoice`, args: { InvoiceID: guid1 } },
-			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
-			{ action: 'update', expectedPath: `invoices/${guid1}?summarizeErrors=false`, args: { InvoiceID: guid1 } },
-			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` },
-			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=false`, args: { InvoiceNumber: 'INV-123' } },
-			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { InvoiceNumber: 'INV-123', summarizeErrors: true } },
-			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { summarizeErrors: true, InvoiceNumber: 'INV-123' } },
-			// { action: 'savePDF', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1, savePath: '/dev/null'} },
-			// { action: 'savePDF', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123', savePath: '/dev/null' } },
+		brandingThemes: [
+			{ action: 'get', expectedPath: 'brandingthemes' },
+			{ action: 'get', expectedPath: `brandingthemes/${guid1}`, args: { BrandingThemeID: guid1 } },
 		],
-		linkedTransactions: [
-			{ action: 'get', expectedPath: 'linkedtransactions' },
-			{ action: 'get', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } },
-			{ action: 'get', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } },
-			{ action: 'get', expectedPath: `linkedtransactions?page=3`, args: { page: 3 } },
-			{ action: 'get', expectedPath: `linkedtransactions?SourceTransactionID=${guid1}`, args: { SourceTransactionID: guid1 } },
-			{ action: 'get', expectedPath: `linkedtransactions?ContactID=${guid1}`, args: { ContactID: guid1 } },
-			{ action: 'get', expectedPath: `linkedtransactions?Status=${guid1}`, args: { Status: guid1 } },
-			{ action: 'get', expectedPath: `linkedtransactions?TargetTransactionID=${guid1}`, args: { TargetTransactionID: guid1 } },
-
-			{ action: 'create', expectedPath: 'linkedtransactions' },
-			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=false' },
-			{ action: 'update', expectedPath: `linkedtransactions/${guid1}?summarizeErrors=false`, args: { LinkedTransactionID: guid1 } },
-			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=true', args: { summarizeErrors: true } },
-			{ action: 'delete', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } }
-		],
-		invoiceReminders: [
-			{ action: 'get', expectedPath: 'invoicereminders/settings' },
-		],
-		organisation: [
-			{ action: 'get', expectedPath: 'organisation' },
-			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
+		contactgroups: [
+			{ action: 'get', expectedPath: 'contactgroups' },
+			{ action: 'get', expectedPath: 'contactgroups?where=Type%3D%3D%22BANK%22', args: { where: 'Type=="BANK"' } },
+			{ action: 'get', expectedPath: 'contactgroups?order=EmailAddress%20DESC', args: { order: 'EmailAddress DESC' } },
+			{ action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
+			{ action: 'update', expectedPath: `contactgroups/${guid1}?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
+			{ action: 'update', expectedPath: `contactgroups?summarizeErrors=false` },
+			{ subResource: 'contacts', action: 'create', expectedPath: `contactgroups/${guid1}/contacts?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
+			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts/${guid2}?summarizeErrors=false`, args: { ContactGroupID: guid1, ContactID: guid2 } },
+			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
 		],
 		contacts: [
 			{ action: 'get', expectedPath: 'contacts' },
@@ -125,16 +91,16 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: `contacts?summarizeErrors=false` },
 			{ action: 'create', expectedPath: `contacts?summarizeErrors=true`, args: { summarizeErrors: true } },
 		],
-		contactgroups: [
-			{ action: 'get', expectedPath: 'contactgroups' },
-			{ action: 'get', expectedPath: 'contactgroups?where=Type%3D%3D%22BANK%22', args: { where: 'Type=="BANK"' } },
-			{ action: 'get', expectedPath: 'contactgroups?order=EmailAddress%20DESC', args: { order: 'EmailAddress DESC' } },
-			{ action: 'create', expectedPath: 'contactgroups?summarizeErrors=false' },
-			{ action: 'update', expectedPath: `contactgroups/${guid1}?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
-			{ action: 'update', expectedPath: `contactgroups?summarizeErrors=false` },
-			{ subResource: 'contacts', action: 'create', expectedPath: `contactgroups/${guid1}/contacts?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
-			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts/${guid2}?summarizeErrors=false`, args: { ContactGroupID: guid1, ContactID: guid2 } },
-			{ subResource: 'contacts', action: 'delete', expectedPath: `contactgroups/${guid1}/contacts?summarizeErrors=false`, args: { ContactGroupID: guid1 } },
+		creditNotes: [
+			{ action: 'get', expectedPath: 'creditnotes' },
+			{ subResource: 'allocations', action: 'create', expectedPath: `creditnotes/${guid1}/allocations`, args: { CreditNoteID: guid1 } },
+			{ action: 'get', expectedPath: `creditnotes?page=3`, args: { page: 3 } },
+			{ action: 'get', expectedPath: `creditnotes?order=something`, args: { order: 'something' } },
+			{ action: 'get', expectedPath: `creditnotes?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
+			{ action: 'get', expectedPath: `creditnotes?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
+			{ action: 'create', expectedPath: 'creditnotes' },
+			{ action: 'update', expectedPath: 'creditnotes?summarizeErrors=false' },
+			{ action: 'update', expectedPath: 'creditnotes?summarizeErrors=true', args: { summarizeErrors: true } }
 		],
 		currencies: [
 			{ action: 'get', expectedPath: `currencies` },
@@ -160,6 +126,32 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `expenseclaims/${guid1}?summarizeErrors=false`, args: { ExpenseClaimID: guid1 } },
 			{ action: 'update', expectedPath: `expenseclaims/${guid1}?summarizeErrors=true`, args: { ExpenseClaimID: guid1, summarizeErrors: true } },
 		],
+		invoiceReminders: [
+			{ action: 'get', expectedPath: 'invoicereminders/settings' },
+		],
+		invoices: [
+			{ action: 'get', expectedPath: 'invoices' },
+			{ action: 'get', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1 } },
+			{ action: 'get', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123' } },
+			{ action: 'get', expectedPath: `invoices/${guid1}?createdByMyApp=true`, args: { InvoiceID: guid1, createdByMyApp: true } },
+			{ action: 'get', expectedPath: `invoices?where=Type%3D%3D%22ACCPAY%22`, args: { where: `Type=="ACCPAY"` } },
+			{ action: 'get', expectedPath: `invoices?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
+			{ action: 'get', expectedPath: `invoices?Statuses=DRAFT%2CSUBMITTED`, args: { Statuses: 'DRAFT,SUBMITTED' } },
+			{ action: 'get', expectedPath: `invoices?order=something`, args: { order: 'something' } },
+			{ action: 'get', expectedPath: `invoices?page=3`, args: { page: 3 } },
+			{ action: 'get', expectedPath: `invoices?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
+			{ action: 'get', expectedPath: `invoices?createdByMyApp=true&where=Type%3D%3D%22ACCREC%22&page=5&Statuses=DELETED`, args: { createdByMyApp: true, where: `Type=="ACCREC"`, page: 5, Statuses: 'DELETED' } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { EntityID: guid1 } },
+			{ subResource: 'onlineInvoice', action: 'get', expectedPath: `invoices/${guid1}/onlineinvoice`, args: { InvoiceID: guid1 } },
+			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
+			{ action: 'update', expectedPath: `invoices/${guid1}?summarizeErrors=false`, args: { InvoiceID: guid1 } },
+			{ action: 'update', expectedPath: `invoices?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=false`, args: { InvoiceNumber: 'INV-123' } },
+			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { InvoiceNumber: 'INV-123', summarizeErrors: true } },
+			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { summarizeErrors: true, InvoiceNumber: 'INV-123' } },
+			// { action: 'savePDF', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1, savePath: '/dev/null'} },
+			// { action: 'savePDF', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123', savePath: '/dev/null' } },
+		],
 		items: [
 			{ action: 'get', expectedPath: 'items' },
 			{ action: 'get', expectedPath: `items/${guid1}`, args: { ItemID: guid1 } },
@@ -167,6 +159,34 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: `items?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `items?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `items/${guid1}?summarizeErrors=true`, args: { ItemID: guid1, summarizeErrors: true } },
+		],
+		journals: [
+			{ action: 'get', expectedPath: 'journals' },
+			{ action: 'get', expectedPath: `journals/${guid1}`, args: { Recordfilter: guid1 } },
+			{ action: 'get', expectedPath: `journals?offset=2`, args: { offset: '2' } },
+			{ action: 'get', expectedPath: `journals?paymentsOnly=true`, args: { paymentsOnly: true } },
+			{ action: 'get', expectedPath: `journals`, args: { 'If-Modified-Since': 'headerValue' } },
+		],
+		linkedTransactions: [
+			{ action: 'get', expectedPath: 'linkedtransactions' },
+			{ action: 'get', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions?page=3`, args: { page: 3 } },
+			{ action: 'get', expectedPath: `linkedtransactions?SourceTransactionID=${guid1}`, args: { SourceTransactionID: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions?ContactID=${guid1}`, args: { ContactID: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions?Status=${guid1}`, args: { Status: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions?TargetTransactionID=${guid1}`, args: { TargetTransactionID: guid1 } },
+
+			{ action: 'create', expectedPath: 'linkedtransactions' },
+			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=false' },
+			{ action: 'update', expectedPath: `linkedtransactions/${guid1}?summarizeErrors=false`, args: { LinkedTransactionID: guid1 } },
+			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=true', args: { summarizeErrors: true } },
+			{ action: 'delete', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } }
+		],
+		// TODO manualJournals
+		organisation: [
+			{ action: 'get', expectedPath: 'organisation' },
+			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
 		],
 		overpayments: [
 			{ action: 'get', expectedPath: 'overpayments' },
@@ -191,20 +211,8 @@ describe('AccountingAPI endpoints', () => {
 			{ subResource: 'allocations', action: 'create', expectedPath: `prepayments/${guid1}/allocations`, args: { PrepaymentID: guid1 } },
 			{ subResource: 'attachments', action: 'get', expectedPath: `prepayments/${guid1}/attachments`, args: { EntityID: guid1 } },
 		],
-		users: [
-			{ action: 'get', expectedPath: 'users' },
-			{ action: 'get', expectedPath: `users/${guid1}`, args: { UserID: guid1 } },
-			{ action: 'get', expectedPath: `users?where=IsSubscriber%3D%3Dtrue`, args: { where: 'IsSubscriber==true' } },
-			{ action: 'get', expectedPath: `users?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
-			{ action: 'get', expectedPath: `users`, args: { 'If-Modified-Since': 'headerValue' } },
-		],
-		journals: [
-			{ action: 'get', expectedPath: 'journals' },
-			{ action: 'get', expectedPath: `journals/${guid1}`, args: { Recordfilter: guid1 } },
-			{ action: 'get', expectedPath: `journals?offset=2`, args: { offset: '2' } },
-			{ action: 'get', expectedPath: `journals?paymentsOnly=true`, args: { paymentsOnly: true } },
-			{ action: 'get', expectedPath: `journals`, args: { 'If-Modified-Since': 'headerValue' } },
-		],
+		// TODO purchaseOrders
+		// TODO repeatingInvoices
 		reports: [
 			{ action: 'get', expectedPath: 'reports' },
 			{ action: 'get', expectedPath: `reports/${guid1}`, args: { ReportID: guid1 } },
@@ -212,10 +220,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: 'reports/TenNinetyNine?reportYear=2013', args: { ReportID: 'TenNinetyNine', reportYear: 2013 } },
 			{ action: 'get', expectedPath: 'reports/ProfitAndLoss?fromDate=2010-01-01&toDate=2011-01-01', args: { ReportID: 'ProfitAndLoss', fromDate: '2010-01-01', toDate: '2011-01-01' } }
 		],
-		brandingThemes: [
-			{ action: 'get', expectedPath: 'brandingthemes' },
-			{ action: 'get', expectedPath: `brandingthemes/${guid1}`, args: { BrandingThemeID: guid1 } },
-		],
+		// TODO taxRates
 		trackingCategories: [
 			{ action: 'get', expectedPath: 'trackingcategories' },
 			{ action: 'get', expectedPath: 'trackingcategories?where=Status%3D%3D%22ACTIVE%22', args: { where: 'Status=="ACTIVE"' } },
@@ -227,13 +232,12 @@ describe('AccountingAPI endpoints', () => {
 			{ subResource: 'trackingOptions', action: 'update', expectedPath: `trackingcategories/${guid1}/Options/${guid2}`, args: { TrackingCategoryID: guid1, TrackingOptionID: guid2 } },
 			{ subResource: 'trackingOptions', action: 'delete', expectedPath: `trackingcategories/${guid1}/Options/${guid2}`, args: { TrackingCategoryID: guid1, TrackingOptionID: guid2 } }
 		],
-		bankTransfers: [
-			{ action: 'get', expectedPath: 'banktransfers' },
-			{ action: 'get', expectedPath: `banktransfers/${guid1}`, args: { BankTransferID: guid1 } },
-			{ action: 'get', expectedPath: `banktransfers?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
-			{ action: 'get', expectedPath: 'banktransfers' },
-			{ action: 'create', expectedPath: `banktransfers?summarizeErrors=false` },
-			{ subResource: 'attachments', action: 'get', expectedPath: `banktransfers/${guid1}/attachments`, args: { EntityID: guid1 } }
+		users: [
+			{ action: 'get', expectedPath: 'users' },
+			{ action: 'get', expectedPath: `users/${guid1}`, args: { UserID: guid1 } },
+			{ action: 'get', expectedPath: `users?where=IsSubscriber%3D%3Dtrue`, args: { where: 'IsSubscriber==true' } },
+			{ action: 'get', expectedPath: `users?order=EmailAddress%20DESC`, args: { order: 'EmailAddress DESC' } },
+			{ action: 'get', expectedPath: `users`, args: { 'If-Modified-Since': 'headerValue' } },
 		]
 	};
 
