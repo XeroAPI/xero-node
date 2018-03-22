@@ -25,7 +25,7 @@ import {
 	InvoiceRemindersResponse,
 	JournalsResponse,
 	PaymentsResponse, Payment,
-	PrepaymentsResponse, Allocation, OverpaymentsResponse
+	PrepaymentsResponse, Allocation, OverpaymentsResponse, LinkedTransaction, LinkedTransactionsResponse
 } from './AccountingAPI-types';
 
 export interface QueryArgs {
@@ -213,6 +213,42 @@ export class AccountingAPIClient extends BaseAPIClient {
 			},
 		};
 	}
+
+	public linkedTransactions = {
+		get: async (args?: { LinkedTransactionID?: string } & QueryArgs & HeaderArgs): Promise<LinkedTransactionsResponse> => {
+			let endpoint = 'linkedtransactions';
+			if (args && args.LinkedTransactionID) {
+				endpoint = endpoint + '/' + args.LinkedTransactionID;
+				delete args.LinkedTransactionID; // remove from query string
+			}
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<LinkedTransactionsResponse>(endpoint, header);
+		},
+		create: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }): Promise<LinkedTransactionsResponse> => {
+			const endpoint = 'linkedtransactions';
+			return this.oauth1Client.put<LinkedTransactionsResponse>(endpoint, linkedTransaction);
+		},
+		update: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }, args?: { LinkedTransactionID?: string, summarizeErrors?: boolean }): Promise<LinkedTransactionsResponse> => {
+			let endpoint = 'linkedtransactions';
+			if (args && args.LinkedTransactionID) {
+				endpoint = endpoint + '/' + args.LinkedTransactionID;
+				delete args.LinkedTransactionID; // remove from query string
+			}
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.post<LinkedTransactionsResponse>(endpoint, linkedTransaction);
+		},
+		delete: async (args?: { LinkedTransactionID?: string}): Promise<void> => {
+			let endpoint = 'linkedtransactions';
+			if (args && args.LinkedTransactionID) {
+				endpoint = endpoint + '/' + args.LinkedTransactionID;
+				delete args.LinkedTransactionID; // remove from query string
+			}
+			endpoint += generateQueryString(args, false);
+			return this.oauth1Client.delete<void>(endpoint);
+		},
+	};
 
 	public banktransactions = {
 		create: async (bankTransactions: any): Promise<any> => {

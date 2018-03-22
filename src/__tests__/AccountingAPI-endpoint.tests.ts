@@ -43,12 +43,13 @@ describe('AccountingAPI endpoints', () => {
 		bankTransactions: [
 			{ action: 'get', expectedPath: 'banktransactions' },
 			{ action: 'get', expectedPath: `banktransactions?page=3`, args: { page: 3 } },
+			{ action: 'get', expectedPath: `banktransactions/${guid1}`, args: { BankTransactionID: guid1 } },
 			{ action: 'get', expectedPath: `banktransactions?order=something`, args: { order: 'something' } },
 			{ action: 'get', expectedPath: `banktransactions?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
 			{ action: 'get', expectedPath: `banktransactions?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
 			{ action: 'create', expectedPath: 'banktransactions' },
 			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=false' },
-			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=true', args: { summarizeErrors: true}  }
+			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=true', args: { summarizeErrors: true } }
 		],
 		creditNotes: [
 			{ action: 'get', expectedPath: 'creditnotes' },
@@ -83,6 +84,22 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `invoices/${'INV-123'}?summarizeErrors=true`, args: { summarizeErrors: true, InvoiceNumber: 'INV-123' } },
 			// { action: 'savePDF', expectedPath: `invoices/${guid1}`, args: { InvoiceID: guid1, savePath: '/dev/null'} },
 			// { action: 'savePDF', expectedPath: `invoices/${'INV-123'}`, args: { InvoiceNumber: 'INV-123', savePath: '/dev/null' } },
+		],
+		linkedTransactions: [
+			{ action: 'get', expectedPath: 'linkedtransactions' },
+			{ action: 'get', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions?page=3`, args: { page: 3 } },
+			{ action: 'get', expectedPath: `linkedtransactions?SourceTransactionID=${guid1}`, args: { SourceTransactionID: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions?ContactID=${guid1}`, args: { ContactID: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions?Status=${guid1}`, args: { Status: guid1 } },
+			{ action: 'get', expectedPath: `linkedtransactions?TargetTransactionID=${guid1}`, args: { TargetTransactionID: guid1 } },
+
+			{ action: 'create', expectedPath: 'linkedtransactions' },
+			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=false' },
+			{ action: 'update', expectedPath: `linkedtransactions/${guid1}?summarizeErrors=false`, args: { LinkedTransactionID: guid1 } },
+			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=true', args: { summarizeErrors: true } },
+			{ action: 'delete', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } }
 		],
 		invoiceReminders: [
 			{ action: 'get', expectedPath: 'invoicereminders/settings' },
@@ -155,7 +172,8 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: 'overpayments' },
 			{ action: 'get', expectedPath: `overpayments/${guid1}?order=Date`, args: { OverpaymentID: guid1, order: 'Date' } },
 			{ action: 'get', expectedPath: `overpayments?page=5`, args: { page: 5 }},
-			{ action: 'create', expectedPath: `overpayments/${guid1}/allocations`, args: { OverpaymentID: guid1 } }
+			{ action: 'create', expectedPath: `overpayments/${guid1}/allocations`, args: { OverpaymentID: guid1 } },
+			{ action: 'get', expectedPath: `overpayments?page=5`, args: { page: 5 } },
 		],
 		payments: [
 			{ action: 'get', expectedPath: 'payments' },

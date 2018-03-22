@@ -114,6 +114,23 @@ export interface BankTransfersResponse {
 	BankTransfers: BankTransfer[];
 }
 
+export interface LinkedTransactionsResponse {
+	LinkedTransactions: LinkedTransaction[];
+}
+
+export interface LinkedTransaction {
+	LinkedTransactionID: string;
+	SourceTransactionID: string;
+	SourceLineItemID: string;
+	ContactID: string;
+	TargetTransactionID: string;
+	TargetLineItemID: string;
+	Status: string;
+	Type: string;
+	UpdatedDateUTC: string;
+	SourceTransactionTypeCode: string;
+}
+
 export interface BankTransaction {
 	Contact?: Contact;
 	DateString?: string;
