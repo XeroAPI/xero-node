@@ -132,6 +132,7 @@ export interface LinkedTransaction {
 }
 
 export interface BankTransaction {
+	BankTransactionID?: string;
 	Contact?: Contact;
 	DateString?: string;
 	Date?: string;
@@ -143,11 +144,15 @@ export interface BankTransaction {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
-	BankTransactionID?: string;
+	CurrencyRate?: number;
 	BankAccount?: BankAccount;
 	Type?: string;
 	Reference?: string;
 	IsReconciled?: boolean;
+	Url?: string;
+	PrepaymentID?: string;
+	OverpaymentID?: string;
+	HasAttachments?: boolean;
 }
 
 export interface BankAccount {
