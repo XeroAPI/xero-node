@@ -3,7 +3,7 @@
 
 # node-xero
 
-NodeJS Client for the [Xero API](http://developer.xero.com). Works with ES5, ES6 and TypeScript.
+NodeJS Client for the [Xero API](http://developer.xero.com). Works with ES5, ES6+ and TypeScript.
 
 Supports all application types:
 
@@ -11,8 +11,8 @@ Supports all application types:
 * Public - apps that can connect to any organisation, but only for 30 minutes at a time
 * Partner - approved apps that can automatically refresh tokens
 
-Version 3 has been rebuilt fron the ground-up using TypeScript to make it
-more maintainable and take advantage of modern JavaScript features.
+Version 3 has been rebuilt fron the ground-up using TypeScript, to make it
+more maintainable and to take advantage of modern JavaScript features.
 
 <!-- [API Reference](https://xeroapi.github.io/xero-node/). -->
 
