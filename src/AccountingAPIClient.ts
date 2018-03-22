@@ -263,8 +263,8 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<CreditNotesResponse>(endpoint, header);
 		},
-		create: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }): Promise<CreditNotesResponse> => {
-			const endpoint = 'creditnotes';
+		create: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: { summarizeErrors?: boolean }): Promise<CreditNotesResponse> => {
+			const endpoint = 'creditnotes' + generateQueryString(args, true);
 			return this.oauth1Client.put<CreditNotesResponse>(endpoint, creditNote);
 		},
 		update: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: { summarizeErrors?: boolean }): Promise<CreditNotesResponse> => {
