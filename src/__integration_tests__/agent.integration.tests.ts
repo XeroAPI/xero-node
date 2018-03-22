@@ -6,7 +6,7 @@ describe('OAuth Client Custom HTTP Agent', () => {
 
 	it('I can set a custom HTTP agent on the oauth client', async () => {
 
-		const data = getPrivateConfig();
+		const data = getPrivateConfig('1');
 		const xero = new AccountingAPIClient(data);
 		xero.oauth1Client.agent = 'not_an_agent' as any;
 

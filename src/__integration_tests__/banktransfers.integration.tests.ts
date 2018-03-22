@@ -7,7 +7,7 @@ describe('/banktransfers', () => {
 
 	beforeAll(async () => {
 		setJestTimeout();
-		const config = getPrivateConfig();
+		const config = getPrivateConfig('1');
 		xero = new AccountingAPIClient(config);
 	});
 
