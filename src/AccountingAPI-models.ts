@@ -89,8 +89,6 @@ export interface Payment {
 	Prepayment?: Prepayment;
 	Overpayment?: Overpayment;
 	UpdatedDateUTC?: string;
-	HasValidationErrors?: boolean;
-	ValidationErrors?: ValidationError[];
 }
 
 export interface BrandingTheme {
@@ -118,8 +116,6 @@ export interface Overpayment {
 	Allocations?: Allocation[];
 	Payments?: Payment[];
 	HasAttachments?: boolean;
-	HasValidationErrors?: boolean;
-	ValidationErrors?: ValidationError[];
 }
 
 export interface Prepayment {
@@ -140,8 +136,6 @@ export interface Prepayment {
 	Allocations?: Allocation[];
 	Reference?: string;
 	HasAttachments?: boolean;
-	HasValidationErrors?: boolean;
-	ValidationErrors?: ValidationError[];
 }
 
 export interface Allocation {
@@ -202,9 +196,6 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
-	StatusAttributeString?: string; // Have asked Arr about this
-	ValidationErrors?: ValidationError[];
-	HasErrors?: boolean;
 }
 
 export interface InvoiceReminder {
@@ -237,12 +228,6 @@ export interface Schedule {
 	NextScheduleDate?: string;
 }
 
-// TODO: Are last two common therefore we can put on common interface?
-
-export interface ValidationError {
-	Message: string;
-}
-
 export interface Contact {
 	ContactID?: string;
 	ContactStatus?: string;
@@ -267,8 +252,6 @@ export interface Contact {
 	AccountsPayableTaxType?: string;
 	TaxNumber?: string;
 	SkypeUserName?: string;
-	HasValidationErrors?: boolean;
-	ValidationErrors?: ValidationError[];
 }
 
 export interface ContactGroup {
@@ -276,7 +259,6 @@ export interface ContactGroup {
 	Name?: string;
 	Status?: string;
 	Contacts?: Contact[];
-	HasValidationErrors?: boolean;
 }
 
 export interface Currency {
@@ -331,7 +313,6 @@ export interface LineItem {
 	Tracking?: Tracking[];
 	Quantity?: number;
 	LineItemID?: string;
-	ValidationErrors?: any[];
 }
 export interface Organisation {
 	APIKey: string;
@@ -440,8 +421,6 @@ export interface Receipt {
 	Total?: number;
 	Url?: string;
 	HasAttachments?: boolean;
-	HasValidationErrors?: boolean;
-	ValidationErrors?: ValidationError[];
 }
 
 export interface Report {

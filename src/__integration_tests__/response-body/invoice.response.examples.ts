@@ -17,8 +17,7 @@ export const multipleInvoices: InvoicesResponse = {
 					Date: '\/Date(1508889600000+0000)\/',
 					Amount: 148.50,
 					Reference: 'Chq 409',
-					HasAccount: false,
-					HasValidationErrors: false
+					HasAccount: false
 				}
 			],
 			CreditNotes: [],
@@ -36,8 +35,7 @@ export const multipleInvoices: InvoicesResponse = {
 				Addresses: [],
 				Phones: [],
 				ContactGroups: [],
-				ContactPersons: [],
-				HasValidationErrors: false
+				ContactPersons: []
 			},
 			DateString: '2017-10-17T00:00:00',
 			Date: '\/Date(1508198400000+0000)\/',
@@ -64,8 +62,7 @@ export const multipleInvoices: InvoicesResponse = {
 					Date: '\/Date(1509840000000+0000)\/',
 					Amount: 974.60,
 					Reference: 'DD # 96013',
-					HasAccount: false,
-					HasValidationErrors: false
+					HasAccount: false
 				}
 			],
 			CreditNotes: [
@@ -92,8 +89,7 @@ export const multipleInvoices: InvoicesResponse = {
 				Addresses: [],
 				Phones: [],
 				ContactGroups: [],
-				ContactPersons: [],
-				HasValidationErrors: false
+				ContactPersons: []
 			},
 			DateString: '2017-10-30T00:00:00',
 			Date: '\/Date(1509321600000+0000)\/',
@@ -130,8 +126,7 @@ export const singleInvoice: InvoicesResponse = {
 					Amount: 148.50,
 					Reference: 'Chq 409',
 					CurrencyRate: 0.000000,
-					HasAccount: false,
-					HasValidationErrors: false
+					HasAccount: false
 				}
 			],
 			Prepayments: [],
@@ -225,8 +220,7 @@ export const singleInvoice: InvoicesResponse = {
 					AccountCode: '449',
 					Tracking: [],
 					Quantity: 1.0000,
-					LineItemID: 'c997b810-b637-439d-9036-93fd4319011f',
-					ValidationErrors: []
+					LineItemID: 'c997b810-b637-439d-9036-93fd4319011f'
 				}
 			],
 			SubTotal: 135.00,
@@ -261,8 +255,6 @@ export const createInvoiceWithValidationError: InvoicesResponse = {
 				Phones: [],
 				ContactGroups: [],
 				ContactPersons: [],
-				HasValidationErrors: false,
-				ValidationErrors: []
 			},
 			DateString: '2018-02-15T00:00:00',
 			Date: '\/Date(1518652800000+0000)\/',
@@ -276,8 +268,7 @@ export const createInvoiceWithValidationError: InvoicesResponse = {
 					UnitAmount: 395.0,
 					AccountCode: '200',
 					Tracking: [],
-					Quantity: 4.3400,
-					ValidationErrors: []
+					Quantity: 4.3400
 				}
 			],
 			CurrencyCode: 'AUD',

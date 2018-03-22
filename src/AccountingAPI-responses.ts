@@ -6,83 +6,99 @@ export interface AccountingAPIResponse {
 	ProviderName: string;
 	DateTimeUTC: string;
 }
+export interface SummariseErrors {
+	StatusAttributeString?: string;
+	HasErrors?: boolean;
+	HasValidationErrors?: boolean;
+	ValidationErrors?: ValidationError[];
+	Warnings?: Warning[];
+}
+
+export interface ValidationError {
+	Message?: string;
+	Description?: string;
+}
+
+export interface Warning {
+	Message: string;
+}
 
 export interface AccountsResponse extends AccountingAPIResponse {
-	Accounts: any[];
+	Accounts: Array<any & SummariseErrors>;
 }
 
 export interface AllocationsResponse extends AccountingAPIResponse {
-	BankTransactions: Allocation[];
+	Allocations: Array<Allocation & SummariseErrors>;
 }
 
 export interface AttachmentsResponse extends AccountingAPIResponse {
-	Attachments: Attachment[];
+	Attachments: Array<Attachment & SummariseErrors>;
 }
 
 export interface BankTransactionsResponse extends AccountingAPIResponse {
-	BankTransactions: BankTransaction[];
+	BankTransactions: Array<BankTransaction & SummariseErrors>;
 }
 
 export interface BankTransfersResponse {
-	BankTransfers: BankTransfer[];
+	BankTransfers: Array<BankTransfer & SummariseErrors>;
 }
 
 export interface BrandingThemesResponse extends AccountingAPIResponse {
-	BrandingThemes: BrandingTheme[];
+	BrandingThemes: Array<BrandingTheme & SummariseErrors>;
 }
 
 export interface ContactGroupsResponse extends AccountingAPIResponse {
-	ContactGroups: ContactGroup[];
+	ContactGroups: Array<ContactGroup & SummariseErrors>;
 }
 
 export interface ContactsResponse extends AccountingAPIResponse {
-	Contacts: Contact[];
+	Contacts: Array<Contact & SummariseErrors>;
 }
 
 export interface CreditNotesResponse extends AccountingAPIResponse {
-	CreditNotes: CreditNote[];
+	CreditNotes: Array<CreditNote & SummariseErrors>;
 }
 
 export interface CurrenciesResponse extends AccountingAPIResponse {
-	Currencies: Currency[];
+	Currencies: Array<Currency & SummariseErrors>;
 }
 
 export interface EmployeesResponse extends AccountingAPIResponse {
-	Employees: Employee[];
+	Employees: Array<Employee & SummariseErrors>;
 }
 
 export interface ExpenseClaimsResponse extends AccountingAPIResponse {
-	ExpenseClaims: ExpenseClaim[];
+	ExpenseClaims: Array<ExpenseClaim & SummariseErrors>;
 }
 
 export interface InvoiceRemindersResponse extends AccountingAPIResponse {
-	InvoiceReminders: InvoiceReminder[];
+	InvoiceReminders: Array<InvoiceReminder & SummariseErrors>;
 }
 
 export interface InvoicesResponse extends AccountingAPIResponse {
-	Invoices: Invoice[];
+	Invoices: Array<Invoice & SummariseErrors>;
 }
 
 export interface ItemsResponse extends AccountingAPIResponse {
-	Items: Item[];
+	Items: Array<Item & SummariseErrors>;
 }
 
 export interface JournalsResponse extends AccountingAPIResponse {
-	Journals: Journal[];
+	Journals: Array<Journal & SummariseErrors>;
 }
 
 export interface LinkedTransactionsResponse {
-	LinkedTransactions: LinkedTransaction[];
+	LinkedTransactions: Array<LinkedTransaction & SummariseErrors>;
 }
 
 // TODO manual journals
 
 export interface OnlineInvoicesResponse extends AccountingAPIResponse {
-	OnlineInvoices: OnlineInvoice[];
+	OnlineInvoices: Array<OnlineInvoice & SummariseErrors>;
 }
 
 export interface OrganisationResponse extends AccountingAPIResponse {
-	Organisations: Organisation[];
+	Organisations: Array<Organisation & SummariseErrors>;
 }
 
 export interface OrganisationCISSettingResponse extends AccountingAPIResponse {
@@ -94,7 +110,7 @@ export interface OverpaymentsResponse extends AccountingAPIResponse {
 }
 
 export interface PaymentsResponse extends AccountingAPIResponse {
-	Payments: Payment[];
+	Payments: Array<Payment & SummariseErrors>;
 }
 
 export interface PrepaymentsResponse extends AccountingAPIResponse {
@@ -104,7 +120,7 @@ export interface PrepaymentsResponse extends AccountingAPIResponse {
 // TODO purchase orders
 
 export interface ReceiptsResponse extends AccountingAPIResponse {
-	Receipts: Receipt[];
+	Receipts: Array<Receipt & SummariseErrors>;
 }
 
 export interface RepeatingInvoicesResponse extends AccountingAPIResponse {
@@ -116,11 +132,11 @@ export interface ReportsResponse extends AccountingAPIResponse {
 }
 
 export interface TaxRatesResponse extends AccountingAPIResponse {
-	TaxRates?: TaxRate[];
+	TaxRates?: Array<TaxRate & SummariseErrors>;
 }
 
 export interface TrackingCategoriesResponse extends AccountingAPIResponse {
-	TrackingCategories?: TrackingCategory[];
+	TrackingCategories?: Array<TrackingCategory & SummariseErrors>;
 }
 
 export interface UsersResponse extends AccountingAPIResponse {
