@@ -9,7 +9,7 @@ describe('/expenseclaims', () => {
 
 	beforeAll(() => {
 		setJestTimeout();
-		const config = getPrivateConfig('1');
+		const config = getPrivateConfig();
 		xero = new AccountingAPIClient(config);
 	});
 
