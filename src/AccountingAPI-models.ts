@@ -211,6 +211,32 @@ export interface InvoiceReminder {
 	Enabled?: boolean;
 }
 
+export interface RepeatingInvoice {
+	Schedule?: Schedule;
+	RepeatingInvoiceID?: string;
+	Type?: string;
+	Reference?: string;
+	HasAttachments?: boolean;
+	ID?: string;
+	Contact?: Contact;
+	Status?: string;
+	LineAmountTypes?: string;
+	LineItems?: LineItem[];
+	SubTotal?: string;
+	TotalTax?: string;
+	Total?: string;
+	CurrencyCode?: string;
+}
+
+export interface Schedule {
+	Period?: string;
+	Unit?: string;
+	DueDate?: string;
+	DueDateType?: string;
+	StartDate?: string;
+	NextScheduleDate?: string;
+}
+
 // TODO: Are last two common therefore we can put on common interface?
 
 export interface ValidationError {
