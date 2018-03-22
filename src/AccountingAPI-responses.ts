@@ -1,109 +1,121 @@
 ﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment } from './AccountingAPI-models';
 
-export interface AccountingResponse {
+export interface AccountingAPIResponse {
 	Id: string;
 	Status: string;
 	ProviderName: string;
 	DateTimeUTC: string;
 }
 
-export interface AttachmentsResponse extends AccountingResponse {
-	Attachments: Attachment[];
-}
-
-export interface BankTransactionsResponse extends AccountingResponse {
-	BankTransactions: BankTransaction[];
-}
-
-export interface AllocationsResponse extends AccountingResponse {
-	BankTransactions: Allocation[];
-}
-
-export interface InvoicesResponse extends AccountingResponse {
-	Invoices: Invoice[];
-}
-
-export interface InvoiceRemindersResponse extends AccountingResponse {
-	InvoiceReminders: InvoiceReminder[];
-}
-
-export interface ContactGroupsResponse extends AccountingResponse {
-	ContactGroups: ContactGroup[];
-}
-
-export interface ContactsResponse extends AccountingResponse {
-	Contacts: Contact[];
-}
-
-export interface ReportsResponse extends AccountingResponse {
-	Reports: any[];
-}
-
-export interface CurrenciesResponse extends AccountingResponse {
-	Currencies: Currency[];
-}
-
-export interface EmployeesResponse extends AccountingResponse {
-	Employees: Employee[];
-}
-
-export interface ExpenseClaimsResponse extends AccountingResponse {
-	ExpenseClaims: ExpenseClaim[];
-}
-
-export interface UsersResponse extends AccountingResponse {
-	Users: User[];
-}
-export interface AccountsResponse extends AccountingResponse {
+export interface AccountsResponse extends AccountingAPIResponse {
 	Accounts: any[];
 }
 
-export interface CreditNotesResponse extends AccountingResponse {
-	CreditNotes: CreditNote[];
+export interface AllocationsResponse extends AccountingAPIResponse {
+	BankTransactions: Allocation[];
 }
 
-export interface BrandingThemesResponse extends AccountingResponse {
-	BrandingThemes: BrandingTheme[];
-}
-export interface JournalsResponse extends AccountingResponse {
-	Journals: Journal[];
-}
-export interface ItemsResponse extends AccountingResponse {
-	Items: Item[];
-}
-export interface ItemsResponse extends AccountingResponse {
-	Items: Item[];
-}
-export interface OnlineInvoicesResponse extends AccountingResponse {
-	OnlineInvoices: OnlineInvoice[];
-}
-export interface OrganisationResponse extends AccountingResponse {
-	Organisations: Organisation[];
-}
-export interface OrganisationCISSettingResponse extends AccountingResponse {
-	CISSettings: OrgCISSetting[];
-}
-export interface OverpaymentsResponse extends AccountingResponse {
-	Overpayments: Overpayment[];
-}
-export interface PaymentsResponse extends AccountingResponse {
-	Payments: Payment[];
-}
-export interface PrepaymentsResponse extends AccountingResponse {
-	Prepayments: Prepayment[];
-}
-export interface TaxRatesResponse extends AccountingResponse {
-	TaxRates?: TaxRate[];
+export interface AttachmentsResponse extends AccountingAPIResponse {
+	Attachments: Attachment[];
 }
 
-export interface TrackingCategoriesResponse extends AccountingResponse {
-	TrackingCategories?: TrackingCategory[];
+export interface BankTransactionsResponse extends AccountingAPIResponse {
+	BankTransactions: BankTransaction[];
 }
 
 export interface BankTransfersResponse {
 	BankTransfers: BankTransfer[];
 }
 
+export interface BrandingThemesResponse extends AccountingAPIResponse {
+	BrandingThemes: BrandingTheme[];
+}
+
+export interface ContactGroupsResponse extends AccountingAPIResponse {
+	ContactGroups: ContactGroup[];
+}
+
+export interface ContactsResponse extends AccountingAPIResponse {
+	Contacts: Contact[];
+}
+
+export interface CreditNotesResponse extends AccountingAPIResponse {
+	CreditNotes: CreditNote[];
+}
+
+export interface CurrenciesResponse extends AccountingAPIResponse {
+	Currencies: Currency[];
+}
+
+export interface EmployeesResponse extends AccountingAPIResponse {
+	Employees: Employee[];
+}
+
+export interface ExpenseClaimsResponse extends AccountingAPIResponse {
+	ExpenseClaims: ExpenseClaim[];
+}
+
+export interface InvoiceRemindersResponse extends AccountingAPIResponse {
+	InvoiceReminders: InvoiceReminder[];
+}
+
+export interface InvoicesResponse extends AccountingAPIResponse {
+	Invoices: Invoice[];
+}
+
+export interface ItemsResponse extends AccountingAPIResponse {
+	Items: Item[];
+}
+
+export interface JournalsResponse extends AccountingAPIResponse {
+	Journals: Journal[];
+}
+
 export interface LinkedTransactionsResponse {
 	LinkedTransactions: LinkedTransaction[];
+}
+
+// TODO manual journals
+
+export interface OnlineInvoicesResponse extends AccountingAPIResponse {
+	OnlineInvoices: OnlineInvoice[];
+}
+
+export interface OrganisationResponse extends AccountingAPIResponse {
+	Organisations: Organisation[];
+}
+
+export interface OrganisationCISSettingResponse extends AccountingAPIResponse {
+	CISSettings: OrgCISSetting[];
+}
+
+export interface OverpaymentsResponse extends AccountingAPIResponse {
+	Overpayments: Overpayment[];
+}
+
+export interface PaymentsResponse extends AccountingAPIResponse {
+	Payments: Payment[];
+}
+
+export interface PrepaymentsResponse extends AccountingAPIResponse {
+	Prepayments: Prepayment[];
+}
+
+// TODO purchase orders
+// TODO repeating invoices
+
+export interface ReportsResponse extends AccountingAPIResponse {
+	Reports: any[];
+}
+
+export interface TaxRatesResponse extends AccountingAPIResponse {
+	TaxRates?: TaxRate[];
+}
+
+export interface TrackingCategoriesResponse extends AccountingAPIResponse {
+	TrackingCategories?: TrackingCategory[];
+}
+
+export interface UsersResponse extends AccountingAPIResponse {
+	Users: User[];
 }
