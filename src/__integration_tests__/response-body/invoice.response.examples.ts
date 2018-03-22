@@ -1,4 +1,4 @@
-import { InvoicesResponse } from '../../AccountingAPI-types';
+import { InvoicesResponse } from '../../AccountingAPI-responses';
 
 export const multipleInvoices: InvoicesResponse = {
 	Id: '431b0b6a-81bf-4286-82f3-73e6f8c78fd3',

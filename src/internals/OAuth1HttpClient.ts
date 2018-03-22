@@ -9,7 +9,7 @@ import * as http from 'http';
 import * as https from 'https';
 import * as URL from 'url';
 import { XeroError } from '../XeroError';
-import { AttachmentsResponse } from '../AccountingAPI-types';
+import { AttachmentsResponse } from '../AccountingAPI-responses';
 
 export interface IToken {
 	oauth_token: string;

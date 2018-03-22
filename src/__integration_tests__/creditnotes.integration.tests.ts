@@ -1,6 +1,6 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { CreditNotesResponse } from '../AccountingAPI-types';
+import { CreditNotesResponse } from '../AccountingAPI-responses';
 
 describe('/creditnotes', () => {
 	let xero: AccountingAPIClient;

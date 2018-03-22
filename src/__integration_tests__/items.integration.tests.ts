@@ -1,6 +1,6 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { ItemsResponse } from '../AccountingAPI-types';
+import { ItemsResponse } from '../AccountingAPI-responses';
 import { getOrCreateItemId } from './helpers/entityId.helpers';
 
 describe('/items', () => {

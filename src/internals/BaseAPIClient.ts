@@ -4,7 +4,7 @@
 import { IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
 import { mapConfig, mapState } from './config-helper';
 import * as  fs from 'fs';
-import { AttachmentsResponse } from '../AccountingAPI-types';
+import { AttachmentsResponse } from '../AccountingAPI-responses';
 
 /**
  * TODO: Add support for the following keys:

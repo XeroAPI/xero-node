@@ -1,7 +1,8 @@
-import { EmployeesResponse, Employee } from '../AccountingAPI-types';
+import { EmployeesResponse } from '../AccountingAPI-responses';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { getOrCreateEmployeeId } from './helpers/entityId.helpers';
+import { Employee } from '../AccountingAPI-models';
 
 describe('/employees', () => {
 

@@ -1,4 +1,4 @@
-import { ContactsResponse } from '../../AccountingAPI-types';
+import { ContactsResponse } from '../../AccountingAPI-responses';
 
 export const getSingle: ContactsResponse = {
 	Id: '1ab1ca3d-9305-4473-bfa2-82cd5985e736',

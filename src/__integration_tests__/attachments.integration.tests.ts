@@ -3,7 +3,8 @@ import * as path from 'path';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { createSingleInvoiceRequest } from './request-body/invoice.request.examples';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { InvoicesResponse, Invoice } from '../AccountingAPI-types';
+import { InvoicesResponse } from '../AccountingAPI-responses';
+import { Invoice } from '../AccountingAPI-models';
 
 describe('attachments', () => {
 

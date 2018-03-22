@@ -3,30 +3,8 @@ import * as fs from 'fs';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
-import {
-	AccountsResponse, BankTransaction, BankTransactionsResponse,
-	InvoicesResponse, Invoice, CreditNotesResponse,
-	CreditNote,
-	AllocationsResponse,
-	ContactGroupsResponse, ContactGroup,
-	CurrenciesResponse, Currency,
-	EmployeesResponse, Employee,
-	ContactsResponse, Contact,
-	ReportsResponse,
-	AttachmentsResponse,
-	OrganisationResponse,
-	UsersResponse,
-	BrandingThemesResponse,
-	BankTransfersResponse, BankTransfer,
-	TrackingCategoriesResponse, TrackingCategory, TrackingOption,
-	TaxRatesResponse, TaxRate,
-	ExpenseClaimsResponse, ExpenseClaim,
-	ItemsResponse, Item,
-	InvoiceRemindersResponse,
-	JournalsResponse,
-	PaymentsResponse, Payment,
-	PrepaymentsResponse, Allocation, OverpaymentsResponse, LinkedTransaction, LinkedTransactionsResponse
-} from './AccountingAPI-types';
+import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse } from './AccountingAPI-responses';
+import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
 
 export interface QueryArgs {
 	where?: string;
@@ -525,7 +503,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.post<LinkedTransactionsResponse>(endpoint, linkedTransaction);
 		},
-		delete: async (args?: { LinkedTransactionID?: string}): Promise<void> => {
+		delete: async (args?: { LinkedTransactionID?: string }): Promise<void> => {
 			let endpoint = 'linkedtransactions';
 			if (args && args.LinkedTransactionID) {
 				endpoint = endpoint + '/' + args.LinkedTransactionID;

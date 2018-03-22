@@ -4,7 +4,7 @@ import * as path from 'path';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from './request-body/invoice.request.examples';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { InvoicesResponse } from '../AccountingAPI-types';
+import { InvoicesResponse } from '../AccountingAPI-responses';
 import { getOrCreateInvoiceId } from './helpers/entityId.helpers';
 
 describe('/invoices', () => {

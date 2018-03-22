@@ -1,4 +1,4 @@
-import { ContactsResponse } from '../AccountingAPI-types';
+import { ContactsResponse } from '../AccountingAPI-responses';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 

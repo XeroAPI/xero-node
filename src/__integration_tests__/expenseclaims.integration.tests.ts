@@ -1,6 +1,6 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { ExpenseClaimsResponse } from '../AccountingAPI-types';
+import { ExpenseClaimsResponse } from '../AccountingAPI-responses';
 import { getOrCreateExpenseClaimId } from './helpers/entityId.helpers';
 
 describe('/expenseclaims', () => {

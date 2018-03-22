@@ -1,5 +1,5 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
-import { CurrenciesResponse } from '../AccountingAPI-types';
+import { CurrenciesResponse } from '../AccountingAPI-responses';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('/currencies', () => {
