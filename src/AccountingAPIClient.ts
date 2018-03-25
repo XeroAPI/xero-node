@@ -263,6 +263,18 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<CreditNotesResponse>(endpoint, header);
 		},
+		savePDF: async (args?: { CreditNoteID: string, savePath: string }): Promise<void> => {
+			let endpoint = 'creditnotes';
+			if (args && args.CreditNoteID) {
+				endpoint = endpoint + '/' + args.CreditNoteID;
+				delete args.CreditNoteID;
+			}
+			endpoint += generateQueryString(args);
+
+			const writeStream = fs.createWriteStream(args.savePath);
+
+			return this.oauth1Client.writeUTF8ResponseToStream(endpoint, 'application/pdf', writeStream);
+		},
 		create: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }): Promise<CreditNotesResponse> => {
 			const endpoint = 'creditnotes';
 			return this.oauth1Client.put<CreditNotesResponse>(endpoint, creditNote);
