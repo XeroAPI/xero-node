@@ -38,7 +38,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: `accounts` },
 			{ action: 'update', expectedPath: `accounts/${guid1}`, args: { AccountID: guid1 } },
 			{ action: 'delete', expectedPath: `accounts/${guid1}`, args: { AccountID: guid1 } },
-			{ subResource: 'attachments', action: 'get', expectedPath: `accounts/${guid1}/attachments`, args: { EntityID: guid1 } }
+			{ subResource: 'attachments', action: 'get', expectedPath: `accounts/${guid1}/attachments`, args: { entityId: guid1 } }
 		],
 		bankTransactions: [
 			{ action: 'get', expectedPath: 'banktransactions' },
@@ -57,7 +57,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `banktransfers?where=Type%3D%3D%22BANK%22`, args: { where: 'Type=="BANK"' } },
 			{ action: 'get', expectedPath: 'banktransfers' },
 			{ action: 'create', expectedPath: `banktransfers?summarizeErrors=false` },
-			{ subResource: 'attachments', action: 'get', expectedPath: `banktransfers/${guid1}/attachments`, args: { EntityID: guid1 } }
+			{ subResource: 'attachments', action: 'get', expectedPath: `banktransfers/${guid1}/attachments`, args: { entityId: guid1 } }
 		],
 		brandingThemes: [
 			{ action: 'get', expectedPath: 'brandingthemes' },
@@ -141,7 +141,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `invoices?page=3`, args: { page: 3 } },
 			{ action: 'get', expectedPath: `invoices?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
 			{ action: 'get', expectedPath: `invoices?createdByMyApp=true&where=Type%3D%3D%22ACCREC%22&page=5&Statuses=DELETED`, args: { createdByMyApp: true, where: `Type=="ACCREC"`, page: 5, Statuses: 'DELETED' } },
-			{ subResource: 'attachments', action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { EntityID: guid1 } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `invoices/${guid1}/attachments`, args: { entityId: guid1 } },
 			{ subResource: 'onlineInvoice', action: 'get', expectedPath: `invoices/${guid1}/onlineinvoice`, args: { InvoiceID: guid1 } },
 			{ action: 'create', expectedPath: 'invoices?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `invoices/${guid1}?summarizeErrors=false`, args: { InvoiceID: guid1 } },
@@ -191,7 +191,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: `manualjournals?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `manualjournals?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `manualjournals/${guid1}?summarizeErrors=true`, args: { ManualJournalID: guid1, summarizeErrors: true } },
-			{ subResource: 'attachments', action: 'get', expectedPath: `manualjournals/${guid1}/attachments`, args: { EntityID: guid1 } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `manualjournals/${guid1}/attachments`, args: { entityId: guid1 } },
 		],
 		organisation: [
 			{ action: 'get', expectedPath: 'organisation' },
@@ -218,7 +218,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `prepayments/${guid1}?order=UpdatedDateUTC`, args: { PrepaymentID: guid1, order: 'UpdatedDateUTC' } },
 			{ action: 'get', expectedPath: `prepayments?page=5`, args: { 'page': 5, 'If-Modified-Since': 'headerValue' } },
 			{ subResource: 'allocations', action: 'create', expectedPath: `prepayments/${guid1}/allocations`, args: { PrepaymentID: guid1 } },
-			{ subResource: 'attachments', action: 'get', expectedPath: `prepayments/${guid1}/attachments`, args: { EntityID: guid1 } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `prepayments/${guid1}/attachments`, args: { entityId: guid1 } },
 		],
 		// TODO purchaseOrders
 		receipts: [
@@ -229,7 +229,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: 'receipts?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `receipts?summarizeErrors=true`, args: { summarizeErrors: true } },
 			{ action: 'update', expectedPath: `receipts/${guid1}?summarizeErrors=false`, args: { ReceiptID: guid1 } },
-			{ subResource: 'attachments', action: 'get', expectedPath: `receipts/${guid1}/attachments`, args: { EntityID: guid1 } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `receipts/${guid1}/attachments`, args: { entityId: guid1 } },
 		],
 		// TODO repeatingInvoices
 		reports: [

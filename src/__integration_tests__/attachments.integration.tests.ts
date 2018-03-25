@@ -1,56 +1,50 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { AccountingAPIClient } from '../AccountingAPIClient';
-import { createSingleInvoiceRequest } from './request-body/invoice.request.examples';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { InvoicesResponse } from '../AccountingAPI-responses';
-import { Invoice } from '../AccountingAPI-models';
+import { getOrCreateInvoiceId } from './helpers/entityId.helpers';
 
 describe('attachments', () => {
 
 	let xero: AccountingAPIClient;
 
-	let invoiceIdsToArchive: string[] = [];
-
-	let anInvoice: Invoice;
-	const attachementPath = path.resolve(__dirname, 'helpers', 'image.jpg');
-	const tempAttachementPath = path.resolve(__dirname, 'temp-image.jpg');
+	let entityId: string;
+	const attachmentPath = path.resolve(__dirname, 'helpers', 'image.jpg');
+	const tempAttachmentPath = path.resolve(__dirname, 'temp-image.jpg');
 
 	beforeAll(async () => {
 		setJestTimeout();
 		const config = getPrivateConfig('1');
 		xero = new AccountingAPIClient(config);
 
-		const response = await xero.invoices.create(createSingleInvoiceRequest);
-		anInvoice = response.Invoices[0];
-		collectInvoicesToArchive(response);
+		entityId = await getOrCreateInvoiceId(xero);
 	});
 
 	it('can add an attachment', async () => {
 		await xero.invoices.attachments.uploadAttachment({
-			entityID: anInvoice.InvoiceID,
+			entityId: entityId,
 			mimeType: 'image/jpg',
 			fileName: 'anUploadedImage.jpg',
-			pathToUpload: attachementPath
+			pathToUpload: attachmentPath
 		});
 	});
 
 	it('can download the same attachment', async () => {
 		await xero.invoices.attachments.downloadAttachment({
-			entityID: anInvoice.InvoiceID,
+			entityId: entityId,
 			mimeType: 'image/jpg',
 			fileName: 'anUploadedImage.jpg',
-			pathToSave: tempAttachementPath
+			pathToSave: tempAttachmentPath
 		});
 
-		const tempFile = fs.statSync(tempAttachementPath);
-		const realFile = fs.statSync(attachementPath);
+		const tempFile = fs.statSync(tempAttachmentPath);
+		const realFile = fs.statSync(attachmentPath);
 		expect(tempFile.size).toBe(realFile.size);
 	});
 
 	it('get the attachment details', async () => {
 		const response = await xero.invoices.attachments.get({
-			EntityID: anInvoice.InvoiceID
+			entityId: entityId
 		});
 
 		expect(response.Attachments.length).toEqual(1);
@@ -64,14 +58,6 @@ describe('attachments', () => {
 
 	afterAll(async () => {
 		// delete the file
-		fs.unlinkSync(tempAttachementPath);
-
-		// archive the invoices
-		const updateRequestBody = invoiceIdsToArchive.map((invoiceId) => ({ InvoiceID: invoiceId, Status: 'DELETED' }));
-		await xero.invoices.update({ Invoices: updateRequestBody });
+		fs.unlinkSync(tempAttachmentPath);
 	});
-
-	function collectInvoicesToArchive(response: InvoicesResponse) {
-		invoiceIdsToArchive = invoiceIdsToArchive.concat(response.Invoices.map((invoice) => invoice.InvoiceID));
-	}
 });

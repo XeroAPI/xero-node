@@ -12,12 +12,17 @@ export function getStringFromFile(location: string) {
 }
 
 export function generateQueryString(args: { [key: string]: any }, addSummarizeErrorsParam: boolean = false): string {
-	args = { ...args };
-	if (addSummarizeErrorsParam && args.summarizeErrors == undefined) {
-		args.summarizeErrors = false;
+	const argsToUse = { ...args };
+	if (addSummarizeErrorsParam && argsToUse.summarizeErrors == undefined) {
+		argsToUse.summarizeErrors = false;
 	}
-	if (args && Object.keys(args).length > 0) {
-		return '?' + querystring.stringify(args);
+	for (const key of Object.keys(argsToUse)) {
+		if (argsToUse[key] == undefined) {
+			delete argsToUse[key];
+		}
+	}
+	if (argsToUse && Object.keys(argsToUse).length > 0) {
+		return '?' + querystring.stringify(argsToUse);
 	} else {
 		return '';
 	}

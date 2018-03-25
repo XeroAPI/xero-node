@@ -27,18 +27,18 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 	private generateAttachmentsEndpoint(path: string) {
 		return {
-			get: async (args?: { EntityID: string }): Promise<AttachmentsResponse> => {
-				const endpoint = `${path}/${args.EntityID}/attachments`;
+			get: async (args: { entityId: string }): Promise<AttachmentsResponse> => {
+				const endpoint = `${path}/${args.entityId}/attachments`;
 				return this.oauth1Client.get<AttachmentsResponse>(endpoint);
 			},
-			downloadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToSave: string }) => {
-				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
+			downloadAttachment: async (args: { entityId: string, mimeType: string, fileName: string, pathToSave: string }) => {
+				const endpoint = `${path}/${args.entityId}/attachments/${args.fileName}`;
 				const writeStream = fs.createWriteStream(args.pathToSave);
 
 				await this.oauth1Client.writeBinaryResponseToStream(endpoint, args.mimeType, writeStream);
 			},
-			uploadAttachment: async (args?: { entityID: string, mimeType: string, fileName: string, pathToUpload: string }) => {
-				const endpoint = `${path}/${args.entityID}/attachments/${args.fileName}`;
+			uploadAttachment: async (args: { entityId: string, mimeType: string, fileName: string, pathToUpload: string, includeOnline?: boolean }) => {
+				const endpoint = `${path}/${args.entityId}/attachments/${args.fileName}` + generateQueryString({ IncludeOnline: args.includeOnline });
 				const readStream = fs.createReadStream(args.pathToUpload);
 
 				const fileSize = fs.statSync(args.pathToUpload).size;

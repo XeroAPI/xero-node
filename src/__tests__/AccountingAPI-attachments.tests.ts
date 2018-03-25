@@ -38,28 +38,28 @@ describe('AccountingAPI attachments', () => {
 
 	const fixtures: IFixture = {
 		invoices: [
-			{ expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		bankTransactions: [
-			{ expectedPath: `banktransactions/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `banktransactions/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		creditNotes: [
-			{ expectedPath: `creditnotes/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `creditnotes/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		repeatingInvoices: [
-			{ expectedPath: `repeatinginvoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `repeatinginvoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		bankTransfers: [
-			{ expectedPath: `banktransfers/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `banktransfers/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		contacts: [
-			{ expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		accounts: [
-			{ expectedPath: `accounts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `accounts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		manualJournals: [
-			{ expectedPath: `manualjournals/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityID: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `manualjournals/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		]
 	};
 
@@ -134,7 +134,7 @@ describe('AccountingAPI attachments', () => {
 					const xeroClient = new AccountingAPIClient(xeroConfig, null, oAuth1HttpClient);
 
 					response = await (xeroClient as any)[endpoint]['attachments'].uploadAttachment({
-						entityID: fixture.args.entityID,
+						entityId: fixture.args.entityId,
 						mimeType: fixture.args.mimeType,
 						fileName: fixture.args.fileName,
 						pathToUpload: localAttachmentLocation

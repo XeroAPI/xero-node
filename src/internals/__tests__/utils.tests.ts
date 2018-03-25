@@ -33,6 +33,12 @@ describe('generateQueryString()', () => {
 	it('handles single param', () => {
 		expect(generateQueryString({ where: 'Type=="ACCREC"' })).toEqual('?where=Type%3D%3D%22ACCREC%22');
 	});
+	it('omits param whose value is undefined', () => {
+		expect(generateQueryString({ abc: undefined })).toEqual('');
+	});
+	it('omits param whose value is undefined, but keeps other params', () => {
+		expect(generateQueryString({ page: 5, abc: undefined })).toEqual('?page=5');
+	});
 	it('handles multiple params', () => {
 		expect(generateQueryString({ page: 5, where: 'Type=="ACCREC"' })).toEqual('?page=5&where=Type%3D%3D%22ACCREC%22');
 	});
