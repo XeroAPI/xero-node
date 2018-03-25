@@ -52,6 +52,7 @@ describe('Partner Example Tests using oauth_verifier', () => {
 				const query = (document.querySelector(PIN_SELECTOR) as any).value;
 				return query;
 			});
+			browser.close();
 		} catch (e) {
 			browser.close();
 			throw e;
