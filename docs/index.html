@@ -65,50 +65,20 @@
 				<p><a href="https://badge.fury.io/js/xero-node"><img src="https://badge.fury.io/js/xero-node.svg" alt="npm version"></a>
 				<a href="https://circleci.com/gh/XeroAPI/xero-node/tree/v3"><img src="https://circleci.com/gh/XeroAPI/xero-node/tree/v3.svg?style=svg" alt="CircleCI"></a></p>
 				<h1 id="node-xero">node-xero</h1>
-				<p>NodeJS Client for the <a href="http://developer.xero.com">Xero API</a>.</p>
+				<p>NodeJS Client for the <a href="http://developer.xero.com">Xero API</a>. Works with ES5, ES6+ and TypeScript.</p>
 				<p>Supports all application types:</p>
 				<ul>
 					<li>Private - apps that can only connect to a single organisation</li>
 					<li>Public - apps that can connect to any organisation, but only for 30 minutes at a time</li>
 					<li>Partner - approved apps that can automatically refresh tokens</li>
 				</ul>
+				<p>Version 3 has been rebuilt fron the ground-up using TypeScript, to make it
+				more maintainable and to take advantage of modern JavaScript features.</p>
 				<!-- [API Reference](https://xeroapi.github.io/xero-node/). -->
 				<h1 id="features">Features</h1>
 				<ul>
 					<li>v3.0.0<ul>
-							<li>all <a href="https://developer.xero.com/documentation/api/api-overview">accounting endpoints</a><ul>
-									<li>[ ] attachments</li>
-									<li>[ ] accounts</li>
-									<li>[ ] bankstatements</li>
-									<li>[ ] banktransactions</li>
-									<li>[ ] bank-transfers</li>
-									<li>[ ] branding-themes</li>
-									<li>[ ] contacts</li>
-									<li>[ ] contactgroups</li>
-									<li>[ ] credit-notes</li>
-									<li>[ ] currencies</li>
-									<li>[ ] employees</li>
-									<li>[ ] expense-claims</li>
-									<li>[ ] invoices</li>
-									<li>[ ] invoice-reminders</li>
-									<li>[ ] items</li>
-									<li>[ ] journals</li>
-									<li>[ ] linked-transactions</li>
-									<li>[ ] manual-journals</li>
-									<li>[ ] organisation</li>
-									<li>[ ] overpayments</li>
-									<li>[ ] payments</li>
-									<li>[ ] prepayments</li>
-									<li>[ ] purchase-orders</li>
-									<li>[ ] receipts</li>
-									<li>[ ] repeating-invoices</li>
-									<li>[ ] reports</li>
-									<li>[ ] tax-rates</li>
-									<li>[ ] tracking-categories</li>
-									<li>[ ] users</li>
-									<li>[ ] types</li>
-								</ul>
-							</li>
+							<li>all <a href="https://developer.xero.com/documentation/api/api-overview">accounting endpoints</a></li>
 							<li>generic methods (<code>get</code>, <code>put</code>, <code>post</code>, <code>delete</code>) for calling any unsupported endpoints</li>
 						</ul>
 					</li>
@@ -116,61 +86,90 @@
 				<h1 id="installation">Installation</h1>
 				<p>This SDK is published as an npm package called <code>xero-node</code>.</p>
 				<p><code>npm install --save xero-node</code></p>
-				<h3 id="configuration">Configuration</h3>
-				<p>Sample configuration files for various application types are in the <a href="src/__integration_tests__">integration test directory</a>.</p>
-				<table>
-					<thead>
-						<tr>
-							<th>Parameter</th>
-							<th>Description</th>
-							<th>Mandatory</th>
-							<th>Default</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>consumerKey</td>
-							<td>The consumer key that is required with all calls to the Xero API</td>
-							<td>True</td>
-							<td>-</td>
-						</tr>
-						<tr>
-							<td>consumerSecret</td>
-							<td>The secret key from the developer portal that is required to authenticate your API calls</td>
-							<td>True</td>
-							<td>-</td>
-						</tr>
-						<tr>
-							<td>callbackUrl</td>
-							<td>The callback that Xero should invoke when the authorization is successful</td>
-							<td>False</td>
-							<td>null</td>
-						</tr>
-						<tr>
-							<td>privateKeyPath</td>
-							<td>The filesystem path to your privatekey.pem file to sign the API calls</td>
-							<td>False</td>
-							<td>null</td>
-						</tr>
-						<tr>
-							<td>redirectOnError</td>
-							<td>Whether Xero Auth should redirect to your app in the event the user clicks &#39;Cancel&#39;</td>
-							<td>False</td>
-							<td>true</td>
-						</tr>
-					</tbody>
-				</table>
-				<h1 id="usage">Usage</h1>
-				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> XeroClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).AccountingAPIClient;
-<span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'/some/path/to/config.json'</span>);
-
-<span class="hljs-keyword">const</span> xeroClient = <span class="hljs-keyword">new</span> XeroClient(config);
-
-<span class="hljs-comment">//Print a count of invoices</span>
-<span class="hljs-keyword">let</span> invoices = xeroClient.invoices.get()
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Number of Invoices: "</span> + invoices.length);
+				<h1 id="usage-example-for-private-apps">Usage Example for Private Apps</h1>
+				<p>Create a <code>config.json</code> file:</p>
+				<pre><code class="lang-json">{
+    <span class="hljs-attr">"appType"</span>: <span class="hljs-string">"private"</span>,
+    <span class="hljs-attr">"consumerKey"</span>: <span class="hljs-string">"your_consumer_key"</span>,
+    <span class="hljs-attr">"consumerSecret"</span>: <span class="hljs-string">"your_consumer_secret"</span>,
+    <span class="hljs-attr">"callbackUrl"</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">"privateKeyPath"</span>: <span class="hljs-string">"C:\\keys\\your_private_key.pem"</span>
+}
 </code></pre>
-				<h3 id="examples">Examples</h3>
+				<p>Then add the following JavaScript (example works in NodeJS version 8 and above):</p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> XeroClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).AccountingAPIClient;
+<span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./config.json'</span>);
+
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span> (</span>) =&gt;</span> {
+
+    <span class="hljs-comment">// You can initialise Private apps directly from your configuration</span>
+    <span class="hljs-keyword">let</span> xero = <span class="hljs-keyword">new</span> XeroClient(config);
+
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> xero.invoices.get();
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Number of invoices:'</span>, result.Invoices.length);
+
+})();
+
+</code></pre>
+				<h1 id="usage-example-for-public-and-partner-apps">Usage Example for Public and Partner Apps</h1>
+				<p>Create a <code>config.json</code> file:</p>
+				<pre><code class="lang-json">{
+    <span class="hljs-attr">"appType"</span>: <span class="hljs-string">"public"</span>,
+    <span class="hljs-attr">"consumerKey"</span>: <span class="hljs-string">"your_consumer_key"</span>,
+    <span class="hljs-attr">"consumerSecret"</span>: <span class="hljs-string">"your_consumer_secret"</span>,
+    <span class="hljs-attr">"callbackUrl"</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">"privateKeyPath"</span>: <span class="hljs-string">"C:\\keys\\your_private_key.pem"</span>
+}
+</code></pre>
+				<p>Then add the following JavaScript (example works in NodeJS version 8 and above):</p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> XeroClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).AccountingAPIClient;
+<span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./config.json'</span>);
+
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span> (</span>) =&gt;</span> {
+
+    <span class="hljs-keyword">let</span> xero = <span class="hljs-keyword">new</span> XeroClient(config);
+
+    <span class="hljs-comment">// Create request token and get an authorisation URL</span>
+    <span class="hljs-keyword">const</span> requestToken = <span class="hljs-keyword">await</span> xero.oauth1Client.getRequestToken();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Received Request Token:'</span>, requestToken);
+
+    authUrl = xero.oauth1Client.buildAuthoriseUrl(requestToken);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Authorisation URL:'</span>, authUrl);
+
+    <span class="hljs-comment">// Send the user to the Authorisation URL to authorise the connection</span>
+
+    <span class="hljs-comment">// Once the user has authorised your app, swap Request token for Access token</span>
+    <span class="hljs-keyword">const</span> oauth_verifier = <span class="hljs-number">123456</span>;
+    <span class="hljs-keyword">const</span> savedRequestToken = {
+        <span class="hljs-attr">oauth_token</span>: <span class="hljs-string">'aaa'</span>,
+        <span class="hljs-attr">oauth_token_secret</span>: <span class="hljs-string">'bbb'</span>
+    };
+    <span class="hljs-keyword">const</span> accessToken = <span class="hljs-keyword">await</span> xero.oauth1Client.swapRequestTokenforAccessToken(savedRequestToken, oauth_verifier);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Received Access Token:'</span>, accessToken);
+
+    <span class="hljs-comment">// You should now store the access token securely for the user.</span>
+
+    <span class="hljs-comment">// You can make API calls straight away</span>
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> xero.invoices.get();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Number of invoices:'</span>, result.Invoices.length);
+
+    <span class="hljs-comment">// When making future calls, you can initialise the Xero client direectly with the stored access token:</span>
+
+    <span class="hljs-keyword">const</span> storedAccessToken = {
+        <span class="hljs-attr">oauth_token</span>: <span class="hljs-string">'aaa'</span>,
+        <span class="hljs-attr">oauth_token_secret</span>: <span class="hljs-string">'bbb'</span>,
+        <span class="hljs-attr">oauth_session_handle</span>: <span class="hljs-string">'ccc'</span>,
+        <span class="hljs-attr">oauth_expires_at</span>: <span class="hljs-string">'2018-01-01T01:02:03'</span>
+    };
+    <span class="hljs-keyword">const</span> xero2 = <span class="hljs-keyword">new</span> XeroClient(config, storedAccessToken);
+    <span class="hljs-keyword">const</span> invoices = <span class="hljs-keyword">await</span> xero2.invoices.get();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Number of invoices:'</span>, invoices.Invoices.length);
+
+})();
+
+</code></pre>
+				<h3 id="further-examples">Further Examples</h3>
 				<ul>
 					<li><a href="src/__integration_tests__">Integration tests</a></li>
 					<li><a href="https://github.com/XeroAPI/xero-node-sample-app">Sample app</a></li>
@@ -246,13 +245,10 @@
 						<a href="classes/practiceapiclient.html" class="tsd-kind-icon">PracticeAPIClient</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/xeroautherror.html" class="tsd-kind-icon">Xero<wbr>Auth<wbr>Error</a>
+						<a href="classes/xeroerror.html" class="tsd-kind-icon">Xero<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/xerohttperror.html" class="tsd-kind-icon">Xero<wbr>Http<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-not-exported">
-						<a href="interfaces/accountingresponse.html" class="tsd-kind-icon">Accounting<wbr>Response</a>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accountingapiresponse.html" class="tsd-kind-icon">AccountingAPIResponse</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/accountsresponse.html" class="tsd-kind-icon">Accounts<wbr>Response</a>
@@ -264,10 +260,34 @@
 						<a href="interfaces/allocation.html" class="tsd-kind-icon">Allocation</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/allocationsresponse.html" class="tsd-kind-icon">Allocations<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/attachment.html" class="tsd-kind-icon">Attachment</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/attachmentsresponse.html" class="tsd-kind-icon">Attachments<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bankaccount.html" class="tsd-kind-icon">Bank<wbr>Account</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/banktransaction.html" class="tsd-kind-icon">Bank<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/banktransactionsresponse.html" class="tsd-kind-icon">Bank<wbr>Transactions<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/banktransfer.html" class="tsd-kind-icon">Bank<wbr>Transfer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/banktransfersresponse.html" class="tsd-kind-icon">Bank<wbr>Transfers<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/brandingtheme.html" class="tsd-kind-icon">Branding<wbr>Theme</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/brandingthemesresponse.html" class="tsd-kind-icon">Branding<wbr>Themes<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/cell.html" class="tsd-kind-icon">Cell</a>
@@ -288,6 +308,9 @@
 						<a href="interfaces/creditnote.html" class="tsd-kind-icon">Credit<wbr>Note</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/creditnotesresponse.html" class="tsd-kind-icon">Credit<wbr>Notes<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/currenciesresponse.html" class="tsd-kind-icon">Currencies<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -300,7 +323,16 @@
 						<a href="interfaces/employeesresponse.html" class="tsd-kind-icon">Employees<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/expenseclaim.html" class="tsd-kind-icon">Expense<wbr>Claim</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/expenseclaimsresponse.html" class="tsd-kind-icon">Expense<wbr>Claims<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/field.html" class="tsd-kind-icon">Field</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/headerargs.html" class="tsd-kind-icon">Header<wbr>Args</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/iapiconfiguration.html" class="tsd-kind-icon">IApi<wbr>Configuration</a>
@@ -330,10 +362,43 @@
 						<a href="interfaces/invoice.html" class="tsd-kind-icon">Invoice</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/invoicereminder.html" class="tsd-kind-icon">Invoice<wbr>Reminder</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invoiceremindersresponse.html" class="tsd-kind-icon">Invoice<wbr>Reminders<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/invoicesresponse.html" class="tsd-kind-icon">Invoices<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/item.html" class="tsd-kind-icon">Item</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/itemsresponse.html" class="tsd-kind-icon">Items<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/journal.html" class="tsd-kind-icon">Journal</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/journalline.html" class="tsd-kind-icon">Journal<wbr>Line</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/journalsresponse.html" class="tsd-kind-icon">Journals<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/lineitem.html" class="tsd-kind-icon">Line<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/linkedtransaction.html" class="tsd-kind-icon">Linked<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/linkedtransactionsresponse.html" class="tsd-kind-icon">Linked<wbr>Transactions<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/manualjournal.html" class="tsd-kind-icon">Manual<wbr>Journal</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/manualjournalsresponse.html" class="tsd-kind-icon">Manual<wbr>Journals<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/onlineinvoice.html" class="tsd-kind-icon">Online<wbr>Invoice</a>
@@ -342,13 +407,58 @@
 						<a href="interfaces/onlineinvoicesresponse.html" class="tsd-kind-icon">Online<wbr>Invoices<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/orgcissetting.html" class="tsd-kind-icon">OrgCISSetting</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/organisation.html" class="tsd-kind-icon">Organisation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/organisationcissettingresponse.html" class="tsd-kind-icon">OrganisationCISSetting<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/organisationresponse.html" class="tsd-kind-icon">Organisation<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/overpayment.html" class="tsd-kind-icon">Overpayment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/overpaymentsresponse.html" class="tsd-kind-icon">Overpayments<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pagingargs.html" class="tsd-kind-icon">Paging<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/payment.html" class="tsd-kind-icon">Payment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/paymentsresponse.html" class="tsd-kind-icon">Payments<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/phone.html" class="tsd-kind-icon">Phone</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/prepayment.html" class="tsd-kind-icon">Prepayment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/prepaymentsresponse.html" class="tsd-kind-icon">Prepayments<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/purchaseandsalesdetails.html" class="tsd-kind-icon">Purchase<wbr>And<wbr>Sales<wbr>Details</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/queryargs.html" class="tsd-kind-icon">Query<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/receipt.html" class="tsd-kind-icon">Receipt</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/receiptsresponse.html" class="tsd-kind-icon">Receipts<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/repeatinginvoice.html" class="tsd-kind-icon">Repeating<wbr>Invoice</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/repeatinginvoicesresponse.html" class="tsd-kind-icon">Repeating<wbr>Invoices<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/report.html" class="tsd-kind-icon">Report</a>
@@ -360,10 +470,52 @@
 						<a href="interfaces/row.html" class="tsd-kind-icon">Row</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/schedule.html" class="tsd-kind-icon">Schedule</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/summariseerrors.html" class="tsd-kind-icon">Summarise<wbr>Errors</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/taxcomponent.html" class="tsd-kind-icon">Tax<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/taxrate.html" class="tsd-kind-icon">Tax<wbr>Rate</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/taxratesresponse.html" class="tsd-kind-icon">Tax<wbr>Rates<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/tracking.html" class="tsd-kind-icon">Tracking</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/trackingcategoriesresponse.html" class="tsd-kind-icon">Tracking<wbr>Categories<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trackingcategory.html" class="tsd-kind-icon">Tracking<wbr>Category</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trackingoption.html" class="tsd-kind-icon">Tracking<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/unitdecimalplacesargs.html" class="tsd-kind-icon">Unit<wbr>Decimal<wbr>Places<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/user.html" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/usersresponse.html" class="tsd-kind-icon">Users<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/validationerror.html" class="tsd-kind-icon">Validation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/warning.html" class="tsd-kind-icon">Warning</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#version" class="tsd-kind-icon">version</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#generatequerystring" class="tsd-kind-icon">generate<wbr>Query<wbr>String</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-external">
 						<a href="globals.html#getstringfromfile" class="tsd-kind-icon">get<wbr>String<wbr>From<wbr>File</a>

@@ -88,7 +88,9 @@
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external"><a href="ihttpclient.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external"><a href="ihttpclient.html#post" class="tsd-kind-icon">post</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external"><a href="ihttpclient.html#put" class="tsd-kind-icon">put</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ihttpclient.html#writeUTF8ResponseToStream" class="tsd-kind-icon">write<wbr>Response<wbr>ToStream</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ihttpclient.html#readstreamtorequest" class="tsd-kind-icon">read<wbr>Stream<wbr>ToRequest</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ihttpclient.html#writebinaryresponsetostream" class="tsd-kind-icon">write<wbr>Binary<wbr>Response<wbr>ToStream</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ihttpclient.html#writeutf8responsetostream" class="tsd-kind-icon">writeUTF8<wbr>Response<wbr>ToStream</a></li>
 							</ul>
 						</section>
 					</div>
@@ -100,13 +102,13 @@
 					<a name="delete" class="tsd-anchor"></a>
 					<h3>delete</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">delete&lt;T&gt;<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">delete&lt;T&gt;<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, headers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L32">internals/BaseAPIClient.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/BaseAPIClient.ts#L32">internals/BaseAPIClient.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -119,6 +121,14 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>endpoint: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> headers: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-index-signature">
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -129,13 +139,13 @@
 					<a name="get" class="tsd-anchor"></a>
 					<h3>get</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get&lt;T&gt;<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, acceptType<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get&lt;T&gt;<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, headers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L31">internals/BaseAPIClient.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/BaseAPIClient.ts#L31">internals/BaseAPIClient.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -150,7 +160,12 @@
 									<h5>endpoint: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> acceptType: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> headers: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-index-signature">
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -161,13 +176,13 @@
 					<a name="post" class="tsd-anchor"></a>
 					<h3>post</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">post&lt;T&gt;<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">post&lt;T&gt;<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, headers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L34">internals/BaseAPIClient.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/BaseAPIClient.ts#L34">internals/BaseAPIClient.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -183,6 +198,14 @@
 								</li>
 								<li>
 									<h5>body: <span class="tsd-signature-type">object</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> headers: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-index-signature">
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -193,13 +216,13 @@
 					<a name="put" class="tsd-anchor"></a>
 					<h3>put</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">put&lt;T&gt;<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">put&lt;T&gt;<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, headers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L33">internals/BaseAPIClient.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/BaseAPIClient.ts#L33">internals/BaseAPIClient.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -216,22 +239,91 @@
 								<li>
 									<h5>body: <span class="tsd-signature-type">object</span></h5>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> headers: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-index-signature">
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+									</ul>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-					<a name="writeUTF8ResponseToStream" class="tsd-anchor"></a>
-					<h3>write<wbr>Response<wbr>ToStream</h3>
+					<a name="readstreamtorequest" class="tsd-anchor"></a>
+					<h3>read<wbr>Stream<wbr>ToRequest</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">write<wbr>Response<wbr>ToStream<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, mimeType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, writeStream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WriteStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Stream<wbr>ToRequest<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, mimeType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, readStream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="attachmentsresponse.html" class="tsd-signature-type">AttachmentsResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/BaseAPIClient.ts#L35">internals/BaseAPIClient.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/BaseAPIClient.ts#L37">internals/BaseAPIClient.ts:37</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>endpoint: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>mimeType: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>size: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>readStream: <span class="tsd-signature-type">ReadStream</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="attachmentsresponse.html" class="tsd-signature-type">AttachmentsResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+					<a name="writebinaryresponsetostream" class="tsd-anchor"></a>
+					<h3>write<wbr>Binary<wbr>Response<wbr>ToStream</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Binary<wbr>Response<wbr>ToStream<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, mimeType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, writeStream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WriteStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/BaseAPIClient.ts#L36">internals/BaseAPIClient.ts:36</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>endpoint: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>mimeType: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>writeStream: <span class="tsd-signature-type">WriteStream</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+					<a name="writeutf8responsetostream" class="tsd-anchor"></a>
+					<h3>writeUTF8<wbr>Response<wbr>ToStream</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">writeUTF8<wbr>Response<wbr>ToStream<span class="tsd-signature-symbol">(</span>endpoint<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, mimeType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, writeStream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WriteStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/BaseAPIClient.ts#L35">internals/BaseAPIClient.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -280,7 +372,13 @@
 								<a href="ihttpclient.html#put" class="tsd-kind-icon">put</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-								<a href="ihttpclient.html#writeUTF8ResponseToStream" class="tsd-kind-icon">write<wbr>Response<wbr>ToStream</a>
+								<a href="ihttpclient.html#readstreamtorequest" class="tsd-kind-icon">read<wbr>Stream<wbr>ToRequest</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+								<a href="ihttpclient.html#writebinaryresponsetostream" class="tsd-kind-icon">write<wbr>Binary<wbr>Response<wbr>ToStream</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+								<a href="ihttpclient.html#writeutf8responsetostream" class="tsd-kind-icon">writeUTF8<wbr>Response<wbr>ToStream</a>
 							</li>
 						</ul>
 					</li>

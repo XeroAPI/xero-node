@@ -79,13 +79,22 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#account" class="tsd-kind-icon">Account</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#amount" class="tsd-kind-icon">Amount</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#bankamount" class="tsd-kind-icon">Bank<wbr>Amount</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#creditnote" class="tsd-kind-icon">Credit<wbr>Note</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#currencyrate" class="tsd-kind-icon">Currency<wbr>Rate</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#date" class="tsd-kind-icon">Date</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#hasaccount" class="tsd-kind-icon">Has<wbr>Account</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#hasvalidationerrors" class="tsd-kind-icon">Has<wbr>Validation<wbr>Errors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#invoice" class="tsd-kind-icon">Invoice</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#isreconciled" class="tsd-kind-icon">Is<wbr>Reconciled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#overpayment" class="tsd-kind-icon">Overpayment</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#paymentid" class="tsd-kind-icon">PaymentID</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#paymenttype" class="tsd-kind-icon">Payment<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#prepayment" class="tsd-kind-icon">Prepayment</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#reference" class="tsd-kind-icon">Reference</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#status" class="tsd-kind-icon">Status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="payment.html#updateddateutc" class="tsd-kind-icon">Updated<wbr>DateUTC</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,12 +103,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="account" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Account</h3>
+					<div class="tsd-signature tsd-kind-icon">Account<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L86">AccountingAPI-models.ts:86</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="amount" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Amount</h3>
 					<div class="tsd-signature tsd-kind-icon">Amount<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/AccountingAPI-types.d.ts#L59">AccountingAPI-types.d.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L78">AccountingAPI-models.ts:78</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="bankamount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Bank<wbr>Amount</h3>
+					<div class="tsd-signature tsd-kind-icon">Bank<wbr>Amount<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L79">AccountingAPI-models.ts:79</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="creditnote" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Credit<wbr>Note</h3>
+					<div class="tsd-signature tsd-kind-icon">Credit<wbr>Note<span class="tsd-signature-symbol">:</span> <a href="creditnote.html" class="tsd-signature-type">CreditNote</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L88">AccountingAPI-models.ts:88</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -109,7 +148,7 @@
 					<div class="tsd-signature tsd-kind-icon">Currency<wbr>Rate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/AccountingAPI-types.d.ts#L61">AccountingAPI-types.d.ts:61</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L81">AccountingAPI-models.ts:81</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -119,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/AccountingAPI-types.d.ts#L58">AccountingAPI-types.d.ts:58</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L77">AccountingAPI-models.ts:77</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -129,17 +168,37 @@
 					<div class="tsd-signature tsd-kind-icon">Has<wbr>Account<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/AccountingAPI-types.d.ts#L62">AccountingAPI-types.d.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L85">AccountingAPI-models.ts:85</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="hasvalidationerrors" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Has<wbr>Validation<wbr>Errors</h3>
-					<div class="tsd-signature tsd-kind-icon">Has<wbr>Validation<wbr>Errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="invoice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Invoice</h3>
+					<div class="tsd-signature tsd-kind-icon">Invoice<span class="tsd-signature-symbol">:</span> <a href="invoice.html" class="tsd-signature-type">Invoice</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/AccountingAPI-types.d.ts#L63">AccountingAPI-types.d.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L87">AccountingAPI-models.ts:87</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isreconciled" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Is<wbr>Reconciled</h3>
+					<div class="tsd-signature tsd-kind-icon">Is<wbr>Reconciled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L82">AccountingAPI-models.ts:82</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="overpayment" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Overpayment</h3>
+					<div class="tsd-signature tsd-kind-icon">Overpayment<span class="tsd-signature-symbol">:</span> <a href="overpayment.html" class="tsd-signature-type">Overpayment</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L90">AccountingAPI-models.ts:90</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -149,7 +208,27 @@
 					<div class="tsd-signature tsd-kind-icon">PaymentID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/AccountingAPI-types.d.ts#L57">AccountingAPI-types.d.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L76">AccountingAPI-models.ts:76</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="paymenttype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Payment<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Payment<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L84">AccountingAPI-models.ts:84</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="prepayment" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Prepayment</h3>
+					<div class="tsd-signature tsd-kind-icon">Prepayment<span class="tsd-signature-symbol">:</span> <a href="prepayment.html" class="tsd-signature-type">Prepayment</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L89">AccountingAPI-models.ts:89</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -159,7 +238,27 @@
 					<div class="tsd-signature tsd-kind-icon">Reference<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/AccountingAPI-types.d.ts#L60">AccountingAPI-types.d.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L80">AccountingAPI-models.ts:80</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="status" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Status</h3>
+					<div class="tsd-signature tsd-kind-icon">Status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L83">AccountingAPI-models.ts:83</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="updateddateutc" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Updated<wbr>DateUTC</h3>
+					<div class="tsd-signature tsd-kind-icon">Updated<wbr>DateUTC<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-models.ts#L91">AccountingAPI-models.ts:91</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -181,7 +280,16 @@
 						<a href="payment.html" class="tsd-kind-icon">Payment</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#account" class="tsd-kind-icon">Account</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="payment.html#amount" class="tsd-kind-icon">Amount</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#bankamount" class="tsd-kind-icon">Bank<wbr>Amount</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#creditnote" class="tsd-kind-icon">Credit<wbr>Note</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="payment.html#currencyrate" class="tsd-kind-icon">Currency<wbr>Rate</a>
@@ -193,13 +301,31 @@
 								<a href="payment.html#hasaccount" class="tsd-kind-icon">Has<wbr>Account</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="payment.html#hasvalidationerrors" class="tsd-kind-icon">Has<wbr>Validation<wbr>Errors</a>
+								<a href="payment.html#invoice" class="tsd-kind-icon">Invoice</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#isreconciled" class="tsd-kind-icon">Is<wbr>Reconciled</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#overpayment" class="tsd-kind-icon">Overpayment</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="payment.html#paymentid" class="tsd-kind-icon">PaymentID</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#paymenttype" class="tsd-kind-icon">Payment<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#prepayment" class="tsd-kind-icon">Prepayment</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="payment.html#reference" class="tsd-kind-icon">Reference</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#status" class="tsd-kind-icon">Status</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="payment.html#updateddateutc" class="tsd-kind-icon">Updated<wbr>DateUTC</a>
 							</li>
 						</ul>
 					</li>

@@ -91,10 +91,8 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ioauth1client.html#buildauthoriseurl" class="tsd-kind-icon">build<wbr>Authorise<wbr>Url</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ioauth1client.html#getstate" class="tsd-kind-icon">get<wbr>State</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ioauth1client.html#getunauthorisedrequesttoken" class="tsd-kind-icon">get<wbr>Unauthorised<wbr>Request<wbr>Token</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ioauth1client.html#getrequesttoken" class="tsd-kind-icon">get<wbr>Request<wbr>Token</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ioauth1client.html#refreshaccesstoken" class="tsd-kind-icon">refresh<wbr>Access<wbr>Token</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ioauth1client.html#setstate" class="tsd-kind-icon">set<wbr>State</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="ioauth1client.html#swaprequesttokenforaccesstoken" class="tsd-kind-icon">swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</a></li>
 							</ul>
 						</section>
@@ -109,7 +107,7 @@
 					<div class="tsd-signature tsd-kind-icon">agent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Agent</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/OAuth1HttpClient.ts#L41">internals/OAuth1HttpClient.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/OAuth1HttpClient.ts#L41">internals/OAuth1HttpClient.ts:41</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -120,50 +118,39 @@
 					<a name="buildauthoriseurl" class="tsd-anchor"></a>
 					<h3>build<wbr>Authorise<wbr>Url</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">build<wbr>Authorise<wbr>Url<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">build<wbr>Authorise<wbr>Url<span class="tsd-signature-symbol">(</span>requestToken<span class="tsd-signature-symbol">: </span><a href="itoken.html" class="tsd-signature-type">IToken</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/OAuth1HttpClient.ts#L45">internals/OAuth1HttpClient.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/OAuth1HttpClient.ts#L43">internals/OAuth1HttpClient.ts:43</a></li>
 								</ul>
 							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>requestToken: <a href="itoken.html" class="tsd-signature-type">IToken</a></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-					<a name="getstate" class="tsd-anchor"></a>
-					<h3>get<wbr>State</h3>
+					<a name="getrequesttoken" class="tsd-anchor"></a>
+					<h3>get<wbr>Request<wbr>Token</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>State<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ioauth1state.html" class="tsd-signature-type">IOAuth1State</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Request<wbr>Token<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="itoken.html" class="tsd-signature-type">IToken</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/OAuth1HttpClient.ts#L42">internals/OAuth1HttpClient.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/OAuth1HttpClient.ts#L42">internals/OAuth1HttpClient.ts:42</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="ioauth1state.html" class="tsd-signature-type">IOAuth1State</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-					<a name="getunauthorisedrequesttoken" class="tsd-anchor"></a>
-					<h3>get<wbr>Unauthorised<wbr>Request<wbr>Token</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Unauthorised<wbr>Request<wbr>Token<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/OAuth1HttpClient.ts#L44">internals/OAuth1HttpClient.ts:44</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="itoken.html" class="tsd-signature-type">IToken</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -171,39 +158,16 @@
 					<a name="refreshaccesstoken" class="tsd-anchor"></a>
 					<h3>refresh<wbr>Access<wbr>Token</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">refresh<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">refresh<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="ioauth1state.html" class="tsd-signature-type">IOAuth1State</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/OAuth1HttpClient.ts#L47">internals/OAuth1HttpClient.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/OAuth1HttpClient.ts#L45">internals/OAuth1HttpClient.ts:45</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-					<a name="setstate" class="tsd-anchor"></a>
-					<h3>set<wbr>State</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>State<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="ioauth1state.html" class="tsd-signature-type">IOAuth1State</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/OAuth1HttpClient.ts#L43">internals/OAuth1HttpClient.ts:43</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>state: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="ioauth1state.html" class="tsd-signature-type">IOAuth1State</a><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="ioauth1state.html" class="tsd-signature-type">IOAuth1State</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -211,22 +175,25 @@
 					<a name="swaprequesttokenforaccesstoken" class="tsd-anchor"></a>
 					<h3>swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span>oauth_verifier<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span>requestToken<span class="tsd-signature-symbol">: </span><a href="itoken.html" class="tsd-signature-type">IToken</a>, oauth_verifier<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="ioauth1state.html" class="tsd-signature-type">IOAuth1State</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/internals/OAuth1HttpClient.ts#L46">internals/OAuth1HttpClient.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/internals/OAuth1HttpClient.ts#L44">internals/OAuth1HttpClient.ts:44</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
+									<h5>requestToken: <a href="itoken.html" class="tsd-signature-type">IToken</a></h5>
+								</li>
+								<li>
 									<h5>oauth_verifier: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="ioauth1state.html" class="tsd-signature-type">IOAuth1State</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -254,16 +221,10 @@
 								<a href="ioauth1client.html#buildauthoriseurl" class="tsd-kind-icon">build<wbr>Authorise<wbr>Url</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-								<a href="ioauth1client.html#getstate" class="tsd-kind-icon">get<wbr>State</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-								<a href="ioauth1client.html#getunauthorisedrequesttoken" class="tsd-kind-icon">get<wbr>Unauthorised<wbr>Request<wbr>Token</a>
+								<a href="ioauth1client.html#getrequesttoken" class="tsd-kind-icon">get<wbr>Request<wbr>Token</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
 								<a href="ioauth1client.html#refreshaccesstoken" class="tsd-kind-icon">refresh<wbr>Access<wbr>Token</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-								<a href="ioauth1client.html#setstate" class="tsd-kind-icon">set<wbr>State</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
 								<a href="ioauth1client.html#swaprequesttokenforaccesstoken" class="tsd-kind-icon">swap<wbr>Request<wbr>Tokenfor<wbr>Access<wbr>Token</a>

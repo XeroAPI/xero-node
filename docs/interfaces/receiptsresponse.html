@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>XeroAuthError | xero-node</title>
+	<title>ReceiptsResponse | xero-node</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="xeroautherror.html">XeroAuthError</a>
+					<a href="receiptsresponse.html">ReceiptsResponse</a>
 				</li>
 			</ul>
-			<h1>Class XeroAuthError</h1>
+			<h1>Interface ReceiptsResponse</h1>
 		</div>
 	</div>
 </header>
@@ -68,10 +68,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">Error</span>
+						<a href="accountingapiresponse.html" class="tsd-signature-type">AccountingAPIResponse</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">XeroAuthError</span>
+								<span class="target">ReceiptsResponse</span>
 							</li>
 						</ul>
 					</li>
@@ -82,117 +82,71 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="xeroautherror.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="xeroautherror.html#data" class="tsd-kind-icon">data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="xeroautherror.html#statuscode" class="tsd-kind-icon">status<wbr>Code</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="xeroautherror.html#error" class="tsd-kind-icon">Error</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="xeroautherror.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="xeroautherror.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static"><a href="xeroautherror.html#stack" class="tsd-kind-icon">stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="receiptsresponse.html#datetimeutc" class="tsd-kind-icon">Date<wbr>TimeUTC</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="receiptsresponse.html#id" class="tsd-kind-icon">Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="receiptsresponse.html#providername" class="tsd-kind-icon">Provider<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="receiptsresponse.html#receipts" class="tsd-kind-icon">Receipts</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="receiptsresponse.html#status" class="tsd-kind-icon">Status</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Xero<wbr>Auth<wbr>Error<span class="tsd-signature-symbol">(</span>statusCode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="xeroautherror.html" class="tsd-signature-type">XeroAuthError</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/XeroErrors.ts#L5">XeroErrors.ts:5</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>statusCode: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>data: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="xeroautherror.html" class="tsd-signature-type">XeroAuthError</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="datetimeutc" class="tsd-anchor"></a>
+					<h3>Date<wbr>TimeUTC</h3>
+					<div class="tsd-signature tsd-kind-icon">Date<wbr>TimeUTC<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="accountingapiresponse.html">AccountingAPIResponse</a>.<a href="accountingapiresponse.html#datetimeutc">DateTimeUTC</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/XeroErrors.ts#L5">XeroErrors.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-responses.ts#L7">AccountingAPI-responses.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="statuscode" class="tsd-anchor"></a>
-					<h3>status<wbr>Code</h3>
-					<div class="tsd-signature tsd-kind-icon">status<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="id" class="tsd-anchor"></a>
+					<h3>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="accountingapiresponse.html">AccountingAPIResponse</a>.<a href="accountingapiresponse.html#id">Id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/c8e8742/src/XeroErrors.ts#L4">XeroErrors.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-responses.ts#L4">AccountingAPI-responses.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="error" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> Error</h3>
-					<div class="tsd-signature tsd-kind-icon">Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ErrorConstructor</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="providername" class="tsd-anchor"></a>
+					<h3>Provider<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">Provider<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="accountingapiresponse.html">AccountingAPIResponse</a>.<a href="accountingapiresponse.html#providername">ProviderName</a></p>
 						<ul>
-							<li>Defined in C:/Dev/xero-node/node_modules/typescript/lib/lib.es5.d.ts:896</li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-responses.ts#L6">AccountingAPI-responses.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="message" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> message</h3>
-					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="receipts" class="tsd-anchor"></a>
+					<h3>Receipts</h3>
+					<div class="tsd-signature tsd-kind-icon">Receipts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="receipt.html" class="tsd-signature-type">Receipt</a><span class="tsd-signature-symbol"> &amp; </span><a href="summariseerrors.html" class="tsd-signature-type">SummariseErrors</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Error.message</p>
 						<ul>
-							<li>Defined in C:/Dev/xero-node/node_modules/typescript/lib/lib.es5.d.ts:886</li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-responses.ts#L125">AccountingAPI-responses.ts:125</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="name" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="status" class="tsd-anchor"></a>
+					<h3>Status</h3>
+					<div class="tsd-signature tsd-kind-icon">Status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Error.name</p>
+						<p>Inherited from <a href="accountingapiresponse.html">AccountingAPIResponse</a>.<a href="accountingapiresponse.html#status">Status</a></p>
 						<ul>
-							<li>Defined in C:/Dev/xero-node/node_modules/typescript/lib/lib.es5.d.ts:885</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
-					<a name="stack" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagOptional">Optional</span> stack</h3>
-					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from Error.stack</p>
-						<p>Overrides Error.stack</p>
-						<ul>
-							<li>Defined in C:/Dev/xero-node/node_modules/typescript/lib/lib.es5.d.ts:887</li>
+							<li>Defined in <a href="https://github.com/XeroAPI/xero-node/blob/2e93066/src/AccountingAPI-responses.ts#L5">AccountingAPI-responses.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -210,29 +164,23 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="xeroautherror.html" class="tsd-kind-icon">Xero<wbr>Auth<wbr>Error</a>
+					<li class="current tsd-kind-interface">
+						<a href="receiptsresponse.html" class="tsd-kind-icon">Receipts<wbr>Response</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="xeroautherror.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="receiptsresponse.html#datetimeutc" class="tsd-kind-icon">Date<wbr>TimeUTC</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="xeroautherror.html#data" class="tsd-kind-icon">data</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="receiptsresponse.html#id" class="tsd-kind-icon">Id</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="xeroautherror.html#statuscode" class="tsd-kind-icon">status<wbr>Code</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="receiptsresponse.html#providername" class="tsd-kind-icon">Provider<wbr>Name</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="xeroautherror.html#error" class="tsd-kind-icon">Error</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="receiptsresponse.html#receipts" class="tsd-kind-icon">Receipts</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="xeroautherror.html#message" class="tsd-kind-icon">message</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="xeroautherror.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
-								<a href="xeroautherror.html#stack" class="tsd-kind-icon">stack</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="receiptsresponse.html#status" class="tsd-kind-icon">Status</a>
 							</li>
 						</ul>
 					</li>
