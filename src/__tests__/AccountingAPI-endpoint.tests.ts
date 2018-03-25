@@ -47,7 +47,8 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `banktransactions?order=something`, args: { order: 'something' } },
 			{ action: 'get', expectedPath: `banktransactions?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
 			{ action: 'get', expectedPath: `banktransactions?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
-			{ action: 'create', expectedPath: 'banktransactions' },
+			{ action: 'get', expectedPath: `banktransactions?page=3&unitdp=4`, args: { page: 3, unitdp: 4 } },
+			{ action: 'create', expectedPath: 'banktransactions?summarizeErrors=false' },
 			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=false' },
 			{ action: 'update', expectedPath: 'banktransactions?summarizeErrors=true', args: { summarizeErrors: true } }
 		],
@@ -98,7 +99,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `creditnotes?order=something`, args: { order: 'something' } },
 			{ action: 'get', expectedPath: `creditnotes?where=Type%3D%3D%22ACCPAY%22&createdByMyApp=true`, args: { where: `Type=="ACCPAY"`, createdByMyApp: true } },
 			{ action: 'get', expectedPath: `creditnotes?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
-			{ action: 'create', expectedPath: 'creditnotes' },
+			{ action: 'create', expectedPath: 'creditnotes?summarizeErrors=false' },
 			{ action: 'update', expectedPath: 'creditnotes?summarizeErrors=false' },
 			{ action: 'update', expectedPath: 'creditnotes?summarizeErrors=true', args: { summarizeErrors: true } }
 		],
@@ -176,8 +177,8 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: `linkedtransactions?ContactID=${guid1}`, args: { ContactID: guid1 } },
 			{ action: 'get', expectedPath: `linkedtransactions?Status=${guid1}`, args: { Status: guid1 } },
 			{ action: 'get', expectedPath: `linkedtransactions?TargetTransactionID=${guid1}`, args: { TargetTransactionID: guid1 } },
-
-			{ action: 'create', expectedPath: 'linkedtransactions' },
+			{ action: 'get', expectedPath: `linkedtransactions?unitdp=4`, args: { unitdp: 4 } },
+			{ action: 'create', expectedPath: 'linkedtransactions?summarizeErrors=false' },
 			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=false' },
 			{ action: 'update', expectedPath: `linkedtransactions/${guid1}?summarizeErrors=false`, args: { LinkedTransactionID: guid1 } },
 			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=true', args: { summarizeErrors: true } },

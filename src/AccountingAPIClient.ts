@@ -15,6 +15,10 @@ export interface PagingArgs {
 	page?: number;
 }
 
+export interface UnitDecimalPlacesArgs {
+	unitdp?: number;
+}
+
 export interface HeaderArgs {
 	'If-Modified-Since'?: string;
 }
@@ -96,7 +100,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public bankTransactions = {
-		get: async (args?: { BankTransactionID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<BankTransactionsResponse> => {
+		get: async (args?: { BankTransactionID?: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<BankTransactionsResponse> => {
 			let endpoint = 'banktransactions';
 			if (args && args.BankTransactionID) {
 				endpoint = endpoint + '/' + args.BankTransactionID;
@@ -107,11 +111,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<BankTransactionsResponse>(endpoint, header);
 		},
-		create: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }): Promise<BankTransactionsResponse> => {
-			const endpoint = 'banktransactions';
+		create: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }, args?: { summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<BankTransactionsResponse> => {
+			const endpoint = 'banktransactions' + generateQueryString(args, true);
 			return this.oauth1Client.put<BankTransactionsResponse>(endpoint, bankTransaction);
 		},
-		update: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }, args?: { summarizeErrors?: boolean }): Promise<BankTransactionsResponse> => {
+		update: async (bankTransaction: BankTransaction | { BankTransactions: BankTransaction[] }, args?: { summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<BankTransactionsResponse> => {
 			const endpoint = 'banktransactions' + generateQueryString(args, true);
 			return this.oauth1Client.post<BankTransactionsResponse>(endpoint, bankTransaction);
 		},
@@ -252,7 +256,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public creditNotes = {
-		get: async (args?: { CreditNoteID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<CreditNotesResponse> => {
+		get: async (args?: { CreditNoteID?: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<CreditNotesResponse> => {
 			let endpoint = 'creditnotes';
 			if (args && args.CreditNoteID) {
 				endpoint = endpoint + '/' + args.CreditNoteID;
@@ -275,11 +279,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.writeUTF8ResponseToStream(endpoint, 'application/pdf', writeStream);
 		},
-		create: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }): Promise<CreditNotesResponse> => {
-			const endpoint = 'creditnotes';
+		create: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: {summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<CreditNotesResponse> => {
+			const endpoint = 'creditnotes' + generateQueryString(args, true);
 			return this.oauth1Client.put<CreditNotesResponse>(endpoint, creditNote);
 		},
-		update: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: { summarizeErrors?: boolean }): Promise<CreditNotesResponse> => {
+		update: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: { summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<CreditNotesResponse> => {
 			const endpoint = 'creditnotes' + generateQueryString(args, true);
 			return this.oauth1Client.post<CreditNotesResponse>(endpoint, creditNote);
 		},
@@ -367,7 +371,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, createdByMyApp?: boolean } & HeaderArgs & PagingArgs & QueryArgs): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, createdByMyApp?: boolean } & HeaderArgs & PagingArgs & UnitDecimalPlacesArgs & QueryArgs): Promise<InvoicesResponse> => {
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
@@ -397,12 +401,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.writeUTF8ResponseToStream(endpoint, 'application/pdf', writeStream);
 		},
-		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: { summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
+		create: async (invoice: Invoice | { Invoices: Invoice[] }, args?: { summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<InvoicesResponse> => {
 			const endpoint = 'invoices' + generateQueryString(args, true);
 
 			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
 		},
-		update: async (invoices: Invoice | { Invoices: Invoice[] }, args?: { InvoiceID?: string, InvoiceNumber?: string, where?: string, summarizeErrors?: boolean }): Promise<InvoicesResponse> => {
+		update: async (invoices: Invoice | { Invoices: Invoice[] }, args?: { InvoiceID?: string, InvoiceNumber?: string, where?: string, summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<InvoicesResponse> => {
 			let endpoint = `invoices`;
 
 			if (args && args.InvoiceID) {
@@ -484,7 +488,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public linkedTransactions = {
-		get: async (args?: { LinkedTransactionID?: string } & QueryArgs & HeaderArgs): Promise<LinkedTransactionsResponse> => {
+		get: async (args?: { LinkedTransactionID?: string } & QueryArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<LinkedTransactionsResponse> => {
 			let endpoint = 'linkedtransactions';
 			if (args && args.LinkedTransactionID) {
 				endpoint = endpoint + '/' + args.LinkedTransactionID;
@@ -495,11 +499,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<LinkedTransactionsResponse>(endpoint, header);
 		},
-		create: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }): Promise<LinkedTransactionsResponse> => {
-			const endpoint = 'linkedtransactions';
+		create: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }, args?: {summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<LinkedTransactionsResponse> => {
+			const endpoint = 'linkedtransactions' + generateQueryString(args, true);
 			return this.oauth1Client.put<LinkedTransactionsResponse>(endpoint, linkedTransaction);
 		},
-		update: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }, args?: { LinkedTransactionID?: string, summarizeErrors?: boolean }): Promise<LinkedTransactionsResponse> => {
+		update: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }, args?: { LinkedTransactionID?: string, summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<LinkedTransactionsResponse> => {
 			let endpoint = 'linkedtransactions';
 			if (args && args.LinkedTransactionID) {
 				endpoint = endpoint + '/' + args.LinkedTransactionID;
@@ -566,7 +570,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public overpayments = {
-		get: async (args?: { OverpaymentID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<OverpaymentsResponse> => {
+		get: async (args?: { OverpaymentID?: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<OverpaymentsResponse> => {
 			let endpoint = 'overpayments';
 			if (args && args.OverpaymentID) {
 				endpoint += '/' + args.OverpaymentID;
@@ -612,7 +616,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public prepayments = {
-		get: async (args?: { PrepaymentID: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
+		get: async (args?: { PrepaymentID: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
 			let endpoint = 'prepayments';
 			if (args && args.PrepaymentID) {
 				endpoint = endpoint + '/' + args.PrepaymentID;
@@ -644,7 +648,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public receipts = {
-		get: async (args?: { ReceiptID?: string } & QueryArgs & HeaderArgs): Promise<ReceiptsResponse> => {
+		get: async (args?: { ReceiptID?: string } & QueryArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<ReceiptsResponse> => {
 			let endpoint = 'receipts';
 			if (args && args.ReceiptID) {
 				endpoint += '/' + args.ReceiptID;
@@ -654,11 +658,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 			return this.oauth1Client.get<ReceiptsResponse>(endpoint, header);
 		},
-		create: async (receipts?: Receipt | { Receipts: Receipt[] }, args?: { summarizeErrors?: boolean }): Promise<ReceiptsResponse> => {
+		create: async (receipts?: Receipt | { Receipts: Receipt[] }, args?: { summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<ReceiptsResponse> => {
 			const endpoint = 'receipts' + generateQueryString(args, true);
 			return this.oauth1Client.put<ReceiptsResponse>(endpoint, receipts);
 		},
-		update: async (receipts?: Receipt | { Receipts: Receipt[] }, args?: { ReceiptID?: string, summarizeErrors?: boolean }): Promise<ReceiptsResponse> => {
+		update: async (receipts?: Receipt | { Receipts: Receipt[] }, args?: { ReceiptID?: string, summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<ReceiptsResponse> => {
 			let endpoint = 'receipts';
 			if (args && args.ReceiptID) {
 				endpoint += '/' + args.ReceiptID;
