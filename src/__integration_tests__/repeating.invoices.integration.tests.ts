@@ -13,7 +13,6 @@ describe('/repeatinginvoices', () => {
 	// only checks that the response returns an array of repeating invoice
 	it('get all', async () => {
 		const response = await xero.repeatingInvoices.get();
-		console.log(response);
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
 		expect(response.Status).toBe('OK');
