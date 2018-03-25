@@ -293,9 +293,13 @@ export interface JournalLine {
 	AccountCode?: string;
 	AccountType?: string;
 	AccountName?: string;
-	NetAmount?: string;
-	GrossAmount?: string;
-	TaxAmount?: string;
+	NetAmount?: number;
+	GrossAmount?: number;
+	TaxAmount?: number;
+	TaxType?: string;
+	Tracking?: Tracking[];
+	Description?: string;
+	LineAmount?: number;
 }
 export interface Phone {
 	PhoneType?: string;
@@ -313,6 +317,17 @@ export interface LineItem {
 	Tracking?: Tracking[];
 	Quantity?: number;
 	LineItemID?: string;
+}
+export interface ManualJournal {
+	Date?: string;
+	LineAmountTypes?: string;
+	Status?: string;
+	Narration?: string;
+	JournalLines?: JournalLine[];
+	Url?: string;
+	ShowOnCashBasisReports?: boolean;
+	HasAttachments?: boolean;
+	UpdatedDateUTC?: string;
 }
 export interface Organisation {
 	APIKey: string;

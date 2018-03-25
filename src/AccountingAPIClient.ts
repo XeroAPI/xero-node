@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
-import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse } from './AccountingAPI-responses';
-import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt } from './AccountingAPI-models';
+import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse } from './AccountingAPI-responses';
+import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt, ManualJournal } from './AccountingAPI-models';
 
 export interface QueryArgs {
 	where?: string;
@@ -508,6 +508,29 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public manualJournals = {
+		get: async (args?: { ManualJournalID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<ManualJournalsResponse> => {
+			let endpoint = 'manualjournals';
+			if (args && args.ManualJournalID) {
+				endpoint += '/' + args.ManualJournalID;
+				delete args.ManualJournalID;
+			}
+			const header = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+			return this.oauth1Client.get<ManualJournalsResponse>(endpoint, header);
+		},
+		create: async (manualJournals?: ManualJournal | { ManualJournals: ManualJournal[] }, args?: { summarizeErrors?: boolean }): Promise<ManualJournalsResponse> => {
+			const endpoint = 'manualjournals' + generateQueryString(args, true);
+			return this.oauth1Client.put<ManualJournalsResponse>(endpoint, manualJournals);
+		},
+		update: async (manualJournals?: ManualJournal | { ManualJournals: ManualJournal[] }, args?: { ManualJournalID?: string, summarizeErrors?: boolean }): Promise<ManualJournalsResponse> => {
+			let endpoint = 'manualjournals';
+			if (args && args.ManualJournalID) {
+				endpoint += '/' + args.ManualJournalID;
+				delete args.ManualJournalID;
+			}
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.post<ManualJournalsResponse>(endpoint, manualJournals);
+		},
 		attachments: this.generateAttachmentsEndpoint('manualjournals')
 	};
 

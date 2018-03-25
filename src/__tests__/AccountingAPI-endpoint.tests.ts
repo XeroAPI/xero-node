@@ -183,7 +183,16 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: 'linkedtransactions?summarizeErrors=true', args: { summarizeErrors: true } },
 			{ action: 'delete', expectedPath: `linkedtransactions/${guid1}`, args: { LinkedTransactionID: guid1 } }
 		],
-		// TODO manualJournals
+		manualJournals: [
+			{ action: 'get', expectedPath: 'manualjournals' },
+			{ action: 'get', expectedPath: `manualjournals/${guid1}`, args: { ManualJournalID: guid1 } },
+			{ action: 'get', expectedPath: `manualjournals/${guid1}?order=UpdatedDateUTC`, args: { ManualJournalID: guid1, order: 'UpdatedDateUTC' } },
+			{ action: 'get', expectedPath: `manualjournals?page=3`, args: { 'page': 3, 'If-Modified-Since': 'headerValue' } },
+			{ action: 'create', expectedPath: `manualjournals?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `manualjournals?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `manualjournals/${guid1}?summarizeErrors=true`, args: { ManualJournalID: guid1, summarizeErrors: true } },
+			{ subResource: 'attachments', action: 'get', expectedPath: `manualjournals/${guid1}/attachments`, args: { EntityID: guid1 } },
+		],
 		organisation: [
 			{ action: 'get', expectedPath: 'organisation' },
 			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }

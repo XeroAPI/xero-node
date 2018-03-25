@@ -1,4 +1,4 @@
-﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment, Receipt, RepeatingInvoice } from './AccountingAPI-models';
+﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment, Receipt, RepeatingInvoice, ManualJournal } from './AccountingAPI-models';
 
 export interface AccountingAPIResponse {
 	Id: string;
@@ -91,7 +91,9 @@ export interface LinkedTransactionsResponse {
 	LinkedTransactions: Array<LinkedTransaction & SummariseErrors>;
 }
 
-// TODO manual journals
+export interface ManualJournalsResponse {
+	ManualJournals: Array<ManualJournal & SummariseErrors>;
+}
 
 export interface OnlineInvoicesResponse extends AccountingAPIResponse {
 	OnlineInvoices: Array<OnlineInvoice & SummariseErrors>;
