@@ -47,8 +47,8 @@ describe('attachments', () => {
 			entityId: entityId
 		});
 
-		expect(response.Attachments.length).toEqual(1);
-		expect(response.Attachments[0].FileName).toEqual('anUploadedImage.jpg');
+		expect(response.Attachments.length).toBeGreaterThan(0);
+		expect(response.Attachments.map((attachment) => attachment.FileName)).toContainEqual('anUploadedImage.jpg');
 	});
 
 	it('errors like this', async () => {
