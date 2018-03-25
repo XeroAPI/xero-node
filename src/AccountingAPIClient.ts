@@ -448,7 +448,8 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<RepeatingInvoicesResponse>(endpoint, headers);
-		}
+		},
+		attachments: this.generateAttachmentsEndpoint('repeatinginvoices')
 	};
 
 	public items = {
