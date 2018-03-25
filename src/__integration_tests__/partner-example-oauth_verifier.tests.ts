@@ -17,7 +17,6 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	let authUrl: string;
 	let requestToken: IToken;
 	let authState: IOAuth1State;
-	let page: any;
 	let oauth_verifier: string;
 
 	beforeAll(async () => {
@@ -29,7 +28,7 @@ describe('Partner Example Tests using oauth_verifier', () => {
 			headless: true,
 		});
 		try {
-			page = await browser.newPage();
+			const page = await browser.newPage();
 			await page.goto(authUrl);
 
 			// /user logs into Xero and Auths your app
@@ -38,12 +37,14 @@ describe('Partner Example Tests using oauth_verifier', () => {
 			await page.click(PASSWORD_SELECTOR);
 			await page.keyboard.type(password_config.password);
 
-			await page.click(LOGIN_BUTTON_SELECTOR);
-			await page.waitForNavigation();
-			await page.waitForNavigation();
-			await page.click(AUTH_BUTTON_SELECTOR);
-
-			await delay(2500);
+			await Promise.all([
+				page.click(LOGIN_BUTTON_SELECTOR),
+				page.waitForNavigation().then(() => page.waitForNavigation())
+			]);
+			await Promise.all([
+				page.click(AUTH_BUTTON_SELECTOR),
+				page.waitForNavigation()
+			]);
 
 			// The pin is usually sent to your callback url, in this example,
 			// callback url is set to null
@@ -52,10 +53,10 @@ describe('Partner Example Tests using oauth_verifier', () => {
 				const query = (document.querySelector(PIN_SELECTOR) as any).value;
 				return query;
 			});
-			browser.close();
 		} catch (e) {
-			browser.close();
 			throw e;
+		} finally {
+			browser.close();
 		}
 	});
 
@@ -101,9 +102,3 @@ describe('Partner Example Tests using oauth_verifier', () => {
 		});
 	});
 });
-
-function delay(timeout: number) {
-	return new Promise((resolve) => {
-		setTimeout(resolve, timeout);
-	});
-}
