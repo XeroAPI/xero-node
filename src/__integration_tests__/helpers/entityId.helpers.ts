@@ -11,6 +11,7 @@ const inMemoryCache: {
 	expenseClaimId?: string,
 	invoiceId?: string,
 	itemId?: string,
+	manualJournalId?: string,
 	paymentId?: string,
 	receiptId?: string,
 	userId?: string,
@@ -127,6 +128,20 @@ export async function getOrCreateItemId(xero: AccountingAPIClient) {
 		inMemoryCache.itemId = response.Items[0].ItemID;
 	}
 	return inMemoryCache.itemId;
+}
+
+export async function getOrCreateManualJournalId(xero: AccountingAPIClient) {
+	if (!inMemoryCache.manualJournalId) {
+		let response = await xero.manualJournals.get();
+		if (response.ManualJournals.length <= 0) {
+			response = await xero.manualJournals.create({
+				Narration: 'Tea for the DevX Pirates',
+				JournalLines: []
+			});
+		}
+		inMemoryCache.manualJournalId = response.ManualJournals[0].ManualJournalID;
+	}
+	return inMemoryCache.manualJournalId;
 }
 
 export async function getOrCreatePaymentId(xero: AccountingAPIClient) {

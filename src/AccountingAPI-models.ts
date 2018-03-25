@@ -319,6 +319,7 @@ export interface LineItem {
 	LineItemID?: string;
 }
 export interface ManualJournal {
+	ManualJournalID?: string;
 	Date?: string;
 	LineAmountTypes?: string;
 	Status?: string;

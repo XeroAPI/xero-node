@@ -87,11 +87,11 @@ export interface JournalsResponse extends AccountingAPIResponse {
 	Journals: Array<Journal & SummariseErrors>;
 }
 
-export interface LinkedTransactionsResponse {
+export interface LinkedTransactionsResponse extends AccountingAPIResponse {
 	LinkedTransactions: Array<LinkedTransaction & SummariseErrors>;
 }
 
-export interface ManualJournalsResponse {
+export interface ManualJournalsResponse extends AccountingAPIResponse {
 	ManualJournals: Array<ManualJournal & SummariseErrors>;
 }
 
