@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
-import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse } from './AccountingAPI-responses';
+import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse, RepeatingInvoicesResponse } from './AccountingAPI-responses';
 import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt, ManualJournal } from './AccountingAPI-models';
 
 export interface QueryArgs {
@@ -437,6 +437,20 @@ export class AccountingAPIClient extends BaseAPIClient {
 		attachments: this.generateAttachmentsEndpoint('invoices')
 	};
 
+	public repeatingInvoices = {
+		get: async (args?: { RepeatingInvoiceID?: string} & QueryArgs): Promise<RepeatingInvoicesResponse> => {
+			let endpoint = 'repeatinginvoices';
+			if (args && args.RepeatingInvoiceID) {
+				endpoint = endpoint + '/' + args.RepeatingInvoiceID;
+				delete args.RepeatingInvoiceID;
+			}
+			const headers = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<RepeatingInvoicesResponse>(endpoint, headers);
+		}
+	};
+
 	public items = {
 		get: async (args?: { ItemID?: string, Code?: string } & QueryArgs & HeaderArgs): Promise<ItemsResponse> => {
 			let endpoint = 'items';
@@ -672,10 +686,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.post<ReceiptsResponse>(endpoint, receipts);
 		},
 		attachments: this.generateAttachmentsEndpoint('receipts')
-	};
-
-	public repeatingInvoices = {
-		attachments: this.generateAttachmentsEndpoint('repeatinginvoices')
 	};
 
 	public reports = {

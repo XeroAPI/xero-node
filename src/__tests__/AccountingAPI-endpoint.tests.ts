@@ -232,7 +232,12 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `receipts/${guid1}?summarizeErrors=false`, args: { ReceiptID: guid1 } },
 			{ subResource: 'attachments', action: 'get', expectedPath: `receipts/${guid1}/attachments`, args: { entityId: guid1 } },
 		],
-		// TODO repeatingInvoices
+		repeatingInvoices: [
+			{ action: 'get', expectedPath: 'repeatinginvoices' },
+			{ action: 'get', expectedPath: `repeatinginvoices/${guid1}`, args: { RepeatingInvoiceID: guid1 } },
+			{ action: 'get', expectedPath: 'repeatinginvoices?where=Status%3D%3D%22DRAFT%22', args: { where: 'Status=="DRAFT"' } },
+			{ action: 'get', expectedPath: 'repeatinginvoices?order=Name%20DESC', args: { order: 'Name DESC' } },
+		],
 		reports: [
 			{ action: 'get', expectedPath: 'reports' },
 			{ action: 'get', expectedPath: `reports/${guid1}`, args: { ReportID: guid1 } },
