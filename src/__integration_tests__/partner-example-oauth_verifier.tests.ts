@@ -28,31 +28,34 @@ describe('Partner Example Tests using oauth_verifier', () => {
 		const browser = await puppeteer.launch({
 			headless: true,
 		});
-		page = await browser.newPage();
-		await page.goto(authUrl);
+		try {
+			page = await browser.newPage();
+			await page.goto(authUrl);
 
-		// /user logs into Xero and Auths your app
-		await page.click(USERNAME_SELECTOR);
-		await page.keyboard.type(password_config.userName);
-		await page.click(PASSWORD_SELECTOR);
-		await page.keyboard.type(password_config.password);
+			// /user logs into Xero and Auths your app
+			await page.click(USERNAME_SELECTOR);
+			await page.keyboard.type(password_config.userName);
+			await page.click(PASSWORD_SELECTOR);
+			await page.keyboard.type(password_config.password);
 
-		await page.click(LOGIN_BUTTON_SELECTOR);
-		await page.waitForNavigation();
-		await page.waitForNavigation();
-		await page.click(AUTH_BUTTON_SELECTOR);
+			await page.click(LOGIN_BUTTON_SELECTOR);
+			await page.waitForNavigation();
+			await page.waitForNavigation();
+			await page.click(AUTH_BUTTON_SELECTOR);
 
-		await delay(2500);
+			await delay(2500);
 
-		// The pin is usually sent to your callback url, in this example,
-		// callback url is set to null
-		oauth_verifier = await page.evaluate(() => {
-			const PIN_SELECTOR = '#pin-input';
-			const query = (document.querySelector(PIN_SELECTOR) as any).value;
-			return query;
-		});
-
-		browser.close();
+			// The pin is usually sent to your callback url, in this example,
+			// callback url is set to null
+			oauth_verifier = await page.evaluate(() => {
+				const PIN_SELECTOR = '#pin-input';
+				const query = (document.querySelector(PIN_SELECTOR) as any).value;
+				return query;
+			});
+		} catch (e) {
+			browser.close();
+			throw e;
+		}
 	});
 
 	it('it returns the authorised url', async () => {
