@@ -96,7 +96,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public bankTransactions = {
-		get: async (args?: { BankTransactionID?: string } & QueryArgs & HeaderArgs): Promise<BankTransactionsResponse> => {
+		get: async (args?: { BankTransactionID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<BankTransactionsResponse> => {
 			let endpoint = 'banktransactions';
 			if (args && args.BankTransactionID) {
 				endpoint = endpoint + '/' + args.BankTransactionID;
@@ -206,7 +206,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public contacts = {
-		get: async (args?: { ContactID?: string, includeArchived?: boolean, IDs?: string } & HeaderArgs & QueryArgs): Promise<ContactsResponse> => {
+		get: async (args?: { ContactID?: string, includeArchived?: boolean, IDs?: string } & HeaderArgs & PagingArgs & QueryArgs): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
 
 			if (args && args.ContactID) {
@@ -252,7 +252,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public creditNotes = {
-		get: async (args?: { CreditNoteID?: string } & QueryArgs & HeaderArgs): Promise<CreditNotesResponse> => {
+		get: async (args?: { CreditNoteID?: string } & QueryArgs & PagingArgs & HeaderArgs): Promise<CreditNotesResponse> => {
 			let endpoint = 'creditnotes';
 			if (args && args.CreditNoteID) {
 				endpoint = endpoint + '/' + args.CreditNoteID;
@@ -355,7 +355,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, page?: number, createdByMyApp?: boolean } & HeaderArgs & QueryArgs): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, createdByMyApp?: boolean } & HeaderArgs & PagingArgs & QueryArgs): Promise<InvoicesResponse> => {
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
