@@ -258,6 +258,9 @@ Feel free to send PRs on any of these issues.
 
 ## Release Change Log
 
+* 2.20.0
+    - handle "No key provided to sign" error #181
+    - add LineItemID back to LineItemSchema #188
 * 2.19.0
     - Fix missing 'OrganisationID' after called organisation.toJSON() #173
 * 2.18.0
