@@ -668,10 +668,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<PurchaseOrdersResponse>(endpoint, headers);
 		},
-		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<PurchaseOrdersResponse> => {
+		create: async (purchaseOrders?: PurchaseOrder | { PurchaseOrders: PurchaseOrder[] }, args?: { summarizeErrors: boolean }): Promise<PurchaseOrdersResponse> => {
 			let endpoint = 'purchaseorders';
 			endpoint += generateQueryString(args, true);
-			return this.oauth1Client.put<PurchaseOrdersResponse>(endpoint, body);
+			return this.oauth1Client.put<PurchaseOrdersResponse>(endpoint, purchaseOrders);
 		},
 		update: async (purchaseOrders?: PurchaseOrder | { PurchaseOrders: PurchaseOrder[] }, args?: { PurchaseOrderID?: string, summarizeErrors?: boolean }): Promise<PurchaseOrdersResponse> => {
 			let endpoint = 'purchaseorders';
