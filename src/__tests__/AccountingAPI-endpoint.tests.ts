@@ -221,7 +221,15 @@ describe('AccountingAPI endpoints', () => {
 			{ subResource: 'allocations', action: 'create', expectedPath: `prepayments/${guid1}/allocations`, args: { PrepaymentID: guid1 } },
 			{ subResource: 'attachments', action: 'get', expectedPath: `prepayments/${guid1}/attachments`, args: { entityId: guid1 } },
 		],
-		// TODO purchaseOrders
+		purchaseOrders: [
+			{ action: 'get', expectedPath: 'purchaseorders' },
+			{ action: 'get', expectedPath: `purchaseorders/${guid1}`, args: { PurchaseOrderID: guid1 } },
+			{ action: 'get', expectedPath: `purchaseorders/${guid1}?order=UpdatedDateUTC`, args: { PurchaseOrderID: guid1, order: 'UpdatedDateUTC' } },
+			{ action: 'get', expectedPath: `purchaseorders`, args: { 'If-Modified-Since': 'headerValue' } },
+			{ action: 'create', expectedPath: `purchaseorders?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `purchaseorders?summarizeErrors=false` },
+			{ action: 'update', expectedPath: `purchaseorders/${guid1}?summarizeErrors=true`, args: { PurchaseOrderID: guid1, summarizeErrors: true } },
+		],
 		receipts: [
 			{ action: 'get', expectedPath: 'receipts' },
 			{ action: 'get', expectedPath: `receipts/${guid1}`, args: { ReceiptID: guid1 } },

@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
-import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse, RepeatingInvoicesResponse } from './AccountingAPI-responses';
-import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt, ManualJournal } from './AccountingAPI-models';
+import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse, RepeatingInvoicesResponse, PurchaseOrdersResponse } from './AccountingAPI-responses';
+import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt, ManualJournal, PurchaseOrder } from './AccountingAPI-models';
 
 export interface QueryArgs {
 	where?: string;
@@ -653,12 +653,34 @@ export class AccountingAPIClient extends BaseAPIClient {
 		attachments: this.generateAttachmentsEndpoint('prepayments')
 	};
 
-	public purchaseorders = {
-		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<any> => {
+	public purchaseOrders = {
+		get: async (args?: { PurchaseOrderID?: string, PurchasOrderNumber?: string, Status?: string, DateFrom?: string, DateTo?: string } & QueryArgs & HeaderArgs): Promise<PurchaseOrdersResponse> => {
+			let endpoint = 'purchaseorders';
+			if (args && args.PurchaseOrderID) {
+				endpoint = endpoint + '/' + args.PurchaseOrderID;
+				delete args.PurchaseOrderID;
+			} else if (args && args.PurchasOrderNumber) {
+				endpoint = endpoint + '/' + args.PurchasOrderNumber;
+				delete args.PurchasOrderNumber;
+			}
+			const headers = this.generateHeader(args);
+			endpoint += generateQueryString(args);
+
+			return this.oauth1Client.get<PurchaseOrdersResponse>(endpoint, headers);
+		},
+		create: async (body?: object, args?: { summarizeErrors: boolean }): Promise<PurchaseOrdersResponse> => {
 			let endpoint = 'purchaseorders';
 			endpoint += generateQueryString(args, true);
-			// TODO: Add interface here
-			return this.oauth1Client.post<any>(endpoint, body);
+			return this.oauth1Client.put<PurchaseOrdersResponse>(endpoint, body);
+		},
+		update: async (purchaseOrders?: PurchaseOrder | { PurchaseOrders: PurchaseOrder[] }, args?: { PurchaseOrderID?: string, summarizeErrors?: boolean }): Promise<PurchaseOrdersResponse> => {
+			let endpoint = 'purchaseorders';
+			if (args && args.PurchaseOrderID) {
+				endpoint = endpoint + '/' + args.PurchaseOrderID;
+				delete args.PurchaseOrderID;
+			}
+			endpoint += generateQueryString(args, true);
+			return this.oauth1Client.post<PurchaseOrdersResponse>(endpoint, purchaseOrders);
 		}
 	};
 
