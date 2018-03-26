@@ -382,6 +382,34 @@ export interface PurchaseAndSalesDetails {
 	TaxType?: string;
 }
 
+export interface PurchaseOrder {
+	PurchaseOrderID?: string;
+	PurchaseOrderNumber?: string;
+	DateString?: string;
+	Date?: string;
+	DeliveryDateString?: string;
+	DeliveryDate?: string;
+	DeliveryAddress?: string;
+	AttentionTo?: string;
+	Telephone?: string;
+	DeliveryInstructions?: string;
+	IsDiscounted?: boolean;
+	Reference?: string;
+	Type?: string;
+	CurrencyRate?: string;
+	CurrencyCode?: string;
+	Contact?: Contact;
+	BrandingThemeID?: string;
+	Status?: string;
+	LineAmountTypes?: string;
+	LineItems?: LineItem[];
+	SubTotal?: string;
+	TotalTax?: string;
+	Total?: string;
+	UpdatedDateUTC?: string;
+	HasAttachments?: boolean;
+}
+
 export interface Tracking {
 	Name?: string;
 	Option?: string;
