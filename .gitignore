@@ -1,6 +1,7 @@
 node_modules
 *.tgz
 lib/**/*
+docs/**/*
 npm-debug.log
 *.pdf
 *config.json
