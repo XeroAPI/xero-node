@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
 [![CircleCI](https://circleci.com/gh/XeroAPI/xero-node/tree/v3.svg?style=svg)](https://circleci.com/gh/XeroAPI/xero-node/tree/v3)
 
-# node-xero
+# xero-node
 
 NodeJS Client for the [Xero API](http://developer.xero.com). Works with ES5, ES6+ and TypeScript.
 
