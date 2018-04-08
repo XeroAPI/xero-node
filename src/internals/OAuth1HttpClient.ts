@@ -190,12 +190,16 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				this._state.oauth_token_secret);
 
 			request.addListener('response', function(response: any) {
-				response.addListener('data', function(chunk: any) {
+				response.on('data', function(chunk: any) {
 					writeStream.write(chunk);
 				});
-				response.addListener('end', function() {
+				response.on('end', function() {
 					writeStream.end();
-					resolve();
+					return resolve();
+				});
+				response.on('close', function() {
+					writeStream.end();
+					return resolve();
 				});
 			});
 			request.end();
