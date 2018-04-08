@@ -195,7 +195,6 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				});
 				response.addListener('end', function() {
 					writeStream.end();
-					writeStream.close();
 					resolve();
 				});
 			});
