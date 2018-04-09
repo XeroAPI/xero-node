@@ -8,7 +8,7 @@
     "build-watch": "tsc --watch",
     "build-docs": "typedoc --external-aliases internalapi --options ./typedoc.js ./src",
     "lint": "tslint ./src/**/*.ts",
-    "prepublishOnly": "npm run build && npm run test",
+    "prepublishOnly": "npm run build",
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
     "test-auth": "tsc --noEmit && jest ./src/__integration_tests__/partner-example.tests.ts --config ./jestconfig.js",
