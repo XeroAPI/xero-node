@@ -1,4 +1,4 @@
-import { IOAuth1Configuration } from '../../OAuth1HttpClient';
+import { OAuth1Configuration } from '../../OAuth1HttpClient';
 
 export class InMemoryOAuthLibFactoryFactory {
 
@@ -8,8 +8,8 @@ export class InMemoryOAuthLibFactoryFactory {
 		this.inMemoryOAuthLib = new InMemoryOAuthLib();
 	}
 
-	public newFactory(): (config?: IOAuth1Configuration) => InMemoryOAuthLib {
-		return (config?: IOAuth1Configuration) => {
+	public newFactory(): (config?: OAuth1Configuration) => InMemoryOAuthLib {
+		return (config?: OAuth1Configuration) => {
 			this.inMemoryOAuthLib.setConfig(config);
 			return this.inMemoryOAuthLib;
 		};
@@ -33,10 +33,10 @@ export class InMemoryOAuthLib {
 	private oauth_expires_in: string = null;
 	public _headers: any;
 
-	constructor(private config?: IOAuth1Configuration) {
+	constructor(private config?: OAuth1Configuration) {
 	}
 
-	public setConfig(config?: IOAuth1Configuration) {
+	public setConfig(config?: OAuth1Configuration) {
 		this.config = config;
 		(this.config as any)['key'] = 'test';
 	}

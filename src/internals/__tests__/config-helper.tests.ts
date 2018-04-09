@@ -1,4 +1,4 @@
-import { IXeroClientConfiguration, IApiConfiguration } from '../BaseAPIClient';
+import { XeroClientConfiguration, ApiConfiguration } from '../BaseAPIClient';
 import { mapConfig, mapState } from '../config-helper';
 import { validTestCertPath, testCertString } from './helpers/privateKey-helpers';
 const version = require('../../../package.json').version;
@@ -6,7 +6,7 @@ const version = require('../../../package.json').version;
 describe('config-helper', () => {
 	describe('Private apps', () => {
 		describe('with cert as a path', () => {
-			const xeroConfigWithCertPath: IXeroClientConfiguration = {
+			const xeroConfigWithCertPath: XeroClientConfiguration = {
 				appType: 'private',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
@@ -42,7 +42,7 @@ describe('config-helper', () => {
 		});
 
 		describe('with cert as a string', () => {
-			const xeroConfigWithCertPath: IXeroClientConfiguration = {
+			const xeroConfigWithCertPath: XeroClientConfiguration = {
 				appType: 'private',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
@@ -81,7 +81,7 @@ describe('config-helper', () => {
 
 	describe('Public apps', () => {
 
-		const xeroConfig: IXeroClientConfiguration = {
+		const xeroConfig: XeroClientConfiguration = {
 			appType: 'public',
 			consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 			consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
@@ -116,7 +116,7 @@ describe('config-helper', () => {
 	describe('Partner apps', () => {
 
 		describe('with cert as a path', () => {
-			const xeroConfig: IXeroClientConfiguration = {
+			const xeroConfig: XeroClientConfiguration = {
 				appType: 'partner',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
@@ -149,7 +149,7 @@ describe('config-helper', () => {
 		});
 
 		describe('with cert as a string', () => {
-			const xeroConfig: IXeroClientConfiguration = {
+			const xeroConfig: XeroClientConfiguration = {
 				appType: 'partner',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
@@ -186,13 +186,13 @@ describe('config-helper', () => {
 	describe('API Config', () => {
 
 		describe('with cert as path', () => {
-			const xeroConfig: IXeroClientConfiguration = {
+			const xeroConfig: XeroClientConfiguration = {
 				appType: 'partner',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				privateKeyPath: validTestCertPath()
 			};
-			const apiConfig: IApiConfiguration = {
+			const apiConfig: ApiConfiguration = {
 				tenantType: 'PRACTICE'
 			};
 
@@ -216,13 +216,13 @@ describe('config-helper', () => {
 		});
 
 		describe('with cert as string', () => {
-			const xeroConfig: IXeroClientConfiguration = {
+			const xeroConfig: XeroClientConfiguration = {
 				appType: 'partner',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				privateKeyString: testCertString()
 			};
-			const apiConfig: IApiConfiguration = {
+			const apiConfig: ApiConfiguration = {
 				tenantType: 'PRACTICE'
 			};
 

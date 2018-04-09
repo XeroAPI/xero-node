@@ -1,12 +1,13 @@
 /** @internalapi */
 /** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
 
-import { IXeroClientConfiguration, IApiConfiguration } from './BaseAPIClient';
+import { XeroClientConfiguration, ApiConfiguration } from './BaseAPIClient';
 import { getStringFromFile } from './utils';
-import { IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
+import { OAuth1Configuration, AccessToken } from './OAuth1HttpClient';
 const version = require('../../package.json').version;
 
-export function mapState(xeroConfig: IXeroClientConfiguration): IOAuth1State {
+/** @private */
+export function mapState(xeroConfig: XeroClientConfiguration): AccessToken {
 	let cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null; // TODO don't read twice
 
 	if (xeroConfig.privateKeyString) {
@@ -27,7 +28,8 @@ export function mapState(xeroConfig: IXeroClientConfiguration): IOAuth1State {
 	}
 }
 
-export function mapConfig(xeroConfig: IXeroClientConfiguration, apiConfig: IApiConfiguration): IOAuth1Configuration {
+/** @private */
+export function mapConfig(xeroConfig: XeroClientConfiguration, apiConfig: ApiConfiguration): OAuth1Configuration {
 
 	// the logic for API_BASE can be used for testing against a mock server
 	const API_BASE = process.env.XERO_API_BASE ? process.env.XERO_API_BASE : 'https://api.xero.com';
@@ -41,7 +43,7 @@ export function mapConfig(xeroConfig: IXeroClientConfiguration, apiConfig: IApiC
 		cert = xeroConfig.privateKeyString;
 	}
 
-	const oauthConfig: IOAuth1Configuration = {
+	const oauthConfig: OAuth1Configuration = {
 		apiBaseUrl: API_BASE,
 		apiBasePath: API_BASE_PATH,
 		oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,

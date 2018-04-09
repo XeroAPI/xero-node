@@ -1,7 +1,5 @@
-/** @internalapi */
-/** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
 
-import { IOAuth1HttpClient, OAuth1HttpClient, IOAuth1Configuration, IOAuth1State } from './OAuth1HttpClient';
+import { IOAuth1HttpClient, OAuth1HttpClient, OAuth1Configuration, AccessToken } from './OAuth1HttpClient';
 import { mapConfig, mapState } from './config-helper';
 import * as  fs from 'fs';
 import { AttachmentsResponse } from '../AccountingAPI-responses';
@@ -11,7 +9,7 @@ import { AttachmentsResponse } from '../AccountingAPI-responses';
  *
  * - PrivateKeyPassword
  */
-export interface IXeroClientConfiguration {
+export interface XeroClientConfiguration {
 	appType: 'public' | 'private' | 'partner';
 	consumerKey: string;
 	consumerSecret: string;
@@ -21,12 +19,14 @@ export interface IXeroClientConfiguration {
 }
 
 /**
+ * @private
  * Options specific to the API in use
  */
-export interface IApiConfiguration {
+export interface ApiConfiguration {
 	tenantType?: string;
 }
 
+/** @private */
 export interface IHttpClient {
 	get<T>(endpoint: string, headers?: { [key: string]: string }): Promise<T>;
 	delete<T>(endpoint: string, headers?: { [key: string]: string }): Promise<T>;
@@ -37,15 +37,16 @@ export interface IHttpClient {
 	readStreamToRequest(endpoint: string, mimeType: string, size: number, readStream: fs.ReadStream): Promise<AttachmentsResponse>;
 }
 
+/** @private */
 export abstract class BaseAPIClient {
 
-	public constructor(xeroConfig: IXeroClientConfiguration, authState: IOAuth1State = null, apiConfig: IApiConfiguration = {}, public readonly oauth1Client: IOAuth1HttpClient = null) {
+	public constructor(xeroConfig: XeroClientConfiguration, authState: AccessToken = null, apiConfig: ApiConfiguration = {}, public readonly oauth1Client: IOAuth1HttpClient = null) {
 		if (!xeroConfig) {
 			throw new Error('Config must be passed in when creating a new instance');
 		}
 
 		if (!this.oauth1Client) {
-			const oauthConfig: IOAuth1Configuration = mapConfig(xeroConfig, apiConfig);
+			const oauthConfig: OAuth1Configuration = mapConfig(xeroConfig, apiConfig);
 			if (!authState) {
 				authState = mapState(xeroConfig);
 			}

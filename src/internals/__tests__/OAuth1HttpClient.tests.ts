@@ -1,12 +1,12 @@
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
-import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IToken } from '../OAuth1HttpClient';
+import { OAuth1HttpClient, OAuth1Configuration, AccessToken, RequestToken } from '../OAuth1HttpClient';
 
-const requestToken: IToken = {
+const requestToken: RequestToken = {
 	oauth_token: 'test3',
 	oauth_token_secret: 'test4'
 };
 
-const defaultState: IOAuth1State = {
+const defaultState: AccessToken = {
 	oauth_token: 'test7',
 	oauth_token_secret: 'test8',
 	oauth_session_handle: 'test9'
@@ -17,7 +17,7 @@ describe('OAuth1HttpClient', () => {
 	const inMemoryOAuthLib = new InMemoryOAuthLibFactoryFactory();
 	let oauth1HttpClient: OAuth1HttpClient;
 
-	const oauthConfig: IOAuth1Configuration = {
+	const oauthConfig: OAuth1Configuration = {
 		consumerKey: 'ck',
 		consumerSecret: 'cs',
 		tenantType: null,
@@ -82,7 +82,7 @@ describe('OAuth1HttpClient', () => {
 	});
 
 	describe('and getting RequestTokens', () => {
-		let token: IToken;
+		let token: RequestToken;
 
 		beforeEach(async () => {
 			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, defaultState, inMemoryOAuthLib.newFactory());
@@ -97,7 +97,7 @@ describe('OAuth1HttpClient', () => {
 	});
 
 	describe('and swapping request for access token', () => {
-		let authState: IOAuth1State;
+		let authState: AccessToken;
 
 		beforeAll(async () => {
 			inMemoryOAuthLib.inMemoryOAuthLib.reset();
@@ -123,7 +123,7 @@ describe('OAuth1HttpClient', () => {
 	});
 
 	describe('and refreshing authorized request token', () => {
-		let authState: IOAuth1State;
+		let authState: AccessToken;
 
 		beforeAll(async () => {
 			oauth1HttpClient = new OAuth1HttpClient(oauthConfig, defaultState, inMemoryOAuthLib.newFactory());
@@ -136,7 +136,7 @@ describe('OAuth1HttpClient', () => {
 			const currentMilliseconds = new Date().getTime();
 			const expDate = new Date(currentMilliseconds + (1800 * 1000));
 
-			const expectedState: IOAuth1State = {
+			const expectedState: AccessToken = {
 				oauth_token: `access#token`,
 				oauth_token_secret: `access#secret`,
 				oauth_session_handle: 'session#handle',

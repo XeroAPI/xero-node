@@ -2,7 +2,7 @@ import { AccountingAPIClient } from '../AccountingAPIClient';
 import * as puppeteer from 'puppeteer';
 import { getPartnerAppConfig, getLoginConfig, setJestTimeout } from './helpers/integration.helpers';
 import * as querystring from 'querystring';
-import { IOAuth1State, IToken } from '../internals/OAuth1HttpClient';
+import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
 
 setJestTimeout();
 
@@ -17,8 +17,8 @@ describe.skip('Partner Example Tests with callbackUrl', () => {
 	config.callbackUrl = 'https://developer.xero.com/xero-node-test/callbackurl'; // Note you MUST add localhost as a callback domain in https://developer.xero.com/myapps
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
-	let requestToken: IToken;
-	let authState: IOAuth1State;
+	let requestToken: RequestToken;
+	let authState: AccessToken;
 	let page: any;
 	let oauth_verifier: string;
 

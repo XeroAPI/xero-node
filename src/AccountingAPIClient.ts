@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
-import { IXeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
-import { IOAuth1HttpClient, IOAuth1State } from './internals/OAuth1HttpClient';
+import { XeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
+import { IOAuth1HttpClient, AccessToken } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
 import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse, RepeatingInvoicesResponse, PurchaseOrdersResponse } from './AccountingAPI-responses';
 import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt, ManualJournal, PurchaseOrder } from './AccountingAPI-models';
@@ -25,7 +25,7 @@ export interface HeaderArgs {
 
 export class AccountingAPIClient extends BaseAPIClient {
 
-	public constructor(options: IXeroClientConfiguration, authState?: IOAuth1State, _oAuth1HttpClient?: IOAuth1HttpClient) {
+	public constructor(options: XeroClientConfiguration, authState?: AccessToken, _oAuth1HttpClient?: IOAuth1HttpClient) {
 		super(options, authState, {}, _oAuth1HttpClient);
 	}
 

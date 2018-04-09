@@ -1,8 +1,8 @@
 import { TestAPIClient } from './helpers/TestAPIClient';
-import { BaseAPIClient, IXeroClientConfiguration } from '../BaseAPIClient';
+import { BaseAPIClient, XeroClientConfiguration } from '../BaseAPIClient';
 import { validTestCertPath } from './helpers/privateKey-helpers';
 import { XeroError } from '../../XeroError';
-import { OAuth1HttpClient, IOAuth1Configuration, IOAuth1State, IToken } from '../OAuth1HttpClient';
+import { OAuth1HttpClient, OAuth1Configuration, AccessToken, RequestToken } from '../OAuth1HttpClient';
 import { InMemoryOAuthLibFactoryFactory } from './helpers/InMemoryOAuthLib';
 
 describe('HTTP errors', () => {
@@ -11,7 +11,7 @@ describe('HTTP errors', () => {
 	const inMemoryOAuthFF = new InMemoryOAuthLibFactoryFactory();
 	let xeroClient: BaseAPIClient;
 
-	const oauthConfig: IOAuth1Configuration = {
+	const oauthConfig: OAuth1Configuration = {
 		consumerKey: 'ck',
 		consumerSecret: 'cs',
 		tenantType: null,
@@ -24,16 +24,16 @@ describe('HTTP errors', () => {
 		accept: 'acceps',
 		userAgent: 'ua'
 	};
-	const requestToken: IToken = {
+	const requestToken: RequestToken = {
 		oauth_token: 'reqtoken',
 		oauth_token_secret: 'reqsecret',
 	};
-	const oauthState: IOAuth1State = {
+	const oauthState: AccessToken = {
 		oauth_token: 'atoken',
 		oauth_token_secret: 'asecret',
 		oauth_session_handle: 'sessionHandle'
 	};
-	const xeroConfig: IXeroClientConfiguration = {
+	const xeroConfig: XeroClientConfiguration = {
 		appType: 'private',
 		consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 		consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',

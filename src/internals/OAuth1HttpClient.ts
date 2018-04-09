@@ -1,5 +1,3 @@
-/** @internalapi */
-/** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
 
 import { OAuth } from 'oauth';
 import { IHttpClient } from './BaseAPIClient';
@@ -11,17 +9,18 @@ import * as URL from 'url';
 import { XeroError } from '../XeroError';
 import { AttachmentsResponse } from '../AccountingAPI-responses';
 
-export interface IToken {
+export interface RequestToken {
 	oauth_token: string;
 	oauth_token_secret: string;
 }
 
-export interface IOAuth1State extends IToken {
+export interface AccessToken extends RequestToken {
 	oauth_session_handle?: string;
 	oauth_expires_at?: Date;
 }
 
-export interface IOAuth1Configuration {
+/** @private */
+export interface OAuth1Configuration {
 	consumerKey: string;
 	consumerSecret: string;
 	tenantType: string;
@@ -37,19 +36,22 @@ export interface IOAuth1Configuration {
 	callbackUrl: string;
 }
 
+/** @private */
 export interface IOAuth1Client {
 	agent?: http.Agent;
-	getRequestToken(): Promise<IToken>;
-	buildAuthoriseUrl(requestToken: IToken): string;
-	swapRequestTokenforAccessToken(requestToken: IToken, oauth_verifier: string): Promise<IOAuth1State>;
-	refreshAccessToken(): Promise<IOAuth1State>;
+	getRequestToken(): Promise<RequestToken>;
+	buildAuthoriseUrl(requestToken: RequestToken): string;
+	swapRequestTokenforAccessToken(requestToken: RequestToken, oauth_verifier: string): Promise<AccessToken>;
+	refreshAccessToken(): Promise<AccessToken>;
 }
 
+/** @private */
 export interface IOAuth1HttpClient extends IHttpClient, IOAuth1Client { }
 
+/** @private */
 export class OAuth1HttpClient implements IOAuth1HttpClient {
 
-	private _state: IOAuth1State = null;
+	private _state: AccessToken = null;
 
 	private oauthLib: typeof OAuth;
 
@@ -64,13 +66,13 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		this.oauthLib._headers = this._defaultHeaders;
 	}
 
-	constructor(private config: IOAuth1Configuration, authState?: IOAuth1State, private oAuthLibFactory?: (config: IOAuth1Configuration) => typeof OAuth) {
+	constructor(private config: OAuth1Configuration, authState?: AccessToken, private oAuthLibFactory?: (config: OAuth1Configuration) => typeof OAuth) {
 		if (authState) {
 			this._state = authState;
 		}
 
 		if (!this.oAuthLibFactory) {
-			this.oAuthLibFactory = function(passedInConfig: IOAuth1Configuration) {
+			this.oAuthLibFactory = function(passedInConfig: OAuth1Configuration) {
 				let requestTokenPath = passedInConfig.oauthRequestTokenPath;
 				if (passedInConfig.tenantType) {
 					requestTokenPath += `?tenantType=${passedInConfig.tenantType}`;
@@ -98,7 +100,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 
 	public getRequestToken = async () => {
 		this.resetToDefaultHeaders();
-		return new Promise<IToken>((resolve, reject) => {
+		return new Promise<RequestToken>((resolve, reject) => {
 			this.oauthLib.getOAuthRequestToken(
 				(err: any, oauth_token: string, oauth_token_secret: string, result: any) => {
 					if (err) {
@@ -114,13 +116,13 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	public buildAuthoriseUrl = (requestToken: IToken) => {
+	public buildAuthoriseUrl = (requestToken: RequestToken) => {
 		return `${this.config.apiBaseUrl}/oauth/Authorize?oauth_token=${requestToken.oauth_token}`;
 	}
 
-	public swapRequestTokenforAccessToken = async (requestToken: IToken, oauth_verifier: string) => {
+	public swapRequestTokenforAccessToken = async (requestToken: RequestToken, oauth_verifier: string) => {
 		this.resetToDefaultHeaders();
-		return new Promise<IOAuth1State>((resolve, reject) => {
+		return new Promise<AccessToken>((resolve, reject) => {
 			this.oauthLib.getOAuthAccessToken(
 				requestToken.oauth_token,
 				requestToken.oauth_token_secret,
@@ -131,7 +133,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					} else {
 						const currentMilliseconds = new Date().getTime();
 						const expDate = new Date(currentMilliseconds + (results.oauth_expires_in * 1000));
-						const oauthState: IOAuth1State = {
+						const oauthState: AccessToken = {
 							oauth_token: oauth_token,
 							oauth_token_secret: oauth_token_secret,
 							oauth_session_handle: results.oauth_session_handle,
@@ -147,7 +149,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 	}
 
 	public refreshAccessToken = async () => {
-		return new Promise<IOAuth1State>((resolve, reject) => {
+		return new Promise<AccessToken>((resolve, reject) => {
 			// We're accessing this "private" method as the lib does not allow refresh with oauth_session_handle.
 			this.oauthLib._performSecureRequest(
 				this._state.oauth_token,
@@ -165,7 +167,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 						const currentMilliseconds = new Date().getTime();
 						const expDate = new Date(currentMilliseconds + (results.oauth_expires_in * 1000));
 
-						const oauthState: IOAuth1State = {
+						const oauthState: AccessToken = {
 							oauth_token: results.oauth_token,
 							oauth_token_secret: results.oauth_token_secret,
 							oauth_session_handle: results.oauth_session_handle,
@@ -439,7 +441,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
-	private setState(newState: Partial<IOAuth1State>) {
+	private setState(newState: Partial<AccessToken>) {
 		this._state = { ...this._state, ...newState };
 	}
 

@@ -1,7 +1,7 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import * as puppeteer from 'puppeteer';
 import { getPartnerAppConfig, getLoginConfig, setJestTimeout } from './helpers/integration.helpers';
-import { IOAuth1State, IToken } from '../internals/OAuth1HttpClient';
+import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
 
 setJestTimeout();
 
@@ -15,8 +15,8 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	const config = getPartnerAppConfig();
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
-	let requestToken: IToken;
-	let authState: IOAuth1State;
+	let requestToken: RequestToken;
+	let authState: AccessToken;
 	let oauth_verifier: string;
 
 	beforeAll(async () => {

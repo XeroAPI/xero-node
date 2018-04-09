@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run lint && tsc",
     "build-watch": "tsc --watch",
-    "build-docs": "typedoc --external-aliases internalapi --options ./typedoc.js ./src",
+    "build-docs": "typedoc --options ./typedoc.js ./src",
     "lint": "tslint ./src/**/*.ts",
     "prepublishOnly": "npm run build",
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
@@ -39,7 +39,6 @@
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "typedoc": "^0.11.1",
-    "typedoc-plugin-internal-external": "^1.0.10",
     "typescript": "^2.7.1"
   }
 }

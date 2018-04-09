@@ -1,7 +1,7 @@
 module.exports = {
     mode: 'file',
     includes: 'src/',
-    exclude: '**/__tests__/**/*',
+    exclude: '**/_*tests__/**/*',
     out: 'docs/v3/',
 	theme: 'docs_theme/',
     excludeExternals: true,

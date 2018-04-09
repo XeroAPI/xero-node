@@ -1,6 +1,6 @@
 import * as  prompt from 'prompt';
 import * as path from 'path';
-import { IXeroClientConfiguration } from '../../internals/BaseAPIClient';
+import { XeroClientConfiguration } from '../../internals/BaseAPIClient';
 
 export async function readLine(stringPrompt: string): Promise<string> {
 	return new Promise<string>((resolve, reject) => {
@@ -11,9 +11,9 @@ export async function readLine(stringPrompt: string): Promise<string> {
 	});
 }
 
-export function getPrivateConfig(testPartition?: string): IXeroClientConfiguration {
+export function getPrivateConfig(testPartition?: string): XeroClientConfiguration {
 	if (!process.env.CI) {
-		const config: IXeroClientConfiguration = require(`../${(testPartition || '')}private-config.json`);
+		const config: XeroClientConfiguration = require(`../${(testPartition || '')}private-config.json`);
 		return config;
 	} else {
 		return {

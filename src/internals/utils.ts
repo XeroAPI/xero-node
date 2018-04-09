@@ -5,12 +5,14 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as querystring from 'querystring';
 
+/** @private */
 export function getStringFromFile(location: string) {
 	const privateKeyFile = path.resolve(location);
 	const privateKey = fs.readFileSync(privateKeyFile, 'utf8');
 	return privateKey;
 }
 
+/** @private */
 export function generateQueryString(args: { [key: string]: any }, addSummarizeErrorsParam: boolean = false): string {
 	const argsToUse = { ...args };
 	if (addSummarizeErrorsParam && argsToUse.summarizeErrors == undefined) {

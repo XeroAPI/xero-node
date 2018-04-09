@@ -482,15 +482,18 @@ export interface Report {
 	Fields?: Field[];
 	Rows: Row[];
 }
+/** @private */
 export interface Field {
 	FieldID: string;
 	Description: string;
 	Value: string;
 }
+/** @private */
 export interface Row {
 	RowType: string;
 	Cells: Cell[];
 }
+/** @private */
 export interface Cell {
 	Value?: string;
 	Attributes?: Array<{
