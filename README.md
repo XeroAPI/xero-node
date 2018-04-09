@@ -148,6 +148,24 @@ We need two private Apps to get around the ratelimits. They can be connected to 
 4. (Do the same for `partner-config-example.json` if required.)
 5. Run `npm test`
 
+## Migration from V2
+
+The biggest change is the number of function calls you have to make to complete your task. This is consistant across all endpoints. It's not JSON in and JSON out. your object never gets modified:
+
+Example:
+
+```// V2
+let invoiceObj = xero.core.invoices.newInvoice(invoiceJSON);
+let result = await invoiceObj.save()
+```
+
+becomes:
+```// V3
+let result = await xero.invoices.create(invoiceJSON);
+```
+
+Please also review the documentation around how to construct the client object. You no longer have to use specifc constructors for your App Type. Instead this information is passed in with your config object.
+
 ## Project Philosophies
 
 1. A simple and intuitive interface.
