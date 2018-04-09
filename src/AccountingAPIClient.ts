@@ -23,13 +23,20 @@ export interface HeaderArgs {
 	'If-Modified-Since'?: string;
 }
 
+/** @private */
+export interface AttachmentsEndpoint {
+	get(args: { entityId: string }): Promise<AttachmentsResponse>;
+	downloadAttachment(args: { entityId: string, mimeType: string, fileName: string, pathToSave: string }): Promise<void>;
+	uploadAttachment(args: { entityId: string, mimeType: string, fileName: string, pathToUpload: string, includeOnline?: boolean }): Promise<AttachmentsResponse>;
+}
+
 export class AccountingAPIClient extends BaseAPIClient {
 
 	public constructor(options: XeroClientConfiguration, authState?: AccessToken, _oAuth1HttpClient?: IOAuth1HttpClient) {
 		super(options, authState, {}, _oAuth1HttpClient);
 	}
 
-	private generateAttachmentsEndpoint(path: string) {
+	private generateAttachmentsEndpoint(path: string): AttachmentsEndpoint {
 		return {
 			get: async (args: { entityId: string }): Promise<AttachmentsResponse> => {
 				const endpoint = `${path}/${args.entityId}/attachments`;
