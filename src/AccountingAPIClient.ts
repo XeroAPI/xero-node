@@ -574,7 +574,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 	public organisations = {
 		get: async (): Promise<OrganisationResponse> => {
-			const endpoint = 'organisation';
+			const endpoint = 'organisations';
 			return this.oauth1Client.get<OrganisationResponse>(endpoint);
 		},
 		CISSettings: {
