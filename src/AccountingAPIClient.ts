@@ -591,7 +591,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	public overPayments = {
+	public overpayments = {
 		get: async (args?: { OverpaymentID?: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<OverpaymentsResponse> => {
 			let endpoint = 'overpayments';
 			if (args && args.OverpaymentID) {
