@@ -15,7 +15,7 @@ describe('/contactgroups', () => {
 	});
 
 	it('get single', async () => {
-		const response = await xero.contactgroups.get({ ContactGroupID: await getOrCreateContactGroupId(xero) });
+		const response = await xero.contactGroups.get({ ContactGroupID: await getOrCreateContactGroupId(xero) });
 
 		expect(response).not.toBeNull();
 		expect(isUUID(response.Id)).toBeTruthy();
@@ -23,7 +23,7 @@ describe('/contactgroups', () => {
 	});
 
 	it('get all', async () => {
-		const response = await xero.contactgroups.get();
+		const response = await xero.contactGroups.get();
 
 		expect(response).not.toBeNull();
 		expect(isUUID(response.Id)).toBeTruthy();
@@ -32,7 +32,7 @@ describe('/contactgroups', () => {
 
 	it('create', async () => {
 		const uniqueName = 'NewContactGroup' + new Date().getTime();
-		const response = await xero.contactgroups.create({
+		const response = await xero.contactGroups.create({
 			Name: uniqueName,
 			Status: 'ACTIVE'
 		});
@@ -46,7 +46,7 @@ describe('/contactgroups', () => {
 	});
 
 	it('delete', async () => {
-		const response = await xero.contactgroups.update({
+		const response = await xero.contactGroups.update({
 			ContactGroupID: await getOrCreateContactGroupId(xero, false),
 			Status: 'DELETED'
 		});
@@ -60,7 +60,7 @@ describe('/contactgroups', () => {
 
 		it('add to group', async () => {
 			const contactId = await getOrCreateContactId(xero);
-			const response = await xero.contactgroups.contacts.create({ ContactID: contactId }, { ContactGroupID: await getOrCreateContactGroupId(xero) });
+			const response = await xero.contactGroups.contacts.create({ ContactID: contactId }, { ContactGroupID: await getOrCreateContactGroupId(xero) });
 
 			expect(response.Contacts.length).toBe(1);
 		});
@@ -68,10 +68,10 @@ describe('/contactgroups', () => {
 		it('delete all from group', async () => {
 			const contactGroupId = await getOrCreateContactGroupId(xero);
 
-			const response = await xero.contactgroups.contacts.delete({ ContactGroupID: contactGroupId });
+			const response = await xero.contactGroups.contacts.delete({ ContactGroupID: contactGroupId });
 			expect(response).toBeNull();
 
-			const getResponse = await xero.contactgroups.get({ ContactGroupID: contactGroupId });
+			const getResponse = await xero.contactGroups.get({ ContactGroupID: contactGroupId });
 			expect(getResponse.ContactGroups[0].Contacts.length).toBe(0);
 		});
 
@@ -81,17 +81,17 @@ describe('/contactgroups', () => {
 
 			expect.assertions(2);
 
-			const response = await xero.contactgroups.contacts.delete({ ContactGroupID: contactGroupId, ContactID: contactId });
+			const response = await xero.contactGroups.contacts.delete({ ContactGroupID: contactGroupId, ContactID: contactId });
 			expect(response).toBeNull();
 
-			const getResponse = await xero.contactgroups.get({ ContactGroupID: contactGroupId });
+			const getResponse = await xero.contactGroups.get({ ContactGroupID: contactGroupId });
 			expect(getResponse.ContactGroups[0].Contacts.map((contact) => contact.ContactID)).not.toContainEqual(contactId);
 		});
 
 	});
 
 	afterAll(async () => {
-		await Promise.all(_idsToDelete.map((id) => xero.contactgroups.update({
+		await Promise.all(_idsToDelete.map((id) => xero.contactGroups.update({
 			ContactGroupID: id,
 			Status: 'DELETED'
 		})));

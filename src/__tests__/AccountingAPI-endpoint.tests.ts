@@ -64,7 +64,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'get', expectedPath: 'brandingthemes' },
 			{ action: 'get', expectedPath: `brandingthemes/${guid1}`, args: { BrandingThemeID: guid1 } },
 		],
-		contactgroups: [
+		contactGroups: [
 			{ action: 'get', expectedPath: 'contactgroups' },
 			{ action: 'get', expectedPath: 'contactgroups?where=Type%3D%3D%22BANK%22', args: { where: 'Type=="BANK"' } },
 			{ action: 'get', expectedPath: 'contactgroups?order=EmailAddress%20DESC', args: { order: 'EmailAddress DESC' } },
@@ -118,7 +118,7 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'create', expectedPath: 'employees' },
 			{ action: 'update', expectedPath: 'employees' }
 		],
-		expenseclaims: [
+		expenseClaims: [
 			{ action: 'get', expectedPath: 'expenseclaims' },
 			{ action: 'get', expectedPath: `expenseclaims/${guid1}`, args: { ExpenseClaimID: guid1 } },
 			{ action: 'get', expectedPath: `expenseclaims?order=Status`, args: { order: 'Status' } },

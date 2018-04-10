@@ -160,7 +160,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	public contactgroups = {
+	public contactGroups = {
 		get: async (args?: { ContactGroupID?: string } & QueryArgs): Promise<ContactGroupsResponse> => {
 
 			let endpoint = 'contactgroups';
@@ -345,7 +345,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	public expenseclaims = {
+	public expenseClaims = {
 		get: async (args?: { ExpenseClaimID?: string } & QueryArgs & HeaderArgs): Promise<ExpenseClaimsResponse> => {
 			let endpoint = 'expenseclaims';
 			if (args && args.ExpenseClaimID) {
@@ -591,7 +591,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	public overpayments = {
+	public overPayments = {
 		get: async (args?: { OverpaymentID?: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<OverpaymentsResponse> => {
 			let endpoint = 'overpayments';
 			if (args && args.OverpaymentID) {
@@ -637,7 +637,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	public prepayments = {
+	public prePayments = {
 		get: async (args?: { PrepaymentID: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
 			let endpoint = 'prepayments';
 			if (args && args.PrepaymentID) {

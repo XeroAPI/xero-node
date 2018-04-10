@@ -47,9 +47,9 @@ export async function getOrCreateBankTransferId(xero: AccountingAPIClient) {
 
 export async function getOrCreateContactGroupId(xero: AccountingAPIClient, useCache: boolean = true) {
 	if (!inMemoryCache.contactGroupId || !useCache) {
-		let response = await xero.contactgroups.get();
+		let response = await xero.contactGroups.get();
 		if (response.ContactGroups.length <= 0) {
-			response = await xero.contactgroups.create({ Name: 'xero-node test' });
+			response = await xero.contactGroups.create({ Name: 'xero-node test' });
 		}
 		const contactGroupId = response.ContactGroups[0].ContactGroupID;
 		if (!useCache) {
@@ -74,10 +74,10 @@ export async function getOrCreateContactId(xero: AccountingAPIClient) {
 
 export async function getOrCreateContactIdInContactGroup(xero: AccountingAPIClient, contactGroupId: string) {
 	if (!inMemoryCache.contactIdInContactGroup) {
-		const getResponse = await xero.contactgroups.get({ ContactGroupID: contactGroupId });
+		const getResponse = await xero.contactGroups.get({ ContactGroupID: contactGroupId });
 		if (getResponse.ContactGroups[0].Contacts.length <= 0) {
 			const contactId = await getOrCreateContactId(xero);
-			const createResponse = await xero.contactgroups.contacts.create({ ContactID: contactId }, { ContactGroupID: contactGroupId });
+			const createResponse = await xero.contactGroups.contacts.create({ ContactID: contactId }, { ContactGroupID: contactGroupId });
 			inMemoryCache.contactIdInContactGroup = createResponse.Contacts[0].ContactID;
 		} else {
 			inMemoryCache.contactIdInContactGroup = getResponse.ContactGroups[0].Contacts[0].ContactID;
@@ -99,9 +99,9 @@ export async function getOrCreateEmployeeId(xero: AccountingAPIClient) {
 
 export async function getOrCreateExpenseClaimId(xero: AccountingAPIClient) {
 	if (!inMemoryCache.expenseClaimId) {
-		let response = await xero.expenseclaims.get();
+		let response = await xero.expenseClaims.get();
 		if (response.ExpenseClaims.length <= 0) {
-			response = await xero.expenseclaims.create({ AmountDue: 1 });
+			response = await xero.expenseClaims.create({ AmountDue: 1 });
 		}
 		inMemoryCache.expenseClaimId = response.ExpenseClaims[0].ExpenseClaimID;
 	}

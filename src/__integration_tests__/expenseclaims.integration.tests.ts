@@ -14,7 +14,7 @@ describe('/expenseclaims', () => {
 	});
 
 	it('create single', async () => {
-		const response = await xero.expenseclaims.create({
+		const response = await xero.expenseClaims.create({
 			AmountDue: 123
 		});
 
@@ -25,7 +25,7 @@ describe('/expenseclaims', () => {
 	});
 
 	it('get single', async () => {
-		const response = await xero.expenseclaims.get({ ExpenseClaimID: await getOrCreateExpenseClaimId(xero) });
+		const response = await xero.expenseClaims.get({ ExpenseClaimID: await getOrCreateExpenseClaimId(xero) });
 
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
@@ -34,7 +34,7 @@ describe('/expenseclaims', () => {
 	});
 
 	it('get all', async () => {
-		const response = await xero.expenseclaims.get();
+		const response = await xero.expenseClaims.get();
 
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
@@ -43,7 +43,7 @@ describe('/expenseclaims', () => {
 	});
 
 	it('update', async () => {
-		const response = await xero.expenseclaims.update({
+		const response = await xero.expenseClaims.update({
 			ExpenseClaimID: await getOrCreateExpenseClaimId(xero),
 			Status: 'VOIDED'
 		});
@@ -62,7 +62,7 @@ describe('/expenseclaims', () => {
 			Status: 'VOIDED'
 		}));
 
-		await xero.expenseclaims.update({
+		await xero.expenseClaims.update({
 			ExpenseClaims: expenseClaimsToUpdate
 		});
 	});
