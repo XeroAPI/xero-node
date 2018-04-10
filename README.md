@@ -107,7 +107,17 @@ const config = require('./config.json');
 
     // You can make API calls straight away
     const result = await xero.invoices.get();
-    console.log('Number of invoices:', result.Invoices.length);
+	console.log('Number of invoices:', result.Invoices.length);
+
+	// You can refresh your access token when it's getting close to expiring
+	if((new Date) - accessToken.oauth_expires_at > 60*30*1000){
+		let newToken = await xero.oauth1Client.refreshAccessToken();
+		// Remember to store the new access token in your data store
+	}
+
+	// The SDK will hold the latest acess token, so you can make more calls
+	const result1 = await xero.invoices.get();
+	console.log('Number of invoices:', result1.Invoices.length);
 
     // When making future calls, you can initialise the Xero client direectly with the stored access token:
 
