@@ -12,7 +12,7 @@ describe('/organisations', () => {
 	});
 
 	it('get current organisation', async () => {
-		const response = await xero.organisation.get();
+		const response = await xero.organisations.get();
 
 		expect(response.Organisations.length).toBe(1);
 		expect(response.Organisations[0].Name).toBeTruthy();

@@ -194,9 +194,9 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `manualjournals/${guid1}?summarizeErrors=true`, args: { ManualJournalID: guid1, summarizeErrors: true } },
 			{ subResource: 'attachments', action: 'get', expectedPath: `manualjournals/${guid1}/attachments`, args: { entityId: guid1 } },
 		],
-		organisation: [
-			{ action: 'get', expectedPath: 'organisation' },
-			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisation/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
+		organisations: [
+			{ action: 'get', expectedPath: 'organisations' },
+			{ subResource: 'CISSettings', action: 'get', expectedPath: `organisations/${guid1}/CISSettings`, args: { OrganisationID: guid1 } }
 		],
 		overpayments: [
 			{ action: 'get', expectedPath: 'overpayments' },

@@ -572,14 +572,14 @@ export class AccountingAPIClient extends BaseAPIClient {
 		attachments: this.generateAttachmentsEndpoint('manualjournals')
 	};
 
-	public organisation = {
+	public organisations = {
 		get: async (): Promise<OrganisationResponse> => {
 			const endpoint = 'organisation';
 			return this.oauth1Client.get<OrganisationResponse>(endpoint);
 		},
 		CISSettings: {
 			get: async (args: { OrganisationID: string, where?: string }): Promise<OrganisationResponse> => {
-				let endpoint = 'organisation';
+				let endpoint = 'organisations';
 				if (args && args.OrganisationID) {
 					endpoint = endpoint + '/' + args.OrganisationID + '/CISSettings';
 					delete args.OrganisationID;
