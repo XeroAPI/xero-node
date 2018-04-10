@@ -39,7 +39,7 @@ describe('/prepayments', () => {
 	});
 
 	it('get all', async () => {
-		const response = await xero.prePayments.get();
+		const response = await xero.prepayments.get();
 
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
@@ -48,7 +48,7 @@ describe('/prepayments', () => {
 	});
 
 	it('get single', async () => {
-		const response = await xero.prePayments.get({ PrepaymentID: existingId });
+		const response = await xero.prepayments.get({ PrepaymentID: existingId });
 
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();

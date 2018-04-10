@@ -637,7 +637,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		}
 	};
 
-	public prePayments = {
+	public prepayments = {
 		get: async (args?: { PrepaymentID: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<PrepaymentsResponse> => {
 			let endpoint = 'prepayments';
 			if (args && args.PrepaymentID) {
