@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"outDir": "./lib",
+		"rootDir": "./src/",
+		"declaration": true,
+		"noImplicitAny": true,
+		"noUnusedLocals": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"target": "es5",
+		"lib": [
+			"dom",
+			"es6"
+		]
+	},
+	"include": [
+		"./src/**/*"
+	],
+	"exclude": [
+		"./src/**/*/scratch.ts"
+	]
+}

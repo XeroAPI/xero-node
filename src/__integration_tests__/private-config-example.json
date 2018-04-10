@@ -1,0 +1,7 @@
+{
+	"appType": "private",
+	"consumerKey": "CONSUMERKEY",
+	"consumerSecret": "CONSUMERSECRET",
+	"callbackUrl": null,
+	"privateKeyPath": "./privatekey.pem"
+}

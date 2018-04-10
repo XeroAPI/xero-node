@@ -1,0 +1,9 @@
+node_modules/
+src/
+.*
+*.tgz
+tsconfig.json
+tslint.json
+scratch.ts
+lib/__integration_tests__/*
+lib/__tests__/*
