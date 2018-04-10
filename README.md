@@ -136,13 +136,15 @@ The biggest change is the number of function calls you have to make to complete 
 
 Example:
 
-```// V2
+```
+// V2
 let invoiceObj = xero.core.invoices.newInvoice(invoiceJSON);
 let result = await invoiceObj.save()
 ```
 
 becomes:
-```// V3
+```
+// V3
 let result = await xero.invoices.create(invoiceJSON);
 ```
 
