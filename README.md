@@ -19,8 +19,8 @@ more maintainable and to take advantage of modern JavaScript features.
 # Features
 
 - v3.0.0
-	- all [accounting endpoints](https://developer.xero.com/documentation/api/api-overview)
-	- generic methods (`get`, `put`, `post`, `delete`) for calling any unsupported endpoints
+	- almost all [accounting endpoints](https://developer.xero.com/documentation/api/api-overview)
+	- generic methods (`get`, `put`, `post`, `delete`) for calling any unsupported accounting endpoints
 
 # Installation
 

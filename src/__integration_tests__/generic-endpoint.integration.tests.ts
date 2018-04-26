@@ -1,0 +1,36 @@
+import { AccountingAPIClient } from '../AccountingAPIClient';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
+import { UsersResponse } from '../AccountingAPI-responses';
+
+describe('Generic accounting endpoint tests', () => {
+
+	let xero: AccountingAPIClient;
+	let existingId: string;
+
+	beforeAll(() => {
+		setJestTimeout();
+		const config = getPrivateConfig('1');
+		xero = new AccountingAPIClient(config);
+	});
+
+	it('get all', async () => {
+		const response = await xero.oauth1Client.get('users');
+
+		expect(response).toBeDefined();
+		expect((response as UsersResponse).Id).toBeTruthy();
+		expect((response as UsersResponse).Users.length).toBeGreaterThan(0);
+		expect((response as UsersResponse).Users[0].UserID).toBeTruthy();
+
+		existingId = (response as UsersResponse).Users[0].UserID;
+	});
+
+	it('get single', async () => {
+		const response = await xero.oauth1Client.get('users?UserID=' + existingId);
+
+		expect((response as UsersResponse)).toBeDefined();
+		expect((response as UsersResponse).Id).toBeTruthy();
+		expect((response as UsersResponse).Users.length).toBe(1);
+		expect((response as UsersResponse).Users[0].UserID).toBeTruthy();
+	});
+
+});
