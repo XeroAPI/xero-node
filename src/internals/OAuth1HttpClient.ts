@@ -26,7 +26,6 @@ export interface OAuth1Configuration {
 	tenantType: string;
 
 	apiBaseUrl: string;
-	apiBasePath: string;
 	oauthRequestTokenPath: string;
 	oauthAccessTokenPath: string;
 
@@ -187,7 +186,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 			this.assertAccessTokenIsSet();
 			const oauthForPdf = this.oAuthLibFactory({ ...this.config, ...{ accept: mimeType } });
 			const request = oauthForPdf.get(
-				this.config.apiBaseUrl + this.config.apiBasePath + endpoint,
+				this.config.apiBaseUrl + endpoint,
 				this._state.oauth_token,
 				this._state.oauth_token_secret);
 
@@ -217,7 +216,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 				this._state.oauth_token,
 				this._state.oauth_token_secret,
 				'GET',
-				this.config.apiBaseUrl + this.config.apiBasePath + endpoint,
+				this.config.apiBaseUrl + endpoint,
 				(err: any, data: string, httpResponse: any) => {
 					// data is the body of the response
 
@@ -322,7 +321,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					};
 
 					this.oauthLib.post(
-						this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
+						this.config.apiBaseUrl + endpoint, // url
 						this._state.oauth_token,
 						this._state.oauth_token_secret,
 						Buffer.concat(bufs),
@@ -346,7 +345,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		return new Promise<T>((resolve, reject) => {
 			this.assertAccessTokenIsSet();
 			this.oauthLib.get(
-				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
+				this.config.apiBaseUrl + endpoint, // url
 				this._state.oauth_token,
 				this._state.oauth_token_secret,
 				(err: any, data: string, httpResponse: any) => {
@@ -369,7 +368,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.put(
-				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
+				this.config.apiBaseUrl + endpoint, // url
 				this._state.oauth_token,
 				this._state.oauth_token_secret,
 				JSON.stringify(body), 		// Had to do this not sure if there is another way
@@ -395,7 +394,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.post(
-				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
+				this.config.apiBaseUrl + endpoint, // url
 				this._state.oauth_token,
 				this._state.oauth_token_secret,
 				JSON.stringify(body), 		// Had to do this not sure if there is another way
@@ -421,7 +420,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		this.assertAccessTokenIsSet();
 		return new Promise<T>((resolve, reject) => {
 			this.oauthLib.delete(
-				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
+				this.config.apiBaseUrl + endpoint, // url
 				this._state.oauth_token,
 				this._state.oauth_token_secret,
 				(err: any, data: string, httpResponse: any) => {

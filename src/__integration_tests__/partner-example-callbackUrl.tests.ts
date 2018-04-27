@@ -1,13 +1,17 @@
-import { AccountingAPIClient } from '../AccountingAPIClient';
 import * as puppeteer from 'puppeteer';
 import { getPartnerAppConfig, getLoginConfig, setJestTimeout } from './helpers/integration.helpers';
 import * as querystring from 'querystring';
 import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
+import { BaseAPIClient } from '../internals/BaseAPIClient';
 
 setJestTimeout();
 
 // We cannot run this and the other example in parallel as one de-auths the other
-describe.skip('Partner Example Tests with callbackUrl', () => {
+
+// This example shows how to make generic API calls as a partner app. If you're making generic calls
+// please consider sending a PR with the new endpoint you are using. Thanks
+
+describe('Partner Example Tests with callbackUrl', () => {
 	const USERNAME_SELECTOR = '#email';
 	const PASSWORD_SELECTOR = '#password';
 	const LOGIN_BUTTON_SELECTOR = '#submitButton';
@@ -15,7 +19,7 @@ describe.skip('Partner Example Tests with callbackUrl', () => {
 	const password_config = getLoginConfig();
 	const config = getPartnerAppConfig();
 	config.callbackUrl = 'https://developer.xero.com/xero-node-test/callbackurl'; // Note you MUST add localhost as a callback domain in https://developer.xero.com/myapps
-	const accounting1 = new AccountingAPIClient(config);
+	const accounting1 = new BaseAPIClient(config);
 	let authUrl: string;
 	let requestToken: RequestToken;
 	let authState: AccessToken;
@@ -69,18 +73,18 @@ describe.skip('Partner Example Tests with callbackUrl', () => {
 
 		it('it can make a successful API call', async () => {
 			authState = await accounting1.oauth1Client.swapRequestTokenforAccessToken(requestToken, oauth_verifier);
-			const inv1 = await accounting1.organisations.get();
+			const inv1 = await accounting1.oauth1Client.get('/api.xro/2.0/Organisation') as any;
 			expect(inv1.Status).toEqual('OK');
 		});
 
 		it('it can still make a successfull API call after refreshing the access token', async () => {
 			await accounting1.oauth1Client.refreshAccessToken();
-			const inv2 = await accounting1.organisations.get();
+			const inv2 = await accounting1.oauth1Client.get('/api.xro/2.0/Organisation') as any;
 			expect(inv2.Status).toEqual('OK');
 		});
 
 		describe('OAuth State', () => {
-			let accounting2_callback: AccountingAPIClient;
+			let accounting2_callback: BaseAPIClient;
 			it('it allows you to keep copy of the state in your own dadtastore', async () => {
 				// Saves your state to your datastore
 				expect(authState).not.toBeNull();
@@ -92,11 +96,11 @@ describe.skip('Partner Example Tests with callbackUrl', () => {
 			});
 
 			it('it allows you to restore a new instance of the client next time your user logs in', async () => {
-				accounting2_callback = new AccountingAPIClient(config, authState);
+				accounting2_callback = new BaseAPIClient(config, authState);
 			});
 
 			it('it lets you make API calls using the restored state', async () => {
-				const inv3 = await accounting2_callback.organisations.get();
+				const inv3 = await accounting1.oauth1Client.get('/api.xro/2.0/Organisation') as any;
 				expect(inv3.Status).toEqual('OK');
 			});
 		});

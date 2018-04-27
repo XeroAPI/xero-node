@@ -15,6 +15,8 @@ const xeroConfig: XeroClientConfiguration = {
 	privateKeyPath: validTestCertPath()
 };
 
+const accountingBaseUrl =  '/api.xro/2.0/';
+
 describe('AccountingAPI attachments', () => {
 	const writeBinaryResponseToStreamSpy = jest.fn();
 	const readStreamToRequestSpy = jest.fn();
@@ -38,28 +40,28 @@ describe('AccountingAPI attachments', () => {
 
 	const fixtures: IFixture = {
 		invoices: [
-			{ expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `${accountingBaseUrl}invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		bankTransactions: [
-			{ expectedPath: `banktransactions/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `${accountingBaseUrl}banktransactions/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		creditNotes: [
-			{ expectedPath: `creditnotes/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `${accountingBaseUrl}creditnotes/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		repeatingInvoices: [
-			{ expectedPath: `repeatinginvoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `${accountingBaseUrl}repeatinginvoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		bankTransfers: [
-			{ expectedPath: `banktransfers/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `${accountingBaseUrl}banktransfers/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		contacts: [
-			{ expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `${accountingBaseUrl}contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		accounts: [
-			{ expectedPath: `accounts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `${accountingBaseUrl}accounts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		],
 		manualJournals: [
-			{ expectedPath: `manualjournals/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `${accountingBaseUrl}manualjournals/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
 		]
 	};
 

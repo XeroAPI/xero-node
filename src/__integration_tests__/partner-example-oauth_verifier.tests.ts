@@ -6,7 +6,7 @@ import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
 setJestTimeout();
 
 // We cannot run this and the other example in parallel as one de-auths the other
-describe('Partner Example Tests using oauth_verifier', () => {
+describe.skip('Partner Example Tests using oauth_verifier', () => {
 	const USERNAME_SELECTOR = '#email';
 	const PASSWORD_SELECTOR = '#password';
 	const LOGIN_BUTTON_SELECTOR = '#submitButton';

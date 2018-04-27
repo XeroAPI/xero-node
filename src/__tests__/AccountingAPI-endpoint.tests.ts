@@ -20,7 +20,7 @@ describe('AccountingAPI endpoints', () => {
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
 	const oauthConfig = mapConfig(xeroConfig, {});
-	const accountingBaseUrl = oauthConfig.apiBaseUrl + oauthConfig.apiBasePath;
+	const accountingBaseUrl = oauthConfig.apiBaseUrl + '/api.xro/2.0/';
 	const oauthHttpClient = new OAuth1HttpClient(oauthConfig, mapState(xeroConfig), inMemoryOAuthLibFF.newFactory());
 	const xeroClient = new AccountingAPIClient(xeroConfig, null, oauthHttpClient);
 
