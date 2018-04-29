@@ -33,7 +33,6 @@ export function mapConfig(xeroConfig: XeroClientConfiguration, apiConfig: ApiCon
 
 	// the logic for API_BASE can be used for testing against a mock server
 	const API_BASE = process.env.XERO_API_BASE ? process.env.XERO_API_BASE : 'https://api.xero.com';
-	// const API_BASE_PATH = '/api.xro/2.0/';
 	const OAUTH_REQUEST_TOKEN_PATH = '/oauth/RequestToken';
 	const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
 
@@ -49,7 +48,7 @@ export function mapConfig(xeroConfig: XeroClientConfiguration, apiConfig: ApiCon
 		oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
 		oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
 		accept: 'application/json',
-		userAgent: 'NodeJS-XeroAPIClient.' + version + '.' + xeroConfig.consumerKey, // TODO add package.json version here
+		userAgent: 'NodeJS-XeroAPIClient.' + version + '.' + xeroConfig.consumerKey,
 		consumerKey: xeroConfig.consumerKey,
 		consumerSecret: xeroConfig.consumerSecret,
 		tenantType: apiConfig.tenantType || null,
