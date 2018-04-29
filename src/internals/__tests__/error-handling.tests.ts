@@ -16,6 +16,7 @@ describe('HTTP errors', () => {
 		consumerSecret: 'cs',
 		tenantType: null,
 		apiBaseUrl: 'abu',
+		apiBasePath: 'abp',
 		oauthRequestTokenPath: 'ortp',
 		oauthAccessTokenPath: 'oatp',
 		signatureMethod: 'sigm',

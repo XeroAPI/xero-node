@@ -24,6 +24,7 @@ export interface XeroClientConfiguration {
  */
 export interface ApiConfiguration {
 	tenantType?: string;
+	apiBasePath?: string;
 }
 
 /** @private */

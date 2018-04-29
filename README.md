@@ -18,8 +18,8 @@ more maintainable and to take advantage of modern JavaScript features.
 
 # Features/Change Log
 
-- v3.1.0
-	- Reimplmented how to make generic API calls. See examples below
+- v3.0.1
+	- Reimplmented how to make generic API calls in BaseAPI layer. See examples below
 - v3.0.0
 	- almost all [accounting endpoints](https://developer.xero.com/documentation/api/api-overview)
 

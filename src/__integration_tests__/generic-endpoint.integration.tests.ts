@@ -15,7 +15,7 @@ describe('Generic accounting endpoint tests', () => {
 	});
 
 	it('get all', async () => {
-		const response = await xero.oauth1Client.get('/api.xro/2.0/users');
+		const response = await xero.oauth1Client.get('users');
 
 		expect(response).toBeDefined();
 		expect((response as UsersResponse).Id).toBeTruthy();
@@ -26,7 +26,7 @@ describe('Generic accounting endpoint tests', () => {
 	});
 
 	it('get single', async () => {
-		const response = await xero.oauth1Client.get('/api.xro/2.0/users?UserID=' + existingId);
+		const response = await xero.oauth1Client.get('users?UserID=' + existingId);
 
 		expect((response as UsersResponse)).toBeDefined();
 		expect((response as UsersResponse).Id).toBeTruthy();

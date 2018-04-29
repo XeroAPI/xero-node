@@ -25,6 +25,7 @@ describe('config-helper', () => {
 					signatureMethod: 'RSA-SHA1',
 					callbackUrl: null,
 					apiBaseUrl: 'https://api.xero.com',
+					apiBasePath: '',
 					oauthAccessTokenPath: '/oauth/AccessToken',
 					oauthRequestTokenPath: '/oauth/RequestToken',
 				});
@@ -57,6 +58,7 @@ describe('config-helper', () => {
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: null,
+					apiBasePath: '',
 					signatureMethod: 'RSA-SHA1',
 					callbackUrl: null,
 					apiBaseUrl: 'https://api.xero.com',
@@ -95,6 +97,7 @@ describe('config-helper', () => {
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				tenantType: null,
+				apiBasePath: '',
 				signatureMethod: 'HMAC-SHA1',
 				callbackUrl: null,
 				apiBaseUrl: 'https://api.xero.com',
@@ -129,6 +132,7 @@ describe('config-helper', () => {
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: null,
+					apiBasePath: '',
 					signatureMethod: 'RSA-SHA1',
 					callbackUrl: null,
 					apiBaseUrl: 'https://api.xero.com',
@@ -161,6 +165,7 @@ describe('config-helper', () => {
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: null,
+					apiBasePath: '',
 					signatureMethod: 'RSA-SHA1',
 					callbackUrl: null,
 					apiBaseUrl: 'https://api.xero.com',
@@ -188,7 +193,8 @@ describe('config-helper', () => {
 				privateKeyPath: validTestCertPath()
 			};
 			const apiConfig: ApiConfiguration = {
-				tenantType: 'PRACTICE'
+				tenantType: 'PRACTICE',
+				apiBasePath: '/s/s',
 			};
 
 			it('maps config correctly', () => {
@@ -200,6 +206,7 @@ describe('config-helper', () => {
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: 'PRACTICE',
+					apiBasePath: '/s/s',
 					signatureMethod: 'RSA-SHA1',
 					callbackUrl: null,
 					apiBaseUrl: 'https://api.xero.com',
@@ -231,6 +238,7 @@ describe('config-helper', () => {
 					tenantType: 'PRACTICE',
 					signatureMethod: 'RSA-SHA1',
 					callbackUrl: null,
+					apiBasePath: '',
 					apiBaseUrl: 'https://api.xero.com',
 					oauthAccessTokenPath: '/oauth/AccessToken',
 					oauthRequestTokenPath: '/oauth/RequestToken',

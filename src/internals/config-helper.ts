@@ -45,7 +45,7 @@ export function mapConfig(xeroConfig: XeroClientConfiguration, apiConfig: ApiCon
 
 	const oauthConfig: OAuth1Configuration = {
 		apiBaseUrl: API_BASE,
-		// apiBasePath: API_BASE_PATH,
+		apiBasePath: apiConfig.apiBasePath || '',
 		oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
 		oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
 		accept: 'application/json',
