@@ -18,6 +18,8 @@ more maintainable and to take advantage of modern JavaScript features.
 
 # Features/Change Log
 
+- v3.0.2
+	- Removes some unused deps
 - v3.0.1
 	- Reimplmented how to make generic API calls in BaseAPI layer. See examples below
 - v3.0.0
