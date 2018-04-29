@@ -21,7 +21,6 @@
   "license": "MIT",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "fs": "0.0.1-security",
     "oauth": "^0.9.15"
   },
   "devDependencies": {
@@ -29,7 +28,7 @@
     "@types/jest": "^22.1.1",
     "@types/node": "^9.4.0",
     "@types/puppeteer": "^1.1.0",
-    "jest": "^22.1.4",
+    "jest": "^22.4.3",
     "jest-junit": "^3.6.0",
     "nodemon": "^1.14.12",
     "opn": "^5.2.0",
