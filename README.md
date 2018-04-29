@@ -3,6 +3,8 @@
 
 # xero-node
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/XeroAPI/xero-node.svg)](https://greenkeeper.io/)
+
 NodeJS Client for the [Xero API](http://developer.xero.com). Works with ES5, ES6+ and TypeScript.
 
 [API Reference](https://xeroapi.github.io/xero-node/v3)
