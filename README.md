@@ -16,11 +16,12 @@ Supports all application types:
 Version 3 has been rebuilt fron the ground-up using TypeScript, to make it
 more maintainable and to take advantage of modern JavaScript features.
 
-# Features
+# Features/Change Log
 
+- v3.0.1
+	- Reimplmented how to make generic API calls in BaseAPI layer. See examples below
 - v3.0.0
 	- almost all [accounting endpoints](https://developer.xero.com/documentation/api/api-overview)
-	- generic methods (`get`, `put`, `post`, `delete`) for calling any unsupported accounting endpoints
 
 # Installation
 
@@ -139,6 +140,8 @@ const config = require('./config.json');
 
 - [Integration tests](src/__integration_tests__)
 - [Sample app](https://github.com/XeroAPI/xero-node-sample-app)
+- [Generic API calls private](https://github.com/XeroAPI/xero-node/blob/master/src/__integration_tests__/generic-endpoint.integration.tests.ts)
+- [Generic API calls public/partner](https://github.com/XeroAPI/xero-node/blob/master/src/__integration_tests__/partner-example-callbackUrl.tests.ts)
 
 ## Migration from V2
 

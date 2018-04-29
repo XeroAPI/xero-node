@@ -24,6 +24,7 @@ export interface XeroClientConfiguration {
  */
 export interface ApiConfiguration {
 	tenantType?: string;
+	apiBasePath?: string;
 }
 
 /** @private */
@@ -38,7 +39,7 @@ export interface IHttpClient {
 }
 
 /** @private */
-export abstract class BaseAPIClient {
+export class BaseAPIClient {
 
 	public constructor(xeroConfig: XeroClientConfiguration, authState: AccessToken = null, apiConfig: ApiConfiguration = {}, public readonly oauth1Client: IOAuth1HttpClient = null) {
 		if (!xeroConfig) {

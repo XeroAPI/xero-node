@@ -33,7 +33,7 @@ export interface AttachmentsEndpoint {
 export class AccountingAPIClient extends BaseAPIClient {
 
 	public constructor(options: XeroClientConfiguration, authState?: AccessToken, _oAuth1HttpClient?: IOAuth1HttpClient) {
-		super(options, authState, {}, _oAuth1HttpClient);
+		super(options, authState, { apiBasePath: '/api.xro/2.0/' }, _oAuth1HttpClient);
 	}
 
 	private generateAttachmentsEndpoint(path: string): AttachmentsEndpoint {
@@ -286,7 +286,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.writeUTF8ResponseToStream(endpoint, 'application/pdf', writeStream);
 		},
-		create: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: {summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<CreditNotesResponse> => {
+		create: async (creditNote: CreditNote | { CreditNotes: CreditNote[] }, args?: { summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<CreditNotesResponse> => {
 			const endpoint = 'creditnotes' + generateQueryString(args, true);
 			return this.oauth1Client.put<CreditNotesResponse>(endpoint, creditNote);
 		},
@@ -414,7 +414,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.put<InvoicesResponse>(endpoint, invoice);
 		},
 		update: async (invoices: Invoice | { Invoices: Invoice[] }, args?: { InvoiceID?: string, InvoiceNumber?: string, where?: string, summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<InvoicesResponse> => {
-			let endpoint = `invoices`;
+			let endpoint = 'invoices';
 
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
@@ -445,7 +445,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public repeatingInvoices = {
-		get: async (args?: { RepeatingInvoiceID?: string} & QueryArgs): Promise<RepeatingInvoicesResponse> => {
+		get: async (args?: { RepeatingInvoiceID?: string } & QueryArgs): Promise<RepeatingInvoicesResponse> => {
 			let endpoint = 'repeatinginvoices';
 			if (args && args.RepeatingInvoiceID) {
 				endpoint = endpoint + '/' + args.RepeatingInvoiceID;
@@ -521,7 +521,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<LinkedTransactionsResponse>(endpoint, header);
 		},
-		create: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }, args?: {summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<LinkedTransactionsResponse> => {
+		create: async (linkedTransaction: LinkedTransaction | { LinkedTransactions: LinkedTransaction[] }, args?: { summarizeErrors?: boolean } & UnitDecimalPlacesArgs): Promise<LinkedTransactionsResponse> => {
 			const endpoint = 'linkedtransactions' + generateQueryString(args, true);
 			return this.oauth1Client.put<LinkedTransactionsResponse>(endpoint, linkedTransaction);
 		},

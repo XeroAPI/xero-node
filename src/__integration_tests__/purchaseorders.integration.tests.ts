@@ -12,7 +12,6 @@ describe('/purchaseorders', () => {
 
 	it('get all', async () => {
 		const response = await xero.purchaseOrders.get();
-		console.log(response);
 		expect(response).toBeDefined();
 		expect(response.Id).toBeTruthy();
 		expect(response.PurchaseOrders).toBeInstanceOf(Array);

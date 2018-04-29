@@ -19,8 +19,8 @@ describe('AccountingAPI endpoints', () => {
 
 	const inMemoryOAuthLibFF = new InMemoryOAuthLibFactoryFactory();
 
-	const oauthConfig = mapConfig(xeroConfig, {});
-	const accountingBaseUrl = oauthConfig.apiBaseUrl + oauthConfig.apiBasePath;
+	const oauthConfig = mapConfig(xeroConfig, { apiBasePath: '/api.xro/2.0/' });
+	const accountingBaseUrl = oauthConfig.apiBaseUrl;
 	const oauthHttpClient = new OAuth1HttpClient(oauthConfig, mapState(xeroConfig), inMemoryOAuthLibFF.newFactory());
 	const xeroClient = new AccountingAPIClient(xeroConfig, null, oauthHttpClient);
 
@@ -301,7 +301,7 @@ describe('AccountingAPI endpoints', () => {
 				});
 
 				it(`calls the ${fixture.expectedPath} endpoint`, () => {
-					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + fixture.expectedPath);
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + '/api.xro/2.0/' + fixture.expectedPath);
 				});
 
 				it(`calls the ${actionToVerbMap[fixture.action]} verb`, () => {
