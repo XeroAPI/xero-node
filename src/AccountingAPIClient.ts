@@ -263,11 +263,14 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public creditNotes = {
-		get: async (args?: { CreditNoteID?: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<CreditNotesResponse> => {
+		get: async (args?: { CreditNoteID?: string, CreditNoteNumber?: string } & QueryArgs & PagingArgs & UnitDecimalPlacesArgs & HeaderArgs): Promise<CreditNotesResponse> => {
 			let endpoint = 'creditnotes';
 			if (args && args.CreditNoteID) {
 				endpoint = endpoint + '/' + args.CreditNoteID;
 				delete args.CreditNoteID; // remove from query string
+			} else if (args && args.CreditNoteNumber) {
+				endpoint = endpoint + '/' + args.CreditNoteNumber;
+				delete args.CreditNoteNumber;
 			}
 			const header = this.generateHeader(args);
 			endpoint += generateQueryString(args);
