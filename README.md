@@ -18,6 +18,8 @@ more maintainable and to take advantage of modern JavaScript features.
 
 # Features/Change Log
 
+- v3.0.3
+	- Thanks gslisrael. Enable getting creditNotes by CreditNoteNumber #199
 - v3.0.2
 	- Removes some unused deps
 - v3.0.1
