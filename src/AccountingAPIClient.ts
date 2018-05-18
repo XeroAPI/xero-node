@@ -1,5 +1,6 @@
 
 import * as fs from 'fs';
+import * as querystring from 'querystring';
 import { XeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, AccessToken } from './internals/OAuth1HttpClient';
 import { generateQueryString } from './internals/utils';
@@ -43,13 +44,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.oauth1Client.get<AttachmentsResponse>(endpoint);
 			},
 			downloadAttachment: async (args: { entityId: string, mimeType: string, fileName: string, pathToSave: string }) => {
-				const endpoint = `${path}/${args.entityId}/attachments/${args.fileName}`;
+				const endpoint = `${path}/${args.entityId}/attachments/${querystring.escape(args.fileName)}`;
 				const writeStream = fs.createWriteStream(args.pathToSave);
 
 				await this.oauth1Client.writeBinaryResponseToStream(endpoint, args.mimeType, writeStream);
 			},
 			uploadAttachment: async (args: { entityId: string, mimeType: string, fileName: string, pathToUpload: string, includeOnline?: boolean }) => {
-				const endpoint = `${path}/${args.entityId}/attachments/${args.fileName}` + generateQueryString({ IncludeOnline: args.includeOnline });
+				const endpoint = `${path}/${args.entityId}/attachments/${querystring.escape(args.fileName)}` + generateQueryString({ IncludeOnline: args.includeOnline });
 				const readStream = fs.createReadStream(args.pathToUpload);
 
 				const fileSize = fs.statSync(args.pathToUpload).size;
@@ -664,19 +665,34 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public purchaseOrders = {
-		get: async (args?: { PurchaseOrderID?: string, PurchasOrderNumber?: string, Status?: string, DateFrom?: string, DateTo?: string } & QueryArgs & HeaderArgs): Promise<PurchaseOrdersResponse> => {
+		get: async (args?: { PurchaseOrderID?: string, PurchaseOrderNumber?: string, Status?: string, DateFrom?: string, DateTo?: string } & QueryArgs & HeaderArgs): Promise<PurchaseOrdersResponse> => {
 			let endpoint = 'purchaseorders';
 			if (args && args.PurchaseOrderID) {
 				endpoint = endpoint + '/' + args.PurchaseOrderID;
 				delete args.PurchaseOrderID;
-			} else if (args && args.PurchasOrderNumber) {
-				endpoint = endpoint + '/' + args.PurchasOrderNumber;
-				delete args.PurchasOrderNumber;
+			} else if (args && args.PurchaseOrderNumber) {
+				endpoint = endpoint + '/' + args.PurchaseOrderNumber;
+				delete args.PurchaseOrderNumber;
 			}
 			const headers = this.generateHeader(args);
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<PurchaseOrdersResponse>(endpoint, headers);
+		},
+		savePDF: async (args?: { PurchaseOrderID?: string, PurchaseOrderNumber?: string, savePath: string }): Promise<void> => {
+			let endpoint = 'purchaseorders';
+			if (args && args.PurchaseOrderID) {
+				endpoint = endpoint + '/' + args.PurchaseOrderID;
+				delete args.PurchaseOrderID;
+			} else if (args && args.PurchaseOrderNumber) {
+				endpoint = endpoint + '/' + args.PurchaseOrderNumber;
+				delete args.PurchaseOrderNumber;
+			}
+			endpoint += generateQueryString(args);
+
+			const writeStream = fs.createWriteStream(args.savePath);
+
+			return this.oauth1Client.writeUTF8ResponseToStream(endpoint, 'application/pdf', writeStream);
 		},
 		create: async (purchaseOrders?: PurchaseOrder | { PurchaseOrders: PurchaseOrder[] }, args?: { summarizeErrors: boolean }): Promise<PurchaseOrdersResponse> => {
 			let endpoint = 'purchaseorders';
