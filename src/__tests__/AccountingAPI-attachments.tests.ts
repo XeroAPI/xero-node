@@ -35,31 +35,40 @@ describe('AccountingAPI attachments', () => {
 
 	const tempAttachmentLocation = path.resolve(__dirname, 'temp-image.jpg');
 	const localAttachmentLocation = path.resolve(__dirname, 'helpers', 'bean.jpg');
+	const localAttachmentLocation2 = path.resolve(__dirname, 'helpers', 'bean#2.jpg');
 
 	const fixtures: IFixture = {
 		invoices: [
-			{ expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `invoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } },
+			{ expectedPath: `invoices/${guid1}/attachments/bean%232.jpg`, args: { mimeType: 'image/jpg', pathToSave: localAttachmentLocation2, entityId: guid1, fileName: 'bean#2.jpg' } }
 		],
 		bankTransactions: [
-			{ expectedPath: `banktransactions/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `banktransactions/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } },
+			{ expectedPath: `banktransactions/${guid1}/attachments/bean%232.jpg`, args: { mimeType: 'image/jpg', pathToSave: localAttachmentLocation2, entityId: guid1, fileName: 'bean#2.jpg' } }
 		],
 		creditNotes: [
-			{ expectedPath: `creditnotes/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `creditnotes/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } },
+			{ expectedPath: `creditnotes/${guid1}/attachments/bean%232.jpg`, args: { mimeType: 'image/jpg', pathToSave: localAttachmentLocation2, entityId: guid1, fileName: 'bean#2.jpg' } }
 		],
 		repeatingInvoices: [
-			{ expectedPath: `repeatinginvoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `repeatinginvoices/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } },
+			{ expectedPath: `repeatinginvoices/${guid1}/attachments/bean%232.jpg`, args: { mimeType: 'image/jpg', pathToSave: localAttachmentLocation2, entityId: guid1, fileName: 'bean#2.jpg' } }
 		],
 		bankTransfers: [
-			{ expectedPath: `banktransfers/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `banktransfers/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } },
+			{ expectedPath: `banktransfers/${guid1}/attachments/bean%232.jpg`, args: { mimeType: 'image/jpg', pathToSave: localAttachmentLocation2, entityId: guid1, fileName: 'bean#2.jpg' } }
 		],
 		contacts: [
-			{ expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `contacts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } },
+			{ expectedPath: `contacts/${guid1}/attachments/bean%232.jpg`, args: { mimeType: 'image/jpg', pathToSave: localAttachmentLocation2, entityId: guid1, fileName: 'bean#2.jpg' } }
 		],
 		accounts: [
-			{ expectedPath: `accounts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `accounts/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } },
+			{ expectedPath: `accounts/${guid1}/attachments/bean%232.jpg`, args: { mimeType: 'image/jpg', pathToSave: localAttachmentLocation2, entityId: guid1, fileName: 'bean#2.jpg' } }
 		],
 		manualJournals: [
-			{ expectedPath: `manualjournals/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } }
+			{ expectedPath: `manualjournals/${guid1}/attachments/bean.jpg`, args: { mimeType: 'image/jpg', pathToSave: tempAttachmentLocation, entityId: guid1, fileName: 'bean.jpg' } },
+			{ expectedPath: `manualjournals/${guid1}/attachments/bean%232.jpg`, args: { mimeType: 'image/jpg', pathToSave: localAttachmentLocation2, entityId: guid1, fileName: 'bean#2.jpg' } }
 		]
 	};
 

@@ -225,11 +225,14 @@ describe('AccountingAPI endpoints', () => {
 		purchaseOrders: [
 			{ action: 'get', expectedPath: 'purchaseorders' },
 			{ action: 'get', expectedPath: `purchaseorders/${guid1}`, args: { PurchaseOrderID: guid1 } },
+			{ action: 'get', expectedPath: `purchaseorders/${'PO-123'}`, args: { PurchaseOrderNumber: 'PO-123' } },
 			{ action: 'get', expectedPath: `purchaseorders/${guid1}?order=UpdatedDateUTC`, args: { PurchaseOrderID: guid1, order: 'UpdatedDateUTC' } },
 			{ action: 'get', expectedPath: `purchaseorders`, args: { 'If-Modified-Since': 'headerValue' } },
 			{ action: 'create', expectedPath: `purchaseorders?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `purchaseorders?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `purchaseorders/${guid1}?summarizeErrors=true`, args: { PurchaseOrderID: guid1, summarizeErrors: true } },
+			// { action: 'savePDF', expectedPath: `purchaseorders/${guid1}`, args: { InvoiceID: guid1, savePath: '/dev/null'} },
+			// { action: 'savePDF', expectedPath: `purchaseorders/${'PO-123'}`, args: { InvoiceNumber: 'PO-123', savePath: '/dev/null' } },
 		],
 		receipts: [
 			{ action: 'get', expectedPath: 'receipts' },
