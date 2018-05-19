@@ -1,9 +1,8 @@
 
 import * as fs from 'fs';
-import * as querystring from 'querystring';
 import { XeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, AccessToken } from './internals/OAuth1HttpClient';
-import { generateQueryString } from './internals/utils';
+import { generateQueryString, escapeString } from './internals/utils';
 import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse, RepeatingInvoicesResponse, PurchaseOrdersResponse } from './AccountingAPI-responses';
 import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt, ManualJournal, PurchaseOrder } from './AccountingAPI-models';
 
@@ -44,13 +43,13 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.oauth1Client.get<AttachmentsResponse>(endpoint);
 			},
 			downloadAttachment: async (args: { entityId: string, mimeType: string, fileName: string, pathToSave: string }) => {
-				const endpoint = `${path}/${args.entityId}/attachments/${querystring.escape(args.fileName)}`;
+				const endpoint = `${path}/${args.entityId}/attachments/${escapeString(args.fileName)}`;
 				const writeStream = fs.createWriteStream(args.pathToSave);
 
 				await this.oauth1Client.writeBinaryResponseToStream(endpoint, args.mimeType, writeStream);
 			},
 			uploadAttachment: async (args: { entityId: string, mimeType: string, fileName: string, pathToUpload: string, includeOnline?: boolean }) => {
-				const endpoint = `${path}/${args.entityId}/attachments/${querystring.escape(args.fileName)}` + generateQueryString({ IncludeOnline: args.includeOnline });
+				const endpoint = `${path}/${args.entityId}/attachments/${escapeString(args.fileName)}` + generateQueryString({ IncludeOnline: args.includeOnline });
 				const readStream = fs.createReadStream(args.pathToUpload);
 
 				const fileSize = fs.statSync(args.pathToUpload).size;
