@@ -13,6 +13,11 @@ export function getStringFromFile(location: string) {
 }
 
 /** @private */
+export function escapeString(string: string) {
+	return querystring.escape(querystring.unescape(string));
+}
+
+/** @private */
 export function generateQueryString(args: { [key: string]: any }, addSummarizeErrorsParam: boolean = false): string {
 	const argsToUse = { ...args };
 	if (addSummarizeErrorsParam && argsToUse.summarizeErrors == undefined) {
