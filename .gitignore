@@ -14,3 +14,4 @@ xero-login.json
 oAuthState.json
 *.orig
 *junit.xml
+.DS_Store

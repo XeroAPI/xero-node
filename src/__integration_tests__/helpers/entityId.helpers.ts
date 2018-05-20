@@ -13,6 +13,7 @@ const inMemoryCache: {
 	itemId?: string,
 	manualJournalId?: string,
 	paymentId?: string,
+	purchaseOrderId?: string,
 	receiptId?: string,
 	userId?: string,
 } = {};
@@ -117,6 +118,28 @@ export async function getOrCreateInvoiceId(xero: AccountingAPIClient) {
 		inMemoryCache.invoiceId = response.Invoices[0].InvoiceID;
 	}
 	return inMemoryCache.invoiceId;
+}
+
+export async function getOrCreatePurchaseOrderId(xero: AccountingAPIClient) {
+	if (!inMemoryCache.purchaseOrderId) {
+		const contactId = await getOrCreateContactId(xero);
+		const response = await xero.purchaseOrders.create({
+			Contact: { ContactID: contactId },
+			Date: '2015-11-30',
+			DeliveryDate: '2015-12-20',
+			LineAmountTypes: 'Exclusive',
+			LineItems: [
+				{
+					Description: 'Office Chairs',
+					Quantity: 5.0000,
+					UnitAmount: 120.00
+				}
+			]
+		});
+
+		inMemoryCache.purchaseOrderId = response.PurchaseOrders[0].PurchaseOrderID;
+	}
+	return inMemoryCache.purchaseOrderId;
 }
 
 export async function getOrCreateItemId(xero: AccountingAPIClient) {
