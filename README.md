@@ -18,6 +18,11 @@ more maintainable and to take advantage of modern JavaScript features.
 
 # Features/Change Log
 
+- v3.0.4
+	- Thanks nickngsr #203
+	- escape filename to ensure it is url safe for attachments
+	- add ability to save purchase order pdf
+	- fix typo on purchase order number in get request
 - v3.0.3
 	- Thanks gslisrael. Enable getting creditNotes by CreditNoteNumber #199
 - v3.0.2
