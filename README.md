@@ -170,7 +170,11 @@ becomes:
 let result = await xero.invoices.create(invoiceJSON);
 ```
 
-Please also review the documentation around how to construct the client object. You no longer have to use specifc constructors for your App Type. Instead this information is passed in with your config object.
+Please also review the documentation around how to construct the client object. You no longer have to use specifc constructors for your App Type. Instead this information is passed in with your config object. For example, rather than `Xero.PublicApplication` you use `new Xero.AccountingAPIClient` and specify the appType in the config passed in.
+
+In addition the oAuth1.0a related methods are in their own namespace now, and there are some changes from `z` to `s` to align with Xero API naming. 
+
+Please see related blog post here: https://devblog.xero.com/the-new-xero-node-sdk-2c69dcab4a2f
 
 # Contributing
 
