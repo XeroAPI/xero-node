@@ -66,6 +66,13 @@ describe('/invoices', () => {
 		expect(invoiceBuffer.byteLength).toBeGreaterThan(3000); // Let's hope all PDFs are bigger than 3000B
 	});
 
+	it('get history', async () => {
+		const invoiceId = await getOrCreateInvoiceId(xero);
+		const response = await xero.invoices.history.get({ InvoiceID: invoiceId });		
+		expect(response.HistoryRecords[0]).toBeDefined();
+	});
+
+
 	describe('Invalid requests', () => {
 		it('creating an invalid invoice', async () => {
 			const createInvalidInvoiceRequest = { ...createSingleInvoiceRequest, ...{ Type: 'ImNotARealType' } };

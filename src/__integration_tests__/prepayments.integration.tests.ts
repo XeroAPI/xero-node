@@ -56,6 +56,11 @@ describe('/prepayments', () => {
 		expect(response.Prepayments[0].PrepaymentID).toEqual(existingId);
 	});
 
+	it('get history', async () => {
+		const response = await xero.prepayments.history.get({ PrepaymentID: existingId });
+		expect(response.HistoryRecords[0]).toBeDefined();
+	});
+
 	it('reverse via the payments endpoint', async () => {
 		const response = await xero.payments.update({ PaymentID: existingId, Status: 'DELETED' });
 

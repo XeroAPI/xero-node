@@ -33,6 +33,11 @@ describe('/expenseclaims', () => {
 		expect(response.ExpenseClaims[0].ExpenseClaimID).toBeTruthy();
 	});
 
+	it('get history', async () => {
+		let response = await xero.expenseClaims.history.get({ ExpenseClaimID: await getOrCreateExpenseClaimId(xero) });		
+		expect(response.HistoryRecords[0]).toBeDefined();
+	});
+
 	it('get all', async () => {
 		const response = await xero.expenseClaims.get();
 

@@ -18,4 +18,10 @@ describe('/repeatinginvoices', () => {
 		expect(response.Status).toBe('OK');
 		expect(response.RepeatingInvoices).toBeInstanceOf(Array);
 	});
+
+	it('get history', async () => {
+		const repInv = await xero.repeatingInvoices.get();
+		const response = await xero.repeatingInvoices.history.get({ RepeatingInvoiceID: repInv.RepeatingInvoices[0].RepeatingInvoiceID });
+		expect(response.HistoryRecords[0]).toBeDefined();
+	});
 });

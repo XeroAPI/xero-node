@@ -45,6 +45,7 @@ export interface BankTransaction {
 	PrepaymentID?: string;
 	OverpaymentID?: string;
 	HasAttachments?: boolean;
+	History?: HistoryRecord[];
 }
 
 export interface BankAccount {
@@ -70,6 +71,7 @@ export interface BankTransfer {
 	Amount?: number;
 	FromBankTransactionID?: string;
 	ToBankTransactionID?: string;
+	History?: HistoryRecord[];
 }
 
 export interface Payment {
@@ -89,6 +91,7 @@ export interface Payment {
 	Prepayment?: Prepayment;
 	Overpayment?: Overpayment;
 	UpdatedDateUTC?: string;
+	History?: HistoryRecord[];
 }
 
 export interface BrandingTheme {
@@ -116,6 +119,7 @@ export interface Overpayment {
 	Allocations?: Allocation[];
 	Payments?: Payment[];
 	HasAttachments?: boolean;
+	History?: HistoryRecord[];
 }
 
 export interface Prepayment {
@@ -136,6 +140,7 @@ export interface Prepayment {
 	Allocations?: Allocation[];
 	Reference?: string;
 	HasAttachments?: boolean;
+	History?: HistoryRecord[];
 }
 
 export interface Allocation {
@@ -164,6 +169,7 @@ export interface CreditNote {
 	HasAttachments?: boolean;
 	CreditNoteID?: string;
 	CreditNoteNumber?: string;
+	History?: HistoryRecord[];
 }
 
 export interface Invoice {
@@ -196,6 +202,7 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
+	History?: HistoryRecord[];
 }
 
 export interface InvoiceReminder {
@@ -217,6 +224,7 @@ export interface RepeatingInvoice {
 	TotalTax?: string;
 	Total?: string;
 	CurrencyCode?: string;
+	History?: HistoryRecord[];
 }
 
 export interface Schedule {
@@ -226,6 +234,14 @@ export interface Schedule {
 	DueDateType?: string;
 	StartDate?: string;
 	NextScheduleDate?: string;
+}
+
+export interface HistoryRecord {
+	Changes?: string;
+	DateUTCString?: string;
+	DateUTC?: string;
+	User?: String;
+	Details?: String;
 }
 
 export interface Contact {
@@ -252,6 +268,7 @@ export interface Contact {
 	AccountsPayableTaxType?: string;
 	TaxNumber?: string;
 	SkypeUserName?: string;
+	History?: HistoryRecord[];
 }
 
 export interface ContactGroup {
@@ -373,6 +390,7 @@ export interface Item {
 	IsTrackedAsInventory?: boolean;
 	InventoryAssetAccountCode?: string;
 	UpdatedDateUTC?: string;
+	History?: HistoryRecord[];
 }
 
 export interface PurchaseAndSalesDetails {
@@ -408,6 +426,7 @@ export interface PurchaseOrder {
 	Total?: string;
 	UpdatedDateUTC?: string;
 	HasAttachments?: boolean;
+	History?: HistoryRecord[];
 }
 
 export interface Tracking {
@@ -437,6 +456,7 @@ export interface ExpenseClaim {
 	AmountPaid?: number;
 	PaymentDueDate?: string;
 	ReportingDate?: string;
+	History?: HistoryRecord[];
 }
 
 export interface User {
@@ -465,6 +485,7 @@ export interface Receipt {
 	Total?: number;
 	Url?: string;
 	HasAttachments?: boolean;
+	History?: HistoryRecord[];
 }
 
 export interface Report {
