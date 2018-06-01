@@ -18,7 +18,7 @@ more maintainable and to take advantage of modern JavaScript features.
 
 # Features/Change Log
 
-- v3.0.5
+- v3.0.6
 	- Thanks brucem1976 who added History to the endpoints that support History #206
 - v3.0.4
 	- Thanks nickngsr #203
