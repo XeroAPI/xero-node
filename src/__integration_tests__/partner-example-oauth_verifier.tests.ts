@@ -1,7 +1,7 @@
-import { AccountingAPIClient } from '../AccountingAPIClient';
 import * as puppeteer from 'puppeteer';
-import { getPartnerAppConfig, getLoginConfig, setJestTimeout } from './helpers/integration.helpers';
+import { AccountingAPIClient } from '../AccountingAPIClient';
 import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
+import { getLoginConfig, getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpers';
 
 setJestTimeout();
 

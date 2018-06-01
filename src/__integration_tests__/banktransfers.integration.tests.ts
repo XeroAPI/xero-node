@@ -1,6 +1,6 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
+import { getOrCreateAccountId, getOrCreateBankTransferId } from './helpers/entityId.helpers';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { getOrCreateBankTransferId, getOrCreateAccountId } from './helpers/entityId.helpers';
 
 describe('/banktransfers', () => {
 	let xero: AccountingAPIClient;

@@ -1,7 +1,7 @@
+import { TaxRate } from '../AccountingAPI-models';
+import { TaxRatesResponse } from '../AccountingAPI-responses';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { TaxRatesResponse } from '../AccountingAPI-responses';
-import { TaxRate } from '../AccountingAPI-models';
 
 describe('/taxrates', () => {
 	let xero: AccountingAPIClient;

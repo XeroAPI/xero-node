@@ -1,7 +1,7 @@
-import { AccountingAPIClient } from '../AccountingAPIClient';
-import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { UsersResponse } from '../AccountingAPI-responses';
+import { AccountingAPIClient } from '../AccountingAPIClient';
 import { BaseAPIClient } from '../internals/BaseAPIClient';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('Generic accounting endpoint tests', () => {
 

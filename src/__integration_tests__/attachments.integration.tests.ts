@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { AccountingAPIClient } from '../AccountingAPIClient';
-import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { getOrCreateInvoiceId } from './helpers/entityId.helpers';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('attachments', () => {
 

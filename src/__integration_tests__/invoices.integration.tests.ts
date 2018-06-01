@@ -1,11 +1,11 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { AccountingAPIClient } from '../AccountingAPIClient';
-import { createSingleInvoiceRequest, createMultipleInvoiceRequest } from './request-body/invoice.request.examples';
-import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { InvoicesResponse } from '../AccountingAPI-responses';
+import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getOrCreateInvoiceId } from './helpers/entityId.helpers';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
+import { createMultipleInvoiceRequest, createSingleInvoiceRequest } from './request-body/invoice.request.examples';
 
 describe('/invoices', () => {
 
@@ -68,10 +68,9 @@ describe('/invoices', () => {
 
 	// it('get history', async () => {
 	// 	const invoiceId = await getOrCreateInvoiceId(xero);
-	// 	const response = await xero.invoices.history.get({ InvoiceID: invoiceId });		
+	// 	const response = await xero.invoices.history.get({ InvoiceID: invoiceId });
 	// 	expect(response.HistoryRecords[0]).toBeDefined();
 	// });
-
 
 	describe('Invalid requests', () => {
 		it('creating an invalid invoice', async () => {

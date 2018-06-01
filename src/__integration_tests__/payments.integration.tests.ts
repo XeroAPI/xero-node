@@ -1,6 +1,6 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
+import { getOrCreateInvoiceId, getOrCreatePaymentId } from './helpers/entityId.helpers';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { getOrCreatePaymentId, getOrCreateInvoiceId } from './helpers/entityId.helpers';
 
 describe('/payments', () => {
 	let xero: AccountingAPIClient;
@@ -28,7 +28,7 @@ describe('/payments', () => {
 	// it('get history', async () => {
 	// 	const paymentId = await getOrCreatePaymentId(xero);
 	// 	const response = await xero.payments.history.get({ PaymentID: paymentId });
-		
+
 	// 	expect(response.HistoryRecords[0]).toBeDefined();
 	// });
 

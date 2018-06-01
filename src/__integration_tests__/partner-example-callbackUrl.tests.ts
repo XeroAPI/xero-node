@@ -1,8 +1,8 @@
 import * as puppeteer from 'puppeteer';
-import { getPartnerAppConfig, getLoginConfig, setJestTimeout } from './helpers/integration.helpers';
 import * as querystring from 'querystring';
-import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
 import { BaseAPIClient } from '../internals/BaseAPIClient';
+import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
+import { getLoginConfig, getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpers';
 
 setJestTimeout();
 

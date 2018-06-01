@@ -1,6 +1,6 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
-import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { getOrCreateManualJournalId } from './helpers/entityId.helpers';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('/manualJournals', () => {
 	let xero: AccountingAPIClient;

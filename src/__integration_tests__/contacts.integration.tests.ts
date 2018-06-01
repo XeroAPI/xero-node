@@ -38,7 +38,7 @@ describe('/contacts', () => {
 
 	// it('can get history', async () => {
 	// 	const response = await xero.contacts.history.get({ ContactID: contactIdsToArchive[0] });
-		
+
 	// 	expect(response.HistoryRecords[0]).toBeDefined();
 	// });
 

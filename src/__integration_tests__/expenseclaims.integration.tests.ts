@@ -1,7 +1,7 @@
-import { AccountingAPIClient } from '../AccountingAPIClient';
-import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { ExpenseClaimsResponse } from '../AccountingAPI-responses';
+import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getOrCreateExpenseClaimId } from './helpers/entityId.helpers';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('/expenseclaims', () => {
 	let xero: AccountingAPIClient;
@@ -34,7 +34,7 @@ describe('/expenseclaims', () => {
 	});
 
 	// it('get history', async () => {
-	// 	let response = await xero.expenseClaims.history.get({ ExpenseClaimID: await getOrCreateExpenseClaimId(xero) });		
+	// 	let response = await xero.expenseClaims.history.get({ ExpenseClaimID: await getOrCreateExpenseClaimId(xero) });
 	// 	expect(response.HistoryRecords[0]).toBeDefined();
 	// });
 

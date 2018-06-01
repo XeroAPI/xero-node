@@ -1,6 +1,6 @@
+import { CreditNotesResponse } from '../AccountingAPI-responses';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { CreditNotesResponse } from '../AccountingAPI-responses';
 
 describe('/creditnotes', () => {
 	let xero: AccountingAPIClient;
@@ -23,9 +23,8 @@ describe('/creditnotes', () => {
 	});
 
 	// it('can get history', async () => {
-	// 	let historyResponse = await xero.creditNotes.history.get({ CreditNoteID: response.CreditNotes[0].CreditNoteID });		
+	// 	let historyResponse = await xero.creditNotes.history.get({ CreditNoteID: response.CreditNotes[0].CreditNoteID });
 	// 	expect(historyResponse.HistoryRecords[0]).toBeDefined();
 	// });
-
 
 });

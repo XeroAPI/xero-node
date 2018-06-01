@@ -1,7 +1,7 @@
-import { AccountingAPIClient } from '../AccountingAPIClient';
-import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { ReceiptsResponse } from '../AccountingAPI-responses';
+import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getOrCreateContactId, getOrCreateReceiptId, getOrCreateUserId } from './helpers/entityId.helpers';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('/receipts', () => {
 	let xero: AccountingAPIClient;
@@ -53,10 +53,9 @@ describe('/receipts', () => {
 		expect(response.Receipts[0].ReceiptID).toBeTruthy();
 	});
 
-	
 	// it('get history', async () => {
 	// 	const response = await xero.receipts.history.get({ ReceiptID: await getOrCreateReceiptId(xero) });
-		
+
 	// 	expect(response.HistoryRecords[0]).toBeDefined();
 	// })
 

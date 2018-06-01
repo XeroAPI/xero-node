@@ -1,7 +1,7 @@
-import { AccountingAPIClient } from '../AccountingAPIClient';
-import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 import { ItemsResponse } from '../AccountingAPI-responses';
+import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getOrCreateItemId } from './helpers/entityId.helpers';
+import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
 describe('/items', () => {
 	let xero: AccountingAPIClient;
@@ -43,7 +43,7 @@ describe('/items', () => {
 	});
 
 	// it('get history', async () => {
-	// 	const response = await xero.items.history.get({ ItemID: await getOrCreateItemId(xero)});		
+	// 	const response = await xero.items.history.get({ ItemID: await getOrCreateItemId(xero)});
 	// 	expect(response.HistoryRecords[0]).toBeDefined();
 	// });
 
