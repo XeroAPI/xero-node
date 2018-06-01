@@ -28,6 +28,12 @@ describe('/purchaseorders', () => {
 		expect(response.PurchaseOrders).toBeInstanceOf(Array);
 	});
 
+	// it('get history', async () => {
+	// 	const response = await xero.purchaseOrders.history.get({ PurchaseOrderID: await getOrCreatePurchaseOrderId(xero) });
+		
+	// 	expect(response.HistoryRecords[0]).toBeDefined();
+	// })
+
 	afterAll(async () => {
 		// delete the file
 		fs.unlinkSync(tmpDownloadFile);

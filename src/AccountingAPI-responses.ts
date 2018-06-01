@@ -1,4 +1,4 @@
-﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment, Receipt, RepeatingInvoice, ManualJournal, PurchaseOrder } from './AccountingAPI-models';
+﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, HistoryRecord, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment, Receipt, RepeatingInvoice, ManualJournal, PurchaseOrder } from './AccountingAPI-models';
 
 /** @private */
 export interface AccountingAPIResponse {
@@ -66,6 +66,11 @@ export interface ContactGroupsResponse extends AccountingAPIResponse {
 /** @private */
 export interface ContactsResponse extends AccountingAPIResponse {
 	Contacts: Array<Contact & SummariseErrors>;
+}
+
+/** @private */
+export interface HistoryResponse extends AccountingAPIResponse {
+	HistoryRecords: Array<HistoryRecord & SummariseErrors>;
 }
 
 /** @private */
