@@ -22,10 +22,10 @@ describe('/creditnotes', () => {
 		expect(response.CreditNotes[0].CreditNoteID).toBeDefined();
 	});
 
-	it('can get history', async () => {
-		let historyResponse = await xero.creditNotes.history.get({ CreditNoteID: response.CreditNotes[0].CreditNoteID });		
-		expect(historyResponse.HistoryRecords[0]).toBeDefined();
-	});
+	// it('can get history', async () => {
+	// 	let historyResponse = await xero.creditNotes.history.get({ CreditNoteID: response.CreditNotes[0].CreditNoteID });		
+	// 	expect(historyResponse.HistoryRecords[0]).toBeDefined();
+	// });
 
 
 });

@@ -42,10 +42,10 @@ describe('/items', () => {
 		expect(response.Items[0].ItemID).toBeTruthy();
 	});
 
-	it('get history', async () => {
-		const response = await xero.items.history.get({ ItemID: await getOrCreateItemId(xero)});		
-		expect(response.HistoryRecords[0]).toBeDefined();
-	});
+	// it('get history', async () => {
+	// 	const response = await xero.items.history.get({ ItemID: await getOrCreateItemId(xero)});		
+	// 	expect(response.HistoryRecords[0]).toBeDefined();
+	// });
 
 	it('update', async () => {
 		const response = await xero.items.update({

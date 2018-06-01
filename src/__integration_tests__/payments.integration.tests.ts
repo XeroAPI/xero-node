@@ -25,12 +25,12 @@ describe('/payments', () => {
 		expect(response.Payments[0].Amount).toBeDefined();
 	});
 
-	it('get history', async () => {
-		const paymentId = await getOrCreatePaymentId(xero);
-		const response = await xero.payments.history.get({ PaymentID: paymentId });
+	// it('get history', async () => {
+	// 	const paymentId = await getOrCreatePaymentId(xero);
+	// 	const response = await xero.payments.history.get({ PaymentID: paymentId });
 		
-		expect(response.HistoryRecords[0]).toBeDefined();
-	});
+	// 	expect(response.HistoryRecords[0]).toBeDefined();
+	// });
 
 	it('create', async () => {
 		const response = await xero.payments.create({

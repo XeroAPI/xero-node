@@ -36,11 +36,11 @@ describe('/contacts', () => {
 		expect(response.Contacts[0].ContactID).toBeDefined();
 	});
 
-	it('can get history', async () => {
-		const response = await xero.contacts.history.get({ ContactID: contactIdsToArchive[0] });
+	// it('can get history', async () => {
+	// 	const response = await xero.contacts.history.get({ ContactID: contactIdsToArchive[0] });
 		
-		expect(response.HistoryRecords[0]).toBeDefined();
-	});
+	// 	expect(response.HistoryRecords[0]).toBeDefined();
+	// });
 
 	afterAll(async () => {
 		// And this is how you update

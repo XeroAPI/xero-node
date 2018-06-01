@@ -23,12 +23,12 @@ describe('/banktransfers', () => {
 		expect(response.BankTransfers[0].Amount).toBeDefined();
 	});
 
-	it('can get history', async () => {
-		const bankTransferId = await getOrCreateBankTransferId(xero);
+	// it('can get history', async () => {
+	// 	const bankTransferId = await getOrCreateBankTransferId(xero);
 
-		const response = await xero.bankTransfers.history.get({ BankTransferID: bankTransferId });
-		expect(response.HistoryRecords[0]).toBeDefined();
-	});
+	// 	const response = await xero.bankTransfers.history.get({ BankTransferID: bankTransferId });
+	// 	expect(response.HistoryRecords[0]).toBeDefined();
+	// });
 
 	it('create', async () => {
 		const fromAccountId = await getOrCreateAccountId(xero, { where: 'Type=="BANK"' });

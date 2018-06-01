@@ -3,7 +3,7 @@ import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers'
 
 describe('/overpayments', () => {
 	let xero: AccountingAPIClient;
-	let overPaymentID: any;
+	//let overPaymentID: any;
 	
 	beforeAll(async () => {
 		setJestTimeout();
@@ -16,13 +16,13 @@ describe('/overpayments', () => {
 		expect(response).not.toBeNull();
 		expect(response.Overpayments).toBeInstanceOf(Array);
 		expect(response.Overpayments[0]).toHaveProperty('Contact');
-		overPaymentID = response.Overpayments[0].OverpaymentID;
+		//overPaymentID = response.Overpayments[0].OverpaymentID;
 	});
 
-	it('get history', async () => {
-		const response = await xero.overpayments.history.get(overPaymentID);
+	// it('get history', async () => {
+	// 	const response = await xero.overpayments.history.get(overPaymentID);
 		
-		expect(response.HistoryRecords[0]).toBeDefined();
-	});
+	// 	expect(response.HistoryRecords[0]).toBeDefined();
+	// });
 
 });

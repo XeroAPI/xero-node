@@ -54,11 +54,11 @@ describe('/receipts', () => {
 	});
 
 	
-	it('get history', async () => {
-		const response = await xero.receipts.history.get({ ReceiptID: await getOrCreateReceiptId(xero) });
+	// it('get history', async () => {
+	// 	const response = await xero.receipts.history.get({ ReceiptID: await getOrCreateReceiptId(xero) });
 		
-		expect(response.HistoryRecords[0]).toBeDefined();
-	})
+	// 	expect(response.HistoryRecords[0]).toBeDefined();
+	// })
 
 	it('update', async () => {
 		const response = await xero.receipts.update({

@@ -23,10 +23,10 @@ describe('/banktransactions', () => {
 		expect(newResponse.BankTransactions[0].BankTransactionID).toBeDefined();
 	});
 
-	it('can get history', async () => {
-		const newResponse = await xero.bankTransactions.history.get({ BankTransactionID: existingId });
-		expect(newResponse.HistoryRecords[0]).toBeDefined();
-	});
+	// it('can get history', async () => {
+	// 	const newResponse = await xero.bankTransactions.history.get({ BankTransactionID: existingId });
+	// 	expect(newResponse.HistoryRecords[0]).toBeDefined();
+	// });
 
 	it('can update', async () => {
 		const deleteResult = await xero.bankTransactions.update({

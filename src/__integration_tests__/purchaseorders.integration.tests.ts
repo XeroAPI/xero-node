@@ -28,11 +28,11 @@ describe('/purchaseorders', () => {
 		expect(response.PurchaseOrders).toBeInstanceOf(Array);
 	});
 
-	it('get history', async () => {
-		const response = await xero.purchaseOrders.history.get({ PurchaseOrderID: await getOrCreatePurchaseOrderId(xero) });
+	// it('get history', async () => {
+	// 	const response = await xero.purchaseOrders.history.get({ PurchaseOrderID: await getOrCreatePurchaseOrderId(xero) });
 		
-		expect(response.HistoryRecords[0]).toBeDefined();
-	})
+	// 	expect(response.HistoryRecords[0]).toBeDefined();
+	// })
 
 	afterAll(async () => {
 		// delete the file
