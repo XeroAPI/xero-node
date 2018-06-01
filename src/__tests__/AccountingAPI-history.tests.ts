@@ -1,7 +1,6 @@
+import { AccountingAPIClient } from '../AccountingAPIClient';
 import { XeroClientConfiguration } from '../internals/BaseAPIClient';
 import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
-import { AccountingAPIClient } from '../AccountingAPIClient';
-
 import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/InMemoryOAuthLib';
 import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
 import { mapConfig, mapState } from '../internals/config-helper';
