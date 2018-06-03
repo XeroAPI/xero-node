@@ -196,6 +196,10 @@ We need two private Apps to get around the ratelimits. They can be connected to 
 4. (Do the same for `partner-config-example.json` if required.)
 5. Run `npm test`
 
+For the partner tests to pass you will need a partner app. Don't worry if you don't have one and the test fails. It will run in CircleCI.
+
+The Prepayments and Overpayments tests require Pre/Overpayments to be present in your Organisatino, again, don't worry too much if these fail for you - they run in CircleCI.
+
 
 ## Project Philosophies
 
