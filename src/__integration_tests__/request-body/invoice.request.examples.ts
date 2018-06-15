@@ -36,6 +36,24 @@ const createMultipleInvoiceRequest: { Invoices: Invoice[] } = {
 	]
 };
 
+const createEmailInvoiceRequest: Invoice = {
+	Type: 'ACCREC',
+	Contact: {
+		Name: 'Martin Hudson',
+		EmailAddress: 'test@test.com'
+	},
+	Date: '2018-02-15T00:00:00',
+	DueDate: '2018-02-22T00:00:00',
+	LineAmountTypes: 'Exclusive',
+	Status: 'AUTHORISED',
+	LineItems: [{
+		Description: 'Monthly rental for property at 56a Email Avenue',
+		Quantity: 4.3400,
+		UnitAmount: 395.00,
+		AccountCode: '200'
+	}]
+};
+
 export {
-	createSingleInvoiceRequest, createMultipleInvoiceRequest
+	createSingleInvoiceRequest, createMultipleInvoiceRequest, createEmailInvoiceRequest
 };

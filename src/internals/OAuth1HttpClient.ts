@@ -406,7 +406,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					if (err) {
 						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse ? httpResponse.headers : null) : err);
 					} else {
-						const toReturn = JSON.parse(data) as T;
+						const toReturn = JSON.parse(data || '{}') as T;
 						return resolve(toReturn);
 					}
 				}

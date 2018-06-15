@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { XeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
 import { IOAuth1HttpClient, AccessToken } from './internals/OAuth1HttpClient';
 import { generateQueryString, escapeString } from './internals/utils';
-import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, HistoryResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse, RepeatingInvoicesResponse, PurchaseOrdersResponse } from './AccountingAPI-responses';
+import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, HistoryResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse, RepeatingInvoicesResponse, PurchaseOrdersResponse, EmailInvoiceResponse } from './AccountingAPI-responses';
 import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt, ManualJournal, PurchaseOrder } from './AccountingAPI-models';
 
 export interface QueryArgs {
@@ -523,6 +523,19 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.oauth1Client.get<HistoryResponse>(endpoint);
 			}
 		},
+		email: {
+			create: async(args: { InvoiceID: string }): Promise<EmailInvoiceResponse> => {
+				let endpoint = 'invoices';
+				if (args && args.InvoiceID) {
+					endpoint = endpoint + '/' + args.InvoiceID;
+					delete args.InvoiceID;
+				}
+
+				endpoint += '/email';
+
+				return this.oauth1Client.post<EmailInvoiceResponse>(endpoint, {})
+			}
+		}
 	};
 
 	public repeatingInvoices = {
