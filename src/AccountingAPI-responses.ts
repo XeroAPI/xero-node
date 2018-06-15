@@ -187,6 +187,3 @@ export interface TrackingCategoriesResponse extends AccountingAPIResponse {
 export interface UsersResponse extends AccountingAPIResponse {
 	Users: User[];
 }
-
-/** @private */
-export interface EmailInvoiceResponse {}

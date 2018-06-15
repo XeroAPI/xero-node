@@ -73,7 +73,7 @@ describe('/invoices', () => {
 
 		collectInvoicesToArchive(invoiceResponse);
 
-		expect(email).toMatchObject({});
+		expect(email).toBeNull();
 	});
 
 	// it('get history', async () => {
