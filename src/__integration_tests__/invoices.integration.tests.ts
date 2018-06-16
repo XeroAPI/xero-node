@@ -5,7 +5,7 @@ import { InvoicesResponse } from '../AccountingAPI-responses';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getOrCreateInvoiceId } from './helpers/entityId.helpers';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { createMultipleInvoiceRequest, createSingleInvoiceRequest } from './request-body/invoice.request.examples';
+import { createMultipleInvoiceRequest, createSingleInvoiceRequest, createEmailInvoiceRequest } from './request-body/invoice.request.examples';
 
 describe('/invoices', () => {
 
@@ -64,6 +64,16 @@ describe('/invoices', () => {
 		expect(response).toBeUndefined();
 		const invoiceBuffer = fs.readFileSync(tmpDownloadFile);
 		expect(invoiceBuffer.byteLength).toBeGreaterThan(3000); // Let's hope all PDFs are bigger than 3000B
+	});
+
+	it('sends invoice email', async () => {
+		const invoiceResponse = await xero.invoices.create(createEmailInvoiceRequest);
+		const invoiceId = invoiceResponse.Invoices[0].InvoiceID;
+		const email = await xero.invoices.email.create({ InvoiceID: invoiceId });
+
+		collectInvoicesToArchive(invoiceResponse);
+
+		expect(email).toBeNull();
 	});
 
 	// it('get history', async () => {

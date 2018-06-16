@@ -523,6 +523,19 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.oauth1Client.get<HistoryResponse>(endpoint);
 			}
 		},
+		email: {
+			create: async(args: { InvoiceID: string }): Promise<void> => {
+				let endpoint = 'invoices';
+				if (args && args.InvoiceID) {
+					endpoint = endpoint + '/' + args.InvoiceID;
+					delete args.InvoiceID;
+				}
+
+				endpoint += '/email';
+
+				return this.oauth1Client.post<void>(endpoint, {})
+			}
+		}
 	};
 
 	public repeatingInvoices = {
