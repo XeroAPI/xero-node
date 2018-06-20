@@ -13,7 +13,7 @@ Supports all application types:
 * Public - apps that can connect to any organisation, but only for 30 minutes at a time
 * Partner - approved apps that can automatically refresh tokens
 
-Version 3 has been rebuilt fron the ground-up using TypeScript, to make it
+Version 3 has been rebuilt from the ground-up using TypeScript, to make it
 more maintainable and to take advantage of modern JavaScript features.
 
 # Features/Change Log
@@ -218,7 +218,7 @@ The Prepayments and Overpayments tests require Pre/Overpayments to be present in
 
     That rather than using HTTP verbs (`.put()`, `.post()` etc) the SDK will use actions. Example `get()`, `create()`,`delete()`, `update()`. This abstracts away Xero's [funny](https://developer.xero.com/documentation/api/requests-and-responses) `PUT` vs `POST`.
 
-2. A simple and single OAuth flow. Rather than automatically refreshing tokens, the SDK we will expose methods which allow the OAuth methods eg Refreshing Tokens etc. Consideration is also being made to OAuth2.
+2. A simple and single OAuth flow. Rather than automatically refreshing tokens, the SDK will expose methods which allow the OAuth methods eg Refreshing Tokens etc. Consideration is also being made to OAuth2.
 
 3. Abstracted underlyting OAuth/HTTP lib. This will allow swapping it out if we needed. The SDK won't bleed the OAuth libs exception types onto the consumer when it hits a 500/400 etc. Having a OAuth/HTTP layer will allow reuse and extension to other APIs (Payroll, Expenses etc).
 
