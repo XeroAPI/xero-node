@@ -177,6 +177,7 @@ export interface Invoice {
 	InvoiceID?: string;
 	InvoiceNumber?: string;
 	Reference?: string;
+	Url?: string;
 	Prepayments?: Prepayment[];
 	Payments?: Payment[];
 	CreditNotes?: CreditNote[];
