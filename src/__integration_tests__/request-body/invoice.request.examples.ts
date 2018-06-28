@@ -7,6 +7,7 @@ const createSingleInvoiceRequest: Invoice = {
 	},
 	Date: '2018-02-15T00:00:00',
 	DueDate: '2018-02-22T00:00:00',
+	Url: 'http://www.accounting20.com',
 	LineAmountTypes: 'Exclusive',
 	LineItems: [{
 		Description: 'Monthly rental for property at 56a Wilkins Avenue',
