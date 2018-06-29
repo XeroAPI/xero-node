@@ -249,8 +249,8 @@ export interface HistoryRecord {
 	Changes?: string;
 	DateUTCString?: string;
 	DateUTC?: string;
-	User?: String;
-	Details?: String;
+	User?: string;
+	Details?: string;
 }
 
 export interface Contact {
@@ -304,6 +304,7 @@ export interface Address {
 	Country?: string;
 	AttentionTo?: string;
 }
+
 export interface Journal {
 	JournalID?: string;
 	JournalDate?: string;
@@ -313,6 +314,7 @@ export interface Journal {
 	SourceType?: string;
 	JournalLines?: JournalLine[];
 }
+
 export interface JournalLine {
 	JournalLineID?: string;
 	AccountID?: string;
@@ -327,12 +329,14 @@ export interface JournalLine {
 	Description?: string;
 	LineAmount?: number;
 }
+
 export interface Phone {
 	PhoneType?: string;
 	PhoneNumber?: string;
 	PhoneAreaCode?: string;
 	PhoneCountryCode?: string;
 }
+
 export interface LineItem {
 	Description?: string;
 	UnitAmount?: number;
@@ -344,6 +348,7 @@ export interface LineItem {
 	Quantity?: number;
 	LineItemID?: string;
 }
+
 export interface ManualJournal {
 	ManualJournalID?: string;
 	Date?: string;
@@ -356,6 +361,7 @@ export interface ManualJournal {
 	HasAttachments?: boolean;
 	UpdatedDateUTC?: string;
 }
+
 export interface Organisation {
 	APIKey: string;
 	Name: string;
@@ -379,6 +385,7 @@ export interface Organisation {
 	OrganisationID: string;
 	LineOfBusiness: string;
 }
+
 export interface OrgCISSetting {
 	CISContractorEnabled: boolean;
 	CISSubContractorEnabled: boolean;
@@ -512,17 +519,20 @@ export interface Report {
 	Fields?: Field[];
 	Rows: Row[];
 }
+
 /** @private */
 export interface Field {
 	FieldID: string;
 	Description: string;
 	Value: string;
 }
+
 /** @private */
 export interface Row {
 	RowType: string;
 	Cells: Cell[];
 }
+
 /** @private */
 export interface Cell {
 	Value?: string;
@@ -565,4 +575,59 @@ export interface TrackingOption {
 	TrackingOptionID?: string;
 	Name?: string;
 	Status?: string;
+}
+
+export interface Project {
+	projectId?: string;
+	contactId?: string;
+	name?: string;
+	currencyCode?: string;
+	minutesLogged?: number;
+	totalTaskAmount?: {
+		currency: string,
+		value: number
+	};
+	totalExpenseAmount?: {
+		currency: string,
+		value: number
+	};
+	minutesToBeInvoiced?: number;
+	taskAmountToBeInvoiced?: {
+		currency: string,
+		value: number
+	};
+	taskAmountInvoiced?: {
+		currency: string,
+		value: number
+	};
+	expenseAmountToBeInvoiced?: {
+		currency: string,
+		value: number
+	};
+	expenseAmountInvoiced?: {
+		currency: string,
+		value: number
+	};
+	deposit?: {
+		currency: string,
+		value: number
+	};
+	depositApplied?: {
+		currency: string,
+		value: number
+	};
+	deadlineUTC?: string;
+	totalInvoiced?: {
+		currency: string,
+		value: number
+	};
+	totalToBeInvoiced?: {
+		currency: string,
+		value: number
+	};
+	estimate?: {
+		currency: string,
+		value: number
+	};
+	status?: string;
 }
