@@ -1,4 +1,4 @@
-﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, HistoryRecord, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment, Receipt, RepeatingInvoice, ManualJournal, PurchaseOrder } from './AccountingAPI-models';
+﻿import { ExpenseClaim, User, CreditNote, BrandingTheme, Journal, Item, OnlineInvoice, Organisation, OrgCISSetting, Overpayment, Payment, Prepayment, TaxRate, TrackingCategory, BankTransfer, LinkedTransaction, Employee, Currency, HistoryRecord, Contact, ContactGroup, InvoiceReminder, Invoice, Allocation, BankTransaction, Attachment, Receipt, RepeatingInvoice, ManualJournal, PurchaseOrder, Project } from './AccountingAPI-models';
 
 /** @private */
 export interface AccountingAPIResponse {
@@ -186,4 +186,28 @@ export interface TrackingCategoriesResponse extends AccountingAPIResponse {
 /** @private */
 export interface UsersResponse extends AccountingAPIResponse {
 	Users: User[];
+}
+
+/** @private */
+export interface PaginatedResponse extends AccountingAPIResponse {
+	pagination?: {
+		page: number,
+		pageSize: number,
+		pageCount: number,
+		itemCount: number
+	};
+}
+
+/** @private */
+export interface ProjectsResponse extends PaginatedResponse {
+	items: Project[];
+}
+
+/** @private */
+export interface ProjectResponse extends AccountingAPIResponse {
+	contactId?: string;
+	name?: string;
+	deadlineUtc?: string;
+	estimateAmount?: number;
+	status?: string;
 }

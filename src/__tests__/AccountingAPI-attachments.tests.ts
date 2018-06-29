@@ -22,6 +22,7 @@ describe('AccountingAPI attachments', () => {
 	const oAuth1HttpClient: IOAuth1HttpClient = {
 		get: undefined,
 		put: undefined,
+		patch: undefined,
 		post: undefined,
 		delete: undefined,
 		writeUTF8ResponseToStream: undefined,
