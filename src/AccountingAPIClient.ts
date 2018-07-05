@@ -13,6 +13,7 @@ export interface QueryArgs {
 
 export interface PagingArgs {
 	page?: number;
+	pageSize?: number;
 }
 
 export interface UnitDecimalPlacesArgs {
@@ -911,6 +912,4 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.get<UsersResponse>(endpoint, headers);
 		}
 	};
-
-
 }
