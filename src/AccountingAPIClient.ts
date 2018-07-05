@@ -1,63 +1,9 @@
 import * as fs from 'fs';
-import {XeroClientConfiguration, BaseAPIClient} from './internals/BaseAPIClient';
-import {IOAuth1HttpClient, AccessToken} from './internals/OAuth1HttpClient';
-import {generateQueryString, escapeString} from './internals/utils';
-import {
-	AccountsResponse,
-	BankTransactionsResponse,
-	InvoicesResponse,
-	CreditNotesResponse,
-	AllocationsResponse,
-	ContactGroupsResponse,
-	CurrenciesResponse,
-	EmployeesResponse,
-	ContactsResponse,
-	HistoryResponse,
-	ReportsResponse,
-	AttachmentsResponse,
-	OrganisationResponse,
-	UsersResponse,
-	BrandingThemesResponse,
-	BankTransfersResponse,
-	TrackingCategoriesResponse,
-	TaxRatesResponse,
-	ExpenseClaimsResponse,
-	ItemsResponse,
-	InvoiceRemindersResponse,
-	JournalsResponse,
-	PaymentsResponse,
-	PrepaymentsResponse,
-	OverpaymentsResponse,
-	LinkedTransactionsResponse,
-	ReceiptsResponse,
-	ManualJournalsResponse,
-	RepeatingInvoicesResponse,
-	PurchaseOrdersResponse,
-	ProjectsResponse,
-	ProjectResponse
-} from './AccountingAPI-responses';
-import {
-	BankTransaction,
-	BankTransfer,
-	ContactGroup,
-	Contact,
-	CreditNote,
-	Allocation,
-	Currency,
-	Employee,
-	ExpenseClaim,
-	Invoice,
-	Item,
-	LinkedTransaction,
-	Payment,
-	TaxRate,
-	TrackingCategory,
-	TrackingOption,
-	Receipt,
-	ManualJournal,
-	PurchaseOrder,
-	Project
-} from './AccountingAPI-models';
+import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
+import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
+import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
+import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
+import { escapeString, generateQueryString } from './internals/utils';
 
 export interface QueryArgs {
 	where?: string;
@@ -89,7 +35,7 @@ export interface AttachmentsEndpoint {
 export class AccountingAPIClient extends BaseAPIClient {
 
 	public constructor(options: XeroClientConfiguration, authState?: AccessToken, _oAuth1HttpClient?: IOAuth1HttpClient) {
-		super(options, authState, {apiBasePath: '/api.xro/2.0/'}, _oAuth1HttpClient);
+		super(options, authState, { apiBasePath: '/api.xro/2.0/' }, _oAuth1HttpClient);
 	}
 
 	private generateAttachmentsEndpoint(path: string): AttachmentsEndpoint {
@@ -105,7 +51,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				await this.oauth1Client.writeBinaryResponseToStream(endpoint, args.mimeType, writeStream);
 			},
 			uploadAttachment: async (args: { entityId: string, mimeType: string, fileName: string, pathToUpload: string, includeOnline?: boolean }) => {
-				const endpoint = `${path}/${args.entityId}/attachments/${escapeString(args.fileName)}` + generateQueryString({IncludeOnline: args.includeOnline});
+				const endpoint = `${path}/${args.entityId}/attachments/${escapeString(args.fileName)}` + generateQueryString({ IncludeOnline: args.includeOnline });
 				const readStream = fs.createReadStream(args.pathToUpload);
 
 				const fileSize = fs.statSync(args.pathToUpload).size;
@@ -1078,40 +1024,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args);
 
 			return this.oauth1Client.get<UsersResponse>(endpoint, headers);
-		}
-	};
-
-	public projects = {
-		get: async (args?: { projectId?: string, projectIds?: string[], contactID?: string, states?: string } & HeaderArgs & PagingArgs & QueryArgs): Promise<ProjectsResponse> => {
-			let endpoint = '../../projects.xro/1.0/Projects';
-
-			if (args && args.projectId) {
-				endpoint = endpoint + '/' + args.projectId;
-				delete args.projectId;
-			}
-
-			const header = this.generateHeader(args);
-			endpoint += generateQueryString(args);
-
-			return this.oauth1Client.get<ProjectsResponse>(endpoint, header);
-		},
-		create: async (body: Project): Promise<ProjectResponse> => {
-			const endpoint = '../../projects.xro/1.0/Projects';
-			return this.oauth1Client.post<ProjectResponse>(endpoint, body);
-		},
-		update: async (body: Project, args?: { projectId: string }): Promise<ProjectResponse> => {
-			let endpoint = '../../projects.xro/1.0/Projects';
-
-			if (args && args.projectId) {
-				endpoint = endpoint + '/' + args.projectId;
-				delete args.projectId;
-			}
-
-			if (body.status) {
-				return this.oauth1Client.patch<ProjectResponse>(endpoint, body);
-			} else {
-				return this.oauth1Client.put<ProjectResponse>(endpoint, body);
-			}
 		}
 	};
 }
