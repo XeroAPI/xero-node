@@ -919,7 +919,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public reports = {
-		get: async (args?: { ReportID: string }): Promise<ReportsResponse> => {
+		get: async (args?: { ReportID: string, toDate?: string, fromDate?: string }): Promise<ReportsResponse> => {
 			let endpoint = 'reports';
 			if (args) {
 				const reportId = args.ReportID;
