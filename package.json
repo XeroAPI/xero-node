@@ -1,6 +1,6 @@
 {
   "name": "xero-node",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "NodeJS Client for the Xero API, supporting Public, Private and Partner Apps",
   "main": "lib/index.js",
   "scripts": {
