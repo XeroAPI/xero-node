@@ -18,6 +18,8 @@ more maintainable and to take advantage of modern JavaScript features.
 
 # Features/Change Log
 
+- v3.0.9
+	- Thanks glenndevenish for adding optional reporting params #224
 - v3.0.7
 	- Thanks davibq for adding the ability to email invoices #209
 - v3.0.6
