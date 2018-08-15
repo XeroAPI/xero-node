@@ -1,10 +1,10 @@
 
 import * as fs from 'fs';
-import { XeroClientConfiguration, BaseAPIClient } from './internals/BaseAPIClient';
-import { IOAuth1HttpClient, AccessToken } from './internals/OAuth1HttpClient';
-import { generateQueryString, escapeString } from './internals/utils';
-import { AccountsResponse, BankTransactionsResponse, InvoicesResponse, CreditNotesResponse, AllocationsResponse, ContactGroupsResponse, CurrenciesResponse, EmployeesResponse, ContactsResponse, HistoryResponse, ReportsResponse, AttachmentsResponse, OrganisationResponse, UsersResponse, BrandingThemesResponse, BankTransfersResponse, TrackingCategoriesResponse, TaxRatesResponse, ExpenseClaimsResponse, ItemsResponse, InvoiceRemindersResponse, JournalsResponse, PaymentsResponse, PrepaymentsResponse, OverpaymentsResponse, LinkedTransactionsResponse, ReceiptsResponse, ManualJournalsResponse, RepeatingInvoicesResponse, PurchaseOrdersResponse } from './AccountingAPI-responses';
-import { BankTransaction, BankTransfer, ContactGroup, Contact, CreditNote, Allocation, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, Payment, TaxRate, TrackingCategory, TrackingOption, Receipt, ManualJournal, PurchaseOrder } from './AccountingAPI-models';
+import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
+import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
+import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
+import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
+import { escapeString, generateQueryString } from './internals/utils';
 
 export interface QueryArgs {
 	where?: string;
@@ -446,7 +446,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public invoices = {
-		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, createdByMyApp?: boolean } & HeaderArgs & PagingArgs & UnitDecimalPlacesArgs & QueryArgs): Promise<InvoicesResponse> => {
+		get: async (args?: { InvoiceID?: string, InvoiceNumber?: string, createdByMyApp?: boolean, ContactIDs?: string } & HeaderArgs & PagingArgs & UnitDecimalPlacesArgs & QueryArgs): Promise<InvoicesResponse> => {
 			let endpoint = 'invoices';
 			if (args && args.InvoiceID) {
 				endpoint = endpoint + '/' + args.InvoiceID;
@@ -524,7 +524,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 		},
 		email: {
-			create: async(args: { InvoiceID: string }): Promise<void> => {
+			create: async (args: { InvoiceID: string }): Promise<void> => {
 				let endpoint = 'invoices';
 				if (args && args.InvoiceID) {
 					endpoint = endpoint + '/' + args.InvoiceID;
@@ -533,7 +533,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				endpoint += '/email';
 
-				return this.oauth1Client.post<void>(endpoint, {})
+				return this.oauth1Client.post<void>(endpoint, {});
 			}
 		}
 	};
