@@ -203,6 +203,7 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
+	CurrencyRate?: number;
 	History?: HistoryRecord[];
 }
 
