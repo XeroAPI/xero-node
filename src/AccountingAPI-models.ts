@@ -94,6 +94,14 @@ export interface Payment {
 	History?: HistoryRecord[];
 }
 
+export interface PaymentService {
+	PaymentServiceID?: string;
+	PaymentServiceName?: string;
+	PaymentServiceUrl?: string;
+	PayNowText?: string;
+	PaymentServiceType?: string;
+}
+
 export interface BrandingTheme {
 	BrandingThemeID: string;
 	Name: string;
