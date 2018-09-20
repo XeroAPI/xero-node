@@ -1,6 +1,6 @@
 import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
 import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
-import { ProjectsResponse } from './ProjectsAPI-responses';
+import { ProjectsResponse, ProjectResponse } from './ProjectsAPI-responses';
 
 export class ProjectsAPIClient extends BaseAPIClient {
 
@@ -20,6 +20,12 @@ export class ProjectsAPIClient extends BaseAPIClient {
 			endpoint += generateProjectsQueryString(args);
 
 			return this.oauth1Client.get<ProjectsResponse>(endpoint);
+		},
+
+		post: async (args: { contactId: string; Name: string; deadlineUtc?: string; estimateAmount?: number }): Promise<ProjectResponse> => {
+			let endpoint = "projects";
+
+			return this.oauth1Client.post<ProjectResponse>(endpoint, args);
 		}
 	};
 }
