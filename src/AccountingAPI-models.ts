@@ -1,4 +1,4 @@
-﻿export interface Attachment {
+﻿﻿export interface Attachment {
 	AttachmentID: string;
 	FileName: string;
 	Url: string;
@@ -203,6 +203,7 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
+	CurrencyRate?: number;
 	History?: HistoryRecord[];
 }
 
@@ -241,8 +242,8 @@ export interface HistoryRecord {
 	Changes?: string;
 	DateUTCString?: string;
 	DateUTC?: string;
-	User?: String;
-	Details?: String;
+	User?: string;
+	Details?: string;
 }
 
 export interface Contact {
