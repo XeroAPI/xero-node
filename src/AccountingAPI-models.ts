@@ -144,7 +144,7 @@ export interface Prepayment {
 }
 
 export interface Allocation {
-	AppliedAmount?: number;
+	Amount?: number;
 	Date?: string;
 	Invoice?: Invoice;
 }
