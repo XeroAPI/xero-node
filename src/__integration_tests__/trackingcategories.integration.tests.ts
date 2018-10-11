@@ -13,22 +13,23 @@ describe('/trackingcategories', () => {
 
 	// commented out some of the tests for now.
 
-	// it('create single', async () => {
-	// 	try {
-	// 		createResponse = await xero.trackingCategories.create({
-	// 			Name: 'Phil Test Category 1'
-	// 		});
-	// 	} catch (error) {
-	// 		const response = await xero.trackingCategories.get();
-	// 		await xero.trackingCategories.delete({TrackingCategoryID: response.TrackingCategories[0].TrackingCategoryID});
-	// 		createResponse = await xero.trackingCategories.create({
-	// 			Name: 'Phil Test Category 1'
-	// 		});
-	// 	}
+	it('create single', async () => {
+		let createResponse;
+		try {
+			createResponse = await xero.trackingCategories.create({
+				Name: 'Phil Test Category 1'
+			});
+		} catch (error) {
+			const response = await xero.trackingCategories.get();
+			await xero.trackingCategories.delete({ TrackingCategoryID: response.TrackingCategories[0].TrackingCategoryID });
+			createResponse = await xero.trackingCategories.create({
+				Name: 'Phil Test Category 1'
+			});
+		}
 
-	// 	expect(createResponse.TrackingCategories.length).toBe(1);
-	// 	expect(createResponse.TrackingCategories[0].Name).toEqual('Phil Test Category 1');
-	// });
+		expect(createResponse.TrackingCategories.length).toBe(1);
+		expect(createResponse.TrackingCategories[0].Name).toEqual('Phil Test Category 1');
+	});
 
 	// it('get single', async () => {
 	// 	const response = await xero.trackingCategories.get({ TrackingCategoryID: createResponse.TrackingCategories[0].TrackingCategoryID});

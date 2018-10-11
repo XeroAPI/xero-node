@@ -1,13 +1,13 @@
 
-import { OAuth } from 'oauth';
-import { IHttpClient } from './BaseAPIClient';
 import * as fs from 'fs';
-import * as querystring from 'querystring';
 import * as http from 'http';
 import * as https from 'https';
+import { OAuth } from 'oauth';
+import * as querystring from 'querystring';
 import * as URL from 'url';
-import { XeroError } from '../XeroError';
 import { AttachmentsResponse } from '../AccountingAPI-responses';
+import { XeroError } from '../XeroError';
+import { IHttpClient } from './BaseAPIClient';
 
 export interface RequestToken {
 	oauth_token: string;

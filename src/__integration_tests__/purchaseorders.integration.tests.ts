@@ -18,7 +18,7 @@ describe('/purchaseorders', () => {
 		const response = await xero.purchaseOrders.savePDF({ PurchaseOrderID: await getOrCreatePurchaseOrderId(xero), savePath: tmpDownloadFile });
 		expect(response).toBeUndefined();
 		const pdfBuffer = fs.readFileSync(tmpDownloadFile);
-		expect(pdfBuffer.byteLength).toBeGreaterThan(3000); // Let's hope all PDFs are bigger than 3000B
+		expect(pdfBuffer.byteLength).toBeGreaterThan(1000); // Let's hope all PDFs are bigger than 1000B
 	});
 
 	it('get all', async () => {
