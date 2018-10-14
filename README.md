@@ -155,6 +155,11 @@ const config = require('./config.json');
 
 - [Integration tests](src/__integration_tests__)
 - [Sample app](https://github.com/XeroAPI/xero-node-sample-app)
+
+### What about endpoints not in the package yet?
+
+Sometimes there may be endpoints in the API which have not been added to this package. Feel free to send a PR. In the mean time we have implemented a way of calling any endpoint. Here is a few examples (replace `.get` with `.post` or `.put`):
+
 - [Generic API calls private](https://github.com/XeroAPI/xero-node/blob/master/src/__integration_tests__/generic-endpoint.integration.tests.ts)
 - [Generic API calls public/partner](https://github.com/XeroAPI/xero-node/blob/master/src/__integration_tests__/partner-example-callbackUrl.tests.ts)
 
