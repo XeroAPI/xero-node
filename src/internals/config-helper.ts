@@ -37,6 +37,7 @@ export function mapConfig(xeroConfig: XeroClientConfiguration, apiConfig: ApiCon
 	const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
 
 	let cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null;
+    let userAgentString = xeroConfig.userAgent ? xeroConfig.userAgent : 'NodeJS-XeroAPIClient';
 
 	if (xeroConfig.privateKeyString) {
 		cert = xeroConfig.privateKeyString;
@@ -48,7 +49,7 @@ export function mapConfig(xeroConfig: XeroClientConfiguration, apiConfig: ApiCon
 		oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
 		oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
 		accept: 'application/json',
-		userAgent: 'NodeJS-XeroAPIClient.' + version + '.' + xeroConfig.consumerKey,
+        userAgent: userAgentString + '.' + version + '.' + xeroConfig.consumerKey,
 		consumerKey: xeroConfig.consumerKey,
 		consumerSecret: xeroConfig.consumerSecret,
 		tenantType: apiConfig.tenantType || null,

@@ -16,6 +16,7 @@ export interface XeroClientConfiguration {
 	privateKeyPath?: string;
 	privateKeyString?: string;
 	callbackUrl?: string;
+    userAgent?: string;
 }
 
 /**
