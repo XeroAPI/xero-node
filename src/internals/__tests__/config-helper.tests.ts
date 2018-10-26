@@ -1,6 +1,6 @@
-import { XeroClientConfiguration, ApiConfiguration } from '../BaseAPIClient';
+import { ApiConfiguration, XeroClientConfiguration } from '../BaseAPIClient';
 import { mapConfig, mapState } from '../config-helper';
-import { validTestCertPath, testCertString } from './helpers/privateKey-helpers';
+import { testCertString, validTestCertPath } from './helpers/privateKey-helpers';
 const version = require('../../../package.json').version;
 
 describe('config-helper', () => {
@@ -203,6 +203,38 @@ describe('config-helper', () => {
 				expect(retrievedState).toEqual({
 					accept: 'application/json',
 					userAgent: `NodeJS-XeroAPIClient.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
+					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+					consumerSecret: testCertString(),
+					tenantType: 'PRACTICE',
+					apiBasePath: '/s/s',
+					signatureMethod: 'RSA-SHA1',
+					callbackUrl: null,
+					apiBaseUrl: 'https://api.xero.com',
+					oauthAccessTokenPath: '/oauth/AccessToken',
+					oauthRequestTokenPath: '/oauth/RequestToken',
+				});
+			});
+		});
+
+		describe('with user agent set', () => {
+			const xeroConfig: XeroClientConfiguration = {
+				appType: 'partner',
+				userAgent: 'PHILWASHERE',
+				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
+				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
+				privateKeyPath: validTestCertPath()
+			};
+			const apiConfig: ApiConfiguration = {
+				tenantType: 'PRACTICE',
+				apiBasePath: '/s/s',
+			};
+
+			it('appends useragent', () => {
+				const retrievedState = mapConfig(xeroConfig, apiConfig);
+
+				expect(retrievedState).toEqual({
+					accept: 'application/json',
+					userAgent: `NodeJS-XeroAPIClient.PHILWASHERE.${version}.RDGDV41TRLQZDFSDX96TKQ2KRJIW4C`,
 					consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 					consumerSecret: testCertString(),
 					tenantType: 'PRACTICE',

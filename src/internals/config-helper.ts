@@ -1,9 +1,9 @@
 /** @internalapi */
 /** This second comment is required for typedoc to recognise the WHOLE FILE as @internalapi */
 
-import { XeroClientConfiguration, ApiConfiguration } from './BaseAPIClient';
+import { ApiConfiguration, XeroClientConfiguration } from './BaseAPIClient';
+import { AccessToken, OAuth1Configuration } from './OAuth1HttpClient';
 import { getStringFromFile } from './utils';
-import { OAuth1Configuration, AccessToken } from './OAuth1HttpClient';
 const version = require('../../package.json').version;
 
 /** @private */
@@ -37,7 +37,13 @@ export function mapConfig(xeroConfig: XeroClientConfiguration, apiConfig: ApiCon
 	const OAUTH_ACCESS_TOKEN_PATH = '/oauth/AccessToken';
 
 	let cert = xeroConfig.privateKeyPath ? getStringFromFile(xeroConfig.privateKeyPath) : null;
-    let userAgentString = xeroConfig.userAgent ? xeroConfig.userAgent : 'NodeJS-XeroAPIClient';
+
+	let userAgentString = 'NodeJS-XeroAPIClient';
+	if (xeroConfig.userAgent){
+		userAgentString = userAgentString + '.' + xeroConfig.userAgent;
+	}
+
+	userAgentString = userAgentString + '.' + version + '.' + xeroConfig.consumerKey;
 
 	if (xeroConfig.privateKeyString) {
 		cert = xeroConfig.privateKeyString;
@@ -49,7 +55,7 @@ export function mapConfig(xeroConfig: XeroClientConfiguration, apiConfig: ApiCon
 		oauthRequestTokenPath: OAUTH_REQUEST_TOKEN_PATH,
 		oauthAccessTokenPath: OAUTH_ACCESS_TOKEN_PATH,
 		accept: 'application/json',
-        userAgent: userAgentString + '.' + version + '.' + xeroConfig.consumerKey,
+		userAgent: userAgentString,
 		consumerKey: xeroConfig.consumerKey,
 		consumerSecret: xeroConfig.consumerSecret,
 		tenantType: apiConfig.tenantType || null,
