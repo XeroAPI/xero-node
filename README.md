@@ -16,27 +16,6 @@ Supports all application types:
 Version 3 has been rebuilt from the ground-up using TypeScript, to make it
 more maintainable and to take advantage of modern JavaScript features.
 
-# Features/Change Log
-
-- v3.0.9
-	- Thanks glenndevenish for adding optional reporting params #224
-- v3.0.7
-	- Thanks davibq for adding the ability to email invoices #209
-- v3.0.6
-	- Thanks brucem1976 who added History to the endpoints that support History #206
-- v3.0.4
-	- Thanks nickngsr #203
-	- escape filename to ensure it is url safe for attachments
-	- add ability to save purchase order pdf
-	- fix typo on purchase order number in get request
-- v3.0.3
-	- Thanks gslisrael. Enable getting creditNotes by CreditNoteNumber #199
-- v3.0.2
-	- Removes some unused deps
-- v3.0.1
-	- Reimplmented how to make generic API calls in BaseAPI layer. See examples below
-- v3.0.0
-	- almost all [accounting endpoints](https://developer.xero.com/documentation/api/api-overview)
 
 # Installation
 
@@ -152,6 +131,8 @@ const config = require('./config.json');
 ```
 
 ### Further Examples
+
+Often the best palace for documentation is the integration tests in this repo. Please have a look:
 
 - [Integration tests](src/__integration_tests__)
 - [Sample app](https://github.com/XeroAPI/xero-node-sample-app)
