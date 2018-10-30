@@ -15,4 +15,9 @@ This will help us to diagnose your issue.
 
 Any bugs/issues with the API are best directed to: https://developer.xero.com/community
 
+Often the best palace for documentation is the integration tests in this repo. Please have a look:
+
+- [Integration tests](src/__integration_tests__)
+- [Sample app](https://github.com/XeroAPI/xero-node-sample-app)
+
 Thanks
