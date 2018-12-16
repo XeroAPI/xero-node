@@ -248,6 +248,7 @@ export interface HistoryRecord {
 
 export interface Contact {
 	ContactID?: string;
+	ContactNumber?: string;
 	ContactStatus?: string;
 	Name?: string;
 	FirstName?: string;
