@@ -144,6 +144,21 @@ Sometimes there may be endpoints in the API which have not been added to this pa
 - [Generic API calls private](https://github.com/XeroAPI/xero-node/blob/master/src/__integration_tests__/generic-endpoint.integration.tests.ts)
 - [Generic API calls public/partner](https://github.com/XeroAPI/xero-node/blob/master/src/__integration_tests__/partner-example-callbackUrl.tests.ts)
 
+## Private key as an ENV var
+
+The config.json includes an optional field `privateKeyString`. Set this as an ENV var outside the of `xero-node` and pass it in with the config.
+
+Private keys are of a particular format. Here is an example:
+
+```
+let xeroKeyString =
+"-----BEGIN RSA PRIVATE KEY-----\n\
+cdfljkefrjkl45ljk34jkl4334lkj34ljk34343434\
+dsljdsjlkerjlk4343jkl34ljk34jkl34kjl34kjl34j\
+sajklsdalksdasdlkdslkdwlkdwskldskldslkd\n\
+-----END RSA PRIVATE KEY-----";
+```
+
 ## Migration from V2
 
 The biggest change is the number of function calls you have to make to complete your task. This is consistant across all endpoints. It's not JSON in and JSON out. your object never gets modified:
