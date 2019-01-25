@@ -148,7 +148,9 @@ Sometimes there may be endpoints in the API which have not been added to this pa
 
 The config.json includes an optional field `privateKeyString`. Set this as an ENV var outside the of `xero-node` and pass it in with the config.
 
-Private keys are of a particular format. Here is an example:
+Private keys are of a particular format. If your using this method it needs to be a single string, and it must include the `-----BEGIN RSA PRIVATE KEY-----` and matching end part. Be sure to include a `\n` after this first line and before the last line, as well as `\` characters at the end of lines.
+
+Here is an example:
 
 ```
 let xeroKeyString =
@@ -157,6 +159,12 @@ cdfljkefrjkl45ljk34jkl4334lkj34ljk34343434\
 dsljdsjlkerjlk4343jkl34ljk34jkl34kjl34kjl34j\
 sajklsdalksdasdlkdslkdwlkdwskldskldslkd\n\
 -----END RSA PRIVATE KEY-----";
+```
+
+Here is a handy command to generate this string from your .pem file:
+
+```
+$ awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' privatekey.pem
 ```
 
 ## Migration from V2
