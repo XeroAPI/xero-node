@@ -13,8 +13,10 @@ Supports all application types:
 * Public - apps that can connect to any organisation, but only for 30 minutes at a time
 * Partner - approved apps that can automatically refresh tokens
 
-Version 3 has been rebuilt from the ground-up using TypeScript, to make it
-more maintainable and to take advantage of modern JavaScript features.
+A great way to get started is our YouTube videos:
+
+[How to make Private App calls using NodeJS and xero-node](https://www.youtube.com/watch?v=pntUoUy8io4)
+[How to make Partner and Public App calls using NodeJS and xero-node](https://www.youtube.com/watch?v=SwyZctAmCu8)
 
 
 # Installation
