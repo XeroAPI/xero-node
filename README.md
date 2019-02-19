@@ -15,9 +15,8 @@ Supports all application types:
 
 A great way to get started is our YouTube videos:
 
-[How to make Private App calls using NodeJS and xero-node](https://www.youtube.com/watch?v=pntUoUy8io4)
-
-[How to make Partner and Public App calls using NodeJS and xero-node](https://www.youtube.com/watch?v=SwyZctAmCu8)
+* [How to make Private App calls using NodeJS and xero-node](https://www.youtube.com/watch?v=pntUoUy8io4)
+* [How to make Partner and Public App calls using NodeJS and xero-node](https://www.youtube.com/watch?v=SwyZctAmCu8)
 
 
 # Installation
