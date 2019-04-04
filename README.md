@@ -223,3 +223,11 @@ The Prepayments and Overpayments tests require Pre/Overpayments to be present in
 
 ## Maintainers
 @philals @iamam34 @bryanlloydtee @dannyvincent @dupski
+
+Relase:
+
+```
+npm verion major|minor|patch
+npm publish
+git push origin master --tags
+```
