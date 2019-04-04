@@ -28,7 +28,7 @@
     "@types/jest": "22.1.1",
     "@types/node": "9.4.0",
     "@types/puppeteer": "1.1.0",
-    "jest": "22.4.3",
+    "jest": "^24.7.1",
     "jest-junit": "3.6.0",
     "nodemon": "^1.18.7",
     "opn": "5.2.0",
@@ -37,7 +37,7 @@
     "ts-jest": "23.10.5",
     "ts-node": "4.1.0",
     "tslint": "5.9.1",
-    "typedoc": "0.11.1",
+    "typedoc": "^0.14.2",
     "typescript": "2.7.1"
   }
 }
