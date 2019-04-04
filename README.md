@@ -169,29 +169,9 @@ Here is a handy command to generate this string from your .pem file:
 $ awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' privatekey.pem
 ```
 
-## Migration from V2
+## Migration from V2 to V3
 
-The biggest change is the number of function calls you have to make to complete your task. This is consistant across all endpoints. It's not JSON in and JSON out. your object never gets modified:
-
-Example:
-
-```
-// V2
-let invoiceObj = xero.core.invoices.newInvoice(invoiceJSON);
-let result = await invoiceObj.save()
-```
-
-becomes:
-```
-// V3
-let result = await xero.invoices.create(invoiceJSON);
-```
-
-Please also review the documentation around how to construct the client object. You no longer have to use specifc constructors for your App Type. Instead this information is passed in with your config object. For example, rather than `Xero.PublicApplication` you use `new Xero.AccountingAPIClient` and specify the appType in the config passed in.
-
-In addition the oAuth1.0a related methods are in their own namespace now, and there are some changes from `z` to `s` to align with Xero API naming.
-
-Please see related blog post here: https://devblog.xero.com/the-new-xero-node-sdk-2c69dcab4a2f
+[See here.](https://github.com/XeroAPI/xero-node/wiki/Migration-from-V2-to-V3)
 
 # Contributing
 
