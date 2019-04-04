@@ -183,6 +183,7 @@ export interface Invoice {
 	CreditNotes?: CreditNote[];
 	Overpayments?: Overpayment[];
 	CISDeduction?: number;
+	BrandingThemeID?: string;
 	AmountDue?: number;
 	AmountPaid?: number;
 	AmountCredited?: number;
