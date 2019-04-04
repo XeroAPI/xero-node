@@ -743,7 +743,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public payments = {
-		get: async (args?: { PaymentID: string } & QueryArgs & HeaderArgs): Promise<PaymentsResponse> => {
+		get: async (args?: { PaymentID?: string } & QueryArgs & HeaderArgs): Promise<PaymentsResponse> => {
 			let endpoint = 'payments';
 			if (args && args.PaymentID) {
 				endpoint = endpoint + '/' + args.PaymentID;
