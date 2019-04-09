@@ -1,7 +1,39 @@
 
 import * as fs from 'fs';
 import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
-import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
+import {
+	AccountsResponse,
+	AllocationsResponse,
+	AttachmentsResponse,
+	BankTransactionsResponse,
+	BankTransfersResponse,
+	BrandingThemesResponse,
+	ContactGroupsResponse,
+	ContactsResponse,
+	CreditNotesResponse,
+	CurrenciesResponse,
+	EmployeesResponse,
+	ExpenseClaimsResponse,
+	HistoryResponse,
+	InvoiceRemindersResponse,
+	InvoicesResponse,
+	ItemsResponse,
+	JournalsResponse,
+	LinkedTransactionsResponse,
+	ManualJournalsResponse,
+	OnlineInvoicesResponse,
+	OrganisationResponse,
+	OverpaymentsResponse,
+	PaymentsResponse,
+	PrepaymentsResponse,
+	PurchaseOrdersResponse,
+	ReceiptsResponse,
+	RepeatingInvoicesResponse,
+	ReportsResponse,
+	TaxRatesResponse,
+	TrackingCategoriesResponse,
+	UsersResponse
+} from './AccountingAPI-responses';
 import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
 import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { escapeString, generateQueryString } from './internals/utils';
@@ -497,7 +529,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoices);
 		},
 		onlineInvoice: {
-			get: async (args?: { InvoiceID: string }): Promise<string> => {
+			get: async (args?: { InvoiceID: string }): Promise<OnlineInvoicesResponse> => {
 				let endpoint = 'invoices';
 				if (args && args.InvoiceID) {
 					endpoint = endpoint + '/' + args.InvoiceID;
