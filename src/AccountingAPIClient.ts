@@ -1,39 +1,7 @@
 
 import * as fs from 'fs';
 import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
-import {
-	AccountsResponse,
-	AllocationsResponse,
-	AttachmentsResponse,
-	BankTransactionsResponse,
-	BankTransfersResponse,
-	BrandingThemesResponse,
-	ContactGroupsResponse,
-	ContactsResponse,
-	CreditNotesResponse,
-	CurrenciesResponse,
-	EmployeesResponse,
-	ExpenseClaimsResponse,
-	HistoryResponse,
-	InvoiceRemindersResponse,
-	InvoicesResponse,
-	ItemsResponse,
-	JournalsResponse,
-	LinkedTransactionsResponse,
-	ManualJournalsResponse,
-	OnlineInvoicesResponse,
-	OrganisationResponse,
-	OverpaymentsResponse,
-	PaymentsResponse,
-	PrepaymentsResponse,
-	PurchaseOrdersResponse,
-	ReceiptsResponse,
-	RepeatingInvoicesResponse,
-	ReportsResponse,
-	TaxRatesResponse,
-	TrackingCategoriesResponse,
-	UsersResponse
-} from './AccountingAPI-responses';
+import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OnlineInvoicesResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
 import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
 import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { escapeString, generateQueryString } from './internals/utils';
@@ -91,7 +59,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		};
 	}
 
-	private generateHeader(args: HeaderArgs) {
+	private generateHeader(args: HeaderArgs & any) {
 		if (args && args['If-Modified-Since']) {
 			const toReturn = {
 				'If-Modified-Since': args['If-Modified-Since']
