@@ -28,6 +28,7 @@ export interface AttachmentsEndpoint {
 	get(args: { entityId: string }): Promise<AttachmentsResponse>;
 	downloadAttachment(args: { entityId: string, mimeType: string, fileName: string, pathToSave: string }): Promise<void>;
 	uploadAttachment(args: { entityId: string, mimeType: string, fileName: string, pathToUpload: string, includeOnline?: boolean }): Promise<AttachmentsResponse>;
+	uploadAttachmentFromStream(args: { entityId: string, mimeType: string, fileName: string, readStream: fs.ReadStream, fileSize: number, includeOnline?: boolean }): Promise<AttachmentsResponse>;
 }
 
 export class AccountingAPIClient extends BaseAPIClient {
@@ -55,6 +56,10 @@ export class AccountingAPIClient extends BaseAPIClient {
 				const fileSize = fs.statSync(args.pathToUpload).size;
 
 				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, fileSize, readStream);
+			},
+			uploadAttachmentFromStream: async (args: { entityId: string, mimeType: string, fileName: string, readStream: fs.ReadStream, fileSize: number, includeOnline?: boolean }) => {
+				const endpoint = `${path}/${args.entityId}/attachments/${escapeString(args.fileName)}` + generateQueryString({ IncludeOnline: args.includeOnline });
+				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, args.fileSize, args.readStream);
 			},
 		};
 	}
