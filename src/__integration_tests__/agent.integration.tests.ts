@@ -15,7 +15,7 @@ describe('OAuth Client Custom HTTP Agent', () => {
 			await xero.invoices.create({ test: 1 } as any);
 		}
 		catch (e) {
-			expect(e.message).toContain('Agent option must be an Agent-like object');
+			expect(e.message).toContain('The \"options.agent\" property must be one of type Agent-like Object, undefined, or false. Received type string');
 		}
 
 	});

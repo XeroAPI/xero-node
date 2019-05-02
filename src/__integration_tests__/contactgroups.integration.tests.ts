@@ -56,7 +56,7 @@ describe('/contactgroups', () => {
 		expect(response.ContactGroups[0].Status).toBe('DELETED');
 	});
 
-	describe('contacts', async () => {
+	describe('contacts', () => {
 
 		it('add to group', async () => {
 			const contactId = await getOrCreateContactId(xero);

@@ -224,7 +224,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					if (err) {
 						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
 					} else {
-						const buffer = new Buffer(data, 'binary');
+						const buffer = Buffer.from(data, 'binary');
 
 						writeStream.write(buffer, () => {
 							writeStream.close();

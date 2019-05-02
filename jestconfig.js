@@ -3,7 +3,7 @@ const path = require('path');
 let jestConfig = {
 	"rootDir": ".",
 	"transform": {
-		".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+		".(ts|tsx)": "ts-jest"
 	},
 	"testMatch": [
 		"<rootDir>/src/**/__tests__/**/*tests.(ts|tsx)",
@@ -12,7 +12,8 @@ let jestConfig = {
 	"moduleFileExtensions": [
 		"ts",
 		"tsx",
-		"js"
+		"js",
+		"json"
 	],
 	"moduleNameMapper": {
 		"^.+\\.(css|less|scss)$": "identity-obj-proxy"
