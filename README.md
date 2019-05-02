@@ -188,12 +188,12 @@ We need two private Apps to get around the ratelimits. They can be connected to 
 1. Copy `private-config-example.json` to `private-config.json` in the [integration test directory](src/__integration_tests__).
 2. Copy it again to `1private-config.json` in the [integration test directory](src/__integration_tests__).
 3. Overwrite the example values with your own from the [Developer Portal](https://developer.xero.com/myapps).
-4. (Do the same for `partner-config-example.json` if required.)
+4. (Do the same for `partner-config-example.json` and `xero-login.json`, if required.)
 5. Run `npm test`
 
 For the partner tests to pass you will need a partner app. Don't worry if you don't have one and the test fails. It will run in CircleCI.
 
-The Prepayments and Overpayments tests require Pre/Overpayments to be present in your Organisatino, again, don't worry too much if these fail for you - they run in CircleCI.
+The Prepayments and Overpayments tests require Pre/Overpayments to be present in your organisation, again, don't worry too much if these fail for you - they run in CircleCI.
 
 
 ## Project Philosophies
@@ -219,7 +219,7 @@ The Prepayments and Overpayments tests require Pre/Overpayments to be present in
 
 4. Unit tests!
 
-5. Writing the SDK in Typescript will allow us to provide TS types for the API's contracts, and it's what we use internally at Xero. This will also aid in self-generated docs.
+5. Writing the SDK in Typescript allows us to provide TS types for the API's contracts, and it's what we use internally at Xero. This also enables generated docs.
 
 ## Maintainers
 @philals @iamam34 @bryanlloydtee @dannyvincent @dupski
@@ -227,7 +227,7 @@ The Prepayments and Overpayments tests require Pre/Overpayments to be present in
 Relase:
 
 ```
-npm verion major|minor|patch
+npm version major|minor|patch
 npm publish
 git push origin master --tags
 ```
