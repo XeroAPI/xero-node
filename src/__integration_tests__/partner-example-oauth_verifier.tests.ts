@@ -1,17 +1,12 @@
-import * as puppeteer from 'puppeteer';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
-import { getLoginConfig, getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpers';
+import {  getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpers';
+import { loginToXero } from './helpers/login';
 
 setJestTimeout();
 
 // We cannot run this and the other example in parallel as one de-auths the other
 describe.skip('Partner Example Tests using oauth_verifier', () => {
-	const USERNAME_SELECTOR = '#email';
-	const PASSWORD_SELECTOR = '#password';
-	const LOGIN_BUTTON_SELECTOR = '#submitButton';
-	const AUTH_BUTTON_SELECTOR = '#submit-button';
-	const password_config = getLoginConfig();
 	const config = getPartnerAppConfig();
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
@@ -19,45 +14,11 @@ describe.skip('Partner Example Tests using oauth_verifier', () => {
 	let authState: AccessToken;
 	let oauth_verifier: string;
 
-	beforeAll(async () => {
+	beforeAll(async (done) => {
 		requestToken = await accounting1.oauth1Client.getRequestToken();
 		authUrl = accounting1.oauth1Client.buildAuthoriseUrl(requestToken);
-
-		// Direct user to the authorise URL
-		const browser = await puppeteer.launch({
-			headless: true,
-		});
-		try {
-			const page = await browser.newPage();
-			await page.goto(authUrl);
-
-			// /user logs into Xero and Auths your app
-			await page.click(USERNAME_SELECTOR);
-			await page.keyboard.type(password_config.userName);
-			await page.click(PASSWORD_SELECTOR);
-			await page.keyboard.type(password_config.password);
-
-			await Promise.all([
-				page.click(LOGIN_BUTTON_SELECTOR),
-				page.waitForNavigation()
-			]);
-			await Promise.all([
-				page.click(AUTH_BUTTON_SELECTOR),
-				page.waitForNavigation()
-			]);
-
-			// The pin is usually sent to your callback url, in this example,
-			// callback url is set to null
-			oauth_verifier = await page.evaluate(() => {
-				const PIN_SELECTOR = '#pin-input';
-				const query = (document.querySelector(PIN_SELECTOR) as any).value;
-				return query;
-			});
-		} catch (e) {
-			throw e;
-		} finally {
-			browser.close();
-		}
+		oauth_verifier = await loginToXero(authUrl, false);
+		done();
 	});
 
 	it('it returns the authorised url', async () => {

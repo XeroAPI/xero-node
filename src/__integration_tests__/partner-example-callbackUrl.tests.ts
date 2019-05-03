@@ -1,8 +1,7 @@
-import * as puppeteer from 'puppeteer';
-import * as querystring from 'querystring';
 import { BaseAPIClient } from '../internals/BaseAPIClient';
 import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
-import { getLoginConfig, getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpers';
+import { getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpers';
+import { loginToXero } from './helpers/login';
 
 setJestTimeout();
 
@@ -12,53 +11,19 @@ setJestTimeout();
 // please consider sending a PR with the new endpoint you are using. Thanks
 
 describe('Partner Example Tests with callbackUrl', () => {
-	const USERNAME_SELECTOR = '#email';
-	const PASSWORD_SELECTOR = '#password';
-	const LOGIN_BUTTON_SELECTOR = '#submitButton';
-	const AUTH_BUTTON_SELECTOR = '#submit-button';
-	const password_config = getLoginConfig();
 	const config = getPartnerAppConfig();
-	config.callbackUrl = 'https://developer.xero.com/xero-node-test/callbackurl'; // Note you MUST add localhost as a callback domain in https://developer.xero.com/myapps
+	config.callbackUrl = 'http://localhost'; // Note you MUST add localhost as a callback domain in https://developer.xero.com/myapps
 	const accounting1 = new BaseAPIClient(config);
 	let authUrl: string;
 	let requestToken: RequestToken;
 	let authState: AccessToken;
-	let page: any;
 	let oauth_verifier: string;
 
-	beforeAll(async () => {
+	beforeAll(async (done) => {
 		requestToken = await accounting1.oauth1Client.getRequestToken();
 		authUrl = accounting1.oauth1Client.buildAuthoriseUrl(requestToken);
-
-		// Direct user to the authorise URL
-		const browser = await puppeteer.launch({
-			headless: true,
-		});
-		page = await browser.newPage();
-		await page.goto(authUrl);
-
-		// /user logs into Xero and Auths your app
-		await page.click(USERNAME_SELECTOR);
-		await page.keyboard.type(password_config.userName);
-		await page.click(PASSWORD_SELECTOR);
-		await page.keyboard.type(password_config.password);
-
-		await page.click(LOGIN_BUTTON_SELECTOR);
-		await page.waitForNavigation();
-		await page.click(AUTH_BUTTON_SELECTOR);
-
-		await delay(2500);
-
-		// Here is where your cutomer will be redirected back to your callbackUrl. From that you can get the oauth_verifier.
-		// Below is an example of the query parameters on the callbackUrl
-		// ?oauth_token=IAIXWWYYCGG0JA6VE9B4CSV7YOKFUY&oauth_verifier=2896958&org=zfI4JWUAyKgcyGT4zOMyf0
-
-		const pageUrl = page.url(); // This is the URL that your customer gets redirected back to
-
-		const querystrings = querystring.parse(pageUrl);
-		oauth_verifier = querystrings.oauth_verifier as string;
-
-		browser.close();
+		oauth_verifier = await loginToXero(authUrl, true);
+		done();
 	});
 
 	it('it returns the authorised url', async () => {
