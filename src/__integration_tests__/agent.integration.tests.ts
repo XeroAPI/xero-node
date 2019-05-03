@@ -15,7 +15,7 @@ describe('OAuth Client Custom HTTP Agent', () => {
 			await xero.invoices.create({ test: 1 } as any);
 		}
 		catch (e) {
-			expect(e.message).toContain('Agent-like Object');
+			expect(e.message).toContain('Agent');
 		}
 
 	});

@@ -45,7 +45,6 @@ describe('Partner Example Tests with callbackUrl', () => {
 
 		await page.click(LOGIN_BUTTON_SELECTOR);
 		await page.waitForNavigation();
-		await page.waitForNavigation();
 		await page.click(AUTH_BUTTON_SELECTOR);
 
 		await delay(2500);
@@ -84,7 +83,7 @@ describe('Partner Example Tests with callbackUrl', () => {
 
 	describe('OAuth State', () => {
 		let accounting2_callback: BaseAPIClient;
-		it('it allows you to keep copy of the state in your own dadtastore', async () => {
+		it('it allows you to keep copy of the state in your own datastore', async () => {
 			// Saves your state to your datastore
 			expect(authState).not.toBeNull();
 			expect(authState.oauth_session_handle).not.toBeNull();

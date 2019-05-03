@@ -39,7 +39,7 @@ describe.skip('Partner Example Tests using oauth_verifier', () => {
 
 			await Promise.all([
 				page.click(LOGIN_BUTTON_SELECTOR),
-				page.waitForNavigation().then(() => page.waitForNavigation())
+				page.waitForNavigation()
 			]);
 			await Promise.all([
 				page.click(AUTH_BUTTON_SELECTOR),
@@ -82,7 +82,7 @@ describe.skip('Partner Example Tests using oauth_verifier', () => {
 
 	describe('OAuth State', () => {
 		let accounting2: AccountingAPIClient;
-		it('it allows you to keep copy of the state in your own dadtastore', async () => {
+		it('it allows you to keep copy of the state in your own datastore', async () => {
 			// Saves your state to your datastore
 			expect(authState).not.toBeNull();
 			expect(authState.oauth_session_handle).not.toBeNull();
