@@ -1,0 +1,11 @@
+{
+  "name": "xero-node-sdk",
+  "version": "0.0.1",
+  "description": "nodejs SDK for Xero API",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "regenerate": "docker run --mount type=bind,source=/$(pwd)/src/gen,destination=/output/ openapitools/openapi-generator-cli generate  -i https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/oauth2/accounting-yaml/Xero_accounting_2.0.0_swagger.yaml -g typescript-node -o output/"
+  }
+}
