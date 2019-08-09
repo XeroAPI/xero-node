@@ -2,7 +2,8 @@
   "name": "xero-node-sdk",
   "version": "0.0.1",
   "description": "nodejs SDK for Xero API",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "",
   "license": "ISC",
   "scripts": {
