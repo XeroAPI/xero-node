@@ -1,4 +1,5 @@
-src/
 node_modules/
-tsconfig.json
 *.tgz
+
+src/
+tsconfig.json

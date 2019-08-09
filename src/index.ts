@@ -1,3 +1,3 @@
-import { XeroClient } from "./xeroClient";
+import { XeroClient } from "./XeroClient";
 
 module.exports = [XeroClient];
