@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "es2018",
+        "removeComments": true,
+        "sourceMap": true,
+        "declaration": true,
+        "lib": [
+            "dom",
+            "es6",
+            "es5",
+            "dom.iterable",
+            "scripthost"
+        ],
+        "outDir": "dist",
+        "strict": true,
+        "noImplicitAny": false,
+    },
+    "include": [
+        "src"
+    ]
+}

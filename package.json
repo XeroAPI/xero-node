@@ -6,6 +6,15 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "regenerate": "docker run --mount type=bind,source=/$(pwd)/src/gen,destination=/output/ openapitools/openapi-generator-cli generate  -i https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/oauth2/accounting-yaml/Xero_accounting_2.0.0_swagger.yaml -g typescript-node -o output/"
+    "regenerate": "docker run --mount type=bind,source=/$(pwd)/src/gen,destination=/output/ openapitools/openapi-generator-cli generate  -i https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/oauth2/accounting-yaml/Xero_accounting_2.0.0_swagger.yaml -g typescript-node -o output/",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.0",
+    "@types/request": "^2.48.2",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "request": "^2.88.0"
   }
 }
