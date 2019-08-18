@@ -3,7 +3,10 @@ src/
 .*
 *.tgz
 tsconfig.json
-tslint.json
+typedoc.json
 scratch.ts
-lib/__integration_tests__/*
-lib/__tests__/*
+**/__integration_tests__/**
+**/__tests__/**
+*.map
+docs_theme
+*.config.js
