@@ -40,6 +40,13 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      # run lint
+      - run:
+          name: ESLint for scripts
+          command: >-
+            npm run lint -- --quiet --format junit -o
+            artifacts/ESLint/lint-results.xml
+
       # run tests!
       - run:
           command: npm run test-ci
