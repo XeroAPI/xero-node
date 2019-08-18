@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": ".tsconfig.tsbuildinfo",
     "outDir": "./lib",
     "rootDir": "./src/",
     "declaration": true,
