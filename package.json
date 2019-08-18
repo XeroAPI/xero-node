@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run lint -- --quiet && tsc",
     "build-watch": "tsc --watch",
-    "build-docs": "typedoc --options ./typedoc.js ./src",
+    "build-docs": "typedoc",
     "lint": "eslint --ext=.ts ./src",
     "prepublishOnly": "npm run build",
     "test-watch": "tsc --noEmit && jest --watch",
@@ -41,7 +41,7 @@
     "puppeteer": "^1.15.0",
     "ts-jest": "^24.0.2",
     "ts-node": "4.1.0",
-    "typedoc": "^0.14.2",
+    "typedoc": "0.15.0",
     "typescript": "3.5.3"
   }
 }
