@@ -25,12 +25,12 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run:
           name: Workaround for GoogleChrome/puppeteer#290
-          command: 'sh .circleci/setup_puppeteer.sh'
+          command: "sh .circleci/setup_puppeteer.sh"
 
       - run: npm run create-key
       - run: npm install
@@ -48,6 +48,7 @@ jobs:
             JEST_JUNIT_CLASSNAME: "{classname}"
             JEST_JUNIT_TITLE: "{title}"
             JEST_JUNIT_ANCESTOR_SEPARATOR: " > "
+            JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
       - store_test_results:
           path: artifacts
       - store_artifacts:
