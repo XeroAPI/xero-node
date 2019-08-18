@@ -12,7 +12,7 @@
     "test-watch": "tsc --noEmit && jest --watch",
     "test": "tsc --noEmit && jest",
     "test-auth": "tsc --noEmit && jest ./src/__integration_tests__/partner-example.tests.ts",
-    "test-ci": "tsc --noEmit && jest --runInBand --ci --testResultsProcessor=jest-junit",
+    "test-ci": "tsc --noEmit && jest --runInBand --ci --reporters=default --reporters=jest-junit",
     "scratch": "ts-node ./src/scratch.ts",
     "create-key": "node ./.circleci/create_private_key.js"
   },
@@ -29,7 +29,7 @@
     "@types/node": "9.4.0",
     "@types/puppeteer": "1.1.0",
     "jest": "24.9.0",
-    "jest-junit": "3.6.0",
+    "jest-junit": "7.0.0",
     "nodemon": "^1.18.7",
     "opn": "5.2.0",
     "prompt": "1.0.0",
