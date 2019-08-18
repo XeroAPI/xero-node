@@ -24,7 +24,6 @@
     "oauth": "^0.9.15"
   },
   "devDependencies": {
-    "@types/es6-promise": "3.3.0",
     "@types/jest": "24.0.17",
     "@types/node": "9.4.0",
     "@types/puppeteer": "1.1.0",
@@ -38,6 +37,6 @@
     "ts-node": "4.1.0",
     "tslint": "5.16.0",
     "typedoc": "^0.14.2",
-    "typescript": "3.4.3"
+    "typescript": "3.5.3"
   }
 }
