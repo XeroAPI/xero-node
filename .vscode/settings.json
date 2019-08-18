@@ -1,6 +1,10 @@
 {
   "files.eol": "\r\n",
   "editor.insertSpaces": false,
+  // prevent Jest extension to run automatically on our integration tests
+  "jest.autoEnable": false,
+  "jest.runAllTestsFirst": false,
+  "jest.debugCodeLens.showWhenTestStateIn": ["pass", "fail", "unknown"],
   "[json]": {
     "files.eol": "\n",
     "editor.insertSpaces": true,

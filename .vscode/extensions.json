@@ -3,6 +3,8 @@
   // for the documentation about the extensions.json format
   "recommendations": [
     // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
-    "EditorConfig.editorconfig"
+    "EditorConfig.editorconfig",
+    // We use Jest for test and this extension allows easy debugging
+    "Orta.vscode-jest"
   ]
 }
