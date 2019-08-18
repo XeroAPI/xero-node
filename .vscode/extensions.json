@@ -3,8 +3,11 @@
   // for the documentation about the extensions.json format
   "recommendations": [
     // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+    // Editor config to enforce our TAB and CRLF
     "EditorConfig.editorconfig",
     // We use Jest for test and this extension allows easy debugging
-    "Orta.vscode-jest"
+    "Orta.vscode-jest",
+    // We use ESLint for code linting
+    "dbaeumer.vscode-eslint"
   ]
 }

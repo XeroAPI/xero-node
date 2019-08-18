@@ -1,23 +1,29 @@
 {
-  "files.eol": "\r\n",
-  "editor.insertSpaces": false,
-  // prevent Jest extension to run automatically on our integration tests
-  "jest.autoEnable": false,
-  "jest.runAllTestsFirst": false,
-  "jest.debugCodeLens.showWhenTestStateIn": ["pass", "fail", "unknown"],
-  "[json]": {
-    "files.eol": "\n",
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2
-  },
-  "[yaml]": {
-    "files.eol": "\n",
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2
-  },
-  "[shellscript]": {
-    "files.eol": "\n",
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2
-  }
+	"files.eol": "\r\n",
+	"editor.insertSpaces": false,
+	"[json]": {
+		"files.eol": "\n",
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2
+	},
+	"[yaml]": {
+		"files.eol": "\n",
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2
+	},
+	"[shellscript]": {
+		"files.eol": "\n",
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2
+	},
+	// prevent Jest extension to run automatically on our integration tests
+	"jest.autoEnable": false,
+	"jest.runAllTestsFirst": false,
+	"jest.debugCodeLens.showWhenTestStateIn": ["pass", "fail", "unknown"],
+	// ESlint Options
+	"eslint.autoFixOnSave": true,
+	"eslint.run": "onType",
+	"eslint.validate": ["javascript", "typescript"],
+	// we run prettier from ESLint, so, disable it from separated extension
+	"prettier.disableLanguages": ["typescript"]
 }
