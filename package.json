@@ -11,7 +11,6 @@
     "prepublishOnly": "npm run build",
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
     "test": "tsc --noEmit && jest --config ./jestconfig.js",
-    "test-auth": "tsc --noEmit && jest ./src/__integration_tests__/partner-example.tests.ts --config ./jestconfig.js",
     "test-ci": "tsc --noEmit && jest --runInBand --config ./jestconfig.js --ci --testResultsProcessor=jest-junit",
     "scratch": "ts-node ./src/scratch.ts",
     "create-key": "node ./.circleci/create_private_key.js"
@@ -32,12 +31,13 @@
     "jest-junit": "3.6.0",
     "nodemon": "^1.18.7",
     "opn": "5.2.0",
+    "prettier": "^1.18.2",
     "prompt": "1.0.0",
     "puppeteer": "^1.15.0",
     "ts-jest": "^24.0.2",
     "ts-node": "4.1.0",
     "tslint": "5.16.0",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.15.0",
     "typescript": "3.4.3"
   }
 }

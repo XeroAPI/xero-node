@@ -186,7 +186,7 @@ After you clone the repository, run `npm install` to install required dependenci
 We need two private Apps to get around the ratelimits. They can be connected to the same Org.
 
 1. Copy `private-config-example.json` to `private-config.json` in the [integration test directory](src/__integration_tests__).
-2. Copy it again to `1private-config.json` in the [integration test directory](src/__integration_tests__).
+2. Copy it again to `private-config1.json` in the [integration test directory](src/__integration_tests__).
 3. Overwrite the example values with your own from the [Developer Portal](https://developer.xero.com/myapps).
 4. (Do the same for `partner-config-example.json` and `xero-login.json`, if required.)
 5. Run `npm test`

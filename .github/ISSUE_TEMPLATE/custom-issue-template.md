@@ -8,14 +8,14 @@ Hi, before posting an issue please try to replicate your bug in an empty repo an
 
 Here are some repos that you can fork and attempt to replicate the issue:
 
-- https://philals/xero-node-example-console-app
+- https://github.com/XeroAPI/xero-node-samples
 - Copy and paste the examples in the README or this repo
 
 This will help us to diagnose your issue.
 
 Any bugs/issues with the API are best directed to: https://developer.xero.com/community
 
-Often the best palace for documentation is the integration tests in this repo. Please have a look:
+Often the best place for documentation is the integration tests in this repo. Please have a look:
 
 - [Integration tests](src/__integration_tests__)
 - [Sample app](https://github.com/XeroAPI/xero-node-sample-app)

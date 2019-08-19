@@ -13,7 +13,7 @@ export async function readLine(stringPrompt: string): Promise<string> {
 
 export function getPrivateConfig(testPartition?: string): XeroClientConfiguration {
 	if (!process.env.CI) {
-		const config: XeroClientConfiguration = require(`../${(testPartition || '')}private-config.json`);
+		const config: XeroClientConfiguration = require(`../private-config${(testPartition || '')}.json`);
 		return config;
 	} else {
 		return {
