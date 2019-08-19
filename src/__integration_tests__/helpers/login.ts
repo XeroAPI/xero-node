@@ -76,7 +76,9 @@ async function doTwoStepAuth(page: puppeteer.Page, login_config: any) {
 	const TWOSTEPAUTH_SECONDANSWER_INPUT_SELECTOR = '[data-automationid="auth-secondanswer--input"]';
 
 	const TWOSTEPAUTH_SUBMIT_BUTTON_SELECTOR = '[data-automationid="auth-submitanswersbutton"]';
-	await page.waitForSelector(TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR);
+	await page.waitForSelector(TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR, {
+		timeout: 1000 // only wait 1 second here, because if 2SA is not required we want to bail asap
+	});
 	await page.click(TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR);
 
 	await page.click(TWOSTEPAUTH_SECURITYQUESTIONS_BUTTON_SELECTOR);
