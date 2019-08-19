@@ -1,9 +1,10 @@
 const path = require('path');
 
 let jestConfig = {
+	"preset": "jest-puppeteer",
 	"rootDir": ".",
 	"transform": {
-		".(ts|tsx)": "ts-jest"
+		"^.+\\.tsx?$": "ts-jest"
 	},
 	"testMatch": [
 		"<rootDir>/src/**/__tests__/**/*tests.(ts|tsx)",

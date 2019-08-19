@@ -6,7 +6,7 @@ import { loginToXero } from './helpers/login';
 setJestTimeout();
 
 // We cannot run this and the other example in parallel as one de-auths the other
-describe.skip('Partner Example Tests using oauth_verifier', () => {
+describe('Partner Example Tests using oauth_verifier', () => {
 	const config = getPartnerAppConfig();
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
@@ -14,11 +14,14 @@ describe.skip('Partner Example Tests using oauth_verifier', () => {
 	let authState: AccessToken;
 	let oauth_verifier: string;
 
-	beforeAll(async (done) => {
+	beforeAll(async () => {
 		requestToken = await accounting1.oauth1Client.getRequestToken();
 		authUrl = accounting1.oauth1Client.buildAuthoriseUrl(requestToken);
 		oauth_verifier = await loginToXero(authUrl, false);
-		done();
+	});
+
+	it('it gets a request token', async () => {
+		expect(requestToken).toBeTruthy();
 	});
 
 	it('it returns the authorised url', async () => {

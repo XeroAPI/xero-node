@@ -15,13 +15,6 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 	const USERNAME_SELECTOR = '#email';
 	const PASSWORD_SELECTOR = '#password';
 	const LOGIN_BUTTON_SELECTOR = '#submitButton';
-	const TWOFACTORAUTH_OTHERMETHOD_BUTTON_SELECTOR = '[data-automationid="auth-othermethodbutton"]';
-	const TWOFACTORAUTH_SECURITYQUESTIONS_BUTTON_SELECTOR = '[data-automationid="auth-authwithsecurityquestionsbutton"]';
-	const TWOFACTORAUTH_FIRSTQUESTION_PGH_SELECTOR = '.auth-firstquestion';
-	const TWOFACTORAUTH_FIRSTANSWER_INPUT_SELECTOR = '[data-automationid="auth-firstanswer--input"]';
-	const TWOFACTORAUTH_SECONDQUESTION_PGH_SELECTOR = '.auth-secondquestion';
-	const TWOFACTORAUTH_SECONDANSWER_INPUT_SELECTOR = '[data-automationid="auth-secondanswer--input"]';
-	const TWOFACTORAUTH_SUBMIT_BUTTON_SELECTOR = '[data-automationid="auth-submitanswersbutton"]';
 	const AUTH_BUTTON_SELECTOR = '#submit-button';
 	const PIN_SELECTOR = '#pin-input';
 	const login_config = getLoginConfig();
@@ -40,48 +33,23 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 		await page.click(PASSWORD_SELECTOR);
 		await page.keyboard.type(login_config.password);
 
-		await Promise.all([
-			page.click(LOGIN_BUTTON_SELECTOR),
-			page.waitForNavigation()
+		await page.click(LOGIN_BUTTON_SELECTOR);
+
+		await Promise.race([
+			doTwoStepAuth(page, login_config).then(() => page.waitForSelector(AUTH_BUTTON_SELECTOR)),
+			page.waitForSelector(AUTH_BUTTON_SELECTOR)
 		]);
-
-		// 2FA
-		let requires2FA: boolean;
-		try {
-			await page.click(TWOFACTORAUTH_OTHERMETHOD_BUTTON_SELECTOR);
-			requires2FA = true;
-		} catch (e) {
-			// Catch and ignore errors when waiting for and finding "auth-othermethodbutton".
-			// Not finding "auth-othermethodbutton" means 2FA was not required for this login
-			requires2FA = false;
-		}
-		if (requires2FA) {
-			await page.click(TWOFACTORAUTH_SECURITYQUESTIONS_BUTTON_SELECTOR);
-
-			const firstQuestion = await page.$eval(TWOFACTORAUTH_FIRSTQUESTION_PGH_SELECTOR, (node) => (node as any).innerText);
-			await page.click(TWOFACTORAUTH_FIRSTANSWER_INPUT_SELECTOR);
-			await page.keyboard.type(getSecurityAnswer(login_config, firstQuestion));
-
-			const secondQuestion = await page.$eval(TWOFACTORAUTH_SECONDQUESTION_PGH_SELECTOR, (node) => (node as any).innerText);
-			await page.click(TWOFACTORAUTH_SECONDANSWER_INPUT_SELECTOR);
-			await page.keyboard.type(getSecurityAnswer(login_config, secondQuestion));
-
-			await page.click(TWOFACTORAUTH_SUBMIT_BUTTON_SELECTOR);
-			await page.waitForNavigation();
-			await page.waitForNavigation();
-		}
 
 		await page.click(AUTH_BUTTON_SELECTOR);
 
 		let oauth_verifier: string;
 		if (hasCallbackUrl) {
-			// Here is where your cutomer will be redirected back to your callbackUrl. From that you can get the oauth_verifier.
+			// Here is where your customer will be redirected back to your callbackUrl.
+			// From that you can get the oauth_verifier.
 			// Below is an example of the query parameters on the callbackUrl
 			// ?oauth_token=IAIXWWYYCGG0JA6VE9B4CSV7YOKFUY&oauth_verifier=2896958&org=zfI4JWUAyKgcyGT4zOMyf0
-
 			await page.waitForNavigation();
 			const pageUrl = page.url(); // This is the URL that your customer gets redirected back to
-
 			const querystrings = querystring.parse(pageUrl);
 			oauth_verifier = querystrings.oauth_verifier as string;
 		} else {
@@ -95,4 +63,29 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 	} finally {
 		browser.close();
 	}
+}
+
+async function doTwoStepAuth(page: puppeteer.Page, login_config: any) {
+	const TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR = '[data-automationid="auth-othermethodbutton"]';
+	const TWOSTEPAUTH_SECURITYQUESTIONS_BUTTON_SELECTOR = '[data-automationid="auth-authwithsecurityquestionsbutton"]';
+	const TWOSTEPAUTH_FIRSTQUESTION_PGH_SELECTOR = '.auth-firstquestion';
+	const TWOSTEPAUTH_FIRSTANSWER_INPUT_SELECTOR = '[data-automationid="auth-firstanswer--input"]';
+	const TWOSTEPAUTH_SECONDQUESTION_PGH_SELECTOR = '.auth-secondquestion';
+	const TWOSTEPAUTH_SECONDANSWER_INPUT_SELECTOR = '[data-automationid="auth-secondanswer--input"]';
+
+	const TWOSTEPAUTH_SUBMIT_BUTTON_SELECTOR = '[data-automationid="auth-submitanswersbutton"]';
+	await page.waitForSelector(TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR);
+	await page.click(TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR);
+
+	await page.click(TWOSTEPAUTH_SECURITYQUESTIONS_BUTTON_SELECTOR);
+
+	const firstQuestion = await page.$eval(TWOSTEPAUTH_FIRSTQUESTION_PGH_SELECTOR, (node) => (node as any).innerText);
+	await page.click(TWOSTEPAUTH_FIRSTANSWER_INPUT_SELECTOR);
+	await page.keyboard.type(getSecurityAnswer(login_config, firstQuestion));
+
+	const secondQuestion = await page.$eval(TWOSTEPAUTH_SECONDQUESTION_PGH_SELECTOR, (node) => (node as any).innerText);
+	await page.click(TWOSTEPAUTH_SECONDANSWER_INPUT_SELECTOR);
+	await page.keyboard.type(getSecurityAnswer(login_config, secondQuestion));
+
+	await page.click(TWOSTEPAUTH_SUBMIT_BUTTON_SELECTOR);
 }
