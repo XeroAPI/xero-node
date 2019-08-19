@@ -1,7 +1,6 @@
 const path = require('path');
 
 let jestConfig = {
-	"preset": "jest-puppeteer",
 	"rootDir": ".",
 	"transform": {
 		"^.+\\.tsx?$": "ts-jest"
