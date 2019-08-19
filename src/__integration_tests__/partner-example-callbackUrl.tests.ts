@@ -4,8 +4,6 @@ import { getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpe
 import { loginToXero } from './helpers/login';
 import { Invoice } from '../AccountingAPI-models';
 
-setJestTimeout();
-
 // We cannot run this and the other example in parallel as one de-auths the other
 
 // This example shows how to make generic API calls as a partner app. If you're making generic calls
@@ -20,10 +18,12 @@ describe('Partner Example Tests with callbackUrl', () => {
 	let authState: AccessToken;
 	let oauth_verifier: string;
 
-	beforeAll(async () => {
+	beforeAll(async (done) => {
+		setJestTimeout();
 		requestToken = await accounting1.oauth1Client.getRequestToken();
 		authUrl = accounting1.oauth1Client.buildAuthoriseUrl(requestToken);
 		oauth_verifier = await loginToXero(authUrl, true);
+		done();
 	});
 
 	it('it gets a request token', async () => {

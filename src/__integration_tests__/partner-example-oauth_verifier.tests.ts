@@ -1,9 +1,7 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { AccessToken, RequestToken } from '../internals/OAuth1HttpClient';
-import {  getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpers';
+import { getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpers';
 import { loginToXero } from './helpers/login';
-
-setJestTimeout();
 
 // We cannot run this and the other example in parallel as one de-auths the other
 describe('Partner Example Tests using oauth_verifier', () => {
@@ -15,6 +13,7 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	let oauth_verifier: string;
 
 	beforeAll(async () => {
+		setJestTimeout();
 		requestToken = await accounting1.oauth1Client.getRequestToken();
 		authUrl = accounting1.oauth1Client.buildAuthoriseUrl(requestToken);
 		oauth_verifier = await loginToXero(authUrl, false);
