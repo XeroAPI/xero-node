@@ -35,11 +35,13 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 
 		await page.click(LOGIN_BUTTON_SELECTOR);
 
-		await Promise.race([
-			doTwoStepAuth(page, login_config).then(() => page.waitForSelector(AUTH_BUTTON_SELECTOR)),
-			page.waitForSelector(AUTH_BUTTON_SELECTOR)
-		]);
+		try {
+			await doTwoStepAuth(page, login_config);
+		} catch (err) {
+			console.log('ignoring two step auth error', err);
+		}
 
+		await page.waitForSelector(AUTH_BUTTON_SELECTOR);
 		await page.click(AUTH_BUTTON_SELECTOR);
 
 		let oauth_verifier: string;
