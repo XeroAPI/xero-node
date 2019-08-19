@@ -28,7 +28,7 @@ describe('Partner Example Tests using oauth_verifier', () => {
 	});
 
 	it('it returns a PIN when the user allows access to the app', async () => {
-		expect(oauth_verifier).not.toBeNull();
+		expect(oauth_verifier).toBeTruthy();
 	});
 
 	it('it can make a successful API call', async () => {
@@ -47,9 +47,9 @@ describe('Partner Example Tests using oauth_verifier', () => {
 		let accounting2: AccountingAPIClient;
 		it('it allows you to keep copy of the state in your own datastore', async () => {
 			// Saves your state to your datastore
-			expect(authState).not.toBeNull();
-			expect(authState.oauth_session_handle).not.toBeNull();
-			expect(requestToken).not.toBeNull();
+			expect(authState).toBeTruthy();
+			expect(authState.oauth_session_handle).toBeTruthy();
+			expect(requestToken).toBeTruthy();
 
 			// This is how you can check when you have to refresh your Access Token
 			expect(typeof authState.oauth_expires_at.getDate).toBe('function');

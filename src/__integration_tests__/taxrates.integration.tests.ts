@@ -42,7 +42,7 @@ describe('/taxrates', () => {
 
 	it('get all', async () => {
 		const response = await xero.taxRates.get();
-		expect(response).not.toBeNull();
+		expect(response).toBeTruthy();
 		expect(response.TaxRates).toBeInstanceOf(Array);
 		expect(response.TaxRates[0]).toHaveProperty('Name');
 		expect(response.TaxRates[0]).toHaveProperty('TaxType');

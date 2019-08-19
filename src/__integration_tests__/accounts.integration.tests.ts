@@ -12,7 +12,7 @@ describe('/accounts', () => {
 
 	it('get all', async () => {
 		const response = await xero.accounts.get();
-		expect(response).not.toBeNull();
+		expect(response).toBeTruthy();
 		expect(response.Accounts.length).toBeGreaterThan(0);
 		expect(response.Accounts.map((account) => account.SystemAccount)).toContainEqual('DEBTORS');
 	});

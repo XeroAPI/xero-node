@@ -30,7 +30,7 @@ describe('/currencies', () => {
 
 	it('get all', async () => {
 		const response = await xero.currencies.get();
-		expect(response).not.toBeNull();
+		expect(response).toBeTruthy();
 		expect(response.Currencies).toContainEqual({
 			Code: 'PHP',
 			Description: 'Philippine Peso'
