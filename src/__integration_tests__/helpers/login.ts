@@ -2,6 +2,7 @@ import * as puppeteer from 'puppeteer';
 import * as querystring from 'querystring';
 
 import { getLoginConfig } from './integration.helpers';
+import { takeScreenshot as tryTakeScreenshot } from './puppeteer.helpers';
 
 function getSecurityAnswer(config: { securityQuestions: Array<{ q: string, a: string }> }, question: string): string {
 	for (const pair of config.securityQuestions) {
@@ -23,8 +24,9 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 	const browser = await puppeteer.launch({
 		headless: true
 	});
+	let page: puppeteer.Page;
 	try {
-		const page = await browser.newPage();
+		page = await browser.newPage();
 		await page.goto(authUrl);
 
 		// /user logs into Xero and Auths your app
@@ -35,11 +37,7 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 
 		await page.click(LOGIN_BUTTON_SELECTOR);
 
-		try {
-			await doTwoStepAuth(page, login_config);
-		} catch (err) {
-			console.log('ignoring two step auth error', err.message);
-		}
+		await doTwoStepAuthIfRequired(page, login_config);
 
 		await page.waitForSelector(AUTH_BUTTON_SELECTOR);
 		await page.click(AUTH_BUTTON_SELECTOR);
@@ -60,14 +58,15 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 			oauth_verifier = await page.$eval(PIN_SELECTOR, (node) => (node as any).value);
 		}
 		return oauth_verifier;
-	} catch (e) {
-		throw e;
+	} catch (err) {
+		await tryTakeScreenshot(page, 'login');
+		throw err;
 	} finally {
 		browser.close();
 	}
 }
 
-async function doTwoStepAuth(page: puppeteer.Page, login_config: any) {
+async function doTwoStepAuthIfRequired(page: puppeteer.Page, login_config: any) {
 	const TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR = '[data-automationid="auth-othermethodbutton"]';
 	const TWOSTEPAUTH_SECURITYQUESTIONS_BUTTON_SELECTOR = '[data-automationid="auth-authwithsecurityquestionsbutton"]';
 	const TWOSTEPAUTH_FIRSTQUESTION_PGH_SELECTOR = '.auth-firstquestion';
@@ -76,9 +75,16 @@ async function doTwoStepAuth(page: puppeteer.Page, login_config: any) {
 	const TWOSTEPAUTH_SECONDANSWER_INPUT_SELECTOR = '[data-automationid="auth-secondanswer--input"]';
 
 	const TWOSTEPAUTH_SUBMIT_BUTTON_SELECTOR = '[data-automationid="auth-submitanswersbutton"]';
-	await page.waitForSelector(TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR, {
-		timeout: 1000 // only wait 1 second here, because if 2SA is not required we want to bail asap
-	});
+
+	try {
+		await page.waitForSelector(TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR, {
+			timeout: 1000 // only wait 1 second here, because if 2SA is not required we want to bail asap
+		});
+	} catch (err) {
+		console.log('Skipping two step auth because', err.message);
+		return; // premature exit
+	}
+
 	await page.click(TWOSTEPAUTH_OTHERMETHOD_BUTTON_SELECTOR);
 
 	await page.click(TWOSTEPAUTH_SECURITYQUESTIONS_BUTTON_SELECTOR);
