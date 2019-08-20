@@ -41,6 +41,7 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 
 		await page.waitForSelector(AUTH_BUTTON_SELECTOR);
 		await page.click(AUTH_BUTTON_SELECTOR);
+		await tryTakeScreenshot(page, 'auth');
 
 		let oauth_verifier: string;
 		if (hasCallbackUrl) {
