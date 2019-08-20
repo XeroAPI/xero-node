@@ -38,7 +38,7 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 		try {
 			await doTwoStepAuth(page, login_config);
 		} catch (err) {
-			console.log('ignoring two step auth error', err);
+			console.log('ignoring two step auth error', err.message);
 		}
 
 		await page.waitForSelector(AUTH_BUTTON_SELECTOR);
