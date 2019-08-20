@@ -32,8 +32,8 @@ export function getLoginConfig() {
 		return config;
 	} else {
 		return {
-			userName: process.env.UserName,
-			password: process.env.Password
+			userName: process.env.UserName2,
+			password: process.env.Password2
 		};
 	}
 
