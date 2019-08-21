@@ -26,7 +26,7 @@ describe('Partner Example Tests with callbackUrl', () => {
 		done();
 	});
 
-	it('it gets a request token', async () => {
+	it.only('it gets a request token', async () => {
 		expect(requestToken).toBeTruthy();
 	});
 
