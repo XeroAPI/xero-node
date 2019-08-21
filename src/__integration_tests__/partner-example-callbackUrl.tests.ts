@@ -22,7 +22,7 @@ describe('Partner Example Tests with callbackUrl', () => {
 		setJestTimeout();
 		requestToken = await accounting1.oauth1Client.getRequestToken();
 		authUrl = accounting1.oauth1Client.buildAuthoriseUrl(requestToken);
-		oauth_verifier = await loginToXero(authUrl, true);
+		oauth_verifier = await loginToXero(authUrl, false);
 		done();
 	});
 
