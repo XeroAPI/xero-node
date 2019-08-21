@@ -53,10 +53,12 @@ export async function loginToXero(authUrl: string, hasCallbackUrl: boolean): Pro
 			const pageUrl = page.url(); // This is the URL that your customer gets redirected back to
 			const querystrings = querystring.parse(pageUrl);
 			oauth_verifier = querystrings.oauth_verifier as string;
+			await tryTakeScreenshot(page, 'callback');
 		} else {
 			// The pin is usually sent to your callback url, in this example,
 			// callback url is set to null
 			oauth_verifier = await page.$eval(PIN_SELECTOR, (node) => (node as any).value);
+			await tryTakeScreenshot(page, 'null');
 		}
 		return oauth_verifier;
 	} catch (err) {
