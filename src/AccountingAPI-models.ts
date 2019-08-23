@@ -338,6 +338,7 @@ export interface LineItem {
 	Tracking?: Tracking[];
 	Quantity?: number;
 	LineItemID?: string;
+	ItemCode?: string;
 }
 export interface ManualJournal {
 	ManualJournalID?: string;
