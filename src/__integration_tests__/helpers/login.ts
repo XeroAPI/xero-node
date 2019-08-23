@@ -2,7 +2,7 @@ import * as puppeteer from 'puppeteer';
 import * as querystring from 'querystring';
 
 import { getLoginConfig } from './integration.helpers';
-import { takeScreenshot as tryTakeScreenshot } from './puppeteer.helpers';
+import { tryTakeScreenshot } from './puppeteer.helpers';
 
 function getSecurityAnswer(config: { securityQuestions: Array<{ q: string, a: string }> }, question: string): string {
 	for (const pair of config.securityQuestions) {
@@ -82,6 +82,7 @@ async function doTwoStepAuthIfRequired(page: puppeteer.Page, login_config: any) 
 		});
 	} catch (err) {
 		console.log('Skipping two step auth because', err.message);
+		await tryTakeScreenshot(page, 'no2SA');
 		return; // premature exit
 	}
 

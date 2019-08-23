@@ -1,7 +1,7 @@
 import * as puppeteer from 'puppeteer';
 import * as fs from 'fs';
 
-export async function takeScreenshot(page: puppeteer.Page, tag: string) {
+export async function tryTakeScreenshot(page: puppeteer.Page, tag: string) {
 	try {
 		// Step 1: create destination directory, if it doesn't already exist.
 		try {
