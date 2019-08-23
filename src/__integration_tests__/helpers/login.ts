@@ -82,7 +82,6 @@ async function doTwoStepAuthIfRequired(page: puppeteer.Page, login_config: any) 
 		});
 	} catch (err) {
 		console.log('Skipping two step auth because', err.message);
-		await tryTakeScreenshot(page, 'no2SA');
 		return; // premature exit
 	}
 
