@@ -9,7 +9,7 @@ import { Invoice } from '../AccountingAPI-models';
 // This example shows how to make generic API calls as a partner app. If you're making generic calls
 // please consider sending a PR with the new endpoint you are using. Thanks
 
-describe('Partner Example Tests with callbackUrl', () => {
+describe.skip('Partner Example Tests with callbackUrl', () => {
 	const config = getPartnerAppConfig();
 	config.callbackUrl = 'http://localhost'; // Note you MUST add localhost as a callback domain in https://developer.xero.com/myapps
 	const accounting1 = new BaseAPIClient(config);

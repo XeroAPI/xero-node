@@ -4,7 +4,7 @@ import { getPartnerAppConfig, setJestTimeout } from './helpers/integration.helpe
 import { loginToXero } from './helpers/login';
 
 // We cannot run this and the other example in parallel as one de-auths the other
-describe('Partner Example Tests using oauth_verifier', () => {
+describe.skip('Partner Example Tests using oauth_verifier', () => {
 	const config = getPartnerAppConfig();
 	const accounting1 = new AccountingAPIClient(config);
 	let authUrl: string;
