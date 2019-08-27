@@ -48,15 +48,14 @@ describe('AccountingAPI endpoints', () => {
 
 		describe(`${endpoint} and getting History`, () => {
 			let result: any;
+			const args: any = {};
+			args[idValue] = guid1;
 
 			const mockedResponse = JSON.stringify({ a: 'response' });
 
 			beforeAll(async () => {
 				inMemoryOAuthLibFF.inMemoryOAuthLib.reset();
 				inMemoryOAuthLibFF.inMemoryOAuthLib.setResponse(false, mockedResponse, { statusCode: 200 });
-
-				const args: any = {};
-				args[idValue] = guid1;
 
 				result = await (xeroClient as any)[endpoint]['history'].get(args);
 			});
@@ -68,7 +67,12 @@ describe('AccountingAPI endpoints', () => {
 			it('matches the expected response', () => {
 				expect(result).toMatchObject(JSON.parse(mockedResponse));
 			});
+
+			if (endpoint === 'invoices') {
+				it('matches the expected response for creating a History Note', async () => {
+					result = await (xeroClient as any)[endpoint]['history'].create(args);
+				});
+			}
 		});
 	});
-
 });

@@ -1,6 +1,6 @@
 
 import * as fs from 'fs';
-import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
+import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption, HistoryRecord } from './AccountingAPI-models';
 import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OnlineInvoicesResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
 import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
 import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
@@ -526,6 +526,17 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint += '/history';
 
 				return this.oauth1Client.get<HistoryResponse>(endpoint);
+			},
+			create: async (args: { InvoiceID: string, HistoryNote: HistoryRecord }): Promise<HistoryResponse> => {
+				let endpoint = 'invoices';
+				if (args && args.InvoiceID) {
+					endpoint = endpoint + '/' + args.InvoiceID;
+					delete args.InvoiceID;
+				}
+
+				endpoint += '/history';
+
+				return this.oauth1Client.put<HistoryResponse>(endpoint, args.HistoryNote);
 			}
 		},
 		email: {
