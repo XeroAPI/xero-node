@@ -2,21 +2,23 @@
     "compilerOptions": {
         "module": "commonjs",
         "moduleResolution": "node",
+        "strictPropertyInitialization": false,
+        "noImplicitAny": false,
+        "suppressImplicitAnyIndexErrors": true,
         "target": "es2018",
+        "strict": true,
         "removeComments": true,
         "sourceMap": true,
+        "noLib": false,
         "declaration": true,
+        "outDir": "dist",
         "lib": [
             "dom",
             "es6",
             "es5",
             "dom.iterable",
             "scripthost"
-        ],
-        "outDir": "dist",
-        "strict": true,
-        "noImplicitAny": false,
-        "esModuleInterop": true
+        ]
     },
     "include": [
         "src"

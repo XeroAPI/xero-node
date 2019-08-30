@@ -175,7 +175,9 @@ export class Prepayment {
 export namespace Prepayment {
     export enum TypeEnum {
         RECEIVEPREPAYMENT = <any> 'RECEIVE-PREPAYMENT',
-        SPENDPREPAYMENT = <any> 'SPEND-PREPAYMENT'
+        SPENDPREPAYMENT = <any> 'SPEND-PREPAYMENT',
+        ARPREPAYMENT = <any> 'ARPREPAYMENT',
+        APPREPAYMENT = <any> 'APPREPAYMENT'
     }
     export enum StatusEnum {
         AUTHORISED = <any> 'AUTHORISED',

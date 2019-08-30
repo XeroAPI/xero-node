@@ -321,11 +321,14 @@ export namespace Organisation {
     export enum OrganisationTypeEnum {
         COMPANY = <any> 'COMPANY',
         CHARITY = <any> 'CHARITY',
-        CLUBSOCIETY = <any> 'CLUBSOCIETY',
+        CLUBORSOCIETY = <any> 'CLUB_OR_SOCIETY',
+        LOOKTHROUGHCOMPANY = <any> 'LOOK_THROUGH_COMPANY',
+        NOTFORPROFIT = <any> 'NOT_FOR_PROFIT',
         PARTNERSHIP = <any> 'PARTNERSHIP',
-        PRACTICE = <any> 'PRACTICE',
-        PERSON = <any> 'PERSON',
-        SOLETRADER = <any> 'SOLETRADER',
+        SCORPORATION = <any> 'S_CORPORATION',
+        SELFMANAGEDSUPERANNUATIONFUND = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
+        SOLETRADER = <any> 'SOLE_TRADER',
+        SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
         TRUST = <any> 'TRUST'
     }
     export enum SalesTaxBasisEnum {
@@ -357,11 +360,14 @@ export namespace Organisation {
     export enum OrganisationEntityTypeEnum {
         COMPANY = <any> 'COMPANY',
         CHARITY = <any> 'CHARITY',
-        CLUBSOCIETY = <any> 'CLUBSOCIETY',
+        CLUBORSOCIETY = <any> 'CLUB_OR_SOCIETY',
+        LOOKTHROUGHCOMPANY = <any> 'LOOK_THROUGH_COMPANY',
+        NOTFORPROFIT = <any> 'NOT_FOR_PROFIT',
         PARTNERSHIP = <any> 'PARTNERSHIP',
-        PRACTICE = <any> 'PRACTICE',
-        PERSON = <any> 'PERSON',
-        SOLETRADER = <any> 'SOLETRADER',
+        SCORPORATION = <any> 'S_CORPORATION',
+        SELFMANAGEDSUPERANNUATIONFUND = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
+        SOLETRADER = <any> 'SOLE_TRADER',
+        SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
         TRUST = <any> 'TRUST'
     }
     export enum ClassEnum {

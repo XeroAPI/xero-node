@@ -23,7 +23,7 @@ export class Receipt {
     */
     'date': string;
     'contact': Contact;
-    'lineitems': Array<LineItem>;
+    'lineItems': Array<LineItem>;
     'user': User;
     /**
     * Additional reference number
@@ -89,8 +89,8 @@ export class Receipt {
             "type": "Contact"
         },
         {
-            "name": "lineitems",
-            "baseName": "Lineitems",
+            "name": "lineItems",
+            "baseName": "LineItems",
             "type": "Array<LineItem>"
         },
         {
@@ -173,7 +173,7 @@ export namespace Receipt {
     export enum StatusEnum {
         DRAFT = <any> 'DRAFT',
         SUBMITTED = <any> 'SUBMITTED',
-        AUTHORIZED = <any> 'AUTHORIZED',
+        AUTHORISED = <any> 'AUTHORISED',
         DECLINED = <any> 'DECLINED'
     }
 }

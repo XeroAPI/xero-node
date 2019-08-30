@@ -185,7 +185,8 @@ export class Overpayment {
 export namespace Overpayment {
     export enum TypeEnum {
         RECEIVEOVERPAYMENT = <any> 'RECEIVE-OVERPAYMENT',
-        SPENDOVERPAYMENT = <any> 'SPEND-OVERPAYMENT'
+        SPENDOVERPAYMENT = <any> 'SPEND-OVERPAYMENT',
+        AROVERPAYMENT = <any> 'AROVERPAYMENT'
     }
     export enum StatusEnum {
         AUTHORISED = <any> 'AUTHORISED',

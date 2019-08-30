@@ -26,7 +26,7 @@ export class BankTransaction {
     /**
     * See LineItems
     */
-    'lineitems': Array<LineItem>;
+    'lineItems': Array<LineItem>;
     'bankAccount': Account;
     /**
     * Boolean to show if transaction is reconciled
@@ -109,8 +109,8 @@ export class BankTransaction {
             "type": "Contact"
         },
         {
-            "name": "lineitems",
-            "baseName": "Lineitems",
+            "name": "lineItems",
+            "baseName": "LineItems",
             "type": "Array<LineItem>"
         },
         {

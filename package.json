@@ -1,6 +1,6 @@
 {
   "name": "xero-node-sdk",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "description": "nodejs SDK for Xero API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,12 +11,12 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "@types/node": "^8.0.0",
+    "@types/node": "8.10.34",
     "@types/request": "^2.48.2",
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "openid-client": "^3.3.0",
+    "openid-client": "^3.4.0",
     "request": "^2.88.0"
   }
 }

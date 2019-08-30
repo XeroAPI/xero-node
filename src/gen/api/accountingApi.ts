@@ -29,6 +29,7 @@ import { ContactGroups } from '../model/contactGroups';
 import { Contacts } from '../model/contacts';
 import { CreditNotes } from '../model/creditNotes';
 import { Currencies } from '../model/currencies';
+import { Currency } from '../model/currency';
 import { Employees } from '../model/employees';
 import { ExpenseClaims } from '../model/expenseClaims';
 import { HistoryRecords } from '../model/historyRecords';
@@ -1552,9 +1553,9 @@ export class AccountingApi {
     /**
      * 
      * @param xeroTenantId Xero identifier for Tenant
-     * @param currencies 
+     * @param currency 
      */
-    public async createCurrency (xeroTenantId: string, currencies: Currencies, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Currencies;  }> {
+    public async createCurrency (xeroTenantId: string, currency: Currency, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Currencies;  }> {
         const localVarPath = this.basePath + '/Currencies';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -1565,9 +1566,9 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createCurrency.');
         }
 
-        // verify required parameter 'currencies' is not null or undefined
-        if (currencies === null || currencies === undefined) {
-            throw new Error('Required parameter currencies was null or undefined when calling createCurrency.');
+        // verify required parameter 'currency' is not null or undefined
+        if (currency === null || currency === undefined) {
+            throw new Error('Required parameter currency was null or undefined when calling createCurrency.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -1582,7 +1583,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(currencies, "Currencies")
+            body: ObjectSerializer.serialize(currency, "Currency")
         };
 
         let authenticationPromise = Promise.resolve();
