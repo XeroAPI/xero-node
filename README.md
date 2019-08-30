@@ -16,7 +16,7 @@ Coming soon
 ## Usage
 Installation
 ```sh
-npm install @xero/xero-node-sdk
+npm install xero-node-sdk
 ```
 Example
 ```js
