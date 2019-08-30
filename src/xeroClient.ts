@@ -8,7 +8,7 @@ export class XeroClient {
 
     readonly accountingApi: xero.AccountingApi;
 
-    private client: any; // from openid-client
+    private openIdClient: any; // from openid-client
     private tokenSet: { id_token: string, access_token: string, refresh_token: string, claims: object }; // from openid-client
 
     private _tenantIds: string[];
@@ -27,7 +27,7 @@ export class XeroClient {
             client_secret: this.config.clientSecret,
             redirect_uris: this.config.redirectUris,
         });
-        this.client.CLOCK_TOLERANCE = 5; // to allow a 5 second skew in the openid-client validations
+        this.openIdClient.CLOCK_TOLERANCE = 5; // to allow a 5 second skew in the openid-client validations
       
 
         const url = this.openIdClient.authorizationUrl({
@@ -39,7 +39,7 @@ export class XeroClient {
     }
 
     async setAccessTokenFromRedirectUri(urlQuery: string) {
-        this.tokenSet = await this.client.callback(this.config.redirectUris[0], urlQuery);
+        this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], urlQuery);
         this.setAccessTokenForAllApis();
 
         await this.fetchConnectedTenantIds();
