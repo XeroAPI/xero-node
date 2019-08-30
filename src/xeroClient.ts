@@ -22,7 +22,7 @@ export class XeroClient {
 
     async buildConsentUrl() {
         const issuer = await Issuer.discover('https://identity.xero.com');
-        this.client = new issuer.Client({
+        this.openIdClient = new issuer.Client({
             client_id: this.config.clientId,
             client_secret: this.config.clientSecret,
             redirect_uris: this.config.redirectUris,
@@ -30,7 +30,7 @@ export class XeroClient {
         this.client.CLOCK_TOLERANCE = 5; // to allow a 5 second skew in the openid-client validations
       
 
-        const url = this.client.authorizationUrl({
+        const url = this.openIdClient.authorizationUrl({
             redirect_uri: this.config.redirectUris[0],
             scope: this.config.scopes.join(' ') || 'openid email profile'
         });
@@ -50,7 +50,11 @@ export class XeroClient {
     }
 
     async refreshToken() {
-        this.tokenSet = await this.client.refresh(this.tokenSet.refresh_token);
+
+        if (!this.tokenSet) {
+            throw new Error('tokenSet is not defined');
+        }
+        this.tokenSet = await this.openIdClient.refresh(this.tokenSet.refresh_token);
         this.setAccessTokenForAllApis();
         
         await this.fetchConnectedTenantIds();
