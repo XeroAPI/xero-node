@@ -18,6 +18,22 @@ Installation
 ```sh
 npm install xero-node-sdk
 ```
+
+## Getting Started
+
+### Create a Xero App
+Follow these steps to create your Xero app
+
+* Create a [free Xero user account](https://www.xero.com/us/signup/api/) (if you don't have one)
+* Login to [Xero developer center](https://developer.xero.com/myapps)
+* Click "Try oAuth2" link
+* Enter your App name, company url, privacy policy url.
+* Enter the redirect URI (this is your callback url - localhost, etc)
+* Agree to terms and condition and click "Create App".
+* Click "Generate a secret" button.
+* Copy your client id and client secret and save for use later.
+* Click the "Save" button. You secret is now hidden.
+
 Example
 ```js
 import { XeroClient } from "xero-node-sdk";
