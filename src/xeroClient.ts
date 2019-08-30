@@ -16,7 +16,7 @@ export class XeroClient {
 
     readonly accountingApi: xero.AccountingApi;
 
-    private client: any; // from openid-client
+    private openIdClient: any; // from openid-client
     private tokenSet?: TokenSet;
 
     private _tenantIds?: string[];
@@ -30,13 +30,13 @@ export class XeroClient {
 
     async buildConsentUrl() {
         const issuer = await Issuer.discover('https://identity.xero.com');
-        this.client = new issuer.Client({
+        this.openIdClient = new issuer.Client({
             client_id: this.config.clientId,
             client_secret: this.config.clientSecret,
             redirect_uris: this.config.redirectUris,
         });
 
-        const url = this.client.authorizationUrl({
+        const url = this.openIdClient.authorizationUrl({
             redirect_uri: this.config.redirectUris[0],
             scope: this.config.scopes.join(' ') || 'openid email profile'
         });
@@ -45,7 +45,7 @@ export class XeroClient {
     }
 
     async setAccessTokenFromRedirectUri(urlQuery: string) {
-        this.tokenSet = await this.client.authorizationCallback(this.config.redirectUris[0], urlQuery);
+        this.tokenSet = await this.openIdClient.authorizationCallback(this.config.redirectUris[0], urlQuery);
         this.setAccessTokenForAllApis();
 
         await this.fetchConnectedTenantIds();
@@ -62,7 +62,7 @@ export class XeroClient {
         if (!this.tokenSet) {
             throw new Error('tokenSet is not defined');
         }
-        this.tokenSet = await this.client.refresh(this.tokenSet.refresh_token);
+        this.tokenSet = await this.openIdClient.refresh(this.tokenSet.refresh_token);
         this.setAccessTokenForAllApis();
 
         await this.fetchConnectedTenantIds();
