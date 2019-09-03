@@ -58,8 +58,11 @@ describe('generateQueryString()', () => {
 		it('adds to existing params', () => {
 			expect(generateQueryString({ a: 5 }, true)).toEqual('?a=5&summarizeErrors=false');
 		});
-		it('preserves value if specified', () => {
+		it('preserves value if specified true', () => {
 			expect(generateQueryString({ summarizeErrors: true }, true)).toEqual('?summarizeErrors=true');
+		});
+		it('preserves value if specified false', () => {
+			expect(generateQueryString({ summarizeErrors: false }, true)).toEqual('?summarizeErrors=false');
 		});
 		it('preserves order if specified with other params', () => {
 			expect(generateQueryString({ d: 12, summarizeErrors: true, a: 5 }, true)).toEqual('?d=12&summarizeErrors=true&a=5');
