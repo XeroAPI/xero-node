@@ -216,7 +216,7 @@ describe('AccountingAPI endpoints', () => {
 		],
 		paymentServices: [
 			{ action: 'get', expectedPath: 'paymentservices' },
-			{ action: 'create', expectedPath: 'paymentservices' }
+			{ action: 'create', expectedPath: 'paymentservices?summarizeErrors=false' }
 		],
 		prepayments: [
 			{ action: 'get', expectedPath: 'prepayments' },

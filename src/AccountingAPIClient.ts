@@ -792,8 +792,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 		get: async (): Promise<PaymentServicesResponse> => {
 			return this.oauth1Client.get<PaymentServicesResponse>('paymentservices');
 		},
-		create: async (body?: PaymentService): Promise<PaymentServicesResponse> => {
-			return this.oauth1Client.put<PaymentServicesResponse>('paymentservices', body);
+		create: async (paymentService?: PaymentService, args?: { summarizeErrors?: boolean }): Promise<PaymentServicesResponse> => {
+			const endpoint = 'paymentservices' + generateQueryString(args, true);
+			return this.oauth1Client.put<PaymentServicesResponse>(endpoint, paymentService);
 		}
 	};
 
