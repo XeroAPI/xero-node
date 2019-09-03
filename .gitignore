@@ -5,11 +5,11 @@ docs/**/*
 npm-debug.log
 *.pdf
 *config.json
+*config?.json
 privatekey.pem
 *.scratch.ts
 scratch.ts
 scratch*
-partner-config.json
 xero-login.json
 oAuthState.json
 *.orig

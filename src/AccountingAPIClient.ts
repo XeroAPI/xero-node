@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PaymentService, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
-import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PaymentServicesResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
+import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OnlineInvoicesResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PaymentServicesResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
 import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
 import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { escapeString, generateQueryString } from './internals/utils';
@@ -28,6 +28,7 @@ export interface AttachmentsEndpoint {
 	get(args: { entityId: string }): Promise<AttachmentsResponse>;
 	downloadAttachment(args: { entityId: string, mimeType: string, fileName: string, pathToSave: string }): Promise<void>;
 	uploadAttachment(args: { entityId: string, mimeType: string, fileName: string, pathToUpload: string, includeOnline?: boolean }): Promise<AttachmentsResponse>;
+	uploadAttachmentFromStream(args: { entityId: string, mimeType: string, fileName: string, readStream: fs.ReadStream, fileSize: number, includeOnline?: boolean }): Promise<AttachmentsResponse>;
 }
 
 export class AccountingAPIClient extends BaseAPIClient {
@@ -56,10 +57,14 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, fileSize, readStream);
 			},
+			uploadAttachmentFromStream: async (args: { entityId: string, mimeType: string, fileName: string, readStream: fs.ReadStream, fileSize: number, includeOnline?: boolean }) => {
+				const endpoint = `${path}/${args.entityId}/attachments/${escapeString(args.fileName)}` + generateQueryString({ IncludeOnline: args.includeOnline });
+				return this.oauth1Client.readStreamToRequest(endpoint, args.mimeType, args.fileSize, args.readStream);
+			},
 		};
 	}
 
-	private generateHeader(args: HeaderArgs) {
+	private generateHeader(args: HeaderArgs & any) {
 		if (args && args['If-Modified-Since']) {
 			const toReturn = {
 				'If-Modified-Since': args['If-Modified-Since']
@@ -256,12 +261,12 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.get<ContactsResponse>(endpoint, header);
 		},
-		create: async (body: Contact | { Contacts: Contact[] }, args?: { summarizeErrors: boolean }): Promise<ContactsResponse> => {
+		create: async (body: Contact | { Contacts: Contact[] }, args?: { summarizeErrors?: boolean }): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.put<ContactsResponse>(endpoint, body);
 		},
-		update: async (body?: Contact | { Contacts: Contact[] }, args?: { ContactID: string, summarizeErrors: boolean }): Promise<ContactsResponse> => {
+		update: async (body: Contact | { Contacts: Contact[] }, args?: { ContactID?: string, summarizeErrors?: boolean }): Promise<ContactsResponse> => {
 			let endpoint = 'contacts';
 
 			if (args && args.ContactID) {
@@ -497,7 +502,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.post<InvoicesResponse>(endpoint, invoices);
 		},
 		onlineInvoice: {
-			get: async (args?: { InvoiceID: string }): Promise<string> => {
+			get: async (args?: { InvoiceID: string }): Promise<OnlineInvoicesResponse> => {
 				let endpoint = 'invoices';
 				if (args && args.InvoiceID) {
 					endpoint = endpoint + '/' + args.InvoiceID;
@@ -743,7 +748,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 	};
 
 	public payments = {
-		get: async (args?: { PaymentID: string } & QueryArgs & HeaderArgs): Promise<PaymentsResponse> => {
+		get: async (args?: { PaymentID?: string } & QueryArgs & HeaderArgs): Promise<PaymentsResponse> => {
 			let endpoint = 'payments';
 			if (args && args.PaymentID) {
 				endpoint = endpoint + '/' + args.PaymentID;

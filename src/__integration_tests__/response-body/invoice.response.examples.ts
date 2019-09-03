@@ -201,8 +201,7 @@ export const singleInvoice: InvoicesResponse = {
 				IsCustomer: false,
 				SalesTrackingCategories: [],
 				PurchasesTrackingCategories: [],
-				ContactPersons: [],
-				HasValidationErrors: false
+				ContactPersons: []
 			},
 			DateString: '2017-10-17T00:00:00',
 			Date: '\/Date(1508198400000+0000)\/',

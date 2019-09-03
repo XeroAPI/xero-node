@@ -41,7 +41,7 @@ const createEmailInvoiceRequest: Invoice = {
 	Type: 'ACCREC',
 	Contact: {
 		Name: 'Martin Hudson',
-		EmailAddress: 'test@test.com'
+		EmailAddress: 'notrealemail@test.xero.com'
 	},
 	Date: '2018-02-15T00:00:00',
 	DueDate: '2018-02-22T00:00:00',
@@ -55,6 +55,4 @@ const createEmailInvoiceRequest: Invoice = {
 	}]
 };
 
-export {
-	createSingleInvoiceRequest, createMultipleInvoiceRequest, createEmailInvoiceRequest
-};
+export { createSingleInvoiceRequest, createMultipleInvoiceRequest, createEmailInvoiceRequest };

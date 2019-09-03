@@ -1,8 +1,8 @@
 
-import { IOAuth1HttpClient, OAuth1HttpClient, OAuth1Configuration, AccessToken } from './OAuth1HttpClient';
-import { mapConfig, mapState } from './config-helper';
-import * as  fs from 'fs';
+import * as fs from 'fs';
 import { AttachmentsResponse } from '../AccountingAPI-responses';
+import { mapConfig, mapState } from './config-helper';
+import { AccessToken, IOAuth1HttpClient, OAuth1Configuration, OAuth1HttpClient } from './OAuth1HttpClient';
 
 /**
  * TODO: Add support for the following keys:
@@ -16,6 +16,7 @@ export interface XeroClientConfiguration {
 	privateKeyPath?: string;
 	privateKeyString?: string;
 	callbackUrl?: string;
+	userAgent?: string;
 }
 
 /**

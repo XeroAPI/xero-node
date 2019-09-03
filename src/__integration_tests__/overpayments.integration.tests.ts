@@ -13,7 +13,7 @@ describe('/overpayments', () => {
 
 	it('get all', async () => {
 		const response = await xero.overpayments.get();
-		expect(response).not.toBeNull();
+		expect(response).toBeTruthy();
 		expect(response.Overpayments).toBeInstanceOf(Array);
 		expect(response.Overpayments[0]).toHaveProperty('Contact');
 		// overPaymentID = response.Overpayments[0].OverpaymentID;

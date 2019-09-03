@@ -17,7 +17,7 @@ describe('/contactgroups', () => {
 	it('get single', async () => {
 		const response = await xero.contactGroups.get({ ContactGroupID: await getOrCreateContactGroupId(xero) });
 
-		expect(response).not.toBeNull();
+		expect(response).toBeTruthy();
 		expect(isUUID(response.Id)).toBeTruthy();
 		expect(response.ContactGroups.length).toBe(1);
 	});
@@ -25,7 +25,7 @@ describe('/contactgroups', () => {
 	it('get all', async () => {
 		const response = await xero.contactGroups.get();
 
-		expect(response).not.toBeNull();
+		expect(response).toBeTruthy();
 		expect(isUUID(response.Id)).toBeTruthy();
 		expect(response.ContactGroups.length).toBeGreaterThan(0);
 	});
@@ -39,7 +39,7 @@ describe('/contactgroups', () => {
 
 		_idsToDelete = _idsToDelete.concat(response.ContactGroups[0].ContactGroupID);
 
-		expect(response).not.toBeNull();
+		expect(response).toBeTruthy();
 		expect(isUUID(response.ContactGroups[0].ContactGroupID)).toBeTruthy();
 		expect(response.ContactGroups[0].Name).toBe(uniqueName);
 
@@ -51,12 +51,12 @@ describe('/contactgroups', () => {
 			Status: 'DELETED'
 		});
 
-		expect(response).not.toBeNull();
+		expect(response).toBeTruthy();
 		expect(response.ContactGroups.length).toBe(1);
 		expect(response.ContactGroups[0].Status).toBe('DELETED');
 	});
 
-	describe('contacts', async () => {
+	describe('contacts', () => {
 
 		it('add to group', async () => {
 			const contactId = await getOrCreateContactId(xero);

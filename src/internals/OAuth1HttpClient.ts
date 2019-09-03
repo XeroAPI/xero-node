@@ -1,13 +1,13 @@
 
-import { OAuth } from 'oauth';
-import { IHttpClient } from './BaseAPIClient';
 import * as fs from 'fs';
-import * as querystring from 'querystring';
 import * as http from 'http';
 import * as https from 'https';
+import { OAuth } from 'oauth';
+import * as querystring from 'querystring';
 import * as URL from 'url';
-import { XeroError } from '../XeroError';
 import { AttachmentsResponse } from '../AccountingAPI-responses';
+import { XeroError } from '../XeroError';
+import { IHttpClient } from './BaseAPIClient';
 
 export interface RequestToken {
 	oauth_token: string;
@@ -224,7 +224,7 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 					if (err) {
 						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse.headers) : err);
 					} else {
-						const buffer = new Buffer(data, 'binary');
+						const buffer = Buffer.from(data, 'binary');
 
 						writeStream.write(buffer, () => {
 							writeStream.close();

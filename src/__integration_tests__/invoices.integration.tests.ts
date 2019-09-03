@@ -5,7 +5,7 @@ import { InvoicesResponse } from '../AccountingAPI-responses';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getOrCreateInvoiceId } from './helpers/entityId.helpers';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
-import { createMultipleInvoiceRequest, createSingleInvoiceRequest, createEmailInvoiceRequest } from './request-body/invoice.request.examples';
+import { createEmailInvoiceRequest, createMultipleInvoiceRequest, createSingleInvoiceRequest } from './request-body/invoice.request.examples';
 
 describe('/invoices', () => {
 
@@ -63,7 +63,7 @@ describe('/invoices', () => {
 
 		expect(response).toBeUndefined();
 		const invoiceBuffer = fs.readFileSync(tmpDownloadFile);
-		expect(invoiceBuffer.byteLength).toBeGreaterThan(3000); // Let's hope all PDFs are bigger than 3000B
+		expect(invoiceBuffer.byteLength).toBeGreaterThan(1000); // Let's hope all PDFs are bigger than 1000B
 	});
 
 	it('sends invoice email', async () => {
