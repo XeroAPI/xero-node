@@ -9,7 +9,7 @@ interface IHistoryFixture {
 	[key: string]: { idKey: string };
 }
 
-describe('AccountingAPI endpoints', () => {
+describe('AccountingAPI history', () => {
 	const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
 
 	const xeroConfig: XeroClientConfiguration = {
@@ -46,33 +46,60 @@ describe('AccountingAPI endpoints', () => {
 
 		const idValue = fixtures[endpoint].idKey;
 
-		describe(`${endpoint} and getting History`, () => {
-			let result: any;
-			const args: any = {};
-			args[idValue] = guid1;
+		describe(`${endpoint}`, () => {
+			describe(`and getting History`, () => {
+				let result: any;
+				const args: any = {};
+				args[idValue] = guid1;
 
-			const mockedResponse = JSON.stringify({ a: 'response' });
+				const mockedResponse = JSON.stringify({ a: 'response' });
 
-			beforeAll(async () => {
-				inMemoryOAuthLibFF.inMemoryOAuthLib.reset();
-				inMemoryOAuthLibFF.inMemoryOAuthLib.setResponse(false, mockedResponse, { statusCode: 200 });
+				beforeAll(async () => {
+					inMemoryOAuthLibFF.inMemoryOAuthLib.reset();
+					inMemoryOAuthLibFF.inMemoryOAuthLib.setResponse(false, mockedResponse, { statusCode: 200 });
 
-				result = await (xeroClient as any)[endpoint]['history'].get(args);
+					result = await (xeroClient as any)[endpoint]['history'].get(args);
+				});
+
+				it(`calls the ${endpoint} url`, () => {
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + '/api.xro/2.0/' + endpoint.toLowerCase() + '/' + guid1 + '/history');
+				});
+
+				it(`calls the GET method`, () => {
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisMethod('get');
+				});
+
+				it('matches the expected response', () => {
+					expect(result).toMatchObject(JSON.parse(mockedResponse));
+				});
 			});
 
-			it(`calls the ${endpoint} url`, () => {
-				inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + '/api.xro/2.0/' + endpoint.toLowerCase() + '/' + guid1 + '/history');
-			});
+			describe(`and creating History`, () => {
+				let result: any;
+				const args: any = {};
+				args[idValue] = guid1;
 
-			it('matches the expected response', () => {
-				expect(result).toMatchObject(JSON.parse(mockedResponse));
-			});
+				const mockedResponse = JSON.stringify({ a: 'response' });
 
-			if (endpoint === 'invoices') {
-				it('matches the expected response for creating a History Note', async () => {
+				beforeAll(async () => {
+					inMemoryOAuthLibFF.inMemoryOAuthLib.reset();
+					inMemoryOAuthLibFF.inMemoryOAuthLib.setResponse(false, mockedResponse, { statusCode: 200 });
+
 					result = await (xeroClient as any)[endpoint]['history'].create(args);
 				});
-			}
+
+				it(`calls the ${endpoint} url`, () => {
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisURL(accountingBaseUrl + '/api.xro/2.0/' + endpoint.toLowerCase() + '/' + guid1 + '/history');
+				});
+
+				it(`calls the PUT method`, () => {
+					inMemoryOAuthLibFF.inMemoryOAuthLib.lastCalledThisMethod('put');
+				});
+
+				it('matches the expected response', () => {
+					expect(result).toMatchObject(JSON.parse(mockedResponse));
+				});
+			});
 		});
 	});
 });

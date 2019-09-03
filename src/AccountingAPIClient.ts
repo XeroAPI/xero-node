@@ -64,6 +64,33 @@ export class AccountingAPIClient extends BaseAPIClient {
 		};
 	}
 
+	private generateHistoryEndpoint<ArgName extends string>(endpointName: string, argName: ArgName) {
+		return {
+			get: async (args: { [key in ArgName]: string }): Promise<HistoryResponse> => {
+				let endpoint = endpointName;
+				if (args && args[argName]) {
+					endpoint = endpoint + '/' + args[argName];
+					delete args[argName];
+				}
+
+				endpoint += '/history';
+
+				return this.oauth1Client.get<HistoryResponse>(endpoint);
+			},
+			create: async (args: { [key in ArgName]: string } & { HistoryNote: HistoryRecord }): Promise<HistoryResponse> => {
+				let endpoint = endpointName;
+				if (args && args[argName]) {
+					endpoint = endpoint + '/' + args[argName];
+					delete args[argName];
+				}
+
+				endpoint += '/history';
+
+				return this.oauth1Client.put<HistoryResponse>(endpoint, args.HistoryNote);
+			}
+		};
+	}
+
 	private generateHeader(args: HeaderArgs & any) {
 		if (args && args['If-Modified-Since']) {
 			const toReturn = {
@@ -132,19 +159,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.post<BankTransactionsResponse>(endpoint, bankTransaction);
 		},
 		attachments: this.generateAttachmentsEndpoint('banktransactions'),
-		history: {
-			get: async (args: { BankTransactionID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'banktransactions';
-				if (args && args.BankTransactionID) {
-					endpoint = endpoint + '/' + args.BankTransactionID;
-					delete args.BankTransactionID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('banktransactions', 'BankTransactionID')
 	};
 
 	public bankTransfers = {
@@ -164,19 +179,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.put<BankTransfersResponse>(endpoint, bankTransfers);
 		},
 		attachments: this.generateAttachmentsEndpoint('banktransfers'),
-		history: {
-			get: async (args: { BankTransferID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'banktransfers';
-				if (args && args.BankTransferID) {
-					endpoint = endpoint + '/' + args.BankTransferID;
-					delete args.BankTransferID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('banktransfers', 'BankTransferID')
 	};
 
 	public brandingThemes = {
@@ -291,19 +294,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 		},
 		attachments: this.generateAttachmentsEndpoint('contacts'),
-		history: {
-			get: async (args: { ContactID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'contacts';
-				if (args && args.ContactID) {
-					endpoint = endpoint + '/' + args.ContactID;
-					delete args.ContactID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('contacts', 'ContactID')
 	};
 
 	public creditNotes = {
@@ -355,19 +346,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			},
 		},
 		attachments: this.generateAttachmentsEndpoint('creditnotes'),
-		history: {
-			get: async (args: { CreditNoteID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'creditnotes';
-				if (args && args.CreditNoteID) {
-					endpoint = endpoint + '/' + args.CreditNoteID;
-					delete args.CreditNoteID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('creditnotes', 'CreditNoteID')
 	};
 
 	public currencies = {
@@ -428,19 +407,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.post<ExpenseClaimsResponse>(endpoint, expenseClaims);
 		},
-		history: {
-			get: async (args: { ExpenseClaimID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'expenseclaims';
-				if (args && args.ExpenseClaimID) {
-					endpoint = endpoint + '/' + args.ExpenseClaimID;
-					delete args.ExpenseClaimID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('expenseclaims', 'ExpenseClaimID')
 	};
 
 	public invoiceReminders = {
@@ -515,30 +482,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 		},
 		attachments: this.generateAttachmentsEndpoint('invoices'),
-		history: {
-			get: async (args: { InvoiceID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'invoices';
-				if (args && args.InvoiceID) {
-					endpoint = endpoint + '/' + args.InvoiceID;
-					delete args.InvoiceID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			},
-			create: async (args: { InvoiceID: string, HistoryNote: HistoryRecord }): Promise<HistoryResponse> => {
-				let endpoint = 'invoices';
-				if (args && args.InvoiceID) {
-					endpoint = endpoint + '/' + args.InvoiceID;
-					delete args.InvoiceID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.put<HistoryResponse>(endpoint, args.HistoryNote);
-			}
-		},
+		history: this.generateHistoryEndpoint('invoices', 'InvoiceID'),
 		email: {
 			create: async (args: { InvoiceID: string }): Promise<void> => {
 				let endpoint = 'invoices';
@@ -567,19 +511,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.get<RepeatingInvoicesResponse>(endpoint, headers);
 		},
 		attachments: this.generateAttachmentsEndpoint('repeatinginvoices'),
-		history: {
-			get: async (args: { RepeatingInvoiceID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'repeatinginvoices';
-				if (args && args.RepeatingInvoiceID) {
-					endpoint = endpoint + '/' + args.RepeatingInvoiceID;
-					delete args.RepeatingInvoiceID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('repeatinginvoices', 'RepeatingInvoiceID')
 	};
 
 	public items = {
@@ -614,19 +546,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			const endpoint = 'items' + '/' + args.ItemID;
 			return this.oauth1Client.delete<ItemsResponse>(endpoint);
 		},
-		history: {
-			get: async (args: { ItemID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'items';
-				if (args && args.ItemID) {
-					endpoint = endpoint + '/' + args.ItemID;
-					delete args.ItemID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('items', 'ItemID')
 	};
 
 	public journals = {
@@ -743,19 +663,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.oauth1Client.put<OverpaymentsResponse>(endpoint, body);
 			}
 		},
-		history: {
-			get: async (args: { OverpaymentID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'overpayments';
-				if (args && args.OverpaymentID) {
-					endpoint = endpoint + '/' + args.OverpaymentID;
-					delete args.OverpaymentID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('overpayments', 'OverpaymentID')
 	};
 
 	public payments = {
@@ -784,19 +692,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 
 			return this.oauth1Client.post<PaymentsResponse>(endpoint, payments);
 		},
-		history: {
-			get: async (args: { PaymentID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'payments';
-				if (args && args.PaymentID) {
-					endpoint = endpoint + '/' + args.PaymentID;
-					delete args.PaymentID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('payments', 'PaymentID')
 	};
 
 	public paymentServices = {
@@ -830,19 +726,8 @@ export class AccountingAPIClient extends BaseAPIClient {
 			}
 		},
 		attachments: this.generateAttachmentsEndpoint('prepayments'),
-		history: {
-			get: async (args: { PrepaymentID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'prepayments';
-				if (args && args.PrepaymentID) {
-					endpoint = endpoint + '/' + args.PrepaymentID;
-					delete args.PrepaymentID;
-				}
+		history: this.generateHistoryEndpoint('prepayments', 'PrepaymentID')
 
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
 	};
 
 	public purchaseOrders = {
@@ -889,19 +774,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			endpoint += generateQueryString(args, true);
 			return this.oauth1Client.post<PurchaseOrdersResponse>(endpoint, purchaseOrders);
 		},
-		history: {
-			get: async (args: { PurchaseOrderID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'purchaseorders';
-				if (args && args.PurchaseOrderID) {
-					endpoint = endpoint + '/' + args.PurchaseOrderID;
-					delete args.PurchaseOrderID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('purchaseorders', 'PurchaseOrderID')
 	};
 
 	public receipts = {
@@ -929,19 +802,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.post<ReceiptsResponse>(endpoint, receipts);
 		},
 		attachments: this.generateAttachmentsEndpoint('receipts'),
-		history: {
-			get: async (args: { ReceiptID: string }): Promise<HistoryResponse> => {
-				let endpoint = 'receipts';
-				if (args && args.ReceiptID) {
-					endpoint = endpoint + '/' + args.ReceiptID;
-					delete args.ReceiptID;
-				}
-
-				endpoint += '/history';
-
-				return this.oauth1Client.get<HistoryResponse>(endpoint);
-			}
-		},
+		history: this.generateHistoryEndpoint('receipts', 'ReceiptID')
 	};
 
 	public reports = {
@@ -1050,4 +911,6 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.get<UsersResponse>(endpoint, headers);
 		}
 	};
+
+
 }
