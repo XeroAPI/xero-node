@@ -214,6 +214,10 @@ describe('AccountingAPI endpoints', () => {
 			{ action: 'update', expectedPath: `payments?summarizeErrors=false` },
 			{ action: 'update', expectedPath: `payments/${guid1}?summarizeErrors=true`, args: { PaymentID: guid1, summarizeErrors: true } },
 		],
+		paymentServices: [
+			{ action: 'get', expectedPath: 'paymentservices' },
+			{ action: 'create', expectedPath: 'paymentservices?summarizeErrors=false' }
+		],
 		prepayments: [
 			{ action: 'get', expectedPath: 'prepayments' },
 			{ action: 'get', expectedPath: `prepayments/${guid1}`, args: { PrepaymentID: guid1 } },

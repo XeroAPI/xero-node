@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
-import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
-import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OnlineInvoicesResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
+import { Allocation, BankTransaction, BankTransfer, Contact, ContactGroup, CreditNote, Currency, Employee, ExpenseClaim, Invoice, Item, LinkedTransaction, ManualJournal, Payment, PaymentService, PurchaseOrder, Receipt, TaxRate, TrackingCategory, TrackingOption } from './AccountingAPI-models';
+import { AccountsResponse, AllocationsResponse, AttachmentsResponse, BankTransactionsResponse, BankTransfersResponse, BrandingThemesResponse, ContactGroupsResponse, ContactsResponse, CreditNotesResponse, CurrenciesResponse, EmployeesResponse, ExpenseClaimsResponse, HistoryResponse, InvoiceRemindersResponse, InvoicesResponse, ItemsResponse, JournalsResponse, LinkedTransactionsResponse, ManualJournalsResponse, OnlineInvoicesResponse, OrganisationResponse, OverpaymentsResponse, PaymentsResponse, PaymentServicesResponse, PrepaymentsResponse, PurchaseOrdersResponse, ReceiptsResponse, RepeatingInvoicesResponse, ReportsResponse, TaxRatesResponse, TrackingCategoriesResponse, UsersResponse } from './AccountingAPI-responses';
 import { BaseAPIClient, XeroClientConfiguration } from './internals/BaseAPIClient';
 import { AccessToken, IOAuth1HttpClient } from './internals/OAuth1HttpClient';
 import { escapeString, generateQueryString } from './internals/utils';
@@ -786,6 +786,16 @@ export class AccountingAPIClient extends BaseAPIClient {
 				return this.oauth1Client.get<HistoryResponse>(endpoint);
 			}
 		},
+	};
+
+	public paymentServices = {
+		get: async (): Promise<PaymentServicesResponse> => {
+			return this.oauth1Client.get<PaymentServicesResponse>('paymentservices');
+		},
+		create: async (paymentService?: PaymentService, args?: { summarizeErrors?: boolean }): Promise<PaymentServicesResponse> => {
+			const endpoint = 'paymentservices' + generateQueryString(args, true);
+			return this.oauth1Client.put<PaymentServicesResponse>(endpoint, paymentService);
+		}
 	};
 
 	public prepayments = {

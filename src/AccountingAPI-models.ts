@@ -1,4 +1,4 @@
-﻿﻿export interface Attachment {
+﻿export interface Attachment {
 	AttachmentID: string;
 	FileName: string;
 	Url: string;
@@ -94,6 +94,14 @@ export interface Payment {
 	History?: HistoryRecord[];
 }
 
+export interface PaymentService {
+	PaymentServiceID?: string;
+	PaymentServiceName?: string;
+	PaymentServiceUrl?: string;
+	PayNowText?: string;
+	PaymentServiceType?: string;
+}
+
 export interface BrandingTheme {
 	BrandingThemeID: string;
 	Name: string;
@@ -144,7 +152,7 @@ export interface Prepayment {
 }
 
 export interface Allocation {
-	Amount?: number;
+	AppliedAmount?: number;
 	Date?: string;
 	Invoice?: Invoice;
 }
@@ -183,7 +191,6 @@ export interface Invoice {
 	CreditNotes?: CreditNote[];
 	Overpayments?: Overpayment[];
 	CISDeduction?: number;
-	BrandingThemeID?: string;
 	AmountDue?: number;
 	AmountPaid?: number;
 	AmountCredited?: number;
@@ -204,7 +211,6 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
-	CurrencyRate?: number;
 	History?: HistoryRecord[];
 }
 
@@ -243,13 +249,12 @@ export interface HistoryRecord {
 	Changes?: string;
 	DateUTCString?: string;
 	DateUTC?: string;
-	User?: string;
-	Details?: string;
+	User?: String;
+	Details?: String;
 }
 
 export interface Contact {
 	ContactID?: string;
-	ContactNumber?: string;
 	ContactStatus?: string;
 	Name?: string;
 	FirstName?: string;
@@ -338,7 +343,6 @@ export interface LineItem {
 	Tracking?: Tracking[];
 	Quantity?: number;
 	LineItemID?: string;
-	ItemCode?: string;
 }
 export interface ManualJournal {
 	ManualJournalID?: string;
