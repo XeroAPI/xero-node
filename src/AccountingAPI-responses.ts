@@ -202,17 +202,3 @@ export interface PaginatedResponse extends AccountingAPIResponse {
 		itemCount: number
 	};
 }
-
-/** @private */
-export interface ProjectsResponse extends PaginatedResponse {
-	items: Project[];
-}
-
-/** @private */
-export interface ProjectResponse extends AccountingAPIResponse {
-	contactId?: string;
-	name?: string;
-	deadlineUtc?: string;
-	estimateAmount?: number;
-	status?: string;
-}
