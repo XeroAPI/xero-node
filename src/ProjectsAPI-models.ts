@@ -1,54 +1,26 @@
+interface CurrencyAmount {
+	currency: string;
+	value: number;
+}
+
 export interface Project {
 	projectId?: string;
 	contactId?: string;
 	name?: string;
 	currencyCode?: string;
 	minutesLogged?: number;
-	totalTaskAmount?: {
-		currency: string,
-		value: number
-	};
-	totalExpenseAmount?: {
-		currency: string,
-		value: number
-	};
+	totalTaskAmount?: CurrencyAmount;
+	totalExpenseAmount?: CurrencyAmount;
 	minutesToBeInvoiced?: number;
-	taskAmountToBeInvoiced?: {
-		currency: string,
-		value: number
-	};
-	taskAmountInvoiced?: {
-		currency: string,
-		value: number
-	};
-	expenseAmountToBeInvoiced?: {
-		currency: string,
-		value: number
-	};
-	expenseAmountInvoiced?: {
-		currency: string,
-		value: number
-	};
-	deposit?: {
-		currency: string,
-		value: number
-	};
-	depositApplied?: {
-		currency: string,
-		value: number
-	};
+	taskAmountToBeInvoiced?: CurrencyAmount;
+	taskAmountInvoiced?: CurrencyAmount;
+	expenseAmountToBeInvoiced?: CurrencyAmount;
+	expenseAmountInvoiced?: CurrencyAmount;
+	deposit?: CurrencyAmount;
+	depositApplied?: CurrencyAmount;
 	deadlineUTC?: string;
-	totalInvoiced?: {
-		currency: string,
-		value: number
-	};
-	totalToBeInvoiced?: {
-		currency: string,
-		value: number
-	};
-	estimate?: {
-		currency: string,
-		value: number
-	};
-	status?: string;
+	totalInvoiced?: CurrencyAmount;
+	totalToBeInvoiced?: CurrencyAmount;
+	estimate?: CurrencyAmount;
+	status?: 'INPROGRESS' | 'CLOSED';
 }

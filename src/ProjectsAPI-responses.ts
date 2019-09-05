@@ -14,12 +14,3 @@ export interface PaginatedResponse {
 export interface ProjectsResponse extends PaginatedResponse {
 	items: Project[];
 }
-
-/** @private */
-export interface ProjectResponse {
-	contactId?: string;
-	name?: string;
-	deadlineUtc?: string;
-	estimateAmount?: number;
-	status?: string;
-}

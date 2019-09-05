@@ -7,8 +7,6 @@ import { ProjectsAPIClient } from '../ProjectsAPIClient';
 import { IEndPointDetails, IFixture } from './helpers/IFixture';
 
 describe('ProjectsAPI endpoints', () => {
-	// const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
-	// const guid2 = '857c9e3f-640a-4df2-99fd-dd0e52a785e7';
 
 	const xeroConfig: XeroClientConfiguration = {
 		appType: 'private',
