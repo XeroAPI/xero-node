@@ -2,7 +2,7 @@ import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers'
 import { ProjectsAPIClient } from '../ProjectsAPIClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 
-describe('/projects', () => {
+describe.skip('/projects', () => {
 	const DEFAULT_PAGE_SIZE = 50;
 
 	let xero: ProjectsAPIClient;
