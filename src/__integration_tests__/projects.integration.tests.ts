@@ -3,6 +3,8 @@ import { ProjectsAPIClient } from '../ProjectsAPIClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 
 describe('/projects', () => {
+	const DEFAULT_PAGE_SIZE = 50;
+
 	let xero: ProjectsAPIClient;
 	let contactId: string;
 	let existingId: string;
@@ -38,7 +40,7 @@ describe('/projects', () => {
 		expect(response).toBeDefined();
 		expect(response.items).toBeTruthy();
 		expect(response.items.length).toBeGreaterThan(0);
-		if (response.items.length < 50) { // default page size
+		if (response.items.length < DEFAULT_PAGE_SIZE) {
 			expect(response.items.map((project) => project.projectId)).toContain(existingId);
 		}
 	});
@@ -49,7 +51,7 @@ describe('/projects', () => {
 		expect(response).toBeDefined();
 		expect(response.items).toBeTruthy();
 		expect(response.items.length).toBeGreaterThan(0);
-		if (response.items.length < 50) { // default page size
+		if (response.items.length < DEFAULT_PAGE_SIZE) {
 			expect(response.items.map((project) => project.projectId)).toContain(existingId);
 		}
 	});

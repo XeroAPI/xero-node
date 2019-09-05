@@ -4,6 +4,11 @@ import { ProjectsResponse } from './ProjectsAPI-responses';
 import { Project } from './ProjectsAPI-models';
 import { generateQueryString } from './internals/utils';
 
+export interface PagingArgs {
+	page?: number;
+	pageSize?: number;
+}
+
 export class ProjectsAPIClient extends BaseAPIClient {
 
 	public constructor(options: XeroClientConfiguration, authState?: AccessToken, _oAuth1HttpClient?: IOAuth1HttpClient) {
@@ -11,7 +16,7 @@ export class ProjectsAPIClient extends BaseAPIClient {
 	}
 
 	public projects = {
-		get: async (args?: { projectIds?: string[], contactID?: string, states?: string }): Promise<ProjectsResponse> => {
+		get: async (args?: { projectIds?: string[], contactID?: string, states?: string } & PagingArgs): Promise<ProjectsResponse> => {
 			let endpoint = 'projects';
 			endpoint += generateQueryString(args);
 

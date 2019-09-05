@@ -192,13 +192,3 @@ export interface TrackingCategoriesResponse extends AccountingAPIResponse {
 export interface UsersResponse extends AccountingAPIResponse {
 	Users: User[];
 }
-
-/** @private */
-export interface PaginatedResponse extends AccountingAPIResponse {
-	pagination?: {
-		page: number,
-		pageSize: number,
-		pageCount: number,
-		itemCount: number
-	};
-}
