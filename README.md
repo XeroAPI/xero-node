@@ -222,11 +222,12 @@ The Prepayments and Overpayments tests require Pre/Overpayments to be present in
 5. Writing the SDK in Typescript allows us to provide TS types for the API's contracts, and it's what we use internally at Xero. This also enables generated docs.
 
 ## Maintainers
-@philals @iamam34 @bryanlloydtee @dannyvincent @dupski
+@iamam34 @kodyoconnell @bryanlloydtee @dannyvincent
 
-Relase:
+Release:
 
 ```
+npm login
 npm version major|minor|patch
 npm publish
 git push origin master --tags
