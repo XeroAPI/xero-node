@@ -418,6 +418,32 @@ export class OAuth1HttpClient implements IOAuth1HttpClient {
 		});
 	}
 
+	public patch = async <T>(endpoint: string, body: object, customHeaders?: { [key: string]: string }): Promise<T> => {
+		this.resetToDefaultHeaders();
+		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
+		this.assertAccessTokenIsSet();
+		return new Promise<T>((resolve, reject) => {
+			this.oauthLib.patch(
+				this.config.apiBaseUrl + this.config.apiBasePath + endpoint, // url
+				this._state.oauth_token,
+				this._state.oauth_token_secret,
+				JSON.stringify(body), 		// Had to do this not sure if there is another way
+				'application/json',
+				(err: any, data: string, httpResponse: any) => {
+					// data is the body of the response
+
+					if (err) {
+						reject(err.statusCode ? new XeroError(err.statusCode, err.data, httpResponse ? httpResponse.headers : null) : err);
+					} else {
+						const toReturn = JSON.parse(data) as T;
+						return resolve(toReturn);
+					}
+				}
+			);
+
+		});
+	}
+
 	public delete = async <T>(endpoint: string, customHeaders?: { [key: string]: string }): Promise<T> => {
 		this.resetToDefaultHeaders();
 		this.oauthLib._headers = { ...this._defaultHeaders, ...customHeaders };
