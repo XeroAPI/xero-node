@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run lint && tsc",
     "build-watch": "tsc --watch",
-    "build-docs": "typedoc --options ./typedoc.js ./src",
+    "build-docs": "typedoc --options ./typedoc.config.js ./src",
     "lint": "tslint ./src/**/*.ts",
     "prepublishOnly": "npm run build",
     "test-watch": "tsc --noEmit && jest --config ./jestconfig.js --watch",
@@ -20,7 +20,8 @@
   "license": "MIT",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "oauth": "^0.9.15"
+    "oauth": "^0.9.15",
+    "typedoc": "^0.15.0"
   },
   "devDependencies": {
     "@types/es6-promise": "3.3.0",
@@ -37,7 +38,6 @@
     "ts-jest": "^24.0.2",
     "ts-node": "4.1.0",
     "tslint": "5.16.0",
-    "typedoc": "^0.15.0",
     "typescript": "3.5.3"
   }
 }

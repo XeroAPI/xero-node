@@ -226,9 +226,23 @@ The Prepayments and Overpayments tests require Pre/Overpayments to be present in
 
 Release:
 
-```
+```sh
+git checkout master
+git pull
 npm login
 npm version major|minor|patch
 npm publish
 git push origin master --tags
+```
+
+Regenerate docs:
+```sh
+git checkout master
+git pull
+npm run build-docs
+# copy docs/ directory to clipboard
+git checkout gh-pages
+# paste and rename to v3/
+git commit -am "regenerated typedoc for vX.X.X"
+git push origin gh-pages
 ```
