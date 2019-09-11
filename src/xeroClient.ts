@@ -9,7 +9,30 @@ export class XeroClient {
     readonly accountingApi: xero.AccountingApi;
 
     private openIdClient: any; // from openid-client
-    private tokenSet: { id_token: string, access_token: string, refresh_token: string, claims: object }; // from openid-client
+    private tokenSet: {
+        id_token: string,
+        access_token: string,
+        refresh_token: string,
+        claims(): {
+            amr: string[],
+            at_hash: string,
+            aud: string,
+            auth_time: number,
+            email: string,
+            exp: number,
+            family_name: string,
+            given_name: string,
+            global_session_id: string,
+            iat: number,
+            idp: string,
+            iss: string,
+            nbf: number,
+            preferred_username: string,
+            sid: string,
+            sub: string,
+            xero_userid: string,
+        }
+    }; // from openid-client
 
     private _tenantIds: string[];
     get tenantIds(): string[] {
@@ -28,7 +51,7 @@ export class XeroClient {
             redirect_uris: this.config.redirectUris,
         });
         this.openIdClient.CLOCK_TOLERANCE = 5; // to allow a 5 second skew in the openid-client validations
-      
+
 
         const url = this.openIdClient.authorizationUrl({
             redirect_uri: this.config.redirectUris[0],
@@ -38,15 +61,22 @@ export class XeroClient {
         return url;
     }
 
-    async setAccessTokenFromRedirectUri(urlQuery: string) {
-        this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], urlQuery);
+    async setAccessTokenFromRedirectUri(url: string) {
+        // get query params as object
+        const urlObject = new URL(url);
+        let params: { [key: string]: string } = {};
+        for (const [key, value] of urlObject.searchParams) {
+            params[key] = value;
+        }
+
+        this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params);
         this.setAccessTokenForAllApis();
 
         await this.fetchConnectedTenantIds();
     }
 
     async readIdTokenClaims() {
-        return this.tokenSet.claims;
+        return this.tokenSet.claims();
     }
 
     async refreshToken() {
@@ -56,7 +86,7 @@ export class XeroClient {
         }
         this.tokenSet = await this.openIdClient.refresh(this.tokenSet.refresh_token);
         this.setAccessTokenForAllApis();
-        
+
         await this.fetchConnectedTenantIds();
     }
 
