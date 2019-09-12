@@ -1,11 +1,17 @@
 import { Issuer } from 'openid-client';
-import * as xero from './gen/api';
-//import xero = require('./gen/api');
 import request = require('request');
 import http = require('http');
 
-export class XeroClient {
+import * as xero from './gen/api';
 
+export interface IXeroClientConfig { 
+    clientId: string, 
+    clientSecret: string, 
+    redirectUris: string[], 
+    scopes: string[],
+}
+
+export class XeroClient {
     readonly accountingApi: xero.AccountingApi;
 
     private openIdClient: any; // from openid-client
@@ -39,7 +45,7 @@ export class XeroClient {
         return this._tenantIds;
     }
 
-    constructor(private readonly config: { clientId: string, clientSecret: string, redirectUris: string[], scopes: string[] }) {
+    constructor(private readonly config: IXeroClientConfig) {
         this.accountingApi = new xero.AccountingApi(); // need to set access token before use
     }
 
@@ -92,7 +98,7 @@ export class XeroClient {
 
     private setAccessTokenForAllApis() {
         const accessToken = this.tokenSet.access_token;
-        this.accountingApi.accessToken = accessToken;
+        this.accountingApi.accessToken = accessToken;        
         // this.payrollApi.accessToken = accessToken;
         // etc.
     }
