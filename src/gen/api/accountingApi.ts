@@ -12,6 +12,7 @@
 
 import localVarRequest = require('request');
 import http = require('http');
+import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
 import { Account } from '../model/account';
@@ -191,7 +192,7 @@ export class AccountingApi {
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */
-    public async createAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+    public async createAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -230,8 +231,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -246,6 +245,24 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
+
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
