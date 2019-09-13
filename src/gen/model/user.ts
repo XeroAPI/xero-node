@@ -92,6 +92,7 @@ export namespace User {
         STANDARD = <any> 'STANDARD',
         FINANCIALADVISER = <any> 'FINANCIALADVISER',
         MANAGEDCLIENT = <any> 'MANAGEDCLIENT',
-        CASHBOOKCLIENT = <any> 'CASHBOOKCLIENT'
+        CASHBOOKCLIENT = <any> 'CASHBOOKCLIENT',
+        UNKNOWN = <any> 'UNKNOWN'
     }
 }

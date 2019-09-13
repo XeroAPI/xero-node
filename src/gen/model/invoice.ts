@@ -78,6 +78,10 @@ export class Invoice {
     */
     'plannedPaymentDate'?: string;
     /**
+    * CIS deduction for UK contractors
+    */
+    'cISDeduction'?: number;
+    /**
     * Total of invoice excluding taxes
     */
     'subTotal'?: number;
@@ -240,6 +244,11 @@ export class Invoice {
             "name": "plannedPaymentDate",
             "baseName": "PlannedPaymentDate",
             "type": "string"
+        },
+        {
+            "name": "cISDeduction",
+            "baseName": "CISDeduction",
+            "type": "number"
         },
         {
             "name": "subTotal",

@@ -153,6 +153,7 @@ export namespace TaxRate {
         CAPITALEXPENSESINPUT = <any> 'CAPITALEXPENSESINPUT',
         MOSSSALES = <any> 'MOSSSALES',
         NONE = <any> 'NONE',
-        GSTONIMPORTS = <any> 'GSTONIMPORTS'
+        GSTONIMPORTS = <any> 'GSTONIMPORTS',
+        AVALARA = <any> 'AVALARA'
     }
 }

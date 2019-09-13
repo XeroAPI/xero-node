@@ -19,6 +19,7 @@ import { Account } from '../model/account';
 import { Accounts } from '../model/accounts';
 import { Allocations } from '../model/allocations';
 import { Attachments } from '../model/attachments';
+import { BankTransaction } from '../model/bankTransaction';
 import { BankTransactions } from '../model/bankTransactions';
 import { BankTransfers } from '../model/bankTransfers';
 import { BatchPayments } from '../model/batchPayments';
@@ -28,14 +29,18 @@ import { CISSettings } from '../model/cISSettings';
 import { Contact } from '../model/contact';
 import { ContactGroups } from '../model/contactGroups';
 import { Contacts } from '../model/contacts';
+import { CreditNote } from '../model/creditNote';
 import { CreditNotes } from '../model/creditNotes';
 import { Currencies } from '../model/currencies';
 import { Currency } from '../model/currency';
+import { Employee } from '../model/employee';
 import { Employees } from '../model/employees';
 import { ExpenseClaims } from '../model/expenseClaims';
 import { HistoryRecords } from '../model/historyRecords';
+import { Invoice } from '../model/invoice';
 import { InvoiceReminders } from '../model/invoiceReminders';
 import { Invoices } from '../model/invoices';
+import { Item } from '../model/item';
 import { Items } from '../model/items';
 import { Journals } from '../model/journals';
 import { LinkedTransactions } from '../model/linkedTransactions';
@@ -47,6 +52,7 @@ import { PaymentService } from '../model/paymentService';
 import { PaymentServices } from '../model/paymentServices';
 import { Payments } from '../model/payments';
 import { Prepayments } from '../model/prepayments';
+import { PurchaseOrder } from '../model/purchaseOrder';
 import { PurchaseOrders } from '../model/purchaseOrders';
 import { Receipts } from '../model/receipts';
 import { RepeatingInvoices } from '../model/repeatingInvoices';
@@ -124,7 +130,7 @@ export class AccountingApi {
      * @summary Allows you to create a new chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
      * @param account Request of type Account
-     */
+     */     
     public async createAccount (xeroTenantId: string, account: Account, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts';
         let localVarQueryParameters: any = {};
@@ -191,7 +197,7 @@ export class AccountingApi {
      * @param accountID Unique identifier for Account object
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
-     */
+     */     
     public async createAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
@@ -262,7 +268,6 @@ export class AccountingApi {
             });
         }).then((fileContents) => {
             localVarRequestOptions.body = fileContents;
-
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -283,10 +288,9 @@ export class AccountingApi {
      * 
      * @summary Allows you to create a spend or receive money transaction
      * @param xeroTenantId Xero identifier for Tenant
-     * @param bankTransactions 
-     * @param summarizeErrors response format that shows validation errors for each bank transaction
-     */
-    public async createBankTransaction (xeroTenantId: string, bankTransactions: BankTransactions, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransactions;  }> {
+     * @param bankTransaction 
+     */     
+    public async createBankTransaction (xeroTenantId: string, bankTransaction: BankTransaction, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -297,13 +301,9 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createBankTransaction.');
         }
 
-        // verify required parameter 'bankTransactions' is not null or undefined
-        if (bankTransactions === null || bankTransactions === undefined) {
-            throw new Error('Required parameter bankTransactions was null or undefined when calling createBankTransaction.');
-        }
-
-        if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        // verify required parameter 'bankTransaction' is not null or undefined
+        if (bankTransaction === null || bankTransaction === undefined) {
+            throw new Error('Required parameter bankTransaction was null or undefined when calling createBankTransaction.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -318,7 +318,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
+            body: ObjectSerializer.serialize(bankTransaction, "BankTransaction")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -356,8 +356,8 @@ export class AccountingApi {
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param fileName The name of the file being attached
      * @param body Byte array of file in body of request
-     */
-    public async createBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async createBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{FileName}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -396,8 +396,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -412,6 +410,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -434,7 +449,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param historyRecords 
-     */
+     */     
     public async createBankTransactionHistoryRecord (xeroTenantId: string, bankTransactionID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/History'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -502,10 +517,80 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to create a spend or receive money transaction
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param bankTransactions 
+     * @param summarizeErrors response format that shows validation errors for each bank transaction
+     */     
+    public async createBankTransactions (xeroTenantId: string, bankTransactions: BankTransactions, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransactions;  }> {
+        const localVarPath = this.basePath + '/BankTransactions#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createBankTransactions.');
+        }
+
+        // verify required parameter 'bankTransactions' is not null or undefined
+        if (bankTransactions === null || bankTransactions === undefined) {
+            throw new Error('Required parameter bankTransactions was null or undefined when calling createBankTransactions.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: BankTransactions;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "BankTransactions");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Allows you to create a bank transfers
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransfers 
-     */
+     */     
     public async createBankTransfer (xeroTenantId: string, bankTransfers: BankTransfers, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransfers;  }> {
         const localVarPath = this.basePath + '/BankTransfers';
         let localVarQueryParameters: any = {};
@@ -571,8 +656,8 @@ export class AccountingApi {
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param fileName The name of the file being attached to a Bank Transfer
      * @param body Byte array of file in body of request
-     */
-    public async createBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async createBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{FileName}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -611,8 +696,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -627,6 +710,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -648,7 +748,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param historyRecords 
-     */
+     */     
     public async createBankTransferHistoryRecord (xeroTenantId: string, bankTransferID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/History'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)));
@@ -719,7 +819,7 @@ export class AccountingApi {
      * @summary Create one or many BatchPayments for invoices
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPayments Request of type BatchPayments containing a Payments array with one or more Payment objects
-     */
+     */     
     public async createBatchPayment (xeroTenantId: string, batchPayments: BatchPayments, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BatchPayments;  }> {
         const localVarPath = this.basePath + '/BatchPayments';
         let localVarQueryParameters: any = {};
@@ -785,7 +885,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPaymentID Unique identifier for BatchPayment
      * @param historyRecords 
-     */
+     */     
     public async createBatchPaymentHistoryRecord (xeroTenantId: string, batchPaymentID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BatchPayments/{BatchPaymentID}/History'
             .replace('{' + 'BatchPaymentID' + '}', encodeURIComponent(String(batchPaymentID)));
@@ -857,7 +957,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param brandingThemeID Unique identifier for a Branding Theme
      * @param paymentService 
-     */
+     */     
     public async createBrandingThemePaymentServices (xeroTenantId: string, brandingThemeID: string, paymentService: PaymentService, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PaymentServices;  }> {
         const localVarPath = this.basePath + '/BrandingThemes/{BrandingThemeID}/PaymentServices'
             .replace('{' + 'BrandingThemeID' + '}', encodeURIComponent(String(brandingThemeID)));
@@ -927,7 +1027,7 @@ export class AccountingApi {
      * 
      * @param xeroTenantId Xero identifier for Tenant
      * @param contact 
-     */
+     */     
     public async createContact (xeroTenantId: string, contact: Contact, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts';
         let localVarQueryParameters: any = {};
@@ -993,8 +1093,8 @@ export class AccountingApi {
      * @param contactID Unique identifier for a Contact
      * @param fileName Name for the file you are attaching
      * @param body Byte array of file in body of request
-     */
-    public async createContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async createContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{FileName}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -1033,8 +1133,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1049,6 +1147,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -1070,7 +1185,7 @@ export class AccountingApi {
      * @summary Allows you to create a contact group
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroups an array of contact groups with names specified
-     */
+     */     
     public async createContactGroup (xeroTenantId: string, contactGroups: ContactGroups, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ContactGroups;  }> {
         const localVarPath = this.basePath + '/ContactGroups';
         let localVarQueryParameters: any = {};
@@ -1136,7 +1251,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
      * @param contacts an array of contacts with ContactID to be added to ContactGroup
-     */
+     */     
     public async createContactGroupContacts (xeroTenantId: string, contactGroupID: string, contacts: Contacts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}/Contacts'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)));
@@ -1208,7 +1323,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
      * @param historyRecords 
-     */
+     */     
     public async createContactHistory (xeroTenantId: string, contactID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/History'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -1276,29 +1391,23 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create a credit note
      * @param xeroTenantId Xero identifier for Tenant
-     * @param creditNotes an array of Credit Notes with a single CreditNote object.
-     * @param summarizeErrors shows validation errors for each credit note
-     */
-    public async createCreditNote (xeroTenantId: string, creditNotes: CreditNotes, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: CreditNotes;  }> {
-        const localVarPath = this.basePath + '/CreditNotes';
+     * @param contacts 
+     */     
+    public async createContacts (xeroTenantId: string, contacts: Contacts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Contacts;  }> {
+        const localVarPath = this.basePath + '/Contacts#bulk';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createCreditNote.');
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createContacts.');
         }
 
-        // verify required parameter 'creditNotes' is not null or undefined
-        if (creditNotes === null || creditNotes === undefined) {
-            throw new Error('Required parameter creditNotes was null or undefined when calling createCreditNote.');
-        }
-
-        if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        // verify required parameter 'contacts' is not null or undefined
+        if (contacts === null || contacts === undefined) {
+            throw new Error('Required parameter contacts was null or undefined when calling createContacts.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -1313,7 +1422,72 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
+            body: ObjectSerializer.serialize(contacts, "Contacts")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: Contacts;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Contacts");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to create a credit note
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param creditNote an array of Credit Notes with a single CreditNote object.
+     */     
+    public async createCreditNote (xeroTenantId: string, creditNote: CreditNote, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: CreditNotes;  }> {
+        const localVarPath = this.basePath + '/CreditNotes';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createCreditNote.');
+        }
+
+        // verify required parameter 'creditNote' is not null or undefined
+        if (creditNote === null || creditNote === undefined) {
+            throw new Error('Required parameter creditNote was null or undefined when calling createCreditNote.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(creditNote, "CreditNote")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1350,7 +1524,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param allocations an array of Allocations with single Allocation object defined.
-     */
+     */     
     public async createCreditNoteAllocation (xeroTenantId: string, creditNoteID: string, allocations: Allocations, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Allocations;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Allocations'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -1423,8 +1597,8 @@ export class AccountingApi {
      * @param creditNoteID Unique identifier for a Credit Note
      * @param fileName Name of the file you are attaching to Credit Note
      * @param body Byte array of file in body of request
-     */
-    public async createCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async createCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -1463,8 +1637,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1479,6 +1651,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -1501,7 +1690,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param historyRecords 
-     */
+     */     
     public async createCreditNoteHistory (xeroTenantId: string, creditNoteID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/History'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -1569,9 +1758,79 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to create a credit note
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param creditNotes an array of Credit Notes with a single CreditNote object.
+     * @param summarizeErrors shows validation errors for each credit note
+     */     
+    public async createCreditNotes (xeroTenantId: string, creditNotes: CreditNotes, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: CreditNotes;  }> {
+        const localVarPath = this.basePath + '/CreditNotes#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createCreditNotes.');
+        }
+
+        // verify required parameter 'creditNotes' is not null or undefined
+        if (creditNotes === null || creditNotes === undefined) {
+            throw new Error('Required parameter creditNotes was null or undefined when calling createCreditNotes.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: CreditNotes;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "CreditNotes");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @param xeroTenantId Xero identifier for Tenant
      * @param currency 
-     */
+     */     
     public async createCurrency (xeroTenantId: string, currency: Currency, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Currencies;  }> {
         const localVarPath = this.basePath + '/Currencies';
         let localVarQueryParameters: any = {};
@@ -1635,9 +1894,9 @@ export class AccountingApi {
      * 
      * @summary Allows you to create new employees used in Xero payrun
      * @param xeroTenantId Xero identifier for Tenant
-     * @param employees 
-     */
-    public async createEmployee (xeroTenantId: string, employees: Employees, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Employees;  }> {
+     * @param employee 
+     */     
+    public async createEmployee (xeroTenantId: string, employee: Employee, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -1648,9 +1907,74 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployee.');
         }
 
+        // verify required parameter 'employee' is not null or undefined
+        if (employee === null || employee === undefined) {
+            throw new Error('Required parameter employee was null or undefined when calling createEmployee.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(employee, "Employee")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: Employees;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Employees");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to create new employees used in Xero payrun
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param employees 
+     */     
+    public async createEmployees (xeroTenantId: string, employees: Employees, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Employees;  }> {
+        const localVarPath = this.basePath + '/Employees#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployees.');
+        }
+
         // verify required parameter 'employees' is not null or undefined
         if (employees === null || employees === undefined) {
-            throw new Error('Required parameter employees was null or undefined when calling createEmployee.');
+            throw new Error('Required parameter employees was null or undefined when calling createEmployees.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -1698,81 +2022,11 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to retrieve expense claims
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param expenseClaims 
-     * @param summarizeErrors shows validation errors for each expense claim
-     */
-    public async createExpenseClaim (xeroTenantId: string, expenseClaims: ExpenseClaims, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ExpenseClaims;  }> {
-        const localVarPath = this.basePath + '/ExpenseClaims';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createExpenseClaim.');
-        }
-
-        // verify required parameter 'expenseClaims' is not null or undefined
-        if (expenseClaims === null || expenseClaims === undefined) {
-            throw new Error('Required parameter expenseClaims was null or undefined when calling createExpenseClaim.');
-        }
-
-        if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.ClientResponse; body: ExpenseClaims;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "ExpenseClaims");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
      * @summary Allows you to create a history records of an ExpenseClaim
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaimID Unique identifier for a ExpenseClaim
      * @param historyRecords 
-     */
+     */     
     public async createExpenseClaimHistory (xeroTenantId: string, expenseClaimID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims/{ExpenseClaimID}/History'
             .replace('{' + 'ExpenseClaimID' + '}', encodeURIComponent(String(expenseClaimID)));
@@ -1840,29 +2094,24 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create any sales invoices or purchase bills
+     * @summary Allows you to retrieve expense claims
      * @param xeroTenantId Xero identifier for Tenant
-     * @param invoices 
-     * @param summarizeErrors shows validation errors for each invoice
-     */
-    public async createInvoice (xeroTenantId: string, invoices: Invoices, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Invoices;  }> {
-        const localVarPath = this.basePath + '/Invoices';
+     * @param expenseClaims 
+     */     
+    public async createExpenseClaims (xeroTenantId: string, expenseClaims: ExpenseClaims, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ExpenseClaims;  }> {
+        const localVarPath = this.basePath + '/ExpenseClaims';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createInvoice.');
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createExpenseClaims.');
         }
 
-        // verify required parameter 'invoices' is not null or undefined
-        if (invoices === null || invoices === undefined) {
-            throw new Error('Required parameter invoices was null or undefined when calling createInvoice.');
-        }
-
-        if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        // verify required parameter 'expenseClaims' is not null or undefined
+        if (expenseClaims === null || expenseClaims === undefined) {
+            throw new Error('Required parameter expenseClaims was null or undefined when calling createExpenseClaims.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -1877,7 +2126,72 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(invoices, "Invoices")
+            body: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: ExpenseClaims;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "ExpenseClaims");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to create any sales invoices or purchase bills
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param invoice 
+     */     
+    public async createInvoice (xeroTenantId: string, invoice: Invoice, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Invoices;  }> {
+        const localVarPath = this.basePath + '/Invoices';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createInvoice.');
+        }
+
+        // verify required parameter 'invoice' is not null or undefined
+        if (invoice === null || invoice === undefined) {
+            throw new Error('Required parameter invoice was null or undefined when calling createInvoice.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(invoice, "Invoice")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1915,8 +2229,8 @@ export class AccountingApi {
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the file you are attaching
      * @param body Byte array of file in body of request
-     */
-    public async createInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async createInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -1955,8 +2269,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1971,6 +2283,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -1993,7 +2322,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param historyRecords 
-     */
+     */     
     public async createInvoiceHistory (xeroTenantId: string, invoiceID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/History'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -2061,24 +2390,29 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create an item
+     * @summary Allows you to create any sales invoices or purchase bills
      * @param xeroTenantId Xero identifier for Tenant
-     * @param items 
-     */
-    public async createItem (xeroTenantId: string, items: Items, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Items;  }> {
-        const localVarPath = this.basePath + '/Items';
+     * @param invoices 
+     * @param summarizeErrors shows validation errors for each invoice
+     */     
+    public async createInvoices (xeroTenantId: string, invoices: Invoices, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Invoices;  }> {
+        const localVarPath = this.basePath + '/Invoices#bulk';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createItem.');
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createInvoices.');
         }
 
-        // verify required parameter 'items' is not null or undefined
-        if (items === null || items === undefined) {
-            throw new Error('Required parameter items was null or undefined when calling createItem.');
+        // verify required parameter 'invoices' is not null or undefined
+        if (invoices === null || invoices === undefined) {
+            throw new Error('Required parameter invoices was null or undefined when calling createInvoices.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2093,7 +2427,72 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(items, "Items")
+            body: ObjectSerializer.serialize(invoices, "Invoices")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: Invoices;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Invoices");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to create an item
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param item 
+     */     
+    public async createItem (xeroTenantId: string, item: Item, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Items;  }> {
+        const localVarPath = this.basePath + '/Items';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createItem.');
+        }
+
+        // verify required parameter 'item' is not null or undefined
+        if (item === null || item === undefined) {
+            throw new Error('Required parameter item was null or undefined when calling createItem.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(item, "Item")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2130,7 +2529,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
      * @param historyRecords 
-     */
+     */     
     public async createItemHistory (xeroTenantId: string, itemID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}/History'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -2198,10 +2597,75 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to create an item
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param items 
+     */     
+    public async createItems (xeroTenantId: string, items: Items, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Items;  }> {
+        const localVarPath = this.basePath + '/Items#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createItems.');
+        }
+
+        // verify required parameter 'items' is not null or undefined
+        if (items === null || items === undefined) {
+            throw new Error('Required parameter items was null or undefined when calling createItems.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(items, "Items")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: Items;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Items");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Allows you to create linked transactions (billable expenses)
      * @param xeroTenantId Xero identifier for Tenant
      * @param linkedTransactions 
-     */
+     */     
     public async createLinkedTransaction (xeroTenantId: string, linkedTransactions: LinkedTransactions, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions';
         let localVarQueryParameters: any = {};
@@ -2266,7 +2730,7 @@ export class AccountingApi {
      * @summary Allows you to create a manual journal
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournals 
-     */
+     */     
     public async createManualJournal (xeroTenantId: string, manualJournals: ManualJournals, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals';
         let localVarQueryParameters: any = {};
@@ -2333,8 +2797,8 @@ export class AccountingApi {
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param fileName The name of the file being attached to a ManualJournal
      * @param body Byte array of file in body of request
-     */
-    public async createManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async createManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{FileName}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -2373,8 +2837,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2389,6 +2851,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -2411,7 +2890,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
      * @param allocations 
-     */
+     */     
     public async createOverpaymentAllocation (xeroTenantId: string, overpaymentID: string, allocations: Allocations, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Allocations;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/Allocations'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
@@ -2483,7 +2962,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
      * @param historyRecords 
-     */
+     */     
     public async createOverpaymentHistory (xeroTenantId: string, overpaymentID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/History'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
@@ -2554,7 +3033,7 @@ export class AccountingApi {
      * @summary Allows you to create payments for invoices and credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param payments 
-     */
+     */     
     public async createPayment (xeroTenantId: string, payments: Payments, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments';
         let localVarQueryParameters: any = {};
@@ -2620,7 +3099,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentID Unique identifier for a Payment
      * @param historyRecords 
-     */
+     */     
     public async createPaymentHistory (xeroTenantId: string, paymentID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Payments/{PaymentID}/History'
             .replace('{' + 'PaymentID' + '}', encodeURIComponent(String(paymentID)));
@@ -2691,7 +3170,7 @@ export class AccountingApi {
      * @summary Allows you to create payment services
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentServices 
-     */
+     */     
     public async createPaymentService (xeroTenantId: string, paymentServices: PaymentServices, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PaymentServices;  }> {
         const localVarPath = this.basePath + '/PaymentServices';
         let localVarQueryParameters: any = {};
@@ -2757,7 +3236,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID 
      * @param allocations 
-     */
+     */     
     public async createPrepaymentAllocation (xeroTenantId: string, prepaymentID: string, allocations: Allocations, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Allocations;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}/Allocations'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)));
@@ -2829,7 +3308,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID Unique identifier for a PrePayment
      * @param historyRecords 
-     */
+     */     
     public async createPrepaymentHistory (xeroTenantId: string, prepaymentID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}/History'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)));
@@ -2899,10 +3378,9 @@ export class AccountingApi {
      * 
      * @summary Allows you to create purchase orders
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrders 
-     * @param summarizeErrors shows validation errors for each purchase order.
-     */
-    public async createPurchaseOrder (xeroTenantId: string, purchaseOrders: PurchaseOrders, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PurchaseOrders;  }> {
+     * @param purchaseOrder 
+     */     
+    public async createPurchaseOrder (xeroTenantId: string, purchaseOrder: PurchaseOrder, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -2913,13 +3391,9 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createPurchaseOrder.');
         }
 
-        // verify required parameter 'purchaseOrders' is not null or undefined
-        if (purchaseOrders === null || purchaseOrders === undefined) {
-            throw new Error('Required parameter purchaseOrders was null or undefined when calling createPurchaseOrder.');
-        }
-
-        if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        // verify required parameter 'purchaseOrder' is not null or undefined
+        if (purchaseOrder === null || purchaseOrder === undefined) {
+            throw new Error('Required parameter purchaseOrder was null or undefined when calling createPurchaseOrder.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2934,7 +3408,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
+            body: ObjectSerializer.serialize(purchaseOrder, "PurchaseOrder")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2971,7 +3445,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for a PurchaseOrder
      * @param historyRecords 
-     */
+     */     
     public async createPurchaseOrderHistory (xeroTenantId: string, purchaseOrderID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/History'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -3039,10 +3513,80 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to create purchase orders
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param purchaseOrders 
+     * @param summarizeErrors shows validation errors for each purchase order.
+     */     
+    public async createPurchaseOrders (xeroTenantId: string, purchaseOrders: PurchaseOrders, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PurchaseOrders;  }> {
+        const localVarPath = this.basePath + '/PurchaseOrders#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createPurchaseOrders.');
+        }
+
+        // verify required parameter 'purchaseOrders' is not null or undefined
+        if (purchaseOrders === null || purchaseOrders === undefined) {
+            throw new Error('Required parameter purchaseOrders was null or undefined when calling createPurchaseOrders.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: PurchaseOrders;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "PurchaseOrders");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Allows you to create draft expense claim receipts for any user
      * @param xeroTenantId Xero identifier for Tenant
      * @param receipts 
-     */
+     */     
     public async createReceipt (xeroTenantId: string, receipts: Receipts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts';
         let localVarQueryParameters: any = {};
@@ -3109,8 +3653,8 @@ export class AccountingApi {
      * @param receiptID Unique identifier for a Receipt
      * @param fileName The name of the file being attached to the Receipt
      * @param body Byte array of file in body of request
-     */
-    public async createReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async createReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{FileName}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -3149,8 +3693,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3165,6 +3707,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -3187,7 +3746,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
      * @param historyRecords 
-     */
+     */     
     public async createReceiptHistory (xeroTenantId: string, receiptID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/History'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -3260,8 +3819,8 @@ export class AccountingApi {
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param fileName The name of the file being attached to a Repeating Invoice
      * @param body Byte array of file in body of request
-     */
-    public async createRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async createRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -3300,8 +3859,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3316,6 +3873,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -3338,7 +3912,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param historyRecords 
-     */
+     */     
     public async createRepeatingInvoiceHistory (xeroTenantId: string, repeatingInvoiceID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/History'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -3409,7 +3983,7 @@ export class AccountingApi {
      * @summary Allows you to create Tax Rates
      * @param xeroTenantId Xero identifier for Tenant
      * @param taxRates 
-     */
+     */     
     public async createTaxRate (xeroTenantId: string, taxRates: TaxRates, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TaxRates;  }> {
         const localVarPath = this.basePath + '/TaxRates';
         let localVarQueryParameters: any = {};
@@ -3474,7 +4048,7 @@ export class AccountingApi {
      * @summary Allows you to create tracking categories
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategory 
-     */
+     */     
     public async createTrackingCategory (xeroTenantId: string, trackingCategory: TrackingCategory, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories';
         let localVarQueryParameters: any = {};
@@ -3540,7 +4114,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
      * @param trackingOption 
-     */
+     */     
     public async createTrackingOptions (xeroTenantId: string, trackingCategoryID: string, trackingOption: TrackingOption, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TrackingOptions;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}/Options'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)));
@@ -3611,7 +4185,7 @@ export class AccountingApi {
      * @summary Allows you to delete a chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for retrieving single object
-     */
+     */     
     public async deleteAccount (xeroTenantId: string, accountID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)));
@@ -3640,7 +4214,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3677,7 +4250,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
      * @param contactID Unique identifier for a Contact
-     */
+     */     
     public async deleteContactGroupContact (xeroTenantId: string, contactGroupID: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}/Contacts/{ContactID}'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)))
@@ -3712,7 +4285,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3747,7 +4319,7 @@ export class AccountingApi {
      * @summary Allows you to delete  all Contacts from a Contract Group
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
-     */
+     */     
     public async deleteContactGroupContacts (xeroTenantId: string, contactGroupID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}/Contacts'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)));
@@ -3776,7 +4348,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3811,7 +4382,7 @@ export class AccountingApi {
      * @summary Allows you to delete a specified item
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
-     */
+     */     
     public async deleteItem (xeroTenantId: string, itemID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -3840,7 +4411,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3875,7 +4445,7 @@ export class AccountingApi {
      * @summary Allows you to delete a specified linked transactions (billable expenses)
      * @param xeroTenantId Xero identifier for Tenant
      * @param linkedTransactionID Unique identifier for a LinkedTransaction
-     */
+     */     
     public async deleteLinkedTransaction (xeroTenantId: string, linkedTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions/{LinkedTransactionID}'
             .replace('{' + 'LinkedTransactionID' + '}', encodeURIComponent(String(linkedTransactionID)));
@@ -3904,7 +4474,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3940,7 +4509,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentID Unique identifier for a Payment
      * @param payments 
-     */
+     */     
     public async deletePayment (xeroTenantId: string, paymentID: string, payments: Payments, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments/{PaymentID}'
             .replace('{' + 'PaymentID' + '}', encodeURIComponent(String(paymentID)));
@@ -4011,7 +4580,7 @@ export class AccountingApi {
      * @summary Allows you to delete tracking categories
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
-     */
+     */     
     public async deleteTrackingCategory (xeroTenantId: string, trackingCategoryID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)));
@@ -4040,7 +4609,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4077,7 +4645,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
      * @param trackingOptionID Unique identifier for a Tracking Option
-     */
+     */     
     public async deleteTrackingOptions (xeroTenantId: string, trackingCategoryID: string, trackingOptionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TrackingOptions;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}/Options/{TrackingOptionID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)))
@@ -4112,7 +4680,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4149,7 +4716,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param requestEmpty 
-     */
+     */     
     public async emailInvoice (xeroTenantId: string, invoiceID: string, requestEmpty: RequestEmpty, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Email'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -4219,7 +4786,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a single chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for retrieving single object
-     */
+     */     
     public async getAccount (xeroTenantId: string, accountID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)));
@@ -4248,7 +4815,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4286,7 +4852,7 @@ export class AccountingApi {
      * @param accountID Unique identifier for Account object
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
@@ -4365,7 +4931,7 @@ export class AccountingApi {
      * @param accountID Unique identifier for Account object
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getAccountAttachmentById (xeroTenantId: string, accountID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{AttachmentID}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
@@ -4442,7 +5008,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve Attachments for accounts
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
-     */
+     */     
     public async getAccountAttachments (xeroTenantId: string, accountID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)));
@@ -4471,7 +5037,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4509,7 +5074,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getAccounts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts';
         let localVarQueryParameters: any = {};
@@ -4541,7 +5106,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4577,7 +5141,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a single spend or receive money transaction
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     */
+     */     
     public async getBankTransaction (xeroTenantId: string, bankTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -4606,7 +5170,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4644,7 +5207,7 @@ export class AccountingApi {
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param fileName The name of the file being attached
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{FileName}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
@@ -4723,7 +5286,7 @@ export class AccountingApi {
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param attachmentID Xero generated unique identifier for an attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getBankTransactionAttachmentById (xeroTenantId: string, bankTransactionID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{AttachmentID}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
@@ -4800,7 +5363,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve any attachments to bank transactions
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     */
+     */     
     public async getBankTransactionAttachments (xeroTenantId: string, bankTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -4829,7 +5392,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4869,7 +5431,7 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 bank transactions will be returned in a single API call with line items shown for each bank transaction
      * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
-     */
+     */     
     public async getBankTransactions (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions';
         let localVarQueryParameters: any = {};
@@ -4909,7 +5471,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4945,7 +5506,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve history from a bank transactions
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     */
+     */     
     public async getBankTransactionsHistory (xeroTenantId: string, bankTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/History'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -4974,7 +5535,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5010,7 +5570,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve any bank transfers
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     */
+     */     
     public async getBankTransfer (xeroTenantId: string, bankTransferID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransfers;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)));
@@ -5039,7 +5599,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5077,7 +5636,7 @@ export class AccountingApi {
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param fileName The name of the file being attached to a Bank Transfer
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{FileName}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
@@ -5156,7 +5715,7 @@ export class AccountingApi {
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param attachmentID Xero generated unique identifier for an Attachment to a bank transfer
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getBankTransferAttachmentById (xeroTenantId: string, bankTransferID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{AttachmentID}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
@@ -5233,7 +5792,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve Attachments from  bank transfers
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     */
+     */     
     public async getBankTransferAttachments (xeroTenantId: string, bankTransferID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)));
@@ -5262,7 +5821,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5298,7 +5856,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve history from a bank transfers
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     */
+     */     
     public async getBankTransferHistory (xeroTenantId: string, bankTransferID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/History'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)));
@@ -5327,7 +5885,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5365,7 +5922,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getBankTransfers (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransfers;  }> {
         const localVarPath = this.basePath + '/BankTransfers';
         let localVarQueryParameters: any = {};
@@ -5397,7 +5954,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5433,7 +5989,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve history from a Batch Payment
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPaymentID Unique identifier for BatchPayment
-     */
+     */     
     public async getBatchPaymentHistory (xeroTenantId: string, batchPaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BatchPayments/{BatchPaymentID}/History'
             .replace('{' + 'BatchPaymentID' + '}', encodeURIComponent(String(batchPaymentID)));
@@ -5462,7 +6018,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5500,7 +6055,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getBatchPayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BatchPayments;  }> {
         const localVarPath = this.basePath + '/BatchPayments';
         let localVarQueryParameters: any = {};
@@ -5532,7 +6087,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5568,7 +6122,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specific BrandingThemes
      * @param xeroTenantId Xero identifier for Tenant
      * @param brandingThemeID Unique identifier for a Branding Theme
-     */
+     */     
     public async getBrandingTheme (xeroTenantId: string, brandingThemeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BrandingThemes;  }> {
         const localVarPath = this.basePath + '/BrandingThemes/{BrandingThemeID}'
             .replace('{' + 'BrandingThemeID' + '}', encodeURIComponent(String(brandingThemeID)));
@@ -5597,7 +6151,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5633,7 +6186,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve the Payment services for a Branding Theme
      * @param xeroTenantId Xero identifier for Tenant
      * @param brandingThemeID Unique identifier for a Branding Theme
-     */
+     */     
     public async getBrandingThemePaymentServices (xeroTenantId: string, brandingThemeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PaymentServices;  }> {
         const localVarPath = this.basePath + '/BrandingThemes/{BrandingThemeID}/PaymentServices'
             .replace('{' + 'BrandingThemeID' + '}', encodeURIComponent(String(brandingThemeID)));
@@ -5662,7 +6215,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5697,7 +6249,7 @@ export class AccountingApi {
      * 
      * @summary Allows you to retrieve all the BrandingThemes
      * @param xeroTenantId Xero identifier for Tenant
-     */
+     */     
     public async getBrandingThemes (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BrandingThemes;  }> {
         const localVarPath = this.basePath + '/BrandingThemes';
         let localVarQueryParameters: any = {};
@@ -5720,7 +6272,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5756,7 +6307,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve, add and update contacts in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     */
+     */     
     public async getContact (xeroTenantId: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -5785,7 +6336,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5823,7 +6373,7 @@ export class AccountingApi {
      * @param contactID Unique identifier for a Contact
      * @param fileName Name for the file you are attaching
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{FileName}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
@@ -5902,7 +6452,7 @@ export class AccountingApi {
      * @param contactID Unique identifier for a Contact
      * @param attachmentID Unique identifier for a Attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getContactAttachmentById (xeroTenantId: string, contactID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{AttachmentID}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
@@ -5979,7 +6529,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve, add and update contacts in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     */
+     */     
     public async getContactAttachments (xeroTenantId: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -6008,7 +6558,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6044,7 +6593,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve CISSettings for a contact in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     */
+     */     
     public async getContactCISSettings (xeroTenantId: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: CISSettings;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/CISSettings'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -6073,7 +6622,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6109,7 +6657,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a unique Contract Group by ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
-     */
+     */     
     public async getContactGroup (xeroTenantId: string, contactGroupID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ContactGroups;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)));
@@ -6138,7 +6686,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6175,7 +6722,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getContactGroups (xeroTenantId: string, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ContactGroups;  }> {
         const localVarPath = this.basePath + '/ContactGroups';
         let localVarQueryParameters: any = {};
@@ -6206,7 +6753,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6242,7 +6788,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a history records of an Contact
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     */
+     */     
     public async getContactHistory (xeroTenantId: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/History'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -6271,7 +6817,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6312,8 +6857,8 @@ export class AccountingApi {
      * @param iDs Filter by a comma separated list of ContactIDs. Allows you to retrieve a specific set of contacts in a single call.
      * @param page e.g. page&#x3D;1 - Up to 100 contacts will be returned in a single API call.
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
-     */
-    public async getContacts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: string, page?: number, includeArchived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Contacts;  }> {
+     */     
+    public async getContacts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, page?: number, includeArchived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -6333,7 +6878,7 @@ export class AccountingApi {
         }
 
         if (iDs !== undefined) {
-            localVarQueryParameters['IDs'] = ObjectSerializer.serialize(iDs, "string");
+            localVarQueryParameters['IDs'] = ObjectSerializer.serialize(iDs, "Array<string>");
         }
 
         if (page !== undefined) {
@@ -6356,7 +6901,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6392,7 +6936,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specific credit note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     */
+     */     
     public async getCreditNote (xeroTenantId: string, creditNoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: CreditNotes;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -6421,7 +6965,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6458,7 +7001,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getCreditNoteAsPdf (xeroTenantId: string, creditNoteID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/pdf'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -6531,7 +7074,7 @@ export class AccountingApi {
      * @param creditNoteID Unique identifier for a Credit Note
      * @param fileName Name of the file you are attaching to Credit Note
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
@@ -6610,7 +7153,7 @@ export class AccountingApi {
      * @param creditNoteID Unique identifier for a Credit Note
      * @param attachmentID Unique identifier for a Attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getCreditNoteAttachmentById (xeroTenantId: string, creditNoteID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{AttachmentID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
@@ -6687,7 +7230,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve Attachments for credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     */
+     */     
     public async getCreditNoteAttachments (xeroTenantId: string, creditNoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -6716,7 +7259,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6752,7 +7294,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a history records of an CreditNote
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     */
+     */     
     public async getCreditNoteHistory (xeroTenantId: string, creditNoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/History'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -6781,7 +7323,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6820,7 +7361,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 credit notes will be returned in a single API call with line items shown for each credit note
-     */
+     */     
     public async getCreditNotes (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: CreditNotes;  }> {
         const localVarPath = this.basePath + '/CreditNotes';
         let localVarQueryParameters: any = {};
@@ -6856,7 +7397,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6893,7 +7433,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getCurrencies (xeroTenantId: string, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Currencies;  }> {
         const localVarPath = this.basePath + '/Currencies';
         let localVarQueryParameters: any = {};
@@ -6924,7 +7464,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6960,7 +7499,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specific employee used in Xero payrun
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Unique identifier for a Employee
-     */
+     */     
     public async getEmployee (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -6989,7 +7528,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7027,7 +7565,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getEmployees (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
@@ -7059,7 +7597,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7095,7 +7632,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified expense claim
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaimID Unique identifier for a ExpenseClaim
-     */
+     */     
     public async getExpenseClaim (xeroTenantId: string, expenseClaimID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ExpenseClaims;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims/{ExpenseClaimID}'
             .replace('{' + 'ExpenseClaimID' + '}', encodeURIComponent(String(expenseClaimID)));
@@ -7124,7 +7661,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7160,7 +7696,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a history records of an ExpenseClaim
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaimID Unique identifier for a ExpenseClaim
-     */
+     */     
     public async getExpenseClaimHistory (xeroTenantId: string, expenseClaimID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims/{ExpenseClaimID}/History'
             .replace('{' + 'ExpenseClaimID' + '}', encodeURIComponent(String(expenseClaimID)));
@@ -7189,7 +7725,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7227,7 +7762,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getExpenseClaims (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ExpenseClaims;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims';
         let localVarQueryParameters: any = {};
@@ -7259,7 +7794,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7295,7 +7829,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified sales invoice or purchase bill
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     */
+     */     
     public async getInvoice (xeroTenantId: string, invoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -7324,7 +7858,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7361,7 +7894,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getInvoiceAsPdf (xeroTenantId: string, invoiceID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/pdf'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -7434,7 +7967,7 @@ export class AccountingApi {
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the file you are attaching
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
@@ -7513,7 +8046,7 @@ export class AccountingApi {
      * @param invoiceID Unique identifier for an Invoice
      * @param attachmentID Unique identifier for an Attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getInvoiceAttachmentById (xeroTenantId: string, invoiceID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{AttachmentID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
@@ -7590,7 +8123,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve Attachments on invoices or purchase bills
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     */
+     */     
     public async getInvoiceAttachments (xeroTenantId: string, invoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -7619,7 +8152,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7655,7 +8187,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a history records of an invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     */
+     */     
     public async getInvoiceHistory (xeroTenantId: string, invoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/History'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -7684,7 +8216,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7719,7 +8250,7 @@ export class AccountingApi {
      * 
      * @summary Allows you to retrieve invoice reminder settings
      * @param xeroTenantId Xero identifier for Tenant
-     */
+     */     
     public async getInvoiceReminders (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: InvoiceReminders;  }> {
         const localVarPath = this.basePath + '/InvoiceReminders/Settings';
         let localVarQueryParameters: any = {};
@@ -7742,7 +8273,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7788,8 +8318,8 @@ export class AccountingApi {
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
      * @param createdByMyApp When set to true you\&#39;ll only retrieve Invoices created by your app
      * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
-     */
-    public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: string, invoiceNumbers?: string, contactIDs?: string, statuses?: string, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Invoices;  }> {
+     */     
+    public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -7809,19 +8339,19 @@ export class AccountingApi {
         }
 
         if (iDs !== undefined) {
-            localVarQueryParameters['IDs'] = ObjectSerializer.serialize(iDs, "string");
+            localVarQueryParameters['IDs'] = ObjectSerializer.serialize(iDs, "Array<string>");
         }
 
         if (invoiceNumbers !== undefined) {
-            localVarQueryParameters['InvoiceNumbers'] = ObjectSerializer.serialize(invoiceNumbers, "string");
+            localVarQueryParameters['InvoiceNumbers'] = ObjectSerializer.serialize(invoiceNumbers, "Array<string>");
         }
 
         if (contactIDs !== undefined) {
-            localVarQueryParameters['ContactIDs'] = ObjectSerializer.serialize(contactIDs, "string");
+            localVarQueryParameters['ContactIDs'] = ObjectSerializer.serialize(contactIDs, "Array<string>");
         }
 
         if (statuses !== undefined) {
-            localVarQueryParameters['Statuses'] = ObjectSerializer.serialize(statuses, "string");
+            localVarQueryParameters['Statuses'] = ObjectSerializer.serialize(statuses, "Array<string>");
         }
 
         if (page !== undefined) {
@@ -7852,7 +8382,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7888,7 +8417,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified item
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
-     */
+     */     
     public async getItem (xeroTenantId: string, itemID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Items;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -7917,7 +8446,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7953,7 +8481,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve history for items
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
-     */
+     */     
     public async getItemHistory (xeroTenantId: string, itemID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}/History'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -7982,7 +8510,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8021,7 +8548,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
-     */
+     */     
     public async getItems (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Items;  }> {
         const localVarPath = this.basePath + '/Items';
         let localVarQueryParameters: any = {};
@@ -8057,7 +8584,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8093,7 +8619,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified journals.
      * @param xeroTenantId Xero identifier for Tenant
      * @param journalID Unique identifier for a Journal
-     */
+     */     
     public async getJournal (xeroTenantId: string, journalID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Journals;  }> {
         const localVarPath = this.basePath + '/Journals/{JournalID}'
             .replace('{' + 'JournalID' + '}', encodeURIComponent(String(journalID)));
@@ -8122,7 +8648,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8160,7 +8685,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param offset Offset by a specified journal number. e.g. journals with a JournalNumber greater than the offset will be returned
      * @param paymentsOnly Filter to retrieve journals on a cash basis. Journals are returned on an accrual basis by default.
-     */
+     */     
     public async getJournals (xeroTenantId: string, ifModifiedSince?: Date, offset?: number, paymentsOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Journals;  }> {
         const localVarPath = this.basePath + '/Journals';
         let localVarQueryParameters: any = {};
@@ -8192,7 +8717,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8228,7 +8752,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified linked transactions (billable expenses)
      * @param xeroTenantId Xero identifier for Tenant
      * @param linkedTransactionID Unique identifier for a LinkedTransaction
-     */
+     */     
     public async getLinkedTransaction (xeroTenantId: string, linkedTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions/{LinkedTransactionID}'
             .replace('{' + 'LinkedTransactionID' + '}', encodeURIComponent(String(linkedTransactionID)));
@@ -8257,7 +8781,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8298,7 +8821,7 @@ export class AccountingApi {
      * @param contactID Filter by the ContactID. Get all the linked transactions that have been assigned to a particular customer.
      * @param status Filter by the combination of ContactID and Status. Get all the linked transactions that have been assigned to a particular customer and have a particular status e.g. GET /LinkedTransactions?ContactID&#x3D;4bb34b03-3378-4bb2-a0ed-6345abf3224e&amp;Status&#x3D;APPROVED.
      * @param targetTransactionID Filter by the TargetTransactionID. Get all the linked transactions allocated to a particular ACCREC invoice
-     */
+     */     
     public async getLinkedTransactions (xeroTenantId: string, page?: number, linkedTransactionID?: string, sourceTransactionID?: string, contactID?: string, status?: string, targetTransactionID?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions';
         let localVarQueryParameters: any = {};
@@ -8345,7 +8868,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8381,7 +8903,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified manual journals
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     */
+     */     
     public async getManualJournal (xeroTenantId: string, manualJournalID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)));
@@ -8410,7 +8932,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8448,7 +8969,7 @@ export class AccountingApi {
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param fileName The name of the file being attached to a ManualJournal
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{FileName}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
@@ -8527,7 +9048,7 @@ export class AccountingApi {
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param attachmentID Unique identifier for a Attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getManualJournalAttachmentById (xeroTenantId: string, manualJournalID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{AttachmentID}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
@@ -8604,7 +9125,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve Attachment for manual journals
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     */
+     */     
     public async getManualJournalAttachments (xeroTenantId: string, manualJournalID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)));
@@ -8633,7 +9154,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8672,7 +9192,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 manual journals will be returned in a single API call with line items shown for each overpayment
-     */
+     */     
     public async getManualJournals (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals';
         let localVarQueryParameters: any = {};
@@ -8708,7 +9228,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8744,7 +9263,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a URL to an online invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     */
+     */     
     public async getOnlineInvoice (xeroTenantId: string, invoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: OnlineInvoices;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/OnlineInvoice'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -8773,7 +9292,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8809,7 +9327,7 @@ export class AccountingApi {
      * @summary Allows you To verify if an organisation is using contruction industry scheme, you can retrieve the CIS settings for the organistaion.
      * @param xeroTenantId Xero identifier for Tenant
      * @param organisationID 
-     */
+     */     
     public async getOrganisationCISSettings (xeroTenantId: string, organisationID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: CISOrgSetting;  }> {
         const localVarPath = this.basePath + '/Organisation/{OrganisationID}/CISSettings'
             .replace('{' + 'OrganisationID' + '}', encodeURIComponent(String(organisationID)));
@@ -8838,7 +9356,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8873,7 +9390,7 @@ export class AccountingApi {
      * 
      * @summary Allows you to retrieve Organisation details
      * @param xeroTenantId Xero identifier for Tenant
-     */
+     */     
     public async getOrganisations (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Organisations;  }> {
         const localVarPath = this.basePath + '/Organisation';
         let localVarQueryParameters: any = {};
@@ -8896,7 +9413,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8932,7 +9448,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified overpayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
-     */
+     */     
     public async getOverpayment (xeroTenantId: string, overpaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Overpayments;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
@@ -8961,7 +9477,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8997,7 +9512,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a history records of an Overpayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
-     */
+     */     
     public async getOverpaymentHistory (xeroTenantId: string, overpaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/History'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
@@ -9026,7 +9541,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9066,7 +9580,7 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 overpayments will be returned in a single API call with line items shown for each overpayment
      * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
-     */
+     */     
     public async getOverpayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Overpayments;  }> {
         const localVarPath = this.basePath + '/Overpayments';
         let localVarQueryParameters: any = {};
@@ -9106,7 +9620,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9142,7 +9655,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified payment for invoices and credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentID Unique identifier for a Payment
-     */
+     */     
     public async getPayment (xeroTenantId: string, paymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments/{PaymentID}'
             .replace('{' + 'PaymentID' + '}', encodeURIComponent(String(paymentID)));
@@ -9171,7 +9684,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9207,7 +9719,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve history records of a payment
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentID Unique identifier for a Payment
-     */
+     */     
     public async getPaymentHistory (xeroTenantId: string, paymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Payments/{PaymentID}/History'
             .replace('{' + 'PaymentID' + '}', encodeURIComponent(String(paymentID)));
@@ -9236,7 +9748,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9271,7 +9782,7 @@ export class AccountingApi {
      * 
      * @summary Allows you to retrieve payment services
      * @param xeroTenantId Xero identifier for Tenant
-     */
+     */     
     public async getPaymentServices (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PaymentServices;  }> {
         const localVarPath = this.basePath + '/PaymentServices';
         let localVarQueryParameters: any = {};
@@ -9294,7 +9805,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9332,7 +9842,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getPayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments';
         let localVarQueryParameters: any = {};
@@ -9364,7 +9874,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9400,7 +9909,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified prepayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID Unique identifier for a PrePayment
-     */
+     */     
     public async getPrepayment (xeroTenantId: string, prepaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Prepayments;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)));
@@ -9429,7 +9938,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9465,7 +9973,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a history records of an Prepayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID Unique identifier for a PrePayment
-     */
+     */     
     public async getPrepaymentHistory (xeroTenantId: string, prepaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}/History'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)));
@@ -9494,7 +10002,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9534,7 +10041,7 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 prepayments will be returned in a single API call with line items shown for each overpayment
      * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
-     */
+     */     
     public async getPrepayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Prepayments;  }> {
         const localVarPath = this.basePath + '/Prepayments';
         let localVarQueryParameters: any = {};
@@ -9574,7 +10081,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9610,7 +10116,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified purchase orders
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for a PurchaseOrder
-     */
+     */     
     public async getPurchaseOrder (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -9639,7 +10145,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9675,7 +10180,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve history for PurchaseOrder
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for a PurchaseOrder
-     */
+     */     
     public async getPurchaseOrderHistory (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/History'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -9704,7 +10209,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9745,8 +10249,8 @@ export class AccountingApi {
      * @param dateTo Filter by purchase order date (e.g. GET https://.../PurchaseOrders?DateFrom&#x3D;2015-12-01&amp;DateTo&#x3D;2015-12-31
      * @param order Order by an any element
      * @param page To specify a page, append the page parameter to the URL e.g. ?page&#x3D;1. If there are 100 records in the response you will need to check if there is any more data by fetching the next page e.g ?page&#x3D;2 and continuing this process until no more results are returned.
-     */
-    public async getPurchaseOrders (xeroTenantId: string, ifModifiedSince?: Date, status?: string, dateFrom?: string, dateTo?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PurchaseOrders;  }> {
+     */     
+    public async getPurchaseOrders (xeroTenantId: string, ifModifiedSince?: Date, status?: 'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'BILLED' | 'DELETED', dateFrom?: string, dateTo?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -9758,7 +10262,7 @@ export class AccountingApi {
         }
 
         if (status !== undefined) {
-            localVarQueryParameters['Status'] = ObjectSerializer.serialize(status, "string");
+            localVarQueryParameters['Status'] = ObjectSerializer.serialize(status, "'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'BILLED' | 'DELETED'");
         }
 
         if (dateFrom !== undefined) {
@@ -9789,7 +10293,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9825,7 +10328,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified draft expense claim receipts
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     */
+     */     
     public async getReceipt (xeroTenantId: string, receiptID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -9854,7 +10357,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9892,7 +10394,7 @@ export class AccountingApi {
      * @param receiptID Unique identifier for a Receipt
      * @param fileName The name of the file being attached to the Receipt
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{FileName}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
@@ -9971,7 +10473,7 @@ export class AccountingApi {
      * @param receiptID Unique identifier for a Receipt
      * @param attachmentID Unique identifier for a Attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getReceiptAttachmentById (xeroTenantId: string, receiptID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{AttachmentID}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
@@ -10048,7 +10550,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve Attachments for expense claim receipts
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     */
+     */     
     public async getReceiptAttachments (xeroTenantId: string, receiptID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -10077,7 +10579,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10113,7 +10614,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a history records of an Receipt
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     */
+     */     
     public async getReceiptHistory (xeroTenantId: string, receiptID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/History'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -10142,7 +10643,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10181,7 +10681,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
-     */
+     */     
     public async getReceipts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts';
         let localVarQueryParameters: any = {};
@@ -10217,7 +10717,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10253,7 +10752,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified repeating invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     */
+     */     
     public async getRepeatingInvoice (xeroTenantId: string, repeatingInvoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: RepeatingInvoices;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -10282,7 +10781,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10320,7 +10818,7 @@ export class AccountingApi {
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param fileName The name of the file being attached to a Repeating Invoice
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
@@ -10399,7 +10897,7 @@ export class AccountingApi {
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param attachmentID Unique identifier for a Attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */
+     */     
     public async getRepeatingInvoiceAttachmentById (xeroTenantId: string, repeatingInvoiceID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{AttachmentID}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
@@ -10476,7 +10974,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve Attachments on repeating invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     */
+     */     
     public async getRepeatingInvoiceAttachments (xeroTenantId: string, repeatingInvoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -10505,7 +11003,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10541,7 +11038,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve history for a repeating invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     */
+     */     
     public async getRepeatingInvoiceHistory (xeroTenantId: string, repeatingInvoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/History'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -10570,7 +11067,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10607,7 +11103,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getRepeatingInvoices (xeroTenantId: string, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: RepeatingInvoices;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices';
         let localVarQueryParameters: any = {};
@@ -10638,7 +11134,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10677,7 +11172,7 @@ export class AccountingApi {
      * @param date The date of the Aged Payables By Contact report
      * @param fromDate The from date of the Aged Payables By Contact report
      * @param toDate The to date of the Aged Payables By Contact report
-     */
+     */     
     public async getReportAgedPayablesByContact (xeroTenantId: string, contactId: string, date?: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/AgedPayablesByContact';
         let localVarQueryParameters: any = {};
@@ -10721,7 +11216,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10760,7 +11254,7 @@ export class AccountingApi {
      * @param date The date of the Aged Receivables By Contact report
      * @param fromDate The from date of the Aged Receivables By Contact report
      * @param toDate The to date of the Aged Receivables By Contact report
-     */
+     */     
     public async getReportAgedReceivablesByContact (xeroTenantId: string, contactId: string, date?: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/AgedReceivablesByContact';
         let localVarQueryParameters: any = {};
@@ -10804,7 +11298,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10840,7 +11333,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve report for BAS only valid for AU orgs
      * @param xeroTenantId Xero identifier for Tenant
      * @param reportID Unique identifier for a Report
-     */
+     */     
     public async getReportBASorGST (xeroTenantId: string, reportID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/{ReportID}'
             .replace('{' + 'ReportID' + '}', encodeURIComponent(String(reportID)));
@@ -10869,7 +11362,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10904,7 +11396,7 @@ export class AccountingApi {
      * 
      * @summary Allows you to retrieve report for BAS only valid for AU orgs
      * @param xeroTenantId Xero identifier for Tenant
-     */
+     */     
     public async getReportBASorGSTList (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports';
         let localVarQueryParameters: any = {};
@@ -10927,7 +11419,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10969,7 +11460,7 @@ export class AccountingApi {
      * @param trackingOptionID2 The tracking option 2 for the Balance Sheet report
      * @param standardLayout The standard layout boolean for the Balance Sheet report
      * @param paymentsOnly return a cash basis for the Balance Sheet report
-     */
+     */     
     public async getReportBalanceSheet (xeroTenantId: string, date?: string, periods?: number, timeframe?: 'MONTH' | 'QUARTER' | 'YEAR', trackingOptionID1?: string, trackingOptionID2?: string, standardLayout?: boolean, paymentsOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BalanceSheet';
         let localVarQueryParameters: any = {};
@@ -11020,7 +11511,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11058,7 +11548,7 @@ export class AccountingApi {
      * @param date The date for the Bank Summary report e.g. 2018-03-31
      * @param period The number of periods to compare (integer between 1 and 12)
      * @param timeframe The period size to compare to (1&#x3D;month, 3&#x3D;quarter, 12&#x3D;year)
-     */
+     */     
     public async getReportBankSummary (xeroTenantId: string, date?: string, period?: number, timeframe?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BankSummary';
         let localVarQueryParameters: any = {};
@@ -11093,7 +11583,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11131,7 +11620,7 @@ export class AccountingApi {
      * @param date The date for the Bank Summary report e.g. 2018-03-31
      * @param period The number of periods to compare (integer between 1 and 12)
      * @param timeframe The period size to compare to (1&#x3D;month, 3&#x3D;quarter, 12&#x3D;year)
-     */
+     */     
     public async getReportBudgetSummary (xeroTenantId: string, date?: string, period?: number, timeframe?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BudgetSummary';
         let localVarQueryParameters: any = {};
@@ -11166,7 +11655,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11202,7 +11690,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve report for ExecutiveSummary
      * @param xeroTenantId Xero identifier for Tenant
      * @param date The date for the Bank Summary report e.g. 2018-03-31
-     */
+     */     
     public async getReportExecutiveSummary (xeroTenantId: string, date?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/ExecutiveSummary';
         let localVarQueryParameters: any = {};
@@ -11229,7 +11717,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11274,7 +11761,7 @@ export class AccountingApi {
      * @param trackingOptionID2 The tracking option 2 for the ProfitAndLoss report
      * @param standardLayout Return the standard layout for the ProfitAndLoss report
      * @param paymentsOnly Return cash only basis for the ProfitAndLoss report
-     */
+     */     
     public async getReportProfitAndLoss (xeroTenantId: string, fromDate?: string, toDate?: string, periods?: number, timeframe?: 'MONTH' | 'QUARTER' | 'YEAR', trackingCategoryID?: string, trackingCategoryID2?: string, trackingOptionID?: string, trackingOptionID2?: string, standardLayout?: boolean, paymentsOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/ProfitAndLoss';
         let localVarQueryParameters: any = {};
@@ -11337,7 +11824,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11373,7 +11859,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve report for TenNinetyNine
      * @param xeroTenantId Xero identifier for Tenant
      * @param reportYear The year of the 1099 report
-     */
+     */     
     public async getReportTenNinetyNine (xeroTenantId: string, reportYear?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Reports;  }> {
         const localVarPath = this.basePath + '/Reports/TenNinetyNine';
         let localVarQueryParameters: any = {};
@@ -11400,7 +11886,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11437,7 +11922,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param date The date for the Trial Balance report e.g. 2018-03-31
      * @param paymentsOnly Return cash only basis for the Trial Balance report
-     */
+     */     
     public async getReportTrialBalance (xeroTenantId: string, date?: string, paymentsOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/TrialBalance';
         let localVarQueryParameters: any = {};
@@ -11468,7 +11953,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11506,7 +11990,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param taxType Filter by tax type
-     */
+     */     
     public async getTaxRates (xeroTenantId: string, where?: string, order?: string, taxType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TaxRates;  }> {
         const localVarPath = this.basePath + '/TaxRates';
         let localVarQueryParameters: any = {};
@@ -11541,7 +12025,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11579,7 +12062,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param includeArchived e.g. includeArchived&#x3D;true - Categories and options with a status of ARCHIVED will be included in the response
-     */
+     */     
     public async getTrackingCategories (xeroTenantId: string, where?: string, order?: string, includeArchived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories';
         let localVarQueryParameters: any = {};
@@ -11614,7 +12097,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11650,7 +12132,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve tracking categories and options for specified category
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
-     */
+     */     
     public async getTrackingCategory (xeroTenantId: string, trackingCategoryID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)));
@@ -11679,7 +12161,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11715,7 +12196,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specified user
      * @param xeroTenantId Xero identifier for Tenant
      * @param userID Unique identifier for a User
-     */
+     */     
     public async getUser (xeroTenantId: string, userID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Users;  }> {
         const localVarPath = this.basePath + '/Users/{UserID}'
             .replace('{' + 'UserID' + '}', encodeURIComponent(String(userID)));
@@ -11744,7 +12225,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11782,7 +12262,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */
+     */     
     public async getUsers (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Users;  }> {
         const localVarPath = this.basePath + '/Users';
         let localVarQueryParameters: any = {};
@@ -11814,7 +12294,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11851,7 +12330,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for retrieving single object
      * @param accounts Request of type Accounts array with one Account
-     */
+     */     
     public async updateAccount (xeroTenantId: string, accountID: string, accounts: Accounts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)));
@@ -11924,8 +12403,8 @@ export class AccountingApi {
      * @param accountID Unique identifier for Account object
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
-     */
-    public async updateAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -11964,8 +12443,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11980,6 +12457,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -12002,7 +12496,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param bankTransactions 
-     */
+     */     
     public async updateBankTransaction (xeroTenantId: string, bankTransactionID: string, bankTransactions: BankTransactions, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -12075,8 +12569,8 @@ export class AccountingApi {
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param fileName The name of the file being attached
      * @param body Byte array of file in body of request
-     */
-    public async updateBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{FileName}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -12115,8 +12609,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12131,6 +12623,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -12153,8 +12662,8 @@ export class AccountingApi {
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param fileName The name of the file being attached to a Bank Transfer
      * @param body Byte array of file in body of request
-     */
-    public async updateBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{FileName}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -12193,8 +12702,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12209,6 +12716,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -12230,7 +12754,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
      * @param contacts an array of Contacts containing single Contact object with properties to update
-     */
+     */     
     public async updateContact (xeroTenantId: string, contactID: string, contacts: Contacts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -12302,8 +12826,8 @@ export class AccountingApi {
      * @param contactID Unique identifier for a Contact
      * @param fileName Name for the file you are attaching
      * @param body Byte array of file in body of request
-     */
-    public async updateContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{FileName}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -12342,8 +12866,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12358,6 +12880,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -12380,7 +12919,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
      * @param contactGroups an array of Contact groups with Name of specific group to update
-     */
+     */     
     public async updateContactGroup (xeroTenantId: string, contactGroupID: string, contactGroups: ContactGroups, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ContactGroups;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)));
@@ -12452,7 +12991,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param creditNotes an array of Credit Notes containing credit note details to update
-     */
+     */     
     public async updateCreditNote (xeroTenantId: string, creditNoteID: string, creditNotes: CreditNotes, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: CreditNotes;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -12525,8 +13064,8 @@ export class AccountingApi {
      * @param creditNoteID Unique identifier for a Credit Note
      * @param fileName Name of the file you are attaching to Credit Note
      * @param body Byte array of file in body of request
-     */
-    public async updateCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -12565,8 +13104,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12581,6 +13118,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -12603,7 +13157,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Unique identifier for a Employee
      * @param employees 
-     */
+     */     
     public async updateEmployee (xeroTenantId: string, employeeID: string, employees: Employees, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -12675,7 +13229,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaimID Unique identifier for a ExpenseClaim
      * @param expenseClaims 
-     */
+     */     
     public async updateExpenseClaim (xeroTenantId: string, expenseClaimID: string, expenseClaims: ExpenseClaims, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ExpenseClaims;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims/{ExpenseClaimID}'
             .replace('{' + 'ExpenseClaimID' + '}', encodeURIComponent(String(expenseClaimID)));
@@ -12747,7 +13301,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param invoices 
-     */
+     */     
     public async updateInvoice (xeroTenantId: string, invoiceID: string, invoices: Invoices, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -12820,8 +13374,8 @@ export class AccountingApi {
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the file you are attaching
      * @param body Byte array of file in body of request
-     */
-    public async updateInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -12860,8 +13414,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12876,6 +13428,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -12898,7 +13467,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
      * @param items 
-     */
+     */     
     public async updateItem (xeroTenantId: string, itemID: string, items: Items, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Items;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -12970,7 +13539,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param linkedTransactionID Unique identifier for a LinkedTransaction
      * @param linkedTransactions 
-     */
+     */     
     public async updateLinkedTransaction (xeroTenantId: string, linkedTransactionID: string, linkedTransactions: LinkedTransactions, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions/{LinkedTransactionID}'
             .replace('{' + 'LinkedTransactionID' + '}', encodeURIComponent(String(linkedTransactionID)));
@@ -13042,7 +13611,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param manualJournals 
-     */
+     */     
     public async updateManualJournal (xeroTenantId: string, manualJournalID: string, manualJournals: ManualJournals, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)));
@@ -13115,8 +13684,8 @@ export class AccountingApi {
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param fileName The name of the file being attached to a ManualJournal
      * @param body Byte array of file in body of request
-     */
-    public async updateManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{FileName}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -13155,8 +13724,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13171,6 +13738,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -13193,7 +13777,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for a PurchaseOrder
      * @param purchaseOrders 
-     */
+     */     
     public async updatePurchaseOrder (xeroTenantId: string, purchaseOrderID: string, purchaseOrders: PurchaseOrders, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -13265,7 +13849,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
      * @param receipts 
-     */
+     */     
     public async updateReceipt (xeroTenantId: string, receiptID: string, receipts: Receipts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -13338,8 +13922,8 @@ export class AccountingApi {
      * @param receiptID Unique identifier for a Receipt
      * @param fileName The name of the file being attached to the Receipt
      * @param body Byte array of file in body of request
-     */
-    public async updateReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{FileName}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -13378,8 +13962,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13394,6 +13976,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -13417,8 +14016,8 @@ export class AccountingApi {
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param fileName The name of the file being attached to a Repeating Invoice
      * @param body Byte array of file in body of request
-     */
-    public async updateRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
+     */     
+    public async updateRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -13457,8 +14056,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13473,6 +14070,23 @@ export class AccountingApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
+        }).then(() => {
+            // Reads file stream as chunks so we can put it in the request body.
+            // This collects the whole file into memory, which is why we do it _after_ authentication.
+            return new Promise<any[]>((resolve, reject) => {
+                const fileContents: any[] = [];
+                body.on('data', (chunk) => { 
+                    fileContents.push(chunk); 
+                });
+                body.on('end', () => {
+                    resolve(fileContents);
+                });
+                body.on('error', (err) => {
+                    reject(err);
+                })
+            });
+        }).then((fileContents) => {
+            localVarRequestOptions.body = fileContents;
             return new Promise<{ response: http.ClientResponse; body: Attachments;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
@@ -13494,7 +14108,7 @@ export class AccountingApi {
      * @summary Allows you to update Tax Rates
      * @param xeroTenantId Xero identifier for Tenant
      * @param taxRates 
-     */
+     */     
     public async updateTaxRate (xeroTenantId: string, taxRates: TaxRates, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TaxRates;  }> {
         const localVarPath = this.basePath + '/TaxRates';
         let localVarQueryParameters: any = {};
@@ -13560,7 +14174,7 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
      * @param trackingCategory 
-     */
+     */     
     public async updateTrackingCategory (xeroTenantId: string, trackingCategoryID: string, trackingCategory: TrackingCategory, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)));
@@ -13616,6 +14230,85 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "TrackingCategories");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to update options for a specified tracking category
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param trackingCategoryID Unique identifier for a TrackingCategory
+     * @param trackingOptionID Unique identifier for a Tracking Option
+     * @param trackingOption 
+     */     
+    public async updateTrackingOptions (xeroTenantId: string, trackingCategoryID: string, trackingOptionID: string, trackingOption: TrackingOption, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.ClientResponse; body: TrackingOptions;  }> {
+        const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}/Options/{TrackingOptionID}'
+            .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)))
+            .replace('{' + 'TrackingOptionID' + '}', encodeURIComponent(String(trackingOptionID)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateTrackingOptions.');
+        }
+
+        // verify required parameter 'trackingCategoryID' is not null or undefined
+        if (trackingCategoryID === null || trackingCategoryID === undefined) {
+            throw new Error('Required parameter trackingCategoryID was null or undefined when calling updateTrackingOptions.');
+        }
+
+        // verify required parameter 'trackingOptionID' is not null or undefined
+        if (trackingOptionID === null || trackingOptionID === undefined) {
+            throw new Error('Required parameter trackingOptionID was null or undefined when calling updateTrackingOptions.');
+        }
+
+        // verify required parameter 'trackingOption' is not null or undefined
+        if (trackingOption === null || trackingOption === undefined) {
+            throw new Error('Required parameter trackingOption was null or undefined when calling updateTrackingOptions.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(trackingOption, "TrackingOption")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.ClientResponse; body: TrackingOptions;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "TrackingOptions");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
