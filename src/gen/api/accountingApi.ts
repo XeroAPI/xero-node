@@ -237,6 +237,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -396,6 +397,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -696,6 +698,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1133,6 +1136,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1637,6 +1641,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2269,6 +2274,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2837,6 +2843,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3693,6 +3700,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3859,6 +3867,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4214,6 +4223,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4285,6 +4295,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4348,6 +4359,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4411,6 +4423,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4474,6 +4487,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4609,6 +4623,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4680,6 +4695,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4815,6 +4831,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5037,6 +5054,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5106,6 +5124,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5170,6 +5189,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5392,6 +5412,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5471,6 +5492,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5535,6 +5557,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5599,6 +5622,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5821,6 +5845,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5885,6 +5910,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5954,6 +5980,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6018,6 +6045,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6087,6 +6115,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6151,6 +6180,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6215,6 +6245,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6272,6 +6303,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6336,6 +6368,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6558,6 +6591,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6622,6 +6656,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6686,6 +6721,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6753,6 +6789,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6817,6 +6854,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6901,6 +6939,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6965,6 +7004,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7259,6 +7299,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7323,6 +7364,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7397,6 +7439,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7464,6 +7507,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7528,6 +7572,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7597,6 +7642,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7661,6 +7707,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7725,6 +7772,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7794,6 +7842,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7858,6 +7907,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8152,6 +8202,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8216,6 +8267,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8273,6 +8325,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8382,6 +8435,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8446,6 +8500,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8510,6 +8565,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8584,6 +8640,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8648,6 +8705,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8717,6 +8775,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8781,6 +8840,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8868,6 +8928,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8932,6 +8993,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9154,6 +9216,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9228,6 +9291,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9292,6 +9356,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9356,6 +9421,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9413,6 +9479,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9477,6 +9544,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9541,6 +9609,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9620,6 +9689,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9684,6 +9754,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9748,6 +9819,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9805,6 +9877,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9874,6 +9947,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9938,6 +10012,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10002,6 +10077,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10081,6 +10157,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10145,6 +10222,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10209,6 +10287,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10293,6 +10372,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10357,6 +10437,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10579,6 +10660,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10643,6 +10725,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10717,6 +10800,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10781,6 +10865,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11003,6 +11088,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11067,6 +11153,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11134,6 +11221,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11216,6 +11304,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11298,6 +11387,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11362,6 +11452,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11419,6 +11510,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11511,6 +11603,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11583,6 +11676,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11655,6 +11749,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11717,6 +11812,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11824,6 +11920,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11886,6 +11983,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11953,6 +12051,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12025,6 +12124,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12097,6 +12197,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12161,6 +12262,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12225,6 +12327,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12294,6 +12397,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12443,6 +12547,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12609,6 +12714,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12702,6 +12808,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12866,6 +12973,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13104,6 +13212,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13414,6 +13523,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13724,6 +13834,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13962,6 +14073,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14056,6 +14168,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
