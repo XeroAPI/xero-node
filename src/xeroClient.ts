@@ -3,8 +3,6 @@ import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
 
-import * as xero from './gen/api';
-
 export interface IXeroClientConfig { 
     clientId: string, 
     clientSecret: string, 
