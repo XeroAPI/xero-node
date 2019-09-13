@@ -1,6 +1,5 @@
 import { Issuer } from 'openid-client';
 import * as xero from './gen/api';
-//import xero = require('./gen/api');
 import request = require('request');
 import http = require('http');
 
@@ -47,6 +46,15 @@ export class XeroClient {
 
     async readIdTokenClaims() {
         return this.tokenSet.claims;
+    }
+
+    async readTokenSet() {
+        return this.tokenSet;
+    }
+
+    async setTokenSet(savedTokens: { id_token: string, access_token: string, refresh_token: string, claims: object }) {
+        this.tokenSet = savedTokens;
+        this.setAccessTokenForAllApis();
     }
 
     async refreshToken() {
