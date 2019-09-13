@@ -10,34 +10,36 @@ export interface IXeroClientConfig {
     scopes: string[],
 }
 
+interface TokenSet { // from openid-client
+    id_token: string,
+    access_token: string,
+    refresh_token: string,
+    claims(): {
+        amr: string[],
+        at_hash: string,
+        aud: string,
+        auth_time: number,
+        email: string,
+        exp: number,
+        family_name: string,
+        given_name: string,
+        global_session_id: string,
+        iat: number,
+        idp: string,
+        iss: string,
+        nbf: number,
+        preferred_username: string,
+        sid: string,
+        sub: string,
+        xero_userid: string,
+    }
+}
+
 export class XeroClient {
     readonly accountingApi: xero.AccountingApi;
 
     private openIdClient: any; // from openid-client
-    private tokenSet: {
-        id_token: string,
-        access_token: string,
-        refresh_token: string,
-        claims(): {
-            amr: string[],
-            at_hash: string,
-            aud: string,
-            auth_time: number,
-            email: string,
-            exp: number,
-            family_name: string,
-            given_name: string,
-            global_session_id: string,
-            iat: number,
-            idp: string,
-            iss: string,
-            nbf: number,
-            preferred_username: string,
-            sid: string,
-            sub: string,
-            xero_userid: string,
-        }
-    }; // from openid-client
+    private tokenSet: TokenSet;
 
     private _tenantIds: string[];
     get tenantIds(): string[] {
@@ -88,7 +90,7 @@ export class XeroClient {
         return this.tokenSet;
     }
 
-    async setTokenSet(savedTokens: { id_token: string, access_token: string, refresh_token: string, claims: object }) {
+    async setTokenSet(savedTokens: TokenSet) {
         this.tokenSet = savedTokens;
         this.setAccessTokenForAllApis();
     }
