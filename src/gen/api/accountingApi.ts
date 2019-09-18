@@ -238,6 +238,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -398,6 +399,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -699,6 +701,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1137,6 +1140,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1642,6 +1646,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2275,6 +2280,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2844,6 +2850,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3701,6 +3708,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3868,6 +3876,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4295,7 +4304,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4359,7 +4367,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4423,7 +4430,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4487,7 +4493,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4766,7 +4771,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
             body: ObjectSerializer.serialize(requestEmpty, "RequestEmpty")
         };
 
@@ -12548,6 +12552,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12715,6 +12720,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12809,6 +12815,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12974,6 +12981,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13213,6 +13221,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13524,6 +13533,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13835,6 +13845,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14074,6 +14085,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14169,6 +14181,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
