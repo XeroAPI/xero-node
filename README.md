@@ -5,7 +5,9 @@
 
 NodeJS Client for the [Xero API](http://developer.xero.com). Works with ES5, ES6+ and TypeScript.
 
-[API Reference](https://xeroapi.github.io/xero-node/v3)
+[Xero API documentation](https://developer.xero.com/documentation/)
+
+[xero-node v3 API Reference](https://xeroapi.github.io/xero-node/v3)
 
 Supports all application types:
 
