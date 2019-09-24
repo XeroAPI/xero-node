@@ -305,7 +305,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.CreditNoteID;
 				delete args.CreditNoteID; // remove from query string
 			} else if (args && args.CreditNoteNumber) {
-				endpoint = endpoint + '/' + args.CreditNoteNumber;
+				endpoint = endpoint + '/' + encodeURIComponent(args.CreditNoteNumber);
 				delete args.CreditNoteNumber;
 			}
 			const header = this.generateHeader(args);
@@ -425,7 +425,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceID;
 				delete args.InvoiceID;
 			} else if (args && args.InvoiceNumber) {
-				endpoint = endpoint + '/' + args.InvoiceNumber;
+				endpoint = endpoint + '/' + encodeURIComponent(args.InvoiceNumber);
 				delete args.InvoiceNumber;
 			}
 
@@ -440,7 +440,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceID;
 				delete args.InvoiceID;
 			} else if (args && args.InvoiceNumber) {
-				endpoint = endpoint + '/' + args.InvoiceNumber;
+				endpoint = endpoint + '/' + encodeURIComponent(args.InvoiceNumber);
 				delete args.InvoiceNumber;
 			}
 			endpoint += generateQueryString(args);
@@ -461,7 +461,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.InvoiceID;
 				delete args.InvoiceID;
 			} else if (args && args.InvoiceNumber) {
-				endpoint = endpoint + '/' + args.InvoiceNumber;
+				endpoint = endpoint + '/' + encodeURIComponent(args.InvoiceNumber);
 				delete args.InvoiceNumber;
 			}
 
@@ -522,7 +522,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.ItemID;
 				delete args.ItemID;
 			} else if (args && args.Code) {
-				endpoint = endpoint + '/' + args.Code;
+				endpoint = endpoint + '/' + encodeURIComponent(args.Code);
 				delete args.Code;
 			}
 			const headers = this.generateHeader(args);
@@ -554,7 +554,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 		get: async (args?: { Recordfilter?: string, offset?: string, paymentsOnly?: boolean } & HeaderArgs): Promise<JournalsResponse> => {
 			let endpoint = 'journals';
 			if (args && args.Recordfilter) {
-				endpoint = endpoint + '/' + args.Recordfilter;
+				endpoint = endpoint + '/' + encodeURIComponent(args.Recordfilter);
 				delete args.Recordfilter;
 			}
 
@@ -738,7 +738,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.PurchaseOrderID;
 				delete args.PurchaseOrderID;
 			} else if (args && args.PurchaseOrderNumber) {
-				endpoint = endpoint + '/' + args.PurchaseOrderNumber;
+				endpoint = endpoint + '/' + encodeURIComponent(args.PurchaseOrderNumber);
 				delete args.PurchaseOrderNumber;
 			}
 			const headers = this.generateHeader(args);
@@ -752,7 +752,7 @@ export class AccountingAPIClient extends BaseAPIClient {
 				endpoint = endpoint + '/' + args.PurchaseOrderID;
 				delete args.PurchaseOrderID;
 			} else if (args && args.PurchaseOrderNumber) {
-				endpoint = endpoint + '/' + args.PurchaseOrderNumber;
+				endpoint = endpoint + '/' + encodeURIComponent(args.PurchaseOrderNumber);
 				delete args.PurchaseOrderNumber;
 			}
 			endpoint += generateQueryString(args);
