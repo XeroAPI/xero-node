@@ -1,4 +1,4 @@
-# Contributing to Xero-Java
+# Contributing to xero-node
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
 We want to make contributing to this project as easy and transparent as possible, whether it's:
@@ -24,7 +24,7 @@ The following is a set of guidelines for contributing to Xero and its projects, 
 
 
 ## Code of Conduct
-Please note that this project is released with a [Contributor Code of Conduct](https://github.com/XeroAPI/Xero-Java/blob/oauth2/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://github.com/XeroAPI/xero-node/blob/oauth2/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 ## I don't want to read this whole thing I just have a question!!!
 
@@ -40,7 +40,7 @@ We have an official [message board](https://community.xero.com/developer) where 
 
 # How Can I Contribute?
 
-You can contribute by reporting bugs, suggesting enhancements, improving documentation i.e. [README](https://github.com/XeroAPI/Xero-Java/blob/oauth2/README.md) or submitting a pull request.
+You can contribute by reporting bugs, suggesting enhancements, improving documentation i.e. [README](https://github.com/XeroAPI/xero-node/blob/oauth2/README.md) or submitting a pull request.
 
 
 ## Which version of the SDK are you using?
@@ -58,9 +58,9 @@ Bugs and enhancements for version 3.x will be prioritized over 2.x.
 Bugs are tracked as issues in this repository.
 
 Before opening a new issue:
-* **check [the README](https://github.com/XeroAPI/Xero-Java/blob/oauth2/README.md)** to see if the behavior you observed might be expected and if configuration options are available to provide you with the desired behavior.
+* **check [the README](https://github.com/XeroAPI/xero-node/blob/oauth2/README.md)** to see if the behavior you observed might be expected and if configuration options are available to provide you with the desired behavior.
 
-* **perform a cursory search** to see if there's [an existing issue](https://github.com/XeroAPI/Xero-Java/issues) covering your feedback. If there is one and the issue is still open, **add a :+1: reaction** on the issue to express interest in the issue being resolved. That will help the team gauge interest without the noise of comments which trigger notifications to all watchers. Comments should be used only if you have new and useful information to share.
+* **perform a cursory search** to see if there's [an existing issue](https://github.com/XeroAPI/xero-node/issues) covering your feedback. If there is one and the issue is still open, **add a :+1: reaction** on the issue to express interest in the issue being resolved. That will help the team gauge interest without the noise of comments which trigger notifications to all watchers. Comments should be used only if you have new and useful information to share.
 
 ### Write bug reports with detail, background, and sample code
 
@@ -84,7 +84,7 @@ When opening an issue for a feature request:
 We welcome your feedback and pull requests. Be aware some code is generated and pull requests may not be the best solution -  see below.
 
 ### We Use OpenAPI Generator
-The best way to propose changes to the codebase is to open an [issue](https://github.com/XeroAPI/Xero-Java/issues) and discuss with our team.  
+The best way to propose changes to the codebase is to open an [issue](https://github.com/XeroAPI/xero-node/issues) and discuss with our team.  
 
 We are using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) and [our OpenAPI specs](https://github.com/XeroAPI/Xero-OpenAPI), to create and update our models and client classes.  Improvements may require updates to our OAS or our customized mustache templates instead of modifying via pull request.
 
@@ -107,12 +107,6 @@ Here are a few things you can do that will increase the likelihood of your pull 
 ### Style Guide
 
 * 4 spaces for indentation rather than tabs
-
-How to indent a Java source file in Eclipse:
-* Open the file in Eclipse's text editor.
-* Ctrl+A to select all text.
-* Ctrl+I to indent the text (or right click > Source > Indent).
-* Ctrl+S to save the file.
 
 ## License
 By contributing, you agree that your contributions will be licensed under its MIT License.
