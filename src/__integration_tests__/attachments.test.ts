@@ -22,7 +22,7 @@ describe('xeroClient', () => {
             try {
                 accountsResponse = await xeroClient.accountingApi.getAccounts(xeroClient.tenantIds[0]);
             } catch (err) {
-                throw accountsResponse.response.body;
+                throw err;
             }
             accountId = (accountsResponse.body.accounts && accountsResponse.body.accounts[0].accountID) as string;
         });
