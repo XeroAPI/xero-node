@@ -1,38 +1,13 @@
-import { Issuer } from 'openid-client';
+import { Issuer, TokenSet } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
 
-export interface IXeroClientConfig { 
-    clientId: string, 
-    clientSecret: string, 
-    redirectUris: string[], 
+export interface IXeroClientConfig {
+    clientId: string,
+    clientSecret: string,
+    redirectUris: string[],
     scopes: string[],
-}
-
-interface TokenSet { // from openid-client
-    id_token: string,
-    access_token: string,
-    refresh_token: string,
-    claims(): {
-        amr: string[],
-        at_hash: string,
-        aud: string,
-        auth_time: number,
-        email: string,
-        exp: number,
-        family_name: string,
-        given_name: string,
-        global_session_id: string,
-        iat: number,
-        idp: string,
-        iss: string,
-        nbf: number,
-        preferred_username: string,
-        sid: string,
-        sub: string,
-        xero_userid: string,
-    }
 }
 
 export class XeroClient {
@@ -108,7 +83,11 @@ export class XeroClient {
 
     private setAccessTokenForAllApis() {
         const accessToken = this.tokenSet.access_token;
-        this.accountingApi.accessToken = accessToken;        
+        if (typeof accessToken === 'undefined') {
+            throw new Error('Access token is undefined!');
+        }
+        
+        this.accountingApi.accessToken = accessToken;
         // this.payrollApi.accessToken = accessToken;
         // etc.
     }
