@@ -11,7 +11,10 @@ declare module 'openid-client' {
     import * as http2 from 'http2';
     import * as tls from 'tls';
 
-    import { JWKS, JSONWebKeySet } from '@panva/jose';
+    namespace JWKS {
+        class KeyStore {}
+    }
+    type JSONWebKeySet = any;
 
     export type RetryFunction = (retry: number, error: Error) => number;
 

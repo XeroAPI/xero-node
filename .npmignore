@@ -1,5 +1,5 @@
 node_modules/
 *.tgz
-
+jest*
 src/
 tsconfig.json

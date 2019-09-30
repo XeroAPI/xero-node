@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
-    "@types/node": "8.10.34",
+    "@types/node": "^10.14.19",
     "@types/request": "^2.48.2",
     "jest": "^24.9.0",
     "open": "^6.4.0",
