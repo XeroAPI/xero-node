@@ -114,14 +114,15 @@ export class XeroClient {
     }
 
     private async fetchConnectedTenantIds() {
-        // - retrieve the authorized tenants from api.xero.com/connections
-        const result = await new Promise<{ response: http.IncomingMessage; body: any; }>((resolve, reject) => {
+        // retrieve the authorized tenants from api.xero.com/connections
+        const result = await new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantType: string }> }>((resolve, reject) => {
             request({
                 method: 'GET',
                 uri: 'https://api.xero.com/connections',
                 auth: {
                     bearer: this.tokenSet.access_token
-                }
+                },
+                json: true
             }, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -135,8 +136,7 @@ export class XeroClient {
             });
         });
 
-        const connections = JSON.parse(result.body);
-        this._tenantIds = connections.map(connection => connection.tenantId);
+        this._tenantIds = result.body.map(connection => connection.tenantId);
 
         // Requests to the accounting api will look like this:
         //   let apiResponse = await xeroClient.accountingApi.getInvoices(xeroClient.tenantIds[0]);
