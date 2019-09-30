@@ -237,8 +237,6 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -275,6 +273,7 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        body = JSON.parse(body); // because the request was not JSON, we have to manually parse the response
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });

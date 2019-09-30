@@ -40,10 +40,9 @@ describe('xeroClient', () => {
                 }
             });
             expect(attachmentsResponse.response.statusCode).toBe(200);
-
-            // SKIP ASSERTION: the deserialisation isn't working properly :(
-            // expect(attachmentsResponse.body.attachments).toBeTruthy();
-            // expect(attachmentsResponse.body.attachments && attachmentsResponse.body.attachments[0].fileName).toBe(filename);
+            
+            expect(attachmentsResponse.body.attachments).toBeTruthy();
+            expect(attachmentsResponse.body.attachments && attachmentsResponse.body.attachments[0].fileName).toBe(filename);
         });
 
         it('get attachments', async () => {
@@ -51,6 +50,21 @@ describe('xeroClient', () => {
             expect(attachmentsResponse.response.statusCode).toBe(200);
             expect(attachmentsResponse.body.attachments).toBeTruthy();
             expect(attachmentsResponse.body.attachments && attachmentsResponse.body.attachments[0].contentLength).toBeGreaterThan(0);
+        });
+
+        it('get attachment by id', async () => {
+            const attachmentsResponse = await xeroClient.accountingApi.getAccountAttachments(xeroClient.tenantIds[0], accountId);
+            if (!attachmentsResponse.body.attachments || !attachmentsResponse.body.attachments[0]) {
+                throw new Error('no attachments exist');
+            }
+            const attachment = attachmentsResponse.body.attachments[0];
+            const attachmentResponse = await xeroClient.accountingApi.getAccountAttachmentById(xeroClient.tenantIds[0], accountId, attachment.attachmentID || '', attachment.mimeType || '', {
+                headers: {
+                    'accept': 'image/jpg'
+                }
+            });
+            expect(attachmentResponse.response.statusCode).toBe(200);
+            fs.writeFileSync(attachment.fileName || '', attachmentResponse.body, {encoding:null});
         });
     });
 });
