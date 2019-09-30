@@ -1,8 +1,8 @@
 import { IXeroClientConfig } from "../gen/api";
 
 export const config: IXeroClientConfig = {
-    clientId: '***REMOVED***',
-    clientSecret: '***REMOVED***',
+    clientId: 'YOUR_CLIENT_ID',
+    clientSecret: 'YOUR_CLIENT_SECRET',
     redirectUris: [
         'http://localhost:5000/callback'
     ],
