@@ -1,4 +1,4 @@
-﻿export interface Attachment {
+export interface Attachment {
 	AttachmentID: string;
 	FileName: string;
 	Url: string;
@@ -152,7 +152,7 @@ export interface Prepayment {
 }
 
 export interface Allocation {
-	AppliedAmount?: number;
+	Amount?: number;
 	Date?: string;
 	Invoice?: Invoice;
 }
@@ -191,6 +191,7 @@ export interface Invoice {
 	CreditNotes?: CreditNote[];
 	Overpayments?: Overpayment[];
 	CISDeduction?: number;
+	BrandingThemeID?: string;
 	AmountDue?: number;
 	AmountPaid?: number;
 	AmountCredited?: number;
@@ -211,6 +212,7 @@ export interface Invoice {
 	Total?: number;
 	UpdatedDateUTC?: string;
 	CurrencyCode?: string;
+	CurrencyRate?: number;
 	History?: HistoryRecord[];
 }
 
@@ -255,6 +257,7 @@ export interface HistoryRecord {
 
 export interface Contact {
 	ContactID?: string;
+	ContactNumber?: string;
 	ContactStatus?: string;
 	Name?: string;
 	FirstName?: string;
@@ -304,7 +307,6 @@ export interface Address {
 	Country?: string;
 	AttentionTo?: string;
 }
-
 export interface Journal {
 	JournalID?: string;
 	JournalDate?: string;
@@ -314,7 +316,6 @@ export interface Journal {
 	SourceType?: string;
 	JournalLines?: JournalLine[];
 }
-
 export interface JournalLine {
 	JournalLineID?: string;
 	AccountID?: string;
@@ -329,14 +330,12 @@ export interface JournalLine {
 	Description?: string;
 	LineAmount?: number;
 }
-
 export interface Phone {
 	PhoneType?: string;
 	PhoneNumber?: string;
 	PhoneAreaCode?: string;
 	PhoneCountryCode?: string;
 }
-
 export interface LineItem {
 	Description?: string;
 	UnitAmount?: number;
@@ -347,8 +346,8 @@ export interface LineItem {
 	Tracking?: Tracking[];
 	Quantity?: number;
 	LineItemID?: string;
+	ItemCode?: string;
 }
-
 export interface ManualJournal {
 	ManualJournalID?: string;
 	Date?: string;
@@ -361,7 +360,6 @@ export interface ManualJournal {
 	HasAttachments?: boolean;
 	UpdatedDateUTC?: string;
 }
-
 export interface Organisation {
 	APIKey: string;
 	Name: string;
@@ -385,7 +383,6 @@ export interface Organisation {
 	OrganisationID: string;
 	LineOfBusiness: string;
 }
-
 export interface OrgCISSetting {
 	CISContractorEnabled: boolean;
 	CISSubContractorEnabled: boolean;
@@ -519,20 +516,17 @@ export interface Report {
 	Fields?: Field[];
 	Rows: Row[];
 }
-
 /** @private */
 export interface Field {
 	FieldID: string;
 	Description: string;
 	Value: string;
 }
-
 /** @private */
 export interface Row {
 	RowType: string;
 	Cells: Cell[];
 }
-
 /** @private */
 export interface Cell {
 	Value?: string;
