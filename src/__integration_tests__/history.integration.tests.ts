@@ -17,12 +17,15 @@ describe('history', () => {
 	});
 
 	it('can add a history note', async () => {
-		await xero.invoices.history.create({
+		const response = await xero.invoices.history.create({
 			InvoiceID: invoiceId,
 			HistoryNote: {
 				Details: 'Hello from the xero-node SDK integration tests'
 			}
 		});
+
+		expect(response.HistoryRecords).toHaveLength(1);
+		expect(response.HistoryRecords[0].Details).toBe('Hello from the xero-node SDK integration tests');
 	});
 
 	it('get the history details', async () => {
@@ -31,5 +34,6 @@ describe('history', () => {
 		});
 
 		expect(response.HistoryRecords.length).toBeGreaterThan(0);
+		expect(response.HistoryRecords.some((history) => history.Details === 'Hello from the xero-node SDK integration tests'));
 	});
 });
