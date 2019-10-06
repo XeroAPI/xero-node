@@ -43,6 +43,7 @@ describe('xeroClient', () => {
             
             expect(attachmentsResponse.body.attachments).toBeTruthy();
             expect(attachmentsResponse.body.attachments && attachmentsResponse.body.attachments[0].fileName).toBe(filename);
+            // TODO: check that attachment looks good in Xero UI
         });
 
         it('get attachments', async () => {
@@ -65,6 +66,7 @@ describe('xeroClient', () => {
             });
             expect(attachmentResponse.response.statusCode).toBe(200);
             fs.writeFileSync(attachment.fileName || '', attachmentResponse.body, {encoding:null});
+            // TODO: check that saved file looks good in local filesystem
         });
     });
 });
