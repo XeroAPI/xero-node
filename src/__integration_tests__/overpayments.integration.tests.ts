@@ -11,12 +11,28 @@ describe('/overpayments', () => {
 		xero = new AccountingAPIClient(config);
 	});
 
+	async function createOverpayment() {
+		const response = await xero.bankTransactions.create({
+			Type: 'RECEIVE-OVERPAYMENT',
+			Contact: { ContactID: '6d42f03b-181f-43e3-93fb-2025c012de92' },
+			BankAccount: { Code: '090' },
+			LineAmountTypes: 'NoTax',
+			LineItems: [{
+				Description: 'Forgot to cancel annual sub payment',
+				LineAmount: 100.00
+			}]
+		});
+		return response.BankTransactions[0].OverpaymentID;
+	}
+
 	it('get all', async () => {
-		const response = await xero.overpayments.get();
+		const overpaymentId = await createOverpayment();
+
+		const response = await xero.overpayments.get({ OverpaymentID: overpaymentId });
 		expect(response).toBeTruthy();
 		expect(response.Overpayments).toBeInstanceOf(Array);
 		expect(response.Overpayments[0]).toHaveProperty('Contact');
-		// overPaymentID = response.Overpayments[0].OverpaymentID;
+		expect(response.Overpayments[0].OverpaymentID).toBe(overpaymentId);
 	});
 
 	// it('get history', async () => {
@@ -25,4 +41,26 @@ describe('/overpayments', () => {
 	// 	expect(response.HistoryRecords[0]).toBeDefined();
 	// });
 
+	it('create allocation', async () => {
+		const overpaymentId = await createOverpayment();
+
+		const invoices = await xero.invoices.get({ pageSize: 1, where: 'Type=="ACCREC"&&Status=="AUTHORISED"' });
+		const invoiceId = invoices.Invoices[0].InvoiceID;
+
+		const response = await xero.overpayments.allocations.create(
+			{
+				Amount: 12,
+				Invoice: {
+					InvoiceID: invoiceId,
+				}
+			},
+			{
+				OverpaymentID: overpaymentId,
+			}
+		);
+
+		expect(response).toBeTruthy();
+		expect(response.Status).toBe('OK');
+		console.log(JSON.stringify(response));
+	});
 });

@@ -659,9 +659,9 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.get<OverpaymentsResponse>(endpoint);
 		},
 		allocations: {
-			create: async (body: Allocation[], args: { OverpaymentID: string }): Promise<OverpaymentsResponse> => {
+			create: async (allocations: Allocation | { Allocations: Allocation[] }, args: { OverpaymentID: string }): Promise<AllocationsResponse> => {
 				const endpoint = `overpayments/${args.OverpaymentID}/allocations`;
-				return this.oauth1Client.put<OverpaymentsResponse>(endpoint, body);
+				return this.oauth1Client.put<AllocationsResponse>(endpoint, allocations);
 			}
 		},
 		history: this.generateHistoryEndpoint('overpayments', 'OverpaymentID')
@@ -719,11 +719,11 @@ export class AccountingAPIClient extends BaseAPIClient {
 			return this.oauth1Client.get<PrepaymentsResponse>(endpoint, headers);
 		},
 		allocations: {
-			create: async (allocations: Allocation | { Allocations: Allocation[] }, args: { PrepaymentID: string }): Promise<PrepaymentsResponse> => {
+			create: async (allocations: Allocation | { Allocations: Allocation[] }, args: { PrepaymentID: string }): Promise<AllocationsResponse> => {
 				const endpoint = `prepayments/${args.PrepaymentID}/allocations`;
 				delete args.PrepaymentID;
 
-				return this.oauth1Client.put<PrepaymentsResponse>(endpoint, allocations);
+				return this.oauth1Client.put<AllocationsResponse>(endpoint, allocations);
 			}
 		},
 		attachments: this.generateAttachmentsEndpoint('prepayments'),
