@@ -60,6 +60,55 @@ const config = require('./config.json');
 
 ```
 
+Express.JS WebHook event listener - exmaple uses contacts
+```javascript
+// Xero webhook for contact creation
+app.post("/contactadded", itrBodyParser, (req, res) => {
+
+  // do Xero auth check
+  let hmac = crypto.createHmac("sha256", xeroWebhookKey).update(req.body.toString()).digest("base64");
+  
+  // parse to json here - doing it in express messes with the hmac
+  const body = JSON.parse(req.body);
+  
+  // check if you have events/contacts
+  if (Object.keys(body.events).length > 0) {
+  
+    // iterate through each new event/contact - can get multiple at a time
+    Object.entries(body.events).forEach(async (contact) => {
+	
+      // grab the resource ID of the current contact
+      const resourceID = contact[1].resourceId;
+      
+      // initialise xeroclient library (xero-node)
+      let xero = new XeroClient(xeroApplicationConfig);
+      
+      // get contact speficied by the ContactID: resourceID
+      const result = await xero.contacts.get({ ContactID: resourceID });
+      
+      /*
+       * Do stuff with your new contact data eg:
+       * Send welcome email to new client
+       * Push contact information onto your CRM
+       */
+    
+    });
+  }
+  
+  // send hmac response to Xero
+  if (req.headers['x-xero-signature'] == hmac) {
+  	console.log("Success HMAC TEST");
+  	res.status(200);
+  } else {
+    console.log("Failed HMAC TEST");
+  	res.status(401);
+  }
+  
+  res.send();
+  
+})
+```
+
 # Usage Example for Public and Partner Apps
 
 Create a `config.json` file:
