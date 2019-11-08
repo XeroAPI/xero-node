@@ -3,13 +3,19 @@ import { mapConfig, mapState } from './config-helper';
 import * as  fs from 'fs';
 import { AttachmentsResponse } from '../AccountingAPI-responses';
 
+enum AppType {
+	Public = 'public',
+	Private = 'private',
+	Partner = 'partner'
+}
+
 /**
  * TODO: Add support for the following keys:
  *
  * - PrivateKeyPassword
  */
 export interface XeroClientConfiguration {
-	appType: 'public' | 'private' | 'partner';
+	appType: AppType;
 	consumerKey: string;
 	consumerSecret: string;
 	privateKeyPath?: string;
