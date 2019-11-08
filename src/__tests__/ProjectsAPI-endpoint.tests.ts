@@ -1,4 +1,4 @@
-import { XeroClientConfiguration } from '../internals/BaseAPIClient';
+import { XeroClientConfiguration, AppType } from '../internals/BaseAPIClient';
 import { mapConfig, mapState } from '../internals/config-helper';
 import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
 import { InMemoryOAuthLibFactoryFactory } from '../internals/__tests__/helpers/InMemoryOAuthLib';
@@ -9,7 +9,7 @@ import { IEndPointDetails, IFixture } from './helpers/IFixture';
 describe('ProjectsAPI endpoints', () => {
 
 	const xeroConfig: XeroClientConfiguration = {
-		appType: 'private',
+		appType: AppType.Private,
 		consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 		consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 		privateKeyPath: validTestCertPath()

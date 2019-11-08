@@ -1,6 +1,6 @@
 import * as  prompt from 'prompt';
 import * as path from 'path';
-import { XeroClientConfiguration } from '../../internals/BaseAPIClient';
+import { XeroClientConfiguration, AppType } from '../../internals/BaseAPIClient';
 
 export async function readLine(stringPrompt: string): Promise<string> {
 	return new Promise<string>((resolve, reject) => {
@@ -17,7 +17,7 @@ export function getPrivateConfig(testPartition?: string): XeroClientConfiguratio
 		return config;
 	} else {
 		return {
-			appType: 'private',
+			appType: AppType.Private,
 			consumerKey: process.env['PrivateConsumerKey' + (testPartition || '')],
 			consumerSecret: process.env['PrivateConsumerKey' + (testPartition || '')],
 			callbackUrl: null,
@@ -45,7 +45,7 @@ export function getPartnerAppConfig() {
 		return config;
 	} else {
 		return {
-			appType: 'partner',
+			appType: AppType.Partner,
 			consumerKey: process.env.PartnerConsumerKey,
 			consumerSecret: process.env.PartnerConsumerSecret,
 			callbackUrl: null,

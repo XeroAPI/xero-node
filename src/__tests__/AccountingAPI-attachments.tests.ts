@@ -1,4 +1,4 @@
-import { XeroClientConfiguration } from '../internals/BaseAPIClient';
+import { XeroClientConfiguration, AppType } from '../internals/BaseAPIClient';
 import { IOAuth1HttpClient } from '../internals/OAuth1HttpClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { validTestCertPath } from '../internals/__tests__/helpers/privateKey-helpers';
@@ -9,7 +9,7 @@ import { IFixture, IEndPointDetails } from './helpers/IFixture';
 const guid1 = 'dcb417fc-0c23-4ba3-bc7f-fbc718e7e663';
 
 const xeroConfig: XeroClientConfiguration = {
-	appType: 'private',
+	appType: AppType.Private,
 	consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 	consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 	privateKeyPath: validTestCertPath()

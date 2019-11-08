@@ -1,4 +1,4 @@
-import { ApiConfiguration, XeroClientConfiguration } from '../BaseAPIClient';
+import { ApiConfiguration, XeroClientConfiguration, AppType } from '../BaseAPIClient';
 import { mapConfig, mapState } from '../config-helper';
 import { testCertString, validTestCertPath } from './helpers/privateKey-helpers';
 const version = require('../../../package.json').version;
@@ -7,7 +7,7 @@ describe('config-helper', () => {
 	describe('Private apps', () => {
 		describe('with cert as a path', () => {
 			const xeroConfigWithCertPath: XeroClientConfiguration = {
-				appType: 'private',
+				appType: AppType.Private,
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				privateKeyPath: validTestCertPath()
@@ -43,7 +43,7 @@ describe('config-helper', () => {
 
 		describe('with cert as a string', () => {
 			const xeroConfigWithCertPath: XeroClientConfiguration = {
-				appType: 'private',
+				appType: AppType.Private,
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				privateKeyString: testCertString()
@@ -82,7 +82,7 @@ describe('config-helper', () => {
 	describe('Public apps', () => {
 
 		const xeroConfig: XeroClientConfiguration = {
-			appType: 'public',
+			appType: AppType.Public,
 			consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 			consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 			privateKeyPath: validTestCertPath()
@@ -117,7 +117,7 @@ describe('config-helper', () => {
 
 		describe('with cert as a path', () => {
 			const xeroConfig: XeroClientConfiguration = {
-				appType: 'partner',
+				appType: AppType.Partner,
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				privateKeyPath: validTestCertPath()
@@ -150,7 +150,7 @@ describe('config-helper', () => {
 
 		describe('with cert as a string', () => {
 			const xeroConfig: XeroClientConfiguration = {
-				appType: 'partner',
+				appType: AppType.Partner,
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				privateKeyString: testCertString()
@@ -187,7 +187,7 @@ describe('config-helper', () => {
 
 		describe('with cert as path', () => {
 			const xeroConfig: XeroClientConfiguration = {
-				appType: 'partner',
+				appType: AppType.Partner,
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				privateKeyPath: validTestCertPath()
@@ -218,7 +218,7 @@ describe('config-helper', () => {
 
 		describe('with user agent set', () => {
 			const xeroConfig: XeroClientConfiguration = {
-				appType: 'partner',
+				appType: AppType.Partner,
 				userAgent: 'PHILWASHERE',
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
@@ -250,7 +250,7 @@ describe('config-helper', () => {
 
 		describe('with cert as string', () => {
 			const xeroConfig: XeroClientConfiguration = {
-				appType: 'partner',
+				appType: AppType.Partner,
 				consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 				consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 				privateKeyString: testCertString()

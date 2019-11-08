@@ -3,7 +3,7 @@ import { mapConfig, mapState } from './config-helper';
 import * as  fs from 'fs';
 import { AttachmentsResponse } from '../AccountingAPI-responses';
 
-enum AppType {
+export enum AppType {
 	Public = 'public',
 	Private = 'private',
 	Partner = 'partner'

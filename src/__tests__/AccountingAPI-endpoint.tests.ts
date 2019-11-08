@@ -1,4 +1,4 @@
-import { XeroClientConfiguration } from '../internals/BaseAPIClient';
+import { XeroClientConfiguration, AppType } from '../internals/BaseAPIClient';
 import { OAuth1HttpClient } from '../internals/OAuth1HttpClient';
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { mapState, mapConfig } from '../internals/config-helper';
@@ -11,7 +11,7 @@ describe('AccountingAPI endpoints', () => {
 	const guid2 = '857c9e3f-640a-4df2-99fd-dd0e52a785e7';
 
 	const xeroConfig: XeroClientConfiguration = {
-		appType: 'private',
+		appType: AppType.Private,
 		consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 		consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 		privateKeyPath: validTestCertPath()

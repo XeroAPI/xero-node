@@ -1,5 +1,5 @@
 import { TestAPIClient } from './helpers/TestAPIClient';
-import { BaseAPIClient, XeroClientConfiguration } from '../BaseAPIClient';
+import { BaseAPIClient, XeroClientConfiguration, AppType } from '../BaseAPIClient';
 import { validTestCertPath } from './helpers/privateKey-helpers';
 import { XeroError } from '../../XeroError';
 import { OAuth1HttpClient, OAuth1Configuration, AccessToken, RequestToken } from '../OAuth1HttpClient';
@@ -34,7 +34,7 @@ describe('HTTP errors', () => {
 		oauth_session_handle: 'sessionHandle'
 	};
 	const xeroConfig: XeroClientConfiguration = {
-		appType: 'private',
+		appType: AppType.Private,
 		consumerKey: 'RDGDV41TRLQZDFSDX96TKQ2KRJIW4C',
 		consumerSecret: 'DJ3CMGDB0DIIA9DNEEJMRLZG0BWE7Y',
 		privateKeyPath: validTestCertPath()
