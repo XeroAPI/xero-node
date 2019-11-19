@@ -135,7 +135,8 @@ export namespace TaxRate {
     export enum StatusEnum {
         ACTIVE = <any> 'ACTIVE',
         DELETED = <any> 'DELETED',
-        ARCHIVED = <any> 'ARCHIVED'
+        ARCHIVED = <any> 'ARCHIVED',
+        PENDING = <any> 'PENDING'
     }
     export enum ReportTaxTypeEnum {
         AVALARA = <any> 'AVALARA',

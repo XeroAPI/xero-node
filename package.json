@@ -1,27 +1,35 @@
 {
-  "name": "xero-node-sdk",
-  "version": "4.0.0-beta-1",
-  "description": "QA for NodeJS Client for the Xero API, supporting OAuth2 Apps",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "author": "",
-  "license": "ISC",
-  "scripts": {
-    "build": "tsc",
-    "test": "jest"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.12.5",
-    "@types/request": "^2.48.2",
-    "jest": "^24.9.0",
-    "open": "^6.4.0",
-    "prompt": "^1.0.0",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.0.3"
-  },
-  "dependencies": {
-    "openid-client": "^3.4.0",
-    "request": "^2.88.0"
-  }
+    "name": "@xero/xero-node-sdk",
+    "version": "4.0.0-beta3",
+    "description": "NodeJS client for @xero/xero-node-sdk",
+    "repository": "XeroAPI/xero-node",
+    "main": "dist/api.js",
+    "types": "dist/api.d.ts",
+    "author": "Xero Platform Team",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/XeroAPI/xero-node.git"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "devDependencies": {
+        "@types/jest": "^25.0.0",
+        "@types/node": "^12.12.5",
+        "@types/request": "^2.48.3",
+        "jest": "^25.0.0",
+        "open": "^6.4.0",
+        "prompt": "^1.0.0",
+        "ts-jest": "^24.1.0",
+        "typescript": "^3.7.2"
+    },
+    "dependencies": {
+        "openid-client": "^3.8.3",
+        "request": "^2.88.0"
+    },
+    "publishConfig": {
+        "registry": "https://skimdb.npmjs.com/registry"
+    }
 }

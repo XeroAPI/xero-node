@@ -10913,20 +10913,27 @@ export class AccountingApi {
     /**
      * 
      * @summary Allows you to retrieve a specified quote
+     * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
      */     
-    public async getQuote (quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
+    public async getQuote (xeroTenantId: string, quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling getQuote.');
+        }
+
         // verify required parameter 'quoteID' is not null or undefined
         if (quoteID === null || quoteID === undefined) {
             throw new Error('Required parameter quoteID was null or undefined when calling getQuote.');
         }
 
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10970,6 +10977,7 @@ export class AccountingApi {
     /**
      * 
      * @summary Allows you to retrieve any sales quotes
+     * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param dateFrom Filter for quotes after a particular date
      * @param dateTo Filter for quotes before a particular date
@@ -10980,11 +10988,16 @@ export class AccountingApi {
      * @param page e.g. page&#x3D;1 – Up to 100 Quotes will be returned in a single API call with line items shown for each quote
      * @param order Order by an any element
      */     
-    public async getQuotes (ifModifiedSince?: Date, dateFrom?: string, dateTo?: string, expiryDateFrom?: string, expiryDateTo?: string, contactID?: string, status?: string, page?: number, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
+    public async getQuotes (xeroTenantId: string, ifModifiedSince?: Date, dateFrom?: string, dateTo?: string, expiryDateFrom?: string, expiryDateTo?: string, contactID?: string, status?: string, page?: number, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
         const localVarPath = this.basePath + '/Quotes';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling getQuotes.');
+        }
 
         if (dateFrom !== undefined) {
             localVarQueryParameters['DateFrom'] = ObjectSerializer.serialize(dateFrom, "string");
@@ -11018,6 +11031,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

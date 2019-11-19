@@ -38,11 +38,11 @@ export class ReportWithRow {
     * Date of report
     */
     'reportDate'?: string;
+    'rows'?: Array<ReportRows>;
     /**
     * Updated Date
     */
     'updatedDateUTC'?: Date;
-    'rows'?: Array<ReportRows>;
     'fields'?: Array<ReportFields>;
 
     static discriminator: string | undefined = undefined;
@@ -79,14 +79,14 @@ export class ReportWithRow {
             "type": "string"
         },
         {
-            "name": "updatedDateUTC",
-            "baseName": "UpdatedDateUTC",
-            "type": "Date"
-        },
-        {
             "name": "rows",
             "baseName": "Rows",
             "type": "Array<ReportRows>"
+        },
+        {
+            "name": "updatedDateUTC",
+            "baseName": "UpdatedDateUTC",
+            "type": "Date"
         },
         {
             "name": "fields",
