@@ -1,7 +1,7 @@
 {
-  "name": "xero-node",
-  "version": "4.0.0-alpha.3",
-  "description": "NodeJS Client for the Xero API, supporting OAuth2 Apps",
+  "name": "xero-node-sdk",
+  "version": "4.0.0-beta-1",
+  "description": "QA for NodeJS Client for the Xero API, supporting OAuth2 Apps",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "",
@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
-    "@types/node": "^10.14.19",
+    "@types/node": "^12.12.5",
     "@types/request": "^2.48.2",
     "jest": "^24.9.0",
     "open": "^6.4.0",

@@ -77,6 +77,9 @@ export * from './prepayments';
 export * from './purchase';
 export * from './purchaseOrder';
 export * from './purchaseOrders';
+export * from './quote';
+export * from './quoteStatusCodes';
+export * from './quotes';
 export * from './receipt';
 export * from './receipts';
 export * from './repeatingInvoice';
@@ -189,6 +192,9 @@ import { Prepayments } from './prepayments';
 import { Purchase } from './purchase';
 import { PurchaseOrder } from './purchaseOrder';
 import { PurchaseOrders } from './purchaseOrders';
+import { Quote } from './quote';
+import { QuoteStatusCodes } from './quoteStatusCodes';
+import { Quotes } from './quotes';
 import { Receipt } from './receipt';
 import { Receipts } from './receipts';
 import { RepeatingInvoice } from './repeatingInvoice';
@@ -241,6 +247,7 @@ let enumsMap: {[index: string]: any} = {
         "Address.AddressTypeEnum": Address.AddressTypeEnum,
         "BankTransaction.TypeEnum": BankTransaction.TypeEnum,
         "BankTransaction.StatusEnum": BankTransaction.StatusEnum,
+        "BatchPayment.TypeEnum": BatchPayment.TypeEnum,
         "Contact.ContactStatusEnum": Contact.ContactStatusEnum,
         "ContactGroup.StatusEnum": ContactGroup.StatusEnum,
         "CountryCode": CountryCode,
@@ -274,6 +281,7 @@ let enumsMap: {[index: string]: any} = {
         "Prepayment.TypeEnum": Prepayment.TypeEnum,
         "Prepayment.StatusEnum": Prepayment.StatusEnum,
         "PurchaseOrder.StatusEnum": PurchaseOrder.StatusEnum,
+        "QuoteStatusCodes": QuoteStatusCodes,
         "Receipt.StatusEnum": Receipt.StatusEnum,
         "RepeatingInvoice.TypeEnum": RepeatingInvoice.TypeEnum,
         "RepeatingInvoice.StatusEnum": RepeatingInvoice.StatusEnum,
@@ -365,6 +373,8 @@ let typeMap: {[index: string]: any} = {
     "Purchase": Purchase,
     "PurchaseOrder": PurchaseOrder,
     "PurchaseOrders": PurchaseOrders,
+    "Quote": Quote,
+    "Quotes": Quotes,
     "Receipt": Receipt,
     "Receipts": Receipts,
     "RepeatingInvoice": RepeatingInvoice,

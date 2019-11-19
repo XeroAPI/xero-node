@@ -1,4 +1,4 @@
-# xero-node (alpha)
+# xero-node (QA Beta)
 
 ## Release of SDK with oAuth 2 support
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.

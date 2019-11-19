@@ -227,6 +227,7 @@ export namespace BankTransaction {
     }
     export enum StatusEnum {
         AUTHORISED = <any> 'AUTHORISED',
-        DELETED = <any> 'DELETED'
+        DELETED = <any> 'DELETED',
+        VOIDED = <any> 'VOIDED'
     }
 }

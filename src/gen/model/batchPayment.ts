@@ -55,7 +55,7 @@ export class BatchPayment {
     /**
     * PAYBATCH for bill payments or RECBATCH for sales invoice payments (read-only)
     */
-    'type'?: string;
+    'type'?: BatchPayment.TypeEnum;
     /**
     * AUTHORISED or DELETED (read-only). New batch payments will have a status of AUTHORISED. It is not possible to delete batch payments via the API.
     */
@@ -134,7 +134,7 @@ export class BatchPayment {
         {
             "name": "type",
             "baseName": "Type",
-            "type": "string"
+            "type": "BatchPayment.TypeEnum"
         },
         {
             "name": "status",
@@ -162,3 +162,9 @@ export class BatchPayment {
     }
 }
 
+export namespace BatchPayment {
+    export enum TypeEnum {
+        PAYBATCH = <any> 'PAYBATCH',
+        RECBATCH = <any> 'RECBATCH'
+    }
+}

@@ -17,6 +17,7 @@ import fs = require('fs');
 /* tslint:disable:no-unused-locals */
 import { Account } from '../model/account';
 import { Accounts } from '../model/accounts';
+import { Allocation } from '../model/allocation';
 import { Allocations } from '../model/allocations';
 import { Attachments } from '../model/attachments';
 import { BankTransaction } from '../model/bankTransaction';
@@ -43,22 +44,27 @@ import { Invoices } from '../model/invoices';
 import { Item } from '../model/item';
 import { Items } from '../model/items';
 import { Journals } from '../model/journals';
+import { LinkedTransaction } from '../model/linkedTransaction';
 import { LinkedTransactions } from '../model/linkedTransactions';
+import { ManualJournal } from '../model/manualJournal';
 import { ManualJournals } from '../model/manualJournals';
 import { OnlineInvoices } from '../model/onlineInvoices';
 import { Organisations } from '../model/organisations';
 import { Overpayments } from '../model/overpayments';
+import { Payment } from '../model/payment';
 import { PaymentService } from '../model/paymentService';
 import { PaymentServices } from '../model/paymentServices';
 import { Payments } from '../model/payments';
 import { Prepayments } from '../model/prepayments';
 import { PurchaseOrder } from '../model/purchaseOrder';
 import { PurchaseOrders } from '../model/purchaseOrders';
+import { Quotes } from '../model/quotes';
 import { Receipts } from '../model/receipts';
 import { RepeatingInvoices } from '../model/repeatingInvoices';
 import { ReportWithRows } from '../model/reportWithRows';
 import { Reports } from '../model/reports';
 import { RequestEmpty } from '../model/requestEmpty';
+import { TaxRate } from '../model/taxRate';
 import { TaxRates } from '../model/taxRates';
 import { TrackingCategories } from '../model/trackingCategories';
 import { TrackingCategory } from '../model/trackingCategory';
@@ -82,6 +88,7 @@ export class AccountingApi {
     protected _basePath = defaultBasePath;
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected binaryHeaders : any = {};
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
@@ -148,6 +155,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -225,8 +233,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createAccountAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -237,6 +247,8 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(body, "string")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -273,7 +285,6 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body); // because the request was not JSON, we have to manually parse the response
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -308,6 +319,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -385,8 +397,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createBankTransactionAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -476,6 +490,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -546,6 +561,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -611,6 +627,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -687,8 +704,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createBankTransferAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -777,6 +796,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -842,6 +862,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -914,6 +935,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -986,6 +1008,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1050,6 +1073,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1126,8 +1150,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createContactAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1210,6 +1236,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1282,6 +1309,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1354,6 +1382,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1418,6 +1447,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1483,6 +1513,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1555,6 +1586,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1632,8 +1664,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createCreditNoteAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1723,6 +1757,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1793,6 +1828,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1857,6 +1893,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1922,6 +1959,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -1987,6 +2025,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2059,6 +2098,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2124,6 +2164,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2189,6 +2230,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2266,8 +2308,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createInvoiceAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2357,6 +2401,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2427,6 +2472,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2492,6 +2538,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2564,6 +2611,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2629,6 +2677,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2675,9 +2724,9 @@ export class AccountingApi {
      * 
      * @summary Allows you to create linked transactions (billable expenses)
      * @param xeroTenantId Xero identifier for Tenant
-     * @param linkedTransactions 
+     * @param linkedTransaction 
      */     
-    public async createLinkedTransaction (xeroTenantId: string, linkedTransactions: LinkedTransactions, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }> {
+    public async createLinkedTransaction (xeroTenantId: string, linkedTransaction: LinkedTransaction, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -2688,12 +2737,79 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createLinkedTransaction.');
         }
 
-        // verify required parameter 'linkedTransactions' is not null or undefined
-        if (linkedTransactions === null || linkedTransactions === undefined) {
-            throw new Error('Required parameter linkedTransactions was null or undefined when calling createLinkedTransaction.');
+        // verify required parameter 'linkedTransaction' is not null or undefined
+        if (linkedTransaction === null || linkedTransaction === undefined) {
+            throw new Error('Required parameter linkedTransaction was null or undefined when calling createLinkedTransaction.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(linkedTransaction, "LinkedTransaction")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "LinkedTransactions");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to create linked transactions (billable expenses)
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param linkedTransactions 
+     */     
+    public async createLinkedTransactions (xeroTenantId: string, linkedTransactions: LinkedTransactions, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }> {
+        const localVarPath = this.basePath + '/LinkedTransactions#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createLinkedTransactions.');
+        }
+
+        // verify required parameter 'linkedTransactions' is not null or undefined
+        if (linkedTransactions === null || linkedTransactions === undefined) {
+            throw new Error('Required parameter linkedTransactions was null or undefined when calling createLinkedTransactions.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2740,9 +2856,9 @@ export class AccountingApi {
      * 
      * @summary Allows you to create a manual journal
      * @param xeroTenantId Xero identifier for Tenant
-     * @param manualJournals 
+     * @param manualJournal 
      */     
-    public async createManualJournal (xeroTenantId: string, manualJournals: ManualJournals, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ManualJournals;  }> {
+    public async createManualJournal (xeroTenantId: string, manualJournal: ManualJournal, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -2753,12 +2869,13 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createManualJournal.');
         }
 
-        // verify required parameter 'manualJournals' is not null or undefined
-        if (manualJournals === null || manualJournals === undefined) {
-            throw new Error('Required parameter manualJournals was null or undefined when calling createManualJournal.');
+        // verify required parameter 'manualJournal' is not null or undefined
+        if (manualJournal === null || manualJournal === undefined) {
+            throw new Error('Required parameter manualJournal was null or undefined when calling createManualJournal.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2770,7 +2887,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(manualJournals, "ManualJournals")
+            body: ObjectSerializer.serialize(manualJournal, "ManualJournal")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2836,8 +2953,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createManualJournalAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2899,12 +3018,78 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to create a manual journal
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param manualJournals 
+     */     
+    public async createManualJournals (xeroTenantId: string, manualJournals: ManualJournals, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ManualJournals;  }> {
+        const localVarPath = this.basePath + '/ManualJournals#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createManualJournals.');
+        }
+
+        // verify required parameter 'manualJournals' is not null or undefined
+        if (manualJournals === null || manualJournals === undefined) {
+            throw new Error('Required parameter manualJournals was null or undefined when calling createManualJournals.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(manualJournals, "ManualJournals")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: ManualJournals;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "ManualJournals");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Allows you to retrieve Allocations for overpayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
-     * @param allocations 
+     * @param allocation 
      */     
-    public async createOverpaymentAllocation (xeroTenantId: string, overpaymentID: string, allocations: Allocations, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Allocations;  }> {
+    public async createOverpaymentAllocation (xeroTenantId: string, overpaymentID: string, allocation: Allocation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Allocations;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/Allocations'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
         let localVarQueryParameters: any = {};
@@ -2921,12 +3106,86 @@ export class AccountingApi {
             throw new Error('Required parameter overpaymentID was null or undefined when calling createOverpaymentAllocation.');
         }
 
-        // verify required parameter 'allocations' is not null or undefined
-        if (allocations === null || allocations === undefined) {
-            throw new Error('Required parameter allocations was null or undefined when calling createOverpaymentAllocation.');
+        // verify required parameter 'allocation' is not null or undefined
+        if (allocation === null || allocation === undefined) {
+            throw new Error('Required parameter allocation was null or undefined when calling createOverpaymentAllocation.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(allocation, "Allocation")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Allocations;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Allocations");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to retrieve Allocations for overpayments
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param overpaymentID Unique identifier for a Overpayment
+     * @param allocations 
+     */     
+    public async createOverpaymentAllocations (xeroTenantId: string, overpaymentID: string, allocations: Allocations, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Allocations;  }> {
+        const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/Allocations#bulk'
+            .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createOverpaymentAllocations.');
+        }
+
+        // verify required parameter 'overpaymentID' is not null or undefined
+        if (overpaymentID === null || overpaymentID === undefined) {
+            throw new Error('Required parameter overpaymentID was null or undefined when calling createOverpaymentAllocations.');
+        }
+
+        // verify required parameter 'allocations' is not null or undefined
+        if (allocations === null || allocations === undefined) {
+            throw new Error('Required parameter allocations was null or undefined when calling createOverpaymentAllocations.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -2999,6 +3258,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3045,9 +3305,9 @@ export class AccountingApi {
      * 
      * @summary Allows you to create payments for invoices and credit notes
      * @param xeroTenantId Xero identifier for Tenant
-     * @param payments 
+     * @param payment 
      */     
-    public async createPayment (xeroTenantId: string, payments: Payments, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Payments;  }> {
+    public async createPayment (xeroTenantId: string, payment: Payment, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -3058,12 +3318,13 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createPayment.');
         }
 
-        // verify required parameter 'payments' is not null or undefined
-        if (payments === null || payments === undefined) {
-            throw new Error('Required parameter payments was null or undefined when calling createPayment.');
+        // verify required parameter 'payment' is not null or undefined
+        if (payment === null || payment === undefined) {
+            throw new Error('Required parameter payment was null or undefined when calling createPayment.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3075,7 +3336,7 @@ export class AccountingApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(payments, "Payments")
+            body: ObjectSerializer.serialize(payment, "Payment")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3136,6 +3397,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3201,6 +3463,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3245,6 +3508,72 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to create payments for invoices and credit notes
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param payments 
+     */     
+    public async createPayments (xeroTenantId: string, payments: Payments, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Payments;  }> {
+        const localVarPath = this.basePath + '/Payments#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createPayments.');
+        }
+
+        // verify required parameter 'payments' is not null or undefined
+        if (payments === null || payments === undefined) {
+            throw new Error('Required parameter payments was null or undefined when calling createPayments.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(payments, "Payments")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Payments;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Payments");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Allows you to create an Allocation for prepayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID 
@@ -3273,6 +3602,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3345,6 +3675,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3410,6 +3741,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3482,6 +3814,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3552,6 +3885,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3617,6 +3951,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3694,8 +4029,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createReceiptAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3785,6 +4122,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3862,8 +4200,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createRepeatingInvoiceAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3953,6 +4293,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -3999,9 +4340,9 @@ export class AccountingApi {
      * 
      * @summary Allows you to create Tax Rates
      * @param xeroTenantId Xero identifier for Tenant
-     * @param taxRates 
+     * @param taxRate 
      */     
-    public async createTaxRate (xeroTenantId: string, taxRates: TaxRates, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TaxRates;  }> {
+    public async createTaxRate (xeroTenantId: string, taxRate: TaxRate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TaxRates;  }> {
         const localVarPath = this.basePath + '/TaxRates';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -4012,12 +4353,79 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createTaxRate.');
         }
 
-        // verify required parameter 'taxRates' is not null or undefined
-        if (taxRates === null || taxRates === undefined) {
-            throw new Error('Required parameter taxRates was null or undefined when calling createTaxRate.');
+        // verify required parameter 'taxRate' is not null or undefined
+        if (taxRate === null || taxRate === undefined) {
+            throw new Error('Required parameter taxRate was null or undefined when calling createTaxRate.');
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(taxRate, "TaxRate")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: TaxRates;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "TaxRates");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to create Tax Rates
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param taxRates 
+     */     
+    public async createTaxRates (xeroTenantId: string, taxRates: TaxRates, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TaxRates;  }> {
+        const localVarPath = this.basePath + '/TaxRates#bulk';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createTaxRates.');
+        }
+
+        // verify required parameter 'taxRates' is not null or undefined
+        if (taxRates === null || taxRates === undefined) {
+            throw new Error('Required parameter taxRates was null or undefined when calling createTaxRates.');
+        }
+
+        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4083,6 +4491,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4155,6 +4564,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4221,6 +4631,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4293,6 +4704,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4322,6 +4734,7 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -4356,6 +4769,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4385,6 +4799,7 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -4419,6 +4834,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4448,6 +4864,7 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -4482,6 +4899,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4511,6 +4929,7 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -4551,6 +4970,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4617,6 +5037,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4689,6 +5110,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4760,6 +5182,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4790,6 +5213,7 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -4824,6 +5248,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4903,6 +5328,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -4982,6 +5408,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5047,6 +5474,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5117,6 +5545,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5182,6 +5611,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5261,6 +5691,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5340,6 +5771,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5405,6 +5837,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5485,6 +5918,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5550,6 +5984,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5615,6 +6050,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5694,6 +6130,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5773,6 +6210,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5838,6 +6276,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5903,6 +6342,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -5973,6 +6413,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6038,6 +6479,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6108,6 +6550,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6173,6 +6616,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6238,6 +6682,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6296,6 +6741,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6361,6 +6807,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6440,6 +6887,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6519,6 +6967,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6584,6 +7033,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6649,6 +7099,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6714,6 +7165,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6782,6 +7234,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6847,6 +7300,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6932,6 +7386,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -6997,6 +7452,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7069,6 +7525,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7148,6 +7605,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7227,6 +7685,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7292,6 +7751,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7357,6 +7817,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7432,6 +7893,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7500,6 +7962,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7565,6 +8028,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7635,6 +8099,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7700,6 +8165,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7765,6 +8231,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7835,6 +8302,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7900,6 +8368,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -7972,6 +8441,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8051,6 +8521,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8130,6 +8601,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8195,6 +8667,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8260,6 +8733,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8318,6 +8792,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8428,6 +8903,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8493,6 +8969,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8558,6 +9035,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8633,6 +9111,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8698,6 +9177,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8768,6 +9248,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8833,6 +9314,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8921,6 +9403,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -8986,6 +9469,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9065,6 +9549,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9144,6 +9629,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9209,6 +9695,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9284,6 +9771,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9349,6 +9837,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9414,6 +9903,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9472,6 +9962,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9537,6 +10028,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9602,6 +10094,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9682,6 +10175,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9747,6 +10241,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9812,6 +10307,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9870,6 +10366,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -9940,6 +10437,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10005,6 +10503,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10070,6 +10569,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10150,6 +10650,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10215,6 +10716,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10280,6 +10782,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10365,6 +10868,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10408,6 +10912,155 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to retrieve a specified quote
+     * @param quoteID Unique identifier for an Quote
+     */     
+    public async getQuote (quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
+        const localVarPath = this.basePath + '/Quotes/{QuoteID}'
+            .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'quoteID' is not null or undefined
+        if (quoteID === null || quoteID === undefined) {
+            throw new Error('Required parameter quoteID was null or undefined when calling getQuote.');
+        }
+
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Quotes");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to retrieve any sales quotes
+     * @param ifModifiedSince Only records created or modified since this timestamp will be returned
+     * @param dateFrom Filter for quotes after a particular date
+     * @param dateTo Filter for quotes before a particular date
+     * @param expiryDateFrom Filter for quotes expiring after a particular date
+     * @param expiryDateTo Filter for quotes before a particular date
+     * @param contactID Filter for quotes belonging to a particular contact
+     * @param status Filter for quotes of a particular Status
+     * @param page e.g. page&#x3D;1 – Up to 100 Quotes will be returned in a single API call with line items shown for each quote
+     * @param order Order by an any element
+     */     
+    public async getQuotes (ifModifiedSince?: Date, dateFrom?: string, dateTo?: string, expiryDateFrom?: string, expiryDateTo?: string, contactID?: string, status?: string, page?: number, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
+        const localVarPath = this.basePath + '/Quotes';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        if (dateFrom !== undefined) {
+            localVarQueryParameters['DateFrom'] = ObjectSerializer.serialize(dateFrom, "string");
+        }
+
+        if (dateTo !== undefined) {
+            localVarQueryParameters['DateTo'] = ObjectSerializer.serialize(dateTo, "string");
+        }
+
+        if (expiryDateFrom !== undefined) {
+            localVarQueryParameters['ExpiryDateFrom'] = ObjectSerializer.serialize(expiryDateFrom, "string");
+        }
+
+        if (expiryDateTo !== undefined) {
+            localVarQueryParameters['ExpiryDateTo'] = ObjectSerializer.serialize(expiryDateTo, "string");
+        }
+
+        if (contactID !== undefined) {
+            localVarQueryParameters['ContactID'] = ObjectSerializer.serialize(contactID, "string");
+        }
+
+        if (status !== undefined) {
+            localVarQueryParameters['Status'] = ObjectSerializer.serialize(status, "string");
+        }
+
+        if (page !== undefined) {
+            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+        }
+
+        if (order !== undefined) {
+            localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
+        }
+
+        localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Quotes");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Allows you to retrieve a specified draft expense claim receipts
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
@@ -10430,6 +11083,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10509,6 +11163,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10588,6 +11243,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10653,6 +11309,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10718,6 +11375,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10793,6 +11451,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10858,6 +11517,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -10937,6 +11597,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11016,6 +11677,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11081,6 +11743,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11146,6 +11809,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11214,6 +11878,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11297,6 +11962,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11380,6 +12046,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11445,6 +12112,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11503,6 +12171,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11596,6 +12265,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11669,6 +12339,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11742,6 +12413,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11805,6 +12477,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11913,6 +12586,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -11976,6 +12650,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12044,6 +12719,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12117,6 +12793,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12190,6 +12867,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12255,6 +12933,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12320,6 +12999,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12390,6 +13070,7 @@ export class AccountingApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12461,6 +13142,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12538,8 +13220,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateAccountAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12629,6 +13313,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12706,8 +13391,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateBankTransactionAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12801,8 +13488,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateBankTransferAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12891,6 +13580,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -12967,8 +13657,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateContactAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13058,6 +13750,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13130,6 +13823,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13207,8 +13901,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateCreditNoteAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13298,6 +13994,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13370,6 +14067,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13442,6 +14140,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13519,8 +14218,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateInvoiceAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13610,6 +14311,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13682,6 +14384,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13754,6 +14457,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13831,8 +14535,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateManualJournalAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13922,6 +14628,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -13994,6 +14701,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -14071,8 +14779,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateReceiptAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -14167,8 +14877,10 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateRepeatingInvoiceAttachmentByFileName.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -14251,6 +14963,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -14323,6 +15036,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -14402,6 +15116,7 @@ export class AccountingApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;

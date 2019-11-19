@@ -132,6 +132,7 @@ export namespace ExpenseClaim {
         SUBMITTED = <any> 'SUBMITTED',
         AUTHORISED = <any> 'AUTHORISED',
         PAID = <any> 'PAID',
-        VOIDED = <any> 'VOIDED'
+        VOIDED = <any> 'VOIDED',
+        DELETED = <any> 'DELETED'
     }
 }
