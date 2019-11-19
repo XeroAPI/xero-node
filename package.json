@@ -1,6 +1,6 @@
 {
     "name": "xero-node-sdk",
-    "version": "4.0.0-beta2",
+    "version": "4.0.0-beta3",
     "description": "NodeJS client for xero-node-sdk",
     "repository": "XeroAPI/xero-node",
     "main": "dist/api.js",
