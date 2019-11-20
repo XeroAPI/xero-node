@@ -1,4 +1,4 @@
-import { Issuer, TokenSet } from 'openid-client';
+import { Issuer, TokenSet, custom } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
@@ -32,7 +32,7 @@ export class XeroClient {
             client_secret: this.config.clientSecret,
             redirect_uris: this.config.redirectUris,
         });
-        this.openIdClient.CLOCK_TOLERANCE = 5; // to allow a 5 second skew in the openid-client validations
+        this.openIdClient[custom.clock_tolerance] = 5; // to allow a 5 second skew in the openid-client validations
 
 
         const url = this.openIdClient.authorizationUrl({
