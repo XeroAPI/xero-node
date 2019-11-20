@@ -1,7 +1,26 @@
+# xero-node
+
+## Looking for OAuth 2.0 support?
+
 [![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
+
+xero-node with OAuth 2.0 support is available on npm with beta tag removed.
+
+Examples and code is located in the [oauth2 branch](https://github.com/XeroAPI/xero-node/tree/oauth2) (will be promoted to master soon).  Please submit pull requests to the `oauth2` branch for review and submit issues for us to review.
+
+> Version 4 is a complete rewrite of xero-node and not a continuation of version 3.  
+> All OAuth 2.0 SDKs built by Xero will be generated from our [OpenAPI 3.0](https://github.com/XeroAPI/Xero-OpenAPI) specifications.  
+> We still welcome your feedbacks and PRs - please see [guidelines around contributing](https://github.com/XeroAPI/xero-node/blob/oauth2/CONTRIBUTING.md).   
+> A [kitchen sync app](https://github.com/XeroAPI/xero-node-oauth2-app) is available that demonstrates interacting with each endpoint. 
+
+## Looking for OAuth 1.0a support?
+
+
+[![npm package](https://img.shields.io/badge/npm%20package-3.1.1-blue.svg)](https://www.npmjs.com/package/xero-node/v/3.1.1)
+
 [![CircleCI](https://circleci.com/gh/XeroAPI/xero-node/tree/master.svg?style=svg)](https://circleci.com/gh/XeroAPI/xero-node/tree/master)
 
-# xero-node
+xero-node 3.xx with OAuth 1.0a support is available on npm.
 
 NodeJS Client for the [Xero API](http://developer.xero.com). Works with ES5, ES6+ and TypeScript.
 
