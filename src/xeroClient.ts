@@ -22,7 +22,8 @@ export class XeroClient {
     }
 
     constructor(private readonly config: IXeroClientConfig) {
-        this.accountingApi = new xero.AccountingApi(); // need to set access token before use
+        // need to set access token before use
+        this.accountingApi = new xero.AccountingApi(); 
     }
 
     async buildConsentUrl() {
@@ -33,7 +34,6 @@ export class XeroClient {
             redirect_uris: this.config.redirectUris,
         });
         this.openIdClient.CLOCK_TOLERANCE = 5; // to allow a 5 second skew in the openid-client validations
-
 
         const url = this.openIdClient.authorizationUrl({
             redirect_uri: this.config.redirectUris[0],

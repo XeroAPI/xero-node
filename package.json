@@ -1,10 +1,9 @@
 {
-    "name": "xero-node-sdk",
-    "version": "4.0.0-beta3",
-    "description": "NodeJS client for xero-node-sdk",
-    "repository": "XeroAPI/xero-node",
-    "main": "dist/api.js",
-    "types": "dist/api.d.ts",
+    "name": "xero-node",
+    "version": "4.0.1",
+    "description": "NodeJS client for Xero API with OAuth 2.0 support",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "author": "Xero Platform Team",
     "license": "MIT",
     "repository": {

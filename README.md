@@ -1,22 +1,24 @@
-# xero-node (QA Beta)
+# xero-node
+![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 
 ## Release of SDK with oAuth 2 support
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
 * accounting
-* bank feeds 
 
 Coming soon
+* bank feeds 
 * fixed asset 
 * files 
 * payroll
 * projects
 * xero hq
 
-
 ## Usage
 Installation
+This SDK is published as an npm package called xero-node.
+
 ```sh
-npm install xero-node-sdk
+npm install --save xero-node
 ```
 
 ## Getting Started
@@ -34,44 +36,85 @@ Follow these steps to create your Xero app
 * Copy your client id and client secret and save for use later.
 * Click the "Save" button. You secret is now hidden.
 
-Example
+## Typescript example 
+A "kitchen sync" app is available that demonstrates interacting with each endpoint.
+Just [download the code](https://github.com/XeroAPI/xero-node-oauth2-app) and configure.
+
+## Javascript Example 
+This is a barebones example showing how to authenticate and display the 
+name of the Xero organisation you've connected to.
+
 ```js
-import { XeroClient } from "xero-node-sdk";
+'use strict';
+
+const express = require('express');
+const session = require('express-session');
+const  xero_node = require('xero-node')
 
 const client_id = 'YOUR-CLIENT_ID'
 const client_secret = 'YOUR-CLIENT_SECRET'
-const redirectUri = 'http://www.yourdomain.com/callback'
-const scopes = 'openid profile email accounting.transactions offline_access'
+const redirectUri = 'http://localhost:5000/callback'
+const scopes = 'openid profile email accounting.transactions accounting.settings offline_access'
 
-const xero = new XeroClient({
-        clientId: client_id,
-        clientSecret: client_secret,
-        redirectUris: [redirectUri],
-        scopes: scopes.split(" ")
-      });
+const xero = new xero_node.XeroClient({
+  clientId: client_id,
+  clientSecret: client_secret,
+  redirectUris: [redirectUri],
+  scopes: scopes.split(" ")
+});
 
-// Get authorization for user
-let consentUrl = await xeroClient.buildConsentUrl();
+let app = express()
 
-// Redirect user's browser to the consentUrl
-// User will login to Xero and grant your app access
-// User will be returned to the redirectUri (aka Callback URL)
+app.set('port', (process.env.PORT || 3000))
+app.use(express.static(__dirname + '/public'))
+app.use(session({
+    secret: 'something crazy',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
-//On callback - get token from Xero
-//Get the query string (i.e. with express req.query)
-await  xero.setAccessTokenFromRedirectUri(req.query);
+app.get('/', function(req, res) {
+  res.send('<a href="/connect">Connect to Xero</a>');
+})
 
-// Optional: read user info from the id token
-let tokenClaims = await xeroClient.readIdTokenClaims();
-  
-//Call the Xero API
-let apiResponse = await xero.accountingApi.getInvoices(xero.tenantIds[0]);
-console.log("Invoices[1]: ", apiResponse.body.invoices[0].invoiceID);
+app.get('/connect', async function(req, res) {
+  try {
+    let consentUrl = await xero.buildConsentUrl();	  
+    res.redirect(consentUrl);
+  } catch (err) {
+    res.send("Sorry, something went wrong");
+  }
+})
 
-// Refresh the token when it expires
-await xeroClient.refreshToken();
+app.get('/callback', async function(req, res) {
+    const url = "http://localhost:5000/" + req.originalUrl;
+    await xero.setAccessTokenFromRedirectUri(url);
+
+    // Optional: read user info from the id token
+    let tokenClaims = await xero.readIdTokenClaims();
+    const accessToken = await xero.readTokenSet();
+    
+    req.session.accessToken = tokenClaims;
+    req.session.accessToken = accessToken;
+    req.session.xeroTenantId = xero.tenantIds[0];
+    res.redirect('/organisation');
+})
+
+app.get('/organisation', async function(req, res) {  
+  try {
+    const response = await xero.accountingApi.getOrganisations(xero.tenantIds[0])
+    res.send("Hello, " + response.body.organisations[0].name);
+  } catch (err) {
+    res.send("Sorry, something went wrong");
+  }
+})
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, function() {
+  console.log("Your Xero basic public app is running at localhost:" + PORT)
+})
 ```
-
 
 #### Project Structure
 ```
