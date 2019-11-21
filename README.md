@@ -95,7 +95,7 @@ app.get('/callback', async function(req, res) {
     let tokenClaims = await xero.readIdTokenClaims();
     const accessToken = await xero.readTokenSet();
     
-    req.session.accessToken = tokenClaims;
+    req.session.tokenClaims = tokenClaims;
     req.session.accessToken = accessToken;
     req.session.xeroTenantId = xero.tenantIds[0];
     res.redirect('/organisation');
