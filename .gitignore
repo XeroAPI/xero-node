@@ -16,3 +16,4 @@ oAuthState.json
 *junit.xml
 .DS_Store
 .idea
+.tsconfig.tsbuildinfo

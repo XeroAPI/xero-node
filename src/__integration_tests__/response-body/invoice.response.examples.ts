@@ -4,7 +4,7 @@ export const multipleInvoices: InvoicesResponse = {
 	Id: '431b0b6a-81bf-4286-82f3-73e6f8c78fd3',
 	Status: 'OK',
 	ProviderName: 'Xero API Previewer',
-	DateTimeUTC: '\/Date(1518298927172)\/',
+	DateTimeUTC: '/Date(1518298927172)/',
 	Invoices: [
 		{
 			Type: 'ACCPAY',
@@ -14,8 +14,8 @@ export const multipleInvoices: InvoicesResponse = {
 			Payments: [
 				{
 					PaymentID: '22974891-3689-4694-9ee7-fd2ba917af55',
-					Date: '\/Date(1508889600000+0000)\/',
-					Amount: 148.50,
+					Date: '/Date(1508889600000+0000)/',
+					Amount: 148.5,
 					Reference: 'Chq 409',
 					HasAccount: false
 				}
@@ -23,9 +23,9 @@ export const multipleInvoices: InvoicesResponse = {
 			CreditNotes: [],
 			Prepayments: [],
 			Overpayments: [],
-			AmountDue: 0.00,
-			AmountPaid: 148.50,
-			AmountCredited: 0.00,
+			AmountDue: 0.0,
+			AmountPaid: 148.5,
+			AmountCredited: 0.0,
 			HasErrors: false,
 			IsDiscounted: false,
 			HasAttachments: true,
@@ -38,18 +38,18 @@ export const multipleInvoices: InvoicesResponse = {
 				ContactPersons: []
 			},
 			DateString: '2017-10-17T00:00:00',
-			Date: '\/Date(1508198400000+0000)\/',
+			Date: '/Date(1508198400000+0000)/',
 			DueDateString: '2017-10-26T00:00:00',
-			DueDate: '\/Date(1508976000000+0000)\/',
+			DueDate: '/Date(1508976000000+0000)/',
 			Status: 'PAID',
 			LineAmountTypes: 'Exclusive',
 			LineItems: [],
-			SubTotal: 135.00,
-			TotalTax: 13.50,
-			Total: 148.50,
-			UpdatedDateUTC: '\/Date(1221560931500+0000)\/',
+			SubTotal: 135.0,
+			TotalTax: 13.5,
+			Total: 148.5,
+			UpdatedDateUTC: '/Date(1221560931500+0000)/',
 			CurrencyCode: 'AUD',
-			FullyPaidOnDate: '\/Date(1508889600000+0000)\/'
+			FullyPaidOnDate: '/Date(1508889600000+0000)/'
 		},
 		{
 			Type: 'ACCPAY',
@@ -59,8 +59,8 @@ export const multipleInvoices: InvoicesResponse = {
 			Payments: [
 				{
 					PaymentID: '4d06f609-5200-4364-9c8b-d4379a945252',
-					Date: '\/Date(1509840000000+0000)\/',
-					Amount: 974.60,
+					Date: '/Date(1509840000000+0000)/',
+					Amount: 974.6,
 					Reference: 'DD # 96013',
 					HasAccount: false
 				}
@@ -70,16 +70,16 @@ export const multipleInvoices: InvoicesResponse = {
 					CreditNoteID: '7df8949c-b71f-40c0-bbcf-39f2f450f286',
 					CreditNoteNumber: '03391',
 					DateString: '2017-10-31T00:00:00',
-					Date: '\/Date(1509408000000+0000)\/',
+					Date: '/Date(1509408000000+0000)/',
 					LineItems: [],
-					Total: 218.90
+					Total: 218.9
 				}
 			],
 			Prepayments: [],
 			Overpayments: [],
-			AmountDue: 0.00,
-			AmountPaid: 974.60,
-			AmountCredited: 218.90,
+			AmountDue: 0.0,
+			AmountPaid: 974.6,
+			AmountCredited: 218.9,
 			HasErrors: false,
 			IsDiscounted: false,
 			HasAttachments: false,
@@ -92,18 +92,18 @@ export const multipleInvoices: InvoicesResponse = {
 				ContactPersons: []
 			},
 			DateString: '2017-10-30T00:00:00',
-			Date: '\/Date(1509321600000+0000)\/',
+			Date: '/Date(1509321600000+0000)/',
 			DueDateString: '2017-11-06T00:00:00',
-			DueDate: '\/Date(1509926400000+0000)\/',
+			DueDate: '/Date(1509926400000+0000)/',
 			Status: 'PAID',
 			LineAmountTypes: 'Exclusive',
 			LineItems: [],
-			SubTotal: 1085.00,
-			TotalTax: 108.50,
-			Total: 1193.50,
-			UpdatedDateUTC: '\/Date(1221561913790+0000)\/',
+			SubTotal: 1085.0,
+			TotalTax: 108.5,
+			Total: 1193.5,
+			UpdatedDateUTC: '/Date(1221561913790+0000)/',
 			CurrencyCode: 'AUD',
-			FullyPaidOnDate: '\/Date(1509840000000+0000)\/'
+			FullyPaidOnDate: '/Date(1509840000000+0000)/'
 		}
 	]
 };
@@ -112,7 +112,7 @@ export const singleInvoice: InvoicesResponse = {
 	Id: '964a6253-5544-45ad-84e1-73751c9300e1',
 	Status: 'OK',
 	ProviderName: 'Xero API Previewer',
-	DateTimeUTC: '\/Date(1518681355590)\/',
+	DateTimeUTC: '/Date(1518681355590)/',
 	Invoices: [
 		{
 			Type: 'ACCPAY',
@@ -122,19 +122,19 @@ export const singleInvoice: InvoicesResponse = {
 			Payments: [
 				{
 					PaymentID: '22974891-3689-4694-9ee7-fd2ba917af55',
-					Date: '\/Date(1508889600000+0000)\/',
-					Amount: 148.50,
+					Date: '/Date(1508889600000+0000)/',
+					Amount: 148.5,
 					Reference: 'Chq 409',
-					CurrencyRate: 0.000000,
+					CurrencyRate: 0.0,
 					HasAccount: false
 				}
 			],
 			Prepayments: [],
 			Overpayments: [],
-			CISDeduction: 0.00,
-			AmountDue: 0.00,
-			AmountPaid: 148.50,
-			AmountCredited: 0.00,
+			CISDeduction: 0.0,
+			AmountDue: 0.0,
+			AmountPaid: 148.5,
+			AmountCredited: 0.0,
 			SentToContact: false,
 			HasErrors: false,
 			IsDiscounted: false,
@@ -195,7 +195,7 @@ export const singleInvoice: InvoicesResponse = {
 						PhoneCountryCode: ''
 					}
 				],
-				UpdatedDateUTC: '\/Date(1516212222020+0000)\/',
+				UpdatedDateUTC: '/Date(1516212222020+0000)/',
 				ContactGroups: [],
 				IsSupplier: true,
 				IsCustomer: false,
@@ -203,31 +203,32 @@ export const singleInvoice: InvoicesResponse = {
 				PurchasesTrackingCategories: [],
 				ContactPersons: []
 			},
+			HasValidationErrors: false,
 			DateString: '2017-10-17T00:00:00',
-			Date: '\/Date(1508198400000+0000)\/',
+			Date: '/Date(1508198400000+0000)/',
 			DueDateString: '2017-10-26T00:00:00',
-			DueDate: '\/Date(1508976000000+0000)\/',
+			DueDate: '/Date(1508976000000+0000)/',
 			Status: 'PAID',
 			LineAmountTypes: 'Exclusive',
 			LineItems: [
 				{
 					Description: 'Company car park (month in advance)',
-					UnitAmount: 135.00,
+					UnitAmount: 135.0,
 					TaxType: 'INPUT',
-					TaxAmount: 13.50,
-					LineAmount: 135.00,
+					TaxAmount: 13.5,
+					LineAmount: 135.0,
 					AccountCode: '449',
 					Tracking: [],
-					Quantity: 1.0000,
+					Quantity: 1.0,
 					LineItemID: 'c997b810-b637-439d-9036-93fd4319011f'
 				}
 			],
-			SubTotal: 135.00,
-			TotalTax: 13.50,
-			Total: 148.50,
-			UpdatedDateUTC: '\/Date(1221560931500+0000)\/',
+			SubTotal: 135.0,
+			TotalTax: 13.5,
+			Total: 148.5,
+			UpdatedDateUTC: '/Date(1221560931500+0000)/',
 			CurrencyCode: 'AUD',
-			FullyPaidOnDate: '\/Date(1508889600000+0000)\/'
+			FullyPaidOnDate: '/Date(1508889600000+0000)/'
 		}
 	]
 };
@@ -236,7 +237,7 @@ export const createInvoiceWithValidationError: InvoicesResponse = {
 	Id: '83a0044f-bbf9-4242-a1df-00e9402fe6ea',
 	Status: 'OK',
 	ProviderName: 'Node - Private',
-	DateTimeUTC: '\/Date(1518938572217)\/',
+	DateTimeUTC: '/Date(1518938572217)/',
 	Invoices: [
 		{
 			Type: 'IMNOTAREALTYPE',
@@ -253,12 +254,12 @@ export const createInvoiceWithValidationError: InvoicesResponse = {
 				Addresses: [],
 				Phones: [],
 				ContactGroups: [],
-				ContactPersons: [],
+				ContactPersons: []
 			},
 			DateString: '2018-02-15T00:00:00',
-			Date: '\/Date(1518652800000+0000)\/',
+			Date: '/Date(1518652800000+0000)/',
 			DueDateString: '2018-02-22T00:00:00',
-			DueDate: '\/Date(1519257600000+0000)\/',
+			DueDate: '/Date(1519257600000+0000)/',
 			Status: 'DRAFT',
 			LineAmountTypes: 'Exclusive',
 			LineItems: [
@@ -267,7 +268,7 @@ export const createInvoiceWithValidationError: InvoicesResponse = {
 					UnitAmount: 395.0,
 					AccountCode: '200',
 					Tracking: [],
-					Quantity: 4.3400
+					Quantity: 4.34
 				}
 			],
 			CurrencyCode: 'AUD',
@@ -277,7 +278,8 @@ export const createInvoiceWithValidationError: InvoicesResponse = {
 					Message: 'Invoice not of valid type for creation'
 				},
 				{
-					Message: 'An error occurred in Xero. Check the API Status page http://status.developer.xero.com for current service status. Contact the API support team at api@xero.com for more assistance.'
+					Message:
+						'An error occurred in Xero. Check the API Status page http://status.developer.xero.com for current service status. Contact the API support team at api@xero.com for more assistance.'
 				}
 			]
 		}

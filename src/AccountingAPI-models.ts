@@ -1,4 +1,4 @@
-export interface Attachment {
+﻿export interface Attachment {
 	AttachmentID: string;
 	FileName: string;
 	Url: string;
@@ -92,14 +92,6 @@ export interface Payment {
 	Overpayment?: Overpayment;
 	UpdatedDateUTC?: string;
 	History?: HistoryRecord[];
-}
-
-export interface PaymentService {
-	PaymentServiceID?: string;
-	PaymentServiceName?: string;
-	PaymentServiceUrl?: string;
-	PayNowText?: string;
-	PaymentServiceType?: string;
 }
 
 export interface BrandingTheme {
@@ -346,7 +338,6 @@ export interface LineItem {
 	Tracking?: Tracking[];
 	Quantity?: number;
 	LineItemID?: string;
-	ItemCode?: string;
 }
 export interface ManualJournal {
 	ManualJournalID?: string;
