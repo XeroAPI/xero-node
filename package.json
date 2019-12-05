@@ -1,7 +1,7 @@
 {
     "name": "xero-node",
-    "version": "4.0.2",
-    "description": "NodeJS client for Xero API with OAuth 2.0 support",
+    "version": "4.0.3",
+    "description": "Xero NodeJS OAuth 2.0 client for xero-node",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "author": "Xero Platform Team",

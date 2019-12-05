@@ -319,6 +319,7 @@ export namespace Organisation {
         USONRAMP = <any> 'USONRAMP'
     }
     export enum OrganisationTypeEnum {
+        ACCOUNTINGPRACTICE = <any> 'ACCOUNTING_PRACTICE',
         COMPANY = <any> 'COMPANY',
         CHARITY = <any> 'CHARITY',
         CLUBORSOCIETY = <any> 'CLUB_OR_SOCIETY',
@@ -358,6 +359,7 @@ export namespace Organisation {
         YEARLY = <any> 'YEARLY'
     }
     export enum OrganisationEntityTypeEnum {
+        ACCOUNTINGPRACTICE = <any> 'ACCOUNTING_PRACTICE',
         COMPANY = <any> 'COMPANY',
         CHARITY = <any> 'CHARITY',
         CLUBORSOCIETY = <any> 'CLUB_OR_SOCIETY',

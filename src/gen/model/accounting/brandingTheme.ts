@@ -21,6 +21,14 @@ export class BrandingTheme {
     */
     'name'?: string;
     /**
+    * The location of the image file used as the logo on this branding theme
+    */
+    'logoUrl'?: string;
+    /**
+    * Always INVOICE
+    */
+    'type'?: BrandingTheme.TypeEnum;
+    /**
     * Integer – ranked order of branding theme. The default branding theme has a value of 0
     */
     'sortOrder'?: number;
@@ -43,6 +51,16 @@ export class BrandingTheme {
             "type": "string"
         },
         {
+            "name": "logoUrl",
+            "baseName": "LogoUrl",
+            "type": "string"
+        },
+        {
+            "name": "type",
+            "baseName": "Type",
+            "type": "BrandingTheme.TypeEnum"
+        },
+        {
             "name": "sortOrder",
             "baseName": "SortOrder",
             "type": "number"
@@ -58,3 +76,8 @@ export class BrandingTheme {
     }
 }
 
+export namespace BrandingTheme {
+    export enum TypeEnum {
+        INVOICE = <any> 'INVOICE'
+    }
+}
