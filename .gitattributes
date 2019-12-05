@@ -1,0 +1,25 @@
+
+# Enforce CRLF to all files by default
+*          text=auto eol=crlf
+
+#
+# The above will handle all files NOT found below
+#
+
+# Graphics
+*.png      binary
+*.jpg      binary
+
+# Scripts
+*.sh       text eol=lf
+
+# Serialisation
+*.json     text eol=lf
+*.yml      text eol=lf
+
+#
+# Exclude files from exporting
+#
+
+.gitattributes export-ignore
+.gitignore     export-ignore

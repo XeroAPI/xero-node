@@ -4,9 +4,10 @@ docs_theme/
 .*
 *.tgz
 tsconfig.json
-tslint.json
-lib/__integration_tests__/*
-lib/__tests__/*
-jest*
-*.xml
-typedoc*
+typedoc.json
+scratch.ts
+**/__integration_tests__/**
+**/__tests__/**
+*.map
+docs_theme
+*.config.js

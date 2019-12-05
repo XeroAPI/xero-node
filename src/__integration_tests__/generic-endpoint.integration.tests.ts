@@ -30,7 +30,7 @@ describe('Generic accounting endpoint tests', () => {
 
 		expect((response as UsersResponse)).toBeDefined();
 		expect((response as UsersResponse).Id).toBeTruthy();
-		expect((response as UsersResponse).Users.length).toBe(1);
+		expect((response as UsersResponse).Users.length).toBe(7);
 		expect((response as UsersResponse).Users[0].UserID).toBeTruthy();
 	});
 
@@ -63,7 +63,7 @@ describe('Generic endpoint tests', () => {
 
 		expect((response as UsersResponse)).toBeDefined();
 		expect((response as UsersResponse).Id).toBeTruthy();
-		expect((response as UsersResponse).Users.length).toBe(1);
+		expect((response as UsersResponse).Users.length).toBe(7);
 		expect((response as UsersResponse).Users[0].UserID).toBeTruthy();
 	});
 

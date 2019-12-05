@@ -1,0 +1,27 @@
+{
+	"printWidth": 100,
+	"endOfLine": "crlf",
+	"trailingComma": "es5",
+	"singleQuote": true,
+	"semi": true,
+	"useTabs": true,
+	"tabWidth": 1,
+	"arrowParens": "always",
+	"overrides": [
+		{
+			"files": ["*.yml", "*.sh", "*.json"],
+			"options": {
+				"singleQuote": false,
+				"useTabs": false,
+				"endOfLine": "lf",
+				"tabWidth": 2
+			}
+		},
+		{
+			"files": ["package.json", "package-lock.json"],
+			"options": {
+				"parser": "json-stringify"
+			}
+		}
+	]
+}

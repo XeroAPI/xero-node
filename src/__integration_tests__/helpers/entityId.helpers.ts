@@ -22,7 +22,7 @@ export async function getOrCreateAccountId(xero: AccountingAPIClient, args?: any
 	if (!inMemoryCache.accountId || args) {
 		let response = await xero.accounts.get(args);
 		if (response.Accounts.length <= 0) {
-			response = await xero.accounts.create({ Name: 'AmyTest', Code: 200, Type: 'BANK', BankAccountNumber: '00-12345-678-00' });
+			response = await xero.accounts.create({ Name: 'Sid BANK test', Code: 100000, Type: 'BANK', BankAccountNumber: '00-12345-678-00' });
 		}
 		inMemoryCache.accountId = response.Accounts[0].AccountID;
 	}
