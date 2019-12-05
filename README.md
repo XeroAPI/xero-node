@@ -5,13 +5,13 @@
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
 * accounting
 
-Coming soon
-* bank feeds 
-* fixed asset 
-* files 
-* payroll
-* projects
-* xero hq
+### Bank feeds support in OAuth 2
+An early release in a separate package is availalbe [bank feeds API](https://github.com/XeroAPI/xero-node-bankfeeds).
+
+## Looking for OAuth 1.0a support?
+[![npm package](https://img.shields.io/badge/npm%20package-3.1.2-blue.svg)](https://www.npmjs.com/package/xero-node/v/3.1.2)
+
+We've moved this code into the [oauth1 branch](https://github.com/XeroAPI/xero-node/tree/oauth1).
 
 ## Usage
 Installation
