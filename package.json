@@ -1,0 +1,31 @@
+{
+    "name": "xero-node",
+    "version": "4.0.2",
+    "description": "NodeJS client for Xero API with OAuth 2.0 support",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "author": "Xero Platform Team",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/XeroAPI/xero-node.git"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "devDependencies": {
+        "@types/jest": "^25.0.0",
+        "@types/node": "^12.12.5",
+        "@types/request": "^2.48.3",
+        "jest": "^25.0.0",
+        "open": "^6.4.0",
+        "prompt": "^1.0.0",
+        "ts-jest": "^24.1.0",
+        "typescript": "^3.7.2"
+    },
+    "dependencies": {
+        "openid-client": "^3.8.3",
+        "request": "^2.88.0"
+    }
+}
