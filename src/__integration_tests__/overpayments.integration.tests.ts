@@ -14,7 +14,7 @@ describe('/overpayments', () => {
 	async function createOverpayment() {
 		const response = await xero.bankTransactions.create({
 			Type: 'RECEIVE-OVERPAYMENT',
-			Contact: { ContactID: '6d42f03b-181f-43e3-93fb-2025c012de92' },
+			Contact: { ContactID: 'dc163e83-7438-4d7c-be1e-754a70babaec' },
 			BankAccount: { Code: '090' },
 			LineAmountTypes: 'NoTax',
 			LineItems: [{

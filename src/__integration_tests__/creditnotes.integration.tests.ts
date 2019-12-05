@@ -8,7 +8,7 @@ describe('/creditnotes', () => {
 
 	beforeAll(async () => {
 		setJestTimeout();
-		const config = getPrivateConfig('1');
+		const config = getPrivateConfig('2');
 		xero = new AccountingAPIClient(config);
 	});
 

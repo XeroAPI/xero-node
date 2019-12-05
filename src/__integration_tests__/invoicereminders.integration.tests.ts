@@ -1,7 +1,7 @@
 import { AccountingAPIClient } from '../AccountingAPIClient';
 import { getPrivateConfig, setJestTimeout } from './helpers/integration.helpers';
 
-describe('/brandingthemes', () => {
+describe('/invoicereminders', () => {
 	let xero: AccountingAPIClient;
 
 	beforeAll(async () => {

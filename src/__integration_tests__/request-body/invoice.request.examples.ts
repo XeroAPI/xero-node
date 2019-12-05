@@ -51,7 +51,7 @@ const createEmailInvoiceRequest: Invoice = {
 		Description: 'Monthly rental for property at 56a Email Avenue',
 		Quantity: 4.3400,
 		UnitAmount: 395.00,
-		AccountCode: '200'
+		AccountCode: '400'
 	}]
 };
 

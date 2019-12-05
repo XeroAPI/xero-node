@@ -101,6 +101,14 @@ export interface BrandingTheme {
 	CreatedDateUTC: string;
 }
 
+export interface PaymentService {
+	PaymentServiceID?: string;
+	PaymentServiceName?: string;
+	PaymentServiceUrl?: string;
+	PayNowText?: string;
+	PaymentServiceType?: string;
+}
+
 export interface Overpayment {
 	OverpaymentID?: string;
 	Type?: string;
