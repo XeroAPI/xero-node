@@ -17,8 +17,12 @@ export class ProjectsAPIClient extends BaseAPIClient {
 
 	public projects = {
 		get: async (args?: { projectIds?: string[], contactID?: string, states?: string } & PagingArgs): Promise<ProjectsResponse> => {
-			let endpoint = 'projects';
-			endpoint += generateQueryString(args);
+			const endpoint = 'projects' + generateQueryString({
+				...args,
+				// Joining all projectIds into string here in order to ensure that generateQueryString generates
+				// the query string in the following format: projectIDs={projectId},{projectId}
+				projectIds: args.projectIds ? args.projectIds.join(',') : undefined
+			});
 
 			return this.oauth1Client.get<ProjectsResponse>(endpoint);
 		},
