@@ -1,0 +1,1 @@
+{"version":3,"file":"invoiceReminder.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/invoiceReminder.ts"],"names":[],"mappings":";;AAaA,MAAa,eAAe;IAexB,MAAM,CAAC,mBAAmB;QACtB,OAAO,eAAe,CAAC,gBAAgB,CAAC;IAC5C,CAAC;;AAjBL,0CAkBC;AAZU,6BAAa,GAAuB,SAAS,CAAC;AAE9C,gCAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,SAAS;QACjB,UAAU,EAAE,SAAS;QACrB,MAAM,EAAE,SAAS;KACpB;CAAK,CAAC"}

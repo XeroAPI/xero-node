@@ -1,0 +1,1 @@
+{"version":3,"file":"bankTransfers.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/bankTransfers.ts"],"names":[],"mappings":";;AAcA,MAAa,aAAa;IAYtB,MAAM,CAAC,mBAAmB;QACtB,OAAO,aAAa,CAAC,gBAAgB,CAAC;IAC1C,CAAC;;AAdL,sCAeC;AAZU,2BAAa,GAAuB,SAAS,CAAC;AAE9C,8BAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,eAAe;QACvB,UAAU,EAAE,eAAe;QAC3B,MAAM,EAAE,qBAAqB;KAChC;CAAK,CAAC"}

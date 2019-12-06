@@ -1,0 +1,1 @@
+{"version":3,"file":"quotes.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/quotes.ts"],"names":[],"mappings":";;AAcA,MAAa,MAAM;IAYf,MAAM,CAAC,mBAAmB;QACtB,OAAO,MAAM,CAAC,gBAAgB,CAAC;IACnC,CAAC;;AAdL,wBAeC;AAZU,oBAAa,GAAuB,SAAS,CAAC;AAE9C,uBAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,QAAQ;QAChB,UAAU,EAAE,QAAQ;QACpB,MAAM,EAAE,cAAc;KACzB;CAAK,CAAC"}

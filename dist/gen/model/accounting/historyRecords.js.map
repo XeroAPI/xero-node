@@ -1,0 +1,1 @@
+{"version":3,"file":"historyRecords.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/historyRecords.ts"],"names":[],"mappings":";;AAcA,MAAa,cAAc;IAYvB,MAAM,CAAC,mBAAmB;QACtB,OAAO,cAAc,CAAC,gBAAgB,CAAC;IAC3C,CAAC;;AAdL,wCAeC;AAZU,4BAAa,GAAuB,SAAS,CAAC;AAE9C,+BAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,gBAAgB;QACxB,UAAU,EAAE,gBAAgB;QAC5B,MAAM,EAAE,sBAAsB;KACjC;CAAK,CAAC"}

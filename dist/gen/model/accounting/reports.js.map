@@ -1,0 +1,1 @@
+{"version":3,"file":"reports.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/reports.ts"],"names":[],"mappings":";;AAcA,MAAa,OAAO;IAYhB,MAAM,CAAC,mBAAmB;QACtB,OAAO,OAAO,CAAC,gBAAgB,CAAC;IACpC,CAAC;;AAdL,0BAeC;AAZU,qBAAa,GAAuB,SAAS,CAAC;AAE9C,wBAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,SAAS;QACjB,UAAU,EAAE,SAAS;QACrB,MAAM,EAAE,eAAe;KAC1B;CAAK,CAAC"}

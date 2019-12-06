@@ -1,0 +1,1 @@
+{"version":3,"file":"element.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/element.ts"],"names":[],"mappings":";;AAcA,MAAa,OAAO;IAehB,MAAM,CAAC,mBAAmB;QACtB,OAAO,OAAO,CAAC,gBAAgB,CAAC;IACpC,CAAC;;AAjBL,0BAkBC;AAZU,qBAAa,GAAuB,SAAS,CAAC;AAE9C,wBAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,kBAAkB;QAC1B,UAAU,EAAE,kBAAkB;QAC9B,MAAM,EAAE,wBAAwB;KACnC;CAAK,CAAC"}

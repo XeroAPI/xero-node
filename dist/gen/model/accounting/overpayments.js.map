@@ -1,0 +1,1 @@
+{"version":3,"file":"overpayments.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/overpayments.ts"],"names":[],"mappings":";;AAcA,MAAa,YAAY;IAYrB,MAAM,CAAC,mBAAmB;QACtB,OAAO,YAAY,CAAC,gBAAgB,CAAC;IACzC,CAAC;;AAdL,oCAeC;AAZU,0BAAa,GAAuB,SAAS,CAAC;AAE9C,6BAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,cAAc;QACtB,UAAU,EAAE,cAAc;QAC1B,MAAM,EAAE,oBAAoB;KAC/B;CAAK,CAAC"}
