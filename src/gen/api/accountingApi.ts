@@ -154,7 +154,7 @@ export class AccountingApi {
             throw new Error('Required parameter account was null or undefined when calling createAccount.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -235,7 +235,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -318,7 +318,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransaction was null or undefined when calling createBankTransaction.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -399,7 +399,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -489,7 +489,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createBankTransactionHistoryRecord.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -560,7 +560,7 @@ export class AccountingApi {
             localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -626,7 +626,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransfers was null or undefined when calling createBankTransfer.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -706,7 +706,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -795,7 +795,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createBankTransferHistoryRecord.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -861,7 +861,7 @@ export class AccountingApi {
             throw new Error('Required parameter batchPayments was null or undefined when calling createBatchPayment.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -934,7 +934,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createBatchPaymentHistoryRecord.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1007,7 +1007,7 @@ export class AccountingApi {
             throw new Error('Required parameter paymentService was null or undefined when calling createBrandingThemePaymentServices.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1053,6 +1053,7 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to create a single contact in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contact 
      */     
@@ -1072,7 +1073,7 @@ export class AccountingApi {
             throw new Error('Required parameter contact was null or undefined when calling createContact.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1152,7 +1153,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1235,7 +1236,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactGroups was null or undefined when calling createContactGroup.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1308,7 +1309,7 @@ export class AccountingApi {
             throw new Error('Required parameter contacts was null or undefined when calling createContactGroupContacts.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1381,7 +1382,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createContactHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1427,10 +1428,12 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to create a multiple contacts (bulk) in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contacts 
+     * @param summarizeErrors response format that shows validation errors for each bank transaction
      */     
-    public async createContacts (xeroTenantId: string, contacts: Contacts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
+    public async createContacts (xeroTenantId: string, contacts: Contacts, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts#bulk';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -1446,7 +1449,11 @@ export class AccountingApi {
             throw new Error('Required parameter contacts was null or undefined when calling createContacts.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1512,7 +1519,7 @@ export class AccountingApi {
             throw new Error('Required parameter creditNote was null or undefined when calling createCreditNote.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1585,7 +1592,7 @@ export class AccountingApi {
             throw new Error('Required parameter allocations was null or undefined when calling createCreditNoteAllocation.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1666,7 +1673,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1756,7 +1763,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createCreditNoteHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1827,7 +1834,7 @@ export class AccountingApi {
             localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1892,7 +1899,7 @@ export class AccountingApi {
             throw new Error('Required parameter currency was null or undefined when calling createCurrency.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -1958,7 +1965,7 @@ export class AccountingApi {
             throw new Error('Required parameter employee was null or undefined when calling createEmployee.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2024,7 +2031,7 @@ export class AccountingApi {
             throw new Error('Required parameter employees was null or undefined when calling createEmployees.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2097,7 +2104,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createExpenseClaimHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2163,7 +2170,7 @@ export class AccountingApi {
             throw new Error('Required parameter expenseClaims was null or undefined when calling createExpenseClaims.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2229,7 +2236,7 @@ export class AccountingApi {
             throw new Error('Required parameter invoice was null or undefined when calling createInvoice.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2310,7 +2317,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2400,7 +2407,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createInvoiceHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2471,7 +2478,7 @@ export class AccountingApi {
             localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2537,7 +2544,7 @@ export class AccountingApi {
             throw new Error('Required parameter item was null or undefined when calling createItem.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2610,7 +2617,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createItemHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2659,8 +2666,9 @@ export class AccountingApi {
      * @summary Allows you to create an item
      * @param xeroTenantId Xero identifier for Tenant
      * @param items 
+     * @param summarizeErrors response format that shows validation errors for each bank transaction
      */     
-    public async createItems (xeroTenantId: string, items: Items, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Items;  }> {
+    public async createItems (xeroTenantId: string, items: Items, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Items;  }> {
         const localVarPath = this.basePath + '/Items#bulk';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -2676,7 +2684,11 @@ export class AccountingApi {
             throw new Error('Required parameter items was null or undefined when calling createItems.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2742,7 +2754,7 @@ export class AccountingApi {
             throw new Error('Required parameter linkedTransaction was null or undefined when calling createLinkedTransaction.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2808,7 +2820,7 @@ export class AccountingApi {
             throw new Error('Required parameter linkedTransactions was null or undefined when calling createLinkedTransactions.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2874,7 +2886,7 @@ export class AccountingApi {
             throw new Error('Required parameter manualJournal was null or undefined when calling createManualJournal.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -2955,7 +2967,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3038,7 +3050,7 @@ export class AccountingApi {
             throw new Error('Required parameter manualJournals was null or undefined when calling createManualJournals.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3111,7 +3123,7 @@ export class AccountingApi {
             throw new Error('Required parameter allocation was null or undefined when calling createOverpaymentAllocation.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3184,7 +3196,7 @@ export class AccountingApi {
             throw new Error('Required parameter allocations was null or undefined when calling createOverpaymentAllocations.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3257,7 +3269,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createOverpaymentHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3323,7 +3335,7 @@ export class AccountingApi {
             throw new Error('Required parameter payment was null or undefined when calling createPayment.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3396,7 +3408,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createPaymentHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3462,7 +3474,7 @@ export class AccountingApi {
             throw new Error('Required parameter paymentServices was null or undefined when calling createPaymentService.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3528,7 +3540,7 @@ export class AccountingApi {
             throw new Error('Required parameter payments was null or undefined when calling createPayments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3601,7 +3613,7 @@ export class AccountingApi {
             throw new Error('Required parameter allocations was null or undefined when calling createPrepaymentAllocation.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3674,7 +3686,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createPrepaymentHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3740,7 +3752,7 @@ export class AccountingApi {
             throw new Error('Required parameter purchaseOrder was null or undefined when calling createPurchaseOrder.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3813,7 +3825,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createPurchaseOrderHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3884,7 +3896,7 @@ export class AccountingApi {
             localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -3950,7 +3962,7 @@ export class AccountingApi {
             throw new Error('Required parameter receipts was null or undefined when calling createReceipt.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4031,7 +4043,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4121,7 +4133,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createReceiptHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4202,7 +4214,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4292,7 +4304,7 @@ export class AccountingApi {
             throw new Error('Required parameter historyRecords was null or undefined when calling createRepeatingInvoiceHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4358,7 +4370,7 @@ export class AccountingApi {
             throw new Error('Required parameter taxRate was null or undefined when calling createTaxRate.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4424,7 +4436,7 @@ export class AccountingApi {
             throw new Error('Required parameter taxRates was null or undefined when calling createTaxRates.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4490,7 +4502,7 @@ export class AccountingApi {
             throw new Error('Required parameter trackingCategory was null or undefined when calling createTrackingCategory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4563,7 +4575,7 @@ export class AccountingApi {
             throw new Error('Required parameter trackingOption was null or undefined when calling createTrackingOptions.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4630,7 +4642,7 @@ export class AccountingApi {
             throw new Error('Required parameter accountID was null or undefined when calling deleteAccount.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4703,7 +4715,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactID was null or undefined when calling deleteContactGroupContact.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4768,7 +4780,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactGroupID was null or undefined when calling deleteContactGroupContacts.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4833,7 +4845,7 @@ export class AccountingApi {
             throw new Error('Required parameter itemID was null or undefined when calling deleteItem.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4898,7 +4910,7 @@ export class AccountingApi {
             throw new Error('Required parameter linkedTransactionID was null or undefined when calling deleteLinkedTransaction.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -4969,7 +4981,7 @@ export class AccountingApi {
             throw new Error('Required parameter payments was null or undefined when calling deletePayment.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -5036,7 +5048,7 @@ export class AccountingApi {
             throw new Error('Required parameter trackingCategoryID was null or undefined when calling deleteTrackingCategory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -5109,7 +5121,7 @@ export class AccountingApi {
             throw new Error('Required parameter trackingOptionID was null or undefined when calling deleteTrackingOptions.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -5181,7 +5193,7 @@ export class AccountingApi {
             throw new Error('Required parameter requestEmpty was null or undefined when calling emailInvoice.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -5247,7 +5259,7 @@ export class AccountingApi {
             throw new Error('Required parameter accountID was null or undefined when calling getAccount.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -5326,7 +5338,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getAccountAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -5406,7 +5418,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getAccountAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -5473,7 +5485,7 @@ export class AccountingApi {
             throw new Error('Required parameter accountID was null or undefined when calling getAccountAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -5543,7 +5555,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -5610,7 +5622,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransactionID was null or undefined when calling getBankTransaction.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -5689,7 +5701,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getBankTransactionAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -5769,7 +5781,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getBankTransactionAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -5836,7 +5848,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransactionID was null or undefined when calling getBankTransactionAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -5916,7 +5928,7 @@ export class AccountingApi {
             localVarQueryParameters['unitdp'] = ObjectSerializer.serialize(unitdp, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -5983,7 +5995,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransactionID was null or undefined when calling getBankTransactionsHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6049,7 +6061,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransferID was null or undefined when calling getBankTransfer.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6128,7 +6140,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getBankTransferAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -6208,7 +6220,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getBankTransferAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -6275,7 +6287,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransferID was null or undefined when calling getBankTransferAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6341,7 +6353,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransferID was null or undefined when calling getBankTransferHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6411,7 +6423,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -6478,7 +6490,7 @@ export class AccountingApi {
             throw new Error('Required parameter batchPaymentID was null or undefined when calling getBatchPaymentHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6548,7 +6560,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -6615,7 +6627,7 @@ export class AccountingApi {
             throw new Error('Required parameter brandingThemeID was null or undefined when calling getBrandingTheme.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6681,7 +6693,7 @@ export class AccountingApi {
             throw new Error('Required parameter brandingThemeID was null or undefined when calling getBrandingThemePaymentServices.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6740,7 +6752,7 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getBrandingThemes.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6806,7 +6818,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactID was null or undefined when calling getContact.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -6885,7 +6897,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getContactAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -6965,7 +6977,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getContactAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -7032,7 +7044,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactID was null or undefined when calling getContactAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -7098,7 +7110,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactID was null or undefined when calling getContactCISSettings.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -7164,7 +7176,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactGroupID was null or undefined when calling getContactGroup.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -7233,7 +7245,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -7299,7 +7311,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactID was null or undefined when calling getContactHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -7384,7 +7396,7 @@ export class AccountingApi {
             localVarQueryParameters['includeArchived'] = ObjectSerializer.serialize(includeArchived, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -7451,7 +7463,7 @@ export class AccountingApi {
             throw new Error('Required parameter creditNoteID was null or undefined when calling getCreditNote.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -7523,7 +7535,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getCreditNoteAsPdf.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -7603,7 +7615,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getCreditNoteAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -7683,7 +7695,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getCreditNoteAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -7750,7 +7762,7 @@ export class AccountingApi {
             throw new Error('Required parameter creditNoteID was null or undefined when calling getCreditNoteAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -7816,7 +7828,7 @@ export class AccountingApi {
             throw new Error('Required parameter creditNoteID was null or undefined when calling getCreditNoteHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -7891,7 +7903,7 @@ export class AccountingApi {
             localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -7961,7 +7973,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -8027,7 +8039,7 @@ export class AccountingApi {
             throw new Error('Required parameter employeeID was null or undefined when calling getEmployee.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -8097,7 +8109,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -8164,7 +8176,7 @@ export class AccountingApi {
             throw new Error('Required parameter expenseClaimID was null or undefined when calling getExpenseClaim.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -8230,7 +8242,7 @@ export class AccountingApi {
             throw new Error('Required parameter expenseClaimID was null or undefined when calling getExpenseClaimHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -8300,7 +8312,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -8367,7 +8379,7 @@ export class AccountingApi {
             throw new Error('Required parameter invoiceID was null or undefined when calling getInvoice.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -8439,7 +8451,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getInvoiceAsPdf.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -8519,7 +8531,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getInvoiceAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -8599,7 +8611,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getInvoiceAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -8666,7 +8678,7 @@ export class AccountingApi {
             throw new Error('Required parameter invoiceID was null or undefined when calling getInvoiceAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -8732,7 +8744,7 @@ export class AccountingApi {
             throw new Error('Required parameter invoiceID was null or undefined when calling getInvoiceHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -8791,7 +8803,7 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getInvoiceReminders.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -8901,7 +8913,7 @@ export class AccountingApi {
             localVarQueryParameters['unitdp'] = ObjectSerializer.serialize(unitdp, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -8968,7 +8980,7 @@ export class AccountingApi {
             throw new Error('Required parameter itemID was null or undefined when calling getItem.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9034,7 +9046,7 @@ export class AccountingApi {
             throw new Error('Required parameter itemID was null or undefined when calling getItemHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9109,7 +9121,7 @@ export class AccountingApi {
             localVarQueryParameters['unitdp'] = ObjectSerializer.serialize(unitdp, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -9176,7 +9188,7 @@ export class AccountingApi {
             throw new Error('Required parameter journalID was null or undefined when calling getJournal.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9246,7 +9258,7 @@ export class AccountingApi {
             localVarQueryParameters['paymentsOnly'] = ObjectSerializer.serialize(paymentsOnly, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -9313,7 +9325,7 @@ export class AccountingApi {
             throw new Error('Required parameter linkedTransactionID was null or undefined when calling getLinkedTransaction.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9402,7 +9414,7 @@ export class AccountingApi {
             localVarQueryParameters['TargetTransactionID'] = ObjectSerializer.serialize(targetTransactionID, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9468,7 +9480,7 @@ export class AccountingApi {
             throw new Error('Required parameter manualJournalID was null or undefined when calling getManualJournal.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9547,7 +9559,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getManualJournalAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -9627,7 +9639,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getManualJournalAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -9694,7 +9706,7 @@ export class AccountingApi {
             throw new Error('Required parameter manualJournalID was null or undefined when calling getManualJournalAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9769,7 +9781,7 @@ export class AccountingApi {
             localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -9836,7 +9848,7 @@ export class AccountingApi {
             throw new Error('Required parameter invoiceID was null or undefined when calling getOnlineInvoice.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9902,7 +9914,7 @@ export class AccountingApi {
             throw new Error('Required parameter organisationID was null or undefined when calling getOrganisationCISSettings.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -9961,7 +9973,7 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getOrganisations.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10027,7 +10039,7 @@ export class AccountingApi {
             throw new Error('Required parameter overpaymentID was null or undefined when calling getOverpayment.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10093,7 +10105,7 @@ export class AccountingApi {
             throw new Error('Required parameter overpaymentID was null or undefined when calling getOverpaymentHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10173,7 +10185,7 @@ export class AccountingApi {
             localVarQueryParameters['unitdp'] = ObjectSerializer.serialize(unitdp, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -10240,7 +10252,7 @@ export class AccountingApi {
             throw new Error('Required parameter paymentID was null or undefined when calling getPayment.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10306,7 +10318,7 @@ export class AccountingApi {
             throw new Error('Required parameter paymentID was null or undefined when calling getPaymentHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10365,7 +10377,7 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getPaymentServices.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10435,7 +10447,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -10502,7 +10514,7 @@ export class AccountingApi {
             throw new Error('Required parameter prepaymentID was null or undefined when calling getPrepayment.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10568,7 +10580,7 @@ export class AccountingApi {
             throw new Error('Required parameter prepaymentID was null or undefined when calling getPrepaymentHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10648,7 +10660,7 @@ export class AccountingApi {
             localVarQueryParameters['unitdp'] = ObjectSerializer.serialize(unitdp, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -10715,7 +10727,7 @@ export class AccountingApi {
             throw new Error('Required parameter purchaseOrderID was null or undefined when calling getPurchaseOrder.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10781,7 +10793,7 @@ export class AccountingApi {
             throw new Error('Required parameter purchaseOrderID was null or undefined when calling getPurchaseOrderHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -10866,7 +10878,7 @@ export class AccountingApi {
             localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -10933,7 +10945,7 @@ export class AccountingApi {
             throw new Error('Required parameter quoteID was null or undefined when calling getQuote.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -11031,7 +11043,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -11096,7 +11108,7 @@ export class AccountingApi {
             throw new Error('Required parameter receiptID was null or undefined when calling getReceipt.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -11175,7 +11187,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getReceiptAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -11255,7 +11267,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getReceiptAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -11322,7 +11334,7 @@ export class AccountingApi {
             throw new Error('Required parameter receiptID was null or undefined when calling getReceiptAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -11388,7 +11400,7 @@ export class AccountingApi {
             throw new Error('Required parameter receiptID was null or undefined when calling getReceiptHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -11463,7 +11475,7 @@ export class AccountingApi {
             localVarQueryParameters['unitdp'] = ObjectSerializer.serialize(unitdp, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -11530,7 +11542,7 @@ export class AccountingApi {
             throw new Error('Required parameter repeatingInvoiceID was null or undefined when calling getRepeatingInvoice.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -11609,7 +11621,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getRepeatingInvoiceAttachmentByFileName.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -11689,7 +11701,7 @@ export class AccountingApi {
             throw new Error('Required parameter contentType was null or undefined when calling getRepeatingInvoiceAttachmentById.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -11756,7 +11768,7 @@ export class AccountingApi {
             throw new Error('Required parameter repeatingInvoiceID was null or undefined when calling getRepeatingInvoiceAttachments.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -11822,7 +11834,7 @@ export class AccountingApi {
             throw new Error('Required parameter repeatingInvoiceID was null or undefined when calling getRepeatingInvoiceHistory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -11891,7 +11903,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -11975,7 +11987,7 @@ export class AccountingApi {
             localVarQueryParameters['toDate'] = ObjectSerializer.serialize(toDate, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12059,7 +12071,7 @@ export class AccountingApi {
             localVarQueryParameters['toDate'] = ObjectSerializer.serialize(toDate, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12125,7 +12137,7 @@ export class AccountingApi {
             throw new Error('Required parameter reportID was null or undefined when calling getReportBASorGST.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12184,7 +12196,7 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getReportBASorGSTList.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12278,7 +12290,7 @@ export class AccountingApi {
             localVarQueryParameters['paymentsOnly'] = ObjectSerializer.serialize(paymentsOnly, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12352,7 +12364,7 @@ export class AccountingApi {
             localVarQueryParameters['timeframe'] = ObjectSerializer.serialize(timeframe, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12426,7 +12438,7 @@ export class AccountingApi {
             localVarQueryParameters['timeframe'] = ObjectSerializer.serialize(timeframe, "number");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12490,7 +12502,7 @@ export class AccountingApi {
             localVarQueryParameters['date'] = ObjectSerializer.serialize(date, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12599,7 +12611,7 @@ export class AccountingApi {
             localVarQueryParameters['paymentsOnly'] = ObjectSerializer.serialize(paymentsOnly, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12663,7 +12675,7 @@ export class AccountingApi {
             localVarQueryParameters['reportYear'] = ObjectSerializer.serialize(reportYear, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12732,7 +12744,7 @@ export class AccountingApi {
             localVarQueryParameters['paymentsOnly'] = ObjectSerializer.serialize(paymentsOnly, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12806,7 +12818,7 @@ export class AccountingApi {
             localVarQueryParameters['TaxType'] = ObjectSerializer.serialize(taxType, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12880,7 +12892,7 @@ export class AccountingApi {
             localVarQueryParameters['includeArchived'] = ObjectSerializer.serialize(includeArchived, "boolean");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -12946,7 +12958,7 @@ export class AccountingApi {
             throw new Error('Required parameter trackingCategoryID was null or undefined when calling getTrackingCategory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13012,7 +13024,7 @@ export class AccountingApi {
             throw new Error('Required parameter userID was null or undefined when calling getUser.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13082,7 +13094,7 @@ export class AccountingApi {
             localVarQueryParameters['order'] = ObjectSerializer.serialize(order, "string");
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -13155,7 +13167,7 @@ export class AccountingApi {
             throw new Error('Required parameter accounts was null or undefined when calling updateAccount.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13236,7 +13248,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13326,7 +13338,7 @@ export class AccountingApi {
             throw new Error('Required parameter bankTransactions was null or undefined when calling updateBankTransaction.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13407,7 +13419,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13504,7 +13516,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13593,7 +13605,7 @@ export class AccountingApi {
             throw new Error('Required parameter contacts was null or undefined when calling updateContact.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13673,7 +13685,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13763,7 +13775,7 @@ export class AccountingApi {
             throw new Error('Required parameter contactGroups was null or undefined when calling updateContactGroup.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13836,7 +13848,7 @@ export class AccountingApi {
             throw new Error('Required parameter creditNotes was null or undefined when calling updateCreditNote.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -13917,7 +13929,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14007,7 +14019,7 @@ export class AccountingApi {
             throw new Error('Required parameter employees was null or undefined when calling updateEmployee.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14080,7 +14092,7 @@ export class AccountingApi {
             throw new Error('Required parameter expenseClaims was null or undefined when calling updateExpenseClaim.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14153,7 +14165,7 @@ export class AccountingApi {
             throw new Error('Required parameter invoices was null or undefined when calling updateInvoice.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14234,7 +14246,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14324,7 +14336,7 @@ export class AccountingApi {
             throw new Error('Required parameter items was null or undefined when calling updateItem.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14397,7 +14409,7 @@ export class AccountingApi {
             throw new Error('Required parameter linkedTransactions was null or undefined when calling updateLinkedTransaction.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14470,7 +14482,7 @@ export class AccountingApi {
             throw new Error('Required parameter manualJournals was null or undefined when calling updateManualJournal.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14551,7 +14563,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14641,7 +14653,7 @@ export class AccountingApi {
             throw new Error('Required parameter purchaseOrders was null or undefined when calling updatePurchaseOrder.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14714,7 +14726,7 @@ export class AccountingApi {
             throw new Error('Required parameter receipts was null or undefined when calling updateReceipt.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14795,7 +14807,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14893,7 +14905,7 @@ export class AccountingApi {
         }
         this.binaryHeaders = {'Accept': 'application/json'};
         (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -14976,7 +14988,7 @@ export class AccountingApi {
             throw new Error('Required parameter taxRates was null or undefined when calling updateTaxRate.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -15049,7 +15061,7 @@ export class AccountingApi {
             throw new Error('Required parameter trackingCategory was null or undefined when calling updateTrackingCategory.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -15129,7 +15141,7 @@ export class AccountingApi {
             throw new Error('Required parameter trackingOption was null or undefined when calling updateTrackingOptions.');
         }
 
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
