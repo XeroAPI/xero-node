@@ -147,6 +147,7 @@ export namespace TaxRate {
         ECOUTPUTSERVICES = <any> 'ECOUTPUTSERVICES',
         ECINPUT = <any> 'ECINPUT',
         ECACQUISITIONS = <any> 'ECACQUISITIONS',
+        EXEMPTCAPITAL = <any> 'EXEMPTCAPITAL',
         EXEMPTEXPENSES = <any> 'EXEMPTEXPENSES',
         EXEMPTINPUT = <any> 'EXEMPTINPUT',
         EXEMPTOUTPUT = <any> 'EXEMPTOUTPUT',

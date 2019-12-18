@@ -99,6 +99,10 @@ export class CreditNote {
     */
     'hasAttachments'?: boolean;
     /**
+    * A boolean to indicate if a credit note has an validation errors
+    */
+    'hasErrors'?: boolean;
+    /**
     * Displays array of validation error messages from the API
     */
     'validationErrors'?: Array<ValidationError>;
@@ -214,6 +218,11 @@ export class CreditNote {
         {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
+            "type": "boolean"
+        },
+        {
+            "name": "hasErrors",
+            "baseName": "HasErrors",
             "type": "boolean"
         },
         {
