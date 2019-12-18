@@ -64,7 +64,6 @@ import { RepeatingInvoices } from '../model/accounting/repeatingInvoices';
 import { ReportWithRows } from '../model/accounting/reportWithRows';
 import { Reports } from '../model/accounting/reports';
 import { RequestEmpty } from '../model/accounting/requestEmpty';
-import { TaxRate } from '../model/accounting/taxRate';
 import { TaxRates } from '../model/accounting/taxRates';
 import { TrackingCategories } from '../model/accounting/trackingCategories';
 import { TrackingCategory } from '../model/accounting/trackingCategory';
@@ -541,7 +540,7 @@ export class AccountingApi {
      * @param summarizeErrors response format that shows validation errors for each bank transaction
      */     
     public async createBankTransactions (xeroTenantId: string, bankTransactions: BankTransactions, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BankTransactions;  }> {
-        const localVarPath = this.basePath + '/BankTransactions#bulk';
+        const localVarPath = this.basePath + '/BankTransactions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -567,7 +566,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -1434,7 +1433,7 @@ export class AccountingApi {
      * @param summarizeErrors response format that shows validation errors for each bank transaction
      */     
     public async createContacts (xeroTenantId: string, contacts: Contacts, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
-        const localVarPath = this.basePath + '/Contacts#bulk';
+        const localVarPath = this.basePath + '/Contacts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1460,7 +1459,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -1815,7 +1814,7 @@ export class AccountingApi {
      * @param summarizeErrors shows validation errors for each credit note
      */     
     public async createCreditNotes (xeroTenantId: string, creditNotes: CreditNotes, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreditNotes;  }> {
-        const localVarPath = this.basePath + '/CreditNotes#bulk';
+        const localVarPath = this.basePath + '/CreditNotes';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1841,7 +1840,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -2016,7 +2015,7 @@ export class AccountingApi {
      * @param employees 
      */     
     public async createEmployees (xeroTenantId: string, employees: Employees, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Employees;  }> {
-        const localVarPath = this.basePath + '/Employees#bulk';
+        const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -2038,7 +2037,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -2459,7 +2458,7 @@ export class AccountingApi {
      * @param summarizeErrors shows validation errors for each invoice
      */     
     public async createInvoices (xeroTenantId: string, invoices: Invoices, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Invoices;  }> {
-        const localVarPath = this.basePath + '/Invoices#bulk';
+        const localVarPath = this.basePath + '/Invoices';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -2485,7 +2484,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -2669,7 +2668,7 @@ export class AccountingApi {
      * @param summarizeErrors response format that shows validation errors for each bank transaction
      */     
     public async createItems (xeroTenantId: string, items: Items, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Items;  }> {
-        const localVarPath = this.basePath + '/Items#bulk';
+        const localVarPath = this.basePath + '/Items';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -2695,7 +2694,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -2805,7 +2804,7 @@ export class AccountingApi {
      * @param linkedTransactions 
      */     
     public async createLinkedTransactions (xeroTenantId: string, linkedTransactions: LinkedTransactions, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }> {
-        const localVarPath = this.basePath + '/LinkedTransactions#bulk';
+        const localVarPath = this.basePath + '/LinkedTransactions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -2827,7 +2826,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3035,7 +3034,7 @@ export class AccountingApi {
      * @param manualJournals 
      */     
     public async createManualJournals (xeroTenantId: string, manualJournals: ManualJournals, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ManualJournals;  }> {
-        const localVarPath = this.basePath + '/ManualJournals#bulk';
+        const localVarPath = this.basePath + '/ManualJournals';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -3057,7 +3056,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3175,7 +3174,7 @@ export class AccountingApi {
      * @param allocations 
      */     
     public async createOverpaymentAllocations (xeroTenantId: string, overpaymentID: string, allocations: Allocations, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Allocations;  }> {
-        const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/Allocations#bulk'
+        const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/Allocations'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -3203,7 +3202,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3525,7 +3524,7 @@ export class AccountingApi {
      * @param payments 
      */     
     public async createPayments (xeroTenantId: string, payments: Payments, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Payments;  }> {
-        const localVarPath = this.basePath + '/Payments#bulk';
+        const localVarPath = this.basePath + '/Payments';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -3547,7 +3546,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3877,7 +3876,7 @@ export class AccountingApi {
      * @param summarizeErrors shows validation errors for each purchase order.
      */     
     public async createPurchaseOrders (xeroTenantId: string, purchaseOrders: PurchaseOrders, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }> {
-        const localVarPath = this.basePath + '/PurchaseOrders#bulk';
+        const localVarPath = this.basePath + '/PurchaseOrders';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -3903,7 +3902,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -4350,78 +4349,12 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create Tax Rates
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param taxRate 
-     */     
-    public async createTaxRate (xeroTenantId: string, taxRate: TaxRate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TaxRates;  }> {
-        const localVarPath = this.basePath + '/TaxRates';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createTaxRate.');
-        }
-
-        // verify required parameter 'taxRate' is not null or undefined
-        if (taxRate === null || taxRate === undefined) {
-            throw new Error('Required parameter taxRate was null or undefined when calling createTaxRate.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(taxRate, "TaxRate")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: TaxRates;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TaxRates");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Allows you to create Tax Rates
+     * @summary Allows you to create one or more Tax Rates
      * @param xeroTenantId Xero identifier for Tenant
      * @param taxRates 
      */     
     public async createTaxRates (xeroTenantId: string, taxRates: TaxRates, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TaxRates;  }> {
-        const localVarPath = this.basePath + '/TaxRates#bulk';
+        const localVarPath = this.basePath + '/TaxRates';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
