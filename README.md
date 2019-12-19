@@ -1,6 +1,9 @@
 # xero-node
 ![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 
+## Requirements
+node version 10.13.0 or higher
+
 ## Release of SDK with oAuth 2 support
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
 * accounting
