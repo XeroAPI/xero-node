@@ -7447,7 +7447,7 @@ export class AccountingApi {
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getCreditNoteAsPdf (xeroTenantId: string, creditNoteID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
-        const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/pdf'
+        const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -8363,7 +8363,7 @@ export class AccountingApi {
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getInvoiceAsPdf (xeroTenantId: string, invoiceID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
-        const localVarPath = this.basePath + '/Invoices/{InvoiceID}/pdf'
+        const localVarPath = this.basePath + '/Invoices/{InvoiceID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
