@@ -12,12 +12,21 @@ export interface IXeroClientConfig {
 }
 
 export class XeroClient {
+
+    constructor(
+        private readonly config: IXeroClientConfig,
+        private tokenSet: TokenSet,
+        private _tenantIds: string[]
+    ) {
+        // need to set access token before use
+        this.accountingApi = new xero.AccountingApi(); 
+        this.buildClient()
+    }
+
     readonly accountingApi: xero.AccountingApi;
 
     private openIdClient: any; // from openid-client
-    private tokenSet: TokenSet;
-
-    private _tenantIds: string[];
+    
     get tenantIds(): string[] {
         return this._tenantIds;
     }
@@ -29,12 +38,6 @@ export class XeroClient {
             client_secret: this.config.clientSecret,
             redirect_uris: this.config.redirectUris,
         });
-    }
-
-    constructor(private readonly config: IXeroClientConfig) {
-        // need to set access token before use
-        this.accountingApi = new xero.AccountingApi(); 
-        this.buildClient()
     }
 
     async buildConsentUrl() {
