@@ -1,4 +1,4 @@
-import { Issuer, TokenSet, custom } from 'openid-client';
+import { Issuer, TokenSet, custom, } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
@@ -8,6 +8,7 @@ export interface IXeroClientConfig {
     clientSecret: string,
     redirectUris: string[],
     scopes: string[],
+    state?: string
 }
 
 export class XeroClient {
@@ -21,18 +22,22 @@ export class XeroClient {
         return this._tenantIds;
     }
 
-    constructor(private readonly config: IXeroClientConfig) {
-        // need to set access token before use
-        this.accountingApi = new xero.AccountingApi(); 
-    }
-
-    async buildConsentUrl() {
+    async buildClient() {
         const issuer = await Issuer.discover('https://identity.xero.com');
         this.openIdClient = new issuer.Client({
             client_id: this.config.clientId,
             client_secret: this.config.clientSecret,
             redirect_uris: this.config.redirectUris,
         });
+    }
+
+    constructor(private readonly config: IXeroClientConfig) {
+        // need to set access token before use
+        this.accountingApi = new xero.AccountingApi(); 
+        this.buildClient()
+    }
+
+    async buildConsentUrl() {
         this.openIdClient[custom.clock_tolerance] = 5; // to allow a 5 second skew in the openid-client validations
 
         const url = this.openIdClient.authorizationUrl({
@@ -44,14 +49,9 @@ export class XeroClient {
     }
 
     async setAccessTokenFromRedirectUri(url: string) {
-        // get query params as object
-        const urlObject = new URL(url);
-        let params: { [key: string]: string } = {};
-        for (const [key, value] of urlObject.searchParams) {
-            params[key] = value;
-        }
-
-        this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params);
+        const params = this.openIdClient.callbackParams(url)
+        const check = {...params}
+        this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
         this.setAccessTokenForAllApis();
 
         await this.fetchConnectedTenantIds();
