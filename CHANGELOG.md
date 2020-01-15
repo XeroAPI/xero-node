@@ -21,3 +21,5 @@ async setAccessTokenFromRedirectUri(url: string) {
 
 3) Leverages openId's callbackParam fn() to simplify K,V object creation
 `const params = this.openIdClient.callbackParams(url)`
+
+4) clean up constructor and set default values for token and tenants

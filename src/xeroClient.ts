@@ -13,15 +13,14 @@ export interface IXeroClientConfig {
 
 export class XeroClient {
 
-    constructor(
-        private readonly config: IXeroClientConfig,
-        private tokenSet: TokenSet,
-        private _tenantIds: string[]
-    ) {
+    constructor(private readonly config: IXeroClientConfig) {
         // need to set access token before use
         this.accountingApi = new xero.AccountingApi(); 
         this.buildClient()
     }
+
+    private tokenSet: TokenSet = new TokenSet
+    private _tenantIds: string[] = ['']
 
     readonly accountingApi: xero.AccountingApi;
 
