@@ -1,6 +1,0 @@
-export declare enum PaymentTermType {
-    DAYSAFTERBILLDATE,
-    DAYSAFTERBILLMONTH,
-    OFCURRENTMONTH,
-    OFFOLLOWINGMONTH
-}

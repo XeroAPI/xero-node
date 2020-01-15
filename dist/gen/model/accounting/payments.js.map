@@ -1,1 +1,0 @@
-{"version":3,"file":"payments.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/payments.ts"],"names":[],"mappings":";;AAcA,MAAa,QAAQ;IAYjB,MAAM,CAAC,mBAAmB;QACtB,OAAO,QAAQ,CAAC,gBAAgB,CAAC;IACrC,CAAC;;AAdL,4BAeC;AAZU,sBAAa,GAAuB,SAAS,CAAC;AAE9C,yBAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,UAAU;QAClB,UAAU,EAAE,UAAU;QACtB,MAAM,EAAE,gBAAgB;KAC3B;CAAK,CAAC"}

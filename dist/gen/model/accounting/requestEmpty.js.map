@@ -1,1 +1,0 @@
-{"version":3,"file":"requestEmpty.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/requestEmpty.ts"],"names":[],"mappings":";;AAaA,MAAa,YAAY;IAerB,MAAM,CAAC,mBAAmB;QACtB,OAAO,YAAY,CAAC,gBAAgB,CAAC;IACzC,CAAC;;AAjBL,oCAkBC;AAZU,0BAAa,GAAuB,SAAS,CAAC;AAE9C,6BAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,QAAQ;QAChB,UAAU,EAAE,QAAQ;QACpB,MAAM,EAAE,QAAQ;KACnB;CAAK,CAAC"}

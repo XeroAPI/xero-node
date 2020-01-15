@@ -1,1 +1,0 @@
-{"version":3,"file":"trackingOptions.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/trackingOptions.ts"],"names":[],"mappings":";;AAcA,MAAa,eAAe;IAYxB,MAAM,CAAC,mBAAmB;QACtB,OAAO,eAAe,CAAC,gBAAgB,CAAC;IAC5C,CAAC;;AAdL,0CAeC;AAZU,6BAAa,GAAuB,SAAS,CAAC;AAE9C,gCAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,SAAS;QACjB,UAAU,EAAE,SAAS;QACrB,MAAM,EAAE,uBAAuB;KAClC;CAAK,CAAC"}
