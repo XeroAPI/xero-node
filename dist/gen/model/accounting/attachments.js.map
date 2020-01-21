@@ -1,1 +1,0 @@
-{"version":3,"file":"attachments.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/attachments.ts"],"names":[],"mappings":";;AAcA,MAAa,WAAW;IAYpB,MAAM,CAAC,mBAAmB;QACtB,OAAO,WAAW,CAAC,gBAAgB,CAAC;IACxC,CAAC;;AAdL,kCAeC;AAZU,yBAAa,GAAuB,SAAS,CAAC;AAE9C,4BAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,aAAa;QACrB,UAAU,EAAE,aAAa;QACzB,MAAM,EAAE,mBAAmB;KAC9B;CAAK,CAAC"}

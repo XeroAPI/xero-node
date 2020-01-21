@@ -1,1 +1,0 @@
-{"version":3,"file":"onlineInvoice.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/onlineInvoice.ts"],"names":[],"mappings":";;AAaA,MAAa,aAAa;IAetB,MAAM,CAAC,mBAAmB;QACtB,OAAO,aAAa,CAAC,gBAAgB,CAAC;IAC1C,CAAC;;AAjBL,sCAkBC;AAZU,2BAAa,GAAuB,SAAS,CAAC;AAE9C,8BAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,kBAAkB;QAC1B,UAAU,EAAE,kBAAkB;QAC9B,MAAM,EAAE,QAAQ;KACnB;CAAK,CAAC"}

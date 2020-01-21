@@ -1,1 +1,0 @@
-{"version":3,"file":"items.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/items.ts"],"names":[],"mappings":";;AAcA,MAAa,KAAK;IAYd,MAAM,CAAC,mBAAmB;QACtB,OAAO,KAAK,CAAC,gBAAgB,CAAC;IAClC,CAAC;;AAdL,sBAeC;AAZU,mBAAa,GAAuB,SAAS,CAAC;AAE9C,sBAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,OAAO;QACf,UAAU,EAAE,OAAO;QACnB,MAAM,EAAE,aAAa;KACxB;CAAK,CAAC"}

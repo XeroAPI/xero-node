@@ -1,1 +1,0 @@
-{"version":3,"file":"currencies.js","sourceRoot":"","sources":["../../../../src/gen/model/accounting/currencies.ts"],"names":[],"mappings":";;AAcA,MAAa,UAAU;IAYnB,MAAM,CAAC,mBAAmB;QACtB,OAAO,UAAU,CAAC,gBAAgB,CAAC;IACvC,CAAC;;AAdL,gCAeC;AAZU,wBAAa,GAAuB,SAAS,CAAC;AAE9C,2BAAgB,GAA0D;IAC7E;QACI,MAAM,EAAE,YAAY;QACpB,UAAU,EAAE,YAAY;QACxB,MAAM,EAAE,iBAAiB;KAC5B;CAAK,CAAC"}
