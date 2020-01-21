@@ -6,9 +6,6 @@ import { XeroClient, IXeroClientConfig } from "..";
 export async function getAuthorisedXeroClient(config: IXeroClientConfig) {
     const xeroClient = new XeroClient(config);
 
-    let consentUrl = await xeroClient.buildConsentUrl();
-    open(consentUrl);
-
     const url = await getUserInput('URL after redirect');
     await xeroClient.setAccessTokenFromRedirectUri(url);
 
