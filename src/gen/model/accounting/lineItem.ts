@@ -56,7 +56,7 @@ export class LineItem {
     /**
     * Percentage discount being applied to a line item (only supported on  ACCREC invoices – ACC PAY invoices and credit notes in Xero do not support discounts
     */
-    'discountRate'?: string;
+    'discountRate'?: number;
     /**
     * Discount amount being applied to a line item. Only supported on ACCREC invoices - ACCPAY invoices and credit notes in Xero do not support discounts.
     */
@@ -122,7 +122,7 @@ export class LineItem {
         {
             "name": "discountRate",
             "baseName": "DiscountRate",
-            "type": "string"
+            "type": "number"
         },
         {
             "name": "discountAmount",
