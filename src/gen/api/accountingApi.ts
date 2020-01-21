@@ -20,17 +20,14 @@ import { Accounts } from '../model/accounting/accounts';
 import { Allocation } from '../model/accounting/allocation';
 import { Allocations } from '../model/accounting/allocations';
 import { Attachments } from '../model/accounting/attachments';
-import { BankTransaction } from '../model/accounting/bankTransaction';
 import { BankTransactions } from '../model/accounting/bankTransactions';
 import { BankTransfers } from '../model/accounting/bankTransfers';
 import { BatchPayments } from '../model/accounting/batchPayments';
 import { BrandingThemes } from '../model/accounting/brandingThemes';
 import { CISOrgSetting } from '../model/accounting/cISOrgSetting';
 import { CISSettings } from '../model/accounting/cISSettings';
-import { Contact } from '../model/accounting/contact';
 import { ContactGroups } from '../model/accounting/contactGroups';
 import { Contacts } from '../model/accounting/contacts';
-import { CreditNote } from '../model/accounting/creditNote';
 import { CreditNotes } from '../model/accounting/creditNotes';
 import { Currencies } from '../model/accounting/currencies';
 import { Currency } from '../model/accounting/currency';
@@ -38,10 +35,8 @@ import { Employee } from '../model/accounting/employee';
 import { Employees } from '../model/accounting/employees';
 import { ExpenseClaims } from '../model/accounting/expenseClaims';
 import { HistoryRecords } from '../model/accounting/historyRecords';
-import { Invoice } from '../model/accounting/invoice';
 import { InvoiceReminders } from '../model/accounting/invoiceReminders';
 import { Invoices } from '../model/accounting/invoices';
-import { Item } from '../model/accounting/item';
 import { Items } from '../model/accounting/items';
 import { Journals } from '../model/accounting/journals';
 import { LinkedTransaction } from '../model/accounting/linkedTransaction';
@@ -56,7 +51,6 @@ import { PaymentService } from '../model/accounting/paymentService';
 import { PaymentServices } from '../model/accounting/paymentServices';
 import { Payments } from '../model/accounting/payments';
 import { Prepayments } from '../model/accounting/prepayments';
-import { PurchaseOrder } from '../model/accounting/purchaseOrder';
 import { PurchaseOrders } from '../model/accounting/purchaseOrders';
 import { Quotes } from '../model/accounting/quotes';
 import { Receipts } from '../model/accounting/receipts';
@@ -297,72 +291,6 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create a spend or receive money transaction
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param bankTransaction 
-     */     
-    public async createBankTransaction (xeroTenantId: string, bankTransaction: BankTransaction, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BankTransactions;  }> {
-        const localVarPath = this.basePath + '/BankTransactions';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createBankTransaction.');
-        }
-
-        // verify required parameter 'bankTransaction' is not null or undefined
-        if (bankTransaction === null || bankTransaction === undefined) {
-            throw new Error('Required parameter bankTransaction was null or undefined when calling createBankTransaction.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(bankTransaction, "BankTransaction")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: BankTransactions;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "BankTransactions");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
      * @summary Allows you to createa an Attachment on BankTransaction by Filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
@@ -534,7 +462,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create a spend or receive money transaction
+     * @summary Allows you to create one or more spend or receive money transaction
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactions 
      * @param summarizeErrors response format that shows validation errors for each bank transaction
@@ -556,7 +484,7 @@ export class AccountingApi {
         }
 
         if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -566,7 +494,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -843,8 +771,9 @@ export class AccountingApi {
      * @summary Create one or many BatchPayments for invoices
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPayments Request of type BatchPayments containing a Payments array with one or more Payment objects
+     * @param summarizeErrors shows validation errors for each credit note
      */     
-    public async createBatchPayment (xeroTenantId: string, batchPayments: BatchPayments, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchPayments;  }> {
+    public async createBatchPayment (xeroTenantId: string, batchPayments: BatchPayments, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchPayments;  }> {
         const localVarPath = this.basePath + '/BatchPayments';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -858,6 +787,10 @@ export class AccountingApi {
         // verify required parameter 'batchPayments' is not null or undefined
         if (batchPayments === null || batchPayments === undefined) {
             throw new Error('Required parameter batchPayments was null or undefined when calling createBatchPayment.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -1040,72 +973,6 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "PaymentServices");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Allows you to create a single contact in a Xero organisation
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param contact 
-     */     
-    public async createContact (xeroTenantId: string, contact: Contact, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
-        const localVarPath = this.basePath + '/Contacts';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createContact.');
-        }
-
-        // verify required parameter 'contact' is not null or undefined
-        if (contact === null || contact === undefined) {
-            throw new Error('Required parameter contact was null or undefined when calling createContact.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(contact, "Contact")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Contacts");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -1449,7 +1316,7 @@ export class AccountingApi {
         }
 
         if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -1459,7 +1326,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -1486,72 +1353,6 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "Contacts");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Allows you to create a credit note
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param creditNote an array of Credit Notes with a single CreditNote object.
-     */     
-    public async createCreditNote (xeroTenantId: string, creditNote: CreditNote, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreditNotes;  }> {
-        const localVarPath = this.basePath + '/CreditNotes';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createCreditNote.');
-        }
-
-        // verify required parameter 'creditNote' is not null or undefined
-        if (creditNote === null || creditNote === undefined) {
-            throw new Error('Required parameter creditNote was null or undefined when calling createCreditNote.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(creditNote, "CreditNote")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: CreditNotes;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "CreditNotes");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -1830,7 +1631,7 @@ export class AccountingApi {
         }
 
         if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -1840,7 +1641,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -1944,7 +1745,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create new employees used in Xero payrun
+     * @summary Allows you to create a single new employees used in Xero payrun
      * @param xeroTenantId Xero identifier for Tenant
      * @param employee 
      */     
@@ -1971,7 +1772,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -2037,7 +1838,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -2203,72 +2004,6 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "ExpenseClaims");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Allows you to create any sales invoices or purchase bills
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param invoice 
-     */     
-    public async createInvoice (xeroTenantId: string, invoice: Invoice, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Invoices;  }> {
-        const localVarPath = this.basePath + '/Invoices';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createInvoice.');
-        }
-
-        // verify required parameter 'invoice' is not null or undefined
-        if (invoice === null || invoice === undefined) {
-            throw new Error('Required parameter invoice was null or undefined when calling createInvoice.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(invoice, "Invoice")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Invoices;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Invoices");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -2452,7 +2187,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create any sales invoices or purchase bills
+     * @summary Allows you to create one or more sales invoices or purchase bills
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoices 
      * @param summarizeErrors shows validation errors for each invoice
@@ -2474,7 +2209,7 @@ export class AccountingApi {
         }
 
         if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2484,7 +2219,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -2511,72 +2246,6 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "Invoices");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Allows you to create an item
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param item 
-     */     
-    public async createItem (xeroTenantId: string, item: Item, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Items;  }> {
-        const localVarPath = this.basePath + '/Items';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createItem.');
-        }
-
-        // verify required parameter 'item' is not null or undefined
-        if (item === null || item === undefined) {
-            throw new Error('Required parameter item was null or undefined when calling createItem.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(item, "Item")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: Items;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Items");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -2662,7 +2331,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create an item
+     * @summary Allows you to create one or more items
      * @param xeroTenantId Xero identifier for Tenant
      * @param items 
      * @param summarizeErrors response format that shows validation errors for each bank transaction
@@ -2684,7 +2353,7 @@ export class AccountingApi {
         }
 
         if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2694,7 +2363,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -2799,73 +2468,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create linked transactions (billable expenses)
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param linkedTransactions 
-     */     
-    public async createLinkedTransactions (xeroTenantId: string, linkedTransactions: LinkedTransactions, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }> {
-        const localVarPath = this.basePath + '/LinkedTransactions';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createLinkedTransactions.');
-        }
-
-        // verify required parameter 'linkedTransactions' is not null or undefined
-        if (linkedTransactions === null || linkedTransactions === undefined) {
-            throw new Error('Required parameter linkedTransactions was null or undefined when calling createLinkedTransactions.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(linkedTransactions, "LinkedTransactions")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "LinkedTransactions");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Allows you to create a manual journal
+     * @summary Allows you to create a single manual journal
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournal 
      */     
@@ -2892,7 +2495,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3029,7 +2632,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create a manual journal
+     * @summary Allows you to create multiple manual journals
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournals 
      */     
@@ -3056,7 +2659,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3095,7 +2698,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to retrieve Allocations for overpayments
+     * @summary Allows you to create a single allocations for overpayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
      * @param allocation 
@@ -3129,7 +2732,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3168,7 +2771,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to retrieve Allocations for overpayments
+     * @summary Allows you to create a single allocation for an overpayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
      * @param allocations 
@@ -3202,7 +2805,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3314,7 +2917,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create payments for invoices and credit notes
+     * @summary Allows you to create a single payment for invoices or credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param payment 
      */     
@@ -3341,7 +2944,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3519,7 +3122,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create payments for invoices and credit notes
+     * @summary Allows you to create multiple payments for invoices or credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param payments 
      */     
@@ -3546,7 +3149,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -3731,72 +3334,6 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create purchase orders
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrder 
-     */     
-    public async createPurchaseOrder (xeroTenantId: string, purchaseOrder: PurchaseOrder, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }> {
-        const localVarPath = this.basePath + '/PurchaseOrders';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createPurchaseOrder.');
-        }
-
-        // verify required parameter 'purchaseOrder' is not null or undefined
-        if (purchaseOrder === null || purchaseOrder === undefined) {
-            throw new Error('Required parameter purchaseOrder was null or undefined when calling createPurchaseOrder.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(purchaseOrder, "PurchaseOrder")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PurchaseOrders");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
      * @summary Allows you to create HistoryRecord for purchase orders
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for a PurchaseOrder
@@ -3870,7 +3407,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create purchase orders
+     * @summary Allows you to create one or more purchase orders
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrders 
      * @param summarizeErrors shows validation errors for each purchase order.
@@ -3892,7 +3429,7 @@ export class AccountingApi {
         }
 
         if (summarizeErrors !== undefined) {
-            localVarQueryParameters['SummarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -3902,7 +3439,7 @@ export class AccountingApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
@@ -5137,7 +4674,7 @@ export class AccountingApi {
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
-            useQuerystring: this._useQuerystring,
+            useQuerystring: this._useQuerystring,json: true,
             body: ObjectSerializer.serialize(requestEmpty, "RequestEmpty")
         };
 
@@ -12270,11 +11807,10 @@ export class AccountingApi {
      * 
      * @summary Allows you to retrieve report for BankSummary
      * @param xeroTenantId Xero identifier for Tenant
-     * @param date The date for the Bank Summary report e.g. 2018-03-31
-     * @param period The number of periods to compare (integer between 1 and 12)
-     * @param timeframe The period size to compare to (1&#x3D;month, 3&#x3D;quarter, 12&#x3D;year)
+     * @param fromDate The from date for the Bank Summary report e.g. 2018-03-31
+     * @param toDate The to date for the Bank Summary report e.g. 2018-03-31
      */     
-    public async getReportBankSummary (xeroTenantId: string, date?: string, period?: number, timeframe?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
+    public async getReportBankSummary (xeroTenantId: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BankSummary';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -12285,16 +11821,12 @@ export class AccountingApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getReportBankSummary.');
         }
 
-        if (date !== undefined) {
-            localVarQueryParameters['date'] = ObjectSerializer.serialize(date, "string");
+        if (fromDate !== undefined) {
+            localVarQueryParameters['fromDate'] = ObjectSerializer.serialize(fromDate, "string");
         }
 
-        if (period !== undefined) {
-            localVarQueryParameters['period'] = ObjectSerializer.serialize(period, "number");
-        }
-
-        if (timeframe !== undefined) {
-            localVarQueryParameters['timeframe'] = ObjectSerializer.serialize(timeframe, "number");
+        if (toDate !== undefined) {
+            localVarQueryParameters['toDate'] = ObjectSerializer.serialize(toDate, "string");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -14242,7 +13774,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to udpate a specified item
+     * @summary Allows you to update a specified item
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
      * @param items 
@@ -14547,6 +14079,432 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "Attachments");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to update or create one or more spend or receive money transaction
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param bankTransactions 
+     * @param summarizeErrors response format that shows validation errors for each bank transaction
+     */     
+    public async updateOrCreateBankTransactions (xeroTenantId: string, bankTransactions: BankTransactions, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BankTransactions;  }> {
+        const localVarPath = this.basePath + '/BankTransactions';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateOrCreateBankTransactions.');
+        }
+
+        // verify required parameter 'bankTransactions' is not null or undefined
+        if (bankTransactions === null || bankTransactions === undefined) {
+            throw new Error('Required parameter bankTransactions was null or undefined when calling updateOrCreateBankTransactions.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: BankTransactions;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "BankTransactions");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to update OR create one or more contacts in a Xero organisation
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param contacts 
+     * @param summarizeErrors response format that shows validation errors for each bank transaction
+     */     
+    public async updateOrCreateContacts (xeroTenantId: string, contacts: Contacts, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
+        const localVarPath = this.basePath + '/Contacts';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateOrCreateContacts.');
+        }
+
+        // verify required parameter 'contacts' is not null or undefined
+        if (contacts === null || contacts === undefined) {
+            throw new Error('Required parameter contacts was null or undefined when calling updateOrCreateContacts.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(contacts, "Contacts")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Contacts");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to update OR create one or more credit notes
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param creditNotes an array of Credit Notes with a single CreditNote object.
+     * @param summarizeErrors shows validation errors for each credit note
+     */     
+    public async updateOrCreateCreditNotes (xeroTenantId: string, creditNotes: CreditNotes, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreditNotes;  }> {
+        const localVarPath = this.basePath + '/CreditNotes';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateOrCreateCreditNotes.');
+        }
+
+        // verify required parameter 'creditNotes' is not null or undefined
+        if (creditNotes === null || creditNotes === undefined) {
+            throw new Error('Required parameter creditNotes was null or undefined when calling updateOrCreateCreditNotes.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: CreditNotes;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "CreditNotes");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to update OR create one or more sales invoices or purchase bills
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param invoices 
+     * @param summarizeErrors shows validation errors for each credit note
+     */     
+    public async updateOrCreateInvoices (xeroTenantId: string, invoices: Invoices, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Invoices;  }> {
+        const localVarPath = this.basePath + '/Invoices';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateOrCreateInvoices.');
+        }
+
+        // verify required parameter 'invoices' is not null or undefined
+        if (invoices === null || invoices === undefined) {
+            throw new Error('Required parameter invoices was null or undefined when calling updateOrCreateInvoices.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(invoices, "Invoices")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Invoices;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Invoices");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to update or create one or more items
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param items 
+     * @param summarizeErrors response format that shows validation errors for each bank transaction
+     */     
+    public async updateOrCreateItems (xeroTenantId: string, items: Items, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Items;  }> {
+        const localVarPath = this.basePath + '/Items';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateOrCreateItems.');
+        }
+
+        // verify required parameter 'items' is not null or undefined
+        if (items === null || items === undefined) {
+            throw new Error('Required parameter items was null or undefined when calling updateOrCreateItems.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(items, "Items")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Items;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Items");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to update or create one or more purchase orders
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param purchaseOrders 
+     * @param summarizeErrors shows validation errors for each credit note
+     */     
+    public async updateOrCreatePurchaseOrders (xeroTenantId: string, purchaseOrders: PurchaseOrders, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }> {
+        const localVarPath = this.basePath + '/PurchaseOrders';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateOrCreatePurchaseOrders.');
+        }
+
+        // verify required parameter 'purchaseOrders' is not null or undefined
+        if (purchaseOrders === null || purchaseOrders === undefined) {
+            throw new Error('Required parameter purchaseOrders was null or undefined when calling updateOrCreatePurchaseOrders.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "PurchaseOrders");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {

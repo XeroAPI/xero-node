@@ -163,6 +163,7 @@ export namespace TaxRate {
         EXEMPTEXPORT = <any> 'EXEMPTEXPORT',
         CAPITALEXINPUT = <any> 'CAPITALEXINPUT',
         GSTONCAPIMPORTS = <any> 'GSTONCAPIMPORTS',
+        GSTONCAPITALIMPORTS = <any> 'GSTONCAPITALIMPORTS',
         REVERSECHARGES = <any> 'REVERSECHARGES',
         PAYMENTS = <any> 'PAYMENTS',
         INVOICE = <any> 'INVOICE',

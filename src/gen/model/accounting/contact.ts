@@ -161,6 +161,10 @@ export class Contact {
     * A boolean to indicate if a contact has an validation errors
     */
     'hasValidationErrors'?: boolean;
+    /**
+    * Status of object
+    */
+    'statusAttributeString'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -354,6 +358,11 @@ export class Contact {
             "name": "hasValidationErrors",
             "baseName": "HasValidationErrors",
             "type": "boolean"
+        },
+        {
+            "name": "statusAttributeString",
+            "baseName": "StatusAttributeString",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

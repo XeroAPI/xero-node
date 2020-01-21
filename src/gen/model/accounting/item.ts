@@ -65,6 +65,10 @@ export class Item {
     */
     'itemID'?: string;
     /**
+    * Status of object
+    */
+    'statusAttributeString'?: string;
+    /**
     * Displays array of validation error messages from the API
     */
     'validationErrors'?: Array<ValidationError>;
@@ -140,6 +144,11 @@ export class Item {
         {
             "name": "itemID",
             "baseName": "ItemID",
+            "type": "string"
+        },
+        {
+            "name": "statusAttributeString",
+            "baseName": "StatusAttributeString",
             "type": "string"
         },
         {
