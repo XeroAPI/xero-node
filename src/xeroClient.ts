@@ -45,7 +45,6 @@ export class XeroClient {
       redirect_uri: this.config.redirectUris[0],
       scope: this.config.scopes.join(' ') || 'openid email profile'
     });
-    console.log('url: ',url)
     return url;
   }
 
