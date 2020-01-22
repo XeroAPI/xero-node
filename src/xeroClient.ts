@@ -1,4 +1,4 @@
-import { Issuer, TokenSet } from 'openid-client';
+import { Issuer, TokenSet, custom } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
@@ -37,14 +37,16 @@ export class XeroClient {
       client_secret: this.config.clientSecret,
       redirect_uris: this.config.redirectUris,
     });
-    this.openIdClient.CLOCK_TOLERANCE = 5; // to allow a 5 second skew in the openid-client validations
+    this.openIdClient[custom.clock_tolerance] = 5
   }
 
   async buildConsentUrl() {
-    this.openIdClient.authorizationUrl({
+    const url = this.openIdClient.authorizationUrl({
       redirect_uri: this.config.redirectUris[0],
       scope: this.config.scopes.join(' ') || 'openid email profile'
     });
+    console.log('url: ',url)
+    return url;
   }
 
   async setAccessTokenFromRedirectUri(url: string) {
@@ -101,9 +103,6 @@ export class XeroClient {
           }
       });
     });
-
-    result.body.map(connection => console.log('connection: ',connection));
-
     this._tenantIds = result.body.map(connection => connection.tenantId);
 
     // Requests to the accounting api will look like this:
