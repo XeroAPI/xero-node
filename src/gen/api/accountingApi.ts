@@ -2016,7 +2016,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to create an Attachment on invoices or purchase bills by it\'s filename
+     * @summary Allows you to create an Attachment on invoices or purchase bills by it's filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the file you are attaching
@@ -7967,7 +7967,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to retrieve Attachment on invoices or purchase bills by it\'s filename
+     * @summary Allows you to retrieve Attachment on invoices or purchase bills by it's filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the file you are attaching
@@ -8047,7 +8047,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to retrieve a specified Attachment on invoices or purchase bills by it\'s ID
+     * @summary Allows you to retrieve a specified Attachment on invoices or purchase bills by it's ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param attachmentID Unique identifier for an Attachment
@@ -8329,7 +8329,7 @@ export class AccountingApi {
      * @param statuses Filter by a comma-separated list Statuses. For faster response times we recommend using these explicit parameters instead of passing OR conditions into the Where filter.
      * @param page e.g. page&#x3D;1 – Up to 100 invoices will be returned in a single API call with line items shown for each invoice
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
-     * @param createdByMyApp When set to true you\&#39;ll only retrieve Invoices created by your app
+     * @param createdByMyApp When set to true you&#39;ll only retrieve Invoices created by your app
      * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
      */     
     public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Invoices;  }> {
@@ -10431,6 +10431,8 @@ export class AccountingApi {
         };
 
         let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
@@ -10530,6 +10532,8 @@ export class AccountingApi {
         };
 
         let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
@@ -13676,7 +13680,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Allows you to update Attachment on invoices or purchase bills by it\'s filename
+     * @summary Allows you to update Attachment on invoices or purchase bills by it's filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the file you are attaching
