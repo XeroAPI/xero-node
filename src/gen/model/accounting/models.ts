@@ -496,7 +496,14 @@ export class ObjectSerializer {
             }
             return transformedData;
         } else if (type === "Date") {
-            return new Date(data);
+            const isDate = new Date(data)
+            if (isNaN(d2)) {
+                const re = /-?\d+/;
+                const m = re.exec(data);
+                return new Date(parseInt(m[0], 10));
+            } else {
+               return isDate
+            }
         } else {
             if (enumsMap[type]) {// is Enum
                 return data;

@@ -2,6 +2,23 @@
 ---------
 
 
+## "version": "4.1.1"
+
+* Adds OAuth 2 Gateway to fix #https://github.com/XeroAPI/xero-node/issues/328
+
+* Adds Fix for serializer for the numerous dates returned by XeroAPI to fix #https://github.com/XeroAPI/xero-node/issues/323
+
+Possible raw date formats
+`"Date": "2009-03-29",`
+`"DateString": "2016-12-16T00:00:00",`
+`"DateUTCString": "2018-02-28T21:02:11",`
+`"createdDateUtc": "2020-01-08T17:26:30.5778680",`
+MS Format ( this was main problem date )
+`"FullyPaidOnDate": "\/Date(1481846400000+0000)\/",`
+
+ref: https://developer.xero.com/documentation/api/requests-and-responses
+
+
 ## "version": "4.1.0"
 
 Naming Conventions updated - Open API spec only allows us to to single PUT/POST in our generated SDKS - refactoring to enable the supported endpoints. This is a larger change that will enable the generated SDK's to be encompass the full features of the raw API, but does require some painful re-naming.
