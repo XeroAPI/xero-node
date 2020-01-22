@@ -3,7 +3,6 @@ src/
 docs_theme/
 .*
 *.tgz
-tsconfig.json
 typedoc.json
 scratch.ts
 **/__integration_tests__/**
