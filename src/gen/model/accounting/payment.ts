@@ -80,7 +80,7 @@ export class Payment {
     */
     'particulars'?: string;
     /**
-    * The information to appear on the supplier\'s bank account
+    * The information to appear on the supplier's bank account
     */
     'details'?: string;
     /**
