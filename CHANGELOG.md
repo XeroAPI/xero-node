@@ -3,7 +3,9 @@
 
 ## "version": "4.1.1"
 
-* Adds OAuth 2 Gateway to fix #https://github.com/XeroAPI/xero-node/issues/328
+* Adds OAuth 2 Gateway to fix #https://github.com/XeroAPI/xero-node/issues/328 so that we can get Quotes
+** NOTE
+* getQuotes only endpoint supported, but rest of CRUD actions coming soon!
 
 * Adds Fix for serializer for the numerous dates returned by XeroAPI to fix #https://github.com/XeroAPI/xero-node/issues/323
 
