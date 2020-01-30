@@ -364,8 +364,7 @@ export namespace Invoice {
         APPREPAYMENT = <any> 'APPREPAYMENT',
         ACCREC = <any> 'ACCREC',
         ACCRECCREDIT = <any> 'ACCRECCREDIT',
-        AROVERPAYMENT = <any> 'AROVERPAYMENT',
-        APPREPAYMENT = <any> 'APPREPAYMENT'
+        AROVERPAYMENT = <any> 'AROVERPAYMENT'
     }
     export enum StatusEnum {
         DRAFT = <any> 'DRAFT',

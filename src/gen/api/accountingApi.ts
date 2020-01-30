@@ -5527,7 +5527,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 bank transactions will be returned in a single API call with line items shown for each bank transaction
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getBankTransactions (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions';
@@ -8488,7 +8488,7 @@ export class AccountingApi {
      * @param page e.g. page&#x3D;1 – Up to 100 invoices will be returned in a single API call with line items shown for each invoice
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
      * @param createdByMyApp When set to true you&#39;ll only retrieve Invoices created by your app
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices';
@@ -8724,7 +8724,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getItems (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Items;  }> {
         const localVarPath = this.basePath + '/Items';
@@ -9784,7 +9784,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 overpayments will be returned in a single API call with line items shown for each overpayment
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getOverpayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Overpayments;  }> {
         const localVarPath = this.basePath + '/Overpayments';
@@ -10259,7 +10259,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 prepayments will be returned in a single API call with line items shown for each overpayment
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getPrepayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Prepayments;  }> {
         const localVarPath = this.basePath + '/Prepayments';
@@ -11148,7 +11148,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getReceipts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts';
