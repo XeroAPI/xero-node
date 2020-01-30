@@ -3,8 +3,10 @@
 
 ## "version": "4.1.3"
 
-* Adds Quotes 🥳
-
+* Adds Quotes CRUD 🥳
+* Remove a duplicate Enum
+* Improved docs for `unitdp`
+* Fix filters and where clause where we expect an array. Serializes to api as a comma sep. string
 
 ## "version": "4.1.2"
 
