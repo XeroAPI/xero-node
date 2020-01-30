@@ -18,11 +18,11 @@ import { QuoteStatusCodes } from './quoteStatusCodes';
 
 export class Quote {
     /**
-    * Xero generated unique identifier for quote
+    * QuoteID GUID is automatically generated and is returned after create or GET.
     */
     'quoteID'?: string;
     /**
-    * Unique alpha numeric code identifying quote (when missing will auto-generate from your Organisation Invoice Settings)
+    * Unique alpha numeric code identifying a quote (Max Length = 255)
     */
     'quoteNumber'?: string;
     /**
@@ -35,13 +35,13 @@ export class Quote {
     'terms'?: string;
     'contact': Contact;
     /**
-    * See LineItems
+    * The LineItems collection can contain any number of individual LineItem sub-elements. At minimum, a description is required to create a complete quote.
     */
-    'lineItems'?: Array<LineItem>;
+    'lineItems': Array<LineItem>;
     /**
     * Date quote was issued – YYYY-MM-DD. If the Date element is not specified it will default to the current date based on the timezone setting of the organisation
     */
-    'date'?: string;
+    'date': string;
     /**
     * Date the quote was issued (YYYY-MM-DD)
     */
@@ -57,7 +57,7 @@ export class Quote {
     'status'?: QuoteStatusCodes;
     'currencyCode'?: CurrencyCode;
     /**
-    * The currency rate for a multicurrency quote. If no rate is specified, the XE.com day rate is used.
+    * The currency rate for a multicurrency quote
     */
     'currencyRate'?: number;
     /**
