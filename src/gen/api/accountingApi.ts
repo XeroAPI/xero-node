@@ -1442,12 +1442,14 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param fileName Name of the file you are attaching to Credit Note
+     * @param includeOnline Set an attachment to be included with the invoice when viewed online (through Xero)
      * @param body Byte array of file in body of request
      */     
-    public async createCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
+    public async createCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, includeOnline: boolean, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
-            .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
+            .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)))
+            .replace('{' + 'IncludeOnline' + '}', encodeURIComponent(String(includeOnline)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1465,6 +1467,11 @@ export class AccountingApi {
         // verify required parameter 'fileName' is not null or undefined
         if (fileName === null || fileName === undefined) {
             throw new Error('Required parameter fileName was null or undefined when calling createCreditNoteAttachmentByFileName.');
+        }
+
+        // verify required parameter 'includeOnline' is not null or undefined
+        if (includeOnline === null || includeOnline === undefined) {
+            throw new Error('Required parameter includeOnline was null or undefined when calling createCreditNoteAttachmentByFileName.');
         }
 
         // verify required parameter 'body' is not null or undefined
@@ -2020,12 +2027,14 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the file you are attaching
+     * @param includeOnline Set an attachment to be included with the invoice when viewed online (through Xero)
      * @param body Byte array of file in body of request
      */     
-    public async createInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
+    public async createInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, includeOnline: boolean, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
-            .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
+            .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)))
+            .replace('{' + 'IncludeOnline' + '}', encodeURIComponent(String(includeOnline)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -2043,6 +2052,11 @@ export class AccountingApi {
         // verify required parameter 'fileName' is not null or undefined
         if (fileName === null || fileName === undefined) {
             throw new Error('Required parameter fileName was null or undefined when calling createInvoiceAttachmentByFileName.');
+        }
+
+        // verify required parameter 'includeOnline' is not null or undefined
+        if (includeOnline === null || includeOnline === undefined) {
+            throw new Error('Required parameter includeOnline was null or undefined when calling createInvoiceAttachmentByFileName.');
         }
 
         // verify required parameter 'body' is not null or undefined
@@ -3466,6 +3480,150 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "PurchaseOrders");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to retrieve a history records of an quote
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param quoteID Unique identifier for an Quote
+     * @param historyRecords 
+     */     
+    public async createQuoteHistory (xeroTenantId: string, quoteID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }> {
+        const localVarPath = this.basePath + '/Quotes/{QuoteID}/History'
+            .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createQuoteHistory.');
+        }
+
+        // verify required parameter 'quoteID' is not null or undefined
+        if (quoteID === null || quoteID === undefined) {
+            throw new Error('Required parameter quoteID was null or undefined when calling createQuoteHistory.');
+        }
+
+        // verify required parameter 'historyRecords' is not null or undefined
+        if (historyRecords === null || historyRecords === undefined) {
+            throw new Error('Required parameter historyRecords was null or undefined when calling createQuoteHistory.');
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "HistoryRecords");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to create one or more quotes
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param quotes 
+     * @param summarizeErrors if true, only return quotes with validation errors
+     */     
+    public async createQuotes (xeroTenantId: string, quotes: Quotes, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
+        const localVarPath = this.basePath + '/Quotes';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling createQuotes.');
+        }
+
+        // verify required parameter 'quotes' is not null or undefined
+        if (quotes === null || quotes === undefined) {
+            throw new Error('Required parameter quotes was null or undefined when calling createQuotes.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(quotes, "Quotes")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Quotes");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -5369,7 +5527,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 bank transactions will be returned in a single API call with line items shown for each bank transaction
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getBankTransactions (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions';
@@ -7900,7 +8058,7 @@ export class AccountingApi {
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getInvoiceAsPdf (xeroTenantId: string, invoiceID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
-        const localVarPath = this.basePath + '/Invoices/{InvoiceID}/pdf'
+        const localVarPath = this.basePath + '/Invoices/{InvoiceID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -8330,7 +8488,7 @@ export class AccountingApi {
      * @param page e.g. page&#x3D;1 – Up to 100 invoices will be returned in a single API call with line items shown for each invoice
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
      * @param createdByMyApp When set to true you&#39;ll only retrieve Invoices created by your app
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices';
@@ -8566,7 +8724,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getItems (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Items;  }> {
         const localVarPath = this.basePath + '/Items';
@@ -9626,7 +9784,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 overpayments will be returned in a single API call with line items shown for each overpayment
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getOverpayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Overpayments;  }> {
         const localVarPath = this.basePath + '/Overpayments';
@@ -10101,7 +10259,7 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 prepayments will be returned in a single API call with line items shown for each overpayment
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getPrepayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Prepayments;  }> {
         const localVarPath = this.basePath + '/Prepayments';
@@ -10448,6 +10606,72 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "Quotes");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to retrieve a history records of an quote
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param quoteID Unique identifier for an Quote
+     */     
+    public async getQuoteHistory (xeroTenantId: string, quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }> {
+        const localVarPath = this.basePath + '/Quotes/{QuoteID}/History'
+            .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling getQuoteHistory.');
+        }
+
+        // verify required parameter 'quoteID' is not null or undefined
+        if (quoteID === null || quoteID === undefined) {
+            throw new Error('Required parameter quoteID was null or undefined when calling getQuoteHistory.');
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "HistoryRecords");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -10924,7 +11148,7 @@ export class AccountingApi {
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     * @param unitdp e.g. unitdp&#x3D;4 – You can opt in to use four decimal places for unit amounts
+     * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
     public async getReceipts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts';
@@ -14521,6 +14745,77 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Allows you to update OR create one or more quotes
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param quotes 
+     * @param summarizeErrors if true, only return quotes with  validation errors
+     */     
+    public async updateOrCreateQuotes (xeroTenantId: string, quotes: Quotes, summarizeErrors?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
+        const localVarPath = this.basePath + '/Quotes';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateOrCreateQuotes.');
+        }
+
+        // verify required parameter 'quotes' is not null or undefined
+        if (quotes === null || quotes === undefined) {
+            throw new Error('Required parameter quotes was null or undefined when calling updateOrCreateQuotes.');
+        }
+
+        if (summarizeErrors !== undefined) {
+            localVarQueryParameters['summarizeErrors'] = ObjectSerializer.serialize(summarizeErrors, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(quotes, "Quotes")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Quotes");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Allows you to update a specified purchase order
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for a PurchaseOrder
@@ -14582,6 +14877,79 @@ export class AccountingApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "PurchaseOrders");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Allows you to update a specified quote
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param quoteID Unique identifier for an Quote
+     * @param quotes 
+     */     
+    public async updateQuote (xeroTenantId: string, quoteID: string, quotes: Quotes, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Quotes;  }> {
+        const localVarPath = this.basePath + '/Quotes/{QuoteID}'
+            .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateQuote.');
+        }
+
+        // verify required parameter 'quoteID' is not null or undefined
+        if (quoteID === null || quoteID === undefined) {
+            throw new Error('Required parameter quoteID was null or undefined when calling updateQuote.');
+        }
+
+        // verify required parameter 'quotes' is not null or undefined
+        if (quotes === null || quotes === undefined) {
+            throw new Error('Required parameter quotes was null or undefined when calling updateQuote.');
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(quotes, "Quotes")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Quotes");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {

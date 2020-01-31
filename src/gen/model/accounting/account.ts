@@ -233,6 +233,13 @@ export namespace Account {
         UNPAIDEXPCLM = <any> 'UNPAIDEXPCLM',
         UNREALISEDCURRENCYGAIN = <any> 'UNREALISEDCURRENCYGAIN',
         WAGEPAYABLES = <any> 'WAGEPAYABLES',
+        CISASSETS = <any> 'CISASSETS',
+        CISASSET = <any> 'CISASSET',
+        CISLABOUR = <any> 'CISLABOUR',
+        CISLABOUREXPENSE = <any> 'CISLABOUREXPENSE',
+        CISLABOURINCOME = <any> 'CISLABOURINCOME',
+        CISLIABILITY = <any> 'CISLIABILITY',
+        CISMATERIALS = <any> 'CISMATERIALS',
         Empty = <any> ''
     }
 }

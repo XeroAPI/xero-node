@@ -360,9 +360,11 @@ export namespace Invoice {
     export enum TypeEnum {
         ACCPAY = <any> 'ACCPAY',
         ACCPAYCREDIT = <any> 'ACCPAYCREDIT',
-        AROVERPAYMENT = <any> 'AROVERPAYMENT',
+        APOVERPAYMENT = <any> 'APOVERPAYMENT',
+        APPREPAYMENT = <any> 'APPREPAYMENT',
         ACCREC = <any> 'ACCREC',
-        ACCRECCREDIT = <any> 'ACCRECCREDIT'
+        ACCRECCREDIT = <any> 'ACCRECCREDIT',
+        AROVERPAYMENT = <any> 'AROVERPAYMENT'
     }
     export enum StatusEnum {
         DRAFT = <any> 'DRAFT',
