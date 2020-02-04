@@ -41,8 +41,7 @@ export class XeroClient {
   }
 
   async buildConsentUrl() {
-    const client = this.openIdClient || this.buildClient()
-    const url = client.authorizationUrl({
+    const url = this.openIdClient.authorizationUrl({
       redirect_uri: this.config.redirectUris[0],
       scope: this.config.scopes.join(' ') || 'openid email profile'
     });
