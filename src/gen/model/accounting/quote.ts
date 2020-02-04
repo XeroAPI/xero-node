@@ -35,7 +35,7 @@ export class Quote {
     'terms'?: string;
     'contact': Contact;
     /**
-    * The LineItems collection can contain any number of individual LineItem sub-elements. At minimum, a description is required to create a complete quote.
+    * See LineItems
     */
     'lineItems': Array<LineItem>;
     /**

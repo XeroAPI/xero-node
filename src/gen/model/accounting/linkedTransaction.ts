@@ -20,7 +20,7 @@ export class LinkedTransaction {
     /**
     * The line item identifier from the source transaction.
     */
-    'sourceLineItemID': string;
+    'sourceLineItemID'?: string;
     /**
     * Filter by the combination of ContactID and Status. Get all the linked transactions that have been assigned to a particular customer and have a particular status e.g. GET /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.
     */
@@ -34,7 +34,7 @@ export class LinkedTransaction {
     */
     'targetLineItemID'?: string;
     /**
-    * The Xero identifier for an Linked Transaction e.g. /LinkedTransactions/297c2dc5-cc47-4afd-8ec8-74990b8761e9
+    * The Xero identifier for an Linked Transaction e.g./LinkedTransactions/297c2dc5-cc47-4afd-8ec8-74990b8761e9
     */
     'linkedTransactionID'?: string;
     /**
