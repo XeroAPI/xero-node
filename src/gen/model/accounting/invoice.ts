@@ -25,12 +25,12 @@ export class Invoice {
     /**
     * See Invoice Types
     */
-    'type': Invoice.TypeEnum;
-    'contact': Contact;
+    'type'?: Invoice.TypeEnum;
+    'contact'?: Contact;
     /**
     * See LineItems
     */
-    'lineItems': Array<LineItem>;
+    'lineItems'?: Array<LineItem>;
     /**
     * Date invoice was issued – YYYY-MM-DD. If the Date element is not specified it will default to the current date based on the timezone setting of the organisation
     */
