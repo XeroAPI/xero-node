@@ -1,12 +1,16 @@
 # Change Log
 ---------
+## "version": "4.1.5"
 
-## "version": "4.1.3"
+* Relaxes required types for certain objects & parameters
+
+## "version": "4.1.4"
 
 * Adds Quotes CRUD 🥳
 * Remove a duplicate Enum
 * Improved docs for `unitdp`
 * Fix filters and where clause where we expect an array. Serializes to api as a comma sep. string
+* Fix bug form 4.1.3 that was serializing all Array[any] when we just wanted Array[strings]
 
 ## "version": "4.1.2"
 
