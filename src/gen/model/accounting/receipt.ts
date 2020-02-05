@@ -21,10 +21,10 @@ export class Receipt {
     /**
     * Date of receipt – YYYY-MM-DD
     */
-    'date': string;
-    'contact': Contact;
-    'lineItems': Array<LineItem>;
-    'user': User;
+    'date'?: string;
+    'contact'?: Contact;
+    'lineItems'?: Array<LineItem>;
+    'user'?: User;
     /**
     * Additional reference number
     */

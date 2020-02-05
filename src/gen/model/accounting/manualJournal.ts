@@ -23,7 +23,7 @@ export class ManualJournal {
     /**
     * See JournalLines
     */
-    'journalLines': Array<ManualJournalLine>;
+    'journalLines'?: Array<ManualJournalLine>;
     /**
     * Date journal was posted – YYYY-MM-DD
     */

@@ -454,7 +454,11 @@ export class ObjectSerializer {
                 let date = data[index];
                 transformedData.push(ObjectSerializer.serialize(date, subType));
             }
-            return transformedData;
+            if(subType === 'string') {
+                return transformedData.join(',')
+            } else {
+                return transformedData
+            }
         } else if (type === "Date") {
             return data.toISOString();
         } else {

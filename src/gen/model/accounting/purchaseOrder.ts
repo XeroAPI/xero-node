@@ -18,11 +18,11 @@ import { LineItem } from './lineItem';
 import { ValidationError } from './validationError';
 
 export class PurchaseOrder {
-    'contact': Contact;
+    'contact'?: Contact;
     /**
     * See LineItems
     */
-    'lineItems': Array<LineItem>;
+    'lineItems'?: Array<LineItem>;
     /**
     * Date purchase order was issued – YYYY-MM-DD. If the Date element is not specified then it will default to the current date based on the timezone setting of the organisation
     */

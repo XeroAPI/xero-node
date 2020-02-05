@@ -21,7 +21,7 @@ export class Item {
     /**
     * The inventory asset account for the item. The account must be of type INVENTORY. The  COGSAccountCode in PurchaseDetails is also required to create a tracked item
     */
-    'inventoryAssetAccountCode': string;
+    'inventoryAssetAccountCode'?: string;
     /**
     * The name of the item (max length = 50)
     */
