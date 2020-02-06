@@ -12,8 +12,8 @@
 
 import { Contact } from './contact';
 import { CurrencyCode } from './currencyCode';
-import { LineAmountTypes } from './lineAmountTypes';
 import { LineItem } from './lineItem';
+import { QuoteLineAmountTypes } from './quoteLineAmountTypes';
 import { QuoteStatusCodes } from './quoteStatusCodes';
 
 export class Quote {
@@ -33,15 +33,15 @@ export class Quote {
     * Terms of the quote
     */
     'terms'?: string;
-    'contact': Contact;
+    'contact'?: Contact;
     /**
     * See LineItems
     */
-    'lineItems': Array<LineItem>;
+    'lineItems'?: Array<LineItem>;
     /**
     * Date quote was issued – YYYY-MM-DD. If the Date element is not specified it will default to the current date based on the timezone setting of the organisation
     */
-    'date': string;
+    'date'?: string;
     /**
     * Date the quote was issued (YYYY-MM-DD)
     */
@@ -92,7 +92,7 @@ export class Quote {
     * Last modified date UTC format
     */
     'updatedDateUTC'?: Date;
-    'lineAmountTypes'?: LineAmountTypes;
+    'lineAmountTypes'?: QuoteLineAmountTypes;
 
     static discriminator: string | undefined = undefined;
 
@@ -205,7 +205,7 @@ export class Quote {
         {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
-            "type": "LineAmountTypes"
+            "type": "QuoteLineAmountTypes"
         }    ];
 
     static getAttributeTypeMap() {
