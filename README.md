@@ -39,12 +39,12 @@ Follow these steps to create your Xero app
 * Copy your client id and client secret and save for use later.
 * Click the "Save" button. You secret is now hidden.
 
-## Typescript example 
+## Typescript example
 A "kitchen sync" app is available that demonstrates interacting with each endpoint.
 Just [download the code](https://github.com/XeroAPI/xero-node-oauth2-app) and configure.
 
-## Javascript Example 
-This is a barebones example showing how to authenticate and display the 
+## Javascript Example
+This is a barebones example showing how to authenticate and display the
 name of the Xero organisation you've connected to.
 
 ```js
@@ -83,7 +83,7 @@ app.get('/', function(req, res) {
 
 app.get('/connect', async function(req, res) {
   try {
-    let consentUrl = await xero.buildConsentUrl();	  
+    let consentUrl = await xero.buildConsentUrl();
     res.redirect(consentUrl);
   } catch (err) {
     res.send("Sorry, something went wrong");
@@ -97,14 +97,14 @@ app.get('/callback', async function(req, res) {
     // Optional: read user info from the id token
     let tokenClaims = await xero.readIdTokenClaims();
     const accessToken = await xero.readTokenSet();
-    
+
     req.session.tokenClaims = tokenClaims;
     req.session.accessToken = accessToken;
     req.session.xeroTenantId = xero.tenantIds[0];
     res.redirect('/organisation');
 })
 
-app.get('/organisation', async function(req, res) {  
+app.get('/organisation', async function(req, res) {
   try {
     const response = await xero.accountingApi.getOrganisations(xero.tenantIds[0])
     res.send("Hello, " + response.body.organisations[0].name);
