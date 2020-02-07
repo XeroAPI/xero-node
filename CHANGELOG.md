@@ -1,5 +1,9 @@
 # Change Log
 ---------
+## "version": "4.1.6"
+* Fixed file uploads.. Image data was being force encoded in JSON.. Using mime type now
+* adds some additional types and optionalitities to ceratin functions
+
 ## "version": "4.1.5"
 
 * Relaxes required types for certain objects & parameters
