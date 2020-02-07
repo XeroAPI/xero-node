@@ -4,6 +4,9 @@
 ## Requirements
 node version 10.13.0 or higher
 
+## SDK Documentation
+[version 4](https://xeroapi.github.io/xero-node/) documentation
+
 ## Release of SDK with oAuth 2 support
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
 * accounting
