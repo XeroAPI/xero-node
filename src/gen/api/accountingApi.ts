@@ -4832,7 +4832,7 @@ export class AccountingApi {
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
-            useQuerystring: this._useQuerystring,json: true,
+            useQuerystring: this._useQuerystring,
             body: ObjectSerializer.serialize(requestEmpty, "RequestEmpty")
         };
 
