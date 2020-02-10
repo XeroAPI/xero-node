@@ -153,14 +153,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(account, "Account")
+            body: ObjectSerializer.serialize(account, "Account"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -234,14 +235,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -332,14 +333,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -422,14 +423,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -493,14 +495,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
+            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -559,14 +562,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(bankTransfers, "BankTransfers")
+            body: ObjectSerializer.serialize(bankTransfers, "BankTransfers"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -639,14 +643,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -728,14 +732,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -799,14 +804,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(batchPayments, "BatchPayments")
+            body: ObjectSerializer.serialize(batchPayments, "BatchPayments"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -872,14 +878,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -945,14 +952,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(paymentService, "PaymentService")
+            body: ObjectSerializer.serialize(paymentService, "PaymentService"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1025,14 +1033,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1108,14 +1116,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(contactGroups, "ContactGroups")
+            body: ObjectSerializer.serialize(contactGroups, "ContactGroups"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1181,14 +1190,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(contacts, "Contacts")
+            body: ObjectSerializer.serialize(contacts, "Contacts"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1254,14 +1264,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1325,14 +1336,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(contacts, "Contacts")
+            body: ObjectSerializer.serialize(contacts, "Contacts"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1398,14 +1410,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(allocations, "Allocations")
+            body: ObjectSerializer.serialize(allocations, "Allocations"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1486,14 +1499,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1576,14 +1589,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1647,14 +1661,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
+            body: ObjectSerializer.serialize(creditNotes, "CreditNotes"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1712,14 +1727,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(currency, "Currency")
+            body: ObjectSerializer.serialize(currency, "Currency"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1778,14 +1794,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employee, "Employee")
+            body: ObjectSerializer.serialize(employee, "Employee"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1844,14 +1861,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employees, "Employees")
+            body: ObjectSerializer.serialize(employees, "Employees"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1917,14 +1935,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1983,14 +2002,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims")
+            body: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2071,14 +2091,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2161,14 +2181,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2232,14 +2253,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(invoices, "Invoices")
+            body: ObjectSerializer.serialize(invoices, "Invoices"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2305,14 +2327,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2376,14 +2399,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(items, "Items")
+            body: ObjectSerializer.serialize(items, "Items"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2442,14 +2466,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(linkedTransaction, "LinkedTransaction")
+            body: ObjectSerializer.serialize(linkedTransaction, "LinkedTransaction"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2508,14 +2533,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(manualJournal, "ManualJournal")
+            body: ObjectSerializer.serialize(manualJournal, "ManualJournal"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2589,14 +2615,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2672,14 +2698,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(manualJournals, "ManualJournals")
+            body: ObjectSerializer.serialize(manualJournals, "ManualJournals"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2745,14 +2772,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(allocation, "Allocation")
+            body: ObjectSerializer.serialize(allocation, "Allocation"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2818,14 +2846,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(allocations, "Allocations")
+            body: ObjectSerializer.serialize(allocations, "Allocations"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2891,14 +2920,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2957,14 +2987,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(payment, "Payment")
+            body: ObjectSerializer.serialize(payment, "Payment"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3030,14 +3061,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3096,14 +3128,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(paymentServices, "PaymentServices")
+            body: ObjectSerializer.serialize(paymentServices, "PaymentServices"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3162,14 +3195,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(payments, "Payments")
+            body: ObjectSerializer.serialize(payments, "Payments"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3235,14 +3269,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(allocations, "Allocations")
+            body: ObjectSerializer.serialize(allocations, "Allocations"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3308,14 +3343,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3381,14 +3417,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3452,14 +3489,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
+            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3525,14 +3563,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3596,14 +3635,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(quotes, "Quotes")
+            body: ObjectSerializer.serialize(quotes, "Quotes"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3662,14 +3702,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(receipts, "Receipts")
+            body: ObjectSerializer.serialize(receipts, "Receipts"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3743,14 +3784,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3833,14 +3874,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3914,14 +3956,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4004,14 +4046,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
+            body: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4070,14 +4113,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(taxRates, "TaxRates")
+            body: ObjectSerializer.serialize(taxRates, "TaxRates"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4136,14 +4180,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(trackingCategory, "TrackingCategory")
+            body: ObjectSerializer.serialize(trackingCategory, "TrackingCategory"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4209,14 +4254,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'PUT',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(trackingOption, "TrackingOption")
+            body: ObjectSerializer.serialize(trackingOption, "TrackingOption"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4276,13 +4322,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4349,13 +4396,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4415,13 +4462,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4481,13 +4528,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4547,13 +4594,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4619,14 +4666,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(payments, "Payments")
+            body: ObjectSerializer.serialize(payments, "Payments"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4686,13 +4734,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4759,13 +4808,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4831,14 +4881,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(requestEmpty, "RequestEmpty")
+            body: ObjectSerializer.serialize(requestEmpty, "RequestEmpty"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4898,13 +4948,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4977,6 +5028,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -5058,6 +5110,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -5124,13 +5177,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5195,13 +5248,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5261,13 +5315,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5340,6 +5395,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -5421,6 +5477,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -5487,13 +5544,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5568,13 +5625,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5634,13 +5692,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5700,13 +5759,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5779,6 +5839,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -5860,6 +5921,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -5926,13 +5988,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5992,13 +6054,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6063,13 +6126,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6129,13 +6193,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6200,13 +6265,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6266,13 +6332,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6332,13 +6399,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6391,13 +6459,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6457,13 +6526,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6536,6 +6606,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -6617,6 +6688,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -6683,13 +6755,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6749,13 +6821,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6815,13 +6888,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6884,13 +6958,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6950,13 +7025,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7036,13 +7112,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7102,13 +7179,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7174,6 +7252,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -7255,6 +7334,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -7335,6 +7415,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -7401,13 +7482,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7467,13 +7548,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7543,13 +7625,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7612,13 +7695,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7678,13 +7762,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7749,13 +7834,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7815,13 +7901,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7881,13 +7968,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7952,13 +8040,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8018,13 +8107,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8090,6 +8180,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -8171,6 +8262,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -8251,6 +8343,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -8317,13 +8410,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8383,13 +8476,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8442,13 +8536,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8553,13 +8648,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8619,13 +8715,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8685,13 +8782,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8761,13 +8859,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8827,13 +8926,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8898,13 +8998,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8964,13 +9065,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9053,13 +9155,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9119,13 +9222,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9198,6 +9302,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -9279,6 +9384,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -9345,13 +9451,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9421,13 +9527,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9487,13 +9594,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9553,13 +9661,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9612,13 +9721,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9678,13 +9788,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9744,13 +9855,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9825,13 +9937,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9891,13 +10004,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9957,13 +10071,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10016,13 +10131,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10087,13 +10203,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10153,13 +10270,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10219,13 +10337,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10300,13 +10419,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10366,13 +10486,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10432,13 +10553,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10518,13 +10640,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10584,13 +10707,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10650,13 +10774,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10751,13 +10876,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10817,13 +10943,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10896,6 +11023,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -10977,6 +11105,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -11043,13 +11172,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11109,13 +11238,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11185,13 +11315,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11251,13 +11382,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11330,6 +11462,7 @@ export class AccountingApi {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
+
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
@@ -11411,6 +11544,7 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
@@ -11477,13 +11611,13 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11543,13 +11677,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11612,13 +11747,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11696,13 +11832,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11780,13 +11917,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11846,13 +11984,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11905,13 +12044,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11999,13 +12139,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12068,13 +12209,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12142,13 +12284,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12206,13 +12349,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12315,13 +12459,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12379,13 +12524,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12448,13 +12594,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12522,13 +12669,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12596,13 +12744,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12662,13 +12811,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12728,13 +12878,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12799,13 +12950,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12871,14 +13023,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(accounts, "Accounts")
+            body: ObjectSerializer.serialize(accounts, "Accounts"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12952,14 +13105,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13042,14 +13195,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
+            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13123,14 +13277,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13220,14 +13374,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13309,14 +13463,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(contacts, "Contacts")
+            body: ObjectSerializer.serialize(contacts, "Contacts"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13389,14 +13544,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13479,14 +13634,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(contactGroups, "ContactGroups")
+            body: ObjectSerializer.serialize(contactGroups, "ContactGroups"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13552,14 +13708,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
+            body: ObjectSerializer.serialize(creditNotes, "CreditNotes"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13633,14 +13790,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13723,14 +13880,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employees, "Employees")
+            body: ObjectSerializer.serialize(employees, "Employees"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13796,14 +13954,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims")
+            body: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13869,14 +14028,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(invoices, "Invoices")
+            body: ObjectSerializer.serialize(invoices, "Invoices"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13950,14 +14110,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14040,14 +14200,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(items, "Items")
+            body: ObjectSerializer.serialize(items, "Items"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14113,14 +14274,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(linkedTransactions, "LinkedTransactions")
+            body: ObjectSerializer.serialize(linkedTransactions, "LinkedTransactions"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14186,14 +14348,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(manualJournals, "ManualJournals")
+            body: ObjectSerializer.serialize(manualJournals, "ManualJournals"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14267,14 +14430,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14355,14 +14518,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
+            body: ObjectSerializer.serialize(bankTransactions, "BankTransactions"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14426,14 +14590,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(contacts, "Contacts")
+            body: ObjectSerializer.serialize(contacts, "Contacts"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14497,14 +14662,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
+            body: ObjectSerializer.serialize(creditNotes, "CreditNotes"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14568,14 +14734,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(invoices, "Invoices")
+            body: ObjectSerializer.serialize(invoices, "Invoices"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14639,14 +14806,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(items, "Items")
+            body: ObjectSerializer.serialize(items, "Items"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14710,14 +14878,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
+            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14781,14 +14950,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(quotes, "Quotes")
+            body: ObjectSerializer.serialize(quotes, "Quotes"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14854,14 +15024,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
+            body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -14927,14 +15098,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(quotes, "Quotes")
+            body: ObjectSerializer.serialize(quotes, "Quotes"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -15000,14 +15172,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(receipts, "Receipts")
+            body: ObjectSerializer.serialize(receipts, "Receipts"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -15081,14 +15254,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -15179,14 +15352,14 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            
-            body: ObjectSerializer.serialize(body, "string")
+            body: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -15262,14 +15435,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(taxRates, "TaxRates")
+            body: ObjectSerializer.serialize(taxRates, "TaxRates"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -15335,14 +15509,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(trackingCategory, "TrackingCategory")
+            body: ObjectSerializer.serialize(trackingCategory, "TrackingCategory"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
@@ -15415,14 +15590,15 @@ export class AccountingApi {
 
         let localVarUseFormData = false;
 
+
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(trackingOption, "TrackingOption")
+            body: ObjectSerializer.serialize(trackingOption, "TrackingOption"),
+            json: true
         };
 
         let authenticationPromise = Promise.resolve();
