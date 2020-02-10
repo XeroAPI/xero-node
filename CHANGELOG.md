@@ -1,5 +1,10 @@
 # Change Log
 ---------
+## "version": "4.1.7"
+* Fixed file uploads.. Image data was being force encoded in JSON.. Using mime type now
+* emailInvoice and functions with an empty response need `json: true` to succeed when its a 204 response
+* adds some additional types and optionalitities to ceratin functions
+
 ## "version": "4.1.5"
 
 * Relaxes required types for certain objects & parameters

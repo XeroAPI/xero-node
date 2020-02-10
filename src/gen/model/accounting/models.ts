@@ -78,6 +78,7 @@ export * from './purchase';
 export * from './purchaseOrder';
 export * from './purchaseOrders';
 export * from './quote';
+export * from './quoteLineAmountTypes';
 export * from './quoteStatusCodes';
 export * from './quotes';
 export * from './receipt';
@@ -193,6 +194,7 @@ import { Purchase } from './purchase';
 import { PurchaseOrder } from './purchaseOrder';
 import { PurchaseOrders } from './purchaseOrders';
 import { Quote } from './quote';
+import { QuoteLineAmountTypes } from './quoteLineAmountTypes';
 import { QuoteStatusCodes } from './quoteStatusCodes';
 import { Quotes } from './quotes';
 import { Receipt } from './receipt';
@@ -282,6 +284,7 @@ let enumsMap: {[index: string]: any} = {
         "Prepayment.TypeEnum": Prepayment.TypeEnum,
         "Prepayment.StatusEnum": Prepayment.StatusEnum,
         "PurchaseOrder.StatusEnum": PurchaseOrder.StatusEnum,
+        "QuoteLineAmountTypes": QuoteLineAmountTypes,
         "QuoteStatusCodes": QuoteStatusCodes,
         "Receipt.StatusEnum": Receipt.StatusEnum,
         "RepeatingInvoice.TypeEnum": RepeatingInvoice.TypeEnum,

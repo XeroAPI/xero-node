@@ -17,6 +17,10 @@ export class LineItemTracking {
     */
     'trackingCategoryID'?: string;
     /**
+    * The Xero identifier for a tracking category option
+    */
+    'trackingOptionID'?: string;
+    /**
     * The name of the tracking category
     */
     'name'?: string;
@@ -31,6 +35,11 @@ export class LineItemTracking {
         {
             "name": "trackingCategoryID",
             "baseName": "TrackingCategoryID",
+            "type": "string"
+        },
+        {
+            "name": "trackingOptionID",
+            "baseName": "TrackingOptionID",
             "type": "string"
         },
         {
