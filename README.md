@@ -57,9 +57,10 @@ const express = require('express');
 const session = require('express-session');
 const  xero_node = require('xero-node')
 
+const port = process.env.PORT || 3000
 const client_id = 'YOUR-CLIENT_ID'
 const client_secret = 'YOUR-CLIENT_SECRET'
-const redirectUri = 'http://localhost:5000/callback'
+const redirectUri = `http://localhost:${port}/callback`
 const scopes = 'openid profile email accounting.transactions accounting.settings offline_access'
 
 const xero = new xero_node.XeroClient({
@@ -71,7 +72,7 @@ const xero = new xero_node.XeroClient({
 
 let app = express()
 
-app.set('port', (process.env.PORT || 3000))
+app.set('port', port)
 app.use(express.static(__dirname + '/public'))
 app.use(session({
     secret: 'something crazy',
@@ -116,9 +117,8 @@ app.get('/organisation', async function(req, res) {
   }
 })
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, function() {
-  console.log("Your Xero basic public app is running at localhost:" + PORT)
+app.listen(port, function() {
+  console.log("Your Xero basic public app is running at localhost:" + port)
 })
 ```
 
