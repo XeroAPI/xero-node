@@ -55,7 +55,7 @@ name of the Xero organisation you've connected to.
 
 const express = require('express');
 const session = require('express-session');
-const  xero_node = require('xero-node')
+const xero_node = require('xero-node')
 
 const port = process.env.PORT || 3000
 const client_id = 'YOUR-CLIENT_ID'
@@ -100,10 +100,10 @@ app.get('/callback', async function(req, res) {
 
     // Optional: read user info from the id token
     let tokenClaims = await xero.readIdTokenClaims();
-    const accessToken = await xero.readTokenSet();
+    const tokenSet = await xero.readTokenSet();
 
     req.session.tokenClaims = tokenClaims;
-    req.session.accessToken = accessToken;
+    req.session.tokenSet = tokenSet;
     req.session.xeroTenantId = xero.tenantIds[0];
     res.redirect('/organisation');
 })
