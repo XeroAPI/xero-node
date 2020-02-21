@@ -1,5 +1,48 @@
 # Change Log
 ---------
+## "version": "4.2.0"
+* Added Singapore TaxRates and ReportTaxRates
+* getInvoiceAsPdf and getCreditNoteAsPdf
+	* removed "contentType" param as it's unnecessary
+	* changed response content type from application/octet-stream to application/pdf because it will alway return a pdf.
+	
+* Update createEmployees
+	* add summarizeErrors param
+
+* Remove createEmployee method (singular - as this path/method)
+* /Employees POST is needed for updateOrCreateEmployees
+
+* Add updateOrCreateEmployees method
+	* with summarizeErrors param
+
+* Update createManualJournals
+	* add summarizeErrors param
+
+* Remove createManualJournal method (singular - as this path/method)
+* /ManualJournals POST is needed for updateOrCreateManualJournals
+
+* Add updateOrCreateManualJournals method
+	* with summarizeErrors param
+
+* Remove createOverpaymentAllocation method
+
+* Add createOverpaymentAllocations method
+	* with summarizeErrors param
+
+* Add createPrepaymentAllocations method
+	* with summarizeErrors param
+
+* Add missing attributes of Employee object
+* StatusAttributeString
+* ValidationErrors array
+
+* Add missing attributes of Invoice object
+* Warnings array
+
+* Add missing attributes of ManualJournal object
+* StatusAttributeString
+
+
 ## "version": "4.1.7"
 * Fixed file uploads.. Image data was being force encoded in JSON.. Using mime type now
 * emailInvoice and functions with an empty response need `json: true` to succeed when its a 204 response
