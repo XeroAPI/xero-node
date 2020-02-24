@@ -12,11 +12,8 @@ export interface IXeroClientConfig {
 }
 
 export class XeroClient {
-
   constructor(private readonly config: IXeroClientConfig) {
-    // need to set access token before use
     this.accountingApi = new xero.AccountingApi(); 
-    this.buildClient()
   }
 
   private tokenSet: TokenSet = new TokenSet
@@ -30,7 +27,7 @@ export class XeroClient {
     return this._tenantIds;
   }
 
-  async buildClient() {
+  async initialize() {
     const issuer = await Issuer.discover('https://identity.xero.com');
     this.openIdClient = new issuer.Client({
       client_id: this.config.clientId,
@@ -82,6 +79,14 @@ export class XeroClient {
 
   async fetchConnectedTenantIds() {
     // retrieve the authorized tenants from api.xero.com/connections
+    
+    this._tenantIds = result.body.map(connection => connection.tenantId);
+
+    // Requests to the accounting api will look like this:
+    //   let apiResponse = await xeroClient.accountingApi.getInvoices(xeroClient.tenantIds[0]);
+  }
+
+  async queryApi(){
     const result = await new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantType: string }> }>((resolve, reject) => {
       request({
           method: 'GET',
@@ -102,11 +107,7 @@ export class XeroClient {
           }
       });
     });
-    this._tenantIds = result.body.map(connection => connection.tenantId);
-
-    // Requests to the accounting api will look like this:
-    //   let apiResponse = await xeroClient.accountingApi.getInvoices(xeroClient.tenantIds[0]);
-  }
+  })
 
   private setAccessTokenForAllApis() {
     const accessToken = this.tokenSet.access_token;
