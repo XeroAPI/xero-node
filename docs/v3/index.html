@@ -1,0 +1,668 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>xero-node</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Xero Node.JS SDK Documentation</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+			</ul>
+			<h1>xero-node</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://badge.fury.io/js/xero-node"><img src="https://badge.fury.io/js/xero-node.svg" alt="npm version"></a>
+				<a href="https://circleci.com/gh/XeroAPI/xero-node/tree/master"><img src="https://circleci.com/gh/XeroAPI/xero-node/tree/master.svg?style=svg" alt="CircleCI"></a></p>
+				<a href="#xero-node" id="xero-node" style="color: inherit; text-decoration: none;">
+					<h1>xero-node</h1>
+				</a>
+				<p>NodeJS Client for the <a href="http://developer.xero.com">Xero API</a>. Works with ES5, ES6+ and TypeScript.</p>
+				<p><a href="https://developer.xero.com/documentation/">Xero API documentation</a></p>
+				<p><a href="https://xeroapi.github.io/xero-node/v3">xero-node v3 API Reference</a></p>
+				<p>Supports all application types:</p>
+				<ul>
+					<li>Private - apps that can only connect to a single organisation</li>
+					<li>Public - apps that can connect to any organisation, but only for 30 minutes at a time</li>
+					<li>Partner - approved apps that can automatically refresh tokens</li>
+				</ul>
+				<p>A great way to get started is our YouTube videos:</p>
+				<ul>
+					<li><a href="https://www.youtube.com/watch?v=pntUoUy8io4">How to make Private App calls using NodeJS and xero-node</a></li>
+					<li><a href="https://www.youtube.com/watch?v=SwyZctAmCu8">How to make Partner and Public App calls using NodeJS and xero-node</a></li>
+				</ul>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h1>Installation</h1>
+				</a>
+				<p>This SDK is published as an npm package called <code>xero-node</code>.</p>
+				<p><code>npm install --save xero-node</code></p>
+				<a href="#usage-example-for-private-apps" id="usage-example-for-private-apps" style="color: inherit; text-decoration: none;">
+					<h1>Usage Example for Private Apps</h1>
+				</a>
+				<p>Create a <code>config.json</code> file:</p>
+				<pre><code class="language-json">{
+    <span class="hljs-attr">"appType"</span>: <span class="hljs-string">"private"</span>,
+    <span class="hljs-attr">"consumerKey"</span>: <span class="hljs-string">"your_consumer_key"</span>,
+    <span class="hljs-attr">"consumerSecret"</span>: <span class="hljs-string">"your_consumer_secret"</span>,
+    <span class="hljs-attr">"callbackUrl"</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">"privateKeyPath"</span>: <span class="hljs-string">"C:\\keys\\your_private_key.pem"</span>
+}</code></pre>
+				<p>Then add the following JavaScript (example works in NodeJS version 8 and above):</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> XeroClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).AccountingAPIClient;
+<span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./config.json'</span>);
+
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span> (</span>) =&gt;</span> {
+
+    <span class="hljs-comment">// You can initialise Private apps directly from your configuration</span>
+    <span class="hljs-keyword">let</span> xero = <span class="hljs-keyword">new</span> XeroClient(config);
+
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> xero.invoices.get();
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Number of invoices:'</span>, result.Invoices.length);
+
+})();
+</code></pre>
+				<a href="#usage-example-for-public-and-partner-apps" id="usage-example-for-public-and-partner-apps" style="color: inherit; text-decoration: none;">
+					<h1>Usage Example for Public and Partner Apps</h1>
+				</a>
+				<p>Create a <code>config.json</code> file:</p>
+				<pre><code class="language-json">{
+    <span class="hljs-attr">"appType"</span>: <span class="hljs-string">"public"</span>,
+    <span class="hljs-attr">"consumerKey"</span>: <span class="hljs-string">"your_consumer_key"</span>,
+    <span class="hljs-attr">"consumerSecret"</span>: <span class="hljs-string">"your_consumer_secret"</span>,
+    <span class="hljs-attr">"callbackUrl"</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">"privateKeyPath"</span>: <span class="hljs-string">"C:\\keys\\your_private_key.pem"</span>
+}</code></pre>
+				<p>Then add the following JavaScript (example works in NodeJS version 8 and above):</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> XeroClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xero-node'</span>).AccountingAPIClient;
+<span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./config.json'</span>);
+
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span> (</span>) =&gt;</span> {
+
+    <span class="hljs-keyword">let</span> xero = <span class="hljs-keyword">new</span> XeroClient(config);
+
+    <span class="hljs-comment">// Create request token and get an authorisation URL</span>
+    <span class="hljs-keyword">const</span> requestToken = <span class="hljs-keyword">await</span> xero.oauth1Client.getRequestToken();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Received Request Token:'</span>, requestToken);
+
+    authUrl = xero.oauth1Client.buildAuthoriseUrl(requestToken);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Authorisation URL:'</span>, authUrl);
+
+    <span class="hljs-comment">// Send the user to the Authorisation URL to authorise the connection</span>
+
+    <span class="hljs-comment">// Once the user has authorised your app, swap Request token for Access token</span>
+    <span class="hljs-keyword">const</span> oauth_verifier = <span class="hljs-number">123456</span>;
+    <span class="hljs-keyword">const</span> savedRequestToken = {
+        <span class="hljs-attr">oauth_token</span>: <span class="hljs-string">'aaa'</span>,
+        <span class="hljs-attr">oauth_token_secret</span>: <span class="hljs-string">'bbb'</span>
+    };
+    <span class="hljs-keyword">const</span> accessToken = <span class="hljs-keyword">await</span> xero.oauth1Client.swapRequestTokenforAccessToken(savedRequestToken, oauth_verifier);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Received Access Token:'</span>, accessToken);
+
+    <span class="hljs-comment">// You should now store the access token securely for the user.</span>
+
+    <span class="hljs-comment">// You can make API calls straight away</span>
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> xero.invoices.get();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Number of invoices:'</span>, result.Invoices.length);
+
+    <span class="hljs-comment">// You can refresh your access token when it's getting close to expiring</span>
+    <span class="hljs-keyword">if</span>((<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>) - accessToken.oauth_expires_at &gt; <span class="hljs-number">60</span>*<span class="hljs-number">30</span>*<span class="hljs-number">1000</span>){
+        <span class="hljs-keyword">let</span> newToken = <span class="hljs-keyword">await</span> xero.oauth1Client.refreshAccessToken();
+        <span class="hljs-comment">// Remember to store the new access token in your data store</span>
+    }
+
+    <span class="hljs-comment">// The SDK will hold the latest acess token, so you can make more calls</span>
+    <span class="hljs-keyword">const</span> result1 = <span class="hljs-keyword">await</span> xero.invoices.get();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Number of invoices:'</span>, result1.Invoices.length);
+
+    <span class="hljs-comment">// When making future calls, you can initialise the Xero client direectly with the stored access token:</span>
+
+    <span class="hljs-keyword">const</span> storedAccessToken = {
+        <span class="hljs-attr">oauth_token</span>: <span class="hljs-string">'aaa'</span>,
+        <span class="hljs-attr">oauth_token_secret</span>: <span class="hljs-string">'bbb'</span>,
+        <span class="hljs-attr">oauth_session_handle</span>: <span class="hljs-string">'ccc'</span>,
+        <span class="hljs-attr">oauth_expires_at</span>: <span class="hljs-string">'2018-01-01T01:02:03'</span>
+    };
+    <span class="hljs-keyword">const</span> xero2 = <span class="hljs-keyword">new</span> XeroClient(config, storedAccessToken);
+    <span class="hljs-keyword">const</span> invoices = <span class="hljs-keyword">await</span> xero2.invoices.get();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Number of invoices:'</span>, invoices.Invoices.length);
+
+})();
+</code></pre>
+				<a href="#further-examples" id="further-examples" style="color: inherit; text-decoration: none;">
+					<h3>Further Examples</h3>
+				</a>
+				<p>Often the best palace for documentation is the integration tests in this repo. Please have a look:</p>
+				<ul>
+					<li><a href="src/__integration_tests__">Integration tests</a></li>
+					<li><a href="https://github.com/XeroAPI/xero-node-sample-app">Sample app</a></li>
+				</ul>
+				<a href="#what-about-endpoints-not-in-the-package-yet" id="what-about-endpoints-not-in-the-package-yet" style="color: inherit; text-decoration: none;">
+					<h3>What about endpoints not in the package yet?</h3>
+				</a>
+				<p>Sometimes there may be endpoints in the API which have not been added to this package. Feel free to send a PR. In the mean time we have implemented a way of calling any endpoint. Here is a few examples (replace <code>.get</code> with <code>.post</code> or <code>.put</code>):</p>
+				<ul>
+					<li><a href="https://github.com/XeroAPI/xero-node/blob/master/src/__integration_tests__/generic-endpoint.integration.tests.ts">Generic API calls private</a></li>
+					<li><a href="https://github.com/XeroAPI/xero-node/blob/master/src/__integration_tests__/partner-example-callbackUrl.tests.ts">Generic API calls public/partner</a></li>
+				</ul>
+				<a href="#private-key-as-an-env-var" id="private-key-as-an-env-var" style="color: inherit; text-decoration: none;">
+					<h2>Private key as an ENV var</h2>
+				</a>
+				<p>The config.json includes an optional field <code>privateKeyString</code>. Set this as an ENV var outside the of <code>xero-node</code> and pass it in with the config.</p>
+				<p>Private keys are of a particular format. If your using this method it needs to be a single string, and it must include the <code>-----BEGIN RSA PRIVATE KEY-----</code> and matching end part. Be sure to include a <code>\n</code> after this first line and before the last line, as well as <code>\</code> characters at the end of lines.</p>
+				<p>Here is an example:</p>
+				<pre><code>let xeroKeyString =
+"-----BEGIN RSA PRIVATE KEY-----<span class="hljs-tag">\<span class="hljs-name">n</span></span><span class="hljs-tag">\<span class="hljs-name">
+</span></span>cdfljkefrjkl45ljk34jkl4334lkj34ljk34343434<span class="hljs-tag">\<span class="hljs-name">
+</span></span>dsljdsjlkerjlk4343jkl34ljk34jkl34kjl34kjl34j<span class="hljs-tag">\<span class="hljs-name">
+</span></span>sajklsdalksdasdlkdslkdwlkdwskldskldslkd<span class="hljs-tag">\<span class="hljs-name">n</span></span><span class="hljs-tag">\<span class="hljs-name">
+</span></span>-----END RSA PRIVATE KEY-----";</code></pre><p>Here is a handy command to generate this string from your .pem file:</p>
+				<pre><code>$ awk 'NF {sub(/\r/, <span class="hljs-string">""</span>); printf <span class="hljs-string">"%s<span class="hljs-subst">\\</span>n"</span>,$<span class="hljs-number">0</span>;}' privatekey.pem</code></pre>
+				<a href="#migration-from-v2-to-v3" id="migration-from-v2-to-v3" style="color: inherit; text-decoration: none;">
+					<h2>Migration from V2 to V3</h2>
+				</a>
+				<p><a href="https://github.com/XeroAPI/xero-node/wiki/Migration-from-V2-to-V3">See here.</a></p>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h1>Contributing</h1>
+				</a>
+				<a href="#local-development" id="local-development" style="color: inherit; text-decoration: none;">
+					<h2>Local development</h2>
+				</a>
+				<p>There are lots of TODOs in code and on our GitHub Projects kanban board - feel free to pick one off.</p>
+				<p>After you clone the repository, run <code>npm install</code> to install required dependencies.</p>
+				<a href="#running-the-tests" id="running-the-tests" style="color: inherit; text-decoration: none;">
+					<h3>Running the tests</h3>
+				</a>
+				<p>We need two private Apps to get around the ratelimits. They can be connected to the same Org.</p>
+				<ol>
+					<li>Copy <code>private-config-example.json</code> to <code>private-config.json</code> in the <a href="src/__integration_tests__">integration test directory</a>.</li>
+					<li>Copy it again to <code>private-config1.json</code> in the <a href="src/__integration_tests__">integration test directory</a>.</li>
+					<li>Overwrite the example values with your own from the <a href="https://developer.xero.com/myapps">Developer Portal</a>.</li>
+					<li>(Do the same for <code>partner-config-example.json</code> and <code>xero-login.json</code>, if required.)</li>
+					<li>Run <code>npm test</code></li>
+				</ol>
+				<p>For the partner tests to pass you will need a partner app. Don&#39;t worry if you don&#39;t have one and the test fails. It will run in CircleCI.</p>
+				<p>The Prepayments and Overpayments tests require Pre/Overpayments to be present in your organisation, again, don&#39;t worry too much if these fail for you - they run in CircleCI.</p>
+				<a href="#project-philosophies" id="project-philosophies" style="color: inherit; text-decoration: none;">
+					<h2>Project Philosophies</h2>
+				</a>
+				<ol>
+					<li><p>A simple and intuitive interface.
+						eg:</p>
+						<p> <code>PUT https://api.xero.com/api.xro/2.0/ContactGroups/b05466c8-dc54-4ff8-8f17-9d7008a2e44b/Contacts</code></p>
+						<p> becomes:</p>
+						<p> <code>xero.contacts.contactGroups.create(contact)</code></p>
+						<p> Matching SDK methods names to endpoints, allows consumers to read the official API documentation and translate it to SDK method calls quickly.</p>
+						<p> That rather than using HTTP verbs (<code>.put()</code>, <code>.post()</code> etc) the SDK will use actions. Example <code>get()</code>, <code>create()</code>,<code>delete()</code>, <code>update()</code>. This abstracts away Xero&#39;s <a href="https://developer.xero.com/documentation/api/requests-and-responses">funny</a> <code>PUT</code> vs <code>POST</code>.</p>
+					</li>
+					<li><p>A simple and single OAuth flow. Rather than automatically refreshing tokens, the SDK will expose methods which allow the OAuth methods eg Refreshing Tokens etc. Consideration is also being made to OAuth2.</p>
+					</li>
+					<li><p>Abstracted underlyting OAuth/HTTP lib. This will allow swapping it out if we needed. The SDK won&#39;t bleed the OAuth libs exception types onto the consumer when it hits a 500/400 etc. Having a OAuth/HTTP layer will allow reuse and extension to other APIs (Payroll, Expenses etc).</p>
+					</li>
+					<li><p>Minimal to no entity/request/response validation. A consumer will pass in JSON and get JSON out. There will be no manipulation of data along the way. Helper methods if asked for will be provided by a separate module. This will reduce maintenance costs.</p>
+					</li>
+					<li><p>Unit tests!</p>
+					</li>
+					<li><p>Writing the SDK in Typescript allows us to provide TS types for the API&#39;s contracts, and it&#39;s what we use internally at Xero. This also enables generated docs.</p>
+					</li>
+				</ol>
+				<a href="#maintainers" id="maintainers" style="color: inherit; text-decoration: none;">
+					<h2>Maintainers</h2>
+				</a>
+				<p>@iamam34 @kodyoconnell @bryanlloydtee @dannyvincent</p>
+				<p>Release:</p>
+				<pre><code class="language-sh">git checkout master
+git pull
+npm login
+npm version major|minor|patch
+npm publish
+git push origin master --tags</code></pre>
+				<p>Regenerate docs:</p>
+				<pre><code class="language-sh">git checkout master
+git pull
+npm run build-docs
+<span class="hljs-comment"># copy docs/ directory to clipboard</span>
+git checkout gh-pages
+<span class="hljs-comment"># paste and rename to v3/</span>
+git commit -am <span class="hljs-string">"regenerated typedoc for vX.X.X"</span>
+git push origin gh-pages</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/accountingapiclient.html" class="tsd-kind-icon">AccountingAPIClient</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-private">
+						<a href="classes/baseapiclient.html" class="tsd-kind-icon">BaseAPIClient</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-private">
+						<a href="classes/oauth1httpclient.html" class="tsd-kind-icon">OAuth1<wbr>Http<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-private">
+						<a href="classes/practiceapiclient.html" class="tsd-kind-icon">PracticeAPIClient</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/projectsapiclient.html" class="tsd-kind-icon">ProjectsAPIClient</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/xeroerror.html" class="tsd-kind-icon">Xero<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accesstoken.html" class="tsd-kind-icon">Access<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/accountingapiresponse.html" class="tsd-kind-icon">AccountingAPIResponse</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/accountsresponse.html" class="tsd-kind-icon">Accounts<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/address.html" class="tsd-kind-icon">Address</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/allocation.html" class="tsd-kind-icon">Allocation</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/allocationsresponse.html" class="tsd-kind-icon">Allocations<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/apiconfiguration.html" class="tsd-kind-icon">Api<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/attachment.html" class="tsd-kind-icon">Attachment</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/attachmentsendpoint.html" class="tsd-kind-icon">Attachments<wbr>Endpoint</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/attachmentsresponse.html" class="tsd-kind-icon">Attachments<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bankaccount.html" class="tsd-kind-icon">Bank<wbr>Account</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/banktransaction.html" class="tsd-kind-icon">Bank<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/banktransactionsresponse.html" class="tsd-kind-icon">Bank<wbr>Transactions<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/banktransfer.html" class="tsd-kind-icon">Bank<wbr>Transfer</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/banktransfersresponse.html" class="tsd-kind-icon">Bank<wbr>Transfers<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/brandingtheme.html" class="tsd-kind-icon">Branding<wbr>Theme</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/brandingthemesresponse.html" class="tsd-kind-icon">Branding<wbr>Themes<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/cell.html" class="tsd-kind-icon">Cell</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contact.html" class="tsd-kind-icon">Contact</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contactgroup.html" class="tsd-kind-icon">Contact<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/contactgroupsresponse.html" class="tsd-kind-icon">Contact<wbr>Groups<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/contactsresponse.html" class="tsd-kind-icon">Contacts<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/creditnote.html" class="tsd-kind-icon">Credit<wbr>Note</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/creditnotesresponse.html" class="tsd-kind-icon">Credit<wbr>Notes<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/currenciesresponse.html" class="tsd-kind-icon">Currencies<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/currency.html" class="tsd-kind-icon">Currency</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/employee.html" class="tsd-kind-icon">Employee</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/employeesresponse.html" class="tsd-kind-icon">Employees<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/expenseclaim.html" class="tsd-kind-icon">Expense<wbr>Claim</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/expenseclaimsresponse.html" class="tsd-kind-icon">Expense<wbr>Claims<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/field.html" class="tsd-kind-icon">Field</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/headerargs.html" class="tsd-kind-icon">Header<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/historyrecord.html" class="tsd-kind-icon">History<wbr>Record</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/historyresponse.html" class="tsd-kind-icon">History<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/ihttpclient.html" class="tsd-kind-icon">IHttp<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/ioauth1client.html" class="tsd-kind-icon">IOAuth1<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/ioauth1httpclient.html" class="tsd-kind-icon">IOAuth1<wbr>Http<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invoice.html" class="tsd-kind-icon">Invoice</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invoicereminder.html" class="tsd-kind-icon">Invoice<wbr>Reminder</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/invoiceremindersresponse.html" class="tsd-kind-icon">Invoice<wbr>Reminders<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/invoicesresponse.html" class="tsd-kind-icon">Invoices<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/item.html" class="tsd-kind-icon">Item</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/itemsresponse.html" class="tsd-kind-icon">Items<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/journal.html" class="tsd-kind-icon">Journal</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/journalline.html" class="tsd-kind-icon">Journal<wbr>Line</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/journalsresponse.html" class="tsd-kind-icon">Journals<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/lineitem.html" class="tsd-kind-icon">Line<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/linkedtransaction.html" class="tsd-kind-icon">Linked<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/linkedtransactionsresponse.html" class="tsd-kind-icon">Linked<wbr>Transactions<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/manualjournal.html" class="tsd-kind-icon">Manual<wbr>Journal</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/manualjournalsresponse.html" class="tsd-kind-icon">Manual<wbr>Journals<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/oauth1configuration.html" class="tsd-kind-icon">OAuth1<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/onlineinvoice.html" class="tsd-kind-icon">Online<wbr>Invoice</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/onlineinvoicesresponse.html" class="tsd-kind-icon">Online<wbr>Invoices<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/orgcissetting.html" class="tsd-kind-icon">OrgCISSetting</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/organisation.html" class="tsd-kind-icon">Organisation</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/organisationcissettingresponse.html" class="tsd-kind-icon">OrganisationCISSetting<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/organisationresponse.html" class="tsd-kind-icon">Organisation<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/overpayment.html" class="tsd-kind-icon">Overpayment</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/overpaymentsresponse.html" class="tsd-kind-icon">Overpayments<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/paginatedresponse.html" class="tsd-kind-icon">Paginated<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pagingargs.html" class="tsd-kind-icon">Paging<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/payment.html" class="tsd-kind-icon">Payment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/paymentservice.html" class="tsd-kind-icon">Payment<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/paymentservicesresponse.html" class="tsd-kind-icon">Payment<wbr>Services<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/paymentsresponse.html" class="tsd-kind-icon">Payments<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/phone.html" class="tsd-kind-icon">Phone</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/prepayment.html" class="tsd-kind-icon">Prepayment</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/prepaymentsresponse.html" class="tsd-kind-icon">Prepayments<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/project.html" class="tsd-kind-icon">Project</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/projectsresponse.html" class="tsd-kind-icon">Projects<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/purchaseandsalesdetails.html" class="tsd-kind-icon">Purchase<wbr>And<wbr>Sales<wbr>Details</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/purchaseorder.html" class="tsd-kind-icon">Purchase<wbr>Order</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/purchaseordersresponse.html" class="tsd-kind-icon">Purchase<wbr>Orders<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/queryargs.html" class="tsd-kind-icon">Query<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/receipt.html" class="tsd-kind-icon">Receipt</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/receiptsresponse.html" class="tsd-kind-icon">Receipts<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/repeatinginvoice.html" class="tsd-kind-icon">Repeating<wbr>Invoice</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/repeatinginvoicesresponse.html" class="tsd-kind-icon">Repeating<wbr>Invoices<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/report.html" class="tsd-kind-icon">Report</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/reportsresponse.html" class="tsd-kind-icon">Reports<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/requesttoken.html" class="tsd-kind-icon">Request<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/row.html" class="tsd-kind-icon">Row</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/schedule.html" class="tsd-kind-icon">Schedule</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/summariseerrors.html" class="tsd-kind-icon">Summarise<wbr>Errors</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/taxcomponent.html" class="tsd-kind-icon">Tax<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/taxrate.html" class="tsd-kind-icon">Tax<wbr>Rate</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/taxratesresponse.html" class="tsd-kind-icon">Tax<wbr>Rates<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tracking.html" class="tsd-kind-icon">Tracking</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/trackingcategoriesresponse.html" class="tsd-kind-icon">Tracking<wbr>Categories<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trackingcategory.html" class="tsd-kind-icon">Tracking<wbr>Category</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trackingoption.html" class="tsd-kind-icon">Tracking<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/unitdecimalplacesargs.html" class="tsd-kind-icon">Unit<wbr>Decimal<wbr>Places<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/user.html" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/usersresponse.html" class="tsd-kind-icon">Users<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/validationerror.html" class="tsd-kind-icon">Validation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/warning.html" class="tsd-kind-icon">Warning</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/xeroclientconfiguration.html" class="tsd-kind-icon">Xero<wbr>Client<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#escapestring" class="tsd-kind-icon">escape<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#generatequerystring" class="tsd-kind-icon">generate<wbr>Query<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#getstringfromfile" class="tsd-kind-icon">get<wbr>String<wbr>From<wbr>File</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#mapconfig" class="tsd-kind-icon">map<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#mapstate" class="tsd-kind-icon">map<wbr>State</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
