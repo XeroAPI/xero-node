@@ -11,6 +11,41 @@ export interface IXeroClientConfig {
   scopes: string[],
   state?: string
 }
+export interface XeroJwt {
+  nbf: number
+  exp: number
+  iss: string,
+  aud: string
+  iat: number
+  at_hash: string
+  sid: string
+  sub: string
+  auth_time: number
+  idp: string
+  xero_userid: string
+  global_session_id: string
+  preferred_username: string
+  email: string
+  given_name: string
+  family_name: string
+  amr: string[]
+}
+
+export interface XeroAccessToken {
+  nbf: number
+  exp: number
+  iss: string
+  aud: string
+  client_id: string
+  sub: string
+  auth_time: number
+  idp: string
+  xero_userid: string
+  global_session_id: string
+  jti: string
+  scope: string[]
+  amr: string[]
+}
 
 export class XeroClient {
   constructor(private readonly config: IXeroClientConfig) {
@@ -46,12 +81,20 @@ export class XeroClient {
     return url;
   }
 
-  async apiCallback(url: string) {
+  async apiCallback(url: string): Promise<TokenSet> {
     const params = this.openIdClient.callbackParams(url)
     const check = {...params}
     this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
     this.setAccessToken();
     await this.updateTenants();
+    return this.tokenSet
+  }
+
+  async disconnect(tenantId: string): Promise<TokenSet> {
+    await this.queryApi('DELETE', `https://api.xero.com/connections/${tenantId}`)
+    await this.updateTenants();
+    this.setAccessToken();
+    return this.tokenSet
   }
 
   readIdTokenClaims() {
@@ -73,31 +116,36 @@ export class XeroClient {
     }
     this.tokenSet = await this.openIdClient.refresh(this.tokenSet.refresh_token);
     this.setAccessToken();
+    return this.tokenSet
+  }
+
+  async refreshTokenUsingTokenSet(tokenSet: TokenSet) {
+    this.tokenSet = await this.openIdClient.refresh(tokenSet.refresh_token);
+    this.setAccessToken();
+    return this.tokenSet
   }
   
   async updateTenants() {
-    const result = await this.queryApi('https://api.xero.com/connections')
+    const result = await this.queryApi('GET', 'https://api.xero.com/connections')
     let tenants = result.body.map(connection => connection)
     
     const getOrgsForAll = tenants.map(async tenant => {
-      const meta = await this.accountingApi.getOrganisations(tenant.tenantId)      
-      return meta.body.organisations[0]
+      const result = await this.accountingApi.getOrganisations(tenant.tenantId)      
+      return result.body.organisations[0]
     })
-    const meta = await Promise.all(getOrgsForAll)
+    const orgData = await Promise.all(getOrgsForAll)
 
-    tenants.map((tenant) => {
-      tenant.meta = meta.filter((el) => el.organisationID == tenant.tenantId)[0]
+    tenants.map((tenant) => { // assign orgData nested under each tenant
+      tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0]
     })
     this._tenants = tenants;
-
-    return this._tenants
   }
 
-  async queryApi(uri) {
-    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantType: string, meta: any }> }>((resolve, reject) => {
+  async queryApi(method, uri) {
+    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
       request({
-        method: 'GET',
-        uri: uri,
+        method,
+        uri,
         auth: {
           bearer: this.tokenSet.access_token
         },
