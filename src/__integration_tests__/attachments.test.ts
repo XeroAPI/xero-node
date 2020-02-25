@@ -20,7 +20,7 @@ describe('xeroClient', () => {
         beforeAll(async () => {
             let accountsResponse;
             try {
-                accountsResponse = await xeroClient.accountingApi.getAccounts(xeroClient.tenantIds[0]);
+                accountsResponse = await xeroClient.accountingApi.getAccounts(xeroClient.tenants[0].tenantId);
             } catch (err) {
                 throw err;
             }
@@ -33,7 +33,7 @@ describe('xeroClient', () => {
             const filesize = fs.statSync(pathToUpload).size;
             const readStream = fs.createReadStream(pathToUpload);
 
-            const attachmentsResponse = await xeroClient.accountingApi.createAccountAttachmentByFileName(xeroClient.tenantIds[0], accountId, filename, readStream, {
+            const attachmentsResponse = await xeroClient.accountingApi.createAccountAttachmentByFileName(xeroClient.tenants[0].tenantId, accountId, filename, readStream, {
                 headers: {
                     'Content-Type': 'image/jpg',
                     'Content-Length': filesize.toString()
@@ -47,19 +47,19 @@ describe('xeroClient', () => {
         });
 
         it('get attachments', async () => {
-            const attachmentsResponse = await xeroClient.accountingApi.getAccountAttachments(xeroClient.tenantIds[0], accountId);
+            const attachmentsResponse = await xeroClient.accountingApi.getAccountAttachments(xeroClient.tenants[0].tenantId, accountId);
             expect(attachmentsResponse.response.statusCode).toBe(200);
             expect(attachmentsResponse.body.attachments).toBeTruthy();
             expect(attachmentsResponse.body.attachments && attachmentsResponse.body.attachments[0].contentLength).toBeGreaterThan(0);
         });
 
         it('get attachment by id', async () => {
-            const attachmentsResponse = await xeroClient.accountingApi.getAccountAttachments(xeroClient.tenantIds[0], accountId);
+            const attachmentsResponse = await xeroClient.accountingApi.getAccountAttachments(xeroClient.tenants[0].tenantId, accountId);
             if (!attachmentsResponse.body.attachments || !attachmentsResponse.body.attachments[0]) {
                 throw new Error('no attachments exist');
             }
             const attachment = attachmentsResponse.body.attachments[0];
-            const attachmentResponse = await xeroClient.accountingApi.getAccountAttachmentById(xeroClient.tenantIds[0], accountId, attachment.attachmentID || '', attachment.mimeType || '', {
+            const attachmentResponse = await xeroClient.accountingApi.getAccountAttachmentById(xeroClient.tenants[0].tenantId, accountId, attachment.attachmentID || '', attachment.mimeType || '', {
                 headers: {
                     'accept': 'image/jpg'
                 }

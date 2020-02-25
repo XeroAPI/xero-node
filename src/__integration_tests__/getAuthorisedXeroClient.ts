@@ -7,7 +7,7 @@ export async function getAuthorisedXeroClient(config: IXeroClientConfig) {
     const xeroClient = new XeroClient(config);
 
     const url = await getUserInput('URL after redirect');
-    await xeroClient.setAccessTokenFromRedirectUri(url);
+    await xeroClient.apiCallback(url);
 
     return xeroClient;
 }

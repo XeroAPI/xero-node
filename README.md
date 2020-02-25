@@ -96,7 +96,7 @@ app.get('/connect', async function(req, res) {
 
 app.get('/callback', async function(req, res) {
     const url = "http://localhost:5000/" + req.originalUrl;
-    await xero.setAccessTokenFromRedirectUri(url);
+    await xero.apiCallback(url);
 
     // Optional: read user info from the id token
     let tokenClaims = await xero.readIdTokenClaims();
