@@ -1,9 +1,9 @@
 # Change Log
 
 ## "version": "4.4.0"
-> Jumping past vsn 4.3.0 to indicate the breaking changes without having to increment a major release and leave room for any dev on the previous client setup
+> Jumping past vsn 4.3.0 to indicate the breaking changes without having to increment a major release as well as leaving room for development on the previous client configuration
 
-Had significant community feedback that the documentation around the auth was too complex.. This refactor is a simplification of the `xeroClient.ts` naming, as well as expaning some helper functionality to be more clear.
+#### Had significant community feedback that the documentation and initial auth was too complex.. This refactor is a simplification of the `xeroClient.ts` naming and an expansion of functionality around the non-generated SDK code.
 
 Breaking Changes:
 * `setAccessTokenFromRedirectUri` renamed as `apiCallback`
