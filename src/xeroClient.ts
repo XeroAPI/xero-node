@@ -70,9 +70,11 @@ export class XeroClient {
       redirect_uris: this.config.redirectUris,
     });
     this.openIdClient[custom.clock_tolerance] = 5
+    return this
   }
 
   async buildConsentUrl() {
+    await this.initialize()
     const url = this.openIdClient.authorizationUrl({
       redirect_uri: this.config.redirectUris[0],
       scope: this.config.scopes.join(' ') || 'openid email profile'
@@ -85,13 +87,11 @@ export class XeroClient {
     const check = {...params}
     this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
     this.setAccessToken();
-    await this.updateTenants();
     return this.tokenSet
   }
 
   async disconnect(tenantId: string): Promise<TokenSet> {
     await this.queryApi('DELETE', `https://api.xero.com/connections/${tenantId}`)
-    await this.updateTenants();
     this.setAccessToken();
     return this.tokenSet
   }
@@ -138,6 +138,7 @@ export class XeroClient {
       tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0]
     })
     this._tenants = tenants;
+    return tenants
   }
 
   async queryApi(method, uri) {

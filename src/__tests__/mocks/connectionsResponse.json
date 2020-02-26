@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1234",
+    "tenantId": "1234",
+    "tenantType": "ORGANISATION",
+    "createdDateUtc": "2020-01-08T19:50:42.8073030",
+    "updatedDateUtc": "2020-01-08T19:50:42.8099500"
+  },
+  {
+    "id": "1234",
+    "tenantId": "1234",
+    "tenantType": "ORGANISATION",
+    "createdDateUtc": "2020-01-08T19:50:42.8073030",
+    "updatedDateUtc": "2020-01-08T19:50:42.8099500"
+  }
+]
