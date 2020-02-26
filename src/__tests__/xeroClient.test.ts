@@ -14,20 +14,27 @@ const xero = new XeroClient({
 });
 
 const tokenSet: any = tokenSetJson
+let connect
+let disconnect
 
 describe('the XeroClient', () => {
   beforeEach(() => {
     xero.setTokenSet(tokenSet)
 
-    nock('https://api.xero.com')
+    connect = nock('https://api.xero.com')
       .get('/connections')
       .reply(200, connectionsResponse);
+
+    disconnect = nock('https://api.xero.com')
+      .delete(`/connections/${connectionsResponse[0].tenantId}`)
+      .reply(200, tokenSet);
 
     sinon.stub(xero.accountingApi, 'getOrganisations').returns(getOrganisationResponse);
   })
 
   afterEach(function () {
     sinon.restore();
+    nock.cleanAll()
   });
 
   it('buildConsentUrl() initializes the client', async () => {
@@ -50,9 +57,17 @@ describe('the XeroClient', () => {
     expect(xeroTokenSet).toEqual(tokenSet)
   });
 
-  it('apiCallback() returns the tokenSet', async () => {
+  it('updateTenants() returns tenant data, nests orgData, & is accessible on the client', async () => {
     const tenants = await xero.updateTenants()
     expect(tenants[0].orgData).toEqual(getOrganisationResponse.body.organisations[0])
+    expect(xero.tenants[0]).toEqual(tenants[0])
+    expect(connect.isDone()).toBe(true)
+  });
+
+  it('disconnect() returns the tokenSet', async () => {
+    const tokenSet = await xero.disconnect(connectionsResponse[0].tenantId)
+    expect(tokenSet).toEqual(tokenSet)
+    expect(disconnect.isDone()).toBe(true)
   });
 
   // disconnect
