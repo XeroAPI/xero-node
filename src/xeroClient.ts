@@ -2,7 +2,6 @@ import { Issuer, TokenSet, custom } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
-import { Organisation } from './gen/api';
 
 export interface IXeroClientConfig {
   clientId: string,
@@ -11,7 +10,7 @@ export interface IXeroClientConfig {
   scopes: string[],
   state?: string
 }
-export interface XeroJwt {
+export interface XeroIdToken {
   nbf: number
   exp: number
   iss: string,

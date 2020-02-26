@@ -131,9 +131,7 @@ console.log(xero.tenants)
 ```
 
 ## Usage
-
 > Full API documentation: https://xeroapi.github.io/xero-node/v4/
-
 
 ### Basics
 ```js
@@ -177,11 +175,11 @@ const createdInvoices = await xero.accountingApi.createInvoices(activeTenantId, 
 ```
 
 ## Sample App
-For more robust examples in how to utilize our accounting api, we have roughly every single endpoint mapped out with an example in our sample app - complete with showing the Xero data dependencies required for interaction with many objects ( ie. types, assoc. accounts, tax types, date formats)
+For more robust examples in how to utilize our accounting api we have (roughly) every single endpoint mapped out with an example in our sample app - complete with showing the Xero data dependencies required for interaction with many objects ( ie. types, assoc. accounts, tax types, date formats).
 
-Just visit the repo - https://github.com/XeroAPI/xero-node-oauth2-app and configure your credentials to get started exploring.
+Just visit the repo https://github.com/XeroAPI/xero-node-oauth2-app configure your credentials & get started exploring.
 
-## Helper functions
+### Other Helper functions
 ```javascript
 // xero.tenants
 xero.tenants
