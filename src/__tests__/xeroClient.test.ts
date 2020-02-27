@@ -18,8 +18,14 @@ let connect
 let disconnect
 
 describe('the XeroClient', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
+    await xero.initialize()
+
     xero.setTokenSet(tokenSet)
+    
+    sinon.stub(xero.openIdClient, 'refresh').returns(tokenSet);
+
+    sinon.stub(xero.accountingApi, 'getOrganisations').returns(getOrganisationResponse);
 
     connect = nock('https://api.xero.com')
       .get('/connections')
@@ -28,52 +34,55 @@ describe('the XeroClient', () => {
     disconnect = nock('https://api.xero.com')
       .delete(`/connections/${connectionsResponse[0].tenantId}`)
       .reply(200, tokenSet);
-
-    sinon.stub(xero.accountingApi, 'getOrganisations').returns(getOrganisationResponse);
   })
 
-  afterEach(function () {
+  afterEach(() => {
     sinon.restore();
     nock.cleanAll()
   });
 
-  it('buildConsentUrl() initializes the client', async () => {
-    const authUrl = await xero.buildConsentUrl() 
-    expect(authUrl.substring(0,49)).toEqual('https://login.xero.com/identity/connect/authorize')
-  });
-
-  it('initialize() returns the client', async () => {
-    const xeroClient = await xero.initialize()
-    expect(xeroClient).toHaveProperty('accountingApi')
-  });
+  describe('functions', () => {
+    it('buildConsentUrl() returns the auth url', async () => {
+      const authUrl = await xero.buildConsentUrl() 
+      expect(authUrl.substring(0,49)).toEqual('https://login.xero.com/identity/connect/authorize')
+    });
   
-	it('readTokenSet() returns the tokenSet', async () => {
-    const xeroTokenSet = await xero.readTokenSet()
-    expect(xeroTokenSet).toEqual(tokenSet)
-  });
-
-  it('apiCallback() returns the tokenSet', async () => {
-    const xeroTokenSet = await xero.readTokenSet()
-    expect(xeroTokenSet).toEqual(tokenSet)
-  });
-
-  it('updateTenants() returns tenant data, nests orgData, & is accessible on the client', async () => {
-    const tenants = await xero.updateTenants()
-    expect(tenants[0].orgData).toEqual(getOrganisationResponse.body.organisations[0])
-    expect(xero.tenants[0]).toEqual(tenants[0])
-    expect(connect.isDone()).toBe(true)
-  });
-
-  it('disconnect() returns the tokenSet', async () => {
-    const tokenSet = await xero.disconnect(connectionsResponse[0].tenantId)
-    expect(tokenSet).toEqual(tokenSet)
-    expect(disconnect.isDone()).toBe(true)
-  });
-
-  // disconnect
-  // refreshToken
-  // refreshTokenUsingTokenSet
-  // updateTenants
-  // tenant
-  // queryApi
+    it('initialize() returns the client', async () => {
+      const xeroClient = await xero.initialize()
+      expect(xeroClient).toHaveProperty('accountingApi')
+    });
+    
+    it('readTokenSet() returns the tokenSet', async () => {
+      const xeroTokenSet = await xero.readTokenSet()
+      expect(xeroTokenSet).toEqual(tokenSet)
+    });
+  
+    it('apiCallback() returns the tokenSet', async () => {
+      const xeroTokenSet = await xero.readTokenSet()
+      expect(xeroTokenSet).toEqual(tokenSet)
+    });
+  
+    it('updateTenants() returns tenant data, nests orgData, & is accessible on the client', async () => {
+      const tenants = await xero.updateTenants()
+      expect(tenants[0].orgData).toEqual(getOrganisationResponse.body.organisations[0])
+      expect(xero.tenants[0]).toEqual(tenants[0])
+      expect(connect.isDone()).toBe(true)
+    });
+  
+    it('disconnect() returns the tokenSet', async () => {
+      const tokenSet = await xero.disconnect(connectionsResponse[0].tenantId)
+      expect(tokenSet).toEqual(tokenSet)
+      expect(disconnect.isDone()).toBe(true)
+    });
+  
+    it('refreshToken() refreshes token and returns the tokenSet', async () => {
+      expect(await xero.refreshToken()).toEqual(tokenSet)
+    });
+  
+    it('refreshTokenUsingTokenSet() refreshes token with tokenSetParameter and returns the tokenSet', async () => {
+      const newTokenSet = Object.assign(tokenSet, {"id_token": 'abc_123'})
+      const updatedToken = await xero.refreshTokenUsingTokenSet(newTokenSet)
+      expect(updatedToken.id_token).toEqual('abc_123')
+    });
+  })
 })

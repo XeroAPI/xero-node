@@ -56,7 +56,7 @@ export class XeroClient {
 
   readonly accountingApi: xero.AccountingApi;
 
-  private openIdClient: any; // from openid-client
+  openIdClient: any; // from openid-client
   
   get tenants(): any[] {
     return this._tenants;
