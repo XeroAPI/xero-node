@@ -1,0 +1,35 @@
+{
+  "body": {
+    "organisations": [
+      {
+        "organisationID": "1234",
+        "APIKey": "qwerty",
+        "Name": "Sweet Xero org",
+        "LegalName": "V Sweet Xero Org",
+        "PaysTax": true,
+        "Version": "AU",
+        "OrganisationType": "COMPANY",
+        "BaseCurrency": "AUD",
+        "CountryCode": "AU",
+        "IsDemoCompany": false,
+        "OrganisationStatus": "ACTIVE",
+        "FinancialYearEndDay": 30,
+        "FinancialYearEndMonth": 6,
+        "SalesTaxBasis": "ACCRUALS",
+        "SalesTaxPeriod": "QUARTERLY1",
+        "DefaultSalesTax": "Tax Exclusive",
+        "DefaultPurchasesTax": "Tax Inclusive",
+        "CreatedDateUTC": "\/Date(1572552096000)\/",
+        "OrganisationEntityType": "COMPANY",
+        "Timezone": "AUSEASTERNSTANDARDTIME",
+        "ShortCode": "!v9Mrp",
+        "Edition": "BUSINESS",
+        "Class": "PREMIUM",
+        "Addresses": [],
+        "Phones": [],
+        "ExternalLinks": [],
+        "PaymentTerms": {}
+      }
+    ]
+  }
+}

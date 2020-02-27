@@ -7,11 +7,13 @@
     "sourceMap": true,
     "outDir": "dist",
     "rootDir": "./src",
-    "declaration": true
+    "declaration": true,
+    "resolveJsonModule": true
   },
   "lib": ["es2015"],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "src/test/"
   ]
 }

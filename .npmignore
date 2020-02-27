@@ -5,7 +5,6 @@ docs_theme/
 *.tgz
 typedoc.json
 scratch.ts
-**/__integration_tests__/**
 **/__tests__/**
 *.map
 docs_theme

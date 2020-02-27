@@ -1,5 +1,23 @@
 # Change Log
----------
+
+## "version": "4.4.0"
+> Jumping past vsn 4.3.0 to indicate the breaking changes without having to increment a major release as well as leaving room for development on the previous client configuration
+
+#### Had significant community feedback that the documentation and initial auth was too complex.. This refactor is a simplification of the `xeroClient.ts` naming and an expansion of functionality around the non-generated SDK code.
+
+Breaking Changes:
+* `setAccessTokenFromRedirectUri` renamed as `apiCallback`
+* `buildClient()` remove from constructor, and those responsibilities were moved to an initializer function which must be called once the XeroClient is constructed due to some asyncronous setup required by the [openid-client](https://github.com/panva/node-openid-client):
+	* Example:
+		```js
+		const xero = new XeroClient({...config})
+		xero.initialize()
+		```
+* Added a `disconnect()` function
+* Added a `updateTenants()` function which populates the tenant's organisation details behind during the authentication process and greatly reduces the complexity of showing org details by eliminating the need for developers to make additional calls the the `/organisation` endpoint for each connected tenant
+* Added types for XeroAccessToken and XeroIdToken to show usable data that the access & id tokens may contain.
+
+---
 ## "version": "4.2.0"
 * Added Singapore TaxRates and ReportTaxRates
 * getInvoiceAsPdf and getCreditNoteAsPdf
@@ -42,16 +60,16 @@
 * Add missing attributes of ManualJournal object
 * StatusAttributeString
 
-
+---
 ## "version": "4.1.7"
 * Fixed file uploads.. Image data was being force encoded in JSON.. Using mime type now
 * emailInvoice and functions with an empty response need `json: true` to succeed when its a 204 response
 * adds some additional types and optionalitities to ceratin functions
-
+---
 ## "version": "4.1.5"
 
 * Relaxes required types for certain objects & parameters
-
+---
 ## "version": "4.1.4"
 
 * Adds Quotes CRUD 🥳
@@ -59,7 +77,7 @@
 * Improved docs for `unitdp`
 * Fix filters and where clause where we expect an array. Serializes to api as a comma sep. string
 * Fix bug form 4.1.3 that was serializing all Array[any] when we just wanted Array[strings]
-
+---
 ## "version": "4.1.2"
 
 * Adds OAuth 2 Gateway to fix #https://github.com/XeroAPI/xero-node/issues/328 so that we can get Quotes
@@ -79,7 +97,7 @@ MS Format ( this was main problem date )
 
 ref: https://developer.xero.com/documentation/api/requests-and-responses
 
-
+---
 ## "version": "4.1.1"
 
 * Adds OAuth 2 Gateway to fix #https://github.com/XeroAPI/xero-node/issues/328 so that we can get Quotes
@@ -98,7 +116,7 @@ MS Format ( this was main problem date )
 
 ref: https://developer.xero.com/documentation/api/requests-and-responses
 
-
+---
 ## "version": "4.1.0"
 
 Naming Conventions updated - Open API spec only allows us to to single PUT/POST in our generated SDKS - refactoring to enable the supported endpoints. This is a larger change that will enable the generated SDK's to be encompass the full features of the raw API, but does require some painful re-naming.
@@ -140,7 +158,7 @@ Add createOrUpdate bulk methods
 
 * Add statusAttributeString to Contact model
 
-
+---
 ## "version": "4.0.7"
 
 1) Persists client in the constructor so you can access `openIdClient` without having to call `buildConsentUrl()`
