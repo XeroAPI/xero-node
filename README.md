@@ -1,13 +1,6 @@
 # xero-node
 ![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 
-## Requirements
-node version 10.13.0 or higher
-
-## SDK Documentation
-* [version 3 - deprecated end of 2020](https://xeroapi.github.io/xero-node/v3/index.html) documentation
-* [version 4](https://xeroapi.github.io/xero-node/v4) documentation
-
 ## Release of SDK with oAuth 2 support
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
 * accounting
@@ -81,7 +74,7 @@ res.redirect(consentUrl);
 ```
 
 ## Step 2
-Call the `apiCallback` function with the response url which returns a tokenSet you can save in your datastore for future API calls.
+Call `apiCallback` function with the response url which returns a tokenSet you can save in your datastore for future calls.
 
 *The `tokenSet` can also be accessed from the client as `xero.readTokenSet()`.*
 
@@ -162,7 +155,8 @@ await xero.updateTenants()
 await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 ```
 
-## Usage
+## SDK Documentation
+* [version 3 docs](https://xeroapi.github.io/xero-node/v3/index.html) documentation (*deprecated end of 2020*)
 > Full API documentation: https://xeroapi.github.io/xero-node/v4/
 
 ### Basics
@@ -206,12 +200,12 @@ const invoices = {
 const createdInvoice = await xero.accountingApi.createInvoices(activeTenantId, invoices)
 ```
 
-## Sample App
+# Sample App
 For more robust examples in how to utilize our accounting api we have *(roughly)* every single endpoint mapped out with an example in our sample app - complete with showing the Xero data dependencies required for interaction with many objects ( ie. types, assoc. accounts, tax types, date formats).
 
 Just visit the repo https://github.com/XeroAPI/xero-node-oauth2-app configure your credentials & get started.
 
-### Other Helper functions
+## Other Helper functions
 ```js
 // xero.tenants
 xero.tenants
