@@ -82,16 +82,16 @@ export class XeroClient {
     return url;
   }
 
-  async apiCallback(url: string): Promise<TokenSet> {
-    const params = this.openIdClient.callbackParams(url)
+  async apiCallback(callbackUrl: string): Promise<TokenSet> {
+    const params = this.openIdClient.callbackParams(callbackUrl)
     const check = {...params}
     this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
     this.setAccessToken();
     return this.tokenSet
   }
 
-  async disconnect(tenantId: string): Promise<TokenSet> {
-    await this.queryApi('DELETE', `https://api.xero.com/connections/${tenantId}`)
+  async disconnect(connectionId: string): Promise<TokenSet> {
+    await this.queryApi('DELETE', `https://api.xero.com/connections/${connectionId}`)
     this.setAccessToken();
     return this.tokenSet
   }
