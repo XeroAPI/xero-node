@@ -1,4 +1,4 @@
-import { XeroClient } from "../xeroClient"
+import { XeroClient } from "../index"
 import tokenSetJson from "./mocks/tokenSet.json"
 import connectionsResponse from "./mocks/connectionsResponse.json"
 import getOrganisationResponse from "./mocks/getOrganisationResponse.json"
