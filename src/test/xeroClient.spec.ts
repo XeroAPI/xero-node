@@ -80,8 +80,11 @@ describe('the XeroClient', () => {
   
     it('refreshTokenUsingTokenSet() refreshes token with tokenSetParameter and returns the tokenSet', async () => {
       const newTokenSet = Object.assign(tokenSet, {"id_token": 'abc_123'})
-      const updatedToken = await xero.refreshTokenUsingTokenSet(newTokenSet)
-      expect(updatedToken.id_token).toEqual('abc_123')
+      const updatedTokenSet = await xero.refreshTokenUsingTokenSet(newTokenSet)
+      expect(updatedTokenSet.id_token).toEqual('abc_123')
+      await xero.setTokenSet(updatedTokenSet)
+      const xeroTokenSet = await xero.readTokenSet()
+      expect(xeroTokenSet.id_token).toEqual('abc_123')
     });
   })
 })
