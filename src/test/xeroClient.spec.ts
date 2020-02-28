@@ -1,7 +1,7 @@
-import { XeroClient } from "../xeroClient"
-import tokenSetJson from "./mocks/tokenSet.json"
-import connectionsResponse from "./mocks/connectionsResponse.json"
-import getOrganisationResponse from "./mocks/getOrganisationResponse.json"
+import { XeroClient } from "../XeroClient"
+const tokenSetJson = require("./mocks/tokenSet.json")
+const connectionsResponse = require("./mocks/connectionsResponse.json")
+const getOrganisationResponse = require("./mocks/getOrganisationResponse.json")
 import nock from 'nock';
 import sinon from 'sinon';
 
