@@ -1,5 +1,8 @@
 # Change Log
 
+## "version": "4.4.1"
+Bug fix for issue [371](https://github.com/XeroAPI/xero-node/issues/371) - import name matches capitalization
+
 ## "version": "4.4.0"
 > Jumping past vsn 4.3.0 to indicate the breaking changes without having to increment a major release as well as leaving room for development on the previous client configuration
 
