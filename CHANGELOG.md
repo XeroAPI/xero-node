@@ -1,5 +1,8 @@
 # Change Log
 
+## "version": "4.4.2"
+Add functionality for attachments on Quotes
+
 ## "version": "4.4.1"
 Bug fix for issue [371](https://github.com/XeroAPI/xero-node/issues/371) - import name matches capitalization
 
