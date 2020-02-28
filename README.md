@@ -34,6 +34,13 @@ The exception is the `src/xeroClient.ts` which contains the typescript that is u
 
 > Read more about our process in [maintaining our suite of SDK's](https://devblog.xero.com/building-sdks-for-the-future-b79ff726dfd6)
 
+## Testing
+We are working to build out a more robust test suite, and currently just have tests setup for our xeroClient.ts - PR's will now run against a CI build - and as we add more tests to this project community collaboration will be easier to incorporate.
+
+```
+npm test
+```
+
 ## Authentication
 
 We use [OAuth2.0](https://oauth.net/2) to authenticate requests against our API. Each API call will need to have a valid token populated on the API client to succeed. In a tokenSet will be an *access_token* which lasts for 30 minutes, and a *refresh_token* which lasts for 30 days. If you don't want to require your users to re-authenticate each time you want to call the API on their behalf, you will need a datastore for these tokens and will be required to refresh the tokens at least once per 30 days to avoid expiration. The `offline_access` scope is required for refresh tokens to work.
