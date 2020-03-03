@@ -48,7 +48,7 @@ export interface XeroAccessToken {
 
 export class XeroClient {
   constructor(private readonly config: IXeroClientConfig) {
-    this.accountingApi = new xero.AccountingApi(); 
+    this.accountingApi = new xero.AccountingApi();
   }
 
   private tokenSet: TokenSet = new TokenSet
@@ -57,11 +57,11 @@ export class XeroClient {
   readonly accountingApi: xero.AccountingApi;
 
   openIdClient: any; // from openid-client
-  
+
   get tenants(): any[] {
     return this._tenants;
   }
-  
+
   async initialize() {
     const issuer = await Issuer.discover('https://identity.xero.com');
     this.openIdClient = new issuer.Client({
@@ -84,7 +84,7 @@ export class XeroClient {
 
   async apiCallback(callbackUrl: string): Promise<TokenSet> {
     const params = this.openIdClient.callbackParams(callbackUrl)
-    const check = {...params}
+    const check = { ...params }
     this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
     this.setAccessToken();
     return this.tokenSet
@@ -123,22 +123,24 @@ export class XeroClient {
     this.setAccessToken();
     return this.tokenSet
   }
-  
+
   async updateTenants() {
-    const result = await this.queryApi('GET', 'https://api.xero.com/connections')
-    let tenants = result.body.map(connection => connection)
-    
+    const result = await this.queryApi('GET', 'https://api.xero.com/connections');
+    let tenants = result.body.map(connection => connection);
+
     const getOrgsForAll = tenants.map(async tenant => {
-      const result = await this.accountingApi.getOrganisations(tenant.tenantId)      
-      return result.body.organisations[0]
-    })
-    const orgData = await Promise.all(getOrgsForAll)
+      const result = await this.accountingApi.getOrganisations(tenant.tenantId);
+      return result.body.organisations[0];
+    });
+    const orgData = await Promise.all(getOrgsForAll);
 
     tenants.map((tenant) => { // assign orgData nested under each tenant
-      tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0]
-    })
+      tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0];
+    });
+    // sorting tenants so the most connection / active tenant is at index 0
+    tenants.sort((a: any, b: any) => <number><unknown>new Date(b.updatedDateUtc) - <number><unknown>new Date(a.updatedDateUtc));
     this._tenants = tenants;
-    return tenants
+    return tenants;
   }
 
   async queryApi(method, uri) {
@@ -169,7 +171,7 @@ export class XeroClient {
     if (typeof accessToken === 'undefined') {
       throw new Error('Access token is undefined!');
     }
-    
+
     this.accountingApi.accessToken = accessToken;
     // this.payrollApi.accessToken = accessToken;
   }

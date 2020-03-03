@@ -1,5 +1,8 @@
 # Change Log
 
+## "version": "4.4.3"
+Change functionality of `updateTenants()` function to sort connections so the most recent connection / active tenant is index 0
+
 ## "version": "4.4.2"
 Add functionality for attachments on Quotes
 
