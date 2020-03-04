@@ -49,7 +49,7 @@ export class Prepayment {
     */
     'total'?: number;
     /**
-    * Returns Invoice number field. Reference field isn't available.
+    * Returns Invoice number field. Reference field isn\'t available.
     */
     'reference'?: string;
     /**
