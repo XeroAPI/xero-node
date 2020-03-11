@@ -1,5 +1,27 @@
 # Change Log
 
+## "version": "4.4.4"
+Update based on OAS version 2.0.4
+https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.4
+
+* PurchaseOrder
+
+* Add operation for getPurchaseOrderByNumber
+* AppliedAmount property added to the following models
+* CreditNote
+* Prepayment
+* Overpayment
+
+* Update projects yaml
+
+* Add getTask by ID and return a single task
+* Add missing "description" property from Task model
+* Rename all the yaml files …
+* Remove the version number and "swagger" and convert to all lowercase for names
+
+* Assets
+	* Remove a few required properties on Asset model
+
 ## "version": "4.4.3"
 Change functionality of `updateTenants()` function to sort connections so the most recent connection / active tenant is index 0
 
