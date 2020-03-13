@@ -1,33 +1,33 @@
 {
-  "name": "xero-node",
-  "version": "4.4.4",
-  "description": "Xero NodeJS OAuth 2.0 client for xero-node",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "author": "Xero Platform Team",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/XeroAPI/xero-node.git"
-  },
-  "scripts": {
-    "build": "tsc",
-    "test": "jest"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.21",
-    "@types/request": "^2.48.4",
-    "jest": "^24.9.0",
-    "open": "^6.4.0",
-    "prompt": "^1.0.0",
-    "ts-jest": "^24.3.0",
-    "typescript": "^3.8.2",
-    "nock": "^12.0.1",
-    "sinon": "^9.0.0"
-  },
-  "dependencies": {
-    "openid-client": "^3.9.2",
-    "request": "^2.88.0"
-  }
+    "name": "xero-node",
+    "version": "4.4.3",
+    "description": "Xero NodeJS OAuth 2.0 client for xero-node",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "author": "Xero Platform Team",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/XeroAPI/xero-node.git"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "devDependencies": {
+        "@types/jest": "^24.9.1",
+        "@types/node": "^12.12.21",
+        "@types/request": "^2.48.4",
+        "jest": "^24.9.0",
+        "open": "^6.4.0",
+        "prompt": "^1.0.0",
+        "ts-jest": "^24.3.0",
+        "typescript": "^3.8.2",
+        "nock": "^12.0.1",
+        "sinon": "^9.0.0"
+    },
+    "dependencies": {
+        "openid-client": "^3.9.2",
+        "request": "^2.88.0"
+    }
 }
