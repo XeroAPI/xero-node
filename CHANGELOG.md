@@ -1,5 +1,20 @@
 # Change Log
 
+## "version": "4.4.5"
+Update based on OAS version 2.0.4
+https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.4
+
+* add the assets API
+https://developer.xero.com/documentation/assets-api/overview
+
+Assets related api calls will be accessible via xero.assetApi.fn() - Must have the scope in your auth/token generation to include `assets assets.read`
+* createAsset
+* createAssetType
+* getAssetById
+* getAssetSettings
+* getAssetTypes
+* getAssets
+
 ## "version": "4.4.4"
 Update based on OAS version 2.0.4
 https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.4
