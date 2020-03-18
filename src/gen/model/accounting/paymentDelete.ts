@@ -10,22 +10,24 @@
  * Do not edit the class manually.
  */
 
-import { ReportWithRow } from '././reportWithRow';
 
-export class ReportWithRows {
-    'reports'?: Array<ReportWithRow>;
+export class PaymentDelete {
+    /**
+    * The status of the payment.
+    */
+    'status': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "reports",
-            "baseName": "Reports",
-            "type": "Array<ReportWithRow>"
+            "name": "status",
+            "baseName": "Status",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return ReportWithRows.attributeTypeMap;
+        return PaymentDelete.attributeTypeMap;
     }
 }
 

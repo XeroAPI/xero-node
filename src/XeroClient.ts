@@ -89,6 +89,8 @@ export class XeroClient {
     const check = { ...params }
     this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
     this.setAccessToken();
+    console.log('this.accountingApi.accessToken: ', this.accountingApi.accessToken)
+    console.log('this.assetApi.accessToken: ',this.assetApi.accessToken)
     return this.tokenSet
   }
 
@@ -173,6 +175,7 @@ export class XeroClient {
     if (typeof accessToken === 'undefined') {
       throw new Error('Access token is undefined!');
     }
+    console.log('accessToken: ',accessToken)
 
     this.accountingApi.accessToken = accessToken;
     this.assetApi.accessToken = accessToken;
