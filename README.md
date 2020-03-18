@@ -108,7 +108,7 @@ Populate the XeroClient's active tenant data
 
 For most integrations you will always want to display the org name and additional metadata about the connected org. The `/connections` endpoint does not currently serialize that data so requires developers to make additional api calls for each org that your user connects to surface that information.
 
-The `updatedTenants` function will query & nest the additional orgData results in your xeroClient under each connection/tenant object and return the array of tenants.
+The `updatedTenants` function will query & nest the additional orgData results in your xeroClient under each connection/tenant object and return the array of tenants. This requires `accounting.settings` scope because `updateTenants` calls the organisation endpoint.
 
 ```js
 const tenants = await xero.updateTenants()
