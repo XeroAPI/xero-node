@@ -401,7 +401,7 @@ export class AssetApi {
      * @param sortDirection ASC or DESC
      * @param filterBy A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
      */     
-    public async getAssets (xeroTenantId: string, status: 'Draft' | 'Registered' | 'Disposed', page?: number, pageSize?: number, orderBy?: 'AssetType' | 'AssetName' | 'AssetNumber' | 'PurchaseDate' | 'PurchasePrice' | 'DisposalDate' | 'DisposalPrice', sortDirection?: 'asc' | 'desc', filterBy?: 'AssetName' | 'AssetNumber' | 'Description' | 'AssetTypeName', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Assets;  }> {
+    public async getAssets (xeroTenantId: string, status: 'DRAFT' | 'REGISTERED' | 'DISPOSED', page?: number, pageSize?: number, orderBy?: 'AssetType' | 'AssetName' | 'AssetNumber' | 'PurchaseDate' | 'PurchasePrice' | 'DisposalDate' | 'DisposalPrice', sortDirection?: 'asc' | 'desc', filterBy?: 'AssetName' | 'AssetNumber' | 'Description' | 'AssetTypeName', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Assets;  }> {
         const localVarPath = this.basePath + '/Assets';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -418,7 +418,7 @@ export class AssetApi {
         }
 
         if (status !== undefined) {
-            localVarQueryParameters['status'] = ObjectSerializer.serialize(status, "'Draft' | 'Registered' | 'Disposed'");
+            localVarQueryParameters['status'] = ObjectSerializer.serialize(status, "'DRAFT' | 'REGISTERED' | 'DISPOSED'");
         }
 
         if (page !== undefined) {
