@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { AssetStatus } from '././assetStatus';
 import { BookDepreciationDetail } from '././bookDepreciationDetail';
 import { BookDepreciationSetting } from '././bookDepreciationSetting';
 
@@ -38,10 +39,7 @@ export class Asset {
     * The price the asset was disposed at
     */
     'disposalPrice'?: number;
-    /**
-    * See Asset Status Codes.
-    */
-    'assetStatus'?: Asset.AssetStatusEnum;
+    'assetStatus'?: AssetStatus;
     /**
     * The date the asset’s warranty expires (if needed) YYYY-MM-DD
     */
@@ -101,7 +99,7 @@ export class Asset {
         {
             "name": "assetStatus",
             "baseName": "assetStatus",
-            "type": "Asset.AssetStatusEnum"
+            "type": "AssetStatus"
         },
         {
             "name": "warrantyExpiryDate",
@@ -144,10 +142,3 @@ export class Asset {
     }
 }
 
-export namespace Asset {
-    export enum AssetStatusEnum {
-        Draft = <any> 'Draft',
-        Registered = <any> 'Registered',
-        Disposed = <any> 'Disposed'
-    }
-}

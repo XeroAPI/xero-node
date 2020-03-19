@@ -1,4 +1,5 @@
 export * from '././asset';
+export * from '././assetStatus';
 export * from '././assetType';
 export * from '././assets';
 export * from '././bookDepreciationDetail';
@@ -9,6 +10,7 @@ export * from '././setting';
 import localVarRequest = require('request');
 
 import { Asset } from '././asset';
+import { AssetStatus } from '././assetStatus';
 import { AssetType } from '././assetType';
 import { Assets } from '././assets';
 import { BookDepreciationDetail } from '././bookDepreciationDetail';
@@ -29,7 +31,7 @@ let primitives = [
                  ];
                  
 let enumsMap: {[index: string]: any} = {
-        "Asset.AssetStatusEnum": Asset.AssetStatusEnum,
+        "AssetStatus": AssetStatus,
         "BookDepreciationSetting.DepreciationMethodEnum": BookDepreciationSetting.DepreciationMethodEnum,
         "BookDepreciationSetting.AveragingMethodEnum": BookDepreciationSetting.AveragingMethodEnum,
         "BookDepreciationSetting.DepreciationCalculationMethodEnum": BookDepreciationSetting.DepreciationCalculationMethodEnum,
