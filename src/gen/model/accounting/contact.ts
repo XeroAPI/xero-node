@@ -10,18 +10,18 @@
  * Do not edit the class manually.
  */
 
-import { Address } from '././address';
-import { Attachment } from '././attachment';
-import { Balances } from '././balances';
-import { BatchPaymentDetails } from '././batchPaymentDetails';
-import { BrandingTheme } from '././brandingTheme';
-import { ContactGroup } from '././contactGroup';
-import { ContactPerson } from '././contactPerson';
-import { CurrencyCode } from '././currencyCode';
-import { PaymentTerm } from '././paymentTerm';
-import { Phone } from '././phone';
-import { SalesTrackingCategory } from '././salesTrackingCategory';
-import { ValidationError } from '././validationError';
+import { Address } from './address';
+import { Attachment } from './attachment';
+import { Balances } from './balances';
+import { BatchPaymentDetails } from './batchPaymentDetails';
+import { BrandingTheme } from './brandingTheme';
+import { ContactGroup } from './contactGroup';
+import { ContactPerson } from './contactPerson';
+import { CurrencyCode } from './currencyCode';
+import { PaymentTerm } from './paymentTerm';
+import { Phone } from './phone';
+import { SalesTrackingCategory } from './salesTrackingCategory';
+import { ValidationError } from './validationError';
 
 export class Contact {
     /**

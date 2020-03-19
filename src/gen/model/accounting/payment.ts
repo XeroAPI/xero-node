@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { Account } from '././account';
-import { CreditNote } from '././creditNote';
-import { Invoice } from '././invoice';
-import { Overpayment } from '././overpayment';
-import { Prepayment } from '././prepayment';
-import { ValidationError } from '././validationError';
+import { Account } from './account';
+import { CreditNote } from './creditNote';
+import { Invoice } from './invoice';
+import { Overpayment } from './overpayment';
+import { Prepayment } from './prepayment';
+import { ValidationError } from './validationError';
 
 export class Payment {
     'invoice'?: Invoice;

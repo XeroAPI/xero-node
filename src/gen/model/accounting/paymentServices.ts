@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentService } from '././paymentService';
+import { PaymentService } from './paymentService';
 
 export class PaymentServices {
     'paymentServices'?: Array<PaymentService>;

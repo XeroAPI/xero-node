@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { Contact } from '././contact';
-import { CurrencyCode } from '././currencyCode';
-import { LineItem } from '././lineItem';
-import { QuoteLineAmountTypes } from '././quoteLineAmountTypes';
-import { QuoteStatusCodes } from '././quoteStatusCodes';
+import { Contact } from './contact';
+import { CurrencyCode } from './currencyCode';
+import { LineItem } from './lineItem';
+import { QuoteLineAmountTypes } from './quoteLineAmountTypes';
+import { QuoteStatusCodes } from './quoteStatusCodes';
 
 export class Quote {
     /**

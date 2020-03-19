@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { Attachment } from '././attachment';
-import { Contact } from '././contact';
-import { CurrencyCode } from '././currencyCode';
-import { LineAmountTypes } from '././lineAmountTypes';
-import { LineItem } from '././lineItem';
-import { Schedule } from '././schedule';
+import { Attachment } from './attachment';
+import { Contact } from './contact';
+import { CurrencyCode } from './currencyCode';
+import { LineAmountTypes } from './lineAmountTypes';
+import { LineItem } from './lineItem';
+import { Schedule } from './schedule';
 
 export class RepeatingInvoice {
     /**

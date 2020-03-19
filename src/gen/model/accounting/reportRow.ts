@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ReportCell } from '././reportCell';
-import { RowType } from '././rowType';
+import { ReportCell } from './reportCell';
+import { RowType } from './rowType';
 
 export class ReportRow {
     'rowType'?: RowType;

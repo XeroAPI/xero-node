@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentTermType } from '././paymentTermType';
+import { PaymentTermType } from './paymentTermType';
 
 export class Bill {
     /**

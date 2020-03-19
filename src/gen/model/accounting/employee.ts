@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ExternalLink } from '././externalLink';
-import { ValidationError } from '././validationError';
+import { ExternalLink } from './externalLink';
+import { ValidationError } from './validationError';
 
 export class Employee {
     /**

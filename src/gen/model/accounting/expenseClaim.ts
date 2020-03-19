@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { Payment } from '././payment';
-import { Receipt } from '././receipt';
-import { User } from '././user';
+import { Payment } from './payment';
+import { Receipt } from './receipt';
+import { User } from './user';
 
 export class ExpenseClaim {
     /**

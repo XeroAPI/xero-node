@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { Attachment } from '././attachment';
-import { Contact } from '././contact';
-import { LineAmountTypes } from '././lineAmountTypes';
-import { LineItem } from '././lineItem';
-import { User } from '././user';
-import { ValidationError } from '././validationError';
+import { Attachment } from './attachment';
+import { Contact } from './contact';
+import { LineAmountTypes } from './lineAmountTypes';
+import { LineItem } from './lineItem';
+import { User } from './user';
+import { ValidationError } from './validationError';
 
 export class Receipt {
     /**

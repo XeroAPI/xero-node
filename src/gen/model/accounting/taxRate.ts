@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { TaxComponent } from '././taxComponent';
+import { TaxComponent } from './taxComponent';
 
 export class TaxRate {
     /**

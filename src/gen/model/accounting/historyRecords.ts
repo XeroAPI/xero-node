@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { HistoryRecord } from '././historyRecord';
+import { HistoryRecord } from './historyRecord';
 
 export class HistoryRecords {
     'historyRecords'?: Array<HistoryRecord>;

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Invoice } from '././invoice';
+import { Invoice } from './invoice';
 
 export class Allocation {
     'invoice': Invoice;

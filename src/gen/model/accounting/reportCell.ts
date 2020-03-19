@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ReportAttribute } from '././reportAttribute';
+import { ReportAttribute } from './reportAttribute';
 
 export class ReportCell {
     'value'?: string;

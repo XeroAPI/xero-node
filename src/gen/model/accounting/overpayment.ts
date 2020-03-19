@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { Allocation } from '././allocation';
-import { Attachment } from '././attachment';
-import { Contact } from '././contact';
-import { CurrencyCode } from '././currencyCode';
-import { LineAmountTypes } from '././lineAmountTypes';
-import { LineItem } from '././lineItem';
-import { Payment } from '././payment';
+import { Allocation } from './allocation';
+import { Attachment } from './attachment';
+import { Contact } from './contact';
+import { CurrencyCode } from './currencyCode';
+import { LineAmountTypes } from './lineAmountTypes';
+import { LineItem } from './lineItem';
+import { Payment } from './payment';
 
 export class Overpayment {
     /**

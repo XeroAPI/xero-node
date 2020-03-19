@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ReportWithRow } from '././reportWithRow';
+import { ReportWithRow } from './reportWithRow';
 
 export class ReportWithRows {
     'reports'?: Array<ReportWithRow>;

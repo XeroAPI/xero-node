@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Receipt } from '././receipt';
+import { Receipt } from './receipt';
 
 export class Receipts {
     'receipts'?: Array<Receipt>;

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CurrencyCode } from '././currencyCode';
+import { CurrencyCode } from './currencyCode';
 
 export class Currency {
     'code'?: CurrencyCode;

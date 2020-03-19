@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { BrandingTheme } from '././brandingTheme';
+import { BrandingTheme } from './brandingTheme';
 
 export class BrandingThemes {
     'brandingThemes'?: Array<BrandingTheme>;

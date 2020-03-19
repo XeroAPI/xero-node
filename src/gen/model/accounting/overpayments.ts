@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Overpayment } from '././overpayment';
+import { Overpayment } from './overpayment';
 
 export class Overpayments {
     'overpayments'?: Array<Overpayment>;

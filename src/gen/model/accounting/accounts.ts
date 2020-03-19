@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Account } from '././account';
+import { Account } from './account';
 
 export class Accounts {
     'accounts'?: Array<Account>;

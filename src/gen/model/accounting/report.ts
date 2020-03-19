@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { TenNinteyNineContact } from '././tenNinteyNineContact';
+import { TenNinteyNineContact } from './tenNinteyNineContact';
 
 export class Report {
     /**

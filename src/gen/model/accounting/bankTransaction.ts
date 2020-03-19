@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { Account } from '././account';
-import { Contact } from '././contact';
-import { CurrencyCode } from '././currencyCode';
-import { LineAmountTypes } from '././lineAmountTypes';
-import { LineItem } from '././lineItem';
-import { ValidationError } from '././validationError';
+import { Account } from './account';
+import { Contact } from './contact';
+import { CurrencyCode } from './currencyCode';
+import { LineAmountTypes } from './lineAmountTypes';
+import { LineItem } from './lineItem';
+import { ValidationError } from './validationError';
 
 export class BankTransaction {
     /**

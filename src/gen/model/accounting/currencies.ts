@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Currency } from '././currency';
+import { Currency } from './currency';
 
 export class Currencies {
     'currencies'?: Array<Currency>;

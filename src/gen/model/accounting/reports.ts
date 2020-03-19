@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Report } from '././report';
+import { Report } from './report';
 
 export class Reports {
     'reports'?: Array<Report>;

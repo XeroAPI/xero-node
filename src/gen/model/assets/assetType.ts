@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { BookDepreciationSetting } from '././bookDepreciationSetting';
+import { BookDepreciationSetting } from './bookDepreciationSetting';
 
 export class AssetType {
     /**

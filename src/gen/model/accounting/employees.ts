@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Employee } from '././employee';
+import { Employee } from './employee';
 
 export class Employees {
     'employees'?: Array<Employee>;

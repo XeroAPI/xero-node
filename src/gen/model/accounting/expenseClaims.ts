@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ExpenseClaim } from '././expenseClaim';
+import { ExpenseClaim } from './expenseClaim';
 
 export class ExpenseClaims {
     'expenseClaims'?: Array<ExpenseClaim>;

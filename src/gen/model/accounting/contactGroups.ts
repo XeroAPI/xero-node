@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ContactGroup } from '././contactGroup';
+import { ContactGroup } from './contactGroup';
 
 export class ContactGroups {
     'contactGroups'?: Array<ContactGroup>;

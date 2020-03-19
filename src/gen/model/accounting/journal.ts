@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { JournalLine } from '././journalLine';
+import { JournalLine } from './journalLine';
 
 export class Journal {
     /**

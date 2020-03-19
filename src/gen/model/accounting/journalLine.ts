@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AccountType } from '././accountType';
-import { TrackingCategory } from '././trackingCategory';
+import { AccountType } from './accountType';
+import { TrackingCategory } from './trackingCategory';
 
 export class JournalLine {
     /**

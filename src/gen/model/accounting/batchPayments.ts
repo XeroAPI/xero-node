@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { BatchPayment } from '././batchPayment';
+import { BatchPayment } from './batchPayment';
 
 export class BatchPayments {
     'batchPayments'?: Array<BatchPayment>;

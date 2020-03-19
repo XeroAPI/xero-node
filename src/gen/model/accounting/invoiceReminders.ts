@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { InvoiceReminder } from '././invoiceReminder';
+import { InvoiceReminder } from './invoiceReminder';
 
 export class InvoiceReminders {
     'invoiceReminders'?: Array<InvoiceReminder>;

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Contact } from '././contact';
+import { Contact } from './contact';
 
 export class ContactGroup {
     /**
