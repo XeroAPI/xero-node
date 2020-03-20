@@ -4,6 +4,7 @@
 ## Release of SDK with oAuth 2 support
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
 * accounting
+* assets
 
 ### Bank feeds support in OAuth 2
 An early release in a separate package is availalbe [bank feeds API](https://github.com/XeroAPI/xero-node-bankfeeds).
@@ -20,7 +21,7 @@ Follow these steps to create your Xero app
 
 * Create a [free Xero user account](https://www.xero.com/us/signup/api/) (if you don't have one)
 * Login to [Xero developer center](https://developer.xero.com/myapps)
-* Click "Try oAuth2" link
+* Click "New App" link
 * Enter your App name, company url, privacy policy url.
 * Enter the redirect URI (this is your callback url - localhost, etc)
 * Agree to terms and condition and click "Create App".
@@ -43,7 +44,7 @@ npm test
 
 ## Authentication
 
-We use [OAuth2.0](https://oauth.net/2) to authenticate requests against our API. Each API call will need to have a valid token populated on the API client to succeed. In a tokenSet will be an *access_token* which lasts for 30 minutes, and a *refresh_token* which lasts for 30 days. If you don't want to require your users to re-authenticate each time you want to call the API on their behalf, you will need a datastore for these tokens and will be required to refresh the tokens at least once per 30 days to avoid expiration. The `offline_access` scope is required for refresh tokens to work.
+We use [OAuth2.0](https://oauth.net/2) to generate access tokens that authenticate requests against our API. Each API call will need to have a valid token populated on the API client to succeed. In a tokenSet will be an *access_token* which lasts for 30 minutes, and a *refresh_token* which lasts for 30 days. If you don't want to require your users to re-authenticate each time you want to call the API on their behalf, you will need a datastore for these tokens and will be required to refresh the tokens at least once per 30 days to avoid expiration. The `offline_access` scope is required for refresh tokens to work.
  
 In Xero a user can belong to multiple organisations. Tokens are ultimately associated with a Xero user, who can belong to multiple tenants/organisations. If your user 'Allows Access' to multiple organisations, be hyper aware of which `tenantId` you are passing to each function.
 
@@ -164,7 +165,9 @@ await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 
 ## SDK Documentation
 * [version 3 docs](https://xeroapi.github.io/xero-node/v3/index.html) documentation (*deprecated end of 2020*)
-> Full API documentation: https://xeroapi.github.io/xero-node/v4/
+
+* Accounting API documentation: https://xeroapi.github.io/xero-node/v4/accounting/index.html
+* Assets API documentation: https://xeroapi.github.io/xero-node/v4/accounting/index.html
 
 ### Basics
 ```js

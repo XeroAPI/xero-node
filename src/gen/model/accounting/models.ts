@@ -66,6 +66,7 @@ export * from './organisations';
 export * from './overpayment';
 export * from './overpayments';
 export * from './payment';
+export * from './paymentDelete';
 export * from './paymentService';
 export * from './paymentServices';
 export * from './paymentTerm';
@@ -182,6 +183,7 @@ import { Organisations } from './organisations';
 import { Overpayment } from './overpayment';
 import { Overpayments } from './overpayments';
 import { Payment } from './payment';
+import { PaymentDelete } from './paymentDelete';
 import { PaymentService } from './paymentService';
 import { PaymentServices } from './paymentServices';
 import { PaymentTerm } from './paymentTerm';
@@ -368,6 +370,7 @@ let typeMap: {[index: string]: any} = {
     "Overpayment": Overpayment,
     "Overpayments": Overpayments,
     "Payment": Payment,
+    "PaymentDelete": PaymentDelete,
     "PaymentService": PaymentService,
     "PaymentServices": PaymentServices,
     "PaymentTerm": PaymentTerm,
@@ -498,9 +501,11 @@ export class ObjectSerializer {
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
             let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
-                transformedData.push(ObjectSerializer.deserialize(date, subType));
+            // Asset API returns string even for Array<Model>
+            const dataFormatted = typeof data == 'string' ? JSON.parse(data) : data
+            for (let index in dataFormatted) {
+                let currentData = dataFormatted[index];
+                transformedData.push(ObjectSerializer.deserialize(currentData, subType));
             }
             return transformedData;
         } else if (type === "Date") {
