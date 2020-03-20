@@ -164,10 +164,9 @@ await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 ```
 
 ## SDK Documentation
-* [version 3 docs](https://xeroapi.github.io/xero-node/v3/index.html) documentation (*deprecated end of 2020*)
-
+* Version 3 (OAuth1.0a documentation) https://xeroapi.github.io/xero-node/v3/index.html (*deprecated end of 2020*)
 * Accounting API documentation: https://xeroapi.github.io/xero-node/v4/accounting/index.html
-* Assets API documentation: https://xeroapi.github.io/xero-node/v4/accounting/index.html
+* Assets API documentation: https://xeroapi.github.io/xero-node/v4/assets/index.html
 
 ### Basics
 ```js
