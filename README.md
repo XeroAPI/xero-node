@@ -153,6 +153,14 @@ Once you have a valid token saved you can set the token on the client without go
 
 For example - once a user authenticates you can refresh the token (which will also set the new token on the client) to make authorized api calls.
 ```js
+const getTokenFromDatabase = userId => {
+  // function to fetch your user Token from DB;
+  const tokenFromDB;
+
+  // const { TokenSet } = require('openid-client');
+  return new TokenSet(tokenFromDB);
+};
+
 const tokenSet = getTokenFromDatabase(userId) // example function name
 
 await xero.setTokenSet(tokenSet)
