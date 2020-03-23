@@ -74,8 +74,6 @@ const xero = new XeroClient({
   scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
 });
 
-await xero.initialize();
-
 let consentUrl = await xero.buildConsentUrl();
 
 res.redirect(consentUrl);
@@ -170,6 +168,20 @@ await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 
 ### Basics
 ```js
+// example flow of initializing and using the client after someone has already authenticated and you have saved their tokenSet
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID',
+  clientSecret: 'YOUR_CLIENT_SECRET',
+  redirectUris: [`http://localhost:${port}/callback`],
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
+});
+await xero.initialize();
+
+const tokenSet = getYourTokenSetFromSavedLocation(currentUser)
+
+await xero.setTokenSet(tokenSet)
+...
+
 const activeTenantId = xero.tenants[0].tenantId
 
 const getOrgs = await xero.accountingApi.getOrganisations(activeTenantId)
@@ -219,7 +231,12 @@ Just visit the repo https://github.com/XeroAPI/xero-node-oauth2-app configure yo
 // xero.tenants
 xero.tenants
 
+// initialize()
+// This needs to be called to setup relevant OAuth2.0 information on the client
+await xero.initialize()
+
 // buildConsentUrl()
+// This calls `await xero.initialize()` so you don't need to call initialize if you are using this function to send someone through auth flow
 await xero.buildConsentUrl()
 
 // readTokenSet()
