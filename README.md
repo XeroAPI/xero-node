@@ -74,6 +74,7 @@ const xero = new XeroClient({
   scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
 });
 
+// `buildConsentUrl()` calls `await xero.initialize()`
 let consentUrl = await xero.buildConsentUrl();
 
 res.redirect(consentUrl);
@@ -155,7 +156,7 @@ const tokenSet = getTokenFromDatabase(userId) // example function name
 
 await xero.setTokenSet(tokenSet)
 
-// you can call this to fetch/set your connected tenant data on your client, or you could also store this information in a database
+// you can call this to fetch/set your connected tenant data on your client, or you could also store this information in a database so you don't need to updateTenants every time you connect to API
 await xero.updateTenants()
 
 await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
