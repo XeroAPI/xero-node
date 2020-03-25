@@ -49,12 +49,16 @@ export interface XeroAccessToken {
 export class XeroClient {
   constructor(private readonly config: IXeroClientConfig) {
     this.accountingApi = new xero.AccountingApi();
+    this.assetApi = new xero.AssetApi();
+    this.projectApi = new xero.ProjectApi();
   }
 
   private tokenSet: TokenSet = new TokenSet
   private _tenants: any[] = []
 
   readonly accountingApi: xero.AccountingApi;
+  readonly assetApi: xero.AssetApi;
+  readonly projectApi: xero.ProjectApi;
 
   openIdClient: any; // from openid-client
 
@@ -173,6 +177,8 @@ export class XeroClient {
     }
 
     this.accountingApi.accessToken = accessToken;
+    this.assetApi.accessToken = accessToken;
+    this.projectApi.accessToken = accessToken;
     // this.payrollApi.accessToken = accessToken;
   }
 }
