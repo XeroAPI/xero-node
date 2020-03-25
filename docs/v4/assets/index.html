@@ -855,10 +855,7 @@ ul.nav-tabs {
       "example" : 1.0000
     },
     "assetStatus" : {
-      "type" : "string",
-      "description" : "See Asset Status Codes.",
-      "example" : "Draft",
-      "enum" : [ "Draft", "Registered", "Disposed" ]
+      "$ref" : "#/components/schemas/AssetStatus"
     },
     "warrantyExpiryDate" : {
       "type" : "string",
@@ -894,6 +891,13 @@ ul.nav-tabs {
     }
   },
   "description" : ""
+};
+    defs["AssetStatus"] = {
+  "title" : "",
+  "type" : "string",
+  "description" : "See Asset Status Codes.",
+  "example" : "DRAFT",
+  "enum" : [ "DRAFT", "REGISTERED", "DISPOSED" ]
 };
     defs["AssetType"] = {
   "title" : "",
@@ -1182,7 +1186,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 4.1.5</div>
             <!--
-              <div class="app-desc">Version: 2.0.5</div>
+              <div class="app-desc">Version: 2.0.6</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Assets API
@@ -1248,7 +1252,7 @@ public class AssetApiExample {
 
         AssetApi apiInstance = new AssetApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        Asset asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset | 
+        Asset asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"DRAFT", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset | 
         try {
             Asset result = apiInstance.createAsset(xeroTenantId, asset);
             System.out.println(result);
@@ -1268,7 +1272,7 @@ public class AssetApiExample {
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        Asset asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset | 
+        Asset asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"DRAFT", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset | 
         try {
             Asset result = apiInstance.createAsset(xeroTenantId, asset);
             System.out.println(result);
@@ -1290,7 +1294,7 @@ public class AssetApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-Asset *asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // 
+Asset *asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"DRAFT", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // 
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
 
@@ -1320,7 +1324,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 await xero.setTokenSet(tokenSet);
  
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const asset:Asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 };  // {Asset} 
+const asset:Asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"DRAFT", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 };  // {Asset} 
 try {
   const response: any = await xero.accountingApi.createAsset(xeroTenantId, asset);
   console.log(response.body || response.response.statusCode)
@@ -1446,7 +1450,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .AssetApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 } # Asset | 
+asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"DRAFT", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 } # Asset | 
 
 try: 
     # adds a fixed asset
@@ -1461,7 +1465,7 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset
+    let asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"DRAFT", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset
 
     let mut context = AssetApi::Context::default();
     let result = client.createAsset(xeroTenantId, asset, &context).wait();
@@ -1608,7 +1612,7 @@ $(document).ready(function() {
       "schema" : {
         "$ref" : "#/components/schemas/Asset"
       },
-      "example" : "{ \"assetId\":\"2257c64a-77ca-444c-a5ea-fa9a588c7039\", \"assetName\":\"Computer74863\", \"assetNumber\":\"123477544\", \"purchaseDate\":\"2020-01-01T00:00:00\", \"purchasePrice\":100.0000, \"disposalPrice\":23.2300, \"assetStatus\":\"Draft\", \"trackingItems\":[], \"bookDepreciationSetting\":{ \"depreciableObjectId\":\"2257c64a-77ca-444c-a5ea-fa9a588c7039\", \"depreciableObjectType\":\"Asset\", \"bookEffectiveDateOfChangeId\":\"b58a2ace-1213-4681-9f11-2e30f57b5b8c\", \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.50, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"depreciationStartDate\":\"2020-01-02T00:00:00\", \"priorAccumDepreciationAmount\":0.000000, \"currentAccumDepreciationAmount\":0.000000, \"currentCapitalGain\":0.000000, \"currentGainLoss\":0.000000 }, \"taxDepreciationSettings\":[ ], \"taxDepreciationDetails\":[], \"canRollback\":true, \"accountingBookValue\":76.770000, \"taxValues\":[], \"isDeleteEnabledForDate\":true }"
+      "example" : "{ \"assetId\":\"2257c64a-77ca-444c-a5ea-fa9a588c7039\", \"assetName\":\"Computer74863\", \"assetNumber\":\"123477544\", \"purchaseDate\":\"2020-01-01T00:00:00\", \"purchasePrice\":100.0000, \"disposalPrice\":23.2300, \"assetStatus\":\"DRAFT\", \"trackingItems\":[], \"bookDepreciationSetting\":{ \"depreciableObjectId\":\"2257c64a-77ca-444c-a5ea-fa9a588c7039\", \"depreciableObjectType\":\"Asset\", \"bookEffectiveDateOfChangeId\":\"b58a2ace-1213-4681-9f11-2e30f57b5b8c\", \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.50, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"depreciationStartDate\":\"2020-01-02T00:00:00\", \"priorAccumDepreciationAmount\":0.000000, \"currentAccumDepreciationAmount\":0.000000, \"currentCapitalGain\":0.000000, \"currentGainLoss\":0.000000 }, \"taxDepreciationSettings\":[ ], \"taxDepreciationDetails\":[], \"canRollback\":true, \"accountingBookValue\":76.770000, \"taxValues\":[], \"isDeleteEnabledForDate\":true }"
     }
   }
 };
@@ -2561,7 +2565,7 @@ Xero identifier for Tenant
       "schema" : {
         "$ref" : "#/components/schemas/Asset"
       },
-      "example" : "{ \"assetId\":\"68f17094-af97-4f1b-b36b-013b45b6ad3c\", \"assetName\":\"Computer47822\", \"assetNumber\":\"123478074\", \"purchaseDate\":\"2020-01-01T00:00:00\", \"purchasePrice\":100.0000, \"disposalPrice\":23.0000, \"assetStatus\":\"Draft\", \"trackingItems\":[\n], \"bookDepreciationSetting\":{ \"depreciableObjectId\":\"68f17094-af97-4f1b-b36b-013b45b6ad3c\", \"depreciableObjectType\":\"Asset\", \"bookEffectiveDateOfChangeId\":\"5da77739-7f22-4109-b0a0-67480fb89af0\", \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.50, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"depreciationStartDate\":\"2020-01-02T00:00:00\", \"priorAccumDepreciationAmount\":0.000000, \"currentAccumDepreciationAmount\":0.000000, \"currentCapitalGain\":0.000000, \"currentGainLoss\":0.000000 }, \"taxDepreciationSettings\":[ ], \"taxDepreciationDetails\":[ ], \"canRollback\":true, \"metaData\":{ \"bookDepreciationDetailsCanChange\":true, \"taxDepreciationDetailsCanChange\":true }, \"accountingBookValue\":77.000000, \"taxValues\":[ ], \"isDeleteEnabledForDate\":true }"
+      "example" : "{ \"assetId\":\"68f17094-af97-4f1b-b36b-013b45b6ad3c\", \"assetName\":\"Computer47822\", \"assetNumber\":\"123478074\", \"purchaseDate\":\"2020-01-01T00:00:00\", \"purchasePrice\":100.0000, \"disposalPrice\":23.0000, \"assetStatus\":\"DRAFT\", \"trackingItems\":[\n], \"bookDepreciationSetting\":{ \"depreciableObjectId\":\"68f17094-af97-4f1b-b36b-013b45b6ad3c\", \"depreciableObjectType\":\"Asset\", \"bookEffectiveDateOfChangeId\":\"5da77739-7f22-4109-b0a0-67480fb89af0\", \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.50, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"depreciationStartDate\":\"2020-01-02T00:00:00\", \"priorAccumDepreciationAmount\":0.000000, \"currentAccumDepreciationAmount\":0.000000, \"currentCapitalGain\":0.000000, \"currentGainLoss\":0.000000 }, \"taxDepreciationSettings\":[ ], \"taxDepreciationDetails\":[ ], \"canRollback\":true, \"metaData\":{ \"bookDepreciationDetailsCanChange\":true, \"taxDepreciationDetailsCanChange\":true }, \"accountingBookValue\":77.000000, \"taxValues\":[ ], \"isDeleteEnabledForDate\":true }"
     }
   }
 };
@@ -3486,7 +3490,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Asset-getAssets-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/assets.xro/1.0/Assets?status=Draft&page=1&pageSize=5&orderBy=AssetName&sortDirection=ASC&filterBy=Draft"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/assets.xro/1.0/Assets?status=&page=1&pageSize=5&orderBy=AssetName&sortDirection=ASC&filterBy=Draft"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Asset-getAssets-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -3508,7 +3512,7 @@ public class AssetApiExample {
 
         AssetApi apiInstance = new AssetApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        String status = Draft; // String | Required when retrieving a collection of assets. See Asset Status Codes
+        AssetStatus status = ; // AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes
         Integer page = 1; // Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
         Integer pageSize = 5; // Integer | The number of records returned per page. By default the number of records returned is 10.
         String orderBy = AssetName; // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
@@ -3533,7 +3537,7 @@ public class AssetApiExample {
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        String status = Draft; // String | Required when retrieving a collection of assets. See Asset Status Codes
+        AssetStatus status = ; // AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes
         Integer page = 1; // Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
         Integer pageSize = 5; // Integer | The number of records returned per page. By default the number of records returned is 10.
         String orderBy = AssetName; // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
@@ -3560,7 +3564,7 @@ public class AssetApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-String *status = Draft; // Required when retrieving a collection of assets. See Asset Status Codes (default to null)
+AssetStatus *status = ; // Required when retrieving a collection of assets. See Asset Status Codes (default to null)
 Integer *page = 1; // Results are paged. This specifies which page of the results to return. The default page is 1. (optional) (default to null)
 Integer *pageSize = 5; // The number of records returned per page. By default the number of records returned is 10. (optional) (default to null)
 String *orderBy = AssetName; // Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional) (default to null)
@@ -3600,7 +3604,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 await xero.setTokenSet(tokenSet);
  
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const status = "Draft";  // {String} Required when retrieving a collection of assets. See Asset Status Codes
+const status:AssetStatus = ;  // {AssetStatus} Required when retrieving a collection of assets. See Asset Status Codes
 const page =  1;  // {Integer} Results are paged. This specifies which page of the results to return. The default page is 1.
 const pageSize =  5;  // {Integer} The number of records returned per page. By default the number of records returned is 10.
 const orderBy =  'AssetName';  // {String} Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
@@ -3657,7 +3661,7 @@ namespace Example
 
             var apiInstance = new AssetApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
-            var status = Draft;  // String | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
+            var status = new AssetStatus(); // AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
             var page = 1;  // Integer | Results are paged. This specifies which page of the results to return. The default page is 1. (optional)  (default to null)
             var pageSize = 5;  // Integer | The number of records returned per page. By default the number of records returned is 10. (optional)  (default to null)
             var orderBy = AssetName;  // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional)  (default to null)
@@ -3713,7 +3717,7 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::AssetApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
-my $status = Draft; # String | Required when retrieving a collection of assets. See Asset Status Codes
+my $status = ; # AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes
 my $page = 1; # Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
 my $pageSize = 5; # Integer | The number of records returned per page. By default the number of records returned is 10.
 my $orderBy = AssetName; # String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
@@ -3742,7 +3746,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .AssetApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-status = Draft # String | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
+status =  # AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
 page = 1 # Integer | Results are paged. This specifies which page of the results to return. The default page is 1. (optional) (default to null)
 pageSize = 5 # Integer | The number of records returned per page. By default the number of records returned is 10. (optional) (default to null)
 orderBy = AssetName # String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional) (default to null)
@@ -3762,7 +3766,7 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let status = Draft; // String
+    let status = ; // AssetStatus
     let page = 1; // Integer
     let pageSize = 5; // Integer
     let orderBy = AssetName; // String
@@ -3838,7 +3842,7 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    AssetStatus
                 </span>
 
                     <div class="inner description marked">
@@ -3997,7 +4001,7 @@ A string that can be used to filter the list to only return assets containing th
       "schema" : {
         "$ref" : "#/components/schemas/Assets"
       },
-      "example" : "{ \"pagination\":{ \"page\":1, \"pageSize\":10, \"pageCount\":2, \"itemCount\":11, \"links\":{ \"first\":{ \"href\":\"http://asset.favorit.xero.com/v1/assets?status=DRAFT&page=1\" }, \"next\":{ \"href\":\"http://asset.favorit.xero.com/v1/assets?status=DRAFT&page=2\" }, \"last\":{ \"href\":\"http://asset.favorit.xero.com/v1/assets?status=DRAFT&page=2\" } } }, \"items\":[ { \"assetId\":\"68f17094-af97-4f1b-b36b-013b45b6ad3c\", \"assetName\":\"Computer47822\", \"assetNumber\":\"123478074\", \"purchaseDate\":\"2020-01-01T00:00:00\", \"purchasePrice\":100.0000, \"disposalPrice\":0.0, \"assetStatus\":\"Draft\", \"trackingItems\":[ ], \"bookDepreciationSetting\":{ \"depreciableObjectId\":\"68f17094-af97-4f1b-b36b-013b45b6ad3c\", \"depreciableObjectType\":\"Asset\", \"bookEffectiveDateOfChangeId\":\"5da77739-7f22-4109-b0a0-67480fb89af0\", \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.50, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"depreciationStartDate\":\"2020-01-02T00:00:00\", \"priorAccumDepreciationAmount\":0.000000, \"currentAccumDepreciationAmount\":0.000000, \"currentCapitalGain\":0.000000, \"currentGainLoss\":0.000000 }, \"taxDepreciationSettings\":[ ], \"taxDepreciationDetails\":[ ], \"canRollback\":true, \"accountingBookValue\":100.000000, \"taxValues\":[ ], \"isDeleteEnabledForDate\":false }, { \"assetId\":\"52ea3adf-f04a-4577-8fd2-43c52a256bd5\", \"assetName\":\"Computer4148\", \"assetNumber\":\"123466620\", \"purchaseDate\":\"2020-01-01T00:00:00\", \"purchasePrice\":100.0000, \"disposalPrice\":0.0, \"assetStatus\":\"Draft\", \"trackingItems\":[\n], \"bookDepreciationSetting\":{ \"depreciableObjectId\":\"52ea3adf-f04a-4577-8fd2-43c52a256bd5\", \"depreciableObjectType\":\"Asset\", \"bookEffectiveDateOfChangeId\":\"c0d5280f-28b6-4329-b5b7-36e08c662010\", \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.50, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"depreciationStartDate\":\"2020-01-02T00:00:00\", \"priorAccumDepreciationAmount\":0.000000, \"currentAccumDepreciationAmount\":0.000000, \"currentCapitalGain\":0.000000, \"currentGainLoss\":0.000000 }, \"taxDepreciationSettings\":[ ], \"taxDepreciationDetails\":[ ], \"canRollback\":true, \"accountingBookValue\":100.000000, \"taxValues\":[\n], \"isDeleteEnabledForDate\":false } ] }"
+      "example" : "{ \"pagination\":{ \"page\":1, \"pageSize\":10, \"pageCount\":2, \"itemCount\":11, \"links\":{ \"first\":{ \"href\":\"http://asset.favorit.xero.com/v1/assets?status=DRAFT&page=1\" }, \"next\":{ \"href\":\"http://asset.favorit.xero.com/v1/assets?status=DRAFT&page=2\" }, \"last\":{ \"href\":\"http://asset.favorit.xero.com/v1/assets?status=DRAFT&page=2\" } } }, \"items\":[ { \"assetId\":\"68f17094-af97-4f1b-b36b-013b45b6ad3c\", \"assetName\":\"Computer47822\", \"assetNumber\":\"123478074\", \"purchaseDate\":\"2020-01-01T00:00:00\", \"purchasePrice\":100.0000, \"disposalPrice\":0.0, \"assetStatus\":\"DRAFT\", \"trackingItems\":[ ], \"bookDepreciationSetting\":{ \"depreciableObjectId\":\"68f17094-af97-4f1b-b36b-013b45b6ad3c\", \"depreciableObjectType\":\"Asset\", \"bookEffectiveDateOfChangeId\":\"5da77739-7f22-4109-b0a0-67480fb89af0\", \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.50, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"depreciationStartDate\":\"2020-01-02T00:00:00\", \"priorAccumDepreciationAmount\":0.000000, \"currentAccumDepreciationAmount\":0.000000, \"currentCapitalGain\":0.000000, \"currentGainLoss\":0.000000 }, \"taxDepreciationSettings\":[ ], \"taxDepreciationDetails\":[ ], \"canRollback\":true, \"accountingBookValue\":100.000000, \"taxValues\":[ ], \"isDeleteEnabledForDate\":false }, { \"assetId\":\"52ea3adf-f04a-4577-8fd2-43c52a256bd5\", \"assetName\":\"Computer4148\", \"assetNumber\":\"123466620\", \"purchaseDate\":\"2020-01-01T00:00:00\", \"purchasePrice\":100.0000, \"disposalPrice\":0.0, \"assetStatus\":\"DRAFT\", \"trackingItems\":[\n], \"bookDepreciationSetting\":{ \"depreciableObjectId\":\"52ea3adf-f04a-4577-8fd2-43c52a256bd5\", \"depreciableObjectType\":\"Asset\", \"bookEffectiveDateOfChangeId\":\"c0d5280f-28b6-4329-b5b7-36e08c662010\", \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.50, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"depreciationStartDate\":\"2020-01-02T00:00:00\", \"priorAccumDepreciationAmount\":0.000000, \"currentAccumDepreciationAmount\":0.000000, \"currentCapitalGain\":0.000000, \"currentGainLoss\":0.000000 }, \"taxDepreciationSettings\":[ ], \"taxDepreciationDetails\":[ ], \"canRollback\":true, \"accountingBookValue\":100.000000, \"taxValues\":[\n], \"isDeleteEnabledForDate\":false } ] }"
     }
   }
 };

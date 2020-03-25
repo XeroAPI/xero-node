@@ -86,9 +86,12 @@ Call `apiCallback` function with the response url which returns a tokenSet you c
 *The `tokenSet` can also be accessed from the client as `xero.readTokenSet()`.*
 
 ```js
-const tokenSet = await xero.apiCallback(req.url);
+
+const { TokenSet } = require('openid-client');
+
+const tokenSet: TokenSet = await xero.apiCallback(req.url);
 ```
-The `tokenSet` will contain your access_token and refresh_token as well as other information regarding your connection.
+The `tokenSet` is what you should store in your database. That object is what you will need to pass to the client. It contains your access_token and refresh_token as well as other information regarding your connection.
 ```js
 {
   id_token: 'eyJhxxxx.yyy',
@@ -148,11 +151,11 @@ console.log(tenants || xero.tenants)
 ---
 ## Making **offline_access** calls
 
-Once you have a valid token saved you can set the token on the client without going through the callback by calling `setTokenSet`.
+Once you have a valid token/tokenSet saved you can set the tokenSet on the client without going through the callback by calling `setTokenSet`.
 
 For example - once a user authenticates you can refresh the token (which will also set the new token on the client) to make authorized api calls.
 ```js
-const tokenSet = getTokenFromDatabase(userId) // example function name
+const tokenSet = getTokenSetFromDatabase(userId) // example function name
 
 await xero.setTokenSet(tokenSet)
 

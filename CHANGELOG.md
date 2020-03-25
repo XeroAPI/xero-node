@@ -1,5 +1,20 @@
 # Change Log
 
+## "version": "4.4.6"
+
+Generated as per OAS 2.0.6
+
+Fixed deserialization of a few fields that were using the MS date format: https://github.com/XeroAPI/xero-node/issues/385
+
+ACCOUNTING
+* updateEmployee singular not supported by API - removed
+* Add getQuotesAsPDF
+
+ASSETS
+* Added documentation ( https://xeroapi.github.io/xero-node/v4/assets/index.html ) 
+* enums capitalized for assets status
+* AssetStatus component added
+
 ## "version": "4.4.5"
 Update based on OAS version 2.0.4
 https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.4
