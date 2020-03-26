@@ -1,6 +1,6 @@
 # Change Log
 
-## "version": "4.4.6"
+## "version": "4.4.7"
 
 Generated as per OAS 2.0.6
 
