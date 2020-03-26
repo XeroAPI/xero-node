@@ -2,7 +2,7 @@
 
 ## "version": "4.4.7"
 
-Generated as per OAS 2.0.6
+Generated as per OAS 2.0.6 (https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.6)
 
 Fixed deserialization of a few fields that were using the MS date format: https://github.com/XeroAPI/xero-node/issues/385
 
