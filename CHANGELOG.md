@@ -1,5 +1,13 @@
 # Change Log
 
+## "version": "4.4.8"
+
+PROJECTS
+* Add projects functionality to xero-node (https://developer.xero.com/documentation/projects/overview-projects)
+
+ASSETS
+* Fix array serialization bug for assets api
+
 ## "version": "4.4.7"
 
 Generated as per OAS 2.0.6 (https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.6)

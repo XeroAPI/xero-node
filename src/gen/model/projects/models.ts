@@ -181,9 +181,11 @@ export class ObjectSerializer {
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
             let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
-                transformedData.push(ObjectSerializer.deserialize(date, subType));
+            // Asset API returns string even for Array<Model>
+            const dataFormatted = typeof data == 'string' ? JSON.parse(data) : data
+            for (let index in dataFormatted) {
+                let currentData = dataFormatted[index];
+                transformedData.push(ObjectSerializer.deserialize(currentData, subType));
             }
             return transformedData;
         } else if (type === "Date") {
