@@ -99,6 +99,10 @@ export class CreditNote {
     */
     'brandingThemeID'?: string;
     /**
+    * A string to indicate if a invoice status
+    */
+    'statusAttributeString'?: string;
+    /**
     * boolean to indicate if a credit note has an attachment
     */
     'hasAttachments'?: boolean;
@@ -222,6 +226,11 @@ export class CreditNote {
         {
             "name": "brandingThemeID",
             "baseName": "BrandingThemeID",
+            "type": "string"
+        },
+        {
+            "name": "statusAttributeString",
+            "baseName": "StatusAttributeString",
             "type": "string"
         },
         {

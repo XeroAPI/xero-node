@@ -1,5 +1,7 @@
 export * from './accountingApi';
 export * from './assetApi';
+export * from './projectApi';
 import { AccountingApi } from './accountingApi';
 import { AssetApi } from './assetApi';
-export const APIS = [AccountingApi, AssetApi];
+import { ProjectApi } from './projectApi';
+export const APIS = [AccountingApi, AssetApi, ProjectApi];
