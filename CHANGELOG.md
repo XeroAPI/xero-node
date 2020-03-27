@@ -1,5 +1,41 @@
 # Change Log
 
+## "version": "4.4.7"
+
+Generated as per OAS 2.0.6 (https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.6)
+
+Fixed deserialization of a few fields that were using the MS date format: https://github.com/XeroAPI/xero-node/issues/385
+
+ACCOUNTING
+* updateEmployee singular not supported by API - removed
+* Add getQuotesAsPDF
+
+ASSETS
+* Added documentation ( https://xeroapi.github.io/xero-node/v4/assets/index.html ) 
+* enums capitalized for assets status
+* AssetStatus component added
+
+## "version": "4.4.5"
+Update based on OAS version 2.0.4
+https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.4
+
+* add the assets API
+https://developer.xero.com/documentation/assets-api/overview
+
+Assets related api calls will be accessible via xero.assetApi.fn() - Must have the scope in your auth/token generation to include `assets assets.read`
+* createAsset
+* createAssetType
+* getAssetById
+* getAssetSettings
+* getAssetTypes
+* getAssets
+
+## "version": "4.4.4"
+Update based on OAS version 2.0.4
+https://github.com/XeroAPI/Xero-OpenAPI/releases/tag/2.0.4
+
+* Add operation for getPurchaseOrderByNumber
+
 ## "version": "4.4.3"
 Change functionality of `updateTenants()` function to sort connections so the most recent connection / active tenant is index 0
 

@@ -490,13 +490,29 @@ export class ObjectSerializer {
         }
     }
 
+    public static deserializeDateFormats(type: string, data: any) {
+        const isDate = new Date(data)
+        if (isNaN(isDate.getTime())) {
+            const re = /-?\d+/;
+            const m = re.exec(data);
+            return new Date(parseInt(m[0], 10));
+        } else {
+            return isDate
+        }
+    }
+
     public static deserialize(data: any, type: string) {
         // polymorphism may change the actual type.
         type = ObjectSerializer.findCorrectType(data, type);
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
-            return data;
+            if (type === "string" && data.substring(0, 6) === "/Date(") {
+                return this.deserializeDateFormats(type, data) // For MS dates that are of type 'string'
+            }
+            else {
+                return data;
+            }
         } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
@@ -507,14 +523,7 @@ export class ObjectSerializer {
             }
             return transformedData;
         } else if (type === "Date") {
-            const isDate = new Date(data)
-            if (isNaN(isDate.getTime())) {
-                const re = /-?\d+/;
-                const m = re.exec(data);
-                return new Date(parseInt(m[0], 10));
-            } else {
-               return isDate
-            }
+            return this.deserializeDateFormats(type, data)
         } else {
             if (enumsMap[type]) {// is Enum
                 return data;

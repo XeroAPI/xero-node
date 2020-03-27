@@ -4,6 +4,7 @@
 ## Release of SDK with oAuth 2 support
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
 * accounting
+* assets
 
 ### Bank feeds support in OAuth 2
 An early release in a separate package is availalbe [bank feeds API](https://github.com/XeroAPI/xero-node-bankfeeds).
@@ -20,7 +21,7 @@ Follow these steps to create your Xero app
 
 * Create a [free Xero user account](https://www.xero.com/us/signup/api/) (if you don't have one)
 * Login to [Xero developer center](https://developer.xero.com/myapps)
-* Click "Try oAuth2" link
+* Click "New App" link
 * Enter your App name, company url, privacy policy url.
 * Enter the redirect URI (this is your callback url - localhost, etc)
 * Agree to terms and condition and click "Create App".
@@ -43,7 +44,7 @@ npm test
 
 ## Authentication
 
-We use [OAuth2.0](https://oauth.net/2) to authenticate requests against our API. Each API call will need to have a valid token populated on the API client to succeed. In a tokenSet will be an *access_token* which lasts for 30 minutes, and a *refresh_token* which lasts for 30 days. If you don't want to require your users to re-authenticate each time you want to call the API on their behalf, you will need a datastore for these tokens and will be required to refresh the tokens at least once per 30 days to avoid expiration. The `offline_access` scope is required for refresh tokens to work.
+We use [OAuth2.0](https://oauth.net/2) to generate access tokens that authenticate requests against our API. Each API call will need to have a valid token populated on the API client to succeed. In a tokenSet will be an *access_token* which lasts for 30 minutes, and a *refresh_token* which lasts for 30 days. If you don't want to require your users to re-authenticate each time you want to call the API on their behalf, you will need a datastore for these tokens and will be required to refresh the tokens at least once per 30 days to avoid expiration. The `offline_access` scope is required for refresh tokens to work.
  
 In Xero a user can belong to multiple organisations. Tokens are ultimately associated with a Xero user, who can belong to multiple tenants/organisations. If your user 'Allows Access' to multiple organisations, be hyper aware of which `tenantId` you are passing to each function.
 
@@ -73,8 +74,7 @@ const xero = new XeroClient({
   scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
 });
 
-await xero.initialize();
-
+// `buildConsentUrl()` calls `await xero.initialize()`
 let consentUrl = await xero.buildConsentUrl();
 
 res.redirect(consentUrl);
@@ -86,9 +86,12 @@ Call `apiCallback` function with the response url which returns a tokenSet you c
 *The `tokenSet` can also be accessed from the client as `xero.readTokenSet()`.*
 
 ```js
-const tokenSet = await xero.apiCallback(req.url);
+
+const { TokenSet } = require('openid-client');
+
+const tokenSet: TokenSet = await xero.apiCallback(req.url);
 ```
-The `tokenSet` will contain your access_token and refresh_token as well as other information regarding your connection.
+The `tokenSet` is what you should store in your database. That object is what you will need to pass to the client. It contains your access_token and refresh_token as well as other information regarding your connection.
 ```js
 {
   id_token: 'eyJhxxxx.yyy',
@@ -107,7 +110,7 @@ Populate the XeroClient's active tenant data
 
 For most integrations you will always want to display the org name and additional metadata about the connected org. The `/connections` endpoint does not currently serialize that data so requires developers to make additional api calls for each org that your user connects to surface that information.
 
-The `updatedTenants` function will query & nest the additional orgData results in your xeroClient under each connection/tenant object and return the array of tenants.
+The `updatedTenants` function will query & nest the additional orgData results in your xeroClient under each connection/tenant object and return the array of tenants. This requires `accounting.settings` scope because `updateTenants` calls the organisation endpoint.
 
 ```js
 const tenants = await xero.updateTenants()
@@ -148,26 +151,41 @@ console.log(tenants || xero.tenants)
 ---
 ## Making **offline_access** calls
 
-Once you have a valid token saved you can set the token on the client without going through the callback by calling `setTokenSet`.
+Once you have a valid token/tokenSet saved you can set the tokenSet on the client without going through the callback by calling `setTokenSet`.
 
 For example - once a user authenticates you can refresh the token (which will also set the new token on the client) to make authorized api calls.
 ```js
-const tokenSet = getTokenFromDatabase(userId) // example function name
+const tokenSet = getTokenSetFromDatabase(userId) // example function name
 
 await xero.setTokenSet(tokenSet)
 
-// you can call this to fetch/set your connected tenant data on your client, or you could also store this information in a database
+// you can call this to fetch/set your connected tenant data on your client, or you could also store this information in a database so you don't need to updateTenants every time you connect to API
 await xero.updateTenants()
 
 await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 ```
 
 ## SDK Documentation
-* [version 3 docs](https://xeroapi.github.io/xero-node/v3/index.html) documentation (*deprecated end of 2020*)
-> Full API documentation: https://xeroapi.github.io/xero-node/v4/
+* Version 3 (OAuth1.0a documentation) https://xeroapi.github.io/xero-node/v3/index.html (*deprecated end of 2020*)
+* Accounting API documentation: https://xeroapi.github.io/xero-node/v4/accounting/index.html
+* Assets API documentation: https://xeroapi.github.io/xero-node/v4/assets/index.html
 
 ### Basics
 ```js
+// example flow of initializing and using the client after someone has already authenticated and you have saved their tokenSet
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID',
+  clientSecret: 'YOUR_CLIENT_SECRET',
+  redirectUris: [`http://localhost:${port}/callback`],
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
+});
+await xero.initialize();
+
+const tokenSet = getYourTokenSetFromSavedLocation(currentUser)
+
+await xero.setTokenSet(tokenSet)
+...
+
 const activeTenantId = xero.tenants[0].tenantId
 
 const getOrgs = await xero.accountingApi.getOrganisations(activeTenantId)
@@ -217,7 +235,12 @@ Just visit the repo https://github.com/XeroAPI/xero-node-oauth2-app configure yo
 // xero.tenants
 xero.tenants
 
+// initialize()
+// This needs to be called to setup relevant OAuth2.0 information on the client
+await xero.initialize()
+
 // buildConsentUrl()
+// This calls `await xero.initialize()` so you don't need to call initialize if you are using this function to send someone through auth flow
 await xero.buildConsentUrl()
 
 // readTokenSet()
