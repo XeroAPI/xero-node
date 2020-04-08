@@ -896,6 +896,13 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "See Asset Status Codes.",
+  "example" : "Draft",
+  "enum" : [ "Draft", "Registered", "Disposed" ]
+};
+    defs["AssetStatusQueryParam"] = {
+  "title" : "",
+  "type" : "string",
+  "description" : "See Asset Status Codes.",
   "example" : "DRAFT",
   "enum" : [ "DRAFT", "REGISTERED", "DISPOSED" ]
 };
@@ -1061,6 +1068,76 @@ ul.nav-tabs {
   },
   "description" : ""
 };
+    defs["Error"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "resourceValidationErrors" : {
+      "type" : "array",
+      "description" : "Array of elements of resource validation errors",
+      "items" : {
+        "$ref" : "#/components/schemas/ResourceValidationErrorsElement"
+      }
+    },
+    "fieldValidationErrors" : {
+      "type" : "array",
+      "description" : "Array of elements of field validation errors",
+      "items" : {
+        "$ref" : "#/components/schemas/FieldValidationErrorsElement"
+      }
+    },
+    "type" : {
+      "type" : "string",
+      "description" : "The internal type of error, not accessible externally"
+    },
+    "title" : {
+      "type" : "string",
+      "description" : "Title of the error"
+    },
+    "detail" : {
+      "type" : "string",
+      "description" : "Detail of the error"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "https://developer.xero.com/documentation/api/http-response-codes"
+  }
+};
+    defs["FieldValidationErrorsElement"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "fieldName" : {
+      "type" : "string",
+      "description" : "The field name of the erroneous field"
+    },
+    "valueProvided" : {
+      "type" : "string",
+      "description" : "The provided value"
+    },
+    "localisedMessage" : {
+      "type" : "string",
+      "description" : "Explaination of the field validation error"
+    },
+    "type" : {
+      "type" : "string",
+      "description" : "Internal type of the field validation error message"
+    },
+    "title" : {
+      "type" : "string",
+      "description" : "Title of the field validation error"
+    },
+    "detail" : {
+      "type" : "string",
+      "description" : "Detail of the field validation error"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "https://developer.xero.com/documentation/api/http-response-codes"
+  }
+};
     defs["Pagination"] = {
   "title" : "",
   "properties" : {
@@ -1082,6 +1159,36 @@ ul.nav-tabs {
     }
   },
   "description" : ""
+};
+    defs["ResourceValidationErrorsElement"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "resourceName" : {
+      "type" : "string",
+      "description" : "The field name of the erroneous field"
+    },
+    "localisedMessage" : {
+      "type" : "string",
+      "description" : "Explaination of the resource validation error"
+    },
+    "type" : {
+      "type" : "string",
+      "description" : "Internal type of the resource error message"
+    },
+    "title" : {
+      "type" : "string",
+      "description" : "Title of the resource validation error"
+    },
+    "detail" : {
+      "type" : "string",
+      "description" : "Detail of the resource validation error"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "https://developer.xero.com/documentation/api/http-response-codes"
+  }
 };
     defs["Setting"] = {
   "title" : "",
@@ -1186,7 +1293,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 4.1.5</div>
             <!--
-              <div class="app-desc">Version: 2.0.6</div>
+              <div class="app-desc">Version: 2.0.8</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Assets API
@@ -3512,7 +3619,7 @@ public class AssetApiExample {
 
         AssetApi apiInstance = new AssetApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        AssetStatus status = ; // AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes
+        AssetStatusQueryParam status = ; // AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes
         Integer page = 1; // Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
         Integer pageSize = 5; // Integer | The number of records returned per page. By default the number of records returned is 10.
         String orderBy = AssetName; // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
@@ -3537,7 +3644,7 @@ public class AssetApiExample {
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        AssetStatus status = ; // AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes
+        AssetStatusQueryParam status = ; // AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes
         Integer page = 1; // Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
         Integer pageSize = 5; // Integer | The number of records returned per page. By default the number of records returned is 10.
         String orderBy = AssetName; // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
@@ -3564,7 +3671,7 @@ public class AssetApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-AssetStatus *status = ; // Required when retrieving a collection of assets. See Asset Status Codes (default to null)
+AssetStatusQueryParam *status = ; // Required when retrieving a collection of assets. See Asset Status Codes (default to null)
 Integer *page = 1; // Results are paged. This specifies which page of the results to return. The default page is 1. (optional) (default to null)
 Integer *pageSize = 5; // The number of records returned per page. By default the number of records returned is 10. (optional) (default to null)
 String *orderBy = AssetName; // Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional) (default to null)
@@ -3604,7 +3711,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 await xero.setTokenSet(tokenSet);
  
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const status:AssetStatus = ;  // {AssetStatus} Required when retrieving a collection of assets. See Asset Status Codes
+const status:AssetStatusQueryParam = ;  // {AssetStatusQueryParam} Required when retrieving a collection of assets. See Asset Status Codes
 const page =  1;  // {Integer} Results are paged. This specifies which page of the results to return. The default page is 1.
 const pageSize =  5;  // {Integer} The number of records returned per page. By default the number of records returned is 10.
 const orderBy =  'AssetName';  // {String} Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
@@ -3661,7 +3768,7 @@ namespace Example
 
             var apiInstance = new AssetApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
-            var status = new AssetStatus(); // AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
+            var status = new AssetStatusQueryParam(); // AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
             var page = 1;  // Integer | Results are paged. This specifies which page of the results to return. The default page is 1. (optional)  (default to null)
             var pageSize = 5;  // Integer | The number of records returned per page. By default the number of records returned is 10. (optional)  (default to null)
             var orderBy = AssetName;  // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional)  (default to null)
@@ -3717,7 +3824,7 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::AssetApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
-my $status = ; # AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes
+my $status = ; # AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes
 my $page = 1; # Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
 my $pageSize = 5; # Integer | The number of records returned per page. By default the number of records returned is 10.
 my $orderBy = AssetName; # String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
@@ -3746,7 +3853,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .AssetApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-status =  # AssetStatus | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
+status =  # AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
 page = 1 # Integer | Results are paged. This specifies which page of the results to return. The default page is 1. (optional) (default to null)
 pageSize = 5 # Integer | The number of records returned per page. By default the number of records returned is 10. (optional) (default to null)
 orderBy = AssetName # String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional) (default to null)
@@ -3766,7 +3873,7 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let status = ; // AssetStatus
+    let status = ; // AssetStatusQueryParam
     let page = 1; // Integer
     let pageSize = 5; // Integer
     let orderBy = AssetName; // String
@@ -3842,7 +3949,7 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    AssetStatus
+                    AssetStatusQueryParam
                 </span>
 
                     <div class="inner description marked">

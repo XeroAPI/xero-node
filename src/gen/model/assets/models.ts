@@ -1,21 +1,29 @@
 export * from './asset';
 export * from './assetStatus';
+export * from './assetStatusQueryParam';
 export * from './assetType';
 export * from './assets';
 export * from './bookDepreciationDetail';
 export * from './bookDepreciationSetting';
+export * from './fieldValidationErrorsElement';
+export * from './modelError';
 export * from './pagination';
+export * from './resourceValidationErrorsElement';
 export * from './setting';
 
 import localVarRequest = require('request');
 
 import { Asset } from './asset';
 import { AssetStatus } from './assetStatus';
+import { AssetStatusQueryParam } from './assetStatusQueryParam';
 import { AssetType } from './assetType';
 import { Assets } from './assets';
 import { BookDepreciationDetail } from './bookDepreciationDetail';
 import { BookDepreciationSetting } from './bookDepreciationSetting';
+import { FieldValidationErrorsElement } from './fieldValidationErrorsElement';
+import { ModelError } from './modelError';
 import { Pagination } from './pagination';
+import { ResourceValidationErrorsElement } from './resourceValidationErrorsElement';
 import { Setting } from './setting';
 
 /* tslint:disable:no-unused-variable */
@@ -32,6 +40,7 @@ let primitives = [
                  
 let enumsMap: {[index: string]: any} = {
         "AssetStatus": AssetStatus,
+        "AssetStatusQueryParam": AssetStatusQueryParam,
         "BookDepreciationSetting.DepreciationMethodEnum": BookDepreciationSetting.DepreciationMethodEnum,
         "BookDepreciationSetting.AveragingMethodEnum": BookDepreciationSetting.AveragingMethodEnum,
         "BookDepreciationSetting.DepreciationCalculationMethodEnum": BookDepreciationSetting.DepreciationCalculationMethodEnum,
@@ -43,7 +52,10 @@ let typeMap: {[index: string]: any} = {
     "Assets": Assets,
     "BookDepreciationDetail": BookDepreciationDetail,
     "BookDepreciationSetting": BookDepreciationSetting,
+    "FieldValidationErrorsElement": FieldValidationErrorsElement,
+    "ModelError": ModelError,
     "Pagination": Pagination,
+    "ResourceValidationErrorsElement": ResourceValidationErrorsElement,
     "Setting": Setting,
 }
 
