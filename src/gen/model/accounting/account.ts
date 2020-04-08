@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { AccountType } from '././accountType';
-import { CurrencyCode } from '././currencyCode';
-import { ValidationError } from '././validationError';
+import { AccountType } from './accountType';
+import { CurrencyCode } from './currencyCode';
+import { ValidationError } from './validationError';
 
 export class Account {
     /**

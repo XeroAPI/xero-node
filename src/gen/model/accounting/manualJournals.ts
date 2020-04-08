@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ManualJournal } from '././manualJournal';
+import { ManualJournal } from './manualJournal';
 
 export class ManualJournals {
     'manualJournals'?: Array<ManualJournal>;

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { TrackingOption } from '././trackingOption';
+import { TrackingOption } from './trackingOption';
 
 export class TrackingCategory {
     /**

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Purchase } from '././purchase';
-import { ValidationError } from '././validationError';
+import { Purchase } from './purchase';
+import { ValidationError } from './validationError';
 
 export class Item {
     /**

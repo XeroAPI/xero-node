@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { Attachment } from '././attachment';
-import { Contact } from '././contact';
-import { CurrencyCode } from '././currencyCode';
-import { LineAmountTypes } from '././lineAmountTypes';
-import { LineItem } from '././lineItem';
-import { Schedule } from '././schedule';
+import { Attachment } from './attachment';
+import { Contact } from './contact';
+import { CurrencyCode } from './currencyCode';
+import { LineAmountTypes } from './lineAmountTypes';
+import { LineItem } from './lineItem';
+import { Schedule } from './schedule';
 
 export class RepeatingInvoice {
     /**
@@ -61,7 +61,7 @@ export class RepeatingInvoice {
     /**
     * Xero generated unique identifier for repeating invoice template
     */
-    'iD'?: string;
+    'ID'?: string;
     /**
     * boolean to indicate if an invoice has an attachment
     */
@@ -140,7 +140,7 @@ export class RepeatingInvoice {
             "type": "string"
         },
         {
-            "name": "iD",
+            "name": "ID",
             "baseName": "ID",
             "type": "string"
         },

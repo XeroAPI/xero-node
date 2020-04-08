@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Quote } from '././quote';
+import { Quote } from './quote';
 
 export class Quotes {
     'quotes'?: Array<Quote>;

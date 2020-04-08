@@ -10,16 +10,16 @@
  * Do not edit the class manually.
  */
 
-import { Attachment } from '././attachment';
-import { Contact } from '././contact';
-import { CreditNote } from '././creditNote';
-import { CurrencyCode } from '././currencyCode';
-import { LineAmountTypes } from '././lineAmountTypes';
-import { LineItem } from '././lineItem';
-import { Overpayment } from '././overpayment';
-import { Payment } from '././payment';
-import { Prepayment } from '././prepayment';
-import { ValidationError } from '././validationError';
+import { Attachment } from './attachment';
+import { Contact } from './contact';
+import { CreditNote } from './creditNote';
+import { CurrencyCode } from './currencyCode';
+import { LineAmountTypes } from './lineAmountTypes';
+import { LineItem } from './lineItem';
+import { Overpayment } from './overpayment';
+import { Payment } from './payment';
+import { Prepayment } from './prepayment';
+import { ValidationError } from './validationError';
 
 export class Invoice {
     /**

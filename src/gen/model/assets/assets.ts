@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Asset } from '././asset';
-import { Pagination } from '././pagination';
+import { Asset } from './asset';
+import { Pagination } from './pagination';
 
 export class Assets {
     'pagination'?: Pagination;

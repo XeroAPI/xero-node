@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Pagination } from '././pagination';
-import { Project } from '././project';
+import { Pagination } from './pagination';
+import { Project } from './project';
 
 export class Projects {
     'pagination'?: Pagination;

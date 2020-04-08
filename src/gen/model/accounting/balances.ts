@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AccountsPayable } from '././accountsPayable';
-import { AccountsReceivable } from '././accountsReceivable';
+import { AccountsPayable } from './accountsPayable';
+import { AccountsReceivable } from './accountsReceivable';
 
 /**
 * The raw AccountsReceivable(sales invoices) and AccountsPayable(bills) outstanding and overdue amounts, not converted to base currency (read only)

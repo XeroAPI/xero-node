@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Amount } from '././amount';
-import { ChargeType } from '././chargeType';
+import { Amount } from './amount';
+import { ChargeType } from './chargeType';
 
 export class TaskCreateOrUpdate {
     /**

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Prepayment } from '././prepayment';
+import { Prepayment } from './prepayment';
 
 export class Prepayments {
     'prepayments'?: Array<Prepayment>;

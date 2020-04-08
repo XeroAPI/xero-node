@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CreditNote } from '././creditNote';
+import { CreditNote } from './creditNote';
 
 export class CreditNotes {
     'creditNotes'?: Array<CreditNote>;

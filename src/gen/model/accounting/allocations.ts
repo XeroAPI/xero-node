@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Allocation } from '././allocation';
+import { Allocation } from './allocation';
 
 export class Allocations {
     'allocations'?: Array<Allocation>;

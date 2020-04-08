@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { LineItemTracking } from '././lineItemTracking';
+import { LineItemTracking } from './lineItemTracking';
 
 export class LineItem {
     /**

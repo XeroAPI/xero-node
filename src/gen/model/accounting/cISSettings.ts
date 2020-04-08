@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CISSetting } from '././cISSetting';
+import { CISSetting } from './cISSetting';
 
 export class CISSettings {
     'cISSettings'?: Array<CISSetting>;

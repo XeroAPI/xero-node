@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ProjectStatus } from '././projectStatus';
+import { ProjectStatus } from './projectStatus';
 
 export class ProjectPatch {
     'status': ProjectStatus;

@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { AssetStatus } from '././assetStatus';
-import { BookDepreciationDetail } from '././bookDepreciationDetail';
-import { BookDepreciationSetting } from '././bookDepreciationSetting';
+import { AssetStatus } from './assetStatus';
+import { BookDepreciationDetail } from './bookDepreciationDetail';
+import { BookDepreciationSetting } from './bookDepreciationSetting';
 
 export class Asset {
     /**

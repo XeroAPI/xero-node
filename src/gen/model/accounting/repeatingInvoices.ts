@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RepeatingInvoice } from '././repeatingInvoice';
+import { RepeatingInvoice } from './repeatingInvoice';
 
 export class RepeatingInvoices {
     'repeatingInvoices'?: Array<RepeatingInvoice>;

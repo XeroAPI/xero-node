@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Element } from '././element';
+import { Element } from './element';
 
 export class ModelError {
     /**

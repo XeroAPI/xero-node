@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Account } from '././account';
-import { Payment } from '././payment';
+import { Account } from './account';
+import { Payment } from './payment';
 
 export class BatchPayment {
     'account'?: Account;

@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { Amount } from '././amount';
-import { CurrencyCode } from '././currencyCode';
-import { ProjectStatus } from '././projectStatus';
+import { Amount } from './amount';
+import { CurrencyCode } from './currencyCode';
+import { ProjectStatus } from './projectStatus';
 
 export class Project {
     /**

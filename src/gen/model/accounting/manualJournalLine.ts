@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { TrackingCategory } from '././trackingCategory';
+import { TrackingCategory } from './trackingCategory';
 
 export class ManualJournalLine {
     /**

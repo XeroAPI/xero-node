@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Pagination } from '././pagination';
-import { ProjectUser } from '././projectUser';
+import { Pagination } from './pagination';
+import { ProjectUser } from './projectUser';
 
 export class ProjectUsers {
     'pagination'?: Pagination;

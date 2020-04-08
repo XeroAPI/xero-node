@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Attachment } from '././attachment';
+import { Attachment } from './attachment';
 
 export class Attachments {
     'attachments'?: Array<Attachment>;

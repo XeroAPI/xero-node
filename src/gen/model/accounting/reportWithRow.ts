@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ReportFields } from '././reportFields';
-import { ReportRows } from '././reportRows';
+import { ReportFields } from './reportFields';
+import { ReportRows } from './reportRows';
 
 export class ReportWithRow {
     /**

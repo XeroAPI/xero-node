@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { Allocation } from '././allocation';
-import { Contact } from '././contact';
-import { CurrencyCode } from '././currencyCode';
-import { LineAmountTypes } from '././lineAmountTypes';
-import { LineItem } from '././lineItem';
-import { Payment } from '././payment';
-import { ValidationError } from '././validationError';
+import { Allocation } from './allocation';
+import { Contact } from './contact';
+import { CurrencyCode } from './currencyCode';
+import { LineAmountTypes } from './lineAmountTypes';
+import { LineItem } from './lineItem';
+import { Payment } from './payment';
+import { ValidationError } from './validationError';
 
 export class CreditNote {
     /**

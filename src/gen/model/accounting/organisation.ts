@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { Address } from '././address';
-import { CountryCode } from '././countryCode';
-import { CurrencyCode } from '././currencyCode';
-import { ExternalLink } from '././externalLink';
-import { PaymentTerm } from '././paymentTerm';
-import { Phone } from '././phone';
-import { TimeZone } from '././timeZone';
+import { Address } from './address';
+import { CountryCode } from './countryCode';
+import { CurrencyCode } from './currencyCode';
+import { ExternalLink } from './externalLink';
+import { PaymentTerm } from './paymentTerm';
+import { Phone } from './phone';
+import { TimeZone } from './timeZone';
 
 export class Organisation {
     /**

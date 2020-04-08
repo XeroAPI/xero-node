@@ -962,8 +962,7 @@ ul.nav-tabs {
     "deadlineUtc" : {
       "type" : "string",
       "description" : "Deadline for the project. UTC Date Time in ISO-8601 format.",
-      "format" : "date-time",
-      "example" : "2019-12-10T12:59:59Z"
+      "format" : "date-time"
     },
     "totalInvoiced" : {
       "$ref" : "#/components/schemas/Amount"
@@ -1010,8 +1009,7 @@ ul.nav-tabs {
     "deadlineUtc" : {
       "type" : "string",
       "description" : "Deadline for the project. UTC Date Time in ISO-8601 format.",
-      "format" : "date-time",
-      "example" : "2019-12-10T12:59:59Z"
+      "format" : "date-time"
     }
   },
   "description" : "",
@@ -1408,7 +1406,7 @@ ul.nav-tabs {
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
-              <div class="app-desc">Version: 1.0.0</div>
+              <div class="app-desc">Version: 4.1.5</div>
             <!--
               <div class="app-desc">Version: 2.0.8</div>
             <hr>
@@ -1557,7 +1555,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -2079,7 +2077,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -2569,7 +2567,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -2989,7 +2987,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -3503,7 +3501,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -4045,7 +4043,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -4654,7 +4652,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -5139,7 +5137,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -5697,8 +5695,8 @@ const page =  1;  // {Integer} Set to 1 by default. The requested number of the 
 const pageSize =  10;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
 const states =  [''];  // {array[String]} Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
 const isChargeable =  true;  // {Boolean} Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>.
-const dateAfterUtc =  2013-10-20T19:20:30+01:00;  // {Date} ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field.
-const dateBeforeUtc =  2013-10-20T19:20:30+01:00;  // {Date} ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field.
+const dateAfterUtc:Date =  2013-10-20T19:20:30+01:00;  // {Date} ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field.
+const dateBeforeUtc:Date =  2013-10-20T19:20:30+01:00;  // {Date} ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field.
 
 try {
   const response: any = await xero.accountingApi.getTimeEntries(xeroTenantId, projectId,  userId, taskId, invoiceId, contactId, page, pageSize, states, isChargeable, dateAfterUtc, dateBeforeUtc);
@@ -5708,7 +5706,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -6417,7 +6415,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -6886,7 +6884,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -7391,7 +7389,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2
@@ -7901,7 +7899,7 @@ try {
   console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
 }
 <!--
-var  = require('xero-node');
+var  = require('');
 var defaultClient = .ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: OAuth2

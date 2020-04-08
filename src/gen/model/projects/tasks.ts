@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Pagination } from '././pagination';
-import { Task } from '././task';
+import { Pagination } from './pagination';
+import { Task } from './task';
 
 export class Tasks {
     'pagination'?: Pagination;

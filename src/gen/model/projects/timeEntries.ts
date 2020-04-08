@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Pagination } from '././pagination';
-import { TimeEntry } from '././timeEntry';
+import { Pagination } from './pagination';
+import { TimeEntry } from './timeEntry';
 
 export class TimeEntries {
     'pagination'?: Pagination;

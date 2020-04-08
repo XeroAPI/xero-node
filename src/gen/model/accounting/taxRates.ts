@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { TaxRate } from '././taxRate';
+import { TaxRate } from './taxRate';
 
 export class TaxRates {
     'taxRates'?: Array<TaxRate>;

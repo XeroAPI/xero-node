@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Organisation } from '././organisation';
+import { Organisation } from './organisation';
 
 export class Organisations {
     'organisations'?: Array<Organisation>;

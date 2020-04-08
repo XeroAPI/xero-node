@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PurchaseOrder } from '././purchaseOrder';
+import { PurchaseOrder } from './purchaseOrder';
 
 export class PurchaseOrders {
     'purchaseOrders'?: Array<PurchaseOrder>;

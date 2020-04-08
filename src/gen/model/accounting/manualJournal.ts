@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { Attachment } from '././attachment';
-import { LineAmountTypes } from '././lineAmountTypes';
-import { ManualJournalLine } from '././manualJournalLine';
-import { ValidationError } from '././validationError';
+import { Attachment } from './attachment';
+import { LineAmountTypes } from './lineAmountTypes';
+import { ManualJournalLine } from './manualJournalLine';
+import { ValidationError } from './validationError';
 
 export class ManualJournal {
     /**

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ValidationError } from '././validationError';
+import { ValidationError } from './validationError';
 
 export class PaymentService {
     /**

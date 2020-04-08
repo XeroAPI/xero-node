@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { LinkedTransaction } from '././linkedTransaction';
+import { LinkedTransaction } from './linkedTransaction';
 
 export class LinkedTransactions {
     'linkedTransactions'?: Array<LinkedTransaction>;

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Journal } from '././journal';
+import { Journal } from './journal';
 
 export class Journals {
     'journals'?: Array<Journal>;

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Bill } from '././bill';
+import { Bill } from './bill';
 
 export class PaymentTerm {
     'bills'?: Bill;

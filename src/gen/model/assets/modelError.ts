@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { FieldValidationErrorsElement } from '././fieldValidationErrorsElement';
-import { ResourceValidationErrorsElement } from '././resourceValidationErrorsElement';
+import { FieldValidationErrorsElement } from './fieldValidationErrorsElement';
+import { ResourceValidationErrorsElement } from './resourceValidationErrorsElement';
 
 export class ModelError {
     /**

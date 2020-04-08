@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { BankTransfer } from '././bankTransfer';
+import { BankTransfer } from './bankTransfer';
 
 export class BankTransfers {
     'bankTransfers'?: Array<BankTransfer>;

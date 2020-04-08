@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { OnlineInvoice } from '././onlineInvoice';
+import { OnlineInvoice } from './onlineInvoice';
 
 export class OnlineInvoices {
     'onlineInvoices'?: Array<OnlineInvoice>;
