@@ -15,6 +15,7 @@ const xero = new XeroClient({
 const tokenSet: any = tokenSetJson
 let connect
 let disconnect
+let refresh
 
 describe('the XeroClient', () => {
   beforeEach(async () => {
@@ -29,6 +30,8 @@ describe('the XeroClient', () => {
     connect = nock('https://api.xero.com')
       .get('/connections')
       .reply(200, connectionsResponse);
+
+    sinon.stub(xero, 'postWithRefreshToken').returns({ body: JSON.stringify(tokenSetJson) });
 
     disconnect = nock('https://api.xero.com')
       .delete(`/connections/${connectionsResponse[0].tenantId}`)
@@ -78,13 +81,12 @@ describe('the XeroClient', () => {
       expect(await xero.refreshToken()).toEqual(tokenSet)
     });
   
-    it('refreshTokenUsingTokenSet() refreshes token with tokenSetParameter and returns the tokenSet', async () => {
-      const newTokenSet = Object.assign(tokenSet, {"id_token": 'abc_123'})
-      const updatedTokenSet = await xero.refreshTokenUsingTokenSet(newTokenSet)
-      expect(updatedTokenSet.id_token).toEqual('abc_123')
+    it('refreshWithRefreshToken() refreshes token with tokenSetParameter and returns the tokenSet', async () => {
+      const updatedTokenSet = await xero.refreshWithRefreshToken('cleint_id','client_secret','refresh_token')
+      expect(updatedTokenSet.id_token).toEqual(tokenSetJson.id_token)
       await xero.setTokenSet(updatedTokenSet)
       const xeroTokenSet = await xero.readTokenSet()
-      expect(xeroTokenSet.id_token).toEqual('abc_123')
+      expect(xeroTokenSet.id_token).toEqual(tokenSetJson.id_token)
     });
   })
 })
