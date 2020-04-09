@@ -154,6 +154,22 @@ console.log(tenants || xero.tenants)
 Once you have a valid token/tokenSet saved you can set the tokenSet on the client without going through the callback by calling `setTokenSet`.
 
 For example - once a user authenticates you can refresh the token (which will also set the new token on the client) to make authorized api calls.
+
+There are two ways to refresh a token.
+
+```js
+// refreshToken()
+const validTokenSet = await xero.refreshToken()
+```
+
+If users who prefer to not leverage the openid-client, and have already generated a valid access token, you can initialize an empty client, and refresh any saved access_tokens by passing the client, secret, and refresh_token to refreshWithRefreshToken
+```js
+const newXeroClient = new XeroClient()
+const refreshedTokenSet = await newXeroClient.refreshWithRefreshToken(client_id, client_secret,tokenSet.refresh_token)
+```
+
+Making AUthorized API calls:
+
 ```js
 const tokenSet = getTokenSetFromDatabase(userId) // example function name
 
@@ -255,8 +271,8 @@ if (tokenSet.expired()) {
 // refreshToken()
 const validTokenSet = await xero.refreshToken()
 
-// refreshTokenUsingTokenSet()
-await xero.refreshTokenUsingTokenSet(tokenSet)
+// refreshWithRefreshToken()
+await xero.refreshWithRefreshToken(client_id, client_secret)
 
 // disconnect()
 await xero.disconnect(xero.tenants[0].id)

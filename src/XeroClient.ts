@@ -47,7 +47,7 @@ export interface XeroAccessToken {
 }
 
 export class XeroClient {
-  constructor(private readonly config: IXeroClientConfig) {
+  constructor(private readonly config?: IXeroClientConfig) {
     this.accountingApi = new xero.AccountingApi();
     this.assetApi = new xero.AssetApi();
     this.projectApi = new xero.ProjectApi();
@@ -67,22 +67,27 @@ export class XeroClient {
   }
 
   async initialize() {
-    const issuer = await Issuer.discover('https://identity.xero.com');
-    this.openIdClient = new issuer.Client({
-      client_id: this.config.clientId,
-      client_secret: this.config.clientSecret,
-      redirect_uris: this.config.redirectUris,
-    });
-    this.openIdClient[custom.clock_tolerance] = 5
+    if(this.config){
+      const issuer = await Issuer.discover('https://identity.xero.com');
+      this.openIdClient = new issuer.Client({
+        client_id: this.config.clientId,
+        client_secret: this.config.clientSecret,
+        redirect_uris: this.config.redirectUris,
+      });
+      this.openIdClient[custom.clock_tolerance] = 5
+    }
     return this
   }
 
   async buildConsentUrl() {
     await this.initialize()
-    const url = this.openIdClient.authorizationUrl({
-      redirect_uri: this.config.redirectUris[0],
-      scope: this.config.scopes.join(' ') || 'openid email profile'
-    });
+    let url
+    if(this.config){
+      url = this.openIdClient.authorizationUrl({
+        redirect_uri: this.config.redirectUris[0],
+        scope: this.config.scopes.join(' ') || 'openid email profile'
+      });
+    }
     return url;
   }
 
@@ -117,15 +122,70 @@ export class XeroClient {
     if (!this.tokenSet) {
       throw new Error('tokenSet is not defined');
     }
-    this.tokenSet = await this.openIdClient.refresh(this.tokenSet.refresh_token);
+    const refreshedTokenSet = await this.openIdClient.refresh(this.tokenSet.refresh_token);
+    this.tokenSet = refreshedTokenSet
     this.setAccessToken();
     return this.tokenSet
   }
 
-  async refreshTokenUsingTokenSet(tokenSet: TokenSet) {
-    this.tokenSet = await this.openIdClient.refresh(tokenSet.refresh_token);
+  encodeBody(params) {
+    var formBody: any = [];
+    for (var property in params) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(params[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    return formBody.join("&");
+  }
+
+  async refreshWithRefreshToken(clientId, clientSecret, refreshToken) {
+    console.log('1 : ')
+    const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken)
+    const tokenSet = JSON.parse(result.body)
+    console.log('2: tokenSet', tokenSet)
+    this.tokenSet = tokenSet
+    console.log('3 : JSON.parse(body): ',this.tokenSet)
     this.setAccessToken();
     return this.tokenSet
+  }
+
+  async postWithRefreshToken(clientId, clientSecret, refreshToken) {
+    const body = {
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken
+    }
+    // await request.post('https://identity.xero.com/connect/token', {
+    //   headers: {
+    //     authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   },
+    //   body: this.encodeBody(body)
+    // }, (error, response, body) => {
+    //   console.log('2 : JSON.parse(body): ',JSON.parse(body))
+    //   this.setTokenSet(JSON.parse(body))
+    // })
+
+    return new Promise<{ response: http.IncomingMessage; body: any }>((resolve, reject) => {
+      request({
+        method: 'POST',
+        uri: 'https://identity.xero.com/connect/token',
+        headers: {
+          authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: this.encodeBody(body)
+      }, (error, response, body) => {
+        if (error) {
+          reject(error);
+        } else {
+          if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            resolve({ response: response, body: body });
+          } else {
+            reject({ response: response, body: body });
+          }
+        }
+      });
+    });
   }
 
   async updateTenants() {
@@ -171,7 +231,9 @@ export class XeroClient {
   }
 
   private setAccessToken() {
+    console.log('4 :  ',this.tokenSet)
     const accessToken = this.tokenSet.access_token;
+    console.log('5 :  ',accessToken)
     if (typeof accessToken === 'undefined') {
       throw new Error('Access token is undefined!');
     }
