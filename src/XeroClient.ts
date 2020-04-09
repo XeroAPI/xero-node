@@ -139,12 +139,9 @@ export class XeroClient {
   }
 
   async refreshWithRefreshToken(clientId, clientSecret, refreshToken) {
-    console.log('1 : ')
     const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken)
     const tokenSet = JSON.parse(result.body)
-    console.log('2: tokenSet', tokenSet)
     this.tokenSet = tokenSet
-    console.log('3 : JSON.parse(body): ',this.tokenSet)
     this.setAccessToken();
     return this.tokenSet
   }
@@ -154,18 +151,8 @@ export class XeroClient {
       grant_type: 'refresh_token',
       refresh_token: refreshToken
     }
-    // await request.post('https://identity.xero.com/connect/token', {
-    //   headers: {
-    //     authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   },
-    //   body: this.encodeBody(body)
-    // }, (error, response, body) => {
-    //   console.log('2 : JSON.parse(body): ',JSON.parse(body))
-    //   this.setTokenSet(JSON.parse(body))
-    // })
-
-    return new Promise<{ response: http.IncomingMessage; body: any }>((resolve, reject) => {
+   
+    return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
       request({
         method: 'POST',
         uri: 'https://identity.xero.com/connect/token',
@@ -231,9 +218,7 @@ export class XeroClient {
   }
 
   private setAccessToken() {
-    console.log('4 :  ',this.tokenSet)
     const accessToken = this.tokenSet.access_token;
-    console.log('5 :  ',accessToken)
     if (typeof accessToken === 'undefined') {
       throw new Error('Access token is undefined!');
     }
