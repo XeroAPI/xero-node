@@ -57,6 +57,13 @@ In Xero a user can belong to multiple organisations. Tokens are ultimately assoc
 
 **Step 3:** Call `updateTenats` to populate additional tenant data
 
+**NOTE:** If you have already authorized the user and have stored a valid tokenSet, you can create a `new XeroClient()` and refresh your token without triggering the openid-client dependency:
+```js
+  const tokenSet = getTokenSetFromUserId(user.id) // example function
+  const newXeroClient = new XeroClient()
+  const newTokenSet = await newXeroClient.refreshWithRefreshToken(xero_client_id, xero_client_secret, tokenSet.refresh_token)
+```
+
 ---
 
 ## Step 1
