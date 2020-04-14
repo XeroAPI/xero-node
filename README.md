@@ -3,8 +3,9 @@
 
 ## Release of SDK with oAuth 2 support
 Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
-* accounting
-* assets
+* [accounting](https://developer.xero.com/documentation/api/api-overview)
+* [assets](https://developer.xero.com/documentation/assets-api/overview)
+* [projects](https://developer.xero.com/documentation/projects/overview-projects)
 
 ### Bank feeds support in OAuth 2
 An early release in a separate package is availalbe [bank feeds API](https://github.com/XeroAPI/xero-node-bankfeeds).
