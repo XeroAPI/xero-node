@@ -162,10 +162,10 @@ There are two ways to refresh a token.
 const validTokenSet = await xero.refreshToken()
 ```
 
-If users who prefer to not leverage the openid-client, and have already generated a valid access token, you can initialize an empty client, and refresh any saved access_tokens by passing the client, secret, and refresh_token to refreshWithRefreshToken
+If you already generated a valid access token, you can initialize an empty client and refresh any saved access_tokens by passing the client, secret, and refresh_token to refreshWithRefreshToken()
 ```js
 const newXeroClient = new XeroClient()
-const refreshedTokenSet = await newXeroClient.refreshWithRefreshToken(client_id, client_secret,tokenSet.refresh_token)
+const refreshedTokenSet = await newXeroClient.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
 ```
 
 Making AUthorized API calls:
@@ -272,7 +272,7 @@ if (tokenSet.expired()) {
 const validTokenSet = await xero.refreshToken()
 
 // refreshWithRefreshToken()
-await xero.refreshWithRefreshToken(client_id, client_secret)
+await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
 
 // disconnect()
 await xero.disconnect(xero.tenants[0].id)
