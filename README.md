@@ -45,7 +45,7 @@ npm test
 
 ## Authentication
 
-We use [OAuth2.0](https://oauth.net/2) to generate access tokens that authenticate requests against our API. Each API call will need to have a valid token populated on the API client to succeed. In a tokenSet will be an *access_token* which lasts for 30 minutes, and a *refresh_token* which lasts for 30 days. If you don't want to require your users to re-authenticate each time you want to call the API on their behalf, you will need a datastore for these tokens and will be required to refresh the tokens at least once per 30 days to avoid expiration. The `offline_access` scope is required for refresh tokens to work.
+We use [OAuth2.0](https://oauth.net/2) to generate access tokens that authenticate requests against our API. Each API call will need to have a valid token populated on the API client to succeed. In a tokenSet will be an *access_token* which lasts for 30 minutes, and a *refresh_token* which lasts for 60 days. If you don't want to require your users to re-authenticate each time you want to call the API on their behalf, you will need a datastore for these tokens and will be required to refresh the tokens at least once per 60 days to avoid expiration. The `offline_access` scope is required for refresh tokens to work.
  
 In Xero a user can belong to multiple organisations. Tokens are ultimately associated with a Xero user, who can belong to multiple tenants/organisations. If your user 'Allows Access' to multiple organisations, be hyper aware of which `tenantId` you are passing to each function.
 
