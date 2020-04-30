@@ -24,7 +24,7 @@ export class Journal {
     /**
     * Xero generated journal number
     */
-    'journalNumber'?: string;
+    'journalNumber'?: number;
     /**
     * Created date UTC format
     */
@@ -62,7 +62,7 @@ export class Journal {
         {
             "name": "journalNumber",
             "baseName": "JournalNumber",
-            "type": "string"
+            "type": "number"
         },
         {
             "name": "createdDateUTC",
