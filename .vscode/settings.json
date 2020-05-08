@@ -30,5 +30,8 @@
     "**/.git": true,
     "**/.DS_Store": true,
     ".tsconfig.tsbuildinfo": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   }
 }
