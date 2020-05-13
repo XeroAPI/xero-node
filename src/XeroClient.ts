@@ -142,6 +142,12 @@ export class XeroClient {
     return formBody.join("&");
   }
 
+  formatMsDate(dateString: string){
+    // dateString = "1990-02-05"
+    const epoch = Date.parse(dateString)
+    return "/Date(" + epoch + "+0000)/"
+  }
+
   async refreshWithRefreshToken(clientId, clientSecret, refreshToken) {
     const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken)
     const tokenSet = JSON.parse(result.body)
