@@ -342,7 +342,7 @@ export class ObjectSerializer {
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
-            if (type === "string" && data.substring(0, 6) === "/Date(") {
+            if (type === "string" && data.toString().substring(0, 6) === "/Date(") {
                 return this.deserializeDateFormats(type, data) // For MS dates that are of type 'string'
             }
             else {
