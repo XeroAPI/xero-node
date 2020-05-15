@@ -6,9 +6,8 @@ Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the follo
 * [accounting](https://developer.xero.com/documentation/api/api-overview)
 * [assets](https://developer.xero.com/documentation/assets-api/overview)
 * [projects](https://developer.xero.com/documentation/projects/overview-projects)
-
-### Bank feeds support in OAuth 2
-An early release in a separate package is availalbe [bank feeds API](https://github.com/XeroAPI/xero-node-bankfeeds).
+* [AU Payroll](https://developer.xero.com/documentation/payroll-api/overview)
+* [BankFeeds (Restricted API)](https://developer.xero.com/documentation/bank-feeds-api/overview)
 
 ## Looking for OAuth 1.0a support?
 [![npm package](https://img.shields.io/badge/npm%20package-3.1.2-blue.svg)](https://www.npmjs.com/package/xero-node/v/3.1.2)
@@ -196,7 +195,9 @@ await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 * Version 3 (OAuth1.0a documentation) https://xeroapi.github.io/xero-node/v3/index.html (*deprecated end of 2020*)
 * Accounting API documentation: https://xeroapi.github.io/xero-node/v4/accounting/index.html
 * Assets API documentation: https://xeroapi.github.io/xero-node/v4/assets/index.html
-* Projects API documentation: https://xeroapi.github.io/xero-node/v4/projects/index.html
+* AU Payroll API documentation: https://xeroapi.github.io/xero-node/v4/payroll-au/index.html
+* Bankfeeds API documentation: https://xeroapi.github.io/xero-node/v4/bankfeeds/index.html
+
 
 ### Basics
 ```js
@@ -260,41 +261,35 @@ Just visit the repo https://github.com/XeroAPI/xero-node-oauth2-app configure yo
 
 ## Other Helper functions
 ```js
-// xero.tenants
 xero.tenants
 
-// initialize()
-// This needs to be called to setup relevant OAuth2.0 information on the client
+// This needs to be called to setup relevant openid-client on the XeroClient
 await xero.initialize()
 
-// buildConsentUrl()
-// This calls `await xero.initialize()` so you don't need to call initialize if you are using this function to send someone through auth flow
+// buildConsentUrl calls `await xero.initialize()` so if you wint't need to call initialize()
 await xero.buildConsentUrl()
 
-// readTokenSet()
 const tokenSet = await xero.readTokenSet();
 
-// tokenSet.expired()
 if (tokenSet.expired()) {
   // refresh etc.
 }
 
-// refreshToken()
+// some endpoints date fields require
+// the MS date format for POST'ing data
+const dateString = "1990-02-05"
+const birthday = await xero.formatMsDate(dateString)
+
 const validTokenSet = await xero.refreshToken()
 
-// refreshWithRefreshToken()
 await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
 
-// disconnect()
 await xero.disconnect(xero.tenants[0].id)
 
-// readIdTokenClaims()
 await xero.readIdTokenClaims()
 
-// readTokenSet()
 await xero.readTokenSet()
 
-// setTokenSet(tokenSet)
 const tokenSet = await xero.readTokenSet()
 await xero.setTokenSet(tokenSet)
 ```

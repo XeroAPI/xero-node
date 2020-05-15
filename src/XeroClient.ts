@@ -51,6 +51,8 @@ export class XeroClient {
     this.accountingApi = new xero.AccountingApi();
     this.assetApi = new xero.AssetApi();
     this.projectApi = new xero.ProjectApi();
+    this.payrollAUApi = new xero.PayrollAUApi();
+    this.bankFeedsApi = new xero.BankFeedsApi();
   }
 
   private tokenSet: TokenSet = new TokenSet
@@ -59,6 +61,8 @@ export class XeroClient {
   readonly accountingApi: xero.AccountingApi;
   readonly assetApi: xero.AssetApi;
   readonly projectApi: xero.ProjectApi;
+  readonly payrollAUApi: xero.PayrollAUApi;
+  readonly bankFeedsApi: xero.BankFeedsApi;
 
   openIdClient: any; // from openid-client
 
@@ -67,7 +71,7 @@ export class XeroClient {
   }
 
   async initialize() {
-    if(this.config){
+    if (this.config) {
       const issuer = await Issuer.discover('https://identity.xero.com');
       this.openIdClient = new issuer.Client({
         client_id: this.config.clientId,
@@ -82,7 +86,7 @@ export class XeroClient {
   async buildConsentUrl() {
     await this.initialize()
     let url
-    if(this.config){
+    if (this.config) {
       url = this.openIdClient.authorizationUrl({
         redirect_uri: this.config.redirectUris[0],
         scope: this.config.scopes.join(' ') || 'openid email profile'
@@ -138,6 +142,11 @@ export class XeroClient {
     return formBody.join("&");
   }
 
+  formatMsDate(dateString: string){
+    const epoch = Date.parse(dateString)
+    return "/Date(" + epoch + "+0000)/"
+  }
+
   async refreshWithRefreshToken(clientId, clientSecret, refreshToken) {
     const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken)
     const tokenSet = JSON.parse(result.body)
@@ -151,7 +160,7 @@ export class XeroClient {
       grant_type: 'refresh_token',
       refresh_token: refreshToken
     }
-   
+
     return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
       request({
         method: 'POST',
@@ -226,6 +235,7 @@ export class XeroClient {
     this.accountingApi.accessToken = accessToken;
     this.assetApi.accessToken = accessToken;
     this.projectApi.accessToken = accessToken;
-    // this.payrollApi.accessToken = accessToken;
+    this.payrollAUApi.accessToken = accessToken;
+    this.bankFeedsApi.accessToken = accessToken;
   }
 }

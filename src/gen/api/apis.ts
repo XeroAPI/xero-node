@@ -1,7 +1,11 @@
 export * from './accountingApi';
 export * from './assetApi';
 export * from './projectApi';
+export * from './payrollAUApi';
+export * from './bankfeedsApi';
 import { AccountingApi } from './accountingApi';
 import { AssetApi } from './assetApi';
 import { ProjectApi } from './projectApi';
-export const APIS = [AccountingApi, AssetApi, ProjectApi];
+import { PayrollAUApi } from './payrollAUApi';
+import { BankFeedsApi } from './bankfeedsApi';
+export const APIS = [AccountingApi, AssetApi, ProjectApi, PayrollAUApi, BankFeedsApi];
