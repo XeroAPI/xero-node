@@ -143,7 +143,6 @@ export class XeroClient {
   }
 
   formatMsDate(dateString: string){
-    // dateString = "1990-02-05"
     const epoch = Date.parse(dateString)
     return "/Date(" + epoch + "+0000)/"
   }

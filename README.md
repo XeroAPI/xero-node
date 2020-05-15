@@ -260,41 +260,35 @@ Just visit the repo https://github.com/XeroAPI/xero-node-oauth2-app configure yo
 
 ## Other Helper functions
 ```js
-// xero.tenants
 xero.tenants
 
-// initialize()
-// This needs to be called to setup relevant OAuth2.0 information on the client
+// This needs to be called to setup relevant openid-client on the XeroClient
 await xero.initialize()
 
-// buildConsentUrl()
-// This calls `await xero.initialize()` so you don't need to call initialize if you are using this function to send someone through auth flow
+// buildConsentUrl calls `await xero.initialize()` so if you wint't need to call initialize()
 await xero.buildConsentUrl()
 
-// readTokenSet()
 const tokenSet = await xero.readTokenSet();
 
-// tokenSet.expired()
 if (tokenSet.expired()) {
   // refresh etc.
 }
 
-// refreshToken()
+// some endpoints date fields require
+// the MS date format for POST'ing data
+const dateString = "1990-02-05"
+const birthday = await xero.formatMsDate(dateString)
+
 const validTokenSet = await xero.refreshToken()
 
-// refreshWithRefreshToken()
 await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
 
-// disconnect()
 await xero.disconnect(xero.tenants[0].id)
 
-// readIdTokenClaims()
 await xero.readIdTokenClaims()
 
-// readTokenSet()
 await xero.readTokenSet()
 
-// setTokenSet(tokenSet)
 const tokenSet = await xero.readTokenSet()
 await xero.setTokenSet(tokenSet)
 ```
