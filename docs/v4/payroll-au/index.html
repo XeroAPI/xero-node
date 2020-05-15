@@ -1336,6 +1336,13 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1583967733054+0000)/",
       "x-is-msdate-time" : true
+    },
+    "ValidationErrors" : {
+      "type" : "array",
+      "description" : "Displays array of validation error messages from the API",
+      "items" : {
+        "$ref" : "#/components/schemas/ValidationError"
+      }
     }
   },
   "description" : ""
@@ -1493,6 +1500,13 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1583967733054+0000)/",
       "x-is-msdate-time" : true
+    },
+    "ValidationErrors" : {
+      "type" : "array",
+      "description" : "Displays array of validation error messages from the API",
+      "items" : {
+        "$ref" : "#/components/schemas/ValidationError"
+      }
     }
   },
   "description" : ""
@@ -1898,6 +1912,13 @@ ul.nav-tabs {
       "description" : "The total NetPay for the Payrun",
       "format" : "float",
       "example" : 862.5
+    },
+    "ValidationErrors" : {
+      "type" : "array",
+      "description" : "Displays array of validation error messages from the API",
+      "items" : {
+        "$ref" : "#/components/schemas/ValidationError"
+      }
     }
   },
   "description" : ""
@@ -2000,6 +2021,13 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1583967733054+0000)/",
       "x-is-msdate-time" : true
+    },
+    "ValidationErrors" : {
+      "type" : "array",
+      "description" : "Displays array of validation error messages from the API",
+      "items" : {
+        "$ref" : "#/components/schemas/ValidationError"
+      }
     }
   },
   "description" : ""
@@ -2133,6 +2161,61 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1583967733054+0000)/",
       "x-is-msdate-time" : true
+    }
+  },
+  "description" : ""
+};
+    defs["PayslipLines"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "EarningsLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/EarningsLine"
+      }
+    },
+    "LeaveEarningsLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/LeaveEarningsLine"
+      }
+    },
+    "TimesheetEarningsLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/EarningsLine"
+      }
+    },
+    "DeductionLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/DeductionLine"
+      }
+    },
+    "LeaveAccrualLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/LeaveAccrualLine"
+      }
+    },
+    "ReimbursementLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/ReimbursementLine"
+      }
+    },
+    "SuperannuationLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/SuperannuationLine"
+      }
+    },
+    "TaxLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/TaxLine"
+      }
     }
   },
   "description" : ""
@@ -2464,6 +2547,13 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1583967733054+0000)/",
       "x-is-msdate-time" : true
+    },
+    "ValidationErrors" : {
+      "type" : "array",
+      "description" : "Displays array of validation error messages from the API",
+      "items" : {
+        "$ref" : "#/components/schemas/ValidationError"
+      }
     }
   },
   "description" : ""
@@ -2840,6 +2930,13 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1583967733054+0000)/",
       "x-is-msdate-time" : true
+    },
+    "ValidationErrors" : {
+      "type" : "array",
+      "description" : "Displays array of validation error messages from the API",
+      "items" : {
+        "$ref" : "#/components/schemas/ValidationError"
+      }
     }
   },
   "description" : ""
@@ -2908,6 +3005,20 @@ ul.nav-tabs {
     }
   },
   "description" : ""
+};
+    defs["ValidationError"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Message" : {
+      "type" : "string",
+      "description" : "Validation error message"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "https://developer.xero.com/documentation/api/http-response-codes"
+  }
 };
 
     var errs = {};
@@ -3006,8 +3117,8 @@ ul.nav-tabs {
                     <li data-group="PayrollAU" data-name="updatePayRun" class="">
                       <a href="#api-PayrollAU-updatePayRun">updatePayRun</a>
                     </li>
-                    <li data-group="PayrollAU" data-name="updatePayslipByID" class="">
-                      <a href="#api-PayrollAU-updatePayslipByID">updatePayslipByID</a>
+                    <li data-group="PayrollAU" data-name="updatePayslip" class="">
+                      <a href="#api-PayrollAU-updatePayslip">updatePayslip</a>
                     </li>
                     <li data-group="PayrollAU" data-name="updateSuperfund" class="">
                       <a href="#api-PayrollAU-updateSuperfund">updateSuperfund</a>
@@ -3030,7 +3141,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.1.2</div>
+              <div class="app-desc">Version: 2.1.3</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in Australia region.
@@ -4040,7 +4151,7 @@ public class PayrollAUApiExample {
 
         PayrollAUApi apiInstance = new PayrollAUApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        array[PayItem] payItem = [ { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ]; // array[PayItem] | 
+        PayItem payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ; // PayItem | 
         try {
             PayItems result = apiInstance.createPayItem(xeroTenantId, payItem);
             System.out.println(result);
@@ -4060,7 +4171,7 @@ public class PayrollAUApiExample {
     public static void main(String[] args) {
         PayrollAUApi apiInstance = new PayrollAUApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        array[PayItem] payItem = [ { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ]; // array[PayItem] | 
+        PayItem payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ; // PayItem | 
         try {
             PayItems result = apiInstance.createPayItem(xeroTenantId, payItem);
             System.out.println(result);
@@ -4082,7 +4193,7 @@ public class PayrollAUApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-array[PayItem] *payItem = [ { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ]; // 
+PayItem *payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ; // 
 
 PayrollAUApi *apiInstance = [[PayrollAUApi alloc] init];
 
@@ -4112,7 +4223,7 @@ PayrollAUApi *apiInstance = [[PayrollAUApi alloc] init];
 await xero.setTokenSet(tokenSet);
  
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const payItem = [ { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ];  // {array[PayItem]} 
+const payItem:PayItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ;  // {PayItem} 
 try {
   const response: any = await xero.accountingApi.createPayItem(xeroTenantId, payItem);
   console.log(response.body || response.response.statusCode)
@@ -4163,7 +4274,7 @@ namespace Example
 
             var apiInstance = new PayrollAUApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
-            var payItem = new array[PayItem](); // array[PayItem] | 
+            var payItem = new PayItem(); // PayItem | 
 
             try
             {
@@ -4214,7 +4325,7 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::PayrollAUApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
-my $payItem = [::Object::array[PayItem]->new()]; # array[PayItem] | 
+my $payItem = ::Object::PayItem->new(); # PayItem | 
 
 eval { 
     my $result = $api_instance->createPayItem(xeroTenantId => $xeroTenantId, payItem => $payItem);
@@ -4238,7 +4349,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .PayrollAUApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-payItem = [ { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ] # array[PayItem] | 
+payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] }  # PayItem | 
 
 try: 
     # Use this method to create a Pay Item
@@ -4253,7 +4364,7 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let payItem = [ { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ]; // array[PayItem]
+    let payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ; // PayItem
 
     let mut context = PayrollAUApi::Context::default();
     let result = client.createPayItem(xeroTenantId, payItem, &context).wait();
@@ -4319,7 +4430,7 @@ Xero identifier for Tenant
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    array[PayItem]
+                    PayItem
                 </span>
 
                     <div class="inner description marked">
@@ -15955,10 +16066,10 @@ $(document).ready(function() {
                         </article>
                       </div>
                       <hr>
-                    <div id="api-PayrollAU-updatePayslipByID">
-                      <article id="api-PayrollAU-updatePayslipByID-0" data-group="User" data-name="updatePayslipByID" data-version="0">
+                    <div id="api-PayrollAU-updatePayslip">
+                      <article id="api-PayrollAU-updatePayslip-0" data-group="User" data-name="updatePayslip" data-version="0">
                         <div class="pull-left">
-                          <h1>updatePayslipByID</h1>
+                          <h1>updatePayslip</h1>
                           <p>Update a Payslip</p>
                         </div>
                         <div class="pull-right"></div>
@@ -15972,25 +16083,25 @@ $(document).ready(function() {
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <!--<li class="active"><a href="#examples-PayrollAU-updatePayslipByID-0-curl">Curl</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-java">Java</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-android">Android</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-groovy">Groovy</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-objc">Obj-C</a></li>-->
-                          <li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-javascript">NodeJS</a></li>
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-angular">Angular</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-csharp">C#</a></li>-->
-                          <!-- <li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-php">PHP</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-perl">Perl</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-python">Python</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslipByID-0-rust">Rust</a></li>-->
+                          <!--<li class="active"><a href="#examples-PayrollAU-updatePayslip-0-curl">Curl</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-java">Java</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-android">Android</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-groovy">Groovy</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-objc">Obj-C</a></li>-->
+                          <li class=""><a href="#examples-PayrollAU-updatePayslip-0-javascript">NodeJS</a></li>
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-angular">Angular</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-csharp">C#</a></li>-->
+                          <!-- <li class=""><a href="#examples-PayrollAU-updatePayslip-0-php">PHP</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-perl">Perl</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-python">Python</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollAU-updatePayslip-0-rust">Rust</a></li>-->
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-PayrollAU-updatePayslipByID-0-curl">
+                          <div class="tab-pane active" id="examples-PayrollAU-updatePayslip-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/Payslip/{PayslipID}"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-java">
+                          <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
 import org.openapitools.client.auth.*;
 import org.openapitools.client.model.*;
@@ -16011,19 +16122,19 @@ public class PayrollAUApiExample {
         PayrollAUApi apiInstance = new PayrollAUApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
         UUID payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Payslip id for single object
-        PayslipObject payslipObject = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }; // PayslipObject | 
+        array[PayslipLines] payslipLines = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }; // array[PayslipLines] | 
         try {
-            PayslipObject result = apiInstance.updatePayslipByID(xeroTenantId, payslipID, payslipObject);
+            PayslipObject result = apiInstance.updatePayslip(xeroTenantId, payslipID, payslipLines);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling PayrollAUApi#updatePayslipByID");
+            System.err.println("Exception when calling PayrollAUApi#updatePayslip");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-android">
+                          <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-android">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.PayrollAUApi;
 
 public class PayrollAUApiExample {
@@ -16032,22 +16143,22 @@ public class PayrollAUApiExample {
         PayrollAUApi apiInstance = new PayrollAUApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
         UUID payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Payslip id for single object
-        PayslipObject payslipObject = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }; // PayslipObject | 
+        array[PayslipLines] payslipLines = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }; // array[PayslipLines] | 
         try {
-            PayslipObject result = apiInstance.updatePayslipByID(xeroTenantId, payslipID, payslipObject);
+            PayslipObject result = apiInstance.updatePayslip(xeroTenantId, payslipID, payslipLines);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling PayrollAUApi#updatePayslipByID");
+            System.err.println("Exception when calling PayrollAUApi#updatePayslip");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-groovy">
+  <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-objc">
+                            <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
@@ -16055,14 +16166,14 @@ public class PayrollAUApiExample {
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
 UUID *payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Payslip id for single object (default to null)
-PayslipObject *payslipObject = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }; //  (optional)
+array[PayslipLines] *payslipLines = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }; //  (optional)
 
 PayrollAUApi *apiInstance = [[PayrollAUApi alloc] init];
 
 // Update a Payslip
-[apiInstance updatePayslipByIDWith:xeroTenantId
+[apiInstance updatePayslipWith:xeroTenantId
     payslipID:payslipID
-    payslipObject:payslipObject
+    payslipLines:payslipLines
               completionHandler: ^(PayslipObject output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -16074,7 +16185,7 @@ PayrollAUApi *apiInstance = [[PayrollAUApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-javascript">
+                            <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-javascript">
                               <pre class="prettyprint"><code class="language-js">const tokenSet: TokenSet =  {
   id_token: 'xxx',
   access_token: 'yyy',
@@ -16087,10 +16198,10 @@ await xero.setTokenSet(tokenSet);
  
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
 const payslipID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Payslip id for single object
-const payslipObject:PayslipObject =  { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } };  // {PayslipObject} 
+const payslipLines =  ['{ "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }'];  // {array[PayslipLines]} 
 
 try {
-  const response: any = await xero.accountingApi.updatePayslipByID(xeroTenantId, payslipID,  payslipObject);
+  const response: any = await xero.accountingApi.updatePayslip(xeroTenantId, payslipID,  payslipLines);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
@@ -16113,14 +16224,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.updatePayslipByID(xeroTenantId, payslipID, opts, callback);
+api.updatePayslip(xeroTenantId, payslipID, opts, callback);
 --></code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-angular">
+                            <!--<div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-csharp">
+                            <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using .Api;
@@ -16129,7 +16240,7 @@ using .Model;
 
 namespace Example
 {
-    public class updatePayslipByIDExample
+    public class updatePayslipExample
     {
         public void main()
         {
@@ -16140,17 +16251,17 @@ namespace Example
             var apiInstance = new PayrollAUApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
             var payslipID = new UUID(); // UUID | Payslip id for single object (default to null)
-            var payslipObject = new PayslipObject(); // PayslipObject |  (optional) 
+            var payslipLines = new array[PayslipLines](); // array[PayslipLines] |  (optional) 
 
             try
             {
                 // Update a Payslip
-                PayslipObject result = apiInstance.updatePayslipByID(xeroTenantId, payslipID, payslipObject);
+                PayslipObject result = apiInstance.updatePayslip(xeroTenantId, payslipID, payslipLines);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling PayrollAUApi.updatePayslipByID: " + e.Message );
+                Debug.Print("Exception when calling PayrollAUApi.updatePayslip: " + e.Message );
             }
         }
     }
@@ -16158,7 +16269,7 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-php">
+                            <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
@@ -16176,12 +16287,12 @@ $apiInstance = new XeroAPI\XeroPHP\Api\PayrollAUApi(
 
 try { 
 } catch (Exception $e) {
-    echo 'Exception when calling PayrollAUApi->updatePayslipByID: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PayrollAUApi->updatePayslip: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-perl">
+                            <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use ::Configuration;
 use ::PayrollAUApi;
@@ -16192,18 +16303,18 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 my $api_instance = ::PayrollAUApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
 my $payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Payslip id for single object
-my $payslipObject = ::Object::PayslipObject->new(); # PayslipObject | 
+my $payslipLines = [::Object::array[PayslipLines]->new()]; # array[PayslipLines] | 
 
 eval { 
-    my $result = $api_instance->updatePayslipByID(xeroTenantId => $xeroTenantId, payslipID => $payslipID, payslipObject => $payslipObject);
+    my $result = $api_instance->updatePayslip(xeroTenantId => $xeroTenantId, payslipID => $payslipID, payslipLines => $payslipLines);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling PayrollAUApi->updatePayslipByID: $@\n";
+    warn "Exception when calling PayrollAUApi->updatePayslip: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-python">
+                            <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import 
@@ -16217,26 +16328,26 @@ from pprint import pprint
 api_instance = .PayrollAUApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
 payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Payslip id for single object (default to null)
-payslipObject = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } } # PayslipObject |  (optional)
+payslipLines = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } } # array[PayslipLines] |  (optional)
 
 try: 
     # Update a Payslip
-    api_response = api_instance.update_payslip_by_id(xeroTenantId, payslipID, payslipObject=payslipObject)
+    api_response = api_instance.update_payslip(xeroTenantId, payslipID, payslipLines=payslipLines)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling PayrollAUApi->updatePayslipByID: %s\n" % e)</code></pre>
+    print("Exception when calling PayrollAUApi->updatePayslip: %s\n" % e)</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-0-rust">
+                            <div class="tab-pane" id="examples-PayrollAU-updatePayslip-0-rust">
                               <pre class="prettyprint"><code class="language-rust">extern crate PayrollAUApi;
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
     let payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
-    let payslipObject = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }; // PayslipObject
+    let payslipLines = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }; // array[PayslipLines]
 
     let mut context = PayrollAUApi::Context::default();
-    let result = client.updatePayslipByID(xeroTenantId, payslipID, payslipObject, &context).wait();
+    let result = client.updatePayslip(xeroTenantId, payslipID, payslipLines, &context).wait();
     println!("{:?}", result);
 
 }
@@ -16266,7 +16377,7 @@ pub fn main() {
 <td>
 
 
-    <div id="d2e199_updatePayslipByID_payslipID">
+    <div id="d2e199_updatePayslip_payslipID">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -16300,7 +16411,7 @@ Payslip id for single object
 <td>
 
 
-    <div id="d2e199_updatePayslipByID_xeroTenantId">
+    <div id="d2e199_updatePayslip_xeroTenantId">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -16327,12 +16438,12 @@ Xero identifier for Tenant
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                              <tr><td style="width:150px;">payslipObject </td>
+                              <tr><td style="width:150px;">payslipLines </td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    PayslipObject
+                    array[PayslipLines]
                 </span>
 
                     <div class="inner description marked">
@@ -16355,12 +16466,12 @@ $(document).ready(function() {
   }
 
   var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updatePayslipByID_payslipObject');
+  var result = $('#d2e199_updatePayslip_payslipLines');
   result.empty();
   result.append(view.render());
 });
 </script>
-<div id="d2e199_updatePayslipByID_payslipObject"></div>
+<div id="d2e199_updatePayslip_payslipLines"></div>
 </td>
 </tr>
 
@@ -16369,27 +16480,27 @@ $(document).ready(function() {
 
 <!--
                           <h2>Responses</h2>
-                            <h3 id="examples-PayrollAU-updatePayslipByID-title-200"></h3>
-                            <p id="examples-PayrollAU-updatePayslipByID-description-200" class="marked"></p>
+                            <h3 id="examples-PayrollAU-updatePayslip-title-200"></h3>
+                            <p id="examples-PayrollAU-updatePayslip-description-200" class="marked"></p>
                             <script>
                               var responsePayrollAU200_description = `A successful request - currently returns empty array for JSON`;
                               var responsePayrollAU200_description_break = responsePayrollAU200_description.indexOf('\n');
                               if (responsePayrollAU200_description_break == -1) {
-                                $("#examples-PayrollAU-updatePayslipByID-title-200").text("Status: 200 - " + responsePayrollAU200_description);
+                                $("#examples-PayrollAU-updatePayslip-title-200").text("Status: 200 - " + responsePayrollAU200_description);
                               } else {
-                                $("#examples-PayrollAU-updatePayslipByID-title-200").text("Status: 200 - " + responsePayrollAU200_description.substring(0, responsePayrollAU200_description_break));
-                                $("#examples-PayrollAU-updatePayslipByID-description-200").html(responsePayrollAU200_description.substring(responsePayrollAU200_description_break));
+                                $("#examples-PayrollAU-updatePayslip-title-200").text("Status: 200 - " + responsePayrollAU200_description.substring(0, responsePayrollAU200_description_break));
+                                $("#examples-PayrollAU-updatePayslip-description-200").html(responsePayrollAU200_description.substring(responsePayrollAU200_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-PayrollAU-updatePayslipByID-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-PayrollAU-updatePayslip-200" class="nav nav-tabs nav-tabs-examples" >
                              
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-PayrollAU-updatePayslipByID-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-PayrollAU-updatePayslip-200-schema">Schema</a>
                                 </li>
                                 <li class="">
-                                    <a data-toggle="tab" href="#responses-PayrollAU-updatePayslipByID-200-example">Response Example</a>
+                                    <a data-toggle="tab" href="#responses-PayrollAU-updatePayslip-200-example">Response Example</a>
                                 </li>
                                
 
@@ -16397,10 +16508,10 @@ $(document).ready(function() {
                             </ul>
 
 
-                            <div class="tab-content" id="responses-PayrollAU-updatePayslipByID-200-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-PayrollAU-updatePayslip-200-wrapper" style='margin-bottom: 10px;'>
                                
-                                <div class="tab-pane active" id="responses-PayrollAU-updatePayslipByID-200-schema">
-                                  <div id="responses-PayrollAU-updatePayslipByID-schema-200" class="exampleStyle">
+                                <div class="tab-pane active" id="responses-PayrollAU-updatePayslip-200-schema">
+                                  <div id="responses-PayrollAU-updatePayslip-schema-200" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -16425,16 +16536,16 @@ $(document).ready(function() {
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-PayrollAU-updatePayslipByID-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-PayrollAU-updatePayslipByID-schema-200');
+                                        $('#responses-PayrollAU-updatePayslip-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-PayrollAU-updatePayslip-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-PayrollAU-updatePayslipByID-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-PayrollAU-updatePayslip-200-schema-data' type='hidden' value=''></input>
                                 </div>
-                                <div class="tab-pane" id="examples-PayrollAU-updatePayslipByID-200-example">
+                                <div class="tab-pane" id="examples-PayrollAU-updatePayslip-200-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>

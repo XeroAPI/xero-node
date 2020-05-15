@@ -1,85 +1,300 @@
-# OpenAPI Generator for the default library
+# xero-node
+![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 
-## Overview
-This is a boiler-plate project to generate your own project derived from an OpenAPI specification.
-Its goal is to get you started with the basic plumbing so you can put in your own logic.
-It won't work without your changes applied.
+## Release of SDK with oAuth 2 support
+Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
+* [accounting](https://developer.xero.com/documentation/api/api-overview)
+* [assets](https://developer.xero.com/documentation/assets-api/overview)
+* [projects](https://developer.xero.com/documentation/projects/overview-projects)
 
-## What's OpenAPI
-The goal of OpenAPI is to define a standard, language-agnostic interface to REST APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection.
-When properly described with OpenAPI, a consumer can understand and interact with the remote service with a minimal amount of implementation logic.
-Similar to what interfaces have done for lower-level programming, OpenAPI removes the guesswork in calling the service.
+### Bank feeds support in OAuth 2
+An early release in a separate package is availalbe [bank feeds API](https://github.com/XeroAPI/xero-node-bankfeeds).
 
-Check out [OpenAPI-Spec](https://github.com/OAI/OpenAPI-Specification) for additional information about the OpenAPI project, including additional libraries with support for other languages and more. 
+## Looking for OAuth 1.0a support?
+[![npm package](https://img.shields.io/badge/npm%20package-3.1.2-blue.svg)](https://www.npmjs.com/package/xero-node/v/3.1.2)
 
-## How do I use this?
-At this point, you've likely generated a client setup.  It will include something along these lines:
+We've moved this code into the [oauth1 branch](https://github.com/XeroAPI/xero-node/tree/oauth1).
 
-```
-.
-|- README.md    // this file
-|- pom.xml      // build script
-|-- src
-|--- main
-|---- java
-|----- org.openapitools.codegen.DefaultGenerator.java // generator file
-|---- resources
-|----- default // template files
-|----- META-INF
-|------ services
-|------- org.openapitools.codegen.CodegenConfig
-```
+## Getting Started
 
-You _will_ need to make changes in at least the following:
+### Create a Xero App
+Follow these steps to create your Xero app
 
-`DefaultGenerator.java`
+* Create a [free Xero user account](https://www.xero.com/us/signup/api/) (if you don't have one)
+* Login to [Xero developer center](https://developer.xero.com/myapps)
+* Click "New App" link
+* Enter your App name, company url, privacy policy url.
+* Enter the redirect URI (this is your callback url - localhost, etc)
+* Agree to terms and condition and click "Create App".
+* Click "Generate a secret" button.
+* Copy your client id and client secret and save for use later.
+* Click the "Save" button. You secret is now hidden.
 
-Templates in this folder:
+## Repo Context & Contributing
+This SDK's functionality is majority generated [from our OpenAPISpec](https://github.com/XeroAPI/Xero-OpenAPI).
+The exception is the `src/xeroClient.ts` which contains the typescript that is unique to this repository. Contributions are welcome but please keep in mind that majority of SDK is auto-generated from the OpenAPISpec. We try to get changes in that projects to be released on a reasonable cadence.
 
-`src/main/resources/default`
+> Read more about our process in [maintaining our suite of SDK's](https://devblog.xero.com/building-sdks-for-the-future-b79ff726dfd6)
 
-Once modified, you can run this:
-
-```
-mvn package
-```
-
-In your generator project. A single jar file will be produced in `target`. You can now use that with [OpenAPI Generator](https://openapi-generator.tech):
-
-For mac/linux:
-```
-java -cp /path/to/openapi-generator-cli.jar:/path/to/your.jar org.openapitools.codegen.OpenAPIGenerator generate -g default -i /path/to/openapi.yaml -o ./test
-```
-(Do not forget to replace the values `/path/to/openapi-generator-cli.jar`, `/path/to/your.jar` and `/path/to/openapi.yaml` in the previous command)
-
-For Windows users, you will need to use `;` instead of `:` in the classpath, e.g.
-```
-java -cp /path/to/openapi-generator-cli.jar;/path/to/your.jar org.openapitools.codegen.OpenAPIGenerator generate -g default -i /path/to/openapi.yaml -o ./test
-```
-
-Now your templates are available to the client generator and you can write output values
-
-## But how do I modify this?
-The `DefaultGenerator.java` has comments in it--lots of comments.  There is no good substitute
-for reading the code more, though.  See how the `DefaultGenerator` implements `CodegenConfig`.
-That class has the signature of all values that can be overridden.
-
-You can also step through DefaultGenerator.java in a debugger.  Just debug the JUnit
-test in DebugCodegenLauncher.  That runs the command line tool and lets you inspect what the code is doing.  
-
-For the templates themselves, you have a number of values available to you for generation.
-You can execute the `java` command from above while passing different debug flags to show
-the object you have available during client generation:
+## Testing
+We are working to build out a more robust test suite, and currently just have tests setup for our xeroClient.ts - PR's will now run against a CI build - and as we add more tests to this project community collaboration will be easier to incorporate.
 
 ```
-# The following additional debug options are available for all codegen targets:
-# -DdebugOpenAPI prints the OpenAPI Specification as interpreted by the codegen
-# -DdebugModels prints models passed to the template engine
-# -DdebugOperations prints operations passed to the template engine
-# -DdebugSupportingFiles prints additional data passed to the template engine
-
-java -DdebugOperations -cp /path/to/openapi-generator-cli.jar:/path/to/your.jar org.openapitools.codegen.OpenAPIGenerator generate -g default -i /path/to/openapi.yaml -o ./test
+npm test
 ```
 
-Will, for example, output the debug info for operations.
-You can use this info in the `api.mustache` file.
+## Authentication
+
+We use [OAuth2.0](https://oauth.net/2) to generate access tokens that authenticate requests against our API. Each API call will need to have a valid token populated on the API client to succeed. In a tokenSet will be an *access_token* which lasts for 30 minutes, and a *refresh_token* which lasts for 60 days. If you don't want to require your users to re-authenticate each time you want to call the API on their behalf, you will need a datastore for these tokens and will be required to refresh the tokens at least once per 60 days to avoid expiration. The `offline_access` scope is required for refresh tokens to work.
+ 
+In Xero a user can belong to multiple organisations. Tokens are ultimately associated with a Xero user, who can belong to multiple tenants/organisations. If your user 'Allows Access' to multiple organisations, be hyper aware of which `tenantId` you are passing to each function.
+
+---
+
+**Step 1:** Initialize the `XeroClient`, and redirect user to xero auth flow
+
+**Step 2:** Call `apiCallback` to get your tokenSet
+
+**Step 3:** Call `updateTenats` to populate additional tenant data
+*You will need to have the `accounting.settings` scope in order to use this helper*
+
+**NOTE:** If you have already authorized the user and have stored a valid tokenSet, you can create a `new XeroClient()` and refresh your token without triggering the openid-client dependency:
+```js
+  const tokenSet = getTokenSetFromUserId(user.id) // example function
+  const newXeroClient = new XeroClient()
+  const newTokenSet = await newXeroClient.refreshWithRefreshToken(xero_client_id, xero_client_secret, tokenSet.refresh_token)
+  // refreshWithRefreshToken calls setAccessToken() so the refreshed token will be stored on newXeroClient
+  await newXeroClient.accountingApi.getInvoices('my-tenant-uuid))
+```
+
+---
+
+## Step 1
+* Configure client and generate Authorization URL
+* Choose [XeroAPI Scopes](https://developer.xero.com/documentation/oauth2/scopes) based on the access you need
+* `initialize()` the client to set up the 'openid-client'
+* Build the `consentUrl`
+* Redirect to auth flow
+```js
+const port = process.env.PORT || 3000
+
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID',
+  clientSecret: 'YOUR_CLIENT_SECRET',
+  redirectUris: [`http://localhost:${port}/callback`],
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
+});
+
+// `buildConsentUrl()` calls `await xero.initialize()`
+let consentUrl = await xero.buildConsentUrl();
+
+res.redirect(consentUrl);
+```
+
+## Step 2
+Call `apiCallback` function with the response url which returns a tokenSet you can save in your datastore for future calls.
+
+*The `tokenSet` can also be accessed from the client as `xero.readTokenSet()`.*
+
+```js
+
+const { TokenSet } = require('openid-client');
+
+const tokenSet: TokenSet = await xero.apiCallback(req.url);
+```
+The `tokenSet` is what you should store in your database. That object is what you will need to pass to the client. It contains your access_token and refresh_token as well as other information regarding your connection.
+```js
+{
+  id_token: 'eyJhxxxx.yyy',
+  access_token: 'eyJxxx.yyy.zzz',
+  expires_at: 1231231234,
+  token_type: 'Bearer',
+  refresh_token: 'xxxyyyyzzz',
+  scope: 'openid profile email accounting.settings accounting.reports.read accounting.journals.read accounting.contacts accounting.attachments accounting.transactions offline_access',
+  session_state: 'xxx.yyy'
+}
+```
+
+## Step 3 (convenience step)
+
+Populate the XeroClient's active tenant data
+
+For most integrations you will always want to display the org name and additional metadata about the connected org. The `/connections` endpoint does not currently serialize that data so requires developers to make additional api calls for each org that your user connects to surface that information.
+
+The `updatedTenants` function will query & nest the additional orgData results in your xeroClient under each connection/tenant object and return the array of tenants. This requires `accounting.settings` scope because `updateTenants` calls the organisation endpoint.
+
+```js
+const tenants = await xero.updateTenants()
+
+console.log(tenants || xero.tenants)
+[
+  {
+    id: 'xxx-yyy-zzz-xxx-yyy',
+    tenantId: 'xxx-yyy-zzz-xxx-yyy',
+    tenantType: 'ORGANISATION',
+    createdDateUtc: 'UTC-DateString',
+    updatedDateUtc: 'UTC-DateString',
+    orgData: {
+      organisationID: 'xxx-yyy-zzz-xxx-yyy',
+      name: 'My first org',
+      version: 'US',
+      shortCode: '!2h37s',
+      ...
+    }
+  },
+  {
+    id: 'xxx-yyy-zzz-xxx-yyy',
+    tenantId: 'xxx-yyy-zzz-xxx-yyy',
+    tenantType: 'ORGANISATION',
+    createdDateUtc: 'UTC-DateString',
+    updatedDateUtc: 'UTC-DateString',
+    orgData: {
+      organisationID: 'xxx-yyy-zzz-xxx-yyy',
+      name: 'My second org',
+      version: 'AUS',
+      shortCode: '!yrcgp',
+      ...
+    }
+  }
+]
+```
+
+---
+## Making **offline_access** calls
+
+Once you have a valid token/tokenSet saved you can set the tokenSet on the client without going through the callback by calling `setTokenSet`.
+
+For example - once a user authenticates you can refresh the token (which will also set the new token on the client) to make authorized api calls.
+
+There are two ways to refresh a token.
+
+```js
+// refreshToken()
+const validTokenSet = await xero.refreshToken()
+```
+
+If you already generated a valid access token, you can initialize an empty client and refresh any saved access_tokens by passing the client, secret, and refresh_token to refreshWithRefreshToken()
+```js
+const newXeroClient = new XeroClient()
+const refreshedTokenSet = await newXeroClient.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
+```
+
+Making AUthorized API calls:
+
+```js
+const tokenSet = getTokenSetFromDatabase(userId) // example function name
+
+await xero.setTokenSet(tokenSet)
+
+// you can call this to fetch/set your connected tenant data on your client, or you could also store this information in a database so you don't need to updateTenants every time you connect to API
+await xero.updateTenants()
+
+await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
+```
+
+## SDK Documentation
+* Version 3 (OAuth1.0a documentation) https://xeroapi.github.io/xero-node/v3/index.html (*deprecated end of 2020*)
+* Accounting API documentation: https://xeroapi.github.io/xero-node/v4/accounting/index.html
+* Assets API documentation: https://xeroapi.github.io/xero-node/v4/assets/index.html
+* Projects API documentation: https://xeroapi.github.io/xero-node/v4/projects/index.html
+
+### Basics
+```js
+// example flow of initializing and using the client after someone has already authenticated and you have saved their tokenSet
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID',
+  clientSecret: 'YOUR_CLIENT_SECRET',
+  redirectUris: [`http://localhost:${port}/callback`],
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
+});
+await xero.initialize();
+
+const tokenSet = getYourTokenSetFromSavedLocation(currentUser)
+
+await xero.setTokenSet(tokenSet)
+...
+
+const activeTenantId = xero.tenants[0].tenantId
+
+const getOrgs = await xero.accountingApi.getOrganisations(activeTenantId)
+const orgCountry= getOrgs.body.organisations[0].countryCode
+
+const contactsResponse = await xero.accountingApi.getContacts(activeTenantId)
+const contactId = getContactsResponse.body.contacts[0].contactID
+
+---
+import { XeroClient, Invoice } from "xero-node";
+
+const invoices = {
+  invoices: [
+    {
+      type: Invoice.TypeEnum.ACCREC,
+      contact: {
+        contactID: contactId
+      },
+      lineItems: [
+        {
+          description: "Acme Tires",
+          quantity: 2.0,
+          unitAmount: 20.0,
+          accountCode: "500",
+          taxType: "NONE",
+          lineAmount: 40.0
+        }
+      ],
+      date: "2019-03-11",
+      dueDate: "2018-12-10",
+      reference: "Website Design",
+      status: Invoice.StatusEnum.AUTHORISED
+    }
+  ]
+};
+
+const createdInvoice = await xero.accountingApi.createInvoices(activeTenantId, invoices)
+```
+
+# Sample App
+For more robust examples in how to utilize our accounting api we have *(roughly)* every single endpoint mapped out with an example in our sample app - complete with showing the Xero data dependencies required for interaction with many objects ( ie. types, assoc. accounts, tax types, date formats).
+
+Just visit the repo https://github.com/XeroAPI/xero-node-oauth2-app configure your credentials & get started.
+
+## Other Helper functions
+```js
+// xero.tenants
+xero.tenants
+
+// initialize()
+// This needs to be called to setup relevant OAuth2.0 information on the client
+await xero.initialize()
+
+// buildConsentUrl()
+// This calls `await xero.initialize()` so you don't need to call initialize if you are using this function to send someone through auth flow
+await xero.buildConsentUrl()
+
+// readTokenSet()
+const tokenSet = await xero.readTokenSet();
+
+// tokenSet.expired()
+if (tokenSet.expired()) {
+  // refresh etc.
+}
+
+// refreshToken()
+const validTokenSet = await xero.refreshToken()
+
+// refreshWithRefreshToken()
+await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
+
+// disconnect()
+await xero.disconnect(xero.tenants[0].id)
+
+// readIdTokenClaims()
+await xero.readIdTokenClaims()
+
+// readTokenSet()
+await xero.readTokenSet()
+
+// setTokenSet(tokenSet)
+const tokenSet = await xero.readTokenSet()
+await xero.setTokenSet(tokenSet)
+```

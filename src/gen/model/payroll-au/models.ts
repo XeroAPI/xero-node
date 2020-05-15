@@ -42,6 +42,7 @@ export * from '././paymentFrequencyType';
 export * from '././payrollCalendar';
 export * from '././payrollCalendars';
 export * from '././payslip';
+export * from '././payslipLines';
 export * from '././payslipObject';
 export * from '././payslipSummary';
 export * from '././rateType';
@@ -73,6 +74,7 @@ export * from '././timesheetLine';
 export * from '././timesheetObject';
 export * from '././timesheetStatus';
 export * from '././timesheets';
+export * from '././validationError';
 
 import localVarRequest = require('request');
 
@@ -120,6 +122,7 @@ import { PaymentFrequencyType } from '././paymentFrequencyType';
 import { PayrollCalendar } from '././payrollCalendar';
 import { PayrollCalendars } from '././payrollCalendars';
 import { Payslip } from '././payslip';
+import { PayslipLines } from '././payslipLines';
 import { PayslipObject } from '././payslipObject';
 import { PayslipSummary } from '././payslipSummary';
 import { RateType } from '././rateType';
@@ -151,6 +154,7 @@ import { TimesheetLine } from '././timesheetLine';
 import { TimesheetObject } from '././timesheetObject';
 import { TimesheetStatus } from '././timesheetStatus';
 import { Timesheets } from '././timesheets';
+import { ValidationError } from '././validationError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -222,6 +226,7 @@ let typeMap: {[index: string]: any} = {
     "PayrollCalendar": PayrollCalendar,
     "PayrollCalendars": PayrollCalendars,
     "Payslip": Payslip,
+    "PayslipLines": PayslipLines,
     "PayslipObject": PayslipObject,
     "PayslipSummary": PayslipSummary,
     "ReimbursementLine": ReimbursementLine,
@@ -245,6 +250,7 @@ let typeMap: {[index: string]: any} = {
     "TimesheetLine": TimesheetLine,
     "TimesheetObject": TimesheetObject,
     "Timesheets": Timesheets,
+    "ValidationError": ValidationError,
 }
 
 export class ObjectSerializer {
