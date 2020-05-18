@@ -156,6 +156,9 @@ console.log(tenants || xero.tenants)
     }
   }
 ]
+
+// You can also remove a connection by passing `disconnect()` the `.id` which is that tenant's connection id.
+await xero.disconnect(xero.tenants[0].id)
 ```
 
 ---
