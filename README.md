@@ -266,7 +266,7 @@ xero.tenants
 // This needs to be called to setup relevant openid-client on the XeroClient
 await xero.initialize()
 
-// buildConsentUrl calls `await xero.initialize()` so if you wint't need to call initialize()
+// buildConsentUrl calls `await xero.initialize()` so if you wont't need to call initialize() if your using the client to send user through the auth flow.
 await xero.buildConsentUrl()
 
 const tokenSet = await xero.readTokenSet();
