@@ -272,20 +272,25 @@ await xero.initialize()
 // buildConsentUrl calls `await xero.initialize()` so if you wont't need to call initialize() if your using the client to send user through the auth flow.
 await xero.buildConsentUrl()
 
+// tokenSet and its expiration
 const tokenSet = await xero.readTokenSet();
+const now = new Date().getTime()
 
-if (tokenSet.expired()) {
-  // refresh etc.
+if (tokenSet.expires_in > now) {
+  const validTokenSet = await xero.refreshToken()
+  // or you can refresh the token without needing to initialize the openid-client
+  // helpful for background processes where you want to limit any dependencies
+  await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
 }
+
+tokenSet.expires_in // returns seconds
+tokenSet.expires_at // returns milliseconds
+new Date(tokenSet.expires_at * 1000).toLocaleString()) // readable expiration
 
 // some endpoints date fields require
 // the MS date format for POST'ing data
 const dateString = "1990-02-05"
 const birthday = await xero.formatMsDate(dateString)
-
-const validTokenSet = await xero.refreshToken()
-
-await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
 
 await xero.disconnect(xero.tenants[0].id)
 
