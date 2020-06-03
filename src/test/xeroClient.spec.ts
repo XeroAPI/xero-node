@@ -82,7 +82,7 @@ describe('the XeroClient', () => {
     });
   
     it('refreshWithRefreshToken() refreshes token with tokenSetParameter and returns the tokenSet', async () => {
-      const updatedTokenSet = await xero.refreshWithRefreshToken('cleint_id','client_secret','refresh_token')
+      const updatedTokenSet = await xero.refreshWithRefreshToken('client_id','client_secret','refresh_token')
       expect(updatedTokenSet.id_token).toEqual(tokenSetJson.id_token)
       await xero.setTokenSet(updatedTokenSet)
       const xeroTokenSet = await xero.readTokenSet()
