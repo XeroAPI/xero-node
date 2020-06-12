@@ -51,8 +51,9 @@ export class XeroClient {
     this.accountingApi = new xero.AccountingApi();
     this.assetApi = new xero.AssetApi();
     this.projectApi = new xero.ProjectApi();
-    this.payrollAUApi = new xero.PayrollAUApi();
+    this.payrollAUApi = new xero.PayrollAuApi();
     this.bankFeedsApi = new xero.BankFeedsApi();
+    this.payrollUKApi = new xero.PayrollUkApi();
   }
 
   private tokenSet: TokenSet = new TokenSet
@@ -61,8 +62,9 @@ export class XeroClient {
   readonly accountingApi: xero.AccountingApi;
   readonly assetApi: xero.AssetApi;
   readonly projectApi: xero.ProjectApi;
-  readonly payrollAUApi: xero.PayrollAUApi;
+  readonly payrollAUApi: xero.PayrollAuApi;
   readonly bankFeedsApi: xero.BankFeedsApi;
+  readonly payrollUKApi: xero.PayrollUkApi;
 
   openIdClient: any; // from openid-client
 
@@ -142,7 +144,7 @@ export class XeroClient {
     return formBody.join("&");
   }
 
-  formatMsDate(dateString: string){
+  formatMsDate(dateString: string) {
     const epoch = Date.parse(dateString)
     return "/Date(" + epoch + "+0000)/"
   }
@@ -237,5 +239,6 @@ export class XeroClient {
     this.projectApi.accessToken = accessToken;
     this.payrollAUApi.accessToken = accessToken;
     this.bankFeedsApi.accessToken = accessToken;
+    this.payrollUKApi.accessToken = accessToken;
   }
 }
