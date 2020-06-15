@@ -45,6 +45,7 @@ export * from '././payslip';
 export * from '././payslipLines';
 export * from '././payslipObject';
 export * from '././payslipSummary';
+export * from '././payslips';
 export * from '././rateType';
 export * from '././reimbursementLine';
 export * from '././reimbursementLines';
@@ -125,6 +126,7 @@ import { Payslip } from '././payslip';
 import { PayslipLines } from '././payslipLines';
 import { PayslipObject } from '././payslipObject';
 import { PayslipSummary } from '././payslipSummary';
+import { Payslips } from '././payslips';
 import { RateType } from '././rateType';
 import { ReimbursementLine } from '././reimbursementLine';
 import { ReimbursementLines } from '././reimbursementLines';
@@ -229,6 +231,7 @@ let typeMap: {[index: string]: any} = {
     "PayslipLines": PayslipLines,
     "PayslipObject": PayslipObject,
     "PayslipSummary": PayslipSummary,
+    "Payslips": Payslips,
     "ReimbursementLine": ReimbursementLine,
     "ReimbursementLines": ReimbursementLines,
     "ReimbursementType": ReimbursementType,

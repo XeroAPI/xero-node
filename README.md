@@ -8,6 +8,7 @@ Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the follo
 * [projects](https://developer.xero.com/documentation/projects/overview-projects)
 * [AU Payroll](https://developer.xero.com/documentation/payroll-api/overview)
 * [BankFeeds (Restricted API)](https://developer.xero.com/documentation/bank-feeds-api/overview)
+* [UK Payroll](https://developer.xero.com/documentation/payroll-api-uk/overview)
 
 ## Looking for OAuth 1.0a support?
 [![npm package](https://img.shields.io/badge/npm%20package-3.1.2-blue.svg)](https://www.npmjs.com/package/xero-node/v/3.1.2)
@@ -200,6 +201,7 @@ await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 * Assets API documentation: https://xeroapi.github.io/xero-node/v4/assets/index.html
 * AU Payroll API documentation: https://xeroapi.github.io/xero-node/v4/payroll-au/index.html
 * Bankfeeds API documentation: https://xeroapi.github.io/xero-node/v4/bankfeeds/index.html
+* UK Payroll API documentation: https://xeroapi.github.io/xero-node/v4/payroll-uk/index.html
 
 
 ### Basics
