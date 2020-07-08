@@ -1185,7 +1185,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.4</div>
+              <div class="app-desc">Version: 2.2.6</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This specifing endpoints Xero Bank feeds API
@@ -1544,7 +1544,26 @@ Feed Connection(s) array object in the body
 <!--p class="marked">Feed Connection(s) array object in the body</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "Feed Connection(s) array object in the body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/FeedConnections"
+      },
+      "example" : {
+        "items" : [ {
+          "accountToken" : "foobar71760",
+          "accountNumber" : "123458637",
+          "accountName" : "SDK Bank 90861",
+          "accountType" : "BANK",
+          "currency" : "GBP"
+        } ]
+      }
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -2089,7 +2108,63 @@ Statements array of objects in the body
 <!--p class="marked">Statements array of objects in the body</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "Statements array of objects in the body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Statements"
+      },
+      "example" : {
+        "items" : [ {
+          "feedConnectionId" : "6a4b9ff5-3a5f-4321-936b-4796163550f6",
+          "startDate" : "2019-08-11",
+          "endDate" : "2019-08-11",
+          "startBalance" : {
+            "amount" : "100",
+            "creditDebitIndicator" : "CREDIT"
+          },
+          "endBalance" : {
+            "amount" : "150",
+            "creditDebitIndicator" : "CREDIT"
+          },
+          "statementLines" : [ {
+            "postedDate" : "2019-08-11",
+            "description" : "My new line",
+            "amount" : "50",
+            "creditDebitIndicator" : "CREDIT",
+            "transactionId" : "123446422",
+            "payeeName" : "StarLord90315",
+            "reference" : "Foobar95578",
+            "chequeNumber" : "12379009"
+          } ]
+        }, {
+          "feedConnectionId" : "2ebe6393-f3bb-48ab-9a0e-b04fa8585a70",
+          "startDate" : "2019-08-11",
+          "endDate" : "2019-08-11",
+          "startBalance" : {
+            "amount" : "100",
+            "creditDebitIndicator" : "CREDIT"
+          },
+          "endBalance" : {
+            "amount" : "150",
+            "creditDebitIndicator" : "CREDIT"
+          },
+          "statementLines" : [ {
+            "postedDate" : "2019-08-11",
+            "description" : "My new line",
+            "amount" : "50",
+            "creditDebitIndicator" : "CREDIT",
+            "transactionId" : "123449402",
+            "payeeName" : "StarLord56705",
+            "reference" : "Foobar67355",
+            "chequeNumber" : "12379350"
+          } ]
+        } ]
+      }
+    }
+  }
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -3004,7 +3079,22 @@ Feed Connections array object in the body
 <!--p class="marked">Feed Connections array object in the body</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "Feed Connections array object in the body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/FeedConnections"
+      },
+      "example" : {
+        "items" : [ {
+          "id" : "b4cc693b-24d9-42ec-a6d4-2943d253ff63"
+        } ]
+      }
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);

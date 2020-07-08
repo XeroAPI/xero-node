@@ -1136,10 +1136,9 @@ ul.nav-tabs {
       "example" : 1.5
     },
     "AccrueLeave" : {
-      "type" : "number",
+      "type" : "boolean",
       "description" : "Indicates that this earnings rate should accrue leave. Only applicable if RateType is MULTIPLE",
-      "format" : "double",
-      "example" : 1.5
+      "example" : false
     },
     "Amount" : {
       "type" : "number",
@@ -1688,9 +1687,10 @@ ul.nav-tabs {
       "example" : "e0eb6747-7c17-4075-b804-989f8d4e5d39"
     },
     "NormalEntitlement" : {
-      "type" : "integer",
+      "type" : "number",
       "description" : "The number of units the employee is entitled to each year",
-      "example" : 152
+      "format" : "double",
+      "example" : 152.0
     },
     "LeaveLoadingRate" : {
       "type" : "integer",
@@ -3165,7 +3165,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.4</div>
+              <div class="app-desc">Version: 2.2.6</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in Australia region.
@@ -3524,7 +3524,20 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Employee"
+        }
+      },
+      "example" : "[ { \"FirstName\": \"Albus\", \"LastName\": \"Dumbledore\", \"DateOfBirth\": \"/Date(321523200000+0000)/\", \"HomeAddress\": { \"AddressLine1\": \"101 Green St\", \"City\": \"Island Bay\", \"Region\": \"NSW\", \"PostalCode\": \"6023\", \"Country\": \"AUSTRALIA\" }, \"StartDate\": \"/Date(321523200000+0000)/\", \"MiddleNames\": \"Percival\", \"Email\": \"albus39608@hogwarts.edu\", \"Gender\": \"M\", \"Phone\": \"444-2323\", \"Mobile\": \"555-1212\", \"IsAuthorisedToApproveLeave\": true, \"IsAuthorisedToApproveTimesheets\": true, \"JobTitle\": \"Regional Manager\", \"Classification\": \"corporate\", \"OrdinaryEarningsRateID\": \"ab874dfb-ab09-4c91-954e-43acf6fc23b4\", \"Status\": \"ACTIVE\" } ]"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -3996,7 +4009,20 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/LeaveApplication"
+        }
+      },
+      "example" : "[ { \"EmployeeID\": \"cdfb8371-0b21-4b8a-8903-1024df6c391e\", \"LeaveTypeID\": \"184ea8f7-d143-46dd-bef3-0c60e1aa6fca\", \"Title\": \"Hello World\", \"StartDate\": \"/Date(1572559200000+0000)/\", \"EndDate\": \"/Date(1572645600000+0000)/\" } ]"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -4175,7 +4201,7 @@ public class PayrollAuApiExample {
 
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        PayItem payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ; // PayItem | 
+        PayItem payItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] }; // PayItem | 
         try {
             PayItems result = apiInstance.createPayItem(xeroTenantId, payItem);
             System.out.println(result);
@@ -4195,7 +4221,7 @@ public class PayrollAuApiExample {
     public static void main(String[] args) {
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        PayItem payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ; // PayItem | 
+        PayItem payItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] }; // PayItem | 
         try {
             PayItems result = apiInstance.createPayItem(xeroTenantId, payItem);
             System.out.println(result);
@@ -4217,7 +4243,7 @@ public class PayrollAuApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-PayItem *payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ; // 
+PayItem *payItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] }; // 
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
@@ -4247,7 +4273,7 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 await xero.setTokenSet(tokenSet);
  
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const payItem:PayItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ;  // {PayItem} 
+const payItem:PayItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] };  // {PayItem} 
 try {
   const response: any = await xero.accountingApi.createPayItem(xeroTenantId, payItem);
   console.log(response.body || response.response.statusCode)
@@ -4373,7 +4399,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .PayrollAuApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] }  # PayItem | 
+payItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] } # PayItem | 
 
 try: 
     # Use this method to create a Pay Item
@@ -4388,7 +4414,7 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let payItem =  { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "FIXED", "EarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "RateType": "FIXEDAMOUNT", "RatePerUnit": "10.0", "Multiplier": 1.5, "AccrueLeave": 1, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ], "DeductionTypes": [ { "Name": "My Deduction", "AccountCode": "400" } ] } ; // PayItem
+    let payItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] }; // PayItem
 
     let mut context = PayrollAuApi::Context::default();
     let result = client.createPayItem(xeroTenantId, payItem, &context).wait();
@@ -4468,7 +4494,17 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/PayItem"
+      },
+      "example" : "{ \"EarningsRates\": [ { \"Name\": \"MyRate\", \"AccountCode\": \"400\", \"TypeOfUnits\": \"4.00\", \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": false, \"EarningsType\": \"ORDINARYTIMEEARNINGS\", \"EarningsRateID\": \"1fa4e226-b711-46ba-a8a7-4344c9c5fb87\", \"RateType\": \"MULTIPLE\", \"RatePerUnit\": \"10.0\", \"Multiplier\": 1.5, \"Amount\": 5, \"EmploymentTerminationPaymentType\": \"O\" } ] }"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -4534,7 +4570,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/PayItems"
-      }
+      },
+      "example" : "{ \"Id\": \"8c15b526-ea07-42e6-9351-1fa00a9516ea\", \"Status\": \"OK\", \"ProviderName\": \"java-sdk-oauth2-dev-02\", \"DateTimeUTC\": \"/Date(1593448963288)/\", \"PayItems\": { \"EarningsRates\": [ { \"EarningsRateID\": \"1fa4e226-b711-46ba-a8a7-4344c9c5fb87\", \"Name\": \"MyRate\", \"EarningsType\": \"ORDINARYTIMEEARNINGS\", \"RateType\": \"MULTIPLE\", \"AccountCode\": \"400\", \"Multiplier\": 1.5, \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"AccrueLeave\": false, \"IsReportableAsW1\": false, \"UpdatedDateUTC\": \"/Date(1593448963210+0000)/\", \"CurrentRecord\": true }, { \"EarningsRateID\": \"c6905c26-0716-4746-9098-608545e04dd2\", \"Name\": \"Redundancy\", \"EarningsType\": \"LUMPSUMD\", \"RateType\": \"FIXEDAMOUNT\", \"AccountCode\": \"477\", \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": true, \"UpdatedDateUTC\": \"/Date(1476729649000+0000)/\", \"CurrentRecord\": true }, { \"EarningsRateID\": \"33820094-656e-4db3-b04b-8bd3e2db0a9b\", \"Name\": \"ETP Leave Earning\", \"EarningsType\": \"EMPLOYMENTTERMINATIONPAYMENT\", \"RateType\": \"RATEPERUNIT\", \"AccountCode\": \"477\", \"TypeOfUnits\": \"Hours\", \"IsExemptFromTax\": false, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": true, \"UpdatedDateUTC\": \"/Date(1520900705000+0000)/\", \"EmploymentTerminationPaymentType\": \"O\", \"CurrentRecord\": true } ] } }"
     }
   }
 };
@@ -4939,7 +4976,20 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/PayRun"
+        }
+      },
+      "example" : "[ { \"PayrollCalendarID\": \"78bb86b9-e1ea-47ac-b75d-f087a81931de\", \"PayRunPeriodStartDate\": \"/Date(1572566400000+0000)/\", \"PayRunPeriodEndDate\": \"/Date(1573084800000+0000)/\", \"PayRunStatus\": \"DRAFT\", \"PaymentDate\": \"/Date(1573171200000+0000)/\" } ]"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -5411,7 +5461,20 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/PayrollCalendar"
+        }
+      },
+      "example" : "[ { \"PayrollCalendarID\":\"78bb86b9-e1ea-47ac-b75d-f087a81931de\", \"PayRunPeriodStartDate\":\"/Date(1572566400000+0000)/\", \"PayRunPeriodEndDate\":\"/Date(1573084800000+0000)/\", \"PayRunStatus\":\"DRAFT\", \"PaymentDate\":\"/Date(1573171200000+0000)/\" } ]"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -5883,7 +5946,20 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/SuperFund"
+        }
+      },
+      "example" : "[ { \"usi\":\"PTC0133AU\", \"Type\":\"REGULATED\", \"Name\":\"Bar99359\", \"AccountNumber\":\"FB36350\", \"AccountName\":\"Foo38428\", \"USI\":\"PTC0133AU\" } ]"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -6355,7 +6431,20 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Timesheet"
+        }
+      },
+      "example" : "[ { \"EmployeeID\":\"b34e89ff-770d-4099-b7e5-f968767118bc\", \"StartDate\":\"/Date(1573171200000+0000)/\", \"EndDate\":\"/Date(1573689600000+0000)/\", \"Status\":\"DRAFT\", \"TimesheetLines\":[ { \"EarningsRateID\":\"ab874dfb-ab09-4c91-954e-43acf6fc23b4\", \"TrackingItemID\":\"af5e9ce2-2349-4136-be99-3561b189f473\", \"NumberOfUnits\":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ] } ] } ]"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -14988,7 +15077,19 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Employee"
+        }
+      },
+      "example" : "[ { \"MiddleNames\": \"Frank\" } ]"
+    }
+  }
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -15478,7 +15579,20 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/LeaveApplication"
+        }
+      },
+      "example" : "[ { \"EmployeeID\": \"cdfb8371-0b21-4b8a-8903-1024df6c391e\", \"LeaveTypeID\": \"184ea8f7-d143-46dd-bef3-0c60e1aa6fca\", \"StartDate\": \"/Date(1572559200000+0000)/\", \"EndDate\": \"/Date(1572645600000+0000)/\", \"Description\": \"My updated Description\" } ]"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -15990,7 +16104,19 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "example" : "[ { \"PayRunStatus\": \"POSTED\" } ]",
+        "items" : {
+          "$ref" : "#/components/schemas/PayRun"
+        }
+      }
+    }
+  }
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -16478,7 +16604,19 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/PayslipLines"
+        }
+      },
+      "example" : "{ \"Payslip\": { \"EmployeeID\": \"cdfb8371-0b21-4b8a-8903-1024df6c391e\", \"DeductionLines\": [ { \"DeductionTypeID\": \"727af5e8-b347-4ae7-85fc-9b82266d0aec\", \"CalculationType\": \"FIXEDAMOUNT\", \"NumberOfUnits\": 10 } ] } }"
+    }
+  }
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -16966,7 +17104,19 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/SuperFund"
+        }
+      },
+      "example" : " [ { \"Type\":\"REGULATED\", \"Name\":\"Nice23534\" } ]"
+    }
+  }
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -17454,7 +17604,19 @@ Xero identifier for Tenant
 <!--p class="marked"></p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Timesheet"
+        }
+      },
+      "example" : "[ { \"EmployeeID\":\"b34e89ff-770d-4099-b7e5-f968767118bc\", \"StartDate\":\"/Date(1573171200000+0000)/\", \"EndDate\":\"/Date(1573689600000+0000)/\", \"Status\":\"APPROVED\", \"Hours\":22.0, \"TimesheetID\":\"a7eb0a79-8511-4ee7-b473-3a25f28abcb9\", \"TimesheetLines\":[ { \"EarningsRateID\":\"ab874dfb-ab09-4c91-954e-43acf6fc23b4\", \"TrackingItemID\":\"af5e9ce2-2349-4136-be99-3561b189f473\", \"NumberOfUnits\":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ], \"UpdatedDateUTC\":\"/Date(1573516185127+0000)/\" } ] } ]"
+    }
+  }
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);

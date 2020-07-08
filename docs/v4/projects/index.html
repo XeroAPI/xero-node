@@ -1410,7 +1410,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.4</div>
+              <div class="app-desc">Version: 2.2.6</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Projects API
@@ -1769,7 +1769,18 @@ Create a new project with ProjectCreateOrUpdate object
 <!--p class="marked">Create a new project with ProjectCreateOrUpdate object</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "Create a new project with ProjectCreateOrUpdate object",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ProjectCreateOrUpdate"
+      },
+      "example" : "{ \"contactId\":\"00000000-0000-0000-000-000000000000\", \"name\":\"New Kitchen\", \"deadlineUtc\":\"2019-12-10T12:59:59Z\", \"estimateAmount\":\"99.99\" }"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -2333,7 +2344,18 @@ The time entry object you are creating
 <!--p class="marked">The time entry object you are creating</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "The time entry object you are creating",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/TimeEntryCreateOrUpdate"
+      },
+      "example" : "{ \"userId\":\"740add2a-a703-4b8a-a670-1093919c2040\", \"taskId\":\"7be77337-feec-4458-bb1b-dbaa5a4aafce\", \"dateUtc\":\"2020-02-26T15:00:00Z\", \"duration\":30, \"description\":\"My description\" }"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -7132,7 +7154,18 @@ Update the status of an existing Project
 <!--p class="marked">Update the status of an existing Project</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "Update the status of an existing Project",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ProjectPatch"
+      },
+      "example" : "{ \"status\": \"INPROGRESS\" }"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -7637,7 +7670,18 @@ Request of type ProjectCreateOrUpdate
 <!--p class="marked">Request of type ProjectCreateOrUpdate</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "Request of type ProjectCreateOrUpdate",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ProjectCreateOrUpdate"
+      },
+      "example" : "{ \"name\": \"New Kitchen\", \"deadlineUtc\": \"2017-04-23T18:25:43.511Z\", \"estimateAmount\": 99.99 }"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -8182,7 +8226,18 @@ The time entry object you are updating
 <!--p class="marked">The time entry object you are updating</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "The time entry object you are updating",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/TimeEntryCreateOrUpdate"
+      },
+      "example" : "{ \"userId\":\"740add2a-a703-4b8a-a670-1093919c2040\", \"taskId\":\"7be77337-feec-4458-bb1b-dbaa5a4aafce\", \"dateUtc\":\"2020-02-27T15:00:00Z\", \"duration\":45, \"description\":\"My UPDATED description\" }"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
