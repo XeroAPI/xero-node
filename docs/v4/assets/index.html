@@ -914,7 +914,7 @@ ul.nav-tabs {
 };
     defs["AssetType"] = {
   "title" : "",
-  "required" : [ "assetTypeId", "assetTypeName", "bookDepreciationSetting" ],
+  "required" : [ "assetTypeName", "bookDepreciationSetting" ],
   "type" : "object",
   "properties" : {
     "assetTypeId" : {
@@ -1299,7 +1299,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.4</div>
+              <div class="app-desc">Version: 2.2.6</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Assets API
@@ -1658,7 +1658,18 @@ Fixed asset you are creating
 <!--p class="marked">Fixed asset you are creating</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "Fixed asset you are creating",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Asset"
+      },
+      "example" : "{ \"assetName\":\"Computer74863\", \"assetNumber\":\"123477544\", \"purchaseDate\":\"2020-01-01\", \"purchasePrice\":100.0, \"disposalPrice\":23.23, \"assetStatus\":\"Draft\", \"bookDepreciationSetting\":{ \"depreciationMethod\":\"StraightLine\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.5, \"depreciationCalculationMethod\":\"None\" }, \"bookDepreciationDetail\":{ \"currentCapitalGain\":5.32, \"currentGainLoss\":3.88, \"depreciationStartDate\":\"2020-01-02\", \"costLimit\":100.0, \"currentAccumDepreciationAmount\":2.25 }, \"AccountingBookValue\":99.5 }"
+    }
+  },
+  "required" : true
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
@@ -2128,7 +2139,17 @@ Asset type to add
 <!--p class="marked">Asset type to add</p-->
 <script>
 $(document).ready(function() {
-  var schemaWrapper = {} ;
+  var schemaWrapper = {} {
+  "description" : "Asset type to add",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/AssetType"
+      },
+      "example" : "{ \"assetTypeName\":\"Machinery11004\", \"fixedAssetAccountId\":\"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82\", \"depreciationExpenseAccountId\":\"d1602f69-f900-4616-8d34-90af393fa368\", \"accumulatedDepreciationAccountId\":\"9195cadd-8645-41e6-9f67-7bcd421defe8\", \"bookDepreciationSetting\":{ \"depreciationMethod\":\"DiminishingValue100\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.05, \"depreciationCalculationMethod\":\"None\" } }"
+    }
+  }
+} {} ;
   var schema = schemaWrapper.schema;
   if (schema.$ref != null) {
     schema = defsParser.$refs.get(schema.$ref);
