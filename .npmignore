@@ -9,3 +9,4 @@ scratch.ts
 *.map
 docs_theme
 *.config.js
+docs
