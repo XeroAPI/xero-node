@@ -852,13 +852,15 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The purchase price of the asset",
       "format" : "double",
-      "example" : 1000.0000
+      "example" : 1000.0000,
+      "x-is-money" : true
     },
     "disposalPrice" : {
       "type" : "number",
       "description" : "The price the asset was disposed at",
       "format" : "double",
-      "example" : 1.0000
+      "example" : 1.0000,
+      "x-is-money" : true
     },
     "assetStatus" : {
       "$ref" : "#/components/schemas/AssetStatus"
@@ -888,7 +890,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The accounting value of the asset",
       "format" : "double",
-      "example" : 0
+      "example" : 0,
+      "x-is-money" : true
     },
     "isDeleteEnabledForDate" : {
       "type" : "boolean",
@@ -981,13 +984,15 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "When an asset is disposed, this will be the sell price minus the purchase price if a profit was made.",
       "format" : "double",
-      "example" : 5.25
+      "example" : 5.25,
+      "x-is-money" : true
     },
     "currentGainLoss" : {
       "type" : "number",
       "description" : "When an asset is disposed, this will be the lowest one of sell price or purchase price, minus the current book value.",
       "format" : "double",
-      "example" : 10.5
+      "example" : 10.5,
+      "x-is-money" : true
     },
     "depreciationStartDate" : {
       "type" : "string",
@@ -998,25 +1003,29 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The value of the asset you want to depreciate, if this is less than the cost of the asset.",
       "format" : "double",
-      "example" : 9000.0
+      "example" : 9000.0,
+      "x-is-money" : true
     },
     "residualValue" : {
       "type" : "number",
       "description" : "The value of the asset remaining when you've fully depreciated it.",
       "format" : "double",
-      "example" : 10000.0
+      "example" : 10000.0,
+      "x-is-money" : true
     },
     "priorAccumDepreciationAmount" : {
       "type" : "number",
       "description" : "All depreciation prior to the current financial year.",
       "format" : "double",
-      "example" : 0.45
+      "example" : 0.45,
+      "x-is-money" : true
     },
     "currentAccumDepreciationAmount" : {
       "type" : "number",
       "description" : "All depreciation occurring in the current financial year.",
       "format" : "double",
-      "example" : 5.0
+      "example" : 5.0,
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -1041,7 +1050,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The rate of depreciation (e.g. 0.05)",
       "format" : "double",
-      "example" : 0.05
+      "example" : 0.05,
+      "x-is-money" : true
     },
     "effectiveLifeYears" : {
       "type" : "integer",
@@ -1299,7 +1309,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.7</div>
+              <div class="app-desc">Version: 2.2.10</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Assets API

@@ -910,7 +910,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Fixed amounts (for example, if an employee wants to have $100 of their salary transferred to one account, and the remaining amount to another)",
       "format" : "double",
-      "example" : 200.0
+      "example" : 200.0,
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -939,19 +940,22 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Deduction type amount",
       "format" : "double",
-      "example" : 10.0
+      "example" : 10.0,
+      "x-is-money" : true
     },
     "Percentage" : {
       "type" : "number",
       "description" : "The Percentage of the Deduction",
       "format" : "double",
-      "example" : 10.0
+      "example" : 10.0,
+      "x-is-money" : true
     },
     "NumberOfUnits" : {
       "type" : "number",
       "description" : "Deduction number of units",
       "format" : "double",
-      "example" : 10.0
+      "example" : 10.0,
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -1035,43 +1039,50 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Annual salary for earnings line",
       "format" : "double",
-      "example" : 40000.0
+      "example" : 40000.0,
+      "x-is-money" : true
     },
     "NumberOfUnitsPerWeek" : {
       "type" : "number",
       "description" : "number of units for earning line",
       "format" : "double",
-      "example" : 38.0
+      "example" : 38.0,
+      "x-is-money" : true
     },
     "RatePerUnit" : {
       "type" : "number",
       "description" : "Rate per unit of the EarningsLine.",
       "format" : "double",
-      "example" : 38.0
+      "example" : 38.0,
+      "x-is-money" : true
     },
     "NormalNumberOfUnits" : {
       "type" : "number",
       "description" : "Normal number of units for EarningsLine. Applicable when RateType is \"MULTIPLE\"",
       "format" : "double",
-      "example" : 38.0
+      "example" : 38.0,
+      "x-is-money" : true
     },
     "Amount" : {
       "type" : "number",
       "description" : "Earnings rate amount",
       "format" : "double",
-      "example" : 38.0
+      "example" : 38.0,
+      "x-is-money" : true
     },
     "NumberOfUnits" : {
       "type" : "number",
       "description" : "Earnings rate number of units.",
       "format" : "double",
-      "example" : 2.5
+      "example" : 2.5,
+      "x-is-money" : true
     },
     "FixedAmount" : {
       "type" : "number",
       "description" : "Earnings rate amount. Only applicable if the EarningsRate RateType is Fixed",
       "format" : "double",
-      "example" : 2.5
+      "example" : 2.5,
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -1133,18 +1144,22 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "This is the multiplier used to calculate the rate per unit, based on the employee’s ordinary earnings rate. For example, for time and a half enter 1.5. Only applicable if RateType is MULTIPLE",
       "format" : "double",
-      "example" : 1.5
+      "example" : 1.5,
+      "x-is-money" : true
     },
     "AccrueLeave" : {
-      "type" : "boolean",
+      "type" : "number",
       "description" : "Indicates that this earnings rate should accrue leave. Only applicable if RateType is MULTIPLE",
-      "example" : false
+      "format" : "double",
+      "example" : 1.5,
+      "x-is-money" : true
     },
     "Amount" : {
       "type" : "number",
       "description" : "Optional Amount for FIXEDAMOUNT RateType EarningsRate",
       "format" : "double",
-      "example" : 50.3
+      "example" : 50.3,
+      "x-is-money" : true
     },
     "EmploymentTerminationPaymentType" : {
       "$ref" : "#/components/schemas/EmploymentTerminationPaymentType"
@@ -1434,7 +1449,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Leave Accrual number of units",
       "format" : "double",
-      "example" : 105.5
+      "example" : 105.5,
+      "x-is-money" : true
     },
     "AutoCalculate" : {
       "type" : "boolean",
@@ -1543,7 +1559,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The balance of the leave available",
       "format" : "double",
-      "example" : 81.2602
+      "example" : 81.2602,
+      "x-is-money" : true
     },
     "TypeOfUnits" : {
       "type" : "string",
@@ -1567,13 +1584,15 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Rate per unit of the EarningsLine.",
       "format" : "double",
-      "example" : 38.0
+      "example" : 38.0,
+      "x-is-money" : true
     },
     "NumberOfUnits" : {
       "type" : "number",
       "description" : "Earnings rate number of units.",
       "format" : "double",
-      "example" : 2.5
+      "example" : 2.5,
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -1606,7 +1625,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Leave number of units",
       "format" : "double",
-      "example" : 2.5
+      "example" : 2.5,
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -1639,7 +1659,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The Number of Units for the leave",
       "format" : "double",
-      "example" : 22.8
+      "example" : 22.8,
+      "x-is-money" : true
     },
     "PayPeriodEndDate" : {
       "type" : "string",
@@ -1885,37 +1906,43 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The total Wages for the Payrun",
       "format" : "double",
-      "example" : 1060.5
+      "example" : 1060.5,
+      "x-is-money" : true
     },
     "Deductions" : {
       "type" : "number",
       "description" : "The total Deductions for the Payrun",
       "format" : "double",
-      "example" : 0.0
+      "example" : 0.0,
+      "x-is-money" : true
     },
     "Tax" : {
       "type" : "number",
       "description" : "The total Tax for the Payrun",
       "format" : "double",
-      "example" : 198.0
+      "example" : 198.0,
+      "x-is-money" : true
     },
     "Super" : {
       "type" : "number",
       "description" : "The total Super for the Payrun",
       "format" : "double",
-      "example" : 75.6
+      "example" : 75.6,
+      "x-is-money" : true
     },
     "Reimbursement" : {
       "type" : "number",
       "description" : "The total Reimbursements for the Payrun",
       "format" : "double",
-      "example" : 0.0
+      "example" : 0.0,
+      "x-is-money" : true
     },
     "NetPay" : {
       "type" : "number",
       "description" : "The total NetPay for the Payrun",
       "format" : "double",
-      "example" : 862.5
+      "example" : 862.5,
+      "x-is-money" : true
     },
     "ValidationErrors" : {
       "type" : "array",
@@ -2081,37 +2108,43 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The Wages for the Payslip",
       "format" : "double",
-      "example" : 1060.5
+      "example" : 1060.5,
+      "x-is-money" : true
     },
     "Deductions" : {
       "type" : "number",
       "description" : "The Deductions for the Payslip",
       "format" : "double",
-      "example" : 0.0
+      "example" : 0.0,
+      "x-is-money" : true
     },
     "Tax" : {
       "type" : "number",
       "description" : "The Tax for the Payslip",
       "format" : "double",
-      "example" : 198.0
+      "example" : 198.0,
+      "x-is-money" : true
     },
     "Super" : {
       "type" : "number",
       "description" : "The Super for the Payslip",
       "format" : "double",
-      "example" : 75.6
+      "example" : 75.6,
+      "x-is-money" : true
     },
     "Reimbursements" : {
       "type" : "number",
       "description" : "The Reimbursements for the Payslip",
       "format" : "double",
-      "example" : 0.0
+      "example" : 0.0,
+      "x-is-money" : true
     },
     "NetPay" : {
       "type" : "number",
       "description" : "The NetPay for the Payslip",
       "format" : "double",
-      "example" : 862.5
+      "example" : 862.5,
+      "x-is-money" : true
     },
     "EarningsLines" : {
       "type" : "array",
@@ -2271,37 +2304,43 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The Wages for the Payslip",
       "format" : "double",
-      "example" : 1060.5
+      "example" : 1060.5,
+      "x-is-money" : true
     },
     "Deductions" : {
       "type" : "number",
       "description" : "The Deductions for the Payslip",
       "format" : "double",
-      "example" : 0.0
+      "example" : 0.0,
+      "x-is-money" : true
     },
     "Tax" : {
       "type" : "number",
       "description" : "The Tax for the Payslip",
       "format" : "double",
-      "example" : 198.0
+      "example" : 198.0,
+      "x-is-money" : true
     },
     "Super" : {
       "type" : "number",
       "description" : "The Super for the Payslip",
       "format" : "double",
-      "example" : 75.6
+      "example" : 75.6,
+      "x-is-money" : true
     },
     "Reimbursements" : {
       "type" : "number",
       "description" : "The Reimbursements for the Payslip",
       "format" : "double",
-      "example" : 0.0
+      "example" : 0.0,
+      "x-is-money" : true
     },
     "NetPay" : {
       "type" : "number",
       "description" : "The NetPay for the Payslip",
       "format" : "double",
-      "example" : 862.5
+      "example" : 862.5,
+      "x-is-money" : true
     },
     "UpdatedDateUTC" : {
       "type" : "string",
@@ -2347,7 +2386,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Reimbursement type amount",
       "format" : "double",
-      "example" : 10.0
+      "example" : 10.0,
+      "x-is-money" : true
     },
     "Description" : {
       "maxLength" : 50,
@@ -2660,7 +2700,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "amount of mimimum earnings",
       "format" : "double",
-      "example" : 450.0
+      "example" : 450.0,
+      "x-is-money" : true
     },
     "ExpenseAccountCode" : {
       "type" : "string",
@@ -2676,13 +2717,15 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "percentage for super line",
       "format" : "double",
-      "example" : 9.0
+      "example" : 9.0,
+      "x-is-money" : true
     },
     "Amount" : {
       "type" : "number",
       "description" : "Super membership amount",
       "format" : "double",
-      "example" : 10.0
+      "example" : 10.0,
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -2744,7 +2787,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Superannuation minimum monthly earnings.",
       "format" : "double",
-      "example" : 100.5
+      "example" : 100.5,
+      "x-is-money" : true
     },
     "ExpenseAccountCode" : {
       "type" : "string",
@@ -2766,13 +2810,15 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Superannuation percentage",
       "format" : "double",
-      "example" : 4.0
+      "example" : 4.0,
+      "x-is-money" : true
     },
     "Amount" : {
       "type" : "number",
       "description" : "Superannuation amount",
       "format" : "double",
-      "example" : 10.5
+      "example" : 10.5,
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -2884,7 +2930,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The tax line amount",
       "format" : "double",
-      "example" : 50.0
+      "example" : 50.0,
+      "x-is-money" : true
     },
     "TaxTypeName" : {
       "type" : "string",
@@ -2936,7 +2983,8 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Timesheet total hours",
       "format" : "double",
-      "example" : 31.0
+      "example" : 31.0,
+      "x-is-money" : true
     },
     "TimesheetID" : {
       "type" : "string",
@@ -3165,7 +3213,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.7</div>
+              <div class="app-desc">Version: 2.2.10</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in Australia region.

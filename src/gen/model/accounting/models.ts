@@ -103,7 +103,7 @@ export * from '././taxComponent';
 export * from '././taxRate';
 export * from '././taxRates';
 export * from '././taxType';
-export * from '././tenNinteyNineContact';
+export * from '././tenNinetyNineContact';
 export * from '././timeZone';
 export * from '././trackingCategories';
 export * from '././trackingCategory';
@@ -220,7 +220,7 @@ import { TaxComponent } from '././taxComponent';
 import { TaxRate } from '././taxRate';
 import { TaxRates } from '././taxRates';
 import { TaxType } from '././taxType';
-import { TenNinteyNineContact } from '././tenNinteyNineContact';
+import { TenNinetyNineContact } from '././tenNinetyNineContact';
 import { TimeZone } from '././timeZone';
 import { TrackingCategories } from '././trackingCategories';
 import { TrackingCategory } from '././trackingCategory';
@@ -402,7 +402,7 @@ let typeMap: {[index: string]: any} = {
     "TaxComponent": TaxComponent,
     "TaxRate": TaxRate,
     "TaxRates": TaxRates,
-    "TenNinteyNineContact": TenNinteyNineContact,
+    "TenNinetyNineContact": TenNinetyNineContact,
     "TrackingCategories": TrackingCategories,
     "TrackingCategory": TrackingCategory,
     "TrackingOption": TrackingOption,
