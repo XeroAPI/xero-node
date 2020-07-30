@@ -939,12 +939,14 @@ ul.nav-tabs {
     "standardAmount" : {
       "type" : "number",
       "description" : "Standard amount of the employer pension",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "percentage" : {
       "type" : "number",
       "description" : "Percentage of gross of the employer pension",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "calculationType" : {
       "type" : "string",
@@ -1092,7 +1094,8 @@ ul.nav-tabs {
     "standardAmount" : {
       "type" : "number",
       "description" : "Standard amount of the deduction",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "reducesSuperLiability" : {
       "type" : "boolean",
@@ -1110,7 +1113,8 @@ ul.nav-tabs {
     "percentage" : {
       "type" : "number",
       "description" : "Percentage of gross",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "subjectToNIC" : {
       "type" : "boolean",
@@ -1354,17 +1358,20 @@ ul.nav-tabs {
     "ratePerUnit" : {
       "type" : "number",
       "description" : "Default rate per unit (optional). Only applicable if RateType is RatePerUnit",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "multipleOfOrdinaryEarningsRate" : {
       "type" : "number",
       "description" : "This is the multiplier used to calculate the rate per unit, based on the employee’s ordinary earnings rate. For example, for time and a half enter 1.5. Only applicable if RateType is MultipleOfOrdinaryEarningsRate",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "fixedAmount" : {
       "type" : "number",
       "description" : "Optional Fixed Rate Amount. Applicable for FixedAmount Rate",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -1416,17 +1423,20 @@ ul.nav-tabs {
     "ratePerUnit" : {
       "type" : "number",
       "description" : "The rate per unit",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "numberOfUnits" : {
       "type" : "number",
       "description" : "The rate per unit",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "fixedAmount" : {
       "type" : "number",
       "description" : "The fixed amount per period",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "earningsRateID" : {
       "type" : "string",
@@ -1771,27 +1781,32 @@ ul.nav-tabs {
     "statutoryAdoptionPay" : {
       "type" : "number",
       "description" : "The total accumulated statutory adoption pay amount received by the employee for current fiscal year to date",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "statutoryMaternityPay" : {
       "type" : "number",
       "description" : "The total accumulated statutory maternity pay amount received by the employee for current fiscal year to date",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "statutoryPaternityPay" : {
       "type" : "number",
       "description" : "The total accumulated statutory paternity pay amount received by the employee for current fiscal year to date",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "statutorySharedParentalPay" : {
       "type" : "number",
       "description" : "The total accumulated statutory shared parental pay amount received by the employee for current fiscal year to date",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "statutorySickPay" : {
       "type" : "number",
       "description" : "The total accumulated statutory sick pay amount received by the employee for current fiscal year to date",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "priorEmployeeNumber" : {
       "type" : "number",
@@ -2117,12 +2132,14 @@ ul.nav-tabs {
     "previousTaxablePay" : {
       "type" : "number",
       "description" : "The previous taxable pay",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "previousTaxPaid" : {
       "type" : "number",
       "description" : "The tax amount previously paid",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     },
     "studentLoanDeduction" : {
       "type" : "string",
@@ -2936,7 +2953,8 @@ ul.nav-tabs {
     "amount" : {
       "type" : "number",
       "description" : "Reimbursement amount",
-      "format" : "double"
+      "format" : "double",
+      "x-is-money" : true
     }
   },
   "description" : ""
@@ -3600,7 +3618,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.7</div>
+              <div class="app-desc">Version: 2.2.10</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in the UK region.
