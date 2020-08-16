@@ -55,7 +55,7 @@ In Xero a user can belong to multiple organisations. Tokens are ultimately assoc
 
 **Step 2:** Call `apiCallback` to get your tokenSet
 
-**Step 3:** Call `updateTenats` to populate additional tenant data
+**Step 3:** Call `updateTenants` to populate additional tenant data
 *You will need to have the `accounting.settings` scope in order to use this helper*
 
 **NOTE:** If you have already authorized the user and have stored a valid tokenSet, you can create a `new XeroClient()` and refresh your token without triggering the openid-client dependency:
