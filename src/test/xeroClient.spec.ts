@@ -49,6 +49,20 @@ describe('the XeroClient', () => {
       expect(authUrl.substring(0, 49)).toEqual('https://login.xero.com/identity/connect/authorize')
     });
 
+    it('buildConsentUrl() returns the state in the auth url', async () => {
+        const authUrlWithoutState = await xero.buildConsentUrl()
+        expect(authUrlWithoutState.includes('state=12345')).not.toEqual(true);
+        const xeroWithState = new XeroClient({
+            clientId: 'YOUR_CLIENT_ID',
+            clientSecret: 'YOUR_CLIENT_SECRET',
+            redirectUris: [`http://localhost:5000/callback`],
+            scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
+            state: '12345'
+        });
+        const authUrlWithState = await xeroWithState.buildConsentUrl();
+        expect(authUrlWithState.includes('state=12345')).toEqual(true);
+    });
+
     it('initialize() returns the client', async () => {
       const xeroClient = await xero.initialize()
       expect(xeroClient).toHaveProperty('accountingApi')

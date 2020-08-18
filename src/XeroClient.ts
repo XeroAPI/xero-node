@@ -91,7 +91,8 @@ export class XeroClient {
     if (this.config) {
       url = this.openIdClient.authorizationUrl({
         redirect_uri: this.config.redirectUris[0],
-        scope: this.config.scopes.join(' ') || 'openid email profile'
+        scope: this.config.scopes.join(' ') || 'openid email profile',
+        state: this.config.state
       });
     }
     return url;
