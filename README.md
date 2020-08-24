@@ -182,7 +182,7 @@ const newXeroClient = new XeroClient()
 const refreshedTokenSet = await newXeroClient.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
 ```
 
-Making AUthorized API calls:
+Making Authorized API calls:
 
 ```js
 const tokenSet = getTokenSetFromDatabase(userId) // example function name
