@@ -64,7 +64,7 @@ In Xero a user can belong to multiple organisations. Tokens are ultimately assoc
   const newXeroClient = new XeroClient()
   const newTokenSet = await newXeroClient.refreshWithRefreshToken(xero_client_id, xero_client_secret, tokenSet.refresh_token)
   // refreshWithRefreshToken calls setAccessToken() so the refreshed token will be stored on newXeroClient
-  await newXeroClient.accountingApi.getInvoices('my-tenant-uuid))
+  await newXeroClient.accountingApi.getInvoices('my-tenant-uuid)
 ```
 
 ---
