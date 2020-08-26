@@ -8,7 +8,8 @@ export interface IXeroClientConfig {
   clientSecret: string,
   redirectUris: string[],
   scopes: string[],
-  state?: string
+  state?: string,
+  httpTimeout?: number;
 }
 export interface XeroIdToken {
   nbf: number
@@ -74,12 +75,19 @@ export class XeroClient {
 
   async initialize() {
     if (this.config) {
+      custom.setHttpOptionsDefaults({
+        retry: {
+          maxRetryAfter: this.config.httpTimeout || 2500
+        }
+      })
+
       const issuer = await Issuer.discover('https://identity.xero.com');
       this.openIdClient = new issuer.Client({
         client_id: this.config.clientId,
         client_secret: this.config.clientSecret,
         redirect_uris: this.config.redirectUris,
       });
+
       this.openIdClient[custom.clock_tolerance] = 5
     }
     return this
