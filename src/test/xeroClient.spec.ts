@@ -63,6 +63,18 @@ describe('the XeroClient', () => {
         expect(authUrlWithState.includes('state=12345')).toEqual(true);
     });
 
+    it('allows for the configuration of the openid-client httpTimeout', async () => {
+      const xeroWithConfig = new XeroClient({
+        clientId: 'YOUR_CLIENT_ID',
+        clientSecret: 'YOUR_CLIENT_SECRET',
+        redirectUris: [`http://localhost:5000/callback`],
+        scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
+        httpTimeout: 3000
+      });
+      const xeroClient = await xeroWithConfig.initialize()
+      expect(xeroClient.config.httpTimeout).toEqual(3000)
+    });
+
     it('initialize() returns the client', async () => {
       const xeroClient = await xero.initialize()
       expect(xeroClient).toHaveProperty('accountingApi')

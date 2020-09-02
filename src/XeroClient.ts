@@ -8,7 +8,8 @@ export interface IXeroClientConfig {
   clientSecret: string,
   redirectUris: string[],
   scopes: string[],
-  state?: string
+  state?: string,
+  httpTimeout?: number
 }
 export interface XeroIdToken {
   nbf: number
@@ -47,7 +48,7 @@ export interface XeroAccessToken {
 }
 
 export class XeroClient {
-  constructor(private readonly config?: IXeroClientConfig) {
+  constructor(readonly config?: IXeroClientConfig) {
     this.accountingApi = new xero.AccountingApi();
     this.assetApi = new xero.AssetApi();
     this.projectApi = new xero.ProjectApi();
@@ -74,12 +75,22 @@ export class XeroClient {
 
   async initialize() {
     if (this.config) {
+      const retryLimit = this.config.httpTimeout || 2500
+      console.log(retryLimit)
+      custom.setHttpOptionsDefaults({
+        retry: {
+          maxRetryAfter: retryLimit
+        }
+      })
+      console.log('custom ', this.config.httpTimeout)
+
       const issuer = await Issuer.discover('https://identity.xero.com');
       this.openIdClient = new issuer.Client({
         client_id: this.config.clientId,
         client_secret: this.config.clientSecret,
         redirect_uris: this.config.redirectUris,
       });
+
       this.openIdClient[custom.clock_tolerance] = 5
     }
     return this
