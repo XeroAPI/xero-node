@@ -8,7 +8,8 @@ export interface IXeroClientConfig {
   clientSecret: string,
   redirectUris: string[],
   scopes: string[],
-  state?: string
+  state?: string,
+  httpTimeout?: number
 }
 export interface XeroIdToken {
   nbf: number
@@ -74,12 +75,19 @@ export class XeroClient {
 
   async initialize() {
     if (this.config) {
+      custom.setHttpOptionsDefaults({
+        retry: {
+          maxRetryAfter: this.config.httpTimeout || 2500
+        }
+      })
+
       const issuer = await Issuer.discover('https://identity.xero.com');
       this.openIdClient = new issuer.Client({
         client_id: this.config.clientId,
         client_secret: this.config.clientSecret,
         redirect_uris: this.config.redirectUris,
       });
+
       this.openIdClient[custom.clock_tolerance] = 5
     }
     return this
@@ -191,19 +199,21 @@ export class XeroClient {
     });
   }
 
-  async updateTenants() {
+  async updateTenants(fullOrgDetails: boolean = true) {
     const result = await this.queryApi('GET', 'https://api.xero.com/connections');
     let tenants = result.body.map(connection => connection);
 
-    const getOrgsForAll = tenants.map(async tenant => {
-      const result = await this.accountingApi.getOrganisations(tenant.tenantId);
-      return result.body.organisations[0];
-    });
-    const orgData = await Promise.all(getOrgsForAll);
-
-    tenants.map((tenant) => { // assign orgData nested under each tenant
-      tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0];
-    });
+    if(fullOrgDetails){
+      const getOrgsForAll = tenants.map(async tenant => {
+        const result = await this.accountingApi.getOrganisations(tenant.tenantId);
+        return result.body.organisations[0];
+      });
+      const orgData = await Promise.all(getOrgsForAll);
+  
+      tenants.map((tenant) => { // assign orgData nested under each tenant
+        tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0];
+      });
+    }
     // sorting tenants so the most connection / active tenant is at index 0
     tenants.sort((a: any, b: any) => <number><unknown>new Date(b.updatedDateUtc) - <number><unknown>new Date(a.updatedDateUtc));
     this._tenants = tenants;
@@ -211,7 +221,7 @@ export class XeroClient {
   }
 
   async queryApi(method, uri) {
-    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
+    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
       request({
         method,
         uri,

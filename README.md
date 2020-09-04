@@ -82,10 +82,12 @@ const xero = new XeroClient({
   clientId: 'YOUR_CLIENT_ID',
   clientSecret: 'YOUR_CLIENT_SECRET',
   redirectUris: [`http://localhost:${port}/callback`],
-  scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
+  state: 'returnPage=my-sweet-dashboard', // custom params (optional)
+  httpTimeout: 3000 // ms (optional)
 });
 
-// `buildConsentUrl()` calls `await xero.initialize()`
+// `buildConsentUrl()` will also call `await xero.initialize()`
 let consentUrl = await xero.buildConsentUrl();
 
 res.redirect(consentUrl);
@@ -117,16 +119,18 @@ The `tokenSet` is what you should store in your database. That object is what yo
 
 ## Step 3 (convenience step)
 
-Populate the XeroClient's active tenant data
+Populate the XeroClient's active tenant data.
 
-For most integrations you will always want to display the org name and additional metadata about the connected org. The `/connections` endpoint does not currently serialize that data so requires developers to make additional api calls for each org that your user connects to surface that information.
+For most integrations you will want to display the org name and use additional metadata about the connected org. The `/connections` endpoint does not currently serialize all org metadata so requires developers to make an additional call for each org your user connects to get information like default currency.
 
-The `updatedTenants` function will query & nest the additional orgData results in your xeroClient under each connection/tenant object and return the array of tenants. This requires `accounting.settings` scope because `updateTenants` calls the organisation endpoint.
+Calling `await xero.updateTenants()` will query the /connections endpoint and store the resulting information on the client. It has an optional parameter named `fullOrgDetails` that defaults to `true`. If you do not pass `false` to this function you will need to have the `accounting.settings` scope on your token as the `/organisation` endpoint that is called, requires it.
+
+If you don't need additional org data (like currency, shortCode, etc) calling the helper with false param `await xero.updateTenants(false)` will not kick off additional org meta data calls.
 
 ```js
+// updateTenants fullOrgDetails param will default to true
 const tenants = await xero.updateTenants()
-
-console.log(tenants || xero.tenants)
+console.log(xero.tenants)
 [
   {
     id: 'xxx-yyy-zzz-xxx-yyy',
@@ -134,6 +138,7 @@ console.log(tenants || xero.tenants)
     tenantType: 'ORGANISATION',
     createdDateUtc: 'UTC-DateString',
     updatedDateUtc: 'UTC-DateString',
+    tenantName: 'Demo Company (US)',
     orgData: {
       organisationID: 'xxx-yyy-zzz-xxx-yyy',
       name: 'My first org',
@@ -141,20 +146,20 @@ console.log(tenants || xero.tenants)
       shortCode: '!2h37s',
       ...
     }
-  },
+  }
+]
+
+// if you pass false, the client will not fetch additional metadata about each org connection
+const tenants = await xero.updateTenants(false)
+console.log(xero.tenants)
+[
   {
     id: 'xxx-yyy-zzz-xxx-yyy',
     tenantId: 'xxx-yyy-zzz-xxx-yyy',
     tenantType: 'ORGANISATION',
     createdDateUtc: 'UTC-DateString',
     updatedDateUtc: 'UTC-DateString',
-    orgData: {
-      organisationID: 'xxx-yyy-zzz-xxx-yyy',
-      name: 'My second org',
-      version: 'AUS',
-      shortCode: '!yrcgp',
-      ...
-    }
+    tenantName: 'Demo Company (US)'
   }
 ]
 
@@ -257,6 +262,27 @@ const invoices = {
 };
 
 const createdInvoice = await xero.accountingApi.createInvoices(activeTenantId, invoices)
+
+---
+
+// getting files as PDF
+const getAsPdf = await xero.accountingApi.getPurchaseOrderAsPdf(
+  req.session.activeTenant.tenantId,
+  getPurchaseOrdersResponse.body.purchaseOrders[0].purchaseOrderID,
+  { headers: { accept: 'application/pdf' } }
+)
+
+// CREATE ATTACHMENT
+const filename = "xero-dev.png";
+const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.png");
+const readStream = fs.createReadStream(pathToUpload);
+const contentType = mime.lookup(filename);
+
+const accountAttachmentsResponse: any = await xero.accountingApi.createAccountAttachmentByFileName(req.session.activeTenant.tenantId, accountId, filename, readStream, {
+  headers: {
+    'Content-Type': contentType
+  }
+});
 ```
 
 # Sample App

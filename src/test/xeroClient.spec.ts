@@ -63,6 +63,18 @@ describe('the XeroClient', () => {
         expect(authUrlWithState.includes('state=12345')).toEqual(true);
     });
 
+    it('allows for the configuration of the openid-client httpTimeout', async () => {
+      const xeroWithConfig = new XeroClient({
+        clientId: 'YOUR_CLIENT_ID',
+        clientSecret: 'YOUR_CLIENT_SECRET',
+        redirectUris: [`http://localhost:5000/callback`],
+        scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
+        httpTimeout: 3000
+      });
+      const xeroClient = await xeroWithConfig.initialize()
+      expect(xeroClient['config']['httpTimeout']).toEqual(3000)
+    });
+
     it('initialize() returns the client', async () => {
       const xeroClient = await xero.initialize()
       expect(xeroClient).toHaveProperty('accountingApi')
@@ -85,7 +97,14 @@ describe('the XeroClient', () => {
 
     it('updateTenants() returns tenant data, nests orgData, & is accessible on the client', async () => {
       const tenants = await xero.updateTenants()
-      expect(tenants[0].orgData).toEqual(getOrganisationResponse.body.organisations[0])
+      expect(tenants[0].tenantName).toEqual('Demo Company (US)')
+      expect(xero.tenants[0]).toEqual(tenants[0])
+      expect(connect.isDone()).toBe(true)
+    });
+
+    it('updateTenants(false) returns basic /connections data accessible on the client', async () => {
+      const tenants = await xero.updateTenants(false)
+      expect(tenants[0].orgData).toEqual(undefined)
       expect(xero.tenants[0]).toEqual(tenants[0])
       expect(connect.isDone()).toBe(true)
     });
