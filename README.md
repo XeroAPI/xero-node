@@ -117,16 +117,13 @@ The `tokenSet` is what you should store in your database. That object is what yo
 
 ## Step 3 (convenience step)
 
-Populate the XeroClient's active tenant data
+Populate the XeroClient's active tenant data.
 
-For most integrations you will always want to display the org name and additional metadata about the connected org. The `/connections` endpoint does not currently serialize that data so requires developers to make additional api calls for each org that your user connects to surface that information.
+For most integrations you will want to display the org name and use additional metadata about the connected org. The `/connections` endpoint does not currently serialize all org metadata so requires developers to make an additional calls for each org that your user connects to get information like default currency.
 
+Calling `await xero.updateTenants()` will query the /connections endpoint and store the resulting information on the client. It has an optional parameter named `fullOrgDetails` that defaults to `true`. If you do not pass `false` to this function you will need to have the `accounting.settings` scope on your token as the `/organisation` endpoint that is called, requires it.
 
-Calling `await xero.updateTenants()` will query the /connections endpoint and store the resulting information on the client. It has an optional parameter named `fullOrgDetails` that defaults to true.
-
-Calling `await xero.updateTenants()` will query & nest the additional orgData results in your xeroClient under each connection/tenant object by hitting the /organisation endpoint fore each of your connections which will require the `accounting.settings` scope.
-
-If you don't need additional org data (like currency, shortCode, etc) the `tenantName` will still be accessible on the `.tenants` function. Call the helper with false param `await xero.updateTenants(false)` and this will not kick off additional org meta data calls.
+If you don't need additional org data (like currency, shortCode, etc) calling the helper with false param `await xero.updateTenants(false)` will not kick off additional org meta data calls.
 
 ```js
 // updateTenants fullOrgDetails param will default to true
