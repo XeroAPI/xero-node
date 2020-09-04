@@ -47,10 +47,6 @@ export interface XeroAccessToken {
   amr: string[]
 }
 
-interface UpdateTenantParams {
-  fullOrgDetails: boolean
-}
-
 export class XeroClient {
   constructor(private readonly config?: IXeroClientConfig) {
     this.accountingApi = new xero.AccountingApi();
