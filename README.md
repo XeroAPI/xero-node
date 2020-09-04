@@ -121,12 +121,17 @@ Populate the XeroClient's active tenant data
 
 For most integrations you will always want to display the org name and additional metadata about the connected org. The `/connections` endpoint does not currently serialize that data so requires developers to make additional api calls for each org that your user connects to surface that information.
 
-The `updatedTenants` function will query & nest the additional orgData results in your xeroClient under each connection/tenant object and return the array of tenants. This requires `accounting.settings` scope because `updateTenants` calls the organisation endpoint.
+
+Calling `await xero.updateTenants()` will query the /connections endpoint and store the resulting information on the client. It has an optional parameter named `fullOrgDetails` that defaults to true.
+
+Calling `await xero.updateTenants()` will query & nest the additional orgData results in your xeroClient under each connection/tenant object by hitting the /organisation endpoint fore each of your connections which will require the `accounting.settings` scope.
+
+If you don't need additional org data (like currency, shortCode, etc) the `tenantName` will still be accessible on the `.tenants` function. Call the helper with false param `await xero.updateTenants(false)` and this will not kick off additional org meta data calls.
 
 ```js
+// updateTenants fullOrgDetails param will default to true
 const tenants = await xero.updateTenants()
-
-console.log(tenants || xero.tenants)
+console.log(xero.tenants)
 [
   {
     id: 'xxx-yyy-zzz-xxx-yyy',
@@ -134,6 +139,7 @@ console.log(tenants || xero.tenants)
     tenantType: 'ORGANISATION',
     createdDateUtc: 'UTC-DateString',
     updatedDateUtc: 'UTC-DateString',
+    tenantName: 'Demo Company (US)',
     orgData: {
       organisationID: 'xxx-yyy-zzz-xxx-yyy',
       name: 'My first org',
@@ -141,20 +147,20 @@ console.log(tenants || xero.tenants)
       shortCode: '!2h37s',
       ...
     }
-  },
+  }
+]
+
+// if you pass false, the client will not fetch additional metadata about each org connection
+const tenants = await xero.updateTenants(false)
+console.log(xero.tenants)
+[
   {
     id: 'xxx-yyy-zzz-xxx-yyy',
     tenantId: 'xxx-yyy-zzz-xxx-yyy',
     tenantType: 'ORGANISATION',
     createdDateUtc: 'UTC-DateString',
     updatedDateUtc: 'UTC-DateString',
-    orgData: {
-      organisationID: 'xxx-yyy-zzz-xxx-yyy',
-      name: 'My second org',
-      version: 'AUS',
-      shortCode: '!yrcgp',
-      ...
-    }
+    tenantName: 'Demo Company (US)'
   }
 ]
 

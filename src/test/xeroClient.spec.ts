@@ -72,7 +72,7 @@ describe('the XeroClient', () => {
         httpTimeout: 3000
       });
       const xeroClient = await xeroWithConfig.initialize()
-      expect(xeroClient.config.httpTimeout).toEqual(3000)
+      expect(xeroClient['config']['httpTimeout']).toEqual(3000)
     });
 
     it('initialize() returns the client', async () => {
@@ -97,7 +97,14 @@ describe('the XeroClient', () => {
 
     it('updateTenants() returns tenant data, nests orgData, & is accessible on the client', async () => {
       const tenants = await xero.updateTenants()
-      expect(tenants[0].orgData).toEqual(getOrganisationResponse.body.organisations[0])
+      expect(tenants[0].tenantName).toEqual('Demo Company (US)')
+      expect(xero.tenants[0]).toEqual(tenants[0])
+      expect(connect.isDone()).toBe(true)
+    });
+
+    it('updateTenants(false) returns basic /connections data accessible on the client', async () => {
+      const tenants = await xero.updateTenants(false)
+      expect(tenants[0].orgData).toEqual(undefined)
       expect(xero.tenants[0]).toEqual(tenants[0])
       expect(connect.isDone()).toBe(true)
     });

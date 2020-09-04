@@ -47,8 +47,12 @@ export interface XeroAccessToken {
   amr: string[]
 }
 
+interface UpdateTenantParams {
+  fullOrgDetails: boolean
+}
+
 export class XeroClient {
-  constructor(readonly config?: IXeroClientConfig) {
+  constructor(private readonly config?: IXeroClientConfig) {
     this.accountingApi = new xero.AccountingApi();
     this.assetApi = new xero.AssetApi();
     this.projectApi = new xero.ProjectApi();
@@ -75,14 +79,11 @@ export class XeroClient {
 
   async initialize() {
     if (this.config) {
-      const retryLimit = this.config.httpTimeout || 2500
-      console.log(retryLimit)
       custom.setHttpOptionsDefaults({
         retry: {
-          maxRetryAfter: retryLimit
+          maxRetryAfter: this.config.httpTimeout || 2500
         }
       })
-      console.log('custom ', this.config.httpTimeout)
 
       const issuer = await Issuer.discover('https://identity.xero.com');
       this.openIdClient = new issuer.Client({
@@ -202,19 +203,21 @@ export class XeroClient {
     });
   }
 
-  async updateTenants() {
+  async updateTenants(fullOrgDetails: boolean = true) {
     const result = await this.queryApi('GET', 'https://api.xero.com/connections');
     let tenants = result.body.map(connection => connection);
 
-    const getOrgsForAll = tenants.map(async tenant => {
-      const result = await this.accountingApi.getOrganisations(tenant.tenantId);
-      return result.body.organisations[0];
-    });
-    const orgData = await Promise.all(getOrgsForAll);
-
-    tenants.map((tenant) => { // assign orgData nested under each tenant
-      tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0];
-    });
+    if(fullOrgDetails){
+      const getOrgsForAll = tenants.map(async tenant => {
+        const result = await this.accountingApi.getOrganisations(tenant.tenantId);
+        return result.body.organisations[0];
+      });
+      const orgData = await Promise.all(getOrgsForAll);
+  
+      tenants.map((tenant) => { // assign orgData nested under each tenant
+        tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0];
+      });
+    }
     // sorting tenants so the most connection / active tenant is at index 0
     tenants.sort((a: any, b: any) => <number><unknown>new Date(b.updatedDateUtc) - <number><unknown>new Date(a.updatedDateUtc));
     this._tenants = tenants;
@@ -222,7 +225,7 @@ export class XeroClient {
   }
 
   async queryApi(method, uri) {
-    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
+    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
       request({
         method,
         uri,
