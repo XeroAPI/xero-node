@@ -119,7 +119,7 @@ The `tokenSet` is what you should store in your database. That object is what yo
 
 Populate the XeroClient's active tenant data.
 
-For most integrations you will want to display the org name and use additional metadata about the connected org. The `/connections` endpoint does not currently serialize all org metadata so requires developers to make an additional calls for each org that your user connects to get information like default currency.
+For most integrations you will want to display the org name and use additional metadata about the connected org. The `/connections` endpoint does not currently serialize all org metadata so requires developers to make an additional call for each org your user connects to get information like default currency.
 
 Calling `await xero.updateTenants()` will query the /connections endpoint and store the resulting information on the client. It has an optional parameter named `fullOrgDetails` that defaults to `true`. If you do not pass `false` to this function you will need to have the `accounting.settings` scope on your token as the `/organisation` endpoint that is called, requires it.
 
@@ -260,6 +260,27 @@ const invoices = {
 };
 
 const createdInvoice = await xero.accountingApi.createInvoices(activeTenantId, invoices)
+
+---
+
+// getting files as PDF
+const getAsPdf = await xero.accountingApi.getPurchaseOrderAsPdf(
+  req.session.activeTenant.tenantId,
+  getPurchaseOrdersResponse.body.purchaseOrders[0].purchaseOrderID,
+  { headers: { accept: 'application/pdf' } }
+)
+
+// CREATE ATTACHMENT
+const filename = "xero-dev.png";
+const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.png");
+const readStream = fs.createReadStream(pathToUpload);
+const contentType = mime.lookup(filename);
+
+const accountAttachmentsResponse: any = await xero.accountingApi.createAccountAttachmentByFileName(req.session.activeTenant.tenantId, accountId, filename, readStream, {
+  headers: {
+    'Content-Type': contentType
+  }
+});
 ```
 
 # Sample App
