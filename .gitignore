@@ -17,3 +17,4 @@ oAuthState.json
 .idea
 .vscode
 dist/
+build_notes.md
