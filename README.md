@@ -82,10 +82,12 @@ const xero = new XeroClient({
   clientId: 'YOUR_CLIENT_ID',
   clientSecret: 'YOUR_CLIENT_SECRET',
   redirectUris: [`http://localhost:${port}/callback`],
-  scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
+  state: 'returnPage=my-sweet-dashboard', // custom params (optional)
+  httpTimeout: 3000 // ms (optional)
 });
 
-// `buildConsentUrl()` calls `await xero.initialize()`
+// `buildConsentUrl()` will also call `await xero.initialize()`
 let consentUrl = await xero.buildConsentUrl();
 
 res.redirect(consentUrl);
