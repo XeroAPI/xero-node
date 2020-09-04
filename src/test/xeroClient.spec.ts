@@ -59,6 +59,8 @@ describe('the XeroClient', () => {
             scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
             state: '12345'
         });
+        expect(xeroWithState.config.state).toEqual('12345');
+
         const authUrlWithState = await xeroWithState.buildConsentUrl();
         expect(authUrlWithState.includes('state=12345')).toEqual(true);
     });
@@ -72,7 +74,7 @@ describe('the XeroClient', () => {
         httpTimeout: 3000
       });
       const xeroClient = await xeroWithConfig.initialize()
-      expect(xeroClient['config']['httpTimeout']).toEqual(3000)
+      expect(xeroClient.config.httpTimeout).toEqual(3000)
     });
 
     it('initialize() returns the client', async () => {

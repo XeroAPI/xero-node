@@ -98,11 +98,12 @@ Call `apiCallback` function with the response url which returns a tokenSet you c
 
 *The `tokenSet` can also be accessed from the client as `xero.readTokenSet()`.*
 
+> `http://localhost:${port}/callback`
 ```js
+console.log(xero.config.state)
+=> 'returnPage=my-sweet-dashboard'
 
-const { TokenSet } = require('openid-client');
-
-const tokenSet: TokenSet = await xero.apiCallback(req.url);
+const tokenSet = await xero.apiCallback(req.url);
 ```
 The `tokenSet` is what you should store in your database. That object is what you will need to pass to the client. It contains your access_token and refresh_token as well as other information regarding your connection.
 ```js
