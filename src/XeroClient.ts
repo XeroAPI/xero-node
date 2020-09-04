@@ -48,7 +48,7 @@ export interface XeroAccessToken {
 }
 
 export class XeroClient {
-  constructor(private readonly config?: IXeroClientConfig) {
+  constructor(readonly config?: IXeroClientConfig) {
     this.accountingApi = new xero.AccountingApi();
     this.assetApi = new xero.AssetApi();
     this.projectApi = new xero.ProjectApi();
