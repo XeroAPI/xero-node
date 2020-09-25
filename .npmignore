@@ -6,7 +6,6 @@ docs_theme/
 typedoc.json
 scratch.ts
 **/__tests__/**
-*.map
 docs_theme
 *.config.js
 docs

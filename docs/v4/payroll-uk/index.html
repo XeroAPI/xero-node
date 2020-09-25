@@ -909,7 +909,7 @@ ul.nav-tabs {
 };
     defs["Benefit"] = {
   "title" : "",
-  "required" : [ "calculationType", "category", "expenseAccountId", "liabilityAccountId", "name", "percentage", "standardAmount" ],
+  "required" : [ "calculationType", "category", "expenseAccountId", "liabilityAccountId", "name", "percentage" ],
   "type" : "object",
   "properties" : {
     "id" : {
@@ -1065,7 +1065,7 @@ ul.nav-tabs {
 };
     defs["Deduction"] = {
   "title" : "",
-  "required" : [ "calculationType", "deductionCategory", "deductionName", "liabilityAccountId" ],
+  "required" : [ "deductionName", "liabilityAccountId" ],
   "type" : "object",
   "properties" : {
     "deductionId" : {
@@ -1080,7 +1080,7 @@ ul.nav-tabs {
     "deductionCategory" : {
       "type" : "string",
       "description" : "Deduction Category type",
-      "enum" : [ "StakeholderPension", "StakeholderPensionPostTax", "ChildCareVoucher", "SalarySacrifice", "UkOther" ]
+      "enum" : [ "CapitalContributions", "ChildCareVoucher", "MakingGood", "PostgraduateLoanDeductions", "PrivateUsePayments", "SalarySacrifice", "StakeholderPension", "StakeholderPensionPostTax", "StudentLoanDeductions", "UkOther" ]
     },
     "liabilityAccountId" : {
       "type" : "string",
@@ -1335,7 +1335,7 @@ ul.nav-tabs {
     "earningsType" : {
       "type" : "string",
       "description" : "Indicates how an employee will be paid when taking this type of earning",
-      "enum" : [ "OvertimeEarnings", "Allowance", "RegularEarnings", "Commission", "Bonus", "Tips(Direct)", "Tips(Non-Direct)", "Backpay", "OtherEarnings", "LumpSum" ]
+      "enum" : [ "Allowance", "Backpay", "Bonus", "Commission", "LumpSum", "OtherEarnings", "OvertimeEarnings", "RegularEarnings", "StatutoryAdoptionPay", "StatutoryMaternityPay", "StatutoryPaternityPay", "StatutorySharedParentalPay", "StatutorySickPay", "Tips(Direct)", "Tips(Non-Direct)" ]
     },
     "rateType" : {
       "type" : "string",
@@ -2996,7 +2996,7 @@ ul.nav-tabs {
 };
     defs["SalaryAndWage"] = {
   "title" : "",
-  "required" : [ "annualSalary", "earningsRateID", "effectiveFrom", "numberOfUnitsPerDay", "numberOfUnitsPerWeek", "paymentType", "ratePerUnit", "status" ],
+  "required" : [ "annualSalary", "earningsRateID", "effectiveFrom", "numberOfUnitsPerWeek", "paymentType", "status" ],
   "type" : "object",
   "properties" : {
     "salaryAndWagesID" : {
@@ -3038,7 +3038,7 @@ ul.nav-tabs {
     "status" : {
       "type" : "string",
       "description" : "The current status of the corresponding salary and wages",
-      "enum" : [ "Active", "Pending" ]
+      "enum" : [ "Active", "Pending", "History" ]
     },
     "paymentType" : {
       "type" : "string",
@@ -3555,8 +3555,8 @@ ul.nav-tabs {
                     <li data-group="PayrollUk" data-name="getPaySlip" class="">
                       <a href="#api-PayrollUk-getPaySlip">getPaySlip</a>
                     </li>
-                    <li data-group="PayrollUk" data-name="getPayslips" class="">
-                      <a href="#api-PayrollUk-getPayslips">getPayslips</a>
+                    <li data-group="PayrollUk" data-name="getPaySlips" class="">
+                      <a href="#api-PayrollUk-getPaySlips">getPaySlips</a>
                     </li>
                     <li data-group="PayrollUk" data-name="getReimbursement" class="">
                       <a href="#api-PayrollUk-getReimbursement">getReimbursement</a>
@@ -3618,7 +3618,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.10</div>
+              <div class="app-desc">Version: 2.3.2</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in the UK region.
@@ -30235,10 +30235,10 @@ Xero identifier for Tenant
                         </article>
                       </div>
                       <hr>
-                    <div id="api-PayrollUk-getPayslips">
-                      <article id="api-PayrollUk-getPayslips-0" data-group="User" data-name="getPayslips" data-version="0">
+                    <div id="api-PayrollUk-getPaySlips">
+                      <article id="api-PayrollUk-getPaySlips-0" data-group="User" data-name="getPaySlips" data-version="0">
                         <div class="pull-left">
-                          <h1>getPayslips</h1>
+                          <h1>getPaySlips</h1>
                           <p>searches payslips</p>
                         </div>
                         <div class="pull-right"></div>
@@ -30252,25 +30252,25 @@ Xero identifier for Tenant
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <!--<li class="active"><a href="#examples-PayrollUk-getPayslips-0-curl">Curl</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-java">Java</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-android">Android</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-groovy">Groovy</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-objc">Obj-C</a></li>-->
-                          <li class=""><a href="#examples-PayrollUk-getPayslips-0-javascript">NodeJS</a></li>
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-angular">Angular</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-csharp">C#</a></li>-->
-                          <!-- <li class=""><a href="#examples-PayrollUk-getPayslips-0-php">PHP</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-perl">Perl</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-python">Python</a></li>-->
-                          <!--<li class=""><a href="#examples-PayrollUk-getPayslips-0-rust">Rust</a></li>-->
+                          <!--<li class="active"><a href="#examples-PayrollUk-getPaySlips-0-curl">Curl</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-java">Java</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-android">Android</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-groovy">Groovy</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-objc">Obj-C</a></li>-->
+                          <li class=""><a href="#examples-PayrollUk-getPaySlips-0-javascript">NodeJS</a></li>
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-angular">Angular</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-csharp">C#</a></li>-->
+                          <!-- <li class=""><a href="#examples-PayrollUk-getPaySlips-0-php">PHP</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-perl">Perl</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-python">Python</a></li>-->
+                          <!--<li class=""><a href="#examples-PayrollUk-getPaySlips-0-rust">Rust</a></li>-->
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-PayrollUk-getPayslips-0-curl">
+                          <div class="tab-pane active" id="examples-PayrollUk-getPaySlips-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/2.0/Payslips?page=56&PayRunID=38400000-8cf0-11bd-b23e-10b96e4ef00d"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-java">
+                          <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
 import org.openapitools.client.auth.*;
 import org.openapitools.client.model.*;
@@ -30293,17 +30293,17 @@ public class PayrollUkApiExample {
         UUID payRunID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | PayrunID which specifies the containing payrun of payslips to retrieve. By default, the API does not group payslips by payrun.
         Integer page = 56; // Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
         try {
-            Payslips result = apiInstance.getPayslips(xeroTenantId, payRunID, page);
+            Payslips result = apiInstance.getPaySlips(xeroTenantId, payRunID, page);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling PayrollUkApi#getPayslips");
+            System.err.println("Exception when calling PayrollUkApi#getPaySlips");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-android">
+                          <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-android">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.PayrollUkApi;
 
 public class PayrollUkApiExample {
@@ -30314,20 +30314,20 @@ public class PayrollUkApiExample {
         UUID payRunID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | PayrunID which specifies the containing payrun of payslips to retrieve. By default, the API does not group payslips by payrun.
         Integer page = 56; // Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
         try {
-            Payslips result = apiInstance.getPayslips(xeroTenantId, payRunID, page);
+            Payslips result = apiInstance.getPaySlips(xeroTenantId, payRunID, page);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling PayrollUkApi#getPayslips");
+            System.err.println("Exception when calling PayrollUkApi#getPaySlips");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-groovy">
+  <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-objc">
+                            <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
@@ -30340,7 +30340,7 @@ Integer *page = 56; // Page number which specifies the set of records to retriev
 PayrollUkApi *apiInstance = [[PayrollUkApi alloc] init];
 
 // searches payslips
-[apiInstance getPayslipsWith:xeroTenantId
+[apiInstance getPaySlipsWith:xeroTenantId
     payRunID:payRunID
     page:page
               completionHandler: ^(Payslips output, NSError* error) {
@@ -30354,7 +30354,7 @@ PayrollUkApi *apiInstance = [[PayrollUkApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-javascript">
+                            <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-javascript">
                               <pre class="prettyprint"><code class="language-js">const tokenSet: TokenSet =  {
   id_token: 'xxx',
   access_token: 'yyy',
@@ -30370,7 +30370,7 @@ const payRunID = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} PayrunID whi
 const page =  56;  // {Integer} Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
 
 try {
-  const response: any = await xero.accountingApi.getPayslips(xeroTenantId, payRunID,  page);
+  const response: any = await xero.accountingApi.getPaySlips(xeroTenantId, payRunID,  page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
@@ -30393,14 +30393,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getPayslips(xeroTenantId, payRunID, opts, callback);
+api.getPaySlips(xeroTenantId, payRunID, opts, callback);
 --></code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-PayrollUk-getPayslips-0-angular">
+                            <!--<div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-csharp">
+                            <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using .Api;
@@ -30409,7 +30409,7 @@ using .Model;
 
 namespace Example
 {
-    public class getPayslipsExample
+    public class getPaySlipsExample
     {
         public void main()
         {
@@ -30425,12 +30425,12 @@ namespace Example
             try
             {
                 // searches payslips
-                Payslips result = apiInstance.getPayslips(xeroTenantId, payRunID, page);
+                Payslips result = apiInstance.getPaySlips(xeroTenantId, payRunID, page);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling PayrollUkApi.getPayslips: " + e.Message );
+                Debug.Print("Exception when calling PayrollUkApi.getPaySlips: " + e.Message );
             }
         }
     }
@@ -30438,7 +30438,7 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-php">
+                            <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
@@ -30456,12 +30456,12 @@ $apiInstance = new XeroAPI\XeroPHP\Api\PayrollUkApi(
 
 try { 
 } catch (Exception $e) {
-    echo 'Exception when calling PayrollUkApi->getPayslips: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PayrollUkApi->getPaySlips: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-perl">
+                            <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use ::Configuration;
 use ::PayrollUkApi;
@@ -30475,15 +30475,15 @@ my $payRunID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | PayrunID which spe
 my $page = 56; # Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
 
 eval { 
-    my $result = $api_instance->getPayslips(xeroTenantId => $xeroTenantId, payRunID => $payRunID, page => $page);
+    my $result = $api_instance->getPaySlips(xeroTenantId => $xeroTenantId, payRunID => $payRunID, page => $page);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling PayrollUkApi->getPayslips: $@\n";
+    warn "Exception when calling PayrollUkApi->getPaySlips: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-python">
+                            <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import 
@@ -30501,13 +30501,13 @@ page = 56 # Integer | Page number which specifies the set of records to retrieve
 
 try: 
     # searches payslips
-    api_response = api_instance.get_payslips(xeroTenantId, payRunID, page=page)
+    api_response = api_instance.get_pay_slips(xeroTenantId, payRunID, page=page)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling PayrollUkApi->getPayslips: %s\n" % e)</code></pre>
+    print("Exception when calling PayrollUkApi->getPaySlips: %s\n" % e)</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-PayrollUk-getPayslips-0-rust">
+                            <div class="tab-pane" id="examples-PayrollUk-getPaySlips-0-rust">
                               <pre class="prettyprint"><code class="language-rust">extern crate PayrollUkApi;
 
 pub fn main() {
@@ -30516,7 +30516,7 @@ pub fn main() {
     let page = 56; // Integer
 
     let mut context = PayrollUkApi::Context::default();
-    let result = client.getPayslips(xeroTenantId, payRunID, page, &context).wait();
+    let result = client.getPaySlips(xeroTenantId, payRunID, page, &context).wait();
     println!("{:?}", result);
 
 }
@@ -30552,7 +30552,7 @@ pub fn main() {
 <td>
 
 
-    <div id="d2e199_getPayslips_xeroTenantId">
+    <div id="d2e199_getPaySlips_xeroTenantId">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -30585,7 +30585,7 @@ Xero identifier for Tenant
 <td>
 
 
-    <div id="d2e199_getPayslips_page">
+    <div id="d2e199_getPaySlips_page">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -30605,7 +30605,7 @@ Page number which specifies the set of records to retrieve. By default the numbe
 <td>
 
 
-    <div id="d2e199_getPayslips_payRunID">
+    <div id="d2e199_getPaySlips_payRunID">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -30630,27 +30630,27 @@ PayrunID which specifies the containing payrun of payslips to retrieve. By defau
                             </table>
 <!--
                           <h2>Responses</h2>
-                            <h3 id="examples-PayrollUk-getPayslips-title-200"></h3>
-                            <p id="examples-PayrollUk-getPayslips-description-200" class="marked"></p>
+                            <h3 id="examples-PayrollUk-getPaySlips-title-200"></h3>
+                            <p id="examples-PayrollUk-getPaySlips-description-200" class="marked"></p>
                             <script>
                               var responsePayrollUk200_description = `search results matching criteria`;
                               var responsePayrollUk200_description_break = responsePayrollUk200_description.indexOf('\n');
                               if (responsePayrollUk200_description_break == -1) {
-                                $("#examples-PayrollUk-getPayslips-title-200").text("Status: 200 - " + responsePayrollUk200_description);
+                                $("#examples-PayrollUk-getPaySlips-title-200").text("Status: 200 - " + responsePayrollUk200_description);
                               } else {
-                                $("#examples-PayrollUk-getPayslips-title-200").text("Status: 200 - " + responsePayrollUk200_description.substring(0, responsePayrollUk200_description_break));
-                                $("#examples-PayrollUk-getPayslips-description-200").html(responsePayrollUk200_description.substring(responsePayrollUk200_description_break));
+                                $("#examples-PayrollUk-getPaySlips-title-200").text("Status: 200 - " + responsePayrollUk200_description.substring(0, responsePayrollUk200_description_break));
+                                $("#examples-PayrollUk-getPaySlips-description-200").html(responsePayrollUk200_description.substring(responsePayrollUk200_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-PayrollUk-getPayslips-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-PayrollUk-getPaySlips-200" class="nav nav-tabs nav-tabs-examples" >
                              
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-PayrollUk-getPayslips-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-PayrollUk-getPaySlips-200-schema">Schema</a>
                                 </li>
                                 <li class="">
-                                    <a data-toggle="tab" href="#responses-PayrollUk-getPayslips-200-example">Response Example</a>
+                                    <a data-toggle="tab" href="#responses-PayrollUk-getPaySlips-200-example">Response Example</a>
                                 </li>
                                
 
@@ -30658,10 +30658,10 @@ PayrunID which specifies the containing payrun of payslips to retrieve. By defau
                             </ul>
 
 
-                            <div class="tab-content" id="responses-PayrollUk-getPayslips-200-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-PayrollUk-getPaySlips-200-wrapper" style='margin-bottom: 10px;'>
                                
-                                <div class="tab-pane active" id="responses-PayrollUk-getPayslips-200-schema">
-                                  <div id="responses-PayrollUk-getPayslips-schema-200" class="exampleStyle">
+                                <div class="tab-pane active" id="responses-PayrollUk-getPaySlips-200-schema">
+                                  <div id="responses-PayrollUk-getPaySlips-schema-200" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -30687,16 +30687,16 @@ PayrunID which specifies the containing payrun of payslips to retrieve. By defau
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-PayrollUk-getPayslips-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-PayrollUk-getPayslips-schema-200');
+                                        $('#responses-PayrollUk-getPaySlips-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-PayrollUk-getPaySlips-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-PayrollUk-getPayslips-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-PayrollUk-getPaySlips-200-schema-data' type='hidden' value=''></input>
                                 </div>
-                                <div class="tab-pane" id="examples-PayrollUk-getPayslips-200-example">
+                                <div class="tab-pane" id="examples-PayrollUk-getPaySlips-200-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
