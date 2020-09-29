@@ -10,7 +10,9 @@
     "declaration": true,
     "resolveJsonModule": true
   },
-  "lib": ["es2015"],
+  "lib": [
+    "es2015"
+  ],
   "exclude": [
     "node_modules",
     "dist",

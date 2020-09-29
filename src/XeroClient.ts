@@ -55,6 +55,7 @@ export class XeroClient {
     this.payrollAUApi = new xero.PayrollAuApi();
     this.bankFeedsApi = new xero.BankFeedsApi();
     this.payrollUKApi = new xero.PayrollUkApi();
+    this.payrollNZApi = new xero.PayrollNzApi();
   }
 
   private tokenSet: TokenSet = new TokenSet
@@ -66,6 +67,7 @@ export class XeroClient {
   readonly payrollAUApi: xero.PayrollAuApi;
   readonly bankFeedsApi: xero.BankFeedsApi;
   readonly payrollUKApi: xero.PayrollUkApi;
+  readonly payrollNZApi: xero.PayrollNzApi;
 
   openIdClient: any; // from openid-client
 
@@ -203,13 +205,13 @@ export class XeroClient {
     const result = await this.queryApi('GET', 'https://api.xero.com/connections');
     let tenants = result.body.map(connection => connection);
 
-    if(fullOrgDetails){
+    if (fullOrgDetails) {
       const getOrgsForAll = tenants.map(async tenant => {
         const result = await this.accountingApi.getOrganisations(tenant.tenantId);
         return result.body.organisations[0];
       });
       const orgData = await Promise.all(getOrgsForAll);
-  
+
       tenants.map((tenant) => { // assign orgData nested under each tenant
         tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0];
       });
@@ -255,5 +257,6 @@ export class XeroClient {
     this.payrollAUApi.accessToken = accessToken;
     this.bankFeedsApi.accessToken = accessToken;
     this.payrollUKApi.accessToken = accessToken;
+    this.payrollNZApi.accessToken = accessToken;
   }
 }

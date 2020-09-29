@@ -1309,7 +1309,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.10</div>
+              <div class="app-desc">Version: 2.3.2</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Assets API
@@ -1374,7 +1374,7 @@ public class AssetApiExample {
         OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         Asset asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset | 
         try {
             Asset result = apiInstance.createAsset(xeroTenantId, asset);
@@ -1394,7 +1394,7 @@ public class AssetApiExample {
 
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         Asset asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset | 
         try {
             Asset result = apiInstance.createAsset(xeroTenantId, asset);
@@ -1416,7 +1416,7 @@ public class AssetApiExample {
 // Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
-String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
+String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 Asset *asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // 
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
@@ -1446,7 +1446,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 }
 await xero.setTokenSet(tokenSet);
  
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant 
 const asset:Asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 };  // {Asset} 
 try {
   const response: any = await xero.accountingApi.createAsset(xeroTenantId, asset);
@@ -1497,7 +1497,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AssetApi();
-            var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
+            var xeroTenantId = YOUR_XERO_TENANT_ID;  // String | Xero identifier for Tenant (default to null)
             var asset = new Asset(); // Asset | 
 
             try
@@ -1548,7 +1548,7 @@ use ::AssetApi;
 $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::AssetApi->new();
-my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
+my $xeroTenantId = YOUR_XERO_TENANT_ID; # String | Xero identifier for Tenant
 my $asset = ::Object::Asset->new(); # Asset | 
 
 eval { 
@@ -1572,7 +1572,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = .AssetApi()
-xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
+xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 } # Asset | 
 
 try: 
@@ -1587,7 +1587,7 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate AssetApi;
 
 pub fn main() {
-    let xeroTenantId = xeroTenantId_example; // String
+    let xeroTenantId = YOUR_XERO_TENANT_ID; // String
     let asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 }; // Asset
 
     let mut context = AssetApi::Context::default();
@@ -1604,7 +1604,7 @@ pub fn main() {
                             
                               <tr>
                                 <td>assets</td>
-                                <td></td>
+                                <td>Grant read-write access to fixed assets</td>
                               </tr>
                             
                           </table>
@@ -1618,7 +1618,7 @@ pub fn main() {
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                  <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
 <td>
 
 
@@ -1857,7 +1857,7 @@ public class AssetApiExample {
         OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         AssetType assetType = { "assetTypeName":"Machinery11004", "fixedAssetAccountId":"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82", "depreciationExpenseAccountId":"d1602f69-f900-4616-8d34-90af393fa368", "accumulatedDepreciationAccountId":"9195cadd-8645-41e6-9f67-7bcd421defe8", "bookDepreciationSetting":{ "depreciationMethod":"DiminishingValue100", "averagingMethod":"ActualDays", "depreciationRate":0.05, "depreciationCalculationMethod":"None" } }; // AssetType | 
         try {
             AssetType result = apiInstance.createAssetType(xeroTenantId, assetType);
@@ -1877,7 +1877,7 @@ public class AssetApiExample {
 
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         AssetType assetType = { "assetTypeName":"Machinery11004", "fixedAssetAccountId":"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82", "depreciationExpenseAccountId":"d1602f69-f900-4616-8d34-90af393fa368", "accumulatedDepreciationAccountId":"9195cadd-8645-41e6-9f67-7bcd421defe8", "bookDepreciationSetting":{ "depreciationMethod":"DiminishingValue100", "averagingMethod":"ActualDays", "depreciationRate":0.05, "depreciationCalculationMethod":"None" } }; // AssetType | 
         try {
             AssetType result = apiInstance.createAssetType(xeroTenantId, assetType);
@@ -1899,7 +1899,7 @@ public class AssetApiExample {
 // Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
-String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
+String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 AssetType *assetType = { "assetTypeName":"Machinery11004", "fixedAssetAccountId":"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82", "depreciationExpenseAccountId":"d1602f69-f900-4616-8d34-90af393fa368", "accumulatedDepreciationAccountId":"9195cadd-8645-41e6-9f67-7bcd421defe8", "bookDepreciationSetting":{ "depreciationMethod":"DiminishingValue100", "averagingMethod":"ActualDays", "depreciationRate":0.05, "depreciationCalculationMethod":"None" } }; //  (optional)
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
@@ -1929,7 +1929,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 }
 await xero.setTokenSet(tokenSet);
  
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 const assetType:AssetType =  { "assetTypeName":"Machinery11004", "fixedAssetAccountId":"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82", "depreciationExpenseAccountId":"d1602f69-f900-4616-8d34-90af393fa368", "accumulatedDepreciationAccountId":"9195cadd-8645-41e6-9f67-7bcd421defe8", "bookDepreciationSetting":{ "depreciationMethod":"DiminishingValue100", "averagingMethod":"ActualDays", "depreciationRate":0.05, "depreciationCalculationMethod":"None" } };  // {AssetType} 
 
 try {
@@ -1981,7 +1981,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AssetApi();
-            var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
+            var xeroTenantId = YOUR_XERO_TENANT_ID;  // String | Xero identifier for Tenant (default to null)
             var assetType = new AssetType(); // AssetType |  (optional) 
 
             try
@@ -2032,7 +2032,7 @@ use ::AssetApi;
 $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::AssetApi->new();
-my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
+my $xeroTenantId = YOUR_XERO_TENANT_ID; # String | Xero identifier for Tenant
 my $assetType = ::Object::AssetType->new(); # AssetType | 
 
 eval { 
@@ -2056,7 +2056,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = .AssetApi()
-xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
+xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 assetType = { "assetTypeName":"Machinery11004", "fixedAssetAccountId":"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82", "depreciationExpenseAccountId":"d1602f69-f900-4616-8d34-90af393fa368", "accumulatedDepreciationAccountId":"9195cadd-8645-41e6-9f67-7bcd421defe8", "bookDepreciationSetting":{ "depreciationMethod":"DiminishingValue100", "averagingMethod":"ActualDays", "depreciationRate":0.05, "depreciationCalculationMethod":"None" } } # AssetType |  (optional)
 
 try: 
@@ -2071,7 +2071,7 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate AssetApi;
 
 pub fn main() {
-    let xeroTenantId = xeroTenantId_example; // String
+    let xeroTenantId = YOUR_XERO_TENANT_ID; // String
     let assetType = { "assetTypeName":"Machinery11004", "fixedAssetAccountId":"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82", "depreciationExpenseAccountId":"d1602f69-f900-4616-8d34-90af393fa368", "accumulatedDepreciationAccountId":"9195cadd-8645-41e6-9f67-7bcd421defe8", "bookDepreciationSetting":{ "depreciationMethod":"DiminishingValue100", "averagingMethod":"ActualDays", "depreciationRate":0.05, "depreciationCalculationMethod":"None" } }; // AssetType
 
     let mut context = AssetApi::Context::default();
@@ -2088,7 +2088,7 @@ pub fn main() {
                             
                               <tr>
                                 <td>assets</td>
-                                <td></td>
+                                <td>Grant read-write access to fixed assets</td>
                               </tr>
                             
                           </table>
@@ -2102,7 +2102,7 @@ pub fn main() {
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                  <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
 <td>
 
 
@@ -2362,7 +2362,7 @@ public class AssetApiExample {
         OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe; // UUID | fixed asset id for single object
         try {
             Asset result = apiInstance.getAssetById(xeroTenantId, id);
@@ -2382,7 +2382,7 @@ public class AssetApiExample {
 
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe; // UUID | fixed asset id for single object
         try {
             Asset result = apiInstance.getAssetById(xeroTenantId, id);
@@ -2404,7 +2404,7 @@ public class AssetApiExample {
 // Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
-String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
+String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 UUID *id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe; // fixed asset id for single object (default to null)
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
@@ -2434,7 +2434,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 }
 await xero.setTokenSet(tokenSet);
  
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant 
 const id = "4f7bcdcb-5ec1-4258-9558-19f662fccdfe";  // {UUID} fixed asset id for single object
 try {
   const response: any = await xero.accountingApi.getAssetById(xeroTenantId, id);
@@ -2485,7 +2485,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AssetApi();
-            var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
+            var xeroTenantId = YOUR_XERO_TENANT_ID;  // String | Xero identifier for Tenant (default to null)
             var id = new UUID(); // UUID | fixed asset id for single object (default to null)
 
             try
@@ -2536,7 +2536,7 @@ use ::AssetApi;
 $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::AssetApi->new();
-my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
+my $xeroTenantId = YOUR_XERO_TENANT_ID; # String | Xero identifier for Tenant
 my $id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe; # UUID | fixed asset id for single object
 
 eval { 
@@ -2560,7 +2560,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = .AssetApi()
-xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
+xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe # UUID | fixed asset id for single object (default to null)
 
 try: 
@@ -2575,7 +2575,7 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate AssetApi;
 
 pub fn main() {
-    let xeroTenantId = xeroTenantId_example; // String
+    let xeroTenantId = YOUR_XERO_TENANT_ID; // String
     let id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe; // UUID
 
     let mut context = AssetApi::Context::default();
@@ -2592,7 +2592,7 @@ pub fn main() {
                             
                               <tr>
                                 <td>assets.read</td>
-                                <td></td>
+                                <td>Grant read-only access to fixed assets</td>
                               </tr>
                             
                           </table>
@@ -2639,7 +2639,7 @@ fixed asset id for single object
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                  <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
 <td>
 
 
@@ -2820,7 +2820,7 @@ public class AssetApiExample {
         OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         try {
             Setting result = apiInstance.getAssetSettings(xeroTenantId);
             System.out.println(result);
@@ -2839,7 +2839,7 @@ public class AssetApiExample {
 
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         try {
             Setting result = apiInstance.getAssetSettings(xeroTenantId);
             System.out.println(result);
@@ -2860,7 +2860,7 @@ public class AssetApiExample {
 // Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
-String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
+String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
 
@@ -2888,7 +2888,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 }
 await xero.setTokenSet(tokenSet);
  
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 try {
   const response: any = await xero.accountingApi.getAssetSettings(xeroTenantId);
   console.log(response.body || response.response.statusCode)
@@ -2938,7 +2938,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AssetApi();
-            var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
+            var xeroTenantId = YOUR_XERO_TENANT_ID;  // String | Xero identifier for Tenant (default to null)
 
             try
             {
@@ -2988,7 +2988,7 @@ use ::AssetApi;
 $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::AssetApi->new();
-my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
+my $xeroTenantId = YOUR_XERO_TENANT_ID; # String | Xero identifier for Tenant
 
 eval { 
     my $result = $api_instance->getAssetSettings(xeroTenantId => $xeroTenantId);
@@ -3011,7 +3011,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = .AssetApi()
-xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
+xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 
 try: 
     # searches fixed asset settings
@@ -3025,7 +3025,7 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate AssetApi;
 
 pub fn main() {
-    let xeroTenantId = xeroTenantId_example; // String
+    let xeroTenantId = YOUR_XERO_TENANT_ID; // String
 
     let mut context = AssetApi::Context::default();
     let result = client.getAssetSettings(xeroTenantId, &context).wait();
@@ -3041,7 +3041,7 @@ pub fn main() {
                             
                               <tr>
                                 <td>assets.read</td>
-                                <td></td>
+                                <td>Grant read-only access to fixed assets</td>
                               </tr>
                             
                           </table>
@@ -3055,7 +3055,7 @@ pub fn main() {
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                  <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
 <td>
 
 
@@ -3236,7 +3236,7 @@ public class AssetApiExample {
         OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         try {
             array[AssetType] result = apiInstance.getAssetTypes(xeroTenantId);
             System.out.println(result);
@@ -3255,7 +3255,7 @@ public class AssetApiExample {
 
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         try {
             array[AssetType] result = apiInstance.getAssetTypes(xeroTenantId);
             System.out.println(result);
@@ -3276,7 +3276,7 @@ public class AssetApiExample {
 // Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
-String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
+String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
 
@@ -3304,7 +3304,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 }
 await xero.setTokenSet(tokenSet);
  
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 try {
   const response: any = await xero.accountingApi.getAssetTypes(xeroTenantId);
   console.log(response.body || response.response.statusCode)
@@ -3354,7 +3354,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AssetApi();
-            var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
+            var xeroTenantId = YOUR_XERO_TENANT_ID;  // String | Xero identifier for Tenant (default to null)
 
             try
             {
@@ -3404,7 +3404,7 @@ use ::AssetApi;
 $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::AssetApi->new();
-my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
+my $xeroTenantId = YOUR_XERO_TENANT_ID; # String | Xero identifier for Tenant
 
 eval { 
     my $result = $api_instance->getAssetTypes(xeroTenantId => $xeroTenantId);
@@ -3427,7 +3427,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = .AssetApi()
-xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
+xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 
 try: 
     # searches fixed asset types
@@ -3441,7 +3441,7 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate AssetApi;
 
 pub fn main() {
-    let xeroTenantId = xeroTenantId_example; // String
+    let xeroTenantId = YOUR_XERO_TENANT_ID; // String
 
     let mut context = AssetApi::Context::default();
     let result = client.getAssetTypes(xeroTenantId, &context).wait();
@@ -3457,7 +3457,7 @@ pub fn main() {
                             
                               <tr>
                                 <td>assets.read</td>
-                                <td></td>
+                                <td>Grant read-only access to fixed assets</td>
                               </tr>
                             
                           </table>
@@ -3471,7 +3471,7 @@ pub fn main() {
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                  <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
 <td>
 
 
@@ -3655,7 +3655,7 @@ public class AssetApiExample {
         OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         AssetStatusQueryParam status = ; // AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes
         Integer page = 1; // Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
         Integer pageSize = 5; // Integer | The number of records returned per page. By default the number of records returned is 10.
@@ -3680,7 +3680,7 @@ public class AssetApiExample {
 
     public static void main(String[] args) {
         AssetApi apiInstance = new AssetApi();
-        String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
+        String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         AssetStatusQueryParam status = ; // AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes
         Integer page = 1; // Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
         Integer pageSize = 5; // Integer | The number of records returned per page. By default the number of records returned is 10.
@@ -3707,7 +3707,7 @@ public class AssetApiExample {
 // Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
-String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
+String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 AssetStatusQueryParam *status = ; // Required when retrieving a collection of assets. See Asset Status Codes (default to null)
 Integer *page = 1; // Results are paged. This specifies which page of the results to return. The default page is 1. (optional) (default to null)
 Integer *pageSize = 5; // The number of records returned per page. By default the number of records returned is 10. (optional) (default to null)
@@ -3747,7 +3747,7 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
 }
 await xero.setTokenSet(tokenSet);
  
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant 
 const status = ;  // {AssetStatusQueryParam} Required when retrieving a collection of assets. See Asset Status Codes
 const page =  1;  // {Integer} Results are paged. This specifies which page of the results to return. The default page is 1.
 const pageSize =  5;  // {Integer} The number of records returned per page. By default the number of records returned is 10.
@@ -3804,7 +3804,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AssetApi();
-            var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
+            var xeroTenantId = YOUR_XERO_TENANT_ID;  // String | Xero identifier for Tenant (default to null)
             var status = new AssetStatusQueryParam(); // AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
             var page = 1;  // Integer | Results are paged. This specifies which page of the results to return. The default page is 1. (optional)  (default to null)
             var pageSize = 5;  // Integer | The number of records returned per page. By default the number of records returned is 10. (optional)  (default to null)
@@ -3860,7 +3860,7 @@ use ::AssetApi;
 $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::AssetApi->new();
-my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
+my $xeroTenantId = YOUR_XERO_TENANT_ID; # String | Xero identifier for Tenant
 my $status = ; # AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes
 my $page = 1; # Integer | Results are paged. This specifies which page of the results to return. The default page is 1.
 my $pageSize = 5; # Integer | The number of records returned per page. By default the number of records returned is 10.
@@ -3889,7 +3889,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = .AssetApi()
-xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
+xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 status =  # AssetStatusQueryParam | Required when retrieving a collection of assets. See Asset Status Codes (default to null)
 page = 1 # Integer | Results are paged. This specifies which page of the results to return. The default page is 1. (optional) (default to null)
 pageSize = 5 # Integer | The number of records returned per page. By default the number of records returned is 10. (optional) (default to null)
@@ -3909,7 +3909,7 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate AssetApi;
 
 pub fn main() {
-    let xeroTenantId = xeroTenantId_example; // String
+    let xeroTenantId = YOUR_XERO_TENANT_ID; // String
     let status = ; // AssetStatusQueryParam
     let page = 1; // Integer
     let pageSize = 5; // Integer
@@ -3931,7 +3931,7 @@ pub fn main() {
                             
                               <tr>
                                 <td>assets.read</td>
-                                <td></td>
+                                <td>Grant read-only access to fixed assets</td>
                               </tr>
                             
                           </table>
@@ -3945,7 +3945,7 @@ pub fn main() {
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                  <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
 <td>
 
 

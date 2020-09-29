@@ -1023,7 +1023,7 @@ ul.nav-tabs {
 };
     defs["EarningsLine"] = {
   "title" : "",
-  "required" : [ "CalculationType", "EarningsRateID" ],
+  "required" : [ "EarningsRateID" ],
   "type" : "object",
   "properties" : {
     "EarningsRateID" : {
@@ -1148,11 +1148,9 @@ ul.nav-tabs {
       "x-is-money" : true
     },
     "AccrueLeave" : {
-      "type" : "number",
+      "type" : "boolean",
       "description" : "Indicates that this earnings rate should accrue leave. Only applicable if RateType is MULTIPLE",
-      "format" : "double",
-      "example" : 1.5,
-      "x-is-money" : true
+      "example" : false
     },
     "Amount" : {
       "type" : "number",
@@ -1192,7 +1190,7 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "",
-  "enum" : [ "FIXED", "ORDINARYTIMEEARNINGS", "OVERTIMEEARNINGS", "ALLOWANCE", "LUMPSUMD", "EMPLOYMENTTERMINATIONPAYMENT", "LUMPSUMA", "LUMPSUMB" ]
+  "enum" : [ "FIXED", "ORDINARYTIMEEARNINGS", "OVERTIMEEARNINGS", "ALLOWANCE", "LUMPSUMD", "EMPLOYMENTTERMINATIONPAYMENT", "LUMPSUMA", "LUMPSUMB", "BONUSESANDCOMMISSIONS" ]
 };
     defs["Employee"] = {
   "title" : "",
@@ -1623,7 +1621,21 @@ ul.nav-tabs {
     },
     "NumberOfUnits" : {
       "type" : "number",
-      "description" : "Leave number of units",
+      "description" : "Number of units for leave line.",
+      "format" : "double",
+      "example" : 2.5,
+      "x-is-money" : true
+    },
+    "AnnualNumberOfUnits" : {
+      "type" : "number",
+      "description" : "Hours of leave accrued each year",
+      "format" : "double",
+      "example" : 2.5,
+      "x-is-money" : true
+    },
+    "FullTimeNumberOfUnitsPerPeriod" : {
+      "type" : "number",
+      "description" : "Normal ordinary earnings number of units for leave line.",
       "format" : "double",
       "example" : 2.5,
       "x-is-money" : true
@@ -1714,9 +1726,10 @@ ul.nav-tabs {
       "example" : 152.0
     },
     "LeaveLoadingRate" : {
-      "type" : "integer",
+      "type" : "number",
       "description" : "Enter an amount here if your organisation pays an additional percentage on top of ordinary earnings when your employees take leave (typically 17.5%)",
-      "example" : 12
+      "format" : "double",
+      "example" : 2.0
     },
     "UpdatedDateUTC" : {
       "type" : "string",
@@ -1753,7 +1766,7 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "",
-  "enum" : [ "PAYGMANUAL", "ETPOMANUAL", "ETPRMANUAL" ]
+  "enum" : [ "PAYGMANUAL", "ETPOMANUAL", "ETPRMANUAL", "SCHEDULE5MANUAL", "SCHEDULE5STSLMANUAL" ]
 };
     defs["OpeningBalances"] = {
   "title" : "",
@@ -2748,9 +2761,9 @@ ul.nav-tabs {
       "example" : "2187a42b-639a-45cb-9eed-cd4ae488306a"
     },
     "EmployeeNumber" : {
-      "type" : "number",
+      "type" : "string",
       "description" : "The memberhsip number assigned to the employee by the super fund.",
-      "example" : 1234
+      "example" : "1234"
     }
   },
   "description" : ""
@@ -2831,7 +2844,7 @@ ul.nav-tabs {
 };
     defs["TaxDeclaration"] = {
   "title" : "",
-  "required" : [ "EmployeeID", "EmploymentBasis" ],
+  "required" : [ "EmployeeID" ],
   "type" : "object",
   "properties" : {
     "EmployeeID" : {
@@ -3213,7 +3226,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.2.10</div>
+              <div class="app-desc">Version: 2.3.2</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in Australia region.
@@ -9137,7 +9150,7 @@ e.g. page=1 – Up to 100 objects will be returned in a single API call
       "schema" : {
         "$ref" : "#/components/schemas/PayItems"
       },
-      "example" : "{ \"Id\": \"add39c3e-f397-45fb-aa4f-af1095ec7f65\", \"Status\": \"OK\", \"ProviderName\": \"java-sdk-oauth2-dev-02\", \"DateTimeUTC\": \"/Date(1573620869531)/\", \"PayItems\": { \"EarningsRates\": [ { \"EarningsRateID\": \"ab874dfb-ab09-4c91-954e-43acf6fc23b4\", \"Name\": \"Ordinary Hours\", \"EarningsType\": \"ORDINARYTIMEEARNINGS\", \"RateType\": \"RATEPERUNIT\", \"AccountCode\": \"477\", \"TypeOfUnits\": \"Hours\", \"RatePerUnit\": 3, \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": true, \"UpdatedDateUTC\": \"/Date(1573620821000+0000)/\", \"CurrentRecord\": true }, { \"EarningsRateID\": \"dc3ff92e-0e49-4967-aa4b-0bb21c0594ce\", \"Name\": \"Overtime Hours (exempt from super)\", \"EarningsType\": \"OVERTIMEEARNINGS\", \"RateType\": \"RATEPERUNIT\", \"AccountCode\": \"477\", \"TypeOfUnits\": \"Hours\", \"IsExemptFromTax\": false, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"EarningsRateID\": \"f59999ca-cd5c-4a54-a381-2d0c817f0c3e\", \"Name\": \"Redundancy\", \"EarningsType\": \"LUMPSUMD\", \"RateType\": \"FIXEDAMOUNT\", \"AccountCode\": \"477\", \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": true, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"EarningsRateID\": \"c97dafac-9d99-406f-9f6c-abfaf81c527d\", \"Name\": \"ETP Leave Earning\", \"EarningsType\": \"EMPLOYMENTTERMINATIONPAYMENT\", \"RateType\": \"RATEPERUNIT\", \"AccountCode\": \"477\", \"TypeOfUnits\": \"Hours\", \"IsExemptFromTax\": false, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": true, \"UpdatedDateUTC\": \"/Date(1573620791000+0000)/\", \"EmploymentTerminationPaymentType\": \"O\", \"CurrentRecord\": true } ], \"DeductionTypes\": [ { \"DeductionTypeID\": \"727af5e8-b347-4ae7-85fc-9b82266d0aec\", \"DeductionCategory\": \"UNIONFEES\", \"Name\": \"Union Fees/Subscriptions\", \"AccountCode\": \"850\", \"ReducesTax\": false, \"ReducesSuper\": false, \"IsExemptFromW1\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"DeductionTypeID\": \"04191cd3-7952-4a87-9911-9d8575280f6a\", \"DeductionCategory\": \"NONE\", \"Name\": \"Lease Payments\", \"AccountCode\": \"850\", \"ReducesTax\": true, \"ReducesSuper\": true, \"IsExemptFromW1\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true } ], \"ReimbursementTypes\": [ { \"ReimbursementTypeID\": \"98ba33b2-db5b-4204-bcac-5ddd98d63524\", \"Name\": \"Travel Costs\", \"AccountCode\": \"850\", \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"ReimbursementTypeID\": \"aa8cfa40-d872-4be0-8a94-bb7f00962f74\", \"Name\": \"Other Reimbursable Costs\", \"AccountCode\": \"850\", \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true } ], \"LeaveTypes\": [ { \"LeaveTypeID\": \"fbcc9dab-6238-43d9-a3f4-d768423fdcfa\", \"Name\": \"Annual Leave\", \"TypeOfUnits\": \"Hours\", \"NormalEntitlement\": 152, \"LeaveLoadingRate\": 1, \"IsPaidLeave\": true, \"ShowOnPayslip\": true, \"UpdatedDateUTC\": \"/Date(1573620853000+0000)/\", \"CurrentRecord\": true }, { \"LeaveTypeID\": \"74195ab2-1f2b-4136-8ddc-20387a0b1027\", \"Name\": \"Long Service Leave\", \"TypeOfUnits\": \"Hours\", \"IsPaidLeave\": true, \"ShowOnPayslip\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"LeaveTypeID\": \"ff4d16da-ae8a-4f57-acb3-9ee593996bce\", \"Name\": \"Parental Leave (unpaid)\", \"TypeOfUnits\": \"Hours\", \"IsPaidLeave\": false, \"ShowOnPayslip\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true } ] } }"
+      "example" : "{ \"Id\": \"add39c3e-f397-45fb-aa4f-af1095ec7f65\", \"Status\": \"OK\", \"ProviderName\": \"java-sdk-oauth2-dev-02\", \"DateTimeUTC\": \"/Date(1573620869531)/\", \"PayItems\": { \"EarningsRates\": [ { \"EarningsRateID\": \"ab874dfb-ab09-4c91-954e-43acf6fc23b4\", \"Name\": \"Ordinary Hours\", \"EarningsType\": \"ORDINARYTIMEEARNINGS\", \"RateType\": \"RATEPERUNIT\", \"AccountCode\": \"477\", \"TypeOfUnits\": \"Hours\", \"RatePerUnit\": 3, \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": true, \"UpdatedDateUTC\": \"/Date(1573620821000+0000)/\", \"CurrentRecord\": true }, { \"EarningsRateID\": \"dc3ff92e-0e49-4967-aa4b-0bb21c0594ce\", \"Name\": \"Overtime Hours (exempt from super)\", \"EarningsType\": \"OVERTIMEEARNINGS\", \"RateType\": \"RATEPERUNIT\", \"AccountCode\": \"477\", \"TypeOfUnits\": \"Hours\", \"IsExemptFromTax\": false, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"EarningsRateID\": \"f59999ca-cd5c-4a54-a381-2d0c817f0c3e\", \"Name\": \"Redundancy\", \"EarningsType\": \"LUMPSUMD\", \"RateType\": \"FIXEDAMOUNT\", \"AccountCode\": \"477\", \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": true, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"EarningsRateID\": \"c97dafac-9d99-406f-9f6c-abfaf81c527d\", \"Name\": \"ETP Leave Earning\", \"EarningsType\": \"EMPLOYMENTTERMINATIONPAYMENT\", \"RateType\": \"RATEPERUNIT\", \"AccountCode\": \"477\", \"TypeOfUnits\": \"Hours\", \"IsExemptFromTax\": false, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": true, \"UpdatedDateUTC\": \"/Date(1573620791000+0000)/\", \"EmploymentTerminationPaymentType\": \"O\", \"CurrentRecord\": true } ], \"DeductionTypes\": [ { \"DeductionTypeID\": \"727af5e8-b347-4ae7-85fc-9b82266d0aec\", \"DeductionCategory\": \"UNIONFEES\", \"Name\": \"Union Fees/Subscriptions\", \"AccountCode\": \"850\", \"ReducesTax\": false, \"ReducesSuper\": false, \"IsExemptFromW1\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"DeductionTypeID\": \"04191cd3-7952-4a87-9911-9d8575280f6a\", \"DeductionCategory\": \"NONE\", \"Name\": \"Lease Payments\", \"AccountCode\": \"850\", \"ReducesTax\": true, \"ReducesSuper\": true, \"IsExemptFromW1\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true } ], \"ReimbursementTypes\": [ { \"ReimbursementTypeID\": \"98ba33b2-db5b-4204-bcac-5ddd98d63524\", \"Name\": \"Travel Costs\", \"AccountCode\": \"850\", \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"ReimbursementTypeID\": \"aa8cfa40-d872-4be0-8a94-bb7f00962f74\", \"Name\": \"Other Reimbursable Costs\", \"AccountCode\": \"850\", \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true } ], \"LeaveTypes\": [ { \"LeaveTypeID\": \"fbcc9dab-6238-43d9-a3f4-d768423fdcfa\", \"Name\": \"Annual Leave\", \"TypeOfUnits\": \"Hours\", \"NormalEntitlement\": 152, \"LeaveLoadingRate\": 1.0, \"IsPaidLeave\": true, \"ShowOnPayslip\": true, \"UpdatedDateUTC\": \"/Date(1573620853000+0000)/\", \"CurrentRecord\": true }, { \"LeaveTypeID\": \"74195ab2-1f2b-4136-8ddc-20387a0b1027\", \"Name\": \"Long Service Leave\", \"TypeOfUnits\": \"Hours\", \"IsPaidLeave\": true, \"ShowOnPayslip\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true }, { \"LeaveTypeID\": \"ff4d16da-ae8a-4f57-acb3-9ee593996bce\", \"Name\": \"Parental Leave (unpaid)\", \"TypeOfUnits\": \"Hours\", \"IsPaidLeave\": false, \"ShowOnPayslip\": false, \"UpdatedDateUTC\": \"/Date(1547500330000+0000)/\", \"CurrentRecord\": true } ] } }"
     }
   }
 };
