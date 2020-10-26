@@ -2844,7 +2844,6 @@ ul.nav-tabs {
 };
     defs["TaxDeclaration"] = {
   "title" : "",
-  "required" : [ "EmployeeID" ],
   "type" : "object",
   "properties" : {
     "EmployeeID" : {
@@ -3075,7 +3074,7 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "",
-  "enum" : [ "DRAFT", "PROCESSED", "APPROVED" ]
+  "enum" : [ "DRAFT", "PROCESSED", "APPROVED", "REJECTED", "REQUESTED" ]
 };
     defs["Timesheets"] = {
   "title" : "",
@@ -3226,7 +3225,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.3.2</div>
+              <div class="app-desc">Version: 2.3.7</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in Australia region.
@@ -3362,35 +3361,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
 const employee = [ { "FirstName": "Albus", "LastName": "Dumbledore", "DateOfBirth": "/Date(321523200000+0000)/", "HomeAddress": { "AddressLine1": "101 Green St", "City": "Island Bay", "Region": "NSW", "PostalCode": "6023", "Country": "AUSTRALIA" }, "StartDate": "/Date(321523200000+0000)/", "MiddleNames": "Percival", "Email": "albus39608@hogwarts.edu", "Gender": "M", "Phone": "444-2323", "Mobile": "555-1212", "IsAuthorisedToApproveLeave": true, "IsAuthorisedToApproveTimesheets": true, "JobTitle": "Regional Manager", "Classification": "corporate", "OrdinaryEarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "Status": "ACTIVE" } ];  // {array[Employee]} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createEmployee(xeroTenantId, employee);
+  const response = await xero.accountingApi.createEmployee(xeroTenantId, employee);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createEmployee(xeroTenantId, employee, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-createEmployee-0-angular">
@@ -3847,35 +3829,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
 const leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "Title": "Hello World", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/" } ];  // {array[LeaveApplication]} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createLeaveApplication(xeroTenantId, leaveApplication);
+  const response = await xero.accountingApi.createLeaveApplication(xeroTenantId, leaveApplication);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createLeaveApplication(xeroTenantId, leaveApplication, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-createLeaveApplication-0-angular">
@@ -4332,35 +4297,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const payItem:PayItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] };  // {PayItem} 
+const payItem: PayItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] };  // {PayItem} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createPayItem(xeroTenantId, payItem);
+  const response = await xero.accountingApi.createPayItem(xeroTenantId, payItem);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createPayItem(xeroTenantId, payItem, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-createPayItem-0-angular">
@@ -4814,35 +4762,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
 const payRun = [ { "PayrollCalendarID": "78bb86b9-e1ea-47ac-b75d-f087a81931de", "PayRunPeriodStartDate": "/Date(1572566400000+0000)/", "PayRunPeriodEndDate": "/Date(1573084800000+0000)/", "PayRunStatus": "DRAFT", "PaymentDate": "/Date(1573171200000+0000)/" } ];  // {array[PayRun]} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createPayRun(xeroTenantId, payRun);
+  const response = await xero.accountingApi.createPayRun(xeroTenantId, payRun);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createPayRun(xeroTenantId, payRun, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-createPayRun-0-angular">
@@ -5299,35 +5230,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
 const payrollCalendar = [ { "PayrollCalendarID":"78bb86b9-e1ea-47ac-b75d-f087a81931de", "PayRunPeriodStartDate":"/Date(1572566400000+0000)/", "PayRunPeriodEndDate":"/Date(1573084800000+0000)/", "PayRunStatus":"DRAFT", "PaymentDate":"/Date(1573171200000+0000)/" } ];  // {array[PayrollCalendar]} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createPayrollCalendar(xeroTenantId, payrollCalendar);
+  const response = await xero.accountingApi.createPayrollCalendar(xeroTenantId, payrollCalendar);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createPayrollCalendar(xeroTenantId, payrollCalendar, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-createPayrollCalendar-0-angular">
@@ -5784,35 +5698,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
 const superFund = [ { "usi":"PTC0133AU", "Type":"REGULATED", "Name":"Bar99359", "AccountNumber":"FB36350", "AccountName":"Foo38428", "USI":"PTC0133AU" } ];  // {array[SuperFund]} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createSuperfund(xeroTenantId, superFund);
+  const response = await xero.accountingApi.createSuperfund(xeroTenantId, superFund);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createSuperfund(xeroTenantId, superFund, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-createSuperfund-0-angular">
@@ -6269,35 +6166,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
 const timesheet = [ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f968767118bc", "StartDate":"/Date(1573171200000+0000)/", "EndDate":"/Date(1573689600000+0000)/", "Status":"DRAFT", "TimesheetLines":[ { "EarningsRateID":"ab874dfb-ab09-4c91-954e-43acf6fc23b4", "TrackingItemID":"af5e9ce2-2349-4136-be99-3561b189f473", "NumberOfUnits":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ] } ] } ];  // {array[Timesheet]} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createTimesheet(xeroTenantId, timesheet);
+  const response = await xero.accountingApi.createTimesheet(xeroTenantId, timesheet);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createTimesheet(xeroTenantId, timesheet, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-createTimesheet-0-angular">
@@ -6754,35 +6634,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const employeeId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Employee id for single object
+
 try {
-  const response: any = await xero.accountingApi.getEmployee(xeroTenantId, employeeId);
+  const response = await xero.accountingApi.getEmployee(xeroTenantId, employeeId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getEmployee(xeroTenantId, employeeId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getEmployee-0-angular">
@@ -7200,39 +7063,25 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const ifModifiedSince:Date = new Date("ifModifiedSince_example"); 
-const where =  'Status=="ACTIVE"';  // {String} Filter by an any element
-const order =  'EmailAddress%20DESC';  // {String} Order by an any element
-const page =  56;  // {Integer} e.g. page=1 – Up to 100 employees will be returned in a single API call
+
+const ifModifiedSince: Date = new Date("ifModifiedSince_example");
+const where = 'Status=="ACTIVE"';  // {String} Filter by an any element
+
+const order = 'EmailAddress%20DESC';  // {String} Order by an any element
+
+const page = 56;  // {Integer} e.g. page=1 – Up to 100 employees will be returned in a single API call
+
 
 try {
-  const response: any = await xero.accountingApi.getEmployees(xeroTenantId, ifModifiedSince, where, order, page);
+  const response = await xero.accountingApi.getEmployees(xeroTenantId, ifModifiedSince, where, order, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getEmployees(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getEmployees-0-angular">
@@ -7773,35 +7622,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const leaveApplicationId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Leave Application id for single object
+
 try {
-  const response: any = await xero.accountingApi.getLeaveApplication(xeroTenantId, leaveApplicationId);
+  const response = await xero.accountingApi.getLeaveApplication(xeroTenantId, leaveApplicationId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getLeaveApplication(xeroTenantId, leaveApplicationId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getLeaveApplication-0-angular">
@@ -8219,39 +8051,25 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const ifModifiedSince:Date = new Date("ifModifiedSince_example"); 
-const where =  'Status=="ACTIVE"';  // {String} Filter by an any element
-const order =  'EmailAddress%20DESC';  // {String} Order by an any element
-const page =  56;  // {Integer} e.g. page=1 – Up to 100 objects will be returned in a single API call
+
+const ifModifiedSince: Date = new Date("ifModifiedSince_example");
+const where = 'Status=="ACTIVE"';  // {String} Filter by an any element
+
+const order = 'EmailAddress%20DESC';  // {String} Order by an any element
+
+const page = 56;  // {Integer} e.g. page=1 – Up to 100 objects will be returned in a single API call
+
 
 try {
-  const response: any = await xero.accountingApi.getLeaveApplications(xeroTenantId, ifModifiedSince, where, order, page);
+  const response = await xero.accountingApi.getLeaveApplications(xeroTenantId, ifModifiedSince, where, order, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getLeaveApplications(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getLeaveApplications-0-angular">
@@ -8804,39 +8622,25 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const ifModifiedSince:Date = new Date("ifModifiedSince_example"); 
-const where =  'Status=="ACTIVE"';  // {String} Filter by an any element
-const order =  'EmailAddress%20DESC';  // {String} Order by an any element
-const page =  56;  // {Integer} e.g. page=1 – Up to 100 objects will be returned in a single API call
+
+const ifModifiedSince: Date = new Date("ifModifiedSince_example");
+const where = 'Status=="ACTIVE"';  // {String} Filter by an any element
+
+const order = 'EmailAddress%20DESC';  // {String} Order by an any element
+
+const page = 56;  // {Integer} e.g. page=1 – Up to 100 objects will be returned in a single API call
+
 
 try {
-  const response: any = await xero.accountingApi.getPayItems(xeroTenantId, ifModifiedSince, where, order, page);
+  const response = await xero.accountingApi.getPayItems(xeroTenantId, ifModifiedSince, where, order, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPayItems(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getPayItems-0-angular">
@@ -9377,35 +9181,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const payRunID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} PayRun id for single object
+
 try {
-  const response: any = await xero.accountingApi.getPayRun(xeroTenantId, payRunID);
+  const response = await xero.accountingApi.getPayRun(xeroTenantId, payRunID);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPayRun(xeroTenantId, payRunID, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getPayRun-0-angular">
@@ -9823,39 +9610,25 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const ifModifiedSince:Date = new Date("ifModifiedSince_example"); 
-const where =  'Status=="ACTIVE"';  // {String} Filter by an any element
-const order =  'EmailAddress%20DESC';  // {String} Order by an any element
-const page =  56;  // {Integer} e.g. page=1 – Up to 100 PayRuns will be returned in a single API call
+
+const ifModifiedSince: Date = new Date("ifModifiedSince_example");
+const where = 'Status=="ACTIVE"';  // {String} Filter by an any element
+
+const order = 'EmailAddress%20DESC';  // {String} Order by an any element
+
+const page = 56;  // {Integer} e.g. page=1 – Up to 100 PayRuns will be returned in a single API call
+
 
 try {
-  const response: any = await xero.accountingApi.getPayRuns(xeroTenantId, ifModifiedSince, where, order, page);
+  const response = await xero.accountingApi.getPayRuns(xeroTenantId, ifModifiedSince, where, order, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPayRuns(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getPayRuns-0-angular">
@@ -10396,35 +10169,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const payrollCalendarID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Payroll Calendar id for single object
+
 try {
-  const response: any = await xero.accountingApi.getPayrollCalendar(xeroTenantId, payrollCalendarID);
+  const response = await xero.accountingApi.getPayrollCalendar(xeroTenantId, payrollCalendarID);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPayrollCalendar(xeroTenantId, payrollCalendarID, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getPayrollCalendar-0-angular">
@@ -10911,39 +10667,25 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const ifModifiedSince:Date = new Date("ifModifiedSince_example"); 
-const where =  'Status=="ACTIVE"';  // {String} Filter by an any element
-const order =  'EmailAddress%20DESC';  // {String} Order by an any element
-const page =  56;  // {Integer} e.g. page=1 – Up to 100 objects will be returned in a single API call
+
+const ifModifiedSince: Date = new Date("ifModifiedSince_example");
+const where = 'Status=="ACTIVE"';  // {String} Filter by an any element
+
+const order = 'EmailAddress%20DESC';  // {String} Order by an any element
+
+const page = 56;  // {Integer} e.g. page=1 – Up to 100 objects will be returned in a single API call
+
 
 try {
-  const response: any = await xero.accountingApi.getPayrollCalendars(xeroTenantId, ifModifiedSince, where, order, page);
+  const response = await xero.accountingApi.getPayrollCalendars(xeroTenantId, ifModifiedSince, where, order, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPayrollCalendars(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getPayrollCalendars-0-angular">
@@ -11484,35 +11226,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const payslipID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Payslip id for single object
+
 try {
-  const response: any = await xero.accountingApi.getPayslip(xeroTenantId, payslipID);
+  const response = await xero.accountingApi.getPayslip(xeroTenantId, payslipID);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getPayslip(xeroTenantId, payslipID, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getPayslip-0-angular">
@@ -11914,34 +11639,17 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
 try {
-  const response: any = await xero.accountingApi.getSettings(xeroTenantId);
+  const response = await xero.accountingApi.getSettings(xeroTenantId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSettings(xeroTenantId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getSettings-0-angular">
@@ -12310,35 +12018,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const superFundID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Superfund id for single object
+
 try {
-  const response: any = await xero.accountingApi.getSuperfund(xeroTenantId, superFundID);
+  const response = await xero.accountingApi.getSuperfund(xeroTenantId, superFundID);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSuperfund(xeroTenantId, superFundID, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getSuperfund-0-angular">
@@ -12748,37 +12439,22 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const aBN =  '40022701955';  // {String} The ABN of the Regulated SuperFund
-const uSI =  'OSF0001AU';  // {String} The USI of the Regulated SuperFund
+
+const aBN = '40022701955';  // {String} The ABN of the Regulated SuperFund
+
+const uSI = 'OSF0001AU';  // {String} The USI of the Regulated SuperFund
+
 
 try {
-  const response: any = await xero.accountingApi.getSuperfundProducts(xeroTenantId,  aBN, uSI);
+  const response = await xero.accountingApi.getSuperfundProducts(xeroTenantId,  aBN, uSI);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSuperfundProducts(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getSuperfundProducts-0-angular">
@@ -13283,39 +12959,25 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const ifModifiedSince:Date = new Date("ifModifiedSince_example"); 
-const where =  'Status=="ACTIVE"';  // {String} Filter by an any element
-const order =  'EmailAddress%20DESC';  // {String} Order by an any element
-const page =  56;  // {Integer} e.g. page=1 – Up to 100 SuperFunds will be returned in a single API call
+
+const ifModifiedSince: Date = new Date("ifModifiedSince_example");
+const where = 'Status=="ACTIVE"';  // {String} Filter by an any element
+
+const order = 'EmailAddress%20DESC';  // {String} Order by an any element
+
+const page = 56;  // {Integer} e.g. page=1 – Up to 100 SuperFunds will be returned in a single API call
+
 
 try {
-  const response: any = await xero.accountingApi.getSuperfunds(xeroTenantId, ifModifiedSince, where, order, page);
+  const response = await xero.accountingApi.getSuperfunds(xeroTenantId, ifModifiedSince, where, order, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getSuperfunds(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getSuperfunds-0-angular">
@@ -13856,35 +13518,18 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const timesheetID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Timesheet id for single object
+
 try {
-  const response: any = await xero.accountingApi.getTimesheet(xeroTenantId, timesheetID);
+  const response = await xero.accountingApi.getTimesheet(xeroTenantId, timesheetID);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getTimesheet(xeroTenantId, timesheetID, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getTimesheet-0-angular">
@@ -14302,39 +13947,25 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const ifModifiedSince:Date = new Date("ifModifiedSince_example"); 
-const where =  'Status=="ACTIVE"';  // {String} Filter by an any element
-const order =  'EmailAddress%20DESC';  // {String} Order by an any element
-const page =  56;  // {Integer} e.g. page=1 – Up to 100 timesheets will be returned in a single API call
+
+const ifModifiedSince: Date = new Date("ifModifiedSince_example");
+const where = 'Status=="ACTIVE"';  // {String} Filter by an any element
+
+const order = 'EmailAddress%20DESC';  // {String} Order by an any element
+
+const page = 56;  // {Integer} e.g. page=1 – Up to 100 timesheets will be returned in a single API call
+
 
 try {
-  const response: any = await xero.accountingApi.getTimesheets(xeroTenantId, ifModifiedSince, where, order, page);
+  const response = await xero.accountingApi.getTimesheets(xeroTenantId, ifModifiedSince, where, order, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getTimesheets(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-getTimesheets-0-angular">
@@ -14879,37 +14510,21 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const employeeId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Employee id for single object
-const employee =  ['[ { "MiddleNames": "Frank" } ]'];  // {array[Employee]} 
+
+const employee = ['[ { "MiddleNames": "Frank" } ]'];  // {array[Employee]} 
+
 
 try {
-  const response: any = await xero.accountingApi.updateEmployee(xeroTenantId, employeeId,  employee);
+  const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeId,  employee);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updateEmployee(xeroTenantId, employeeId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-updateEmployee-0-angular">
@@ -15379,36 +14994,19 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const leaveApplicationId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Leave Application id for single object 
 const leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/", "Description": "My updated Description" } ];  // {array[LeaveApplication]} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const leaveApplicationId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Leave Application id for single object
+
+
 try {
-  const response: any = await xero.accountingApi.updateLeaveApplication(xeroTenantId, leaveApplicationId, leaveApplication);
+  const response = await xero.accountingApi.updateLeaveApplication(xeroTenantId, leaveApplicationId, leaveApplication);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updateLeaveApplication(xeroTenantId, leaveApplicationId, leaveApplication, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-updateLeaveApplication-0-angular">
@@ -15906,37 +15504,21 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const payRunID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} PayRun id for single object
-const payRun =  [''];  // {array[PayRun]} 
+
+const payRun = [''];  // {array[PayRun]} 
+
 
 try {
-  const response: any = await xero.accountingApi.updatePayRun(xeroTenantId, payRunID,  payRun);
+  const response = await xero.accountingApi.updatePayRun(xeroTenantId, payRunID,  payRun);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updatePayRun(xeroTenantId, payRunID, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-updatePayRun-0-angular">
@@ -16406,37 +15988,21 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const payslipID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Payslip id for single object
-const payslipLines =  ['{ "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }'];  // {array[PayslipLines]} 
+
+const payslipLines = ['{ "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } }'];  // {array[PayslipLines]} 
+
 
 try {
-  const response: any = await xero.accountingApi.updatePayslip(xeroTenantId, payslipID,  payslipLines);
+  const response = await xero.accountingApi.updatePayslip(xeroTenantId, payslipID,  payslipLines);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updatePayslip(xeroTenantId, payslipID, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-updatePayslip-0-angular">
@@ -16906,37 +16472,21 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const superFundID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Superfund id for single object
-const superFund =  [' [ { "Type":"REGULATED", "Name":"Nice23534" } ]'];  // {array[SuperFund]} 
+
+const superFund = [' [ { "Type":"REGULATED", "Name":"Nice23534" } ]'];  // {array[SuperFund]} 
+
 
 try {
-  const response: any = await xero.accountingApi.updateSuperfund(xeroTenantId, superFundID,  superFund);
+  const response = await xero.accountingApi.updateSuperfund(xeroTenantId, superFundID,  superFund);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updateSuperfund(xeroTenantId, superFundID, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-updateSuperfund-0-angular">
@@ -17406,37 +16956,21 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const timesheetID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Timesheet id for single object
-const timesheet =  ['[ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f968767118bc", "StartDate":"/Date(1573171200000+0000)/", "EndDate":"/Date(1573689600000+0000)/", "Status":"APPROVED", "Hours":22.0, "TimesheetID":"a7eb0a79-8511-4ee7-b473-3a25f28abcb9", "TimesheetLines":[ { "EarningsRateID":"ab874dfb-ab09-4c91-954e-43acf6fc23b4", "TrackingItemID":"af5e9ce2-2349-4136-be99-3561b189f473", "NumberOfUnits":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ], "UpdatedDateUTC":"/Date(1573516185127+0000)/" } ] } ]'];  // {array[Timesheet]} 
+
+const timesheet = ['[ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f968767118bc", "StartDate":"/Date(1573171200000+0000)/", "EndDate":"/Date(1573689600000+0000)/", "Status":"APPROVED", "Hours":22.0, "TimesheetID":"a7eb0a79-8511-4ee7-b473-3a25f28abcb9", "TimesheetLines":[ { "EarningsRateID":"ab874dfb-ab09-4c91-954e-43acf6fc23b4", "TrackingItemID":"af5e9ce2-2349-4136-be99-3561b189f473", "NumberOfUnits":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ], "UpdatedDateUTC":"/Date(1573516185127+0000)/" } ] } ]'];  // {array[Timesheet]} 
+
 
 try {
-  const response: any = await xero.accountingApi.updateTimesheet(xeroTenantId, timesheetID,  timesheet);
+  const response = await xero.accountingApi.updateTimesheet(xeroTenantId, timesheetID,  timesheet);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .PayrollAuApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.updateTimesheet(xeroTenantId, timesheetID, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-PayrollAu-updateTimesheet-0-angular">

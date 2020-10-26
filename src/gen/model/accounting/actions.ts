@@ -10,22 +10,22 @@
  * Do not edit the class manually.
  */
 
-import { Report } from '././report';
+import { Action } from '././action';
 
-export class Reports {
-    'reports'?: Array<Report>;
+export class Actions {
+    'actions'?: Array<Action>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "reports",
-            "baseName": "Reports",
-            "type": "Array<Report>"
+            "name": "actions",
+            "baseName": "Actions",
+            "type": "Array<Action>"
         }    ];
 
     static getAttributeTypeMap() {
-        return Reports.attributeTypeMap;
+        return Actions.attributeTypeMap;
     }
 }
 

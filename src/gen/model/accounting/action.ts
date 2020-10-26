@@ -10,28 +10,39 @@
  * Do not edit the class manually.
  */
 
-import { Bill } from '././bill';
 
-export class PaymentTerm {
-    'bills'?: Bill;
-    'sales'?: Bill;
+export class Action {
+    /**
+    * Name of the actions for this organisation
+    */
+    'name'?: string;
+    /**
+    * Status of the action for this organisation
+    */
+    'status'?: Action.StatusEnum;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "bills",
-            "baseName": "Bills",
-            "type": "Bill"
+            "name": "name",
+            "baseName": "Name",
+            "type": "string"
         },
         {
-            "name": "sales",
-            "baseName": "Sales",
-            "type": "Bill"
+            "name": "status",
+            "baseName": "Status",
+            "type": "Action.StatusEnum"
         }    ];
 
     static getAttributeTypeMap() {
-        return PaymentTerm.attributeTypeMap;
+        return Action.attributeTypeMap;
     }
 }
 
+export namespace Action {
+    export enum StatusEnum {
+        ALLOWED = <any> 'ALLOWED',
+        NOTALLOWED = <any> 'NOT-ALLOWED'
+    }
+}

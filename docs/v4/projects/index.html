@@ -1412,7 +1412,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.3.2</div>
+              <div class="app-desc">Version: 2.3.7</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Projects API
@@ -1548,35 +1548,18 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const projectCreateOrUpdate:ProjectCreateOrUpdate = { "contactId":"00000000-0000-0000-000-000000000000", "name":"New Kitchen", "deadlineUtc":"2019-12-10T12:59:59Z", "estimateAmount":"99.99" };  // {ProjectCreateOrUpdate} 
+const projectCreateOrUpdate: ProjectCreateOrUpdate = { "contactId":"00000000-0000-0000-000-000000000000", "name":"New Kitchen", "deadlineUtc":"2019-12-10T12:59:59Z", "estimateAmount":"99.99" };  // {ProjectCreateOrUpdate} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createProject(xeroTenantId, projectCreateOrUpdate);
+  const response = await xero.accountingApi.createProject(xeroTenantId, projectCreateOrUpdate);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createProject(xeroTenantId, projectCreateOrUpdate, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-createProject-0-angular">
@@ -2080,36 +2063,19 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint 
-const timeEntryCreateOrUpdate:TimeEntryCreateOrUpdate = { "userId":"740add2a-a703-4b8a-a670-1093919c2040", "taskId":"7be77337-feec-4458-bb1b-dbaa5a4aafce", "dateUtc":"2020-02-26T15:00:00Z", "duration":30, "description":"My description" };  // {TimeEntryCreateOrUpdate} 
+const timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate = { "userId":"740add2a-a703-4b8a-a670-1093919c2040", "taskId":"7be77337-feec-4458-bb1b-dbaa5a4aafce", "dateUtc":"2020-02-26T15:00:00Z", "duration":30, "description":"My description" };  // {TimeEntryCreateOrUpdate} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
+
+
 try {
-  const response: any = await xero.accountingApi.createTimeEntry(xeroTenantId, projectId, timeEntryCreateOrUpdate);
+  const response = await xero.accountingApi.createTimeEntry(xeroTenantId, projectId, timeEntryCreateOrUpdate);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createTimeEntry(xeroTenantId, projectId, timeEntryCreateOrUpdate, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-createTimeEntry-0-angular">
@@ -2581,36 +2547,19 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
 const timeEntryId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual task by appending the id to the endpoint
+
 try {
-  const response: any = await xero.accountingApi.deleteTimeEntry(xeroTenantId, projectId, timeEntryId);
+  const response = await xero.accountingApi.deleteTimeEntry(xeroTenantId, projectId, timeEntryId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.deleteTimeEntry(xeroTenantId, projectId, timeEntryId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-deleteTimeEntry-0-angular">
@@ -3002,35 +2951,18 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
+
 try {
-  const response: any = await xero.accountingApi.getProject(xeroTenantId, projectId);
+  const response = await xero.accountingApi.getProject(xeroTenantId, projectId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getProject(xeroTenantId, projectId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-getProject-0-angular">
@@ -3514,37 +3446,22 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const page =  1;  // {Integer} set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
-const pageSize =  100;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
+
+const page = 1;  // {Integer} set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
+
+const pageSize = 100;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
+
 
 try {
-  const response: any = await xero.accountingApi.getProjectUsers(xeroTenantId,  page, pageSize);
+  const response = await xero.accountingApi.getProjectUsers(xeroTenantId,  page, pageSize);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getProjectUsers(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-getProjectUsers-0-angular">
@@ -4053,40 +3970,28 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const projectIds =  [''];  // {array[UUID]} Search for all projects that match a comma separated list of projectIds
-const contactID =  '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} Filter for projects for a specific contact
-const states =  'states_example';  // {String} Filter for projects in a particular state (INPROGRESS or CLOSED)
-const page =  1;  // {Integer} set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
-const pageSize =  100;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
+
+const projectIds = [''];  // {array[UUID]} Search for all projects that match a comma separated list of projectIds
+
+const contactID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} Filter for projects for a specific contact
+
+const states = 'states_example';  // {String} Filter for projects in a particular state (INPROGRESS or CLOSED)
+
+const page = 1;  // {Integer} set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
+
+const pageSize = 100;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
+
 
 try {
-  const response: any = await xero.accountingApi.getProjects(xeroTenantId,  projectIds, contactID, states, page, pageSize);
+  const response = await xero.accountingApi.getProjects(xeroTenantId,  projectIds, contactID, states, page, pageSize);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getProjects(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-getProjects-0-angular">
@@ -4666,36 +4571,19 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
 const taskId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId}
+
 try {
-  const response: any = await xero.accountingApi.getTask(xeroTenantId, projectId, taskId);
+  const response = await xero.accountingApi.getTask(xeroTenantId, projectId, taskId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getTask(xeroTenantId, projectId, taskId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-getTask-0-angular">
@@ -5148,39 +5036,25 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
-const page =  1;  // {Integer} Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
-const pageSize =  10;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-const taskIds =  'taskIds_example';  // {String} taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+
+const page = 1;  // {Integer} Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
+
+const pageSize = 10;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
+
+const taskIds = 'taskIds_example';  // {String} taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+
 
 try {
-  const response: any = await xero.accountingApi.getTasks(xeroTenantId, projectId,  page, pageSize, taskIds);
+  const response = await xero.accountingApi.getTasks(xeroTenantId, projectId,  page, pageSize, taskIds);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getTasks(xeroTenantId, projectId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-getTasks-0-angular">
@@ -5710,46 +5584,39 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} Identifier of the project, that the task (which the time entry is logged against) belongs to.
-const userId =  '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} The xero user identifier of the person who logged time.
-const taskId =  '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} Identifier of the task that time entry is logged against.
-const invoiceId =  '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} Finds all time entries for this invoice.
-const contactId =  '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} Finds all time entries for this contact identifier.
-const page =  1;  // {Integer} Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
-const pageSize =  10;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-const states =  [''];  // {array[String]} Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
-const isChargeable =  true;  // {Boolean} Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>.
-const dateAfterUtc =  2013-10-20T19:20:30+01:00;  // {Date} ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field.
-const dateBeforeUtc =  2013-10-20T19:20:30+01:00;  // {Date} ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field.
+
+const userId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} The xero user identifier of the person who logged time.
+
+const taskId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} Identifier of the task that time entry is logged against.
+
+const invoiceId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} Finds all time entries for this invoice.
+
+const contactId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} Finds all time entries for this contact identifier.
+
+const page = 1;  // {Integer} Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
+
+const pageSize = 10;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
+
+const states = [''];  // {array[String]} Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
+
+const isChargeable = true;  // {Boolean} Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>.
+
+const dateAfterUtc = 2013-10-20T19:20:30+01:00;  // {Date} ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field.
+
+const dateBeforeUtc = 2013-10-20T19:20:30+01:00;  // {Date} ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field.
+
 
 try {
-  const response: any = await xero.accountingApi.getTimeEntries(xeroTenantId, projectId,  userId, taskId, invoiceId, contactId, page, pageSize, states, isChargeable, dateAfterUtc, dateBeforeUtc);
+  const response = await xero.accountingApi.getTimeEntries(xeroTenantId, projectId,  userId, taskId, invoiceId, contactId, page, pageSize, states, isChargeable, dateAfterUtc, dateBeforeUtc);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getTimeEntries(xeroTenantId, projectId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-getTimeEntries-0-angular">
@@ -6429,36 +6296,19 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint 
+
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
 const timeEntryId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual time entry by appending the id to the endpoint
+
 try {
-  const response: any = await xero.accountingApi.getTimeEntry(xeroTenantId, projectId, timeEntryId);
+  const response = await xero.accountingApi.getTimeEntry(xeroTenantId, projectId, timeEntryId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getTimeEntry(xeroTenantId, projectId, timeEntryId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-getTimeEntry-0-angular">
@@ -6898,36 +6748,19 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint 
-const projectPatch:ProjectPatch = { "status": "INPROGRESS" };  // {ProjectPatch} 
+const projectPatch: ProjectPatch = { "status": "INPROGRESS" };  // {ProjectPatch} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
+
+
 try {
-  const response: any = await xero.accountingApi.patchProject(xeroTenantId, projectId, projectPatch);
+  const response = await xero.accountingApi.patchProject(xeroTenantId, projectId, projectPatch);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.patchProject(xeroTenantId, projectId, projectPatch, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-patchProject-0-angular">
@@ -7414,36 +7247,19 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint 
-const projectCreateOrUpdate:ProjectCreateOrUpdate = { "name": "New Kitchen", "deadlineUtc": "2017-04-23T18:25:43.511Z", "estimateAmount": 99.99 };  // {ProjectCreateOrUpdate} 
+const projectCreateOrUpdate: ProjectCreateOrUpdate = { "name": "New Kitchen", "deadlineUtc": "2017-04-23T18:25:43.511Z", "estimateAmount": 99.99 };  // {ProjectCreateOrUpdate} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
+
+
 try {
-  const response: any = await xero.accountingApi.updateProject(xeroTenantId, projectId, projectCreateOrUpdate);
+  const response = await xero.accountingApi.updateProject(xeroTenantId, projectId, projectCreateOrUpdate);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.updateProject(xeroTenantId, projectId, projectCreateOrUpdate, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-updateProject-0-angular">
@@ -7934,37 +7750,20 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant 
-const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint 
-const timeEntryId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual time entry by appending the id to the endpoint 
-const timeEntryCreateOrUpdate:TimeEntryCreateOrUpdate = { "userId":"740add2a-a703-4b8a-a670-1093919c2040", "taskId":"7be77337-feec-4458-bb1b-dbaa5a4aafce", "dateUtc":"2020-02-27T15:00:00Z", "duration":45, "description":"My UPDATED description" };  // {TimeEntryCreateOrUpdate} 
+const timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate = { "userId":"740add2a-a703-4b8a-a670-1093919c2040", "taskId":"7be77337-feec-4458-bb1b-dbaa5a4aafce", "dateUtc":"2020-02-27T15:00:00Z", "duration":45, "description":"My UPDATED description" };  // {TimeEntryCreateOrUpdate} 
+const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
+const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
+const timeEntryId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual time entry by appending the id to the endpoint
+
+
 try {
-  const response: any = await xero.accountingApi.updateTimeEntry(xeroTenantId, projectId, timeEntryId, timeEntryCreateOrUpdate);
+  const response = await xero.accountingApi.updateTimeEntry(xeroTenantId, projectId, timeEntryId, timeEntryCreateOrUpdate);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .ProjectApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.updateTimeEntry(xeroTenantId, projectId, timeEntryId, timeEntryCreateOrUpdate, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Project-updateTimeEntry-0-angular">

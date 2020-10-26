@@ -3,6 +3,8 @@ export * from '././accountType';
 export * from '././accounts';
 export * from '././accountsPayable';
 export * from '././accountsReceivable';
+export * from '././action';
+export * from '././actions';
 export * from '././address';
 export * from '././allocation';
 export * from '././allocations';
@@ -120,6 +122,8 @@ import { AccountType } from '././accountType';
 import { Accounts } from '././accounts';
 import { AccountsPayable } from '././accountsPayable';
 import { AccountsReceivable } from '././accountsReceivable';
+import { Action } from '././action';
+import { Actions } from '././actions';
 import { Address } from '././address';
 import { Allocation } from '././allocation';
 import { Allocations } from '././allocations';
@@ -248,6 +252,7 @@ let enumsMap: {[index: string]: any} = {
         "Account.ClassEnum": Account.ClassEnum,
         "Account.SystemAccountEnum": Account.SystemAccountEnum,
         "AccountType": AccountType,
+        "Action.StatusEnum": Action.StatusEnum,
         "Address.AddressTypeEnum": Address.AddressTypeEnum,
         "BankTransaction.TypeEnum": BankTransaction.TypeEnum,
         "BankTransaction.StatusEnum": BankTransaction.StatusEnum,
@@ -310,6 +315,8 @@ let typeMap: {[index: string]: any} = {
     "Accounts": Accounts,
     "AccountsPayable": AccountsPayable,
     "AccountsReceivable": AccountsReceivable,
+    "Action": Action,
+    "Actions": Actions,
     "Address": Address,
     "Allocation": Allocation,
     "Allocations": Allocations,
