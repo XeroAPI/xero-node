@@ -1309,7 +1309,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.3.2</div>
+              <div class="app-desc">Version: 2.3.7</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Assets API
@@ -1445,35 +1445,18 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant 
-const asset:Asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 };  // {Asset} 
+const asset: Asset = { "assetName":"Computer74863", "assetNumber":"123477544", "purchaseDate":"2020-01-01", "purchasePrice":100.0, "disposalPrice":23.23, "assetStatus":"Draft", "bookDepreciationSetting":{ "depreciationMethod":"StraightLine", "averagingMethod":"ActualDays", "depreciationRate":0.5, "depreciationCalculationMethod":"None" }, "bookDepreciationDetail":{ "currentCapitalGain":5.32, "currentGainLoss":3.88, "depreciationStartDate":"2020-01-02", "costLimit":100.0, "currentAccumDepreciationAmount":2.25 }, "AccountingBookValue":99.5 };  // {Asset} 
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
+
+
 try {
-  const response: any = await xero.accountingApi.createAsset(xeroTenantId, asset);
+  const response = await xero.accountingApi.createAsset(xeroTenantId, asset);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .AssetApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createAsset(xeroTenantId, asset, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Asset-createAsset-0-angular">
@@ -1928,36 +1911,20 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
-const assetType:AssetType =  { "assetTypeName":"Machinery11004", "fixedAssetAccountId":"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82", "depreciationExpenseAccountId":"d1602f69-f900-4616-8d34-90af393fa368", "accumulatedDepreciationAccountId":"9195cadd-8645-41e6-9f67-7bcd421defe8", "bookDepreciationSetting":{ "depreciationMethod":"DiminishingValue100", "averagingMethod":"ActualDays", "depreciationRate":0.05, "depreciationCalculationMethod":"None" } };  // {AssetType} 
+
+const assetType:AssetType = { "assetTypeName":"Machinery11004", "fixedAssetAccountId":"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82", "depreciationExpenseAccountId":"d1602f69-f900-4616-8d34-90af393fa368", "accumulatedDepreciationAccountId":"9195cadd-8645-41e6-9f67-7bcd421defe8", "bookDepreciationSetting":{ "depreciationMethod":"DiminishingValue100", "averagingMethod":"ActualDays", "depreciationRate":0.05, "depreciationCalculationMethod":"None" } };  // {AssetType} 
+
 
 try {
-  const response: any = await xero.accountingApi.createAssetType(xeroTenantId,  assetType);
+  const response = await xero.accountingApi.createAssetType(xeroTenantId,  assetType);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .AssetApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.createAssetType(xeroTenantId, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Asset-createAssetType-0-angular">
@@ -2433,35 +2400,18 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 const id = "4f7bcdcb-5ec1-4258-9558-19f662fccdfe";  // {UUID} fixed asset id for single object
+
 try {
-  const response: any = await xero.accountingApi.getAssetById(xeroTenantId, id);
+  const response = await xero.accountingApi.getAssetById(xeroTenantId, id);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .AssetApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getAssetById(xeroTenantId, id, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Asset-getAssetById-0-angular">
@@ -2887,34 +2837,17 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
+
 try {
-  const response: any = await xero.accountingApi.getAssetSettings(xeroTenantId);
+  const response = await xero.accountingApi.getAssetSettings(xeroTenantId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .AssetApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getAssetSettings(xeroTenantId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Asset-getAssetSettings-0-angular">
@@ -3303,34 +3236,17 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
+
 const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
+
 try {
-  const response: any = await xero.accountingApi.getAssetTypes(xeroTenantId);
+  const response = await xero.accountingApi.getAssetTypes(xeroTenantId);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .AssetApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getAssetTypes(xeroTenantId, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Asset-getAssetTypes-0-angular">
@@ -3746,41 +3662,29 @@ AssetApi *apiInstance = [[AssetApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
- 
-const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant 
+
+const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 const status = ;  // {AssetStatusQueryParam} Required when retrieving a collection of assets. See Asset Status Codes
-const page =  1;  // {Integer} Results are paged. This specifies which page of the results to return. The default page is 1.
-const pageSize =  5;  // {Integer} The number of records returned per page. By default the number of records returned is 10.
-const orderBy =  'AssetName';  // {String} Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
-const sortDirection =  'ASC';  // {String} ASC or DESC
-const filterBy =  'Draft';  // {String} A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
+
+const page = 1;  // {Integer} Results are paged. This specifies which page of the results to return. The default page is 1.
+
+const pageSize = 5;  // {Integer} The number of records returned per page. By default the number of records returned is 10.
+
+const orderBy = 'AssetName';  // {String} Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
+
+const sortDirection = 'ASC';  // {String} ASC or DESC
+
+const filterBy = 'Draft';  // {String} A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
+
 
 try {
-  const response: any = await xero.accountingApi.getAssets(xeroTenantId, status,  page, pageSize, orderBy, sortDirection, filterBy);
+  const response = await xero.accountingApi.getAssets(xeroTenantId, status,  page, pageSize, orderBy, sortDirection, filterBy);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
-  console.log(`There was an ERROR! \n Status Code: ${err.response.statusCode}.`);
-  console.log(`ERROR: \n ${JSON.stringify(err.response.body, null, 2)}`);
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
 }
-<!--
-var  = require('xero-node');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: OAuth2
-var OAuth2 = defaultClient.authentications['OAuth2'];
-OAuth2.accessToken = "YOUR ACCESS TOKEN"
-var api = new .AssetApi()-->
-<!--
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getAssets(xeroTenantId, status, opts, callback);
---></code></pre>
+</code></pre>
                             </div>
 
                             <!--<div class="tab-pane" id="examples-Asset-getAssets-0-angular">
