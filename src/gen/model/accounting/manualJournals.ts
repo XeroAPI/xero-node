@@ -13,19 +13,19 @@
 import { ManualJournal } from '././manualJournal';
 
 export class ManualJournals {
-    'manualJournals'?: Array<ManualJournal>;
+  'manualJournals'?: Array<ManualJournal>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "manualJournals",
-            "baseName": "ManualJournals",
-            "type": "Array<ManualJournal>"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "manualJournals",
+      "baseName": "ManualJournals",
+      "type": "Array<ManualJournal>"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return ManualJournals.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ManualJournals.attributeTypeMap;
+  }
 }
 

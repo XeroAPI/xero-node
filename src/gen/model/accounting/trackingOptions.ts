@@ -13,19 +13,19 @@
 import { TrackingOption } from '././trackingOption';
 
 export class TrackingOptions {
-    'options'?: Array<TrackingOption>;
+  'options'?: Array<TrackingOption>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "options",
-            "baseName": "Options",
-            "type": "Array<TrackingOption>"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "options",
+      "baseName": "Options",
+      "type": "Array<TrackingOption>"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return TrackingOptions.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return TrackingOptions.attributeTypeMap;
+  }
 }
 

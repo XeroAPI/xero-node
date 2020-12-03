@@ -12,19 +12,19 @@
 
 
 export class ImportSummaryOrganisation {
-    'present'?: boolean;
+  'present'?: boolean;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "present",
-            "baseName": "Present",
-            "type": "boolean"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "present",
+      "baseName": "Present",
+      "type": "boolean"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return ImportSummaryOrganisation.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ImportSummaryOrganisation.attributeTypeMap;
+  }
 }
 

@@ -15,31 +15,31 @@ import { Pagination } from '././pagination';
 import { Problem } from '././problem';
 
 export class SuperannuationObject {
-    'pagination'?: Pagination;
-    'problem'?: Problem;
-    'benefit'?: Benefit;
+  'pagination'?: Pagination;
+  'problem'?: Problem;
+  'benefit'?: Benefit;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "pagination",
-            "baseName": "pagination",
-            "type": "Pagination"
-        },
-        {
-            "name": "problem",
-            "baseName": "problem",
-            "type": "Problem"
-        },
-        {
-            "name": "benefit",
-            "baseName": "benefit",
-            "type": "Benefit"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "pagination",
+      "baseName": "pagination",
+      "type": "Pagination"
+    },
+    {
+      "name": "problem",
+      "baseName": "problem",
+      "type": "Problem"
+    },
+    {
+      "name": "benefit",
+      "baseName": "benefit",
+      "type": "Benefit"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return SuperannuationObject.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return SuperannuationObject.attributeTypeMap;
+  }
 }
 

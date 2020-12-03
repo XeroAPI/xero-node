@@ -13,82 +13,82 @@
 import { User } from '././user';
 
 export class FileObject {
-    /**
-    * TODO
-    */
-    'name'?: string;
-    /**
-    * TODO
-    */
-    'mimeType'?: string;
-    /**
-    * TODO
-    */
-    'size'?: number;
-    /**
-    * TODO
-    */
-    'createdDateUTC'?: Date;
-    /**
-    * TODO
-    */
-    'updatedDateUTC'?: Date;
-    'user'?: User;
-    /**
-    * TODO
-    */
-    'id'?: string;
-    /**
-    * TODO
-    */
-    'folderId'?: string;
+  /*
+    TODO
+  */
+  'name'?: string;
+  /*
+    TODO
+  */
+  'mimeType'?: string;
+  /*
+    TODO
+  */
+  'size'?: number;
+  /*
+    TODO
+  */
+  'createdDateUTC'?: Date;
+  /*
+    TODO
+  */
+  'updatedDateUTC'?: Date;
+  'user'?: User;
+  /*
+    TODO
+  */
+  'id'?: string;
+  /*
+    TODO
+  */
+  'folderId'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "name",
-            "baseName": "Name",
-            "type": "string"
-        },
-        {
-            "name": "mimeType",
-            "baseName": "MimeType",
-            "type": "string"
-        },
-        {
-            "name": "size",
-            "baseName": "Size",
-            "type": "number"
-        },
-        {
-            "name": "createdDateUTC",
-            "baseName": "CreatedDateUTC",
-            "type": "Date"
-        },
-        {
-            "name": "updatedDateUTC",
-            "baseName": "UpdatedDateUTC",
-            "type": "Date"
-        },
-        {
-            "name": "user",
-            "baseName": "User",
-            "type": "User"
-        },
-        {
-            "name": "id",
-            "baseName": "Id",
-            "type": "string"
-        },
-        {
-            "name": "folderId",
-            "baseName": "FolderId",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "name",
+      "baseName": "Name",
+      "type": "string"
+    },
+    {
+      "name": "mimeType",
+      "baseName": "MimeType",
+      "type": "string"
+    },
+    {
+      "name": "size",
+      "baseName": "Size",
+      "type": "number"
+    },
+    {
+      "name": "createdDateUTC",
+      "baseName": "CreatedDateUTC",
+      "type": "Date"
+    },
+    {
+      "name": "updatedDateUTC",
+      "baseName": "UpdatedDateUTC",
+      "type": "Date"
+    },
+    {
+      "name": "user",
+      "baseName": "User",
+      "type": "User"
+    },
+    {
+      "name": "id",
+      "baseName": "Id",
+      "type": "string"
+    },
+    {
+      "name": "folderId",
+      "baseName": "FolderId",
+      "type": "string"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return FileObject.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return FileObject.attributeTypeMap;
+  }
 }
 

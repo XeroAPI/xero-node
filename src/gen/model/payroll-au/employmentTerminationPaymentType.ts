@@ -12,6 +12,6 @@
 
 
 export enum EmploymentTerminationPaymentType {
-    O = <any> 'O',
-    R = <any> 'R'
+  O = <any> 'O',
+  R = <any> 'R'
 }

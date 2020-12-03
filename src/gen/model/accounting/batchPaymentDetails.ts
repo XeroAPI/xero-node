@@ -15,58 +15,58 @@
 * Bank details for use on a batch payment stored with each contact
 */
 export class BatchPaymentDetails {
-    /**
-    * Bank account number for use with Batch Payments
-    */
-    'bankAccountNumber'?: string;
-    /**
-    * Name of bank for use with Batch Payments
-    */
-    'bankAccountName'?: string;
-    /**
-    * (Non-NZ Only) These details are sent to the org’s bank as a reference for the batch payment transaction. They will also show with the batch payment transaction in the bank reconciliation Find & Match screen. Depending on your individual bank, the detail may also show on the bank statement imported into Xero. Maximum field length = 18
-    */
-    'details'?: string;
-    /**
-    * (NZ Only) Optional references for the batch payment transaction. It will also show with the batch payment transaction in the bank reconciliation Find & Match screen. Depending on your individual bank, the detail may also show on the bank statement you import into Xero.
-    */
-    'code'?: string;
-    /**
-    * (NZ Only) Optional references for the batch payment transaction. It will also show with the batch payment transaction in the bank reconciliation Find & Match screen. Depending on your individual bank, the detail may also show on the bank statement you import into Xero.
-    */
-    'reference'?: string;
+  /*
+    Bank account number for use with Batch Payments
+  */
+  'bankAccountNumber'?: string;
+  /*
+    Name of bank for use with Batch Payments
+  */
+  'bankAccountName'?: string;
+  /*
+    (Non-NZ Only) These details are sent to the org’s bank as a reference for the batch payment transaction. They will also show with the batch payment transaction in the bank reconciliation Find & Match screen. Depending on your individual bank, the detail may also show on the bank statement imported into Xero. Maximum field length = 18
+  */
+  'details'?: string;
+  /*
+    (NZ Only) Optional references for the batch payment transaction. It will also show with the batch payment transaction in the bank reconciliation Find & Match screen. Depending on your individual bank, the detail may also show on the bank statement you import into Xero.
+  */
+  'code'?: string;
+  /*
+    (NZ Only) Optional references for the batch payment transaction. It will also show with the batch payment transaction in the bank reconciliation Find & Match screen. Depending on your individual bank, the detail may also show on the bank statement you import into Xero.
+  */
+  'reference'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "bankAccountNumber",
-            "baseName": "BankAccountNumber",
-            "type": "string"
-        },
-        {
-            "name": "bankAccountName",
-            "baseName": "BankAccountName",
-            "type": "string"
-        },
-        {
-            "name": "details",
-            "baseName": "Details",
-            "type": "string"
-        },
-        {
-            "name": "code",
-            "baseName": "Code",
-            "type": "string"
-        },
-        {
-            "name": "reference",
-            "baseName": "Reference",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "bankAccountNumber",
+      "baseName": "BankAccountNumber",
+      "type": "string"
+    },
+    {
+      "name": "bankAccountName",
+      "baseName": "BankAccountName",
+      "type": "string"
+    },
+    {
+      "name": "details",
+      "baseName": "Details",
+      "type": "string"
+    },
+    {
+      "name": "code",
+      "baseName": "Code",
+      "type": "string"
+    },
+    {
+      "name": "reference",
+      "baseName": "Reference",
+      "type": "string"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return BatchPaymentDetails.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return BatchPaymentDetails.attributeTypeMap;
+  }
 }
 

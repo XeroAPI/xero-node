@@ -13,67 +13,67 @@
 import { ValidationError } from '././validationError';
 
 export class Element {
-    /**
-    * Array of Validation Error message
-    */
-    'validationErrors'?: Array<ValidationError>;
-    /**
-    * Unique ID for batch payment object with validation error
-    */
-    'batchPaymentID'?: string;
-    'bankTransactionID'?: string;
-    'creditNoteID'?: string;
-    'contactID'?: string;
-    'invoiceID'?: string;
-    'itemID'?: string;
-    'purchaseOrderID'?: string;
+  /*
+    Array of Validation Error message
+  */
+  'validationErrors'?: Array<ValidationError>;
+  /*
+    Unique ID for batch payment object with validation error
+  */
+  'batchPaymentID'?: string;
+  'bankTransactionID'?: string;
+  'creditNoteID'?: string;
+  'contactID'?: string;
+  'invoiceID'?: string;
+  'itemID'?: string;
+  'purchaseOrderID'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "validationErrors",
-            "baseName": "ValidationErrors",
-            "type": "Array<ValidationError>"
-        },
-        {
-            "name": "batchPaymentID",
-            "baseName": "BatchPaymentID",
-            "type": "string"
-        },
-        {
-            "name": "bankTransactionID",
-            "baseName": "BankTransactionID",
-            "type": "string"
-        },
-        {
-            "name": "creditNoteID",
-            "baseName": "CreditNoteID",
-            "type": "string"
-        },
-        {
-            "name": "contactID",
-            "baseName": "ContactID",
-            "type": "string"
-        },
-        {
-            "name": "invoiceID",
-            "baseName": "InvoiceID",
-            "type": "string"
-        },
-        {
-            "name": "itemID",
-            "baseName": "ItemID",
-            "type": "string"
-        },
-        {
-            "name": "purchaseOrderID",
-            "baseName": "PurchaseOrderID",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "validationErrors",
+      "baseName": "ValidationErrors",
+      "type": "Array<ValidationError>"
+    },
+    {
+      "name": "batchPaymentID",
+      "baseName": "BatchPaymentID",
+      "type": "string"
+    },
+    {
+      "name": "bankTransactionID",
+      "baseName": "BankTransactionID",
+      "type": "string"
+    },
+    {
+      "name": "creditNoteID",
+      "baseName": "CreditNoteID",
+      "type": "string"
+    },
+    {
+      "name": "contactID",
+      "baseName": "ContactID",
+      "type": "string"
+    },
+    {
+      "name": "invoiceID",
+      "baseName": "InvoiceID",
+      "type": "string"
+    },
+    {
+      "name": "itemID",
+      "baseName": "ItemID",
+      "type": "string"
+    },
+    {
+      "name": "purchaseOrderID",
+      "baseName": "PurchaseOrderID",
+      "type": "string"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return Element.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Element.attributeTypeMap;
+  }
 }
 

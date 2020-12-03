@@ -12,49 +12,49 @@
 
 
 export class SuperFundProduct {
-    /**
-    * The ABN of the Regulated SuperFund
-    */
-    'aBN'?: string;
-    /**
-    * The USI of the Regulated SuperFund
-    */
-    'uSI'?: string;
-    /**
-    * The SPIN of the Regulated SuperFund. This field has been deprecated. New superfunds will not have a SPIN value. The USI field should be used instead of SPIN
-    */
-    'sPIN'?: string;
-    /**
-    * The name of the Regulated SuperFund
-    */
-    'productName'?: string;
+  /*
+    The ABN of the Regulated SuperFund
+  */
+  'aBN'?: string;
+  /*
+    The USI of the Regulated SuperFund
+  */
+  'uSI'?: string;
+  /*
+    The SPIN of the Regulated SuperFund. This field has been deprecated. New superfunds will not have a SPIN value. The USI field should be used instead of SPIN
+  */
+  'sPIN'?: string;
+  /*
+    The name of the Regulated SuperFund
+  */
+  'productName'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "aBN",
-            "baseName": "ABN",
-            "type": "string"
-        },
-        {
-            "name": "uSI",
-            "baseName": "USI",
-            "type": "string"
-        },
-        {
-            "name": "sPIN",
-            "baseName": "SPIN",
-            "type": "string"
-        },
-        {
-            "name": "productName",
-            "baseName": "ProductName",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "aBN",
+      "baseName": "ABN",
+      "type": "string"
+    },
+    {
+      "name": "uSI",
+      "baseName": "USI",
+      "type": "string"
+    },
+    {
+      "name": "sPIN",
+      "baseName": "SPIN",
+      "type": "string"
+    },
+    {
+      "name": "productName",
+      "baseName": "ProductName",
+      "type": "string"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return SuperFundProduct.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return SuperFundProduct.attributeTypeMap;
+  }
 }
 

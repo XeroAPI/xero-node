@@ -17,25 +17,25 @@ import { SettingsTrackingCategoriesTimesheetCategories } from '././settingsTrack
 * Tracking categories for Employees and Timesheets
 */
 export class SettingsTrackingCategories {
-    'employeeGroups'?: SettingsTrackingCategoriesEmployeeGroups;
-    'timesheetCategories'?: SettingsTrackingCategoriesTimesheetCategories;
+  'employeeGroups'?: SettingsTrackingCategoriesEmployeeGroups;
+  'timesheetCategories'?: SettingsTrackingCategoriesTimesheetCategories;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "employeeGroups",
-            "baseName": "EmployeeGroups",
-            "type": "SettingsTrackingCategoriesEmployeeGroups"
-        },
-        {
-            "name": "timesheetCategories",
-            "baseName": "TimesheetCategories",
-            "type": "SettingsTrackingCategoriesTimesheetCategories"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "employeeGroups",
+      "baseName": "EmployeeGroups",
+      "type": "SettingsTrackingCategoriesEmployeeGroups"
+    },
+    {
+      "name": "timesheetCategories",
+      "baseName": "TimesheetCategories",
+      "type": "SettingsTrackingCategoriesTimesheetCategories"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return SettingsTrackingCategories.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return SettingsTrackingCategories.attributeTypeMap;
+  }
 }
 

@@ -91,51 +91,51 @@ export enum PayrollNzApiApiKeys {
 }
 
 export class PayrollNzApi {
-    protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
-    protected _useQuerystring : boolean = false;
-    protected binaryHeaders : any = {};
+  protected _basePath = defaultBasePath;
+  protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
+  protected _useQuerystring : boolean = false;
+  protected binaryHeaders : any = {};
 
-    protected authentications = {
-        'default': <Authentication>new VoidAuth(),
-        'OAuth2': new OAuth(),
+  protected authentications = {
+    'default': <Authentication>new VoidAuth(),
+      'OAuth2': new OAuth(),
     }
 
     constructor(basePath?: string);
     constructor(basePathOrUsername: string, password?: string, basePath?: string) {
-        if (password) {
-            if (basePath) {
-                this.basePath = basePath;
-            }
-        } else {
-            if (basePathOrUsername) {
-                this.basePath = basePathOrUsername
-            }
+      if (password) {
+        if (basePath) {
+          this.basePath = basePath;
         }
+      } else {
+        if (basePathOrUsername) {
+          this.basePath = basePathOrUsername
+        }
+      }
     }
 
     set useQuerystring(value: boolean) {
-        this._useQuerystring = value;
+      this._useQuerystring = value;
     }
 
     set basePath(basePath: string) {
-        this._basePath = basePath;
+      this._basePath = basePath;
     }
 
     get basePath() {
-        return this._basePath;
+      return this._basePath;
     }
 
     public setDefaultAuthentication(auth: Authentication) {
-        this.authentications.default = auth;
+      this.authentications.default = auth;
     }
 
     public setApiKey(key: PayrollNzApiApiKeys, value: string) {
-        (this.authentications as any)[PayrollNzApiApiKeys[key]].apiKey = value;
+      (this.authentications as any)[PayrollNzApiApiKeys[key]].apiKey = value;
     }
 
     set accessToken(token: string) {
-        this.authentications.OAuth2.accessToken = token;
+      this.authentications.OAuth2.accessToken = token;
     }
 
     /**
@@ -145,64 +145,64 @@ export class PayrollNzApi {
      * @param timesheetID Identifier for the timesheet
      */     
     public async approveTimesheet (xeroTenantId: string, timesheetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }> {
-        const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Approve'
-            .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Approve'
+          .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling approveTimesheet.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling approveTimesheet.');
+      }
+
+      // verify required parameter 'timesheetID' is not null or undefined
+      if (timesheetID === null || timesheetID === undefined) {
+        throw new Error('Required parameter timesheetID was null or undefined when calling approveTimesheet.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'timesheetID' is not null or undefined
-        if (timesheetID === null || timesheetID === undefined) {
-            throw new Error('Required parameter timesheetID was null or undefined when calling approveTimesheet.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TimesheetObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimesheetObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -211,64 +211,64 @@ export class PayrollNzApi {
      * @param deduction 
      */     
     public async createDeduction (xeroTenantId: string, deduction: Deduction, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DeductionObject;  }> {
-        const localVarPath = this.basePath + '/Deductions';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Deductions';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createDeduction.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createDeduction.');
+      }
+
+      // verify required parameter 'deduction' is not null or undefined
+      if (deduction === null || deduction === undefined) {
+        throw new Error('Required parameter deduction was null or undefined when calling createDeduction.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(deduction, "Deduction")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'deduction' is not null or undefined
-        if (deduction === null || deduction === undefined) {
-            throw new Error('Required parameter deduction was null or undefined when calling createDeduction.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(deduction, "Deduction")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: DeductionObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "DeductionObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: DeductionObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "DeductionObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -277,64 +277,64 @@ export class PayrollNzApi {
      * @param earningsRate 
      */     
     public async createEarningsRate (xeroTenantId: string, earningsRate: EarningsRate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsRateObject;  }> {
-        const localVarPath = this.basePath + '/EarningsRates';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/EarningsRates';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEarningsRate.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEarningsRate.');
+      }
+
+      // verify required parameter 'earningsRate' is not null or undefined
+      if (earningsRate === null || earningsRate === undefined) {
+        throw new Error('Required parameter earningsRate was null or undefined when calling createEarningsRate.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(earningsRate, "EarningsRate")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'earningsRate' is not null or undefined
-        if (earningsRate === null || earningsRate === undefined) {
-            throw new Error('Required parameter earningsRate was null or undefined when calling createEarningsRate.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(earningsRate, "EarningsRate")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EarningsRateObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EarningsRateObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EarningsRateObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EarningsRateObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -343,64 +343,64 @@ export class PayrollNzApi {
      * @param employee 
      */     
     public async createEmployee (xeroTenantId: string, employee: Employee, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }> {
-        const localVarPath = this.basePath + '/Employees';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployee.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployee.');
+      }
+
+      // verify required parameter 'employee' is not null or undefined
+      if (employee === null || employee === undefined) {
+        throw new Error('Required parameter employee was null or undefined when calling createEmployee.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employee, "Employee")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employee' is not null or undefined
-        if (employee === null || employee === undefined) {
-            throw new Error('Required parameter employee was null or undefined when calling createEmployee.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employee, "Employee")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -410,70 +410,70 @@ export class PayrollNzApi {
      * @param earningsTemplate 
      */     
     public async createEmployeeEarningsTemplate (xeroTenantId: string, employeeId: string, earningsTemplate: EarningsTemplate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeEarningsTemplate.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'earningsTemplate' is not null or undefined
+      if (earningsTemplate === null || earningsTemplate === undefined) {
+        throw new Error('Required parameter earningsTemplate was null or undefined when calling createEmployeeEarningsTemplate.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(earningsTemplate, "EarningsTemplate")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeEarningsTemplate.');
-        }
-
-        // verify required parameter 'earningsTemplate' is not null or undefined
-        if (earningsTemplate === null || earningsTemplate === undefined) {
-            throw new Error('Required parameter earningsTemplate was null or undefined when calling createEmployeeEarningsTemplate.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(earningsTemplate, "EarningsTemplate")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EarningsTemplateObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EarningsTemplateObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -483,70 +483,70 @@ export class PayrollNzApi {
      * @param employeeLeave 
      */     
     public async createEmployeeLeave (xeroTenantId: string, employeeId: string, employeeLeave: EmployeeLeave, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeLeave.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeLeave.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeLeave.');
+      }
+
+      // verify required parameter 'employeeLeave' is not null or undefined
+      if (employeeLeave === null || employeeLeave === undefined) {
+        throw new Error('Required parameter employeeLeave was null or undefined when calling createEmployeeLeave.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employeeLeave, "EmployeeLeave")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeLeave.');
-        }
-
-        // verify required parameter 'employeeLeave' is not null or undefined
-        if (employeeLeave === null || employeeLeave === undefined) {
-            throw new Error('Required parameter employeeLeave was null or undefined when calling createEmployeeLeave.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employeeLeave, "EmployeeLeave")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -556,70 +556,70 @@ export class PayrollNzApi {
      * @param employeeLeaveSetup 
      */     
     public async createEmployeeLeaveSetup (xeroTenantId: string, employeeId: string, employeeLeaveSetup: EmployeeLeaveSetup, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveSetupObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/leaveSetup'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/leaveSetup'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeLeaveSetup.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeLeaveSetup.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeLeaveSetup.');
+      }
+
+      // verify required parameter 'employeeLeaveSetup' is not null or undefined
+      if (employeeLeaveSetup === null || employeeLeaveSetup === undefined) {
+        throw new Error('Required parameter employeeLeaveSetup was null or undefined when calling createEmployeeLeaveSetup.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employeeLeaveSetup, "EmployeeLeaveSetup")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeLeaveSetup.');
-        }
-
-        // verify required parameter 'employeeLeaveSetup' is not null or undefined
-        if (employeeLeaveSetup === null || employeeLeaveSetup === undefined) {
-            throw new Error('Required parameter employeeLeaveSetup was null or undefined when calling createEmployeeLeaveSetup.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employeeLeaveSetup, "EmployeeLeaveSetup")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveSetupObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeLeaveSetupObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveSetupObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeLeaveSetupObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -629,70 +629,70 @@ export class PayrollNzApi {
      * @param employeeLeaveType 
      */     
     public async createEmployeeLeaveType (xeroTenantId: string, employeeId: string, employeeLeaveType: EmployeeLeaveType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypeObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveTypes'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveTypes'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeLeaveType.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeLeaveType.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeLeaveType.');
+      }
+
+      // verify required parameter 'employeeLeaveType' is not null or undefined
+      if (employeeLeaveType === null || employeeLeaveType === undefined) {
+        throw new Error('Required parameter employeeLeaveType was null or undefined when calling createEmployeeLeaveType.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employeeLeaveType, "EmployeeLeaveType")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeLeaveType.');
-        }
-
-        // verify required parameter 'employeeLeaveType' is not null or undefined
-        if (employeeLeaveType === null || employeeLeaveType === undefined) {
-            throw new Error('Required parameter employeeLeaveType was null or undefined when calling createEmployeeLeaveType.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employeeLeaveType, "EmployeeLeaveType")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypeObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeLeaveTypeObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypeObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeLeaveTypeObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -702,70 +702,70 @@ export class PayrollNzApi {
      * @param employeeOpeningBalance 
      */     
     public async createEmployeeOpeningBalances (xeroTenantId: string, employeeId: string, employeeOpeningBalance: Array<EmployeeOpeningBalance>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/openingBalances'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/openingBalances'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeOpeningBalances.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeOpeningBalances.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeOpeningBalances.');
+      }
+
+      // verify required parameter 'employeeOpeningBalance' is not null or undefined
+      if (employeeOpeningBalance === null || employeeOpeningBalance === undefined) {
+        throw new Error('Required parameter employeeOpeningBalance was null or undefined when calling createEmployeeOpeningBalances.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employeeOpeningBalance, "Array<EmployeeOpeningBalance>")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeOpeningBalances.');
-        }
-
-        // verify required parameter 'employeeOpeningBalance' is not null or undefined
-        if (employeeOpeningBalance === null || employeeOpeningBalance === undefined) {
-            throw new Error('Required parameter employeeOpeningBalance was null or undefined when calling createEmployeeOpeningBalances.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employeeOpeningBalance, "Array<EmployeeOpeningBalance>")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeOpeningBalancesObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeOpeningBalancesObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -775,70 +775,70 @@ export class PayrollNzApi {
      * @param paymentMethod 
      */     
     public async createEmployeePaymentMethod (xeroTenantId: string, employeeId: string, paymentMethod: PaymentMethod, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/PaymentMethods'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/PaymentMethods'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeePaymentMethod.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeePaymentMethod.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createEmployeePaymentMethod.');
+      }
+
+      // verify required parameter 'paymentMethod' is not null or undefined
+      if (paymentMethod === null || paymentMethod === undefined) {
+        throw new Error('Required parameter paymentMethod was null or undefined when calling createEmployeePaymentMethod.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(paymentMethod, "PaymentMethod")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createEmployeePaymentMethod.');
-        }
-
-        // verify required parameter 'paymentMethod' is not null or undefined
-        if (paymentMethod === null || paymentMethod === undefined) {
-            throw new Error('Required parameter paymentMethod was null or undefined when calling createEmployeePaymentMethod.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(paymentMethod, "PaymentMethod")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PaymentMethodObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PaymentMethodObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -848,70 +848,70 @@ export class PayrollNzApi {
      * @param salaryAndWage 
      */     
     public async createEmployeeSalaryAndWage (xeroTenantId: string, employeeId: string, salaryAndWage: SalaryAndWage, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeSalaryAndWage.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'salaryAndWage' is not null or undefined
+      if (salaryAndWage === null || salaryAndWage === undefined) {
+        throw new Error('Required parameter salaryAndWage was null or undefined when calling createEmployeeSalaryAndWage.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(salaryAndWage, "SalaryAndWage")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeSalaryAndWage.');
-        }
-
-        // verify required parameter 'salaryAndWage' is not null or undefined
-        if (salaryAndWage === null || salaryAndWage === undefined) {
-            throw new Error('Required parameter salaryAndWage was null or undefined when calling createEmployeeSalaryAndWage.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(salaryAndWage, "SalaryAndWage")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "SalaryAndWageObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "SalaryAndWageObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -921,70 +921,70 @@ export class PayrollNzApi {
      * @param employment 
      */     
     public async createEmployment (xeroTenantId: string, employeeId: string, employment: Employment, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmploymentObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/Employment'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/Employment'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployment.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployment.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createEmployment.');
+      }
+
+      // verify required parameter 'employment' is not null or undefined
+      if (employment === null || employment === undefined) {
+        throw new Error('Required parameter employment was null or undefined when calling createEmployment.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employment, "Employment")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createEmployment.');
-        }
-
-        // verify required parameter 'employment' is not null or undefined
-        if (employment === null || employment === undefined) {
-            throw new Error('Required parameter employment was null or undefined when calling createEmployment.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employment, "Employment")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmploymentObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmploymentObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmploymentObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmploymentObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -993,64 +993,64 @@ export class PayrollNzApi {
      * @param leaveType 
      */     
     public async createLeaveType (xeroTenantId: string, leaveType: LeaveType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeaveTypeObject;  }> {
-        const localVarPath = this.basePath + '/LeaveTypes';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/LeaveTypes';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createLeaveType.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createLeaveType.');
+      }
+
+      // verify required parameter 'leaveType' is not null or undefined
+      if (leaveType === null || leaveType === undefined) {
+        throw new Error('Required parameter leaveType was null or undefined when calling createLeaveType.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(leaveType, "LeaveType")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'leaveType' is not null or undefined
-        if (leaveType === null || leaveType === undefined) {
-            throw new Error('Required parameter leaveType was null or undefined when calling createLeaveType.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(leaveType, "LeaveType")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: LeaveTypeObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "LeaveTypeObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: LeaveTypeObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "LeaveTypeObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1060,70 +1060,70 @@ export class PayrollNzApi {
      * @param earningsTemplate 
      */     
     public async createMultipleEmployeeEarningsTemplate (xeroTenantId: string, employeeId: string, earningsTemplate: Array<EarningsTemplate>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeEarningsTemplates;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/paytemplateearnings'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/paytemplateearnings'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'earningsTemplate' is not null or undefined
+      if (earningsTemplate === null || earningsTemplate === undefined) {
+        throw new Error('Required parameter earningsTemplate was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(earningsTemplate, "Array<EarningsTemplate>")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
-        }
-
-        // verify required parameter 'earningsTemplate' is not null or undefined
-        if (earningsTemplate === null || earningsTemplate === undefined) {
-            throw new Error('Required parameter earningsTemplate was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(earningsTemplate, "Array<EarningsTemplate>")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeEarningsTemplates;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeEarningsTemplates");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeEarningsTemplates;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeEarningsTemplates");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1132,64 +1132,64 @@ export class PayrollNzApi {
      * @param payRun 
      */     
     public async createPayRun (xeroTenantId: string, payRun: PayRun, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PayRunObject;  }> {
-        const localVarPath = this.basePath + '/PayRuns';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PayRuns';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createPayRun.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createPayRun.');
+      }
+
+      // verify required parameter 'payRun' is not null or undefined
+      if (payRun === null || payRun === undefined) {
+        throw new Error('Required parameter payRun was null or undefined when calling createPayRun.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(payRun, "PayRun")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'payRun' is not null or undefined
-        if (payRun === null || payRun === undefined) {
-            throw new Error('Required parameter payRun was null or undefined when calling createPayRun.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(payRun, "PayRun")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PayRunObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PayRunObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PayRunObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PayRunObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1198,64 +1198,64 @@ export class PayrollNzApi {
      * @param payRunCalendar 
      */     
     public async createPayRunCalendar (xeroTenantId: string, payRunCalendar: PayRunCalendar, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PayRunCalendarObject;  }> {
-        const localVarPath = this.basePath + '/PayRunCalendars';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PayRunCalendars';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createPayRunCalendar.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createPayRunCalendar.');
+      }
+
+      // verify required parameter 'payRunCalendar' is not null or undefined
+      if (payRunCalendar === null || payRunCalendar === undefined) {
+        throw new Error('Required parameter payRunCalendar was null or undefined when calling createPayRunCalendar.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(payRunCalendar, "PayRunCalendar")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'payRunCalendar' is not null or undefined
-        if (payRunCalendar === null || payRunCalendar === undefined) {
-            throw new Error('Required parameter payRunCalendar was null or undefined when calling createPayRunCalendar.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(payRunCalendar, "PayRunCalendar")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PayRunCalendarObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PayRunCalendarObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PayRunCalendarObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PayRunCalendarObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1264,64 +1264,64 @@ export class PayrollNzApi {
      * @param reimbursement 
      */     
     public async createReimbursement (xeroTenantId: string, reimbursement: Reimbursement, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReimbursementObject;  }> {
-        const localVarPath = this.basePath + '/Reimbursements';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Reimbursements';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createReimbursement.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createReimbursement.');
+      }
+
+      // verify required parameter 'reimbursement' is not null or undefined
+      if (reimbursement === null || reimbursement === undefined) {
+        throw new Error('Required parameter reimbursement was null or undefined when calling createReimbursement.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(reimbursement, "Reimbursement")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'reimbursement' is not null or undefined
-        if (reimbursement === null || reimbursement === undefined) {
-            throw new Error('Required parameter reimbursement was null or undefined when calling createReimbursement.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(reimbursement, "Reimbursement")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: ReimbursementObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "ReimbursementObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: ReimbursementObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "ReimbursementObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1330,64 +1330,64 @@ export class PayrollNzApi {
      * @param benefit 
      */     
     public async createSuperannuation (xeroTenantId: string, benefit: Benefit, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SuperannuationObject;  }> {
-        const localVarPath = this.basePath + '/superannuations';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/superannuations';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createSuperannuation.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createSuperannuation.');
+      }
+
+      // verify required parameter 'benefit' is not null or undefined
+      if (benefit === null || benefit === undefined) {
+        throw new Error('Required parameter benefit was null or undefined when calling createSuperannuation.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(benefit, "Benefit")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'benefit' is not null or undefined
-        if (benefit === null || benefit === undefined) {
-            throw new Error('Required parameter benefit was null or undefined when calling createSuperannuation.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(benefit, "Benefit")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: SuperannuationObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "SuperannuationObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SuperannuationObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "SuperannuationObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1396,64 +1396,64 @@ export class PayrollNzApi {
      * @param timesheet 
      */     
     public async createTimesheet (xeroTenantId: string, timesheet: Timesheet, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }> {
-        const localVarPath = this.basePath + '/Timesheets';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createTimesheet.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createTimesheet.');
+      }
+
+      // verify required parameter 'timesheet' is not null or undefined
+      if (timesheet === null || timesheet === undefined) {
+        throw new Error('Required parameter timesheet was null or undefined when calling createTimesheet.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(timesheet, "Timesheet")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'timesheet' is not null or undefined
-        if (timesheet === null || timesheet === undefined) {
-            throw new Error('Required parameter timesheet was null or undefined when calling createTimesheet.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(timesheet, "Timesheet")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TimesheetObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimesheetObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1463,70 +1463,70 @@ export class PayrollNzApi {
      * @param timesheetLine 
      */     
     public async createTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLine: TimesheetLine, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimesheetLineObject;  }> {
-        const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines'
-            .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines'
+          .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createTimesheetLine.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling createTimesheetLine.');
+      }
+
+      // verify required parameter 'timesheetID' is not null or undefined
+      if (timesheetID === null || timesheetID === undefined) {
+        throw new Error('Required parameter timesheetID was null or undefined when calling createTimesheetLine.');
+      }
+
+      // verify required parameter 'timesheetLine' is not null or undefined
+      if (timesheetLine === null || timesheetLine === undefined) {
+        throw new Error('Required parameter timesheetLine was null or undefined when calling createTimesheetLine.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(timesheetLine, "TimesheetLine")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'timesheetID' is not null or undefined
-        if (timesheetID === null || timesheetID === undefined) {
-            throw new Error('Required parameter timesheetID was null or undefined when calling createTimesheetLine.');
-        }
-
-        // verify required parameter 'timesheetLine' is not null or undefined
-        if (timesheetLine === null || timesheetLine === undefined) {
-            throw new Error('Required parameter timesheetLine was null or undefined when calling createTimesheetLine.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(timesheetLine, "TimesheetLine")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TimesheetLineObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TimesheetLineObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimesheetLineObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimesheetLineObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1536,70 +1536,70 @@ export class PayrollNzApi {
      * @param payTemplateEarningID Id for single pay template earnings object
      */     
     public async deleteEmployeeEarningsTemplate (xeroTenantId: string, employeeId: string, payTemplateEarningID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings/{PayTemplateEarningID}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
-            .replace('{' + 'PayTemplateEarningID' + '}', encodeURIComponent(String(payTemplateEarningID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings/{PayTemplateEarningID}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+          .replace('{' + 'PayTemplateEarningID' + '}', encodeURIComponent(String(payTemplateEarningID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeEarningsTemplate.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'payTemplateEarningID' is not null or undefined
+      if (payTemplateEarningID === null || payTemplateEarningID === undefined) {
+        throw new Error('Required parameter payTemplateEarningID was null or undefined when calling deleteEmployeeEarningsTemplate.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'DELETE',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeEarningsTemplate.');
-        }
-
-        // verify required parameter 'payTemplateEarningID' is not null or undefined
-        if (payTemplateEarningID === null || payTemplateEarningID === undefined) {
-            throw new Error('Required parameter payTemplateEarningID was null or undefined when calling deleteEmployeeEarningsTemplate.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EarningsTemplateObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EarningsTemplateObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1609,70 +1609,70 @@ export class PayrollNzApi {
      * @param leaveID Leave id for single object
      */     
     public async deleteEmployeeLeave (xeroTenantId: string, employeeId: string, leaveID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave/{LeaveID}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
-            .replace('{' + 'LeaveID' + '}', encodeURIComponent(String(leaveID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave/{LeaveID}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+          .replace('{' + 'LeaveID' + '}', encodeURIComponent(String(leaveID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeLeave.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeLeave.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeLeave.');
+      }
+
+      // verify required parameter 'leaveID' is not null or undefined
+      if (leaveID === null || leaveID === undefined) {
+        throw new Error('Required parameter leaveID was null or undefined when calling deleteEmployeeLeave.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'DELETE',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeLeave.');
-        }
-
-        // verify required parameter 'leaveID' is not null or undefined
-        if (leaveID === null || leaveID === undefined) {
-            throw new Error('Required parameter leaveID was null or undefined when calling deleteEmployeeLeave.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1682,70 +1682,70 @@ export class PayrollNzApi {
      * @param salaryAndWagesID Id for single salary and wages object
      */     
     public async deleteEmployeeSalaryAndWage (xeroTenantId: string, employeeId: string, salaryAndWagesID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
-            .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+          .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeSalaryAndWage.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'salaryAndWagesID' is not null or undefined
+      if (salaryAndWagesID === null || salaryAndWagesID === undefined) {
+        throw new Error('Required parameter salaryAndWagesID was null or undefined when calling deleteEmployeeSalaryAndWage.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'DELETE',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeSalaryAndWage.');
-        }
-
-        // verify required parameter 'salaryAndWagesID' is not null or undefined
-        if (salaryAndWagesID === null || salaryAndWagesID === undefined) {
-            throw new Error('Required parameter salaryAndWagesID was null or undefined when calling deleteEmployeeSalaryAndWage.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "SalaryAndWageObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "SalaryAndWageObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1754,64 +1754,64 @@ export class PayrollNzApi {
      * @param timesheetID Identifier for the timesheet
      */     
     public async deleteTimesheet (xeroTenantId: string, timesheetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimesheetLine;  }> {
-        const localVarPath = this.basePath + '/Timesheets/{TimesheetID}'
-            .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets/{TimesheetID}'
+          .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteTimesheet.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteTimesheet.');
+      }
+
+      // verify required parameter 'timesheetID' is not null or undefined
+      if (timesheetID === null || timesheetID === undefined) {
+        throw new Error('Required parameter timesheetID was null or undefined when calling deleteTimesheet.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'DELETE',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'timesheetID' is not null or undefined
-        if (timesheetID === null || timesheetID === undefined) {
-            throw new Error('Required parameter timesheetID was null or undefined when calling deleteTimesheet.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TimesheetLine;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TimesheetLine");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimesheetLine;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimesheetLine");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1821,70 +1821,70 @@ export class PayrollNzApi {
      * @param timesheetLineID Identifier for the timesheet line
      */     
     public async deleteTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLineID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimesheetLine;  }> {
-        const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines/{TimesheetLineID}'
-            .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)))
-            .replace('{' + 'TimesheetLineID' + '}', encodeURIComponent(String(timesheetLineID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines/{TimesheetLineID}'
+          .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)))
+          .replace('{' + 'TimesheetLineID' + '}', encodeURIComponent(String(timesheetLineID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteTimesheetLine.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteTimesheetLine.');
+      }
+
+      // verify required parameter 'timesheetID' is not null or undefined
+      if (timesheetID === null || timesheetID === undefined) {
+        throw new Error('Required parameter timesheetID was null or undefined when calling deleteTimesheetLine.');
+      }
+
+      // verify required parameter 'timesheetLineID' is not null or undefined
+      if (timesheetLineID === null || timesheetLineID === undefined) {
+        throw new Error('Required parameter timesheetLineID was null or undefined when calling deleteTimesheetLine.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'DELETE',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'timesheetID' is not null or undefined
-        if (timesheetID === null || timesheetID === undefined) {
-            throw new Error('Required parameter timesheetID was null or undefined when calling deleteTimesheetLine.');
-        }
-
-        // verify required parameter 'timesheetLineID' is not null or undefined
-        if (timesheetLineID === null || timesheetLineID === undefined) {
-            throw new Error('Required parameter timesheetLineID was null or undefined when calling deleteTimesheetLine.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TimesheetLine;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TimesheetLine");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimesheetLine;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimesheetLine");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1893,64 +1893,64 @@ export class PayrollNzApi {
      * @param deductionId Identifier for the deduction
      */     
     public async getDeduction (xeroTenantId: string, deductionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DeductionObject;  }> {
-        const localVarPath = this.basePath + '/Deductions/{deductionId}'
-            .replace('{' + 'deductionId' + '}', encodeURIComponent(String(deductionId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Deductions/{deductionId}'
+          .replace('{' + 'deductionId' + '}', encodeURIComponent(String(deductionId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getDeduction.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getDeduction.');
+      }
+
+      // verify required parameter 'deductionId' is not null or undefined
+      if (deductionId === null || deductionId === undefined) {
+        throw new Error('Required parameter deductionId was null or undefined when calling getDeduction.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'deductionId' is not null or undefined
-        if (deductionId === null || deductionId === undefined) {
-            throw new Error('Required parameter deductionId was null or undefined when calling getDeduction.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: DeductionObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "DeductionObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: DeductionObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "DeductionObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -1959,62 +1959,62 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getDeductions (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Deductions;  }> {
-        const localVarPath = this.basePath + '/Deductions';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Deductions';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getDeductions.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getDeductions.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: Deductions;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "Deductions");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Deductions;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Deductions");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2023,64 +2023,64 @@ export class PayrollNzApi {
      * @param earningsRateID Identifier for the earnings rate
      */     
     public async getEarningsRate (xeroTenantId: string, earningsRateID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsRateObject;  }> {
-        const localVarPath = this.basePath + '/EarningsRates/{EarningsRateID}'
-            .replace('{' + 'EarningsRateID' + '}', encodeURIComponent(String(earningsRateID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/EarningsRates/{EarningsRateID}'
+          .replace('{' + 'EarningsRateID' + '}', encodeURIComponent(String(earningsRateID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEarningsRate.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEarningsRate.');
+      }
+
+      // verify required parameter 'earningsRateID' is not null or undefined
+      if (earningsRateID === null || earningsRateID === undefined) {
+        throw new Error('Required parameter earningsRateID was null or undefined when calling getEarningsRate.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'earningsRateID' is not null or undefined
-        if (earningsRateID === null || earningsRateID === undefined) {
-            throw new Error('Required parameter earningsRateID was null or undefined when calling getEarningsRate.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EarningsRateObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EarningsRateObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EarningsRateObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EarningsRateObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2089,62 +2089,62 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getEarningsRates (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsRates;  }> {
-        const localVarPath = this.basePath + '/EarningsRates';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/EarningsRates';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEarningsRates.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEarningsRates.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EarningsRates;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EarningsRates");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EarningsRates;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EarningsRates");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2153,64 +2153,64 @@ export class PayrollNzApi {
      * @param employeeId Employee id for single object
      */     
     public async getEmployee (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployee.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployee.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployee.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployee.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2219,64 +2219,64 @@ export class PayrollNzApi {
      * @param employeeId Employee id for single object
      */     
     public async getEmployeeLeaveBalances (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveBalances;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveBalances'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveBalances'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaveBalances.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaveBalances.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaveBalances.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaveBalances.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveBalances;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeLeaveBalances");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveBalances;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeLeaveBalances");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2287,72 +2287,72 @@ export class PayrollNzApi {
      * @param endDate Filter by end date
      */     
     public async getEmployeeLeavePeriods (xeroTenantId: string, employeeId: string, startDate?: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeavePeriods;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeavePeriods'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeavePeriods'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeavePeriods.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeavePeriods.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeavePeriods.');
+      }
+
+      if (startDate !== undefined) {
+        localVarQueryParameters['startDate'] = ObjectSerializer.serialize(startDate, "string");
+      }
+
+      if (endDate !== undefined) {
+        localVarQueryParameters['endDate'] = ObjectSerializer.serialize(endDate, "string");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeavePeriods.');
-        }
-
-        if (startDate !== undefined) {
-            localVarQueryParameters['startDate'] = ObjectSerializer.serialize(startDate, "string");
-        }
-
-        if (endDate !== undefined) {
-            localVarQueryParameters['endDate'] = ObjectSerializer.serialize(endDate, "string");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: LeavePeriods;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "LeavePeriods");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: LeavePeriods;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "LeavePeriods");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2361,64 +2361,64 @@ export class PayrollNzApi {
      * @param employeeId Employee id for single object
      */     
     public async getEmployeeLeaveTypes (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypes;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveTypes'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveTypes'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaveTypes.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaveTypes.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaveTypes.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaveTypes.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypes;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeLeaveTypes");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypes;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeLeaveTypes");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2427,64 +2427,64 @@ export class PayrollNzApi {
      * @param employeeId Employee id for single object
      */     
     public async getEmployeeLeaves (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaves;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaves.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaves.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaves.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaves.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaves;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeLeaves");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaves;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeLeaves");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2493,64 +2493,64 @@ export class PayrollNzApi {
      * @param employeeId Employee id for single object
      */     
     public async getEmployeeOpeningBalances (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/openingBalances'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/openingBalances'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeOpeningBalances.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeOpeningBalances.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeOpeningBalances.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeOpeningBalances.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeOpeningBalancesObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeOpeningBalancesObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2559,64 +2559,64 @@ export class PayrollNzApi {
      * @param employeeId Employee id for single object
      */     
     public async getEmployeePayTemplates (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeePayTemplates;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeePayTemplates.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeePayTemplates.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeePayTemplates.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeePayTemplates.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeePayTemplates;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeePayTemplates");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeePayTemplates;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeePayTemplates");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2625,64 +2625,64 @@ export class PayrollNzApi {
      * @param employeeId Employee id for single object
      */     
     public async getEmployeePaymentMethod (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/PaymentMethods'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/PaymentMethods'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeePaymentMethod.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeePaymentMethod.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeePaymentMethod.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeePaymentMethod.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PaymentMethodObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PaymentMethodObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2692,70 +2692,70 @@ export class PayrollNzApi {
      * @param salaryAndWagesID Id for single pay template earnings object
      */     
     public async getEmployeeSalaryAndWage (xeroTenantId: string, employeeId: string, salaryAndWagesID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
-            .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+          .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeSalaryAndWage.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'salaryAndWagesID' is not null or undefined
+      if (salaryAndWagesID === null || salaryAndWagesID === undefined) {
+        throw new Error('Required parameter salaryAndWagesID was null or undefined when calling getEmployeeSalaryAndWage.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeSalaryAndWage.');
-        }
-
-        // verify required parameter 'salaryAndWagesID' is not null or undefined
-        if (salaryAndWagesID === null || salaryAndWagesID === undefined) {
-            throw new Error('Required parameter salaryAndWagesID was null or undefined when calling getEmployeeSalaryAndWage.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "SalaryAndWages");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "SalaryAndWages");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2765,68 +2765,68 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getEmployeeSalaryAndWages (xeroTenantId: string, employeeId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeSalaryAndWages.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeSalaryAndWages.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeSalaryAndWages.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeSalaryAndWages.');
-        }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "SalaryAndWages");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "SalaryAndWages");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2835,64 +2835,64 @@ export class PayrollNzApi {
      * @param employeeId Employee id for single object
      */     
     public async getEmployeeTax (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/Tax'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/Tax'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeTax.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeTax.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeTax.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeTax.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeTaxObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeTaxObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2903,70 +2903,70 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getEmployees (xeroTenantId: string, firstName?: string, lastName?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Employees;  }> {
-        const localVarPath = this.basePath + '/Employees';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployees.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployees.');
+      }
+
+      if (firstName !== undefined) {
+        localVarQueryParameters['firstName'] = ObjectSerializer.serialize(firstName, "string");
+      }
+
+      if (lastName !== undefined) {
+        localVarQueryParameters['lastName'] = ObjectSerializer.serialize(lastName, "string");
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (firstName !== undefined) {
-            localVarQueryParameters['firstName'] = ObjectSerializer.serialize(firstName, "string");
-        }
-
-        if (lastName !== undefined) {
-            localVarQueryParameters['lastName'] = ObjectSerializer.serialize(lastName, "string");
-        }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: Employees;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "Employees");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Employees;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Employees");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -2975,64 +2975,64 @@ export class PayrollNzApi {
      * @param leaveTypeID Identifier for the leave type
      */     
     public async getLeaveType (xeroTenantId: string, leaveTypeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeaveTypeObject;  }> {
-        const localVarPath = this.basePath + '/LeaveTypes/{LeaveTypeID}'
-            .replace('{' + 'LeaveTypeID' + '}', encodeURIComponent(String(leaveTypeID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/LeaveTypes/{LeaveTypeID}'
+          .replace('{' + 'LeaveTypeID' + '}', encodeURIComponent(String(leaveTypeID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getLeaveType.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getLeaveType.');
+      }
+
+      // verify required parameter 'leaveTypeID' is not null or undefined
+      if (leaveTypeID === null || leaveTypeID === undefined) {
+        throw new Error('Required parameter leaveTypeID was null or undefined when calling getLeaveType.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'leaveTypeID' is not null or undefined
-        if (leaveTypeID === null || leaveTypeID === undefined) {
-            throw new Error('Required parameter leaveTypeID was null or undefined when calling getLeaveType.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: LeaveTypeObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "LeaveTypeObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: LeaveTypeObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "LeaveTypeObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3042,66 +3042,66 @@ export class PayrollNzApi {
      * @param activeOnly Filters leave types by active status. By default the API returns all leave types.
      */     
     public async getLeaveTypes (xeroTenantId: string, page?: number, activeOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeaveTypes;  }> {
-        const localVarPath = this.basePath + '/LeaveTypes';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/LeaveTypes';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getLeaveTypes.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getLeaveTypes.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      if (activeOnly !== undefined) {
+        localVarQueryParameters['ActiveOnly'] = ObjectSerializer.serialize(activeOnly, "boolean");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        if (activeOnly !== undefined) {
-            localVarQueryParameters['ActiveOnly'] = ObjectSerializer.serialize(activeOnly, "boolean");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: LeaveTypes;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "LeaveTypes");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: LeaveTypes;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "LeaveTypes");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3110,64 +3110,64 @@ export class PayrollNzApi {
      * @param payRunID Identifier for the pay run
      */     
     public async getPayRun (xeroTenantId: string, payRunID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PayRunObject;  }> {
-        const localVarPath = this.basePath + '/PayRuns/{PayRunID}'
-            .replace('{' + 'PayRunID' + '}', encodeURIComponent(String(payRunID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PayRuns/{PayRunID}'
+          .replace('{' + 'PayRunID' + '}', encodeURIComponent(String(payRunID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getPayRun.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getPayRun.');
+      }
+
+      // verify required parameter 'payRunID' is not null or undefined
+      if (payRunID === null || payRunID === undefined) {
+        throw new Error('Required parameter payRunID was null or undefined when calling getPayRun.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'payRunID' is not null or undefined
-        if (payRunID === null || payRunID === undefined) {
-            throw new Error('Required parameter payRunID was null or undefined when calling getPayRun.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PayRunObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PayRunObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PayRunObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PayRunObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3176,64 +3176,64 @@ export class PayrollNzApi {
      * @param payrollCalendarID Identifier for the payrun calendars
      */     
     public async getPayRunCalendar (xeroTenantId: string, payrollCalendarID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PayRunCalendarObject;  }> {
-        const localVarPath = this.basePath + '/PayRunCalendars/{PayrollCalendarID}'
-            .replace('{' + 'PayrollCalendarID' + '}', encodeURIComponent(String(payrollCalendarID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PayRunCalendars/{PayrollCalendarID}'
+          .replace('{' + 'PayrollCalendarID' + '}', encodeURIComponent(String(payrollCalendarID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getPayRunCalendar.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getPayRunCalendar.');
+      }
+
+      // verify required parameter 'payrollCalendarID' is not null or undefined
+      if (payrollCalendarID === null || payrollCalendarID === undefined) {
+        throw new Error('Required parameter payrollCalendarID was null or undefined when calling getPayRunCalendar.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'payrollCalendarID' is not null or undefined
-        if (payrollCalendarID === null || payrollCalendarID === undefined) {
-            throw new Error('Required parameter payrollCalendarID was null or undefined when calling getPayRunCalendar.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PayRunCalendarObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PayRunCalendarObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PayRunCalendarObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PayRunCalendarObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3242,62 +3242,62 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getPayRunCalendars (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PayRunCalendars;  }> {
-        const localVarPath = this.basePath + '/PayRunCalendars';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PayRunCalendars';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getPayRunCalendars.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getPayRunCalendars.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PayRunCalendars;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PayRunCalendars");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PayRunCalendars;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PayRunCalendars");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3307,66 +3307,66 @@ export class PayrollNzApi {
      * @param status By default get payruns will return all the payruns for an organization. You can add GET https://api.xero.com/payroll.xro/2.0/payRuns?statu&#x3D;{PayRunStatus} to filter the payruns by status.
      */     
     public async getPayRuns (xeroTenantId: string, page?: number, status?: 'Draft' | 'Posted', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PayRuns;  }> {
-        const localVarPath = this.basePath + '/PayRuns';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PayRuns';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getPayRuns.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getPayRuns.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      if (status !== undefined) {
+        localVarQueryParameters['status'] = ObjectSerializer.serialize(status, "'Draft' | 'Posted'");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        if (status !== undefined) {
-            localVarQueryParameters['status'] = ObjectSerializer.serialize(status, "'Draft' | 'Posted'");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PayRuns;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PayRuns");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PayRuns;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PayRuns");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3375,64 +3375,64 @@ export class PayrollNzApi {
      * @param paySlipID Identifier for the payslip
      */     
     public async getPaySlip (xeroTenantId: string, paySlipID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaySlipObject;  }> {
-        const localVarPath = this.basePath + '/PaySlips/{PaySlipID}'
-            .replace('{' + 'PaySlipID' + '}', encodeURIComponent(String(paySlipID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PaySlips/{PaySlipID}'
+          .replace('{' + 'PaySlipID' + '}', encodeURIComponent(String(paySlipID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getPaySlip.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getPaySlip.');
+      }
+
+      // verify required parameter 'paySlipID' is not null or undefined
+      if (paySlipID === null || paySlipID === undefined) {
+        throw new Error('Required parameter paySlipID was null or undefined when calling getPaySlip.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'paySlipID' is not null or undefined
-        if (paySlipID === null || paySlipID === undefined) {
-            throw new Error('Required parameter paySlipID was null or undefined when calling getPaySlip.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PaySlipObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PaySlipObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PaySlipObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PaySlipObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3442,71 +3442,71 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getPaySlips (xeroTenantId: string, payRunID: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaySlips;  }> {
-        const localVarPath = this.basePath + '/PaySlips';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PaySlips';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getPaySlips.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getPaySlips.');
+      }
+
+      // verify required parameter 'payRunID' is not null or undefined
+      if (payRunID === null || payRunID === undefined) {
+        throw new Error('Required parameter payRunID was null or undefined when calling getPaySlips.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      if (payRunID !== undefined) {
+        localVarQueryParameters['PayRunID'] = ObjectSerializer.serialize(payRunID, "string");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'payRunID' is not null or undefined
-        if (payRunID === null || payRunID === undefined) {
-            throw new Error('Required parameter payRunID was null or undefined when calling getPaySlips.');
-        }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        if (payRunID !== undefined) {
-            localVarQueryParameters['PayRunID'] = ObjectSerializer.serialize(payRunID, "string");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PaySlips;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PaySlips");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PaySlips;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PaySlips");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3515,64 +3515,64 @@ export class PayrollNzApi {
      * @param reimbursementID Identifier for the reimbursement
      */     
     public async getReimbursement (xeroTenantId: string, reimbursementID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReimbursementObject;  }> {
-        const localVarPath = this.basePath + '/Reimbursements/{ReimbursementID}'
-            .replace('{' + 'ReimbursementID' + '}', encodeURIComponent(String(reimbursementID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Reimbursements/{ReimbursementID}'
+          .replace('{' + 'ReimbursementID' + '}', encodeURIComponent(String(reimbursementID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getReimbursement.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getReimbursement.');
+      }
+
+      // verify required parameter 'reimbursementID' is not null or undefined
+      if (reimbursementID === null || reimbursementID === undefined) {
+        throw new Error('Required parameter reimbursementID was null or undefined when calling getReimbursement.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'reimbursementID' is not null or undefined
-        if (reimbursementID === null || reimbursementID === undefined) {
-            throw new Error('Required parameter reimbursementID was null or undefined when calling getReimbursement.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: ReimbursementObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "ReimbursementObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: ReimbursementObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "ReimbursementObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3581,62 +3581,62 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getReimbursements (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Reimbursements;  }> {
-        const localVarPath = this.basePath + '/Reimbursements';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Reimbursements';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getReimbursements.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getReimbursements.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: Reimbursements;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "Reimbursements");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Reimbursements;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Reimbursements");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3644,58 +3644,58 @@ export class PayrollNzApi {
      * @param xeroTenantId Xero identifier for Tenant
      */     
     public async getSettings (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Settings;  }> {
-        const localVarPath = this.basePath + '/Settings';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Settings';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getSettings.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getSettings.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: Settings;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "Settings");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Settings;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Settings");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3704,64 +3704,64 @@ export class PayrollNzApi {
      * @param id Identifier for the statutory deduction
      */     
     public async getStatutoryDeduction (xeroTenantId: string, id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: StatutoryDeductionObject;  }> {
-        const localVarPath = this.basePath + '/StatutoryDeductions/{Id}'
-            .replace('{' + 'Id' + '}', encodeURIComponent(String(id)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/StatutoryDeductions/{Id}'
+          .replace('{' + 'Id' + '}', encodeURIComponent(String(id)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getStatutoryDeduction.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getStatutoryDeduction.');
+      }
+
+      // verify required parameter 'id' is not null or undefined
+      if (id === null || id === undefined) {
+        throw new Error('Required parameter id was null or undefined when calling getStatutoryDeduction.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getStatutoryDeduction.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: StatutoryDeductionObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "StatutoryDeductionObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: StatutoryDeductionObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "StatutoryDeductionObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3770,62 +3770,62 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getStatutoryDeductions (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: StatutoryDeductions;  }> {
-        const localVarPath = this.basePath + '/StatutoryDeductions';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/StatutoryDeductions';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getStatutoryDeductions.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getStatutoryDeductions.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: StatutoryDeductions;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "StatutoryDeductions");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: StatutoryDeductions;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "StatutoryDeductions");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3834,64 +3834,64 @@ export class PayrollNzApi {
      * @param superannuationID Identifier for the superannuation
      */     
     public async getSuperannuation (xeroTenantId: string, superannuationID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SuperannuationObject;  }> {
-        const localVarPath = this.basePath + '/superannuations/{SuperannuationID}'
-            .replace('{' + 'SuperannuationID' + '}', encodeURIComponent(String(superannuationID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/superannuations/{SuperannuationID}'
+          .replace('{' + 'SuperannuationID' + '}', encodeURIComponent(String(superannuationID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getSuperannuation.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getSuperannuation.');
+      }
+
+      // verify required parameter 'superannuationID' is not null or undefined
+      if (superannuationID === null || superannuationID === undefined) {
+        throw new Error('Required parameter superannuationID was null or undefined when calling getSuperannuation.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'superannuationID' is not null or undefined
-        if (superannuationID === null || superannuationID === undefined) {
-            throw new Error('Required parameter superannuationID was null or undefined when calling getSuperannuation.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: SuperannuationObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "SuperannuationObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SuperannuationObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "SuperannuationObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3900,62 +3900,62 @@ export class PayrollNzApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
     public async getSuperannuations (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Superannuations;  }> {
-        const localVarPath = this.basePath + '/superannuations';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/superannuations';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getSuperannuations.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getSuperannuations.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: Superannuations;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "Superannuations");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Superannuations;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Superannuations");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -3964,64 +3964,64 @@ export class PayrollNzApi {
      * @param timesheetID Identifier for the timesheet
      */     
     public async getTimesheet (xeroTenantId: string, timesheetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }> {
-        const localVarPath = this.basePath + '/Timesheets/{TimesheetID}'
-            .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets/{TimesheetID}'
+          .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getTimesheet.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getTimesheet.');
+      }
+
+      // verify required parameter 'timesheetID' is not null or undefined
+      if (timesheetID === null || timesheetID === undefined) {
+        throw new Error('Required parameter timesheetID was null or undefined when calling getTimesheet.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'timesheetID' is not null or undefined
-        if (timesheetID === null || timesheetID === undefined) {
-            throw new Error('Required parameter timesheetID was null or undefined when calling getTimesheet.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TimesheetObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimesheetObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4032,70 +4032,70 @@ export class PayrollNzApi {
      * @param payrollCalendarId By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter&#x3D;payrollCalendarId&#x3D;&#x3D;{PayrollCalendarID} to filter the timesheets by payroll calendar id
      */     
     public async getTimesheets (xeroTenantId: string, page?: number, employeeId?: string, payrollCalendarId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Timesheets;  }> {
-        const localVarPath = this.basePath + '/Timesheets';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getTimesheets.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getTimesheets.');
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+      }
+
+      if (employeeId !== undefined) {
+        localVarQueryParameters['employeeId'] = ObjectSerializer.serialize(employeeId, "string");
+      }
+
+      if (payrollCalendarId !== undefined) {
+        localVarQueryParameters['payrollCalendarId'] = ObjectSerializer.serialize(payrollCalendarId, "string");
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        if (page !== undefined) {
-            localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
-        }
-
-        if (employeeId !== undefined) {
-            localVarQueryParameters['employeeId'] = ObjectSerializer.serialize(employeeId, "string");
-        }
-
-        if (payrollCalendarId !== undefined) {
-            localVarQueryParameters['payrollCalendarId'] = ObjectSerializer.serialize(payrollCalendarId, "string");
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: Timesheets;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "Timesheets");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Timesheets;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Timesheets");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4103,58 +4103,58 @@ export class PayrollNzApi {
      * @param xeroTenantId Xero identifier for Tenant
      */     
     public async getTrackingCategories (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }> {
-        const localVarPath = this.basePath + '/settings/trackingCategories';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/settings/trackingCategories';
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getTrackingCategories.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling getTrackingCategories.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'GET',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TrackingCategories");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TrackingCategories");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4163,64 +4163,64 @@ export class PayrollNzApi {
      * @param timesheetID Identifier for the timesheet
      */     
     public async revertTimesheet (xeroTenantId: string, timesheetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }> {
-        const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/RevertToDraft'
-            .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/RevertToDraft'
+          .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling revertTimesheet.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling revertTimesheet.');
+      }
+
+      // verify required parameter 'timesheetID' is not null or undefined
+      if (timesheetID === null || timesheetID === undefined) {
+        throw new Error('Required parameter timesheetID was null or undefined when calling revertTimesheet.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'timesheetID' is not null or undefined
-        if (timesheetID === null || timesheetID === undefined) {
-            throw new Error('Required parameter timesheetID was null or undefined when calling revertTimesheet.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TimesheetObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimesheetObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4230,70 +4230,70 @@ export class PayrollNzApi {
      * @param employee 
      */     
     public async updateEmployee (xeroTenantId: string, employeeId: string, employee: Employee, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployee.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployee.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling updateEmployee.');
+      }
+
+      // verify required parameter 'employee' is not null or undefined
+      if (employee === null || employee === undefined) {
+        throw new Error('Required parameter employee was null or undefined when calling updateEmployee.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'PUT',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employee, "Employee")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling updateEmployee.');
-        }
-
-        // verify required parameter 'employee' is not null or undefined
-        if (employee === null || employee === undefined) {
-            throw new Error('Required parameter employee was null or undefined when calling updateEmployee.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employee, "Employee")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4304,76 +4304,76 @@ export class PayrollNzApi {
      * @param earningsTemplate 
      */     
     public async updateEmployeeEarningsTemplate (xeroTenantId: string, employeeId: string, payTemplateEarningID: string, earningsTemplate: EarningsTemplate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings/{PayTemplateEarningID}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
-            .replace('{' + 'PayTemplateEarningID' + '}', encodeURIComponent(String(payTemplateEarningID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings/{PayTemplateEarningID}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+          .replace('{' + 'PayTemplateEarningID' + '}', encodeURIComponent(String(payTemplateEarningID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeEarningsTemplate.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'payTemplateEarningID' is not null or undefined
+      if (payTemplateEarningID === null || payTemplateEarningID === undefined) {
+        throw new Error('Required parameter payTemplateEarningID was null or undefined when calling updateEmployeeEarningsTemplate.');
+      }
+
+      // verify required parameter 'earningsTemplate' is not null or undefined
+      if (earningsTemplate === null || earningsTemplate === undefined) {
+        throw new Error('Required parameter earningsTemplate was null or undefined when calling updateEmployeeEarningsTemplate.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'PUT',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(earningsTemplate, "EarningsTemplate")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeEarningsTemplate.');
-        }
-
-        // verify required parameter 'payTemplateEarningID' is not null or undefined
-        if (payTemplateEarningID === null || payTemplateEarningID === undefined) {
-            throw new Error('Required parameter payTemplateEarningID was null or undefined when calling updateEmployeeEarningsTemplate.');
-        }
-
-        // verify required parameter 'earningsTemplate' is not null or undefined
-        if (earningsTemplate === null || earningsTemplate === undefined) {
-            throw new Error('Required parameter earningsTemplate was null or undefined when calling updateEmployeeEarningsTemplate.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(earningsTemplate, "EarningsTemplate")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EarningsTemplateObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EarningsTemplateObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4384,76 +4384,76 @@ export class PayrollNzApi {
      * @param employeeLeave 
      */     
     public async updateEmployeeLeave (xeroTenantId: string, employeeId: string, leaveID: string, employeeLeave: EmployeeLeave, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave/{LeaveID}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
-            .replace('{' + 'LeaveID' + '}', encodeURIComponent(String(leaveID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave/{LeaveID}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+          .replace('{' + 'LeaveID' + '}', encodeURIComponent(String(leaveID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeLeave.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeLeave.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeLeave.');
+      }
+
+      // verify required parameter 'leaveID' is not null or undefined
+      if (leaveID === null || leaveID === undefined) {
+        throw new Error('Required parameter leaveID was null or undefined when calling updateEmployeeLeave.');
+      }
+
+      // verify required parameter 'employeeLeave' is not null or undefined
+      if (employeeLeave === null || employeeLeave === undefined) {
+        throw new Error('Required parameter employeeLeave was null or undefined when calling updateEmployeeLeave.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'PUT',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employeeLeave, "EmployeeLeave")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeLeave.');
-        }
-
-        // verify required parameter 'leaveID' is not null or undefined
-        if (leaveID === null || leaveID === undefined) {
-            throw new Error('Required parameter leaveID was null or undefined when calling updateEmployeeLeave.');
-        }
-
-        // verify required parameter 'employeeLeave' is not null or undefined
-        if (employeeLeave === null || employeeLeave === undefined) {
-            throw new Error('Required parameter employeeLeave was null or undefined when calling updateEmployeeLeave.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employeeLeave, "EmployeeLeave")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4464,76 +4464,76 @@ export class PayrollNzApi {
      * @param salaryAndWage 
      */     
     public async updateEmployeeSalaryAndWage (xeroTenantId: string, employeeId: string, salaryAndWagesID: string, salaryAndWage: SalaryAndWage, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
-            .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+          .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeSalaryAndWage.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'salaryAndWagesID' is not null or undefined
+      if (salaryAndWagesID === null || salaryAndWagesID === undefined) {
+        throw new Error('Required parameter salaryAndWagesID was null or undefined when calling updateEmployeeSalaryAndWage.');
+      }
+
+      // verify required parameter 'salaryAndWage' is not null or undefined
+      if (salaryAndWage === null || salaryAndWage === undefined) {
+        throw new Error('Required parameter salaryAndWage was null or undefined when calling updateEmployeeSalaryAndWage.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'PUT',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(salaryAndWage, "SalaryAndWage")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeSalaryAndWage.');
-        }
-
-        // verify required parameter 'salaryAndWagesID' is not null or undefined
-        if (salaryAndWagesID === null || salaryAndWagesID === undefined) {
-            throw new Error('Required parameter salaryAndWagesID was null or undefined when calling updateEmployeeSalaryAndWage.');
-        }
-
-        // verify required parameter 'salaryAndWage' is not null or undefined
-        if (salaryAndWage === null || salaryAndWage === undefined) {
-            throw new Error('Required parameter salaryAndWage was null or undefined when calling updateEmployeeSalaryAndWage.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(salaryAndWage, "SalaryAndWage")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "SalaryAndWageObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "SalaryAndWageObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4543,70 +4543,70 @@ export class PayrollNzApi {
      * @param employeeTax 
      */     
     public async updateEmployeeTax (xeroTenantId: string, employeeId: string, employeeTax: EmployeeTax, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }> {
-        const localVarPath = this.basePath + '/Employees/{EmployeeId}/Tax'
-            .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Employees/{EmployeeId}/Tax'
+          .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeTax.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeTax.');
+      }
+
+      // verify required parameter 'employeeId' is not null or undefined
+      if (employeeId === null || employeeId === undefined) {
+        throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeTax.');
+      }
+
+      // verify required parameter 'employeeTax' is not null or undefined
+      if (employeeTax === null || employeeTax === undefined) {
+        throw new Error('Required parameter employeeTax was null or undefined when calling updateEmployeeTax.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'POST',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(employeeTax, "EmployeeTax")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'employeeId' is not null or undefined
-        if (employeeId === null || employeeId === undefined) {
-            throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeTax.');
-        }
-
-        // verify required parameter 'employeeTax' is not null or undefined
-        if (employeeTax === null || employeeTax === undefined) {
-            throw new Error('Required parameter employeeTax was null or undefined when calling updateEmployeeTax.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(employeeTax, "EmployeeTax")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "EmployeeTaxObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "EmployeeTaxObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4616,70 +4616,70 @@ export class PayrollNzApi {
      * @param payRun 
      */     
     public async updatePayRun (xeroTenantId: string, payRunID: string, payRun: PayRun, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PayRunObject;  }> {
-        const localVarPath = this.basePath + '/PayRuns/{PayRunID}'
-            .replace('{' + 'PayRunID' + '}', encodeURIComponent(String(payRunID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PayRuns/{PayRunID}'
+          .replace('{' + 'PayRunID' + '}', encodeURIComponent(String(payRunID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling updatePayRun.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling updatePayRun.');
+      }
+
+      // verify required parameter 'payRunID' is not null or undefined
+      if (payRunID === null || payRunID === undefined) {
+        throw new Error('Required parameter payRunID was null or undefined when calling updatePayRun.');
+      }
+
+      // verify required parameter 'payRun' is not null or undefined
+      if (payRun === null || payRun === undefined) {
+        throw new Error('Required parameter payRun was null or undefined when calling updatePayRun.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'PUT',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(payRun, "PayRun")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'payRunID' is not null or undefined
-        if (payRunID === null || payRunID === undefined) {
-            throw new Error('Required parameter payRunID was null or undefined when calling updatePayRun.');
-        }
-
-        // verify required parameter 'payRun' is not null or undefined
-        if (payRun === null || payRun === undefined) {
-            throw new Error('Required parameter payRun was null or undefined when calling updatePayRun.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(payRun, "PayRun")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PayRunObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PayRunObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PayRunObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PayRunObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4689,70 +4689,70 @@ export class PayrollNzApi {
      * @param paySlip 
      */     
     public async updatePaySlipLineItems (xeroTenantId: string, paySlipID: string, paySlip: PaySlip, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaySlipObject;  }> {
-        const localVarPath = this.basePath + '/PaySlips/{PaySlipID}'
-            .replace('{' + 'PaySlipID' + '}', encodeURIComponent(String(paySlipID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/PaySlips/{PaySlipID}'
+          .replace('{' + 'PaySlipID' + '}', encodeURIComponent(String(paySlipID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling updatePaySlipLineItems.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling updatePaySlipLineItems.');
+      }
+
+      // verify required parameter 'paySlipID' is not null or undefined
+      if (paySlipID === null || paySlipID === undefined) {
+        throw new Error('Required parameter paySlipID was null or undefined when calling updatePaySlipLineItems.');
+      }
+
+      // verify required parameter 'paySlip' is not null or undefined
+      if (paySlip === null || paySlip === undefined) {
+        throw new Error('Required parameter paySlip was null or undefined when calling updatePaySlipLineItems.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'PUT',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(paySlip, "PaySlip")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'paySlipID' is not null or undefined
-        if (paySlipID === null || paySlipID === undefined) {
-            throw new Error('Required parameter paySlipID was null or undefined when calling updatePaySlipLineItems.');
-        }
-
-        // verify required parameter 'paySlip' is not null or undefined
-        if (paySlip === null || paySlip === undefined) {
-            throw new Error('Required parameter paySlip was null or undefined when calling updatePaySlipLineItems.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(paySlip, "PaySlip")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: PaySlipObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "PaySlipObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: PaySlipObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "PaySlipObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
     /**
      * 
@@ -4763,75 +4763,75 @@ export class PayrollNzApi {
      * @param timesheetLine 
      */     
     public async updateTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLineID: string, timesheetLine: TimesheetLine, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimesheetLineObject;  }> {
-        const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines/{TimesheetLineID}'
-            .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)))
-            .replace('{' + 'TimesheetLineID' + '}', encodeURIComponent(String(timesheetLineID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+      const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines/{TimesheetLineID}'
+          .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)))
+          .replace('{' + 'TimesheetLineID' + '}', encodeURIComponent(String(timesheetLineID)));
+      let localVarQueryParameters: any = {};
+      let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+      let localVarFormParams: any = {};
 
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling updateTimesheetLine.');
+      // verify required parameter 'xeroTenantId' is not null or undefined
+      if (xeroTenantId === null || xeroTenantId === undefined) {
+        throw new Error('Required parameter xeroTenantId was null or undefined when calling updateTimesheetLine.');
+      }
+
+      // verify required parameter 'timesheetID' is not null or undefined
+      if (timesheetID === null || timesheetID === undefined) {
+        throw new Error('Required parameter timesheetID was null or undefined when calling updateTimesheetLine.');
+      }
+
+      // verify required parameter 'timesheetLineID' is not null or undefined
+      if (timesheetLineID === null || timesheetLineID === undefined) {
+        throw new Error('Required parameter timesheetLineID was null or undefined when calling updateTimesheetLine.');
+      }
+
+      // verify required parameter 'timesheetLine' is not null or undefined
+      if (timesheetLine === null || timesheetLine === undefined) {
+        throw new Error('Required parameter timesheetLine was null or undefined when calling updateTimesheetLine.');
+      }
+
+      localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+      (<any>Object).assign(localVarHeaderParams, options.headers);
+
+      let localVarUseFormData = false;
+
+      let localVarRequestOptions: localVarRequest.Options = {
+        method: 'PUT',
+        qs: localVarQueryParameters,
+        headers: localVarHeaderParams,
+        uri: localVarPath,
+        useQuerystring: this._useQuerystring,
+        json: true,
+        body: ObjectSerializer.serialize(timesheetLine, "TimesheetLine")
+      };
+
+      let authenticationPromise = Promise.resolve();
+      authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+      authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+      return authenticationPromise.then(() => {
+        if (Object.keys(localVarFormParams).length) {
+          if (localVarUseFormData) {
+            (<any>localVarRequestOptions).formData = localVarFormParams;
+          } else {
+            localVarRequestOptions.form = localVarFormParams;
+          }
         }
-
-        // verify required parameter 'timesheetID' is not null or undefined
-        if (timesheetID === null || timesheetID === undefined) {
-            throw new Error('Required parameter timesheetID was null or undefined when calling updateTimesheetLine.');
-        }
-
-        // verify required parameter 'timesheetLineID' is not null or undefined
-        if (timesheetLineID === null || timesheetLineID === undefined) {
-            throw new Error('Required parameter timesheetLineID was null or undefined when calling updateTimesheetLine.');
-        }
-
-        // verify required parameter 'timesheetLine' is not null or undefined
-        if (timesheetLine === null || timesheetLine === undefined) {
-            throw new Error('Required parameter timesheetLine was null or undefined when calling updateTimesheetLine.');
-        }
-
-        localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(timesheetLine, "TimesheetLine")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
+        return new Promise<{ response: http.IncomingMessage; body: TimesheetLineObject;  }>((resolve, reject) => {
+          localVarRequest(localVarRequestOptions, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              body = ObjectSerializer.deserialize(body, "TimesheetLineObject");
+              if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                resolve({ response: response, body: body });
+              } else {
+                reject({ response: response, body: body });
+              }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimesheetLineObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimesheetLineObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
+          });
         });
+      });
     }
 }

@@ -13,19 +13,19 @@
 import { Timesheet } from '././timesheet';
 
 export class TimesheetObject {
-    'timesheet'?: Timesheet;
+  'timesheet'?: Timesheet;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "timesheet",
-            "baseName": "Timesheet",
-            "type": "Timesheet"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "timesheet",
+      "baseName": "Timesheet",
+      "type": "Timesheet"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return TimesheetObject.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return TimesheetObject.attributeTypeMap;
+  }
 }
 

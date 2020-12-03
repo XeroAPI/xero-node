@@ -19,61 +19,61 @@ import { SuperannuationLine } from '././superannuationLine';
 import { TaxLine } from '././taxLine';
 
 export class PayslipLines {
-    'earningsLines'?: Array<EarningsLine>;
-    'leaveEarningsLines'?: Array<LeaveEarningsLine>;
-    'timesheetEarningsLines'?: Array<EarningsLine>;
-    'deductionLines'?: Array<DeductionLine>;
-    'leaveAccrualLines'?: Array<LeaveAccrualLine>;
-    'reimbursementLines'?: Array<ReimbursementLine>;
-    'superannuationLines'?: Array<SuperannuationLine>;
-    'taxLines'?: Array<TaxLine>;
+  'earningsLines'?: Array<EarningsLine>;
+  'leaveEarningsLines'?: Array<LeaveEarningsLine>;
+  'timesheetEarningsLines'?: Array<EarningsLine>;
+  'deductionLines'?: Array<DeductionLine>;
+  'leaveAccrualLines'?: Array<LeaveAccrualLine>;
+  'reimbursementLines'?: Array<ReimbursementLine>;
+  'superannuationLines'?: Array<SuperannuationLine>;
+  'taxLines'?: Array<TaxLine>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "earningsLines",
-            "baseName": "EarningsLines",
-            "type": "Array<EarningsLine>"
-        },
-        {
-            "name": "leaveEarningsLines",
-            "baseName": "LeaveEarningsLines",
-            "type": "Array<LeaveEarningsLine>"
-        },
-        {
-            "name": "timesheetEarningsLines",
-            "baseName": "TimesheetEarningsLines",
-            "type": "Array<EarningsLine>"
-        },
-        {
-            "name": "deductionLines",
-            "baseName": "DeductionLines",
-            "type": "Array<DeductionLine>"
-        },
-        {
-            "name": "leaveAccrualLines",
-            "baseName": "LeaveAccrualLines",
-            "type": "Array<LeaveAccrualLine>"
-        },
-        {
-            "name": "reimbursementLines",
-            "baseName": "ReimbursementLines",
-            "type": "Array<ReimbursementLine>"
-        },
-        {
-            "name": "superannuationLines",
-            "baseName": "SuperannuationLines",
-            "type": "Array<SuperannuationLine>"
-        },
-        {
-            "name": "taxLines",
-            "baseName": "TaxLines",
-            "type": "Array<TaxLine>"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "earningsLines",
+      "baseName": "EarningsLines",
+      "type": "Array<EarningsLine>"
+    },
+    {
+      "name": "leaveEarningsLines",
+      "baseName": "LeaveEarningsLines",
+      "type": "Array<LeaveEarningsLine>"
+    },
+    {
+      "name": "timesheetEarningsLines",
+      "baseName": "TimesheetEarningsLines",
+      "type": "Array<EarningsLine>"
+    },
+    {
+      "name": "deductionLines",
+      "baseName": "DeductionLines",
+      "type": "Array<DeductionLine>"
+    },
+    {
+      "name": "leaveAccrualLines",
+      "baseName": "LeaveAccrualLines",
+      "type": "Array<LeaveAccrualLine>"
+    },
+    {
+      "name": "reimbursementLines",
+      "baseName": "ReimbursementLines",
+      "type": "Array<ReimbursementLine>"
+    },
+    {
+      "name": "superannuationLines",
+      "baseName": "SuperannuationLines",
+      "type": "Array<SuperannuationLine>"
+    },
+    {
+      "name": "taxLines",
+      "baseName": "TaxLines",
+      "type": "Array<TaxLine>"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return PayslipLines.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return PayslipLines.attributeTypeMap;
+  }
 }
 

@@ -13,19 +13,19 @@
 import { PayItem } from '././payItem';
 
 export class PayItems {
-    'payItems'?: PayItem;
+  'payItems'?: PayItem;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "payItems",
-            "baseName": "PayItems",
-            "type": "PayItem"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "payItems",
+      "baseName": "PayItems",
+      "type": "PayItem"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return PayItems.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return PayItems.attributeTypeMap;
+  }
 }
 

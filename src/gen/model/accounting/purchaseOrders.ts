@@ -13,19 +13,19 @@
 import { PurchaseOrder } from '././purchaseOrder';
 
 export class PurchaseOrders {
-    'purchaseOrders'?: Array<PurchaseOrder>;
+  'purchaseOrders'?: Array<PurchaseOrder>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "purchaseOrders",
-            "baseName": "PurchaseOrders",
-            "type": "Array<PurchaseOrder>"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "purchaseOrders",
+      "baseName": "PurchaseOrders",
+      "type": "Array<PurchaseOrder>"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return PurchaseOrders.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return PurchaseOrders.attributeTypeMap;
+  }
 }
 

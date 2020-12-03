@@ -252,378 +252,493 @@ import { ValidationError } from '././validationError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
-                    "string",
-                    "boolean",
-                    "double",
-                    "integer",
-                    "long",
-                    "float",
-                    "number",
-                    "any"
-                 ];
+  "string",
+  "boolean",
+  "double",
+  "integer",
+  "long",
+  "float",
+  "number",
+  "any"
+];
                  
 let enumsMap: {[index: string]: any} = {
-        "Account.StatusEnum": Account.StatusEnum,
-        "Account.BankAccountTypeEnum": Account.BankAccountTypeEnum,
-        "Account.ClassEnum": Account.ClassEnum,
-        "Account.SystemAccountEnum": Account.SystemAccountEnum,
-        "AccountType": AccountType,
-        "Action.StatusEnum": Action.StatusEnum,
-        "Address.AddressTypeEnum": Address.AddressTypeEnum,
-        "BankTransaction.TypeEnum": BankTransaction.TypeEnum,
-        "BankTransaction.StatusEnum": BankTransaction.StatusEnum,
-        "BatchPayment.TypeEnum": BatchPayment.TypeEnum,
-        "BatchPayment.StatusEnum": BatchPayment.StatusEnum,
-        "BrandingTheme.TypeEnum": BrandingTheme.TypeEnum,
-        "Contact.ContactStatusEnum": Contact.ContactStatusEnum,
-        "ContactGroup.StatusEnum": ContactGroup.StatusEnum,
-        "CountryCode": CountryCode,
-        "CreditNote.TypeEnum": CreditNote.TypeEnum,
-        "CreditNote.StatusEnum": CreditNote.StatusEnum,
-        "CurrencyCode": CurrencyCode,
-        "Employee.StatusEnum": Employee.StatusEnum,
-        "ExpenseClaim.StatusEnum": ExpenseClaim.StatusEnum,
-        "ExternalLink.LinkTypeEnum": ExternalLink.LinkTypeEnum,
-        "Invoice.TypeEnum": Invoice.TypeEnum,
-        "Invoice.StatusEnum": Invoice.StatusEnum,
-        "Journal.SourceTypeEnum": Journal.SourceTypeEnum,
-        "LineAmountTypes": LineAmountTypes,
-        "LinkedTransaction.StatusEnum": LinkedTransaction.StatusEnum,
-        "LinkedTransaction.TypeEnum": LinkedTransaction.TypeEnum,
-        "LinkedTransaction.SourceTransactionTypeCodeEnum": LinkedTransaction.SourceTransactionTypeCodeEnum,
-        "ManualJournal.StatusEnum": ManualJournal.StatusEnum,
-        "Organisation.VersionEnum": Organisation.VersionEnum,
-        "Organisation.OrganisationTypeEnum": Organisation.OrganisationTypeEnum,
-        "Organisation.SalesTaxBasisEnum": Organisation.SalesTaxBasisEnum,
-        "Organisation.SalesTaxPeriodEnum": Organisation.SalesTaxPeriodEnum,
-        "Organisation.OrganisationEntityTypeEnum": Organisation.OrganisationEntityTypeEnum,
-        "Organisation.ClassEnum": Organisation.ClassEnum,
-        "Organisation.EditionEnum": Organisation.EditionEnum,
-        "Overpayment.TypeEnum": Overpayment.TypeEnum,
-        "Overpayment.StatusEnum": Overpayment.StatusEnum,
-        "Payment.StatusEnum": Payment.StatusEnum,
-        "Payment.PaymentTypeEnum": Payment.PaymentTypeEnum,
-        "PaymentTermType": PaymentTermType,
-        "Phone.PhoneTypeEnum": Phone.PhoneTypeEnum,
-        "Prepayment.TypeEnum": Prepayment.TypeEnum,
-        "Prepayment.StatusEnum": Prepayment.StatusEnum,
-        "PurchaseOrder.StatusEnum": PurchaseOrder.StatusEnum,
-        "QuoteLineAmountTypes": QuoteLineAmountTypes,
-        "QuoteStatusCodes": QuoteStatusCodes,
-        "Receipt.StatusEnum": Receipt.StatusEnum,
-        "RepeatingInvoice.TypeEnum": RepeatingInvoice.TypeEnum,
-        "RepeatingInvoice.StatusEnum": RepeatingInvoice.StatusEnum,
-        "Report.ReportTypeEnum": Report.ReportTypeEnum,
-        "RowType": RowType,
-        "Schedule.UnitEnum": Schedule.UnitEnum,
-        "Schedule.DueDateTypeEnum": Schedule.DueDateTypeEnum,
-        "TaxRate.StatusEnum": TaxRate.StatusEnum,
-        "TaxRate.ReportTaxTypeEnum": TaxRate.ReportTaxTypeEnum,
-        "TaxType": TaxType,
-        "TimeZone": TimeZone,
-        "TrackingCategory.StatusEnum": TrackingCategory.StatusEnum,
-        "TrackingOption.StatusEnum": TrackingOption.StatusEnum,
-        "User.OrganisationRoleEnum": User.OrganisationRoleEnum,
+  "Account.StatusEnum": Account.StatusEnum,
+  "Account.BankAccountTypeEnum": Account.BankAccountTypeEnum,
+  "Account.ClassEnum": Account.ClassEnum,
+  "Account.SystemAccountEnum": Account.SystemAccountEnum,
+  "AccountType": AccountType,
+  "Action.StatusEnum": Action.StatusEnum,
+  "Address.AddressTypeEnum": Address.AddressTypeEnum,
+  "BankTransaction.TypeEnum": BankTransaction.TypeEnum,
+  "BankTransaction.StatusEnum": BankTransaction.StatusEnum,
+  "BatchPayment.TypeEnum": BatchPayment.TypeEnum,
+  "BatchPayment.StatusEnum": BatchPayment.StatusEnum,
+  "BrandingTheme.TypeEnum": BrandingTheme.TypeEnum,
+  "Contact.ContactStatusEnum": Contact.ContactStatusEnum,
+  "ContactGroup.StatusEnum": ContactGroup.StatusEnum,
+  "CountryCode": CountryCode,
+  "CreditNote.TypeEnum": CreditNote.TypeEnum,
+  "CreditNote.StatusEnum": CreditNote.StatusEnum,
+  "CurrencyCode": CurrencyCode,
+  "Employee.StatusEnum": Employee.StatusEnum,
+  "ExpenseClaim.StatusEnum": ExpenseClaim.StatusEnum,
+  "ExternalLink.LinkTypeEnum": ExternalLink.LinkTypeEnum,
+  "Invoice.TypeEnum": Invoice.TypeEnum,
+  "Invoice.StatusEnum": Invoice.StatusEnum,
+  "Journal.SourceTypeEnum": Journal.SourceTypeEnum,
+  "LineAmountTypes": LineAmountTypes,
+  "LinkedTransaction.StatusEnum": LinkedTransaction.StatusEnum,
+  "LinkedTransaction.TypeEnum": LinkedTransaction.TypeEnum,
+  "LinkedTransaction.SourceTransactionTypeCodeEnum": LinkedTransaction.SourceTransactionTypeCodeEnum,
+  "ManualJournal.StatusEnum": ManualJournal.StatusEnum,
+  "Organisation.VersionEnum": Organisation.VersionEnum,
+  "Organisation.OrganisationTypeEnum": Organisation.OrganisationTypeEnum,
+  "Organisation.SalesTaxBasisEnum": Organisation.SalesTaxBasisEnum,
+  "Organisation.SalesTaxPeriodEnum": Organisation.SalesTaxPeriodEnum,
+  "Organisation.OrganisationEntityTypeEnum": Organisation.OrganisationEntityTypeEnum,
+  "Organisation.ClassEnum": Organisation.ClassEnum,
+  "Organisation.EditionEnum": Organisation.EditionEnum,
+  "Overpayment.TypeEnum": Overpayment.TypeEnum,
+  "Overpayment.StatusEnum": Overpayment.StatusEnum,
+  "Payment.StatusEnum": Payment.StatusEnum,
+  "Payment.PaymentTypeEnum": Payment.PaymentTypeEnum,
+  "PaymentTermType": PaymentTermType,
+  "Phone.PhoneTypeEnum": Phone.PhoneTypeEnum,
+  "Prepayment.TypeEnum": Prepayment.TypeEnum,
+  "Prepayment.StatusEnum": Prepayment.StatusEnum,
+  "PurchaseOrder.StatusEnum": PurchaseOrder.StatusEnum,
+  "QuoteLineAmountTypes": QuoteLineAmountTypes,
+  "QuoteStatusCodes": QuoteStatusCodes,
+  "Receipt.StatusEnum": Receipt.StatusEnum,
+  "RepeatingInvoice.TypeEnum": RepeatingInvoice.TypeEnum,
+  "RepeatingInvoice.StatusEnum": RepeatingInvoice.StatusEnum,
+  "Report.ReportTypeEnum": Report.ReportTypeEnum,
+  "RowType": RowType,
+  "Schedule.UnitEnum": Schedule.UnitEnum,
+  "Schedule.DueDateTypeEnum": Schedule.DueDateTypeEnum,
+  "TaxRate.StatusEnum": TaxRate.StatusEnum,
+  "TaxRate.ReportTaxTypeEnum": TaxRate.ReportTaxTypeEnum,
+  "TaxType": TaxType,
+  "TimeZone": TimeZone,
+  "TrackingCategory.StatusEnum": TrackingCategory.StatusEnum,
+  "TrackingOption.StatusEnum": TrackingOption.StatusEnum,
+  "User.OrganisationRoleEnum": User.OrganisationRoleEnum,
 }
 
 let typeMap: {[index: string]: any} = {
-    "Account": Account,
-    "Accounts": Accounts,
-    "AccountsPayable": AccountsPayable,
-    "AccountsReceivable": AccountsReceivable,
-    "Action": Action,
-    "Actions": Actions,
-    "Address": Address,
-    "Allocation": Allocation,
-    "Allocations": Allocations,
-    "Attachment": Attachment,
-    "Attachments": Attachments,
-    "BalanceDetails": BalanceDetails,
-    "Balances": Balances,
-    "BankTransaction": BankTransaction,
-    "BankTransactions": BankTransactions,
-    "BankTransfer": BankTransfer,
-    "BankTransfers": BankTransfers,
-    "BatchPayment": BatchPayment,
-    "BatchPaymentDetails": BatchPaymentDetails,
-    "BatchPayments": BatchPayments,
-    "Bill": Bill,
-    "BrandingTheme": BrandingTheme,
-    "BrandingThemes": BrandingThemes,
-    "CISOrgSetting": CISOrgSetting,
-    "CISSetting": CISSetting,
-    "CISSettings": CISSettings,
-    "Contact": Contact,
-    "ContactGroup": ContactGroup,
-    "ContactGroups": ContactGroups,
-    "ContactPerson": ContactPerson,
-    "Contacts": Contacts,
-    "ConversionBalances": ConversionBalances,
-    "ConversionDate": ConversionDate,
-    "CreditNote": CreditNote,
-    "CreditNotes": CreditNotes,
-    "Currencies": Currencies,
-    "Currency": Currency,
-    "Element": Element,
-    "Employee": Employee,
-    "Employees": Employees,
-    "ExpenseClaim": ExpenseClaim,
-    "ExpenseClaims": ExpenseClaims,
-    "ExternalLink": ExternalLink,
-    "HistoryRecord": HistoryRecord,
-    "HistoryRecords": HistoryRecords,
-    "ImportSummary": ImportSummary,
-    "ImportSummaryAccounts": ImportSummaryAccounts,
-    "ImportSummaryObject": ImportSummaryObject,
-    "ImportSummaryOrganisation": ImportSummaryOrganisation,
-    "Invoice": Invoice,
-    "InvoiceReminder": InvoiceReminder,
-    "InvoiceReminders": InvoiceReminders,
-    "Invoices": Invoices,
-    "Item": Item,
-    "Items": Items,
-    "Journal": Journal,
-    "JournalLine": JournalLine,
-    "Journals": Journals,
-    "LineItem": LineItem,
-    "LineItemTracking": LineItemTracking,
-    "LinkedTransaction": LinkedTransaction,
-    "LinkedTransactions": LinkedTransactions,
-    "ManualJournal": ManualJournal,
-    "ManualJournalLine": ManualJournalLine,
-    "ManualJournals": ManualJournals,
-    "ModelError": ModelError,
-    "OnlineInvoice": OnlineInvoice,
-    "OnlineInvoices": OnlineInvoices,
-    "Organisation": Organisation,
-    "Organisations": Organisations,
-    "Overpayment": Overpayment,
-    "Overpayments": Overpayments,
-    "Payment": Payment,
-    "PaymentDelete": PaymentDelete,
-    "PaymentService": PaymentService,
-    "PaymentServices": PaymentServices,
-    "PaymentTerm": PaymentTerm,
-    "Payments": Payments,
-    "Phone": Phone,
-    "Prepayment": Prepayment,
-    "Prepayments": Prepayments,
-    "Purchase": Purchase,
-    "PurchaseOrder": PurchaseOrder,
-    "PurchaseOrders": PurchaseOrders,
-    "Quote": Quote,
-    "Quotes": Quotes,
-    "Receipt": Receipt,
-    "Receipts": Receipts,
-    "RepeatingInvoice": RepeatingInvoice,
-    "RepeatingInvoices": RepeatingInvoices,
-    "Report": Report,
-    "ReportAttribute": ReportAttribute,
-    "ReportCell": ReportCell,
-    "ReportFields": ReportFields,
-    "ReportRow": ReportRow,
-    "ReportRows": ReportRows,
-    "ReportWithRow": ReportWithRow,
-    "ReportWithRows": ReportWithRows,
-    "Reports": Reports,
-    "RequestEmpty": RequestEmpty,
-    "SalesTrackingCategory": SalesTrackingCategory,
-    "Schedule": Schedule,
-    "Setup": Setup,
-    "TaxComponent": TaxComponent,
-    "TaxRate": TaxRate,
-    "TaxRates": TaxRates,
-    "TenNinetyNineContact": TenNinetyNineContact,
-    "TrackingCategories": TrackingCategories,
-    "TrackingCategory": TrackingCategory,
-    "TrackingOption": TrackingOption,
-    "TrackingOptions": TrackingOptions,
-    "User": User,
-    "Users": Users,
-    "ValidationError": ValidationError,
+  
+  "Account": Account,
+  
+  "Accounts": Accounts,
+  
+  "AccountsPayable": AccountsPayable,
+  
+  "AccountsReceivable": AccountsReceivable,
+  
+  "Action": Action,
+  
+  "Actions": Actions,
+  
+  "Address": Address,
+  
+  "Allocation": Allocation,
+  
+  "Allocations": Allocations,
+  
+  "Attachment": Attachment,
+  
+  "Attachments": Attachments,
+  
+  "BalanceDetails": BalanceDetails,
+  
+  "Balances": Balances,
+  
+  "BankTransaction": BankTransaction,
+  
+  "BankTransactions": BankTransactions,
+  
+  "BankTransfer": BankTransfer,
+  
+  "BankTransfers": BankTransfers,
+  
+  "BatchPayment": BatchPayment,
+  
+  "BatchPaymentDetails": BatchPaymentDetails,
+  
+  "BatchPayments": BatchPayments,
+  
+  "Bill": Bill,
+  
+  "BrandingTheme": BrandingTheme,
+  
+  "BrandingThemes": BrandingThemes,
+  
+  "CISOrgSetting": CISOrgSetting,
+  
+  "CISSetting": CISSetting,
+  
+  "CISSettings": CISSettings,
+  
+  "Contact": Contact,
+  
+  "ContactGroup": ContactGroup,
+  
+  "ContactGroups": ContactGroups,
+  
+  "ContactPerson": ContactPerson,
+  
+  "Contacts": Contacts,
+  
+  "ConversionBalances": ConversionBalances,
+  
+  "ConversionDate": ConversionDate,
+  
+  "CreditNote": CreditNote,
+  
+  "CreditNotes": CreditNotes,
+  
+  "Currencies": Currencies,
+  
+  "Currency": Currency,
+  
+  "Element": Element,
+  
+  "Employee": Employee,
+  
+  "Employees": Employees,
+  
+  "ExpenseClaim": ExpenseClaim,
+  
+  "ExpenseClaims": ExpenseClaims,
+  
+  "ExternalLink": ExternalLink,
+  
+  "HistoryRecord": HistoryRecord,
+  
+  "HistoryRecords": HistoryRecords,
+  
+  "ImportSummary": ImportSummary,
+  
+  "ImportSummaryAccounts": ImportSummaryAccounts,
+  
+  "ImportSummaryObject": ImportSummaryObject,
+  
+  "ImportSummaryOrganisation": ImportSummaryOrganisation,
+  
+  "Invoice": Invoice,
+  
+  "InvoiceReminder": InvoiceReminder,
+  
+  "InvoiceReminders": InvoiceReminders,
+  
+  "Invoices": Invoices,
+  
+  "Item": Item,
+  
+  "Items": Items,
+  
+  "Journal": Journal,
+  
+  "JournalLine": JournalLine,
+  
+  "Journals": Journals,
+  
+  "LineItem": LineItem,
+  
+  "LineItemTracking": LineItemTracking,
+  
+  "LinkedTransaction": LinkedTransaction,
+  
+  "LinkedTransactions": LinkedTransactions,
+  
+  "ManualJournal": ManualJournal,
+  
+  "ManualJournalLine": ManualJournalLine,
+  
+  "ManualJournals": ManualJournals,
+  
+  "ModelError": ModelError,
+  
+  "OnlineInvoice": OnlineInvoice,
+  
+  "OnlineInvoices": OnlineInvoices,
+  
+  "Organisation": Organisation,
+  
+  "Organisations": Organisations,
+  
+  "Overpayment": Overpayment,
+  
+  "Overpayments": Overpayments,
+  
+  "Payment": Payment,
+  
+  "PaymentDelete": PaymentDelete,
+  
+  "PaymentService": PaymentService,
+  
+  "PaymentServices": PaymentServices,
+  
+  "PaymentTerm": PaymentTerm,
+  
+  "Payments": Payments,
+  
+  "Phone": Phone,
+  
+  "Prepayment": Prepayment,
+  
+  "Prepayments": Prepayments,
+  
+  "Purchase": Purchase,
+  
+  "PurchaseOrder": PurchaseOrder,
+  
+  "PurchaseOrders": PurchaseOrders,
+  
+  "Quote": Quote,
+  
+  "Quotes": Quotes,
+  
+  "Receipt": Receipt,
+  
+  "Receipts": Receipts,
+  
+  "RepeatingInvoice": RepeatingInvoice,
+  
+  "RepeatingInvoices": RepeatingInvoices,
+  
+  "Report": Report,
+  
+  "ReportAttribute": ReportAttribute,
+  
+  "ReportCell": ReportCell,
+  
+  "ReportFields": ReportFields,
+  
+  "ReportRow": ReportRow,
+  
+  "ReportRows": ReportRows,
+  
+  "ReportWithRow": ReportWithRow,
+  
+  "ReportWithRows": ReportWithRows,
+  
+  "Reports": Reports,
+  
+  "RequestEmpty": RequestEmpty,
+  
+  "SalesTrackingCategory": SalesTrackingCategory,
+  
+  "Schedule": Schedule,
+  
+  "Setup": Setup,
+  
+  "TaxComponent": TaxComponent,
+  
+  "TaxRate": TaxRate,
+  
+  "TaxRates": TaxRates,
+  
+  "TenNinetyNineContact": TenNinetyNineContact,
+  
+  "TrackingCategories": TrackingCategories,
+  
+  "TrackingCategory": TrackingCategory,
+  
+  "TrackingOption": TrackingOption,
+  
+  "TrackingOptions": TrackingOptions,
+  
+  "User": User,
+  
+  "Users": Users,
+  
+  "ValidationError": ValidationError,
+  
 }
 
 export class ObjectSerializer {
-    public static findCorrectType(data: any, expectedType: string) {
-        if (data == undefined) {
-            return expectedType;
-        } else if (primitives.indexOf(expectedType.toLowerCase()) !== -1) {
-            return expectedType;
-        } else if (expectedType === "Date") {
-            return expectedType;
+  public static findCorrectType(data: any, expectedType: string) {
+    if (data == undefined) {
+      return expectedType;
+    } else if (primitives.indexOf(expectedType.toLowerCase()) !== -1) {
+      return expectedType;
+    } else if (expectedType === "Date") {
+      return expectedType;
+    } else {
+      if (enumsMap[expectedType]) {
+        return expectedType;
+      }
+
+      if (!typeMap[expectedType]) {
+        return expectedType; // w/e we don't know the type
+      }
+
+      // Check the discriminator
+      let discriminatorProperty = typeMap[expectedType].discriminator;
+      if (discriminatorProperty == null) {
+        return expectedType; // the type does not have a discriminator. use it.
+      } else {
+        if (data[discriminatorProperty]) {
+          var discriminatorType = data[discriminatorProperty];
+          if(typeMap[discriminatorType]){
+            return discriminatorType; // use the type given in the discriminator
+          } else {
+            return expectedType; // discriminator did not map to a type
+          }
         } else {
-            if (enumsMap[expectedType]) {
-                return expectedType;
-            }
-
-            if (!typeMap[expectedType]) {
-                return expectedType; // w/e we don't know the type
-            }
-
-            // Check the discriminator
-            let discriminatorProperty = typeMap[expectedType].discriminator;
-            if (discriminatorProperty == null) {
-                return expectedType; // the type does not have a discriminator. use it.
-            } else {
-                if (data[discriminatorProperty]) {
-                    var discriminatorType = data[discriminatorProperty];
-                    if(typeMap[discriminatorType]){
-                        return discriminatorType; // use the type given in the discriminator
-                    } else {
-                        return expectedType; // discriminator did not map to a type
-                    }
-                } else {
-                    return expectedType; // discriminator was not present (or an empty string)
-                }
-            }
+          return expectedType; // discriminator was not present (or an empty string)
         }
+      }
     }
+  }
 
-    public static serialize(data: any, type: string) {
-        if (data == undefined) {
-            return data;
-        } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
-            return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
-            let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
-                transformedData.push(ObjectSerializer.serialize(date, subType));
-            }
-            if(subType === 'string') {
-                return transformedData.join(',')
-            } else {
-                return transformedData
-            }
-        } else if (type === "Date") {
-            return data.toISOString();
-        } else {
-            if (enumsMap[type]) {
-                return data;
-            }
-            if (!typeMap[type]) { // in case we dont know the type
-                return data;
-            }
-            
-            // Get the actual type of this object
-            type = this.findCorrectType(data, type);
+  public static serialize(data: any, type: string) {
+    if (data == undefined) {
+      return data;
+    } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
+      return data;
+    } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
+      let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
+      subType = subType.substring(0, subType.length - 1); // Type> => Type
+      let transformedData: any[] = [];
+      for (let index in data) {
+        let date = data[index];
+        transformedData.push(ObjectSerializer.serialize(date, subType));
+      }
+      if(subType === 'string') {
+        return transformedData.join(',')
+      } else {
+        return transformedData
+      }
+    } else if (type === "Date") {
+      return data.toISOString();
+    } else {
+      if (enumsMap[type]) {
+        return data;
+      }
+      if (!typeMap[type]) { // in case we dont know the type
+        return data;
+      }
+      
+      // Get the actual type of this object
+      type = this.findCorrectType(data, type);
 
-            // get the map for the correct type.
-            let attributeTypes = typeMap[type].getAttributeTypeMap();
-            let instance: {[index: string]: any} = {};
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
-                instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type);
-            }
-            return instance;
-        }
+      // get the map for the correct type.
+      let attributeTypes = typeMap[type].getAttributeTypeMap();
+      let instance: {[index: string]: any} = {};
+      for (let index in attributeTypes) {
+        let attributeType = attributeTypes[index];
+        instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type);
+      }
+      return instance;
     }
+  }
 
-    public static deserializeDateFormats(type: string, data: any) {
-        const isDate = new Date(data)
-        if (isNaN(isDate.getTime())) {
-            const re = /-?\d+/;
-            const m = re.exec(data);
-            return new Date(parseInt(m[0], 10));
-        } else {
-            return isDate
-        }
+  public static deserializeDateFormats(type: string, data: any) {
+    const isDate = new Date(data)
+    if (isNaN(isDate.getTime())) {
+      const re = /-?\d+/;
+      const m = re.exec(data);
+      return new Date(parseInt(m[0], 10));
+    } else {
+      return isDate
     }
+  }
 
-    public static deserialize(data: any, type: string) {
-        // polymorphism may change the actual type.
-        type = ObjectSerializer.findCorrectType(data, type);
-        if (data == undefined) {
-            return data;
-        } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
-            if (type === "string" && data.toString().substring(0, 6) === "/Date(") {
-                return this.deserializeDateFormats(type, data) // For MS dates that are of type 'string'
-            }
-            else {
-                return data;
-            }
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
-            let transformedData: any[] = [];
-            // Asset API returns string even for Array<Model>
-            const dataFormatted = typeof data == 'string' ? JSON.parse(data) : data
-            for (let index in dataFormatted) {
-                let currentData = dataFormatted[index];
-                transformedData.push(ObjectSerializer.deserialize(currentData, subType));
-            }
-            return transformedData;
-        } else if (type === "Date") {
-            return this.deserializeDateFormats(type, data)
-        } else {
-            if (enumsMap[type]) {// is Enum
-                return data;
-            }
+  public static deserialize(data: any, type: string) {
+    // polymorphism may change the actual type.
+    type = ObjectSerializer.findCorrectType(data, type);
+    if (data == undefined) {
+      return data;
+    } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
+      if (type === "string" && data.toString().substring(0, 6) === "/Date(") {
+        return this.deserializeDateFormats(type, data) // For MS dates that are of type 'string'
+      }
+      else {
+        return data;
+      }
+    } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
+      let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
+      subType = subType.substring(0, subType.length - 1); // Type> => Type
+      let transformedData: any[] = [];
+      // Asset API returns string even for Array<Model>
+      const dataFormatted = typeof data == 'string' ? JSON.parse(data) : data
+      for (let index in dataFormatted) {
+        let currentData = dataFormatted[index];
+        transformedData.push(ObjectSerializer.deserialize(currentData, subType));
+      }
+      return transformedData;
+    } else if (type === "Date") {
+      return this.deserializeDateFormats(type, data)
+    } else {
+      if (enumsMap[type]) {// is Enum
+        return data;
+      }
 
-            if (!typeMap[type]) { // dont know the type
-                return data;
-            }
-            let instance = new typeMap[type]();
-            let attributeTypes = typeMap[type].getAttributeTypeMap();
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
-                instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type);
-            }
-            return instance;
-        }
+      if (!typeMap[type]) { // dont know the type
+        return data;
+      }
+      let instance = new typeMap[type]();
+      let attributeTypes = typeMap[type].getAttributeTypeMap();
+      for (let index in attributeTypes) {
+        let attributeType = attributeTypes[index];
+        instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type);
+      }
+      return instance;
     }
+  }
 }
 
 export interface Authentication {
-    /**
-    * Apply authentication settings to header and query params.
-    */
-    applyToRequest(requestOptions: localVarRequest.Options): Promise<void> | void;
+  /**
+  * Apply authentication settings to header and query params.
+  */
+  applyToRequest(requestOptions: localVarRequest.Options): Promise<void> | void;
 }
 
 export class HttpBasicAuth implements Authentication {
-    public username: string = '';
-    public password: string = '';
+  public username: string = '';
+  public password: string = '';
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
-        requestOptions.auth = {
-            username: this.username, password: this.password
-        }
+  applyToRequest(requestOptions: localVarRequest.Options): void {
+    requestOptions.auth = {
+      username: this.username, password: this.password
     }
+  }
 }
 
 export class ApiKeyAuth implements Authentication {
-    public apiKey: string = '';
+  public apiKey: string = '';
 
-    constructor(private location: string, private paramName: string) {
-    }
+  constructor(private location: string, private paramName: string) {
+  }
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
-        if (this.location == "query") {
-            (<any>requestOptions.qs)[this.paramName] = this.apiKey;
-        } else if (this.location == "header" && requestOptions && requestOptions.headers) {
-            requestOptions.headers[this.paramName] = this.apiKey;
-        }
+  applyToRequest(requestOptions: localVarRequest.Options): void {
+    if (this.location == "query") {
+      (<any>requestOptions.qs)[this.paramName] = this.apiKey;
+    } else if (this.location == "header" && requestOptions && requestOptions.headers) {
+      requestOptions.headers[this.paramName] = this.apiKey;
     }
+  }
 }
 
 export class OAuth implements Authentication {
-    public accessToken: string = '';
+  public accessToken: string = '';
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
-        if (requestOptions && requestOptions.headers) {
-            requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
-        }
+  applyToRequest(requestOptions: localVarRequest.Options): void {
+    if (requestOptions && requestOptions.headers) {
+      requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
     }
+  }
 }
 
 export class VoidAuth implements Authentication {
-    public username: string = '';
-    public password: string = '';
+  public username: string = '';
+  public password: string = '';
 
-    applyToRequest(_: localVarRequest.Options): void {
-        // Do nothing
-    }
+  applyToRequest(_: localVarRequest.Options): void {
+    // Do nothing
+  }
 }

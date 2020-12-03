@@ -13,19 +13,19 @@
 import { LeaveApplication } from '././leaveApplication';
 
 export class LeaveApplications {
-    'leaveApplications'?: Array<LeaveApplication>;
+  'leaveApplications'?: Array<LeaveApplication>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "leaveApplications",
-            "baseName": "LeaveApplications",
-            "type": "Array<LeaveApplication>"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "leaveApplications",
+      "baseName": "LeaveApplications",
+      "type": "Array<LeaveApplication>"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return LeaveApplications.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return LeaveApplications.attributeTypeMap;
+  }
 }
 

@@ -13,19 +13,19 @@
 import { Receipt } from '././receipt';
 
 export class Receipts {
-    'receipts'?: Array<Receipt>;
+  'receipts'?: Array<Receipt>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "receipts",
-            "baseName": "Receipts",
-            "type": "Array<Receipt>"
-        }    ];
+  static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    {
+      "name": "receipts",
+      "baseName": "Receipts",
+      "type": "Array<Receipt>"
+    }  ];
 
-    static getAttributeTypeMap() {
-        return Receipts.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Receipts.attributeTypeMap;
+  }
 }
 
