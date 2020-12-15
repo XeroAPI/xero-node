@@ -89,8 +89,6 @@ export * from '././timesheets';
 export * from '././trackingCategories';
 export * from '././trackingCategory';
 
-import localVarRequest = require('request');
-
 import { Account } from '././account';
 import { Accounts } from '././accounts';
 import { Address } from '././address';
@@ -484,7 +482,7 @@ export class ApiKeyAuth implements Authentication {
 export class OAuth implements Authentication {
     public accessToken: string = '';
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
+    applyToRequest(requestOptions: any): void {
         if (requestOptions && requestOptions.headers) {
             requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
         }

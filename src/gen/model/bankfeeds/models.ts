@@ -11,8 +11,6 @@ export * from '././statement';
 export * from '././statementLine';
 export * from '././statements';
 
-import localVarRequest = require('request');
-
 import { CountryCode } from '././countryCode';
 import { CreditDebitIndicator } from '././creditDebitIndicator';
 import { CurrencyCode } from '././currencyCode';
@@ -229,7 +227,7 @@ export class ApiKeyAuth implements Authentication {
 export class OAuth implements Authentication {
     public accessToken: string = '';
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
+    applyToRequest(requestOptions: any): void {
         if (requestOptions && requestOptions.headers) {
             requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
         }

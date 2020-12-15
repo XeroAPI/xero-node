@@ -1412,7 +1412,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.3.7</div>
+              <div class="app-desc">Version: 2.7.0</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Projects API
@@ -4932,7 +4932,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-getTasks-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/tasks?page=1&pageSize=10&taskIds=taskIds_example"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/tasks?page=1&pageSize=10&taskIds=taskIds_example&chargeType="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-getTasks-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -4958,8 +4958,9 @@ public class ProjectApiExample {
         Integer page = 1; // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
         Integer pageSize = 10; // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
         String taskIds = taskIds_example; // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+        ChargeType chargeType = ; // ChargeType | 
         try {
-            Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds);
+            Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds, chargeType);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectApi#getTasks");
@@ -4981,8 +4982,9 @@ public class ProjectApiExample {
         Integer page = 1; // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
         Integer pageSize = 10; // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
         String taskIds = taskIds_example; // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+        ChargeType chargeType = ; // ChargeType | 
         try {
-            Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds);
+            Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds, chargeType);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectApi#getTasks");
@@ -5006,6 +5008,7 @@ UUID *projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // You can specify an in
 Integer *page = 1; // Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional) (default to null)
 Integer *pageSize = 10; // Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional) (default to null)
 String *taskIds = taskIds_example; // taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId} (optional) (default to null)
+ChargeType *chargeType = ; //  (optional) (default to null)
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
@@ -5015,6 +5018,7 @@ ProjectApi *apiInstance = [[ProjectApi alloc] init];
     page:page
     pageSize:pageSize
     taskIds:taskIds
+    chargeType:chargeType
               completionHandler: ^(Tasks output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -5046,9 +5050,11 @@ const pageSize = 10;  // {Integer} Optional, it is set to 50 by default. The num
 
 const taskIds = 'taskIds_example';  // {String} taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
 
+const chargeType = ;  // {ChargeType} 
+
 
 try {
-  const response = await xero.accountingApi.getTasks(xeroTenantId, projectId,  page, pageSize, taskIds);
+  const response = await xero.accountingApi.getTasks(xeroTenantId, projectId,  page, pageSize, taskIds, chargeType);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -5083,11 +5089,12 @@ namespace Example
             var page = 1;  // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional)  (default to null)
             var pageSize = 10;  // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional)  (default to null)
             var taskIds = taskIds_example;  // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId} (optional)  (default to null)
+            var chargeType = new ChargeType(); // ChargeType |  (optional)  (default to null)
 
             try
             {
                 // Allows you to retrieve a single project
-                Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds);
+                Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds, chargeType);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -5137,9 +5144,10 @@ my $projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | You can specify a
 my $page = 1; # Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
 my $pageSize = 10; # Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
 my $taskIds = taskIds_example; # String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+my $chargeType = ; # ChargeType | 
 
 eval { 
-    my $result = $api_instance->getTasks(xeroTenantId => $xeroTenantId, projectId => $projectId, page => $page, pageSize => $pageSize, taskIds => $taskIds);
+    my $result = $api_instance->getTasks(xeroTenantId => $xeroTenantId, projectId => $projectId, page => $page, pageSize => $pageSize, taskIds => $taskIds, chargeType => $chargeType);
     print Dumper($result);
 };
 if ($@) {
@@ -5164,10 +5172,11 @@ projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an ind
 page = 1 # Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional) (default to null)
 pageSize = 10 # Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional) (default to null)
 taskIds = taskIds_example # String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId} (optional) (default to null)
+chargeType =  # ChargeType |  (optional) (default to null)
 
 try: 
     # Allows you to retrieve a single project
-    api_response = api_instance.get_tasks(xeroTenantId, projectId, page=page, pageSize=pageSize, taskIds=taskIds)
+    api_response = api_instance.get_tasks(xeroTenantId, projectId, page=page, pageSize=pageSize, taskIds=taskIds, chargeType=chargeType)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectApi->getTasks: %s\n" % e)</code></pre>
@@ -5182,9 +5191,10 @@ pub fn main() {
     let page = 1; // Integer
     let pageSize = 10; // Integer
     let taskIds = taskIds_example; // String
+    let chargeType = ; // ChargeType
 
     let mut context = ProjectApi::Context::default();
-    let result = client.getTasks(xeroTenantId, projectId, page, pageSize, taskIds, &context).wait();
+    let result = client.getTasks(xeroTenantId, projectId, page, pageSize, taskIds, chargeType, &context).wait();
     println!("{:?}", result);
 
 }
@@ -5335,6 +5345,26 @@ Optional, it is set to 50 by default. The number of items to return per page in 
 
                     <div class="inner description marked">
 taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">chargeType</td>
+<td>
+
+
+    <div id="d2e199_getTasks_chargeType">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    ChargeType
+                </span>
+
+                    <div class="inner description marked">
+
                     </div>
             </div>
         </div>

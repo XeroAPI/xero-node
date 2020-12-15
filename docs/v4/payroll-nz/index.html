@@ -994,6 +994,12 @@ ul.nav-tabs {
   },
   "description" : ""
 };
+    defs["CalendarType"] = {
+  "title" : "",
+  "type" : "string",
+  "description" : "Calendar type of the pay run",
+  "enum" : [ "Weekly", "Fortnightly", "FourWeekly", "Monthly", "Annual", "Quarterly", "TwiceMonthly" ]
+};
     defs["Deduction"] = {
   "title" : "",
   "required" : [ "calculationType", "deductionCategory", "deductionName", "liabilityAccountId" ],
@@ -1237,7 +1243,7 @@ ul.nav-tabs {
     "earningsType" : {
       "type" : "string",
       "description" : "Indicates how an employee will be paid when taking this type of earning",
-      "enum" : [ "OvertimeEarnings", "Allowance", "RegularEarnings", "Commission", "Bonus", "Tips(Direct)", "Tips(Non-Direct)", "Backpay", "OtherEarnings", "LumpSum" ]
+      "enum" : [ "Allowance", "Backpay", "Bonus", "Commission", "DiscretionaryPayments", "HolidayPay", "LumpSum", "OtherEarnings", "OtherGrossEarnings", "OvertimeEarnings", "RegularEarnings", "SalarySacrificeForKiwiSaver", "Tips(Direct)", "Tips(Non-Direct)", "WithholdingIncome" ]
     },
     "rateType" : {
       "type" : "string",
@@ -2593,9 +2599,7 @@ ul.nav-tabs {
       "enum" : [ "Scheduled", "Unscheduled", "EarlierYearUpdate" ]
     },
     "calendarType" : {
-      "type" : "string",
-      "description" : "Calendar type of the pay run",
-      "enum" : [ "Weekly", "Fortnightly", "FourWeekly", "Monthly", "Annual", "Quarterly" ]
+      "$ref" : "#/components/schemas/CalendarType"
     },
     "postedDateTime" : {
       "type" : "string",
@@ -2627,9 +2631,7 @@ ul.nav-tabs {
       "description" : "Name of the calendar"
     },
     "calendarType" : {
-      "type" : "string",
-      "description" : "Type of the calendar",
-      "enum" : [ "Weekly", "Fortnightly", "FourWeekly", "Monthly", "Annual", "Quarterly" ]
+      "$ref" : "#/components/schemas/CalendarType"
     },
     "periodStartDate" : {
       "type" : "string",
@@ -2933,7 +2935,6 @@ ul.nav-tabs {
 };
     defs["PaymentMethod"] = {
   "title" : "",
-  "required" : [ "paymentMethod" ],
   "type" : "object",
   "properties" : {
     "paymentMethod" : {
@@ -3124,7 +3125,7 @@ ul.nav-tabs {
 };
     defs["SalaryAndWage"] = {
   "title" : "",
-  "required" : [ "annualSalary", "earningsRateID", "effectiveFrom", "numberOfUnitsPerDay", "numberOfUnitsPerWeek", "paymentType", "ratePerUnit", "status" ],
+  "required" : [ "annualSalary", "earningsRateID", "effectiveFrom", "numberOfUnitsPerDay", "numberOfUnitsPerWeek", "paymentType", "status" ],
   "type" : "object",
   "properties" : {
     "salaryAndWagesID" : {
@@ -3447,9 +3448,10 @@ ul.nav-tabs {
   "type" : "object",
   "properties" : {
     "periodUnits" : {
-      "type" : "integer",
+      "type" : "number",
       "description" : "The number of units for the period type",
-      "format" : "int32"
+      "format" : "double",
+      "x-is-money" : true
     },
     "periodType" : {
       "type" : "string",
@@ -3944,7 +3946,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.3.7</div>
+              <div class="app-desc">Version: 2.7.0</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in the NZ region.

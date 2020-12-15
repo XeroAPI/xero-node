@@ -3,6 +3,7 @@ export * from '././accounts';
 export * from '././address';
 export * from '././bankAccount';
 export * from '././benefit';
+export * from '././calendarType';
 export * from '././deduction';
 export * from '././deductionLine';
 export * from '././deductionObject';
@@ -97,13 +98,12 @@ export * from '././timesheets';
 export * from '././trackingCategories';
 export * from '././trackingCategory';
 
-import localVarRequest = require('request');
-
 import { Account } from '././account';
 import { Accounts } from '././accounts';
 import { Address } from '././address';
 import { BankAccount } from '././bankAccount';
 import { Benefit } from '././benefit';
+import { CalendarType } from '././calendarType';
 import { Deduction } from '././deduction';
 import { DeductionLine } from '././deductionLine';
 import { DeductionObject } from '././deductionObject';
@@ -215,6 +215,7 @@ let enumsMap: {[index: string]: any} = {
         "BankAccount.CalculationTypeEnum": BankAccount.CalculationTypeEnum,
         "Benefit.CategoryEnum": Benefit.CategoryEnum,
         "Benefit.CalculationTypeNZEnum": Benefit.CalculationTypeNZEnum,
+        "CalendarType": CalendarType,
         "Deduction.DeductionCategoryEnum": Deduction.DeductionCategoryEnum,
         "EarningsRate.EarningsTypeEnum": EarningsRate.EarningsTypeEnum,
         "EarningsRate.RateTypeEnum": EarningsRate.RateTypeEnum,
@@ -229,8 +230,6 @@ let enumsMap: {[index: string]: any} = {
         "LeavePeriod.PeriodStatusEnum": LeavePeriod.PeriodStatusEnum,
         "PayRun.PayRunStatusEnum": PayRun.PayRunStatusEnum,
         "PayRun.PayRunTypeEnum": PayRun.PayRunTypeEnum,
-        "PayRun.CalendarTypeEnum": PayRun.CalendarTypeEnum,
-        "PayRunCalendar.CalendarTypeEnum": PayRunCalendar.CalendarTypeEnum,
         "PaySlip.PaymentMethodEnum": PaySlip.PaymentMethodEnum,
         "PaymentMethod.PaymentMethodEnum": PaymentMethod.PaymentMethodEnum,
         "Reimbursement.ReimbursementCategoryEnum": Reimbursement.ReimbursementCategoryEnum,
@@ -512,7 +511,7 @@ export class ApiKeyAuth implements Authentication {
 export class OAuth implements Authentication {
     public accessToken: string = '';
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
+    applyToRequest(requestOptions: any): void {
         if (requestOptions && requestOptions.headers) {
             requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
         }

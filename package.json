@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "openid-client": "^3.9.2",
-    "request": "^2.88.0"
+    "got": "^11.8.1",
+    "form-data": "^3.0.0"
   }
 }

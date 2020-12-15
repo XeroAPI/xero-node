@@ -77,8 +77,6 @@ export * from '././timesheetStatus';
 export * from '././timesheets';
 export * from '././validationError';
 
-import localVarRequest = require('request');
-
 import { APIException } from '././aPIException';
 import { Account } from '././account';
 import { AccountType } from '././accountType';
@@ -425,7 +423,7 @@ export class ApiKeyAuth implements Authentication {
 export class OAuth implements Authentication {
     public accessToken: string = '';
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
+    applyToRequest(requestOptions: any): void {
         if (requestOptions && requestOptions.headers) {
             requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
         }
