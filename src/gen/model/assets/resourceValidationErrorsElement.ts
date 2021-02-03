@@ -5,7 +5,7 @@ export class ResourceValidationErrorsElement {
     */
     'resourceName'?: string;
     /**
-    * Explaination of the resource validation error
+    * Explanation of the resource validation error
     */
     'localisedMessage'?: string;
     /**

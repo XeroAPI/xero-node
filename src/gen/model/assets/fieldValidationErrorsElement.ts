@@ -9,7 +9,7 @@ export class FieldValidationErrorsElement {
     */
     'valueProvided'?: string;
     /**
-    * Explaination of the field validation error
+    * Explanation of the field validation error
     */
     'localisedMessage'?: string;
     /**

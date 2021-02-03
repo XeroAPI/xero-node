@@ -37,7 +37,7 @@ export class EmployeeStatutorySickLeave {
     */
     'isPregnancyRelated': boolean;
     /**
-    * Whether the employee provided sufficent notice and documentation as required by the employer supporting the sick leave request
+    * Whether the employee provided sufficient notice and documentation as required by the employer supporting the sick leave request
     */
     'sufficientNotice': boolean;
     /**

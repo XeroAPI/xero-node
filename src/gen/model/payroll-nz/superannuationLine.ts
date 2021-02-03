@@ -1,7 +1,7 @@
 
 export class SuperannuationLine {
     /**
-    * Xero identifier for payroll superannucation type
+    * Xero identifier for payroll superannuation type
     */
     'superannuationTypeID'?: string;
     /**

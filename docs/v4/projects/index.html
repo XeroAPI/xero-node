@@ -1412,7 +1412,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.8.4</div>
+              <div class="app-desc">Version: 2.8.6</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Projects API
@@ -1427,7 +1427,7 @@ ul.nav-tabs {
                       <article id="api-Project-createProject-0" data-group="User" data-name="createProject" data-version="0">
                         <div class="pull-left">
                           <h1>createProject</h1>
-                          <p>create one or more new projects</p>
+                          <p>Create one or more new projects</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1435,7 +1435,7 @@ ul.nav-tabs {
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/projects</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Projects</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -1456,7 +1456,7 @@ ul.nav-tabs {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-createProject-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-createProject-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -1524,7 +1524,7 @@ ProjectCreateOrUpdate *projectCreateOrUpdate = { "contactId":"00000000-0000-0000
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// create one or more new projects
+// Create one or more new projects
 [apiInstance createProjectWith:xeroTenantId
     projectCreateOrUpdate:projectCreateOrUpdate
               completionHandler: ^(Project output, NSError* error) {
@@ -1588,7 +1588,7 @@ namespace Example
 
             try
             {
-                // create one or more new projects
+                // Create one or more new projects
                 Project result = apiInstance.createProject(xeroTenantId, projectCreateOrUpdate);
                 Debug.WriteLine(result);
             }
@@ -1662,7 +1662,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 projectCreateOrUpdate = { "contactId":"00000000-0000-0000-000-000000000000", "name":"New Kitchen", "deadlineUtc":"2019-12-10T12:59:59Z", "estimateAmount":"99.99" } # ProjectCreateOrUpdate | 
 
 try: 
-    # create one or more new projects
+    # Create one or more new projects
     api_response = api_instance.create_project(xeroTenantId, projectCreateOrUpdate)
     pprint(api_response)
 except ApiException as e:
@@ -1938,7 +1938,7 @@ $(document).ready(function() {
                       <article id="api-Project-createTimeEntry-0" data-group="User" data-name="createTimeEntry" data-version="0">
                         <div class="pull-left">
                           <h1>createTimeEntry</h1>
-                          <p>Allows you to create a task</p>
+                          <p>Creates a time entry for a specific project</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1946,7 +1946,7 @@ $(document).ready(function() {
                         <p class="marked">Allows you to create a specific task</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/projects/{projectId}/time</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Projects/{projectId}/Time</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -1967,7 +1967,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-createTimeEntry-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/time"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}/Time"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-createTimeEntry-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -2038,7 +2038,7 @@ TimeEntryCreateOrUpdate *timeEntryCreateOrUpdate = { "userId":"740add2a-a703-4b8
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// Allows you to create a task
+// Creates a time entry for a specific project
 [apiInstance createTimeEntryWith:xeroTenantId
     projectId:projectId
     timeEntryCreateOrUpdate:timeEntryCreateOrUpdate
@@ -2105,7 +2105,7 @@ namespace Example
 
             try
             {
-                // Allows you to create a task
+                // Creates a time entry for a specific project
                 TimeEntry result = apiInstance.createTimeEntry(xeroTenantId, projectId, timeEntryCreateOrUpdate);
                 Debug.WriteLine(result);
             }
@@ -2181,7 +2181,7 @@ projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an ind
 timeEntryCreateOrUpdate = { "userId":"740add2a-a703-4b8a-a670-1093919c2040", "taskId":"7be77337-feec-4458-bb1b-dbaa5a4aafce", "dateUtc":"2020-02-26T15:00:00Z", "duration":30, "description":"My description" } # TimeEntryCreateOrUpdate | 
 
 try: 
-    # Allows you to create a task
+    # Creates a time entry for a specific project
     api_response = api_instance.create_time_entry(xeroTenantId, projectId, timeEntryCreateOrUpdate)
     pprint(api_response)
 except ApiException as e:
@@ -2427,7 +2427,7 @@ $(document).ready(function() {
                       <article id="api-Project-deleteTimeEntry-0" data-group="User" data-name="deleteTimeEntry" data-version="0">
                         <div class="pull-left">
                           <h1>deleteTimeEntry</h1>
-                          <p>Allows you to delete a time entry</p>
+                          <p>Deletes a time entry for a specific project</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2435,7 +2435,7 @@ $(document).ready(function() {
                         <p class="marked">Allows you to delete a specific time entry</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/projects/{projectId}/time/{timeEntryId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/Projects/{projectId}/Time/{timeEntryId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -2456,7 +2456,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-deleteTimeEntry-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/time/{timeEntryId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}/Time/{timeEntryId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-deleteTimeEntry-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -2525,7 +2525,7 @@ UUID *timeEntryId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // You can specify an 
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// Allows you to delete a time entry
+// Deletes a time entry for a specific project
 [apiInstance deleteTimeEntryWith:xeroTenantId
     projectId:projectId
     timeEntryId:timeEntryId
@@ -2589,7 +2589,7 @@ namespace Example
 
             try
             {
-                // Allows you to delete a time entry
+                // Deletes a time entry for a specific project
                 apiInstance.deleteTimeEntry(xeroTenantId, projectId, timeEntryId);
             }
             catch (Exception e)
@@ -2663,7 +2663,7 @@ projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an ind
 timeEntryId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an individual task by appending the id to the endpoint (default to null)
 
 try: 
-    # Allows you to delete a time entry
+    # Deletes a time entry for a specific project
     api_instance.delete_time_entry(xeroTenantId, projectId, timeEntryId)
 except ApiException as e:
     print("Exception when calling ProjectApi->deleteTimeEntry: %s\n" % e)</code></pre>
@@ -2830,15 +2830,15 @@ Xero identifier for Tenant
                       <article id="api-Project-getProject-0" data-group="User" data-name="getProject" data-version="0">
                         <div class="pull-left">
                           <h1>getProject</h1>
-                          <p>Allows you to retrieve a single project</p>
+                          <p>Retrieves a single project</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Allows you to retrieve a specific project</p>
+                        <p class="marked">Allows you to retrieve a specific project using the projectId</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/projects/{projectId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Projects/{projectId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -2859,7 +2859,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-getProject-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-getProject-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -2927,7 +2927,7 @@ UUID *projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // You can specify an in
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// Allows you to retrieve a single project
+// Retrieves a single project
 [apiInstance getProjectWith:xeroTenantId
     projectId:projectId
               completionHandler: ^(Project output, NSError* error) {
@@ -2991,7 +2991,7 @@ namespace Example
 
             try
             {
-                // Allows you to retrieve a single project
+                // Retrieves a single project
                 Project result = apiInstance.getProject(xeroTenantId, projectId);
                 Debug.WriteLine(result);
             }
@@ -3065,7 +3065,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an individual project by appending the projectId to the endpoint (default to null)
 
 try: 
-    # Allows you to retrieve a single project
+    # Retrieves a single project
     api_response = api_instance.get_project(xeroTenantId, projectId)
     pprint(api_response)
 except ApiException as e:
@@ -3321,7 +3321,7 @@ Xero identifier for Tenant
                       <article id="api-Project-getProjectUsers-0" data-group="User" data-name="getProjectUsers" data-version="0">
                         <div class="pull-left">
                           <h1>getProjectUsers</h1>
-                          <p>list all project users</p>
+                          <p>Retrieves a list of all project users</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3329,7 +3329,7 @@ Xero identifier for Tenant
                         <p class="marked">Allows you to retrieve the users on a projects.</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/projectsusers</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/ProjectsUsers</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -3350,7 +3350,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-getProjectUsers-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projectsusers?page=1&pageSize=100"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/ProjectsUsers?page=1&pageSize=100"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-getProjectUsers-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -3421,7 +3421,7 @@ Integer *pageSize = 100; // Optional, it is set to 50 by default. The number of 
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// list all project users
+// Retrieves a list of all project users
 [apiInstance getProjectUsersWith:xeroTenantId
     page:page
     pageSize:pageSize
@@ -3491,7 +3491,7 @@ namespace Example
 
             try
             {
-                // list all project users
+                // Retrieves a list of all project users
                 ProjectUsers result = apiInstance.getProjectUsers(xeroTenantId, page, pageSize);
                 Debug.WriteLine(result);
             }
@@ -3567,7 +3567,7 @@ page = 1 # Integer | set to 1 by default. The requested number of the page in pa
 pageSize = 100 # Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional) (default to 50)
 
 try: 
-    # list all project users
+    # Retrieves a list of all project users
     api_response = api_instance.get_project_users(xeroTenantId, page=page, pageSize=pageSize)
     pprint(api_response)
 except ApiException as e:
@@ -3833,7 +3833,7 @@ Optional, it is set to 50 by default. The number of items to return per page in 
                       <article id="api-Project-getProjects-0" data-group="User" data-name="getProjects" data-version="0">
                         <div class="pull-left">
                           <h1>getProjects</h1>
-                          <p>list all projects</p>
+                          <p>Retrieves all projects</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3841,7 +3841,7 @@ Optional, it is set to 50 by default. The number of items to return per page in 
                         <p class="marked">Allows you to retrieve, create and update projects.</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/projects</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Projects</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -3862,7 +3862,7 @@ Optional, it is set to 50 by default. The number of items to return per page in 
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-getProjects-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects?projectIds=&contactID=38400000-8cf0-11bd-b23e-10b96e4ef00d&states=states_example&page=1&pageSize=100"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects?projectIds=&contactID=38400000-8cf0-11bd-b23e-10b96e4ef00d&states=states_example&page=1&pageSize=100"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-getProjects-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -3942,7 +3942,7 @@ Integer *pageSize = 100; // Optional, it is set to 50 by default. The number of 
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// list all projects
+// Retrieves all projects
 [apiInstance getProjectsWith:xeroTenantId
     projectIds:projectIds
     contactID:contactID
@@ -4024,7 +4024,7 @@ namespace Example
 
             try
             {
-                // list all projects
+                // Retrieves all projects
                 Projects result = apiInstance.getProjects(xeroTenantId, projectIds, contactID, states, page, pageSize);
                 Debug.WriteLine(result);
             }
@@ -4106,7 +4106,7 @@ page = 1 # Integer | set to 1 by default. The requested number of the page in pa
 pageSize = 100 # Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional) (default to 50)
 
 try: 
-    # list all projects
+    # Retrieves all projects
     api_response = api_instance.get_projects(xeroTenantId, projectIds=projectIds, contactID=contactID, states=states, page=page, pageSize=pageSize)
     pprint(api_response)
 except ApiException as e:
@@ -4446,7 +4446,7 @@ Optional, it is set to 50 by default. The number of items to return per page in 
                       <article id="api-Project-getTask-0" data-group="User" data-name="getTask" data-version="0">
                         <div class="pull-left">
                           <h1>getTask</h1>
-                          <p>Allows you to retrieve a single project</p>
+                          <p>Retrieves a single project task</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -4454,7 +4454,7 @@ Optional, it is set to 50 by default. The number of items to return per page in 
                         <p class="marked">Allows you to retrieve a specific project</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/projects/{projectId}/tasks/{taskId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Projects/{projectId}/Tasks/{taskId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -4475,7 +4475,7 @@ Optional, it is set to 50 by default. The number of items to return per page in 
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-getTask-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/tasks/{taskId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}/Tasks/{taskId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-getTask-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -4498,7 +4498,7 @@ public class ProjectApiExample {
         ProjectApi apiInstance = new ProjectApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
         UUID projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | You can specify an individual project by appending the projectId to the endpoint
-        UUID taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId}
+        UUID taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID}
         try {
             Task result = apiInstance.getTask(xeroTenantId, projectId, taskId);
             System.out.println(result);
@@ -4519,7 +4519,7 @@ public class ProjectApiExample {
         ProjectApi apiInstance = new ProjectApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
         UUID projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | You can specify an individual project by appending the projectId to the endpoint
-        UUID taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId}
+        UUID taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID}
         try {
             Task result = apiInstance.getTask(xeroTenantId, projectId, taskId);
             System.out.println(result);
@@ -4542,11 +4542,11 @@ public class ProjectApiExample {
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
 UUID *projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // You can specify an individual project by appending the projectId to the endpoint (default to null)
-UUID *taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId} (default to null)
+UUID *taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID} (default to null)
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// Allows you to retrieve a single project
+// Retrieves a single project task
 [apiInstance getTaskWith:xeroTenantId
     projectId:projectId
     taskId:taskId
@@ -4574,7 +4574,7 @@ await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 const projectId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual project by appending the projectId to the endpoint
-const taskId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId}
+const taskId = "38400000-8cf0-11bd-b23e-10b96e4ef00d";  // {UUID} You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID}
 
 try {
   const response = await xero.accountingApi.getTask(xeroTenantId, projectId, taskId);
@@ -4609,11 +4609,11 @@ namespace Example
             var apiInstance = new ProjectApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
             var projectId = new UUID(); // UUID | You can specify an individual project by appending the projectId to the endpoint (default to null)
-            var taskId = new UUID(); // UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId} (default to null)
+            var taskId = new UUID(); // UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID} (default to null)
 
             try
             {
-                // Allows you to retrieve a single project
+                // Retrieves a single project task
                 Task result = apiInstance.getTask(xeroTenantId, projectId, taskId);
                 Debug.WriteLine(result);
             }
@@ -4661,7 +4661,7 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 my $api_instance = ::ProjectApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
 my $projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | You can specify an individual project by appending the projectId to the endpoint
-my $taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId}
+my $taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID}
 
 eval { 
     my $result = $api_instance->getTask(xeroTenantId => $xeroTenantId, projectId => $projectId, taskId => $taskId);
@@ -4686,10 +4686,10 @@ from pprint import pprint
 api_instance = .ProjectApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
 projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an individual project by appending the projectId to the endpoint (default to null)
-taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId} (default to null)
+taskId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID} (default to null)
 
 try: 
-    # Allows you to retrieve a single project
+    # Retrieves a single project task
     api_response = api_instance.get_task(xeroTenantId, projectId, taskId)
     pprint(api_response)
 except ApiException as e:
@@ -4777,7 +4777,7 @@ You can specify an individual project by appending the projectId to the endpoint
                     </span>
 
                     <div class="inner description marked">
-You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId}
+You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID}
                     </div>
             </div>
                 <div class="inner required">
@@ -4903,7 +4903,7 @@ Xero identifier for Tenant
                       <article id="api-Project-getTasks-0" data-group="User" data-name="getTasks" data-version="0">
                         <div class="pull-left">
                           <h1>getTasks</h1>
-                          <p>Allows you to retrieve a single project</p>
+                          <p>Retrieves all project tasks</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -4911,7 +4911,7 @@ Xero identifier for Tenant
                         <p class="marked">Allows you to retrieve a specific project</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/projects/{projectId}/tasks</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Projects/{projectId}/Tasks</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -4932,7 +4932,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-getTasks-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/tasks?page=1&pageSize=10&taskIds=taskIds_example&chargeType="</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}/Tasks?page=1&pageSize=10&taskIds=taskIds_example&chargeType="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-getTasks-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -4957,7 +4957,7 @@ public class ProjectApiExample {
         UUID projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | You can specify an individual project by appending the projectId to the endpoint
         Integer page = 1; // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
         Integer pageSize = 10; // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-        String taskIds = taskIds_example; // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+        String taskIds = taskIds_example; // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskID},{taskID}
         ChargeType chargeType = ; // ChargeType | 
         try {
             Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds, chargeType);
@@ -4981,7 +4981,7 @@ public class ProjectApiExample {
         UUID projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | You can specify an individual project by appending the projectId to the endpoint
         Integer page = 1; // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
         Integer pageSize = 10; // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-        String taskIds = taskIds_example; // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+        String taskIds = taskIds_example; // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskID},{taskID}
         ChargeType chargeType = ; // ChargeType | 
         try {
             Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds, chargeType);
@@ -5007,12 +5007,12 @@ String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (defa
 UUID *projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // You can specify an individual project by appending the projectId to the endpoint (default to null)
 Integer *page = 1; // Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional) (default to null)
 Integer *pageSize = 10; // Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional) (default to null)
-String *taskIds = taskIds_example; // taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId} (optional) (default to null)
+String *taskIds = taskIds_example; // taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskID},{taskID} (optional) (default to null)
 ChargeType *chargeType = ; //  (optional) (default to null)
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// Allows you to retrieve a single project
+// Retrieves all project tasks
 [apiInstance getTasksWith:xeroTenantId
     projectId:projectId
     page:page
@@ -5048,7 +5048,7 @@ const page = 1;  // {Integer} Set to 1 by default. The requested number of the p
 
 const pageSize = 10;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
 
-const taskIds = 'taskIds_example';  // {String} taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+const taskIds = 'taskIds_example';  // {String} taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskID},{taskID}
 
 const chargeType = ;  // {ChargeType} 
 
@@ -5088,12 +5088,12 @@ namespace Example
             var projectId = new UUID(); // UUID | You can specify an individual project by appending the projectId to the endpoint (default to null)
             var page = 1;  // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional)  (default to null)
             var pageSize = 10;  // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional)  (default to null)
-            var taskIds = taskIds_example;  // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId} (optional)  (default to null)
+            var taskIds = taskIds_example;  // String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskID},{taskID} (optional)  (default to null)
             var chargeType = new ChargeType(); // ChargeType |  (optional)  (default to null)
 
             try
             {
-                // Allows you to retrieve a single project
+                // Retrieves all project tasks
                 Tasks result = apiInstance.getTasks(xeroTenantId, projectId, page, pageSize, taskIds, chargeType);
                 Debug.WriteLine(result);
             }
@@ -5143,7 +5143,7 @@ my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
 my $projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | You can specify an individual project by appending the projectId to the endpoint
 my $page = 1; # Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
 my $pageSize = 10; # Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-my $taskIds = taskIds_example; # String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+my $taskIds = taskIds_example; # String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskID},{taskID}
 my $chargeType = ; # ChargeType | 
 
 eval { 
@@ -5171,11 +5171,11 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an individual project by appending the projectId to the endpoint (default to null)
 page = 1 # Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional) (default to null)
 pageSize = 10 # Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional) (default to null)
-taskIds = taskIds_example # String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId} (optional) (default to null)
+taskIds = taskIds_example # String | taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskID},{taskID} (optional) (default to null)
 chargeType =  # ChargeType |  (optional) (default to null)
 
 try: 
-    # Allows you to retrieve a single project
+    # Retrieves all project tasks
     api_response = api_instance.get_tasks(xeroTenantId, projectId, page=page, pageSize=pageSize, taskIds=taskIds, chargeType=chargeType)
     pprint(api_response)
 except ApiException as e:
@@ -5344,7 +5344,7 @@ Optional, it is set to 50 by default. The number of items to return per page in 
                 </span>
 
                     <div class="inner description marked">
-taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskId},{taskId}
+taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds={taskID},{taskID}
                     </div>
             </div>
         </div>
@@ -5453,7 +5453,7 @@ taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. G
                       <article id="api-Project-getTimeEntries-0" data-group="User" data-name="getTimeEntries" data-version="0">
                         <div class="pull-left">
                           <h1>getTimeEntries</h1>
-                          <p>Allows you to retrieve the time entries associated with a specific project</p>
+                          <p>Retrieves all time entries associated with a specific project</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -5461,7 +5461,7 @@ taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. G
                         <p class="marked">Allows you to retrieve the time entries associated with a specific project</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/projects/{projectId}/time</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Projects/{projectId}/Time</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -5482,7 +5482,7 @@ taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. G
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-getTimeEntries-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/time?userId=38400000-8cf0-11bd-b23e-10b96e4ef00d&taskId=38400000-8cf0-11bd-b23e-10b96e4ef00d&invoiceId=38400000-8cf0-11bd-b23e-10b96e4ef00d&contactId=38400000-8cf0-11bd-b23e-10b96e4ef00d&page=1&pageSize=10&states=&isChargeable=true&dateAfterUtc=2013-10-20T19:20:30+01:00&dateBeforeUtc=2013-10-20T19:20:30+01:00"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}/Time?userId=38400000-8cf0-11bd-b23e-10b96e4ef00d&taskId=38400000-8cf0-11bd-b23e-10b96e4ef00d&invoiceId=38400000-8cf0-11bd-b23e-10b96e4ef00d&contactId=38400000-8cf0-11bd-b23e-10b96e4ef00d&page=1&pageSize=10&states=&isChargeable=true&dateAfterUtc=2013-10-20T19:20:30+01:00&dateBeforeUtc=2013-10-20T19:20:30+01:00"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-getTimeEntries-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -5511,7 +5511,7 @@ public class ProjectApiExample {
         UUID contactId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | Finds all time entries for this contact identifier.
         Integer page = 1; // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
         Integer pageSize = 10; // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-        array[String] states = ; // array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
+        array[String] states = ; // array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified.
         Boolean isChargeable = true; // Boolean | Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>.
         Date dateAfterUtc = 2013-10-20T19:20:30+01:00; // Date | ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field.
         Date dateBeforeUtc = 2013-10-20T19:20:30+01:00; // Date | ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field.
@@ -5541,7 +5541,7 @@ public class ProjectApiExample {
         UUID contactId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | Finds all time entries for this contact identifier.
         Integer page = 1; // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
         Integer pageSize = 10; // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-        array[String] states = ; // array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
+        array[String] states = ; // array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified.
         Boolean isChargeable = true; // Boolean | Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>.
         Date dateAfterUtc = 2013-10-20T19:20:30+01:00; // Date | ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field.
         Date dateBeforeUtc = 2013-10-20T19:20:30+01:00; // Date | ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field.
@@ -5573,14 +5573,14 @@ UUID *invoiceId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // Finds all time entrie
 UUID *contactId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // Finds all time entries for this contact identifier. (optional) (default to null)
 Integer *page = 1; // Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional) (default to null)
 Integer *pageSize = 10; // Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional) (default to null)
-array[String] *states = ; // Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified. (optional) (default to null)
+array[String] *states = ; // Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified. (optional) (default to null)
 Boolean *isChargeable = true; // Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>. (optional) (default to null)
 Date *dateAfterUtc = 2013-10-20T19:20:30+01:00; // ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field. (optional) (default to null)
 Date *dateBeforeUtc = 2013-10-20T19:20:30+01:00; // ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field. (optional) (default to null)
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// Allows you to retrieve the time entries associated with a specific project
+// Retrieves all time entries associated with a specific project
 [apiInstance getTimeEntriesWith:xeroTenantId
     projectId:projectId
     userId:userId
@@ -5630,7 +5630,7 @@ const page = 1;  // {Integer} Set to 1 by default. The requested number of the p
 
 const pageSize = 10;  // {Integer} Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
 
-const states = [''];  // {array[String]} Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
+const states = [''];  // {array[String]} Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified.
 
 const isChargeable = true;  // {Boolean} Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>.
 
@@ -5678,14 +5678,14 @@ namespace Example
             var contactId = new UUID(); // UUID | Finds all time entries for this contact identifier. (optional)  (default to null)
             var page = 1;  // Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional)  (default to null)
             var pageSize = 10;  // Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional)  (default to null)
-            var states = new array[String](); // array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified. (optional)  (default to null)
+            var states = new array[String](); // array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified. (optional)  (default to null)
             var isChargeable = true;  // Boolean | Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>. (optional)  (default to null)
             var dateAfterUtc = 2013-10-20T19:20:30+01:00;  // Date | ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field. (optional)  (default to null)
             var dateBeforeUtc = 2013-10-20T19:20:30+01:00;  // Date | ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field. (optional)  (default to null)
 
             try
             {
-                // Allows you to retrieve the time entries associated with a specific project
+                // Retrieves all time entries associated with a specific project
                 TimeEntries result = apiInstance.getTimeEntries(xeroTenantId, projectId, userId, taskId, invoiceId, contactId, page, pageSize, states, isChargeable, dateAfterUtc, dateBeforeUtc);
                 Debug.WriteLine(result);
             }
@@ -5739,7 +5739,7 @@ my $invoiceId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | Finds all time en
 my $contactId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | Finds all time entries for this contact identifier.
 my $page = 1; # Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
 my $pageSize = 10; # Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-my $states = []; # array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
+my $states = []; # array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified.
 my $isChargeable = true; # Boolean | Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>.
 my $dateAfterUtc = 2013-10-20T19:20:30+01:00; # Date | ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field.
 my $dateBeforeUtc = 2013-10-20T19:20:30+01:00; # Date | ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field.
@@ -5773,13 +5773,13 @@ invoiceId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | Finds all time entries
 contactId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | Finds all time entries for this contact identifier. (optional) (default to null)
 page = 1 # Integer | Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0. (optional) (default to null)
 pageSize = 10 # Integer | Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500. (optional) (default to null)
-states =  # array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified. (optional) (default to null)
+states =  # array[String] | Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified. (optional) (default to null)
 isChargeable = true # Boolean | Finds all time entries which relate to tasks with the charge type <code>TIME</code> or <code>FIXED</code>. (optional) (default to null)
 dateAfterUtc = 2013-10-20T19:20:30+01:00 # Date | ISO 8601 UTC date. Finds all time entries on or after this date filtered on the <code>dateUtc</code> field. (optional) (default to null)
 dateBeforeUtc = 2013-10-20T19:20:30+01:00 # Date | ISO 8601 UTC date. Finds all time entries on or before this date filtered on the <code>dateUtc</code> field. (optional) (default to null)
 
 try: 
-    # Allows you to retrieve the time entries associated with a specific project
+    # Retrieves all time entries associated with a specific project
     api_response = api_instance.get_time_entries(xeroTenantId, projectId, userId=userId, taskId=taskId, invoiceId=invoiceId, contactId=contactId, page=page, pageSize=pageSize, states=states, isChargeable=isChargeable, dateAfterUtc=dateAfterUtc, dateBeforeUtc=dateBeforeUtc)
     pprint(api_response)
 except ApiException as e:
@@ -6046,7 +6046,7 @@ Optional, it is set to 50 by default. The number of items to return per page in 
                 </span>
 
                     <div class="inner description marked">
-Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
+Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified.
                     </div>
             </div>
         </div>
@@ -6201,15 +6201,15 @@ ISO 8601 UTC date. Finds all time entries on or before this date filtered on the
                       <article id="api-Project-getTimeEntry-0" data-group="User" data-name="getTimeEntry" data-version="0">
                         <div class="pull-left">
                           <h1>getTimeEntry</h1>
-                          <p>Allows you to get a single time entry in a project</p>
+                          <p>Retrieves a single time entry for a specific project</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Allows you to upget a single time entry in a project</p>
+                        <p class="marked">Allows you to get a single time entry in a project</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/projects/{projectId}/time/{timeEntryId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Projects/{projectId}/Time/{timeEntryId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -6230,7 +6230,7 @@ ISO 8601 UTC date. Finds all time entries on or before this date filtered on the
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-getTimeEntry-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/time/{timeEntryId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}/Time/{timeEntryId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-getTimeEntry-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -6301,7 +6301,7 @@ UUID *timeEntryId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // You can specify an 
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// Allows you to get a single time entry in a project
+// Retrieves a single time entry for a specific project
 [apiInstance getTimeEntryWith:xeroTenantId
     projectId:projectId
     timeEntryId:timeEntryId
@@ -6368,7 +6368,7 @@ namespace Example
 
             try
             {
-                // Allows you to get a single time entry in a project
+                // Retrieves a single time entry for a specific project
                 TimeEntry result = apiInstance.getTimeEntry(xeroTenantId, projectId, timeEntryId);
                 Debug.WriteLine(result);
             }
@@ -6444,7 +6444,7 @@ projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an ind
 timeEntryId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an individual time entry by appending the id to the endpoint (default to null)
 
 try: 
-    # Allows you to get a single time entry in a project
+    # Retrieves a single time entry for a specific project
     api_response = api_instance.get_time_entry(xeroTenantId, projectId, timeEntryId)
     pprint(api_response)
 except ApiException as e:
@@ -6666,7 +6666,7 @@ Xero identifier for Tenant
                         <p class="marked">Allows you to update a specific projects.</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="patch"><code><span class="pln">/projects/{projectId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="patch"><code><span class="pln">/Projects/{projectId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -6687,7 +6687,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-patchProject-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-patchProject-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -7157,7 +7157,7 @@ $(document).ready(function() {
                       <article id="api-Project-updateProject-0" data-group="User" data-name="updateProject" data-version="0">
                         <div class="pull-left">
                           <h1>updateProject</h1>
-                          <p>update a specific project</p>
+                          <p>Updates a specific project</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -7165,7 +7165,7 @@ $(document).ready(function() {
                         <p class="marked">Allows you to update a specific projects.</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/projects/{projectId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/Projects/{projectId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -7186,7 +7186,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-updateProject-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-updateProject-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -7255,7 +7255,7 @@ ProjectCreateOrUpdate *projectCreateOrUpdate = { "name": "New Kitchen", "deadlin
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// update a specific project
+// Updates a specific project
 [apiInstance updateProjectWith:xeroTenantId
     projectId:projectId
     projectCreateOrUpdate:projectCreateOrUpdate
@@ -7319,7 +7319,7 @@ namespace Example
 
             try
             {
-                // update a specific project
+                // Updates a specific project
                 apiInstance.updateProject(xeroTenantId, projectId, projectCreateOrUpdate);
             }
             catch (Exception e)
@@ -7393,7 +7393,7 @@ projectId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an ind
 projectCreateOrUpdate = { "name": "New Kitchen", "deadlineUtc": "2017-04-23T18:25:43.511Z", "estimateAmount": 99.99 } # ProjectCreateOrUpdate | 
 
 try: 
-    # update a specific project
+    # Updates a specific project
     api_instance.update_project(xeroTenantId, projectId, projectCreateOrUpdate)
 except ApiException as e:
     print("Exception when calling ProjectApi->updateProject: %s\n" % e)</code></pre>
@@ -7656,7 +7656,7 @@ $(document).ready(function() {
                       <article id="api-Project-updateTimeEntry-0" data-group="User" data-name="updateTimeEntry" data-version="0">
                         <div class="pull-left">
                           <h1>updateTimeEntry</h1>
-                          <p>Allows you to update time entry in a project</p>
+                          <p>Updates a time entry for a specific project</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -7664,7 +7664,7 @@ $(document).ready(function() {
                         <p class="marked">Allows you to update time entry in a project</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/projects/{projectId}/time/{timeEntryId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/Projects/{projectId}/Time/{timeEntryId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -7685,7 +7685,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Project-updateTimeEntry-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/projects/{projectId}/time/{timeEntryId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/projects.xro/2.0/Projects/{projectId}/Time/{timeEntryId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Project-updateTimeEntry-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -7757,7 +7757,7 @@ TimeEntryCreateOrUpdate *timeEntryCreateOrUpdate = { "userId":"740add2a-a703-4b8
 
 ProjectApi *apiInstance = [[ProjectApi alloc] init];
 
-// Allows you to update time entry in a project
+// Updates a time entry for a specific project
 [apiInstance updateTimeEntryWith:xeroTenantId
     projectId:projectId
     timeEntryId:timeEntryId
@@ -7824,7 +7824,7 @@ namespace Example
 
             try
             {
-                // Allows you to update time entry in a project
+                // Updates a time entry for a specific project
                 apiInstance.updateTimeEntry(xeroTenantId, projectId, timeEntryId, timeEntryCreateOrUpdate);
             }
             catch (Exception e)
@@ -7900,7 +7900,7 @@ timeEntryId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | You can specify an i
 timeEntryCreateOrUpdate = { "userId":"740add2a-a703-4b8a-a670-1093919c2040", "taskId":"7be77337-feec-4458-bb1b-dbaa5a4aafce", "dateUtc":"2020-02-27T15:00:00Z", "duration":45, "description":"My UPDATED description" } # TimeEntryCreateOrUpdate | 
 
 try: 
-    # Allows you to update time entry in a project
+    # Updates a time entry for a specific project
     api_instance.update_time_entry(xeroTenantId, projectId, timeEntryId, timeEntryCreateOrUpdate)
 except ApiException as e:
     print("Exception when calling ProjectApi->updateTimeEntry: %s\n" % e)</code></pre>

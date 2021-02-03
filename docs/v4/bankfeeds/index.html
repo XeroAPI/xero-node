@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Bank Feeds API</title>
+  <title>Xero Bank Feeds API</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -1179,7 +1179,7 @@ ul.nav-tabs {
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>Bank Feeds API</h1>
+            <h1>Xero Bank Feeds API</h1>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -1188,10 +1188,10 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.8.4</div>
+              <div class="app-desc">Version: 2.8.6</div>
             <hr>
             <div id="app-description" class="app-desc">
-                This specifing endpoints Xero Bank feeds API
+                The Bank Feeds API is a closed API that is only available to financial institutions that have an established financial services partnership with Xero. If you're an existing financial services partner that wants access, contact your local Partner Manager. If you're a financial institution who wants to provide bank feeds to your business customers, contact us to become a financial services partner.
             </div>
             -->
           </div>
@@ -1203,7 +1203,7 @@ ul.nav-tabs {
                       <article id="api-BankFeeds-createFeedConnections-0" data-group="User" data-name="createFeedConnections" data-version="0">
                         <div class="pull-left">
                           <h1>createFeedConnections</h1>
-                          <p>create one or more new feed connection</p>
+                          <p>Create one or more new feed connection</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1300,7 +1300,7 @@ FeedConnections *feedConnections = {"items":[{"accountToken":"foobar71760","acco
 
 BankFeedsApi *apiInstance = [[BankFeedsApi alloc] init];
 
-// create one or more new feed connection
+// Create one or more new feed connection
 [apiInstance createFeedConnectionsWith:xeroTenantId
     feedConnections:feedConnections
               completionHandler: ^(FeedConnections output, NSError* error) {
@@ -1364,7 +1364,7 @@ namespace Example
 
             try
             {
-                // create one or more new feed connection
+                // Create one or more new feed connection
                 FeedConnections result = apiInstance.createFeedConnections(xeroTenantId, feedConnections);
                 Debug.WriteLine(result);
             }
@@ -1438,7 +1438,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 feedConnections = {"items":[{"accountToken":"foobar71760","accountNumber":"123458637","accountName":"SDK Bank 90861","accountType":"BANK","currency":"GBP"}]} # FeedConnections | 
 
 try: 
-    # create one or more new feed connection
+    # Create one or more new feed connection
     api_response = api_instance.create_feed_connections(xeroTenantId, feedConnections)
     pprint(api_response)
 except ApiException as e:
@@ -1752,7 +1752,7 @@ $(document).ready(function() {
                       <article id="api-BankFeeds-createStatements-0" data-group="User" data-name="createStatements" data-version="0">
                         <div class="pull-left">
                           <h1>createStatements</h1>
-                          <p></p>
+                          <p>Creates one or more new statements</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1849,7 +1849,7 @@ Statements *statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-
 
 BankFeedsApi *apiInstance = [[BankFeedsApi alloc] init];
 
-// 
+// Creates one or more new statements
 [apiInstance createStatementsWith:xeroTenantId
     statements:statements
               completionHandler: ^(Statements output, NSError* error) {
@@ -1915,7 +1915,7 @@ namespace Example
 
             try
             {
-                // 
+                // Creates one or more new statements
                 Statements result = apiInstance.createStatements(xeroTenantId, statements);
                 Debug.WriteLine(result);
             }
@@ -1989,7 +1989,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350"}]}]} # Statements |  (optional)
 
 try: 
-    # 
+    # Creates one or more new statements
     api_response = api_instance.create_statements(xeroTenantId, statements=statements)
     pprint(api_response)
 except ApiException as e:
@@ -2705,7 +2705,7 @@ $(document).ready(function() {
                       <article id="api-BankFeeds-deleteFeedConnections-0" data-group="User" data-name="deleteFeedConnections" data-version="0">
                         <div class="pull-left">
                           <h1>deleteFeedConnections</h1>
-                          <p>Delete an exsiting feed connection</p>
+                          <p>Delete an existing feed connection</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2802,7 +2802,7 @@ FeedConnections *feedConnections = {"items":[{"id":"b4cc693b-24d9-42ec-a6d4-2943
 
 BankFeedsApi *apiInstance = [[BankFeedsApi alloc] init];
 
-// Delete an exsiting feed connection
+// Delete an existing feed connection
 [apiInstance deleteFeedConnectionsWith:xeroTenantId
     feedConnections:feedConnections
               completionHandler: ^(FeedConnections output, NSError* error) {
@@ -2866,7 +2866,7 @@ namespace Example
 
             try
             {
-                // Delete an exsiting feed connection
+                // Delete an existing feed connection
                 FeedConnections result = apiInstance.deleteFeedConnections(xeroTenantId, feedConnections);
                 Debug.WriteLine(result);
             }
@@ -2940,7 +2940,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 feedConnections = {"items":[{"id":"b4cc693b-24d9-42ec-a6d4-2943d253ff63"}]} # FeedConnections | 
 
 try: 
-    # Delete an exsiting feed connection
+    # Delete an existing feed connection
     api_response = api_instance.delete_feed_connections(xeroTenantId, feedConnections)
     pprint(api_response)
 except ApiException as e:
@@ -3188,7 +3188,7 @@ $(document).ready(function() {
                       <article id="api-BankFeeds-getFeedConnection-0" data-group="User" data-name="getFeedConnection" data-version="0">
                         <div class="pull-left">
                           <h1>getFeedConnection</h1>
-                          <p>Retrive single feed connection based on unique id provided</p>
+                          <p>Retrieve single feed connection based on a unique id provided</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3285,7 +3285,7 @@ UUID *id = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // Unique identifier for retrie
 
 BankFeedsApi *apiInstance = [[BankFeedsApi alloc] init];
 
-// Retrive single feed connection based on unique id provided
+// Retrieve single feed connection based on a unique id provided
 [apiInstance getFeedConnectionWith:xeroTenantId
     id:id
               completionHandler: ^(FeedConnection output, NSError* error) {
@@ -3349,7 +3349,7 @@ namespace Example
 
             try
             {
-                // Retrive single feed connection based on unique id provided
+                // Retrieve single feed connection based on a unique id provided
                 FeedConnection result = apiInstance.getFeedConnection(xeroTenantId, id);
                 Debug.WriteLine(result);
             }
@@ -3423,7 +3423,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 id = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | Unique identifier for retrieving single object (default to null)
 
 try: 
-    # Retrive single feed connection based on unique id provided
+    # Retrieve single feed connection based on a unique id provided
     api_response = api_instance.get_feed_connection(xeroTenantId, id)
     pprint(api_response)
 except ApiException as e:
@@ -3638,7 +3638,7 @@ Xero identifier for Tenant
                       <article id="api-BankFeeds-getFeedConnections-0" data-group="User" data-name="getFeedConnections" data-version="0">
                         <div class="pull-left">
                           <h1>getFeedConnections</h1>
-                          <p>searches feed connections</p>
+                          <p>Searches for feed connections</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3738,7 +3738,7 @@ Integer *pageSize = 100; // Page size which specifies how many records per page 
 
 BankFeedsApi *apiInstance = [[BankFeedsApi alloc] init];
 
-// searches feed connections
+// Searches for feed connections
 [apiInstance getFeedConnectionsWith:xeroTenantId
     page:page
     pageSize:pageSize
@@ -3808,7 +3808,7 @@ namespace Example
 
             try
             {
-                // searches feed connections
+                // Searches for feed connections
                 FeedConnections result = apiInstance.getFeedConnections(xeroTenantId, page, pageSize);
                 Debug.WriteLine(result);
             }
@@ -3884,7 +3884,7 @@ page = 1 # Integer | Page number which specifies the set of records to retrieve.
 pageSize = 100 # Integer | Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?pageSize=100 to specify page size of 100. (optional) (default to null)
 
 try: 
-    # searches feed connections
+    # Searches for feed connections
     api_response = api_instance.get_feed_connections(xeroTenantId, page=page, pageSize=pageSize)
     pprint(api_response)
 except ApiException as e:
@@ -4131,7 +4131,7 @@ Page size which specifies how many records per page will be returned (default 10
                       <article id="api-BankFeeds-getStatement-0" data-group="User" data-name="getStatement" data-version="0">
                         <div class="pull-left">
                           <h1>getStatement</h1>
-                          <p>Retrive single statement based on unique id provided</p>
+                          <p>Retrieve single statement based on unique id provided</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -4139,7 +4139,7 @@ Page size which specifies how many records per page will be returned (default 10
                         <p class="marked">By passing in a statement id, you can search for matching statements</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Statements/{statementId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Statements/{statementID}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -4160,7 +4160,7 @@ Page size which specifies how many records per page will be returned (default 10
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-BankFeeds-getStatement-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/bankfeeds.xro/1.0/Statements/{statementId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/bankfeeds.xro/1.0/Statements/{statementID}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-BankFeeds-getStatement-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -4228,7 +4228,7 @@ UUID *statementId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // statement id for si
 
 BankFeedsApi *apiInstance = [[BankFeedsApi alloc] init];
 
-// Retrive single statement based on unique id provided
+// Retrieve single statement based on unique id provided
 [apiInstance getStatementWith:xeroTenantId
     statementId:statementId
               completionHandler: ^(Statement output, NSError* error) {
@@ -4292,7 +4292,7 @@ namespace Example
 
             try
             {
-                // Retrive single statement based on unique id provided
+                // Retrieve single statement based on unique id provided
                 Statement result = apiInstance.getStatement(xeroTenantId, statementId);
                 Debug.WriteLine(result);
             }
@@ -4366,7 +4366,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 statementId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | statement id for single object (default to null)
 
 try: 
-    # Retrive single statement based on unique id provided
+    # Retrieve single statement based on unique id provided
     api_response = api_instance.get_statement(xeroTenantId, statementId)
     pprint(api_response)
 except ApiException as e:
@@ -4587,7 +4587,7 @@ Xero identifier for Tenant
                       <article id="api-BankFeeds-getStatements-0" data-group="User" data-name="getStatements" data-version="0">
                         <div class="pull-left">
                           <h1>getStatements</h1>
-                          <p>Retrive all statements based on unique search criteria</p>
+                          <p>Retrieve all statements</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -4693,7 +4693,7 @@ String *xeroUserId = xeroUserId_example; //  (optional) (default to 00000000-000
 
 BankFeedsApi *apiInstance = [[BankFeedsApi alloc] init];
 
-// Retrive all statements based on unique search criteria
+// Retrieve all statements
 [apiInstance getStatementsWith:xeroTenantId
     page:page
     pageSize:pageSize
@@ -4769,7 +4769,7 @@ namespace Example
 
             try
             {
-                // Retrive all statements based on unique search criteria
+                // Retrieve all statements
                 Statements result = apiInstance.getStatements(xeroTenantId, page, pageSize, xeroApplicationId, xeroUserId);
                 Debug.WriteLine(result);
             }
@@ -4849,7 +4849,7 @@ xeroApplicationId = xeroApplicationId_example # String |  (optional) (default to
 xeroUserId = xeroUserId_example # String |  (optional) (default to 00000000-0000-0000-0000-0000030000000)
 
 try: 
-    # Retrive all statements based on unique search criteria
+    # Retrieve all statements
     api_response = api_instance.get_statements(xeroTenantId, page=page, pageSize=pageSize, xeroApplicationId=xeroApplicationId, xeroUserId=xeroUserId)
     pprint(api_response)
 except ApiException as e:

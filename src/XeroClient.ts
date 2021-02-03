@@ -123,7 +123,11 @@ export class XeroClient {
   }
 
   async disconnect(connectionId: string): Promise<TokenSet> {
-    await got.delete(`https://api.xero.com/connections/${connectionId}`);
+    await got.delete(`https://api.xero.com/connections/${connectionId}`, {
+      headers: {
+        'Authorization' : "Bearer " + this.tokenSet.access_token
+      }
+    });
     this.setAccessToken();
     return this.tokenSet
   }
@@ -211,7 +215,7 @@ export class XeroClient {
               json: this.encodeBody(body)
             }
           });
-          return { response: response, body: body }
+          return { response: JSON.parse(response.body), body: body }
         } catch (error) {
           throw new Error(error);
         }
@@ -220,7 +224,11 @@ export class XeroClient {
   }
 
   async updateTenants(fullOrgDetails: boolean = true) {
-    const response = await got('https://api.xero.com/connections');
+    const response = await got('https://api.xero.com/connections/', {
+      headers: {
+        'Authorization' : "Bearer " + this.tokenSet.access_token
+      }
+    });
     let tenants = JSON.parse(response.body).map(connection => connection);
 
     if (fullOrgDetails) {

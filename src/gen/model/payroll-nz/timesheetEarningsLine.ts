@@ -37,7 +37,7 @@ export class TimesheetEarningsLine {
     */
     'isAverageDailyPayRate'?: boolean;
     /**
-    * Flag to indentify whether the earnings line is system generated or not.
+    * Flag to identify whether the earnings line is system generated or not.
     */
     'isSystemGenerated'?: boolean;
 

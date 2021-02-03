@@ -24,7 +24,7 @@ export enum AssetApiApiKeys {
 
 export class AssetApi {
   protected _basePath = defaultBasePath;
-  protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
+  protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
   protected _useQuerystring : boolean = false;
   protected binaryHeaders : any = {};
 
@@ -205,7 +205,7 @@ export class AssetApi {
   }
 /**
   * By passing in the appropriate asset id, you can search for a specific fixed asset in the system 
-  * @summary retrieves fixed asset by id
+  * @summary Retrieves fixed asset by id
   * @param xeroTenantId Xero identifier for Tenant
   * @param id fixed asset id for single object
   */     

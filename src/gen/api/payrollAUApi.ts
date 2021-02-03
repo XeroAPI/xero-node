@@ -40,7 +40,7 @@ export enum PayrollAuApiApiKeys {
 
 export class PayrollAuApi {
   protected _basePath = defaultBasePath;
-  protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
+  protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
   protected _useQuerystring : boolean = false;
   protected binaryHeaders : any = {};
 
@@ -88,7 +88,7 @@ export class PayrollAuApi {
 
 /**
   * 
-  * @summary Use this method to create a payroll employee
+  * @summary Creates a payroll employee
   * @param xeroTenantId Xero identifier for Tenant
   * @param employee 
   */     
@@ -157,7 +157,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary Use this method to create a Leave Application
+  * @summary Creates a leave application
   * @param xeroTenantId Xero identifier for Tenant
   * @param leaveApplication 
   */     
@@ -226,7 +226,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary Use this method to create a Pay Item
+  * @summary Creates a pay item
   * @param xeroTenantId Xero identifier for Tenant
   * @param payItem 
   */     
@@ -295,7 +295,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary Use this method to create a PayRun
+  * @summary Creates a pay run
   * @param xeroTenantId Xero identifier for Tenant
   * @param payRun 
   */     
@@ -364,7 +364,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary Use this method to create a Payroll Calendars
+  * @summary Creates a Payroll Calendar
   * @param xeroTenantId Xero identifier for Tenant
   * @param payrollCalendar 
   */     
@@ -433,7 +433,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary Use this method to create a super fund
+  * @summary Creates a superfund
   * @param xeroTenantId Xero identifier for Tenant
   * @param superFund 
   */     
@@ -502,7 +502,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary Use this method to create a timesheet
+  * @summary Creates a timesheet
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheet 
   */     
@@ -571,13 +571,13 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches for an employee by unique id
+  * @summary Retrieves an employee\'s detail by unique employee id
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployee (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Employees;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployee (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Employees;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -587,9 +587,9 @@ export class PayrollAuApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployee.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployee.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployee.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -640,7 +640,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches employees
+  * @summary Searches payroll employees
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -719,13 +719,13 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches for an Leave Application by unique id
+  * @summary Retrieves a leave application by a unique leave application id
   * @param xeroTenantId Xero identifier for Tenant
-  * @param leaveApplicationId Leave Application id for single object
+  * @param leaveApplicationID Leave Application id for single object
   */     
-  public async getLeaveApplication (xeroTenantId: string, leaveApplicationId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeaveApplications;  }> {
-    const localVarPath = this.basePath + '/LeaveApplications/{LeaveApplicationId}'
-        .replace('{' + 'LeaveApplicationId' + '}', encodeURIComponent(String(leaveApplicationId)));
+  public async getLeaveApplication (xeroTenantId: string, leaveApplicationID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeaveApplications;  }> {
+    const localVarPath = this.basePath + '/LeaveApplications/{LeaveApplicationID}'
+        .replace('{' + 'LeaveApplicationID' + '}', encodeURIComponent(String(leaveApplicationID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -735,9 +735,9 @@ export class PayrollAuApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getLeaveApplication.');
     }
 
-    // verify required parameter 'leaveApplicationId' is not null or undefined
-    if (leaveApplicationId === null || leaveApplicationId === undefined) {
-      throw new Error('Required parameter leaveApplicationId was null or undefined when calling getLeaveApplication.');
+    // verify required parameter 'leaveApplicationID' is not null or undefined
+    if (leaveApplicationID === null || leaveApplicationID === undefined) {
+      throw new Error('Required parameter leaveApplicationID was null or undefined when calling getLeaveApplication.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -788,7 +788,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches Leave Applications
+  * @summary Retrieves leave applications
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -867,7 +867,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches Pay Items
+  * @summary Retrieves pay items
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -946,7 +946,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches for an payrun by unique id
+  * @summary Retrieves a pay run by using a unique pay run id
   * @param xeroTenantId Xero identifier for Tenant
   * @param payRunID PayRun id for single object
   */     
@@ -1015,7 +1015,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches PayRuns
+  * @summary Retrieves pay runs
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -1094,7 +1094,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches Payroll Calendars
+  * @summary Retrieves payroll calendar by using a unique payroll calendar ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param payrollCalendarID Payroll Calendar id for single object
   */     
@@ -1163,7 +1163,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches Payroll Calendars
+  * @summary Retrieves payroll calendars
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -1242,7 +1242,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches for an payslip by unique id
+  * @summary Retrieves for a payslip by a unique payslip id
   * @param xeroTenantId Xero identifier for Tenant
   * @param payslipID Payslip id for single object
   */     
@@ -1311,7 +1311,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary retrieve settings
+  * @summary Retrieves payroll settings
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getSettings (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsObject;  }> {
@@ -1373,7 +1373,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches for an Superfund by unique id
+  * @summary Retrieves a superfund by using a unique superfund ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param superFundID Superfund id for single object
   */     
@@ -1442,7 +1442,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches SuperfundProducts
+  * @summary Retrieves superfund products
   * @param xeroTenantId Xero identifier for Tenant
   * @param aBN The ABN of the Regulated SuperFund
   * @param uSI The USI of the Regulated SuperFund
@@ -1514,7 +1514,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches SuperFunds
+  * @summary Retrieves superfunds
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -1593,7 +1593,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches for an timesheet by unique id
+  * @summary Retrieves a timesheet by using a unique timesheet id
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Timesheet id for single object
   */     
@@ -1662,7 +1662,7 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary searches timesheets
+  * @summary Retrieves timesheets
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -1741,14 +1741,14 @@ export class PayrollAuApi {
   }
 /**
   * Update properties on a single employee
-  * @summary Update an Employee
+  * @summary Updates an employee\'s detail
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param employee 
   */     
-  public async updateEmployee (xeroTenantId: string, employeeId: string, employee?: Array<Employee>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Employees;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async updateEmployee (xeroTenantId: string, employeeID: string, employee?: Array<Employee>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Employees;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -1758,9 +1758,9 @@ export class PayrollAuApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployee.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling updateEmployee.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling updateEmployee.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -1812,14 +1812,14 @@ export class PayrollAuApi {
   }
 /**
   * 
-  * @summary Use this method to update a Leave Application
+  * @summary Updates a specific leave application
   * @param xeroTenantId Xero identifier for Tenant
-  * @param leaveApplicationId Leave Application id for single object
+  * @param leaveApplicationID Leave Application id for single object
   * @param leaveApplication 
   */     
-  public async updateLeaveApplication (xeroTenantId: string, leaveApplicationId: string, leaveApplication: Array<LeaveApplication>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeaveApplications;  }> {
-    const localVarPath = this.basePath + '/LeaveApplications/{LeaveApplicationId}'
-        .replace('{' + 'LeaveApplicationId' + '}', encodeURIComponent(String(leaveApplicationId)));
+  public async updateLeaveApplication (xeroTenantId: string, leaveApplicationID: string, leaveApplication: Array<LeaveApplication>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeaveApplications;  }> {
+    const localVarPath = this.basePath + '/LeaveApplications/{LeaveApplicationID}'
+        .replace('{' + 'LeaveApplicationID' + '}', encodeURIComponent(String(leaveApplicationID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -1829,9 +1829,9 @@ export class PayrollAuApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling updateLeaveApplication.');
     }
 
-    // verify required parameter 'leaveApplicationId' is not null or undefined
-    if (leaveApplicationId === null || leaveApplicationId === undefined) {
-      throw new Error('Required parameter leaveApplicationId was null or undefined when calling updateLeaveApplication.');
+    // verify required parameter 'leaveApplicationID' is not null or undefined
+    if (leaveApplicationID === null || leaveApplicationID === undefined) {
+      throw new Error('Required parameter leaveApplicationID was null or undefined when calling updateLeaveApplication.');
     }
 
     // verify required parameter 'leaveApplication' is not null or undefined
@@ -1888,7 +1888,7 @@ export class PayrollAuApi {
   }
 /**
   * Update properties on a single PayRun
-  * @summary Update a PayRun
+  * @summary Updates a pay run
   * @param xeroTenantId Xero identifier for Tenant
   * @param payRunID PayRun id for single object
   * @param payRun 
@@ -1959,7 +1959,7 @@ export class PayrollAuApi {
   }
 /**
   * Update lines on a single payslips
-  * @summary Update a Payslip
+  * @summary Updates a payslip
   * @param xeroTenantId Xero identifier for Tenant
   * @param payslipID Payslip id for single object
   * @param payslipLines 
@@ -2030,7 +2030,7 @@ export class PayrollAuApi {
   }
 /**
   * Update properties on a single Superfund
-  * @summary Update a Superfund
+  * @summary Updates a superfund
   * @param xeroTenantId Xero identifier for Tenant
   * @param superFundID Superfund id for single object
   * @param superFund 
@@ -2101,7 +2101,7 @@ export class PayrollAuApi {
   }
 /**
   * Update properties on a single timesheet
-  * @summary Update a Timesheet
+  * @summary Updates a timesheet
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Timesheet id for single object
   * @param timesheet 

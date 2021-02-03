@@ -9,7 +9,7 @@ export class SuperMembership {
     */
     'superFundID': string;
     /**
-    * The memberhsip number assigned to the employee by the super fund.
+    * The membership number assigned to the employee by the super fund.
     */
     'employeeNumber': string;
 

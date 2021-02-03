@@ -81,7 +81,7 @@ export enum PayrollUkApiApiKeys {
 
 export class PayrollUkApi {
   protected _basePath = defaultBasePath;
-  protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
+  protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
   protected _useQuerystring : boolean = false;
   protected binaryHeaders : any = {};
 
@@ -129,7 +129,7 @@ export class PayrollUkApi {
 
 /**
   * 
-  * @summary approve a timesheet
+  * @summary Approves a specific timesheet
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Identifier for the timesheet
   */     
@@ -198,7 +198,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary create a new benefit
+  * @summary Creates a new employee benefit
   * @param xeroTenantId Xero identifier for Tenant
   * @param benefit 
   */     
@@ -267,7 +267,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary create a new deduction
+  * @summary Creates a new deduction
   * @param xeroTenantId Xero identifier for Tenant
   * @param deduction 
   */     
@@ -336,7 +336,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary create a new earnings rate
+  * @summary Creates a new earnings rate
   * @param xeroTenantId Xero identifier for Tenant
   * @param earningsRate 
   */     
@@ -405,7 +405,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employees
+  * @summary Creates employees
   * @param xeroTenantId Xero identifier for Tenant
   * @param employee 
   */     
@@ -474,14 +474,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employee earnings template records
+  * @summary Creates an earnings template records for a specific employee
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param earningsTemplate 
   */     
-  public async createEmployeeEarningsTemplate (xeroTenantId: string, employeeId: string, earningsTemplate: EarningsTemplate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async createEmployeeEarningsTemplate (xeroTenantId: string, employeeID: string, earningsTemplate: EarningsTemplate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplates/earnings'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -491,9 +491,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeEarningsTemplate.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeEarningsTemplate.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling createEmployeeEarningsTemplate.');
     }
 
     // verify required parameter 'earningsTemplate' is not null or undefined
@@ -550,14 +550,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employee leave records
+  * @summary Creates leave records for a specific employee
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param employeeLeave 
   */     
-  public async createEmployeeLeave (xeroTenantId: string, employeeId: string, employeeLeave: EmployeeLeave, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async createEmployeeLeave (xeroTenantId: string, employeeID: string, employeeLeave: EmployeeLeave, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -567,9 +567,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeLeave.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeLeave.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling createEmployeeLeave.');
     }
 
     // verify required parameter 'employeeLeave' is not null or undefined
@@ -626,14 +626,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employee leave type records
+  * @summary Creates employee leave type records
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param employeeLeaveType 
   */     
-  public async createEmployeeLeaveType (xeroTenantId: string, employeeId: string, employeeLeaveType: EmployeeLeaveType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypeObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveTypes'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async createEmployeeLeaveType (xeroTenantId: string, employeeID: string, employeeLeaveType: EmployeeLeaveType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypeObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeaveTypes'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -643,9 +643,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeLeaveType.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeLeaveType.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling createEmployeeLeaveType.');
     }
 
     // verify required parameter 'employeeLeaveType' is not null or undefined
@@ -702,14 +702,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employee opening balances
+  * @summary Creates an opening balance for a specific employee
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param employeeOpeningBalances 
   */     
-  public async createEmployeeOpeningBalances (xeroTenantId: string, employeeId: string, employeeOpeningBalances: EmployeeOpeningBalances, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/ukopeningbalances'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async createEmployeeOpeningBalances (xeroTenantId: string, employeeID: string, employeeOpeningBalances: EmployeeOpeningBalances, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/ukopeningbalances'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -719,9 +719,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeOpeningBalances.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeOpeningBalances.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling createEmployeeOpeningBalances.');
     }
 
     // verify required parameter 'employeeOpeningBalances' is not null or undefined
@@ -778,14 +778,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employee payment method
+  * @summary Creates an employee payment method
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param paymentMethod 
   */     
-  public async createEmployeePaymentMethod (xeroTenantId: string, employeeId: string, paymentMethod: PaymentMethod, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/PaymentMethods'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async createEmployeePaymentMethod (xeroTenantId: string, employeeID: string, paymentMethod: PaymentMethod, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/PaymentMethods'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -795,9 +795,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeePaymentMethod.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling createEmployeePaymentMethod.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling createEmployeePaymentMethod.');
     }
 
     // verify required parameter 'paymentMethod' is not null or undefined
@@ -854,14 +854,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employee salary and wage record
+  * @summary Creates a salary and wage record for a specific employee
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param salaryAndWage 
   */     
-  public async createEmployeeSalaryAndWage (xeroTenantId: string, employeeId: string, salaryAndWage: SalaryAndWage, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async createEmployeeSalaryAndWage (xeroTenantId: string, employeeID: string, salaryAndWage: SalaryAndWage, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -871,9 +871,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployeeSalaryAndWage.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling createEmployeeSalaryAndWage.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling createEmployeeSalaryAndWage.');
     }
 
     // verify required parameter 'salaryAndWage' is not null or undefined
@@ -930,7 +930,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employee statutory sick leave records
+  * @summary Creates statutory sick leave records
   * @param xeroTenantId Xero identifier for Tenant
   * @param employeeStatutorySickLeave 
   */     
@@ -999,14 +999,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates employment
+  * @summary Creates employment detail for a specific employee using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param employment 
   */     
-  public async createEmployment (xeroTenantId: string, employeeId: string, employment: Employment, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmploymentObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/Employment'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async createEmployment (xeroTenantId: string, employeeID: string, employment: Employment, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmploymentObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/Employment'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -1016,9 +1016,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling createEmployment.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling createEmployment.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling createEmployment.');
     }
 
     // verify required parameter 'employment' is not null or undefined
@@ -1075,7 +1075,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary create a new leave type
+  * @summary Creates a new leave type
   * @param xeroTenantId Xero identifier for Tenant
   * @param leaveType 
   */     
@@ -1144,14 +1144,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary creates multiple employee earnings template records
+  * @summary Creates multiple earnings template records for a specific employee using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param earningsTemplate 
   */     
-  public async createMultipleEmployeeEarningsTemplate (xeroTenantId: string, employeeId: string, earningsTemplate: Array<EarningsTemplate>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeePayTemplates;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/paytemplateearnings'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async createMultipleEmployeeEarningsTemplate (xeroTenantId: string, employeeID: string, earningsTemplate: Array<EarningsTemplate>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeePayTemplates;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/paytemplateearnings'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -1161,9 +1161,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling createMultipleEmployeeEarningsTemplate.');
     }
 
     // verify required parameter 'earningsTemplate' is not null or undefined
@@ -1220,7 +1220,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary create a new payrun calendar
+  * @summary Creates a new payrun calendar
   * @param xeroTenantId Xero identifier for Tenant
   * @param payRunCalendar 
   */     
@@ -1289,7 +1289,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary create a new reimbursement
+  * @summary Creates a new reimbursement
   * @param xeroTenantId Xero identifier for Tenant
   * @param reimbursement 
   */     
@@ -1358,7 +1358,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary create a new timesheet
+  * @summary Creates a new timesheet
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheet 
   */     
@@ -1427,7 +1427,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary create a new timesheet line
+  * @summary Creates a new timesheet line for a specific timesheet using a unique timesheet ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Identifier for the timesheet
   * @param timesheetLine 
@@ -1503,14 +1503,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary deletes an employee earnings template record
+  * @summary Deletes a specific employee\'s earnings template record
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param payTemplateEarningID Id for single pay template earnings object
   */     
-  public async deleteEmployeeEarningsTemplate (xeroTenantId: string, employeeId: string, payTemplateEarningID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings/{PayTemplateEarningID}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+  public async deleteEmployeeEarningsTemplate (xeroTenantId: string, employeeID: string, payTemplateEarningID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplates/earnings/{PayTemplateEarningID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
         .replace('{' + 'PayTemplateEarningID' + '}', encodeURIComponent(String(payTemplateEarningID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -1521,9 +1521,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeEarningsTemplate.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeEarningsTemplate.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling deleteEmployeeEarningsTemplate.');
     }
 
     // verify required parameter 'payTemplateEarningID' is not null or undefined
@@ -1578,14 +1578,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary deletes an employee leave record
+  * @summary Deletes a specific employee\'s leave record
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param leaveID Leave id for single object
   */     
-  public async deleteEmployeeLeave (xeroTenantId: string, employeeId: string, leaveID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave/{LeaveID}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+  public async deleteEmployeeLeave (xeroTenantId: string, employeeID: string, leaveID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave/{LeaveID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
         .replace('{' + 'LeaveID' + '}', encodeURIComponent(String(leaveID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -1596,9 +1596,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeLeave.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeLeave.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling deleteEmployeeLeave.');
     }
 
     // verify required parameter 'leaveID' is not null or undefined
@@ -1654,14 +1654,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary deletes an employee salary and wages record
+  * @summary Deletes a salary and wages record for a specific employee
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param salaryAndWagesID Id for single salary and wages object
   */     
-  public async deleteEmployeeSalaryAndWage (xeroTenantId: string, employeeId: string, salaryAndWagesID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+  public async deleteEmployeeSalaryAndWage (xeroTenantId: string, employeeID: string, salaryAndWagesID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages/{SalaryAndWagesID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
         .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -1672,9 +1672,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteEmployeeSalaryAndWage.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling deleteEmployeeSalaryAndWage.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling deleteEmployeeSalaryAndWage.');
     }
 
     // verify required parameter 'salaryAndWagesID' is not null or undefined
@@ -1729,7 +1729,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary delete a timesheet
+  * @summary Deletes a specific timesheet
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Identifier for the timesheet
   */     
@@ -1798,7 +1798,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary delete a timesheet line
+  * @summary Deletes a specific timesheet line
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Identifier for the timesheet
   * @param timesheetLineID Identifier for the timesheet line
@@ -1874,7 +1874,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single benefit by id
+  * @summary Retrieves a specific benefit by using a unique benefit ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param id Identifier for the benefit
   */     
@@ -1943,7 +1943,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches benefits
+  * @summary Retrieves employee benefits
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   */     
@@ -2010,7 +2010,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single deduction by id
+  * @summary Retrieves a specific deduction by using a unique deduction ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param deductionId Identifier for the deduction
   */     
@@ -2079,7 +2079,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches deductions
+  * @summary Retrieves deductions
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   */     
@@ -2146,7 +2146,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single deduction by id
+  * @summary Retrieves a specific earnings orders by using a unique earnings orders id
   * @param xeroTenantId Xero identifier for Tenant
   * @param id Identifier for the deduction
   */     
@@ -2215,7 +2215,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches earnings orders
+  * @summary Retrieves earnings orders
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   */     
@@ -2282,7 +2282,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single earnings rates by id
+  * @summary Retrieves a specific earnings rates by using a unique earnings rate id
   * @param xeroTenantId Xero identifier for Tenant
   * @param earningsRateID Identifier for the earnings rate
   */     
@@ -2351,7 +2351,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches earnings rates
+  * @summary Retrieves earnings rates
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   */     
@@ -2418,13 +2418,13 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches employees
+  * @summary Retrieves specific employees by using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployee (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployee (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -2434,9 +2434,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployee.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployee.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployee.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2487,14 +2487,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single employee leave record
+  * @summary Retrieves a specific employee\'s leave record using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param leaveID Leave id for single object
   */     
-  public async getEmployeeLeave (xeroTenantId: string, employeeId: string, leaveID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave/{LeaveID}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+  public async getEmployeeLeave (xeroTenantId: string, employeeID: string, leaveID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave/{LeaveID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
         .replace('{' + 'LeaveID' + '}', encodeURIComponent(String(leaveID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -2505,9 +2505,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeave.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeave.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeLeave.');
     }
 
     // verify required parameter 'leaveID' is not null or undefined
@@ -2563,13 +2563,13 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary search employee leave balances
+  * @summary Retrieves a specific employee\'s leave balances using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployeeLeaveBalances (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveBalances;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveBalances'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeeLeaveBalances (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveBalances;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeaveBalances'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -2579,9 +2579,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaveBalances.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaveBalances.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeLeaveBalances.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2632,15 +2632,15 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches employee leave periods
+  * @summary Retrieves a specific employee\'s leave periods using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param startDate Filter by start date
   * @param endDate Filter by end date
   */     
-  public async getEmployeeLeavePeriods (xeroTenantId: string, employeeId: string, startDate?: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeavePeriods;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeavePeriods'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeeLeavePeriods (xeroTenantId: string, employeeID: string, startDate?: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LeavePeriods;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeavePeriods'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -2650,9 +2650,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeavePeriods.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeavePeriods.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeLeavePeriods.');
     }
 
     if (startDate !== undefined) {
@@ -2711,13 +2711,13 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches employee leave types
+  * @summary Retrieves a specific employee\'s leave types using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployeeLeaveTypes (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypes;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/LeaveTypes'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeeLeaveTypes (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypes;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeaveTypes'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -2727,9 +2727,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaveTypes.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaveTypes.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeLeaveTypes.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2780,13 +2780,13 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary search employee leave records
+  * @summary Retrieves a specific employee\'s leave records using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployeeLeaves (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaves;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeeLeaves (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaves;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -2796,9 +2796,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeLeaves.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeLeaves.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeLeaves.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2849,13 +2849,13 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve employee openingbalances
+  * @summary Retrieves a specific employee\'s openingbalances using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployeeOpeningBalances (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/ukopeningbalances'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeeOpeningBalances (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/ukopeningbalances'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -2865,9 +2865,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeOpeningBalances.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeOpeningBalances.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeOpeningBalances.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2918,13 +2918,13 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches employee pay templates
+  * @summary Retrieves a specific employee pay templates using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployeePayTemplate (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeePayTemplateObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeePayTemplate (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeePayTemplateObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplates'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -2934,9 +2934,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeePayTemplate.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeePayTemplate.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeePayTemplate.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -2987,13 +2987,13 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieves an employee\'s payment method
+  * @summary Retrieves a specific employee\'s payment method using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployeePaymentMethod (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/PaymentMethods'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeePaymentMethod (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/PaymentMethods'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -3003,9 +3003,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeePaymentMethod.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeePaymentMethod.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeePaymentMethod.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -3056,14 +3056,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary get employee salary and wages record by id
+  * @summary Retrieves a specific salary and wages record for a specific employee using a unique salary and wage id
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param salaryAndWagesID Id for single pay template earnings object
   */     
-  public async getEmployeeSalaryAndWage (xeroTenantId: string, employeeId: string, salaryAndWagesID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+  public async getEmployeeSalaryAndWage (xeroTenantId: string, employeeID: string, salaryAndWagesID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages/{SalaryAndWagesID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
         .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -3074,9 +3074,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeSalaryAndWage.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeSalaryAndWage.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeSalaryAndWage.');
     }
 
     // verify required parameter 'salaryAndWagesID' is not null or undefined
@@ -3132,14 +3132,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieves an employee\'s salary and wages
+  * @summary Retrieves a specific employee\'s salary and wages by using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   */     
-  public async getEmployeeSalaryAndWages (xeroTenantId: string, employeeId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeeSalaryAndWages (xeroTenantId: string, employeeID: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -3149,9 +3149,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeSalaryAndWages.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeSalaryAndWages.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeSalaryAndWages.');
     }
 
     if (page !== undefined) {
@@ -3206,15 +3206,15 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary search employee leave balances
+  * @summary Retrieves a specific employee\'s leave balances using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param leaveType Filter by the type of statutory leave
   * @param asOfDate The date from which to calculate balance remaining. If not specified, current date UTC is used.
   */     
-  public async getEmployeeStatutoryLeaveBalances (xeroTenantId: string, employeeId: string, leaveType?: string, asOfDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeStatutoryLeaveBalanceObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/StatutoryLeaveBalance'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeeStatutoryLeaveBalances (xeroTenantId: string, employeeID: string, leaveType?: string, asOfDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeStatutoryLeaveBalanceObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/StatutoryLeaveBalance'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -3224,9 +3224,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeStatutoryLeaveBalances.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeStatutoryLeaveBalances.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeStatutoryLeaveBalances.');
     }
 
     if (leaveType !== undefined) {
@@ -3285,7 +3285,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a statutory sick leave for an employee
+  * @summary Retrieves a statutory sick leave for an employee
   * @param xeroTenantId Xero identifier for Tenant
   * @param statutorySickLeaveID Statutory sick leave id for single object
   */     
@@ -3354,13 +3354,13 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches tax records for an employee
+  * @summary Retrieves tax records for a specific employee using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   */     
-  public async getEmployeeTax (xeroTenantId: string, employeeId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/Tax'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getEmployeeTax (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/Tax'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -3370,9 +3370,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployeeTax.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getEmployeeTax.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getEmployeeTax.');
     }
 
     localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -3423,7 +3423,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches employees
+  * @summary Retrieves employees
   * @param xeroTenantId Xero identifier for Tenant
   * @param firstName Filter by first name
   * @param lastName Filter by last name
@@ -3500,7 +3500,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single leave type by id
+  * @summary Retrieves a specific leave type by using a unique leave type ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param leaveTypeID Identifier for the leave type
   */     
@@ -3569,7 +3569,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches leave types
+  * @summary Retrieves leave types
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   * @param activeOnly Filters leave types by active status. By default the API returns all leave types.
@@ -3641,7 +3641,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single pay run by id
+  * @summary Retrieves a specific pay run by using a unique pay run ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param payRunID Identifier for the pay run
   */     
@@ -3710,7 +3710,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single payrun calendar by id
+  * @summary Retrieves a specific payrun calendar by using a unique payrun calendar ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param payRunCalendarID Identifier for the payrun calendars
   */     
@@ -3779,7 +3779,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches payrun calendars
+  * @summary Retrieves payrun calendars
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   */     
@@ -3846,7 +3846,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches pay runs
+  * @summary Retrieves pay runs
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   * @param status By default get payruns will return all the payruns for an organization. You can add GET https://api.xero.com/payroll.xro/2.0/payRuns?statu&#x3D;{PayRunStatus} to filter the payruns by status.
@@ -3918,7 +3918,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single payslip by id
+  * @summary Retrieves a specific payslip by using a unique payslip ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param payslipID Identifier for the payslip
   */     
@@ -3987,7 +3987,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches payslips
+  * @summary Retrieves payslips
   * @param xeroTenantId Xero identifier for Tenant
   * @param payRunID PayrunID which specifies the containing payrun of payslips to retrieve. By default, the API does not group payslips by payrun.
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
@@ -4064,7 +4064,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single reimbursement by id
+  * @summary Retrieves a specific reimbursement by using a unique reimbursement id
   * @param xeroTenantId Xero identifier for Tenant
   * @param reimbursementID Identifier for the reimbursement
   */     
@@ -4133,7 +4133,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches reimbursements
+  * @summary Retrieves reimbursements
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
   */     
@@ -4200,7 +4200,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches settings
+  * @summary Retrieves payroll settings
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getSettings (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Settings;  }> {
@@ -4262,14 +4262,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a summary of statutory leaves for an employee
+  * @summary Retrieves a specific employee\'s summary of statutory leaves using a unique employee ID
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param activeOnly Filter response with leaves that are currently active or yet to be taken. If not specified, all leaves (past, current, and future scheduled) are returned
   */     
-  public async getStatutoryLeaveSummary (xeroTenantId: string, employeeId: string, activeOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeStatutoryLeavesSummaries;  }> {
-    const localVarPath = this.basePath + '/statutoryleaves/summary/{EmployeeId}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async getStatutoryLeaveSummary (xeroTenantId: string, employeeID: string, activeOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeStatutoryLeavesSummaries;  }> {
+    const localVarPath = this.basePath + '/StatutoryLeaves/Summary/{EmployeeID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -4279,9 +4279,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling getStatutoryLeaveSummary.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling getStatutoryLeaveSummary.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling getStatutoryLeaveSummary.');
     }
 
     if (activeOnly !== undefined) {
@@ -4336,7 +4336,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary retrieve a single timesheet by id
+  * @summary Retrieve a specific timesheet by using a unique timesheet ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Identifier for the timesheet
   */     
@@ -4405,10 +4405,10 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches timesheets
+  * @summary Retrieves timesheets
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-  * @param employeeId By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter&#x3D;employeeId&#x3D;&#x3D;{EmployeeId} to get only the timesheets of a particular employee.
+  * @param employeeId By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter&#x3D;employeeId&#x3D;&#x3D;{EmployeeID} to get only the timesheets of a particular employee.
   * @param payrollCalendarId By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter&#x3D;payrollCalendarId&#x3D;&#x3D;{PayrollCalendarID} to filter the timesheets by payroll calendar id
   */     
   public async getTimesheets (xeroTenantId: string, page?: number, employeeId?: string, payrollCalendarId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Timesheets;  }> {
@@ -4482,11 +4482,11 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary searches tracking categories
+  * @summary Retrieves tracking categories
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getTrackingCategories (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }> {
-    const localVarPath = this.basePath + '/settings/trackingCategories';
+    const localVarPath = this.basePath + '/Settings/trackingCategories';
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -4544,7 +4544,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary revert a timesheet to draft
+  * @summary Reverts a specific timesheet to draft
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Identifier for the timesheet
   */     
@@ -4613,14 +4613,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary updates employee
+  * @summary Updates a specific employee\'s detail
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param employee 
   */     
-  public async updateEmployee (xeroTenantId: string, employeeId: string, employee: Employee, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async updateEmployee (xeroTenantId: string, employeeID: string, employee: Employee, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -4630,9 +4630,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployee.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling updateEmployee.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling updateEmployee.');
     }
 
     // verify required parameter 'employee' is not null or undefined
@@ -4689,15 +4689,15 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary updates employee earnings template records
+  * @summary Updates a specific employee\'s earnings template records
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param payTemplateEarningID Id for single pay template earnings object
   * @param earningsTemplate 
   */     
-  public async updateEmployeeEarningsTemplate (xeroTenantId: string, employeeId: string, payTemplateEarningID: string, earningsTemplate: EarningsTemplate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/PayTemplates/earnings/{PayTemplateEarningID}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+  public async updateEmployeeEarningsTemplate (xeroTenantId: string, employeeID: string, payTemplateEarningID: string, earningsTemplate: EarningsTemplate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplates/earnings/{PayTemplateEarningID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
         .replace('{' + 'PayTemplateEarningID' + '}', encodeURIComponent(String(payTemplateEarningID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -4708,9 +4708,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeEarningsTemplate.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeEarningsTemplate.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling updateEmployeeEarningsTemplate.');
     }
 
     // verify required parameter 'payTemplateEarningID' is not null or undefined
@@ -4772,15 +4772,15 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary updates employee leave records
+  * @summary Updates a specific employee\'s leave records
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param leaveID Leave id for single object
   * @param employeeLeave 
   */     
-  public async updateEmployeeLeave (xeroTenantId: string, employeeId: string, leaveID: string, employeeLeave: EmployeeLeave, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/Leave/{LeaveID}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+  public async updateEmployeeLeave (xeroTenantId: string, employeeID: string, leaveID: string, employeeLeave: EmployeeLeave, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave/{LeaveID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
         .replace('{' + 'LeaveID' + '}', encodeURIComponent(String(leaveID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -4791,9 +4791,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeLeave.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeLeave.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling updateEmployeeLeave.');
     }
 
     // verify required parameter 'leaveID' is not null or undefined
@@ -4855,14 +4855,14 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary updates employee opening balances
+  * @summary Updates a specific employee\'s opening balances
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param employeeOpeningBalances 
   */     
-  public async updateEmployeeOpeningBalances (xeroTenantId: string, employeeId: string, employeeOpeningBalances: EmployeeOpeningBalances, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/ukopeningbalances'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)));
+  public async updateEmployeeOpeningBalances (xeroTenantId: string, employeeID: string, employeeOpeningBalances: EmployeeOpeningBalances, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/ukopeningbalances'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -4872,9 +4872,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeOpeningBalances.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeOpeningBalances.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling updateEmployeeOpeningBalances.');
     }
 
     // verify required parameter 'employeeOpeningBalances' is not null or undefined
@@ -4931,15 +4931,15 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary updates employee salary and wages record
+  * @summary Updates salary and wages record for a specific employee
   * @param xeroTenantId Xero identifier for Tenant
-  * @param employeeId Employee id for single object
+  * @param employeeID Employee id for single object
   * @param salaryAndWagesID Id for single pay template earnings object
   * @param salaryAndWage 
   */     
-  public async updateEmployeeSalaryAndWage (xeroTenantId: string, employeeId: string, salaryAndWagesID: string, salaryAndWage: SalaryAndWage, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }> {
-    const localVarPath = this.basePath + '/Employees/{EmployeeId}/SalaryAndWages/{SalaryAndWagesID}'
-        .replace('{' + 'EmployeeId' + '}', encodeURIComponent(String(employeeId)))
+  public async updateEmployeeSalaryAndWage (xeroTenantId: string, employeeID: string, salaryAndWagesID: string, salaryAndWage: SalaryAndWage, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }> {
+    const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages/{SalaryAndWagesID}'
+        .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
         .replace('{' + 'SalaryAndWagesID' + '}', encodeURIComponent(String(salaryAndWagesID)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -4950,9 +4950,9 @@ export class PayrollUkApi {
       throw new Error('Required parameter xeroTenantId was null or undefined when calling updateEmployeeSalaryAndWage.');
     }
 
-    // verify required parameter 'employeeId' is not null or undefined
-    if (employeeId === null || employeeId === undefined) {
-      throw new Error('Required parameter employeeId was null or undefined when calling updateEmployeeSalaryAndWage.');
+    // verify required parameter 'employeeID' is not null or undefined
+    if (employeeID === null || employeeID === undefined) {
+      throw new Error('Required parameter employeeID was null or undefined when calling updateEmployeeSalaryAndWage.');
     }
 
     // verify required parameter 'salaryAndWagesID' is not null or undefined
@@ -5014,7 +5014,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary update a pay run
+  * @summary Updates a specific pay run
   * @param xeroTenantId Xero identifier for Tenant
   * @param payRunID Identifier for the pay run
   * @param payRun 
@@ -5090,7 +5090,7 @@ export class PayrollUkApi {
   }
 /**
   * 
-  * @summary update a timesheet line
+  * @summary Updates a specific timesheet line for a specific timesheet
   * @param xeroTenantId Xero identifier for Tenant
   * @param timesheetID Identifier for the timesheet
   * @param timesheetLineID Identifier for the timesheet line

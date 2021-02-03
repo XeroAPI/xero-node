@@ -69,7 +69,7 @@ export enum AccountingApiApiKeys {
 
 export class AccountingApi {
   protected _basePath = defaultBasePath;
-  protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
+  protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
   protected _useQuerystring : boolean = false;
   protected binaryHeaders : any = {};
 
@@ -117,7 +117,7 @@ export class AccountingApi {
 
 /**
   * 
-  * @summary Allows you to create a new chart of accounts
+  * @summary Creates a new chart of accounts
   * @param xeroTenantId Xero identifier for Tenant
   * @param account Account object in body of request
   */     
@@ -186,7 +186,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create Attachment on Account
+  * @summary Creates an attachment on a specific account
   * @param xeroTenantId Xero identifier for Tenant
   * @param accountID Unique identifier for Account object
   * @param fileName Name of the attachment
@@ -287,7 +287,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create an Attachment on BankTransaction by Filename
+  * @summary Creates an attachment for a specific bank transaction by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   * @param fileName The name of the file being attached
@@ -388,7 +388,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create history record for a bank transactions
+  * @summary Creates a history record for a specific bank transactions
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -464,7 +464,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create one or more spend or receive money transaction
+  * @summary Creates one or more spent or received money transaction
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactions BankTransactions with an array of BankTransaction objects in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -543,7 +543,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a bank transfers
+  * @summary Creates a bank transfer
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransfers BankTransfers with array of BankTransfer objects in request body
   */     
@@ -712,7 +712,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create history record for a bank transfers
+  * @summary Creates a history record for a specific bank transfer
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransferID Xero generated unique identifier for a bank transfer
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -788,7 +788,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Create one or many BatchPayments for invoices
+  * @summary Creates one or many batch payments for invoices
   * @param xeroTenantId Xero identifier for Tenant
   * @param batchPayments BatchPayments with an array of Payments in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -862,7 +862,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a history record for a Batch Payment
+  * @summary Creates a history record for a specific batch payment
   * @param xeroTenantId Xero identifier for Tenant
   * @param batchPaymentID Unique identifier for BatchPayment
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -938,7 +938,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allow for the creation of new custom payment service for specified Branding Theme
+  * @summary Creates a new custom payment service for a specific branding theme
   * @param xeroTenantId Xero identifier for Tenant
   * @param brandingThemeID Unique identifier for a Branding Theme
   * @param paymentService PaymentService object in body of request
@@ -1114,7 +1114,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a contact group
+  * @summary Creates a contact group
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactGroups ContactGroups with an array of names in request body
   */     
@@ -1183,10 +1183,10 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to add Contacts to a Contact Group
+  * @summary Creates contacts to a specific contact group
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactGroupID Unique identifier for a Contact Group
-  * @param contacts Contacts with array of contacts specifiying the ContactID to be added to ContactGroup in body of request
+  * @param contacts Contacts with array of contacts specifying the ContactID to be added to ContactGroup in body of request
   */     
   public async createContactGroupContacts (xeroTenantId: string, contactGroupID: string, contacts: Contacts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
     const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}/Contacts'
@@ -1259,7 +1259,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an Contact
+  * @summary Creates a new history record for a specific contact
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactID Unique identifier for a Contact
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -1335,7 +1335,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a multiple contacts (bulk) in a Xero organisation
+  * @summary Creates multiple contacts (bulk) in a Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
   * @param contacts Contacts with an array of Contact objects to create in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -1409,7 +1409,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create Allocation on CreditNote
+  * @summary Creates allocation for a specific credit note
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   * @param allocations Allocations with array of Allocation object in body of request.
@@ -1490,7 +1490,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create Attachments on CreditNote by file name
+  * @summary Creates an attachment for a specific credit note
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   * @param fileName Name of the file you are attaching to Credit Note
@@ -1596,7 +1596,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an CreditNote
+  * @summary Retrieves history records of a specific credit note
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -1672,7 +1672,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a credit note
+  * @summary Creates a new credit note
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNotes Credit Notes with array of CreditNote object in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -1751,9 +1751,9 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a new currency for an org
+  * @summary Create a new currency for a Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
-  * @param currency Currency obejct in the body of request
+  * @param currency Currency object in the body of request
   */     
   public async createCurrency (xeroTenantId: string, currency: Currency, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Currencies;  }> {
     const localVarPath = this.basePath + '/Currencies';
@@ -1820,7 +1820,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create new employees used in Xero payrun
+  * @summary Creates new employees used in Xero payrun
   * @param xeroTenantId Xero identifier for Tenant
   * @param employees Employees with array of Employee object in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -1894,7 +1894,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a history records of an ExpenseClaim
+  * @summary Creates a history record for a specific expense claim
   * @param xeroTenantId Xero identifier for Tenant
   * @param expenseClaimID Unique identifier for a ExpenseClaim
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -1970,7 +1970,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve expense claims
+  * @summary Creates expense claims
   * @param xeroTenantId Xero identifier for Tenant
   * @param expenseClaims ExpenseClaims with array of ExpenseClaim object in body of request
   */     
@@ -2039,7 +2039,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create an Attachment on invoices or purchase bills by it\'s filename
+  * @summary Creates an attachment for a specific invoice or purchase bill by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   * @param fileName Name of the file you are attaching
@@ -2145,7 +2145,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an invoice
+  * @summary Creates a history record for a specific invoice
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -2221,7 +2221,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create one or more sales invoices or purchase bills
+  * @summary Creates one or more sales invoices or purchase bills
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoices Invoices with an array of invoice objects in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -2300,7 +2300,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a history record for items
+  * @summary Creates a history record for a specific item
   * @param xeroTenantId Xero identifier for Tenant
   * @param itemID Unique identifier for an Item
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -2376,7 +2376,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create one or more items
+  * @summary Creates one or more items
   * @param xeroTenantId Xero identifier for Tenant
   * @param items Items with an array of Item objects in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -2455,7 +2455,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create linked transactions (billable expenses)
+  * @summary Creates linked transactions (billable expenses)
   * @param xeroTenantId Xero identifier for Tenant
   * @param linkedTransaction LinkedTransaction object in body of request
   */     
@@ -2524,7 +2524,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a specified Attachment on ManualJournal by file name
+  * @summary Creates a specific attachment for a specific manual journal by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Unique identifier for a ManualJournal
   * @param fileName The name of the file being attached to a ManualJournal
@@ -2625,7 +2625,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create history record for a manual journal
+  * @summary Creates a history record for a specific manual journal
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Xero generated unique identifier for a manual journal
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -2701,7 +2701,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create one or more manual journals
+  * @summary Creates one or more manual journals
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournals ManualJournals array with ManualJournal object in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -2775,7 +2775,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a single allocation for an overpayment
+  * @summary Creates a single allocation for a specific overpayment
   * @param xeroTenantId Xero identifier for Tenant
   * @param overpaymentID Unique identifier for a Overpayment
   * @param allocations Allocations array with Allocation object in body of request
@@ -2856,7 +2856,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create history records of an Overpayment
+  * @summary Creates a history record for a specific overpayment
   * @param xeroTenantId Xero identifier for Tenant
   * @param overpaymentID Unique identifier for a Overpayment
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -2932,7 +2932,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a single payment for invoices or credit notes
+  * @summary Creates a single payment for invoice or credit notes
   * @param xeroTenantId Xero identifier for Tenant
   * @param payment Request body with a single Payment object
   */     
@@ -3001,7 +3001,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a history record for a payment
+  * @summary Creates a history record for a specific payment
   * @param xeroTenantId Xero identifier for Tenant
   * @param paymentID Unique identifier for a Payment
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -3077,7 +3077,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create payment services
+  * @summary Creates a payment service
   * @param xeroTenantId Xero identifier for Tenant
   * @param paymentServices PaymentServices array with PaymentService object in body of request
   */     
@@ -3146,7 +3146,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create multiple payments for invoices or credit notes
+  * @summary Creates multiple payments for invoices or credit notes
   * @param xeroTenantId Xero identifier for Tenant
   * @param payments Payments array with Payment object in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -3301,7 +3301,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a history record for an Prepayment
+  * @summary Creates a history record for a specific prepayment
   * @param xeroTenantId Xero identifier for Tenant
   * @param prepaymentID Unique identifier for a PrePayment
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -3377,7 +3377,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create Attachment on Purchase Order
+  * @summary Creates attachment for a specific purchase order
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for Purchase Order object
   * @param fileName Name of the attachment
@@ -3478,7 +3478,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create HistoryRecord for purchase orders
+  * @summary Creates a history record for a specific purchase orders
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for a PurchaseOrder
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -3554,7 +3554,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create one or more purchase orders
+  * @summary Creates one or more purchase orders
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrders PurchaseOrders with an array of PurchaseOrder object in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -3628,7 +3628,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create Attachment on Quote
+  * @summary Creates attachment for a specific quote
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for Quote object
   * @param fileName Name of the attachment
@@ -3729,7 +3729,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an quote
+  * @summary Creates a history record for a specific quote
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for an Quote
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -3805,7 +3805,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create one or more quotes
+  * @summary Create one or more quotes
   * @param xeroTenantId Xero identifier for Tenant
   * @param quotes Quotes with an array of Quote object in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -3879,7 +3879,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create draft expense claim receipts for any user
+  * @summary Creates draft expense claim receipts for any user
   * @param xeroTenantId Xero identifier for Tenant
   * @param receipts Receipts with an array of Receipt object in body of request
   * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
@@ -3953,7 +3953,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create Attachment on expense claim receipts by file name
+  * @summary Creates an attachment on a specific expense claim receipts by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   * @param fileName The name of the file being attached to the Receipt
@@ -4054,7 +4054,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an Receipt
+  * @summary Creates a history record for a specific receipt
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -4130,7 +4130,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create attachment on repeating invoices by file name
+  * @summary Creates an attachment from a specific repeating invoices by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
   * @param fileName The name of the file being attached to a Repeating Invoice
@@ -4231,7 +4231,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create history for a repeating invoice
+  * @summary Creates a  history record for a specific repeating invoice
   * @param xeroTenantId Xero identifier for Tenant
   * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
   * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
@@ -4307,7 +4307,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create one or more Tax Rates
+  * @summary Creates one or more tax rates
   * @param xeroTenantId Xero identifier for Tenant
   * @param taxRates TaxRates array with TaxRate object in body of request
   */     
@@ -4376,7 +4376,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create tracking categories
+  * @summary Create tracking categories
   * @param xeroTenantId Xero identifier for Tenant
   * @param trackingCategory TrackingCategory object in body of request
   */     
@@ -4445,7 +4445,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create options for a specified tracking category
+  * @summary Creates options for a specific tracking category
   * @param xeroTenantId Xero identifier for Tenant
   * @param trackingCategoryID Unique identifier for a TrackingCategory
   * @param trackingOption TrackingOption object in body of request
@@ -4521,7 +4521,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to delete a chart of accounts
+  * @summary Deletes a chart of accounts
   * @param xeroTenantId Xero identifier for Tenant
   * @param accountID Unique identifier for retrieving single object
   */     
@@ -4590,7 +4590,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to delete a specific Contact from a Contact Group
+  * @summary Deletes a specific contact from a contact group using a unique contact Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactGroupID Unique identifier for a Contact Group
   * @param contactID Unique identifier for a Contact
@@ -4666,7 +4666,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to delete  all Contacts from a Contact Group
+  * @summary Deletes all contacts from a specific contact group
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactGroupID Unique identifier for a Contact Group
   */     
@@ -4735,7 +4735,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to delete a specified item
+  * @summary Deletes a specific item
   * @param xeroTenantId Xero identifier for Tenant
   * @param itemID Unique identifier for an Item
   */     
@@ -4804,7 +4804,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to delete a specified linked transactions (billable expenses)
+  * @summary Deletes a specific linked transactions (billable expenses)
   * @param xeroTenantId Xero identifier for Tenant
   * @param linkedTransactionID Unique identifier for a LinkedTransaction
   */     
@@ -4873,7 +4873,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specified payment for invoices and credit notes
+  * @summary Updates a specific payment for invoices and credit notes
   * @param xeroTenantId Xero identifier for Tenant
   * @param paymentID Unique identifier for a Payment
   * @param paymentDelete 
@@ -4949,7 +4949,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to delete tracking categories
+  * @summary Deletes a specific tracking category
   * @param xeroTenantId Xero identifier for Tenant
   * @param trackingCategoryID Unique identifier for a TrackingCategory
   */     
@@ -5018,7 +5018,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to delete a specified option for a specified tracking category
+  * @summary Deletes a specific option for a specific tracking category
   * @param xeroTenantId Xero identifier for Tenant
   * @param trackingCategoryID Unique identifier for a TrackingCategory
   * @param trackingOptionID Unique identifier for a Tracking Option
@@ -5094,7 +5094,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to email a copy of invoice to related Contact
+  * @summary Sends a copy of a specific invoice to related contact via email
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   * @param requestEmpty 
@@ -5170,7 +5170,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a single chart of accounts
+  * @summary Retrieves a single chart of accounts by using a unique account Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param accountID Unique identifier for retrieving single object
   */     
@@ -5239,7 +5239,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachment on Account by Filename
+  * @summary Retrieves an attachment for a specific account by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param accountID Unique identifier for Account object
   * @param fileName Name of the attachment
@@ -5322,7 +5322,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve specific Attachment on Account
+  * @summary Retrieves a specific attachment from a specific account using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param accountID Unique identifier for Account object
   * @param attachmentID Unique identifier for Attachment object
@@ -5405,7 +5405,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments for accounts
+  * @summary Retrieves attachments for a specific accounts by using a unique account Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param accountID Unique identifier for Account object
   */     
@@ -5474,7 +5474,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve the full chart of accounts
+  * @summary Retrieves the full chart of accounts
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -5548,7 +5548,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a single spend or receive money transaction
+  * @summary Retrieves a single spent or received money transaction by using a unique bank transaction Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
@@ -5622,7 +5622,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on BankTransaction by Filename
+  * @summary Retrieves a specific attachment from a specific bank transaction by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   * @param fileName The name of the file being attached
@@ -5705,7 +5705,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on a specific BankTransaction
+  * @summary Retrieves specific attachments from a specific BankTransaction using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   * @param attachmentID Xero generated unique identifier for an attachment
@@ -5788,7 +5788,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any attachments to bank transactions
+  * @summary Retrieves any attachments from a specific bank transactions
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   */     
@@ -5857,7 +5857,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any spend or receive money transactions
+  * @summary Retrieves any spent or received money transactions
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -5941,7 +5941,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve history from a bank transactions
+  * @summary Retrieves history from a specific bank transaction using a unique bank transaction Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   */     
@@ -6010,7 +6010,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any bank transfers
+  * @summary Retrieves specific bank transfers by using a unique bank transfer Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransferID Xero generated unique identifier for a bank transfer
   */     
@@ -6079,7 +6079,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on BankTransfer by file name
+  * @summary Retrieves a specific attachment on a specific bank transfer by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransferID Xero generated unique identifier for a bank transfer
   * @param fileName The name of the file being attached to a Bank Transfer
@@ -6162,7 +6162,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on BankTransfer
+  * @summary Retrieves a specific attachment from a specific bank transfer using a unique attachment ID
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransferID Xero generated unique identifier for a bank transfer
   * @param attachmentID Xero generated unique identifier for an Attachment to a bank transfer
@@ -6245,7 +6245,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments from  bank transfers
+  * @summary Retrieves attachments from a specific bank transfer
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransferID Xero generated unique identifier for a bank transfer
   */     
@@ -6314,7 +6314,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve history from a bank transfers
+  * @summary Retrieves history from a specific bank transfer using a unique bank transfer Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransferID Xero generated unique identifier for a bank transfer
   */     
@@ -6383,7 +6383,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve all bank transfers
+  * @summary Retrieves all bank transfers
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -6457,7 +6457,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve history from a Batch Payment
+  * @summary Retrieves history from a specific batch payment
   * @param xeroTenantId Xero identifier for Tenant
   * @param batchPaymentID Unique identifier for BatchPayment
   */     
@@ -6526,7 +6526,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Retrieve either one or many BatchPayments for invoices
+  * @summary Retrieves either one or many batch payments for invoices
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -6600,7 +6600,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specific BrandingThemes
+  * @summary Retrieves a specific branding theme using a unique branding theme Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param brandingThemeID Unique identifier for a Branding Theme
   */     
@@ -6669,7 +6669,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve the Payment services for a Branding Theme
+  * @summary Retrieves the payment services for a specific branding theme
   * @param xeroTenantId Xero identifier for Tenant
   * @param brandingThemeID Unique identifier for a Branding Theme
   */     
@@ -6738,7 +6738,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve all the BrandingThemes
+  * @summary Retrieves all the branding themes
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getBrandingThemes (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BrandingThemes;  }> {
@@ -6800,7 +6800,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a single contacts in a Xero organisation
+  * @summary Retrieves a specific contacts in a Xero organisation using a unique contact Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactID Unique identifier for a Contact
   */     
@@ -6869,7 +6869,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on Contacts by file name
+  * @summary Retrieves a specific attachment from a specific contact by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactID Unique identifier for a Contact
   * @param fileName Name for the file you are attaching
@@ -6952,7 +6952,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on Contacts
+  * @summary Retrieves a specific attachment from a specific contact using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactID Unique identifier for a Contact
   * @param attachmentID Unique identifier for a Attachment
@@ -7035,7 +7035,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve, add and update contacts in a Xero organisation
+  * @summary Retrieves attachments for a specific contact in a Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactID Unique identifier for a Contact
   */     
@@ -7104,7 +7104,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a single contact by Contact Number in a Xero organisation
+  * @summary Retrieves a specific contact by contact number in a Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactNumber This field is read only on the Xero contact screen, used to identify contacts in external systems (max length &#x3D; 50).
   */     
@@ -7173,7 +7173,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve CISSettings for a contact in a Xero organisation
+  * @summary Retrieves CIS settings for a specific contact in a Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactID Unique identifier for a Contact
   */     
@@ -7242,7 +7242,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a unique Contact Group by ID
+  * @summary Retrieves a specific contact group by using a unique contact group Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactGroupID Unique identifier for a Contact Group
   */     
@@ -7311,7 +7311,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve the ContactID and Name of all the contacts in a contact group
+  * @summary Retrieves the contact Id and name of all the contacts in a contact group
   * @param xeroTenantId Xero identifier for Tenant
   * @param where Filter by an any element
   * @param order Order by an any element
@@ -7383,7 +7383,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an Contact
+  * @summary Retrieves history records for a specific contact
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactID Unique identifier for a Contact
   */     
@@ -7452,7 +7452,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve all contacts in a Xero organisation
+  * @summary Retrieves all contacts in a Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -7541,7 +7541,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specific credit note
+  * @summary Retrieves a specific credit note using a unique credit note Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
@@ -7615,7 +7615,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Credit Note as PDF files
+  * @summary Retrieves credit notes as PDF files
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   */     
@@ -7684,7 +7684,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on CreditNote by file name
+  * @summary Retrieves a specific attachment on a specific credit note by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   * @param fileName Name of the file you are attaching to Credit Note
@@ -7767,7 +7767,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on CreditNote
+  * @summary Retrieves a specific attachment from a specific credit note using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   * @param attachmentID Unique identifier for a Attachment
@@ -7850,7 +7850,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments for credit notes
+  * @summary Retrieves attachments for a specific credit notes
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   */     
@@ -7919,7 +7919,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an CreditNote
+  * @summary Retrieves history records of a specific credit note
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   */     
@@ -7988,7 +7988,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any credit notes
+  * @summary Retrieves any credit notes
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -8072,7 +8072,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve currencies for your organisation
+  * @summary Retrieves currencies for your Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
   * @param where Filter by an any element
   * @param order Order by an any element
@@ -8144,7 +8144,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specific employee used in Xero payrun
+  * @summary Retrieves a specific employee used in Xero payrun using a unique employee Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param employeeID Unique identifier for a Employee
   */     
@@ -8213,7 +8213,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve employees used in Xero payrun
+  * @summary Retrieves employees used in Xero payrun
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -8287,7 +8287,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified expense claim
+  * @summary Retrieves a specific expense claim using a unique expense claim Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param expenseClaimID Unique identifier for a ExpenseClaim
   */     
@@ -8356,7 +8356,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an ExpenseClaim
+  * @summary Retrieves history records of a specific expense claim
   * @param xeroTenantId Xero identifier for Tenant
   * @param expenseClaimID Unique identifier for a ExpenseClaim
   */     
@@ -8425,7 +8425,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve expense claims
+  * @summary Retrieves expense claims
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -8499,7 +8499,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified sales invoice or purchase bill
+  * @summary Retrieves a specific sales invoice or purchase bill using a unique invoice Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
@@ -8573,7 +8573,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve invoices or purchase bills as PDF files
+  * @summary Retrieves invoices or purchase bills as PDF files
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   */     
@@ -8642,7 +8642,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachment on invoices or purchase bills by it\'s filename
+  * @summary Retrieves an attachment from a specific invoice or purchase bill by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   * @param fileName Name of the file you are attaching
@@ -8725,7 +8725,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified Attachment on invoices or purchase bills by it\'s ID
+  * @summary Retrieves a specific attachment from a specific invoices or purchase bills by using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   * @param attachmentID Unique identifier for an Attachment
@@ -8808,7 +8808,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on invoices or purchase bills
+  * @summary Retrieves attachments for a specific invoice or purchase bill
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   */     
@@ -8877,7 +8877,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an invoice
+  * @summary Retrieves history records for a specific invoice
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   */     
@@ -8946,7 +8946,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve invoice reminder settings
+  * @summary Retrieves invoice reminder settings
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getInvoiceReminders (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: InvoiceReminders;  }> {
@@ -9008,7 +9008,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any sales invoices or purchase bills
+  * @summary Retrieves sales invoices or purchase bills
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -9122,7 +9122,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified item
+  * @summary Retrieves a specific item using a unique item Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param itemID Unique identifier for an Item
   * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
@@ -9196,7 +9196,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve history for items
+  * @summary Retrieves history for a specific item
   * @param xeroTenantId Xero identifier for Tenant
   * @param itemID Unique identifier for an Item
   */     
@@ -9265,7 +9265,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any items
+  * @summary Retrieves items
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -9344,7 +9344,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified journals.
+  * @summary Retrieves a specific journal using a unique journal Id.
   * @param xeroTenantId Xero identifier for Tenant
   * @param journalID Unique identifier for a Journal
   */     
@@ -9413,7 +9413,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any journals.
+  * @summary Retrieves journals
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param offset Offset by a specified journal number. e.g. journals with a JournalNumber greater than the offset will be returned
@@ -9487,7 +9487,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified linked transactions (billable expenses)
+  * @summary Retrieves a specific linked transaction (billable expenses) using a unique linked transaction Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param linkedTransactionID Unique identifier for a LinkedTransaction
   */     
@@ -9556,13 +9556,13 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Retrieve linked transactions (billable expenses)
+  * @summary Retrieves linked transactions (billable expenses)
   * @param xeroTenantId Xero identifier for Tenant
   * @param page Up to 100 linked transactions will be returned in a single API call. Use the page parameter to specify the page to be returned e.g. page&#x3D;1.
   * @param linkedTransactionID The Xero identifier for an Linked Transaction
   * @param sourceTransactionID Filter by the SourceTransactionID. Get the linked transactions created from a particular ACCPAY invoice
   * @param contactID Filter by the ContactID. Get all the linked transactions that have been assigned to a particular customer.
-  * @param status Filter by the combination of ContactID and Status. Get  the linked transactions associaed to a  customer and with a status
+  * @param status Filter by the combination of ContactID and Status. Get  the linked transactions associated to a  customer and with a status
   * @param targetTransactionID Filter by the TargetTransactionID. Get all the linked transactions allocated to a particular ACCREC invoice
   */     
   public async getLinkedTransactions (xeroTenantId: string, page?: number, linkedTransactionID?: string, sourceTransactionID?: string, contactID?: string, status?: string, targetTransactionID?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }> {
@@ -9648,7 +9648,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified manual journals
+  * @summary Retrieves a specific manual journal
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Unique identifier for a ManualJournal
   */     
@@ -9717,7 +9717,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve specified Attachment on ManualJournal by file name
+  * @summary Retrieves a specific attachment from a specific manual journal by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Unique identifier for a ManualJournal
   * @param fileName The name of the file being attached to a ManualJournal
@@ -9800,7 +9800,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve specified Attachment on ManualJournals
+  * @summary Allows you to retrieve a specific attachment from a specific manual journal using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Unique identifier for a ManualJournal
   * @param attachmentID Unique identifier for a Attachment
@@ -9883,7 +9883,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachment for manual journals
+  * @summary Retrieves attachment for a specific manual journal
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Unique identifier for a ManualJournal
   */     
@@ -9952,7 +9952,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any manual journals
+  * @summary Retrieves manual journals
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -10031,7 +10031,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve history from a manual journal
+  * @summary Retrieves history for a specific manual journal
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Xero generated unique identifier for a manual journal
   */     
@@ -10100,7 +10100,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a URL to an online invoice
+  * @summary Retrieves a URL to an online invoice
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   */     
@@ -10169,7 +10169,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Retrieve a list of the key actions your app has permission to perform in the connected organisation.
+  * @summary Retrieves a list of the key actions your app has permission to perform in the connected Xero organisation.
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getOrganisationActions (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Actions;  }> {
@@ -10231,7 +10231,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you To verify if an organisation is using contruction industry scheme, you can retrieve the CIS settings for the organistaion.
+  * @summary Retrieves the CIS settings for the Xero organistaion.
   * @param xeroTenantId Xero identifier for Tenant
   * @param organisationID The unique Xero identifier for an organisation
   */     
@@ -10300,7 +10300,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Organisation details
+  * @summary Retrieves Xero organisation details
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getOrganisations (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Organisations;  }> {
@@ -10362,7 +10362,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified overpayments
+  * @summary Retrieves a specific overpayment using a unique overpayment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param overpaymentID Unique identifier for a Overpayment
   */     
@@ -10431,7 +10431,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an Overpayment
+  * @summary Retrieves history records of a specific overpayment
   * @param xeroTenantId Xero identifier for Tenant
   * @param overpaymentID Unique identifier for a Overpayment
   */     
@@ -10500,7 +10500,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve overpayments
+  * @summary Retrieves overpayments
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -10584,7 +10584,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified payment for invoices and credit notes
+  * @summary Retrieves a specific payment for invoices and credit notes using a unique payment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param paymentID Unique identifier for a Payment
   */     
@@ -10653,7 +10653,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve history records of a payment
+  * @summary Retrieves history records of a specific payment
   * @param xeroTenantId Xero identifier for Tenant
   * @param paymentID Unique identifier for a Payment
   */     
@@ -10722,7 +10722,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve payment services
+  * @summary Retrieves payment services
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getPaymentServices (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PaymentServices;  }> {
@@ -10784,7 +10784,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve payments for invoices and credit notes
+  * @summary Retrieves payments for invoices and credit notes
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -10932,7 +10932,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an Prepayment
+  * @summary Retrieves history record for a specific prepayment
   * @param xeroTenantId Xero identifier for Tenant
   * @param prepaymentID Unique identifier for a PrePayment
   */     
@@ -11001,7 +11001,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve prepayments
+  * @summary Retrieves prepayments
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -11085,7 +11085,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified purchase orders
+  * @summary Retrieves a specific purchase order using a unique purchase order Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for a PurchaseOrder
   */     
@@ -11154,7 +11154,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve purchase orders as PDF files
+  * @summary Retrieves specific purchase order as PDF files using a unique purchase order Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for an Purchase Order
   */     
@@ -11223,7 +11223,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachment on a Purchase Order by Filename
+  * @summary Retrieves a specific attachment for a specific purchase order by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for Purchase Order object
   * @param fileName Name of the attachment
@@ -11306,7 +11306,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve specific Attachment on purchase order
+  * @summary Retrieves specific attachment for a specific purchase order using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for Purchase Order object
   * @param attachmentID Unique identifier for Attachment object
@@ -11389,7 +11389,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve attachments for purchase orders
+  * @summary Retrieves attachments for a specific purchase order
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for Purchase Orders object
   */     
@@ -11458,7 +11458,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified purchase orders
+  * @summary Retrieves a specific purchase order using purchase order number
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderNumber Unique identifier for a PurchaseOrder
   */     
@@ -11527,7 +11527,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve history for PurchaseOrder
+  * @summary Retrieves history for a specific purchase order
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for a PurchaseOrder
   */     
@@ -11596,7 +11596,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve purchase orders
+  * @summary Retrieves purchase orders
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param status Filter by purchase order status
@@ -11685,7 +11685,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified quote
+  * @summary Retrieves a specific quote using a unique quote Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for an Quote
   */     
@@ -11754,7 +11754,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve quotes as PDF files
+  * @summary Retrieves a specific quote as a PDF file using a unique quote Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for an Quote
   */     
@@ -11823,7 +11823,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachment on Quote by Filename
+  * @summary Retrieves a specific attachment from a specific quote by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for Quote object
   * @param fileName Name of the attachment
@@ -11906,7 +11906,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve specific Attachment on Quote
+  * @summary Retrieves a specific attachment from a specific quote using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for Quote object
   * @param attachmentID Unique identifier for Attachment object
@@ -11989,7 +11989,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments for Quotes
+  * @summary Retrieves attachments for a specific quote
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for Quote object
   */     
@@ -12058,7 +12058,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an quote
+  * @summary Retrieves history records of a specific quote
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for an Quote
   */     
@@ -12127,7 +12127,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any sales quotes
+  * @summary Retrieves sales quotes
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param dateFrom Filter for quotes after a particular date
@@ -12236,7 +12236,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified draft expense claim receipts
+  * @summary Retrieves a specific draft expense claim receipt by using a unique receipt Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
@@ -12310,7 +12310,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on expense claim receipts by file name
+  * @summary Retrieves a specific attachment from a specific expense claim receipts by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   * @param fileName The name of the file being attached to the Receipt
@@ -12393,7 +12393,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on expense claim receipts by ID
+  * @summary Retrieves a specific attachments from a specific expense claim receipts by using a unique attachment Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   * @param attachmentID Unique identifier for a Attachment
@@ -12476,7 +12476,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments for expense claim receipts
+  * @summary Retrieves attachments for a specific expense claim receipt
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   */     
@@ -12545,7 +12545,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a history records of an Receipt
+  * @summary Retrieves a history record for a specific receipt
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   */     
@@ -12614,7 +12614,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve draft expense claim receipts for any user
+  * @summary Retrieves draft expense claim receipts for any user
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -12693,7 +12693,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified repeating invoice
+  * @summary Retrieves a specific repeating invoice by using a unique repeating invoice Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
   */     
@@ -12762,7 +12762,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve specified attachment on repeating invoices by file name
+  * @summary Retrieves a specific attachment from a specific repeating invoices by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
   * @param fileName The name of the file being attached to a Repeating Invoice
@@ -12845,7 +12845,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified Attachments on repeating invoices
+  * @summary Retrieves a specific attachment from a specific repeating invoice
   * @param xeroTenantId Xero identifier for Tenant
   * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
   * @param attachmentID Unique identifier for a Attachment
@@ -12928,7 +12928,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Attachments on repeating invoice
+  * @summary Retrieves attachments from a specific repeating invoice
   * @param xeroTenantId Xero identifier for Tenant
   * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
   */     
@@ -12997,7 +12997,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve history for a repeating invoice
+  * @summary Retrieves history record for a specific repeating invoice
   * @param xeroTenantId Xero identifier for Tenant
   * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
   */     
@@ -13066,7 +13066,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve any repeating invoices
+  * @summary Retrieves repeating invoices
   * @param xeroTenantId Xero identifier for Tenant
   * @param where Filter by an any element
   * @param order Order by an any element
@@ -13138,7 +13138,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for AgedPayablesByContact
+  * @summary Retrieves report for aged payables by contact
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactId Unique identifier for a Contact
   * @param date The date of the Aged Payables By Contact report
@@ -13225,7 +13225,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for AgedReceivablesByContact
+  * @summary Retrieves report for aged receivables by contact
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactId Unique identifier for a Contact
   * @param date The date of the Aged Receivables By Contact report
@@ -13312,7 +13312,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for BAS only valid for AU orgs
+  * @summary Retrieves a specific report for BAS using a unique report Id (only valid for AU orgs)
   * @param xeroTenantId Xero identifier for Tenant
   * @param reportID Unique identifier for a Report
   */     
@@ -13381,7 +13381,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for BAS only valid for AU orgs
+  * @summary Retrieves report for BAS (only valid for AU orgs)
   * @param xeroTenantId Xero identifier for Tenant
   */     
   public async getReportBASorGSTList (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
@@ -13443,7 +13443,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for BalanceSheet
+  * @summary Retrieves report for balancesheet
   * @param xeroTenantId Xero identifier for Tenant
   * @param date The date of the Balance Sheet report
   * @param periods The number of periods for the Balance Sheet report
@@ -13540,7 +13540,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for BankSummary
+  * @summary Retrieves report for bank summary
   * @param xeroTenantId Xero identifier for Tenant
   * @param fromDate The from date for the Bank Summary report e.g. 2018-03-31
   * @param toDate The to date for the Bank Summary report e.g. 2018-03-31
@@ -13612,7 +13612,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for Budget Summary
+  * @summary Retrieves report for budget summary
   * @param xeroTenantId Xero identifier for Tenant
   * @param date The date for the Bank Summary report e.g. 2018-03-31
   * @param period The number of periods to compare (integer between 1 and 12)
@@ -13689,7 +13689,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for ExecutiveSummary
+  * @summary Retrieves report for executive summary
   * @param xeroTenantId Xero identifier for Tenant
   * @param date The date for the Bank Summary report e.g. 2018-03-31
   */     
@@ -13756,7 +13756,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for ProfitAndLoss
+  * @summary Retrieves report for profit and loss
   * @param xeroTenantId Xero identifier for Tenant
   * @param fromDate The from date for the ProfitAndLoss report e.g. 2018-03-31
   * @param toDate The to date for the ProfitAndLoss report e.g. 2018-03-31
@@ -13868,7 +13868,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for TenNinetyNine
+  * @summary Retrieve reports for 1099
   * @param xeroTenantId Xero identifier for Tenant
   * @param reportYear The year of the 1099 report
   */     
@@ -13935,7 +13935,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve report for TrialBalance
+  * @summary Retrieves report for trial balance
   * @param xeroTenantId Xero identifier for Tenant
   * @param date The date for the Trial Balance report e.g. 2018-03-31
   * @param paymentsOnly Return cash only basis for the Trial Balance report
@@ -14007,7 +14007,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve Tax Rates
+  * @summary Retrieves tax rates
   * @param xeroTenantId Xero identifier for Tenant
   * @param where Filter by an any element
   * @param order Order by an any element
@@ -14084,7 +14084,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve tracking categories and options
+  * @summary Retrieves tracking categories and options
   * @param xeroTenantId Xero identifier for Tenant
   * @param where Filter by an any element
   * @param order Order by an any element
@@ -14161,7 +14161,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve tracking categories and options for specified category
+  * @summary Retrieves specific tracking categories and options using a unique tracking category Id
   * @param xeroTenantId Xero identifier for Tenant
   * @param trackingCategoryID Unique identifier for a TrackingCategory
   */     
@@ -14230,7 +14230,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified user
+  * @summary Retrieves a specific user
   * @param xeroTenantId Xero identifier for Tenant
   * @param userID Unique identifier for a User
   */     
@@ -14299,7 +14299,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve users
+  * @summary Retrieves users
   * @param xeroTenantId Xero identifier for Tenant
   * @param ifModifiedSince Only records created or modified since this timestamp will be returned
   * @param where Filter by an any element
@@ -14373,7 +14373,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to set the chart of accounts, the conversion date and conversion balances
+  * @summary Sets the chart of accounts, the conversion date and conversion balances
   * @param xeroTenantId Xero identifier for Tenant
   * @param setup Object including an accounts array, a conversion balances array and a conversion date object in body of request
   */     
@@ -14442,7 +14442,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a chart of accounts
+  * @summary Updates a chart of accounts
   * @param xeroTenantId Xero identifier for Tenant
   * @param accountID Unique identifier for retrieving single object
   * @param accounts Request of type Accounts array with one Account
@@ -14518,7 +14518,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update Attachment on Account by Filename
+  * @summary Updates attachment on a specific account by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param accountID Unique identifier for Account object
   * @param fileName Name of the attachment
@@ -14619,7 +14619,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a single spend or receive money transaction
+  * @summary Updates a single spent or received money transaction
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   * @param bankTransactions 
@@ -14700,7 +14700,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update an Attachment on BankTransaction by Filename
+  * @summary Updates a specific attachment from a specific bank transaction by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactionID Xero generated unique identifier for a bank transaction
   * @param fileName The name of the file being attached
@@ -14901,7 +14901,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update one contact in a Xero organisation
+  * @summary Updates a specific contact in a Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactID Unique identifier for a Contact
   * @param contacts an array of Contacts containing single Contact object with properties to update
@@ -15077,7 +15077,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a Contact Group
+  * @summary Updates a specific contact group
   * @param xeroTenantId Xero identifier for Tenant
   * @param contactGroupID Unique identifier for a Contact Group
   * @param contactGroups an array of Contact groups with Name of specific group to update
@@ -15153,7 +15153,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specific credit note
+  * @summary Updates a specific credit note
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   * @param creditNotes an array of Credit Notes containing credit note details to update
@@ -15234,7 +15234,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update Attachments on CreditNote by file name
+  * @summary Updates attachments on a specific credit note by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNoteID Unique identifier for a Credit Note
   * @param fileName Name of the file you are attaching to Credit Note
@@ -15335,7 +15335,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update specified expense claims
+  * @summary Updates a specific expense claims
   * @param xeroTenantId Xero identifier for Tenant
   * @param expenseClaimID Unique identifier for a ExpenseClaim
   * @param expenseClaims 
@@ -15411,7 +15411,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specified sales invoices or purchase bills
+  * @summary Updates a specific sales invoices or purchase bills
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   * @param invoices 
@@ -15492,7 +15492,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update Attachment on invoices or purchase bills by it\'s filename
+  * @summary Updates an attachment from a specific invoices or purchase bill by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoiceID Unique identifier for an Invoice
   * @param fileName Name of the file you are attaching
@@ -15593,7 +15593,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specified item
+  * @summary Updates a specific item
   * @param xeroTenantId Xero identifier for Tenant
   * @param itemID Unique identifier for an Item
   * @param items 
@@ -15674,7 +15674,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specified linked transactions (billable expenses)
+  * @summary Updates a specific linked transactions (billable expenses)
   * @param xeroTenantId Xero identifier for Tenant
   * @param linkedTransactionID Unique identifier for a LinkedTransaction
   * @param linkedTransactions 
@@ -15750,7 +15750,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specified manual journal
+  * @summary Updates a specific manual journal
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Unique identifier for a ManualJournal
   * @param manualJournals 
@@ -15826,7 +15826,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specified Attachment on ManualJournal by file name
+  * @summary Updates a specific attachment from a specific manual journal by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournalID Unique identifier for a ManualJournal
   * @param fileName The name of the file being attached to a ManualJournal
@@ -15927,7 +15927,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update or create one or more spend or receive money transaction
+  * @summary Updates or creates one or more spent or received money transaction
   * @param xeroTenantId Xero identifier for Tenant
   * @param bankTransactions 
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16006,7 +16006,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update OR create one or more contacts in a Xero organisation
+  * @summary Updates or creates one or more contacts in a Xero organisation
   * @param xeroTenantId Xero identifier for Tenant
   * @param contacts 
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16080,7 +16080,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update OR create one or more credit notes
+  * @summary Updates or creates one or more credit notes
   * @param xeroTenantId Xero identifier for Tenant
   * @param creditNotes an array of Credit Notes with a single CreditNote object.
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16159,7 +16159,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a single new employees used in Xero payrun
+  * @summary Creates a single new employees used in Xero payrun
   * @param xeroTenantId Xero identifier for Tenant
   * @param employees Employees with array of Employee object in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16233,7 +16233,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update OR create one or more sales invoices or purchase bills
+  * @summary Updates or creates one or more sales invoices or purchase bills
   * @param xeroTenantId Xero identifier for Tenant
   * @param invoices 
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16312,7 +16312,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update or create one or more items
+  * @summary Updates or creates one or more items
   * @param xeroTenantId Xero identifier for Tenant
   * @param items 
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16391,7 +16391,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to create a single manual journal
+  * @summary Updates or creates a single manual journal
   * @param xeroTenantId Xero identifier for Tenant
   * @param manualJournals ManualJournals array with ManualJournal object in body of request
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16465,7 +16465,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update or create one or more purchase orders
+  * @summary Updates or creates one or more purchase orders
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrders 
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16539,7 +16539,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update OR create one or more quotes
+  * @summary Updates or creates one or more quotes
   * @param xeroTenantId Xero identifier for Tenant
   * @param quotes 
   * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
@@ -16613,7 +16613,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specified purchase order
+  * @summary Updates a specific purchase order
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for a PurchaseOrder
   * @param purchaseOrders 
@@ -16689,7 +16689,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update Attachment on Purchase Order by Filename
+  * @summary Updates a specific attachment for a specific purchase order by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param purchaseOrderID Unique identifier for Purchase Order object
   * @param fileName Name of the attachment
@@ -16790,7 +16790,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update a specified quote
+  * @summary Updates a specific quote
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for an Quote
   * @param quotes 
@@ -16866,7 +16866,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update Attachment on Quote by Filename
+  * @summary Updates a specific attachment from a specific quote by filename
   * @param xeroTenantId Xero identifier for Tenant
   * @param quoteID Unique identifier for Quote object
   * @param fileName Name of the attachment
@@ -16967,7 +16967,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to retrieve a specified draft expense claim receipts
+  * @summary Updates a specific draft expense claim receipts
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   * @param receipts 
@@ -17048,7 +17048,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update Attachment on expense claim receipts by file name
+  * @summary Updates a specific attachment on a specific expense claim receipts by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param receiptID Unique identifier for a Receipt
   * @param fileName The name of the file being attached to the Receipt
@@ -17149,7 +17149,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update specified attachment on repeating invoices by file name
+  * @summary Updates a specific attachment from a specific repeating invoices by file name
   * @param xeroTenantId Xero identifier for Tenant
   * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
   * @param fileName The name of the file being attached to a Repeating Invoice
@@ -17250,7 +17250,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update Tax Rates
+  * @summary Updates tax rates
   * @param xeroTenantId Xero identifier for Tenant
   * @param taxRates 
   */     
@@ -17319,7 +17319,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update tracking categories
+  * @summary Updates a specific tracking category
   * @param xeroTenantId Xero identifier for Tenant
   * @param trackingCategoryID Unique identifier for a TrackingCategory
   * @param trackingCategory 
@@ -17395,7 +17395,7 @@ export class AccountingApi {
   }
 /**
   * 
-  * @summary Allows you to update options for a specified tracking category
+  * @summary Updates a specific option for a specific tracking category
   * @param xeroTenantId Xero identifier for Tenant
   * @param trackingCategoryID Unique identifier for a TrackingCategory
   * @param trackingOptionID Unique identifier for a Tracking Option

@@ -9,7 +9,7 @@ export class SuperLine {
     'contributionType'?: SuperannuationContributionType;
     'calculationType'?: SuperannuationCalculationType;
     /**
-    * amount of mimimum earnings
+    * amount of minimum earnings
     */
     'minimumMonthlyEarnings'?: number;
     /**

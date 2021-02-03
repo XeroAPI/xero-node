@@ -30,7 +30,7 @@ export enum ProjectApiApiKeys {
 
 export class ProjectApi {
   protected _basePath = defaultBasePath;
-  protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
+  protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
   protected _useQuerystring : boolean = false;
   protected binaryHeaders : any = {};
 
@@ -78,12 +78,12 @@ export class ProjectApi {
 
 /**
   * 
-  * @summary create one or more new projects
+  * @summary Create one or more new projects
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectCreateOrUpdate Create a new project with ProjectCreateOrUpdate object
   */     
   public async createProject (xeroTenantId: string, projectCreateOrUpdate: ProjectCreateOrUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Project;  }> {
-    const localVarPath = this.basePath + '/projects';
+    const localVarPath = this.basePath + '/Projects';
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -147,13 +147,13 @@ export class ProjectApi {
   }
 /**
   * Allows you to create a specific task
-  * @summary Allows you to create a task
+  * @summary Creates a time entry for a specific project
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId You can specify an individual project by appending the projectId to the endpoint
   * @param timeEntryCreateOrUpdate The time entry object you are creating
   */     
   public async createTimeEntry (xeroTenantId: string, projectId: string, timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimeEntry;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}/time'
+    const localVarPath = this.basePath + '/Projects/{projectId}/Time'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -223,13 +223,13 @@ export class ProjectApi {
   }
 /**
   * Allows you to delete a specific time entry
-  * @summary Allows you to delete a time entry
+  * @summary Deletes a time entry for a specific project
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId You can specify an individual project by appending the projectId to the endpoint
   * @param timeEntryId You can specify an individual task by appending the id to the endpoint
   */     
   public async deleteTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}/time/{timeEntryId}'
+    const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
         .replace('{' + 'timeEntryId' + '}', encodeURIComponent(String(timeEntryId)));
     let localVarQueryParameters: any = {};
@@ -298,13 +298,13 @@ export class ProjectApi {
     });
   }
 /**
-  * Allows you to retrieve a specific project
-  * @summary Allows you to retrieve a single project
+  * Allows you to retrieve a specific project using the projectId
+  * @summary Retrieves a single project
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId You can specify an individual project by appending the projectId to the endpoint
   */     
   public async getProject (xeroTenantId: string, projectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Project;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}'
+    const localVarPath = this.basePath + '/Projects/{projectId}'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -368,13 +368,13 @@ export class ProjectApi {
   }
 /**
   * Allows you to retrieve the users on a projects.
-  * @summary list all project users
+  * @summary Retrieves a list of all project users
   * @param xeroTenantId Xero identifier for Tenant
   * @param page set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
   * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
   */     
   public async getProjectUsers (xeroTenantId: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ProjectUsers;  }> {
-    const localVarPath = this.basePath + '/projectsusers';
+    const localVarPath = this.basePath + '/ProjectsUsers';
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -440,7 +440,7 @@ export class ProjectApi {
   }
 /**
   * Allows you to retrieve, create and update projects.
-  * @summary list all projects
+  * @summary Retrieves all projects
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectIds Search for all projects that match a comma separated list of projectIds
   * @param contactID Filter for projects for a specific contact
@@ -449,7 +449,7 @@ export class ProjectApi {
   * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
   */     
   public async getProjects (xeroTenantId: string, projectIds?: Array<string>, contactID?: string, states?: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Projects;  }> {
-    const localVarPath = this.basePath + '/projects';
+    const localVarPath = this.basePath + '/Projects';
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
     let localVarFormParams: any = {};
@@ -527,13 +527,13 @@ export class ProjectApi {
   }
 /**
   * Allows you to retrieve a specific project
-  * @summary Allows you to retrieve a single project
+  * @summary Retrieves a single project task
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId You can specify an individual project by appending the projectId to the endpoint
-  * @param taskId You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskId}
+  * @param taskId You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID}
   */     
   public async getTask (xeroTenantId: string, projectId: string, taskId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Task;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}/tasks/{taskId}'
+    const localVarPath = this.basePath + '/Projects/{projectId}/Tasks/{taskId}'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
         .replace('{' + 'taskId' + '}', encodeURIComponent(String(taskId)));
     let localVarQueryParameters: any = {};
@@ -603,16 +603,16 @@ export class ProjectApi {
   }
 /**
   * Allows you to retrieve a specific project
-  * @summary Allows you to retrieve a single project
+  * @summary Retrieves all project tasks
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId You can specify an individual project by appending the projectId to the endpoint
   * @param page Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
   * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-  * @param taskIds taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds&#x3D;{taskId},{taskId}
+  * @param taskIds taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds&#x3D;{taskID},{taskID}
   * @param chargeType 
   */     
   public async getTasks (xeroTenantId: string, projectId: string, page?: number, pageSize?: number, taskIds?: string, chargeType?: ChargeType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Tasks;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}/tasks'
+    const localVarPath = this.basePath + '/Projects/{projectId}/Tasks'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -692,7 +692,7 @@ export class ProjectApi {
   }
 /**
   * Allows you to retrieve the time entries associated with a specific project
-  * @summary Allows you to retrieve the time entries associated with a specific project
+  * @summary Retrieves all time entries associated with a specific project
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId Identifier of the project, that the task (which the time entry is logged against) belongs to.
   * @param userId The xero user identifier of the person who logged time.
@@ -701,13 +701,13 @@ export class ProjectApi {
   * @param contactId Finds all time entries for this contact identifier.
   * @param page Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
   * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-  * @param states Comma-separated list of states to find. Will find all time entries that are in the status of whatever’s specified.
+  * @param states Comma-separated list of states to find. Will find all time entries that are in the status of whatever is specified.
   * @param isChargeable Finds all time entries which relate to tasks with the charge type &#x60;TIME&#x60; or &#x60;FIXED&#x60;.
   * @param dateAfterUtc ISO 8601 UTC date. Finds all time entries on or after this date filtered on the &#x60;dateUtc&#x60; field.
   * @param dateBeforeUtc ISO 8601 UTC date. Finds all time entries on or before this date filtered on the &#x60;dateUtc&#x60; field.
   */     
   public async getTimeEntries (xeroTenantId: string, projectId: string, userId?: string, taskId?: string, invoiceId?: string, contactId?: string, page?: number, pageSize?: number, states?: Array<string>, isChargeable?: boolean, dateAfterUtc?: Date, dateBeforeUtc?: Date, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimeEntries;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}/time'
+    const localVarPath = this.basePath + '/Projects/{projectId}/Time'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -810,14 +810,14 @@ export class ProjectApi {
     });
   }
 /**
-  * Allows you to upget a single time entry in a project
-  * @summary Allows you to get a single time entry in a project
+  * Allows you to get a single time entry in a project
+  * @summary Retrieves a single time entry for a specific project
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId You can specify an individual project by appending the projectId to the endpoint
   * @param timeEntryId You can specify an individual time entry by appending the id to the endpoint
   */     
   public async getTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimeEntry;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}/time/{timeEntryId}'
+    const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
         .replace('{' + 'timeEntryId' + '}', encodeURIComponent(String(timeEntryId)));
     let localVarQueryParameters: any = {};
@@ -893,7 +893,7 @@ export class ProjectApi {
   * @param projectPatch Update the status of an existing Project
   */     
   public async patchProject (xeroTenantId: string, projectId: string, projectPatch: ProjectPatch, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}'
+    const localVarPath = this.basePath + '/Projects/{projectId}'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -963,13 +963,13 @@ export class ProjectApi {
   }
 /**
   * Allows you to update a specific projects.
-  * @summary update a specific project
+  * @summary Updates a specific project
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId You can specify an individual project by appending the projectId to the endpoint
   * @param projectCreateOrUpdate Request of type ProjectCreateOrUpdate
   */     
   public async updateProject (xeroTenantId: string, projectId: string, projectCreateOrUpdate: ProjectCreateOrUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}'
+    const localVarPath = this.basePath + '/Projects/{projectId}'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
     let localVarQueryParameters: any = {};
     let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -1039,14 +1039,14 @@ export class ProjectApi {
   }
 /**
   * Allows you to update time entry in a project
-  * @summary Allows you to update time entry in a project
+  * @summary Updates a time entry for a specific project
   * @param xeroTenantId Xero identifier for Tenant
   * @param projectId You can specify an individual project by appending the projectId to the endpoint
   * @param timeEntryId You can specify an individual time entry by appending the id to the endpoint
   * @param timeEntryCreateOrUpdate The time entry object you are updating
   */     
   public async updateTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-    const localVarPath = this.basePath + '/projects/{projectId}/time/{timeEntryId}'
+    const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
         .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
         .replace('{' + 'timeEntryId' + '}', encodeURIComponent(String(timeEntryId)));
     let localVarQueryParameters: any = {};

@@ -1139,7 +1139,7 @@ ul.nav-tabs {
     },
     "localisedMessage" : {
       "type" : "string",
-      "description" : "Explaination of the field validation error"
+      "description" : "Explanation of the field validation error"
     },
     "type" : {
       "type" : "string",
@@ -1191,7 +1191,7 @@ ul.nav-tabs {
     },
     "localisedMessage" : {
       "type" : "string",
-      "description" : "Explaination of the resource validation error"
+      "description" : "Explanation of the resource validation error"
     },
     "type" : {
       "type" : "string",
@@ -1314,10 +1314,10 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.8.4</div>
+              <div class="app-desc">Version: 2.8.6</div>
             <hr>
             <div id="app-description" class="app-desc">
-                This is the Xero Assets API
+                The Assets API exposes fixed asset related functions of the Xero Accounting application and can be used for a variety of purposes such as creating assets, retrieving asset valuations etc.
             </div>
             -->
           </div>
@@ -2283,7 +2283,7 @@ $(document).ready(function() {
                       <article id="api-Asset-getAssetById-0" data-group="User" data-name="getAssetById" data-version="0">
                         <div class="pull-left">
                           <h1>getAssetById</h1>
-                          <p>retrieves fixed asset by id</p>
+                          <p>Retrieves fixed asset by id</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2381,7 +2381,7 @@ UUID *id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe; // fixed asset id for single ob
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
 
-// retrieves fixed asset by id
+// Retrieves fixed asset by id
 [apiInstance getAssetByIdWith:xeroTenantId
     id:id
               completionHandler: ^(Asset output, NSError* error) {
@@ -2445,7 +2445,7 @@ namespace Example
 
             try
             {
-                // retrieves fixed asset by id
+                // Retrieves fixed asset by id
                 Asset result = apiInstance.getAssetById(xeroTenantId, id);
                 Debug.WriteLine(result);
             }
@@ -2519,7 +2519,7 @@ xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (defaul
 id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe # UUID | fixed asset id for single object (default to null)
 
 try: 
-    # retrieves fixed asset by id
+    # Retrieves fixed asset by id
     api_response = api_instance.get_asset_by_id(xeroTenantId, id)
     pprint(api_response)
 except ApiException as e:

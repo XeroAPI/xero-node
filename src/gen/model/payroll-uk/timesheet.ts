@@ -6,7 +6,7 @@ export class Timesheet {
     */
     'timesheetID'?: string;
     /**
-    * The Xero identifier for the Payroll Calandar that the Timesheet applies to
+    * The Xero identifier for the Payroll Calendar that the Timesheet applies to
     */
     'payrollCalendarID': string;
     /**
