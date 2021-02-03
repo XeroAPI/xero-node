@@ -1,7 +1,9 @@
 import { Issuer, TokenSet, custom } from 'openid-client';
 import * as xero from './gen/api';
-import request = require('request');
+// import request = require('request');
+import got = require('got');
 import http = require('http');
+var packageJson = require('../package.json');
 
 export interface IXeroClientConfig {
   clientId: string,
@@ -121,7 +123,7 @@ export class XeroClient {
   }
 
   async disconnect(connectionId: string): Promise<TokenSet> {
-    await this.queryApi('DELETE', `https://api.xero.com/connections/${connectionId}`)
+    await got.delete(`https://api.xero.com/connections/${connectionId}`);
     this.setAccessToken();
     return this.tokenSet
   }
@@ -179,31 +181,47 @@ export class XeroClient {
     }
 
     return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
-      request({
-        method: 'POST',
-        uri: 'https://identity.xero.com/connect/token',
-        headers: {
-          authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: this.encodeBody(body)
-      }, (error, response, body) => {
-        if (error) {
-          reject(error);
-        } else {
-          if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-            resolve({ response: response, body: body });
-          } else {
-            reject({ response: response, body: body });
-          }
+      // request({
+      //   method: 'POST',
+      //   uri: 'https://identity.xero.com/connect/token',
+      //   headers: {
+      //     authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
+      //     'Content-Type': 'application/x-www-form-urlencoded'
+      //   },
+      //   body: this.encodeBody(body)
+      // }, (error, response, body) => {
+      //   if (error) {
+      //     reject(error);
+      //   } else {
+      //     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+      //       resolve({ response: response, body: body });
+      //     } else {
+      //       reject({ response: response, body: body });
+      //     }
+      //   }
+      // });
+
+      (async () => {
+        try {
+          const response = await got.post('https://identity.xero.com/connect/token', {
+            headers: {
+              authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
+              'user-agent': `'xero-node-${packageJson.version}`,
+              'Content-Type': 'application/x-www-form-urlencoded',
+              json: this.encodeBody(body)
+            }
+          });
+          return { response: response, body: body }
+        } catch (error) {
+          throw new Error(error);
         }
-      });
+      })();
     });
   }
 
   async updateTenants(fullOrgDetails: boolean = true) {
-    const result = await this.queryApi('GET', 'https://api.xero.com/connections');
-    let tenants = result.body.map(connection => connection);
+    const response = await got('https://api.xero.com/connections');
+    let tenants = JSON.parse(response.body).map(connection => connection);
 
     if (fullOrgDetails) {
       const getOrgsForAll = tenants.map(async tenant => {
@@ -213,36 +231,13 @@ export class XeroClient {
       const orgData = await Promise.all(getOrgsForAll);
 
       tenants.map((tenant) => { // assign orgData nested under each tenant
-        tenant.orgData = orgData.filter((el) => el.organisationID == tenant.tenantId)[0];
+        tenant.orgData = orgData.filter((el: any) => el.organisationID == tenant.tenantId)[0];
       });
     }
     // sorting tenants so the most connection / active tenant is at index 0
     tenants.sort((a: any, b: any) => <number><unknown>new Date(b.updatedDateUtc) - <number><unknown>new Date(a.updatedDateUtc));
     this._tenants = tenants;
     return tenants;
-  }
-
-  async queryApi(method, uri) {
-    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
-      request({
-        method,
-        uri,
-        auth: {
-          bearer: this.tokenSet.access_token
-        },
-        json: true
-      }, (error, response, body) => {
-        if (error) {
-          reject(error);
-        } else {
-          if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-            resolve({ response: response, body: body });
-          } else {
-            reject({ response: response, body: body });
-          }
-        }
-      });
-    });
   }
 
   private setAccessToken() {
