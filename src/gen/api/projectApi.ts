@@ -130,7 +130,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: Project;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Project");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -206,7 +206,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: TimeEntry;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimeEntry");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -282,7 +282,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -351,7 +351,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: Project;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Project");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -423,7 +423,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: ProjectUsers;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ProjectUsers");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -510,7 +510,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: Projects;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Projects");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -586,7 +586,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: Task;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Task");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -675,7 +675,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: Tasks;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Tasks");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -794,7 +794,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: TimeEntries;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimeEntries");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -870,7 +870,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body: TimeEntry;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimeEntry");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -946,7 +946,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PATCH'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1022,7 +1022,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1105,7 +1105,7 @@ export class ProjectApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {

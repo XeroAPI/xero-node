@@ -123,7 +123,7 @@ export class BankFeedsApi {
       return new Promise<{ response: http.IncomingMessage; body: FeedConnections;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "FeedConnections");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -187,7 +187,7 @@ export class BankFeedsApi {
       return new Promise<{ response: http.IncomingMessage; body: Statements;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Statements");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -256,7 +256,7 @@ export class BankFeedsApi {
       return new Promise<{ response: http.IncomingMessage; body: FeedConnections;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "FeedConnections");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -325,7 +325,7 @@ export class BankFeedsApi {
       return new Promise<{ response: http.IncomingMessage; body: FeedConnection;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "FeedConnection");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -397,7 +397,7 @@ export class BankFeedsApi {
       return new Promise<{ response: http.IncomingMessage; body: FeedConnections;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "FeedConnections");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -466,7 +466,7 @@ export class BankFeedsApi {
       return new Promise<{ response: http.IncomingMessage; body: Statement;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Statement");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -542,7 +542,7 @@ export class BankFeedsApi {
       return new Promise<{ response: http.IncomingMessage; body: Statements;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Statements");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {

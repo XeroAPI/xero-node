@@ -181,7 +181,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimesheetObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -250,7 +250,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: BenefitObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BenefitObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -319,7 +319,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: DeductionObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "DeductionObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -388,7 +388,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EarningsRateObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EarningsRateObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -457,7 +457,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -533,7 +533,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EarningsTemplateObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -609,7 +609,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -685,7 +685,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypeObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeLeaveTypeObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -761,7 +761,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeOpeningBalancesObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -837,7 +837,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PaymentMethodObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -913,7 +913,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "SalaryAndWageObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -982,7 +982,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeStatutorySickLeaveObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeStatutorySickLeaveObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1058,7 +1058,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmploymentObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmploymentObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1127,7 +1127,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: LeaveTypeObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "LeaveTypeObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1203,7 +1203,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeePayTemplates;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeePayTemplates");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1272,7 +1272,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PayRunCalendarObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PayRunCalendarObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1341,7 +1341,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: ReimbursementObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReimbursementObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1410,7 +1410,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimesheetObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1486,7 +1486,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TimesheetLineObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimesheetLineObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1561,7 +1561,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1637,7 +1637,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1712,7 +1712,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1781,7 +1781,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TimesheetLine;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimesheetLine");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1857,7 +1857,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TimesheetLine;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimesheetLine");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1926,7 +1926,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: BenefitObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BenefitObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1993,7 +1993,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: Benefits;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Benefits");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2062,7 +2062,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: DeductionObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "DeductionObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2129,7 +2129,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: Deductions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Deductions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2198,7 +2198,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EarningsOrderObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EarningsOrderObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2265,7 +2265,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EarningsOrders;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EarningsOrders");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2334,7 +2334,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EarningsRateObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EarningsRateObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2401,7 +2401,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EarningsRates;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EarningsRates");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2470,7 +2470,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2546,7 +2546,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2615,7 +2615,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveBalances;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeLeaveBalances");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2694,7 +2694,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: LeavePeriods;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "LeavePeriods");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2763,7 +2763,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveTypes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeLeaveTypes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2832,7 +2832,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaves;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeLeaves");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2901,7 +2901,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeOpeningBalancesObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2970,7 +2970,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeePayTemplateObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeePayTemplateObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3039,7 +3039,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PaymentMethodObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PaymentMethodObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3115,7 +3115,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "SalaryAndWages");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3189,7 +3189,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: SalaryAndWages;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "SalaryAndWages");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3268,7 +3268,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeStatutoryLeaveBalanceObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeStatutoryLeaveBalanceObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3337,7 +3337,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeStatutorySickLeaveObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeStatutorySickLeaveObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3406,7 +3406,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeTaxObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeTaxObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3483,7 +3483,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: Employees;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3552,7 +3552,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: LeaveTypeObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "LeaveTypeObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3624,7 +3624,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: LeaveTypes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "LeaveTypes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3693,7 +3693,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PayRunObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PayRunObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3762,7 +3762,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PayRunCalendarObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PayRunCalendarObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3829,7 +3829,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PayRunCalendars;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PayRunCalendars");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3901,7 +3901,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PayRuns;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PayRuns");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3970,7 +3970,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PayslipObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PayslipObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4047,7 +4047,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: Payslips;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Payslips");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4116,7 +4116,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: ReimbursementObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReimbursementObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4183,7 +4183,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: Reimbursements;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Reimbursements");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4245,7 +4245,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: Settings;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Settings");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4319,7 +4319,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeStatutoryLeavesSummaries;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeStatutoryLeavesSummaries");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4388,7 +4388,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimesheetObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4465,7 +4465,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: Timesheets;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Timesheets");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4527,7 +4527,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingCategories");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4596,7 +4596,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TimesheetObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimesheetObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4672,7 +4672,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4755,7 +4755,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EarningsTemplateObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EarningsTemplateObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4838,7 +4838,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeLeaveObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeLeaveObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4914,7 +4914,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: EmployeeOpeningBalancesObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "EmployeeOpeningBalancesObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4997,7 +4997,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: SalaryAndWageObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "SalaryAndWageObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5073,7 +5073,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: PayRunObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PayRunObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5156,7 +5156,7 @@ export class PayrollUkApi {
       return new Promise<{ response: http.IncomingMessage; body: TimesheetLineObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TimesheetLineObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {

@@ -124,7 +124,7 @@ export class AssetApi {
       return new Promise<{ response: http.IncomingMessage; body: Asset;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Asset");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -188,7 +188,7 @@ export class AssetApi {
       return new Promise<{ response: http.IncomingMessage; body: AssetType;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "AssetType");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -257,7 +257,7 @@ export class AssetApi {
       return new Promise<{ response: http.IncomingMessage; body: Asset;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Asset");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -319,7 +319,7 @@ export class AssetApi {
       return new Promise<{ response: http.IncomingMessage; body: Setting;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Setting");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -380,7 +380,7 @@ export class AssetApi {
       return new Promise<{ response: http.IncomingMessage; body: Array<AssetType>;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Array<AssetType>");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -477,7 +477,7 @@ export class AssetApi {
       return new Promise<{ response: http.IncomingMessage; body: Assets;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Assets");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {

@@ -169,7 +169,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Accounts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Accounts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -269,7 +269,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -370,7 +370,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -447,7 +447,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -526,7 +526,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BankTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BankTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -595,7 +595,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BankTransfers;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BankTransfers");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -694,7 +694,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -771,7 +771,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -845,7 +845,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BatchPayments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BatchPayments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -921,7 +921,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -997,7 +997,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PaymentServices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PaymentServices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1096,7 +1096,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -1166,7 +1166,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ContactGroups;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ContactGroups");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1242,7 +1242,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Contacts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1318,7 +1318,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1392,7 +1392,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Contacts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1473,7 +1473,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Allocations;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Allocations");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1578,7 +1578,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -1655,7 +1655,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1734,7 +1734,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: CreditNotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "CreditNotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1803,7 +1803,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Currencies;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Currencies");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1877,7 +1877,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Employees;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -1953,7 +1953,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2022,7 +2022,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ExpenseClaims;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ExpenseClaims");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2127,7 +2127,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -2204,7 +2204,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2283,7 +2283,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Invoices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Invoices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2359,7 +2359,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2438,7 +2438,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Items;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Items");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2507,7 +2507,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "LinkedTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2607,7 +2607,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -2684,7 +2684,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2758,7 +2758,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ManualJournals;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ManualJournals");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2839,7 +2839,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Allocations;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Allocations");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2915,7 +2915,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -2984,7 +2984,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Payments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Payments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3060,7 +3060,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3129,7 +3129,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PaymentServices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PaymentServices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3203,7 +3203,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Payments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Payments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3284,7 +3284,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Allocations;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Allocations");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3360,7 +3360,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3460,7 +3460,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -3537,7 +3537,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3611,7 +3611,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PurchaseOrders");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3711,7 +3711,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -3788,7 +3788,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3862,7 +3862,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Quotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -3936,7 +3936,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Receipts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Receipts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4036,7 +4036,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -4113,7 +4113,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4213,7 +4213,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -4290,7 +4290,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4359,7 +4359,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TaxRates;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TaxRates");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4428,7 +4428,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingCategories");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4504,7 +4504,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingOptions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingOptions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4573,7 +4573,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Accounts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Accounts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4649,7 +4649,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4718,7 +4718,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4787,7 +4787,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4856,7 +4856,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -4932,7 +4932,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Payments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Payments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5001,7 +5001,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingCategories");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5077,7 +5077,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingOptions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingOptions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5153,7 +5153,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5222,7 +5222,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Accounts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Accounts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5305,7 +5305,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5388,7 +5388,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5456,7 +5456,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -5531,7 +5531,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Accounts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Accounts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5605,7 +5605,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BankTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BankTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5688,7 +5688,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5771,7 +5771,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5839,7 +5839,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -5924,7 +5924,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BankTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BankTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -5993,7 +5993,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6062,7 +6062,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BankTransfers;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BankTransfers");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6145,7 +6145,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6228,7 +6228,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6296,7 +6296,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -6366,7 +6366,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6440,7 +6440,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BankTransfers;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BankTransfers");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6509,7 +6509,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6583,7 +6583,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BatchPayments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BatchPayments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6652,7 +6652,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BrandingThemes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BrandingThemes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6721,7 +6721,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PaymentServices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PaymentServices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6783,7 +6783,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BrandingThemes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BrandingThemes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6852,7 +6852,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Contacts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -6935,7 +6935,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7018,7 +7018,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7086,7 +7086,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -7156,7 +7156,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Contacts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7225,7 +7225,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: CISSettings;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "CISSettings");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7294,7 +7294,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ContactGroups;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ContactGroups");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7366,7 +7366,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ContactGroups;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ContactGroups");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7435,7 +7435,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7524,7 +7524,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Contacts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7598,7 +7598,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: CreditNotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "CreditNotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7667,7 +7667,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7750,7 +7750,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7833,7 +7833,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -7901,7 +7901,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -7971,7 +7971,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8055,7 +8055,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: CreditNotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "CreditNotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8127,7 +8127,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Currencies;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Currencies");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8196,7 +8196,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Employees;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8270,7 +8270,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Employees;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8339,7 +8339,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ExpenseClaims;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ExpenseClaims");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8408,7 +8408,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8482,7 +8482,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ExpenseClaims;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ExpenseClaims");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8556,7 +8556,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Invoices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Invoices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8625,7 +8625,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8708,7 +8708,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8791,7 +8791,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8859,7 +8859,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -8929,7 +8929,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -8991,7 +8991,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: InvoiceReminders;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "InvoiceReminders");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9105,7 +9105,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Invoices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Invoices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9179,7 +9179,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Items;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Items");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9248,7 +9248,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9327,7 +9327,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Items;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Items");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9396,7 +9396,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Journals;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Journals");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9470,7 +9470,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Journals;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Journals");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9539,7 +9539,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "LinkedTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9631,7 +9631,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "LinkedTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9700,7 +9700,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ManualJournals;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ManualJournals");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9783,7 +9783,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9866,7 +9866,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -9934,7 +9934,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -10014,7 +10014,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ManualJournals;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ManualJournals");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10083,7 +10083,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10152,7 +10152,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: OnlineInvoices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "OnlineInvoices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10214,7 +10214,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Actions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Actions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10283,7 +10283,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: CISOrgSetting;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "CISOrgSetting");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10345,7 +10345,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Organisations;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Organisations");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10414,7 +10414,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Overpayments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Overpayments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10483,7 +10483,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10567,7 +10567,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Overpayments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Overpayments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10636,7 +10636,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Payments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Payments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10705,7 +10705,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10767,7 +10767,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PaymentServices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PaymentServices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10846,7 +10846,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Payments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Payments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10915,7 +10915,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Prepayments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Prepayments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -10984,7 +10984,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11068,7 +11068,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Prepayments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Prepayments");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11137,7 +11137,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PurchaseOrders");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11206,7 +11206,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11289,7 +11289,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11372,7 +11372,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11440,7 +11440,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -11510,7 +11510,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PurchaseOrders");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11579,7 +11579,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11668,7 +11668,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PurchaseOrders");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11737,7 +11737,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Quotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11806,7 +11806,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11889,7 +11889,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -11972,7 +11972,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12040,7 +12040,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -12110,7 +12110,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12219,7 +12219,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Quotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12293,7 +12293,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Receipts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Receipts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12376,7 +12376,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12459,7 +12459,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12527,7 +12527,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -12597,7 +12597,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12676,7 +12676,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Receipts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Receipts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12745,7 +12745,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: RepeatingInvoices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "RepeatingInvoices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12828,7 +12828,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12911,7 +12911,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Buffer");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -12979,7 +12979,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -13049,7 +13049,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "HistoryRecords");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13121,7 +13121,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: RepeatingInvoices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "RepeatingInvoices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13208,7 +13208,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13295,7 +13295,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13364,7 +13364,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13426,7 +13426,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13523,7 +13523,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13595,7 +13595,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13672,7 +13672,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13739,7 +13739,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13851,7 +13851,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13918,7 +13918,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Reports;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Reports");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -13990,7 +13990,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ReportWithRows");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14067,7 +14067,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TaxRates;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TaxRates");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14144,7 +14144,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingCategories");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14213,7 +14213,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingCategories");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14282,7 +14282,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Users;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Users");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14356,7 +14356,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Users;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Users");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14425,7 +14425,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ImportSummaryObject;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ImportSummaryObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14501,7 +14501,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Accounts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Accounts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14601,7 +14601,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -14683,7 +14683,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BankTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BankTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -14783,7 +14783,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -14883,7 +14883,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -14960,7 +14960,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Contacts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -15059,7 +15059,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -15136,7 +15136,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ContactGroups;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ContactGroups");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -15217,7 +15217,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: CreditNotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "CreditNotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -15317,7 +15317,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -15394,7 +15394,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ExpenseClaims;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ExpenseClaims");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -15475,7 +15475,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Invoices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Invoices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -15575,7 +15575,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -15657,7 +15657,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Items;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Items");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -15733,7 +15733,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: LinkedTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "LinkedTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -15809,7 +15809,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ManualJournals;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ManualJournals");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -15909,7 +15909,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -15989,7 +15989,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: BankTransactions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "BankTransactions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16063,7 +16063,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Contacts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Contacts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16142,7 +16142,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: CreditNotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "CreditNotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16216,7 +16216,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Employees;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16295,7 +16295,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Invoices;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Invoices");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16374,7 +16374,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Items;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Items");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16448,7 +16448,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: ManualJournals;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "ManualJournals");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16522,7 +16522,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PurchaseOrders");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16596,7 +16596,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Quotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16672,7 +16672,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "PurchaseOrders");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16772,7 +16772,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -16849,7 +16849,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Quotes;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Quotes");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -16949,7 +16949,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -17031,7 +17031,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Receipts;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "Receipts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -17131,7 +17131,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -17232,7 +17232,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: Attachments;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = JSON.parse(body)
             body = ObjectSerializer.deserialize(body, "Attachments");
@@ -17302,7 +17302,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TaxRates;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TaxRates");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -17378,7 +17378,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingCategories;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingCategories");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -17461,7 +17461,7 @@ export class AccountingApi {
       return new Promise<{ response: http.IncomingMessage; body: TrackingOptions;  }>((resolve, reject) => {
         (async (response, body) => {
           try {
-            response = await got(gotOptions);
+            response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
             body = response.body;
             body = ObjectSerializer.deserialize(body, "TrackingOptions");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
