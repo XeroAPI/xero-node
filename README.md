@@ -1,19 +1,15 @@
 # xero-node
 ![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 
-## Release of SDK with oAuth 2 support
-Version 4.x of Xero NodeJS SDK only supports oAuth2 authentication and the following API sets.
+## OAuth 2 support
+Version 4.x of Xero NodeJS SDK supports OAuth2 authentication and the following API sets.
 * [accounting](https://developer.xero.com/documentation/api/api-overview)
 * [assets](https://developer.xero.com/documentation/assets-api/overview)
 * [projects](https://developer.xero.com/documentation/projects/overview-projects)
 * [AU Payroll](https://developer.xero.com/documentation/payroll-api/overview)
 * [BankFeeds (Restricted API)](https://developer.xero.com/documentation/bank-feeds-api/overview)
 * [UK Payroll](https://developer.xero.com/documentation/payroll-api-uk/overview)
-
-## Looking for OAuth 1.0a support?
-[![npm package](https://img.shields.io/badge/npm%20package-3.1.2-blue.svg)](https://www.npmjs.com/package/xero-node/v/3.1.2)
-
-We've moved this code into the [oauth1 branch](https://github.com/XeroAPI/xero-node/tree/oauth1).
+* [NZ Payroll](https://developer.xero.com/documentation/payroll-api-nz/overview)
 
 ## Getting Started
 
@@ -23,12 +19,10 @@ Follow these steps to create your Xero app
 * Create a [free Xero user account](https://www.xero.com/us/signup/api/) (if you don't have one)
 * Login to [Xero developer center](https://developer.xero.com/myapps)
 * Click "New App" link
-* Enter your App name, company url, privacy policy url.
 * Enter the redirect URI (this is your callback url - localhost, etc)
 * Agree to terms and condition and click "Create App".
 * Click "Generate a secret" button.
 * Copy your client id and client secret and save for use later.
-* Click the "Save" button. You secret is now hidden.
 
 ## Repo Context & Contributing
 This SDK's functionality is majority generated [from our OpenAPISpec](https://github.com/XeroAPI/Xero-OpenAPI).
