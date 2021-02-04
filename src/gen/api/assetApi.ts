@@ -97,14 +97,13 @@ export class AssetApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(asset, "Asset")
     };
 
@@ -125,7 +124,7 @@ export class AssetApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Asset");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -161,14 +160,13 @@ export class AssetApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(assetType, "AssetType")
     };
 
@@ -189,7 +187,7 @@ export class AssetApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "AssetType");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -231,14 +229,13 @@ export class AssetApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -258,7 +255,7 @@ export class AssetApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Asset");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -293,14 +290,13 @@ export class AssetApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -320,7 +316,7 @@ export class AssetApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Setting");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -355,7 +351,7 @@ export class AssetApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
@@ -381,7 +377,7 @@ export class AssetApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Array<AssetType>");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -451,14 +447,13 @@ export class AssetApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -478,7 +473,7 @@ export class AssetApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Assets");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });

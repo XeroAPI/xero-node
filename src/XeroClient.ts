@@ -1,6 +1,5 @@
 import { Issuer, TokenSet, custom } from 'openid-client';
 import * as xero from './gen/api';
-// import request = require('request');
 import got = require('got');
 import http = require('http');
 var packageJson = require('../package.json');
@@ -125,7 +124,8 @@ export class XeroClient {
   async disconnect(connectionId: string): Promise<TokenSet> {
     await got.delete(`https://api.xero.com/connections/${connectionId}`, {
       headers: {
-        'Authorization' : "Bearer " + this.tokenSet.access_token
+        'Authorization' : "Bearer " + this.tokenSet.access_token,
+        'user-agent': `'xero-node-${packageJson.version}`
       }
     });
     this.setAccessToken();
@@ -172,8 +172,7 @@ export class XeroClient {
 
   async refreshWithRefreshToken(clientId, clientSecret, refreshToken) {
     const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken)
-    const tokenSet = JSON.parse(result.body)
-    this.tokenSet = tokenSet
+    this.tokenSet = result
     this.setAccessToken();
     return this.tokenSet
   }
@@ -184,49 +183,22 @@ export class XeroClient {
       refresh_token: refreshToken
     }
 
-    return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
-      // request({
-      //   method: 'POST',
-      //   uri: 'https://identity.xero.com/connect/token',
-      //   headers: {
-      //     authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
-      //     'Content-Type': 'application/x-www-form-urlencoded'
-      //   },
-      //   body: this.encodeBody(body)
-      // }, (error, response, body) => {
-      //   if (error) {
-      //     reject(error);
-      //   } else {
-      //     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-      //       resolve({ response: response, body: body });
-      //     } else {
-      //       reject({ response: response, body: body });
-      //     }
-      //   }
-      // });
-
-      (async () => {
-        try {
-          const response = await got.post('https://identity.xero.com/connect/token', {
-            headers: {
-              authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
-              'user-agent': `'xero-node-${packageJson.version}`,
-              'Content-Type': 'application/x-www-form-urlencoded',
-              json: this.encodeBody(body)
-            }
-          });
-          return { response: JSON.parse(response.body), body: body }
-        } catch (error) {
-          throw new Error(error);
-        }
-      })();
+    const response = await got.post('https://identity.xero.com/connect/token', {
+      headers: {
+        authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
+        'user-agent': `'xero-node-${packageJson.version}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: this.encodeBody(body)
     });
+    return JSON.parse(response.body)
   }
 
   async updateTenants(fullOrgDetails: boolean = true) {
-    const response = await got('https://api.xero.com/connections/', {
+    const response = await got.get('https://api.xero.com/connections/', {
       headers: {
-        'Authorization' : "Bearer " + this.tokenSet.access_token
+        'Authorization' : "Bearer " + this.tokenSet.access_token,
+        'user-agent': `'xero-node-${packageJson.version}`
       }
     });
     let tenants = JSON.parse(response.body).map(connection => connection);

@@ -113,14 +113,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(employee, "Array<Employee>")
     };
 
@@ -141,7 +140,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -182,14 +181,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(leaveApplication, "Array<LeaveApplication>")
     };
 
@@ -210,7 +208,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "LeaveApplications");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -251,14 +249,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(payItem, "PayItem")
     };
 
@@ -279,7 +276,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayItems");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -320,14 +317,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(payRun, "Array<PayRun>")
     };
 
@@ -348,7 +344,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayRuns");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -389,14 +385,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(payrollCalendar, "Array<PayrollCalendar>")
     };
 
@@ -417,7 +412,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayrollCalendars");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -458,14 +453,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(superFund, "Array<SuperFund>")
     };
 
@@ -486,7 +480,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "SuperFunds");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -527,14 +521,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(timesheet, "Array<Timesheet>")
     };
 
@@ -555,7 +548,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Timesheets");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -597,14 +590,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -624,7 +616,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -676,14 +668,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -703,7 +694,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -745,14 +736,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -772,7 +762,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "LeaveApplications");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -824,14 +814,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -851,7 +840,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "LeaveApplications");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -903,14 +892,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -930,7 +918,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayItems");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -972,14 +960,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -999,7 +986,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayRuns");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1051,14 +1038,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1078,7 +1064,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayRuns");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1120,14 +1106,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1147,7 +1132,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayrollCalendars");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1199,14 +1184,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1226,7 +1210,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayrollCalendars");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1268,14 +1252,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1295,7 +1278,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayslipObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1330,14 +1313,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1357,7 +1339,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "SettingsObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1399,14 +1381,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1426,7 +1407,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "SuperFunds");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1471,14 +1452,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1498,7 +1478,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "SuperFundProducts");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1550,14 +1530,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1577,7 +1556,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "SuperFunds");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1619,14 +1598,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1646,7 +1624,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "TimesheetObject");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1698,14 +1676,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -1725,7 +1702,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Timesheets");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1768,14 +1745,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(employee, "Array<Employee>")
     };
 
@@ -1796,7 +1772,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Employees");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1844,14 +1820,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(leaveApplication, "Array<LeaveApplication>")
     };
 
@@ -1872,7 +1847,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "LeaveApplications");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1915,14 +1890,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(payRun, "Array<PayRun>")
     };
 
@@ -1943,7 +1917,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "PayRuns");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1986,14 +1960,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(payslipLines, "Array<PayslipLines>")
     };
 
@@ -2014,7 +1987,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Payslips");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -2057,14 +2030,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(superFund, "Array<SuperFund>")
     };
 
@@ -2085,7 +2057,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "SuperFunds");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -2128,14 +2100,13 @@ export class PayrollAuApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(timesheet, "Array<Timesheet>")
     };
 
@@ -2156,7 +2127,7 @@ export class PayrollAuApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Timesheets");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });

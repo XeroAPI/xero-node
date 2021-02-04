@@ -103,14 +103,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate")
     };
 
@@ -131,7 +130,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Project");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -179,14 +178,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'POST',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate")
     };
 
@@ -207,7 +205,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('POST'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "TimeEntry");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -256,14 +254,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'DELETE',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -283,7 +280,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('DELETE'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -325,14 +322,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -352,7 +348,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Project");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -397,14 +393,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -424,7 +419,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "ProjectUsers");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -484,14 +479,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -511,7 +505,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Projects");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -560,14 +554,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -587,7 +580,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Task");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -649,14 +642,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -676,7 +668,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "Tasks");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -768,14 +760,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -795,7 +786,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "TimeEntries");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -844,14 +835,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'GET',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
     };
 
     let authenticationPromise = Promise.resolve();
@@ -871,7 +861,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('GET'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
             body = ObjectSerializer.deserialize(body, "TimeEntry");
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -919,14 +909,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'PATCH',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(projectPatch, "ProjectPatch")
     };
 
@@ -947,7 +936,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('PATCH'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -995,14 +984,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'PUT',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate")
     };
 
@@ -1023,7 +1011,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
@@ -1078,14 +1066,13 @@ export class ProjectApi {
     (<any>Object).assign(localVarHeaderParams, options.headers);
 
     let localVarUseFormData = false;
-
+    
     let gotOptions: any = {
       method: 'PUT',
       searchParams: localVarQueryParameters,
       headers: localVarHeaderParams,
       uri: localVarPath,
       useQuerystring: this._useQuerystring,
-      // json: true,
       json: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate")
     };
 
@@ -1106,7 +1093,7 @@ export class ProjectApi {
         (async (response, body) => {
           try {
             response = await got.call('PUT'.toLowerCase(), localVarPath, gotOptions)
-            body = response.body;
+            body = JSON.parse(response.body)        
 
             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
               resolve({ response: response, body: body });
