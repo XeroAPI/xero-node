@@ -68,7 +68,7 @@ export enum AccountingApiApiKeys {
 
 export class AccountingApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -139,7 +139,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -220,7 +219,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -318,7 +316,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -408,7 +405,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -484,7 +480,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -550,7 +545,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -630,7 +624,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -720,7 +713,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -791,7 +783,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -864,7 +855,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -937,7 +927,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1017,7 +1006,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1100,7 +1088,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1173,7 +1160,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1246,7 +1232,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1317,7 +1302,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1395,7 +1379,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1481,7 +1464,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1571,7 +1553,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1647,7 +1628,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1713,7 +1693,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1784,7 +1763,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1857,7 +1835,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1923,7 +1900,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2009,7 +1985,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2099,7 +2074,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2175,7 +2149,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2248,7 +2221,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2324,7 +2296,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2390,7 +2361,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2471,7 +2441,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2561,7 +2530,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2632,7 +2600,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2710,7 +2677,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2783,7 +2749,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2849,7 +2814,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2922,7 +2886,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -2988,7 +2951,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3059,7 +3021,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3137,7 +3098,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3210,7 +3170,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3291,7 +3250,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3381,7 +3339,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3452,7 +3409,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3533,7 +3489,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3623,7 +3578,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3694,7 +3648,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3765,7 +3718,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3846,7 +3798,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -3936,7 +3887,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4017,7 +3967,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4107,7 +4056,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4173,7 +4121,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4239,7 +4186,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4312,7 +4258,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4379,7 +4324,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4452,7 +4396,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4518,7 +4461,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4584,7 +4526,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4650,7 +4591,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4722,7 +4662,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4789,7 +4728,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4862,7 +4800,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -4934,7 +4871,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5001,7 +4937,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5081,7 +5016,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5161,7 +5095,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5227,7 +5160,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5298,7 +5230,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5369,7 +5300,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5449,7 +5379,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5529,7 +5458,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5595,7 +5523,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5676,7 +5603,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5742,7 +5668,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5808,7 +5733,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5888,7 +5812,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -5968,7 +5891,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6034,7 +5956,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6100,7 +6021,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6171,7 +6091,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6237,7 +6156,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6308,7 +6226,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6374,7 +6291,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6440,7 +6356,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6499,7 +6414,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6565,7 +6479,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6645,7 +6558,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6725,7 +6637,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6791,7 +6702,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6857,7 +6767,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6923,7 +6832,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -6989,7 +6897,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7058,7 +6965,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7124,7 +7030,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7210,7 +7115,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7281,7 +7185,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7347,7 +7250,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7427,7 +7329,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7507,7 +7408,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7573,7 +7473,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7639,7 +7538,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7720,7 +7618,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7789,7 +7686,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7855,7 +7751,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7926,7 +7821,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -7992,7 +7886,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8058,7 +7951,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8129,7 +8021,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8200,7 +8091,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8266,7 +8156,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8346,7 +8235,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8426,7 +8314,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8492,7 +8379,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8558,7 +8444,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8617,7 +8502,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8728,7 +8612,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8799,7 +8682,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8865,7 +8747,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -8941,7 +8822,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9007,7 +8887,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9078,7 +8957,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9144,7 +9022,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9233,7 +9110,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9299,7 +9175,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9379,7 +9254,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9459,7 +9333,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9525,7 +9398,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9601,7 +9473,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9667,7 +9538,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9733,7 +9603,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9792,7 +9661,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9858,7 +9726,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9917,7 +9784,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -9983,7 +9849,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10049,7 +9914,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10130,7 +9994,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10196,7 +10059,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10262,7 +10124,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10321,7 +10182,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10397,7 +10257,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10463,7 +10322,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10529,7 +10387,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10610,7 +10467,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10676,7 +10532,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10742,7 +10597,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10822,7 +10676,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10902,7 +10755,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -10968,7 +10820,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11034,7 +10885,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11100,7 +10950,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11186,7 +11035,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11252,7 +11100,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11318,7 +11165,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11398,7 +11244,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11478,7 +11323,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11544,7 +11388,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11610,7 +11453,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11716,7 +11558,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11787,7 +11628,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11867,7 +11707,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -11947,7 +11786,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12013,7 +11851,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12079,7 +11916,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12155,7 +11991,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12221,7 +12056,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12301,7 +12135,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12381,7 +12214,6 @@ export class AccountingApi {
         localVarHeaderParams['contentType'] = ObjectSerializer.serialize(contentType, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12447,7 +12279,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12513,7 +12344,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12582,7 +12412,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12666,7 +12495,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12750,7 +12578,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12816,7 +12643,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12875,7 +12701,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -12969,7 +12794,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13038,7 +12862,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13112,7 +12935,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13176,7 +12998,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13285,7 +13106,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13349,7 +13169,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13418,7 +13237,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13492,7 +13310,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13566,7 +13383,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13632,7 +13448,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13698,7 +13513,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13769,7 +13583,6 @@ export class AccountingApi {
         localVarHeaderParams['If-Modified-Since'] = ObjectSerializer.serialize(ifModifiedSince, "Date");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13834,7 +13647,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13907,7 +13719,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -13988,7 +13799,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14083,7 +13893,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14164,7 +13973,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14261,7 +14069,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14351,7 +14158,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14431,7 +14237,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14521,7 +14326,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14599,7 +14403,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14680,7 +14483,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14770,7 +14572,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14848,7 +14649,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -14929,7 +14729,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15024,7 +14823,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15097,7 +14895,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15170,7 +14967,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15251,7 +15047,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15344,7 +15139,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15415,7 +15209,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15491,7 +15284,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15562,7 +15354,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15638,7 +15429,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15714,7 +15504,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15785,7 +15574,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15856,7 +15644,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -15927,7 +15714,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16000,7 +15786,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16081,7 +15866,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16171,7 +15955,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16252,7 +16035,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16347,7 +16129,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16428,7 +16209,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16526,7 +16306,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16609,7 +16388,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16682,7 +16460,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -16762,7 +16539,6 @@ export class AccountingApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {

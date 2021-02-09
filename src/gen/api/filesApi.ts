@@ -23,7 +23,7 @@ export enum FilesApiApiKeys {
 
 export class FilesApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -73,12 +73,12 @@ export class FilesApi {
      * By passing in the appropriate options, you can create a new folder
      * @summary Creates a new file association
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fileId File id for single object
+     * @param fileID File id for single object
      * @param association 
      */     
-    public async createFileAssociation (xeroTenantId: string, fileId: string, association?: Association, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Association;  }> {
+    public async createFileAssociation (xeroTenantId: string, fileID: string, association?: Association, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Association;  }> {
         const localVarPath = this.basePath + '/Files/{FileID}/Associations'
-            .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
+            .replace('{' + 'FileID' + '}', encodeURIComponent(String(fileID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -88,15 +88,14 @@ export class FilesApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling createFileAssociation.');
         }
 
-        // verify required parameter 'fileId' is not null or undefined
-        if (fileId === null || fileId === undefined) {
-            throw new Error('Required parameter fileId was null or undefined when calling createFileAssociation.');
+        // verify required parameter 'fileID' is not null or undefined
+        if (fileID === null || fileID === undefined) {
+            throw new Error('Required parameter fileID was null or undefined when calling createFileAssociation.');
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -157,7 +156,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -202,11 +200,11 @@ export class FilesApi {
      * Delete a specific file
      * @summary Deletes a specific file
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fileId File id for single object
+     * @param fileID File id for single object
      */     
-    public async deleteFile (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileResponse204;  }> {
+    public async deleteFile (xeroTenantId: string, fileID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileResponse204;  }> {
         const localVarPath = this.basePath + '/Files/{FileID}'
-            .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
+            .replace('{' + 'FileID' + '}', encodeURIComponent(String(fileID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -216,15 +214,14 @@ export class FilesApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteFile.');
         }
 
-        // verify required parameter 'fileId' is not null or undefined
-        if (fileId === null || fileId === undefined) {
-            throw new Error('Required parameter fileId was null or undefined when calling deleteFile.');
+        // verify required parameter 'fileID' is not null or undefined
+        if (fileID === null || fileID === undefined) {
+            throw new Error('Required parameter fileID was null or undefined when calling deleteFile.');
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -268,12 +265,12 @@ export class FilesApi {
      * By passing in the appropriate options, you can create a new folder
      * @summary Deletes an existing file association
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fileId File id for single object
+     * @param fileID File id for single object
      * @param objectId Object id for single object
      */     
-    public async deleteFileAssociation (xeroTenantId: string, fileId: string, objectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileResponse204;  }> {
+    public async deleteFileAssociation (xeroTenantId: string, fileID: string, objectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileResponse204;  }> {
         const localVarPath = this.basePath + '/Files/{FileID}/Associations/{ObjectID}'
-            .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)))
+            .replace('{' + 'FileID' + '}', encodeURIComponent(String(fileID)))
             .replace('{' + 'ObjectId' + '}', encodeURIComponent(String(objectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -284,9 +281,9 @@ export class FilesApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling deleteFileAssociation.');
         }
 
-        // verify required parameter 'fileId' is not null or undefined
-        if (fileId === null || fileId === undefined) {
-            throw new Error('Required parameter fileId was null or undefined when calling deleteFileAssociation.');
+        // verify required parameter 'fileID' is not null or undefined
+        if (fileID === null || fileID === undefined) {
+            throw new Error('Required parameter fileID was null or undefined when calling deleteFileAssociation.');
         }
 
         // verify required parameter 'objectId' is not null or undefined
@@ -297,7 +294,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -363,7 +359,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -429,7 +424,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -472,11 +466,11 @@ export class FilesApi {
      * 
      * @summary Retrieves a file by a unique file ID
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fileId File id for single object
+     * @param fileID File id for single object
      */     
-    public async getFile (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileObject;  }> {
+    public async getFile (xeroTenantId: string, fileID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FileID}'
-            .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
+            .replace('{' + 'FileID' + '}', encodeURIComponent(String(fileID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -486,15 +480,14 @@ export class FilesApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getFile.');
         }
 
-        // verify required parameter 'fileId' is not null or undefined
-        if (fileId === null || fileId === undefined) {
-            throw new Error('Required parameter fileId was null or undefined when calling getFile.');
+        // verify required parameter 'fileID' is not null or undefined
+        if (fileID === null || fileID === undefined) {
+            throw new Error('Required parameter fileID was null or undefined when calling getFile.');
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -538,11 +531,11 @@ export class FilesApi {
      * By passing in the appropriate options,  
      * @summary Retrieves a specific file associations
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fileId File id for single object
+     * @param fileID File id for single object
      */     
-    public async getFileAssociations (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Association>;  }> {
+    public async getFileAssociations (xeroTenantId: string, fileID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Association>;  }> {
         const localVarPath = this.basePath + '/Files/{FileID}/Associations'
-            .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
+            .replace('{' + 'FileID' + '}', encodeURIComponent(String(fileID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -552,15 +545,14 @@ export class FilesApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getFileAssociations.');
         }
 
-        // verify required parameter 'fileId' is not null or undefined
-        if (fileId === null || fileId === undefined) {
-            throw new Error('Required parameter fileId was null or undefined when calling getFileAssociations.');
+        // verify required parameter 'fileID' is not null or undefined
+        if (fileID === null || fileID === undefined) {
+            throw new Error('Required parameter fileID was null or undefined when calling getFileAssociations.');
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -603,11 +595,11 @@ export class FilesApi {
      * By passing in the appropriate options, retrieve data for specific file
      * @summary Retrieves the content of a specific file
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fileId File id for single object
+     * @param fileID File id for single object
      */     
-    public async getFileContent (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
+    public async getFileContent (xeroTenantId: string, fileID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Files/{FileID}/Content'
-            .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
+            .replace('{' + 'FileID' + '}', encodeURIComponent(String(fileID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -617,15 +609,14 @@ export class FilesApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getFileContent.');
         }
 
-        // verify required parameter 'fileId' is not null or undefined
-        if (fileId === null || fileId === undefined) {
-            throw new Error('Required parameter fileId was null or undefined when calling getFileContent.');
+        // verify required parameter 'fileID' is not null or undefined
+        if (fileID === null || fileID === undefined) {
+            throw new Error('Required parameter fileID was null or undefined when calling getFileContent.');
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -699,7 +690,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -765,7 +755,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -829,7 +818,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -887,7 +875,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -931,12 +918,12 @@ export class FilesApi {
      * Updates file properties of a single file
      * @summary Update a file
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fileId File id for single object
+     * @param fileID File id for single object
      * @param fileObject 
      */     
-    public async updateFile (xeroTenantId: string, fileId: string, fileObject?: FileObject, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileObject;  }> {
+    public async updateFile (xeroTenantId: string, fileID: string, fileObject?: FileObject, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FileID}'
-            .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
+            .replace('{' + 'FileID' + '}', encodeURIComponent(String(fileID)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -946,15 +933,14 @@ export class FilesApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling updateFile.');
         }
 
-        // verify required parameter 'fileId' is not null or undefined
-        if (fileId === null || fileId === undefined) {
-            throw new Error('Required parameter fileId was null or undefined when calling updateFile.');
+        // verify required parameter 'fileID' is not null or undefined
+        if (fileID === null || fileID === undefined) {
+            throw new Error('Required parameter fileID was null or undefined when calling updateFile.');
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1027,7 +1013,6 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1096,47 +1081,18 @@ export class FilesApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
-
         if (body !== undefined) {
             localVarFormParams['body'] = ObjectSerializer.serialize(body, "string");
         }
-
-        if(localVarUseFormData === true) {
-          // does this break normal attachment uploading?
-          localVarHeaderParams["Content-Type"] = "multipart/form-data";
-          localVarFormParams[name] = models_1.ObjectSerializer.serialize(body, "string"); // dont call it body, call it the file name
-        }
-
         if (name !== undefined) {
             localVarFormParams['name'] = ObjectSerializer.serialize(name, "string");
         }
-
-        if(localVarUseFormData === true) {
-          // does this break normal attachment uploading?
-          localVarHeaderParams["Content-Type"] = "multipart/form-data";
-          localVarFormParams[name] = models_1.ObjectSerializer.serialize(body, "string"); // dont call it body, call it the file name
-        }
-
         if (filename !== undefined) {
             localVarFormParams['filename'] = ObjectSerializer.serialize(filename, "string");
         }
-
-        if(localVarUseFormData === true) {
-          // does this break normal attachment uploading?
-          localVarHeaderParams["Content-Type"] = "multipart/form-data";
-          localVarFormParams[name] = models_1.ObjectSerializer.serialize(body, "string"); // dont call it body, call it the file name
-        }
-
         if (mimeType !== undefined) {
             localVarFormParams['mimeType'] = ObjectSerializer.serialize(mimeType, "string");
-        }
-
-        if(localVarUseFormData === true) {
-          // does this break normal attachment uploading?
-          localVarHeaderParams["Content-Type"] = "multipart/form-data";
-          localVarFormParams[name] = models_1.ObjectSerializer.serialize(body, "string"); // dont call it body, call it the file name
         }
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1145,8 +1101,13 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
+        localVarUseFormData = true;
+        localVarHeaderParams["Content-Type"] = "multipart/form-data";
+        delete localVarFormParams['body']
+        localVarFormParams[name] = ObjectSerializer.serialize(body, "string");
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
 
@@ -1164,7 +1125,6 @@ export class FilesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
                         body = ObjectSerializer.deserialize(body, "FileObject");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });

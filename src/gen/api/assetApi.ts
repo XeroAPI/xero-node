@@ -23,7 +23,7 @@ export enum AssetApiApiKeys {
 
 export class AssetApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.9.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -94,7 +94,6 @@ export class AssetApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -155,7 +154,6 @@ export class AssetApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -222,7 +220,6 @@ export class AssetApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -281,7 +278,6 @@ export class AssetApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -340,7 +336,6 @@ export class AssetApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -433,7 +428,6 @@ export class AssetApi {
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
-
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
