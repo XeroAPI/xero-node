@@ -1103,16 +1103,40 @@ export class FilesApi {
             localVarFormParams['body'] = ObjectSerializer.serialize(body, "string");
         }
 
+        if(localVarUseFormData === true) {
+          // does this break normal attachment uploading?
+          localVarHeaderParams["Content-Type"] = "multipart/form-data";
+          localVarFormParams[name] = models_1.ObjectSerializer.serialize(body, "string"); // dont call it body, call it the file name
+        }
+
         if (name !== undefined) {
             localVarFormParams['name'] = ObjectSerializer.serialize(name, "string");
+        }
+
+        if(localVarUseFormData === true) {
+          // does this break normal attachment uploading?
+          localVarHeaderParams["Content-Type"] = "multipart/form-data";
+          localVarFormParams[name] = models_1.ObjectSerializer.serialize(body, "string"); // dont call it body, call it the file name
         }
 
         if (filename !== undefined) {
             localVarFormParams['filename'] = ObjectSerializer.serialize(filename, "string");
         }
 
+        if(localVarUseFormData === true) {
+          // does this break normal attachment uploading?
+          localVarHeaderParams["Content-Type"] = "multipart/form-data";
+          localVarFormParams[name] = models_1.ObjectSerializer.serialize(body, "string"); // dont call it body, call it the file name
+        }
+
         if (mimeType !== undefined) {
             localVarFormParams['mimeType'] = ObjectSerializer.serialize(mimeType, "string");
+        }
+
+        if(localVarUseFormData === true) {
+          // does this break normal attachment uploading?
+          localVarHeaderParams["Content-Type"] = "multipart/form-data";
+          localVarFormParams[name] = models_1.ObjectSerializer.serialize(body, "string"); // dont call it body, call it the file name
         }
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -1121,7 +1145,6 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
-            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1141,6 +1164,7 @@ export class FilesApi {
                     if (error) {
                         reject(error);
                     } else {
+                        body = JSON.parse(body)
                         body = ObjectSerializer.deserialize(body, "FileObject");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });

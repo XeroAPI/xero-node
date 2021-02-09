@@ -1,6 +1,7 @@
 export * from './accountingApi';
 export * from './assetApi';
 export * from './projectApi';
+export * from './filesApi';
 export * from './payrollAUApi';
 export * from './bankfeedsApi';
 export * from './payrollUKApi';
