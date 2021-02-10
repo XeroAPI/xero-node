@@ -10,6 +10,8 @@ Version 4.x of Xero NodeJS SDK supports OAuth2 authentication and the following 
 * [BankFeeds (Restricted API)](https://developer.xero.com/documentation/bank-feeds-api/overview)
 * [UK Payroll](https://developer.xero.com/documentation/payroll-api-uk/overview)
 * [NZ Payroll](https://developer.xero.com/documentation/payroll-api-nz/overview)
+* [files](https://developer.xero.com/documentation/files-api/overview-files)
+
 
 ## Getting Started
 
@@ -58,7 +60,7 @@ In Xero a user can belong to multiple organisations. Tokens are ultimately assoc
   const newXeroClient = new XeroClient()
   const newTokenSet = await newXeroClient.refreshWithRefreshToken(xero_client_id, xero_client_secret, tokenSet.refresh_token)
   // refreshWithRefreshToken calls setAccessToken() so the refreshed token will be stored on newXeroClient
-  await newXeroClient.accountingApi.getInvoices('my-tenant-uuid)
+  await newXeroClient.accountingApi.getInvoices('my-tenant-uuid')
 ```
 
 ---
@@ -196,12 +198,13 @@ await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 ```
 
 ## SDK Documentation
-* Version 3 (OAuth1.0a documentation) https://xeroapi.github.io/xero-node/v3/index.html (*deprecated end of 2020*)
-* Accounting API documentation: https://xeroapi.github.io/xero-node/v4/accounting/index.html
-* Assets API documentation: https://xeroapi.github.io/xero-node/v4/assets/index.html
-* AU Payroll API documentation: https://xeroapi.github.io/xero-node/v4/payroll-au/index.html
-* Bankfeeds API documentation: https://xeroapi.github.io/xero-node/v4/bankfeeds/index.html
-* UK Payroll API documentation: https://xeroapi.github.io/xero-node/v4/payroll-uk/index.html
+* Version 3 (OAuth1.0a) https://xeroapi.github.io/xero-node/v3/index.html (*deprecated end of 2020*)
+* Accounting API: https://xeroapi.github.io/xero-node/v4/accounting/index.html
+* Assets API: https://xeroapi.github.io/xero-node/v4/assets/index.html
+* AU Payroll API: https://xeroapi.github.io/xero-node/v4/payroll-au/index.html
+* Bankfeeds API: https://xeroapi.github.io/xero-node/v4/bankfeeds/index.html
+* UK Payroll API: https://xeroapi.github.io/xero-node/v4/payroll-uk/index.html
+* Files API: https://xeroapi.github.io/xero-node/v4/files/index.html
 
 
 ### Basics
@@ -278,6 +281,21 @@ const accountAttachmentsResponse: any = await xero.accountingApi.createAccountAt
     'Content-Type': contentType
   }
 });
+
+// UPLOAD A FILE
+import * as fs from "fs";
+const mime = require("mime-types");
+const path = require("path");
+
+const tenantId = 'valid-xero-tenant-id-uuid'
+const folderId = 'valid-folder-uuid-goes-here'
+
+const filename = "xero-dev.png";
+const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.png");
+const readStream = fs.createReadStream(pathToUpload);
+const contentType = mime.lookup(filename);
+
+const uploadFile = await xero.filesApi.uploadFile(tenantId, folderId, readStream, filename, contentType);
 ```
 
 # Sample App
