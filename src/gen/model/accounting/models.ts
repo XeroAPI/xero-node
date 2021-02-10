@@ -6,10 +6,12 @@ export * from '././accountsReceivable';
 export * from '././action';
 export * from '././actions';
 export * from '././address';
+export * from '././addressForOrganisation';
 export * from '././allocation';
 export * from '././allocations';
 export * from '././attachment';
 export * from '././attachments';
+export * from '././balanceDetails';
 export * from '././balances';
 export * from '././bankTransaction';
 export * from '././bankTransactions';
@@ -22,6 +24,7 @@ export * from '././bill';
 export * from '././brandingTheme';
 export * from '././brandingThemes';
 export * from '././cISOrgSetting';
+export * from '././cISOrgSettings';
 export * from '././cISSetting';
 export * from '././cISSettings';
 export * from '././contact';
@@ -29,6 +32,8 @@ export * from '././contactGroup';
 export * from '././contactGroups';
 export * from '././contactPerson';
 export * from '././contacts';
+export * from '././conversionBalances';
+export * from '././conversionDate';
 export * from '././countryCode';
 export * from '././creditNote';
 export * from '././creditNotes';
@@ -43,6 +48,10 @@ export * from '././expenseClaims';
 export * from '././externalLink';
 export * from '././historyRecord';
 export * from '././historyRecords';
+export * from '././importSummary';
+export * from '././importSummaryAccounts';
+export * from '././importSummaryObject';
+export * from '././importSummaryOrganisation';
 export * from '././invoice';
 export * from '././invoiceReminder';
 export * from '././invoiceReminders';
@@ -101,6 +110,7 @@ export * from '././requestEmpty';
 export * from '././rowType';
 export * from '././salesTrackingCategory';
 export * from '././schedule';
+export * from '././setup';
 export * from '././taxComponent';
 export * from '././taxRate';
 export * from '././taxRates';
@@ -125,10 +135,12 @@ import { AccountsReceivable } from '././accountsReceivable';
 import { Action } from '././action';
 import { Actions } from '././actions';
 import { Address } from '././address';
+import { AddressForOrganisation } from '././addressForOrganisation';
 import { Allocation } from '././allocation';
 import { Allocations } from '././allocations';
 import { Attachment } from '././attachment';
 import { Attachments } from '././attachments';
+import { BalanceDetails } from '././balanceDetails';
 import { Balances } from '././balances';
 import { BankTransaction } from '././bankTransaction';
 import { BankTransactions } from '././bankTransactions';
@@ -141,6 +153,7 @@ import { Bill } from '././bill';
 import { BrandingTheme } from '././brandingTheme';
 import { BrandingThemes } from '././brandingThemes';
 import { CISOrgSetting } from '././cISOrgSetting';
+import { CISOrgSettings } from '././cISOrgSettings';
 import { CISSetting } from '././cISSetting';
 import { CISSettings } from '././cISSettings';
 import { Contact } from '././contact';
@@ -148,6 +161,8 @@ import { ContactGroup } from '././contactGroup';
 import { ContactGroups } from '././contactGroups';
 import { ContactPerson } from '././contactPerson';
 import { Contacts } from '././contacts';
+import { ConversionBalances } from '././conversionBalances';
+import { ConversionDate } from '././conversionDate';
 import { CountryCode } from '././countryCode';
 import { CreditNote } from '././creditNote';
 import { CreditNotes } from '././creditNotes';
@@ -162,6 +177,10 @@ import { ExpenseClaims } from '././expenseClaims';
 import { ExternalLink } from '././externalLink';
 import { HistoryRecord } from '././historyRecord';
 import { HistoryRecords } from '././historyRecords';
+import { ImportSummary } from '././importSummary';
+import { ImportSummaryAccounts } from '././importSummaryAccounts';
+import { ImportSummaryObject } from '././importSummaryObject';
+import { ImportSummaryOrganisation } from '././importSummaryOrganisation';
 import { Invoice } from '././invoice';
 import { InvoiceReminder } from '././invoiceReminder';
 import { InvoiceReminders } from '././invoiceReminders';
@@ -220,6 +239,7 @@ import { RequestEmpty } from '././requestEmpty';
 import { RowType } from '././rowType';
 import { SalesTrackingCategory } from '././salesTrackingCategory';
 import { Schedule } from '././schedule';
+import { Setup } from '././setup';
 import { TaxComponent } from '././taxComponent';
 import { TaxRate } from '././taxRate';
 import { TaxRates } from '././taxRates';
@@ -254,6 +274,7 @@ let enumsMap: {[index: string]: any} = {
         "AccountType": AccountType,
         "Action.StatusEnum": Action.StatusEnum,
         "Address.AddressTypeEnum": Address.AddressTypeEnum,
+        "AddressForOrganisation.AddressTypeEnum": AddressForOrganisation.AddressTypeEnum,
         "BankTransaction.TypeEnum": BankTransaction.TypeEnum,
         "BankTransaction.StatusEnum": BankTransaction.StatusEnum,
         "BatchPayment.TypeEnum": BatchPayment.TypeEnum,
@@ -318,10 +339,12 @@ let typeMap: {[index: string]: any} = {
     "Action": Action,
     "Actions": Actions,
     "Address": Address,
+    "AddressForOrganisation": AddressForOrganisation,
     "Allocation": Allocation,
     "Allocations": Allocations,
     "Attachment": Attachment,
     "Attachments": Attachments,
+    "BalanceDetails": BalanceDetails,
     "Balances": Balances,
     "BankTransaction": BankTransaction,
     "BankTransactions": BankTransactions,
@@ -334,6 +357,7 @@ let typeMap: {[index: string]: any} = {
     "BrandingTheme": BrandingTheme,
     "BrandingThemes": BrandingThemes,
     "CISOrgSetting": CISOrgSetting,
+    "CISOrgSettings": CISOrgSettings,
     "CISSetting": CISSetting,
     "CISSettings": CISSettings,
     "Contact": Contact,
@@ -341,6 +365,8 @@ let typeMap: {[index: string]: any} = {
     "ContactGroups": ContactGroups,
     "ContactPerson": ContactPerson,
     "Contacts": Contacts,
+    "ConversionBalances": ConversionBalances,
+    "ConversionDate": ConversionDate,
     "CreditNote": CreditNote,
     "CreditNotes": CreditNotes,
     "Currencies": Currencies,
@@ -353,6 +379,10 @@ let typeMap: {[index: string]: any} = {
     "ExternalLink": ExternalLink,
     "HistoryRecord": HistoryRecord,
     "HistoryRecords": HistoryRecords,
+    "ImportSummary": ImportSummary,
+    "ImportSummaryAccounts": ImportSummaryAccounts,
+    "ImportSummaryObject": ImportSummaryObject,
+    "ImportSummaryOrganisation": ImportSummaryOrganisation,
     "Invoice": Invoice,
     "InvoiceReminder": InvoiceReminder,
     "InvoiceReminders": InvoiceReminders,
@@ -406,6 +436,7 @@ let typeMap: {[index: string]: any} = {
     "RequestEmpty": RequestEmpty,
     "SalesTrackingCategory": SalesTrackingCategory,
     "Schedule": Schedule,
+    "Setup": Setup,
     "TaxComponent": TaxComponent,
     "TaxRate": TaxRate,
     "TaxRates": TaxRates,

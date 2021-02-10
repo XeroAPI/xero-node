@@ -855,6 +855,11 @@ ul.nav-tabs {
       "example" : 1000.0000,
       "x-is-money" : true
     },
+    "disposalDate" : {
+      "type" : "string",
+      "description" : "The date the asset was disposed",
+      "format" : "date"
+    },
     "disposalPrice" : {
       "type" : "number",
       "description" : "The price the asset was disposed at",
@@ -1134,7 +1139,7 @@ ul.nav-tabs {
     },
     "localisedMessage" : {
       "type" : "string",
-      "description" : "Explaination of the field validation error"
+      "description" : "Explanation of the field validation error"
     },
     "type" : {
       "type" : "string",
@@ -1186,7 +1191,7 @@ ul.nav-tabs {
     },
     "localisedMessage" : {
       "type" : "string",
-      "description" : "Explaination of the resource validation error"
+      "description" : "Explanation of the resource validation error"
     },
     "type" : {
       "type" : "string",
@@ -1309,10 +1314,10 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.3.7</div>
+              <div class="app-desc">Version: 2.9.0</div>
             <hr>
             <div id="app-description" class="app-desc">
-                This is the Xero Assets API
+                The Assets API exposes fixed asset related functions of the Xero Accounting application and can be used for a variety of purposes such as creating assets, retrieving asset valuations etc.
             </div>
             -->
           </div>
@@ -2278,7 +2283,7 @@ $(document).ready(function() {
                       <article id="api-Asset-getAssetById-0" data-group="User" data-name="getAssetById" data-version="0">
                         <div class="pull-left">
                           <h1>getAssetById</h1>
-                          <p>retrieves fixed asset by id</p>
+                          <p>Retrieves fixed asset by id</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2376,7 +2381,7 @@ UUID *id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe; // fixed asset id for single ob
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
 
-// retrieves fixed asset by id
+// Retrieves fixed asset by id
 [apiInstance getAssetByIdWith:xeroTenantId
     id:id
               completionHandler: ^(Asset output, NSError* error) {
@@ -2440,7 +2445,7 @@ namespace Example
 
             try
             {
-                // retrieves fixed asset by id
+                // Retrieves fixed asset by id
                 Asset result = apiInstance.getAssetById(xeroTenantId, id);
                 Debug.WriteLine(result);
             }
@@ -2514,7 +2519,7 @@ xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (defaul
 id = 4f7bcdcb-5ec1-4258-9558-19f662fccdfe # UUID | fixed asset id for single object (default to null)
 
 try: 
-    # retrieves fixed asset by id
+    # Retrieves fixed asset by id
     api_response = api_instance.get_asset_by_id(xeroTenantId, id)
     pprint(api_response)
 except ApiException as e:
@@ -3550,7 +3555,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Asset-getAssets-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/assets.xro/1.0/Assets?status=&page=1&pageSize=5&orderBy=AssetName&sortDirection=ASC&filterBy=Draft"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/assets.xro/1.0/Assets?status=&page=1&pageSize=5&orderBy=AssetName&sortDirection=ASC&filterBy=Company Car"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Asset-getAssets-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -3577,7 +3582,7 @@ public class AssetApiExample {
         Integer pageSize = 5; // Integer | The number of records returned per page. By default the number of records returned is 10.
         String orderBy = AssetName; // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
         String sortDirection = ASC; // String | ASC or DESC
-        String filterBy = Draft; // String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
+        String filterBy = Company Car; // String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
         try {
             Assets result = apiInstance.getAssets(xeroTenantId, status, page, pageSize, orderBy, sortDirection, filterBy);
             System.out.println(result);
@@ -3602,7 +3607,7 @@ public class AssetApiExample {
         Integer pageSize = 5; // Integer | The number of records returned per page. By default the number of records returned is 10.
         String orderBy = AssetName; // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
         String sortDirection = ASC; // String | ASC or DESC
-        String filterBy = Draft; // String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
+        String filterBy = Company Car; // String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
         try {
             Assets result = apiInstance.getAssets(xeroTenantId, status, page, pageSize, orderBy, sortDirection, filterBy);
             System.out.println(result);
@@ -3629,7 +3634,7 @@ Integer *page = 1; // Results are paged. This specifies which page of the result
 Integer *pageSize = 5; // The number of records returned per page. By default the number of records returned is 10. (optional) (default to null)
 String *orderBy = AssetName; // Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional) (default to null)
 String *sortDirection = ASC; // ASC or DESC (optional) (default to null)
-String *filterBy = Draft; // A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields. (optional) (default to null)
+String *filterBy = Company Car; // A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields. (optional) (default to null)
 
 AssetApi *apiInstance = [[AssetApi alloc] init];
 
@@ -3674,7 +3679,7 @@ const orderBy = 'AssetName';  // {String} Requests can be ordered by AssetType, 
 
 const sortDirection = 'ASC';  // {String} ASC or DESC
 
-const filterBy = 'Draft';  // {String} A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
+const filterBy = 'Company Car';  // {String} A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
 
 
 try {
@@ -3714,7 +3719,7 @@ namespace Example
             var pageSize = 5;  // Integer | The number of records returned per page. By default the number of records returned is 10. (optional)  (default to null)
             var orderBy = AssetName;  // String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional)  (default to null)
             var sortDirection = ASC;  // String | ASC or DESC (optional)  (default to null)
-            var filterBy = Draft;  // String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields. (optional)  (default to null)
+            var filterBy = Company Car;  // String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields. (optional)  (default to null)
 
             try
             {
@@ -3770,7 +3775,7 @@ my $page = 1; # Integer | Results are paged. This specifies which page of the re
 my $pageSize = 5; # Integer | The number of records returned per page. By default the number of records returned is 10.
 my $orderBy = AssetName; # String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
 my $sortDirection = ASC; # String | ASC or DESC
-my $filterBy = Draft; # String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
+my $filterBy = Company Car; # String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
 
 eval { 
     my $result = $api_instance->getAssets(xeroTenantId => $xeroTenantId, status => $status, page => $page, pageSize => $pageSize, orderBy => $orderBy, sortDirection => $sortDirection, filterBy => $filterBy);
@@ -3799,7 +3804,7 @@ page = 1 # Integer | Results are paged. This specifies which page of the results
 pageSize = 5 # Integer | The number of records returned per page. By default the number of records returned is 10. (optional) (default to null)
 orderBy = AssetName # String | Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice. (optional) (default to null)
 sortDirection = ASC # String | ASC or DESC (optional) (default to null)
-filterBy = Draft # String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields. (optional) (default to null)
+filterBy = Company Car # String | A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields. (optional) (default to null)
 
 try: 
     # searches fixed asset
@@ -3819,7 +3824,7 @@ pub fn main() {
     let pageSize = 5; // Integer
     let orderBy = AssetName; // String
     let sortDirection = ASC; // String
-    let filterBy = Draft; // String
+    let filterBy = Company Car; // String
 
     let mut context = AssetApi::Context::default();
     let result = client.getAssets(xeroTenantId, status, page, pageSize, orderBy, sortDirection, filterBy, &context).wait();

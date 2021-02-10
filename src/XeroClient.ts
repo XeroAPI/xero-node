@@ -51,6 +51,7 @@ export class XeroClient {
   constructor(readonly config?: IXeroClientConfig) {
     this.accountingApi = new xero.AccountingApi();
     this.assetApi = new xero.AssetApi();
+    this.filesApi = new xero.FilesApi();
     this.projectApi = new xero.ProjectApi();
     this.payrollAUApi = new xero.PayrollAuApi();
     this.bankFeedsApi = new xero.BankFeedsApi();
@@ -63,6 +64,7 @@ export class XeroClient {
 
   readonly accountingApi: xero.AccountingApi;
   readonly assetApi: xero.AssetApi;
+  readonly filesApi: xero.FilesApi;
   readonly projectApi: xero.ProjectApi;
   readonly payrollAUApi: xero.PayrollAuApi;
   readonly bankFeedsApi: xero.BankFeedsApi;
@@ -253,6 +255,7 @@ export class XeroClient {
 
     this.accountingApi.accessToken = accessToken;
     this.assetApi.accessToken = accessToken;
+    this.filesApi.accessToken = accessToken;
     this.projectApi.accessToken = accessToken;
     this.payrollAUApi.accessToken = accessToken;
     this.bankFeedsApi.accessToken = accessToken;

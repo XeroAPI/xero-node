@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Xero Payroll AU</title>
+  <title>Xero Payroll AU API</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -1190,7 +1190,7 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "",
-  "enum" : [ "FIXED", "ORDINARYTIMEEARNINGS", "OVERTIMEEARNINGS", "ALLOWANCE", "LUMPSUMD", "EMPLOYMENTTERMINATIONPAYMENT", "LUMPSUMA", "LUMPSUMB", "BONUSESANDCOMMISSIONS" ]
+  "enum" : [ "FIXED", "ORDINARYTIMEEARNINGS", "OVERTIMEEARNINGS", "ALLOWANCE", "LUMPSUMD", "EMPLOYMENTTERMINATIONPAYMENT", "LUMPSUMA", "LUMPSUMB", "BONUSESANDCOMMISSIONS", "LUMPSUME" ]
 };
     defs["Employee"] = {
   "title" : "",
@@ -2711,7 +2711,7 @@ ul.nav-tabs {
     },
     "MinimumMonthlyEarnings" : {
       "type" : "number",
-      "description" : "amount of mimimum earnings",
+      "description" : "amount of minimum earnings",
       "format" : "double",
       "example" : 450.0,
       "x-is-money" : true
@@ -2762,7 +2762,7 @@ ul.nav-tabs {
     },
     "EmployeeNumber" : {
       "type" : "string",
-      "description" : "The memberhsip number assigned to the employee by the super fund.",
+      "description" : "The membership number assigned to the employee by the super fund.",
       "example" : "1234"
     }
   },
@@ -3216,7 +3216,7 @@ ul.nav-tabs {
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>Xero Payroll AU</h1>
+            <h1>Xero Payroll AU API</h1>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -3225,7 +3225,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.3.7</div>
+              <div class="app-desc">Version: 2.9.0</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in Australia region.
@@ -3240,7 +3240,7 @@ ul.nav-tabs {
                       <article id="api-PayrollAu-createEmployee-0" data-group="User" data-name="createEmployee" data-version="0">
                         <div class="pull-left">
                           <h1>createEmployee</h1>
-                          <p>Use this method to create a payroll employee</p>
+                          <p>Creates a payroll employee</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3337,7 +3337,7 @@ array[Employee] *employee = [ { "FirstName": "Albus", "LastName": "Dumbledore", 
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Use this method to create a payroll employee
+// Creates a payroll employee
 [apiInstance createEmployeeWith:xeroTenantId
     employee:employee
               completionHandler: ^(Employees output, NSError* error) {
@@ -3401,7 +3401,7 @@ namespace Example
 
             try
             {
-                // Use this method to create a payroll employee
+                // Creates a payroll employee
                 Employees result = apiInstance.createEmployee(xeroTenantId, employee);
                 Debug.WriteLine(result);
             }
@@ -3475,7 +3475,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 employee = [ { "FirstName": "Albus", "LastName": "Dumbledore", "DateOfBirth": "/Date(321523200000+0000)/", "HomeAddress": { "AddressLine1": "101 Green St", "City": "Island Bay", "Region": "NSW", "PostalCode": "6023", "Country": "AUSTRALIA" }, "StartDate": "/Date(321523200000+0000)/", "MiddleNames": "Percival", "Email": "albus39608@hogwarts.edu", "Gender": "M", "Phone": "444-2323", "Mobile": "555-1212", "IsAuthorisedToApproveLeave": true, "IsAuthorisedToApproveTimesheets": true, "JobTitle": "Regional Manager", "Classification": "corporate", "OrdinaryEarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "Status": "ACTIVE" } ] # array[Employee] | 
 
 try: 
-    # Use this method to create a payroll employee
+    # Creates a payroll employee
     api_response = api_instance.create_employee(xeroTenantId, employee)
     pprint(api_response)
 except ApiException as e:
@@ -3708,7 +3708,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-createLeaveApplication-0" data-group="User" data-name="createLeaveApplication" data-version="0">
                         <div class="pull-left">
                           <h1>createLeaveApplication</h1>
-                          <p>Use this method to create a Leave Application</p>
+                          <p>Creates a leave application</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3805,7 +3805,7 @@ array[LeaveApplication] *leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Use this method to create a Leave Application
+// Creates a leave application
 [apiInstance createLeaveApplicationWith:xeroTenantId
     leaveApplication:leaveApplication
               completionHandler: ^(LeaveApplications output, NSError* error) {
@@ -3869,7 +3869,7 @@ namespace Example
 
             try
             {
-                // Use this method to create a Leave Application
+                // Creates a leave application
                 LeaveApplications result = apiInstance.createLeaveApplication(xeroTenantId, leaveApplication);
                 Debug.WriteLine(result);
             }
@@ -3943,7 +3943,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "Title": "Hello World", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/" } ] # array[LeaveApplication] | 
 
 try: 
-    # Use this method to create a Leave Application
+    # Creates a leave application
     api_response = api_instance.create_leave_application(xeroTenantId, leaveApplication)
     pprint(api_response)
 except ApiException as e:
@@ -4176,7 +4176,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-createPayItem-0" data-group="User" data-name="createPayItem" data-version="0">
                         <div class="pull-left">
                           <h1>createPayItem</h1>
-                          <p>Use this method to create a Pay Item</p>
+                          <p>Creates a pay item</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -4273,7 +4273,7 @@ PayItem *payItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400"
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Use this method to create a Pay Item
+// Creates a pay item
 [apiInstance createPayItemWith:xeroTenantId
     payItem:payItem
               completionHandler: ^(PayItems output, NSError* error) {
@@ -4337,7 +4337,7 @@ namespace Example
 
             try
             {
-                // Use this method to create a Pay Item
+                // Creates a pay item
                 PayItems result = apiInstance.createPayItem(xeroTenantId, payItem);
                 Debug.WriteLine(result);
             }
@@ -4411,7 +4411,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 payItem = { "EarningsRates": [ { "Name": "MyRate", "AccountCode": "400", "TypeOfUnits": "4.00", "IsExemptFromTax": true, "IsExemptFromSuper": true, "IsReportableAsW1": false, "EarningsType": "ORDINARYTIMEEARNINGS", "EarningsRateID": "1fa4e226-b711-46ba-a8a7-4344c9c5fb87", "RateType": "MULTIPLE", "RatePerUnit": "10.0", "Multiplier": 1.5, "Amount": 5, "EmploymentTerminationPaymentType": "O" } ] } # PayItem | 
 
 try: 
-    # Use this method to create a Pay Item
+    # Creates a pay item
     api_response = api_instance.create_pay_item(xeroTenantId, payItem)
     pprint(api_response)
 except ApiException as e:
@@ -4641,7 +4641,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-createPayRun-0" data-group="User" data-name="createPayRun" data-version="0">
                         <div class="pull-left">
                           <h1>createPayRun</h1>
-                          <p>Use this method to create a PayRun</p>
+                          <p>Creates a pay run</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -4738,7 +4738,7 @@ array[PayRun] *payRun = [ { "PayrollCalendarID": "78bb86b9-e1ea-47ac-b75d-f087a8
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Use this method to create a PayRun
+// Creates a pay run
 [apiInstance createPayRunWith:xeroTenantId
     payRun:payRun
               completionHandler: ^(PayRuns output, NSError* error) {
@@ -4802,7 +4802,7 @@ namespace Example
 
             try
             {
-                // Use this method to create a PayRun
+                // Creates a pay run
                 PayRuns result = apiInstance.createPayRun(xeroTenantId, payRun);
                 Debug.WriteLine(result);
             }
@@ -4876,7 +4876,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 payRun = [ { "PayrollCalendarID": "78bb86b9-e1ea-47ac-b75d-f087a81931de", "PayRunPeriodStartDate": "/Date(1572566400000+0000)/", "PayRunPeriodEndDate": "/Date(1573084800000+0000)/", "PayRunStatus": "DRAFT", "PaymentDate": "/Date(1573171200000+0000)/" } ] # array[PayRun] | 
 
 try: 
-    # Use this method to create a PayRun
+    # Creates a pay run
     api_response = api_instance.create_pay_run(xeroTenantId, payRun)
     pprint(api_response)
 except ApiException as e:
@@ -5109,7 +5109,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-createPayrollCalendar-0" data-group="User" data-name="createPayrollCalendar" data-version="0">
                         <div class="pull-left">
                           <h1>createPayrollCalendar</h1>
-                          <p>Use this method to create a Payroll Calendars</p>
+                          <p>Creates a Payroll Calendar</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -5206,7 +5206,7 @@ array[PayrollCalendar] *payrollCalendar = [ { "PayrollCalendarID":"78bb86b9-e1ea
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Use this method to create a Payroll Calendars
+// Creates a Payroll Calendar
 [apiInstance createPayrollCalendarWith:xeroTenantId
     payrollCalendar:payrollCalendar
               completionHandler: ^(PayrollCalendars output, NSError* error) {
@@ -5270,7 +5270,7 @@ namespace Example
 
             try
             {
-                // Use this method to create a Payroll Calendars
+                // Creates a Payroll Calendar
                 PayrollCalendars result = apiInstance.createPayrollCalendar(xeroTenantId, payrollCalendar);
                 Debug.WriteLine(result);
             }
@@ -5344,7 +5344,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 payrollCalendar = [ { "PayrollCalendarID":"78bb86b9-e1ea-47ac-b75d-f087a81931de", "PayRunPeriodStartDate":"/Date(1572566400000+0000)/", "PayRunPeriodEndDate":"/Date(1573084800000+0000)/", "PayRunStatus":"DRAFT", "PaymentDate":"/Date(1573171200000+0000)/" } ] # array[PayrollCalendar] | 
 
 try: 
-    # Use this method to create a Payroll Calendars
+    # Creates a Payroll Calendar
     api_response = api_instance.create_payroll_calendar(xeroTenantId, payrollCalendar)
     pprint(api_response)
 except ApiException as e:
@@ -5577,7 +5577,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-createSuperfund-0" data-group="User" data-name="createSuperfund" data-version="0">
                         <div class="pull-left">
                           <h1>createSuperfund</h1>
-                          <p>Use this method to create a super fund</p>
+                          <p>Creates a superfund</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -5674,7 +5674,7 @@ array[SuperFund] *superFund = [ { "usi":"PTC0133AU", "Type":"REGULATED", "Name":
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Use this method to create a super fund
+// Creates a superfund
 [apiInstance createSuperfundWith:xeroTenantId
     superFund:superFund
               completionHandler: ^(SuperFunds output, NSError* error) {
@@ -5738,7 +5738,7 @@ namespace Example
 
             try
             {
-                // Use this method to create a super fund
+                // Creates a superfund
                 SuperFunds result = apiInstance.createSuperfund(xeroTenantId, superFund);
                 Debug.WriteLine(result);
             }
@@ -5812,7 +5812,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 superFund = [ { "usi":"PTC0133AU", "Type":"REGULATED", "Name":"Bar99359", "AccountNumber":"FB36350", "AccountName":"Foo38428", "USI":"PTC0133AU" } ] # array[SuperFund] | 
 
 try: 
-    # Use this method to create a super fund
+    # Creates a superfund
     api_response = api_instance.create_superfund(xeroTenantId, superFund)
     pprint(api_response)
 except ApiException as e:
@@ -6045,7 +6045,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-createTimesheet-0" data-group="User" data-name="createTimesheet" data-version="0">
                         <div class="pull-left">
                           <h1>createTimesheet</h1>
-                          <p>Use this method to create a timesheet</p>
+                          <p>Creates a timesheet</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -6142,7 +6142,7 @@ array[Timesheet] *timesheet = [ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f9687671
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Use this method to create a timesheet
+// Creates a timesheet
 [apiInstance createTimesheetWith:xeroTenantId
     timesheet:timesheet
               completionHandler: ^(Timesheets output, NSError* error) {
@@ -6206,7 +6206,7 @@ namespace Example
 
             try
             {
-                // Use this method to create a timesheet
+                // Creates a timesheet
                 Timesheets result = apiInstance.createTimesheet(xeroTenantId, timesheet);
                 Debug.WriteLine(result);
             }
@@ -6280,7 +6280,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 timesheet = [ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f968767118bc", "StartDate":"/Date(1573171200000+0000)/", "EndDate":"/Date(1573689600000+0000)/", "Status":"DRAFT", "TimesheetLines":[ { "EarningsRateID":"ab874dfb-ab09-4c91-954e-43acf6fc23b4", "TrackingItemID":"af5e9ce2-2349-4136-be99-3561b189f473", "NumberOfUnits":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ] } ] } ] # array[Timesheet] | 
 
 try: 
-    # Use this method to create a timesheet
+    # Creates a timesheet
     api_response = api_instance.create_timesheet(xeroTenantId, timesheet)
     pprint(api_response)
 except ApiException as e:
@@ -6513,7 +6513,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-getEmployee-0" data-group="User" data-name="getEmployee" data-version="0">
                         <div class="pull-left">
                           <h1>getEmployee</h1>
-                          <p>searches for an employee by unique id</p>
+                          <p>Retrieves an employee's detail by unique employee id</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -6521,7 +6521,7 @@ $(document).ready(function() {
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Employees/{EmployeeId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Employees/{EmployeeID}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -6542,7 +6542,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PayrollAu-getEmployee-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/Employees/{EmployeeId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/Employees/{EmployeeID}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PayrollAu-getEmployee-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -6564,9 +6564,9 @@ public class PayrollAuApiExample {
 
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        UUID employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Employee id for single object
+        UUID employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Employee id for single object
         try {
-            Employees result = apiInstance.getEmployee(xeroTenantId, employeeId);
+            Employees result = apiInstance.getEmployee(xeroTenantId, employeeID);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollAuApi#getEmployee");
@@ -6584,9 +6584,9 @@ public class PayrollAuApiExample {
     public static void main(String[] args) {
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        UUID employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Employee id for single object
+        UUID employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Employee id for single object
         try {
-            Employees result = apiInstance.getEmployee(xeroTenantId, employeeId);
+            Employees result = apiInstance.getEmployee(xeroTenantId, employeeID);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollAuApi#getEmployee");
@@ -6606,13 +6606,13 @@ public class PayrollAuApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-UUID *employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Employee id for single object (default to null)
+UUID *employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Employee id for single object (default to null)
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches for an employee by unique id
+// Retrieves an employee's detail by unique employee id
 [apiInstance getEmployeeWith:xeroTenantId
-    employeeId:employeeId
+    employeeID:employeeID
               completionHandler: ^(Employees output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -6636,10 +6636,10 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const employeeId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Employee id for single object
+const employeeID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Employee id for single object
 
 try {
-  const response = await xero.accountingApi.getEmployee(xeroTenantId, employeeId);
+  const response = await xero.accountingApi.getEmployee(xeroTenantId, employeeID);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -6670,12 +6670,12 @@ namespace Example
 
             var apiInstance = new PayrollAuApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
-            var employeeId = new UUID(); // UUID | Employee id for single object (default to null)
+            var employeeID = new UUID(); // UUID | Employee id for single object (default to null)
 
             try
             {
-                // searches for an employee by unique id
-                Employees result = apiInstance.getEmployee(xeroTenantId, employeeId);
+                // Retrieves an employee's detail by unique employee id
+                Employees result = apiInstance.getEmployee(xeroTenantId, employeeID);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -6721,10 +6721,10 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::PayrollAuApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
-my $employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Employee id for single object
+my $employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Employee id for single object
 
 eval { 
-    my $result = $api_instance->getEmployee(xeroTenantId => $xeroTenantId, employeeId => $employeeId);
+    my $result = $api_instance->getEmployee(xeroTenantId => $xeroTenantId, employeeID => $employeeID);
     print Dumper($result);
 };
 if ($@) {
@@ -6745,11 +6745,11 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .PayrollAuApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Employee id for single object (default to null)
+employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Employee id for single object (default to null)
 
 try: 
-    # searches for an employee by unique id
-    api_response = api_instance.get_employee(xeroTenantId, employeeId)
+    # Retrieves an employee's detail by unique employee id
+    api_response = api_instance.get_employee(xeroTenantId, employeeID)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PayrollAuApi->getEmployee: %s\n" % e)</code></pre>
@@ -6760,10 +6760,10 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
+    let employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
 
     let mut context = PayrollAuApi::Context::default();
-    let result = client.getEmployee(xeroTenantId, employeeId, &context).wait();
+    let result = client.getEmployee(xeroTenantId, employeeID, &context).wait();
     println!("{:?}", result);
 
 }
@@ -6789,11 +6789,11 @@ pub fn main() {
                                   <th width="150px">Name</th>
                                   <th>Description</th>
                                 </tr>
-                                  <tr><td style="width:150px;">EmployeeId<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">EmployeeID<span style="color:red;">*</span></td>
 <td>
 
 
-    <div id="d2e199_getEmployee_employeeId">
+    <div id="d2e199_getEmployee_employeeID">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -6930,7 +6930,7 @@ Xero identifier for Tenant
                       <article id="api-PayrollAu-getEmployees-0" data-group="User" data-name="getEmployees" data-version="0">
                         <div class="pull-left">
                           <h1>getEmployees</h1>
-                          <p>searches employees</p>
+                          <p>Searches payroll employees</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -7036,7 +7036,7 @@ Integer *page = 56; // e.g. page=1 – Up to 100 employees will be returned in a
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches employees
+// Searches payroll employees
 [apiInstance getEmployeesWith:xeroTenantId
     ifModifiedSince:ifModifiedSince
     where:where
@@ -7113,7 +7113,7 @@ namespace Example
 
             try
             {
-                // searches employees
+                // Searches payroll employees
                 Employees result = apiInstance.getEmployees(xeroTenantId, ifModifiedSince, where, order, page);
                 Debug.WriteLine(result);
             }
@@ -7193,7 +7193,7 @@ order = EmailAddress%20DESC # String | Order by an any element (optional) (defau
 page = 56 # Integer | e.g. page=1 – Up to 100 employees will be returned in a single API call (optional) (default to null)
 
 try: 
-    # searches employees
+    # Searches payroll employees
     api_response = api_instance.get_employees(xeroTenantId, ifModifiedSince=ifModifiedSince, where=where, order=order, page=page)
     pprint(api_response)
 except ApiException as e:
@@ -7501,7 +7501,7 @@ e.g. page=1 – Up to 100 employees will be returned in a single API call
                       <article id="api-PayrollAu-getLeaveApplication-0" data-group="User" data-name="getLeaveApplication" data-version="0">
                         <div class="pull-left">
                           <h1>getLeaveApplication</h1>
-                          <p>searches for an Leave Application by unique id</p>
+                          <p>Retrieves a leave application by a unique leave application id</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -7509,7 +7509,7 @@ e.g. page=1 – Up to 100 employees will be returned in a single API call
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/LeaveApplications/{LeaveApplicationId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/LeaveApplications/{LeaveApplicationID}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -7530,7 +7530,7 @@ e.g. page=1 – Up to 100 employees will be returned in a single API call
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PayrollAu-getLeaveApplication-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/LeaveApplications/{LeaveApplicationId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/LeaveApplications/{LeaveApplicationID}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PayrollAu-getLeaveApplication-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -7552,9 +7552,9 @@ public class PayrollAuApiExample {
 
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        UUID leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Leave Application id for single object
+        UUID leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Leave Application id for single object
         try {
-            LeaveApplications result = apiInstance.getLeaveApplication(xeroTenantId, leaveApplicationId);
+            LeaveApplications result = apiInstance.getLeaveApplication(xeroTenantId, leaveApplicationID);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollAuApi#getLeaveApplication");
@@ -7572,9 +7572,9 @@ public class PayrollAuApiExample {
     public static void main(String[] args) {
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        UUID leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Leave Application id for single object
+        UUID leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Leave Application id for single object
         try {
-            LeaveApplications result = apiInstance.getLeaveApplication(xeroTenantId, leaveApplicationId);
+            LeaveApplications result = apiInstance.getLeaveApplication(xeroTenantId, leaveApplicationID);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollAuApi#getLeaveApplication");
@@ -7594,13 +7594,13 @@ public class PayrollAuApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-UUID *leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Leave Application id for single object (default to null)
+UUID *leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Leave Application id for single object (default to null)
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches for an Leave Application by unique id
+// Retrieves a leave application by a unique leave application id
 [apiInstance getLeaveApplicationWith:xeroTenantId
-    leaveApplicationId:leaveApplicationId
+    leaveApplicationID:leaveApplicationID
               completionHandler: ^(LeaveApplications output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -7624,10 +7624,10 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const leaveApplicationId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Leave Application id for single object
+const leaveApplicationID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Leave Application id for single object
 
 try {
-  const response = await xero.accountingApi.getLeaveApplication(xeroTenantId, leaveApplicationId);
+  const response = await xero.accountingApi.getLeaveApplication(xeroTenantId, leaveApplicationID);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -7658,12 +7658,12 @@ namespace Example
 
             var apiInstance = new PayrollAuApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
-            var leaveApplicationId = new UUID(); // UUID | Leave Application id for single object (default to null)
+            var leaveApplicationID = new UUID(); // UUID | Leave Application id for single object (default to null)
 
             try
             {
-                // searches for an Leave Application by unique id
-                LeaveApplications result = apiInstance.getLeaveApplication(xeroTenantId, leaveApplicationId);
+                // Retrieves a leave application by a unique leave application id
+                LeaveApplications result = apiInstance.getLeaveApplication(xeroTenantId, leaveApplicationID);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -7709,10 +7709,10 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::PayrollAuApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
-my $leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Leave Application id for single object
+my $leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Leave Application id for single object
 
 eval { 
-    my $result = $api_instance->getLeaveApplication(xeroTenantId => $xeroTenantId, leaveApplicationId => $leaveApplicationId);
+    my $result = $api_instance->getLeaveApplication(xeroTenantId => $xeroTenantId, leaveApplicationID => $leaveApplicationID);
     print Dumper($result);
 };
 if ($@) {
@@ -7733,11 +7733,11 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .PayrollAuApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Leave Application id for single object (default to null)
+leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Leave Application id for single object (default to null)
 
 try: 
-    # searches for an Leave Application by unique id
-    api_response = api_instance.get_leave_application(xeroTenantId, leaveApplicationId)
+    # Retrieves a leave application by a unique leave application id
+    api_response = api_instance.get_leave_application(xeroTenantId, leaveApplicationID)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PayrollAuApi->getLeaveApplication: %s\n" % e)</code></pre>
@@ -7748,10 +7748,10 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
+    let leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
 
     let mut context = PayrollAuApi::Context::default();
-    let result = client.getLeaveApplication(xeroTenantId, leaveApplicationId, &context).wait();
+    let result = client.getLeaveApplication(xeroTenantId, leaveApplicationID, &context).wait();
     println!("{:?}", result);
 
 }
@@ -7777,11 +7777,11 @@ pub fn main() {
                                   <th width="150px">Name</th>
                                   <th>Description</th>
                                 </tr>
-                                  <tr><td style="width:150px;">LeaveApplicationId<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">LeaveApplicationID<span style="color:red;">*</span></td>
 <td>
 
 
-    <div id="d2e199_getLeaveApplication_leaveApplicationId">
+    <div id="d2e199_getLeaveApplication_leaveApplicationID">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -7918,7 +7918,7 @@ Xero identifier for Tenant
                       <article id="api-PayrollAu-getLeaveApplications-0" data-group="User" data-name="getLeaveApplications" data-version="0">
                         <div class="pull-left">
                           <h1>getLeaveApplications</h1>
-                          <p>searches Leave Applications</p>
+                          <p>Retrieves leave applications</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -8024,7 +8024,7 @@ Integer *page = 56; // e.g. page=1 – Up to 100 objects will be returned in a s
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches Leave Applications
+// Retrieves leave applications
 [apiInstance getLeaveApplicationsWith:xeroTenantId
     ifModifiedSince:ifModifiedSince
     where:where
@@ -8101,7 +8101,7 @@ namespace Example
 
             try
             {
-                // searches Leave Applications
+                // Retrieves leave applications
                 LeaveApplications result = apiInstance.getLeaveApplications(xeroTenantId, ifModifiedSince, where, order, page);
                 Debug.WriteLine(result);
             }
@@ -8181,7 +8181,7 @@ order = EmailAddress%20DESC # String | Order by an any element (optional) (defau
 page = 56 # Integer | e.g. page=1 – Up to 100 objects will be returned in a single API call (optional) (default to null)
 
 try: 
-    # searches Leave Applications
+    # Retrieves leave applications
     api_response = api_instance.get_leave_applications(xeroTenantId, ifModifiedSince=ifModifiedSince, where=where, order=order, page=page)
     pprint(api_response)
 except ApiException as e:
@@ -8489,7 +8489,7 @@ e.g. page=1 – Up to 100 objects will be returned in a single API call
                       <article id="api-PayrollAu-getPayItems-0" data-group="User" data-name="getPayItems" data-version="0">
                         <div class="pull-left">
                           <h1>getPayItems</h1>
-                          <p>searches Pay Items</p>
+                          <p>Retrieves pay items</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -8595,7 +8595,7 @@ Integer *page = 56; // e.g. page=1 – Up to 100 objects will be returned in a s
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches Pay Items
+// Retrieves pay items
 [apiInstance getPayItemsWith:xeroTenantId
     ifModifiedSince:ifModifiedSince
     where:where
@@ -8672,7 +8672,7 @@ namespace Example
 
             try
             {
-                // searches Pay Items
+                // Retrieves pay items
                 PayItems result = apiInstance.getPayItems(xeroTenantId, ifModifiedSince, where, order, page);
                 Debug.WriteLine(result);
             }
@@ -8752,7 +8752,7 @@ order = EmailAddress%20DESC # String | Order by an any element (optional) (defau
 page = 56 # Integer | e.g. page=1 – Up to 100 objects will be returned in a single API call (optional) (default to null)
 
 try: 
-    # searches Pay Items
+    # Retrieves pay items
     api_response = api_instance.get_pay_items(xeroTenantId, ifModifiedSince=ifModifiedSince, where=where, order=order, page=page)
     pprint(api_response)
 except ApiException as e:
@@ -9060,7 +9060,7 @@ e.g. page=1 – Up to 100 objects will be returned in a single API call
                       <article id="api-PayrollAu-getPayRun-0" data-group="User" data-name="getPayRun" data-version="0">
                         <div class="pull-left">
                           <h1>getPayRun</h1>
-                          <p>searches for an payrun by unique id</p>
+                          <p>Retrieves a pay run by using a unique pay run id</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -9157,7 +9157,7 @@ UUID *payRunID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // PayRun id for single o
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches for an payrun by unique id
+// Retrieves a pay run by using a unique pay run id
 [apiInstance getPayRunWith:xeroTenantId
     payRunID:payRunID
               completionHandler: ^(PayRuns output, NSError* error) {
@@ -9221,7 +9221,7 @@ namespace Example
 
             try
             {
-                // searches for an payrun by unique id
+                // Retrieves a pay run by using a unique pay run id
                 PayRuns result = apiInstance.getPayRun(xeroTenantId, payRunID);
                 Debug.WriteLine(result);
             }
@@ -9295,7 +9295,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 payRunID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | PayRun id for single object (default to null)
 
 try: 
-    # searches for an payrun by unique id
+    # Retrieves a pay run by using a unique pay run id
     api_response = api_instance.get_pay_run(xeroTenantId, payRunID)
     pprint(api_response)
 except ApiException as e:
@@ -9477,7 +9477,7 @@ Xero identifier for Tenant
                       <article id="api-PayrollAu-getPayRuns-0" data-group="User" data-name="getPayRuns" data-version="0">
                         <div class="pull-left">
                           <h1>getPayRuns</h1>
-                          <p>searches PayRuns</p>
+                          <p>Retrieves pay runs</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -9583,7 +9583,7 @@ Integer *page = 56; // e.g. page=1 – Up to 100 PayRuns will be returned in a s
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches PayRuns
+// Retrieves pay runs
 [apiInstance getPayRunsWith:xeroTenantId
     ifModifiedSince:ifModifiedSince
     where:where
@@ -9660,7 +9660,7 @@ namespace Example
 
             try
             {
-                // searches PayRuns
+                // Retrieves pay runs
                 PayRuns result = apiInstance.getPayRuns(xeroTenantId, ifModifiedSince, where, order, page);
                 Debug.WriteLine(result);
             }
@@ -9740,7 +9740,7 @@ order = EmailAddress%20DESC # String | Order by an any element (optional) (defau
 page = 56 # Integer | e.g. page=1 – Up to 100 PayRuns will be returned in a single API call (optional) (default to null)
 
 try: 
-    # searches PayRuns
+    # Retrieves pay runs
     api_response = api_instance.get_pay_runs(xeroTenantId, ifModifiedSince=ifModifiedSince, where=where, order=order, page=page)
     pprint(api_response)
 except ApiException as e:
@@ -10048,7 +10048,7 @@ e.g. page=1 – Up to 100 PayRuns will be returned in a single API call
                       <article id="api-PayrollAu-getPayrollCalendar-0" data-group="User" data-name="getPayrollCalendar" data-version="0">
                         <div class="pull-left">
                           <h1>getPayrollCalendar</h1>
-                          <p>searches Payroll Calendars</p>
+                          <p>Retrieves payroll calendar by using a unique payroll calendar ID</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -10145,7 +10145,7 @@ UUID *payrollCalendarID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Payroll Calen
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches Payroll Calendars
+// Retrieves payroll calendar by using a unique payroll calendar ID
 [apiInstance getPayrollCalendarWith:xeroTenantId
     payrollCalendarID:payrollCalendarID
               completionHandler: ^(PayrollCalendars output, NSError* error) {
@@ -10209,7 +10209,7 @@ namespace Example
 
             try
             {
-                // searches Payroll Calendars
+                // Retrieves payroll calendar by using a unique payroll calendar ID
                 PayrollCalendars result = apiInstance.getPayrollCalendar(xeroTenantId, payrollCalendarID);
                 Debug.WriteLine(result);
             }
@@ -10283,7 +10283,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 payrollCalendarID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Payroll Calendar id for single object (default to null)
 
 try: 
-    # searches Payroll Calendars
+    # Retrieves payroll calendar by using a unique payroll calendar ID
     api_response = api_instance.get_payroll_calendar(xeroTenantId, payrollCalendarID)
     pprint(api_response)
 except ApiException as e:
@@ -10534,7 +10534,7 @@ Xero identifier for Tenant
                       <article id="api-PayrollAu-getPayrollCalendars-0" data-group="User" data-name="getPayrollCalendars" data-version="0">
                         <div class="pull-left">
                           <h1>getPayrollCalendars</h1>
-                          <p>searches Payroll Calendars</p>
+                          <p>Retrieves payroll calendars</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -10640,7 +10640,7 @@ Integer *page = 56; // e.g. page=1 – Up to 100 objects will be returned in a s
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches Payroll Calendars
+// Retrieves payroll calendars
 [apiInstance getPayrollCalendarsWith:xeroTenantId
     ifModifiedSince:ifModifiedSince
     where:where
@@ -10717,7 +10717,7 @@ namespace Example
 
             try
             {
-                // searches Payroll Calendars
+                // Retrieves payroll calendars
                 PayrollCalendars result = apiInstance.getPayrollCalendars(xeroTenantId, ifModifiedSince, where, order, page);
                 Debug.WriteLine(result);
             }
@@ -10797,7 +10797,7 @@ order = EmailAddress%20DESC # String | Order by an any element (optional) (defau
 page = 56 # Integer | e.g. page=1 – Up to 100 objects will be returned in a single API call (optional) (default to null)
 
 try: 
-    # searches Payroll Calendars
+    # Retrieves payroll calendars
     api_response = api_instance.get_payroll_calendars(xeroTenantId, ifModifiedSince=ifModifiedSince, where=where, order=order, page=page)
     pprint(api_response)
 except ApiException as e:
@@ -11105,7 +11105,7 @@ e.g. page=1 – Up to 100 objects will be returned in a single API call
                       <article id="api-PayrollAu-getPayslip-0" data-group="User" data-name="getPayslip" data-version="0">
                         <div class="pull-left">
                           <h1>getPayslip</h1>
-                          <p>searches for an payslip by unique id</p>
+                          <p>Retrieves for a payslip by a unique payslip id</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -11202,7 +11202,7 @@ UUID *payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Payslip id for single
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches for an payslip by unique id
+// Retrieves for a payslip by a unique payslip id
 [apiInstance getPayslipWith:xeroTenantId
     payslipID:payslipID
               completionHandler: ^(PayslipObject output, NSError* error) {
@@ -11266,7 +11266,7 @@ namespace Example
 
             try
             {
-                // searches for an payslip by unique id
+                // Retrieves for a payslip by a unique payslip id
                 PayslipObject result = apiInstance.getPayslip(xeroTenantId, payslipID);
                 Debug.WriteLine(result);
             }
@@ -11340,7 +11340,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Payslip id for single object (default to null)
 
 try: 
-    # searches for an payslip by unique id
+    # Retrieves for a payslip by a unique payslip id
     api_response = api_instance.get_payslip(xeroTenantId, payslipID)
     pprint(api_response)
 except ApiException as e:
@@ -11522,7 +11522,7 @@ Xero identifier for Tenant
                       <article id="api-PayrollAu-getSettings-0" data-group="User" data-name="getSettings" data-version="0">
                         <div class="pull-left">
                           <h1>getSettings</h1>
-                          <p>retrieve settings</p>
+                          <p>Retrieves payroll settings</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -11616,7 +11616,7 @@ String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (defa
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// retrieve settings
+// Retrieves payroll settings
 [apiInstance getSettingsWith:xeroTenantId
               completionHandler: ^(SettingsObject output, NSError* error) {
                             if (output) {
@@ -11677,7 +11677,7 @@ namespace Example
 
             try
             {
-                // retrieve settings
+                // Retrieves payroll settings
                 SettingsObject result = apiInstance.getSettings(xeroTenantId);
                 Debug.WriteLine(result);
             }
@@ -11749,7 +11749,7 @@ api_instance = .PayrollAuApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
 
 try: 
-    # retrieve settings
+    # Retrieves payroll settings
     api_response = api_instance.get_settings(xeroTenantId)
     pprint(api_response)
 except ApiException as e:
@@ -11897,7 +11897,7 @@ Xero identifier for Tenant
                       <article id="api-PayrollAu-getSuperfund-0" data-group="User" data-name="getSuperfund" data-version="0">
                         <div class="pull-left">
                           <h1>getSuperfund</h1>
-                          <p>searches for an Superfund by unique id</p>
+                          <p>Retrieves a superfund by using a unique superfund ID</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -11994,7 +11994,7 @@ UUID *superFundID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Superfund id for si
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches for an Superfund by unique id
+// Retrieves a superfund by using a unique superfund ID
 [apiInstance getSuperfundWith:xeroTenantId
     superFundID:superFundID
               completionHandler: ^(SuperFunds output, NSError* error) {
@@ -12058,7 +12058,7 @@ namespace Example
 
             try
             {
-                // searches for an Superfund by unique id
+                // Retrieves a superfund by using a unique superfund ID
                 SuperFunds result = apiInstance.getSuperfund(xeroTenantId, superFundID);
                 Debug.WriteLine(result);
             }
@@ -12132,7 +12132,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 superFundID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Superfund id for single object (default to null)
 
 try: 
-    # searches for an Superfund by unique id
+    # Retrieves a superfund by using a unique superfund ID
     api_response = api_instance.get_superfund(xeroTenantId, superFundID)
     pprint(api_response)
 except ApiException as e:
@@ -12314,7 +12314,7 @@ Xero identifier for Tenant
                       <article id="api-PayrollAu-getSuperfundProducts-0" data-group="User" data-name="getSuperfundProducts" data-version="0">
                         <div class="pull-left">
                           <h1>getSuperfundProducts</h1>
-                          <p>searches SuperfundProducts</p>
+                          <p>Retrieves superfund products</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -12414,7 +12414,7 @@ String *uSI = OSF0001AU; // The USI of the Regulated SuperFund (optional) (defau
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches SuperfundProducts
+// Retrieves superfund products
 [apiInstance getSuperfundProductsWith:xeroTenantId
     aBN:aBN
     uSI:uSI
@@ -12484,7 +12484,7 @@ namespace Example
 
             try
             {
-                // searches SuperfundProducts
+                // Retrieves superfund products
                 SuperFundProducts result = apiInstance.getSuperfundProducts(xeroTenantId, aBN, uSI);
                 Debug.WriteLine(result);
             }
@@ -12560,7 +12560,7 @@ aBN = 40022701955 # String | The ABN of the Regulated SuperFund (optional) (defa
 uSI = OSF0001AU # String | The USI of the Regulated SuperFund (optional) (default to null)
 
 try: 
-    # searches SuperfundProducts
+    # Retrieves superfund products
     api_response = api_instance.get_superfund_products(xeroTenantId, aBN=aBN, uSI=uSI)
     pprint(api_response)
 except ApiException as e:
@@ -12826,7 +12826,7 @@ The USI of the Regulated SuperFund
                       <article id="api-PayrollAu-getSuperfunds-0" data-group="User" data-name="getSuperfunds" data-version="0">
                         <div class="pull-left">
                           <h1>getSuperfunds</h1>
-                          <p>searches SuperFunds</p>
+                          <p>Retrieves superfunds</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -12932,7 +12932,7 @@ Integer *page = 56; // e.g. page=1 – Up to 100 SuperFunds will be returned in 
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches SuperFunds
+// Retrieves superfunds
 [apiInstance getSuperfundsWith:xeroTenantId
     ifModifiedSince:ifModifiedSince
     where:where
@@ -13009,7 +13009,7 @@ namespace Example
 
             try
             {
-                // searches SuperFunds
+                // Retrieves superfunds
                 SuperFunds result = apiInstance.getSuperfunds(xeroTenantId, ifModifiedSince, where, order, page);
                 Debug.WriteLine(result);
             }
@@ -13089,7 +13089,7 @@ order = EmailAddress%20DESC # String | Order by an any element (optional) (defau
 page = 56 # Integer | e.g. page=1 – Up to 100 SuperFunds will be returned in a single API call (optional) (default to null)
 
 try: 
-    # searches SuperFunds
+    # Retrieves superfunds
     api_response = api_instance.get_superfunds(xeroTenantId, ifModifiedSince=ifModifiedSince, where=where, order=order, page=page)
     pprint(api_response)
 except ApiException as e:
@@ -13397,7 +13397,7 @@ e.g. page=1 – Up to 100 SuperFunds will be returned in a single API call
                       <article id="api-PayrollAu-getTimesheet-0" data-group="User" data-name="getTimesheet" data-version="0">
                         <div class="pull-left">
                           <h1>getTimesheet</h1>
-                          <p>searches for an timesheet by unique id</p>
+                          <p>Retrieves a timesheet by using a unique timesheet id</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -13494,7 +13494,7 @@ UUID *timesheetID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Timesheet id for si
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches for an timesheet by unique id
+// Retrieves a timesheet by using a unique timesheet id
 [apiInstance getTimesheetWith:xeroTenantId
     timesheetID:timesheetID
               completionHandler: ^(TimesheetObject output, NSError* error) {
@@ -13558,7 +13558,7 @@ namespace Example
 
             try
             {
-                // searches for an timesheet by unique id
+                // Retrieves a timesheet by using a unique timesheet id
                 TimesheetObject result = apiInstance.getTimesheet(xeroTenantId, timesheetID);
                 Debug.WriteLine(result);
             }
@@ -13632,7 +13632,7 @@ xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (defau
 timesheetID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Timesheet id for single object (default to null)
 
 try: 
-    # searches for an timesheet by unique id
+    # Retrieves a timesheet by using a unique timesheet id
     api_response = api_instance.get_timesheet(xeroTenantId, timesheetID)
     pprint(api_response)
 except ApiException as e:
@@ -13814,7 +13814,7 @@ Xero identifier for Tenant
                       <article id="api-PayrollAu-getTimesheets-0" data-group="User" data-name="getTimesheets" data-version="0">
                         <div class="pull-left">
                           <h1>getTimesheets</h1>
-                          <p>searches timesheets</p>
+                          <p>Retrieves timesheets</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -13920,7 +13920,7 @@ Integer *page = 56; // e.g. page=1 – Up to 100 timesheets will be returned in 
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// searches timesheets
+// Retrieves timesheets
 [apiInstance getTimesheetsWith:xeroTenantId
     ifModifiedSince:ifModifiedSince
     where:where
@@ -13997,7 +13997,7 @@ namespace Example
 
             try
             {
-                // searches timesheets
+                // Retrieves timesheets
                 Timesheets result = apiInstance.getTimesheets(xeroTenantId, ifModifiedSince, where, order, page);
                 Debug.WriteLine(result);
             }
@@ -14077,7 +14077,7 @@ order = EmailAddress%20DESC # String | Order by an any element (optional) (defau
 page = 56 # Integer | e.g. page=1 – Up to 100 timesheets will be returned in a single API call (optional) (default to null)
 
 try: 
-    # searches timesheets
+    # Retrieves timesheets
     api_response = api_instance.get_timesheets(xeroTenantId, ifModifiedSince=ifModifiedSince, where=where, order=order, page=page)
     pprint(api_response)
 except ApiException as e:
@@ -14385,7 +14385,7 @@ e.g. page=1 – Up to 100 timesheets will be returned in a single API call
                       <article id="api-PayrollAu-updateEmployee-0" data-group="User" data-name="updateEmployee" data-version="0">
                         <div class="pull-left">
                           <h1>updateEmployee</h1>
-                          <p>Update an Employee</p>
+                          <p>Updates an employee's detail</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -14393,7 +14393,7 @@ e.g. page=1 – Up to 100 timesheets will be returned in a single API call
                         <p class="marked">Update properties on a single employee</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Employees/{EmployeeId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Employees/{EmployeeID}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -14414,7 +14414,7 @@ e.g. page=1 – Up to 100 timesheets will be returned in a single API call
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PayrollAu-updateEmployee-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/Employees/{EmployeeId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/Employees/{EmployeeID}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PayrollAu-updateEmployee-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -14436,10 +14436,10 @@ public class PayrollAuApiExample {
 
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        UUID employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Employee id for single object
+        UUID employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Employee id for single object
         array[Employee] employee = [ { "MiddleNames": "Frank" } ]; // array[Employee] | 
         try {
-            Employees result = apiInstance.updateEmployee(xeroTenantId, employeeId, employee);
+            Employees result = apiInstance.updateEmployee(xeroTenantId, employeeID, employee);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollAuApi#updateEmployee");
@@ -14457,10 +14457,10 @@ public class PayrollAuApiExample {
     public static void main(String[] args) {
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        UUID employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Employee id for single object
+        UUID employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Employee id for single object
         array[Employee] employee = [ { "MiddleNames": "Frank" } ]; // array[Employee] | 
         try {
-            Employees result = apiInstance.updateEmployee(xeroTenantId, employeeId, employee);
+            Employees result = apiInstance.updateEmployee(xeroTenantId, employeeID, employee);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollAuApi#updateEmployee");
@@ -14480,14 +14480,14 @@ public class PayrollAuApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-UUID *employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Employee id for single object (default to null)
+UUID *employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Employee id for single object (default to null)
 array[Employee] *employee = [ { "MiddleNames": "Frank" } ]; //  (optional)
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Update an Employee
+// Updates an employee's detail
 [apiInstance updateEmployeeWith:xeroTenantId
-    employeeId:employeeId
+    employeeID:employeeID
     employee:employee
               completionHandler: ^(Employees output, NSError* error) {
                             if (output) {
@@ -14512,13 +14512,13 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const employeeId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Employee id for single object
+const employeeID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Employee id for single object
 
 const employee = ['[ { "MiddleNames": "Frank" } ]'];  // {array[Employee]} 
 
 
 try {
-  const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeId,  employee);
+  const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeID,  employee);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -14549,13 +14549,13 @@ namespace Example
 
             var apiInstance = new PayrollAuApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
-            var employeeId = new UUID(); // UUID | Employee id for single object (default to null)
+            var employeeID = new UUID(); // UUID | Employee id for single object (default to null)
             var employee = new array[Employee](); // array[Employee] |  (optional) 
 
             try
             {
-                // Update an Employee
-                Employees result = apiInstance.updateEmployee(xeroTenantId, employeeId, employee);
+                // Updates an employee's detail
+                Employees result = apiInstance.updateEmployee(xeroTenantId, employeeID, employee);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -14601,11 +14601,11 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::PayrollAuApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
-my $employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Employee id for single object
+my $employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Employee id for single object
 my $employee = [::Object::array[Employee]->new()]; # array[Employee] | 
 
 eval { 
-    my $result = $api_instance->updateEmployee(xeroTenantId => $xeroTenantId, employeeId => $employeeId, employee => $employee);
+    my $result = $api_instance->updateEmployee(xeroTenantId => $xeroTenantId, employeeID => $employeeID, employee => $employee);
     print Dumper($result);
 };
 if ($@) {
@@ -14626,12 +14626,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .PayrollAuApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Employee id for single object (default to null)
+employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Employee id for single object (default to null)
 employee = [ { "MiddleNames": "Frank" } ] # array[Employee] |  (optional)
 
 try: 
-    # Update an Employee
-    api_response = api_instance.update_employee(xeroTenantId, employeeId, employee=employee)
+    # Updates an employee's detail
+    api_response = api_instance.update_employee(xeroTenantId, employeeID, employee=employee)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PayrollAuApi->updateEmployee: %s\n" % e)</code></pre>
@@ -14642,11 +14642,11 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let employeeId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
+    let employeeID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
     let employee = [ { "MiddleNames": "Frank" } ]; // array[Employee]
 
     let mut context = PayrollAuApi::Context::default();
-    let result = client.updateEmployee(xeroTenantId, employeeId, employee, &context).wait();
+    let result = client.updateEmployee(xeroTenantId, employeeID, employee, &context).wait();
     println!("{:?}", result);
 
 }
@@ -14672,11 +14672,11 @@ pub fn main() {
                                   <th width="150px">Name</th>
                                   <th>Description</th>
                                 </tr>
-                                  <tr><td style="width:150px;">EmployeeId<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">EmployeeID<span style="color:red;">*</span></td>
 <td>
 
 
-    <div id="d2e199_updateEmployee_employeeId">
+    <div id="d2e199_updateEmployee_employeeID">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -14869,7 +14869,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-updateLeaveApplication-0" data-group="User" data-name="updateLeaveApplication" data-version="0">
                         <div class="pull-left">
                           <h1>updateLeaveApplication</h1>
-                          <p>Use this method to update a Leave Application</p>
+                          <p>Updates a specific leave application</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -14877,7 +14877,7 @@ $(document).ready(function() {
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/LeaveApplications/{LeaveApplicationId}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/LeaveApplications/{LeaveApplicationID}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -14898,7 +14898,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PayrollAu-updateLeaveApplication-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/LeaveApplications/{LeaveApplicationId}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/1.0/LeaveApplications/{LeaveApplicationID}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PayrollAu-updateLeaveApplication-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -14920,10 +14920,10 @@ public class PayrollAuApiExample {
 
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        UUID leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Leave Application id for single object
+        UUID leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Leave Application id for single object
         array[LeaveApplication] leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/", "Description": "My updated Description" } ]; // array[LeaveApplication] | 
         try {
-            LeaveApplications result = apiInstance.updateLeaveApplication(xeroTenantId, leaveApplicationId, leaveApplication);
+            LeaveApplications result = apiInstance.updateLeaveApplication(xeroTenantId, leaveApplicationID, leaveApplication);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollAuApi#updateLeaveApplication");
@@ -14941,10 +14941,10 @@ public class PayrollAuApiExample {
     public static void main(String[] args) {
         PayrollAuApi apiInstance = new PayrollAuApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        UUID leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Leave Application id for single object
+        UUID leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Leave Application id for single object
         array[LeaveApplication] leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/", "Description": "My updated Description" } ]; // array[LeaveApplication] | 
         try {
-            LeaveApplications result = apiInstance.updateLeaveApplication(xeroTenantId, leaveApplicationId, leaveApplication);
+            LeaveApplications result = apiInstance.updateLeaveApplication(xeroTenantId, leaveApplicationID, leaveApplication);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollAuApi#updateLeaveApplication");
@@ -14964,14 +14964,14 @@ public class PayrollAuApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-UUID *leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Leave Application id for single object (default to null)
+UUID *leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Leave Application id for single object (default to null)
 array[LeaveApplication] *leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/", "Description": "My updated Description" } ]; // 
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Use this method to update a Leave Application
+// Updates a specific leave application
 [apiInstance updateLeaveApplicationWith:xeroTenantId
-    leaveApplicationId:leaveApplicationId
+    leaveApplicationID:leaveApplicationID
     leaveApplication:leaveApplication
               completionHandler: ^(LeaveApplications output, NSError* error) {
                             if (output) {
@@ -14996,11 +14996,11 @@ PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 await xero.setTokenSet(tokenSet);
 const leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/", "Description": "My updated Description" } ];  // {array[LeaveApplication]} 
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
-const leaveApplicationId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Leave Application id for single object
+const leaveApplicationID = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Leave Application id for single object
 
 
 try {
-  const response = await xero.accountingApi.updateLeaveApplication(xeroTenantId, leaveApplicationId, leaveApplication);
+  const response = await xero.accountingApi.updateLeaveApplication(xeroTenantId, leaveApplicationID, leaveApplication);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -15031,13 +15031,13 @@ namespace Example
 
             var apiInstance = new PayrollAuApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
-            var leaveApplicationId = new UUID(); // UUID | Leave Application id for single object (default to null)
+            var leaveApplicationID = new UUID(); // UUID | Leave Application id for single object (default to null)
             var leaveApplication = new array[LeaveApplication](); // array[LeaveApplication] | 
 
             try
             {
-                // Use this method to update a Leave Application
-                LeaveApplications result = apiInstance.updateLeaveApplication(xeroTenantId, leaveApplicationId, leaveApplication);
+                // Updates a specific leave application
+                LeaveApplications result = apiInstance.updateLeaveApplication(xeroTenantId, leaveApplicationID, leaveApplication);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -15083,11 +15083,11 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::PayrollAuApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
-my $leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Leave Application id for single object
+my $leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Leave Application id for single object
 my $leaveApplication = [::Object::array[LeaveApplication]->new()]; # array[LeaveApplication] | 
 
 eval { 
-    my $result = $api_instance->updateLeaveApplication(xeroTenantId => $xeroTenantId, leaveApplicationId => $leaveApplicationId, leaveApplication => $leaveApplication);
+    my $result = $api_instance->updateLeaveApplication(xeroTenantId => $xeroTenantId, leaveApplicationID => $leaveApplicationID, leaveApplication => $leaveApplication);
     print Dumper($result);
 };
 if ($@) {
@@ -15108,12 +15108,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .PayrollAuApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Leave Application id for single object (default to null)
+leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Leave Application id for single object (default to null)
 leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/", "Description": "My updated Description" } ] # array[LeaveApplication] | 
 
 try: 
-    # Use this method to update a Leave Application
-    api_response = api_instance.update_leave_application(xeroTenantId, leaveApplicationId, leaveApplication)
+    # Updates a specific leave application
+    api_response = api_instance.update_leave_application(xeroTenantId, leaveApplicationID, leaveApplication)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PayrollAuApi->updateLeaveApplication: %s\n" % e)</code></pre>
@@ -15124,11 +15124,11 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let leaveApplicationId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
+    let leaveApplicationID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
     let leaveApplication = [ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/", "Description": "My updated Description" } ]; // array[LeaveApplication]
 
     let mut context = PayrollAuApi::Context::default();
-    let result = client.updateLeaveApplication(xeroTenantId, leaveApplicationId, leaveApplication, &context).wait();
+    let result = client.updateLeaveApplication(xeroTenantId, leaveApplicationID, leaveApplication, &context).wait();
     println!("{:?}", result);
 
 }
@@ -15154,11 +15154,11 @@ pub fn main() {
                                   <th width="150px">Name</th>
                                   <th>Description</th>
                                 </tr>
-                                  <tr><td style="width:150px;">LeaveApplicationId<span style="color:red;">*</span></td>
+                                  <tr><td style="width:150px;">LeaveApplicationID<span style="color:red;">*</span></td>
 <td>
 
 
-    <div id="d2e199_updateLeaveApplication_leaveApplicationId">
+    <div id="d2e199_updateLeaveApplication_leaveApplicationID">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -15379,7 +15379,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-updatePayRun-0" data-group="User" data-name="updatePayRun" data-version="0">
                         <div class="pull-left">
                           <h1>updatePayRun</h1>
-                          <p>Update a PayRun</p>
+                          <p>Updates a pay run</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -15479,7 +15479,7 @@ array[PayRun] *payRun = ; //  (optional)
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Update a PayRun
+// Updates a pay run
 [apiInstance updatePayRunWith:xeroTenantId
     payRunID:payRunID
     payRun:payRun
@@ -15548,7 +15548,7 @@ namespace Example
 
             try
             {
-                // Update a PayRun
+                // Updates a pay run
                 PayRuns result = apiInstance.updatePayRun(xeroTenantId, payRunID, payRun);
                 Debug.WriteLine(result);
             }
@@ -15624,7 +15624,7 @@ payRunID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | PayRun id for single ob
 payRun =  # array[PayRun] |  (optional)
 
 try: 
-    # Update a PayRun
+    # Updates a pay run
     api_response = api_instance.update_pay_run(xeroTenantId, payRunID, payRun=payRun)
     pprint(api_response)
 except ApiException as e:
@@ -15863,7 +15863,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-updatePayslip-0" data-group="User" data-name="updatePayslip" data-version="0">
                         <div class="pull-left">
                           <h1>updatePayslip</h1>
-                          <p>Update a Payslip</p>
+                          <p>Updates a payslip</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -15963,7 +15963,7 @@ array[PayslipLines] *payslipLines = { "Payslip": { "EmployeeID": "cdfb8371-0b21-
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Update a Payslip
+// Updates a payslip
 [apiInstance updatePayslipWith:xeroTenantId
     payslipID:payslipID
     payslipLines:payslipLines
@@ -16032,7 +16032,7 @@ namespace Example
 
             try
             {
-                // Update a Payslip
+                // Updates a payslip
                 Payslips result = apiInstance.updatePayslip(xeroTenantId, payslipID, payslipLines);
                 Debug.WriteLine(result);
             }
@@ -16108,7 +16108,7 @@ payslipID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Payslip id for single 
 payslipLines = { "Payslip": { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "DeductionLines": [ { "DeductionTypeID": "727af5e8-b347-4ae7-85fc-9b82266d0aec", "CalculationType": "FIXEDAMOUNT", "NumberOfUnits": 10 } ] } } # array[PayslipLines] |  (optional)
 
 try: 
-    # Update a Payslip
+    # Updates a payslip
     api_response = api_instance.update_payslip(xeroTenantId, payslipID, payslipLines=payslipLines)
     pprint(api_response)
 except ApiException as e:
@@ -16347,7 +16347,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-updateSuperfund-0" data-group="User" data-name="updateSuperfund" data-version="0">
                         <div class="pull-left">
                           <h1>updateSuperfund</h1>
-                          <p>Update a Superfund</p>
+                          <p>Updates a superfund</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -16447,7 +16447,7 @@ array[SuperFund] *superFund =  [ { "Type":"REGULATED", "Name":"Nice23534" } ]; /
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Update a Superfund
+// Updates a superfund
 [apiInstance updateSuperfundWith:xeroTenantId
     superFundID:superFundID
     superFund:superFund
@@ -16516,7 +16516,7 @@ namespace Example
 
             try
             {
-                // Update a Superfund
+                // Updates a superfund
                 SuperFunds result = apiInstance.updateSuperfund(xeroTenantId, superFundID, superFund);
                 Debug.WriteLine(result);
             }
@@ -16592,7 +16592,7 @@ superFundID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Superfund id for sin
 superFund =  [ { "Type":"REGULATED", "Name":"Nice23534" } ] # array[SuperFund] |  (optional)
 
 try: 
-    # Update a Superfund
+    # Updates a superfund
     api_response = api_instance.update_superfund(xeroTenantId, superFundID, superFund=superFund)
     pprint(api_response)
 except ApiException as e:
@@ -16831,7 +16831,7 @@ $(document).ready(function() {
                       <article id="api-PayrollAu-updateTimesheet-0" data-group="User" data-name="updateTimesheet" data-version="0">
                         <div class="pull-left">
                           <h1>updateTimesheet</h1>
-                          <p>Update a Timesheet</p>
+                          <p>Updates a timesheet</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -16931,7 +16931,7 @@ array[Timesheet] *timesheet = [ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f9687671
 
 PayrollAuApi *apiInstance = [[PayrollAuApi alloc] init];
 
-// Update a Timesheet
+// Updates a timesheet
 [apiInstance updateTimesheetWith:xeroTenantId
     timesheetID:timesheetID
     timesheet:timesheet
@@ -17000,7 +17000,7 @@ namespace Example
 
             try
             {
-                // Update a Timesheet
+                // Updates a timesheet
                 Timesheets result = apiInstance.updateTimesheet(xeroTenantId, timesheetID, timesheet);
                 Debug.WriteLine(result);
             }
@@ -17076,7 +17076,7 @@ timesheetID = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Timesheet id for sin
 timesheet = [ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f968767118bc", "StartDate":"/Date(1573171200000+0000)/", "EndDate":"/Date(1573689600000+0000)/", "Status":"APPROVED", "Hours":22.0, "TimesheetID":"a7eb0a79-8511-4ee7-b473-3a25f28abcb9", "TimesheetLines":[ { "EarningsRateID":"ab874dfb-ab09-4c91-954e-43acf6fc23b4", "TrackingItemID":"af5e9ce2-2349-4136-be99-3561b189f473", "NumberOfUnits":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ], "UpdatedDateUTC":"/Date(1573516185127+0000)/" } ] } ] # array[Timesheet] |  (optional)
 
 try: 
-    # Update a Timesheet
+    # Updates a timesheet
     api_response = api_instance.update_timesheet(xeroTenantId, timesheetID, timesheet=timesheet)
     pprint(api_response)
 except ApiException as e:

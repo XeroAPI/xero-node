@@ -1,15 +1,17 @@
 export * from './accountingApi';
 export * from './assetApi';
 export * from './projectApi';
+export * from './filesApi';
 export * from './payrollAUApi';
 export * from './bankfeedsApi';
 export * from './payrollUKApi';
 export * from './payrollNZApi';
 import { AccountingApi } from './accountingApi';
 import { AssetApi } from './assetApi';
+import { FilesApi } from './filesApi';
 import { ProjectApi } from './projectApi';
 import { PayrollAuApi } from './payrollAUApi';
 import { BankFeedsApi } from './bankfeedsApi';
 import { PayrollUkApi } from './payrollUKApi';
 import { PayrollNzApi } from './payrollNZApi';
-export const APIS = [AccountingApi, AssetApi, ProjectApi, PayrollAuApi, BankFeedsApi, PayrollUkApi, PayrollNzApi];
+export const APIS = [AccountingApi, AssetApi, FilesApi, ProjectApi, PayrollAuApi, BankFeedsApi, PayrollUkApi, PayrollNzApi];
