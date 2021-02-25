@@ -224,11 +224,14 @@ export class XeroClient {
     return tenants;
   }
 
-  async queryApi(method, uri) {
+  async queryApi(method, uri, tenantId?: string) {
     return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
       request({
         method,
         uri,
+        headers: {
+          "xero-tenant-id": tenantId
+        },
         auth: {
           bearer: this.tokenSet.access_token
         },
