@@ -887,19 +887,6 @@ ul.nav-tabs {
   },
   "description" : ""
 };
-    defs["FileResponse204"] = {
-  "title" : "",
-  "properties" : {
-    "Status" : {
-      "type" : "string",
-      "description" : "Status response for 204 no content"
-    }
-  },
-  "description" : "",
-  "externalDocs" : {
-    "url" : "https://developer.xero.com/documentation/files-api/files#DELETE"
-  }
-};
     defs["Files"] = {
   "title" : "",
   "type" : "object",
@@ -1120,7 +1107,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.9.0</div>
+              <div class="app-desc">Version: 2.9.4</div>
             <hr>
             <div id="app-description" class="app-desc">
                 These endpoints are specific to Xero Files API
@@ -1143,7 +1130,7 @@ ul.nav-tabs {
                         <p class="marked">By passing in the appropriate options, you can create a new folder</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Files/{FileID}/Associations</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Files/{FileId}/Associations</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -1164,7 +1151,7 @@ ul.nav-tabs {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-createFileAssociation-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileID}/Associations"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileId}/Associations"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-createFileAssociation-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -1187,7 +1174,7 @@ public class FilesApiExample {
         FilesApi apiInstance = new FilesApi();
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | File id for single object
-        Association association = ; // Association | 
+        Association association = { "ObjectId": "1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectGroup": "Contact", "ObjectType": "Business" }; // Association | 
         try {
             Association result = apiInstance.createFileAssociation(xeroTenantId, fileId, association);
             System.out.println(result);
@@ -1208,7 +1195,7 @@ public class FilesApiExample {
         FilesApi apiInstance = new FilesApi();
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | File id for single object
-        Association association = ; // Association | 
+        Association association = { "ObjectId": "1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectGroup": "Contact", "ObjectType": "Business" }; // Association | 
         try {
             Association result = apiInstance.createFileAssociation(xeroTenantId, fileId, association);
             System.out.println(result);
@@ -1231,7 +1218,7 @@ public class FilesApiExample {
 
 String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 UUID *fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // File id for single object (default to null)
-Association *association = ; //  (optional)
+Association *association = { "ObjectId": "1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectGroup": "Contact", "ObjectType": "Business" }; //  (optional)
 
 FilesApi *apiInstance = [[FilesApi alloc] init];
 
@@ -1264,7 +1251,7 @@ await xero.setTokenSet(tokenSet);
 const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 const fileId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} File id for single object
 
-const association:Association = ;  // {Association} 
+const association:Association = { "ObjectId": "1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectGroup": "Contact", "ObjectType": "Business" };  // {Association} 
 
 
 try {
@@ -1377,7 +1364,7 @@ from pprint import pprint
 api_instance = .FilesApi()
 xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | File id for single object (default to null)
-association =  # Association |  (optional)
+association = { "ObjectId": "1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectGroup": "Contact", "ObjectType": "Business" } # Association |  (optional)
 
 try: 
     # Creates a new file association
@@ -1393,7 +1380,7 @@ except ApiException as e:
 pub fn main() {
     let xeroTenantId = YOUR_XERO_TENANT_ID; // String
     let fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
-    let association = ; // Association
+    let association = { "ObjectId": "1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectGroup": "Contact", "ObjectType": "Business" }; // Association
 
     let mut context = FilesApi::Context::default();
     let result = client.createFileAssociation(xeroTenantId, fileId, association, &context).wait();
@@ -1508,7 +1495,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Association"
-      }
+      },
+      "example" : "{ \"ObjectId\": \"1270bf7c-5d18-473a-9231-1e36c4bd33ed\", \"ObjectGroup\": \"Contact\", \"ObjectType\": \"Business\" }"
     }
   }
 } {} ;
@@ -1537,27 +1525,27 @@ $(document).ready(function() {
 
 <!--
                           <h2>Responses</h2>
-                            <h3 id="examples-Files-createFileAssociation-title-200"></h3>
-                            <p id="examples-Files-createFileAssociation-description-200" class="marked"></p>
+                            <h3 id="examples-Files-createFileAssociation-title-201"></h3>
+                            <p id="examples-Files-createFileAssociation-description-201" class="marked"></p>
                             <script>
-                              var responseFiles200_description = `A successful request`;
-                              var responseFiles200_description_break = responseFiles200_description.indexOf('\n');
-                              if (responseFiles200_description_break == -1) {
-                                $("#examples-Files-createFileAssociation-title-200").text("Status: 200 - " + responseFiles200_description);
+                              var responseFiles201_description = `A successful request`;
+                              var responseFiles201_description_break = responseFiles201_description.indexOf('\n');
+                              if (responseFiles201_description_break == -1) {
+                                $("#examples-Files-createFileAssociation-title-201").text("Status: 201 - " + responseFiles201_description);
                               } else {
-                                $("#examples-Files-createFileAssociation-title-200").text("Status: 200 - " + responseFiles200_description.substring(0, responseFiles200_description_break));
-                                $("#examples-Files-createFileAssociation-description-200").html(responseFiles200_description.substring(responseFiles200_description_break));
+                                $("#examples-Files-createFileAssociation-title-201").text("Status: 201 - " + responseFiles201_description.substring(0, responseFiles201_description_break));
+                                $("#examples-Files-createFileAssociation-description-201").html(responseFiles201_description.substring(responseFiles201_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-Files-createFileAssociation-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-Files-createFileAssociation-201" class="nav nav-tabs nav-tabs-examples" >
                              
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-Files-createFileAssociation-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-Files-createFileAssociation-201-schema">Schema</a>
                                 </li>
                                 <li class="">
-                                    <a data-toggle="tab" href="#responses-Files-createFileAssociation-200-example">Response Example</a>
+                                    <a data-toggle="tab" href="#responses-Files-createFileAssociation-201-example">Response Example</a>
                                 </li>
                                
 
@@ -1565,10 +1553,10 @@ $(document).ready(function() {
                             </ul>
 
 
-                            <div class="tab-content" id="responses-Files-createFileAssociation-200-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-Files-createFileAssociation-201-wrapper" style='margin-bottom: 10px;'>
                                
-                                <div class="tab-pane active" id="responses-Files-createFileAssociation-200-schema">
-                                  <div id="responses-Files-createFileAssociation-schema-200" class="exampleStyle">
+                                <div class="tab-pane active" id="responses-Files-createFileAssociation-201-schema">
+                                  <div id="responses-Files-createFileAssociation-schema-201" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -1577,7 +1565,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Association"
-      }
+      },
+      "example" : "{ \"FileId\": \"6beccb4a-0d7d-4518-93f3-e0cd1dccb254\", \"ObjectId\": \"1270bf7c-5d18-473a-9231-1e36c4bd33ed\", \"ObjectType\": \"Business\", \"ObjectGroup\": \"Contact\" }"
     }
   }
 };
@@ -1593,23 +1582,23 @@ $(document).ready(function() {
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Files-createFileAssociation-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Files-createFileAssociation-schema-200');
+                                        $('#responses-Files-createFileAssociation-201-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Files-createFileAssociation-schema-201');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-Files-createFileAssociation-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-Files-createFileAssociation-201-schema-data' type='hidden' value=''></input>
                                 </div>
-                                <div class="tab-pane" id="examples-Files-createFileAssociation-200-example">
+                                <div class="tab-pane" id="examples-Files-createFileAssociation-201-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
                                                       <h3 id="examples-Files-createFileAssociation-title-400"></h3>
                             <p id="examples-Files-createFileAssociation-description-400" class="marked"></p>
                             <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
+                              var responseFiles400_description = `invalid input, object invalid`;
                               var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
                               if (responseFiles400_description_break == -1) {
                                 $("#examples-Files-createFileAssociation-title-400").text("Status: 400 - " + responseFiles400_description);
@@ -1689,7 +1678,7 @@ public class FilesApiExample {
 
         FilesApi apiInstance = new FilesApi();
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
-        Folder folder = ; // Folder | 
+        Folder folder = { "Name": "My Docs" }; // Folder | 
         try {
             Folder result = apiInstance.createFolder(xeroTenantId, folder);
             System.out.println(result);
@@ -1709,7 +1698,7 @@ public class FilesApiExample {
     public static void main(String[] args) {
         FilesApi apiInstance = new FilesApi();
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
-        Folder folder = ; // Folder | 
+        Folder folder = { "Name": "My Docs" }; // Folder | 
         try {
             Folder result = apiInstance.createFolder(xeroTenantId, folder);
             System.out.println(result);
@@ -1731,7 +1720,7 @@ public class FilesApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
-Folder *folder = ; //  (optional)
+Folder *folder = { "Name": "My Docs" }; //  (optional)
 
 FilesApi *apiInstance = [[FilesApi alloc] init];
 
@@ -1762,7 +1751,7 @@ await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 
-const folder:Folder = ;  // {Folder} 
+const folder:Folder = { "Name": "My Docs" };  // {Folder} 
 
 
 try {
@@ -1872,7 +1861,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .FilesApi()
 xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
-folder =  # Folder |  (optional)
+folder = { "Name": "My Docs" } # Folder |  (optional)
 
 try: 
     # Creates a new folder
@@ -1887,7 +1876,7 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = YOUR_XERO_TENANT_ID; // String
-    let folder = ; // Folder
+    let folder = { "Name": "My Docs" }; // Folder
 
     let mut context = FilesApi::Context::default();
     let result = client.createFolder(xeroTenantId, folder, &context).wait();
@@ -1969,7 +1958,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Folder"
-      }
+      },
+      "example" : "{ \"Name\": \"My Docs\" }"
     }
   }
 } {} ;
@@ -2038,7 +2028,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Folder"
-      }
+      },
+      "example" : "{ \"Name\": \"My Docs\", \"FileCount\": 0, \"IsInbox\": false, \"Id\": \"913970ad-8c8e-4666-8294-35b9cac23206\" }"
     }
   }
 };
@@ -2070,7 +2061,7 @@ $(document).ready(function() {
                                                       <h3 id="examples-Files-createFolder-title-400"></h3>
                             <p id="examples-Files-createFolder-description-400" class="marked"></p>
                             <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
+                              var responseFiles400_description = `invalid input, object invalid`;
                               var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
                               if (responseFiles400_description_break == -1) {
                                 $("#examples-Files-createFolder-title-400").text("Status: 400 - " + responseFiles400_description);
@@ -2107,7 +2098,7 @@ $(document).ready(function() {
                         <p class="marked">Delete a specific file</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/Files/{FileID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/Files/{FileId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -2128,7 +2119,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-deleteFile-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-deleteFile-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -2152,8 +2143,7 @@ public class FilesApiExample {
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | File id for single object
         try {
-            FileResponse204 result = apiInstance.deleteFile(xeroTenantId, fileId);
-            System.out.println(result);
+            apiInstance.deleteFile(xeroTenantId, fileId);
         } catch (ApiException e) {
             System.err.println("Exception when calling FilesApi#deleteFile");
             e.printStackTrace();
@@ -2172,8 +2162,7 @@ public class FilesApiExample {
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | File id for single object
         try {
-            FileResponse204 result = apiInstance.deleteFile(xeroTenantId, fileId);
-            System.out.println(result);
+            apiInstance.deleteFile(xeroTenantId, fileId);
         } catch (ApiException e) {
             System.err.println("Exception when calling FilesApi#deleteFile");
             e.printStackTrace();
@@ -2199,10 +2188,7 @@ FilesApi *apiInstance = [[FilesApi alloc] init];
 // Deletes a specific file
 [apiInstance deleteFileWith:xeroTenantId
     fileId:fileId
-              completionHandler: ^(FileResponse204 output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
+              completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -2261,8 +2247,7 @@ namespace Example
             try
             {
                 // Deletes a specific file
-                FileResponse204 result = apiInstance.deleteFile(xeroTenantId, fileId);
-                Debug.WriteLine(result);
+                apiInstance.deleteFile(xeroTenantId, fileId);
             }
             catch (Exception e)
             {
@@ -2310,8 +2295,7 @@ my $xeroTenantId = YOUR_XERO_TENANT_ID; # String | Xero identifier for Tenant
 my $fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | File id for single object
 
 eval { 
-    my $result = $api_instance->deleteFile(xeroTenantId => $xeroTenantId, fileId => $fileId);
-    print Dumper($result);
+    $api_instance->deleteFile(xeroTenantId => $xeroTenantId, fileId => $fileId);
 };
 if ($@) {
     warn "Exception when calling FilesApi->deleteFile: $@\n";
@@ -2335,8 +2319,7 @@ fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | File id for single object
 
 try: 
     # Deletes a specific file
-    api_response = api_instance.delete_file(xeroTenantId, fileId)
-    pprint(api_response)
+    api_instance.delete_file(xeroTenantId, fileId)
 except ApiException as e:
     print("Exception when calling FilesApi->deleteFile: %s\n" % e)</code></pre>
                             </div>
@@ -2441,7 +2424,7 @@ Xero identifier for Tenant
                             <h3 id="examples-Files-deleteFile-title-204"></h3>
                             <p id="examples-Files-deleteFile-description-204" class="marked"></p>
                             <script>
-                              var responseFiles204_description = `A successful request returns 204 empty response - populate with status property in SDK`;
+                              var responseFiles204_description = `Successful deletion - return response 204 no content`;
                               var responseFiles204_description_break = responseFiles204_description.indexOf('\n');
                               if (responseFiles204_description_break == -1) {
                                 $("#examples-Files-deleteFile-title-204").text("Status: 204 - " + responseFiles204_description);
@@ -2454,13 +2437,6 @@ Xero identifier for Tenant
 
                             <ul id="responses-detail-Files-deleteFile-204" class="nav nav-tabs nav-tabs-examples" >
                              
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-Files-deleteFile-204-schema">Schema</a>
-                                </li>
-                                <li class="">
-                                    <a data-toggle="tab" href="#responses-Files-deleteFile-204-example">Response Example</a>
-                                </li>
-                               
 
 
                             </ul>
@@ -2468,44 +2444,6 @@ Xero identifier for Tenant
 
                             <div class="tab-content" id="responses-Files-deleteFile-204-wrapper" style='margin-bottom: 10px;'>
                                
-                                <div class="tab-pane active" id="responses-Files-deleteFile-204-schema">
-                                  <div id="responses-Files-deleteFile-schema-204" class="exampleStyle">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "A successful request returns 204 empty response - populate with status property in SDK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/FileResponse204"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                      
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Files-deleteFile-204-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Files-deleteFile-schema-204');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-Files-deleteFile-204-schema-data' type='hidden' value=''></input>
-                                </div>
-                                <div class="tab-pane" id="examples-Files-deleteFile-204-example">
-                                    <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
-                                </div>
                             </div>
                           -->
                         </article>
@@ -2523,7 +2461,7 @@ Xero identifier for Tenant
                         <p class="marked">By passing in the appropriate options, you can create a new folder</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/Files/{FileID}/Associations/{ObjectID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/Files/{FileId}/Associations/{ObjectId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -2544,7 +2482,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-deleteFileAssociation-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileID}/Associations/{ObjectID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileId}/Associations/{ObjectId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-deleteFileAssociation-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -2569,8 +2507,7 @@ public class FilesApiExample {
         UUID fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | File id for single object
         UUID objectId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Object id for single object
         try {
-            FileResponse204 result = apiInstance.deleteFileAssociation(xeroTenantId, fileId, objectId);
-            System.out.println(result);
+            apiInstance.deleteFileAssociation(xeroTenantId, fileId, objectId);
         } catch (ApiException e) {
             System.err.println("Exception when calling FilesApi#deleteFileAssociation");
             e.printStackTrace();
@@ -2590,8 +2527,7 @@ public class FilesApiExample {
         UUID fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | File id for single object
         UUID objectId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Object id for single object
         try {
-            FileResponse204 result = apiInstance.deleteFileAssociation(xeroTenantId, fileId, objectId);
-            System.out.println(result);
+            apiInstance.deleteFileAssociation(xeroTenantId, fileId, objectId);
         } catch (ApiException e) {
             System.err.println("Exception when calling FilesApi#deleteFileAssociation");
             e.printStackTrace();
@@ -2619,10 +2555,7 @@ FilesApi *apiInstance = [[FilesApi alloc] init];
 [apiInstance deleteFileAssociationWith:xeroTenantId
     fileId:fileId
     objectId:objectId
-              completionHandler: ^(FileResponse204 output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
+              completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -2683,8 +2616,7 @@ namespace Example
             try
             {
                 // Deletes an existing file association
-                FileResponse204 result = apiInstance.deleteFileAssociation(xeroTenantId, fileId, objectId);
-                Debug.WriteLine(result);
+                apiInstance.deleteFileAssociation(xeroTenantId, fileId, objectId);
             }
             catch (Exception e)
             {
@@ -2733,8 +2665,7 @@ my $fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | File id for single o
 my $objectId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Object id for single object
 
 eval { 
-    my $result = $api_instance->deleteFileAssociation(xeroTenantId => $xeroTenantId, fileId => $fileId, objectId => $objectId);
-    print Dumper($result);
+    $api_instance->deleteFileAssociation(xeroTenantId => $xeroTenantId, fileId => $fileId, objectId => $objectId);
 };
 if ($@) {
     warn "Exception when calling FilesApi->deleteFileAssociation: $@\n";
@@ -2759,8 +2690,7 @@ objectId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Object id for single ob
 
 try: 
     # Deletes an existing file association
-    api_response = api_instance.delete_file_association(xeroTenantId, fileId, objectId)
-    pprint(api_response)
+    api_instance.delete_file_association(xeroTenantId, fileId, objectId)
 except ApiException as e:
     print("Exception when calling FilesApi->deleteFileAssociation: %s\n" % e)</code></pre>
                             </div>
@@ -2892,7 +2822,7 @@ Xero identifier for Tenant
                             <h3 id="examples-Files-deleteFileAssociation-title-204"></h3>
                             <p id="examples-Files-deleteFileAssociation-description-204" class="marked"></p>
                             <script>
-                              var responseFiles204_description = `A successful request`;
+                              var responseFiles204_description = `Successful deletion - return response 204 no content`;
                               var responseFiles204_description_break = responseFiles204_description.indexOf('\n');
                               if (responseFiles204_description_break == -1) {
                                 $("#examples-Files-deleteFileAssociation-title-204").text("Status: 204 - " + responseFiles204_description);
@@ -2905,81 +2835,12 @@ Xero identifier for Tenant
 
                             <ul id="responses-detail-Files-deleteFileAssociation-204" class="nav nav-tabs nav-tabs-examples" >
                              
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-Files-deleteFileAssociation-204-schema">Schema</a>
-                                </li>
-                                <li class="">
-                                    <a data-toggle="tab" href="#responses-Files-deleteFileAssociation-204-example">Response Example</a>
-                                </li>
-                               
 
 
                             </ul>
 
 
                             <div class="tab-content" id="responses-Files-deleteFileAssociation-204-wrapper" style='margin-bottom: 10px;'>
-                               
-                                <div class="tab-pane active" id="responses-Files-deleteFileAssociation-204-schema">
-                                  <div id="responses-Files-deleteFileAssociation-schema-204" class="exampleStyle">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "A successful request",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/FileResponse204"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                      
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Files-deleteFileAssociation-204-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Files-deleteFileAssociation-schema-204');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-Files-deleteFileAssociation-204-schema-data' type='hidden' value=''></input>
-                                </div>
-                                <div class="tab-pane" id="examples-Files-deleteFileAssociation-204-example">
-                                    <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
-                                </div>
-                            </div>
-                                                      <h3 id="examples-Files-deleteFileAssociation-title-400"></h3>
-                            <p id="examples-Files-deleteFileAssociation-description-400" class="marked"></p>
-                            <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
-                              var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
-                              if (responseFiles400_description_break == -1) {
-                                $("#examples-Files-deleteFileAssociation-title-400").text("Status: 400 - " + responseFiles400_description);
-                              } else {
-                                $("#examples-Files-deleteFileAssociation-title-400").text("Status: 400 - " + responseFiles400_description.substring(0, responseFiles400_description_break));
-                                $("#examples-Files-deleteFileAssociation-description-400").html(responseFiles400_description.substring(responseFiles400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Files-deleteFileAssociation-400" class="nav nav-tabs nav-tabs-examples" >
-                             
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Files-deleteFileAssociation-400-wrapper" style='margin-bottom: 10px;'>
                                
                             </div>
                           -->
@@ -2998,7 +2859,7 @@ Xero identifier for Tenant
                         <p class="marked">By passing in the appropriate ID, you can delete a folder</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/Folders/{FolderID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/Folders/{FolderId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -3019,7 +2880,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-deleteFolder-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Folders/{FolderID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Folders/{FolderId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-deleteFolder-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -3043,8 +2904,7 @@ public class FilesApiExample {
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Folder id for single object
         try {
-            FileResponse204 result = apiInstance.deleteFolder(xeroTenantId, folderId);
-            System.out.println(result);
+            apiInstance.deleteFolder(xeroTenantId, folderId);
         } catch (ApiException e) {
             System.err.println("Exception when calling FilesApi#deleteFolder");
             e.printStackTrace();
@@ -3063,8 +2923,7 @@ public class FilesApiExample {
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Folder id for single object
         try {
-            FileResponse204 result = apiInstance.deleteFolder(xeroTenantId, folderId);
-            System.out.println(result);
+            apiInstance.deleteFolder(xeroTenantId, folderId);
         } catch (ApiException e) {
             System.err.println("Exception when calling FilesApi#deleteFolder");
             e.printStackTrace();
@@ -3090,10 +2949,7 @@ FilesApi *apiInstance = [[FilesApi alloc] init];
 // Deletes a folder
 [apiInstance deleteFolderWith:xeroTenantId
     folderId:folderId
-              completionHandler: ^(FileResponse204 output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
+              completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -3152,8 +3008,7 @@ namespace Example
             try
             {
                 // Deletes a folder
-                FileResponse204 result = apiInstance.deleteFolder(xeroTenantId, folderId);
-                Debug.WriteLine(result);
+                apiInstance.deleteFolder(xeroTenantId, folderId);
             }
             catch (Exception e)
             {
@@ -3201,8 +3056,7 @@ my $xeroTenantId = YOUR_XERO_TENANT_ID; # String | Xero identifier for Tenant
 my $folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; # UUID | Folder id for single object
 
 eval { 
-    my $result = $api_instance->deleteFolder(xeroTenantId => $xeroTenantId, folderId => $folderId);
-    print Dumper($result);
+    $api_instance->deleteFolder(xeroTenantId => $xeroTenantId, folderId => $folderId);
 };
 if ($@) {
     warn "Exception when calling FilesApi->deleteFolder: $@\n";
@@ -3226,8 +3080,7 @@ folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Folder id for single ob
 
 try: 
     # Deletes a folder
-    api_response = api_instance.delete_folder(xeroTenantId, folderId)
-    pprint(api_response)
+    api_instance.delete_folder(xeroTenantId, folderId)
 except ApiException as e:
     print("Exception when calling FilesApi->deleteFolder: %s\n" % e)</code></pre>
                             </div>
@@ -3332,7 +3185,7 @@ Xero identifier for Tenant
                             <h3 id="examples-Files-deleteFolder-title-204"></h3>
                             <p id="examples-Files-deleteFolder-description-204" class="marked"></p>
                             <script>
-                              var responseFiles204_description = `A successful request`;
+                              var responseFiles204_description = `Successful deletion - return response 204 no content`;
                               var responseFiles204_description_break = responseFiles204_description.indexOf('\n');
                               if (responseFiles204_description_break == -1) {
                                 $("#examples-Files-deleteFolder-title-204").text("Status: 204 - " + responseFiles204_description);
@@ -3345,81 +3198,12 @@ Xero identifier for Tenant
 
                             <ul id="responses-detail-Files-deleteFolder-204" class="nav nav-tabs nav-tabs-examples" >
                              
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-Files-deleteFolder-204-schema">Schema</a>
-                                </li>
-                                <li class="">
-                                    <a data-toggle="tab" href="#responses-Files-deleteFolder-204-example">Response Example</a>
-                                </li>
-                               
 
 
                             </ul>
 
 
                             <div class="tab-content" id="responses-Files-deleteFolder-204-wrapper" style='margin-bottom: 10px;'>
-                               
-                                <div class="tab-pane active" id="responses-Files-deleteFolder-204-schema">
-                                  <div id="responses-Files-deleteFolder-schema-204" class="exampleStyle">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "A successful request",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/FileResponse204"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                      
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Files-deleteFolder-204-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Files-deleteFolder-schema-204');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-Files-deleteFolder-204-schema-data' type='hidden' value=''></input>
-                                </div>
-                                <div class="tab-pane" id="examples-Files-deleteFolder-204-example">
-                                    <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
-                                </div>
-                            </div>
-                                                      <h3 id="examples-Files-deleteFolder-title-400"></h3>
-                            <p id="examples-Files-deleteFolder-description-400" class="marked"></p>
-                            <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
-                              var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
-                              if (responseFiles400_description_break == -1) {
-                                $("#examples-Files-deleteFolder-title-400").text("Status: 400 - " + responseFiles400_description);
-                              } else {
-                                $("#examples-Files-deleteFolder-title-400").text("Status: 400 - " + responseFiles400_description.substring(0, responseFiles400_description_break));
-                                $("#examples-Files-deleteFolder-description-400").html(responseFiles400_description.substring(responseFiles400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Files-deleteFolder-400" class="nav nav-tabs nav-tabs-examples" >
-                             
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Files-deleteFolder-400-wrapper" style='margin-bottom: 10px;'>
                                
                             </div>
                           -->
@@ -3438,7 +3222,7 @@ Xero identifier for Tenant
                         <p class="marked">By passing in the appropriate options,</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Associations/{ObjectID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Associations/{ObjectId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -3459,7 +3243,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-getAssociationsByObject-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Associations/{ObjectID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Associations/{ObjectId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-getAssociationsByObject-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -3812,7 +3596,8 @@ Xero identifier for Tenant
         "items" : {
           "$ref" : "#/components/schemas/Association"
         }
-      }
+      },
+      "example" : "[ { \"FileId\":\"6beccb4a-0d7d-4518-93f3-e0cd1dccb254\", \"ObjectId\":\"1270bf7c-5d18-473a-9231-1e36c4bd33ed\", \"ObjectType\":\"Business\", \"ObjectGroup\":\"Contact\" } ]"
     }
   }
 };
@@ -3857,7 +3642,7 @@ Xero identifier for Tenant
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Files/{FileID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Files/{FileId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -3878,7 +3663,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-getFile-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-getFile-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -4228,7 +4013,8 @@ Xero identifier for Tenant
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/FileObject"
-      }
+      },
+      "example" : "{ \"Name\": \"helo-heros.jpg\", \"MimeType\": \"application/jpg\", \"Size\": 2878711, \"CreatedDateUtc\": \"2021-02-10T23:17:50.1930000\", \"UpdatedDateUtc\": \"2021-02-10T23:17:50.1930000\", \"User\": { \"Name\": \"sid.maestre@xero.com\", \"FirstName\": \"Sidney\", \"LastName\": \"Maestre\", \"FullName\": \"Sidney Maestre\", \"Id\": \"740add2a-a703-4b8a-a670-1093919c2040\" }, \"FolderId\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\", \"Id\": \"efd77bfc-7018-4da1-b251-7aa2d438382c\" }"
     }
   }
 };
@@ -4273,7 +4059,7 @@ Xero identifier for Tenant
                         <p class="marked">By passing in the appropriate options,</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Files/{FileID}/Associations</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Files/{FileId}/Associations</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -4294,7 +4080,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-getFileAssociations-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileID}/Associations"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileId}/Associations"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-getFileAssociations-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -4647,7 +4433,8 @@ Xero identifier for Tenant
         "items" : {
           "$ref" : "#/components/schemas/Association"
         }
-      }
+      },
+      "example" : "[ { \"FileId\":\"6beccb4a-0d7d-4518-93f3-e0cd1dccb254\", \"ObjectId\":\"1270bf7c-5d18-473a-9231-1e36c4bd33ed\", \"ObjectType\":\"Business\", \"ObjectGroup\":\"Contact\" } ]"
     }
   }
 };
@@ -4692,7 +4479,7 @@ Xero identifier for Tenant
                         <p class="marked">By passing in the appropriate options, retrieve data for specific file</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Files/{FileID}/Content</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Files/{FileId}/Content</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -4713,7 +4500,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-getFileContent-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileID}/Content"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileId}/Content"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-getFileContent-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -5536,7 +5323,8 @@ values to sort by
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Files"
-      }
+      },
+      "example" : "{ \"TotalCount\": 100, \"Page\": 1, \"PerPage\": 2, \"Items\": [ { \"Name\": \"helo-heros.jpg\", \"MimeType\": \"application/jpg\", \"Size\": 2878711, \"CreatedDateUtc\": \"2021-02-10T16:02:54.9930000\", \"UpdatedDateUtc\": \"2021-02-10T16:02:54.9930000\", \"User\": { \"Name\": \"sid.maestre@xero.com\", \"FirstName\": \"Sidney\", \"LastName\": \"Maestre\", \"FullName\": \"Sidney Maestre\", \"Id\": \"740add2a-a703-4b8a-a670-1093919c2040\" }, \"FolderId\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\", \"Id\": \"3d413bfe-f40f-4807-b953-9a42f834ff15\" }, { \"Name\": \"helo-heros.jpg\", \"MimeType\": \"application/jpg\", \"Size\": 2878711, \"CreatedDateUtc\": \"2021-02-09T21:16:00.6130000\", \"UpdatedDateUtc\": \"2021-02-09T21:16:00.6130000\", \"User\": { \"Name\": \"sid.maestre@xero.com\", \"FirstName\": \"Sidney\", \"LastName\": \"Maestre\", \"FullName\": \"Sidney Maestre\", \"Id\": \"740add2a-a703-4b8a-a670-1093919c2040\" }, \"FolderId\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\", \"Id\": \"22f87409-cdfd-4813-a868-559481bcb052\" } ] }"
     }
   }
 };
@@ -5565,30 +5353,6 @@ values to sort by
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
-                                                      <h3 id="examples-Files-getFiles-title-400"></h3>
-                            <p id="examples-Files-getFiles-description-400" class="marked"></p>
-                            <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
-                              var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
-                              if (responseFiles400_description_break == -1) {
-                                $("#examples-Files-getFiles-title-400").text("Status: 400 - " + responseFiles400_description);
-                              } else {
-                                $("#examples-Files-getFiles-title-400").text("Status: 400 - " + responseFiles400_description.substring(0, responseFiles400_description_break));
-                                $("#examples-Files-getFiles-description-400").html(responseFiles400_description.substring(responseFiles400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Files-getFiles-400" class="nav nav-tabs nav-tabs-examples" >
-                             
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Files-getFiles-400-wrapper" style='margin-bottom: 10px;'>
-                               
-                            </div>
                           -->
                         </article>
                       </div>
@@ -5605,7 +5369,7 @@ values to sort by
                         <p class="marked">By passing in the appropriate ID, you can search for specific folder</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Folders/{FolderID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Folders/{FolderId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -5626,7 +5390,7 @@ values to sort by
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-getFolder-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Folders/{FolderID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Folders/{FolderId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-getFolder-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -5976,7 +5740,8 @@ Xero identifier for Tenant
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Folder"
-      }
+      },
+      "example" : "{ \"Name\": \"My Docs\", \"FileCount\": 0, \"IsInbox\": false, \"Id\": \"4c5f3fe4-2516-4863-ac88-3029351773bf\" }"
     }
   }
 };
@@ -6004,30 +5769,6 @@ Xero identifier for Tenant
                                 <div class="tab-pane" id="examples-Files-getFolder-200-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
-                            </div>
-                                                      <h3 id="examples-Files-getFolder-title-400"></h3>
-                            <p id="examples-Files-getFolder-description-400" class="marked"></p>
-                            <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
-                              var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
-                              if (responseFiles400_description_break == -1) {
-                                $("#examples-Files-getFolder-title-400").text("Status: 400 - " + responseFiles400_description);
-                              } else {
-                                $("#examples-Files-getFolder-title-400").text("Status: 400 - " + responseFiles400_description.substring(0, responseFiles400_description_break));
-                                $("#examples-Files-getFolder-description-400").html(responseFiles400_description.substring(responseFiles400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Files-getFolder-400" class="nav nav-tabs nav-tabs-examples" >
-                             
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Files-getFolder-400-wrapper" style='margin-bottom: 10px;'>
-                               
                             </div>
                           -->
                         </article>
@@ -6415,7 +6156,8 @@ values to sort by
         "items" : {
           "$ref" : "#/components/schemas/Folder"
         }
-      }
+      },
+      "example" : "[ { \"Name\":\"Inbox\", \"FileCount\":14, \"Email\":\"xero.inbox.jpf4.6oo29retajkhtfus@xerofiles.com\", \"IsInbox\":true, \"Id\":\"bf924975-7097-46f2-a143-1ecfbab3c8c3\" }, { \"Name\":\"Contracts\", \"FileCount\":7, \"IsInbox\":false, \"Id\":\"554ff1ad-4b94-4266-9b45-e29bcb75e6bf\" } ]"
     }
   }
 };
@@ -6443,30 +6185,6 @@ values to sort by
                                 <div class="tab-pane" id="examples-Files-getFolders-200-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
-                            </div>
-                                                      <h3 id="examples-Files-getFolders-title-400"></h3>
-                            <p id="examples-Files-getFolders-description-400" class="marked"></p>
-                            <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
-                              var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
-                              if (responseFiles400_description_break == -1) {
-                                $("#examples-Files-getFolders-title-400").text("Status: 400 - " + responseFiles400_description);
-                              } else {
-                                $("#examples-Files-getFolders-title-400").text("Status: 400 - " + responseFiles400_description.substring(0, responseFiles400_description_break));
-                                $("#examples-Files-getFolders-description-400").html(responseFiles400_description.substring(responseFiles400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Files-getFolders-400" class="nav nav-tabs nav-tabs-examples" >
-                             
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Files-getFolders-400-wrapper" style='margin-bottom: 10px;'>
-                               
                             </div>
                           -->
                         </article>
@@ -6813,7 +6531,8 @@ Xero identifier for Tenant
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Folder"
-      }
+      },
+      "example" : "{ \"Name\": \"Inbox\", \"FileCount\": 14, \"Email\": \"xero.inbox.jpf4.6oo29retajkhtfus@xerofiles.com\", \"IsInbox\": true, \"Id\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\" }"
     }
   }
 };
@@ -6842,30 +6561,6 @@ Xero identifier for Tenant
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
-                                                      <h3 id="examples-Files-getInbox-title-400"></h3>
-                            <p id="examples-Files-getInbox-description-400" class="marked"></p>
-                            <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
-                              var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
-                              if (responseFiles400_description_break == -1) {
-                                $("#examples-Files-getInbox-title-400").text("Status: 400 - " + responseFiles400_description);
-                              } else {
-                                $("#examples-Files-getInbox-title-400").text("Status: 400 - " + responseFiles400_description.substring(0, responseFiles400_description_break));
-                                $("#examples-Files-getInbox-description-400").html(responseFiles400_description.substring(responseFiles400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Files-getInbox-400" class="nav nav-tabs nav-tabs-examples" >
-                             
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Files-getInbox-400-wrapper" style='margin-bottom: 10px;'>
-                               
-                            </div>
                           -->
                         </article>
                       </div>
@@ -6882,7 +6577,7 @@ Xero identifier for Tenant
                         <p class="marked">Updates file properties of a single file</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/Files/{FileID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/Files/{FileId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -6903,7 +6598,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-updateFile-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files/{FileId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-updateFile-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -6926,7 +6621,7 @@ public class FilesApiExample {
         FilesApi apiInstance = new FilesApi();
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | File id for single object
-        FileObject fileObject = ; // FileObject | 
+        FileObject fileObject = { "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3" }; // FileObject | 
         try {
             FileObject result = apiInstance.updateFile(xeroTenantId, fileId, fileObject);
             System.out.println(result);
@@ -6947,7 +6642,7 @@ public class FilesApiExample {
         FilesApi apiInstance = new FilesApi();
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | File id for single object
-        FileObject fileObject = ; // FileObject | 
+        FileObject fileObject = { "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3" }; // FileObject | 
         try {
             FileObject result = apiInstance.updateFile(xeroTenantId, fileId, fileObject);
             System.out.println(result);
@@ -6970,7 +6665,7 @@ public class FilesApiExample {
 
 String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 UUID *fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // File id for single object (default to null)
-FileObject *fileObject = ; //  (optional)
+FileObject *fileObject = { "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3" }; //  (optional)
 
 FilesApi *apiInstance = [[FilesApi alloc] init];
 
@@ -7003,7 +6698,7 @@ await xero.setTokenSet(tokenSet);
 const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 const fileId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} File id for single object
 
-const fileObject:FileObject = ;  // {FileObject} 
+const fileObject:FileObject = { "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3" };  // {FileObject} 
 
 
 try {
@@ -7116,7 +6811,7 @@ from pprint import pprint
 api_instance = .FilesApi()
 xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | File id for single object (default to null)
-fileObject =  # FileObject |  (optional)
+fileObject = { "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3" } # FileObject |  (optional)
 
 try: 
     # Update a file
@@ -7132,7 +6827,7 @@ except ApiException as e:
 pub fn main() {
     let xeroTenantId = YOUR_XERO_TENANT_ID; // String
     let fileId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
-    let fileObject = ; // FileObject
+    let fileObject = { "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3" }; // FileObject
 
     let mut context = FilesApi::Context::default();
     let result = client.updateFile(xeroTenantId, fileId, fileObject, &context).wait();
@@ -7247,7 +6942,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/FileObject"
-      }
+      },
+      "example" : "{ \"FolderId\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\" }"
     }
   }
 } {} ;
@@ -7316,7 +7012,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/FileObject"
-      }
+      },
+      "example" : "{ \"Name\": \"helo-heros.jpg\", \"MimeType\": \"application/jpg\", \"Size\": 2878711, \"CreatedDateUtc\": \"2021-02-10T23:17:50.1930000\", \"UpdatedDateUtc\": \"2021-02-10T23:58:54.1000000\", \"User\": { \"Name\": \"sid.maestre@xero.com\", \"FirstName\": \"Sidney\", \"LastName\": \"Maestre\", \"FullName\": \"Sidney Maestre\", \"Id\": \"740add2a-a703-4b8a-a670-1093919c2040\" }, \"FolderId\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\", \"Id\": \"efd77bfc-7018-4da1-b251-7aa2d438382c\" }"
     }
   }
 };
@@ -7345,6 +7042,30 @@ $(document).ready(function() {
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
+                                                      <h3 id="examples-Files-updateFile-title-400"></h3>
+                            <p id="examples-Files-updateFile-description-400" class="marked"></p>
+                            <script>
+                              var responseFiles400_description = `invalid input, object invalid`;
+                              var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
+                              if (responseFiles400_description_break == -1) {
+                                $("#examples-Files-updateFile-title-400").text("Status: 400 - " + responseFiles400_description);
+                              } else {
+                                $("#examples-Files-updateFile-title-400").text("Status: 400 - " + responseFiles400_description.substring(0, responseFiles400_description_break));
+                                $("#examples-Files-updateFile-description-400").html(responseFiles400_description.substring(responseFiles400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Files-updateFile-400" class="nav nav-tabs nav-tabs-examples" >
+                             
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Files-updateFile-400-wrapper" style='margin-bottom: 10px;'>
+                               
+                            </div>
                           -->
                         </article>
                       </div>
@@ -7361,7 +7082,7 @@ $(document).ready(function() {
                         <p class="marked">By passing in the appropriate ID and properties, you can update a folder</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/Folders/{FolderID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/Folders/{FolderId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -7382,7 +7103,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-updateFolder-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Folders/{FolderID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Folders/{FolderId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-updateFolder-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -7405,7 +7126,7 @@ public class FilesApiExample {
         FilesApi apiInstance = new FilesApi();
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Folder id for single object
-        Folder folder = ; // Folder | 
+        Folder folder = { "Name": "Your Docs" }; // Folder | 
         try {
             Folder result = apiInstance.updateFolder(xeroTenantId, folderId, folder);
             System.out.println(result);
@@ -7426,7 +7147,7 @@ public class FilesApiExample {
         FilesApi apiInstance = new FilesApi();
         String xeroTenantId = YOUR_XERO_TENANT_ID; // String | Xero identifier for Tenant
         UUID folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID | Folder id for single object
-        Folder folder = ; // Folder | 
+        Folder folder = { "Name": "Your Docs" }; // Folder | 
         try {
             Folder result = apiInstance.updateFolder(xeroTenantId, folderId, folder);
             System.out.println(result);
@@ -7449,7 +7170,7 @@ public class FilesApiExample {
 
 String *xeroTenantId = YOUR_XERO_TENANT_ID; // Xero identifier for Tenant (default to null)
 UUID *folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // Folder id for single object (default to null)
-Folder *folder = ; // 
+Folder *folder = { "Name": "Your Docs" }; // 
 
 FilesApi *apiInstance = [[FilesApi alloc] init];
 
@@ -7478,7 +7199,7 @@ FilesApi *apiInstance = [[FilesApi alloc] init];
   session_state: 'xxx'
 }
 await xero.setTokenSet(tokenSet);
-const folder: Folder = ;  // {Folder} 
+const folder: Folder = { "Name": "Your Docs" };  // {Folder} 
 const xeroTenantId = "YOUR_XERO_TENANT_ID";  // {String} Xero identifier for Tenant
 const folderId = "4ff1e5cc-9835-40d5-bb18-09fdb118db9c";  // {UUID} Folder id for single object
 
@@ -7593,7 +7314,7 @@ from pprint import pprint
 api_instance = .FilesApi()
 xeroTenantId = YOUR_XERO_TENANT_ID # String | Xero identifier for Tenant (default to null)
 folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c # UUID | Folder id for single object (default to null)
-folder =  # Folder | 
+folder = { "Name": "Your Docs" } # Folder | 
 
 try: 
     # Updates an existing folder
@@ -7609,7 +7330,7 @@ except ApiException as e:
 pub fn main() {
     let xeroTenantId = YOUR_XERO_TENANT_ID; // String
     let folderId = 4ff1e5cc-9835-40d5-bb18-09fdb118db9c; // UUID
-    let folder = ; // Folder
+    let folder = { "Name": "Your Docs" }; // Folder
 
     let mut context = FilesApi::Context::default();
     let result = client.updateFolder(xeroTenantId, folderId, folder, &context).wait();
@@ -7727,7 +7448,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Folder"
-      }
+      },
+      "example" : "{ \"Name\": \"Your Docs\" }"
     }
   },
   "required" : true
@@ -7797,7 +7519,8 @@ $(document).ready(function() {
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/Folder"
-      }
+      },
+      "example" : "{ \"Name\": \"Your Docs\", \"FileCount\": 0, \"IsInbox\": false, \"Id\": \"4c5f3fe4-2516-4863-ac88-3029351773bf\" }"
     }
   }
 };
@@ -7829,7 +7552,7 @@ $(document).ready(function() {
                                                       <h3 id="examples-Files-updateFolder-title-400"></h3>
                             <p id="examples-Files-updateFolder-description-400" class="marked"></p>
                             <script>
-                              var responseFiles400_description = `bad input parameter - TODO`;
+                              var responseFiles400_description = `invalid input, object invalid`;
                               var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
                               if (responseFiles400_description_break == -1) {
                                 $("#examples-Files-updateFolder-title-400").text("Status: 400 - " + responseFiles400_description);
@@ -7887,7 +7610,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Files-uploadFile-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files?folderId=4ff1e5cc-9835-40d5-bb18-09fdb118db9c"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/files.xro/1.0/Files?FolderId=4ff1e5cc-9835-40d5-bb18-09fdb118db9c"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Files-uploadFile-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -8300,7 +8023,7 @@ exact name of the file you are uploading
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                <tr><td style="width:150px;">folderId</td>
+                                <tr><td style="width:150px;">FolderId</td>
 <td>
 
 
@@ -8326,27 +8049,27 @@ pass an optional folder id to save file to specific folder
                             </table>
 <!--
                           <h2>Responses</h2>
-                            <h3 id="examples-Files-uploadFile-title-200"></h3>
-                            <p id="examples-Files-uploadFile-description-200" class="marked"></p>
+                            <h3 id="examples-Files-uploadFile-title-201"></h3>
+                            <p id="examples-Files-uploadFile-description-201" class="marked"></p>
                             <script>
-                              var responseFiles200_description = `A successful request`;
-                              var responseFiles200_description_break = responseFiles200_description.indexOf('\n');
-                              if (responseFiles200_description_break == -1) {
-                                $("#examples-Files-uploadFile-title-200").text("Status: 200 - " + responseFiles200_description);
+                              var responseFiles201_description = `A successful request`;
+                              var responseFiles201_description_break = responseFiles201_description.indexOf('\n');
+                              if (responseFiles201_description_break == -1) {
+                                $("#examples-Files-uploadFile-title-201").text("Status: 201 - " + responseFiles201_description);
                               } else {
-                                $("#examples-Files-uploadFile-title-200").text("Status: 200 - " + responseFiles200_description.substring(0, responseFiles200_description_break));
-                                $("#examples-Files-uploadFile-description-200").html(responseFiles200_description.substring(responseFiles200_description_break));
+                                $("#examples-Files-uploadFile-title-201").text("Status: 201 - " + responseFiles201_description.substring(0, responseFiles201_description_break));
+                                $("#examples-Files-uploadFile-description-201").html(responseFiles201_description.substring(responseFiles201_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-Files-uploadFile-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-Files-uploadFile-201" class="nav nav-tabs nav-tabs-examples" >
                              
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-Files-uploadFile-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-Files-uploadFile-201-schema">Schema</a>
                                 </li>
                                 <li class="">
-                                    <a data-toggle="tab" href="#responses-Files-uploadFile-200-example">Response Example</a>
+                                    <a data-toggle="tab" href="#responses-Files-uploadFile-201-example">Response Example</a>
                                 </li>
                                
 
@@ -8354,10 +8077,10 @@ pass an optional folder id to save file to specific folder
                             </ul>
 
 
-                            <div class="tab-content" id="responses-Files-uploadFile-200-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-Files-uploadFile-201-wrapper" style='margin-bottom: 10px;'>
                                
-                                <div class="tab-pane active" id="responses-Files-uploadFile-200-schema">
-                                  <div id="responses-Files-uploadFile-schema-200" class="exampleStyle">
+                                <div class="tab-pane active" id="responses-Files-uploadFile-201-schema">
+                                  <div id="responses-Files-uploadFile-schema-201" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -8366,7 +8089,8 @@ pass an optional folder id to save file to specific folder
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/FileObject"
-      }
+      },
+      "example" : "{ \"Name\": \"helo-heros.jpg\", \"MimeType\": \"application/jpg\", \"Size\": 2878711, \"CreatedDateUtc\": \"2021-02-10T23:17:50.1930000\", \"UpdatedDateUtc\": \"2021-02-10T23:17:50.1930000\", \"User\": { \"Name\": \"sid.maestre@xero.com\", \"FirstName\": \"Sidney\", \"LastName\": \"Maestre\", \"FullName\": \"Sidney Maestre\", \"Id\": \"740add2a-a703-4b8a-a670-1093919c2040\" }, \"FolderId\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\", \"Id\": \"22f87409-cdfd-4813-a868-559481bcb052\" }"
     }
   }
 };
@@ -8382,23 +8106,23 @@ pass an optional folder id to save file to specific folder
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Files-uploadFile-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Files-uploadFile-schema-200');
+                                        $('#responses-Files-uploadFile-201-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Files-uploadFile-schema-201');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-Files-uploadFile-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-Files-uploadFile-201-schema-data' type='hidden' value=''></input>
                                 </div>
-                                <div class="tab-pane" id="examples-Files-uploadFile-200-example">
+                                <div class="tab-pane" id="examples-Files-uploadFile-201-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
                                                       <h3 id="examples-Files-uploadFile-title-400"></h3>
                             <p id="examples-Files-uploadFile-description-400" class="marked"></p>
                             <script>
-                              var responseFiles400_description = `invalid input, object invalid - TODO`;
+                              var responseFiles400_description = `invalid input, object invalid`;
                               var responseFiles400_description_break = responseFiles400_description.indexOf('\n');
                               if (responseFiles400_description_break == -1) {
                                 $("#examples-Files-uploadFile-title-400").text("Status: 400 - " + responseFiles400_description);
@@ -8417,30 +8141,6 @@ pass an optional folder id to save file to specific folder
 
 
                             <div class="tab-content" id="responses-Files-uploadFile-400-wrapper" style='margin-bottom: 10px;'>
-                               
-                            </div>
-                                                      <h3 id="examples-Files-uploadFile-title-409"></h3>
-                            <p id="examples-Files-uploadFile-description-409" class="marked"></p>
-                            <script>
-                              var responseFiles409_description = `an existing item already exists - TODO`;
-                              var responseFiles409_description_break = responseFiles409_description.indexOf('\n');
-                              if (responseFiles409_description_break == -1) {
-                                $("#examples-Files-uploadFile-title-409").text("Status: 409 - " + responseFiles409_description);
-                              } else {
-                                $("#examples-Files-uploadFile-title-409").text("Status: 409 - " + responseFiles409_description.substring(0, responseFiles409_description_break));
-                                $("#examples-Files-uploadFile-description-409").html(responseFiles409_description.substring(responseFiles409_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Files-uploadFile-409" class="nav nav-tabs nav-tabs-examples" >
-                             
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Files-uploadFile-409-wrapper" style='margin-bottom: 10px;'>
                                
                             </div>
                           -->
