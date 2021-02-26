@@ -10,7 +10,8 @@ export interface IXeroClientConfig {
   scopes: string[],
   state?: string,
   httpTimeout?: number
-}
+};
+
 export interface XeroIdToken {
   nbf: number
   exp: number
@@ -29,7 +30,7 @@ export interface XeroIdToken {
   given_name: string
   family_name: string
   amr: string[]
-}
+};
 
 export interface XeroAccessToken {
   nbf: number
@@ -45,7 +46,7 @@ export interface XeroAccessToken {
   jti: string
   scope: string[]
   amr: string[]
-}
+};
 
 export class XeroClient {
   constructor(readonly config?: IXeroClientConfig) {
@@ -57,10 +58,10 @@ export class XeroClient {
     this.bankFeedsApi = new xero.BankFeedsApi();
     this.payrollUKApi = new xero.PayrollUkApi();
     this.payrollNZApi = new xero.PayrollNzApi();
-  }
+  };
 
-  private tokenSet: TokenSet = new TokenSet
-  private _tenants: any[] = []
+  private tokenSet: TokenSet = new TokenSet;
+  private _tenants: any[] = [];
 
   readonly accountingApi: xero.AccountingApi;
   readonly assetApi: xero.AssetApi;
@@ -77,7 +78,7 @@ export class XeroClient {
     return this._tenants;
   }
 
-  async initialize() {
+  public async initialize() {
     if (this.config) {
       custom.setHttpOptionsDefaults({
         retry: {
@@ -92,14 +93,14 @@ export class XeroClient {
         redirect_uris: this.config.redirectUris,
       });
 
-      this.openIdClient[custom.clock_tolerance] = 5
+      this.openIdClient[custom.clock_tolerance] = 5;
     }
-    return this
+    return this;
   }
 
-  async buildConsentUrl() {
-    await this.initialize()
-    let url
+  public async buildConsentUrl() {
+    await this.initialize();
+    let url;
     if (this.config) {
       url = this.openIdClient.authorizationUrl({
         redirect_uri: this.config.redirectUris[0],
@@ -110,48 +111,54 @@ export class XeroClient {
     return url;
   }
 
-  async apiCallback(callbackUrl: string): Promise<TokenSet> {
-    const params = this.openIdClient.callbackParams(callbackUrl)
-    const check = { ...params }
+  public async apiCallback(callbackUrl: string): Promise<TokenSet> {
+    const params = this.openIdClient.callbackParams(callbackUrl);
+    const check = { ...params };
     if (this.config.scopes.includes('openid')) {
       this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
     } else {
       this.tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
     }
     this.setAccessToken();
-    return this.tokenSet
-  }
-
-  async disconnect(connectionId: string): Promise<TokenSet> {
-    await this.queryApi('DELETE', `https://api.xero.com/connections/${connectionId}`)
-    this.setAccessToken();
-    return this.tokenSet
-  }
-
-  readIdTokenClaims() {
-    return this.tokenSet.claims();
-  }
-
-  readTokenSet() {
     return this.tokenSet;
   }
 
-  setTokenSet(tokenSet: TokenSet) {
+  public async disconnect(connectionId: string): Promise<TokenSet> {
+    await this.queryApi('DELETE', `https://api.xero.com/connections/${connectionId}`);
+    this.setAccessToken();
+    return this.tokenSet;
+  }
+
+  public readTokenSet() {
+    return this.tokenSet;
+  }
+
+  public setTokenSet(tokenSet: TokenSet) {
     this.tokenSet = tokenSet;
     this.setAccessToken();
   }
 
-  async refreshToken() {
+  public async refreshToken() {
     if (!this.tokenSet) {
       throw new Error('tokenSet is not defined');
     }
     const refreshedTokenSet = await this.openIdClient.refresh(this.tokenSet.refresh_token);
-    this.tokenSet = refreshedTokenSet
+    this.tokenSet = refreshedTokenSet;
     this.setAccessToken();
-    return this.tokenSet
+    return this.tokenSet;
   }
 
-  encodeBody(params) {
+  public async revokeToken() {
+    if (!this.tokenSet) {
+      throw new Error('tokenSet is not defined');
+    }
+    await this.openIdClient.revoke(this.tokenSet.refresh_token);
+    this.tokenSet = new TokenSet;
+    this._tenants = [];
+    return;
+  }
+
+  private encodeBody(params) {
     var formBody: any = [];
     for (var property in params) {
       var encodedKey = encodeURIComponent(property);
@@ -161,24 +168,24 @@ export class XeroClient {
     return formBody.join("&");
   }
 
-  formatMsDate(dateString: string) {
-    const epoch = Date.parse(dateString)
-    return "/Date(" + epoch + "+0000)/"
+  public formatMsDate(dateString: string) {
+    const epoch = Date.parse(dateString);
+    return "/Date(" + epoch + "+0000)/";
   }
 
-  async refreshWithRefreshToken(clientId, clientSecret, refreshToken) {
-    const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken)
-    const tokenSet = JSON.parse(result.body)
-    this.tokenSet = tokenSet
+  public async refreshWithRefreshToken(clientId, clientSecret, refreshToken) {
+    const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken);
+    const tokenSet = JSON.parse(result.body);
+    this.tokenSet = tokenSet;
     this.setAccessToken();
-    return this.tokenSet
+    return this.tokenSet;
   }
 
-  async postWithRefreshToken(clientId, clientSecret, refreshToken) {
+  private async postWithRefreshToken(clientId, clientSecret, refreshToken) {
     const body = {
       grant_type: 'refresh_token',
       refresh_token: refreshToken
-    }
+    };
 
     return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
       request({
@@ -203,7 +210,7 @@ export class XeroClient {
     });
   }
 
-  async updateTenants(fullOrgDetails: boolean = true) {
+  public async updateTenants(fullOrgDetails: boolean = true) {
     const result = await this.queryApi('GET', 'https://api.xero.com/connections');
     let tenants = result.body.map(connection => connection);
 
@@ -224,7 +231,7 @@ export class XeroClient {
     return tenants;
   }
 
-  async queryApi(method, uri) {
+  private async queryApi(method, uri) {
     return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
       request({
         method,
