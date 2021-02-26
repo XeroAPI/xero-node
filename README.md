@@ -341,4 +341,7 @@ await xero.readTokenSet()
 
 const tokenSet = await xero.readTokenSet()
 await xero.setTokenSet(tokenSet)
+
+// You can revoke a user's refresh token and remove all their connections to your app by making a request to the revocation endpoint.
+await xero.revokeToken()
 ```
