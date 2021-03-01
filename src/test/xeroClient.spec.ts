@@ -36,6 +36,8 @@ describe('the XeroClient', () => {
     disconnect = nock('https://api.xero.com')
       .delete(`/connections/${connectionsResponse[0].tenantId}`)
       .reply(200, tokenSet);
+
+    sinon.stub(xero.openIdClient, 'revoke').returns(undefined);
   })
 
   afterEach(() => {
@@ -50,19 +52,19 @@ describe('the XeroClient', () => {
     });
 
     it('buildConsentUrl() returns the state in the auth url', async () => {
-        const authUrlWithoutState = await xero.buildConsentUrl()
-        expect(authUrlWithoutState.includes('state=12345')).not.toEqual(true);
-        const xeroWithState = new XeroClient({
-            clientId: 'YOUR_CLIENT_ID',
-            clientSecret: 'YOUR_CLIENT_SECRET',
-            redirectUris: [`http://localhost:5000/callback`],
-            scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
-            state: '12345'
-        });
-        expect(xeroWithState.config.state).toEqual('12345');
+      const authUrlWithoutState = await xero.buildConsentUrl()
+      expect(authUrlWithoutState.includes('state=12345')).not.toEqual(true);
+      const xeroWithState = new XeroClient({
+        clientId: 'YOUR_CLIENT_ID',
+        clientSecret: 'YOUR_CLIENT_SECRET',
+        redirectUris: [`http://localhost:5000/callback`],
+        scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
+        state: '12345'
+      });
+      expect(xeroWithState.config.state).toEqual('12345');
 
-        const authUrlWithState = await xeroWithState.buildConsentUrl();
-        expect(authUrlWithState.includes('state=12345')).toEqual(true);
+      const authUrlWithState = await xeroWithState.buildConsentUrl();
+      expect(authUrlWithState.includes('state=12345')).toEqual(true);
     });
 
     it('allows for the configuration of the openid-client httpTimeout', async () => {
@@ -128,5 +130,11 @@ describe('the XeroClient', () => {
       const xeroTokenSet = await xero.readTokenSet()
       expect(xeroTokenSet.id_token).toEqual(tokenSetJson.id_token)
     });
+
+    it('revokeToken() revokes token and clears tokenset and tenants and returns undefined', async () => {
+      expect(await xero.revokeToken()).toEqual(undefined);
+      expect(xero.tenants).toEqual([]);
+      expect(xero.readTokenSet()).toEqual({});
+    })
   })
 })
