@@ -68,7 +68,7 @@ export enum AccountingApiApiKeys {
 
 export class AccountingApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 

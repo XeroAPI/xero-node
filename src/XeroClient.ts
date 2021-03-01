@@ -1,4 +1,4 @@
-import { Issuer, TokenSet, custom } from 'openid-client';
+import { Client, Issuer, TokenSet, custom } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
@@ -72,7 +72,7 @@ export class XeroClient {
   readonly payrollUKApi: xero.PayrollUkApi;
   readonly payrollNZApi: xero.PayrollNzApi;
 
-  openIdClient: any; // from openid-client
+  openIdClient: Client; // from openid-client
 
   get tenants(): any[] {
     return this._tenants;
