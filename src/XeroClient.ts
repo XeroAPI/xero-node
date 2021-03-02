@@ -1,4 +1,4 @@
-import { Issuer, TokenSet, custom } from 'openid-client';
+import { Client, Issuer, TokenSet, custom } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
@@ -60,7 +60,7 @@ export class XeroClient {
     this.payrollNZApi = new xero.PayrollNzApi();
   };
 
-  private tokenSet: TokenSet = new TokenSet;
+  private _tokenSet: TokenSet = new TokenSet;
   private _tenants: any[] = [];
 
   readonly accountingApi: xero.AccountingApi;
@@ -72,13 +72,13 @@ export class XeroClient {
   readonly payrollUKApi: xero.PayrollUkApi;
   readonly payrollNZApi: xero.PayrollNzApi;
 
-  openIdClient: any; // from openid-client
+  openIdClient: Client; // from openid-client
 
   get tenants(): any[] {
     return this._tenants;
   }
 
-  public async initialize() {
+  public async initialize(): Promise<XeroClient> {
     if (this.config) {
       custom.setHttpOptionsDefaults({
         retry: {
@@ -98,7 +98,7 @@ export class XeroClient {
     return this;
   }
 
-  public async buildConsentUrl() {
+  public async buildConsentUrl(): Promise<string> {
     await this.initialize();
     let url;
     if (this.config) {
@@ -115,50 +115,50 @@ export class XeroClient {
     const params = this.openIdClient.callbackParams(callbackUrl);
     const check = { ...params };
     if (this.config.scopes.includes('openid')) {
-      this.tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
+      this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
     } else {
-      this.tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
+      this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
     }
     this.setAccessToken();
-    return this.tokenSet;
+    return this._tokenSet;
   }
 
   public async disconnect(connectionId: string): Promise<TokenSet> {
     await this.queryApi('DELETE', `https://api.xero.com/connections/${connectionId}`);
     this.setAccessToken();
-    return this.tokenSet;
+    return this._tokenSet;
   }
 
-  public readTokenSet() {
-    return this.tokenSet;
+  public readTokenSet(): TokenSet {
+    return this._tokenSet;
   }
 
-  public setTokenSet(tokenSet: TokenSet) {
-    this.tokenSet = tokenSet;
+  public setTokenSet(tokenSet: TokenSet): void {
+    this._tokenSet = new TokenSet(tokenSet);
     this.setAccessToken();
   }
 
-  public async refreshToken() {
-    if (!this.tokenSet) {
+  public async refreshToken(): Promise<TokenSet> {
+    if (!this._tokenSet) {
       throw new Error('tokenSet is not defined');
     }
-    const refreshedTokenSet = await this.openIdClient.refresh(this.tokenSet.refresh_token);
-    this.tokenSet = refreshedTokenSet;
+    const refreshedTokenSet = await this.openIdClient.refresh(this._tokenSet.refresh_token);
+    this._tokenSet = new TokenSet(refreshedTokenSet);
     this.setAccessToken();
-    return this.tokenSet;
+    return this._tokenSet;
   }
 
-  public async revokeToken() {
-    if (!this.tokenSet) {
+  public async revokeToken(): Promise<undefined> {
+    if (!this._tokenSet) {
       throw new Error('tokenSet is not defined');
     }
-    await this.openIdClient.revoke(this.tokenSet.refresh_token);
-    this.tokenSet = new TokenSet;
+    await this.openIdClient.revoke(this._tokenSet.refresh_token);
+    this._tokenSet = new TokenSet;
     this._tenants = [];
     return;
   }
 
-  private encodeBody(params) {
+  private encodeBody(params): string {
     var formBody: any = [];
     for (var property in params) {
       var encodedKey = encodeURIComponent(property);
@@ -168,20 +168,20 @@ export class XeroClient {
     return formBody.join("&");
   }
 
-  public formatMsDate(dateString: string) {
+  public formatMsDate(dateString: string): string {
     const epoch = Date.parse(dateString);
     return "/Date(" + epoch + "+0000)/";
   }
 
-  public async refreshWithRefreshToken(clientId, clientSecret, refreshToken) {
+  public async refreshWithRefreshToken(clientId, clientSecret, refreshToken): Promise<TokenSet> {
     const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken);
     const tokenSet = JSON.parse(result.body);
-    this.tokenSet = tokenSet;
+    this._tokenSet = new TokenSet(tokenSet);
     this.setAccessToken();
-    return this.tokenSet;
+    return this._tokenSet;
   }
 
-  private async postWithRefreshToken(clientId, clientSecret, refreshToken) {
+  private async postWithRefreshToken(clientId, clientSecret, refreshToken): Promise<{ response: http.IncomingMessage; body: string }> {
     const body = {
       grant_type: 'refresh_token',
       refresh_token: refreshToken
@@ -210,7 +210,7 @@ export class XeroClient {
     });
   }
 
-  public async updateTenants(fullOrgDetails: boolean = true) {
+  public async updateTenants(fullOrgDetails: boolean = true): Promise<any[]> {
     const result = await this.queryApi('GET', 'https://api.xero.com/connections');
     let tenants = result.body.map(connection => connection);
 
@@ -231,13 +231,13 @@ export class XeroClient {
     return tenants;
   }
 
-  private async queryApi(method, uri) {
+  private async queryApi(method, uri): Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }> {
     return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
       request({
         method,
         uri,
         auth: {
-          bearer: this.tokenSet.access_token
+          bearer: this._tokenSet.access_token
         },
         json: true
       }, (error, response, body) => {
@@ -254,8 +254,8 @@ export class XeroClient {
     });
   }
 
-  private setAccessToken() {
-    const accessToken = this.tokenSet.access_token;
+  private setAccessToken(): void {
+    const accessToken = this._tokenSet.access_token;
     if (typeof accessToken === 'undefined') {
       throw new Error('Access token is undefined!');
     }
