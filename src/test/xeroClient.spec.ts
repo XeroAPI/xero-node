@@ -1,7 +1,8 @@
-import { XeroClient } from "../XeroClient"
-const tokenSetJson = require("./mocks/tokenSet.json")
-const connectionsResponse = require("./mocks/connectionsResponse.json")
-const getOrganisationResponse = require("./mocks/getOrganisationResponse.json")
+import { XeroClient } from "../XeroClient";
+const tokenSetJson = require("./mocks/tokenSet.json");
+const refreshedTokenSetJson = require("./mocks/refreshedTokenSet.json");
+const connectionsResponse = require("./mocks/connectionsResponse.json");
+const getOrganisationResponse = require("./mocks/getOrganisationResponse.json");
 import nock from 'nock';
 import sinon from 'sinon';
 
@@ -13,9 +14,9 @@ const xero = new XeroClient({
 });
 
 const tokenSet: any = tokenSetJson
+const refreshedTokenSet: any = refreshedTokenSetJson
 let connect
 let disconnect
-let refresh
 
 describe('the XeroClient', () => {
   beforeEach(async () => {
@@ -23,7 +24,7 @@ describe('the XeroClient', () => {
 
     xero.setTokenSet(tokenSet)
 
-    sinon.stub(xero.openIdClient, 'refresh').returns(tokenSet);
+    sinon.stub(xero.openIdClient, 'refresh').returns(refreshedTokenSet);
 
     sinon.stub(xero.accountingApi, 'getOrganisations').returns(getOrganisationResponse);
 
@@ -31,7 +32,7 @@ describe('the XeroClient', () => {
       .get('/connections')
       .reply(200, connectionsResponse);
 
-    sinon.stub(xero, 'postWithRefreshToken').returns({ body: JSON.stringify(tokenSetJson) });
+    sinon.stub(xero, 'postWithRefreshToken').returns({ body: JSON.stringify(refreshedTokenSet) });
 
     disconnect = nock('https://api.xero.com')
       .delete(`/connections/${connectionsResponse[0].tenantId}`)
@@ -83,10 +84,12 @@ describe('the XeroClient', () => {
       const xeroClient = await xero.initialize()
       expect(xeroClient).toHaveProperty('accountingApi')
       expect(xeroClient).toHaveProperty('assetApi')
+      expect(xeroClient).toHaveProperty('filesApi')
       expect(xeroClient).toHaveProperty('bankFeedsApi')
       expect(xeroClient).toHaveProperty('projectApi')
       expect(xeroClient).toHaveProperty('payrollAUApi')
       expect(xeroClient).toHaveProperty('payrollUKApi')
+      expect(xeroClient).toHaveProperty('payrollNZApi')
     });
 
     it('readTokenSet() returns the tokenSet', async () => {
@@ -120,7 +123,9 @@ describe('the XeroClient', () => {
     });
 
     it('refreshToken() refreshes token and returns the tokenSet', async () => {
-      expect(await xero.refreshToken()).toEqual(tokenSet)
+      expect(await xero.readTokenSet()).toEqual(tokenSet);
+      await xero.refreshToken();
+      expect(await xero.readTokenSet()).toEqual(refreshedTokenSet);
     });
 
     it('refreshWithRefreshToken() refreshes token with tokenSetParameter and returns the tokenSet', async () => {
@@ -129,6 +134,7 @@ describe('the XeroClient', () => {
       await xero.setTokenSet(updatedTokenSet)
       const xeroTokenSet = await xero.readTokenSet()
       expect(xeroTokenSet.id_token).toEqual(tokenSetJson.id_token)
+      expect(xeroTokenSet.expires_at).toBeGreaterThan(tokenSetJson.expires_at)
     });
 
     it('revokeToken() revokes token and clears tokenset and tenants and returns undefined', async () => {
