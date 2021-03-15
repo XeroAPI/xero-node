@@ -298,6 +298,87 @@ const contentType = mime.lookup(filename);
 const uploadFile = await xero.filesApi.uploadFile(tenantId, folderId, readStream, filename, contentType);
 ```
 
+# Preventing CSRF in using Xero-Node
+```js
+// Configure the XeroClient including a state param.
+
+const xero = new XeroClient({
+  clientId: client_id,
+  clientSecret: client_secret,
+  redirectUris: [redirectUrl],
+  scopes: scopes.split(" "),
+  state: "imaParam=look-at-me-go",
+  httpTimeout: 2000
+});
+
+// When xero.buildConsentUrl is called, xero-node calls openid-client authorizationUrl method, passing redirect_uri, scope, and state (if present) as arguments and returns a formatted url string made from the params. The user can be directed to the consentUrl to begin the auth process with Xero. When the auth process is complete Xero redirects the user to the specified callback route and passes along params including state if it was initially provided.
+
+public async buildConsentUrl(): Promise<string> {
+  await this.initialize();
+  let url;
+  if (this.config) {
+    url = this.openIdClient.authorizationUrl({
+      redirect_uri: this.config.redirectUris[0],
+      scope: this.config.scopes.join(' ') || 'openid email profile',
+      state: this.config.state
+    });
+  }
+  return url;
+}
+
+// When xero.apiCallback is called with the callback url, it passes in the url string that Xero redirected to as an argument to openid-client callbackParams method, which parses the url into a params object. IMPORTANT NOTE: see how at this step a check object is created with a state property equal to the XeroClient config state. At this point openid-client takes over verifying params.state and check.state match if provided.
+
+public async apiCallback(callbackUrl: string): Promise<TokenSet> {
+  const params = this.openIdClient.callbackParams(callbackUrl);
+  const check = { state: this.config.state };
+  console.log('params ', params);
+  console.log('check ', check)
+  if (this.config.scopes.includes('openid')) {
+    this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
+  } else {
+    this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
+  }
+  this.setAccessToken();
+  return this._tokenSet;
+}
+
+// params  {
+//   code: 'c371cae7d94ca3cde3bcee64a2efb0897e6b76eacd687e86d63da93f6a17ef2a',
+//   state: 'imaParam=look-at-me-go',
+//   session_state: '1Vi40jJJ5ThQyjvN6LaZZs33woGsKBYuEMvMDRDxamc.854c0568ee3b2f7e2866558069609814'
+// }
+// check  { state: 'imaParam=look-at-me-go' }
+
+// If the callback url state param is different from the XeroClient config state or missing, like so:
+
+public async apiCallback(callbackUrl: string): Promise<TokenSet> {
+  const params = this.openIdClient.callbackParams(callbackUrl);
+  params.state = 'imaParam=not-my-state';
+  const check = { state: this.config.state };
+  console.log('params ', params);
+  console.log('check ', check)
+  if (this.config.scopes.includes('openid')) {
+    this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
+  } else {
+    this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
+  }
+  this.setAccessToken();
+  return this._tokenSet;
+}
+
+// params  {
+//   code: 'bb9f5ccf3491a12d747dd2a61b5ef53e453b5c1589b93a8ab4718f55a77ac144',
+//   state: 'imaParam=not-my-state',
+//   session_state: 'IPqi3XUI1OOT-rigZBtJSUTYDkcSx9wlepEIHDjcgyU.d6889179353c1738558aa83646afec91'
+// }
+// check  { state: 'imaParam=look-at-me-go' }
+
+// the openid-client library throws an error:
+
+// RPError: state mismatch, expected imaParam=look-at-me-go, got: imaParam=not-my-state
+```
+For a deeper dive into openid-client functionality, check out the repo https://github.com/panva/node-openid-client.
+
 # Sample App
 For more robust examples in how to utilize our accounting api we have *(roughly)* every single endpoint mapped out with an example in our sample app - complete with showing the Xero data dependencies required for interaction with many objects ( ie. types, assoc. accounts, tax types, date formats).
 
