@@ -298,7 +298,7 @@ const contentType = mime.lookup(filename);
 const uploadFile = await xero.filesApi.uploadFile(tenantId, folderId, readStream, filename, contentType);
 ```
 
-# Preventing CSRF in using Xero-Node
+# Preventing CSRF Using Xero-Node
 ```js
 // Configure the XeroClient including a state param.
 
@@ -376,6 +376,185 @@ public async apiCallback(callbackUrl: string): Promise<TokenSet> {
 // the openid-client library throws an error:
 
 // RPError: state mismatch, expected imaParam=look-at-me-go, got: imaParam=not-my-state
+```
+For a deeper dive into openid-client functionality, check out the repo https://github.com/panva/node-openid-client.
+
+# JWT Verification Using Xero-Node
+```js
+// JWT verification is baked into the openid-client library
+// When xero.apiCallback is called, either openid-client callback or oauthCallback method is called to retrieve a TokenSet
+
+public async apiCallback(callbackUrl: string): Promise<TokenSet> {
+  const params = this.openIdClient.callbackParams(callbackUrl);
+  const check = { state: this.config.state };
+  if (this.config.scopes.includes('openid')) {
+    this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
+  } else {
+    this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
+  }
+  this.setAccessToken();
+  return this._tokenSet;
+}
+
+// Both the callback and oauthCallback methods call openid-client validateJARM, which calls validateJWT
+
+async validateJARM(response) {
+  const expectedAlg = this.authorization_signed_response_alg;
+  const { payload } = await this.validateJWT(response, expectedAlg, ['iss', 'exp', 'aud']);
+  return pickCb(payload);
+}
+
+// the TLDR of this code block is that if openid-client fails to validate the JWT signature it will throw and error
+
+async validateJWT(jwt, expectedAlg, required = ['iss', 'sub', 'aud', 'exp', 'iat']) {
+  const isSelfIssued = this.issuer.issuer === 'https://self-issued.me';
+  const timestamp = now();
+  let header;
+  let payload;
+  try {
+    ({ header, payload } = jose.JWT.decode(jwt, { complete: true }));
+  } catch (err) {
+    throw new RPError({
+      printf: ['failed to decode JWT (%s: %s)', err.name, err.message],
+      jwt,
+    });
+  }
+
+  if (header.alg !== expectedAlg) {
+    throw new RPError({
+      printf: ['unexpected JWT alg received, expected %s, got: %s', expectedAlg, header.alg],
+      jwt,
+    });
+  }
+
+  if (isSelfIssued) {
+    required = [...required, 'sub_jwk']; // eslint-disable-line no-param-reassign
+  }
+
+  required.forEach(verifyPresence.bind(undefined, payload, jwt));
+
+  if (payload.iss !== undefined) {
+    let expectedIss = this.issuer.issuer;
+
+    if (aadIssValidation) {
+      expectedIss = this.issuer.issuer.replace('{tenantid}', payload.tid);
+    }
+
+    if (payload.iss !== expectedIss) {
+      throw new RPError({
+        printf: ['unexpected iss value, expected %s, got: %s', expectedIss, payload.iss],
+        jwt,
+      });
+    }
+  }
+
+  if (payload.iat !== undefined) {
+    if (!Number.isInteger(payload.iat)) {
+      throw new RPError({
+        message: 'JWT iat claim must be a JSON number integer',
+        jwt,
+      });
+    }
+  }
+
+  if (payload.nbf !== undefined) {
+    if (!Number.isInteger(payload.nbf)) {
+      throw new RPError({
+        message: 'JWT nbf claim must be a JSON number integer',
+        jwt,
+      });
+    }
+    if (payload.nbf > timestamp + this[CLOCK_TOLERANCE]) {
+      throw new RPError({
+        printf: ['JWT not active yet, now %i, nbf %i', timestamp + this[CLOCK_TOLERANCE], payload.nbf],
+        jwt,
+      });
+    }
+  }
+
+  if (payload.exp !== undefined) {
+    if (!Number.isInteger(payload.exp)) {
+      throw new RPError({
+        message: 'JWT exp claim must be a JSON number integer',
+        jwt,
+      });
+    }
+    if (timestamp - this[CLOCK_TOLERANCE] >= payload.exp) {
+      throw new RPError({
+        printf: ['JWT expired, now %i, exp %i', timestamp - this[CLOCK_TOLERANCE], payload.exp],
+        jwt,
+      });
+    }
+  }
+
+  if (payload.aud !== undefined) {
+    if (Array.isArray(payload.aud)) {
+      if (payload.aud.length > 1 && !payload.azp) {
+        throw new RPError({
+          message: 'missing required JWT property azp',
+          jwt,
+        });
+      }
+
+      if (!payload.aud.includes(this.client_id)) {
+        throw new RPError({
+          printf: ['aud is missing the client_id, expected %s to be included in %j', this.client_id, payload.aud],
+          jwt,
+        });
+      }
+    } else if (payload.aud !== this.client_id) {
+      throw new RPError({
+        printf: ['aud mismatch, expected %s, got: %s', this.client_id, payload.aud],
+        jwt,
+      });
+    }
+  }
+
+  if (payload.azp !== undefined && payload.azp !== this.client_id) {
+    throw new RPError({
+      printf: ['azp must be the client_id, expected %s, got: %s', this.client_id, payload.azp],
+      jwt,
+    });
+  }
+
+  let key;
+
+  if (isSelfIssued) {
+    try {
+      assert(isPlainObject(payload.sub_jwk));
+      key = jose.JWK.asKey(payload.sub_jwk);
+      assert.equal(key.type, 'public');
+    } catch (err) {
+      throw new RPError({
+        message: 'failed to use sub_jwk claim as an asymmetric JSON Web Key',
+        jwt,
+      });
+    }
+    if (key.thumbprint !== payload.sub) {
+      throw new RPError({
+        message: 'failed to match the subject with sub_jwk',
+        jwt,
+      });
+    }
+  } else if (header.alg.startsWith('HS')) {
+    key = await this.joseSecret();
+  } else if (header.alg !== 'none') {
+    key = await this.issuer.queryKeyStore(header);
+  }
+
+  if (!key && header.alg === 'none') {
+    return { protected: header, payload };
+  }
+
+  try {
+    return jose.JWS.verify(jwt, key, { complete: true });
+  } catch (err) {
+    throw new RPError({
+      message: 'failed to validate JWT signature',
+      jwt,
+    });
+  }
+}
 ```
 For a deeper dive into openid-client functionality, check out the repo https://github.com/panva/node-openid-client.
 
