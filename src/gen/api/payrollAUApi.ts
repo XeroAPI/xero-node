@@ -39,7 +39,7 @@ export enum PayrollAuApiApiKeys {
 
 export class PayrollAuApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.2'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.3'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 

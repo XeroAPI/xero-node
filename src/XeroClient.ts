@@ -113,7 +113,7 @@ export class XeroClient {
 
   public async apiCallback(callbackUrl: string): Promise<TokenSet> {
     const params = this.openIdClient.callbackParams(callbackUrl);
-    const check = { ...params };
+    const check = { state: this.config.state };
     if (this.config.scopes.includes('openid')) {
       this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
     } else {
