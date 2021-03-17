@@ -298,6 +298,18 @@ const contentType = mime.lookup(filename);
 const uploadFile = await xero.filesApi.uploadFile(tenantId, folderId, readStream, filename, contentType);
 ```
 
+# Querying With Filters And Pagination
+```js
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
+const where = 'Status=="AUTHORISED" AND Type=="SPEND"';
+const order = 'Reference ASC';
+const page = 1;
+const unitdp = 4;
+
+const response = await xero.accountingApi.getBankTransactions(xeroTenantId, ifModifiedSince, where, order, page, unitdp);
+```
+
 # Preventing CSRF Using Xero-Node
 ```js
 // Configure the XeroClient including a state param.
