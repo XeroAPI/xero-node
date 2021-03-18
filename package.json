@@ -11,6 +11,7 @@
     "url": "git://github.com/XeroAPI/xero-node.git"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "build": "tsc",
     "test": "jest"
   },
@@ -20,6 +21,7 @@
     "@types/request": "^2.48.5",
     "jest": "^26.6.3",
     "nock": "^13.0.11",
+    "node-notifier": "^8.0.1",
     "open": "^8.0.3",
     "prompt": "^1.1.0",
     "sinon": "^9.2.4",
@@ -29,5 +31,8 @@
   "dependencies": {
     "openid-client": "^4.5.1",
     "request": "^2.88.0"
+  },
+  "resolutions": {
+    "node-notifier": "^8.0.1"
   }
 }
