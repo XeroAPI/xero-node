@@ -1,6 +1,6 @@
 {
   "name": "xero-node",
-  "version": "4.10.4",
+  "version": "4.11.0",
   "description": "Xero NodeJS OAuth 2.0 client for xero-node",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,7 @@
     "url": "git://github.com/XeroAPI/xero-node.git"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
+    "prepare": "npx npm-force-resolutions",
     "build": "tsc",
     "test": "jest"
   },
