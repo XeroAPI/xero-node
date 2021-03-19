@@ -11,7 +11,6 @@
     "url": "git://github.com/XeroAPI/xero-node.git"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "build": "tsc",
     "test": "jest"
   },
