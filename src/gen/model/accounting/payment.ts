@@ -60,6 +60,10 @@ export class Payment {
     */
     'paymentID'?: string;
     /**
+    * Present if the payment was created as part of a batch.
+    */
+    'batchPaymentID'?: string;
+    /**
     * The suppliers bank account number the payment is being made to
     */
     'bankAccountNumber'?: string;
@@ -174,6 +178,11 @@ export class Payment {
         {
             "name": "paymentID",
             "baseName": "PaymentID",
+            "type": "string"
+        },
+        {
+            "name": "batchPaymentID",
+            "baseName": "BatchPaymentID",
             "type": "string"
         },
         {

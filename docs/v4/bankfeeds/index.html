@@ -1110,6 +1110,12 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "The cheque/check number",
       "example" : "021"
+    },
+    "transactionType" : {
+      "maximum" : 30,
+      "type" : "string",
+      "description" : "Descriptive transaction type",
+      "example" : "Refund"
     }
   },
   "description" : "the lines details for a statement"
@@ -1188,7 +1194,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.9.0</div>
+              <div class="app-desc">Version: 2.10.3</div>
             <hr>
             <div id="app-description" class="app-desc">
                 The Bank Feeds API is a closed API that is only available to financial institutions that have an established financial services partnership with Xero. If you're an existing financial services partner that wants access, contact your local Partner Manager. If you're a financial institution who wants to provide bank feeds to your business customers, contact us to become a financial services partner.
@@ -1575,27 +1581,27 @@ $(document).ready(function() {
 
 <!--
                           <h2>Responses</h2>
-                            <h3 id="examples-BankFeeds-createFeedConnections-title-201"></h3>
-                            <p id="examples-BankFeeds-createFeedConnections-description-201" class="marked"></p>
+                            <h3 id="examples-BankFeeds-createFeedConnections-title-202"></h3>
+                            <p id="examples-BankFeeds-createFeedConnections-description-202" class="marked"></p>
                             <script>
-                              var responseBankFeeds201_description = `success new feed connection(s)response`;
-                              var responseBankFeeds201_description_break = responseBankFeeds201_description.indexOf('\n');
-                              if (responseBankFeeds201_description_break == -1) {
-                                $("#examples-BankFeeds-createFeedConnections-title-201").text("Status: 201 - " + responseBankFeeds201_description);
+                              var responseBankFeeds202_description = `success new feed connection(s)response`;
+                              var responseBankFeeds202_description_break = responseBankFeeds202_description.indexOf('\n');
+                              if (responseBankFeeds202_description_break == -1) {
+                                $("#examples-BankFeeds-createFeedConnections-title-202").text("Status: 202 - " + responseBankFeeds202_description);
                               } else {
-                                $("#examples-BankFeeds-createFeedConnections-title-201").text("Status: 201 - " + responseBankFeeds201_description.substring(0, responseBankFeeds201_description_break));
-                                $("#examples-BankFeeds-createFeedConnections-description-201").html(responseBankFeeds201_description.substring(responseBankFeeds201_description_break));
+                                $("#examples-BankFeeds-createFeedConnections-title-202").text("Status: 202 - " + responseBankFeeds202_description.substring(0, responseBankFeeds202_description_break));
+                                $("#examples-BankFeeds-createFeedConnections-description-202").html(responseBankFeeds202_description.substring(responseBankFeeds202_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-BankFeeds-createFeedConnections-201" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-BankFeeds-createFeedConnections-202" class="nav nav-tabs nav-tabs-examples" >
                              
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-BankFeeds-createFeedConnections-201-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-BankFeeds-createFeedConnections-202-schema">Schema</a>
                                 </li>
                                 <li class="">
-                                    <a data-toggle="tab" href="#responses-BankFeeds-createFeedConnections-201-example">Response Example</a>
+                                    <a data-toggle="tab" href="#responses-BankFeeds-createFeedConnections-202-example">Response Example</a>
                                 </li>
                                
 
@@ -1603,10 +1609,10 @@ $(document).ready(function() {
                             </ul>
 
 
-                            <div class="tab-content" id="responses-BankFeeds-createFeedConnections-201-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-BankFeeds-createFeedConnections-202-wrapper" style='margin-bottom: 10px;'>
                                
-                                <div class="tab-pane active" id="responses-BankFeeds-createFeedConnections-201-schema">
-                                  <div id="responses-BankFeeds-createFeedConnections-schema-201" class="exampleStyle">
+                                <div class="tab-pane active" id="responses-BankFeeds-createFeedConnections-202-schema">
+                                  <div id="responses-BankFeeds-createFeedConnections-schema-202" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -1638,23 +1644,23 @@ $(document).ready(function() {
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-BankFeeds-createFeedConnections-201-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-BankFeeds-createFeedConnections-schema-201');
+                                        $('#responses-BankFeeds-createFeedConnections-202-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-BankFeeds-createFeedConnections-schema-202');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-BankFeeds-createFeedConnections-201-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-BankFeeds-createFeedConnections-202-schema-data' type='hidden' value=''></input>
                                 </div>
-                                <div class="tab-pane" id="examples-BankFeeds-createFeedConnections-201-example">
+                                <div class="tab-pane" id="examples-BankFeeds-createFeedConnections-202-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
                                                       <h3 id="examples-BankFeeds-createFeedConnections-title-400"></h3>
                             <p id="examples-BankFeeds-createFeedConnections-description-400" class="marked"></p>
                             <script>
-                              var responseBankFeeds400_description = `invalid input, object invalid`;
+                              var responseBankFeeds400_description = `failed to create new feed connection(s)response`;
                               var responseBankFeeds400_description_break = responseBankFeeds400_description.indexOf('\n');
                               if (responseBankFeeds400_description_break == -1) {
                                 $("#examples-BankFeeds-createFeedConnections-title-400").text("Status: 400 - " + responseBankFeeds400_description);
@@ -1667,6 +1673,13 @@ $(document).ready(function() {
 
                             <ul id="responses-detail-BankFeeds-createFeedConnections-400" class="nav nav-tabs nav-tabs-examples" >
                              
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-BankFeeds-createFeedConnections-400-schema">Schema</a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" href="#responses-BankFeeds-createFeedConnections-400-example">Response Example</a>
+                                </li>
+                               
 
 
                             </ul>
@@ -1674,39 +1687,8 @@ $(document).ready(function() {
 
                             <div class="tab-content" id="responses-BankFeeds-createFeedConnections-400-wrapper" style='margin-bottom: 10px;'>
                                
-                            </div>
-                                                      <h3 id="examples-BankFeeds-createFeedConnections-title-409"></h3>
-                            <p id="examples-BankFeeds-createFeedConnections-description-409" class="marked"></p>
-                            <script>
-                              var responseBankFeeds409_description = `failed to create new feed connection(s)response`;
-                              var responseBankFeeds409_description_break = responseBankFeeds409_description.indexOf('\n');
-                              if (responseBankFeeds409_description_break == -1) {
-                                $("#examples-BankFeeds-createFeedConnections-title-409").text("Status: 409 - " + responseBankFeeds409_description);
-                              } else {
-                                $("#examples-BankFeeds-createFeedConnections-title-409").text("Status: 409 - " + responseBankFeeds409_description.substring(0, responseBankFeeds409_description_break));
-                                $("#examples-BankFeeds-createFeedConnections-description-409").html(responseBankFeeds409_description.substring(responseBankFeeds409_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BankFeeds-createFeedConnections-409" class="nav nav-tabs nav-tabs-examples" >
-                             
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-BankFeeds-createFeedConnections-409-schema">Schema</a>
-                                </li>
-                                <li class="">
-                                    <a data-toggle="tab" href="#responses-BankFeeds-createFeedConnections-409-example">Response Example</a>
-                                </li>
-                               
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BankFeeds-createFeedConnections-409-wrapper" style='margin-bottom: 10px;'>
-                               
-                                <div class="tab-pane active" id="responses-BankFeeds-createFeedConnections-409-schema">
-                                  <div id="responses-BankFeeds-createFeedConnections-schema-409" class="exampleStyle">
+                                <div class="tab-pane active" id="responses-BankFeeds-createFeedConnections-400-schema">
+                                  <div id="responses-BankFeeds-createFeedConnections-schema-400" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -1714,7 +1696,19 @@ $(document).ready(function() {
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Error"
+        "$ref" : "#/components/schemas/FeedConnections"
+      },
+      "example" : {
+        "items" : [ {
+          "accountToken" : "foobar71760",
+          "status" : "REJECTED",
+          "error" : {
+            "type" : "invalid-request",
+            "title" : "Invalid Request",
+            "status" : 400,
+            "detail" : "For the request field 'AccountNumber' exceeded the maximum length of 40."
+          }
+        } ]
       }
     }
   }
@@ -1731,16 +1725,16 @@ $(document).ready(function() {
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-BankFeeds-createFeedConnections-409-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-BankFeeds-createFeedConnections-schema-409');
+                                        $('#responses-BankFeeds-createFeedConnections-400-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-BankFeeds-createFeedConnections-schema-400');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-BankFeeds-createFeedConnections-409-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-BankFeeds-createFeedConnections-400-schema-data' type='hidden' value=''></input>
                                 </div>
-                                <div class="tab-pane" id="examples-BankFeeds-createFeedConnections-409-example">
+                                <div class="tab-pane" id="examples-BankFeeds-createFeedConnections-400-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
@@ -1803,7 +1797,7 @@ public class BankFeedsApiExample {
 
         BankFeedsApi apiInstance = new BankFeedsApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        Statements statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350"}]}]}; // Statements | 
+        Statements statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009","transactionType":"Refund"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350","transactionType":"Currency Conversion Fee"}]}]}; // Statements | 
         try {
             Statements result = apiInstance.createStatements(xeroTenantId, statements);
             System.out.println(result);
@@ -1823,7 +1817,7 @@ public class BankFeedsApiExample {
     public static void main(String[] args) {
         BankFeedsApi apiInstance = new BankFeedsApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        Statements statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350"}]}]}; // Statements | 
+        Statements statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009","transactionType":"Refund"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350","transactionType":"Currency Conversion Fee"}]}]}; // Statements | 
         try {
             Statements result = apiInstance.createStatements(xeroTenantId, statements);
             System.out.println(result);
@@ -1845,7 +1839,7 @@ public class BankFeedsApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-Statements *statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350"}]}]}; //  (optional)
+Statements *statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009","transactionType":"Refund"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350","transactionType":"Currency Conversion Fee"}]}]}; //  (optional)
 
 BankFeedsApi *apiInstance = [[BankFeedsApi alloc] init];
 
@@ -1876,7 +1870,7 @@ await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 
-const statements:Statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350"}]}]};  // {Statements} 
+const statements:Statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009","transactionType":"Refund"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350","transactionType":"Currency Conversion Fee"}]}]};  // {Statements} 
 
 
 try {
@@ -1986,7 +1980,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .BankFeedsApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350"}]}]} # Statements |  (optional)
+statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009","transactionType":"Refund"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350","transactionType":"Currency Conversion Fee"}]}]} # Statements |  (optional)
 
 try: 
     # Creates one or more new statements
@@ -2001,7 +1995,7 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350"}]}]}; // Statements
+    let statements = {"items":[{"feedConnectionId":"6a4b9ff5-3a5f-4321-936b-4796163550f6","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123446422","payeeName":"StarLord90315","reference":"Foobar95578","chequeNumber":"12379009","transactionType":"Refund"}]},{"feedConnectionId":"2ebe6393-f3bb-48ab-9a0e-b04fa8585a70","startDate":"2019-08-11","endDate":"2019-08-11","startBalance":{"amount":"100","creditDebitIndicator":"CREDIT"},"endBalance":{"amount":"150","creditDebitIndicator":"CREDIT"},"statementLines":[{"postedDate":"2019-08-11","description":"My new line","amount":"50","creditDebitIndicator":"CREDIT","transactionId":"123449402","payeeName":"StarLord56705","reference":"Foobar67355","chequeNumber":"12379350","transactionType":"Currency Conversion Fee"}]}]}; // Statements
 
     let mut context = BankFeedsApi::Context::default();
     let result = client.createStatements(xeroTenantId, statements, &context).wait();
@@ -2106,7 +2100,8 @@ $(document).ready(function() {
             "transactionId" : "123446422",
             "payeeName" : "StarLord90315",
             "reference" : "Foobar95578",
-            "chequeNumber" : "12379009"
+            "chequeNumber" : "12379009",
+            "transactionType" : "Refund"
           } ]
         }, {
           "feedConnectionId" : "2ebe6393-f3bb-48ab-9a0e-b04fa8585a70",
@@ -2128,7 +2123,8 @@ $(document).ready(function() {
             "transactionId" : "123449402",
             "payeeName" : "StarLord56705",
             "reference" : "Foobar67355",
-            "chequeNumber" : "12379350"
+            "chequeNumber" : "12379350",
+            "transactionType" : "Currency Conversion Fee"
           } ]
         } ]
       }
@@ -4003,27 +3999,27 @@ Page size which specifies how many records per page will be returned (default 10
                             </table>
 <!--
                           <h2>Responses</h2>
-                            <h3 id="examples-BankFeeds-getFeedConnections-title-201"></h3>
-                            <p id="examples-BankFeeds-getFeedConnections-description-201" class="marked"></p>
+                            <h3 id="examples-BankFeeds-getFeedConnections-title-202"></h3>
+                            <p id="examples-BankFeeds-getFeedConnections-description-202" class="marked"></p>
                             <script>
-                              var responseBankFeeds201_description = `search results matching criteria returned with pagination and items array`;
-                              var responseBankFeeds201_description_break = responseBankFeeds201_description.indexOf('\n');
-                              if (responseBankFeeds201_description_break == -1) {
-                                $("#examples-BankFeeds-getFeedConnections-title-201").text("Status: 201 - " + responseBankFeeds201_description);
+                              var responseBankFeeds202_description = `search results matching criteria returned with pagination and items array`;
+                              var responseBankFeeds202_description_break = responseBankFeeds202_description.indexOf('\n');
+                              if (responseBankFeeds202_description_break == -1) {
+                                $("#examples-BankFeeds-getFeedConnections-title-202").text("Status: 202 - " + responseBankFeeds202_description);
                               } else {
-                                $("#examples-BankFeeds-getFeedConnections-title-201").text("Status: 201 - " + responseBankFeeds201_description.substring(0, responseBankFeeds201_description_break));
-                                $("#examples-BankFeeds-getFeedConnections-description-201").html(responseBankFeeds201_description.substring(responseBankFeeds201_description_break));
+                                $("#examples-BankFeeds-getFeedConnections-title-202").text("Status: 202 - " + responseBankFeeds202_description.substring(0, responseBankFeeds202_description_break));
+                                $("#examples-BankFeeds-getFeedConnections-description-202").html(responseBankFeeds202_description.substring(responseBankFeeds202_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-BankFeeds-getFeedConnections-201" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-BankFeeds-getFeedConnections-202" class="nav nav-tabs nav-tabs-examples" >
                              
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-BankFeeds-getFeedConnections-201-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-BankFeeds-getFeedConnections-202-schema">Schema</a>
                                 </li>
                                 <li class="">
-                                    <a data-toggle="tab" href="#responses-BankFeeds-getFeedConnections-201-example">Response Example</a>
+                                    <a data-toggle="tab" href="#responses-BankFeeds-getFeedConnections-202-example">Response Example</a>
                                 </li>
                                
 
@@ -4031,10 +4027,10 @@ Page size which specifies how many records per page will be returned (default 10
                             </ul>
 
 
-                            <div class="tab-content" id="responses-BankFeeds-getFeedConnections-201-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-BankFeeds-getFeedConnections-202-wrapper" style='margin-bottom: 10px;'>
                                
-                                <div class="tab-pane active" id="responses-BankFeeds-getFeedConnections-201-schema">
-                                  <div id="responses-BankFeeds-getFeedConnections-schema-201" class="exampleStyle">
+                                <div class="tab-pane active" id="responses-BankFeeds-getFeedConnections-202-schema">
+                                  <div id="responses-BankFeeds-getFeedConnections-schema-202" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -4086,16 +4082,16 @@ Page size which specifies how many records per page will be returned (default 10
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-BankFeeds-getFeedConnections-201-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-BankFeeds-getFeedConnections-schema-201');
+                                        $('#responses-BankFeeds-getFeedConnections-202-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-BankFeeds-getFeedConnections-schema-202');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-BankFeeds-getFeedConnections-201-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-BankFeeds-getFeedConnections-202-schema-data' type='hidden' value=''></input>
                                 </div>
-                                <div class="tab-pane" id="examples-BankFeeds-getFeedConnections-201-example">
+                                <div class="tab-pane" id="examples-BankFeeds-getFeedConnections-202-example">
                                     <pre class="prettyprint"><code class="json">MY CODE HERE</code></pre>
                                 </div>
                             </div>
@@ -4139,7 +4135,7 @@ Page size which specifies how many records per page will be returned (default 10
                         <p class="marked">By passing in a statement id, you can search for matching statements</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Statements/{statementID}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Statements/{statementId}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -4160,7 +4156,7 @@ Page size which specifies how many records per page will be returned (default 10
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-BankFeeds-getStatement-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/bankfeeds.xro/1.0/Statements/{statementID}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/bankfeeds.xro/1.0/Statements/{statementId}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-BankFeeds-getStatement-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;

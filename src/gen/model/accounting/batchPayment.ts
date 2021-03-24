@@ -1,5 +1,6 @@
 import { Account } from '././account';
 import { Payment } from '././payment';
+import { ValidationError } from '././validationError';
 
 export class BatchPayment {
     'account'?: Account;
@@ -63,6 +64,10 @@ export class BatchPayment {
     * Booelan that tells you if the batch payment has been reconciled (read-only)
     */
     'isReconciled'?: string;
+    /**
+    * Displays array of validation error messages from the API
+    */
+    'validationErrors'?: Array<ValidationError>;
 
     static discriminator: string | undefined = undefined;
 
@@ -146,6 +151,11 @@ export class BatchPayment {
             "name": "isReconciled",
             "baseName": "IsReconciled",
             "type": "string"
+        },
+        {
+            "name": "validationErrors",
+            "baseName": "ValidationErrors",
+            "type": "Array<ValidationError>"
         }    ];
 
     static getAttributeTypeMap() {

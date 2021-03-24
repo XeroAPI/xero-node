@@ -103,7 +103,8 @@ export class SalaryAndWage {
 export namespace SalaryAndWage {
     export enum StatusEnum {
         Active = <any> 'Active',
-        Pending = <any> 'Pending'
+        Pending = <any> 'Pending',
+        History = <any> 'History'
     }
     export enum PaymentTypeEnum {
         Salary = <any> 'Salary',

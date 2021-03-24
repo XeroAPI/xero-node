@@ -111,10 +111,17 @@ export namespace EarningsRate {
         OvertimeEarnings = <any> 'OvertimeEarnings',
         RegularEarnings = <any> 'RegularEarnings',
         StatutoryAdoptionPay = <any> 'StatutoryAdoptionPay',
+        StatutoryAdoptionPayNonPensionable = <any> 'StatutoryAdoptionPayNonPensionable',
+        StatutoryBereavementPay = <any> 'StatutoryBereavementPay',
         StatutoryMaternityPay = <any> 'StatutoryMaternityPay',
+        StatutoryMaternityPayNonPensionable = <any> 'StatutoryMaternityPayNonPensionable',
         StatutoryPaternityPay = <any> 'StatutoryPaternityPay',
+        StatutoryPaternityPayNonPensionable = <any> 'StatutoryPaternityPayNonPensionable',
+        StatutoryParentalBereavementPayNonPensionable = <any> 'StatutoryParentalBereavementPayNonPensionable',
         StatutorySharedParentalPay = <any> 'StatutorySharedParentalPay',
+        StatutorySharedParentalPayNonPensionable = <any> 'StatutorySharedParentalPayNonPensionable',
         StatutorySickPay = <any> 'StatutorySickPay',
+        StatutorySickPayNonPensionable = <any> 'StatutorySickPayNonPensionable',
         TipsDirect = <any> 'Tips(Direct)',
         TipsNonDirect = <any> 'Tips(Non-Direct)'
     }

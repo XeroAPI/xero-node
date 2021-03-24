@@ -80,7 +80,7 @@ export enum PayrollUkApiApiKeys {
 
 export class PayrollUkApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -3240,11 +3240,10 @@ export class PayrollUkApi {
      * 
      * @summary Retrieves employees
      * @param xeroTenantId Xero identifier for Tenant
-     * @param firstName Filter by first name
-     * @param lastName Filter by last name
+     * @param filter Filter by first name and/or lastname
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      */     
-    public async getEmployees (xeroTenantId: string, firstName?: string, lastName?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Employees;  }> {
+    public async getEmployees (xeroTenantId: string, filter?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -3255,12 +3254,8 @@ export class PayrollUkApi {
             throw new Error('Required parameter xeroTenantId was null or undefined when calling getEmployees.');
         }
 
-        if (firstName !== undefined) {
-            localVarQueryParameters['firstName'] = ObjectSerializer.serialize(firstName, "string");
-        }
-
-        if (lastName !== undefined) {
-            localVarQueryParameters['lastName'] = ObjectSerializer.serialize(lastName, "string");
+        if (filter !== undefined) {
+            localVarQueryParameters['filter'] = ObjectSerializer.serialize(filter, "string");
         }
 
         if (page !== undefined) {
@@ -4167,10 +4162,9 @@ export class PayrollUkApi {
      * @summary Retrieves timesheets
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     * @param employeeId By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter&#x3D;employeeId&#x3D;&#x3D;{EmployeeID} to get only the timesheets of a particular employee.
-     * @param payrollCalendarId By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter&#x3D;payrollCalendarId&#x3D;&#x3D;{PayrollCalendarID} to filter the timesheets by payroll calendar id
+     * @param filter Filter by first name and/or lastname
      */     
-    public async getTimesheets (xeroTenantId: string, page?: number, employeeId?: string, payrollCalendarId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Timesheets;  }> {
+    public async getTimesheets (xeroTenantId: string, page?: number, filter?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Timesheets;  }> {
         const localVarPath = this.basePath + '/Timesheets';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -4185,12 +4179,8 @@ export class PayrollUkApi {
             localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
         }
 
-        if (employeeId !== undefined) {
-            localVarQueryParameters['employeeId'] = ObjectSerializer.serialize(employeeId, "string");
-        }
-
-        if (payrollCalendarId !== undefined) {
-            localVarQueryParameters['payrollCalendarId'] = ObjectSerializer.serialize(payrollCalendarId, "string");
+        if (filter !== undefined) {
+            localVarQueryParameters['filter'] = ObjectSerializer.serialize(filter, "string");
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");

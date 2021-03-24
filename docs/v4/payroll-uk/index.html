@@ -1335,7 +1335,7 @@ ul.nav-tabs {
     "earningsType" : {
       "type" : "string",
       "description" : "Indicates how an employee will be paid when taking this type of earning",
-      "enum" : [ "Allowance", "Backpay", "Bonus", "Commission", "LumpSum", "OtherEarnings", "OvertimeEarnings", "RegularEarnings", "StatutoryAdoptionPay", "StatutoryMaternityPay", "StatutoryPaternityPay", "StatutorySharedParentalPay", "StatutorySickPay", "Tips(Direct)", "Tips(Non-Direct)" ]
+      "enum" : [ "Allowance", "Backpay", "Bonus", "Commission", "LumpSum", "OtherEarnings", "OvertimeEarnings", "RegularEarnings", "StatutoryAdoptionPay", "StatutoryAdoptionPayNonPensionable", "StatutoryBereavementPay", "StatutoryMaternityPay", "StatutoryMaternityPayNonPensionable", "StatutoryPaternityPay", "StatutoryPaternityPayNonPensionable", "StatutoryParentalBereavementPayNonPensionable", "StatutorySharedParentalPay", "StatutorySharedParentalPayNonPensionable", "StatutorySickPay", "StatutorySickPayNonPensionable", "Tips(Direct)", "Tips(Non-Direct)" ]
     },
     "rateType" : {
       "type" : "string",
@@ -3621,7 +3621,7 @@ ul.nav-tabs {
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <!--
-              <div class="app-desc">Version: 2.9.0</div>
+              <div class="app-desc">Version: 2.10.3</div>
             <hr>
             <div id="app-description" class="app-desc">
                 This is the Xero Payroll API for orgs in the UK region.
@@ -25826,7 +25826,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PayrollUk-getEmployees-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/2.0/Employees?firstName=John&lastName=Johnson&page=56"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/2.0/Employees?filter=firstName==John,lastName==Smith&page=56"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PayrollUk-getEmployees-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -25848,11 +25848,10 @@ public class PayrollUkApiExample {
 
         PayrollUkApi apiInstance = new PayrollUkApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        String firstName = John; // String | Filter by first name
-        String lastName = Johnson; // String | Filter by last name
+        String filter = firstName==John,lastName==Smith; // String | Filter by first name and/or lastname
         Integer page = 56; // Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
         try {
-            Employees result = apiInstance.getEmployees(xeroTenantId, firstName, lastName, page);
+            Employees result = apiInstance.getEmployees(xeroTenantId, filter, page);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollUkApi#getEmployees");
@@ -25870,11 +25869,10 @@ public class PayrollUkApiExample {
     public static void main(String[] args) {
         PayrollUkApi apiInstance = new PayrollUkApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
-        String firstName = John; // String | Filter by first name
-        String lastName = Johnson; // String | Filter by last name
+        String filter = firstName==John,lastName==Smith; // String | Filter by first name and/or lastname
         Integer page = 56; // Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
         try {
-            Employees result = apiInstance.getEmployees(xeroTenantId, firstName, lastName, page);
+            Employees result = apiInstance.getEmployees(xeroTenantId, filter, page);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollUkApi#getEmployees");
@@ -25894,16 +25892,14 @@ public class PayrollUkApiExample {
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
-String *firstName = John; // Filter by first name (optional) (default to null)
-String *lastName = Johnson; // Filter by last name (optional) (default to null)
+String *filter = firstName==John,lastName==Smith; // Filter by first name and/or lastname (optional) (default to null)
 Integer *page = 56; // Page number which specifies the set of records to retrieve. By default the number of the records per set is 100. (optional) (default to null)
 
 PayrollUkApi *apiInstance = [[PayrollUkApi alloc] init];
 
 // Retrieves employees
 [apiInstance getEmployeesWith:xeroTenantId
-    firstName:firstName
-    lastName:lastName
+    filter:filter
     page:page
               completionHandler: ^(Employees output, NSError* error) {
                             if (output) {
@@ -25929,15 +25925,13 @@ await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Tenant
 
-const firstName = 'John';  // {String} Filter by first name
-
-const lastName = 'Johnson';  // {String} Filter by last name
+const filter = 'firstName==John,lastName==Smith';  // {String} Filter by first name and/or lastname
 
 const page = 56;  // {Integer} Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
 
 
 try {
-  const response = await xero.accountingApi.getEmployees(xeroTenantId,  firstName, lastName, page);
+  const response = await xero.accountingApi.getEmployees(xeroTenantId,  filter, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -25968,14 +25962,13 @@ namespace Example
 
             var apiInstance = new PayrollUkApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
-            var firstName = John;  // String | Filter by first name (optional)  (default to null)
-            var lastName = Johnson;  // String | Filter by last name (optional)  (default to null)
+            var filter = firstName==John,lastName==Smith;  // String | Filter by first name and/or lastname (optional)  (default to null)
             var page = 56;  // Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100. (optional)  (default to null)
 
             try
             {
                 // Retrieves employees
-                Employees result = apiInstance.getEmployees(xeroTenantId, firstName, lastName, page);
+                Employees result = apiInstance.getEmployees(xeroTenantId, filter, page);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -26021,12 +26014,11 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 
 my $api_instance = ::PayrollUkApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
-my $firstName = John; # String | Filter by first name
-my $lastName = Johnson; # String | Filter by last name
+my $filter = firstName==John,lastName==Smith; # String | Filter by first name and/or lastname
 my $page = 56; # Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
 
 eval { 
-    my $result = $api_instance->getEmployees(xeroTenantId => $xeroTenantId, firstName => $firstName, lastName => $lastName, page => $page);
+    my $result = $api_instance->getEmployees(xeroTenantId => $xeroTenantId, filter => $filter, page => $page);
     print Dumper($result);
 };
 if ($@) {
@@ -26047,13 +26039,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = .PayrollUkApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
-firstName = John # String | Filter by first name (optional) (default to null)
-lastName = Johnson # String | Filter by last name (optional) (default to null)
+filter = firstName==John,lastName==Smith # String | Filter by first name and/or lastname (optional) (default to null)
 page = 56 # Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100. (optional) (default to null)
 
 try: 
     # Retrieves employees
-    api_response = api_instance.get_employees(xeroTenantId, firstName=firstName, lastName=lastName, page=page)
+    api_response = api_instance.get_employees(xeroTenantId, filter=filter, page=page)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PayrollUkApi->getEmployees: %s\n" % e)</code></pre>
@@ -26064,12 +26055,11 @@ except ApiException as e:
 
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
-    let firstName = John; // String
-    let lastName = Johnson; // String
+    let filter = firstName==John,lastName==Smith; // String
     let page = 56; // Integer
 
     let mut context = PayrollUkApi::Context::default();
-    let result = client.getEmployees(xeroTenantId, firstName, lastName, page, &context).wait();
+    let result = client.getEmployees(xeroTenantId, filter, page, &context).wait();
     println!("{:?}", result);
 
 }
@@ -26129,11 +26119,11 @@ Xero identifier for Tenant
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                <tr><td style="width:150px;">firstName</td>
+                                <tr><td style="width:150px;">filter</td>
 <td>
 
 
-    <div id="d2e199_getEmployees_firstName">
+    <div id="d2e199_getEmployees_filter">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -26141,27 +26131,7 @@ Xero identifier for Tenant
                 </span>
 
                     <div class="inner description marked">
-Filter by first name
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">lastName</td>
-<td>
-
-
-    <div id="d2e199_getEmployees_lastName">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Filter by last name
+Filter by first name and/or lastname
                     </div>
             </div>
         </div>
@@ -31925,7 +31895,7 @@ Xero identifier for Tenant
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PayrollUk-getTimesheets-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/2.0/Timesheets?page=56&employeeId=38400000-8cf0-11bd-b23e-10b96e4ef00d&payrollCalendarId=38400000-8cf0-11bd-b23e-10b96e4ef00d"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X  "https://api.xero.com/payroll.xro/2.0/Timesheets?page=56&filter=employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PayrollUk-getTimesheets-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -31948,10 +31918,9 @@ public class PayrollUkApiExample {
         PayrollUkApi apiInstance = new PayrollUkApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
         Integer page = 56; // Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-        UUID employeeId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee.
-        UUID payrollCalendarId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id
+        String filter = employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000; // String | Filter by first name and/or lastname
         try {
-            Timesheets result = apiInstance.getTimesheets(xeroTenantId, page, employeeId, payrollCalendarId);
+            Timesheets result = apiInstance.getTimesheets(xeroTenantId, page, filter);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollUkApi#getTimesheets");
@@ -31970,10 +31939,9 @@ public class PayrollUkApiExample {
         PayrollUkApi apiInstance = new PayrollUkApi();
         String xeroTenantId = xeroTenantId_example; // String | Xero identifier for Tenant
         Integer page = 56; // Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-        UUID employeeId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee.
-        UUID payrollCalendarId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id
+        String filter = employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000; // String | Filter by first name and/or lastname
         try {
-            Timesheets result = apiInstance.getTimesheets(xeroTenantId, page, employeeId, payrollCalendarId);
+            Timesheets result = apiInstance.getTimesheets(xeroTenantId, page, filter);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PayrollUkApi#getTimesheets");
@@ -31994,16 +31962,14 @@ public class PayrollUkApiExample {
 
 String *xeroTenantId = xeroTenantId_example; // Xero identifier for Tenant (default to null)
 Integer *page = 56; // Page number which specifies the set of records to retrieve. By default the number of the records per set is 100. (optional) (default to null)
-UUID *employeeId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee. (optional) (default to null)
-UUID *payrollCalendarId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id (optional) (default to null)
+String *filter = employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000; // Filter by first name and/or lastname (optional) (default to null)
 
 PayrollUkApi *apiInstance = [[PayrollUkApi alloc] init];
 
 // Retrieves timesheets
 [apiInstance getTimesheetsWith:xeroTenantId
     page:page
-    employeeId:employeeId
-    payrollCalendarId:payrollCalendarId
+    filter:filter
               completionHandler: ^(Timesheets output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -32030,13 +31996,11 @@ const xeroTenantId = "xeroTenantId_example";  // {String} Xero identifier for Te
 
 const page = 56;  // {Integer} Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
 
-const employeeId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee.
-
-const payrollCalendarId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';  // {UUID} By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id
+const filter = 'employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000';  // {String} Filter by first name and/or lastname
 
 
 try {
-  const response = await xero.accountingApi.getTimesheets(xeroTenantId,  page, employeeId, payrollCalendarId);
+  const response = await xero.accountingApi.getTimesheets(xeroTenantId,  page, filter);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -32068,13 +32032,12 @@ namespace Example
             var apiInstance = new PayrollUkApi();
             var xeroTenantId = xeroTenantId_example;  // String | Xero identifier for Tenant (default to null)
             var page = 56;  // Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100. (optional)  (default to null)
-            var employeeId = new UUID(); // UUID | By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee. (optional)  (default to null)
-            var payrollCalendarId = new UUID(); // UUID | By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id (optional)  (default to null)
+            var filter = employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000;  // String | Filter by first name and/or lastname (optional)  (default to null)
 
             try
             {
                 // Retrieves timesheets
-                Timesheets result = apiInstance.getTimesheets(xeroTenantId, page, employeeId, payrollCalendarId);
+                Timesheets result = apiInstance.getTimesheets(xeroTenantId, page, filter);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -32121,11 +32084,10 @@ $::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
 my $api_instance = ::PayrollUkApi->new();
 my $xeroTenantId = xeroTenantId_example; # String | Xero identifier for Tenant
 my $page = 56; # Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-my $employeeId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee.
-my $payrollCalendarId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id
+my $filter = employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000; # String | Filter by first name and/or lastname
 
 eval { 
-    my $result = $api_instance->getTimesheets(xeroTenantId => $xeroTenantId, page => $page, employeeId => $employeeId, payrollCalendarId => $payrollCalendarId);
+    my $result = $api_instance->getTimesheets(xeroTenantId => $xeroTenantId, page => $page, filter => $filter);
     print Dumper($result);
 };
 if ($@) {
@@ -32147,12 +32109,11 @@ from pprint import pprint
 api_instance = .PayrollUkApi()
 xeroTenantId = xeroTenantId_example # String | Xero identifier for Tenant (default to null)
 page = 56 # Integer | Page number which specifies the set of records to retrieve. By default the number of the records per set is 100. (optional) (default to null)
-employeeId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee. (optional) (default to null)
-payrollCalendarId = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id (optional) (default to null)
+filter = employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000 # String | Filter by first name and/or lastname (optional) (default to null)
 
 try: 
     # Retrieves timesheets
-    api_response = api_instance.get_timesheets(xeroTenantId, page=page, employeeId=employeeId, payrollCalendarId=payrollCalendarId)
+    api_response = api_instance.get_timesheets(xeroTenantId, page=page, filter=filter)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PayrollUkApi->getTimesheets: %s\n" % e)</code></pre>
@@ -32164,11 +32125,10 @@ except ApiException as e:
 pub fn main() {
     let xeroTenantId = xeroTenantId_example; // String
     let page = 56; // Integer
-    let employeeId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID
-    let payrollCalendarId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID
+    let filter = employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000; // String
 
     let mut context = PayrollUkApi::Context::default();
-    let result = client.getTimesheets(xeroTenantId, page, employeeId, payrollCalendarId, &context).wait();
+    let result = client.getTimesheets(xeroTenantId, page, filter, &context).wait();
     println!("{:?}", result);
 
 }
@@ -32253,45 +32213,19 @@ Page number which specifies the set of records to retrieve. By default the numbe
 </td>
 </tr>
 
-                                <tr><td style="width:150px;">employeeId</td>
+                                <tr><td style="width:150px;">filter</td>
 <td>
 
 
-    <div id="d2e199_getTimesheets_employeeId">
+    <div id="d2e199_getTimesheets_filter">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    UUID
+                    String
                 </span>
-                    <span class="format">
-                        (uuid)
-                    </span>
 
                     <div class="inner description marked">
-By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee.
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">payrollCalendarId</td>
-<td>
-
-
-    <div id="d2e199_getTimesheets_payrollCalendarId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    UUID
-                </span>
-                    <span class="format">
-                        (uuid)
-                    </span>
-
-                    <div class="inner description marked">
-By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id
+Filter by first name and/or lastname
                     </div>
             </div>
         </div>
