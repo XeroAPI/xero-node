@@ -2,15 +2,26 @@
 ![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 
 ## OAuth 2 support
-Version 4.x of Xero NodeJS SDK supports OAuth2 authentication and the following API sets.
-* [accounting](https://developer.xero.com/documentation/api/api-overview)
-* [assets](https://developer.xero.com/documentation/assets-api/overview)
-* [projects](https://developer.xero.com/documentation/projects/overview-projects)
-* [AU Payroll](https://developer.xero.com/documentation/payroll-api/overview)
-* [BankFeeds (Restricted API)](https://developer.xero.com/documentation/bank-feeds-api/overview)
-* [UK Payroll](https://developer.xero.com/documentation/payroll-api-uk/overview)
-* [NZ Payroll](https://developer.xero.com/documentation/payroll-api-nz/overview)
-* [files](https://developer.xero.com/documentation/files-api/overview-files)
+
+## SDK Documentation
+xero-node supports OAuth2 authentication and all the XeroAPI Sets
+* Accounting API: 
+* Assets API: 
+* AU Payroll API: 
+* Bankfeeds API: 
+* UK Payroll API: 
+* Files API: 
+
+## SDK Documentation
+* Core [Accounting Api Docs](https://xeroapi.github.io/xero-node/accounting/index.html)
+---
+* [Asset Api Docs](/https://xeroapi.github.io/xero-node/assets/index.html)
+* [Project Api Docs](https://xeroapi.github.io/xero-node/payroll-au/index.html)
+* [Files Api Docs](https://xeroapi.github.io/xero-node/files/index.html)
+* [Bankfeeds Api Docs](https://xeroapi.github.io/xero-node/bankfeeds/index.html)
+* [Payroll Docs (NZ)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
+* [Payroll Docs (UK)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
+* [Payroll Docs (AU)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
 
 
 ## Getting Started
@@ -197,16 +208,6 @@ await xero.updateTenants()
 await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 ```
 
-## SDK Documentation
-* Version 3 (OAuth1.0a) https://xeroapi.github.io/xero-node/v3/index.html (*deprecated end of 2020*)
-* Accounting API: https://xeroapi.github.io/xero-node/v4/accounting/index.html
-* Assets API: https://xeroapi.github.io/xero-node/v4/assets/index.html
-* AU Payroll API: https://xeroapi.github.io/xero-node/v4/payroll-au/index.html
-* Bankfeeds API: https://xeroapi.github.io/xero-node/v4/bankfeeds/index.html
-* UK Payroll API: https://xeroapi.github.io/xero-node/v4/payroll-uk/index.html
-* Files API: https://xeroapi.github.io/xero-node/v4/files/index.html
-
-
 ### Basics
 ```js
 // example flow of initializing and using the client after someone has already authenticated and you have saved their tokenSet
@@ -310,265 +311,23 @@ const unitdp = 4;
 const response = await xero.accountingApi.getBankTransactions(xeroTenantId, ifModifiedSince, where, order, page, unitdp);
 ```
 
-# Preventing CSRF Using Xero-Node
-```js
-// Configure the XeroClient including a state param.
+# Security
+This repo leverages a certified OA2 and OIDC library called openid-client. For a deeper dive the repo's functionality, check out them directly https://github.com/panva/node-openid-client.
 
-const xero = new XeroClient({
-  clientId: client_id,
-  clientSecret: client_secret,
-  redirectUris: [redirectUrl],
-  scopes: scopes.split(" "),
-  state: "imaParam=look-at-me-go",
-  httpTimeout: 2000
-});
+### Preventing CSRF Using Xero-Node
+When xero.buildConsentUrl is called we call openid-client authorizationUrl method, passing redirect_uri, scope, and state (if present) as arguments and returns a formatted url string made up from the given config. The user is then directed to the consentUrl to begin the auth process with Xero. When the auth process is complete Xero redirects the user to the specified callback route and passes along params including the state if it was initially provided.
 
-// When xero.buildConsentUrl is called, xero-node calls openid-client authorizationUrl method, passing redirect_uri, scope, and state (if present) as arguments and returns a formatted url string made from the params. The user can be directed to the consentUrl to begin the auth process with Xero. When the auth process is complete Xero redirects the user to the specified callback route and passes along params including state if it was initially provided.
+At this point openid-client takes over verifying params.state and check.state match if provided. If the state does not match the initial user's, the openid-client library throws an error:
 
-public async buildConsentUrl(): Promise<string> {
-  await this.initialize();
-  let url;
-  if (this.config) {
-    url = this.openIdClient.authorizationUrl({
-      redirect_uri: this.config.redirectUris[0],
-      scope: this.config.scopes.join(' ') || 'openid email profile',
-      state: this.config.state
-    });
-  }
-  return url;
-}
-
-// When xero.apiCallback is called with the callback url, it passes in the url string that Xero redirected to as an argument to openid-client callbackParams method, which parses the url into a params object. IMPORTANT NOTE: see how at this step a check object is created with a state property equal to the XeroClient config state. At this point openid-client takes over verifying params.state and check.state match if provided.
-
-public async apiCallback(callbackUrl: string): Promise<TokenSet> {
-  const params = this.openIdClient.callbackParams(callbackUrl);
-  const check = { state: this.config.state };
-  console.log('params ', params);
-  console.log('check ', check)
-  if (this.config.scopes.includes('openid')) {
-    this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
-  } else {
-    this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
-  }
-  this.setAccessToken();
-  return this._tokenSet;
-}
-
-// params  {
-//   code: 'c371cae7d94ca3cde3bcee64a2efb0897e6b76eacd687e86d63da93f6a17ef2a',
-//   state: 'imaParam=look-at-me-go',
-//   session_state: '1Vi40jJJ5ThQyjvN6LaZZs33woGsKBYuEMvMDRDxamc.854c0568ee3b2f7e2866558069609814'
-// }
-// check  { state: 'imaParam=look-at-me-go' }
-
-// If the callback url state param is different from the XeroClient config state or missing, like so:
-
-public async apiCallback(callbackUrl: string): Promise<TokenSet> {
-  const params = this.openIdClient.callbackParams(callbackUrl);
-  params.state = 'imaParam=not-my-state';
-  const check = { state: this.config.state };
-  console.log('params ', params);
-  console.log('check ', check)
-  if (this.config.scopes.includes('openid')) {
-    this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
-  } else {
-    this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
-  }
-  this.setAccessToken();
-  return this._tokenSet;
-}
-
-// params  {
-//   code: 'bb9f5ccf3491a12d747dd2a61b5ef53e453b5c1589b93a8ab4718f55a77ac144',
-//   state: 'imaParam=not-my-state',
-//   session_state: 'IPqi3XUI1OOT-rigZBtJSUTYDkcSx9wlepEIHDjcgyU.d6889179353c1738558aa83646afec91'
-// }
-// check  { state: 'imaParam=look-at-me-go' }
-
-// the openid-client library throws an error:
-
-// RPError: state mismatch, expected imaParam=look-at-me-go, got: imaParam=not-my-state
+```json
+RPError: state mismatch, expected user=1234, got: user=666
 ```
-For a deeper dive into openid-client functionality, check out the repo https://github.com/panva/node-openid-client.
+###  JWT Verification Using Xero-Node
+JWT verification of both the `access_token` and `id_token` are baked into the openid-client library we leverage.
 
-# JWT Verification Using Xero-Node
-```js
-// JWT verification is baked into the openid-client library
-// When xero.apiCallback is called, either openid-client callback or oauthCallback method is called to retrieve a TokenSet
+When `xero.apiCallback` is called, openid-client `validateJARM` is triggered which also invokes `validateJWT`
 
-public async apiCallback(callbackUrl: string): Promise<TokenSet> {
-  const params = this.openIdClient.callbackParams(callbackUrl);
-  const check = { state: this.config.state };
-  if (this.config.scopes.includes('openid')) {
-    this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
-  } else {
-    this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
-  }
-  this.setAccessToken();
-  return this._tokenSet;
-}
-
-// Both the callback and oauthCallback methods call openid-client validateJARM, which calls validateJWT
-
-async validateJARM(response) {
-  const expectedAlg = this.authorization_signed_response_alg;
-  const { payload } = await this.validateJWT(response, expectedAlg, ['iss', 'exp', 'aud']);
-  return pickCb(payload);
-}
-
-// the TLDR of this code block is that if openid-client fails to validate the JWT signature it will throw and error
-
-async validateJWT(jwt, expectedAlg, required = ['iss', 'sub', 'aud', 'exp', 'iat']) {
-  const isSelfIssued = this.issuer.issuer === 'https://self-issued.me';
-  const timestamp = now();
-  let header;
-  let payload;
-  try {
-    ({ header, payload } = jose.JWT.decode(jwt, { complete: true }));
-  } catch (err) {
-    throw new RPError({
-      printf: ['failed to decode JWT (%s: %s)', err.name, err.message],
-      jwt,
-    });
-  }
-
-  if (header.alg !== expectedAlg) {
-    throw new RPError({
-      printf: ['unexpected JWT alg received, expected %s, got: %s', expectedAlg, header.alg],
-      jwt,
-    });
-  }
-
-  if (isSelfIssued) {
-    required = [...required, 'sub_jwk']; // eslint-disable-line no-param-reassign
-  }
-
-  required.forEach(verifyPresence.bind(undefined, payload, jwt));
-
-  if (payload.iss !== undefined) {
-    let expectedIss = this.issuer.issuer;
-
-    if (aadIssValidation) {
-      expectedIss = this.issuer.issuer.replace('{tenantid}', payload.tid);
-    }
-
-    if (payload.iss !== expectedIss) {
-      throw new RPError({
-        printf: ['unexpected iss value, expected %s, got: %s', expectedIss, payload.iss],
-        jwt,
-      });
-    }
-  }
-
-  if (payload.iat !== undefined) {
-    if (!Number.isInteger(payload.iat)) {
-      throw new RPError({
-        message: 'JWT iat claim must be a JSON number integer',
-        jwt,
-      });
-    }
-  }
-
-  if (payload.nbf !== undefined) {
-    if (!Number.isInteger(payload.nbf)) {
-      throw new RPError({
-        message: 'JWT nbf claim must be a JSON number integer',
-        jwt,
-      });
-    }
-    if (payload.nbf > timestamp + this[CLOCK_TOLERANCE]) {
-      throw new RPError({
-        printf: ['JWT not active yet, now %i, nbf %i', timestamp + this[CLOCK_TOLERANCE], payload.nbf],
-        jwt,
-      });
-    }
-  }
-
-  if (payload.exp !== undefined) {
-    if (!Number.isInteger(payload.exp)) {
-      throw new RPError({
-        message: 'JWT exp claim must be a JSON number integer',
-        jwt,
-      });
-    }
-    if (timestamp - this[CLOCK_TOLERANCE] >= payload.exp) {
-      throw new RPError({
-        printf: ['JWT expired, now %i, exp %i', timestamp - this[CLOCK_TOLERANCE], payload.exp],
-        jwt,
-      });
-    }
-  }
-
-  if (payload.aud !== undefined) {
-    if (Array.isArray(payload.aud)) {
-      if (payload.aud.length > 1 && !payload.azp) {
-        throw new RPError({
-          message: 'missing required JWT property azp',
-          jwt,
-        });
-      }
-
-      if (!payload.aud.includes(this.client_id)) {
-        throw new RPError({
-          printf: ['aud is missing the client_id, expected %s to be included in %j', this.client_id, payload.aud],
-          jwt,
-        });
-      }
-    } else if (payload.aud !== this.client_id) {
-      throw new RPError({
-        printf: ['aud mismatch, expected %s, got: %s', this.client_id, payload.aud],
-        jwt,
-      });
-    }
-  }
-
-  if (payload.azp !== undefined && payload.azp !== this.client_id) {
-    throw new RPError({
-      printf: ['azp must be the client_id, expected %s, got: %s', this.client_id, payload.azp],
-      jwt,
-    });
-  }
-
-  let key;
-
-  if (isSelfIssued) {
-    try {
-      assert(isPlainObject(payload.sub_jwk));
-      key = jose.JWK.asKey(payload.sub_jwk);
-      assert.equal(key.type, 'public');
-    } catch (err) {
-      throw new RPError({
-        message: 'failed to use sub_jwk claim as an asymmetric JSON Web Key',
-        jwt,
-      });
-    }
-    if (key.thumbprint !== payload.sub) {
-      throw new RPError({
-        message: 'failed to match the subject with sub_jwk',
-        jwt,
-      });
-    }
-  } else if (header.alg.startsWith('HS')) {
-    key = await this.joseSecret();
-  } else if (header.alg !== 'none') {
-    key = await this.issuer.queryKeyStore(header);
-  }
-
-  if (!key && header.alg === 'none') {
-    return { protected: header, payload };
-  }
-
-  try {
-    return jose.JWS.verify(jwt, key, { complete: true });
-  } catch (err) {
-    throw new RPError({
-      message: 'failed to validate JWT signature',
-      jwt,
-    });
-  }
-}
-```
-For a deeper dive into openid-client functionality, check out the repo https://github.com/panva/node-openid-client.
+If openid-client fails to validate the JWT signature it will throw an error. 
 
 # Sample App
 For more robust examples in how to utilize our accounting api we have *(roughly)* every single endpoint mapped out with an example in our sample app - complete with showing the Xero data dependencies required for interaction with many objects ( ie. types, assoc. accounts, tax types, date formats).

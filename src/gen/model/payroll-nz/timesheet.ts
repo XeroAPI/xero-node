@@ -93,6 +93,7 @@ export namespace Timesheet {
     export enum StatusEnum {
         Draft = <any> 'Draft',
         Approved = <any> 'Approved',
-        Completed = <any> 'Completed'
+        Completed = <any> 'Completed',
+        Requested = <any> 'Requested'
     }
 }

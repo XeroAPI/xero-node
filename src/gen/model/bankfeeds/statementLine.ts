@@ -33,6 +33,10 @@ export class StatementLine {
     * The cheque/check number
     */
     'chequeNumber'?: string;
+    /**
+    * Descriptive transaction type
+    */
+    'transactionType'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -75,6 +79,11 @@ export class StatementLine {
         {
             "name": "chequeNumber",
             "baseName": "chequeNumber",
+            "type": "string"
+        },
+        {
+            "name": "transactionType",
+            "baseName": "transactionType",
             "type": "string"
         }    ];
 

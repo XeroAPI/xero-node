@@ -22,7 +22,7 @@ export enum BankFeedsApiApiKeys {
 
 export class BankFeedsApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.11.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.10.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -398,7 +398,7 @@ export class BankFeedsApi {
      * @param statementId statement id for single object
      */     
     public async getStatement (xeroTenantId: string, statementId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Statement;  }> {
-        const localVarPath = this.basePath + '/Statements/{statementID}'
+        const localVarPath = this.basePath + '/Statements/{statementId}'
             .replace('{' + 'statementId' + '}', encodeURIComponent(String(statementId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
