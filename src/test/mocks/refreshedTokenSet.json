@@ -1,0 +1,8 @@
+{
+  "id_token": "eyJhxxxx.yyy",
+  "access_token": "eyJxxx.yyy.zzz",
+  "expires_at": 1614644381,
+  "token_type": "Bearer",
+  "refresh_token": "xxxyyyyzzz",
+  "scope": "openid profile email accounting.settings accounting.reports.read accounting.journals.read accounting.contacts accounting.attachments accounting.transactions offline_access"
+}

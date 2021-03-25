@@ -2,15 +2,26 @@
 ![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 
 ## OAuth 2 support
-Version 4.x of Xero NodeJS SDK supports OAuth2 authentication and the following API sets.
-* [accounting](https://developer.xero.com/documentation/api/api-overview)
-* [assets](https://developer.xero.com/documentation/assets-api/overview)
-* [projects](https://developer.xero.com/documentation/projects/overview-projects)
-* [AU Payroll](https://developer.xero.com/documentation/payroll-api/overview)
-* [BankFeeds (Restricted API)](https://developer.xero.com/documentation/bank-feeds-api/overview)
-* [UK Payroll](https://developer.xero.com/documentation/payroll-api-uk/overview)
-* [NZ Payroll](https://developer.xero.com/documentation/payroll-api-nz/overview)
-* [files](https://developer.xero.com/documentation/files-api/overview-files)
+
+## SDK Documentation
+xero-node supports OAuth2 authentication and all the XeroAPI Sets
+* Accounting API: 
+* Assets API: 
+* AU Payroll API: 
+* Bankfeeds API: 
+* UK Payroll API: 
+* Files API: 
+
+## SDK Documentation
+* Core [Accounting Api Docs](https://xeroapi.github.io/xero-node/accounting/index.html)
+---
+* [Asset Api Docs](/https://xeroapi.github.io/xero-node/assets/index.html)
+* [Project Api Docs](https://xeroapi.github.io/xero-node/payroll-au/index.html)
+* [Files Api Docs](https://xeroapi.github.io/xero-node/files/index.html)
+* [Bankfeeds Api Docs](https://xeroapi.github.io/xero-node/bankfeeds/index.html)
+* [Payroll Docs (NZ)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
+* [Payroll Docs (UK)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
+* [Payroll Docs (AU)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
 
 
 ## Getting Started
@@ -197,16 +208,6 @@ await xero.updateTenants()
 await xero.accountingApi.getInvoices(xero.tenants[0].tenantId)
 ```
 
-## SDK Documentation
-* Version 3 (OAuth1.0a) https://xeroapi.github.io/xero-node/v3/index.html (*deprecated end of 2020*)
-* Accounting API: https://xeroapi.github.io/xero-node/v4/accounting/index.html
-* Assets API: https://xeroapi.github.io/xero-node/v4/assets/index.html
-* AU Payroll API: https://xeroapi.github.io/xero-node/v4/payroll-au/index.html
-* Bankfeeds API: https://xeroapi.github.io/xero-node/v4/bankfeeds/index.html
-* UK Payroll API: https://xeroapi.github.io/xero-node/v4/payroll-uk/index.html
-* Files API: https://xeroapi.github.io/xero-node/v4/files/index.html
-
-
 ### Basics
 ```js
 // example flow of initializing and using the client after someone has already authenticated and you have saved their tokenSet
@@ -298,6 +299,36 @@ const contentType = mime.lookup(filename);
 const uploadFile = await xero.filesApi.uploadFile(tenantId, folderId, readStream, filename, contentType);
 ```
 
+# Querying With Filters And Pagination
+```js
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
+const where = 'Status=="AUTHORISED" AND Type=="SPEND"';
+const order = 'Reference ASC';
+const page = 1;
+const unitdp = 4;
+
+const response = await xero.accountingApi.getBankTransactions(xeroTenantId, ifModifiedSince, where, order, page, unitdp);
+```
+
+# Security
+
+This repo leverages a certified OA2 and OIDC library called openid-client. For a deeper dive the repo's functionality, check out them directly https://github.com/panva/node-openid-client.
+### Preventing CSRF Using Xero-Node
+When xero.buildConsentUrl is called we call openid-client authorizationUrl method, passing redirect_uri, scope, and state (if present) as arguments and returns a formatted url string made up from the given config. The user is then directed to the consentUrl to begin the auth process with Xero. When the auth process is complete Xero redirects the user to the specified callback route and passes along params including the state if it was initially provided.
+
+At this point openid-client takes over verifying params.state and check.state match if provided. If the state does not match the initial user's, the openid-client library throws an error:
+
+```json
+RPError: state mismatch, expected user=1234, got: user=666
+```
+###  JWT Verification Using Xero-Node
+JWT verification of both the `access_token` and `id_token` are baked into the openid-client library we leverage.
+
+When `xero.apiCallback` is called, openid-client `validateJARM` is triggered which also invokes `validateJWT`
+
+If openid-client fails to validate the JWT signature it will throw an error. 
+
 # Sample App
 For more robust examples in how to utilize our accounting api we have *(roughly)* every single endpoint mapped out with an example in our sample app - complete with showing the Xero data dependencies required for interaction with many objects ( ie. types, assoc. accounts, tax types, date formats).
 
@@ -315,18 +346,18 @@ await xero.buildConsentUrl()
 
 // tokenSet and its expiration
 const tokenSet = await xero.readTokenSet();
-const now = new Date().getTime()
 
-if (tokenSet.expires_in > now) {
+tokenSet.expired() // returns boolean true/false
+tokenSet.expires_in // returns seconds
+tokenSet.expires_at // returns milliseconds
+new Date(tokenSet.expires_at * 1000).toLocaleString()) // readable expiration
+
+if (tokenSet.expired()) {
   const validTokenSet = await xero.refreshToken()
   // or you can refresh the token without needing to initialize the openid-client
   // helpful for background processes where you want to limit any dependencies
   await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
 }
-
-tokenSet.expires_in // returns seconds
-tokenSet.expires_at // returns milliseconds
-new Date(tokenSet.expires_at * 1000).toLocaleString()) // readable expiration
 
 // some endpoints date fields require
 // the MS date format for POST'ing data
@@ -341,4 +372,7 @@ await xero.readTokenSet()
 
 const tokenSet = await xero.readTokenSet()
 await xero.setTokenSet(tokenSet)
+
+// You can revoke a user's refresh token and remove all their connections to your app by making a request to the revocation endpoint.
+await xero.revokeToken()
 ```
