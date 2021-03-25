@@ -1,19 +1,7 @@
 # xero-node
 ![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
-
-## OAuth 2 support
-
 ## SDK Documentation
-xero-node supports OAuth2 authentication and all the XeroAPI Sets
-* Accounting API: 
-* Assets API: 
-* AU Payroll API: 
-* Bankfeeds API: 
-* UK Payroll API: 
-* Files API: 
-
-## SDK Documentation
-* Core [Accounting Api Docs](https://xeroapi.github.io/xero-node/accounting/index.html)
+* [Accounting Api Docs](https://xeroapi.github.io/xero-node/accounting/index.html)
 ---
 * [Asset Api Docs](https://xeroapi.github.io/xero-node/assets/index.html)
 * [Project Api Docs](https://xeroapi.github.io/xero-node/payroll-au/index.html)
