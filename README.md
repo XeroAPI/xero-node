@@ -15,14 +15,13 @@ xero-node supports OAuth2 authentication and all the XeroAPI Sets
 ## SDK Documentation
 * Core [Accounting Api Docs](https://xeroapi.github.io/xero-node/accounting/index.html)
 ---
-* [Asset Api Docs](/https://xeroapi.github.io/xero-node/assets/index.html)
+* [Asset Api Docs](https://xeroapi.github.io/xero-node/assets/index.html)
 * [Project Api Docs](https://xeroapi.github.io/xero-node/payroll-au/index.html)
 * [Files Api Docs](https://xeroapi.github.io/xero-node/files/index.html)
 * [Bankfeeds Api Docs](https://xeroapi.github.io/xero-node/bankfeeds/index.html)
 * [Payroll Docs (NZ)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
 * [Payroll Docs (UK)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
 * [Payroll Docs (AU)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
-
 
 ## Getting Started
 
