@@ -312,8 +312,8 @@ const response = await xero.accountingApi.getBankTransactions(xeroTenantId, ifMo
 ```
 
 # Security
-
 This repo leverages a certified OA2 and OIDC library called openid-client. For a deeper dive the repo's functionality, check out them directly https://github.com/panva/node-openid-client.
+
 ### Preventing CSRF Using Xero-Node
 When xero.buildConsentUrl is called we call openid-client authorizationUrl method, passing redirect_uri, scope, and state (if present) as arguments and returns a formatted url string made up from the given config. The user is then directed to the consentUrl to begin the auth process with Xero. When the auth process is complete Xero redirects the user to the specified callback route and passes along params including the state if it was initially provided.
 
