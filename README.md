@@ -7,9 +7,9 @@
 * [Project Api Docs](https://xeroapi.github.io/xero-node/payroll-au/index.html)
 * [Files Api Docs](https://xeroapi.github.io/xero-node/files/index.html)
 * [Bankfeeds Api Docs](https://xeroapi.github.io/xero-node/bankfeeds/index.html)
-* [Payroll Docs (NZ)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
+* [Payroll Docs (NZ)](https://xeroapi.github.io/xero-node/payroll-nz/index.html)
 * [Payroll Docs (UK)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
-* [Payroll Docs (AU)](https://xeroapi.github.io/xero-node/payroll-uk/index.html)
+* [Payroll Docs (AU)](https://xeroapi.github.io/xero-node/payroll-au/index.html)
 
 ## Getting Started
 
