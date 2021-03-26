@@ -5,6 +5,12 @@
       <title>Xero Payroll AU API</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="UTF-8">
+      <meta name="description" content="xero-node SDK PayrollAu API Documentation">
+      <title>xero-node PayrollAu SDK Docs</title>
+      <meta name="keywords" content="xero-node, typescript, node, sdk, documentation, docs, XeroAPI, Xero, developer">
+      <meta name="author" content="Xero Developer Evangelists">
+      <link rel="shortcut icon" href="https://developer.xero.com/static/favicon.ico" type="image/x-icon">
       <meta charset="UTF-8" />
       <script>
 /*! jQuery v3.1.0 | (c) jQuery Foundation | jquery.org/license */
@@ -820,7 +826,7 @@ ul.nav-tabs {
   float: left;
 }
 
-.language {
+.language, .api-set-wrapper {
   float: left;
   margin-left: 20px;
 }
@@ -833,6 +839,14 @@ ul.nav-tabs {
 .api-set {
   float: left;
   margin-left: 30px;
+}
+
+.api-set-wrapper {
+  padding-top: 5px;
+}
+
+.api-set-name {
+  color: #fff;
 }
 
       </style>
@@ -3131,46 +3145,80 @@ ul.nav-tabs {
 };
          
          var errs = {};
+
+
+         function routeDocs(event) {
+            var selectedOption = event.options[event.selectedIndex];
+            location = selectedOption.dataset.url
+         }
       </script>
 
       <div class='docs-header'>
          <div class='xero-logo'>
-            <a target="_blank" href="https://developer.xero.com/documentation/">
+            <a target="_blank"  href="https://developer.xero.com/documentation/">
                <img alt="" width="115" height="30" class="xrh-app-image" src="https://developer.xero.com/static/images/developer-logo.svg">
             </a>
          </div>
          <fieldset class='api-set'>
-            <select name="form" onchange="location = this.value;">
-               <option value="#">SDK Language</option>
-               <option value="https://xeroapi.github.io/xero-ruby/accounting/index.html">Ruby</option>
-               <option value="https://xeroapi.github.io/xero-node/assets/index.html">Node</option>
-               <option value="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html">Java</option>
-               <option value="https://xeroapi.github.io/xero-php-oauth2/docs/v2/accounting/index.html">PHP</option>
+            <select name="form" id="language-set-selection" onchange="routeDocs(this);">
+               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="node">Node</option>
+               <option data-url="https://xeroapi.github.io/xero-ruby/accounting/index.html" value="ruby">Ruby</option>
+               <!--<option data-url="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html" value="java">Java</option>
+               <option data-url="https://xeroapi.github.io/xero-php-oauth2/" value="php">PHP</option>
+               <option data-url="https://xeroapi.github.io/xero-python/docs/accounting/index.html" value="python">Python</option>
+               <option data-url="https://xeroapi.github.io/Xero-NetStandard/docs/accounting/index.html" value="dotnet">Dotnet</option> -->
             </select>
          </fieldset>
          <div class='language'>
             <img alt="" width="115" height="30" class="xrh-app-image" src="https://i.imgur.com/b7XmOOk.png">
          </div>
          <fieldset class='api-set'>
-            <select name="form" onchange="location = this.value;">
-               <option value="#">API Set</option>
-               <option value="https://xeroapi.github.io/xero-node/accounting/index.html">Accounting</option>
-               <option value="https://xeroapi.github.io/xero-node/assets/index.html">Assets</option>
-               <option value="https://xeroapi.github.io/xero-node/files/index.html">Files</option>
-               <option value="https://xeroapi.github.io/xero-node/projects/index.html">Projects</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-au/index.html">Payroll (AU)</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-uk/index.html">Payroll (UK)</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-nz/index.html">Payroll (NZ)</option>
-               <option value="https://xeroapi.github.io/xero-node/bankfeeds/index.html">BankFeeds</option>
+            <select name="form" id="api-set-selection" onchange="routeDocs(this);">
+               <option data-url="https://xeroapi.github.io/xero-node/accounting/index.html" value="Accounting">Accounting</option>
+               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="Asset">Assets</option>
+               <option data-url="https://xeroapi.github.io/xero-node/files/index.html" value="Files">Files</option>
+               <option data-url="https://xeroapi.github.io/xero-node/projects/index.html" value="Project">Projects</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-au/index.html" value="PayrollAu">Payroll (AU)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-uk/index.html" value="PayrollUk">Payroll (UK)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="PayrollNz">Bankfeeds</option>
             </select>
          </fieldset>
+         <div class='api-set-wrapper'>
+            <span class='api-set-name'>PayrollAu API</span>
+
+            <script>
+               $(document).ready(function() {
+                  const location = window.location.href.toLowerCase()
+                  let sdkLang
+                  if( location.includes('ruby') ){
+                   sdkLang = 'ruby'
+                  } else if (location.includes('node')){
+                   sdkLang = 'node'
+                  } else if (location.includes('php')){
+                   sdkLang = 'php'
+                  } else if (location.includes('dotnet')){
+                   sdkLang = 'dotnet'
+                  } else if (location.includes('java')){
+                   sdkLang = 'java'
+                  } else if (location.includes('python')){
+                     sdkLang = 'python'
+                  }
+                  $('#language-set-selection option[value="'+ sdkLang +'"]').attr("selected", "selected");
+                  console.log('PayrollAu')
+                  $('#api-set-selection option[value="'+ 'PayrollAu' + '"]').attr("selected", "selected");
+               });
+            </script>
+         </div>
       </div>
       <div class="container-fluid docs-start">
          <div class="row-fluid">
             <div id="sidenav" class="span2">
                <nav id="scrollingNav">
                   <ul class="sidenav nav nav-list">
-                     <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">xero-node - PayrollAu</a></li>
+                     <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong>xero-ruby</li>
+                     <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.11.2</li>
+                     <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
                      <li data-group="PayrollAu" data-name="createEmployee" class="">
                         <a href="#api-PayrollAu-createEmployee">createEmployee</a>
                      </li>
@@ -3298,13 +3346,13 @@ ul.nav-tabs {
                               <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-createEmployee-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-createEmployee-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-createEmployee-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-createEmployee-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -3506,8 +3554,8 @@ def accounting_create_employee():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->createEmployee: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-createEmployee-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-createEmployee-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -3583,10 +3631,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -3599,27 +3645,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createEmployee_employee');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createEmployee_employee"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -3716,13 +3743,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-createLeaveApplication-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -3924,8 +3951,8 @@ def accounting_create_leave_application():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->createLeaveApplication: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-createLeaveApplication-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-createLeaveApplication-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -4001,10 +4028,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -4017,27 +4042,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createLeaveApplication_leaveApplication');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createLeaveApplication_leaveApplication"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -4134,13 +4140,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-createPayItem-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-createPayItem-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-createPayItem-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-createPayItem-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4342,8 +4348,8 @@ def accounting_create_pay_item():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->createPayItem: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-createPayItem-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-createPayItem-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -4419,10 +4425,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -4432,27 +4436,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createPayItem_payItem');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createPayItem_payItem"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -4549,13 +4534,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-createPayRun-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-createPayRun-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-createPayRun-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-createPayRun-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4757,8 +4742,8 @@ def accounting_create_pay_run():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->createPayRun: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-createPayRun-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-createPayRun-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -4834,10 +4819,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -4850,27 +4833,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createPayRun_payRun');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createPayRun_payRun"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -4967,13 +4931,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-createPayrollCalendar-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -5175,8 +5139,8 @@ def accounting_create_payroll_calendar():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->createPayrollCalendar: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-createPayrollCalendar-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-createPayrollCalendar-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -5252,10 +5216,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -5268,27 +5230,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createPayrollCalendar_payrollCalendar');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createPayrollCalendar_payrollCalendar"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -5385,13 +5328,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-createSuperfund-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-createSuperfund-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-createSuperfund-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-createSuperfund-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -5593,8 +5536,8 @@ def accounting_create_superfund():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->createSuperfund: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-createSuperfund-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-createSuperfund-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -5670,10 +5613,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -5686,27 +5627,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createSuperfund_superFund');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createSuperfund_superFund"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -5803,13 +5725,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-createTimesheet-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-createTimesheet-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-createTimesheet-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-createTimesheet-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6011,8 +5933,8 @@ def accounting_create_timesheet():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->createTimesheet: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-createTimesheet-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-createTimesheet-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -6088,10 +6010,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -6104,27 +6024,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createTimesheet_timesheet');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createTimesheet_timesheet"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -6221,13 +6122,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getEmployee-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getEmployee-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getEmployee-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getEmployee-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6435,8 +6336,8 @@ def accounting_get_employee():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getEmployee: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getEmployee-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getEmployee-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -6605,13 +6506,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getEmployees-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getEmployees-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getEmployees-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getEmployees-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6848,8 +6749,8 @@ def accounting_get_employees():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getEmployees: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getEmployees-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getEmployees-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -7127,13 +7028,13 @@ e.g. page=1 – Up to 100 employees will be returned in a single API call
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getLeaveApplication-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -7341,8 +7242,8 @@ def accounting_get_leave_application():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getLeaveApplication: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getLeaveApplication-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getLeaveApplication-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -7511,13 +7412,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getLeaveApplications-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -7754,8 +7655,8 @@ def accounting_get_leave_applications():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getLeaveApplications: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getLeaveApplications-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getLeaveApplications-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -8033,13 +7934,13 @@ e.g. page=1 – Up to 100 objects will be returned in a single API call
                               <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getPayItems-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getPayItems-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getPayItems-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getPayItems-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -8276,8 +8177,8 @@ def accounting_get_pay_items():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getPayItems: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getPayItems-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getPayItems-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -8555,13 +8456,13 @@ e.g. page=1 – Up to 100 objects will be returned in a single API call
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getPayRun-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getPayRun-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getPayRun-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getPayRun-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -8769,8 +8670,8 @@ def accounting_get_pay_run():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getPayRun: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getPayRun-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getPayRun-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -8939,13 +8840,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getPayRuns-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getPayRuns-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getPayRuns-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getPayRuns-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -9182,8 +9083,8 @@ def accounting_get_pay_runs():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getPayRuns: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getPayRuns-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getPayRuns-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -9461,13 +9362,13 @@ e.g. page=1 – Up to 100 PayRuns will be returned in a single API call
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getPayrollCalendar-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -9675,8 +9576,8 @@ def accounting_get_payroll_calendar():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getPayrollCalendar: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getPayrollCalendar-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getPayrollCalendar-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -9897,13 +9798,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getPayrollCalendars-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -10140,8 +10041,8 @@ def accounting_get_payroll_calendars():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getPayrollCalendars: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getPayrollCalendars-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getPayrollCalendars-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -10419,13 +10320,13 @@ e.g. page=1 – Up to 100 objects will be returned in a single API call
                               <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getPayslip-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getPayslip-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getPayslip-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getPayslip-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -10633,8 +10534,8 @@ def accounting_get_payslip():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getPayslip: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getPayslip-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getPayslip-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -10803,13 +10704,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getSettings-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getSettings-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getSettings-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getSettings-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -11007,8 +10908,8 @@ def accounting_get_settings():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getSettings: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getSettings-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getSettings-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -11143,13 +11044,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getSuperfund-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getSuperfund-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getSuperfund-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getSuperfund-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -11357,8 +11258,8 @@ def accounting_get_superfund():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getSuperfund: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getSuperfund-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getSuperfund-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -11527,13 +11428,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getSuperfundProducts-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -11751,8 +11652,8 @@ def accounting_get_superfund_products():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getSuperfundProducts: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getSuperfundProducts-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getSuperfundProducts-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -11988,13 +11889,13 @@ The USI of the Regulated SuperFund
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getSuperfunds-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getSuperfunds-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getSuperfunds-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getSuperfunds-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -12231,8 +12132,8 @@ def accounting_get_superfunds():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getSuperfunds: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getSuperfunds-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getSuperfunds-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -12510,13 +12411,13 @@ e.g. page=1 – Up to 100 SuperFunds will be returned in a single API call
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getTimesheet-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getTimesheet-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getTimesheet-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getTimesheet-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -12724,8 +12625,8 @@ def accounting_get_timesheet():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getTimesheet: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getTimesheet-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getTimesheet-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -12894,13 +12795,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-getTimesheets-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-getTimesheets-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-getTimesheets-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-getTimesheets-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -13137,8 +13038,8 @@ def accounting_get_timesheets():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->getTimesheets: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-getTimesheets-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-getTimesheets-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -13416,13 +13317,13 @@ e.g. page=1 – Up to 100 timesheets will be returned in a single API call
                               <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-updateEmployee-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-updateEmployee-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-updateEmployee-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-updateEmployee-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -13634,8 +13535,8 @@ def accounting_update_employee():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->updateEmployee: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-updateEmployee-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-updateEmployee-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -13742,10 +13643,8 @@ Xero identifier for Tenant
                     </div>
             </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -13757,27 +13656,8 @@ $(document).ready(function() {
       "example" : "[ { \"MiddleNames\": \"Frank\" } ]"
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updateEmployee_employee');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updateEmployee_employee"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -13860,13 +13740,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-updateLeaveApplication-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -14078,8 +13958,8 @@ def accounting_update_leave_application():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->updateLeaveApplication: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-updateLeaveApplication-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-updateLeaveApplication-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -14189,10 +14069,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -14205,27 +14083,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updateLeaveApplication_leaveApplication');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updateLeaveApplication_leaveApplication"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -14322,13 +14181,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-updatePayRun-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-updatePayRun-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-updatePayRun-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-updatePayRun-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -14540,8 +14399,8 @@ def accounting_update_pay_run():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->updatePayRun: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-updatePayRun-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-updatePayRun-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -14648,10 +14507,8 @@ Xero identifier for Tenant
                     </div>
             </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -14663,27 +14520,8 @@ $(document).ready(function() {
       }
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updatePayRun_payRun');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updatePayRun_payRun"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -14766,13 +14604,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-updatePayslip-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-updatePayslip-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-updatePayslip-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-updatePayslip-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -14984,8 +14822,8 @@ def accounting_update_payslip():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->updatePayslip: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-updatePayslip-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-updatePayslip-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -15092,10 +14930,8 @@ Xero identifier for Tenant
                     </div>
             </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -15107,27 +14943,8 @@ $(document).ready(function() {
       "example" : "{ \"Payslip\": { \"EmployeeID\": \"cdfb8371-0b21-4b8a-8903-1024df6c391e\", \"DeductionLines\": [ { \"DeductionTypeID\": \"727af5e8-b347-4ae7-85fc-9b82266d0aec\", \"CalculationType\": \"FIXEDAMOUNT\", \"NumberOfUnits\": 10 } ] } }"
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updatePayslip_payslipLines');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updatePayslip_payslipLines"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -15210,13 +15027,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-updateSuperfund-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-updateSuperfund-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-updateSuperfund-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-updateSuperfund-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -15428,8 +15245,8 @@ def accounting_update_superfund():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->updateSuperfund: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-updateSuperfund-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-updateSuperfund-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -15536,10 +15353,8 @@ Xero identifier for Tenant
                     </div>
             </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -15551,27 +15366,8 @@ $(document).ready(function() {
       "example" : " [ { \"Type\":\"REGULATED\", \"Name\":\"Nice23534\" } ]"
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updateSuperfund_superFund');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updateSuperfund_superFund"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -15654,13 +15450,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-PayrollAu-updateTimesheet-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-PayrollAu-updateTimesheet-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-PayrollAu-updateTimesheet-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-PayrollAu-updateTimesheet-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -15872,8 +15668,8 @@ def accounting_update_timesheet():
     except AccountingBadRequestException as e:
         print("Exception when calling PayrollAuApi->updateTimesheet: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-PayrollAu-updateTimesheet-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-PayrollAu-updateTimesheet-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -15980,10 +15776,8 @@ Xero identifier for Tenant
                     </div>
             </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -15995,27 +15789,8 @@ $(document).ready(function() {
       "example" : "[ { \"EmployeeID\":\"b34e89ff-770d-4099-b7e5-f968767118bc\", \"StartDate\":\"/Date(1573171200000+0000)/\", \"EndDate\":\"/Date(1573689600000+0000)/\", \"Status\":\"APPROVED\", \"Hours\":22.0, \"TimesheetID\":\"a7eb0a79-8511-4ee7-b473-3a25f28abcb9\", \"TimesheetLines\":[ { \"EarningsRateID\":\"ab874dfb-ab09-4c91-954e-43acf6fc23b4\", \"TrackingItemID\":\"af5e9ce2-2349-4136-be99-3561b189f473\", \"NumberOfUnits\":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ], \"UpdatedDateUTC\":\"/Date(1573516185127+0000)/\" } ] } ]"
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updateTimesheet_timesheet');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updateTimesheet_timesheet"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>

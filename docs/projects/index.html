@@ -5,6 +5,12 @@
       <title>Xero Projects API</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="UTF-8">
+      <meta name="description" content="xero-node SDK Project API Documentation">
+      <title>xero-node Project SDK Docs</title>
+      <meta name="keywords" content="xero-node, typescript, node, sdk, documentation, docs, XeroAPI, Xero, developer">
+      <meta name="author" content="Xero Developer Evangelists">
+      <link rel="shortcut icon" href="https://developer.xero.com/static/favicon.ico" type="image/x-icon">
       <meta charset="UTF-8" />
       <script>
 /*! jQuery v3.1.0 | (c) jQuery Foundation | jquery.org/license */
@@ -820,7 +826,7 @@ ul.nav-tabs {
   float: left;
 }
 
-.language {
+.language, .api-set-wrapper {
   float: left;
   margin-left: 20px;
 }
@@ -833,6 +839,14 @@ ul.nav-tabs {
 .api-set {
   float: left;
   margin-left: 30px;
+}
+
+.api-set-wrapper {
+  padding-top: 5px;
+}
+
+.api-set-name {
+  color: #fff;
 }
 
       </style>
@@ -1366,46 +1380,80 @@ ul.nav-tabs {
 };
          
          var errs = {};
+
+
+         function routeDocs(event) {
+            var selectedOption = event.options[event.selectedIndex];
+            location = selectedOption.dataset.url
+         }
       </script>
 
       <div class='docs-header'>
          <div class='xero-logo'>
-            <a target="_blank" href="https://developer.xero.com/documentation/">
+            <a target="_blank"  href="https://developer.xero.com/documentation/">
                <img alt="" width="115" height="30" class="xrh-app-image" src="https://developer.xero.com/static/images/developer-logo.svg">
             </a>
          </div>
          <fieldset class='api-set'>
-            <select name="form" onchange="location = this.value;">
-               <option value="#">SDK Language</option>
-               <option value="https://xeroapi.github.io/xero-ruby/accounting/index.html">Ruby</option>
-               <option value="https://xeroapi.github.io/xero-node/assets/index.html">Node</option>
-               <option value="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html">Java</option>
-               <option value="https://xeroapi.github.io/xero-php-oauth2/docs/v2/accounting/index.html">PHP</option>
+            <select name="form" id="language-set-selection" onchange="routeDocs(this);">
+               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="node">Node</option>
+               <option data-url="https://xeroapi.github.io/xero-ruby/accounting/index.html" value="ruby">Ruby</option>
+               <!--<option data-url="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html" value="java">Java</option>
+               <option data-url="https://xeroapi.github.io/xero-php-oauth2/" value="php">PHP</option>
+               <option data-url="https://xeroapi.github.io/xero-python/docs/accounting/index.html" value="python">Python</option>
+               <option data-url="https://xeroapi.github.io/Xero-NetStandard/docs/accounting/index.html" value="dotnet">Dotnet</option> -->
             </select>
          </fieldset>
          <div class='language'>
             <img alt="" width="115" height="30" class="xrh-app-image" src="https://i.imgur.com/b7XmOOk.png">
          </div>
          <fieldset class='api-set'>
-            <select name="form" onchange="location = this.value;">
-               <option value="#">API Set</option>
-               <option value="https://xeroapi.github.io/xero-node/accounting/index.html">Accounting</option>
-               <option value="https://xeroapi.github.io/xero-node/assets/index.html">Assets</option>
-               <option value="https://xeroapi.github.io/xero-node/files/index.html">Files</option>
-               <option value="https://xeroapi.github.io/xero-node/projects/index.html">Projects</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-au/index.html">Payroll (AU)</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-uk/index.html">Payroll (UK)</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-nz/index.html">Payroll (NZ)</option>
-               <option value="https://xeroapi.github.io/xero-node/bankfeeds/index.html">BankFeeds</option>
+            <select name="form" id="api-set-selection" onchange="routeDocs(this);">
+               <option data-url="https://xeroapi.github.io/xero-node/accounting/index.html" value="Accounting">Accounting</option>
+               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="Asset">Assets</option>
+               <option data-url="https://xeroapi.github.io/xero-node/files/index.html" value="Files">Files</option>
+               <option data-url="https://xeroapi.github.io/xero-node/projects/index.html" value="Project">Projects</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-au/index.html" value="PayrollAu">Payroll (AU)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-uk/index.html" value="PayrollUk">Payroll (UK)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="PayrollNz">Bankfeeds</option>
             </select>
          </fieldset>
+         <div class='api-set-wrapper'>
+            <span class='api-set-name'>Project API</span>
+
+            <script>
+               $(document).ready(function() {
+                  const location = window.location.href.toLowerCase()
+                  let sdkLang
+                  if( location.includes('ruby') ){
+                   sdkLang = 'ruby'
+                  } else if (location.includes('node')){
+                   sdkLang = 'node'
+                  } else if (location.includes('php')){
+                   sdkLang = 'php'
+                  } else if (location.includes('dotnet')){
+                   sdkLang = 'dotnet'
+                  } else if (location.includes('java')){
+                   sdkLang = 'java'
+                  } else if (location.includes('python')){
+                     sdkLang = 'python'
+                  }
+                  $('#language-set-selection option[value="'+ sdkLang +'"]').attr("selected", "selected");
+                  console.log('Project')
+                  $('#api-set-selection option[value="'+ 'Project' + '"]').attr("selected", "selected");
+               });
+            </script>
+         </div>
       </div>
       <div class="container-fluid docs-start">
          <div class="row-fluid">
             <div id="sidenav" class="span2">
                <nav id="scrollingNav">
                   <ul class="sidenav nav nav-list">
-                     <li class="nav-header" data-group="Project"><a href="#api-Project">xero-node - Project</a></li>
+                     <li class="nav-header" data-group="Project"><strong>SDK: </strong>xero-ruby</li>
+                     <li class="nav-header" data-group="Project"><strong>VSN: </strong>4.11.2</li>
+                     <li class="nav-header" data-group="Project"><a href="#api-Project">Methods</a></li>
                      <li data-group="Project" data-name="createProject" class="">
                         <a href="#api-Project-createProject">createProject</a>
                      </li>
@@ -1485,13 +1533,13 @@ ul.nav-tabs {
                               <!--<li class=""><a href="#examples-Project-createProject-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createProject-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createProject-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-createProject-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-createProject-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-createProject-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createProject-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createProject-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createProject-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createProject-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-createProject-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-createProject-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -1693,8 +1741,8 @@ def accounting_create_project():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->createProject: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-createProject-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-createProject-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -1770,10 +1818,8 @@ Create a new project with ProjectCreateOrUpdate object
                     Required
                 </div>
         </div>
-<!--p class="marked">Create a new project with ProjectCreateOrUpdate object</p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "description" : "Create a new project with ProjectCreateOrUpdate object",
   "content" : {
     "application/json" : {
@@ -1784,27 +1830,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createProject_projectCreateOrUpdate');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createProject_projectCreateOrUpdate"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -1939,13 +1966,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-Project-createTimeEntry-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createTimeEntry-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createTimeEntry-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-createTimeEntry-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-createTimeEntry-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-createTimeEntry-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createTimeEntry-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createTimeEntry-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createTimeEntry-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-createTimeEntry-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-createTimeEntry-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-createTimeEntry-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -2157,8 +2184,8 @@ def accounting_create_time_entry():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->createTimeEntry: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-createTimeEntry-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-createTimeEntry-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -2273,10 +2300,8 @@ The time entry object you are creating
                     Required
                 </div>
         </div>
-<!--p class="marked">The time entry object you are creating</p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "description" : "The time entry object you are creating",
   "content" : {
     "application/json" : {
@@ -2287,27 +2312,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createTimeEntry_timeEntryCreateOrUpdate');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createTimeEntry_timeEntryCreateOrUpdate"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -2390,13 +2396,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-deleteTimeEntry-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-deleteTimeEntry-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-deleteTimeEntry-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-deleteTimeEntry-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -2606,8 +2612,8 @@ def accounting_delete_time_entry():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->deleteTimeEntry: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-deleteTimeEntry-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-deleteTimeEntry-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -2769,13 +2775,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Project-getProject-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProject-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProject-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-getProject-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-getProject-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-getProject-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProject-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProject-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProject-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProject-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-getProject-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-getProject-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -2983,8 +2989,8 @@ def accounting_get_project():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->getProject: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-getProject-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-getProject-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -3210,13 +3216,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Project-getProjectUsers-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjectUsers-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjectUsers-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-getProjectUsers-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-getProjectUsers-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-getProjectUsers-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjectUsers-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjectUsers-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjectUsers-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjectUsers-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-getProjectUsers-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-getProjectUsers-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -3432,8 +3438,8 @@ def accounting_get_project_users():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->getProjectUsers: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-getProjectUsers-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-getProjectUsers-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -3669,13 +3675,13 @@ Optional, it is set to 50 by default. The number of items to return per page in 
                               <!--<li class=""><a href="#examples-Project-getProjects-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjects-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjects-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-getProjects-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-getProjects-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-getProjects-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjects-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjects-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjects-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getProjects-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-getProjects-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-getProjects-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -3921,8 +3927,8 @@ def accounting_get_projects():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->getProjects: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-getProjects-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-getProjects-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -4232,13 +4238,13 @@ Optional, it is set to 50 by default. The number of items to return per page in 
                               <!--<li class=""><a href="#examples-Project-getTask-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTask-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTask-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-getTask-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-getTask-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-getTask-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTask-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTask-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTask-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTask-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-getTask-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-getTask-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4456,8 +4462,8 @@ def accounting_get_task():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->getTask: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-getTask-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-getTask-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -4658,13 +4664,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Project-getTasks-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTasks-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTasks-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-getTasks-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-getTasks-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-getTasks-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTasks-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTasks-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTasks-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTasks-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-getTasks-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-getTasks-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4909,8 +4915,8 @@ def accounting_get_tasks():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->getTasks: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-getTasks-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-getTasks-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -5175,13 +5181,13 @@ taskIdsSearch for all tasks that match a comma separated list of taskIds, i.e. G
                               <!--<li class=""><a href="#examples-Project-getTimeEntries-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntries-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntries-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-getTimeEntries-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-getTimeEntries-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-getTimeEntries-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntries-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntries-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntries-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntries-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-getTimeEntries-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-getTimeEntries-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -5489,8 +5495,8 @@ def accounting_get_time_entries():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->getTimeEntries: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-getTimeEntries-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-getTimeEntries-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -5899,13 +5905,13 @@ ISO 8601 UTC date. Finds all time entries on or before this date filtered on the
                               <!--<li class=""><a href="#examples-Project-getTimeEntry-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntry-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntry-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-getTimeEntry-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-getTimeEntry-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-getTimeEntry-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntry-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntry-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntry-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-getTimeEntry-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-getTimeEntry-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-getTimeEntry-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6123,8 +6129,8 @@ def accounting_get_time_entry():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->getTimeEntry: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-getTimeEntry-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-getTimeEntry-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -6325,13 +6331,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Project-patchProject-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-patchProject-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-patchProject-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-patchProject-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-patchProject-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-patchProject-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-patchProject-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-patchProject-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-patchProject-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-patchProject-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-patchProject-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-patchProject-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6535,8 +6541,8 @@ def accounting_patch_project():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->patchProject: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-patchProject-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-patchProject-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -6646,10 +6652,8 @@ Update the status of an existing Project
                     Required
                 </div>
         </div>
-<!--p class="marked">Update the status of an existing Project</p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "description" : "Update the status of an existing Project",
   "content" : {
     "application/json" : {
@@ -6660,27 +6664,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_patchProject_projectPatch');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_patchProject_projectPatch"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -6776,13 +6761,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-Project-updateProject-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateProject-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateProject-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-updateProject-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-updateProject-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-updateProject-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateProject-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateProject-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateProject-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateProject-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-updateProject-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-updateProject-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6986,8 +6971,8 @@ def accounting_update_project():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->updateProject: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-updateProject-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-updateProject-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -7097,10 +7082,8 @@ Request of type ProjectCreateOrUpdate
                     Required
                 </div>
         </div>
-<!--p class="marked">Request of type ProjectCreateOrUpdate</p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "description" : "Request of type ProjectCreateOrUpdate",
   "content" : {
     "application/json" : {
@@ -7111,27 +7094,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updateProject_projectCreateOrUpdate');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updateProject_projectCreateOrUpdate"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -7227,13 +7191,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Project-updateTimeEntry-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Project-updateTimeEntry-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Project-updateTimeEntry-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Project-updateTimeEntry-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -7447,8 +7411,8 @@ def accounting_update_time_entry():
     except AccountingBadRequestException as e:
         print("Exception when calling ProjectApi->updateTimeEntry: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Project-updateTimeEntry-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Project-updateTimeEntry-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -7590,10 +7554,8 @@ The time entry object you are updating
                     Required
                 </div>
         </div>
-<!--p class="marked">The time entry object you are updating</p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "description" : "The time entry object you are updating",
   "content" : {
     "application/json" : {
@@ -7604,27 +7566,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updateTimeEntry_timeEntryCreateOrUpdate');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updateTimeEntry_timeEntryCreateOrUpdate"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>

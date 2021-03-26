@@ -5,6 +5,12 @@
       <title>Xero Files API</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="UTF-8">
+      <meta name="description" content="xero-node SDK Files API Documentation">
+      <title>xero-node Files SDK Docs</title>
+      <meta name="keywords" content="xero-node, typescript, node, sdk, documentation, docs, XeroAPI, Xero, developer">
+      <meta name="author" content="Xero Developer Evangelists">
+      <link rel="shortcut icon" href="https://developer.xero.com/static/favicon.ico" type="image/x-icon">
       <meta charset="UTF-8" />
       <script>
 /*! jQuery v3.1.0 | (c) jQuery Foundation | jquery.org/license */
@@ -820,7 +826,7 @@ ul.nav-tabs {
   float: left;
 }
 
-.language {
+.language, .api-set-wrapper {
   float: left;
   margin-left: 20px;
 }
@@ -833,6 +839,14 @@ ul.nav-tabs {
 .api-set {
   float: left;
   margin-left: 30px;
+}
+
+.api-set-wrapper {
+  padding-top: 5px;
+}
+
+.api-set-name {
+  color: #fff;
 }
 
       </style>
@@ -1053,46 +1067,80 @@ ul.nav-tabs {
 };
          
          var errs = {};
+
+
+         function routeDocs(event) {
+            var selectedOption = event.options[event.selectedIndex];
+            location = selectedOption.dataset.url
+         }
       </script>
 
       <div class='docs-header'>
          <div class='xero-logo'>
-            <a target="_blank" href="https://developer.xero.com/documentation/">
+            <a target="_blank"  href="https://developer.xero.com/documentation/">
                <img alt="" width="115" height="30" class="xrh-app-image" src="https://developer.xero.com/static/images/developer-logo.svg">
             </a>
          </div>
          <fieldset class='api-set'>
-            <select name="form" onchange="location = this.value;">
-               <option value="#">SDK Language</option>
-               <option value="https://xeroapi.github.io/xero-ruby/accounting/index.html">Ruby</option>
-               <option value="https://xeroapi.github.io/xero-node/assets/index.html">Node</option>
-               <option value="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html">Java</option>
-               <option value="https://xeroapi.github.io/xero-php-oauth2/docs/v2/accounting/index.html">PHP</option>
+            <select name="form" id="language-set-selection" onchange="routeDocs(this);">
+               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="node">Node</option>
+               <option data-url="https://xeroapi.github.io/xero-ruby/accounting/index.html" value="ruby">Ruby</option>
+               <!--<option data-url="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html" value="java">Java</option>
+               <option data-url="https://xeroapi.github.io/xero-php-oauth2/" value="php">PHP</option>
+               <option data-url="https://xeroapi.github.io/xero-python/docs/accounting/index.html" value="python">Python</option>
+               <option data-url="https://xeroapi.github.io/Xero-NetStandard/docs/accounting/index.html" value="dotnet">Dotnet</option> -->
             </select>
          </fieldset>
          <div class='language'>
             <img alt="" width="115" height="30" class="xrh-app-image" src="https://i.imgur.com/b7XmOOk.png">
          </div>
          <fieldset class='api-set'>
-            <select name="form" onchange="location = this.value;">
-               <option value="#">API Set</option>
-               <option value="https://xeroapi.github.io/xero-node/accounting/index.html">Accounting</option>
-               <option value="https://xeroapi.github.io/xero-node/assets/index.html">Assets</option>
-               <option value="https://xeroapi.github.io/xero-node/files/index.html">Files</option>
-               <option value="https://xeroapi.github.io/xero-node/projects/index.html">Projects</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-au/index.html">Payroll (AU)</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-uk/index.html">Payroll (UK)</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-nz/index.html">Payroll (NZ)</option>
-               <option value="https://xeroapi.github.io/xero-node/bankfeeds/index.html">BankFeeds</option>
+            <select name="form" id="api-set-selection" onchange="routeDocs(this);">
+               <option data-url="https://xeroapi.github.io/xero-node/accounting/index.html" value="Accounting">Accounting</option>
+               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="Asset">Assets</option>
+               <option data-url="https://xeroapi.github.io/xero-node/files/index.html" value="Files">Files</option>
+               <option data-url="https://xeroapi.github.io/xero-node/projects/index.html" value="Project">Projects</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-au/index.html" value="PayrollAu">Payroll (AU)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-uk/index.html" value="PayrollUk">Payroll (UK)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="PayrollNz">Bankfeeds</option>
             </select>
          </fieldset>
+         <div class='api-set-wrapper'>
+            <span class='api-set-name'>Files API</span>
+
+            <script>
+               $(document).ready(function() {
+                  const location = window.location.href.toLowerCase()
+                  let sdkLang
+                  if( location.includes('ruby') ){
+                   sdkLang = 'ruby'
+                  } else if (location.includes('node')){
+                   sdkLang = 'node'
+                  } else if (location.includes('php')){
+                   sdkLang = 'php'
+                  } else if (location.includes('dotnet')){
+                   sdkLang = 'dotnet'
+                  } else if (location.includes('java')){
+                   sdkLang = 'java'
+                  } else if (location.includes('python')){
+                     sdkLang = 'python'
+                  }
+                  $('#language-set-selection option[value="'+ sdkLang +'"]').attr("selected", "selected");
+                  console.log('Files')
+                  $('#api-set-selection option[value="'+ 'Files' + '"]').attr("selected", "selected");
+               });
+            </script>
+         </div>
       </div>
       <div class="container-fluid docs-start">
          <div class="row-fluid">
             <div id="sidenav" class="span2">
                <nav id="scrollingNav">
                   <ul class="sidenav nav nav-list">
-                     <li class="nav-header" data-group="Files"><a href="#api-Files">xero-node - Files</a></li>
+                     <li class="nav-header" data-group="Files"><strong>SDK: </strong>xero-ruby</li>
+                     <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.11.2</li>
+                     <li class="nav-header" data-group="Files"><a href="#api-Files">Methods</a></li>
                      <li data-group="Files" data-name="createFileAssociation" class="">
                         <a href="#api-Files-createFileAssociation">createFileAssociation</a>
                      </li>
@@ -1184,13 +1232,13 @@ ul.nav-tabs {
                               <!--<li class=""><a href="#examples-Files-createFileAssociation-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFileAssociation-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFileAssociation-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-createFileAssociation-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-createFileAssociation-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-createFileAssociation-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFileAssociation-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFileAssociation-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFileAssociation-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFileAssociation-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-createFileAssociation-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-createFileAssociation-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -1402,8 +1450,8 @@ def accounting_create_file_association():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->createFileAssociation: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-createFileAssociation-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-createFileAssociation-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -1510,10 +1558,8 @@ Xero identifier for Tenant
                     </div>
             </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -1522,27 +1568,8 @@ $(document).ready(function() {
       "example" : "{ \"ObjectId\": \"1270bf7c-5d18-473a-9231-1e36c4bd33ed\", \"ObjectGroup\": \"Contact\", \"ObjectType\": \"Business\" }"
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createFileAssociation_association');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createFileAssociation_association"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -1639,13 +1666,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-Files-createFolder-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFolder-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFolder-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-createFolder-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-createFolder-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-createFolder-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFolder-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFolder-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFolder-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-createFolder-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-createFolder-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-createFolder-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -1847,8 +1874,8 @@ def accounting_create_folder():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->createFolder: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-createFolder-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-createFolder-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -1921,10 +1948,8 @@ Xero identifier for Tenant
                     </div>
             </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -1933,27 +1958,8 @@ $(document).ready(function() {
       "example" : "{ \"Name\": \"My Docs\" }"
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createFolder_folder');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createFolder_folder"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -2050,13 +2056,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-Files-deleteFile-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFile-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFile-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-deleteFile-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-deleteFile-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-deleteFile-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFile-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFile-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFile-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFile-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-deleteFile-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-deleteFile-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -2256,8 +2262,8 @@ def accounting_delete_file():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->deleteFile: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-deleteFile-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-deleteFile-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -2387,13 +2393,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-deleteFileAssociation-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-deleteFileAssociation-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-deleteFileAssociation-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-deleteFileAssociation-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -2603,8 +2609,8 @@ def accounting_delete_file_association():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->deleteFileAssociation: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-deleteFileAssociation-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-deleteFileAssociation-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -2761,13 +2767,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-deleteFolder-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFolder-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFolder-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-deleteFolder-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-deleteFolder-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-deleteFolder-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFolder-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFolder-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFolder-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-deleteFolder-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-deleteFolder-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-deleteFolder-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -2967,8 +2973,8 @@ def accounting_delete_folder():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->deleteFolder: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-deleteFolder-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-deleteFolder-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -3098,13 +3104,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-getAssociationsByObject-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-getAssociationsByObject-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-getAssociationsByObject-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-getAssociationsByObject-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -3312,8 +3318,8 @@ def accounting_get_associations_by_object():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->getAssociationsByObject: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-getAssociationsByObject-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-getAssociationsByObject-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -3485,13 +3491,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-getFile-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFile-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFile-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-getFile-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-getFile-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-getFile-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFile-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFile-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFile-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFile-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-getFile-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-getFile-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -3699,8 +3705,8 @@ def accounting_get_file():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->getFile: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-getFile-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-getFile-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -3869,13 +3875,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-getFileAssociations-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileAssociations-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileAssociations-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-getFileAssociations-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-getFileAssociations-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-getFileAssociations-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileAssociations-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileAssociations-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileAssociations-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileAssociations-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-getFileAssociations-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-getFileAssociations-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4083,8 +4089,8 @@ def accounting_get_file_associations():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->getFileAssociations: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-getFileAssociations-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-getFileAssociations-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -4256,13 +4262,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-getFileContent-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileContent-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileContent-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-getFileContent-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-getFileContent-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-getFileContent-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileContent-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileContent-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileContent-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFileContent-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-getFileContent-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-getFileContent-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4470,8 +4476,8 @@ def accounting_get_file_content():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->getFileContent: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-getFileContent-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-getFileContent-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -4640,13 +4646,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-getFiles-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFiles-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFiles-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-getFiles-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-getFiles-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-getFiles-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFiles-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFiles-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFiles-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFiles-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-getFiles-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-getFiles-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4872,8 +4878,8 @@ def accounting_get_files():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->getFiles: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-getFiles-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-getFiles-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -5078,13 +5084,13 @@ values to sort by
                               <!--<li class=""><a href="#examples-Files-getFolder-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolder-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolder-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-getFolder-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-getFolder-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-getFolder-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolder-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolder-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolder-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolder-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-getFolder-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-getFolder-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -5292,8 +5298,8 @@ def accounting_get_folder():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->getFolder: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-getFolder-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-getFolder-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -5462,13 +5468,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-getFolders-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolders-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolders-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-getFolders-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-getFolders-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-getFolders-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolders-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolders-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolders-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getFolders-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-getFolders-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-getFolders-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -5676,8 +5682,8 @@ def accounting_get_folders():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->getFolders: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-getFolders-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-getFolders-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -5843,13 +5849,13 @@ values to sort by
                               <!--<li class=""><a href="#examples-Files-getInbox-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getInbox-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getInbox-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-getInbox-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-getInbox-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-getInbox-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getInbox-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getInbox-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getInbox-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-getInbox-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-getInbox-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-getInbox-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6047,8 +6053,8 @@ def accounting_get_inbox():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->getInbox: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-getInbox-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-getInbox-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -6183,13 +6189,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-Files-updateFile-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFile-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFile-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-updateFile-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-updateFile-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-updateFile-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFile-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFile-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFile-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFile-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-updateFile-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-updateFile-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6401,8 +6407,8 @@ def accounting_update_file():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->updateFile: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-updateFile-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-updateFile-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -6509,10 +6515,8 @@ Xero identifier for Tenant
                     </div>
             </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -6521,27 +6525,8 @@ $(document).ready(function() {
       "example" : "{ \"FolderId\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\" }"
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updateFile_fileObject');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updateFile_fileObject"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -6638,13 +6623,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-Files-updateFolder-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFolder-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFolder-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-updateFolder-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-updateFolder-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-updateFolder-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFolder-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFolder-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFolder-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-updateFolder-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-updateFolder-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-updateFolder-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -6856,8 +6841,8 @@ def accounting_update_folder():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->updateFolder: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-updateFolder-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-updateFolder-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -6967,10 +6952,8 @@ Xero identifier for Tenant
                     Required
                 </div>
         </div>
-<!--p class="marked"></p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "content" : {
     "application/json" : {
       "schema" : {
@@ -6980,27 +6963,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_updateFolder_folder');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_updateFolder_folder"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -7097,13 +7061,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-Files-uploadFile-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFile-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFile-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-uploadFile-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-uploadFile-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-uploadFile-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFile-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFile-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFile-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFile-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-uploadFile-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-uploadFile-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -7344,8 +7308,8 @@ def accounting_upload_file():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->uploadFile: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-uploadFile-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-uploadFile-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
@@ -7601,13 +7565,13 @@ exact name of the file you are uploading
                               <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-Files-uploadFileToFolder-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-Files-uploadFileToFolder-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-Files-uploadFileToFolder-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-Files-uploadFileToFolder-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -7858,8 +7822,8 @@ def accounting_upload_file_to_folder():
     except AccountingBadRequestException as e:
         print("Exception when calling FilesApi->uploadFileToFolder: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-Files-uploadFileToFolder-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-Files-uploadFileToFolder-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';

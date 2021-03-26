@@ -5,6 +5,12 @@
       <title>Xero Bank Feeds API</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="UTF-8">
+      <meta name="description" content="xero-node SDK BankFeeds API Documentation">
+      <title>xero-node BankFeeds SDK Docs</title>
+      <meta name="keywords" content="xero-node, typescript, node, sdk, documentation, docs, XeroAPI, Xero, developer">
+      <meta name="author" content="Xero Developer Evangelists">
+      <link rel="shortcut icon" href="https://developer.xero.com/static/favicon.ico" type="image/x-icon">
       <meta charset="UTF-8" />
       <script>
 /*! jQuery v3.1.0 | (c) jQuery Foundation | jquery.org/license */
@@ -820,7 +826,7 @@ ul.nav-tabs {
   float: left;
 }
 
-.language {
+.language, .api-set-wrapper {
   float: left;
   margin-left: 20px;
 }
@@ -833,6 +839,14 @@ ul.nav-tabs {
 .api-set {
   float: left;
   margin-left: 30px;
+}
+
+.api-set-wrapper {
+  padding-top: 5px;
+}
+
+.api-set-name {
+  color: #fff;
 }
 
       </style>
@@ -1166,46 +1180,80 @@ ul.nav-tabs {
 };
          
          var errs = {};
+
+
+         function routeDocs(event) {
+            var selectedOption = event.options[event.selectedIndex];
+            location = selectedOption.dataset.url
+         }
       </script>
 
       <div class='docs-header'>
          <div class='xero-logo'>
-            <a target="_blank" href="https://developer.xero.com/documentation/">
+            <a target="_blank"  href="https://developer.xero.com/documentation/">
                <img alt="" width="115" height="30" class="xrh-app-image" src="https://developer.xero.com/static/images/developer-logo.svg">
             </a>
          </div>
          <fieldset class='api-set'>
-            <select name="form" onchange="location = this.value;">
-               <option value="#">SDK Language</option>
-               <option value="https://xeroapi.github.io/xero-ruby/accounting/index.html">Ruby</option>
-               <option value="https://xeroapi.github.io/xero-node/assets/index.html">Node</option>
-               <option value="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html">Java</option>
-               <option value="https://xeroapi.github.io/xero-php-oauth2/docs/v2/accounting/index.html">PHP</option>
+            <select name="form" id="language-set-selection" onchange="routeDocs(this);">
+               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="node">Node</option>
+               <option data-url="https://xeroapi.github.io/xero-ruby/accounting/index.html" value="ruby">Ruby</option>
+               <!--<option data-url="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html" value="java">Java</option>
+               <option data-url="https://xeroapi.github.io/xero-php-oauth2/" value="php">PHP</option>
+               <option data-url="https://xeroapi.github.io/xero-python/docs/accounting/index.html" value="python">Python</option>
+               <option data-url="https://xeroapi.github.io/Xero-NetStandard/docs/accounting/index.html" value="dotnet">Dotnet</option> -->
             </select>
          </fieldset>
          <div class='language'>
             <img alt="" width="115" height="30" class="xrh-app-image" src="https://i.imgur.com/b7XmOOk.png">
          </div>
          <fieldset class='api-set'>
-            <select name="form" onchange="location = this.value;">
-               <option value="#">API Set</option>
-               <option value="https://xeroapi.github.io/xero-node/accounting/index.html">Accounting</option>
-               <option value="https://xeroapi.github.io/xero-node/assets/index.html">Assets</option>
-               <option value="https://xeroapi.github.io/xero-node/files/index.html">Files</option>
-               <option value="https://xeroapi.github.io/xero-node/projects/index.html">Projects</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-au/index.html">Payroll (AU)</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-uk/index.html">Payroll (UK)</option>
-               <option value="https://xeroapi.github.io/xero-node/payroll-nz/index.html">Payroll (NZ)</option>
-               <option value="https://xeroapi.github.io/xero-node/bankfeeds/index.html">BankFeeds</option>
+            <select name="form" id="api-set-selection" onchange="routeDocs(this);">
+               <option data-url="https://xeroapi.github.io/xero-node/accounting/index.html" value="Accounting">Accounting</option>
+               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="Asset">Assets</option>
+               <option data-url="https://xeroapi.github.io/xero-node/files/index.html" value="Files">Files</option>
+               <option data-url="https://xeroapi.github.io/xero-node/projects/index.html" value="Project">Projects</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-au/index.html" value="PayrollAu">Payroll (AU)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-uk/index.html" value="PayrollUk">Payroll (UK)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
+               <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="PayrollNz">Bankfeeds</option>
             </select>
          </fieldset>
+         <div class='api-set-wrapper'>
+            <span class='api-set-name'>BankFeeds API</span>
+
+            <script>
+               $(document).ready(function() {
+                  const location = window.location.href.toLowerCase()
+                  let sdkLang
+                  if( location.includes('ruby') ){
+                   sdkLang = 'ruby'
+                  } else if (location.includes('node')){
+                   sdkLang = 'node'
+                  } else if (location.includes('php')){
+                   sdkLang = 'php'
+                  } else if (location.includes('dotnet')){
+                   sdkLang = 'dotnet'
+                  } else if (location.includes('java')){
+                   sdkLang = 'java'
+                  } else if (location.includes('python')){
+                     sdkLang = 'python'
+                  }
+                  $('#language-set-selection option[value="'+ sdkLang +'"]').attr("selected", "selected");
+                  console.log('BankFeeds')
+                  $('#api-set-selection option[value="'+ 'BankFeeds' + '"]').attr("selected", "selected");
+               });
+            </script>
+         </div>
       </div>
       <div class="container-fluid docs-start">
          <div class="row-fluid">
             <div id="sidenav" class="span2">
                <nav id="scrollingNav">
                   <ul class="sidenav nav nav-list">
-                     <li class="nav-header" data-group="BankFeeds"><a href="#api-BankFeeds">xero-node - BankFeeds</a></li>
+                     <li class="nav-header" data-group="BankFeeds"><strong>SDK: </strong>xero-ruby</li>
+                     <li class="nav-header" data-group="BankFeeds"><strong>VSN: </strong>4.11.2</li>
+                     <li class="nav-header" data-group="BankFeeds"><a href="#api-BankFeeds">Methods</a></li>
                      <li data-group="BankFeeds" data-name="createFeedConnections" class="">
                         <a href="#api-BankFeeds-createFeedConnections">createFeedConnections</a>
                      </li>
@@ -1267,13 +1315,13 @@ ul.nav-tabs {
                               <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-BankFeeds-createFeedConnections-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-BankFeeds-createFeedConnections-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-BankFeeds-createFeedConnections-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-BankFeeds-createFeedConnections-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -1475,8 +1523,8 @@ def accounting_create_feed_connections():
     except AccountingBadRequestException as e:
         print("Exception when calling BankFeedsApi->createFeedConnections: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-BankFeeds-createFeedConnections-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-BankFeeds-createFeedConnections-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -1552,10 +1600,8 @@ Feed Connection(s) array object in the body
                     Required
                 </div>
         </div>
-<!--p class="marked">Feed Connection(s) array object in the body</p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "description" : "Feed Connection(s) array object in the body",
   "content" : {
     "application/json" : {
@@ -1574,27 +1620,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createFeedConnections_feedConnections');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createFeedConnections_feedConnections"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -1747,13 +1774,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-BankFeeds-createStatements-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-BankFeeds-createStatements-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-BankFeeds-createStatements-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-BankFeeds-createStatements-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -1955,8 +1982,8 @@ def accounting_create_statements():
     except AccountingBadRequestException as e:
         print("Exception when calling BankFeedsApi->createStatements: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-BankFeeds-createStatements-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-BankFeeds-createStatements-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -2029,10 +2056,8 @@ Statements array of objects in the body
                     </div>
             </div>
         </div>
-<!--p class="marked">Statements array of objects in the body</p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "description" : "Statements array of objects in the body",
   "content" : {
     "application/json" : {
@@ -2090,27 +2115,8 @@ $(document).ready(function() {
       }
     }
   }
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_createStatements_statements');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_createStatements_statements"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -2558,13 +2564,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-BankFeeds-deleteFeedConnections-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -2766,8 +2772,8 @@ def accounting_delete_feed_connections():
     except AccountingBadRequestException as e:
         print("Exception when calling BankFeedsApi->deleteFeedConnections: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-BankFeeds-deleteFeedConnections-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-BankFeeds-deleteFeedConnections-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -2843,10 +2849,8 @@ Feed Connections array object in the body
                     Required
                 </div>
         </div>
-<!--p class="marked">Feed Connections array object in the body</p-->
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {} {
+<script type="application/ld+json">
+    {
   "description" : "Feed Connections array object in the body",
   "content" : {
     "application/json" : {
@@ -2861,27 +2865,8 @@ $(document).ready(function() {
     }
   },
   "required" : true
-} {} ;
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_deleteFeedConnections_feedConnections');
-  result.empty();
-  result.append(view.render());
-});
+}
 </script>
-<div id="d2e199_deleteFeedConnections_feedConnections"></div>
-</td>
-</tr>
-
                            </table>
                            <!--
                            <h2>Responses</h2>
@@ -2991,13 +2976,13 @@ $(document).ready(function() {
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-BankFeeds-getFeedConnection-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-BankFeeds-getFeedConnection-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-BankFeeds-getFeedConnection-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-BankFeeds-getFeedConnection-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -3205,8 +3190,8 @@ def accounting_get_feed_connection():
     except AccountingBadRequestException as e:
         print("Exception when calling BankFeedsApi->getFeedConnection: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-BankFeeds-getFeedConnection-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-BankFeeds-getFeedConnection-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -3398,13 +3383,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-BankFeeds-getFeedConnections-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-BankFeeds-getFeedConnections-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-BankFeeds-getFeedConnections-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-BankFeeds-getFeedConnections-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -3620,8 +3605,8 @@ def accounting_get_feed_connections():
     except AccountingBadRequestException as e:
         print("Exception when calling BankFeedsApi->getFeedConnections: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-BankFeeds-getFeedConnections-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-BankFeeds-getFeedConnections-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -3845,13 +3830,13 @@ Page size which specifies how many records per page will be returned (default 10
                               <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-BankFeeds-getStatement-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-BankFeeds-getStatement-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-BankFeeds-getStatement-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-BankFeeds-getStatement-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4059,8 +4044,8 @@ def accounting_get_statement():
     except AccountingBadRequestException as e:
         print("Exception when calling BankFeedsApi->getStatement: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-BankFeeds-getStatement-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-BankFeeds-getStatement-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
@@ -4258,13 +4243,13 @@ Xero identifier for Tenant
                               <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-android">Android</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-groovy">Groovy</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-objc">Obj-C</a></li>-->
-                              <li class=""><a href="#examples-BankFeeds-getStatements-0-javascript">Node</a></li>
+                              <!-- <li class=""><a href="#examples-BankFeeds-getStatements-0-javascript">Node</a></li> -->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-angular">Angular</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-csharp">C#</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-php">PHP</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-perl">Perl</a></li>-->
                               <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-python">Python</a></li>-->
-                              <!--<li class=""><a href="#examples-BankFeeds-getStatements-0-ruby">Ruby</a></li>-->
+                              <li class=""><a href="#examples-BankFeeds-getStatements-0-node">Node</a></li>
                            </ul>
                            <div class="tab-content">
                               <!--
@@ -4500,8 +4485,8 @@ def accounting_get_statements():
     except AccountingBadRequestException as e:
         print("Exception when calling BankFeedsApi->getStatements: %s\n" % e)</code></pre>
                                  </div>-->
-                              <div class="tab-pane" id="examples-BankFeeds-getStatements-0-javascript">
-                                 <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+                              <div class="tab-pane" id="examples-BankFeeds-getStatements-0-node">
+                                 <pre class="prettyprint"><code class="language-node">await xero.setTokenSet(tokenSet);
 
 
 const xeroTenantId = 'xeroTenantId_example';
