@@ -1196,7 +1196,7 @@ ul.nav-tabs {
          </div>
          <fieldset class='api-set'>
             <select name="form" id="language-set-selection" onchange="routeDocs(this);">
-               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="node">Node</option>
+               <option data-url="https://xeroapi.github.io/xero-node/accounting/index.html" value="node">Node</option>
                <option data-url="https://xeroapi.github.io/xero-ruby/accounting/index.html" value="ruby">Ruby</option>
                <option data-url="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html" value="java">Java</option>
                <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/accounting/index.html" value="php">PHP</option>
@@ -1240,6 +1240,7 @@ ul.nav-tabs {
                      sdkLang = 'python'
                   }
                   $('#language-set-selection option[value="'+ sdkLang +'"]').attr("selected", "selected");
+                  $('#sdk-name').html(sdkLang);
                   console.log('BankFeeds')
                   $('#api-set-selection option[value="'+ 'BankFeeds' + '"]').attr("selected", "selected");
                });
@@ -1251,7 +1252,7 @@ ul.nav-tabs {
             <div id="sidenav" class="span2">
                <nav id="scrollingNav">
                   <ul class="sidenav nav nav-list">
-                     <li class="nav-header" data-group="BankFeeds"><strong>SDK: </strong>xero-ruby</li>
+                     <li class="nav-header" data-group="BankFeeds"><strong>SDK: </strong><span id='sdk-name'></span></li>
                      <li class="nav-header" data-group="BankFeeds"><strong>VSN: </strong>4.11.2</li>
                      <li class="nav-header" data-group="BankFeeds"><a href="#api-BankFeeds">Methods</a></li>
                      <li data-group="BankFeeds" data-name="createFeedConnections" class="">

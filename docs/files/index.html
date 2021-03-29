@@ -1083,7 +1083,7 @@ ul.nav-tabs {
          </div>
          <fieldset class='api-set'>
             <select name="form" id="language-set-selection" onchange="routeDocs(this);">
-               <option data-url="https://xeroapi.github.io/xero-node/assets/index.html" value="node">Node</option>
+               <option data-url="https://xeroapi.github.io/xero-node/accounting/index.html" value="node">Node</option>
                <option data-url="https://xeroapi.github.io/xero-ruby/accounting/index.html" value="ruby">Ruby</option>
                <option data-url="https://xeroapi.github.io/Xero-Java/v4/accounting/index.html" value="java">Java</option>
                <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/accounting/index.html" value="php">PHP</option>
@@ -1113,20 +1113,28 @@ ul.nav-tabs {
                $(document).ready(function() {
                   const location = window.location.href.toLowerCase()
                   let sdkLang
+                  let sdkName
                   if( location.includes('ruby') ){
-                   sdkLang = 'ruby'
+                    sdkLang = 'ruby'
+                    sdkName = 'xero-ruby'
                   } else if (location.includes('node')){
-                   sdkLang = 'node'
+                    sdkLang = 'node'
+                    sdkName = 'xero-node'
                   } else if (location.includes('php')){
-                   sdkLang = 'php'
+                    sdkLang = 'php'
+                    sdkName = 'xero-php-oauth2'
                   } else if (location.includes('dotnet')){
-                   sdkLang = 'dotnet'
+                    sdkLang = 'dotnet'
+                    sdkName = 'Xero-NetStandard'
                   } else if (location.includes('java')){
-                   sdkLang = 'java'
+                    sdkLang = 'java'
+                    sdkName = 'Xero-Java'
                   } else if (location.includes('python')){
-                     sdkLang = 'python'
+                    sdkLang = 'python'
+                    sdkName = 'xero-python'
                   }
                   $('#language-set-selection option[value="'+ sdkLang +'"]').attr("selected", "selected");
+                  $('#sdk-name').html(sdkName);
                   console.log('Files')
                   $('#api-set-selection option[value="'+ 'Files' + '"]').attr("selected", "selected");
                });
@@ -1138,7 +1146,7 @@ ul.nav-tabs {
             <div id="sidenav" class="span2">
                <nav id="scrollingNav">
                   <ul class="sidenav nav nav-list">
-                     <li class="nav-header" data-group="Files"><strong>SDK: </strong>xero-ruby</li>
+                     <li class="nav-header" data-group="Files"><strong>SDK: </strong><span id='sdk-name'></span></li>
                      <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.11.2</li>
                      <li class="nav-header" data-group="Files"><a href="#api-Files">Methods</a></li>
                      <li data-group="Files" data-name="createFileAssociation" class="">
