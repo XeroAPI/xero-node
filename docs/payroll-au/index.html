@@ -3191,21 +3191,28 @@ ul.nav-tabs {
                $(document).ready(function() {
                   const location = window.location.href.toLowerCase()
                   let sdkLang
+                  let sdkName
                   if( location.includes('ruby') ){
-                   sdkLang = 'ruby'
+                    sdkLang = 'ruby'
+                    sdkName = 'xero-ruby'
                   } else if (location.includes('node')){
-                   sdkLang = 'node'
+                    sdkLang = 'node'
+                    sdkName = 'xero-node'
                   } else if (location.includes('php')){
-                   sdkLang = 'php'
+                    sdkLang = 'php'
+                    sdkName = 'xero-php-oauth2'
                   } else if (location.includes('dotnet')){
-                   sdkLang = 'dotnet'
+                    sdkLang = 'dotnet'
+                    sdkName = 'Xero-NetStandard'
                   } else if (location.includes('java')){
-                   sdkLang = 'java'
+                    sdkLang = 'java'
+                    sdkName = 'Xero-Java'
                   } else if (location.includes('python')){
-                     sdkLang = 'python'
+                    sdkLang = 'python'
+                    sdkName = 'xero-python'
                   }
                   $('#language-set-selection option[value="'+ sdkLang +'"]').attr("selected", "selected");
-                  $('#sdk-name').html(sdkLang);
+                  $('#sdk-name').html(sdkName);
                   console.log('PayrollAu')
                   $('#api-set-selection option[value="'+ 'PayrollAu' + '"]').attr("selected", "selected");
                });
