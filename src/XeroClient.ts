@@ -1,7 +1,9 @@
-import { Client, Issuer, TokenSet, custom } from 'openid-client';
+import { Client, Issuer, TokenSet, TokenSetParameters, custom } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
 import http = require('http');
+
+export { TokenSet, TokenSetParameters } from 'openid-client';
 
 export interface IXeroClientConfig {
   clientId: string,
@@ -133,7 +135,7 @@ export class XeroClient {
     return this._tokenSet;
   }
 
-  public setTokenSet(tokenSet: TokenSet): void {
+  public setTokenSet(tokenSet: TokenSetParameters | TokenSet): void {
     this._tokenSet = new TokenSet(tokenSet);
     this.setAccessToken();
   }
