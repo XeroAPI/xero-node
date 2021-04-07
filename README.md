@@ -2,7 +2,6 @@
 ![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 ## SDK Documentation
 * [Accounting Api Docs](https://xeroapi.github.io/xero-node/accounting/index.html)
----
 * [Asset Api Docs](https://xeroapi.github.io/xero-node/assets/index.html)
 * [Project Api Docs](https://xeroapi.github.io/xero-node/payroll-au/index.html)
 * [Files Api Docs](https://xeroapi.github.io/xero-node/files/index.html)
