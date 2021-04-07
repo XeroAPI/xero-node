@@ -2,7 +2,6 @@
 ![npm](https://img.shields.io/npm/v/xero-node?label=xero-node)
 ## SDK Documentation
 * [Accounting Api Docs](https://xeroapi.github.io/xero-node/accounting/index.html)
----
 * [Asset Api Docs](https://xeroapi.github.io/xero-node/assets/index.html)
 * [Project Api Docs](https://xeroapi.github.io/xero-node/payroll-au/index.html)
 * [Files Api Docs](https://xeroapi.github.io/xero-node/files/index.html)
@@ -23,12 +22,6 @@ Follow these steps to create your Xero app
 * Agree to terms and condition and click "Create App".
 * Click "Generate a secret" button.
 * Copy your client id and client secret and save for use later.
-
-## Repo Context & Contributing
-This SDK's functionality is majority generated [from our OpenAPISpec](https://github.com/XeroAPI/Xero-OpenAPI).
-The exception is the `src/xeroClient.ts` which contains the typescript that is unique to this repository. Contributions are welcome but please keep in mind that majority of SDK is auto-generated from the OpenAPISpec. We try to get changes in that projects to be released on a reasonable cadence.
-
-> Read more about our process in [maintaining our suite of SDK's](https://devblog.xero.com/building-sdks-for-the-future-b79ff726dfd6)
 
 ## Testing
 We are working to build out a more robust test suite, and currently just have tests setup for our xeroClient.ts - PR's will now run against a CI build - and as we add more tests to this project community collaboration will be easier to incorporate.
@@ -363,3 +356,16 @@ await xero.setTokenSet(tokenSet)
 // You can revoke a user's refresh token and remove all their connections to your app by making a request to the revocation endpoint.
 await xero.revokeToken()
 ```
+
+## Participating in Xero’s developer community
+This SDK is one of a number of SDK’s that the Xero Developer team builds and maintains. We are grateful for all the contributions that the community makes. 
+
+Here are a few things you should be aware of as a contributor:
+* Xero has adopted the Contributor Covenant [Code of Conduct](https://github.com/XeroAPI/xero-node/blob/master/CODE_OF_CONDUCT.md), we expect all contributors in our community to adhere to it
+* If you raise an issue then please make sure to fill out the github issue template, doing so helps us help you 
+* You’re welcome to raise PRs. As our SDKs are generated we may use your code in the core SDK build instead of merging your code
+* We have a [contribution guide](https://github.com/XeroAPI/xero-node/blob/master/CONTRIBUTING.md) for you to follow when contributing to this SDK
+* Curious about how we generate our SDK’s? Have a [read of our process](https://devblog.xero.com/building-sdks-for-the-future-b79ff726dfd6) and have a look at our [OpenAPISpec](https://github.com/XeroAPI/Xero-OpenAPI)
+* This software is published under the [MIT License](https://github.com/XeroAPI/xero-node/blob/master/LICENSE)
+
+For questions that aren’t related to SDKs please refer to our [developer support page](https://developer.xero.com/support/).
