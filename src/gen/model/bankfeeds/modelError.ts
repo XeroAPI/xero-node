@@ -70,6 +70,7 @@ export namespace ModelError {
         InvalidOrganisationMultiCurrency = <any> 'invalid-organisation-multi-currency',
         InvalidFeedConnectionForOrganisation = <any> 'invalid-feed-connection-for-organisation',
         InvalidUserRole = <any> 'invalid-user-role',
-        AccountNotValid = <any> 'account-not-valid'
+        AccountNotValid = <any> 'account-not-valid',
+        FeedNotFoundOrAlreadyDeleted = <any> 'feed-not-found-or-already-deleted'
     }
 }

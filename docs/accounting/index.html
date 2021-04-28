@@ -3662,7 +3662,6 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The calculated tax amount based on the TaxType and LineAmount",
       "format" : "double",
-      "readOnly" : true,
       "example" : 0.0,
       "x-is-money" : true
     },
@@ -5796,7 +5795,7 @@ ul.nav-tabs {
             } else if (location.includes('php')){
               sdkLang = 'php'
               sdkName = 'xero-php-oauth2'
-            } else if (location.includes('dotnet')){
+            } else if (location.includes('xero-netstandard') || location.includes('csharp')){
               sdkLang = 'dotnet'
               sdkName = 'Xero-NetStandard'
             } else if (location.includes('java')){
@@ -20698,9 +20697,10 @@ const order = 'Name ASC';
 const iDs = [&quot;00000000-0000-0000-0000-000000000000&quot;];
 const page = 1;
 const includeArchived = true;
+const summaryOnly = true;
 
 try {
-  const response = await xero.accountingApi.getContacts(xeroTenantId, ifModifiedSince, where, order, iDs, page, includeArchived);
+  const response = await xero.accountingApi.getContacts(xeroTenantId, ifModifiedSince, where, order, iDs, page, includeArchived, summaryOnly);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -20873,6 +20873,26 @@ e.g. page=1 - Up to 100 contacts will be returned in a single API call.
 
                     <div class="inner description marked">
 e.g. includeArchived=true - Contacts with a status of ARCHIVED will be included in the response
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">summaryOnly</td>
+<td>
+
+
+    <div id="d2e199_getContacts_summaryOnly">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Boolean
+                </span>
+
+                    <div class="inner description marked">
+Use summaryOnly=true in GET Contacts endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
                     </div>
             </div>
         </div>

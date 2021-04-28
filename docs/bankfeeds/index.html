@@ -923,7 +923,7 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "Identifies the type of error.",
       "example" : "invalid-application",
-      "enum" : [ "invalid-request", "invalid-application", "invalid-feed-connection", "duplicate-statement", "invalid-end-balance", "invalid-start-and-end-date", "invalid-start-date", "internal-error", "feed-already-connected-in-current-organisation", "invalid-end-date", "statement-not-found", "feed-connected-in-different-organisation", "feed-already-connected-in-different-organisation", "bank-feed-not-found", "invalid-country-specified", "invalid-organisation-bank-feeds", "invalid-organisation-multi-currency", "invalid-feed-connection-for-organisation", "invalid-user-role", "account-not-valid" ]
+      "enum" : [ "invalid-request", "invalid-application", "invalid-feed-connection", "duplicate-statement", "invalid-end-balance", "invalid-start-and-end-date", "invalid-start-date", "internal-error", "feed-already-connected-in-current-organisation", "invalid-end-date", "statement-not-found", "feed-connected-in-different-organisation", "feed-already-connected-in-different-organisation", "bank-feed-not-found", "invalid-country-specified", "invalid-organisation-bank-feeds", "invalid-organisation-multi-currency", "invalid-feed-connection-for-organisation", "invalid-user-role", "account-not-valid", "feed-not-found-or-already-deleted" ]
     }
   },
   "description" : "On error, the API consumer will receive an HTTP response with a HTTP Status Code of 4xx or 5xx and a Content-Type of application/problem+json."
@@ -1243,7 +1243,7 @@ ul.nav-tabs {
             } else if (location.includes('php')){
               sdkLang = 'php'
               sdkName = 'xero-php-oauth2'
-            } else if (location.includes('dotnet')){
+            } else if (location.includes('xero-netstandard') || location.includes('csharp')){
               sdkLang = 'dotnet'
               sdkName = 'Xero-NetStandard'
             } else if (location.includes('java')){

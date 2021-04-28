@@ -94,6 +94,7 @@ export class TimeEntry {
 export namespace TimeEntry {
     export enum StatusEnum {
         ACTIVE = <any> 'ACTIVE',
-        LOCKED = <any> 'LOCKED'
+        LOCKED = <any> 'LOCKED',
+        INVOICED = <any> 'INVOICED'
     }
 }

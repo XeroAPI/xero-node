@@ -264,7 +264,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -281,7 +285,7 @@ export class AccountingApi {
      * @summary Creates an attachment for a specific bank transaction by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     * @param fileName The name of the file being attached
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async createBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -361,7 +365,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -589,7 +597,7 @@ export class AccountingApi {
      * 
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     * @param fileName The name of the file being attached to a Bank Transfer
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async createBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -669,7 +677,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -971,7 +983,7 @@ export class AccountingApi {
      * 
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     * @param fileName Name for the file you are attaching
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async createContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -1051,7 +1063,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -1424,7 +1440,7 @@ export class AccountingApi {
      * @summary Creates an attachment for a specific credit note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     * @param fileName Name of the file you are attaching to Credit Note
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param includeOnline Allows an attachment to be seen by the end customer within their online invoice
      */     
@@ -1509,7 +1525,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -1945,7 +1965,7 @@ export class AccountingApi {
      * @summary Creates an attachment for a specific invoice or purchase bill by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     * @param fileName Name of the file you are attaching
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param includeOnline Allows an attachment to be seen by the end customer within their online invoice
      */     
@@ -2030,7 +2050,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -2406,7 +2430,7 @@ export class AccountingApi {
      * @summary Creates a specific attachment for a specific manual journal by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     * @param fileName The name of the file being attached to a ManualJournal
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async createManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -2486,7 +2510,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -2502,7 +2530,7 @@ export class AccountingApi {
      * 
      * @summary Creates a history record for a specific manual journal
      * @param xeroTenantId Xero identifier for Tenant
-     * @param manualJournalID Xero generated unique identifier for a manual journal
+     * @param manualJournalID Unique identifier for a ManualJournal
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      */     
     public async createManualJournalHistoryRecord (xeroTenantId: string, manualJournalID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }> {
@@ -3065,7 +3093,7 @@ export class AccountingApi {
      * 
      * @summary Allows you to create an Allocation for prepayments
      * @param xeroTenantId Xero identifier for Tenant
-     * @param prepaymentID Unique identifier for Prepayment
+     * @param prepaymentID Unique identifier for a PrePayment
      * @param allocations Allocations with an array of Allocation object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      */     
@@ -3214,7 +3242,7 @@ export class AccountingApi {
      * 
      * @summary Creates attachment for a specific purchase order
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for Purchase Order object
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
@@ -3295,7 +3323,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -3311,7 +3343,7 @@ export class AccountingApi {
      * 
      * @summary Creates a history record for a specific purchase orders
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for a PurchaseOrder
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      */     
     public async createPurchaseOrderHistory (xeroTenantId: string, purchaseOrderID: string, historyRecords: HistoryRecords, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }> {
@@ -3453,7 +3485,7 @@ export class AccountingApi {
      * 
      * @summary Creates attachment for a specific quote
      * @param xeroTenantId Xero identifier for Tenant
-     * @param quoteID Unique identifier for Quote object
+     * @param quoteID Unique identifier for an Quote
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
@@ -3534,7 +3566,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -3763,7 +3799,7 @@ export class AccountingApi {
      * @summary Creates an attachment on a specific expense claim receipts by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     * @param fileName The name of the file being attached to the Receipt
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async createReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -3843,7 +3879,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -3932,7 +3972,7 @@ export class AccountingApi {
      * @summary Creates an attachment from a specific repeating invoices by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     * @param fileName The name of the file being attached to a Repeating Invoice
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async createRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -4012,7 +4052,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -4302,7 +4346,7 @@ export class AccountingApi {
      * 
      * @summary Deletes a chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
-     * @param accountID Unique identifier for retrieving single object
+     * @param accountID Unique identifier for Account object
      */     
     public async deleteAccount (xeroTenantId: string, accountID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}'
@@ -4915,7 +4959,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves a single chart of accounts by using a unique account Id
      * @param xeroTenantId Xero identifier for Tenant
-     * @param accountID Unique identifier for retrieving single object
+     * @param accountID Unique identifier for Account object
      */     
     public async getAccount (xeroTenantId: string, accountID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}'
@@ -5187,7 +5231,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -5344,7 +5392,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific bank transaction by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     * @param fileName The name of the file being attached
+     * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -5423,7 +5471,7 @@ export class AccountingApi {
      * @summary Retrieves specific attachments from a specific BankTransaction using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     * @param attachmentID Xero generated unique identifier for an attachment
+     * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getBankTransactionAttachmentById (xeroTenantId: string, bankTransactionID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -5550,7 +5598,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -5777,7 +5829,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment on a specific bank transfer by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     * @param fileName The name of the file being attached to a Bank Transfer
+     * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -5856,7 +5908,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific bank transfer using a unique attachment ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     * @param attachmentID Xero generated unique identifier for an Attachment to a bank transfer
+     * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getBankTransferAttachmentById (xeroTenantId: string, bankTransferID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -5983,7 +6035,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -6523,7 +6579,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific contact by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     * @param fileName Name for the file you are attaching
+     * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -6602,7 +6658,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific contact using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     * @param attachmentID Unique identifier for a Attachment
+     * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getContactAttachmentById (xeroTenantId: string, contactID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -6729,7 +6785,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -7079,8 +7139,9 @@ export class AccountingApi {
      * @param iDs Filter by a comma separated list of ContactIDs. Allows you to retrieve a specific set of contacts in a single call.
      * @param page e.g. page&#x3D;1 - Up to 100 contacts will be returned in a single API call.
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
+     * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
      */     
-    public async getContacts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, page?: number, includeArchived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
+    public async getContacts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, page?: number, includeArchived?: boolean, summaryOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -7109,6 +7170,10 @@ export class AccountingApi {
 
         if (includeArchived !== undefined) {
             localVarQueryParameters['includeArchived'] = ObjectSerializer.serialize(includeArchived, "boolean");
+        }
+
+        if (summaryOnly !== undefined) {
+            localVarQueryParameters['summaryOnly'] = ObjectSerializer.serialize(summaryOnly, "boolean");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -7294,7 +7359,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment on a specific credit note by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     * @param fileName Name of the file you are attaching to Credit Note
+     * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -7373,7 +7438,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific credit note using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     * @param attachmentID Unique identifier for a Attachment
+     * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getCreditNoteAttachmentById (xeroTenantId: string, creditNoteID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -7500,7 +7565,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -8200,7 +8269,7 @@ export class AccountingApi {
      * @summary Retrieves an attachment from a specific invoice or purchase bill by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     * @param fileName Name of the file you are attaching
+     * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -8279,7 +8348,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific invoices or purchase bills by using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     * @param attachmentID Unique identifier for an Attachment
+     * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getInvoiceAttachmentById (xeroTenantId: string, invoiceID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -8406,7 +8475,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -8553,7 +8626,7 @@ export class AccountingApi {
      * @param contactIDs Filter by a comma-separated list of ContactIDs.
      * @param statuses Filter by a comma-separated list Statuses. For faster response times we recommend using these explicit parameters instead of passing OR conditions into the Where filter.
      * @param page e.g. page&#x3D;1 – Up to 100 invoices will be returned in a single API call with line items shown for each invoice
-     * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
+     * @param includeArchived e.g. includeArchived&#x3D;true - Invoices with a status of ARCHIVED will be included in the response
      * @param createdByMyApp When set to true you\&#39;ll only retrieve Invoices created by your app
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
@@ -9219,7 +9292,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific manual journal by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     * @param fileName The name of the file being attached to a ManualJournal
+     * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -9298,7 +9371,7 @@ export class AccountingApi {
      * @summary Allows you to retrieve a specific attachment from a specific manual journal using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     * @param attachmentID Unique identifier for a Attachment
+     * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getManualJournalAttachmentById (xeroTenantId: string, manualJournalID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -9425,7 +9498,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -9516,7 +9593,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves history for a specific manual journal
      * @param xeroTenantId Xero identifier for Tenant
-     * @param manualJournalID Xero generated unique identifier for a manual journal
+     * @param manualJournalID Unique identifier for a ManualJournal
      */     
     public async getManualJournalsHistory (xeroTenantId: string, manualJournalID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/History'
@@ -10510,7 +10587,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves a specific purchase order using a unique purchase order Id
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for a PurchaseOrder
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      */     
     public async getPurchaseOrder (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}'
@@ -10640,7 +10717,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves a specific attachment for a specific purchase order by filename
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for Purchase Order object
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
@@ -10719,7 +10796,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves specific attachment for a specific purchase order using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for Purchase Order object
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
@@ -10798,7 +10875,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves attachments for a specific purchase order
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for Purchase Orders object
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      */     
     public async getPurchaseOrderAttachments (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/Attachments'
@@ -10847,7 +10924,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -10928,7 +11009,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves history for a specific purchase order
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for a PurchaseOrder
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      */     
     public async getPurchaseOrderHistory (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/History'
@@ -11208,7 +11289,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves a specific attachment from a specific quote by filename
      * @param xeroTenantId Xero identifier for Tenant
-     * @param quoteID Unique identifier for Quote object
+     * @param quoteID Unique identifier for an Quote
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
@@ -11287,7 +11368,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves a specific attachment from a specific quote using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
-     * @param quoteID Unique identifier for Quote object
+     * @param quoteID Unique identifier for an Quote
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
@@ -11366,7 +11447,7 @@ export class AccountingApi {
      * 
      * @summary Retrieves attachments for a specific quote
      * @param xeroTenantId Xero identifier for Tenant
-     * @param quoteID Unique identifier for Quote object
+     * @param quoteID Unique identifier for an Quote
      */     
     public async getQuoteAttachments (xeroTenantId: string, quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/Attachments'
@@ -11415,7 +11496,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -11672,7 +11757,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific expense claim receipts by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     * @param fileName The name of the file being attached to the Receipt
+     * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -11751,7 +11836,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachments from a specific expense claim receipts by using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     * @param attachmentID Unique identifier for a Attachment
+     * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getReceiptAttachmentById (xeroTenantId: string, receiptID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -11878,7 +11963,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -12100,7 +12189,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific repeating invoices by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     * @param fileName The name of the file being attached to a Repeating Invoice
+     * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -12179,7 +12268,7 @@ export class AccountingApi {
      * @summary Retrieves a specific attachment from a specific repeating invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     * @param attachmentID Unique identifier for a Attachment
+     * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
      */     
     public async getRepeatingInvoiceAttachmentById (xeroTenantId: string, repeatingInvoiceID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -12306,7 +12395,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -12457,8 +12550,8 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactId Unique identifier for a Contact
      * @param date The date of the Aged Payables By Contact report
-     * @param fromDate The from date of the Aged Payables By Contact report
-     * @param toDate The to date of the Aged Payables By Contact report
+     * @param fromDate filter by the from date of the report e.g. 2021-02-01
+     * @param toDate filter by the to date of the report e.g. 2021-02-28
      */     
     public async getReportAgedPayablesByContact (xeroTenantId: string, contactId: string, date?: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/AgedPayablesByContact';
@@ -12540,8 +12633,8 @@ export class AccountingApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactId Unique identifier for a Contact
      * @param date The date of the Aged Receivables By Contact report
-     * @param fromDate The from date of the Aged Receivables By Contact report
-     * @param toDate The to date of the Aged Receivables By Contact report
+     * @param fromDate filter by the from date of the report e.g. 2021-02-01
+     * @param toDate filter by the to date of the report e.g. 2021-02-28
      */     
     public async getReportAgedReceivablesByContact (xeroTenantId: string, contactId: string, date?: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/AgedReceivablesByContact';
@@ -12837,8 +12930,8 @@ export class AccountingApi {
      * 
      * @summary Retrieves report for bank summary
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fromDate The from date for the Bank Summary report e.g. 2018-03-31
-     * @param toDate The to date for the Bank Summary report e.g. 2018-03-31
+     * @param fromDate filter by the from date of the report e.g. 2021-02-01
+     * @param toDate filter by the to date of the report e.g. 2021-02-28
      */     
     public async getReportBankSummary (xeroTenantId: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BankSummary';
@@ -13041,8 +13134,8 @@ export class AccountingApi {
      * 
      * @summary Retrieves report for profit and loss
      * @param xeroTenantId Xero identifier for Tenant
-     * @param fromDate The from date for the ProfitAndLoss report e.g. 2018-03-31
-     * @param toDate The to date for the ProfitAndLoss report e.g. 2018-03-31
+     * @param fromDate filter by the from date of the report e.g. 2021-02-01
+     * @param toDate filter by the to date of the report e.g. 2021-02-28
      * @param periods The number of periods to compare (integer between 1 and 12)
      * @param timeframe The period size to compare to (MONTH, QUARTER, YEAR)
      * @param trackingCategoryID The trackingCategory 1 for the ProfitAndLoss report
@@ -13691,7 +13784,7 @@ export class AccountingApi {
      * 
      * @summary Updates a chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
-     * @param accountID Unique identifier for retrieving single object
+     * @param accountID Unique identifier for Account object
      * @param accounts Request of type Accounts array with one Account
      */     
     public async updateAccount (xeroTenantId: string, accountID: string, accounts: Accounts, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Accounts;  }> {
@@ -13844,7 +13937,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -13938,7 +14035,7 @@ export class AccountingApi {
      * @summary Updates a specific attachment from a specific bank transaction by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     * @param fileName The name of the file being attached
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async updateBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -14018,7 +14115,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14034,7 +14135,7 @@ export class AccountingApi {
      * 
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     * @param fileName The name of the file being attached to a Bank Transfer
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async updateBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -14114,7 +14215,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14202,7 +14307,7 @@ export class AccountingApi {
      * 
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     * @param fileName Name for the file you are attaching
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async updateContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -14282,7 +14387,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14448,7 +14557,7 @@ export class AccountingApi {
      * @summary Updates attachments on a specific credit note by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     * @param fileName Name of the file you are attaching to Credit Note
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async updateCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -14528,7 +14637,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14694,7 +14807,7 @@ export class AccountingApi {
      * @summary Updates an attachment from a specific invoices or purchase bill by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     * @param fileName Name of the file you are attaching
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async updateInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -14774,7 +14887,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -15012,7 +15129,7 @@ export class AccountingApi {
      * @summary Updates a specific attachment from a specific manual journal by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     * @param fileName The name of the file being attached to a ManualJournal
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async updateManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -15092,7 +15209,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -15758,7 +15879,7 @@ export class AccountingApi {
      * 
      * @summary Updates a specific purchase order
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for a PurchaseOrder
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param purchaseOrders 
      */     
     public async updatePurchaseOrder (xeroTenantId: string, purchaseOrderID: string, purchaseOrders: PurchaseOrders, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PurchaseOrders;  }> {
@@ -15830,7 +15951,7 @@ export class AccountingApi {
      * 
      * @summary Updates a specific attachment for a specific purchase order by filename
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrderID Unique identifier for Purchase Order object
+     * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
@@ -15911,7 +16032,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -15999,7 +16124,7 @@ export class AccountingApi {
      * 
      * @summary Updates a specific attachment from a specific quote by filename
      * @param xeroTenantId Xero identifier for Tenant
-     * @param quoteID Unique identifier for Quote object
+     * @param quoteID Unique identifier for an Quote
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
@@ -16080,7 +16205,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -16174,7 +16303,7 @@ export class AccountingApi {
      * @summary Updates a specific attachment on a specific expense claim receipts by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     * @param fileName The name of the file being attached to the Receipt
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async updateReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -16254,7 +16383,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -16271,7 +16404,7 @@ export class AccountingApi {
      * @summary Updates a specific attachment from a specific repeating invoices by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     * @param fileName The name of the file being attached to a Repeating Invoice
+     * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      */     
     public async updateRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: fs.ReadStream, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Attachments;  }> {
@@ -16351,7 +16484,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = JSON.parse(body)
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });

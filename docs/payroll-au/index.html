@@ -970,7 +970,7 @@ ul.nav-tabs {
 };
       defs["DeductionLine"] = {
   "title" : "",
-  "required" : [ "CalculationType", "DeductionTypeID" ],
+  "required" : [ "DeductionTypeID" ],
   "type" : "object",
   "properties" : {
     "DeductionTypeID" : {
@@ -3208,7 +3208,7 @@ ul.nav-tabs {
             } else if (location.includes('php')){
               sdkLang = 'php'
               sdkName = 'xero-php-oauth2'
-            } else if (location.includes('dotnet')){
+            } else if (location.includes('xero-netstandard') || location.includes('csharp')){
               sdkLang = 'dotnet'
               sdkName = 'Xero-NetStandard'
             } else if (location.includes('java')){
