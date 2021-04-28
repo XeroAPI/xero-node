@@ -98,6 +98,7 @@ export namespace SalaryAndWage {
         History = <any> 'History'
     }
     export enum PaymentTypeEnum {
-        Salary = <any> 'Salary'
+        Salary = <any> 'Salary',
+        Hourly = <any> 'Hourly'
     }
 }
