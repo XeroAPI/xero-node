@@ -4,6 +4,7 @@ import { Contact } from '././contact';
 import { CurrencyCode } from '././currencyCode';
 import { LineAmountTypes } from '././lineAmountTypes';
 import { LineItem } from '././lineItem';
+import { Payment } from '././payment';
 
 export class Prepayment {
     /**
@@ -61,6 +62,10 @@ export class Prepayment {
     * See Allocations
     */
     'allocations'?: Array<Allocation>;
+    /**
+    * See Payments
+    */
+    'payments'?: Array<Payment>;
     /**
     * The amount of applied to an invoice
     */
@@ -156,6 +161,11 @@ export class Prepayment {
             "name": "allocations",
             "baseName": "Allocations",
             "type": "Array<Allocation>"
+        },
+        {
+            "name": "payments",
+            "baseName": "Payments",
+            "type": "Array<Payment>"
         },
         {
             "name": "appliedAmount",

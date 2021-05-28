@@ -4,10 +4,6 @@ export class Report {
     /**
     * See Prepayment Types
     */
-    'reportID'?: string;
-    /**
-    * See Prepayment Types
-    */
     'reportName'?: string;
     /**
     * See Prepayment Types
@@ -30,11 +26,6 @@ export class Report {
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "reportID",
-            "baseName": "ReportID",
-            "type": "string"
-        },
         {
             "name": "reportName",
             "baseName": "ReportName",
