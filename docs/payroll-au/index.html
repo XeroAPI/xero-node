@@ -3232,7 +3232,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.11.3</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.12.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="createEmployee" class="">
                 <a href="#api-PayrollAu-createEmployee">createEmployee</a>
@@ -3365,6 +3365,21 @@ ul.nav-tabs {
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const dateOfBirth = '2000-10-28'
+
+const homeAddress: HomeAddress = { 
+  addressLine1: "123 Test st",
+  region: "VIC",
+  postalCode: 3000,
+  city: "Melbourne"
+}; 
+
+const employee: Employee = { 
+  firstName: "Adam",
+  lastName: "Adamson",
+  dateOfBirth: dateOfBirth,
+  homeAddress: homeAddress
+}; 
 
 try {
   const response = await xero.accountingApi.createEmployee(xeroTenantId, employee);
@@ -3483,6 +3498,16 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const startDate = '2020-10-28'
+const endDate = '2020-10-30'
+
+const leaveApplication: LeaveApplication = { 
+  employeeId: "00000000-0000-0000-0000-000000000000",
+  leaveTypeId: "00000000-0000-0000-0000-000000000000",
+  title: "Annual Leave",
+  startDate: startDate,
+  endDate: endDate
+}; 
 
 try {
   const response = await xero.accountingApi.createLeaveApplication(xeroTenantId, leaveApplication);
@@ -3602,6 +3627,48 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 
+const earningsRate: EarningsRate = { 
+  name: "Ordinary Hours 123",
+  accountCode: "477",
+  typeOfUnits: "Hours",
+  isExemptFromTax: true,
+  isExemptFromSuper: true,
+  earningsType: EarningsType.OVERTIMEEARNINGS
+}; 
+
+const deductionType: DeductionType = { 
+  name: "Union Fees",
+  accountCode: "826",
+  reducesTax: true,
+  reducesSuper: true
+}; 
+
+const leaveType: LeaveType = { 
+  name: "Annual Leave",
+  typeOfUnits: "Hours",
+  isPaidLeave: true,
+  showOnPayslip: true
+}; 
+
+const reimbursementType: ReimbursementType = { 
+  name: "Annual Leave",
+  accountCode: "850"
+};   
+const earningsRates = [];
+earningsRates.push(earningsRate,  
+const deductionTypes = [];  
+const leaveTypes = [];
+leaveTypes.push(leaveType)  
+const reimbursementTypes = [];
+reimbursementTypes.push(reimbursementType)
+
+const payItem: PayItem = { 
+  earningsRates: earningsRates,
+  deductionTypes: deductionTypes,
+  leaveTypes: leaveTypes,
+  reimbursementTypes: reimbursementTypes
+}; 
+
 try {
   const response = await xero.accountingApi.createPayItem(xeroTenantId, payItem);
   console.log(response.body || response.response.statusCode)
@@ -3716,6 +3783,10 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+
+const payRun: PayRun = { 
+  payrollCalendarID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 try {
   const response = await xero.accountingApi.createPayRun(xeroTenantId, payRun);
@@ -3834,6 +3905,17 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const startDate = '2000-10-28'
+const paymentDate = '2000-10-30'
+
+const payrollCalendar: PayrollCalendar = { 
+  name: "Weekly",
+  calendarType: CalendarType.WEEKLY,
+  startDate: startDate,
+  paymentDate: paymentDate
+};   
+const payrollCalendars = [];
+payrollCalendars.push(payrollCalendar)
 
 try {
   const response = await xero.accountingApi.createPayrollCalendar(xeroTenantId, payrollCalendar);
@@ -3953,6 +4035,11 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 
+const superFund: SuperFund = { 
+  type: SuperFundType.REGULATED,
+  USI: "40022701955002"
+}; 
+
 try {
   const response = await xero.accountingApi.createSuperfund(xeroTenantId, superFund);
   console.log(response.body || response.response.statusCode)
@@ -4070,6 +4157,15 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const startDate = '2020-10-23'
+const endDate = '2020-10-30'
+
+const timesheet: Timesheet = { 
+  employeeID: "00000000-0000-0000-0000-000000000000",
+  startDate: startDate,
+  endDate: endDate,
+  status: TimesheetStatus.DRAFT
+}; 
 
 try {
   const response = await xero.accountingApi.createTimesheet(xeroTenantId, timesheet);
@@ -6377,6 +6473,21 @@ e.g. page=1 – Up to 100 timesheets will be returned in a single API call
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const dateOfBirth = '2000-10-28'
+
+const homeAddress: HomeAddress = { 
+  addressLine1: "123 Test st",
+  region: "VIC",
+  postalCode: 3000,
+  city: "Melbourne"
+}; 
+
+const employee: Employee = { 
+  firstName: "Adam",
+  lastName: "Adamson",
+  dateOfBirth: dateOfBirth,
+  homeAddress: homeAddress
+}; 
 
 try {
   const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeID,  employee);
@@ -6525,6 +6636,16 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const leaveApplicationID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const startDate = '2020-10-28'
+const endDate = '2020-10-30'
+
+const leaveApplication: LeaveApplication = { 
+  employeeId: "00000000-0000-0000-0000-000000000000",
+  leaveTypeId: "00000000-0000-0000-0000-000000000000",
+  title: "Annual Leave",
+  startDate: startDate,
+  endDate: endDate
+}; 
 
 try {
   const response = await xero.accountingApi.updateLeaveApplication(xeroTenantId, leaveApplicationID, leaveApplication);
@@ -6678,6 +6799,10 @@ Xero identifier for Tenant
 const xeroTenantId = 'xeroTenantId_example';
 const payRunID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 
+const payRun: PayRun = { 
+  payrollCalendarID: "00000000-0000-0000-0000-000000000000"
+}; 
+
 try {
   const response = await xero.accountingApi.updatePayRun(xeroTenantId, payRunID,  payRun);
   console.log(response.body || response.response.statusCode)
@@ -6825,6 +6950,19 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const payslipID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+
+const earningsLine: EarningsLine = { 
+  earningsRateID: "00000000-0000-0000-0000-000000000000",
+  ratePerUnit: 20,
+  numberOfUnits: 1,  
+const earningsLines = [];
+earningsLines.push(earningsLine)
+
+const payslipLine: PayslipLines = { 
+  earningsLines: earningsLines
+};   
+const payslipLines = [];
+payslipLines.push(payslipLine)
 
 try {
   const response = await xero.accountingApi.updatePayslip(xeroTenantId, payslipID,  payslipLines);
@@ -6974,6 +7112,11 @@ Xero identifier for Tenant
 const xeroTenantId = 'xeroTenantId_example';
 const superFundID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 
+const superFund: SuperFund = { 
+  type: SuperFundType.REGULATED,
+  USI: "40022701955002"
+}; 
+
 try {
   const response = await xero.accountingApi.updateSuperfund(xeroTenantId, superFundID,  superFund);
   console.log(response.body || response.response.statusCode)
@@ -7121,6 +7264,15 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const timesheetID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const startDate = '2020-10-23'
+const endDate = '2020-10-30'
+
+const timesheet: Timesheet = { 
+  employeeID: "00000000-0000-0000-0000-000000000000",
+  startDate: startDate,
+  endDate: endDate,
+  status: TimesheetStatus.DRAFT
+}; 
 
 try {
   const response = await xero.accountingApi.updateTimesheet(xeroTenantId, timesheetID,  timesheet);
