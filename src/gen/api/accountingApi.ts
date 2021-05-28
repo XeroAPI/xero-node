@@ -12,6 +12,7 @@ import { BankTransactions } from '../model/accounting/bankTransactions';
 import { BankTransfers } from '../model/accounting/bankTransfers';
 import { BatchPayments } from '../model/accounting/batchPayments';
 import { BrandingThemes } from '../model/accounting/brandingThemes';
+import { Budgets } from '../model/accounting/budgets';
 import { CISOrgSettings } from '../model/accounting/cISOrgSettings';
 import { CISSettings } from '../model/accounting/cISSettings';
 import { ContactGroups } from '../model/accounting/contactGroups';
@@ -6511,6 +6512,144 @@ export class AccountingApi {
     }
     /**
      * 
+     * @summary Retrieves a specific budgets, which includes budget lines
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param budgetID Unique identifier for Budgets
+     */     
+    public async getBudget (xeroTenantId: string, budgetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Budgets;  }> {
+        const localVarPath = this.basePath + '/Budgets/{BudgetID}'
+            .replace('{' + 'BudgetID' + '}', encodeURIComponent(String(budgetID)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling getBudget.');
+        }
+
+        // verify required parameter 'budgetID' is not null or undefined
+        if (budgetID === null || budgetID === undefined) {
+            throw new Error('Required parameter budgetID was null or undefined when calling getBudget.');
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Budgets;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Budgets");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Retrieve a list of budgets
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param iDs Filter by BudgetID. Allows you to retrieve a specific individual budget.
+     * @param dateTo Filter by start date
+     * @param dateFrom Filter by end date
+     */     
+    public async getBudgets (xeroTenantId: string, iDs?: Array<string>, dateTo?: string, dateFrom?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Budgets;  }> {
+        const localVarPath = this.basePath + '/Budgets';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling getBudgets.');
+        }
+
+        if (iDs !== undefined) {
+            localVarQueryParameters['IDs'] = ObjectSerializer.serialize(iDs, "Array<string>");
+        }
+
+        if (dateTo !== undefined) {
+            localVarQueryParameters['DateTo'] = ObjectSerializer.serialize(dateTo, "string");
+        }
+
+        if (dateFrom !== undefined) {
+            localVarQueryParameters['DateFrom'] = ObjectSerializer.serialize(dateFrom, "string");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: Budgets;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "Budgets");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @summary Retrieves a specific contacts in a Xero organisation using a unique contact Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
@@ -7139,7 +7278,7 @@ export class AccountingApi {
      * @param iDs Filter by a comma separated list of ContactIDs. Allows you to retrieve a specific set of contacts in a single call.
      * @param page e.g. page&#x3D;1 - Up to 100 contacts will be returned in a single API call.
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
-     * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
+     * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
      */     
     public async getContacts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, page?: number, includeArchived?: boolean, summaryOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts';
@@ -8628,9 +8767,10 @@ export class AccountingApi {
      * @param page e.g. page&#x3D;1 – Up to 100 invoices will be returned in a single API call with line items shown for each invoice
      * @param includeArchived e.g. includeArchived&#x3D;true - Invoices with a status of ARCHIVED will be included in the response
      * @param createdByMyApp When set to true you\&#39;ll only retrieve Invoices created by your app
+     * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      */     
-    public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Invoices;  }> {
+    public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, summaryOnly?: boolean, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -8675,6 +8815,10 @@ export class AccountingApi {
 
         if (createdByMyApp !== undefined) {
             localVarQueryParameters['createdByMyApp'] = ObjectSerializer.serialize(createdByMyApp, "boolean");
+        }
+
+        if (summaryOnly !== undefined) {
+            localVarQueryParameters['summaryOnly'] = ObjectSerializer.serialize(summaryOnly, "boolean");
         }
 
         if (unitdp !== undefined) {
@@ -12712,129 +12856,6 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Retrieves a specific report for BAS using a unique report Id (only valid for AU orgs)
-     * @param xeroTenantId Xero identifier for Tenant
-     * @param reportID Unique identifier for a Report
-     */     
-    public async getReportBASorGST (xeroTenantId: string, reportID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
-        const localVarPath = this.basePath + '/Reports/{ReportID}'
-            .replace('{' + 'ReportID' + '}', encodeURIComponent(String(reportID)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getReportBASorGST.');
-        }
-
-        // verify required parameter 'reportID' is not null or undefined
-        if (reportID === null || reportID === undefined) {
-            throw new Error('Required parameter reportID was null or undefined when calling getReportBASorGST.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "ReportWithRows");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Retrieves report for BAS (only valid for AU orgs)
-     * @param xeroTenantId Xero identifier for Tenant
-     */     
-    public async getReportBASorGSTList (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
-        const localVarPath = this.basePath + '/Reports';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'xeroTenantId' is not null or undefined
-        if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling getReportBASorGSTList.');
-        }
-
-        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
-
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-        return authenticationPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "ReportWithRows");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject({ response: response, body: body });
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
      * @summary Retrieves report for balancesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param date The date of the Balance Sheet report
@@ -12999,10 +13020,10 @@ export class AccountingApi {
      * @summary Retrieves report for budget summary
      * @param xeroTenantId Xero identifier for Tenant
      * @param date The date for the Bank Summary report e.g. 2018-03-31
-     * @param period The number of periods to compare (integer between 1 and 12)
+     * @param periods The number of periods to compare (integer between 1 and 12)
      * @param timeframe The period size to compare to (1&#x3D;month, 3&#x3D;quarter, 12&#x3D;year)
      */     
-    public async getReportBudgetSummary (xeroTenantId: string, date?: string, period?: number, timeframe?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
+    public async getReportBudgetSummary (xeroTenantId: string, date?: string, periods?: number, timeframe?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BudgetSummary';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -13017,8 +13038,8 @@ export class AccountingApi {
             localVarQueryParameters['date'] = ObjectSerializer.serialize(date, "string");
         }
 
-        if (period !== undefined) {
-            localVarQueryParameters['period'] = ObjectSerializer.serialize(period, "number");
+        if (periods !== undefined) {
+            localVarQueryParameters['periods'] = ObjectSerializer.serialize(periods, "number");
         }
 
         if (timeframe !== undefined) {
@@ -13086,6 +13107,71 @@ export class AccountingApi {
 
         if (date !== undefined) {
             localVarQueryParameters['date'] = ObjectSerializer.serialize(date, "string");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "ReportWithRows");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Retrieves a specific report using a unique ReportID
+     * @param xeroTenantId Xero identifier for Tenant
+     * @param reportID Unique identifier for a Report
+     */     
+    public async getReportFromId (xeroTenantId: string, reportID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
+        const localVarPath = this.basePath + '/Reports/{ReportID}'
+            .replace('{' + 'ReportID' + '}', encodeURIComponent(String(reportID)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling getReportFromId.');
+        }
+
+        // verify required parameter 'reportID' is not null or undefined
+        if (reportID === null || reportID === undefined) {
+            throw new Error('Required parameter reportID was null or undefined when calling getReportFromId.');
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -13325,6 +13411,64 @@ export class AccountingApi {
 
         if (paymentsOnly !== undefined) {
             localVarQueryParameters['paymentsOnly'] = ObjectSerializer.serialize(paymentsOnly, "boolean");
+        }
+
+        localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
+
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+        return authenticationPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "ReportWithRows");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject({ response: response, body: body });
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @summary Retrieves a list of the organistaions unique reports that require a uuid to fetch
+     * @param xeroTenantId Xero identifier for Tenant
+     */     
+    public async getReportsList (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ReportWithRows;  }> {
+        const localVarPath = this.basePath + '/Reports';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'xeroTenantId' is not null or undefined
+        if (xeroTenantId === null || xeroTenantId === undefined) {
+            throw new Error('Required parameter xeroTenantId was null or undefined when calling getReportsList.');
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");

@@ -1455,6 +1455,11 @@ ul.nav-tabs {
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
+const asset: Asset = { 
+    assetname: "Other Computer",
+    assetnumber: "FA-00210",
+    status: Asset.StatusEnum.DRAFT }; 
+
 try {
   const response = await xero.accountingApi.createAsset(xeroTenantId, asset);
   console.log(response.body || response.response.statusCode)
@@ -1571,6 +1576,19 @@ Fixed asset you are creating
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
+const bookDepreciationSetting: BookDepreciationSetting = { 
+    depreciationMethod: "DiminishingValue100",
+    averagingMethod: "ActualDays",
+    depreciationRate: 40,
+    depreciationCalculationMethod: "None" }; 
+
+const assetType: AssetType = { 
+    assetTypeName: "Computer Equipment",
+    fixedAssetAccountId: "00000000-0000-0000-0000-000000000000",
+    depreciationExpenseAccountId: "00000000-0000-0000-0000-000000000000",
+    accumulatedDepreciationAccountId: "00000000-0000-0000-0000-000000000000",
+    bookDepreciationSetting: bookDepreciationSetting }; 
+
 try {
   const response = await xero.accountingApi.createAssetType(xeroTenantId,  assetType);
   console.log(response.body || response.response.statusCode)
@@ -1683,7 +1701,7 @@ a specific fixed asset in the system</p>
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const id = '4f7bcdcb-5ec1-4258-9558-19f662fccdfe';
+const id = '00000000-0000-0000-0000-000000000000';
 
 try {
   const response = await xero.accountingApi.getAssetById(xeroTenantId, id);

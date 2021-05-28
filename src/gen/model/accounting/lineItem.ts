@@ -26,6 +26,10 @@ export class LineItem {
     */
     'accountCode'?: string;
     /**
+    * The associated account ID related to this line item
+    */
+    'accountID'?: string;
+    /**
     * The tax type from TaxRates
     */
     'taxType'?: string;
@@ -85,6 +89,11 @@ export class LineItem {
         {
             "name": "accountCode",
             "baseName": "AccountCode",
+            "type": "string"
+        },
+        {
+            "name": "accountID",
+            "baseName": "AccountID",
             "type": "string"
         },
         {
