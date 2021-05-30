@@ -5,7 +5,7 @@ export class DeductionLine {
     * Xero deduction type identifier
     */
     'deductionTypeID': string;
-    'calculationType': DeductionTypeCalculationType;
+    'calculationType'?: DeductionTypeCalculationType;
     /**
     * Deduction type amount
     */
