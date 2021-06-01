@@ -23,6 +23,9 @@ export * from '././batchPayments';
 export * from '././bill';
 export * from '././brandingTheme';
 export * from '././brandingThemes';
+export * from '././budget';
+export * from '././budgetLines';
+export * from '././budgets';
 export * from '././cISOrgSetting';
 export * from '././cISOrgSettings';
 export * from '././cISSetting';
@@ -152,6 +155,9 @@ import { BatchPayments } from '././batchPayments';
 import { Bill } from '././bill';
 import { BrandingTheme } from '././brandingTheme';
 import { BrandingThemes } from '././brandingThemes';
+import { Budget } from '././budget';
+import { BudgetLines } from '././budgetLines';
+import { Budgets } from '././budgets';
 import { CISOrgSetting } from '././cISOrgSetting';
 import { CISOrgSettings } from '././cISOrgSettings';
 import { CISSetting } from '././cISSetting';
@@ -280,6 +286,7 @@ let enumsMap: {[index: string]: any} = {
         "BatchPayment.TypeEnum": BatchPayment.TypeEnum,
         "BatchPayment.StatusEnum": BatchPayment.StatusEnum,
         "BrandingTheme.TypeEnum": BrandingTheme.TypeEnum,
+        "Budget.TypeEnum": Budget.TypeEnum,
         "Contact.ContactStatusEnum": Contact.ContactStatusEnum,
         "ContactGroup.StatusEnum": ContactGroup.StatusEnum,
         "CountryCode": CountryCode,
@@ -356,6 +363,9 @@ let typeMap: {[index: string]: any} = {
     "Bill": Bill,
     "BrandingTheme": BrandingTheme,
     "BrandingThemes": BrandingThemes,
+    "Budget": Budget,
+    "BudgetLines": BudgetLines,
+    "Budgets": Budgets,
     "CISOrgSetting": CISOrgSetting,
     "CISOrgSettings": CISOrgSettings,
     "CISSetting": CISSetting,

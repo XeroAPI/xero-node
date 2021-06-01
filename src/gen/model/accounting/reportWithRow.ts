@@ -3,7 +3,7 @@ import { ReportRows } from '././reportRows';
 
 export class ReportWithRow {
     /**
-    * Report id
+    * ID of the Report
     */
     'reportID'?: string;
     /**

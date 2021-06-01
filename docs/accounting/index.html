@@ -1774,6 +1774,86 @@ ul.nav-tabs {
   "description" : "",
   "x-isObjectArray" : true
 };
+      defs["Budget"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "BudgetID" : {
+      "type" : "string",
+      "description" : "Xero identifier",
+      "format" : "uuid"
+    },
+    "Type" : {
+      "type" : "string",
+      "description" : "Type of Budget. OVERALL or TRACKING",
+      "enum" : [ "OVERALL", "TRACKING" ]
+    },
+    "Description" : {
+      "maxLength" : 255,
+      "type" : "string",
+      "description" : "The Budget description"
+    },
+    "UpdatedDateUTC" : {
+      "type" : "string",
+      "description" : "UTC timestamp of last update to budget",
+      "readOnly" : true,
+      "example" : "/Date(1573755038314)/",
+      "x-is-msdate-time" : true
+    },
+    "BudgetLines" : {
+      "$ref" : "#/components/schemas/BudgetLines"
+    },
+    "Tracking" : {
+      "$ref" : "#/components/schemas/TrackingCategory"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "http://developer.xero.com/documentation/api/budgets/"
+  }
+};
+      defs["BudgetLines"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Period" : {
+      "type" : "string",
+      "description" : "Period the amount applies to (e.g. “2019-08”)",
+      "x-is-msdate" : true
+    },
+    "Amount" : {
+      "type" : "integer",
+      "description" : "LineItem Quantity"
+    },
+    "UnitAmount" : {
+      "type" : "integer",
+      "description" : "Budgeted amount"
+    },
+    "Notes" : {
+      "maxLength" : 255,
+      "type" : "string",
+      "description" : "Any footnotes associated with this balance"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "http://developer.xero.com/documentation/api/budgets/"
+  }
+};
+      defs["Budgets"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Budgets" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Budget"
+      }
+    }
+  },
+  "description" : "",
+  "x-isObjectArray" : true
+};
       defs["CISOrgSetting"] = {
   "title" : "",
   "properties" : {
@@ -3370,6 +3450,12 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "See Accounts"
     },
+    "AccountID" : {
+      "type" : "string",
+      "description" : "The associated account ID related to this line item",
+      "format" : "uuid",
+      "example" : "00000000-0000-0000-0000-000000000000"
+    },
     "TaxType" : {
       "type" : "string",
       "description" : "The tax type from TaxRates"
@@ -4372,6 +4458,13 @@ ul.nav-tabs {
         "$ref" : "#/components/schemas/Allocation"
       }
     },
+    "Payments" : {
+      "type" : "array",
+      "description" : "See Payments",
+      "items" : {
+        "$ref" : "#/components/schemas/Payment"
+      }
+    },
     "AppliedAmount" : {
       "type" : "number",
       "description" : "The amount of applied to an invoice",
@@ -4998,10 +5091,6 @@ ul.nav-tabs {
       defs["Report"] = {
   "title" : "",
   "properties" : {
-    "ReportID" : {
-      "type" : "string",
-      "description" : "See Prepayment Types"
-    },
     "ReportName" : {
       "type" : "string",
       "description" : "See Prepayment Types"
@@ -5134,7 +5223,7 @@ ul.nav-tabs {
   "properties" : {
     "ReportID" : {
       "type" : "string",
-      "description" : "Report id"
+      "description" : "ID of the Report"
     },
     "ReportName" : {
       "type" : "string",
@@ -5819,7 +5908,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.11.3</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.12.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -6078,6 +6167,12 @@ ul.nav-tabs {
               </li>
               <li data-group="Accounting" data-name="getBrandingThemes" class="">
                 <a href="#api-Accounting-getBrandingThemes">getBrandingThemes</a>
+              </li>
+              <li data-group="Accounting" data-name="getBudget" class="">
+                <a href="#api-Accounting-getBudget">getBudget</a>
+              </li>
+              <li data-group="Accounting" data-name="getBudgets" class="">
+                <a href="#api-Accounting-getBudgets">getBudgets</a>
               </li>
               <li data-group="Accounting" data-name="getContact" class="">
                 <a href="#api-Accounting-getContact">getContact</a>
@@ -6340,12 +6435,6 @@ ul.nav-tabs {
               <li data-group="Accounting" data-name="getReportAgedReceivablesByContact" class="">
                 <a href="#api-Accounting-getReportAgedReceivablesByContact">getReportAgedReceivablesByContact</a>
               </li>
-              <li data-group="Accounting" data-name="getReportBASorGST" class="">
-                <a href="#api-Accounting-getReportBASorGST">getReportBASorGST</a>
-              </li>
-              <li data-group="Accounting" data-name="getReportBASorGSTList" class="">
-                <a href="#api-Accounting-getReportBASorGSTList">getReportBASorGSTList</a>
-              </li>
               <li data-group="Accounting" data-name="getReportBalanceSheet" class="">
                 <a href="#api-Accounting-getReportBalanceSheet">getReportBalanceSheet</a>
               </li>
@@ -6358,6 +6447,9 @@ ul.nav-tabs {
               <li data-group="Accounting" data-name="getReportExecutiveSummary" class="">
                 <a href="#api-Accounting-getReportExecutiveSummary">getReportExecutiveSummary</a>
               </li>
+              <li data-group="Accounting" data-name="getReportFromId" class="">
+                <a href="#api-Accounting-getReportFromId">getReportFromId</a>
+              </li>
               <li data-group="Accounting" data-name="getReportProfitAndLoss" class="">
                 <a href="#api-Accounting-getReportProfitAndLoss">getReportProfitAndLoss</a>
               </li>
@@ -6366,6 +6458,9 @@ ul.nav-tabs {
               </li>
               <li data-group="Accounting" data-name="getReportTrialBalance" class="">
                 <a href="#api-Accounting-getReportTrialBalance">getReportTrialBalance</a>
+              </li>
+              <li data-group="Accounting" data-name="getReportsList" class="">
+                <a href="#api-Accounting-getReportsList">getReportsList</a>
               </li>
               <li data-group="Accounting" data-name="getTaxRates" class="">
                 <a href="#api-Accounting-getTaxRates">getTaxRates</a>
@@ -6539,10 +6634,11 @@ ul.nav-tabs {
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const account: Account = { 
-    code: "123456",
-    name: "FooBar",
-    type: AccountType.EXPENSE,
-    description: "Hello World" }; 
+  code: "123456",
+  name: "FooBar",
+  type: AccountType.EXPENSE,
+  description: "Hello World"
+}; 
 
 try {
   const response = await xero.accountingApi.createAccount(xeroTenantId, account);
@@ -7028,10 +7124,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const bankTransactionID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createBankTransactionHistoryRecord(xeroTenantId, bankTransactionID, historyRecords);
@@ -7185,27 +7283,32 @@ const summarizeErrors = true;
 const unitdp = 4;
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const bankAccount: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const bankTransaction: BankTransaction = { 
-    type: BankTransaction.TypeEnum.RECEIVE,
-    contact: contact,
-    lineItems: lineItems,
-    bankAccount: bankAccount }; 
+  type: BankTransaction.TypeEnum.RECEIVE,
+  contact: contact,
+  lineItems: lineItems,
+  bankAccount: bankAccount
+}; 
 
 const bankTransactions: BankTransactions = {  
-    bankTransactions: [bankTransaction] }; 
+  bankTransactions: [bankTransaction]
+}; 
 
 try {
   const response = await xero.accountingApi.createBankTransactions(xeroTenantId, bankTransactions,  summarizeErrors, unitdp);
@@ -7371,18 +7474,22 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const fromBankAccount: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const toBankAccount: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const bankTransfer: BankTransfer = { 
-    fromBankAccount: fromBankAccount,
-    toBankAccount: toBankAccount,
-    amount: 1.0 }; 
+  fromBankAccount: fromBankAccount,
+  toBankAccount: toBankAccount,
+  amount: 1.0
+}; 
 
 const bankTransfers: BankTransfers = {  
-    bankTransfers: [bankTransfer] }; 
+  bankTransfers: [bankTransfer]
+}; 
 
 try {
   const response = await xero.accountingApi.createBankTransfer(xeroTenantId, bankTransfers);
@@ -7685,10 +7792,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const bankTransferID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createBankTransferHistoryRecord(xeroTenantId, bankTransferID, historyRecords);
@@ -7842,30 +7951,36 @@ const summarizeErrors = true;
 const currDate = '2020-12-10'
 
 const paymentAccount: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const bankAccount: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const invoice: Invoice = { 
-    invoiceID: "00000000-0000-0000-0000-000000000000" }; 
+  invoiceID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const payment: Payment = { 
-    account: bankAccount,
-    date: currDate,
-    amount: 1.0,
-    invoice: invoice };   
-const payments = [];    
+  account: bankAccount,
+  date: currDate,
+  amount: 1.0,
+  invoice: invoice
+};   
+const payments = [];
 payments.push(payment)
 
 const batchPayment: BatchPayment = { 
-    account: paymentAccount,
-    reference: "hello foobar",
-    date: currDate,
-    payments: payments }; 
+  account: paymentAccount,
+  reference: "hello foobar",
+  date: currDate,
+  payments: payments
+}; 
 
 const batchPayments: BatchPayments = {  
-    batchPayments: [batchPayment] }; 
+  batchPayments: [batchPayment]
+}; 
 
 try {
   const response = await xero.accountingApi.createBatchPayment(xeroTenantId, batchPayments,  summarizeErrors);
@@ -8012,10 +8127,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const batchPaymentID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createBatchPaymentHistoryRecord(xeroTenantId, batchPaymentID, historyRecords);
@@ -8168,10 +8285,11 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const brandingThemeID = '00000000-0000-0000-0000-000000000000';
 
 const paymentService: PaymentService = { 
-    paymentServiceID: "00000000-0000-0000-0000-000000000000",
-    paymentServiceName: "ACME Payments",
-    paymentServiceUrl: "https://www.payupnow.com/",
-    payNowText: "Pay Now" }; 
+  paymentServiceID: "00000000-0000-0000-0000-000000000000",
+  paymentServiceName: "ACME Payments",
+  paymentServiceUrl: "https://www.payupnow.com/",
+  payNowText: "Pay Now"
+}; 
 
 try {
   const response = await xero.accountingApi.createBrandingThemePaymentServices(xeroTenantId, brandingThemeID, paymentService);
@@ -8285,7 +8403,7 @@ PaymentService object in body of request
       "schema" : {
         "$ref" : "#/components/schemas/PaymentService"
       },
-      "example" : "{ \"PaymentServiceID\": \"00000000-0000-0000-0000-000000000000\", \"PaymentServiceName\": \"ACME Payments\", \"PaymentServiceUrl\": \"https://www.payupnow.com/\", \"PayNowText\": \"Pay Now\" }"
+      "example" : "{ \"PaymentServiceID\": \"00000000-0000-0000-0000-000000000000\", \"PaymentServiceName\": \"Payments Service\", \"PaymentServiceUrl\": \"https://www.paymentservice.com/\", \"PayNowText\": \"Pay Now\" }"
     }
   },
   "required" : true
@@ -8506,10 +8624,12 @@ Byte array of file in body of request
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const contactGroup: ContactGroup = { 
-    name: "VIPs" }; 
+  name: "VIPs"
+}; 
 
 const contactGroups: ContactGroups = {  
-    contactGroups: [contactGroup] }; 
+  contactGroups: [contactGroup]
+}; 
 
 try {
   const response = await xero.accountingApi.createContactGroup(xeroTenantId, contactGroups);
@@ -8629,10 +8749,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const contactGroupID = '00000000-0000-0000-0000-000000000000';
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const contacts: Contacts = {  
-    contacts: [contact] }; 
+  contacts: [contact]
+}; 
 
 try {
   const response = await xero.accountingApi.createContactGroupContacts(xeroTenantId, contactGroupID, contacts);
@@ -8785,10 +8907,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const contactID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createContactHistory(xeroTenantId, contactID, historyRecords);
@@ -8941,18 +9065,21 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const summarizeErrors = true;
 
 const phone: Phone = { 
-    phoneNumber: "555-1212",
-    phoneType: Phone.PhoneTypeEnum.MOBILE };   
-const phones = [];    
+  phoneNumber: "555-1212",
+  phoneType: Phone.PhoneTypeEnum.MOBILE
+};   
+const phones = [];
 phones.push(phone)
 
 const contact: Contact = { 
-    name: "Bruce Banner",
-    emailAddress: "hulk@avengers.com",
-    phones: phones }; 
+  name: "Bruce Banner",
+  emailAddress: "hulk@avengers.com",
+  phones: phones
+}; 
 
 const contacts: Contacts = {  
-    contacts: [contact] }; 
+  contacts: [contact]
+}; 
 
 try {
   const response = await xero.accountingApi.createContacts(xeroTenantId, contacts,  summarizeErrors);
@@ -9101,15 +9228,18 @@ const summarizeErrors = true;
 const currDate = '2020-12-10'
 
 const invoice: Invoice = { 
-    invoiceID: "00000000-0000-0000-0000-000000000000" }; 
+  invoiceID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const allocation: Allocation = { 
-    amount: 1.0,
-    date: currDate,
-    invoice: invoice }; 
+  amount: 1.0,
+  date: currDate,
+  invoice: invoice
+}; 
 
 const allocations: Allocations = {  
-    allocations: [allocation] }; 
+  allocations: [allocation]
+}; 
 
 try {
   const response = await xero.accountingApi.createCreditNoteAllocation(xeroTenantId, creditNoteID, allocations,  summarizeErrors);
@@ -9500,10 +9630,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const creditNoteID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createCreditNoteHistory(xeroTenantId, creditNoteID, historyRecords);
@@ -9658,24 +9790,28 @@ const unitdp = 4;
 const currDate = '2020-12-10'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const creditNote: CreditNote = { 
-    type: CreditNote.TypeEnum.ACCPAYCREDIT,
-    contact: contact,
-    date: currDate,
-    lineItems: lineItems }; 
+  type: CreditNote.TypeEnum.ACCPAYCREDIT,
+  contact: contact,
+  date: currDate,
+  lineItems: lineItems
+}; 
 
 const creditNotes: CreditNotes = {  
-    creditNotes: [creditNote] }; 
+  creditNotes: [creditNote]
+}; 
 
 try {
   const response = await xero.accountingApi.createCreditNotes(xeroTenantId, creditNotes,  summarizeErrors, unitdp);
@@ -9841,8 +9977,9 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const currency: Currency = { 
-    code: CurrencyCode.USD,
-    description: "United States Dollar" }; 
+  code: CurrencyCode.USD,
+  description: "United States Dollar"
+}; 
 
 try {
   const response = await xero.accountingApi.createCurrency(xeroTenantId, currency);
@@ -9962,11 +10099,13 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const summarizeErrors = true;
 
 const employee: Employee = { 
-    firstName: "Nick",
-    lastName: "Fury" }; 
+  firstName: "Nick",
+  lastName: "Fury"
+}; 
 
 const employees: Employees = {  
-    employees: [employee] }; 
+  employees: [employee]
+}; 
 
 try {
   const response = await xero.accountingApi.createEmployees(xeroTenantId, employees,  summarizeErrors);
@@ -10113,10 +10252,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const expenseClaimID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createExpenseClaimHistory(xeroTenantId, expenseClaimID, historyRecords);
@@ -10269,21 +10410,25 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const currDate = '2020-12-10'
 
 const user: User = { 
-    userID: "00000000-0000-0000-0000-000000000000" }; 
+  userID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const receipt: Receipt = { 
-    receiptID: "00000000-0000-0000-0000-000000000000",
-    date: currDate };   
-const receipts = [];    
+  receiptID: "00000000-0000-0000-0000-000000000000",
+  date: currDate
+};   
+const receipts = [];
 receipts.push(receipt)
 
 const expenseClaim: ExpenseClaim = { 
-    status: ExpenseClaim.StatusEnum.SUBMITTED,
-    user: user,
-    receipts: receipts }; 
+  status: ExpenseClaim.StatusEnum.SUBMITTED,
+  user: user,
+  receipts: receipts
+}; 
 
 const expenseClaims: ExpenseClaims = {  
-    expenseClaims: [expenseClaim] }; 
+  expenseClaims: [expenseClaim]
+}; 
 
 try {
   const response = await xero.accountingApi.createExpenseClaims(xeroTenantId, expenseClaims);
@@ -10614,10 +10759,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const invoiceID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createInvoiceHistory(xeroTenantId, invoiceID, historyRecords);
@@ -10773,34 +10920,39 @@ const dateValue = '2020-10-10'
 const dueDateValue = '2020-10-28'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItemTracking: LineItemTracking = { 
-    trackingCategoryID: "00000000-0000-0000-0000-000000000000",
-    trackingOptionID: "00000000-0000-0000-0000-000000000000" };   
-const lineItemTrackings = [];    
+  trackingCategoryID: "00000000-0000-0000-0000-000000000000",
+  trackingOptionID: "00000000-0000-0000-0000-000000000000"
+};   
+const lineItemTrackings = [];
 lineItemTrackings.push(lineItemTracking)
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000",
-    tracking: lineItemTrackings };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000",
+  tracking: lineItemTrackings
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const invoice: Invoice = { 
-    type: Invoice.TypeEnum.ACCREC,
-    contact: contact,
-    date: dateValue,
-    dueDate: dueDateValue,
-    lineItems: lineItems,
-    reference: "Website Design",
-    status: Invoice.StatusEnum.DRAFT }; 
+  type: Invoice.TypeEnum.ACCREC,
+  contact: contact,
+  date: dateValue,
+  dueDate: dueDateValue,
+  lineItems: lineItems,
+  reference: "Website Design",
+  status: Invoice.StatusEnum.DRAFT
+}; 
 
 const invoices: Invoices = {  
-    invoices: [invoice] }; 
+  invoices: [invoice]
+}; 
 
 try {
   const response = await xero.accountingApi.createInvoices(xeroTenantId, invoices,  summarizeErrors, unitdp);
@@ -10967,10 +11119,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const itemID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createItemHistory(xeroTenantId, itemID, historyRecords);
@@ -11124,17 +11278,20 @@ const summarizeErrors = true;
 const unitdp = 4;
 
 const purchaseDetails: Purchase = { 
-    cOGSAccountCode: "500" }; 
+  cOGSAccountCode: "500"
+}; 
 
 const item: Item = { 
-    code: "abcXYZ123",
-    name: "HelloWorld",
-    description: "Foobar",
-    inventoryAssetAccountCode: "140",
-    purchaseDetails: purchaseDetails }; 
+  code: "abcXYZ123",
+  name: "HelloWorld",
+  description: "Foobar",
+  inventoryAssetAccountCode: "140",
+  purchaseDetails: purchaseDetails
+}; 
 
 const items: Items = {  
-    items: [item] }; 
+  items: [item]
+}; 
 
 try {
   const response = await xero.accountingApi.createItems(xeroTenantId, items,  summarizeErrors, unitdp);
@@ -11300,8 +11457,9 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const linkedTransaction: LinkedTransaction = { 
-    sourceTransactionID: "00000000-0000-0000-0000-000000000000",
-    sourceLineItemID: "00000000-0000-0000-0000-000000000000" }; 
+  sourceTransactionID: "00000000-0000-0000-0000-000000000000",
+  sourceLineItemID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 try {
   const response = await xero.accountingApi.createLinkedTransaction(xeroTenantId, linkedTransaction);
@@ -11604,10 +11762,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const manualJournalID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createManualJournalHistoryRecord(xeroTenantId, manualJournalID, historyRecords);
@@ -11762,24 +11922,28 @@ const dateValue = '2020-10-10'
 const manualJournalLines = [];
 
 const credit: ManualJournalLine = { 
-    lineAmount: 100.0,
-    accountCode: "400",
-    description: "Hello there" };     
+  lineAmount: 100.0,
+  accountCode: "400",
+  description: "Hello there"
+}; 
 manualJournalLines.push(credit)
 
 const debit: ManualJournalLine = { 
-    lineAmount: -100.0,
-    accountCode: "120",
-    description: "Hello there" };     
+  lineAmount: -100.0,
+  accountCode: "120",
+  description: "Hello there"
+}; 
 manualJournalLines.push(debit)
 
 const manualJournal: ManualJournal = { 
-    narration: "Foobar",
-    date: dateValue,
-    journalLines: manualJournalLines }; 
+  narration: "Foobar",
+  date: dateValue,
+  journalLines: manualJournalLines
+}; 
 
 const manualJournals: ManualJournals = {  
-    manualJournals: [manualJournal] }; 
+  manualJournals: [manualJournal]
+}; 
 
 try {
   const response = await xero.accountingApi.createManualJournals(xeroTenantId, manualJournals,  summarizeErrors);
@@ -11928,15 +12092,18 @@ const summarizeErrors = true;
 const currDate = '2020-12-10'
 
 const invoice: Invoice = { 
-    invoiceID: "00000000-0000-0000-0000-000000000000" }; 
+  invoiceID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const allocation: Allocation = { 
-    amount: 1.0,
-    date: currDate,
-    invoice: invoice }; 
+  amount: 1.0,
+  date: currDate,
+  invoice: invoice
+}; 
 
 const allocations: Allocations = {  
-    allocations: [allocation] }; 
+  allocations: [allocation]
+}; 
 
 try {
   const response = await xero.accountingApi.createOverpaymentAllocations(xeroTenantId, overpaymentID, allocations,  summarizeErrors);
@@ -12116,10 +12283,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const overpaymentID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createOverpaymentHistory(xeroTenantId, overpaymentID, historyRecords);
@@ -12272,19 +12441,23 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const dateValue = '2020-10-10'
 
 const invoice: Invoice = { 
-    invoiceID: "00000000-0000-0000-0000-000000000000" }; 
+  invoiceID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const account: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const payment: Payment = { 
-    invoice: invoice,
-    account: account,
-    amount: 1.0,
-    date: dateValue }; 
+  invoice: invoice,
+  account: account,
+  amount: 1.0,
+  date: dateValue
+}; 
 
 const payments: Payments = {  
-    payments: [payment] }; 
+  payments: [payment]
+}; 
 
 try {
   const response = await xero.accountingApi.createPayment(xeroTenantId, payment);
@@ -12404,10 +12577,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const paymentID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createPaymentHistory(xeroTenantId, paymentID, historyRecords);
@@ -12559,12 +12734,14 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const paymentService: PaymentService = { 
-    paymentServiceName: "ACME Payments",
-    paymentServiceUrl: "https://www.payupnow.com/",
-    payNowText: "Pay Now" }; 
+  paymentServiceName: "ACME Payments",
+  paymentServiceUrl: "https://www.payupnow.com/",
+  payNowText: "Pay Now"
+}; 
 
 const paymentServices: PaymentServices = {  
-    paymentServices: [paymentService] }; 
+  paymentServices: [paymentService]
+}; 
 
 try {
   const response = await xero.accountingApi.createPaymentService(xeroTenantId, paymentServices);
@@ -12685,19 +12862,23 @@ const summarizeErrors = true;
 const dateValue = '2020-10-10'
 
 const invoice: Invoice = { 
-    invoiceID: "00000000-0000-0000-0000-000000000000" }; 
+  invoiceID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const account: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const payment: Payment = { 
-    invoice: invoice,
-    account: account,
-    amount: 1.0,
-    date: dateValue }; 
+  invoice: invoice,
+  account: account,
+  amount: 1.0,
+  date: dateValue
+}; 
 
 const payments: Payments = {  
-    payments: [payment] }; 
+  payments: [payment]
+}; 
 
 try {
   const response = await xero.accountingApi.createPayments(xeroTenantId, payments,  summarizeErrors);
@@ -12846,15 +13027,18 @@ const summarizeErrors = true;
 const currDate = '2020-12-10'
 
 const invoice: Invoice = { 
-    invoiceID: "00000000-0000-0000-0000-000000000000" }; 
+  invoiceID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const allocation: Allocation = { 
-    invoice: invoice,
-    amount: 1.0,
-    date: currDate }; 
+  invoice: invoice,
+  amount: 1.0,
+  date: currDate
+}; 
 
 const allocations: Allocations = {  
-    allocations: [allocation] }; 
+  allocations: [allocation]
+}; 
 
 try {
   const response = await xero.accountingApi.createPrepaymentAllocations(xeroTenantId, prepaymentID, allocations,  summarizeErrors);
@@ -13034,10 +13218,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const prepaymentID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createPrepaymentHistory(xeroTenantId, prepaymentID, historyRecords);
@@ -13373,10 +13559,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const purchaseOrderID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createPurchaseOrderHistory(xeroTenantId, purchaseOrderID, historyRecords);
@@ -13530,23 +13718,27 @@ const summarizeErrors = true;
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const purchaseOrder: PurchaseOrder = { 
-    contact: contact,
-    lineItems: lineItems,
-    date: dateValue }; 
+  contact: contact,
+  lineItems: lineItems,
+  date: dateValue
+}; 
 
 const purchaseOrders: PurchaseOrders = {  
-    purchaseOrders: [purchaseOrder] }; 
+  purchaseOrders: [purchaseOrder]
+}; 
 
 try {
   const response = await xero.accountingApi.createPurchaseOrders(xeroTenantId, purchaseOrders,  summarizeErrors);
@@ -13876,10 +14068,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const quoteID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createQuoteHistory(xeroTenantId, quoteID, historyRecords);
@@ -14033,23 +14227,27 @@ const summarizeErrors = true;
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const quote: Quote = { 
-    contact: contact,
-    lineItems: lineItems,
-    date: dateValue }; 
+  contact: contact,
+  lineItems: lineItems,
+  date: dateValue
+}; 
 
 const quotes: Quotes = {  
-    quotes: [quote] }; 
+  quotes: [quote]
+}; 
 
 try {
   const response = await xero.accountingApi.createQuotes(xeroTenantId, quotes,  summarizeErrors);
@@ -14196,28 +14394,33 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const unitdp = 4;
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const user: User = { 
-    userID: "00000000-0000-0000-0000-000000000000" }; 
+  userID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const receipt: Receipt = { 
-    contact: contact,
-    user: user,
-    lineItems: lineItems,
-    lineAmountTypes: LineAmountTypes.Inclusive,
-    status: Receipt.StatusEnum.DRAFT }; 
+  contact: contact,
+  user: user,
+  lineItems: lineItems,
+  lineAmountTypes: LineAmountTypes.Inclusive,
+  status: Receipt.StatusEnum.DRAFT
+}; 
 
 const receipts: Receipts = {  
-    receipts: [receipt] }; 
+  receipts: [receipt]
+}; 
 
 try {
   const response = await xero.accountingApi.createReceipt(xeroTenantId, receipts,  unitdp);
@@ -14547,10 +14750,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const receiptID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createReceiptHistory(xeroTenantId, receiptID, historyRecords);
@@ -14886,10 +15091,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const repeatingInvoiceID = '00000000-0000-0000-0000-000000000000';
 
 const historyRecord: HistoryRecord = { 
-    details: "Hello World" }; 
+  details: "Hello World"
+}; 
 
 const historyRecords: HistoryRecords = {  
-    historyRecords: [historyRecord] }; 
+  historyRecords: [historyRecord]
+}; 
 
 try {
   const response = await xero.accountingApi.createRepeatingInvoiceHistory(xeroTenantId, repeatingInvoiceID, historyRecords);
@@ -15041,17 +15248,19 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const taxComponent: TaxComponent = { 
-    name: "State Tax",
-    rate: 2.25 };   
-const taxComponent = [];    
+  name: "State Tax",
+  rate: 2.25
+};   
+const taxComponent = [];
 taxComponents.push(taxComponent)
 
 const taxRate: TaxRate = { 
-    name: "CA State Tax",
-    taxComponents: taxComponents,
+  name: "CA State Tax",
+  taxComponents: taxComponents,
 
 const taxRates: TaxRates = {  
-    taxRates: [taxRate] }; 
+  taxRates: [taxRate]
+}; 
 
 try {
   const response = await xero.accountingApi.createTaxRates(xeroTenantId, taxRates);
@@ -15170,7 +15379,8 @@ TaxRates array with TaxRate object in body of request
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const trackingCategory: TrackingCategory = { 
-    name: "Foobar" }; 
+  name: "Foobar"
+}; 
 
 try {
   const response = await xero.accountingApi.createTrackingCategory(xeroTenantId, trackingCategory);
@@ -15290,7 +15500,8 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const trackingCategoryID = '00000000-0000-0000-0000-000000000000';
 
 const trackingOption: TrackingOption = { 
-    name: "Foobar" }; 
+  name: "Foobar"
+}; 
 
 try {
   const response = await xero.accountingApi.createTrackingOptions(xeroTenantId, trackingCategoryID, trackingOption);
@@ -16035,7 +16246,8 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const paymentID = '00000000-0000-0000-0000-000000000000';
 
 const paymentDelete: PaymentDelete = { 
-    status: "DELETED" }; 
+  status: "DELETED"
+}; 
 
 try {
   const response = await xero.accountingApi.deletePayment(xeroTenantId, paymentID, paymentDelete);
@@ -19537,6 +19749,277 @@ Xero identifier for Tenant
                 </article>
               </div>
               <hr>
+              <div id="api-Accounting-getBudget">
+                <article id="api-Accounting-getBudget-0" data-group="User" data-name="getBudget" data-version="0">
+                  <div class="pull-left">
+                    <h1>getBudget</h1>
+                    <p>Retrieves a specific budgets, which includes budget lines</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Budgets/{BudgetID}</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-getBudget-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-getBudget-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const budgetID = '00000000-0000-0000-0000-000000000000';
+
+try {
+  const response = await xero.accountingApi.getBudget(xeroTenantId, budgetID);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.budgets.read</td>
+                      <td></td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">BudgetID<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBudget_budgetID">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Unique identifier for Budgets
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBudget_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Accounting-getBudgets">
+                <article id="api-Accounting-getBudgets-0" data-group="User" data-name="getBudgets" data-version="0">
+                  <div class="pull-left">
+                    <h1>getBudgets</h1>
+                    <p>Retrieve a list of budgets</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Budgets</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-getBudgets-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-getBudgets-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const iDs = [&quot;00000000-0000-0000-0000-000000000000&quot;];
+const dateTo: Date = new Date("2013-10-20");
+const dateFrom: Date = new Date("2013-10-20");
+
+try {
+  const response = await xero.accountingApi.getBudgets(xeroTenantId,  iDs, dateTo, dateFrom);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.budgets.read</td>
+                      <td></td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBudgets_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Query parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">IDs</td>
+<td>
+
+
+    <div id="d2e199_getBudgets_iDs">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    array[UUID]
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Filter by BudgetID. Allows you to retrieve a specific individual budget.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">DateTo</td>
+<td>
+
+
+    <div id="d2e199_getBudgets_dateTo">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    date
+                </span>
+                    <span class="format">
+                        (date)
+                    </span>
+
+                    <div class="inner description marked">
+Filter by start date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">DateFrom</td>
+<td>
+
+
+    <div id="d2e199_getBudgets_dateFrom">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    date
+                </span>
+                    <span class="format">
+                        (date)
+                    </span>
+
+                    <div class="inner description marked">
+Filter by end date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
               <div id="api-Accounting-getContact">
                 <article id="api-Accounting-getContact-0" data-group="User" data-name="getContact" data-version="0">
                   <div class="pull-left">
@@ -20892,7 +21375,7 @@ e.g. includeArchived=true - Contacts with a status of ARCHIVED will be included 
                 </span>
 
                     <div class="inner description marked">
-Use summaryOnly=true in GET Contacts endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
+Use summaryOnly=true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
                     </div>
             </div>
         </div>
@@ -23595,9 +24078,10 @@ const page = 1;
 const includeArchived = true;
 const createdByMyApp = false;
 const unitdp = 4;
+const summaryOnly = true;
 
 try {
-  const response = await xero.accountingApi.getInvoices(xeroTenantId, ifModifiedSince, where, order, iDs, invoiceNumbers, contactIDs, statuses, page, includeArchived, createdByMyApp, unitdp);
+  const response = await xero.accountingApi.getInvoices(xeroTenantId, ifModifiedSince, where, order, iDs, invoiceNumbers, contactIDs, statuses, page, includeArchived, createdByMyApp, unitdp, summaryOnly);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -23873,6 +24357,26 @@ When set to true you'll only retrieve Invoices created by your app
 
                     <div class="inner description marked">
 e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">summaryOnly</td>
+<td>
+
+
+    <div id="d2e199_getInvoices_summaryOnly">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Boolean
+                </span>
+
+                    <div class="inner description marked">
+Use summaryOnly=true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
                     </div>
             </div>
         </div>
@@ -31672,195 +32176,6 @@ filter by the to date of the report e.g. 2021-02-28
                 </article>
               </div>
               <hr>
-              <div id="api-Accounting-getReportBASorGST">
-                <article id="api-Accounting-getReportBASorGST-0" data-group="User" data-name="getReportBASorGST" data-version="0">
-                  <div class="pull-left">
-                    <h1>getReportBASorGST</h1>
-                    <p>Retrieves a specific report for BAS using a unique report Id (only valid for AU orgs)</p>
-                  </div>
-                  <div class="pull-right"></div>
-                  <div class="clearfix"></div>
-                  <p></p>
-                  <p class="marked"></p>
-                  <p></p>
-                  <br />
-                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Reports/{ReportID}</span></code></pre>
-                  <p>
-                  <h3>Usage and SDK Samples</h3>
-                  </p>
-                  <ul class="nav nav-tabs nav-tabs-examples">
-                    <!-- *****REPLACE***** comment out the other languages <li> -->
-                    <li class=""><a href="#examples-Accounting-getReportBASorGST-0-javascript">Node</a></li>
-                  </ul>
-                  <div class="tab-content">
-                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
-                    <div class="tab-pane" id="examples-Accounting-getReportBASorGST-0-javascript">
-                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
-
-const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const reportID = '00000000-0000-0000-0000-000000000000';
-
-try {
-  const response = await xero.accountingApi.getReportBASorGST(xeroTenantId, reportID);
-  console.log(response.body || response.response.statusCode)
-} catch (err) {
-  const error = JSON.stringify(err.response.body, null, 2)
-  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
-}</code></pre>
-                    </div>
-                  </div>
-                  <h2>Scopes</h2>
-                  <table>
-                    
-                    <tr>
-                      <td>accounting.reports.read</td>
-                      <td>Grant read-only access to accounting reports</td>
-                    </tr>
-                    
-                  </table>
-                  <h2>Parameters</h2>
-                  <div class="methodsubtabletitle">Path parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">ReportID<span style="color:red;">*</span></td>
-<td>
-
-
-    <div id="d2e199_getReportBASorGST_reportID">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Unique identifier for a Report
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                  <div class="methodsubtabletitle">Header parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
-<td>
-
-
-    <div id="d2e199_getReportBASorGST_xeroTenantId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Xero identifier for Tenant
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                </article>
-              </div>
-              <hr>
-              <div id="api-Accounting-getReportBASorGSTList">
-                <article id="api-Accounting-getReportBASorGSTList-0" data-group="User" data-name="getReportBASorGSTList" data-version="0">
-                  <div class="pull-left">
-                    <h1>getReportBASorGSTList</h1>
-                    <p>Retrieves report for BAS (only valid for AU orgs)</p>
-                  </div>
-                  <div class="pull-right"></div>
-                  <div class="clearfix"></div>
-                  <p></p>
-                  <p class="marked"></p>
-                  <p></p>
-                  <br />
-                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Reports</span></code></pre>
-                  <p>
-                  <h3>Usage and SDK Samples</h3>
-                  </p>
-                  <ul class="nav nav-tabs nav-tabs-examples">
-                    <!-- *****REPLACE***** comment out the other languages <li> -->
-                    <li class=""><a href="#examples-Accounting-getReportBASorGSTList-0-javascript">Node</a></li>
-                  </ul>
-                  <div class="tab-content">
-                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
-                    <div class="tab-pane" id="examples-Accounting-getReportBASorGSTList-0-javascript">
-                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
-
-const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-
-try {
-  const response = await xero.accountingApi.getReportBASorGSTList(xeroTenantId);
-  console.log(response.body || response.response.statusCode)
-} catch (err) {
-  const error = JSON.stringify(err.response.body, null, 2)
-  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
-}</code></pre>
-                    </div>
-                  </div>
-                  <h2>Scopes</h2>
-                  <table>
-                    
-                    <tr>
-                      <td>accounting.reports.read</td>
-                      <td>Grant read-only access to accounting reports</td>
-                    </tr>
-                    
-                  </table>
-                  <h2>Parameters</h2>
-                  <div class="methodsubtabletitle">Header parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
-<td>
-
-
-    <div id="d2e199_getReportBASorGSTList_xeroTenantId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Xero identifier for Tenant
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                </article>
-              </div>
-              <hr>
               <div id="api-Accounting-getReportBalanceSheet">
                 <article id="api-Accounting-getReportBalanceSheet-0" data-group="User" data-name="getReportBalanceSheet" data-version="0">
                   <div class="pull-left">
@@ -32258,11 +32573,11 @@ filter by the to date of the report e.g. 2021-02-28
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const date: Date = new Date("2019-03-31");
-const period = 2;
+const periods = 2;
 const timeframe = 3;
 
 try {
-  const response = await xero.accountingApi.getReportBudgetSummary(xeroTenantId,  date, period, timeframe);
+  const response = await xero.accountingApi.getReportBudgetSummary(xeroTenantId,  date, periods, timeframe);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -32339,11 +32654,11 @@ The date for the Bank Summary report e.g. 2018-03-31
 </td>
 </tr>
 
-                    <tr><td style="width:150px;">period</td>
+                    <tr><td style="width:150px;">periods</td>
 <td>
 
 
-    <div id="d2e199_getReportBudgetSummary_period">
+    <div id="d2e199_getReportBudgetSummary_periods">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -32484,6 +32799,116 @@ Xero identifier for Tenant
 The date for the Bank Summary report e.g. 2018-03-31
                     </div>
             </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Accounting-getReportFromId">
+                <article id="api-Accounting-getReportFromId-0" data-group="User" data-name="getReportFromId" data-version="0">
+                  <div class="pull-left">
+                    <h1>getReportFromId</h1>
+                    <p>Retrieves a specific report using a unique ReportID</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Reports/{ReportID}</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-getReportFromId-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-getReportFromId-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const reportID = '00000000-0000-0000-0000-000000000000';
+
+try {
+  const response = await xero.accountingApi.getReportFromId(xeroTenantId, reportID);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.reports.read</td>
+                      <td>Grant read-only access to accounting reports</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">ReportID<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getReportFromId_reportID">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Unique identifier for a Report
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getReportFromId_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
     </div>
 </td>
@@ -33024,6 +33449,85 @@ The date for the Trial Balance report e.g. 2018-03-31
 Return cash only basis for the Trial Balance report
                     </div>
             </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Accounting-getReportsList">
+                <article id="api-Accounting-getReportsList-0" data-group="User" data-name="getReportsList" data-version="0">
+                  <div class="pull-left">
+                    <h1>getReportsList</h1>
+                    <p>Retrieves a list of the organistaions unique reports that require a uuid to fetch</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Reports</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-getReportsList-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-getReportsList-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+
+try {
+  const response = await xero.accountingApi.getReportsList(xeroTenantId);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.reports.read</td>
+                      <td>Grant read-only access to accounting reports</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getReportsList_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
     </div>
 </td>
@@ -33737,21 +34241,24 @@ Order by an any element
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const account: Account = { 
-    code: "123",
-    name: "Business supplies",
-    type: AccountType.EXPENSE };   
-const accounts = [];    
+  code: "123",
+  name: "Business supplies",
+  type: AccountType.EXPENSE
+};   
+const accounts = [];
 accounts.push(account)
 
 const conversionDate: ConversionDate = { 
-    month: 10,
-    year: 2020 };   
+  month: 10,
+  year: 2020
+};   
 const conversionBalances = [];
 
 const setup: Setup = { 
-    accounts: accounts,
-    conversionDate: conversionDate,
-    conversionBalances: conversionBalances }; 
+  accounts: accounts,
+  conversionDate: conversionDate,
+  conversionBalances: conversionBalances
+}; 
 
 try {
   const response = await xero.accountingApi.postSetup(xeroTenantId, setup);
@@ -33871,14 +34378,16 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const accountID = '00000000-0000-0000-0000-000000000000';
 
 const account: Account = { 
-    code: "123456",
-    name: "BarFoo",
-    type: AccountType.EXPENSE,
-    description: "Hello World",
-    taxType: "NONE" }; 
+  code: "123456",
+  name: "BarFoo",
+  type: AccountType.EXPENSE,
+  description: "Hello World",
+  taxType: "NONE"
+}; 
 
 const accounts: Accounts = {  
-    accounts: [account] }; 
+  accounts: [account]
+}; 
 
 try {
   const response = await xero.accountingApi.updateAccount(xeroTenantId, accountID, accounts);
@@ -34215,28 +34724,33 @@ const bankTransactionID = '00000000-0000-0000-0000-000000000000';
 const unitdp = 4;
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const bankAccount: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const bankTransaction: BankTransaction = { 
-    reference: "You just updated",
-    type: BankTransaction.TypeEnum.RECEIVE,
-    contact: contact,
-    lineItems: lineItems,
-    bankAccount: bankAccount }; 
+  reference: "You just updated",
+  type: BankTransaction.TypeEnum.RECEIVE,
+  contact: contact,
+  lineItems: lineItems,
+  bankAccount: bankAccount
+}; 
 
 const bankTransactions: BankTransactions = {  
-    bankTransactions: [bankTransaction] }; 
+  bankTransactions: [bankTransaction]
+}; 
 
 try {
   const response = await xero.accountingApi.updateBankTransaction(xeroTenantId, bankTransactionID, bankTransactions,  unitdp);
@@ -34781,11 +35295,13 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const contactID = '00000000-0000-0000-0000-000000000000';
 
 const contact: Contact = { 
-    name: "Thanos",
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  name: "Thanos",
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const contacts: Contacts = {  
-    contacts: [contact] }; 
+  contacts: [contact]
+}; 
 
 try {
   const response = await xero.accountingApi.updateContact(xeroTenantId, contactID, contacts);
@@ -35121,10 +35637,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const contactGroupID = '00000000-0000-0000-0000-000000000000';
 
 const contactGroup: ContactGroup = { 
-    name: "Vendor" }; 
+  name: "Vendor"
+}; 
 
 const contactGroups: ContactGroups = {  
-    contactGroups: [contactGroup] }; 
+  contactGroups: [contactGroup]
+}; 
 
 try {
   const response = await xero.accountingApi.updateContactGroup(xeroTenantId, contactGroupID, contactGroups);
@@ -35279,26 +35797,30 @@ const unitdp = 4;
 const currDate = '2020-12-10'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const creditNote: CreditNote = { 
-    type: CreditNote.TypeEnum.ACCPAYCREDIT,
-    status: CreditNote.StatusEnum.AUTHORISED,
-    reference: "My ref.",
-    contact: contact,
-    date: currDate,
-    lineItems: lineItems }; 
+  type: CreditNote.TypeEnum.ACCPAYCREDIT,
+  status: CreditNote.StatusEnum.AUTHORISED,
+  reference: "My ref.",
+  contact: contact,
+  date: currDate,
+  lineItems: lineItems
+}; 
 
 const creditNotes: CreditNotes = {  
-    creditNotes: [creditNote] }; 
+  creditNotes: [creditNote]
+}; 
 
 try {
   const response = await xero.accountingApi.updateCreditNote(xeroTenantId, creditNoteID, creditNotes,  unitdp);
@@ -35662,21 +36184,25 @@ const expenseClaimID = '00000000-0000-0000-0000-000000000000';
 const currDate = '2020-12-10'
 
 const user: User = { 
-    userID: "00000000-0000-0000-0000-000000000000" }; 
+  userID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const receipt: Receipt = { 
-    receiptID: "00000000-0000-0000-0000-000000000000",
-    date: currDate };   
-const receipts = [];    
+  receiptID: "00000000-0000-0000-0000-000000000000",
+  date: currDate
+};   
+const receipts = [];
 receipts.push(receipt)
 
 const expenseClaim: ExpenseClaim = { 
-    status: ExpenseClaim.StatusEnum.SUBMITTED,
-    user: user,
-    receipts: receipts }; 
+  status: ExpenseClaim.StatusEnum.SUBMITTED,
+  user: user,
+  receipts: receipts
+}; 
 
 const expenseClaims: ExpenseClaims = {  
-    expenseClaims: [expenseClaim] }; 
+  expenseClaims: [expenseClaim]
+}; 
 
 try {
   const response = await xero.accountingApi.updateExpenseClaim(xeroTenantId, expenseClaimID, expenseClaims);
@@ -35829,10 +36355,12 @@ const invoiceID = '00000000-0000-0000-0000-000000000000';
 const unitdp = 4;
 
 const invoice: Invoice = { 
-    reference: "I am Iron man" }; 
+  reference: "I am Iron man"
+}; 
 
 const invoices: Invoices = {  
-    invoices: [invoice] }; 
+  invoices: [invoice]
+}; 
 
 try {
   const response = await xero.accountingApi.updateInvoice(xeroTenantId, invoiceID, invoices,  unitdp);
@@ -36195,11 +36723,13 @@ const itemID = '00000000-0000-0000-0000-000000000000';
 const unitdp = 4;
 
 const item: Item = { 
-    code: "ItemCode123",
-    description: "Goodbye" }; 
+  code: "ItemCode123",
+  description: "Goodbye"
+}; 
 
 const items: Items = {  
-    items: [item] }; 
+  items: [item]
+}; 
 
 try {
   const response = await xero.accountingApi.updateItem(xeroTenantId, itemID, items,  unitdp);
@@ -36378,11 +36908,13 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const linkedTransactionID = '00000000-0000-0000-0000-000000000000';
 
 const linkedTransaction: LinkedTransaction = { 
-    sourceLineItemID: "00000000-0000-0000-0000-000000000000",
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  sourceLineItemID: "00000000-0000-0000-0000-000000000000",
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const linkedTransactions: LinkedTransactions = {  
-    linkedTransactions: [linkedTransaction] }; 
+  linkedTransactions: [linkedTransaction]
+}; 
 
 try {
   const response = await xero.accountingApi.updateLinkedTransaction(xeroTenantId, linkedTransactionID, linkedTransactions);
@@ -36536,24 +37068,28 @@ const dateValue = '2020-10-10'
 const manualJournalLines = [];
 
 const credit: ManualJournalLine = { 
-    lineAmount: 100.0,
-    accountCode: "400",
-    description: "Hello there" };     
+  lineAmount: 100.0,
+  accountCode: "400",
+  description: "Hello there"
+}; 
 manualJournalLines.push(credit)
 
 const debit: ManualJournalLine = { 
-    lineAmount: -100.0,
-    accountCode: "120",
-    description: "Hello there" };     
+  lineAmount: -100.0,
+  accountCode: "120",
+  description: "Hello there"
+}; 
 manualJournalLines.push(debit)
 
 const manualJournal: ManualJournal = { 
-    narration: "Foobar",
-    date: dateValue,
-    manualJournalLines: manualJournalLines }; 
+  narration: "Foobar",
+  date: dateValue,
+  manualJournalLines: manualJournalLines
+}; 
 
 const manualJournals: ManualJournals = {  
-    manualJournals: [manualJournal] }; 
+  manualJournals: [manualJournal]
+}; 
 
 try {
   const response = await xero.accountingApi.updateManualJournal(xeroTenantId, manualJournalID, manualJournals);
@@ -36889,27 +37425,32 @@ const summarizeErrors = true;
 const unitdp = 4;
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const bankAccount: Account = { 
-    accountID: "00000000-0000-0000-0000-000000000000" }; 
+  accountID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const bankTransaction: BankTransaction = { 
-    type: BankTransaction.TypeEnum.RECEIVE,
-    contact: contact,
-    lineItems: lineItems,
-    bankAccount: bankAccount }; 
+  type: BankTransaction.TypeEnum.RECEIVE,
+  contact: contact,
+  lineItems: lineItems,
+  bankAccount: bankAccount
+}; 
 
 const bankTransactions: BankTransactions = {  
-    bankTransactions: [bankTransaction] }; 
+  bankTransactions: [bankTransaction]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreateBankTransactions(xeroTenantId, bankTransactions,  summarizeErrors, unitdp);
@@ -37075,18 +37616,21 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const summarizeErrors = true;
 
 const phone: Phone = { 
-    phoneNumber: "555-1212",
-    phoneType: Phone.PhoneTypeEnum.MOBILE };   
-const phones = [];    
+  phoneNumber: "555-1212",
+  phoneType: Phone.PhoneTypeEnum.MOBILE
+};   
+const phones = [];
 phones.push(phone)
 
 const contact: Contact = { 
-    name: "Bruce Banner",
-    emailAddress: "hulk@avengers.com",
-    phones: phones }; 
+  name: "Bruce Banner",
+  emailAddress: "hulk@avengers.com",
+  phones: phones
+}; 
 
 const contacts: Contacts = {  
-    contacts: [contact] }; 
+  contacts: [contact]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreateContacts(xeroTenantId, contacts,  summarizeErrors);
@@ -37234,24 +37778,28 @@ const unitdp = 4;
 const currDate = '2020-12-10'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const creditNote: CreditNote = { 
-    type: CreditNote.TypeEnum.ACCPAYCREDIT,
-    contact: contact,
-    date: currDate,
-    lineItems: lineItems }; 
+  type: CreditNote.TypeEnum.ACCPAYCREDIT,
+  contact: contact,
+  date: currDate,
+  lineItems: lineItems
+}; 
 
 const creditNotes: CreditNotes = {  
-    creditNotes: [creditNote] }; 
+  creditNotes: [creditNote]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreateCreditNotes(xeroTenantId, creditNotes,  summarizeErrors, unitdp);
@@ -37418,11 +37966,13 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const summarizeErrors = true;
 
 const employee: Employee = { 
-    firstName: "Nick",
-    lastName: "Fury" }; 
+  firstName: "Nick",
+  lastName: "Fury"
+}; 
 
 const employees: Employees = {  
-    employees: [employee] }; 
+  employees: [employee]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreateEmployees(xeroTenantId, employees,  summarizeErrors);
@@ -37572,27 +38122,31 @@ const dateValue = '2020-10-10'
 const dueDateValue = '2020-10-28'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const invoice: Invoice = { 
-    type: Invoice.TypeEnum.ACCREC,
-    contact: contact,
-    date: dateValue,
-    dueDate: dueDateValue,
-    lineItems: lineItems,
-    reference: "Website Design",
-    status: Invoice.StatusEnum.DRAFT }; 
+  type: Invoice.TypeEnum.ACCREC,
+  contact: contact,
+  date: dateValue,
+  dueDate: dueDateValue,
+  lineItems: lineItems,
+  reference: "Website Design",
+  status: Invoice.StatusEnum.DRAFT
+}; 
 
 const invoices: Invoices = {  
-    invoices: [invoice] }; 
+  invoices: [invoice]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreateInvoices(xeroTenantId, invoices,  summarizeErrors, unitdp);
@@ -37759,12 +38313,14 @@ const summarizeErrors = true;
 const unitdp = 4;
 
 const item: Item = { 
-    code: "abcXYZ123",
-    name: "HelloWorld",
-    description: "Foobar" }; 
+  code: "abcXYZ123",
+  name: "HelloWorld",
+  description: "Foobar"
+}; 
 
 const items: Items = {  
-    items: [item] }; 
+  items: [item]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreateItems(xeroTenantId, items,  summarizeErrors, unitdp);
@@ -37932,24 +38488,28 @@ const dateValue = '2020-10-10'
 const manualJournalLines = [];
 
 const credit: ManualJournalLine = { 
-    lineAmount: 100.0,
-    accountCode: "400",
-    description: "Hello there" };     
+  lineAmount: 100.0,
+  accountCode: "400",
+  description: "Hello there"
+}; 
 manualJournalLines.push(credit)
 
 const debit: ManualJournalLine = { 
-    lineAmount: -100.0,
-    accountCode: "120",
-    description: "Hello there" };     
+  lineAmount: -100.0,
+  accountCode: "120",
+  description: "Hello there"
+}; 
 manualJournalLines.push(debit)
 
 const manualJournal: ManualJournal = { 
-    narration: "Foobar",
-    date: dateValue,
-    manualJournalLines: manualJournalLines }; 
+  narration: "Foobar",
+  date: dateValue,
+  manualJournalLines: manualJournalLines
+}; 
 
 const manualJournals: ManualJournals = {  
-    manualJournals: [manualJournal] }; 
+  manualJournals: [manualJournal]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreateManualJournals(xeroTenantId, manualJournals,  summarizeErrors);
@@ -38097,23 +38657,27 @@ const summarizeErrors = true;
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const purchaseOrder: PurchaseOrder = { 
-    contact: contact,
-    lineItems: lineItems,
-    date: dateValue }; 
+  contact: contact,
+  lineItems: lineItems,
+  date: dateValue
+}; 
 
 const purchaseOrders: PurchaseOrders = {  
-    purchaseOrders: [purchaseOrder] }; 
+  purchaseOrders: [purchaseOrder]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreatePurchaseOrders(xeroTenantId, purchaseOrders,  summarizeErrors);
@@ -38260,23 +38824,27 @@ const summarizeErrors = true;
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const lineItem: LineItem = { 
-    description: "Foobar",
-    quantity: 1.0,
-    unitAmount: 20.0,
-    accountCode: "000" };   
-const lineItems = [];    
+  description: "Foobar",
+  quantity: 1.0,
+  unitAmount: 20.0,
+  accountCode: "000"
+};   
+const lineItems = [];
 lineItems.push(lineItem)
 
 const quote: Quote = { 
-    contact: contact,
-    lineItems: lineItems,
-    date: dateValue }; 
+  contact: contact,
+  lineItems: lineItems,
+  date: dateValue
+}; 
 
 const quotes: Quotes = {  
-    quotes: [quote] }; 
+  quotes: [quote]
+}; 
 
 try {
   const response = await xero.accountingApi.updateOrCreateQuotes(xeroTenantId, quotes,  summarizeErrors);
@@ -38422,10 +38990,12 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const purchaseOrderID = '00000000-0000-0000-0000-000000000000';
 
 const purchaseOrder: PurchaseOrder = { 
-    attentionTo: "Peter Parker" }; 
+  attentionTo: "Peter Parker"
+}; 
 
 const purchaseOrders: PurchaseOrders = {  
-    purchaseOrders: [purchaseOrder] }; 
+  purchaseOrders: [purchaseOrder]
+}; 
 
 try {
   const response = await xero.accountingApi.updatePurchaseOrder(xeroTenantId, purchaseOrderID, purchaseOrders);
@@ -38761,15 +39331,18 @@ const quoteID = '00000000-0000-0000-0000-000000000000';
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
-    contactID: "00000000-0000-0000-0000-000000000000" }; 
+  contactID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const quote: Quote = { 
-    reference: "I am an update",
-    contact: contact,
-    date: dateValue }; 
+  reference: "I am an update",
+  contact: contact,
+  date: dateValue
+}; 
 
 const quotes: Quotes = {  
-    quotes: [quote] }; 
+  quotes: [quote]
+}; 
 
 try {
   const response = await xero.accountingApi.updateQuote(xeroTenantId, quoteID, quotes);
@@ -39106,15 +39679,18 @@ const unitdp = 4;
 const dateValue = '2020-10-10'
 
 const user: User = { 
-    userID: "00000000-0000-0000-0000-000000000000" }; 
+  userID: "00000000-0000-0000-0000-000000000000"
+}; 
 
 const receipt: Receipt = { 
-    user: user,
-    reference: "Foobar",
-    date: dateValue }; 
+  user: user,
+  reference: "Foobar",
+  date: dateValue
+}; 
 
 const receipts: Receipts = {  
-    receipts: [receipt] }; 
+  receipts: [receipt]
+}; 
 
 try {
   const response = await xero.accountingApi.updateReceipt(xeroTenantId, receiptID, receipts,  unitdp);
@@ -39658,17 +40234,19 @@ Byte array of file in body of request
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 
 const taxComponent: TaxComponent = { 
-    name: "State Tax",
-    rate: 2.25 };   
-const taxComponents = [];    
+  name: "State Tax",
+  rate: 2.25
+};   
+const taxComponents = [];
 taxComponents.push(taxComponent)
 
 const taxRate: TaxRate = { 
-    name: "CA State Tax",
-    taxComponents: taxComponents,
+  name: "CA State Tax",
+  taxComponents: taxComponents,
 
 const taxRates: TaxRates = {  
-    taxRates: [taxRate] }; 
+  taxRates: [taxRate]
+}; 
 
 try {
   const response = await xero.accountingApi.updateTaxRate(xeroTenantId, taxRates);
@@ -39787,7 +40365,8 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const trackingCategoryID = '00000000-0000-0000-0000-000000000000';
 
 const trackingCategory: TrackingCategory = { 
-    name: "Foobar" }; 
+  name: "Foobar"
+}; 
 
 try {
   const response = await xero.accountingApi.updateTrackingCategory(xeroTenantId, trackingCategoryID, trackingCategory);
@@ -39940,7 +40519,8 @@ const trackingCategoryID = '00000000-0000-0000-0000-000000000000';
 const trackingOptionID = '00000000-0000-0000-0000-000000000000';
 
 const trackingOption: TrackingOption = { 
-    name: "Foobar" }; 
+  name: "Foobar"
+}; 
 
 try {
   const response = await xero.accountingApi.updateTrackingOptions(xeroTenantId, trackingCategoryID, trackingOptionID, trackingOption);
