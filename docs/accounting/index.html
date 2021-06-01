@@ -24077,11 +24077,11 @@ const statuses = [&quot;DRAFT&quot;, &quot;SUBMITTED&quot;];
 const page = 1;
 const includeArchived = true;
 const createdByMyApp = false;
-const summaryOnly = true;
 const unitdp = 4;
+const summaryOnly = true;
 
 try {
-  const response = await xero.accountingApi.getInvoices(xeroTenantId, ifModifiedSince, where, order, iDs, invoiceNumbers, contactIDs, statuses, page, includeArchived, createdByMyApp, summaryOnly, unitdp);
+  const response = await xero.accountingApi.getInvoices(xeroTenantId, ifModifiedSince, where, order, iDs, invoiceNumbers, contactIDs, statuses, page, includeArchived, createdByMyApp, unitdp, summaryOnly);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -24344,26 +24344,6 @@ When set to true you'll only retrieve Invoices created by your app
 </td>
 </tr>
 
-                    <tr><td style="width:150px;">summaryOnly</td>
-<td>
-
-
-    <div id="d2e199_getInvoices_summaryOnly">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Boolean
-                </span>
-
-                    <div class="inner description marked">
-Use summaryOnly=true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
                     <tr><td style="width:150px;">unitdp</td>
 <td>
 
@@ -24377,6 +24357,26 @@ Use summaryOnly=true in GET Contacts and Invoices endpoint to retrieve a smaller
 
                     <div class="inner description marked">
 e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">summaryOnly</td>
+<td>
+
+
+    <div id="d2e199_getInvoices_summaryOnly">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Boolean
+                </span>
+
+                    <div class="inner description marked">
+Use summaryOnly=true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
                     </div>
             </div>
         </div>
