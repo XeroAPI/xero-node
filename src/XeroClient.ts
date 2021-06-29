@@ -8,8 +8,9 @@ export { TokenSet, TokenSetParameters } from 'openid-client';
 export interface IXeroClientConfig {
   clientId: string,
   clientSecret: string,
-  redirectUris: string[],
-  scopes: string[],
+  redirectUris?: string[],
+  grantType?: string;
+  scopes?: string[],
   state?: string,
   httpTimeout?: number
 };
@@ -187,6 +188,43 @@ export class XeroClient {
     const body = {
       grant_type: 'refresh_token',
       refresh_token: refreshToken
+    };
+
+    return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
+      request({
+        method: 'POST',
+        uri: 'https://identity.xero.com/connect/token',
+        headers: {
+          authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: this.encodeBody(body)
+      }, (error, response, body) => {
+        if (error) {
+          reject(error);
+        } else {
+          if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            resolve({ response: response, body: body });
+          } else {
+            reject({ response: response, body: body });
+          }
+        }
+      });
+    });
+  }
+
+  public async getClientCredentialsToken(): Promise<TokenSet> {
+    const { clientId, clientSecret, grantType } = this.config;
+    const result = await this.clientCredentialsTokenRequest(clientId, clientSecret, grantType)
+    const tokenSet = JSON.parse(result.body);
+    this._tokenSet = new TokenSet(tokenSet);
+    this.setAccessToken();
+    return this._tokenSet;
+  }
+
+  private async clientCredentialsTokenRequest(clientId, clientSecret, grantType): Promise<{ response: http.IncomingMessage; body: string }> {
+    const body = {
+      grant_type: grantType
     };
 
     return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
