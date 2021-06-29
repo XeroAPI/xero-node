@@ -189,28 +189,7 @@ export class XeroClient {
       grant_type: 'refresh_token',
       refresh_token: refreshToken
     };
-
-    return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
-      request({
-        method: 'POST',
-        uri: 'https://identity.xero.com/connect/token',
-        headers: {
-          authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: this.encodeBody(body)
-      }, (error, response, body) => {
-        if (error) {
-          reject(error);
-        } else {
-          if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-            resolve({ response: response, body: body });
-          } else {
-            reject({ response: response, body: body });
-          }
-        }
-      });
-    });
+    return await this.tokenRequest(clientId, clientSecret, body);
   }
 
   public async getClientCredentialsToken(): Promise<TokenSet> {
@@ -226,7 +205,10 @@ export class XeroClient {
     const body = {
       grant_type: grantType
     };
+    return await this.tokenRequest(clientId, clientSecret, body);
+  }
 
+  private async tokenRequest(clientId, clientSecret, body): Promise<{ response: http.IncomingMessage; body: string }> {
     return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
       request({
         method: 'POST',
