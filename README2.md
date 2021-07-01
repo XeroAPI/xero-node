@@ -1,0 +1,306 @@
+# xero-node
+[![npm version](https://badge.fury.io/js/xero-node.svg)](https://badge.fury.io/js/xero-node)
+[![Github forks](https://img.shields.io/github/forks/XeroAPI/xero-node.svg)](https://github.com/XeroAPI/xero-node/network)
+[![Github stars](https://img.shields.io/github/stars/XeroAPI/xero-node.svg)](https://github.com/XeroAPI/xero-node/stargazers)
+![npm](https://img.shields.io/npm/dt/xero-node)
+
+The xero-node SDK makes it easy for developers to access Xero's APIs in their JavaScript code, and build robust applications and software using small business & general ledger accounting data.
+# Table of Contents
+- [API Client documentation](#api-client-documentation)
+- [Sample Applications](#sample-applications)
+- [Xero Account Requirements](#xero-account-requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Authentication](#authentication)
+- [Custom Connections](#custom-connections)
+- [API Clients](#api-clients)
+- [Helper Methods](#helper-methods)
+- [Usage Examples](#usage-examples)
+- [SDK conventions](#sdk-conventions)
+- [Contributing](#contributing)
+
+<hr>
+
+## API Client documentation
+This SDK supports full method coverage for the following Xero API sets:
+
+| API Set | Description |
+| --- | --- |
+| [`Accounting`](https://xeroapi.github.io/xero-node/accounting/index.html) | The Accounting API exposes accounting functions of the main Xero application *(most commonly used)*
+| [Assets](https://xeroapi.github.io/xero-node/assets/index.html) | The Assets API exposes fixed asset related functions of the Xero Accounting application |
+| [Bankfeeds](https://xeroapi.github.io/xero-node/bankfeeds/index.html) | The Bankfeeds API facilitates the flow of transaction and statement data |
+| [Files](https://xeroapi.github.io/xero-node/files/index.html) | The Files API provides access to the files, folders, and the association of files within a Xero organisation |
+| [Projects](https://xeroapi.github.io/xero-node/projects/index.html) | Xero Projects allows businesses to track time and costs on projects/jobs and report on profitability |
+| [Payroll (AU)](https://xeroapi.github.io/xero-node/payroll-au/index.html) | The (AU) Payroll API exposes payroll related functions of the payroll Xero application |
+| [Payroll (NZ)](https://xeroapi.github.io/xero-node/payroll-nz/index.html) | The (NZ) Payroll API exposes payroll related functions of the payroll Xero application |
+| [Payroll (UK)](https://xeroapi.github.io/xero-node/payroll-uk/index.html) | The (UK) Payroll API exposes payroll related functions of the payroll Xero application |
+
+**TODO: Image of Docs**
+
+<img src="https://i.imgur.com/0MsvkGB.png" alt="drawing" width="350"/>
+
+<hr>
+
+## Sample Applications
+Sample apps can get you started quickly with simple auth flows and advanced usage examples.
+
+**TODO: Replace sample app links screenshots**
+
+| Sample App | Description | Screenshot |
+| --- | --- | --- |
+| [`starter-app`](https://github.com/XeroAPI/xero-node-oauth2-ts-starter) | Basic getting started code samples | <img src="https://i.imgur.com/9H4F98M.png" alt="drawing" width="200"/>
+| [`full-app`](https://github.com/XeroAPI/xero-node-oauth2-app) | Complete app with more complex examples | <img src="https://i.imgur.com/XsAp9Ww.png" alt="drawing" width="500"/>
+| [`custom-connections-starter`](https://github.com/XeroAPI/xero-node-custom-connections-starter) | Basic app showing Custom Connections - a Xero [premium option](https://developer.xero.com/documentation/oauth2/custom-connections) for building M2M integrations to a single org | <img src="https://i.imgur.com/YEkScui.png" alt="drawing" width="300"/>
+
+<hr>
+
+## Xero Account Requirements
+- Create a [free Xero user account](https://www.xero.com/us/signup/api/)
+- Login to your Xero developer [dashboard](https://developer.xero.com/app/manage) and create an API application
+- Copy the credentials from your API app and store them using a secure ENV variable strategy
+- Decide the [neccesary scopes](https://developer.xero.com/documentation/oauth2/scopes) for your app's functionality
+
+# Installation
+To install this SDK in your project:
+```
+npm install xero-node
+```
+
+---
+## Configuration
+```js
+import { XeroClient } from 'xero-node';
+
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID',
+  clientSecret: 'YOUR_CLIENT_SECRET',
+  redirectUris: [`http://localhost:${port}/callback`],
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
+  state: 'returnPage=my-sweet-dashboard', // custom params (optional)
+  httpTimeout: 3000 // ms (optional)
+});
+```
+
+---
+## Authentication
+All API requests go through Xero's OAuth2.0 gateway and require a valid `access_token` to be set on the `client` which appends the `access_token` [JWT](https://jwt.io/) to the header of each request.
+
+If you are making an API call for the first time:
+
+1. Send the user to the Xero authorization URL
+```js
+let consentUrl = await xero.buildConsentUrl();
+res.redirect(consentUrl);
+```
+2. The user will authorize your application and be sent to your `redirect_uri`
+```js
+process.env.REDIRECT_URI
+=> /callback?code=xyz123
+```
+3. You exchange the temporary `code` for a valid `token_set`
+```js
+const tokenSet = await xero.apiCallback(req.url);
+// save the tokenSet
+```
+
+It is reccomended that you store this token set JSON in a datastore in relation to the user who has authenticated the Xero API connection. Each time you want to call the Xero API, you will need to access the previously generated token set, initialize it on the SDK `client`, and refresh the `access_token` prior to making API calls.
+
+### Token Set
+| key | value | description |
+| --- | --- | --- |
+| id_token: | "xxx.yyy.zzz" | [OpenID Connect](https://openid.net/connect/) token returned if `openid profile email` scopes accepted |
+| access_token: | "xxx.yyy.zzz" | [Bearer token](https://oauth.net/2/jwt/) with a 30 minute expiration required for all API calls |
+| expires_in: | 1800 | Time in seconds till the token expires - 1800s is 30m |
+| refresh_token: | "XXXXXXX" | Alphanumeric string used to obtain a new Token Set w/ a fresh access_token - 60 day expiry |
+| scope: | "email profile openid accounting.transactions offline_access" | The Xero permissions that are embedded in the `access_token` |
+
+Example Token Set JSON:
+```
+{
+  "id_token": "xxx.yyy.zz",
+  "access_token": "xxx.yyy.zzz",
+  "expires_in": 1800,
+  "token_type": "Bearer",
+  "refresh_token": "xxxxxxxxx",
+  "scope": "email profile openid accounting.transactions offline_access"
+}
+```
+
+---
+## Custom Connections 
+
+Custom Connections are a Xero [premium option](https://developer.xero.com/documentation/oauth2/custom-connections) used for building M2M integrations to a single organisation. A custom connection uses OAuth2.0's [`client_credentis`](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant which eliminates the step of exchanging the temporary code for a token set.
+
+To use this SDK with a Custom Connections:
+```js
+import { XeroClient } from 'xero-node';
+
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID',
+  clientSecret: 'YOUR_CLIENT_SECRET',
+  grantType: 'client_credentials'
+});
+
+const tokenSet = await xero.getClientCredentialsToken();
+// save the tokenSet
+
+const invoices = await xero.accountingApi.getInvoices('');
+```
+
+Because Custom Connections are only valid for a single organisation you don't need to pass the `xero-tenant-id` as the first parameter to every method, or more specifically for this SDK `xeroTenantId` can be an empty string.
+
+> Becuase the SDK is generated from the OpenAPI spec the parameter remains which requires you to pass an empty string to use this SDK with a Custom Connection.
+
+---
+## API Clients
+You can access the different API sets and their available methods through the following:
+
+```js
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID', // required
+  clientSecret: 'YOUR_CLIENT_SECRET', // required
+  redirectUris: [`http://localhost:${port}/callback`], // not used for client_credentials auth flow
+  grantType: 'client_credentials'; // only used for client_credentials auth flow
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" "), // not used for client_credentials auth flow
+  state: 'returnPage=my-sweet-dashboard', // custom params (optional), not used for client_credentials auth flow
+  httpTimeout: 3000 // ms (optional)
+});
+
+xero.accountingApi
+xero.assetApi
+xero.projectApi
+xero.filesApi
+xero.payrollAUApi
+xero.payrollNZApi
+xero.payrollUKApi
+```
+---
+## Helper Methods
+
+Once you have a valid Token Set in your datastore, the next time you want to call the Xero API simply initialize a new `client` and refresh the token set. There are two ways to refresh a token
+
+```js
+// you can refresh the token using the fully initialized client leveraging openid-client
+
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID',
+  clientSecret: 'YOUR_CLIENT_SECRET',
+  redirectUris: [`http://localhost:${port}/callback`],
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
+});
+
+await xero.initialize();
+
+const tokenSet = getTokenSetFromDatabase(userId); // example function name
+
+await xero.setTokenSet(tokenSet);
+
+if(tokenSet.expired()){
+	const validTokenSet = await xero.refreshToken();
+	// save the new tokenset
+}
+```
+```js
+// or if you already generated a tokenSet and have a valid (< 60 days refresh token),
+// you can initialize an empty client and refresh by passing the client, secret, and refresh_token
+
+const tokenSet = getTokenSetFromDatabase(userId); // example function name
+
+if(tokenSet.expired()){
+	const xero = new XeroClient();
+	const validTokenSet = await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
+	// save the new tokenset
+}
+```
+
+A full list of the SDK client's methods:
+
+| method | description |
+| --- | --- |
+| client.`initialize` | Initializes the Xero Client with the provided configuration |
+| client.`buildConsentUrl` | Returns a url concatenated from the provided redirect uri, scope, and the issuer ( Xero identity authorize url) |
+| client.`apiCallback`(callbackUrl) | Leverages openid-client library to exchange temporary auth code for token set |
+| client.`disconnect`(connectionId) | Removes an individual tenant connection by connection ID |
+| client.`readTokenSet` | Returns token set currently set on the Xero Client |
+| client.`setTokenSet`(tokenSet) | Sets a specified token set on the Xero Client |
+| client.`refreshToken` | Leverages openid-client library to refresh token set currently set on the Xero Client and returns updated token set |
+| client.`revokeToken` | Revokes a users refresh token and removes all their connections to your app |
+| client.`formatMsDate`(dateString) | Takes a date string and returns it formatted as an MS Date |
+| client.`refreshWithRefreshToken`(clientId, clientSecret, refreshToken) | Refresh a token set without leveraging openid-client |
+| client.`getClientCredentialsToken` | Get a token set without user intervention via the client credentials grant type for custom connections only |
+| client.`updateTenants`(fullOrgDetails) | GET request to the /connections endpoint. Accepts a boolean to indicate whether or not to also make a GET request to the /organisations endpoint and map full org data to each connection object prior to returning the array of connections |
+---
+## Usage Examples
+### Accounting API
+```
+- require client
+
+client.refresh_token_set(user_token_set)
+tenant_id = client.connections[0].tenantId
+
+- show a few common endpoints
+# Get Accounts
+# Create Invoice
+# Create History
+# Create Attachment
+```
+
+---
+## SDK conventions
+
+### < TODO SDK Feature Name >
+```
+  - descibe any nuance in the SDK 
+  - ex, all currencies are treated as BigDecimal objects..
+```
+
+### Querying & Filtering
+
+Descibe the support for query options and filtering
+
+```ruby
+- opts
+- pagination
+- if_modified_since
+- order
+- where
+  - type
+  - amount_due
+  - invoice_number
+  - fully_paid_on_date
+  - amount_due
+  - reference
+  - invoice_number
+  - contact_id
+  - contact_number
+  - date
+  - status
+  - is_customer
+  - name
+  - email_address
+```
+
+---
+## Contributing
+PRs, issues, and discussion are highly appreciated and encouraged. Note that the majority of this project is generated code based on [Xero's OpenAPI specs](https://github.com/XeroAPI/Xero-OpenAPI) - PR's will be evaluated and pre-merge will be incorporated into the root generation templates.
+
+
+### < TODO - add section about how to run test suite, or add new unit tests >
+
+### Versioning
+We do our best to keep OS industry `semver` standards, but we can make mistakes! If something is not accurately reflected in a version's release notes please let the team know.
+
+
+## Participating in Xero’s developer community
+
+This SDK is one of a number of SDK’s that the Xero Developer team builds and maintains. We are grateful for all the contributions that the community makes. 
+
+Here are a few things you should be aware of as a contributor:
+* Xero has adopted the Contributor Covenant [Code of Conduct](https://github.com/XeroAPI/xero-ruby/blob/master/CODE_OF_CONDUCT.md), we expect all contributors in our community to adhere to it
+* If you raise an issue then please make sure to fill out the github issue template, doing so helps us help you 
+* You’re welcome to raise PRs. As our SDKs are generated we may use your code in the core SDK build instead of merging your code
+* We have a [contribution guide](https://github.com/XeroAPI/xero-ruby/blob/master/CONTRIBUTING.md) for you to follow when contributing to this SDK
+* Curious about how we generate our SDK’s? Have a [read of our process](https://devblog.xero.com/building-sdks-for-the-future-b79ff726dfd6) and have a look at our [OpenAPISpec](https://github.com/XeroAPI/Xero-OpenAPI)
+* This software is published under the [MIT License](https://github.com/XeroAPI/xero-ruby/blob/master/LICENSE)
+
+For questions that aren’t related to SDKs please refer to our [developer support page](https://developer.xero.com/support/).

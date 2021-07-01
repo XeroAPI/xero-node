@@ -32,7 +32,7 @@ describe('the XeroClient', () => {
       .get('/connections')
       .reply(200, connectionsResponse);
 
-    sinon.stub(xero, 'postWithRefreshToken').returns({ body: JSON.stringify(refreshedTokenSet) });
+    sinon.stub(xero, 'tokenRequest').returns({ body: JSON.stringify(refreshedTokenSet) });
 
     disconnect = nock('https://api.xero.com')
       .delete(`/connections/${connectionsResponse[0].tenantId}`)
@@ -141,6 +141,6 @@ describe('the XeroClient', () => {
       expect(await xero.revokeToken()).toEqual(undefined);
       expect(xero.tenants).toEqual([]);
       expect(xero.readTokenSet()).toEqual({});
-    })
+    });
   })
 })
