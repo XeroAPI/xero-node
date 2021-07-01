@@ -182,6 +182,8 @@ Once you have a valid Token Set in your datastore, the next time you want to cal
 ```js
 // you can refresh the token using the fully initialized client leveraging openid-client
 
+import { XeroClient } from 'xero-node';
+
 const xero = new XeroClient({
   clientId: 'YOUR_CLIENT_ID',
   clientSecret: 'YOUR_CLIENT_SECRET',
@@ -203,6 +205,8 @@ if(tokenSet.expired()){
 ```js
 // or if you already generated a tokenSet and have a valid (< 60 days refresh token),
 // you can initialize an empty client and refresh by passing the client, secret, and refresh_token
+
+import { XeroClient } from 'xero-node';
 
 const tokenSet = getTokenSetFromDatabase(userId); // example function name
 
@@ -232,17 +236,91 @@ A full list of the SDK client's methods:
 ---
 ## Usage Examples
 ### Accounting API
-```
-- require client
+```js
+import { XeroClient, HistoryRecords, Invoice } from 'xero-node';
 
-client.refresh_token_set(user_token_set)
-tenant_id = client.connections[0].tenantId
+const xero = new XeroClient({
+  clientId: 'YOUR_CLIENT_ID',
+  clientSecret: 'YOUR_CLIENT_SECRET',
+  redirectUris: [`http://localhost:${port}/callback`],
+  scopes: 'openid profile email accounting.transactions offline_access'.split(" ")
+});
 
-- show a few common endpoints
-# Get Accounts
-# Create Invoice
-# Create History
-# Create Attachment
+await xero.initialize();
+
+const tokenSet = getTokenSetFromDatabase(userId); // example function name
+
+await xero.setTokenSet(tokenSet);
+
+if(tokenSet.expired()){
+	const validTokenSet = await xero.refreshToken();
+	// save the new tokenset
+}
+
+await xero.updateTenants();
+
+const activeTenantId = xero.tenants[0].tenantId;
+
+// GET all Accounts
+const getAccountsResponse = await xero.accountingApi.getAccounts(activeTenantId);
+
+const accountId = getAccountsResponse.body.accounts[0].accountID
+
+// GET one Account by ID
+const getAccountResponse = await xero.accountingApi.getAccount(activeTenantId, accountId);
+
+// CREATE an Invoice
+const invoices = {
+  invoices: [
+    {
+      type: Invoice.TypeEnum.ACCREC,
+      contact: {
+        contactID: contactId
+      },
+      lineItems: [
+        {
+          description: "Acme Tires",
+          quantity: 2.0,
+          unitAmount: 20.0,
+          accountCode: "500",
+          taxType: "NONE",
+          lineAmount: 40.0
+        }
+      ],
+      date: "2019-03-11",
+      dueDate: "2018-12-10",
+      reference: "Website Design",
+      status: Invoice.StatusEnum.AUTHORISED
+    }
+  ]
+};
+
+const createdInvoicesResponse = await xero.accountingApi.createInvoices(activeTenantId, invoices)
+
+const invoiceId = createdInvoicesResponse.body.invoices[0].invoiceID;
+
+// CREATE a History Record
+const historyRecords: HistoryRecords = {
+	historyRecords: [
+		{
+			details: "This is a history record"
+		}
+	]
+};
+
+const createdInvoiceHistoryResponse = await xero.accountingApi.createInvoiceHistory(activeTenantId, invoiceId, historyRecords);
+
+// CREATE Attachment
+const filename = "xero-dev.png";
+const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.png");
+const readStream = fs.createReadStream(pathToUpload);
+const contentType = mime.lookup(filename);
+
+const accountAttachmentsResponse = await xero.accountingApi.createInvoiceAttachmentByFileName(activeTenantId, invoiceId, filename, readStream, {
+  headers: {
+    'Content-Type': contentType
+  }
+});
 ```
 
 ---
@@ -258,26 +336,15 @@ tenant_id = client.connections[0].tenantId
 
 Descibe the support for query options and filtering
 
-```ruby
-- opts
-- pagination
-- if_modified_since
-- order
-- where
-  - type
-  - amount_due
-  - invoice_number
-  - fully_paid_on_date
-  - amount_due
-  - reference
-  - invoice_number
-  - contact_id
-  - contact_number
-  - date
-  - status
-  - is_customer
-  - name
-  - email_address
+```js
+const activeTenantId = 'XERO_TENANT_ID';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
+const where = 'Status=="AUTHORISED" AND Type=="SPEND"';
+const order = 'Reference ASC';
+const page = 1;
+const unitdp = 4;
+
+const response = await xero.accountingApi.getBankTransactions(activeTenantId, ifModifiedSince, where, order, page, unitdp);
 ```
 
 ---
