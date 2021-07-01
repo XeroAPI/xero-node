@@ -80,6 +80,16 @@ describe('the XeroClient', () => {
       expect(xeroClient.config.httpTimeout).toEqual(3000)
     });
 
+    it('allows for the configuration of the Xero Client for use of client credentials grant', async () => {
+      const xeroCustomConnection = new XeroClient({
+        clientId: 'YOUR_CLIENT_ID',
+        clientSecret: 'YOUR_CLIENT_SECRET',
+        grantType: 'client_credentials'
+      });
+      const xeroClient = await xeroCustomConnection.initialize()
+      expect(xeroClient.config.grantType).toEqual('client_credentials')
+    });
+
     it('initialize() returns the client', async () => {
       const xeroClient = await xero.initialize()
       expect(xeroClient).toHaveProperty('accountingApi')
