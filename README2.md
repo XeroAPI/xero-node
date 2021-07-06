@@ -326,11 +326,6 @@ const accountAttachmentsResponse = await xero.accountingApi.createInvoiceAttachm
 ---
 ## SDK conventions
 
-### < TODO SDK Feature Name >
-```
-  - descibe any nuance in the SDK 
-  - ex, all currencies are treated as BigDecimal objects..
-```
 
 ### Querying & Filtering
 
