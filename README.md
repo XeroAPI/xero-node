@@ -99,7 +99,7 @@ const tokenSet = await xero.apiCallback(req.url);
 // save the tokenSet
 ```
 
-It is reccomended that you store this token set JSON in a datastore in relation to the user who has authenticated the Xero API connection. Each time you want to call the Xero API, you will need to access the previously generated token set, initialize it on the SDK `client`, and refresh the `access_token` prior to making API calls.
+It is recommended that you store this token set JSON in a datastore in relation to the user who has authenticated the Xero API connection. Each time you want to call the Xero API, you will need to access the previously generated token set, initialize it on the SDK `client`, and refresh the `access_token` prior to making API calls.
 
 ### Token Set
 | key | value | description |
