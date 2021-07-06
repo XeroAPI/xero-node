@@ -1801,10 +1801,16 @@ ul.nav-tabs {
       "x-is-msdate-time" : true
     },
     "BudgetLines" : {
-      "$ref" : "#/components/schemas/BudgetLines"
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/BudgetLine"
+      }
     },
     "Tracking" : {
-      "$ref" : "#/components/schemas/TrackingCategory"
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/TrackingCategory"
+      }
     }
   },
   "description" : "",
@@ -1812,7 +1818,7 @@ ul.nav-tabs {
     "url" : "http://developer.xero.com/documentation/api/budgets/"
   }
 };
-      defs["BudgetLines"] = {
+      defs["BudgetBalance"] = {
   "title" : "",
   "type" : "object",
   "properties" : {
@@ -1833,6 +1839,29 @@ ul.nav-tabs {
       "maxLength" : 255,
       "type" : "string",
       "description" : "Any footnotes associated with this balance"
+    }
+  },
+  "description" : ""
+};
+      defs["BudgetLine"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "AccountID" : {
+      "type" : "string",
+      "description" : "See Accounts",
+      "format" : "uuid"
+    },
+    "AccountCode" : {
+      "type" : "string",
+      "description" : "See Accounts",
+      "example" : "90.0"
+    },
+    "BudgetBalances" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/BudgetBalance"
+      }
     }
   },
   "description" : "",
@@ -5837,7 +5866,7 @@ ul.nav-tabs {
     <div class='docs-header'>
       <div class='xero-logo'>
         <a target="_blank"  href="https://developer.xero.com/documentation/">
-        <img alt="" width="115" height="30" class="xrh-app-image" src="https://developer.xero.com/static/images/developer-logo.svg">
+        <img alt="" width="115" height="30" class="xrh-app-image" src="https://i.imgur.com/kzfh8mf.png">
         </a>
       </div>
       <fieldset class='api-set'>
@@ -5908,7 +5937,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.12.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.13.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -20911,7 +20940,7 @@ Xero identifier for Tenant
                 <article id="api-Accounting-getContactGroups-0" data-group="User" data-name="getContactGroups" data-version="0">
                   <div class="pull-left">
                     <h1>getContactGroups</h1>
-                    <p>Retrieves the contact Id and name of all the contacts in a contact group</p>
+                    <p>Retrieves the contact Id and name of each contact group</p>
                   </div>
                   <div class="pull-right"></div>
                   <div class="clearfix"></div>

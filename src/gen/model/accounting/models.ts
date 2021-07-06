@@ -24,7 +24,8 @@ export * from '././bill';
 export * from '././brandingTheme';
 export * from '././brandingThemes';
 export * from '././budget';
-export * from '././budgetLines';
+export * from '././budgetBalance';
+export * from '././budgetLine';
 export * from '././budgets';
 export * from '././cISOrgSetting';
 export * from '././cISOrgSettings';
@@ -156,7 +157,8 @@ import { Bill } from '././bill';
 import { BrandingTheme } from '././brandingTheme';
 import { BrandingThemes } from '././brandingThemes';
 import { Budget } from '././budget';
-import { BudgetLines } from '././budgetLines';
+import { BudgetBalance } from '././budgetBalance';
+import { BudgetLine } from '././budgetLine';
 import { Budgets } from '././budgets';
 import { CISOrgSetting } from '././cISOrgSetting';
 import { CISOrgSettings } from '././cISOrgSettings';
@@ -364,7 +366,8 @@ let typeMap: {[index: string]: any} = {
     "BrandingTheme": BrandingTheme,
     "BrandingThemes": BrandingThemes,
     "Budget": Budget,
-    "BudgetLines": BudgetLines,
+    "BudgetBalance": BudgetBalance,
+    "BudgetLine": BudgetLine,
     "Budgets": Budgets,
     "CISOrgSetting": CISOrgSetting,
     "CISOrgSettings": CISOrgSettings,

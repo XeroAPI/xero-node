@@ -32,7 +32,7 @@ describe('the XeroClient', () => {
       .get('/connections')
       .reply(200, connectionsResponse);
 
-    sinon.stub(xero, 'postWithRefreshToken').returns({ body: JSON.stringify(refreshedTokenSet) });
+    sinon.stub(xero, 'tokenRequest').returns({ body: JSON.stringify(refreshedTokenSet) });
 
     disconnect = nock('https://api.xero.com')
       .delete(`/connections/${connectionsResponse[0].tenantId}`)
@@ -78,6 +78,16 @@ describe('the XeroClient', () => {
       });
       const xeroClient = await xeroWithConfig.initialize()
       expect(xeroClient.config.httpTimeout).toEqual(3000)
+    });
+
+    it('allows for the configuration of the Xero Client for use of client credentials grant', async () => {
+      const xeroCustomConnection = new XeroClient({
+        clientId: 'YOUR_CLIENT_ID',
+        clientSecret: 'YOUR_CLIENT_SECRET',
+        grantType: 'client_credentials'
+      });
+      const xeroClient = await xeroCustomConnection.initialize()
+      expect(xeroClient.config.grantType).toEqual('client_credentials')
     });
 
     it('initialize() returns the client', async () => {
@@ -141,6 +151,6 @@ describe('the XeroClient', () => {
       expect(await xero.revokeToken()).toEqual(undefined);
       expect(xero.tenants).toEqual([]);
       expect(xero.readTokenSet()).toEqual({});
-    })
+    });
   })
 })
