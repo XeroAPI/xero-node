@@ -324,7 +324,6 @@ const accountAttachmentsResponse = await xero.accountingApi.createInvoiceAttachm
 
 ### Querying & Filtering
 
-Descibe the support for query options and filtering
 
 ```js
 const activeTenantId = 'XERO_TENANT_ID';
