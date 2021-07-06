@@ -232,7 +232,7 @@ A full list of the SDK client's methods:
 | client.`formatMsDate`(dateString) | Takes a date string and returns it formatted as an MS Date |
 | client.`refreshWithRefreshToken`(clientId, clientSecret, refreshToken) | Refresh a token set without leveraging openid-client |
 | client.`getClientCredentialsToken` | Get a token set without user intervention via the client credentials grant type for custom connections only |
-| client.`updateTenants`(fullOrgDetails) | GET request to the /connections endpoint. Accepts a boolean to indicate whether or not to also make a GET request to the /organisations endpoint and map full org data to each connection object prior to returning the array of connections |
+| client.`updateTenants`(fullOrgDetails: boolean = true) | GET request to the /connections endpoint. Accepts a boolean to indicate whether or not to also make a GET request to the /organisations endpoint and map full org data to each connection object prior to returning the array of connections |
 ---
 ## Usage Examples
 ### Accounting API
