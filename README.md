@@ -17,6 +17,7 @@ The xero-node SDK makes it easy for developers to access Xero's APIs in their Ja
 - [Helper Methods](#helper-methods)
 - [Usage Examples](#usage-examples)
 - [SDK conventions](#sdk-conventions)
+- [Security](#security)
 - [Contributing](#contributing)
 
 <hr>
@@ -197,6 +198,7 @@ if(tokenSet.expired()){
   const validTokenSet = await xero.refreshToken();
   // save the new tokenset
 }
+```
 ```js
 // or if you already generated a tokenSet and have a valid (< 60 days refresh token),
 // you can initialize an empty client and refresh by passing the client, secret, and refresh_token
@@ -349,6 +351,18 @@ const purchaseOrders = xero.accountingApi.getPurchaseOrders(tenant.tenantId, und
 // params are omitted
 // purchaseOrders array will have results now
 ```
+---
+## Security
+This repo leverages a certified OA2 and OIDC library called openid-client. For a deeper dive the repo's functionality, check out them directly https://github.com/panva/node-openid-client.
+
+### Preventing CSRF Using Xero-Node
+When xero.buildConsentUrl is called we call openid-client authorizationUrl method, passing redirect_uri, scope, and state (if present) as arguments and returns a formatted url string made up from the given config. The user is then directed to the consentUrl to begin the auth process with Xero. When the auth process is complete Xero redirects the user to the specified callback route and passes along params including the state if it was initially provided. At this point openid-client takes over verifying params.state and check.state match if provided. If the state does not match the initial user's, the openid-client library throws an error:
+
+```
+RPError: state mismatch, expected user=1234, got: user=666
+```
+###  JWT Verification Using Xero-Node
+JWT verification of both the `access_token` and `id_token` are baked into the openid-client library we leverage. When `xero.apiCallback` is called, openid-client `validateJARM` is triggered which also invokes `validateJWT`. If openid-client fails to validate the JWT signature it will throw an error. 
 
 ---
 ## Contributing
