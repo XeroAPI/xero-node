@@ -194,10 +194,9 @@ const tokenSet = getTokenSetFromDatabase(userId); // example function name
 await xero.setTokenSet(tokenSet);
 
 if(tokenSet.expired()){
-	const validTokenSet = await xero.refreshToken();
-	// save the new tokenset
+  const validTokenSet = await xero.refreshToken();
+  // save the new tokenset
 }
-```
 ```js
 // or if you already generated a tokenSet and have a valid (< 60 days refresh token),
 // you can initialize an empty client and refresh by passing the client, secret, and refresh_token
