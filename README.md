@@ -248,8 +248,8 @@ const tokenSet = getTokenSetFromDatabase(userId); // example function name
 await xero.setTokenSet(tokenSet);
 
 if(tokenSet.expired()){
-	const validTokenSet = await xero.refreshToken();
-	// save the new tokenset
+  const validTokenSet = await xero.refreshToken();
+  // save the new tokenset
 }
 
 await xero.updateTenants();
