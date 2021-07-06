@@ -35,22 +35,18 @@ This SDK supports full method coverage for the following Xero API sets:
 | [Payroll (NZ)](https://xeroapi.github.io/xero-node/payroll-nz/index.html) | The (NZ) Payroll API exposes payroll related functions of the payroll Xero application |
 | [Payroll (UK)](https://xeroapi.github.io/xero-node/payroll-uk/index.html) | The (UK) Payroll API exposes payroll related functions of the payroll Xero application |
 
-**TODO: Image of Docs**
-
-<img src="https://i.imgur.com/0MsvkGB.png" alt="drawing" width="350"/>
+<img src="https://i.imgur.com/3ISSOwp.png" alt="drawing" width="350"/>
 
 <hr>
 
 ## Sample Applications
 Sample apps can get you started quickly with simple auth flows and advanced usage examples.
 
-**TODO: Replace sample app links screenshots**
-
 | Sample App | Description | Screenshot |
 | --- | --- | --- |
-| [`starter-app`](https://github.com/XeroAPI/xero-node-oauth2-ts-starter) | Basic getting started code samples | <img src="https://i.imgur.com/9H4F98M.png" alt="drawing" width="200"/>
-| [`full-app`](https://github.com/XeroAPI/xero-node-oauth2-app) | Complete app with more complex examples | <img src="https://i.imgur.com/XsAp9Ww.png" alt="drawing" width="500"/>
-| [`custom-connections-starter`](https://github.com/XeroAPI/xero-node-custom-connections-starter) | Basic app showing Custom Connections - a Xero [premium option](https://developer.xero.com/documentation/oauth2/custom-connections) for building M2M integrations to a single org | <img src="https://i.imgur.com/YEkScui.png" alt="drawing" width="300"/>
+| [`starter-app`](https://github.com/XeroAPI/xero-node-oauth2-ts-starter) | Basic getting started code samples | <img src="https://i.imgur.com/k208KAv.png" alt="drawing" width="200"/>
+| [`full-app`](https://github.com/XeroAPI/xero-node-oauth2-app) | Complete app with more complex examples | <img src="https://i.imgur.com/TaMQvnp.png" alt="drawing" width="500"/>
+| [`custom-connections-starter`](https://github.com/XeroAPI/xero-node-custom-connections-starter) | Basic app showing Custom Connections - a Xero [premium option](https://developer.xero.com/documentation/oauth2/custom-connections) for building M2M integrations to a single org | <img src="https://i.imgur.com/HoQHLuq.png" alt="drawing" width="300"/>
 
 <hr>
 
@@ -341,13 +337,29 @@ const unitdp = 4;
 
 const response = await xero.accountingApi.getBankTransactions(activeTenantId, ifModifiedSince, where, order, page, unitdp);
 ```
+Note that you should set the query param to undefined instead of null if you wish to ignore a specific filter.
+```js
+const purchaseOrders = xero.accountingApi.getPurchaseOrders(tenant.tenantId, null, null, '2021-01-01', '2021-04-25', null, 1);
+
+// http://api-oauth2.xero.com/api.xro/2.0/PurchaseOrders?Status=&DateFrom=2008-01-01&DateTo=2021-04-25&order=&page=1
+// "Status=&" is breaking the above query 
+// purchaseOrders will be an empty array
+
+const purchaseOrders = xero.accountingApi.getPurchaseOrders(tenant.tenantId, undefined, undefined, '2021-01-01', '2021-04-25', undefined, 1);
+
+// http://api-oauth2.xero.com/api.xro/2.0/PurchaseOrders?DateFrom=2008-01-01&DateTo=2021-04-25&order=&page=1
+// params are omitted
+// purchaseOrders array will have results now
+```
 
 ---
 ## Contributing
 PRs, issues, and discussion are highly appreciated and encouraged. Note that the majority of this project is generated code based on [Xero's OpenAPI specs](https://github.com/XeroAPI/Xero-OpenAPI) - PR's will be evaluated and pre-merge will be incorporated into the root generation templates.
 
-
-### < TODO - add section about how to run test suite, or add new unit tests >
+Please add tests for net new functionality and ensure existing test suite passes all tests.
+```
+npm test
+```
 
 ### Versioning
 We do our best to keep OS industry `semver` standards, but we can make mistakes! If something is not accurately reflected in a version's release notes please let the team know.
