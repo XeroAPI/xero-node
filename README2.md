@@ -211,9 +211,9 @@ import { XeroClient } from 'xero-node';
 const tokenSet = getTokenSetFromDatabase(userId); // example function name
 
 if(tokenSet.expired()){
-	const xero = new XeroClient();
-	const validTokenSet = await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
-	// save the new tokenset
+  const xero = new XeroClient();
+  const validTokenSet = await xero.refreshWithRefreshToken(client_id, client_secret, tokenSet.refresh_token)
+  // save the new tokenset
 }
 ```
 
