@@ -81,7 +81,7 @@ export enum AccountingApiApiKeys {
 
 export class AccountingApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.12.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.13.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -7149,7 +7149,7 @@ export class AccountingApi {
     }
     /**
      * 
-     * @summary Retrieves the contact Id and name of all the contacts in a contact group
+     * @summary Retrieves the contact Id and name of each contact group
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element

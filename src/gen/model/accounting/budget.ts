@@ -1,4 +1,4 @@
-import { BudgetLines } from '././budgetLines';
+import { BudgetLine } from '././budgetLine';
 import { TrackingCategory } from '././trackingCategory';
 
 export class Budget {
@@ -18,8 +18,8 @@ export class Budget {
     * UTC timestamp of last update to budget
     */
     'updatedDateUTC'?: Date;
-    'budgetLines'?: BudgetLines;
-    'tracking'?: TrackingCategory;
+    'budgetLines'?: Array<BudgetLine>;
+    'tracking'?: Array<TrackingCategory>;
 
     static discriminator: string | undefined = undefined;
 
@@ -47,12 +47,12 @@ export class Budget {
         {
             "name": "budgetLines",
             "baseName": "BudgetLines",
-            "type": "BudgetLines"
+            "type": "Array<BudgetLine>"
         },
         {
             "name": "tracking",
             "baseName": "Tracking",
-            "type": "TrackingCategory"
+            "type": "Array<TrackingCategory>"
         }    ];
 
     static getAttributeTypeMap() {
