@@ -301,11 +301,11 @@ const invoiceId = createdInvoicesResponse.body.invoices[0].invoiceID;
 
 // CREATE a History Record
 const historyRecords: HistoryRecords = {
-	historyRecords: [
-		{
-			details: "This is a history record"
-		}
-	]
+  historyRecords: [
+    {
+      details: "This is a history record"
+    }
+  ]
 };
 
 const createdInvoiceHistoryResponse = await xero.accountingApi.createInvoiceHistory(activeTenantId, invoiceId, historyRecords);
