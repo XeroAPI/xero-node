@@ -90,6 +90,7 @@ describe('the XeroClient', () => {
       expect(xeroClient).toHaveProperty('payrollAUApi')
       expect(xeroClient).toHaveProperty('payrollUKApi')
       expect(xeroClient).toHaveProperty('payrollNZApi')
+      expect(xeroClient).toHaveProperty('appStoreApi')
     });
 
     it('readTokenSet() returns the tokenSet', async () => {

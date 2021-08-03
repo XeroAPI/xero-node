@@ -8,8 +8,9 @@ export { TokenSet, TokenSetParameters } from 'openid-client';
 export interface IXeroClientConfig {
   clientId: string,
   clientSecret: string,
-  redirectUris: string[],
-  scopes: string[],
+  redirectUris?: string[],
+  grantType?: string;
+  scopes?: string[],
   state?: string,
   httpTimeout?: number
 };
@@ -60,6 +61,7 @@ export class XeroClient {
     this.bankFeedsApi = new xero.BankFeedsApi();
     this.payrollUKApi = new xero.PayrollUkApi();
     this.payrollNZApi = new xero.PayrollNzApi();
+    this.appStoreApi = new xero.AppStoreApi();
   };
 
   private _tokenSet: TokenSet = new TokenSet;
@@ -73,6 +75,7 @@ export class XeroClient {
   readonly bankFeedsApi: xero.BankFeedsApi;
   readonly payrollUKApi: xero.PayrollUkApi;
   readonly payrollNZApi: xero.PayrollNzApi;
+  readonly appStoreApi: xero.AppStoreApi;
 
   openIdClient: Client; // from openid-client
 
@@ -176,19 +179,23 @@ export class XeroClient {
   }
 
   public async refreshWithRefreshToken(clientId, clientSecret, refreshToken): Promise<TokenSet> {
-    const result = await this.postWithRefreshToken(clientId, clientSecret, refreshToken);
+    const result = await this.tokenRequest(clientId, clientSecret, { grant_type: 'refresh_token', refresh_token: refreshToken });
     const tokenSet = JSON.parse(result.body);
     this._tokenSet = new TokenSet(tokenSet);
     this.setAccessToken();
     return this._tokenSet;
   }
 
-  private async postWithRefreshToken(clientId, clientSecret, refreshToken): Promise<{ response: http.IncomingMessage; body: string }> {
-    const body = {
-      grant_type: 'refresh_token',
-      refresh_token: refreshToken
-    };
+  public async getClientCredentialsToken(): Promise<TokenSet> {
+    const { clientId, clientSecret, grantType, scopes } = this.config;
+    const result = await this.tokenRequest(clientId, clientSecret, { grant_type: grantType, scopes });
+    const tokenSet = JSON.parse(result.body);
+    this._tokenSet = new TokenSet(tokenSet);
+    this.setAccessToken();
+    return this._tokenSet;
+  }
 
+  private async tokenRequest(clientId, clientSecret, body): Promise<{ response: http.IncomingMessage; body: string }> {
     return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
       request({
         method: 'POST',
@@ -270,5 +277,6 @@ export class XeroClient {
     this.bankFeedsApi.accessToken = accessToken;
     this.payrollUKApi.accessToken = accessToken;
     this.payrollNZApi.accessToken = accessToken;
+    this.appStoreApi.accessToken = accessToken;
   }
 }

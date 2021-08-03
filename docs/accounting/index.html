@@ -1801,10 +1801,16 @@ ul.nav-tabs {
       "x-is-msdate-time" : true
     },
     "BudgetLines" : {
-      "$ref" : "#/components/schemas/BudgetLines"
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/BudgetLine"
+      }
     },
     "Tracking" : {
-      "$ref" : "#/components/schemas/TrackingCategory"
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/TrackingCategory"
+      }
     }
   },
   "description" : "",
@@ -1812,7 +1818,7 @@ ul.nav-tabs {
     "url" : "http://developer.xero.com/documentation/api/budgets/"
   }
 };
-      defs["BudgetLines"] = {
+      defs["BudgetBalance"] = {
   "title" : "",
   "type" : "object",
   "properties" : {
@@ -1833,6 +1839,29 @@ ul.nav-tabs {
       "maxLength" : 255,
       "type" : "string",
       "description" : "Any footnotes associated with this balance"
+    }
+  },
+  "description" : ""
+};
+      defs["BudgetLine"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "AccountID" : {
+      "type" : "string",
+      "description" : "See Accounts",
+      "format" : "uuid"
+    },
+    "AccountCode" : {
+      "type" : "string",
+      "description" : "See Accounts",
+      "example" : "90.0"
+    },
+    "BudgetBalances" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/BudgetBalance"
+      }
     }
   },
   "description" : "",
@@ -4158,6 +4187,12 @@ ul.nav-tabs {
       "format" : "double",
       "x-is-money" : true
     },
+    "BankAmount" : {
+      "type" : "number",
+      "description" : "The amount of the payment in the currency of the bank account.",
+      "format" : "double",
+      "x-is-money" : true
+    },
     "Reference" : {
       "type" : "string",
       "description" : "An optional description for the payment e.g. Direct Debit"
@@ -5837,7 +5872,7 @@ ul.nav-tabs {
     <div class='docs-header'>
       <div class='xero-logo'>
         <a target="_blank"  href="https://developer.xero.com/documentation/">
-        <img alt="" width="115" height="30" class="xrh-app-image" src="https://developer.xero.com/static/images/developer-logo.svg">
+        <img alt="" width="115" height="30" class="xrh-app-image" src="https://i.imgur.com/kzfh8mf.png">
         </a>
       </div>
       <fieldset class='api-set'>
@@ -5908,7 +5943,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.12.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.14.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -16819,6 +16854,11 @@ try {
                       <td>Grant read-write access to organisation and account settings</td>
                     </tr>
                     
+                    <tr>
+                      <td>accounting.settings.read</td>
+                      <td>Grant read-only access to organisation and account settings</td>
+                    </tr>
+                    
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -16928,6 +16968,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -17089,6 +17134,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -17253,6 +17303,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -17370,6 +17425,11 @@ try {
                     <tr>
                       <td>accounting.settings</td>
                       <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
+                      <td>accounting.settings.read</td>
+                      <td>Grant read-only access to organisation and account settings</td>
                     </tr>
                     
                   </table>
@@ -17519,6 +17579,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -17659,6 +17724,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -17820,6 +17890,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -17984,6 +18059,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -18099,6 +18179,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -18291,6 +18376,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -18402,6 +18492,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -18517,6 +18612,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -18678,6 +18778,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -18842,6 +18947,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -18953,6 +19063,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -19068,6 +19183,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -19220,6 +19340,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -19333,6 +19458,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -19483,6 +19613,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.settings.read</td>
@@ -19708,6 +19843,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.settings.read</td>
@@ -20061,6 +20201,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.contacts</td>
+                      <td>Grant read-write access to contacts and contact groups</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.contacts.read</td>
                       <td>Grant read-only access to contacts and contact groups</td>
                     </tr>
@@ -20174,6 +20319,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -20335,6 +20485,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -20499,6 +20654,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -20612,6 +20772,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.contacts</td>
+                      <td>Grant read-write access to contacts and contact groups</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.contacts.read</td>
                       <td>Grant read-only access to contacts and contact groups</td>
                     </tr>
@@ -20722,8 +20887,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>accounting.contacts.read</td>
-                      <td>Grant read-only access to contacts and contact groups</td>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
+                      <td>accounting.settings.read</td>
+                      <td>Grant read-only access to organisation and account settings</td>
                     </tr>
                     
                   </table>
@@ -20835,6 +21005,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.contacts</td>
+                      <td>Grant read-write access to contacts and contact groups</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.contacts.read</td>
                       <td>Grant read-only access to contacts and contact groups</td>
                     </tr>
@@ -20911,7 +21086,7 @@ Xero identifier for Tenant
                 <article id="api-Accounting-getContactGroups-0" data-group="User" data-name="getContactGroups" data-version="0">
                   <div class="pull-left">
                     <h1>getContactGroups</h1>
-                    <p>Retrieves the contact Id and name of all the contacts in a contact group</p>
+                    <p>Retrieves the contact Id and name of each contact group</p>
                   </div>
                   <div class="pull-right"></div>
                   <div class="clearfix"></div>
@@ -20947,6 +21122,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.contacts</td>
+                      <td>Grant read-write access to contacts and contact groups</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.contacts.read</td>
@@ -21076,6 +21256,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.contacts</td>
+                      <td>Grant read-write access to contacts and contact groups</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.contacts.read</td>
                       <td>Grant read-only access to contacts and contact groups</td>
                     </tr>
@@ -21193,6 +21378,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.contacts</td>
+                      <td>Grant read-write access to contacts and contact groups</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.contacts.read</td>
@@ -21429,6 +21619,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -21573,6 +21768,11 @@ try {
                       <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
                     </tr>
                     
+                    <tr>
+                      <td>accounting.transactions.read</td>
+                      <td>Grant read-only access to invoices</td>
+                    </tr>
+                    
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -21682,6 +21882,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -21843,6 +22048,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -22007,6 +22217,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -22118,6 +22333,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -22235,6 +22455,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -22428,6 +22653,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -22555,6 +22785,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -22668,6 +22903,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.settings.read</td>
@@ -22820,6 +23060,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -22931,6 +23176,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -23046,6 +23296,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -23199,6 +23454,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -23339,6 +23599,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -23452,6 +23717,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -23613,6 +23883,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -23777,6 +24052,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -23888,6 +24168,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -24002,8 +24287,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>accounting.transactions.read</td>
-                      <td>Grant read-only access to invoices</td>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
+                      <td>accounting.settings.read</td>
+                      <td>Grant read-only access to organisation and account settings</td>
                     </tr>
                     
                   </table>
@@ -24091,6 +24381,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -24430,6 +24725,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -24570,6 +24870,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -24684,6 +24989,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.settings.read</td>
@@ -25121,6 +25431,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -25237,6 +25552,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -25458,6 +25778,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -25571,6 +25896,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -25732,6 +26062,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -25896,6 +26231,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -26010,6 +26350,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -26182,6 +26527,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -26293,6 +26643,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -26407,6 +26762,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -26485,6 +26845,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.settings.read</td>
@@ -26599,6 +26964,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -26677,6 +27047,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -26790,6 +27165,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -26907,6 +27287,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -27099,6 +27484,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -27210,6 +27600,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -27407,6 +27802,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -27577,6 +27977,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -27688,6 +28093,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -27805,6 +28215,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -27997,6 +28412,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -28108,6 +28528,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -28223,6 +28648,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -28387,6 +28817,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -28500,6 +28935,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -28608,6 +29048,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -28726,6 +29171,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -28940,6 +29390,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -29099,6 +29554,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -29210,6 +29670,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -29325,6 +29790,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -29486,6 +29956,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -29650,6 +30125,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -29761,6 +30241,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -29883,6 +30368,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -30191,6 +30681,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -30331,6 +30826,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -30492,6 +30992,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -30656,6 +31161,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -30767,6 +31277,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -30883,6 +31398,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -31055,6 +31575,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.transactions.read</td>
                       <td>Grant read-only access to invoices</td>
                     </tr>
@@ -31168,6 +31693,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -31329,6 +31859,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.attachments.read</td>
@@ -31493,6 +32028,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.attachments</td>
+                      <td>Grant read-write access to attachments</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.attachments.read</td>
                       <td>Grant read-only access to attachments</td>
                     </tr>
@@ -31604,6 +32144,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -31718,6 +32263,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.transactions.read</td>
@@ -33261,6 +33811,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.reports.read</td>
+                      <td>Grant read-only access to accounting reports</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.reports.tenninetynine.read</td>
                       <td>Grant read-only access to 1099 reports</td>
                     </tr>
@@ -33580,6 +34135,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -33729,6 +34289,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -33876,6 +34441,11 @@ try {
                   <table>
                     
                     <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
+                    
+                    <tr>
                       <td>accounting.settings.read</td>
                       <td>Grant read-only access to organisation and account settings</td>
                     </tr>
@@ -33987,6 +34557,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.settings.read</td>
@@ -34102,6 +34677,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>accounting.settings</td>
+                      <td>Grant read-write access to organisation and account settings</td>
+                    </tr>
                     
                     <tr>
                       <td>accounting.settings.read</td>

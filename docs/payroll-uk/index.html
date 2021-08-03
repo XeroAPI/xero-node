@@ -1381,7 +1381,7 @@ ul.nav-tabs {
     "earningsType" : {
       "type" : "string",
       "description" : "Indicates how an employee will be paid when taking this type of earning",
-      "enum" : [ "Allowance", "Backpay", "Bonus", "Commission", "LumpSum", "OtherEarnings", "OvertimeEarnings", "RegularEarnings", "StatutoryAdoptionPay", "StatutoryAdoptionPayNonPensionable", "StatutoryBereavementPay", "StatutoryMaternityPay", "StatutoryMaternityPayNonPensionable", "StatutoryPaternityPay", "StatutoryPaternityPayNonPensionable", "StatutoryParentalBereavementPayNonPensionable", "StatutorySharedParentalPay", "StatutorySharedParentalPayNonPensionable", "StatutorySickPay", "StatutorySickPayNonPensionable", "Tips(Direct)", "Tips(Non-Direct)" ]
+      "enum" : [ "Allowance", "Backpay", "Bonus", "Commission", "LumpSum", "OtherEarnings", "OvertimeEarnings", "RegularEarnings", "StatutoryAdoptionPay", "StatutoryAdoptionPayNonPensionable", "StatutoryBereavementPay", "StatutoryMaternityPay", "StatutoryMaternityPayNonPensionable", "StatutoryPaternityPay", "StatutoryPaternityPayNonPensionable", "StatutoryParentalBereavementPayNonPensionable", "StatutorySharedParentalPay", "StatutorySharedParentalPayNonPensionable", "StatutorySickPay", "StatutorySickPayNonPensionable", "Tips(Direct)", "Tips(Non-Direct)", "TerminationPay" ]
     },
     "rateType" : {
       "type" : "string",
@@ -3434,7 +3434,7 @@ ul.nav-tabs {
     <div class='docs-header'>
       <div class='xero-logo'>
         <a target="_blank"  href="https://developer.xero.com/documentation/">
-        <img alt="" width="115" height="30" class="xrh-app-image" src="https://developer.xero.com/static/images/developer-logo.svg">
+        <img alt="" width="115" height="30" class="xrh-app-image" src="https://i.imgur.com/kzfh8mf.png">
         </a>
       </div>
       <fieldset class='api-set'>
@@ -3505,7 +3505,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollUk"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>4.12.0</li>
+              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>4.14.0</li>
               <li class="nav-header" data-group="PayrollUk"><a href="#api-PayrollUk">Methods</a></li>
               <li data-group="PayrollUk" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollUk-approveTimesheet">approveTimesheet</a>
@@ -5339,8 +5339,8 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -7089,13 +7089,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -7207,13 +7207,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -7319,13 +7319,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -7437,13 +7437,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -7549,13 +7549,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -7667,13 +7667,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -7779,13 +7779,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -7897,13 +7897,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -8009,13 +8009,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -8128,13 +8128,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -8272,13 +8272,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -8392,13 +8392,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -8563,13 +8563,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -8681,13 +8681,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -8799,13 +8799,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -8917,13 +8917,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -9035,13 +9035,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -9299,13 +9299,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -9446,13 +9446,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -9614,13 +9614,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -9732,13 +9732,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
                     </tr>
                     
                   </table>
@@ -9849,6 +9849,11 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
+                    
+                    <tr>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
+                    </tr>
                     
                     <tr>
                       <td>payroll.employees.read</td>
@@ -9978,13 +9983,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -10097,13 +10102,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -10229,13 +10234,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.payruns.read</td>
-                      <td>Grant read-only access to payroll payruns</td>
+                      <td>payroll.payruns</td>
+                      <td>Grant read-write access to payroll payruns</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.payruns</td>
-                      <td>Grant read-write access to payroll payruns</td>
+                      <td>payroll.payruns.read</td>
+                      <td>Grant read-only access to payroll payruns</td>
                     </tr>
                     
                   </table>
@@ -10347,13 +10352,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -10465,13 +10470,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -10578,13 +10583,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.payruns.read</td>
-                      <td>Grant read-only access to payroll payruns</td>
+                      <td>payroll.payruns</td>
+                      <td>Grant read-write access to payroll payruns</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.payruns</td>
-                      <td>Grant read-write access to payroll payruns</td>
+                      <td>payroll.payruns.read</td>
+                      <td>Grant read-only access to payroll payruns</td>
                     </tr>
                     
                   </table>
@@ -10710,13 +10715,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.payslip.read</td>
-                      <td>Grant read-only access to payroll payslips</td>
+                      <td>payroll.payslip</td>
+                      <td>Grant read-write access to payroll payslips</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.payslip</td>
-                      <td>Grant read-write access to payroll payslips</td>
+                      <td>payroll.payslip.read</td>
+                      <td>Grant read-only access to payroll payslips</td>
                     </tr>
                     
                   </table>
@@ -10829,13 +10834,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.payslip.read</td>
-                      <td>Grant read-only access to payroll payslips</td>
+                      <td>payroll.payslip</td>
+                      <td>Grant read-write access to payroll payslips</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.payslip</td>
-                      <td>Grant read-write access to payroll payslips</td>
+                      <td>payroll.payslip.read</td>
+                      <td>Grant read-only access to payroll payslips</td>
                     </tr>
                     
                   </table>
@@ -10967,13 +10972,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -11085,13 +11090,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.settings</td>
-                      <td>Grant read-write access to payroll settings</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -11196,13 +11201,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>settings.payslip</td>
-                      <td></td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -11282,13 +11287,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.employees.read</td>
-                      <td>Grant read-only access to payroll employees</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.employees</td>
-                      <td>Grant read-write access to payroll employees</td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>
@@ -11427,13 +11432,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.timesheets.read</td>
-                      <td>Grant read-only access to payroll timesheets</td>
+                      <td>payroll.timesheets</td>
+                      <td>Grant read-write access to payroll timesheets</td>
                     </tr>
                     
                     <tr>
-                      <td>timesheets.settings</td>
-                      <td></td>
+                      <td>payroll.timesheets.read</td>
+                      <td>Grant read-only access to payroll timesheets</td>
                     </tr>
                     
                   </table>
@@ -11546,13 +11551,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.timesheets.read</td>
-                      <td>Grant read-only access to payroll timesheets</td>
+                      <td>payroll.timesheets</td>
+                      <td>Grant read-write access to payroll timesheets</td>
                     </tr>
                     
                     <tr>
-                      <td>payroll.timesheets</td>
-                      <td>Grant read-write access to payroll timesheets</td>
+                      <td>payroll.timesheets.read</td>
+                      <td>Grant read-only access to payroll timesheets</td>
                     </tr>
                     
                   </table>
@@ -11677,13 +11682,13 @@ try {
                   <table>
                     
                     <tr>
-                      <td>payroll.settings.read</td>
-                      <td>Grant read-only access to payroll settings</td>
+                      <td>payroll.settings</td>
+                      <td>Grant read-write access to payroll settings</td>
                     </tr>
                     
                     <tr>
-                      <td>settings.payslip</td>
-                      <td></td>
+                      <td>payroll.settings.read</td>
+                      <td>Grant read-only access to payroll settings</td>
                     </tr>
                     
                   </table>

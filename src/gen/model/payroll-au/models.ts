@@ -179,6 +179,7 @@ let enumsMap: {[index: string]: any} = {
         "EarningsRateCalculationType": EarningsRateCalculationType,
         "EarningsType": EarningsType,
         "Employee.GenderEnum": Employee.GenderEnum,
+        "Employee.TerminationReasonEnum": Employee.TerminationReasonEnum,
         "EmployeeStatus": EmployeeStatus,
         "EmploymentBasis": EmploymentBasis,
         "EmploymentTerminationPaymentType": EmploymentTerminationPaymentType,

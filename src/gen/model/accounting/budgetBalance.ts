@@ -1,5 +1,5 @@
 
-export class BudgetLines {
+export class BudgetBalance {
     /**
     * Period the amount applies to (e.g. “2019-08”)
     */
@@ -42,7 +42,7 @@ export class BudgetLines {
         }    ];
 
     static getAttributeTypeMap() {
-        return BudgetLines.attributeTypeMap;
+        return BudgetBalance.attributeTypeMap;
     }
 }
 
