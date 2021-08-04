@@ -218,6 +218,9 @@ You should use the subscription data to provision user access/permissions to you
 
 In additon to a subscription Id being passed through the URL, when a purchase or an upgrade takes place you will be notified via a webhook. You can then use the subscription Id in the webhook payload to query the AppStore endpoints and determine what plan the user purchased, upgraded, downgraded or cancelled.
 
+Refer to Xero's documenation to learn more about setting up and receiving webhooks.
+> https://developer.xero.com/documentation/guides/webhooks/overview/
+
 ---
 ## API Clients
 You can access the different API sets and their available methods through the following:
