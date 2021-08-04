@@ -50,7 +50,7 @@ Sample apps can get you started quickly with simple auth flows and advanced usag
 | [`full-app`](https://github.com/XeroAPI/xero-node-oauth2-app) | Complete app with more complex examples | <img src="https://i.imgur.com/TaMQvnp.png" alt="drawing" width="500"/>
 | [`custom-connections-starter`](https://github.com/XeroAPI/xero-node-custom-connections-starter) | Basic app showing Custom Connections - a Xero [premium option](https://developer.xero.com/documentation/oauth2/custom-connections) for building M2M integrations to a single org | <img src="https://i.imgur.com/HoQHLuq.png" alt="drawing" width="300"/>
 | [`xero-node-sso-app`](https://github.com/XeroAPI/https://github.com/XeroAPI/xero-node-sso-app) | App showing Xero Single Sign On - as well as basic setup and usage of the Xero App Store `appStoreApi.getSubscription` endpoint | <img src="https://i.imgur.com/4NGowZz.png" alt="drawing" width="300"/>
-
+ 
 <hr>
 
 ## Xero Account Requirements
@@ -154,11 +154,11 @@ Because Custom Connections are only valid for a single organisation you don't ne
 
 ## App Store Subscriptions 
 
-If you are implementing subscriptsions to participate in Xero's App Store you will need to setup [App Store subscriptions](https://developer.xero.com/documentation/guides/how-to-guides/xero-app-store-referrals/).
+If you are implementing subscriptions to participate in Xero's App Store you will need to setup [App Store subscriptions](https://developer.xero.com/documentation/guides/how-to-guides/xero-app-store-referrals/) endpoints.
 
 When a plan is successfully purchased, the user is redirected back to the URL specified in the setup process. The Xero App Store appends the subscription Id to this URL so you can immediately determine what plan the user has subscribed to through the subscriptions API.
 
-With your app credentials you can now create a new client & `client_credentials` client using the `marketplace.billing` scope. This token will allow you to query any functions in`appStoreApi`. Client Credentials tokens to query app store endpoints will only work for apps that have completed the App Store on-boarding process.
+With your app credentials you can create a client via `client_credentials` grant_type with the `marketplace.billing` scope. This unique access_token will allow you to query any functions in `appStoreApi`. Client Credentials tokens to query app store endpoints will only work for apps that have completed the App Store on-boarding process.
 
 ```ts
 // => /post-purchase-url
@@ -201,7 +201,7 @@ console.log(subscriptionRequest.body)
           id: '9586421f-7325-4493-bac9-d93be06a6a38',
           name: '',
           type: 'FIXED'
-        },
+        },      
         startDate: 2021-08-02T20:08:58.772Z,
         testMode: true
 
@@ -213,10 +213,10 @@ console.log(subscriptionRequest.body)
   testMode: true
 }
 ```
-You should use the subscription data to throttle user access/permissions to your application.
+You should use the subscription data to provision user access/permissions to your application.
 ### App Store Subscription Webhooks
 
-In additon to a subscription Id being passed through the URL, when a purchase or an upgrade takes place, you will be notified via a webhook. You can then use the subscription Id in the webhook payload to query `getSubscription` and determine what plan the user upgraded to.
+In additon to a subscription Id being passed through the URL, when a purchase or an upgrade takes place you will be notified via a webhook. You can then use the subscription Id in the webhook payload to query the AppStore endpoints and determine what plan the user purchased, upgraded, downgraded or cancelled.
 
 ---
 ## API Clients
