@@ -13,6 +13,7 @@ The xero-node SDK makes it easy for developers to access Xero's APIs in their Ja
 - [Configuration](#configuration)
 - [Authentication](#authentication)
 - [Custom Connections](#custom-connections)
+- [App Store Subscriptions](#app-store-subscriptions)
 - [API Clients](#api-clients)
 - [Helper Methods](#helper-methods)
 - [Usage Examples](#usage-examples)
@@ -48,7 +49,8 @@ Sample apps can get you started quickly with simple auth flows and advanced usag
 | [`starter-app`](https://github.com/XeroAPI/xero-node-oauth2-ts-starter) | Basic getting started code samples | <img src="https://i.imgur.com/k208KAv.png" alt="drawing" width="200"/>
 | [`full-app`](https://github.com/XeroAPI/xero-node-oauth2-app) | Complete app with more complex examples | <img src="https://i.imgur.com/TaMQvnp.png" alt="drawing" width="500"/>
 | [`custom-connections-starter`](https://github.com/XeroAPI/xero-node-custom-connections-starter) | Basic app showing Custom Connections - a Xero [premium option](https://developer.xero.com/documentation/oauth2/custom-connections) for building M2M integrations to a single org | <img src="https://i.imgur.com/HoQHLuq.png" alt="drawing" width="300"/>
-
+| [`xero-node-sso-app`](https://github.com/XeroAPI/https://github.com/XeroAPI/xero-node-sso-app) | App showing Xero Single Sign On - as well as basic setup and usage of the Xero App Store `appStoreApi.getSubscription` endpoint | <img src="https://i.imgur.com/4NGowZz.png" alt="drawing" width="300"/>
+ 
 <hr>
 
 ## Xero Account Requirements
@@ -147,6 +149,77 @@ const invoices = await xero.accountingApi.getInvoices('');
 Because Custom Connections are only valid for a single organisation you don't need to pass the `xero-tenant-id` as the first parameter to every method, or more specifically for this SDK `xeroTenantId` can be an empty string.
 
 > Becuase the SDK is generated from the OpenAPI spec the parameter remains which requires you to pass an empty string to use this SDK with a Custom Connection.
+
+---
+
+## App Store Subscriptions 
+
+If you are implementing subscriptions to participate in Xero's App Store you will need to setup [App Store subscriptions](https://developer.xero.com/documentation/guides/how-to-guides/xero-app-store-referrals/) endpoints.
+
+When a plan is successfully purchased, the user is redirected back to the URL specified in the setup process. The Xero App Store appends the subscription Id to this URL so you can immediately determine what plan the user has subscribed to through the subscriptions API.
+
+With your app credentials you can create a client via `client_credentials` grant_type with the `marketplace.billing` scope. This unique access_token will allow you to query any functions in `appStoreApi`. Client Credentials tokens to query app store endpoints will only work for apps that have completed the App Store on-boarding process.
+
+```ts
+// => /post-purchase-url
+
+const xeroAppStoreClient = new XeroClient({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  grantType: 'client_credentials',
+  scopes: ['marketplace.billing']
+});
+
+try {
+  await xeroAppStoreClient.getClientCredentialsToken()
+} catch(e) {
+  console.log('ERROR: ', e)
+}
+
+const subscriptionRequest = await xeroAppStoreClient.appStoreApi.getSubscription(subscripionId)
+
+console.log(subscriptionRequest.body)
+{
+  currentPeriodEnd: 2021-09-02T20:08:58.772Z,
+  endDate: null,
+  id: '03bc74f2-1237-4477-b782-2dfb1a6d8b21',
+  organisationId: '79e8b2e5-c63d-4dce-888f-e0f3e9eac647',
+  plans: [
+    Plan {
+      id: '6abc26f3-9390-4194-8b25-ce8b9942fda9',
+      name: 'Small',
+      status: 'ACTIVE',
+      subscriptionItems: [
+        endDate: null,
+        id: '834cff4c-b753-4de2-9e7a-3451e14fa17a',
+        price: {
+          id: '2310de92-c7c0-4bcb-b972-fb7612177bc7',
+          amount: 0.1,
+          currency: 'NZD'
+        },
+        product: Product {
+          id: '9586421f-7325-4493-bac9-d93be06a6a38',
+          name: '',
+          type: 'FIXED'
+        },      
+        startDate: 2021-08-02T20:08:58.772Z,
+        testMode: true
+
+      ]
+    }
+  ],
+  startDate: 2021-08-02T20:08:58.772Z,
+  status: 'ACTIVE',
+  testMode: true
+}
+```
+You should use the subscription data to provision user access/permissions to your application.
+### App Store Subscription Webhooks
+
+In additon to a subscription Id being passed through the URL, when a purchase or an upgrade takes place you will be notified via a webhook. You can then use the subscription Id in the webhook payload to query the AppStore endpoints and determine what plan the user purchased, upgraded, downgraded or cancelled.
+
+Refer to Xero's documenation to learn more about setting up and receiving webhooks or review [this blogpost](https://devblog.xero.com/keeping-your-integration-in-sync-implementing-xero-webhooks-using-node-express-and-ngrok-6d2976baac6d) explaing webhooks using xero-node sdk.
+> https://developer.xero.com/documentation/guides/webhooks/overview/
 
 ---
 ## API Clients

@@ -36,6 +36,10 @@ export class Payment {
     */
     'amount'?: number;
     /**
+    * The amount of the payment in the currency of the bank account.
+    */
+    'bankAmount'?: number;
+    /**
     * An optional description for the payment e.g. Direct Debit
     */
     'reference'?: string;
@@ -148,6 +152,11 @@ export class Payment {
         {
             "name": "amount",
             "baseName": "Amount",
+            "type": "number"
+        },
+        {
+            "name": "bankAmount",
+            "baseName": "BankAmount",
             "type": "number"
         },
         {

@@ -24,6 +24,10 @@ export class PayrollCalendar {
     */
     'updatedDateUTC'?: Date;
     /**
+    * Reference Date (YYYY-MM-DD)
+    */
+    'referenceDate'?: string;
+    /**
     * Displays array of validation error messages from the API
     */
     'validationErrors'?: Array<ValidationError>;
@@ -60,6 +64,11 @@ export class PayrollCalendar {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
+        },
+        {
+            "name": "referenceDate",
+            "baseName": "ReferenceDate",
+            "type": "string"
         },
         {
             "name": "validationErrors",

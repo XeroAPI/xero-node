@@ -61,6 +61,7 @@ export class XeroClient {
     this.bankFeedsApi = new xero.BankFeedsApi();
     this.payrollUKApi = new xero.PayrollUkApi();
     this.payrollNZApi = new xero.PayrollNzApi();
+    this.appStoreApi = new xero.AppStoreApi();
   };
 
   private _tokenSet: TokenSet = new TokenSet;
@@ -74,6 +75,7 @@ export class XeroClient {
   readonly bankFeedsApi: xero.BankFeedsApi;
   readonly payrollUKApi: xero.PayrollUkApi;
   readonly payrollNZApi: xero.PayrollNzApi;
+  readonly appStoreApi: xero.AppStoreApi;
 
   openIdClient: Client; // from openid-client
 
@@ -185,8 +187,8 @@ export class XeroClient {
   }
 
   public async getClientCredentialsToken(): Promise<TokenSet> {
-    const { clientId, clientSecret, grantType } = this.config;
-    const result = await this.tokenRequest(clientId, clientSecret, { grant_type: grantType });
+    const { clientId, clientSecret, grantType, scopes } = this.config;
+    const result = await this.tokenRequest(clientId, clientSecret, { grant_type: grantType, scopes });
     const tokenSet = JSON.parse(result.body);
     this._tokenSet = new TokenSet(tokenSet);
     this.setAccessToken();
@@ -275,5 +277,6 @@ export class XeroClient {
     this.bankFeedsApi.accessToken = accessToken;
     this.payrollUKApi.accessToken = accessToken;
     this.payrollNZApi.accessToken = accessToken;
+    this.appStoreApi.accessToken = accessToken;
   }
 }
