@@ -1,25 +1,23 @@
 export * from '././association';
 export * from '././fileObject';
-export * from '././fileResponse204';
 export * from '././files';
 export * from '././folder';
 export * from '././folders';
-export * from '././inlineObject';
 export * from '././objectGroup';
 export * from '././objectType';
+export * from '././uploadObject';
 export * from '././user';
 
 import localVarRequest = require('request');
 
 import { Association } from '././association';
 import { FileObject } from '././fileObject';
-import { FileResponse204 } from '././fileResponse204';
 import { Files } from '././files';
 import { Folder } from '././folder';
 import { Folders } from '././folders';
-import { InlineObject } from '././inlineObject';
 import { ObjectGroup } from '././objectGroup';
 import { ObjectType } from '././objectType';
+import { UploadObject } from '././uploadObject';
 import { User } from '././user';
 
 /* tslint:disable:no-unused-variable */
@@ -42,11 +40,10 @@ let enumsMap: {[index: string]: any} = {
 let typeMap: {[index: string]: any} = {
     "Association": Association,
     "FileObject": FileObject,
-    "FileResponse204": FileResponse204,
     "Files": Files,
     "Folder": Folder,
     "Folders": Folders,
-    "InlineObject": InlineObject,
+    "UploadObject": UploadObject,
     "User": User,
 }
 

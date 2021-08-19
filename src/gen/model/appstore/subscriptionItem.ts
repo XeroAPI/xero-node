@@ -1,3 +1,4 @@
+import { Price } from '././price';
 import { Product } from '././product';
 
 export class SubscriptionItem {
@@ -9,10 +10,7 @@ export class SubscriptionItem {
     * The unique identifier of the subscription item.
     */
     'id': string;
-    /**
-    * The price of the product subscribed to.
-    */
-    'price': number;
+    'price': Price;
     'product': Product;
     /**
     * Date the subscription started, or will start. Note: this could be in the future for downgrades or reduced number of seats that haven\'t taken effect yet. 
@@ -39,7 +37,7 @@ export class SubscriptionItem {
         {
             "name": "price",
             "baseName": "price",
-            "type": "number"
+            "type": "Price"
         },
         {
             "name": "product",

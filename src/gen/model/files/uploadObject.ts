@@ -1,11 +1,11 @@
 
-export class InlineObject {
-    'body'?: string;
+export class UploadObject {
+    'body': string;
     /**
     * exact name of the file you are uploading
     */
-    'name'?: string;
-    'filename'?: string;
+    'name': string;
+    'filename': string;
     'mimeType'?: string;
 
     static discriminator: string | undefined = undefined;
@@ -33,7 +33,7 @@ export class InlineObject {
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineObject.attributeTypeMap;
+        return UploadObject.attributeTypeMap;
     }
 }
 
