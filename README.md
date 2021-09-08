@@ -3,6 +3,7 @@
 [![Github forks](https://img.shields.io/github/forks/XeroAPI/xero-node.svg)](https://github.com/XeroAPI/xero-node/network)
 [![Github stars](https://img.shields.io/github/stars/XeroAPI/xero-node.svg)](https://github.com/XeroAPI/xero-node/stargazers)
 ![npm](https://img.shields.io/npm/dt/xero-node)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/xero-node.svg)](https://openbase.com/js/xero-node?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 The xero-node SDK makes it easy for developers to access Xero's APIs in their JavaScript code, and build robust applications and software using small business & general ledger accounting data.
 # Table of Contents
