@@ -9838,7 +9838,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const filter = 'firstName==John,lastName==Smith';
-const page = 56;
+const page = 5;
 
 try {
   const response = await xero.accountingApi.getEmployees(xeroTenantId,  filter, page);
@@ -11537,12 +11537,12 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const page = 56;
+const page = 5;
 const filter = 'employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000';
-const status = '?status=Draft';
-const startDate = '?startDate={yyyy-MM-dd}';
-const endDate = '?endDate={yyyy-MM-dd}';
-const sort = '?sort=startDate';
+const status = 'Draft';
+const startDate = '2019-01-02';
+const endDate = '2020-01-02';
+const sort = 'startDate';
 
 try {
   const response = await xero.accountingApi.getTimesheets(xeroTenantId,  page, filter, status, startDate, endDate, sort);
@@ -11636,7 +11636,7 @@ Page number which specifies the set of records to retrieve. By default the numbe
                 </span>
 
                     <div class="inner description marked">
-Filter by first name and/or lastname
+Filter by employeeId and/or payrollCalendarId
                     </div>
             </div>
         </div>
@@ -11696,7 +11696,7 @@ filter results by any timesheets with a startDate on or after the provided date
                 </span>
 
                     <div class="inner description marked">
-filter results by any timesheets with an endDate on or before the provided date
+filter results by any timesheets with a endDate on or before the provided date
                     </div>
             </div>
         </div>
