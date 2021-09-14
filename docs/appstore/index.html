@@ -955,6 +955,10 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "The pricing model of the product:\n* FIXED: Customers are charged a fixed amount for each billing period\n* PER_SEAT: Customers are charged based on the number of units they purchase\n",
       "enum" : [ "FIXED", "PER_SEAT" ]
+    },
+    "seatUnit" : {
+      "type" : "string",
+      "description" : "The unit of the per seat product. e.g. \"user\", \"organisation\", \"SMS\", etc"
     }
   },
   "description" : ""
@@ -1082,6 +1086,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
           <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="Bankfeeds">Bankfeeds</option>
           <option data-url="https://xeroapi.github.io/xero-node/appstore/index.html" value="AppStore">App Store</option>
+          <option data-url="https://xeroapi.github.io/xero-node/finance/index.html" value="AppStore">Finance</option>
         </select>
       </fieldset>
       <div class='api-set-wrapper'>
@@ -1123,7 +1128,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="AppStore"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="AppStore"><strong>VSN: </strong>4.15.0</li>
+              <li class="nav-header" data-group="AppStore"><strong>VSN: </strong>4.16.0</li>
               <li class="nav-header" data-group="AppStore"><a href="#api-AppStore">Methods</a></li>
               <li data-group="AppStore" data-name="getSubscription" class="">
                 <a href="#api-AppStore-getSubscription">getSubscription</a>

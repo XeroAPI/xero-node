@@ -3204,6 +3204,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
           <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="Bankfeeds">Bankfeeds</option>
           <option data-url="https://xeroapi.github.io/xero-node/appstore/index.html" value="AppStore">App Store</option>
+          <option data-url="https://xeroapi.github.io/xero-node/finance/index.html" value="AppStore">Finance</option>
         </select>
       </fieldset>
       <div class='api-set-wrapper'>
@@ -3245,7 +3246,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.15.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.16.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="createEmployee" class="">
                 <a href="#api-PayrollAu-createEmployee">createEmployee</a>
@@ -4415,7 +4416,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const ifModifiedSince = 'ifModifiedSince_example';
+const ifModifiedSince: Date = new Date("2013-10-20T19:20:30+01:00");
 const where = 'Status=="ACTIVE"';
 const order = 'EmailAddress%20DESC';
 const page = 56;
@@ -4481,8 +4482,11 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description marked">
 Only records created or modified since this timestamp will be returned
