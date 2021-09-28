@@ -9,5 +9,7 @@ export enum EarningsType {
     LUMPSUMA = <any> 'LUMPSUMA',
     LUMPSUMB = <any> 'LUMPSUMB',
     BONUSESANDCOMMISSIONS = <any> 'BONUSESANDCOMMISSIONS',
-    LUMPSUME = <any> 'LUMPSUME'
+    LUMPSUME = <any> 'LUMPSUME',
+    LUMPSUMW = <any> 'LUMPSUMW',
+    DIRECTORSFEES = <any> 'DIRECTORSFEES'
 }

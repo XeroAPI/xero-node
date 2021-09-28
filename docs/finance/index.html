@@ -2436,7 +2436,8 @@ Xero identifier for Tenant
                     <div class="inner description marked">
 <p>date, yyyy-MM-dd</p>
 <p>If no parameter is provided, the current date will be used.</p>
-<p>Lock History for up to 12 months before this date will be returned.</p>
+<p>Any changes to hard or soft lock dates that were made within the period up to 12 months before this date will be returned.</p>
+<p>Please be aware that there may be a delay of up to 3 days before a change is visible from this API.</p>
 
                     </div>
             </div>
@@ -2458,7 +2459,7 @@ Xero identifier for Tenant
                   <div class="pull-right"></div>
                   <div class="clearfix"></div>
                   <p></p>
-                  <p class="marked">For a specified organisation, provides a summary of all the reports run for a given period, which may be an indicator for good business management and oversight.</p>
+                  <p class="marked">For a specified organisation, provides a summary of all the reports published within a given period, which may be an indicator for good business management and oversight.</p>
                   <p></p>
                   <br />
                   <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/AccountingActivities/ReportHistory</span></code></pre>
@@ -2546,7 +2547,8 @@ Xero identifier for Tenant
                     <div class="inner description marked">
 <p>date, yyyy-MM-dd</p>
 <p>If no parameter is provided, the current date will be used.</p>
-<p>Reports published up to 12 months before this date will be returned.</p>
+<p>Any reports that were published within the period up to 12 months before this date will be returned.</p>
+<p>Please be aware that there may be a delay of up to 3 days before a published report is visible from this API.</p>
 
                     </div>
             </div>
@@ -2655,8 +2657,10 @@ Xero identifier for Tenant
 
                     <div class="inner description marked">
 <p>date, yyyy-MM</p>
+<p>The specified month must be complete (in the past); The current month cannot be specified since it is not complete.</p>
 <p>If no parameter is provided, the month immediately previous to the current month will be used.</p>
-<p>The user activities for the specified month will be returned.</p>
+<p>Any user activities occurring within the specified month will be returned.</p>
+<p>Please be aware that there may be a delay of up to 3 days before a user activity is visible from this API.</p>
 
                     </div>
             </div>

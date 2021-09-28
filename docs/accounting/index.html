@@ -1512,6 +1512,22 @@ ul.nav-tabs {
       "format" : "uuid",
       "readOnly" : true
     },
+    "FromIsReconciled" : {
+      "type" : "boolean",
+      "description" : "The Bank Transaction boolean to show if it is reconciled for the source account",
+      "example" : false,
+      "default" : false
+    },
+    "ToIsReconciled" : {
+      "type" : "boolean",
+      "description" : "The Bank Transaction boolean to show if it is reconciled for the destination account",
+      "example" : false,
+      "default" : false
+    },
+    "Reference" : {
+      "type" : "string",
+      "description" : "Reference for the transactions."
+    },
     "HasAttachments" : {
       "type" : "boolean",
       "description" : "Boolean to indicate if a Bank Transfer has an attachment",
@@ -1828,12 +1844,16 @@ ul.nav-tabs {
       "x-is-msdate" : true
     },
     "Amount" : {
-      "type" : "integer",
-      "description" : "LineItem Quantity"
+      "type" : "number",
+      "description" : "LineItem Quantity",
+      "format" : "double",
+      "x-is-money" : true
     },
     "UnitAmount" : {
-      "type" : "integer",
-      "description" : "Budgeted amount"
+      "type" : "number",
+      "description" : "Budgeted amount",
+      "format" : "double",
+      "x-is-money" : true
     },
     "Notes" : {
       "maxLength" : 255,
@@ -7607,7 +7627,7 @@ BankTransfers with array of BankTransfer objects in request body
       "schema" : {
         "$ref" : "#/components/schemas/BankTransfers"
       },
-      "example" : "{ \"BankTransfers\": [ { \"FromBankAccount\": { \"Code\": \"090\", \"Name\": \"My Savings\", \"AccountID\": \"00000000-0000-0000-0000-000000000000\", \"Type\": \"BANK\", \"BankAccountNumber\": \"123455\", \"Status\": \"ACTIVE\", \"BankAccountType\": \"BANK\", \"CurrencyCode\": \"USD\", \"TaxType\": \"NONE\", \"EnablePaymentsToAccount\": false, \"ShowInExpenseClaims\": false, \"Class\": \"ASSET\", \"ReportingCode\": \"ASS\", \"ReportingCodeName\": \"Assets\", \"HasAttachments\": false, \"UpdatedDateUTC\": \"2016-10-17T13:45:33.993-07:00\" }, \"ToBankAccount\": { \"Code\": \"088\", \"Name\": \"Business Wells Fargo\", \"AccountID\": \"00000000-0000-0000-0000-000000000000\", \"Type\": \"BANK\", \"BankAccountNumber\": \"123455\", \"Status\": \"ACTIVE\", \"BankAccountType\": \"BANK\", \"CurrencyCode\": \"USD\", \"TaxType\": \"NONE\", \"EnablePaymentsToAccount\": false, \"ShowInExpenseClaims\": false, \"Class\": \"ASSET\", \"ReportingCode\": \"ASS\", \"ReportingCodeName\": \"Assets\", \"HasAttachments\": false, \"UpdatedDateUTC\": \"2016-06-03T08:31:14.517-07:00\" }, \"Amount\": \"50.00\" } ] }"
+      "example" : "{ \"BankTransfers\": [ { \"FromBankAccount\": { \"Code\": \"090\", \"Name\": \"My Savings\", \"AccountID\": \"00000000-0000-0000-0000-000000000000\", \"Type\": \"BANK\", \"BankAccountNumber\": \"123455\", \"Status\": \"ACTIVE\", \"BankAccountType\": \"BANK\", \"CurrencyCode\": \"USD\", \"TaxType\": \"NONE\", \"EnablePaymentsToAccount\": false, \"ShowInExpenseClaims\": false, \"Class\": \"ASSET\", \"ReportingCode\": \"ASS\", \"ReportingCodeName\": \"Assets\", \"HasAttachments\": false, \"UpdatedDateUTC\": \"2016-10-17T13:45:33.993-07:00\" }, \"ToBankAccount\": { \"Code\": \"088\", \"Name\": \"Business Wells Fargo\", \"AccountID\": \"00000000-0000-0000-0000-000000000000\", \"Type\": \"BANK\", \"BankAccountNumber\": \"123455\", \"Status\": \"ACTIVE\", \"BankAccountType\": \"BANK\", \"CurrencyCode\": \"USD\", \"TaxType\": \"NONE\", \"EnablePaymentsToAccount\": false, \"ShowInExpenseClaims\": false, \"Class\": \"ASSET\", \"ReportingCode\": \"ASS\", \"ReportingCodeName\": \"Assets\", \"HasAttachments\": false, \"UpdatedDateUTC\": \"2016-06-03T08:31:14.517-07:00\" }, \"Amount\": \"50.00\", \"FromIsReconciled\": true, \"ToIsReconciled\": true, \"Reference\": \"Sub 098801\" } ] }"
     }
   },
   "required" : true
@@ -19895,7 +19915,7 @@ Xero identifier for Tenant
                 <article id="api-Accounting-getBudget-0" data-group="User" data-name="getBudget" data-version="0">
                   <div class="pull-left">
                     <h1>getBudget</h1>
-                    <p>Retrieves a specific budgets, which includes budget lines</p>
+                    <p>Retrieves a specific budget, which includes budget lines</p>
                   </div>
                   <div class="pull-right"></div>
                   <div class="clearfix"></div>
@@ -19918,9 +19938,11 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const budgetID = '00000000-0000-0000-0000-000000000000';
+const dateTo: Date = new Date("2019-10-31");
+const dateFrom: Date = new Date("2019-10-31");
 
 try {
-  const response = await xero.accountingApi.getBudget(xeroTenantId, budgetID);
+  const response = await xero.accountingApi.getBudget(xeroTenantId, budgetID,  dateTo, dateFrom);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -20001,6 +20023,59 @@ Xero identifier for Tenant
 </tr>
 
                   </table>
+                  <div class="methodsubtabletitle">Query parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">DateTo</td>
+<td>
+
+
+    <div id="d2e199_getBudget_dateTo">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    date
+                </span>
+                    <span class="format">
+                        (date)
+                    </span>
+
+                    <div class="inner description marked">
+Filter by start date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">DateFrom</td>
+<td>
+
+
+    <div id="d2e199_getBudget_dateFrom">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    date
+                </span>
+                    <span class="format">
+                        (date)
+                    </span>
+
+                    <div class="inner description marked">
+Filter by end date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
                 </article>
               </div>
               <hr>
@@ -20031,8 +20106,8 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const iDs = [&quot;00000000-0000-0000-0000-000000000000&quot;];
-const dateTo: Date = new Date("2013-10-20");
-const dateFrom: Date = new Date("2013-10-20");
+const dateTo: Date = new Date("2019-10-31");
+const dateFrom: Date = new Date("2019-10-31");
 
 try {
   const response = await xero.accountingApi.getBudgets(xeroTenantId,  iDs, dateTo, dateFrom);
@@ -30349,10 +30424,10 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
-const dateFrom: Date = new Date("2013-10-20");
-const dateTo: Date = new Date("2013-10-20");
-const expiryDateFrom: Date = new Date("2013-10-20");
-const expiryDateTo: Date = new Date("2013-10-20");
+const dateFrom: Date = new Date("2019-10-31");
+const dateTo: Date = new Date("2019-10-31");
+const expiryDateFrom: Date = new Date("2019-10-31");
+const expiryDateTo: Date = new Date("2019-10-31");
 const contactID = '00000000-0000-0000-0000-000000000000';
 const status = 'DRAFT';
 const page = 1;
@@ -32385,9 +32460,9 @@ Order by an any element
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const contactId = '00000000-0000-0000-0000-000000000000';
-const date: Date = new Date("2013-10-20");
-const fromDate: Date = new Date("2013-10-20");
-const toDate: Date = new Date("2013-10-20");
+const date: Date = new Date("2019-10-31");
+const fromDate: Date = new Date("2019-10-31");
+const toDate: Date = new Date("2019-10-31");
 
 try {
   const response = await xero.accountingApi.getReportAgedPayablesByContact(xeroTenantId, contactId,  date, fromDate, toDate);
@@ -32570,9 +32645,9 @@ filter by the to date of the report e.g. 2021-02-28
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const contactId = '00000000-0000-0000-0000-000000000000';
-const date: Date = new Date("2013-10-20");
-const fromDate: Date = new Date("2013-10-20");
-const toDate: Date = new Date("2013-10-20");
+const date: Date = new Date("2019-10-31");
+const fromDate: Date = new Date("2019-10-31");
+const toDate: Date = new Date("2019-10-31");
 
 try {
   const response = await xero.accountingApi.getReportAgedReceivablesByContact(xeroTenantId, contactId,  date, fromDate, toDate);
@@ -32990,8 +33065,8 @@ return a cash basis for the Balance Sheet report
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const fromDate: Date = new Date("2013-10-20");
-const toDate: Date = new Date("2013-10-20");
+const fromDate: Date = new Date("2019-10-31");
+const toDate: Date = new Date("2019-10-31");
 
 try {
   const response = await xero.accountingApi.getReportBankSummary(xeroTenantId,  fromDate, toDate);
@@ -33496,8 +33571,8 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const fromDate: Date = new Date("2013-10-20");
-const toDate: Date = new Date("2013-10-20");
+const fromDate: Date = new Date("2019-10-31");
+const toDate: Date = new Date("2019-10-31");
 const periods = 3;
 const timeframe = 'MONTH';
 const trackingCategoryID = '00000000-0000-0000-0000-000000000000';
