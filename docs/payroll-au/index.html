@@ -1236,7 +1236,7 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "",
-  "enum" : [ "FIXED", "ORDINARYTIMEEARNINGS", "OVERTIMEEARNINGS", "ALLOWANCE", "LUMPSUMD", "EMPLOYMENTTERMINATIONPAYMENT", "LUMPSUMA", "LUMPSUMB", "BONUSESANDCOMMISSIONS", "LUMPSUME" ]
+  "enum" : [ "FIXED", "ORDINARYTIMEEARNINGS", "OVERTIMEEARNINGS", "ALLOWANCE", "LUMPSUMD", "EMPLOYMENTTERMINATIONPAYMENT", "LUMPSUMA", "LUMPSUMB", "BONUSESANDCOMMISSIONS", "LUMPSUME", "LUMPSUMW", "DIRECTORSFEES" ]
 };
       defs["Employee"] = {
   "title" : "",
@@ -1818,7 +1818,7 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "",
-  "enum" : [ "PAYGMANUAL", "ETPOMANUAL", "ETPRMANUAL", "SCHEDULE5MANUAL", "SCHEDULE5STSLMANUAL" ]
+  "enum" : [ "PAYGMANUAL", "ETPOMANUAL", "ETPRMANUAL", "SCHEDULE5MANUAL", "SCHEDULE5STSLMANUAL", "SCHEDULE4MANUAL" ]
 };
       defs["OpeningBalances"] = {
   "title" : "",
@@ -3245,7 +3245,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.15.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.16.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="createEmployee" class="">
                 <a href="#api-PayrollAu-createEmployee">createEmployee</a>
@@ -4415,7 +4415,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const ifModifiedSince = 'ifModifiedSince_example';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
 const where = 'Status=="ACTIVE"';
 const order = 'EmailAddress%20DESC';
 const page = 56;
@@ -4481,8 +4481,11 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description marked">
 Only records created or modified since this timestamp will be returned
@@ -4708,7 +4711,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const ifModifiedSince = 'ifModifiedSince_example';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
 const where = 'Status=="ACTIVE"';
 const order = 'EmailAddress%20DESC';
 const page = 56;
@@ -4774,8 +4777,11 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description marked">
 Only records created or modified since this timestamp will be returned
@@ -4883,7 +4889,7 @@ e.g. page=1 – Up to 100 objects will be returned in a single API call
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const ifModifiedSince = 'ifModifiedSince_example';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
 const where = 'Status=="ACTIVE"';
 const order = 'EmailAddress%20DESC';
 const page = 56;
@@ -4949,8 +4955,11 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description marked">
 Only records created or modified since this timestamp will be returned
@@ -5176,7 +5185,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const ifModifiedSince = 'ifModifiedSince_example';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
 const where = 'Status=="ACTIVE"';
 const order = 'EmailAddress%20DESC';
 const page = 56;
@@ -5242,8 +5251,11 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description marked">
 Only records created or modified since this timestamp will be returned
@@ -5469,7 +5481,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const ifModifiedSince = 'ifModifiedSince_example';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
 const where = 'Status=="ACTIVE"';
 const order = 'EmailAddress%20DESC';
 const page = 56;
@@ -5535,8 +5547,11 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description marked">
 Only records created or modified since this timestamp will be returned
@@ -6097,7 +6112,7 @@ The USI of the Regulated SuperFund
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const ifModifiedSince = 'ifModifiedSince_example';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
 const where = 'Status=="ACTIVE"';
 const order = 'EmailAddress%20DESC';
 const page = 56;
@@ -6163,8 +6178,11 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description marked">
 Only records created or modified since this timestamp will be returned
@@ -6390,7 +6408,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const ifModifiedSince = 'ifModifiedSince_example';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
 const where = 'Status=="ACTIVE"';
 const order = 'EmailAddress%20DESC';
 const page = 56;
@@ -6456,8 +6474,11 @@ Xero identifier for Tenant
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description marked">
 Only records created or modified since this timestamp will be returned
