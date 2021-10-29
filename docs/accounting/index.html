@@ -1984,6 +1984,11 @@ ul.nav-tabs {
       "description" : "Xero identifier",
       "format" : "uuid"
     },
+    "MergedToContactID" : {
+      "type" : "string",
+      "description" : "ID for the destination of a merged contact. Only returned when using paging or when fetching a contact by ContactId or ContactNumber.",
+      "format" : "uuid"
+    },
     "ContactNumber" : {
       "maxLength" : 50,
       "type" : "string",
@@ -2013,6 +2018,11 @@ ul.nav-tabs {
       "maxLength" : 255,
       "type" : "string",
       "description" : "Last name of contact person (max length = 255)"
+    },
+    "CompanyNumber" : {
+      "maxLength" : 50,
+      "type" : "string",
+      "description" : "Company registration number (max length = 50)"
     },
     "EmailAddress" : {
       "maxLength" : 255,
@@ -2068,6 +2078,16 @@ ul.nav-tabs {
     "IsCustomer" : {
       "type" : "boolean",
       "description" : "true or false – Boolean that describes if a contact has any AR invoices entered against them. Cannot be set via PUT or POST – it is automatically set when an accounts receivable invoice is generated against this contact."
+    },
+    "SalesDefaultLineAmountType" : {
+      "type" : "string",
+      "description" : "The default sales line amount type for a contact. Only available when summaryOnly parameter or paging is used, or when fetch by ContactId or ContactNumber.",
+      "enum" : [ "INCLUSIVE", "EXCLUSIVE", "NONE" ]
+    },
+    "PurchasesDefaultLineAmountType" : {
+      "type" : "string",
+      "description" : "The default purchases line amount type for a contact Only available when summaryOnly parameter or paging is used, or when fetch by ContactId or ContactNumber.",
+      "enum" : [ "INCLUSIVE", "EXCLUSIVE", "NONE" ]
     },
     "DefaultCurrency" : {
       "$ref" : "#/components/schemas/CurrencyCode"
