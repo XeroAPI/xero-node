@@ -62,6 +62,7 @@ export class XeroClient {
     this.payrollUKApi = new xero.PayrollUkApi();
     this.payrollNZApi = new xero.PayrollNzApi();
     this.appStoreApi = new xero.AppStoreApi();
+    this.financeApi = new xero.FinanceApi();
   };
 
   private _tokenSet: TokenSet = new TokenSet;
@@ -76,6 +77,7 @@ export class XeroClient {
   readonly payrollUKApi: xero.PayrollUkApi;
   readonly payrollNZApi: xero.PayrollNzApi;
   readonly appStoreApi: xero.AppStoreApi;
+  readonly financeApi: xero.FinanceApi;
 
   openIdClient: Client; // from openid-client
 
@@ -283,5 +285,6 @@ export class XeroClient {
     this.payrollUKApi.accessToken = accessToken;
     this.payrollNZApi.accessToken = accessToken;
     this.appStoreApi.accessToken = accessToken;
+    this.financeApi.accessToken = accessToken;
   }
 }

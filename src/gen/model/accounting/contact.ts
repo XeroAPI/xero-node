@@ -17,6 +17,10 @@ export class Contact {
     */
     'contactID'?: string;
     /**
+    * ID for the destination of a merged contact. Only returned when using paging or when fetching a contact by ContactId or ContactNumber.
+    */
+    'mergedToContactID'?: string;
+    /**
     * This can be updated via the API only i.e. This field is read only on the Xero contact screen, used to identify contacts in external systems (max length = 50). If the Contact Number is used, this is displayed as Contact Code in the Contacts UI in Xero.
     */
     'contactNumber'?: string;
@@ -40,6 +44,10 @@ export class Contact {
     * Last name of contact person (max length = 255)
     */
     'lastName'?: string;
+    /**
+    * Company registration number (max length = 50)
+    */
+    'companyNumber'?: string;
     /**
     * Email address of contact person (umlauts not supported) (max length  = 255)
     */
@@ -84,6 +92,14 @@ export class Contact {
     * true or false – Boolean that describes if a contact has any AR invoices entered against them. Cannot be set via PUT or POST – it is automatically set when an accounts receivable invoice is generated against this contact.
     */
     'isCustomer'?: boolean;
+    /**
+    * The default sales line amount type for a contact. Only available when summaryOnly parameter or paging is used, or when fetch by ContactId or ContactNumber.
+    */
+    'salesDefaultLineAmountType'?: Contact.SalesDefaultLineAmountTypeEnum;
+    /**
+    * The default purchases line amount type for a contact Only available when summaryOnly parameter or paging is used, or when fetch by ContactId or ContactNumber.
+    */
+    'purchasesDefaultLineAmountType'?: Contact.PurchasesDefaultLineAmountTypeEnum;
     'defaultCurrency'?: CurrencyCode;
     /**
     * Store XeroNetworkKey for contacts.
@@ -163,6 +179,11 @@ export class Contact {
             "type": "string"
         },
         {
+            "name": "mergedToContactID",
+            "baseName": "MergedToContactID",
+            "type": "string"
+        },
+        {
             "name": "contactNumber",
             "baseName": "ContactNumber",
             "type": "string"
@@ -190,6 +211,11 @@ export class Contact {
         {
             "name": "lastName",
             "baseName": "LastName",
+            "type": "string"
+        },
+        {
+            "name": "companyNumber",
+            "baseName": "CompanyNumber",
             "type": "string"
         },
         {
@@ -246,6 +272,16 @@ export class Contact {
             "name": "isCustomer",
             "baseName": "IsCustomer",
             "type": "boolean"
+        },
+        {
+            "name": "salesDefaultLineAmountType",
+            "baseName": "SalesDefaultLineAmountType",
+            "type": "Contact.SalesDefaultLineAmountTypeEnum"
+        },
+        {
+            "name": "purchasesDefaultLineAmountType",
+            "baseName": "PurchasesDefaultLineAmountType",
+            "type": "Contact.PurchasesDefaultLineAmountTypeEnum"
         },
         {
             "name": "defaultCurrency",
@@ -363,5 +399,15 @@ export namespace Contact {
         ACTIVE = <any> 'ACTIVE',
         ARCHIVED = <any> 'ARCHIVED',
         GDPRREQUEST = <any> 'GDPRREQUEST'
+    }
+    export enum SalesDefaultLineAmountTypeEnum {
+        INCLUSIVE = <any> 'INCLUSIVE',
+        EXCLUSIVE = <any> 'EXCLUSIVE',
+        NONE = <any> 'NONE'
+    }
+    export enum PurchasesDefaultLineAmountTypeEnum {
+        INCLUSIVE = <any> 'INCLUSIVE',
+        EXCLUSIVE = <any> 'EXCLUSIVE',
+        NONE = <any> 'NONE'
     }
 }

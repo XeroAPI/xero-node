@@ -1984,6 +1984,11 @@ ul.nav-tabs {
       "description" : "Xero identifier",
       "format" : "uuid"
     },
+    "MergedToContactID" : {
+      "type" : "string",
+      "description" : "ID for the destination of a merged contact. Only returned when using paging or when fetching a contact by ContactId or ContactNumber.",
+      "format" : "uuid"
+    },
     "ContactNumber" : {
       "maxLength" : 50,
       "type" : "string",
@@ -2013,6 +2018,11 @@ ul.nav-tabs {
       "maxLength" : 255,
       "type" : "string",
       "description" : "Last name of contact person (max length = 255)"
+    },
+    "CompanyNumber" : {
+      "maxLength" : 50,
+      "type" : "string",
+      "description" : "Company registration number (max length = 50)"
     },
     "EmailAddress" : {
       "maxLength" : 255,
@@ -2068,6 +2078,16 @@ ul.nav-tabs {
     "IsCustomer" : {
       "type" : "boolean",
       "description" : "true or false – Boolean that describes if a contact has any AR invoices entered against them. Cannot be set via PUT or POST – it is automatically set when an accounts receivable invoice is generated against this contact."
+    },
+    "SalesDefaultLineAmountType" : {
+      "type" : "string",
+      "description" : "The default sales line amount type for a contact. Only available when summaryOnly parameter or paging is used, or when fetch by ContactId or ContactNumber.",
+      "enum" : [ "INCLUSIVE", "EXCLUSIVE", "NONE" ]
+    },
+    "PurchasesDefaultLineAmountType" : {
+      "type" : "string",
+      "description" : "The default purchases line amount type for a contact Only available when summaryOnly parameter or paging is used, or when fetch by ContactId or ContactNumber.",
+      "enum" : [ "INCLUSIVE", "EXCLUSIVE", "NONE" ]
     },
     "DefaultCurrency" : {
       "$ref" : "#/components/schemas/CurrencyCode"
@@ -5923,6 +5943,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
           <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="Bankfeeds">Bankfeeds</option>
           <option data-url="https://xeroapi.github.io/xero-node/appstore/index.html" value="AppStore">App Store</option>
+          <option data-url="https://xeroapi.github.io/xero-node/finance/index.html" value="Finance">Finance</option>
         </select>
       </fieldset>
       <div class='api-set-wrapper'>
@@ -5964,7 +5985,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.16.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.17.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
