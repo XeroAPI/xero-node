@@ -1,3 +1,4 @@
+import { AllowanceCategory } from '././allowanceCategory';
 import { AllowanceType } from '././allowanceType';
 import { EarningsType } from '././earningsType';
 import { EmploymentTerminationPaymentType } from '././employmentTerminationPaymentType';
@@ -60,6 +61,7 @@ export class EarningsRate {
     */
     'currentRecord'?: boolean;
     'allowanceType'?: AllowanceType;
+    'allowanceCategory'?: AllowanceCategory;
 
     static discriminator: string | undefined = undefined;
 
@@ -148,6 +150,11 @@ export class EarningsRate {
             "name": "allowanceType",
             "baseName": "AllowanceType",
             "type": "AllowanceType"
+        },
+        {
+            "name": "allowanceCategory",
+            "baseName": "AllowanceCategory",
+            "type": "AllowanceCategory"
         }    ];
 
     static getAttributeTypeMap() {

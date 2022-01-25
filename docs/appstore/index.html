@@ -878,8 +878,8 @@ ul.nav-tabs {
     },
     "status" : {
       "type" : "string",
-      "description" : "Status of the plan. Available statuses are ACTIVE,\nPENDING_ACTIVATION.\n",
-      "enum" : [ "ACTIVE", "PENDING_ACTIVATION" ]
+      "description" : "Status of the plan. Available statuses are ACTIVE, CANCELED, and\nPENDING_ACTIVATION.\n",
+      "enum" : [ "ACTIVE", "CANCELED", "PENDING_ACTIVATION" ]
     },
     "subscriptionItems" : {
       "type" : "array",
@@ -1002,7 +1002,8 @@ ul.nav-tabs {
     },
     "status" : {
       "type" : "string",
-      "description" : "Status of the subscription. Available statuses are ACTIVE, CANCELED, and PAST_DUE."
+      "description" : "Status of the subscription. Available statuses are ACTIVE, CANCELED, and PAST_DUE.",
+      "enum" : [ "ACTIVE", "CANCELED", "PAST_DUE" ]
     },
     "testMode" : {
       "type" : "boolean",
@@ -1013,7 +1014,7 @@ ul.nav-tabs {
 };
       defs["SubscriptionItem"] = {
   "title" : "",
-  "required" : [ "id", "price", "product", "startDate" ],
+  "required" : [ "id", "price", "product", "startDate", "status" ],
   "type" : "object",
   "properties" : {
     "endDate" : {
@@ -1036,6 +1037,11 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "Date the subscription started, or will start. Note: this could be in\nthe future for downgrades or reduced number of seats that haven't taken effect yet.\n",
       "format" : "date-time"
+    },
+    "status" : {
+      "type" : "string",
+      "description" : "Status of the subscription item. Available statuses are ACTIVE, CANCELED, and\nPENDING_ACTIVATION.\n",
+      "enum" : [ "ACTIVE", "CANCELED", "PENDING_ACTIVATION" ]
     },
     "testMode" : {
       "type" : "boolean",
@@ -1128,7 +1134,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="AppStore"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="AppStore"><strong>VSN: </strong>4.17.0</li>
+              <li class="nav-header" data-group="AppStore"><strong>VSN: </strong>4.17.1</li>
               <li class="nav-header" data-group="AppStore"><a href="#api-AppStore">Methods</a></li>
               <li data-group="AppStore" data-name="getSubscription" class="">
                 <a href="#api-AppStore-getSubscription">getSubscription</a>

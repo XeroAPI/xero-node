@@ -2,9 +2,12 @@
 export enum AllowanceType {
     CAR = <any> 'CAR',
     TRANSPORT = <any> 'TRANSPORT',
-    TRAVEL = <any> 'TRAVEL',
     LAUNDRY = <any> 'LAUNDRY',
     MEALS = <any> 'MEALS',
+    TRAVEL = <any> 'TRAVEL',
+    OTHER = <any> 'OTHER',
     JOBKEEPER = <any> 'JOBKEEPER',
-    OTHER = <any> 'OTHER'
+    TOOLS = <any> 'TOOLS',
+    TASKS = <any> 'TASKS',
+    QUALIFICATIONS = <any> 'QUALIFICATIONS'
 }

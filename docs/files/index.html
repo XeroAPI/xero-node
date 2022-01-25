@@ -1008,13 +1008,13 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "The Object Group that the object is in. These roughly correlate to the endpoints that can be used to retrieve the object via the core accounting API.",
-  "enum" : [ "Account", "BankTransaction", "Contact", "CreditNote", "Invoice", "Item", "ManualJournal", "Overpayment", "Payment", "Prepayment", "Receipt" ]
+  "enum" : [ "Account", "BankTransaction", "Contact", "CreditNote", "Invoice", "Item", "ManualJournal", "Overpayment", "Payment", "Prepayment", "Quote", "Receipt" ]
 };
       defs["ObjectType"] = {
   "title" : "",
   "type" : "string",
   "description" : "The Object Type",
-  "enum" : [ "Unknown", "Accpay", "AccPayCredit", "AccPayPayment", "AccRec", "AccRecCredit", "AccRecPayment", "Adjustment", "ApCreditPayment", "ApOverPayment", "ApOverPaymentPayment", "ApOverPaymentSourcePayment", "ApPrepayment", "ApPrepaymentPayment", "ApPrepaymentSourcePayment", "ArCreditPayment", "ArOverPayment", "ArOverpaymentPayment", "ArOverpaymentSourcePayment", "ArPrepayment", "ArPrepaymentPayment", "ArPrepaymentSourcePayment", "CashPaid", "CashRec", "ExpPayment", "ManJournal", "PurchaseOrder", "Receipt", "Transfer", "Account", "Contact", "Business", "Employee", "Person", "User", "Org", "FixedAsset", "PayRun", "PriceListItem", "Bank", "Current", "Equity", "Expense", "Fixed", "Liability", "Prepayment", "Revenue", "Sales", "Overheads", "Depreciatn", "OtherIncome", "DirectCosts", "Currliab", "Termliab", "NonCurrent" ]
+  "enum" : [ "Unknown", "Accpay", "AccPayCredit", "AccPayPayment", "AccRec", "AccRecCredit", "AccRecPayment", "Adjustment", "ApCreditPayment", "ApOverPayment", "ApOverPaymentPayment", "ApOverPaymentSourcePayment", "ApPrepayment", "ApPrepaymentPayment", "ApPrepaymentSourcePayment", "ArCreditPayment", "ArOverPayment", "ArOverpaymentPayment", "ArOverpaymentSourcePayment", "ArPrepayment", "ArPrepaymentPayment", "ArPrepaymentSourcePayment", "CashPaid", "CashRec", "ExpPayment", "ManJournal", "PurchaseOrder", "Receipt", "Transfer", "Account", "Contact", "Business", "Employee", "Person", "User", "Org", "FixedAsset", "PayRun", "PriceListItem", "Bank", "Current", "Equity", "Expense", "Fixed", "Liability", "Prepayment", "Revenue", "Sales", "Overheads", "Depreciatn", "OtherIncome", "DirectCosts", "Currliab", "Termliab", "NonCurrent", "SalesQuote" ]
 };
       defs["UploadObject"] = {
   "title" : "",
@@ -1156,7 +1156,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Files"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.17.0</li>
+              <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.17.1</li>
               <li class="nav-header" data-group="Files"><a href="#api-Files">Methods</a></li>
               <li data-group="Files" data-name="createFileAssociation" class="">
                 <a href="#api-Files-createFileAssociation">createFileAssociation</a>

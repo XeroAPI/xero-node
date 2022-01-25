@@ -10,7 +10,7 @@ export class Plan {
     */
     'name': string;
     /**
-    * Status of the plan. Available statuses are ACTIVE, PENDING_ACTIVATION. 
+    * Status of the plan. Available statuses are ACTIVE, CANCELED, and PENDING_ACTIVATION. 
     */
     'status': Plan.StatusEnum;
     /**
@@ -50,6 +50,7 @@ export class Plan {
 export namespace Plan {
     export enum StatusEnum {
         ACTIVE = <any> 'ACTIVE',
+        CANCELED = <any> 'CANCELED',
         PENDINGACTIVATION = <any> 'PENDING_ACTIVATION'
     }
 }

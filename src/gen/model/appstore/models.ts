@@ -29,6 +29,8 @@ let primitives = [
 let enumsMap: {[index: string]: any} = {
         "Plan.StatusEnum": Plan.StatusEnum,
         "Product.TypeEnum": Product.TypeEnum,
+        "Subscription.StatusEnum": Subscription.StatusEnum,
+        "SubscriptionItem.StatusEnum": SubscriptionItem.StatusEnum,
 }
 
 let typeMap: {[index: string]: any} = {
