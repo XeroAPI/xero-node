@@ -57,5 +57,6 @@ export enum ObjectType {
     DirectCosts = <any> 'DirectCosts',
     Currliab = <any> 'Currliab',
     Termliab = <any> 'Termliab',
-    NonCurrent = <any> 'NonCurrent'
+    NonCurrent = <any> 'NonCurrent',
+    SalesQuote = <any> 'SalesQuote'
 }

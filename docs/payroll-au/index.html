@@ -917,11 +917,17 @@ ul.nav-tabs {
   "description" : "See Account Types",
   "enum" : [ "BANK", "CURRENT", "CURRLIAB", "DEPRECIATN", "DIRECTCOSTS", "EQUITY", "EXPENSE", "FIXED", "INVENTORY", "LIABILITY", "NONCURRENT", "OTHERINCOME", "OVERHEADS", "PREPAYMENT", "REVENUE", "SALES", "TERMLIAB", "PAYGLIABILITY", "PAYG", "SUPERANNUATIONEXPENSE", "SUPERANNUATIONLIABILITY", "WAGESEXPENSE", "WAGESPAYABLELIABILITY" ]
 };
+      defs["AllowanceCategory"] = {
+  "title" : "",
+  "type" : "string",
+  "description" : "",
+  "enum" : [ "NONDEDUCTIBLE", "UNIFORM", "PRIVATEVEHICLE", "HOMEOFFICE", "TRANSPORT", "GENERAL", "OTHER" ]
+};
       defs["AllowanceType"] = {
   "title" : "",
   "type" : "string",
   "description" : "",
-  "enum" : [ "CAR", "TRANSPORT", "TRAVEL", "LAUNDRY", "MEALS", "JOBKEEPER", "OTHER" ]
+  "enum" : [ "CAR", "TRANSPORT", "LAUNDRY", "MEALS", "TRAVEL", "OTHER", "JOBKEEPER", "TOOLS", "TASKS", "QUALIFICATIONS" ]
 };
       defs["BankAccount"] = {
   "title" : "",
@@ -1222,6 +1228,9 @@ ul.nav-tabs {
     },
     "AllowanceType" : {
       "$ref" : "#/components/schemas/AllowanceType"
+    },
+    "AllowanceCategory" : {
+      "$ref" : "#/components/schemas/AllowanceCategory"
     }
   },
   "description" : ""
@@ -3246,7 +3255,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.17.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.18.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="createEmployee" class="">
                 <a href="#api-PayrollAu-createEmployee">createEmployee</a>

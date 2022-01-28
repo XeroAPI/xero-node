@@ -13,5 +13,6 @@ export enum ObjectGroup {
     Overpayment = <any> 'Overpayment',
     Payment = <any> 'Payment',
     Prepayment = <any> 'Prepayment',
+    Quote = <any> 'Quote',
     Receipt = <any> 'Receipt'
 }
