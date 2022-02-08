@@ -29,6 +29,18 @@ export class BankTransfer {
     */
     'toBankTransactionID'?: string;
     /**
+    * The Bank Transaction boolean to show if it is reconciled for the source account
+    */
+    'fromIsReconciled'?: boolean;
+    /**
+    * The Bank Transaction boolean to show if it is reconciled for the destination account
+    */
+    'toIsReconciled'?: boolean;
+    /**
+    * Reference for the transactions.
+    */
+    'reference'?: string;
+    /**
     * Boolean to indicate if a Bank Transfer has an attachment
     */
     'hasAttachments'?: boolean;
@@ -82,6 +94,21 @@ export class BankTransfer {
         {
             "name": "toBankTransactionID",
             "baseName": "ToBankTransactionID",
+            "type": "string"
+        },
+        {
+            "name": "fromIsReconciled",
+            "baseName": "FromIsReconciled",
+            "type": "boolean"
+        },
+        {
+            "name": "toIsReconciled",
+            "baseName": "ToIsReconciled",
+            "type": "boolean"
+        },
+        {
+            "name": "reference",
+            "baseName": "Reference",
             "type": "string"
         },
         {

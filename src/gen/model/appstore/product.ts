@@ -12,6 +12,10 @@ export class Product {
     * The pricing model of the product: * FIXED: Customers are charged a fixed amount for each billing period * PER_SEAT: Customers are charged based on the number of units they purchase 
     */
     'type'?: Product.TypeEnum;
+    /**
+    * The unit of the per seat product. e.g. \"user\", \"organisation\", \"SMS\", etc
+    */
+    'seatUnit'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -30,6 +34,11 @@ export class Product {
             "name": "type",
             "baseName": "type",
             "type": "Product.TypeEnum"
+        },
+        {
+            "name": "seatUnit",
+            "baseName": "seatUnit",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

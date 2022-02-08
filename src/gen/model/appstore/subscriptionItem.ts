@@ -17,6 +17,10 @@ export class SubscriptionItem {
     */
     'startDate': Date;
     /**
+    * Status of the subscription item. Available statuses are ACTIVE, CANCELED, and PENDING_ACTIVATION. 
+    */
+    'status': SubscriptionItem.StatusEnum;
+    /**
     * If the subscription is a test subscription
     */
     'testMode'?: boolean;
@@ -50,6 +54,11 @@ export class SubscriptionItem {
             "type": "Date"
         },
         {
+            "name": "status",
+            "baseName": "status",
+            "type": "SubscriptionItem.StatusEnum"
+        },
+        {
             "name": "testMode",
             "baseName": "testMode",
             "type": "boolean"
@@ -60,3 +69,10 @@ export class SubscriptionItem {
     }
 }
 
+export namespace SubscriptionItem {
+    export enum StatusEnum {
+        ACTIVE = <any> 'ACTIVE',
+        CANCELED = <any> 'CANCELED',
+        PENDINGACTIVATION = <any> 'PENDING_ACTIVATION'
+    }
+}

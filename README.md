@@ -50,7 +50,8 @@ Sample apps can get you started quickly with simple auth flows and advanced usag
 | [`starter-app`](https://github.com/XeroAPI/xero-node-oauth2-ts-starter) | Basic getting started code samples | <img src="https://i.imgur.com/k208KAv.png" alt="drawing" width="200"/>
 | [`full-app`](https://github.com/XeroAPI/xero-node-oauth2-app) | Complete app with more complex examples | <img src="https://i.imgur.com/TaMQvnp.png" alt="drawing" width="500"/>
 | [`custom-connections-starter`](https://github.com/XeroAPI/xero-node-custom-connections-starter) | Basic app showing Custom Connections - a Xero [premium option](https://developer.xero.com/documentation/oauth2/custom-connections) for building M2M integrations to a single org | <img src="https://i.imgur.com/HoQHLuq.png" alt="drawing" width="300"/>
-| [`xero-node-sso-app`](https://github.com/XeroAPI/https://github.com/XeroAPI/xero-node-sso-app) | App showing Xero Single Sign On - as well as basic setup and usage of the Xero App Store `appStoreApi.getSubscription` endpoint | <img src="https://i.imgur.com/4NGowZz.png" alt="drawing" width="300"/>
+| [`xero-node-sso-app`](https://github.com/XeroAPI/xero-node-sso-app) | App showing Xero Single Sign On - as well as basic setup and usage of the Xero App Store `appStoreApi.getSubscription` endpoint | <img src="https://i.imgur.com/4NGowZz.png" alt="drawing" width="300"/>
+| [`xero-node-sso-form`](https://github.com/XeroAPI/xero-node-sso-form) | App showing Sign up with Xero to Lead | <img src="https://raw.githubusercontent.com/XeroAPI/xero-node-sso-form/main/public/images/ssu-demo-screenshot.png" alt="drawing" width="300"/>
  
 <hr>
 

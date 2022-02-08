@@ -3797,6 +3797,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
           <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="Bankfeeds">Bankfeeds</option>
           <option data-url="https://xeroapi.github.io/xero-node/appstore/index.html" value="AppStore">App Store</option>
+          <option data-url="https://xeroapi.github.io/xero-node/finance/index.html" value="Finance">Finance</option>
         </select>
       </fieldset>
       <div class='api-set-wrapper'>
@@ -3838,7 +3839,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollNz"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>4.15.0</li>
+              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>4.18.0</li>
               <li class="nav-header" data-group="PayrollNz"><a href="#api-PayrollNz">Methods</a></li>
               <li data-group="PayrollNz" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollNz-approveTimesheet">approveTimesheet</a>
@@ -9427,12 +9428,11 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const firstName = 'John';
-const lastName = 'Johnson';
-const page = 56;
+const filter = 'firstName==John,lastName==Smith';
+const page = 5;
 
 try {
-  const response = await xero.accountingApi.getEmployees(xeroTenantId,  firstName, lastName, page);
+  const response = await xero.accountingApi.getEmployees(xeroTenantId,  filter, page);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -9491,11 +9491,11 @@ Xero identifier for Tenant
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">firstName</td>
+                    <tr><td style="width:150px;">filter</td>
 <td>
 
 
-    <div id="d2e199_getEmployees_firstName">
+    <div id="d2e199_getEmployees_filter">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -9503,27 +9503,7 @@ Xero identifier for Tenant
                 </span>
 
                     <div class="inner description marked">
-Filter by first name
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                    <tr><td style="width:150px;">lastName</td>
-<td>
-
-
-    <div id="d2e199_getEmployees_lastName">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Filter by last name
+Filter by first name and/or lastname
                     </div>
             </div>
         </div>
@@ -11462,12 +11442,15 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const page = 56;
-const employeeId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
-const payrollCalendarId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const page = 5;
+const filter = 'employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000';
+const status = 'Draft';
+const startDate = '2019-01-02';
+const endDate = '2020-01-02';
+const sort = 'startDate';
 
 try {
-  const response = await xero.accountingApi.getTimesheets(xeroTenantId,  page, employeeId, payrollCalendarId);
+  const response = await xero.accountingApi.getTimesheets(xeroTenantId,  page, filter, status, startDate, endDate, sort);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -11546,22 +11529,19 @@ Page number which specifies the set of records to retrieve. By default the numbe
 </td>
 </tr>
 
-                    <tr><td style="width:150px;">employeeId</td>
+                    <tr><td style="width:150px;">filter</td>
 <td>
 
 
-    <div id="d2e199_getTimesheets_employeeId">
+    <div id="d2e199_getTimesheets_filter">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    UUID
+                    String
                 </span>
-                    <span class="format">
-                        (uuid)
-                    </span>
 
                     <div class="inner description marked">
-By default get Timesheets will return the timesheets for all employees in an organization. You can add GET https://…/timesheets?filter=employeeId=={EmployeeID} to get only the timesheets of a particular employee.
+Filter by employeeId and/or payrollCalendarId
                     </div>
             </div>
         </div>
@@ -11569,22 +11549,79 @@ By default get Timesheets will return the timesheets for all employees in an org
 </td>
 </tr>
 
-                    <tr><td style="width:150px;">payrollCalendarId</td>
+                    <tr><td style="width:150px;">status</td>
 <td>
 
 
-    <div id="d2e199_getTimesheets_payrollCalendarId">
+    <div id="d2e199_getTimesheets_status">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    UUID
+                    String
                 </span>
-                    <span class="format">
-                        (uuid)
-                    </span>
 
                     <div class="inner description marked">
-By default get Timesheets will return all the timesheets for an organization. You can add GET https://…/timesheets?filter=payrollCalendarId=={PayrollCalendarID} to filter the timesheets by payroll calendar id
+filter results by any timesheets with a matching timesheet status
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">startDate</td>
+<td>
+
+
+    <div id="d2e199_getTimesheets_startDate">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+filter results by any timesheets with a startDate on or after the provided date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">endDate</td>
+<td>
+
+
+    <div id="d2e199_getTimesheets_endDate">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+filter results by any timesheets with a endDate on or before the provided date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">sort</td>
+<td>
+
+
+    <div id="d2e199_getTimesheets_sort">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+sort the order of timesheets returned. The default is based on the timesheets createdDate, sorted oldest to newest. Currently, the only other option is to reverse the order based on the timesheets startDate, sorted newest to oldest.
                     </div>
             </div>
         </div>

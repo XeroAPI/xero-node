@@ -28,7 +28,7 @@ export class Subscription {
     /**
     * Status of the subscription. Available statuses are ACTIVE, CANCELED, and PAST_DUE.
     */
-    'status': string;
+    'status': Subscription.StatusEnum;
     /**
     * Boolean used to indicate if the subscription is in test mode
     */
@@ -70,7 +70,7 @@ export class Subscription {
         {
             "name": "status",
             "baseName": "status",
-            "type": "string"
+            "type": "Subscription.StatusEnum"
         },
         {
             "name": "testMode",
@@ -83,3 +83,10 @@ export class Subscription {
     }
 }
 
+export namespace Subscription {
+    export enum StatusEnum {
+        ACTIVE = <any> 'ACTIVE',
+        CANCELED = <any> 'CANCELED',
+        PASTDUE = <any> 'PAST_DUE'
+    }
+}

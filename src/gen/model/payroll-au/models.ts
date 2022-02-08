@@ -1,6 +1,7 @@
 export * from '././aPIException';
 export * from '././account';
 export * from '././accountType';
+export * from '././allowanceCategory';
 export * from '././allowanceType';
 export * from '././bankAccount';
 export * from '././calendarType';
@@ -82,6 +83,7 @@ import localVarRequest = require('request');
 import { APIException } from '././aPIException';
 import { Account } from '././account';
 import { AccountType } from '././accountType';
+import { AllowanceCategory } from '././allowanceCategory';
 import { AllowanceType } from '././allowanceType';
 import { BankAccount } from '././bankAccount';
 import { CalendarType } from '././calendarType';
@@ -172,6 +174,7 @@ let primitives = [
                  
 let enumsMap: {[index: string]: any} = {
         "AccountType": AccountType,
+        "AllowanceCategory": AllowanceCategory,
         "AllowanceType": AllowanceType,
         "CalendarType": CalendarType,
         "DeductionType.DeductionCategoryEnum": DeductionType.DeductionCategoryEnum,

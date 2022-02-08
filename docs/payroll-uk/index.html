@@ -1381,7 +1381,7 @@ ul.nav-tabs {
     "earningsType" : {
       "type" : "string",
       "description" : "Indicates how an employee will be paid when taking this type of earning",
-      "enum" : [ "Allowance", "Backpay", "Bonus", "Commission", "LumpSum", "OtherEarnings", "OvertimeEarnings", "RegularEarnings", "StatutoryAdoptionPay", "StatutoryAdoptionPayNonPensionable", "StatutoryBereavementPay", "StatutoryMaternityPay", "StatutoryMaternityPayNonPensionable", "StatutoryPaternityPay", "StatutoryPaternityPayNonPensionable", "StatutoryParentalBereavementPayNonPensionable", "StatutorySharedParentalPay", "StatutorySharedParentalPayNonPensionable", "StatutorySickPay", "StatutorySickPayNonPensionable", "Tips(Direct)", "Tips(Non-Direct)", "TerminationPay" ]
+      "enum" : [ "Allowance", "Backpay", "Bonus", "Commission", "LumpSum", "OtherEarnings", "OvertimeEarnings", "RegularEarnings", "StatutoryAdoptionPay", "StatutoryAdoptionPayNonPensionable", "StatutoryBereavementPay", "StatutoryMaternityPay", "StatutoryMaternityPayNonPensionable", "StatutoryPaternityPay", "StatutoryPaternityPayNonPensionable", "StatutoryParentalBereavementPayNonPensionable", "StatutorySharedParentalPay", "StatutorySharedParentalPayNonPensionable", "StatutorySickPay", "StatutorySickPayNonPensionable", "TipsNonDirect", "TipsDirect", "TerminationPay" ]
     },
     "rateType" : {
       "type" : "string",
@@ -3465,6 +3465,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
           <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="Bankfeeds">Bankfeeds</option>
           <option data-url="https://xeroapi.github.io/xero-node/appstore/index.html" value="AppStore">App Store</option>
+          <option data-url="https://xeroapi.github.io/xero-node/finance/index.html" value="Finance">Finance</option>
         </select>
       </fieldset>
       <div class='api-set-wrapper'>
@@ -3506,7 +3507,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollUk"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>4.15.0</li>
+              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>4.18.0</li>
               <li class="nav-header" data-group="PayrollUk"><a href="#api-PayrollUk">Methods</a></li>
               <li data-group="PayrollUk" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollUk-approveTimesheet">approveTimesheet</a>
@@ -9837,7 +9838,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const filter = 'firstName==John,lastName==Smith';
-const page = 56;
+const page = 5;
 
 try {
   const response = await xero.accountingApi.getEmployees(xeroTenantId,  filter, page);
@@ -11536,11 +11537,15 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const page = 56;
+const page = 5;
 const filter = 'employeeId==00000000-0000-0000-0000-000000000000,payrollCalendarId==00000000-0000-0000-0000-000000000000';
+const status = 'Draft';
+const startDate = '2019-01-02';
+const endDate = '2020-01-02';
+const sort = 'startDate';
 
 try {
-  const response = await xero.accountingApi.getTimesheets(xeroTenantId,  page, filter);
+  const response = await xero.accountingApi.getTimesheets(xeroTenantId,  page, filter, status, startDate, endDate, sort);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -11631,7 +11636,87 @@ Page number which specifies the set of records to retrieve. By default the numbe
                 </span>
 
                     <div class="inner description marked">
-Filter by first name and/or lastname
+Filter by employeeId and/or payrollCalendarId
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">status</td>
+<td>
+
+
+    <div id="d2e199_getTimesheets_status">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+filter results by any timesheets with a matching timesheet status
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">startDate</td>
+<td>
+
+
+    <div id="d2e199_getTimesheets_startDate">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+filter results by any timesheets with a startDate on or after the provided date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">endDate</td>
+<td>
+
+
+    <div id="d2e199_getTimesheets_endDate">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+filter results by any timesheets with a endDate on or before the provided date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">sort</td>
+<td>
+
+
+    <div id="d2e199_getTimesheets_sort">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+sort the order of timesheets returned. The default is based on the timesheets createdDate, sorted oldest to newest. Currently, the only other option is to reverse the order based on the timesheets startDate, sorted newest to oldest.
                     </div>
             </div>
         </div>
