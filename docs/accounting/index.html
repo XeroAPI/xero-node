@@ -3535,6 +3535,9 @@ ul.nav-tabs {
       "format" : "double",
       "x-is-money" : true
     },
+    "Item" : {
+      "$ref" : "#/components/schemas/LineItemItem"
+    },
     "LineAmount" : {
       "type" : "number",
       "description" : "If you wish to omit either of the <Quantity> or <UnitAmount> you can provide a LineAmount and Xero will calculate the missing amount for you. The line amount reflects the discounted price if a DiscountRate has been used . i.e LineAmount = Quantity * Unit Amount * ((100 – DiscountRate)/100)",
@@ -3571,6 +3574,27 @@ ul.nav-tabs {
   "externalDocs" : {
     "url" : "https://developer.xero.com/documentation/api/invoices#post"
   }
+};
+      defs["LineItemItem"] = {
+  "title" : "",
+  "properties" : {
+    "Code" : {
+      "maxLength" : 30,
+      "type" : "string",
+      "description" : "User defined item code (max length = 30)"
+    },
+    "Name" : {
+      "maxLength" : 50,
+      "type" : "string",
+      "description" : "The name of the item (max length = 50)"
+    },
+    "ItemID" : {
+      "type" : "string",
+      "description" : "The Xero identifier for an Item",
+      "format" : "uuid"
+    }
+  },
+  "description" : ""
 };
       defs["LineItemTracking"] = {
   "title" : "",
@@ -5985,7 +6009,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.18.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.19.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>

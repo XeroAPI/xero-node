@@ -58,6 +58,10 @@ export class Employee {
     * National insurance number of the employee
     */
     'nationalInsuranceNumber'?: string;
+    /**
+    * Whether the employee is an off payroll worker
+    */
+    'isOffPayrollWorker'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -136,6 +140,11 @@ export class Employee {
             "name": "nationalInsuranceNumber",
             "baseName": "nationalInsuranceNumber",
             "type": "string"
+        },
+        {
+            "name": "isOffPayrollWorker",
+            "baseName": "isOffPayrollWorker",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
