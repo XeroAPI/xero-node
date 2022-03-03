@@ -1,8 +1,13 @@
 
 export enum ProblemType {
     NotSet = <any> 'NotSet',
-    InvalidRequest = <any> 'invalid-request',
+    BankAccountNotFound = <any> 'bank-account-not-found',
+    InternalError = <any> 'internal-error',
     InvalidApplication = <any> 'invalid-application',
+    InvalidRequest = <any> 'invalid-request',
+    OrganisationNotFound = <any> 'organisation-not-found',
+    OrganisationOffline = <any> 'organisation-offline',
+    RequestTimeout = <any> 'request-timeout',
     ServiceUnavailable = <any> 'service-unavailable',
-    InternalError = <any> 'internal-error'
+    Unauthorized = <any> 'unauthorized'
 }

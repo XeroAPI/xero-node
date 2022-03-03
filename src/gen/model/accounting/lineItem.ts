@@ -1,3 +1,4 @@
+import { LineItemItem } from '././lineItemItem';
 import { LineItemTracking } from '././lineItemTracking';
 
 export class LineItem {
@@ -37,6 +38,7 @@ export class LineItem {
     * The tax amount is auto calculated as a percentage of the line amount (see below) based on the tax rate. This value can be overriden if the calculated <TaxAmount> is not correct.
     */
     'taxAmount'?: number;
+    'item'?: LineItemItem;
     /**
     * If you wish to omit either of the <Quantity> or <UnitAmount> you can provide a LineAmount and Xero will calculate the missing amount for you. The line amount reflects the discounted price if a DiscountRate has been used . i.e LineAmount = Quantity * Unit Amount * ((100 – DiscountRate)/100)
     */
@@ -105,6 +107,11 @@ export class LineItem {
             "name": "taxAmount",
             "baseName": "TaxAmount",
             "type": "number"
+        },
+        {
+            "name": "item",
+            "baseName": "Item",
+            "type": "LineItemItem"
         },
         {
             "name": "lineAmount",
