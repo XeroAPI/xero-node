@@ -27,7 +27,7 @@
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "openid-client": "^3.9.2",
+    "openid-client": "^4.9.1",
     "request": "^2.88.0"
   }
 }
