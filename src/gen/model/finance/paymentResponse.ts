@@ -15,7 +15,7 @@ export class PaymentResponse {
     /**
     * Date the payment is being made (YYYY-MM-DD) e.g. 2009-09-06
     */
-    'date'?: Date;
+    'date'?: string;
     /**
     * The amount of the payment
     */
@@ -49,7 +49,7 @@ export class PaymentResponse {
         {
             "name": "date",
             "baseName": "date",
-            "type": "Date"
+            "type": "string"
         },
         {
             "name": "amount",

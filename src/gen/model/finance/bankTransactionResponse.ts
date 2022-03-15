@@ -14,7 +14,7 @@ export class BankTransactionResponse {
     /**
     * Date of transaction - YYYY-MM-DD
     */
-    'date'?: Date;
+    'date'?: string;
     /**
     * Amount of transaction
     */
@@ -45,7 +45,7 @@ export class BankTransactionResponse {
         {
             "name": "date",
             "baseName": "date",
-            "type": "Date"
+            "type": "string"
         },
         {
             "name": "amount",
