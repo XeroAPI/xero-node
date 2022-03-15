@@ -8,11 +8,11 @@ export class StatementResponse {
     /**
     * Start date of statement
     */
-    'startDate'?: Date;
+    'startDate'?: string;
     /**
     * End date of statement
     */
-    'endDate'?: Date;
+    'endDate'?: string;
     /**
     * Utc date time of when the statement was imported in Xero
     */
@@ -37,12 +37,12 @@ export class StatementResponse {
         {
             "name": "startDate",
             "baseName": "startDate",
-            "type": "Date"
+            "type": "string"
         },
         {
             "name": "endDate",
             "baseName": "endDate",
-            "type": "Date"
+            "type": "string"
         },
         {
             "name": "importedDateTimeUtc",

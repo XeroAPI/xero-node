@@ -9,7 +9,7 @@ export class StatementLineResponse {
     /**
     * Date of when statement line was posted
     */
-    'postedDate'?: Date;
+    'postedDate'?: string;
     /**
     * Reference description of statement line
     */
@@ -29,7 +29,7 @@ export class StatementLineResponse {
     /**
     * Transaction date of statement line
     */
-    'transactionDate'?: Date;
+    'transactionDate'?: string;
     /**
     * Type of statement line
     */
@@ -66,7 +66,7 @@ export class StatementLineResponse {
         {
             "name": "postedDate",
             "baseName": "postedDate",
-            "type": "Date"
+            "type": "string"
         },
         {
             "name": "reference",
@@ -91,7 +91,7 @@ export class StatementLineResponse {
         {
             "name": "transactionDate",
             "baseName": "transactionDate",
-            "type": "Date"
+            "type": "string"
         },
         {
             "name": "type",
