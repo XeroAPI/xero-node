@@ -36,33 +36,27 @@ export class EmployeeStatutoryLeaveSummary {
             "name": "statutoryLeaveID",
             "baseName": "statutoryLeaveID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "employeeID",
             "baseName": "employeeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "type",
             "baseName": "type",
             "type": "EmployeeStatutoryLeaveSummary.TypeEnum"
-        },
-        {
+        }        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "isEntitled",
             "baseName": "isEntitled",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "status",
             "type": "EmployeeStatutoryLeaveSummary.StatusEnum"

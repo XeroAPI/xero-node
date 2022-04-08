@@ -10,8 +10,7 @@ export class AccountsPayable {
             "name": "outstanding",
             "baseName": "Outstanding",
             "type": "number"
-        },
-        {
+        }        {
             "name": "overdue",
             "baseName": "Overdue",
             "type": "number"

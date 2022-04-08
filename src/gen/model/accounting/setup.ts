@@ -17,13 +17,11 @@ export class Setup {
             "name": "conversionDate",
             "baseName": "ConversionDate",
             "type": "ConversionDate"
-        },
-        {
+        }        {
             "name": "conversionBalances",
             "baseName": "ConversionBalances",
             "type": "Array<ConversionBalances>"
-        },
-        {
+        }        {
             "name": "accounts",
             "baseName": "Accounts",
             "type": "Array<Account>"

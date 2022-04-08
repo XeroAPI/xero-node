@@ -16,8 +16,7 @@ export class ModelError {
             "name": "message",
             "baseName": "message",
             "type": "string"
-        },
-        {
+        }        {
             "name": "modelState",
             "baseName": "modelState",
             "type": "object"

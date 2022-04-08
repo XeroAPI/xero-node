@@ -26,23 +26,19 @@ export class EarningsOrder {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "statutoryDeductionCategory",
             "baseName": "statutoryDeductionCategory",
             "type": "StatutoryDeductionCategory"
-        },
-        {
+        }        {
             "name": "liabilityAccountId",
             "baseName": "liabilityAccountId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "currentRecord",
             "baseName": "currentRecord",
             "type": "boolean"

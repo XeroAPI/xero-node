@@ -1,5 +1,5 @@
 
 export enum PayRunStatus {
-    DRAFT = <any> 'DRAFT',
-    POSTED = <any> 'POSTED'
+    Draft = <any> 'DRAFT',
+    Posted = <any> 'POSTED'
 }

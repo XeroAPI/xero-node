@@ -32,28 +32,23 @@ export class EarningsTemplate {
             "name": "payTemplateEarningID",
             "baseName": "payTemplateEarningID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "ratePerUnit",
             "baseName": "ratePerUnit",
             "type": "number"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "numberOfUnits",
             "type": "number"
-        },
-        {
+        }        {
             "name": "fixedAmount",
             "baseName": "fixedAmount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "earningsRateID",
             "baseName": "earningsRateID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"

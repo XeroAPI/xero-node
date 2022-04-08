@@ -28,23 +28,19 @@ export class PracticeResponse {
             "name": "xeroPartnerSince",
             "baseName": "xeroPartnerSince",
             "type": "number"
-        },
-        {
+        }        {
             "name": "tier",
             "baseName": "tier",
             "type": "string"
-        },
-        {
+        }        {
             "name": "location",
             "baseName": "location",
             "type": "string"
-        },
-        {
+        }        {
             "name": "organisationCount",
             "baseName": "organisationCount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "staffCertified",
             "baseName": "staffCertified",
             "type": "boolean"

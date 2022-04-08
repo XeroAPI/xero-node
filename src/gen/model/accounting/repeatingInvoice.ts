@@ -66,78 +66,63 @@ export class RepeatingInvoice {
             "name": "type",
             "baseName": "Type",
             "type": "RepeatingInvoice.TypeEnum"
-        },
-        {
+        }        {
             "name": "contact",
             "baseName": "Contact",
             "type": "Contact"
-        },
-        {
+        }        {
             "name": "schedule",
             "baseName": "Schedule",
             "type": "Schedule"
-        },
-        {
+        }        {
             "name": "lineItems",
             "baseName": "LineItems",
             "type": "Array<LineItem>"
-        },
-        {
+        }        {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
             "type": "LineAmountTypes"
-        },
-        {
+        }        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        },
-        {
+        }        {
             "name": "brandingThemeID",
             "baseName": "BrandingThemeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "currencyCode",
             "baseName": "CurrencyCode",
             "type": "CurrencyCode"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "RepeatingInvoice.StatusEnum"
-        },
-        {
+        }        {
             "name": "subTotal",
             "baseName": "SubTotal",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalTax",
             "baseName": "TotalTax",
             "type": "number"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "Total",
             "type": "number"
-        },
-        {
+        }        {
             "name": "repeatingInvoiceID",
             "baseName": "RepeatingInvoiceID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "iD",
             "baseName": "ID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "attachments",
             "baseName": "Attachments",
             "type": "Array<Attachment>"
@@ -150,12 +135,12 @@ export class RepeatingInvoice {
 
 export namespace RepeatingInvoice {
     export enum TypeEnum {
-        ACCPAY = <any> 'ACCPAY',
-        ACCREC = <any> 'ACCREC'
+        Accpay = <any> 'ACCPAY',
+        Accrec = <any> 'ACCREC'
     }
     export enum StatusEnum {
-        DRAFT = <any> 'DRAFT',
-        AUTHORISED = <any> 'AUTHORISED',
-        DELETED = <any> 'DELETED'
+        Draft = <any> 'DRAFT',
+        Authorised = <any> 'AUTHORISED',
+        Deleted = <any> 'DELETED'
     }
 }

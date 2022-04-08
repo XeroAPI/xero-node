@@ -28,23 +28,19 @@ export class ReimbursementType {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountCode",
             "baseName": "AccountCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "reimbursementTypeID",
             "baseName": "ReimbursementTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "currentRecord",
             "baseName": "CurrentRecord",
             "type": "boolean"

@@ -24,18 +24,15 @@ export class TaxComponent {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "rate",
             "baseName": "Rate",
             "type": "number"
-        },
-        {
+        }        {
             "name": "isCompound",
             "baseName": "IsCompound",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "isNonRecoverable",
             "baseName": "IsNonRecoverable",
             "type": "boolean"

@@ -14,13 +14,11 @@ export class EmployeeLeaves {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "leave",
             "baseName": "leave",
             "type": "Array<EmployeeLeave>"

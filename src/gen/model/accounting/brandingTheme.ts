@@ -32,28 +32,23 @@ export class BrandingTheme {
             "name": "brandingThemeID",
             "baseName": "BrandingThemeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "logoUrl",
             "baseName": "LogoUrl",
             "type": "string"
-        },
-        {
+        }        {
             "name": "type",
             "baseName": "Type",
             "type": "BrandingTheme.TypeEnum"
-        },
-        {
+        }        {
             "name": "sortOrder",
             "baseName": "SortOrder",
             "type": "number"
-        },
-        {
+        }        {
             "name": "createdDateUTC",
             "baseName": "CreatedDateUTC",
             "type": "Date"
@@ -66,6 +61,6 @@ export class BrandingTheme {
 
 export namespace BrandingTheme {
     export enum TypeEnum {
-        INVOICE = <any> 'INVOICE'
+        Invoice = <any> 'INVOICE'
     }
 }

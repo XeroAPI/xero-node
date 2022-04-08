@@ -65,68 +65,55 @@ export class ManualJournal {
             "name": "narration",
             "baseName": "Narration",
             "type": "string"
-        },
-        {
+        }        {
             "name": "journalLines",
             "baseName": "JournalLines",
             "type": "Array<ManualJournalLine>"
-        },
-        {
+        }        {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        },
-        {
+        }        {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
             "type": "LineAmountTypes"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "ManualJournal.StatusEnum"
-        },
-        {
+        }        {
             "name": "url",
             "baseName": "Url",
             "type": "string"
-        },
-        {
+        }        {
             "name": "showOnCashBasisReports",
             "baseName": "ShowOnCashBasisReports",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "manualJournalID",
             "baseName": "ManualJournalID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "statusAttributeString",
             "baseName": "StatusAttributeString",
             "type": "string"
-        },
-        {
+        }        {
             "name": "warnings",
             "baseName": "Warnings",
             "type": "Array<ValidationError>"
-        },
-        {
+        }        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
-        },
-        {
+        }        {
             "name": "attachments",
             "baseName": "Attachments",
             "type": "Array<Attachment>"
@@ -139,10 +126,10 @@ export class ManualJournal {
 
 export namespace ManualJournal {
     export enum StatusEnum {
-        DRAFT = <any> 'DRAFT',
-        POSTED = <any> 'POSTED',
-        DELETED = <any> 'DELETED',
-        VOIDED = <any> 'VOIDED',
-        ARCHIVED = <any> 'ARCHIVED'
+        Draft = <any> 'DRAFT',
+        Posted = <any> 'POSTED',
+        Deleted = <any> 'DELETED',
+        Voided = <any> 'VOIDED',
+        Archived = <any> 'ARCHIVED'
     }
 }

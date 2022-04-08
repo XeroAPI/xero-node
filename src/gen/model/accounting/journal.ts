@@ -41,38 +41,31 @@ export class Journal {
             "name": "journalID",
             "baseName": "JournalID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "journalDate",
             "baseName": "JournalDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "journalNumber",
             "baseName": "JournalNumber",
             "type": "number"
-        },
-        {
+        }        {
             "name": "createdDateUTC",
             "baseName": "CreatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        },
-        {
+        }        {
             "name": "sourceID",
             "baseName": "SourceID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "sourceType",
             "baseName": "SourceType",
             "type": "Journal.SourceTypeEnum"
-        },
-        {
+        }        {
             "name": "journalLines",
             "baseName": "JournalLines",
             "type": "Array<JournalLine>"
@@ -85,30 +78,30 @@ export class Journal {
 
 export namespace Journal {
     export enum SourceTypeEnum {
-        ACCREC = <any> 'ACCREC',
-        ACCPAY = <any> 'ACCPAY',
-        ACCRECCREDIT = <any> 'ACCRECCREDIT',
-        ACCPAYCREDIT = <any> 'ACCPAYCREDIT',
-        ACCRECPAYMENT = <any> 'ACCRECPAYMENT',
-        ACCPAYPAYMENT = <any> 'ACCPAYPAYMENT',
-        ARCREDITPAYMENT = <any> 'ARCREDITPAYMENT',
-        APCREDITPAYMENT = <any> 'APCREDITPAYMENT',
-        CASHREC = <any> 'CASHREC',
-        CASHPAID = <any> 'CASHPAID',
-        TRANSFER = <any> 'TRANSFER',
-        ARPREPAYMENT = <any> 'ARPREPAYMENT',
-        APPREPAYMENT = <any> 'APPREPAYMENT',
-        AROVERPAYMENT = <any> 'AROVERPAYMENT',
-        APOVERPAYMENT = <any> 'APOVERPAYMENT',
-        EXPCLAIM = <any> 'EXPCLAIM',
-        EXPPAYMENT = <any> 'EXPPAYMENT',
-        MANJOURNAL = <any> 'MANJOURNAL',
-        PAYSLIP = <any> 'PAYSLIP',
-        WAGEPAYABLE = <any> 'WAGEPAYABLE',
-        INTEGRATEDPAYROLLPE = <any> 'INTEGRATEDPAYROLLPE',
-        INTEGRATEDPAYROLLPT = <any> 'INTEGRATEDPAYROLLPT',
-        EXTERNALSPENDMONEY = <any> 'EXTERNALSPENDMONEY',
-        INTEGRATEDPAYROLLPTPAYMENT = <any> 'INTEGRATEDPAYROLLPTPAYMENT',
-        INTEGRATEDPAYROLLCN = <any> 'INTEGRATEDPAYROLLCN'
+        Accrec = <any> 'ACCREC',
+        Accpay = <any> 'ACCPAY',
+        Accreccredit = <any> 'ACCRECCREDIT',
+        Accpaycredit = <any> 'ACCPAYCREDIT',
+        Accrecpayment = <any> 'ACCRECPAYMENT',
+        Accpaypayment = <any> 'ACCPAYPAYMENT',
+        Arcreditpayment = <any> 'ARCREDITPAYMENT',
+        Apcreditpayment = <any> 'APCREDITPAYMENT',
+        Cashrec = <any> 'CASHREC',
+        Cashpaid = <any> 'CASHPAID',
+        Transfer = <any> 'TRANSFER',
+        Arprepayment = <any> 'ARPREPAYMENT',
+        Apprepayment = <any> 'APPREPAYMENT',
+        Aroverpayment = <any> 'AROVERPAYMENT',
+        Apoverpayment = <any> 'APOVERPAYMENT',
+        Expclaim = <any> 'EXPCLAIM',
+        Exppayment = <any> 'EXPPAYMENT',
+        Manjournal = <any> 'MANJOURNAL',
+        Payslip = <any> 'PAYSLIP',
+        Wagepayable = <any> 'WAGEPAYABLE',
+        Integratedpayrollpe = <any> 'INTEGRATEDPAYROLLPE',
+        Integratedpayrollpt = <any> 'INTEGRATEDPAYROLLPT',
+        Externalspendmoney = <any> 'EXTERNALSPENDMONEY',
+        Integratedpayrollptpayment = <any> 'INTEGRATEDPAYROLLPTPAYMENT',
+        Integratedpayrollcn = <any> 'INTEGRATEDPAYROLLCN'
     }
 }

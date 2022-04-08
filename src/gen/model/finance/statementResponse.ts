@@ -33,28 +33,23 @@ export class StatementResponse {
             "name": "statementId",
             "baseName": "statementId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "importedDateTimeUtc",
             "baseName": "importedDateTimeUtc",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "importSource",
             "baseName": "importSource",
             "type": "string"
-        },
-        {
+        }        {
             "name": "statementLines",
             "baseName": "statementLines",
             "type": "Array<StatementLineResponse>"

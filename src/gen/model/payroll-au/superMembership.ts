@@ -20,13 +20,11 @@ export class SuperMembership {
             "name": "superMembershipID",
             "baseName": "SuperMembershipID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "superFundID",
             "baseName": "SuperFundID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "employeeNumber",
             "baseName": "EmployeeNumber",
             "type": "string"

@@ -14,13 +14,11 @@ export class EarningsRateObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "earningsRate",
             "baseName": "earningsRate",
             "type": "EarningsRate"

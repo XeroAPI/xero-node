@@ -28,23 +28,19 @@ export class BalanceSheetAccountDetail {
             "name": "code",
             "baseName": "code",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountID",
             "baseName": "accountID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "reportingCode",
             "baseName": "reportingCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "total",
             "type": "number"

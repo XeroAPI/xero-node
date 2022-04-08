@@ -17,8 +17,7 @@ export class StartBalance {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "creditDebitIndicator",
             "baseName": "creditDebitIndicator",
             "type": "CreditDebitIndicator"

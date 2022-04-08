@@ -12,8 +12,7 @@ export class BankStatementResponse {
             "name": "statementLines",
             "baseName": "statementLines",
             "type": "StatementLinesResponse"
-        },
-        {
+        }        {
             "name": "currentStatement",
             "baseName": "currentStatement",
             "type": "CurrentStatementResponse"

@@ -36,33 +36,27 @@ export class PayRunCalendar {
             "name": "payrollCalendarID",
             "baseName": "payrollCalendarID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "calendarType",
             "baseName": "calendarType",
             "type": "PayRunCalendar.CalendarTypeEnum"
-        },
-        {
+        }        {
             "name": "periodStartDate",
             "baseName": "periodStartDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "periodEndDate",
             "baseName": "periodEndDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "paymentDate",
             "baseName": "paymentDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "updatedDateUTC",
             "type": "Date"

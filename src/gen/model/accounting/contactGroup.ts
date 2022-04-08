@@ -25,18 +25,15 @@ export class ContactGroup {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "ContactGroup.StatusEnum"
-        },
-        {
+        }        {
             "name": "contactGroupID",
             "baseName": "ContactGroupID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "contacts",
             "baseName": "Contacts",
             "type": "Array<Contact>"
@@ -49,7 +46,7 @@ export class ContactGroup {
 
 export namespace ContactGroup {
     export enum StatusEnum {
-        ACTIVE = <any> 'ACTIVE',
-        DELETED = <any> 'DELETED'
+        Active = <any> 'ACTIVE',
+        Deleted = <any> 'DELETED'
     }
 }

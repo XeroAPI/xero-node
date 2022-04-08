@@ -15,8 +15,7 @@ export class Balances {
             "name": "accountsReceivable",
             "baseName": "AccountsReceivable",
             "type": "AccountsReceivable"
-        },
-        {
+        }        {
             "name": "accountsPayable",
             "baseName": "AccountsPayable",
             "type": "AccountsPayable"

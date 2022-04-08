@@ -3,6 +3,6 @@
 * Status for project
 */
 export enum ProjectStatus {
-    INPROGRESS = <any> 'INPROGRESS',
-    CLOSED = <any> 'CLOSED'
+    Inprogress = <any> 'INPROGRESS',
+    Closed = <any> 'CLOSED'
 }

@@ -20,13 +20,11 @@ export class TotalDetail {
             "name": "totalPaid",
             "baseName": "totalPaid",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalOutstanding",
             "baseName": "totalOutstanding",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalCreditedUnApplied",
             "baseName": "totalCreditedUnApplied",
             "type": "number"

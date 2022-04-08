@@ -55,73 +55,59 @@ export class Task {
             "name": "taskId",
             "baseName": "taskId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "rate",
             "baseName": "rate",
             "type": "Amount"
-        },
-        {
+        }        {
             "name": "chargeType",
             "baseName": "chargeType",
             "type": "ChargeType"
-        },
-        {
+        }        {
             "name": "estimateMinutes",
             "baseName": "estimateMinutes",
             "type": "number"
-        },
-        {
+        }        {
             "name": "projectId",
             "baseName": "projectId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "totalMinutes",
             "baseName": "totalMinutes",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalAmount",
             "baseName": "totalAmount",
             "type": "Amount"
-        },
-        {
+        }        {
             "name": "minutesInvoiced",
             "baseName": "minutesInvoiced",
             "type": "number"
-        },
-        {
+        }        {
             "name": "minutesToBeInvoiced",
             "baseName": "minutesToBeInvoiced",
             "type": "number"
-        },
-        {
+        }        {
             "name": "fixedMinutes",
             "baseName": "fixedMinutes",
             "type": "number"
-        },
-        {
+        }        {
             "name": "nonChargeableMinutes",
             "baseName": "nonChargeableMinutes",
             "type": "number"
-        },
-        {
+        }        {
             "name": "amountToBeInvoiced",
             "baseName": "amountToBeInvoiced",
             "type": "Amount"
-        },
-        {
+        }        {
             "name": "amountInvoiced",
             "baseName": "amountInvoiced",
             "type": "Amount"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "status",
             "type": "Task.StatusEnum"
@@ -134,8 +120,8 @@ export class Task {
 
 export namespace Task {
     export enum StatusEnum {
-        ACTIVE = <any> 'ACTIVE',
-        INVOICED = <any> 'INVOICED',
-        LOCKED = <any> 'LOCKED'
+        Active = <any> 'ACTIVE',
+        Invoiced = <any> 'INVOICED',
+        Locked = <any> 'LOCKED'
     }
 }

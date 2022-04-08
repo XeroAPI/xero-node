@@ -24,18 +24,15 @@ export class ContactPerson {
             "name": "firstName",
             "baseName": "FirstName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "lastName",
             "baseName": "LastName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "emailAddress",
             "baseName": "EmailAddress",
             "type": "string"
-        },
-        {
+        }        {
             "name": "includeInEmails",
             "baseName": "IncludeInEmails",
             "type": "boolean"

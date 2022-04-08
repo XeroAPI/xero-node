@@ -44,43 +44,35 @@ export class TimeEntry {
             "name": "timeEntryId",
             "baseName": "timeEntryId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "userId",
             "baseName": "userId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "projectId",
             "baseName": "projectId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "taskId",
             "baseName": "taskId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "dateUtc",
             "baseName": "dateUtc",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "dateEnteredUtc",
             "baseName": "dateEnteredUtc",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "duration",
             "baseName": "duration",
             "type": "number"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "description",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "status",
             "type": "TimeEntry.StatusEnum"
@@ -93,8 +85,8 @@ export class TimeEntry {
 
 export namespace TimeEntry {
     export enum StatusEnum {
-        ACTIVE = <any> 'ACTIVE',
-        LOCKED = <any> 'LOCKED',
-        INVOICED = <any> 'INVOICED'
+        Active = <any> 'ACTIVE',
+        Locked = <any> 'LOCKED',
+        Invoiced = <any> 'INVOICED'
     }
 }

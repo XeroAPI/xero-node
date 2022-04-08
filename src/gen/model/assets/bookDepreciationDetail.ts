@@ -36,33 +36,27 @@ export class BookDepreciationDetail {
             "name": "currentCapitalGain",
             "baseName": "currentCapitalGain",
             "type": "number"
-        },
-        {
+        }        {
             "name": "currentGainLoss",
             "baseName": "currentGainLoss",
             "type": "number"
-        },
-        {
+        }        {
             "name": "depreciationStartDate",
             "baseName": "depreciationStartDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "costLimit",
             "baseName": "costLimit",
             "type": "number"
-        },
-        {
+        }        {
             "name": "residualValue",
             "baseName": "residualValue",
             "type": "number"
-        },
-        {
+        }        {
             "name": "priorAccumDepreciationAmount",
             "baseName": "priorAccumDepreciationAmount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "currentAccumDepreciationAmount",
             "baseName": "currentAccumDepreciationAmount",
             "type": "number"

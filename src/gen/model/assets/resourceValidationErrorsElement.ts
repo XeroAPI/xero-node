@@ -28,23 +28,19 @@ export class ResourceValidationErrorsElement {
             "name": "resourceName",
             "baseName": "resourceName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "localisedMessage",
             "baseName": "localisedMessage",
             "type": "string"
-        },
-        {
+        }        {
             "name": "type",
             "baseName": "type",
             "type": "string"
-        },
-        {
+        }        {
             "name": "title",
             "baseName": "title",
             "type": "string"
-        },
-        {
+        }        {
             "name": "detail",
             "baseName": "detail",
             "type": "string"

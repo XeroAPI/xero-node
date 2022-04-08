@@ -15,8 +15,7 @@ export class ImportSummary {
             "name": "accounts",
             "baseName": "Accounts",
             "type": "ImportSummaryAccounts"
-        },
-        {
+        }        {
             "name": "organisation",
             "baseName": "Organisation",
             "type": "ImportSummaryOrganisation"

@@ -41,48 +41,39 @@ export class FeedConnection {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountToken",
             "baseName": "accountToken",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountNumber",
             "baseName": "accountNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountName",
             "baseName": "accountName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountId",
             "baseName": "accountId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountType",
             "baseName": "accountType",
             "type": "FeedConnection.AccountTypeEnum"
-        },
-        {
+        }        {
             "name": "currency",
             "baseName": "currency",
             "type": "CurrencyCode"
-        },
-        {
+        }        {
             "name": "country",
             "baseName": "country",
             "type": "CountryCode"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "status",
             "type": "FeedConnection.StatusEnum"
-        },
-        {
+        }        {
             "name": "error",
             "baseName": "error",
             "type": "Error"
@@ -95,11 +86,11 @@ export class FeedConnection {
 
 export namespace FeedConnection {
     export enum AccountTypeEnum {
-        BANK = <any> 'BANK',
-        CREDITCARD = <any> 'CREDITCARD'
+        Bank = <any> 'BANK',
+        Creditcard = <any> 'CREDITCARD'
     }
     export enum StatusEnum {
-        PENDING = <any> 'PENDING',
-        REJECTED = <any> 'REJECTED'
+        Pending = <any> 'PENDING',
+        Rejected = <any> 'REJECTED'
     }
 }

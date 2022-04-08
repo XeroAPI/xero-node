@@ -40,38 +40,31 @@ export class BankAccount {
             "name": "accountName",
             "baseName": "accountName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountNumber",
             "baseName": "accountNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "sortCode",
             "baseName": "sortCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "particulars",
             "baseName": "particulars",
             "type": "string"
-        },
-        {
+        }        {
             "name": "code",
             "baseName": "code",
             "type": "string"
-        },
-        {
+        }        {
             "name": "dollarAmount",
             "baseName": "dollarAmount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "reference",
             "baseName": "reference",
             "type": "string"
-        },
-        {
+        }        {
             "name": "calculationType",
             "baseName": "calculationType",
             "type": "BankAccount.CalculationTypeEnum"

@@ -31,28 +31,23 @@ export class BankTransactionResponse {
             "name": "bankTransactionId",
             "baseName": "bankTransactionId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "batchPaymentId",
             "baseName": "batchPaymentId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "contact",
             "baseName": "contact",
             "type": "ContactResponse"
-        },
-        {
+        }        {
             "name": "date",
             "baseName": "date",
             "type": "string"
-        },
-        {
+        }        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "lineItems",
             "baseName": "lineItems",
             "type": "Array<LineItemResponse>"

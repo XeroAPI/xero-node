@@ -36,48 +36,39 @@ export class Statement {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        },
-        {
+        }        {
             "name": "feedConnectionId",
             "baseName": "feedConnectionId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "status",
             "type": "Statement.StatusEnum"
-        },
-        {
+        }        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "startBalance",
             "baseName": "startBalance",
             "type": "StartBalance"
-        },
-        {
+        }        {
             "name": "endBalance",
             "baseName": "endBalance",
             "type": "EndBalance"
-        },
-        {
+        }        {
             "name": "statementLines",
             "baseName": "statementLines",
             "type": "Array<StatementLine>"
-        },
-        {
+        }        {
             "name": "errors",
             "baseName": "errors",
             "type": "Array<Error>"
-        },
-        {
+        }        {
             "name": "statementLineCount",
             "baseName": "statementLineCount",
             "type": "number"
@@ -90,8 +81,8 @@ export class Statement {
 
 export namespace Statement {
     export enum StatusEnum {
-        PENDING = <any> 'PENDING',
-        REJECTED = <any> 'REJECTED',
-        DELIVERED = <any> 'DELIVERED'
+        Pending = <any> 'PENDING',
+        Rejected = <any> 'REJECTED',
+        Delivered = <any> 'DELIVERED'
     }
 }

@@ -28,23 +28,19 @@ export class TimesheetLine {
             "name": "timesheetLineID",
             "baseName": "timesheetLineID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "date",
             "baseName": "date",
             "type": "string"
-        },
-        {
+        }        {
             "name": "earningsRateID",
             "baseName": "earningsRateID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "trackingItemID",
             "baseName": "trackingItemID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "numberOfUnits",
             "type": "number"

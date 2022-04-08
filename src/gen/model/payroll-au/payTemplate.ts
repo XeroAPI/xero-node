@@ -18,23 +18,19 @@ export class PayTemplate {
             "name": "earningsLines",
             "baseName": "EarningsLines",
             "type": "Array<EarningsLine>"
-        },
-        {
+        }        {
             "name": "deductionLines",
             "baseName": "DeductionLines",
             "type": "Array<DeductionLine>"
-        },
-        {
+        }        {
             "name": "superLines",
             "baseName": "SuperLines",
             "type": "Array<SuperLine>"
-        },
-        {
+        }        {
             "name": "reimbursementLines",
             "baseName": "ReimbursementLines",
             "type": "Array<ReimbursementLine>"
-        },
-        {
+        }        {
             "name": "leaveLines",
             "baseName": "LeaveLines",
             "type": "Array<LeaveLine>"

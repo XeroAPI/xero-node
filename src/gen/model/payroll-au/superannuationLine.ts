@@ -40,43 +40,35 @@ export class SuperannuationLine {
             "name": "superMembershipID",
             "baseName": "SuperMembershipID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "contributionType",
             "baseName": "ContributionType",
             "type": "SuperannuationContributionType"
-        },
-        {
+        }        {
             "name": "calculationType",
             "baseName": "CalculationType",
             "type": "SuperannuationCalculationType"
-        },
-        {
+        }        {
             "name": "minimumMonthlyEarnings",
             "baseName": "MinimumMonthlyEarnings",
             "type": "number"
-        },
-        {
+        }        {
             "name": "expenseAccountCode",
             "baseName": "ExpenseAccountCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "liabilityAccountCode",
             "baseName": "LiabilityAccountCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "paymentDateForThisPeriod",
             "baseName": "PaymentDateForThisPeriod",
             "type": "string"
-        },
-        {
+        }        {
             "name": "percentage",
             "baseName": "Percentage",
             "type": "number"
-        },
-        {
+        }        {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"

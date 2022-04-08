@@ -24,18 +24,15 @@ export class TrackingOption {
             "name": "trackingOptionID",
             "baseName": "TrackingOptionID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "TrackingOption.StatusEnum"
-        },
-        {
+        }        {
             "name": "trackingCategoryID",
             "baseName": "TrackingCategoryID",
             "type": "string"
@@ -48,8 +45,8 @@ export class TrackingOption {
 
 export namespace TrackingOption {
     export enum StatusEnum {
-        ACTIVE = <any> 'ACTIVE',
-        ARCHIVED = <any> 'ARCHIVED',
-        DELETED = <any> 'DELETED'
+        Active = <any> 'ACTIVE',
+        Archived = <any> 'ARCHIVED',
+        Deleted = <any> 'DELETED'
     }
 }

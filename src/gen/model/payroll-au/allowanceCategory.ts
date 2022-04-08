@@ -1,10 +1,10 @@
 
 export enum AllowanceCategory {
-    NONDEDUCTIBLE = <any> 'NONDEDUCTIBLE',
-    UNIFORM = <any> 'UNIFORM',
-    PRIVATEVEHICLE = <any> 'PRIVATEVEHICLE',
-    HOMEOFFICE = <any> 'HOMEOFFICE',
-    TRANSPORT = <any> 'TRANSPORT',
-    GENERAL = <any> 'GENERAL',
-    OTHER = <any> 'OTHER'
+    Nondeductible = <any> 'NONDEDUCTIBLE',
+    Uniform = <any> 'UNIFORM',
+    Privatevehicle = <any> 'PRIVATEVEHICLE',
+    Homeoffice = <any> 'HOMEOFFICE',
+    Transport = <any> 'TRANSPORT',
+    General = <any> 'GENERAL',
+    Other = <any> 'OTHER'
 }

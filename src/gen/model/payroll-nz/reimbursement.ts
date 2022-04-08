@@ -44,43 +44,35 @@ export class Reimbursement {
             "name": "reimbursementID",
             "baseName": "reimbursementID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountID",
             "baseName": "accountID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "currentRecord",
             "baseName": "currentRecord",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "reimbursementCategory",
             "baseName": "reimbursementCategory",
             "type": "Reimbursement.ReimbursementCategoryEnum"
-        },
-        {
+        }        {
             "name": "calculationType",
             "baseName": "calculationType",
             "type": "Reimbursement.CalculationTypeEnum"
-        },
-        {
+        }        {
             "name": "standardAmount",
             "baseName": "standardAmount",
             "type": "string"
-        },
-        {
+        }        {
             "name": "standardTypeOfUnits",
             "baseName": "standardTypeOfUnits",
             "type": "Reimbursement.StandardTypeOfUnitsEnum"
-        },
-        {
+        }        {
             "name": "standardRatePerUnit",
             "baseName": "standardRatePerUnit",
             "type": "number"
@@ -93,9 +85,9 @@ export class Reimbursement {
 
 export namespace Reimbursement {
     export enum ReimbursementCategoryEnum {
-        GST = <any> 'GST',
-        NoGST = <any> 'NoGST',
-        GSTInclusive = <any> 'GSTInclusive'
+        Gst = <any> 'GST',
+        NoGst = <any> 'NoGST',
+        GstInclusive = <any> 'GSTInclusive'
     }
     export enum CalculationTypeEnum {
         Unknown = <any> 'Unknown',

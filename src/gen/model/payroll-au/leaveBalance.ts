@@ -24,18 +24,15 @@ export class LeaveBalance {
             "name": "leaveName",
             "baseName": "LeaveName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "leaveTypeID",
             "baseName": "LeaveTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "NumberOfUnits",
             "type": "number"
-        },
-        {
+        }        {
             "name": "typeOfUnits",
             "baseName": "TypeOfUnits",
             "type": "string"

@@ -18,13 +18,11 @@ export class BudgetLine {
             "name": "accountID",
             "baseName": "AccountID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountCode",
             "baseName": "AccountCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "budgetBalances",
             "baseName": "BudgetBalances",
             "type": "Array<BudgetBalance>"

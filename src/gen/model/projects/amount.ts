@@ -11,8 +11,7 @@ export class Amount {
             "name": "currency",
             "baseName": "currency",
             "type": "CurrencyCode"
-        },
-        {
+        }        {
             "name": "value",
             "baseName": "value",
             "type": "number"

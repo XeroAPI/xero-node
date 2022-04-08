@@ -32,28 +32,23 @@ export class SuperannuationLine {
             "name": "superannuationTypeID",
             "baseName": "superannuationTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "displayName",
             "baseName": "displayName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "fixedAmount",
             "baseName": "fixedAmount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "percentage",
             "baseName": "percentage",
             "type": "number"
-        },
-        {
+        }        {
             "name": "manualAdjustment",
             "baseName": "manualAdjustment",
             "type": "boolean"

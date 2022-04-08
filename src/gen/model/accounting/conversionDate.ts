@@ -19,8 +19,7 @@ export class ConversionDate {
             "name": "month",
             "baseName": "Month",
             "type": "number"
-        },
-        {
+        }        {
             "name": "year",
             "baseName": "Year",
             "type": "number"

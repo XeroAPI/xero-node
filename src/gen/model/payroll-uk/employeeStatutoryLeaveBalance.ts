@@ -20,13 +20,11 @@ export class EmployeeStatutoryLeaveBalance {
             "name": "leaveType",
             "baseName": "leaveType",
             "type": "EmployeeStatutoryLeaveBalance.LeaveTypeEnum"
-        },
-        {
+        }        {
             "name": "balanceRemaining",
             "baseName": "balanceRemaining",
             "type": "number"
-        },
-        {
+        }        {
             "name": "units",
             "baseName": "units",
             "type": "EmployeeStatutoryLeaveBalance.UnitsEnum"

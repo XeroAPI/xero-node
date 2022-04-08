@@ -1,6 +1,6 @@
 
 export enum RateType {
-    FIXEDAMOUNT = <any> 'FIXEDAMOUNT',
-    MULTIPLE = <any> 'MULTIPLE',
-    RATEPERUNIT = <any> 'RATEPERUNIT'
+    Fixedamount = <any> 'FIXEDAMOUNT',
+    Multiple = <any> 'MULTIPLE',
+    Rateperunit = <any> 'RATEPERUNIT'
 }

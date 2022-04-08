@@ -1,6 +1,6 @@
 
 export enum EarningsRateCalculationType {
-    USEEARNINGSRATE = <any> 'USEEARNINGSRATE',
-    ENTEREARNINGSRATE = <any> 'ENTEREARNINGSRATE',
-    ANNUALSALARY = <any> 'ANNUALSALARY'
+    Useearningsrate = <any> 'USEEARNINGSRATE',
+    Enterearningsrate = <any> 'ENTEREARNINGSRATE',
+    Annualsalary = <any> 'ANNUALSALARY'
 }

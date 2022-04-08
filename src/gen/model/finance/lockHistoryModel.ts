@@ -20,13 +20,11 @@ export class LockHistoryModel {
             "name": "hardLockDate",
             "baseName": "hardLockDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "softLockDate",
             "baseName": "softLockDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "updatedDateUtc",
             "baseName": "updatedDateUtc",
             "type": "Date"

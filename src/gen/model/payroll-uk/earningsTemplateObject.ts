@@ -14,13 +14,11 @@ export class EarningsTemplateObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "earningTemplate",
             "baseName": "earningTemplate",
             "type": "EarningsTemplate"

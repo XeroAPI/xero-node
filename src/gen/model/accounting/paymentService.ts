@@ -33,28 +33,23 @@ export class PaymentService {
             "name": "paymentServiceID",
             "baseName": "PaymentServiceID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "paymentServiceName",
             "baseName": "PaymentServiceName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "paymentServiceUrl",
             "baseName": "PaymentServiceUrl",
             "type": "string"
-        },
-        {
+        }        {
             "name": "payNowText",
             "baseName": "PayNowText",
             "type": "string"
-        },
-        {
+        }        {
             "name": "paymentServiceType",
             "baseName": "PaymentServiceType",
             "type": "string"
-        },
-        {
+        }        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"

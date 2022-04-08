@@ -24,18 +24,15 @@ export class SuperFundProduct {
             "name": "aBN",
             "baseName": "ABN",
             "type": "string"
-        },
-        {
+        }        {
             "name": "uSI",
             "baseName": "USI",
             "type": "string"
-        },
-        {
+        }        {
             "name": "sPIN",
             "baseName": "SPIN",
             "type": "string"
-        },
-        {
+        }        {
             "name": "productName",
             "baseName": "ProductName",
             "type": "string"

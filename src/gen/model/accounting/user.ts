@@ -36,33 +36,27 @@ export class User {
             "name": "userID",
             "baseName": "UserID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "emailAddress",
             "baseName": "EmailAddress",
             "type": "string"
-        },
-        {
+        }        {
             "name": "firstName",
             "baseName": "FirstName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "lastName",
             "baseName": "LastName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "isSubscriber",
             "baseName": "IsSubscriber",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "organisationRole",
             "baseName": "OrganisationRole",
             "type": "User.OrganisationRoleEnum"
@@ -75,12 +69,12 @@ export class User {
 
 export namespace User {
     export enum OrganisationRoleEnum {
-        READONLY = <any> 'READONLY',
-        INVOICEONLY = <any> 'INVOICEONLY',
-        STANDARD = <any> 'STANDARD',
-        FINANCIALADVISER = <any> 'FINANCIALADVISER',
-        MANAGEDCLIENT = <any> 'MANAGEDCLIENT',
-        CASHBOOKCLIENT = <any> 'CASHBOOKCLIENT',
-        UNKNOWN = <any> 'UNKNOWN'
+        Readonly = <any> 'READONLY',
+        Invoiceonly = <any> 'INVOICEONLY',
+        Standard = <any> 'STANDARD',
+        Financialadviser = <any> 'FINANCIALADVISER',
+        Managedclient = <any> 'MANAGEDCLIENT',
+        Cashbookclient = <any> 'CASHBOOKCLIENT',
+        Unknown = <any> 'UNKNOWN'
     }
 }

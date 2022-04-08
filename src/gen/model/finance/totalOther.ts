@@ -20,13 +20,11 @@ export class TotalOther {
             "name": "totalOutstandingAged",
             "baseName": "totalOutstandingAged",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalVoided",
             "baseName": "totalVoided",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalCredited",
             "baseName": "totalCredited",
             "type": "number"

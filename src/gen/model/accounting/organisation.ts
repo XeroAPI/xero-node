@@ -135,163 +135,131 @@ export class Organisation {
             "name": "organisationID",
             "baseName": "OrganisationID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "aPIKey",
             "baseName": "APIKey",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "legalName",
             "baseName": "LegalName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "paysTax",
             "baseName": "PaysTax",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "version",
             "baseName": "Version",
             "type": "Organisation.VersionEnum"
-        },
-        {
+        }        {
             "name": "organisationType",
             "baseName": "OrganisationType",
             "type": "Organisation.OrganisationTypeEnum"
-        },
-        {
+        }        {
             "name": "baseCurrency",
             "baseName": "BaseCurrency",
             "type": "CurrencyCode"
-        },
-        {
+        }        {
             "name": "countryCode",
             "baseName": "CountryCode",
             "type": "CountryCode"
-        },
-        {
+        }        {
             "name": "isDemoCompany",
             "baseName": "IsDemoCompany",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "organisationStatus",
             "baseName": "OrganisationStatus",
             "type": "string"
-        },
-        {
+        }        {
             "name": "registrationNumber",
             "baseName": "RegistrationNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "employerIdentificationNumber",
             "baseName": "EmployerIdentificationNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "taxNumber",
             "baseName": "TaxNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "financialYearEndDay",
             "baseName": "FinancialYearEndDay",
             "type": "number"
-        },
-        {
+        }        {
             "name": "financialYearEndMonth",
             "baseName": "FinancialYearEndMonth",
             "type": "number"
-        },
-        {
+        }        {
             "name": "salesTaxBasis",
             "baseName": "SalesTaxBasis",
             "type": "Organisation.SalesTaxBasisEnum"
-        },
-        {
+        }        {
             "name": "salesTaxPeriod",
             "baseName": "SalesTaxPeriod",
             "type": "Organisation.SalesTaxPeriodEnum"
-        },
-        {
+        }        {
             "name": "defaultSalesTax",
             "baseName": "DefaultSalesTax",
             "type": "string"
-        },
-        {
+        }        {
             "name": "defaultPurchasesTax",
             "baseName": "DefaultPurchasesTax",
             "type": "string"
-        },
-        {
+        }        {
             "name": "periodLockDate",
             "baseName": "PeriodLockDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endOfYearLockDate",
             "baseName": "EndOfYearLockDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "createdDateUTC",
             "baseName": "CreatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "timezone",
             "baseName": "Timezone",
             "type": "TimeZone"
-        },
-        {
+        }        {
             "name": "organisationEntityType",
             "baseName": "OrganisationEntityType",
             "type": "Organisation.OrganisationEntityTypeEnum"
-        },
-        {
+        }        {
             "name": "shortCode",
             "baseName": "ShortCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "_class",
             "baseName": "Class",
             "type": "Organisation.ClassEnum"
-        },
-        {
+        }        {
             "name": "edition",
             "baseName": "Edition",
             "type": "Organisation.EditionEnum"
-        },
-        {
+        }        {
             "name": "lineOfBusiness",
             "baseName": "LineOfBusiness",
             "type": "string"
-        },
-        {
+        }        {
             "name": "addresses",
             "baseName": "Addresses",
             "type": "Array<AddressForOrganisation>"
-        },
-        {
+        }        {
             "name": "phones",
             "baseName": "Phones",
             "type": "Array<Phone>"
-        },
-        {
+        }        {
             "name": "externalLinks",
             "baseName": "ExternalLinks",
             "type": "Array<ExternalLink>"
-        },
-        {
+        }        {
             "name": "paymentTerms",
             "baseName": "PaymentTerms",
             "type": "PaymentTerm"
@@ -304,89 +272,89 @@ export class Organisation {
 
 export namespace Organisation {
     export enum VersionEnum {
-        AU = <any> 'AU',
-        NZ = <any> 'NZ',
-        GLOBAL = <any> 'GLOBAL',
-        UK = <any> 'UK',
-        US = <any> 'US',
-        AUONRAMP = <any> 'AUONRAMP',
-        NZONRAMP = <any> 'NZONRAMP',
-        GLOBALONRAMP = <any> 'GLOBALONRAMP',
-        UKONRAMP = <any> 'UKONRAMP',
-        USONRAMP = <any> 'USONRAMP'
+        Au = <any> 'AU',
+        Nz = <any> 'NZ',
+        Global = <any> 'GLOBAL',
+        Uk = <any> 'UK',
+        Us = <any> 'US',
+        Auonramp = <any> 'AUONRAMP',
+        Nzonramp = <any> 'NZONRAMP',
+        Globalonramp = <any> 'GLOBALONRAMP',
+        Ukonramp = <any> 'UKONRAMP',
+        Usonramp = <any> 'USONRAMP'
     }
     export enum OrganisationTypeEnum {
-        ACCOUNTINGPRACTICE = <any> 'ACCOUNTING_PRACTICE',
-        COMPANY = <any> 'COMPANY',
-        CHARITY = <any> 'CHARITY',
-        CLUBORSOCIETY = <any> 'CLUB_OR_SOCIETY',
-        INDIVIDUAL = <any> 'INDIVIDUAL',
-        LOOKTHROUGHCOMPANY = <any> 'LOOK_THROUGH_COMPANY',
-        NOTFORPROFIT = <any> 'NOT_FOR_PROFIT',
-        PARTNERSHIP = <any> 'PARTNERSHIP',
-        SCORPORATION = <any> 'S_CORPORATION',
-        SELFMANAGEDSUPERANNUATIONFUND = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
-        SOLETRADER = <any> 'SOLE_TRADER',
-        SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
-        TRUST = <any> 'TRUST'
+        AccountingPractice = <any> 'ACCOUNTING_PRACTICE',
+        Company = <any> 'COMPANY',
+        Charity = <any> 'CHARITY',
+        ClubOrSociety = <any> 'CLUB_OR_SOCIETY',
+        Individual = <any> 'INDIVIDUAL',
+        LookThroughCompany = <any> 'LOOK_THROUGH_COMPANY',
+        NotForProfit = <any> 'NOT_FOR_PROFIT',
+        Partnership = <any> 'PARTNERSHIP',
+        SCorporation = <any> 'S_CORPORATION',
+        SelfManagedSuperannuationFund = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
+        SoleTrader = <any> 'SOLE_TRADER',
+        SuperannuationFund = <any> 'SUPERANNUATION_FUND',
+        Trust = <any> 'TRUST'
     }
     export enum SalesTaxBasisEnum {
-        PAYMENTS = <any> 'PAYMENTS',
-        INVOICE = <any> 'INVOICE',
-        NONE = <any> 'NONE',
-        CASH = <any> 'CASH',
-        ACCRUAL = <any> 'ACCRUAL',
-        FLATRATECASH = <any> 'FLATRATECASH',
-        FLATRATEACCRUAL = <any> 'FLATRATEACCRUAL',
-        ACCRUALS = <any> 'ACCRUALS'
+        Payments = <any> 'PAYMENTS',
+        Invoice = <any> 'INVOICE',
+        None = <any> 'NONE',
+        Cash = <any> 'CASH',
+        Accrual = <any> 'ACCRUAL',
+        Flatratecash = <any> 'FLATRATECASH',
+        Flatrateaccrual = <any> 'FLATRATEACCRUAL',
+        Accruals = <any> 'ACCRUALS'
     }
     export enum SalesTaxPeriodEnum {
-        MONTHLY = <any> 'MONTHLY',
-        QUARTERLY1 = <any> 'QUARTERLY1',
-        QUARTERLY2 = <any> 'QUARTERLY2',
-        QUARTERLY3 = <any> 'QUARTERLY3',
-        ANNUALLY = <any> 'ANNUALLY',
-        ONEMONTHS = <any> 'ONEMONTHS',
-        TWOMONTHS = <any> 'TWOMONTHS',
-        SIXMONTHS = <any> 'SIXMONTHS',
-        _1MONTHLY = <any> '1MONTHLY',
-        _2MONTHLY = <any> '2MONTHLY',
-        _3MONTHLY = <any> '3MONTHLY',
-        _6MONTHLY = <any> '6MONTHLY',
-        QUARTERLY = <any> 'QUARTERLY',
-        YEARLY = <any> 'YEARLY',
-        NONE = <any> 'NONE'
+        Monthly = <any> 'MONTHLY',
+        Quarterly1 = <any> 'QUARTERLY1',
+        Quarterly2 = <any> 'QUARTERLY2',
+        Quarterly3 = <any> 'QUARTERLY3',
+        Annually = <any> 'ANNUALLY',
+        Onemonths = <any> 'ONEMONTHS',
+        Twomonths = <any> 'TWOMONTHS',
+        Sixmonths = <any> 'SIXMONTHS',
+        _1Monthly = <any> '1MONTHLY',
+        _2Monthly = <any> '2MONTHLY',
+        _3Monthly = <any> '3MONTHLY',
+        _6Monthly = <any> '6MONTHLY',
+        Quarterly = <any> 'QUARTERLY',
+        Yearly = <any> 'YEARLY',
+        None = <any> 'NONE'
     }
     export enum OrganisationEntityTypeEnum {
-        ACCOUNTINGPRACTICE = <any> 'ACCOUNTING_PRACTICE',
-        COMPANY = <any> 'COMPANY',
-        CHARITY = <any> 'CHARITY',
-        CLUBORSOCIETY = <any> 'CLUB_OR_SOCIETY',
-        INDIVIDUAL = <any> 'INDIVIDUAL',
-        LOOKTHROUGHCOMPANY = <any> 'LOOK_THROUGH_COMPANY',
-        NOTFORPROFIT = <any> 'NOT_FOR_PROFIT',
-        PARTNERSHIP = <any> 'PARTNERSHIP',
-        SCORPORATION = <any> 'S_CORPORATION',
-        SELFMANAGEDSUPERANNUATIONFUND = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
-        SOLETRADER = <any> 'SOLE_TRADER',
-        SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
-        TRUST = <any> 'TRUST'
+        AccountingPractice = <any> 'ACCOUNTING_PRACTICE',
+        Company = <any> 'COMPANY',
+        Charity = <any> 'CHARITY',
+        ClubOrSociety = <any> 'CLUB_OR_SOCIETY',
+        Individual = <any> 'INDIVIDUAL',
+        LookThroughCompany = <any> 'LOOK_THROUGH_COMPANY',
+        NotForProfit = <any> 'NOT_FOR_PROFIT',
+        Partnership = <any> 'PARTNERSHIP',
+        SCorporation = <any> 'S_CORPORATION',
+        SelfManagedSuperannuationFund = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
+        SoleTrader = <any> 'SOLE_TRADER',
+        SuperannuationFund = <any> 'SUPERANNUATION_FUND',
+        Trust = <any> 'TRUST'
     }
     export enum ClassEnum {
-        DEMO = <any> 'DEMO',
-        TRIAL = <any> 'TRIAL',
-        STARTER = <any> 'STARTER',
-        STANDARD = <any> 'STANDARD',
-        PREMIUM = <any> 'PREMIUM',
-        PREMIUM20 = <any> 'PREMIUM_20',
-        PREMIUM50 = <any> 'PREMIUM_50',
-        PREMIUM100 = <any> 'PREMIUM_100',
-        LEDGER = <any> 'LEDGER',
-        GSTCASHBOOK = <any> 'GST_CASHBOOK',
-        NONGSTCASHBOOK = <any> 'NON_GST_CASHBOOK'
+        Demo = <any> 'DEMO',
+        Trial = <any> 'TRIAL',
+        Starter = <any> 'STARTER',
+        Standard = <any> 'STANDARD',
+        Premium = <any> 'PREMIUM',
+        Premium20 = <any> 'PREMIUM_20',
+        Premium50 = <any> 'PREMIUM_50',
+        Premium100 = <any> 'PREMIUM_100',
+        Ledger = <any> 'LEDGER',
+        GstCashbook = <any> 'GST_CASHBOOK',
+        NonGstCashbook = <any> 'NON_GST_CASHBOOK'
     }
     export enum EditionEnum {
-        BUSINESS = <any> 'BUSINESS',
-        PARTNER = <any> 'PARTNER'
+        Business = <any> 'BUSINESS',
+        Partner = <any> 'PARTNER'
     }
 }

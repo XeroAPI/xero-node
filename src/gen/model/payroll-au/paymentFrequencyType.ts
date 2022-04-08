@@ -1,10 +1,10 @@
 
 export enum PaymentFrequencyType {
-    WEEKLY = <any> 'WEEKLY',
-    MONTHLY = <any> 'MONTHLY',
-    FORTNIGHTLY = <any> 'FORTNIGHTLY',
-    QUARTERLY = <any> 'QUARTERLY',
-    TWICEMONTHLY = <any> 'TWICEMONTHLY',
-    FOURWEEKLY = <any> 'FOURWEEKLY',
-    YEARLY = <any> 'YEARLY'
+    Weekly = <any> 'WEEKLY',
+    Monthly = <any> 'MONTHLY',
+    Fortnightly = <any> 'FORTNIGHTLY',
+    Quarterly = <any> 'QUARTERLY',
+    Twicemonthly = <any> 'TWICEMONTHLY',
+    Fourweekly = <any> 'FOURWEEKLY',
+    Yearly = <any> 'YEARLY'
 }

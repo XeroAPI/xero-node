@@ -24,18 +24,15 @@ export class DeductionLine {
             "name": "deductionTypeID",
             "baseName": "deductionTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "subjectToTax",
             "baseName": "subjectToTax",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "percentage",
             "baseName": "percentage",
             "type": "number"

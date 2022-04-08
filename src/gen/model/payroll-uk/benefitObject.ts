@@ -14,13 +14,11 @@ export class BenefitObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "benefit",
             "baseName": "benefit",
             "type": "Benefit"

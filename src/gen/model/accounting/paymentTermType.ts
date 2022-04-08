@@ -1,7 +1,7 @@
 
 export enum PaymentTermType {
-    DAYSAFTERBILLDATE = <any> 'DAYSAFTERBILLDATE',
-    DAYSAFTERBILLMONTH = <any> 'DAYSAFTERBILLMONTH',
-    OFCURRENTMONTH = <any> 'OFCURRENTMONTH',
-    OFFOLLOWINGMONTH = <any> 'OFFOLLOWINGMONTH'
+    Daysafterbilldate = <any> 'DAYSAFTERBILLDATE',
+    Daysafterbillmonth = <any> 'DAYSAFTERBILLMONTH',
+    Ofcurrentmonth = <any> 'OFCURRENTMONTH',
+    Offollowingmonth = <any> 'OFFOLLOWINGMONTH'
 }

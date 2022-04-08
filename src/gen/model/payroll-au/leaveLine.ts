@@ -34,38 +34,31 @@ export class LeaveLine {
             "name": "leaveTypeID",
             "baseName": "LeaveTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "calculationType",
             "baseName": "CalculationType",
             "type": "LeaveLineCalculationType"
-        },
-        {
+        }        {
             "name": "entitlementFinalPayPayoutType",
             "baseName": "EntitlementFinalPayPayoutType",
             "type": "EntitlementFinalPayPayoutType"
-        },
-        {
+        }        {
             "name": "employmentTerminationPaymentType",
             "baseName": "EmploymentTerminationPaymentType",
             "type": "EmploymentTerminationPaymentType"
-        },
-        {
+        }        {
             "name": "includeSuperannuationGuaranteeContribution",
             "baseName": "IncludeSuperannuationGuaranteeContribution",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "NumberOfUnits",
             "type": "number"
-        },
-        {
+        }        {
             "name": "annualNumberOfUnits",
             "baseName": "AnnualNumberOfUnits",
             "type": "number"
-        },
-        {
+        }        {
             "name": "fullTimeNumberOfUnitsPerPeriod",
             "baseName": "FullTimeNumberOfUnitsPerPeriod",
             "type": "number"

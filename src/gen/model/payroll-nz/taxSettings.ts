@@ -30,28 +30,23 @@ export class TaxSettings {
             "name": "periodUnits",
             "baseName": "periodUnits",
             "type": "number"
-        },
-        {
+        }        {
             "name": "periodType",
             "baseName": "periodType",
             "type": "TaxSettings.PeriodTypeEnum"
-        },
-        {
+        }        {
             "name": "taxCode",
             "baseName": "taxCode",
             "type": "TaxCode"
-        },
-        {
+        }        {
             "name": "specialTaxRate",
             "baseName": "specialTaxRate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "lumpSumTaxCode",
             "baseName": "lumpSumTaxCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "lumpSumAmount",
             "baseName": "lumpSumAmount",
             "type": "string"

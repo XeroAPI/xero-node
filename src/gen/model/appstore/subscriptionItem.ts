@@ -13,6 +13,10 @@ export class SubscriptionItem {
     'price': Price;
     'product': Product;
     /**
+    * The quantity of the item. For a fixed product, it is 1. For a per-seat product, it is a positive integer. For metered products, it is always null.
+    */
+    'quantity'?: number;
+    /**
     * Date the subscription started, or will start. Note: this could be in the future for downgrades or reduced number of seats that haven\'t taken effect yet. 
     */
     'startDate': Date;
@@ -32,33 +36,31 @@ export class SubscriptionItem {
             "name": "endDate",
             "baseName": "endDate",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        },
-        {
+        }        {
             "name": "price",
             "baseName": "price",
             "type": "Price"
-        },
-        {
+        }        {
             "name": "product",
             "baseName": "product",
             "type": "Product"
-        },
-        {
+        }        {
+            "name": "quantity",
+            "baseName": "quantity",
+            "type": "number"
+        }        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "status",
             "type": "SubscriptionItem.StatusEnum"
-        },
-        {
+        }        {
             "name": "testMode",
             "baseName": "testMode",
             "type": "boolean"
@@ -71,8 +73,8 @@ export class SubscriptionItem {
 
 export namespace SubscriptionItem {
     export enum StatusEnum {
-        ACTIVE = <any> 'ACTIVE',
-        CANCELED = <any> 'CANCELED',
-        PENDINGACTIVATION = <any> 'PENDING_ACTIVATION'
+        Active = <any> 'ACTIVE',
+        Canceled = <any> 'CANCELED',
+        PendingActivation = <any> 'PENDING_ACTIVATION'
     }
 }

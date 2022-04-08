@@ -14,13 +14,11 @@ export class EarningsOrderObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "statutoryDeduction",
             "baseName": "statutoryDeduction",
             "type": "EarningsOrder"

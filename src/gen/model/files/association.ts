@@ -20,18 +20,15 @@ export class Association {
             "name": "fileId",
             "baseName": "FileId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "objectId",
             "baseName": "ObjectId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "objectGroup",
             "baseName": "ObjectGroup",
             "type": "ObjectGroup"
-        },
-        {
+        }        {
             "name": "objectType",
             "baseName": "ObjectType",
             "type": "ObjectType"

@@ -14,13 +14,11 @@ export class Benefits {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "benefits",
             "baseName": "benefits",
             "type": "Array<Benefit>"

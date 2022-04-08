@@ -18,13 +18,11 @@ export class UserActivitiesResponse {
             "name": "organisationId",
             "baseName": "organisationId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "dataMonth",
             "baseName": "dataMonth",
             "type": "string"
-        },
-        {
+        }        {
             "name": "users",
             "baseName": "users",
             "type": "Array<UserResponse>"

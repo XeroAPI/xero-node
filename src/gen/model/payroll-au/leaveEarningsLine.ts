@@ -20,13 +20,11 @@ export class LeaveEarningsLine {
             "name": "earningsRateID",
             "baseName": "EarningsRateID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "ratePerUnit",
             "baseName": "RatePerUnit",
             "type": "number"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "NumberOfUnits",
             "type": "number"

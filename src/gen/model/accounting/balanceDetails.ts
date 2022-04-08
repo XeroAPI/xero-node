@@ -23,13 +23,11 @@ export class BalanceDetails {
             "name": "balance",
             "baseName": "Balance",
             "type": "number"
-        },
-        {
+        }        {
             "name": "currencyCode",
             "baseName": "CurrencyCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "currencyRate",
             "baseName": "CurrencyRate",
             "type": "number"

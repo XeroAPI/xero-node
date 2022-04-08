@@ -10,8 +10,7 @@ export class ReportAttribute {
             "name": "id",
             "baseName": "Id",
             "type": "string"
-        },
-        {
+        }        {
             "name": "value",
             "baseName": "Value",
             "type": "string"

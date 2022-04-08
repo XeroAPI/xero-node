@@ -28,23 +28,19 @@ export class ReimbursementLine {
             "name": "reimbursementTypeID",
             "baseName": "reimbursementTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "description",
             "type": "string"
-        },
-        {
+        }        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "ratePerUnit",
             "baseName": "ratePerUnit",
             "type": "number"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "numberOfUnits",
             "type": "number"

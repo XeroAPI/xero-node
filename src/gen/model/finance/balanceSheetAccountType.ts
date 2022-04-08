@@ -21,13 +21,11 @@ export class BalanceSheetAccountType {
             "name": "accountType",
             "baseName": "accountType",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accounts",
             "baseName": "accounts",
             "type": "Array<BalanceSheetAccountDetail>"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "total",
             "type": "number"

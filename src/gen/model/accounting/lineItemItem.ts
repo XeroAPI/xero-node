@@ -20,13 +20,11 @@ export class LineItemItem {
             "name": "code",
             "baseName": "Code",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "itemID",
             "baseName": "ItemID",
             "type": "string"

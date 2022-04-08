@@ -32,28 +32,23 @@ export class LeaveType {
             "name": "leaveTypeID",
             "baseName": "leaveTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "isPaidLeave",
             "baseName": "isPaidLeave",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "showOnPayslip",
             "baseName": "showOnPayslip",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "updatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "isActive",
             "baseName": "isActive",
             "type": "boolean"

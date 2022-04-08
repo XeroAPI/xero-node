@@ -5,7 +5,6 @@ export * from '././folder';
 export * from '././folders';
 export * from '././objectGroup';
 export * from '././objectType';
-export * from '././uploadObject';
 export * from '././user';
 
 import localVarRequest = require('request');
@@ -17,7 +16,6 @@ import { Folder } from '././folder';
 import { Folders } from '././folders';
 import { ObjectGroup } from '././objectGroup';
 import { ObjectType } from '././objectType';
-import { UploadObject } from '././uploadObject';
 import { User } from '././user';
 
 /* tslint:disable:no-unused-variable */
@@ -43,7 +41,6 @@ let typeMap: {[index: string]: any} = {
     "Files": Files,
     "Folder": Folder,
     "Folders": Folders,
-    "UploadObject": UploadObject,
     "User": User,
 }
 

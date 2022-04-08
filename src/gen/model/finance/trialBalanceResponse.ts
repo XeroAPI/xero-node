@@ -21,13 +21,11 @@ export class TrialBalanceResponse {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accounts",
             "baseName": "accounts",
             "type": "Array<TrialBalanceAccount>"

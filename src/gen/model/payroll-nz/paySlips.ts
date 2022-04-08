@@ -14,13 +14,11 @@ export class PaySlips {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "paySlips",
             "baseName": "paySlips",
             "type": "Array<PaySlip>"

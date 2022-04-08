@@ -28,23 +28,19 @@ export class Folder {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "fileCount",
             "baseName": "FileCount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "email",
             "baseName": "Email",
             "type": "string"
-        },
-        {
+        }        {
             "name": "isInbox",
             "baseName": "IsInbox",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "id",
             "baseName": "Id",
             "type": "string"

@@ -23,13 +23,11 @@ export class APIException {
             "name": "errorNumber",
             "baseName": "ErrorNumber",
             "type": "number"
-        },
-        {
+        }        {
             "name": "type",
             "baseName": "Type",
             "type": "string"
-        },
-        {
+        }        {
             "name": "message",
             "baseName": "Message",
             "type": "string"

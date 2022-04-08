@@ -24,18 +24,15 @@ export class HistoryRecord {
             "name": "details",
             "baseName": "Details",
             "type": "string"
-        },
-        {
+        }        {
             "name": "changes",
             "baseName": "Changes",
             "type": "string"
-        },
-        {
+        }        {
             "name": "user",
             "baseName": "User",
             "type": "string"
-        },
-        {
+        }        {
             "name": "dateUTC",
             "baseName": "DateUTC",
             "type": "Date"

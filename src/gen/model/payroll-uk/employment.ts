@@ -24,18 +24,15 @@ export class Employment {
             "name": "payrollCalendarID",
             "baseName": "payrollCalendarID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "employeeNumber",
             "baseName": "employeeNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "niCategory",
             "baseName": "niCategory",
             "type": "Employment.NiCategoryEnum"
@@ -51,10 +48,15 @@ export namespace Employment {
         A = <any> 'A',
         B = <any> 'B',
         C = <any> 'C',
+        F = <any> 'F',
         H = <any> 'H',
+        I = <any> 'I',
         J = <any> 'J',
+        L = <any> 'L',
         M = <any> 'M',
-        Z = <any> 'Z',
-        X = <any> 'X'
+        S = <any> 'S',
+        V = <any> 'V',
+        X = <any> 'X',
+        Z = <any> 'Z'
     }
 }

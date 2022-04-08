@@ -1,15 +1,15 @@
 
 export enum EarningsType {
-    FIXED = <any> 'FIXED',
-    ORDINARYTIMEEARNINGS = <any> 'ORDINARYTIMEEARNINGS',
-    OVERTIMEEARNINGS = <any> 'OVERTIMEEARNINGS',
-    ALLOWANCE = <any> 'ALLOWANCE',
-    LUMPSUMD = <any> 'LUMPSUMD',
-    EMPLOYMENTTERMINATIONPAYMENT = <any> 'EMPLOYMENTTERMINATIONPAYMENT',
-    LUMPSUMA = <any> 'LUMPSUMA',
-    LUMPSUMB = <any> 'LUMPSUMB',
-    BONUSESANDCOMMISSIONS = <any> 'BONUSESANDCOMMISSIONS',
-    LUMPSUME = <any> 'LUMPSUME',
-    LUMPSUMW = <any> 'LUMPSUMW',
-    DIRECTORSFEES = <any> 'DIRECTORSFEES'
+    Fixed = <any> 'FIXED',
+    Ordinarytimeearnings = <any> 'ORDINARYTIMEEARNINGS',
+    Overtimeearnings = <any> 'OVERTIMEEARNINGS',
+    Allowance = <any> 'ALLOWANCE',
+    Lumpsumd = <any> 'LUMPSUMD',
+    Employmentterminationpayment = <any> 'EMPLOYMENTTERMINATIONPAYMENT',
+    Lumpsuma = <any> 'LUMPSUMA',
+    Lumpsumb = <any> 'LUMPSUMB',
+    Bonusesandcommissions = <any> 'BONUSESANDCOMMISSIONS',
+    Lumpsume = <any> 'LUMPSUME',
+    Lumpsumw = <any> 'LUMPSUMW',
+    Directorsfees = <any> 'DIRECTORSFEES'
 }

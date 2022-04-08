@@ -32,28 +32,23 @@ export class Attachment {
             "name": "attachmentID",
             "baseName": "AttachmentID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "fileName",
             "baseName": "FileName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "url",
             "baseName": "Url",
             "type": "string"
-        },
-        {
+        }        {
             "name": "mimeType",
             "baseName": "MimeType",
             "type": "string"
-        },
-        {
+        }        {
             "name": "contentLength",
             "baseName": "ContentLength",
             "type": "number"
-        },
-        {
+        }        {
             "name": "includeOnline",
             "baseName": "IncludeOnline",
             "type": "boolean"

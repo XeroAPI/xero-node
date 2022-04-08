@@ -16,8 +16,7 @@ export class InvalidField {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "reason",
             "baseName": "reason",
             "type": "string"

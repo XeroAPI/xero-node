@@ -53,53 +53,43 @@ export class LinkedTransaction {
             "name": "sourceTransactionID",
             "baseName": "SourceTransactionID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "sourceLineItemID",
             "baseName": "SourceLineItemID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "contactID",
             "baseName": "ContactID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "targetTransactionID",
             "baseName": "TargetTransactionID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "targetLineItemID",
             "baseName": "TargetLineItemID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "linkedTransactionID",
             "baseName": "LinkedTransactionID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "LinkedTransaction.StatusEnum"
-        },
-        {
+        }        {
             "name": "type",
             "baseName": "Type",
             "type": "LinkedTransaction.TypeEnum"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "sourceTransactionTypeCode",
             "baseName": "SourceTransactionTypeCode",
             "type": "LinkedTransaction.SourceTransactionTypeCodeEnum"
-        },
-        {
+        }        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
@@ -112,17 +102,17 @@ export class LinkedTransaction {
 
 export namespace LinkedTransaction {
     export enum StatusEnum {
-        APPROVED = <any> 'APPROVED',
-        DRAFT = <any> 'DRAFT',
-        ONDRAFT = <any> 'ONDRAFT',
-        BILLED = <any> 'BILLED',
-        VOIDED = <any> 'VOIDED'
+        Approved = <any> 'APPROVED',
+        Draft = <any> 'DRAFT',
+        Ondraft = <any> 'ONDRAFT',
+        Billed = <any> 'BILLED',
+        Voided = <any> 'VOIDED'
     }
     export enum TypeEnum {
-        BILLABLEEXPENSE = <any> 'BILLABLEEXPENSE'
+        Billableexpense = <any> 'BILLABLEEXPENSE'
     }
     export enum SourceTransactionTypeCodeEnum {
-        ACCPAY = <any> 'ACCPAY',
-        SPEND = <any> 'SPEND'
+        Accpay = <any> 'ACCPAY',
+        Spend = <any> 'SPEND'
     }
 }

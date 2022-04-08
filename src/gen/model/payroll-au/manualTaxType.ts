@@ -1,9 +1,9 @@
 
 export enum ManualTaxType {
-    PAYGMANUAL = <any> 'PAYGMANUAL',
-    ETPOMANUAL = <any> 'ETPOMANUAL',
-    ETPRMANUAL = <any> 'ETPRMANUAL',
-    SCHEDULE5MANUAL = <any> 'SCHEDULE5MANUAL',
-    SCHEDULE5STSLMANUAL = <any> 'SCHEDULE5STSLMANUAL',
-    SCHEDULE4MANUAL = <any> 'SCHEDULE4MANUAL'
+    Paygmanual = <any> 'PAYGMANUAL',
+    Etpomanual = <any> 'ETPOMANUAL',
+    Etprmanual = <any> 'ETPRMANUAL',
+    Schedule5Manual = <any> 'SCHEDULE5MANUAL',
+    Schedule5Stslmanual = <any> 'SCHEDULE5STSLMANUAL',
+    Schedule4Manual = <any> 'SCHEDULE4MANUAL'
 }

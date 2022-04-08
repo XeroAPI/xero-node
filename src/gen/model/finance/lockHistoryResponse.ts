@@ -18,13 +18,11 @@ export class LockHistoryResponse {
             "name": "organisationId",
             "baseName": "organisationId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "lockDates",
             "baseName": "lockDates",
             "type": "Array<LockHistoryModel>"

@@ -16,8 +16,7 @@ export class CISSetting {
             "name": "cISEnabled",
             "baseName": "CISEnabled",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "rate",
             "baseName": "Rate",
             "type": "number"

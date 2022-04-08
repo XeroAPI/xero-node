@@ -1,5 +1,5 @@
 
 export enum LeavePeriodStatus {
-    SCHEDULED = <any> 'SCHEDULED',
-    PROCESSED = <any> 'PROCESSED'
+    Scheduled = <any> 'SCHEDULED',
+    Processed = <any> 'PROCESSED'
 }

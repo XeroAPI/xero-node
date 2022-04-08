@@ -47,48 +47,39 @@ export class LeaveApplication {
             "name": "leaveApplicationID",
             "baseName": "LeaveApplicationID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "employeeID",
             "baseName": "EmployeeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "leaveTypeID",
             "baseName": "LeaveTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "title",
             "baseName": "Title",
             "type": "string"
-        },
-        {
+        }        {
             "name": "startDate",
             "baseName": "StartDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endDate",
             "baseName": "EndDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "Description",
             "type": "string"
-        },
-        {
+        }        {
             "name": "leavePeriods",
             "baseName": "LeavePeriods",
             "type": "Array<LeavePeriod>"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"

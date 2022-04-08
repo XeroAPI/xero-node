@@ -85,98 +85,79 @@ export class Account {
             "name": "code",
             "baseName": "Code",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountID",
             "baseName": "AccountID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "type",
             "baseName": "Type",
             "type": "AccountType"
-        },
-        {
+        }        {
             "name": "bankAccountNumber",
             "baseName": "BankAccountNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "Account.StatusEnum"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "Description",
             "type": "string"
-        },
-        {
+        }        {
             "name": "bankAccountType",
             "baseName": "BankAccountType",
             "type": "Account.BankAccountTypeEnum"
-        },
-        {
+        }        {
             "name": "currencyCode",
             "baseName": "CurrencyCode",
             "type": "CurrencyCode"
-        },
-        {
+        }        {
             "name": "taxType",
             "baseName": "TaxType",
             "type": "string"
-        },
-        {
+        }        {
             "name": "enablePaymentsToAccount",
             "baseName": "EnablePaymentsToAccount",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "showInExpenseClaims",
             "baseName": "ShowInExpenseClaims",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "_class",
             "baseName": "Class",
             "type": "Account.ClassEnum"
-        },
-        {
+        }        {
             "name": "systemAccount",
             "baseName": "SystemAccount",
             "type": "Account.SystemAccountEnum"
-        },
-        {
+        }        {
             "name": "reportingCode",
             "baseName": "ReportingCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "reportingCodeName",
             "baseName": "ReportingCodeName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "addToWatchlist",
             "baseName": "AddToWatchlist",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
@@ -189,45 +170,45 @@ export class Account {
 
 export namespace Account {
     export enum StatusEnum {
-        ACTIVE = <any> 'ACTIVE',
-        ARCHIVED = <any> 'ARCHIVED',
-        DELETED = <any> 'DELETED'
+        Active = <any> 'ACTIVE',
+        Archived = <any> 'ARCHIVED',
+        Deleted = <any> 'DELETED'
     }
     export enum BankAccountTypeEnum {
-        BANK = <any> 'BANK',
-        CREDITCARD = <any> 'CREDITCARD',
-        PAYPAL = <any> 'PAYPAL',
-        NONE = <any> 'NONE',
+        Bank = <any> 'BANK',
+        Creditcard = <any> 'CREDITCARD',
+        Paypal = <any> 'PAYPAL',
+        None = <any> 'NONE',
         Empty = <any> ''
     }
     export enum ClassEnum {
-        ASSET = <any> 'ASSET',
-        EQUITY = <any> 'EQUITY',
-        EXPENSE = <any> 'EXPENSE',
-        LIABILITY = <any> 'LIABILITY',
-        REVENUE = <any> 'REVENUE'
+        Asset = <any> 'ASSET',
+        Equity = <any> 'EQUITY',
+        Expense = <any> 'EXPENSE',
+        Liability = <any> 'LIABILITY',
+        Revenue = <any> 'REVENUE'
     }
     export enum SystemAccountEnum {
-        DEBTORS = <any> 'DEBTORS',
-        CREDITORS = <any> 'CREDITORS',
-        BANKCURRENCYGAIN = <any> 'BANKCURRENCYGAIN',
-        GST = <any> 'GST',
-        GSTONIMPORTS = <any> 'GSTONIMPORTS',
-        HISTORICAL = <any> 'HISTORICAL',
-        REALISEDCURRENCYGAIN = <any> 'REALISEDCURRENCYGAIN',
-        RETAINEDEARNINGS = <any> 'RETAINEDEARNINGS',
-        ROUNDING = <any> 'ROUNDING',
-        TRACKINGTRANSFERS = <any> 'TRACKINGTRANSFERS',
-        UNPAIDEXPCLM = <any> 'UNPAIDEXPCLM',
-        UNREALISEDCURRENCYGAIN = <any> 'UNREALISEDCURRENCYGAIN',
-        WAGEPAYABLES = <any> 'WAGEPAYABLES',
-        CISASSETS = <any> 'CISASSETS',
-        CISASSET = <any> 'CISASSET',
-        CISLABOUR = <any> 'CISLABOUR',
-        CISLABOUREXPENSE = <any> 'CISLABOUREXPENSE',
-        CISLABOURINCOME = <any> 'CISLABOURINCOME',
-        CISLIABILITY = <any> 'CISLIABILITY',
-        CISMATERIALS = <any> 'CISMATERIALS',
+        Debtors = <any> 'DEBTORS',
+        Creditors = <any> 'CREDITORS',
+        Bankcurrencygain = <any> 'BANKCURRENCYGAIN',
+        Gst = <any> 'GST',
+        Gstonimports = <any> 'GSTONIMPORTS',
+        Historical = <any> 'HISTORICAL',
+        Realisedcurrencygain = <any> 'REALISEDCURRENCYGAIN',
+        Retainedearnings = <any> 'RETAINEDEARNINGS',
+        Rounding = <any> 'ROUNDING',
+        Trackingtransfers = <any> 'TRACKINGTRANSFERS',
+        Unpaidexpclm = <any> 'UNPAIDEXPCLM',
+        Unrealisedcurrencygain = <any> 'UNREALISEDCURRENCYGAIN',
+        Wagepayables = <any> 'WAGEPAYABLES',
+        Cisassets = <any> 'CISASSETS',
+        Cisasset = <any> 'CISASSET',
+        Cislabour = <any> 'CISLABOUR',
+        Cislabourexpense = <any> 'CISLABOUREXPENSE',
+        Cislabourincome = <any> 'CISLABOURINCOME',
+        Cisliability = <any> 'CISLIABILITY',
+        Cismaterials = <any> 'CISMATERIALS',
         Empty = <any> ''
     }
 }

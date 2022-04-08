@@ -14,13 +14,11 @@ export class Timesheets {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "timesheets",
             "baseName": "timesheets",
             "type": "Array<Timesheet>"

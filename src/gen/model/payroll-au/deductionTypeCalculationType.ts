@@ -1,6 +1,6 @@
 
 export enum DeductionTypeCalculationType {
-    FIXEDAMOUNT = <any> 'FIXEDAMOUNT',
-    PRETAX = <any> 'PRETAX',
-    POSTTAX = <any> 'POSTTAX'
+    Fixedamount = <any> 'FIXEDAMOUNT',
+    Pretax = <any> 'PRETAX',
+    Posttax = <any> 'POSTTAX'
 }

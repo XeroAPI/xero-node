@@ -23,18 +23,15 @@ export class CashflowResponse {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "cashBalance",
             "baseName": "cashBalance",
             "type": "CashBalance"
-        },
-        {
+        }        {
             "name": "cashflowActivities",
             "baseName": "cashflowActivities",
             "type": "Array<CashflowActivity>"

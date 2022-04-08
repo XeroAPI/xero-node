@@ -20,13 +20,11 @@ export class ReportHistoryModel {
             "name": "reportName",
             "baseName": "reportName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "reportDateText",
             "baseName": "reportDateText",
             "type": "string"
-        },
-        {
+        }        {
             "name": "publishedDateUtc",
             "baseName": "publishedDateUtc",
             "type": "Date"

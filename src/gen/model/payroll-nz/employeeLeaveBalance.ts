@@ -24,18 +24,15 @@ export class EmployeeLeaveBalance {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "leaveTypeID",
             "baseName": "leaveTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "balance",
             "baseName": "balance",
             "type": "number"
-        },
-        {
+        }        {
             "name": "typeOfUnits",
             "baseName": "typeOfUnits",
             "type": "string"

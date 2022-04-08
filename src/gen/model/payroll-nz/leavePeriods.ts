@@ -14,13 +14,11 @@ export class LeavePeriods {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "periods",
             "baseName": "periods",
             "type": "Array<LeavePeriod>"

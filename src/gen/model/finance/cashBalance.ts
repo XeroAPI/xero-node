@@ -20,13 +20,11 @@ export class CashBalance {
             "name": "openingCashBalance",
             "baseName": "openingCashBalance",
             "type": "number"
-        },
-        {
+        }        {
             "name": "closingCashBalance",
             "baseName": "closingCashBalance",
             "type": "number"
-        },
-        {
+        }        {
             "name": "netCashMovement",
             "baseName": "netCashMovement",
             "type": "number"

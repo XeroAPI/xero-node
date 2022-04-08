@@ -24,18 +24,15 @@ export class TimesheetLine {
             "name": "earningsRateID",
             "baseName": "EarningsRateID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "trackingItemID",
             "baseName": "TrackingItemID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "NumberOfUnits",
             "type": "Array<number>"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"

@@ -36,33 +36,27 @@ export class Schedule {
             "name": "period",
             "baseName": "Period",
             "type": "number"
-        },
-        {
+        }        {
             "name": "unit",
             "baseName": "Unit",
             "type": "Schedule.UnitEnum"
-        },
-        {
+        }        {
             "name": "dueDate",
             "baseName": "DueDate",
             "type": "number"
-        },
-        {
+        }        {
             "name": "dueDateType",
             "baseName": "DueDateType",
             "type": "Schedule.DueDateTypeEnum"
-        },
-        {
+        }        {
             "name": "startDate",
             "baseName": "StartDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "nextScheduledDate",
             "baseName": "NextScheduledDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "endDate",
             "baseName": "EndDate",
             "type": "string"
@@ -75,15 +69,15 @@ export class Schedule {
 
 export namespace Schedule {
     export enum UnitEnum {
-        WEEKLY = <any> 'WEEKLY',
-        MONTHLY = <any> 'MONTHLY'
+        Weekly = <any> 'WEEKLY',
+        Monthly = <any> 'MONTHLY'
     }
     export enum DueDateTypeEnum {
-        DAYSAFTERBILLDATE = <any> 'DAYSAFTERBILLDATE',
-        DAYSAFTERBILLMONTH = <any> 'DAYSAFTERBILLMONTH',
-        DAYSAFTERINVOICEDATE = <any> 'DAYSAFTERINVOICEDATE',
-        DAYSAFTERINVOICEMONTH = <any> 'DAYSAFTERINVOICEMONTH',
-        OFCURRENTMONTH = <any> 'OFCURRENTMONTH',
-        OFFOLLOWINGMONTH = <any> 'OFFOLLOWINGMONTH'
+        Daysafterbilldate = <any> 'DAYSAFTERBILLDATE',
+        Daysafterbillmonth = <any> 'DAYSAFTERBILLMONTH',
+        Daysafterinvoicedate = <any> 'DAYSAFTERINVOICEDATE',
+        Daysafterinvoicemonth = <any> 'DAYSAFTERINVOICEMONTH',
+        Ofcurrentmonth = <any> 'OFCURRENTMONTH',
+        Offollowingmonth = <any> 'OFFOLLOWINGMONTH'
     }
 }

@@ -20,13 +20,11 @@ export class BankAccount {
             "name": "accountName",
             "baseName": "accountName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountNumber",
             "baseName": "accountNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "sortCode",
             "baseName": "sortCode",
             "type": "string"

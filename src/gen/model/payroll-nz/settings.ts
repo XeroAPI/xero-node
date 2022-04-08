@@ -14,13 +14,11 @@ export class Settings {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "settings",
             "baseName": "settings",
             "type": "Accounts"

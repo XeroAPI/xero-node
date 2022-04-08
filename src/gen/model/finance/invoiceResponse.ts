@@ -23,18 +23,15 @@ export class InvoiceResponse {
             "name": "invoiceId",
             "baseName": "invoiceId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "contact",
             "baseName": "contact",
             "type": "ContactResponse"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "total",
             "type": "number"
-        },
-        {
+        }        {
             "name": "lineItems",
             "baseName": "lineItems",
             "type": "Array<LineItemResponse>"

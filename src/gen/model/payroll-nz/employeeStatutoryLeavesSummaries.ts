@@ -14,13 +14,11 @@ export class EmployeeStatutoryLeavesSummaries {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "statutoryLeaves",
             "baseName": "statutoryLeaves",
             "type": "Array<EmployeeStatutoryLeaveSummary>"

@@ -11,8 +11,7 @@ export class ReportCell {
             "name": "value",
             "baseName": "Value",
             "type": "string"
-        },
-        {
+        }        {
             "name": "attributes",
             "baseName": "Attributes",
             "type": "Array<ReportAttribute>"

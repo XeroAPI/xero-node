@@ -24,18 +24,15 @@ export class ReimbursementLine {
             "name": "reimbursementTypeID",
             "baseName": "ReimbursementTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "Description",
             "type": "string"
-        },
-        {
+        }        {
             "name": "expenseAccount",
             "baseName": "ExpenseAccount",
             "type": "string"

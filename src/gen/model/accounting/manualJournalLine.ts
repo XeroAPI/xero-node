@@ -41,38 +41,31 @@ export class ManualJournalLine {
             "name": "lineAmount",
             "baseName": "LineAmount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "accountCode",
             "baseName": "AccountCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "accountID",
             "baseName": "AccountID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "Description",
             "type": "string"
-        },
-        {
+        }        {
             "name": "taxType",
             "baseName": "TaxType",
             "type": "string"
-        },
-        {
+        }        {
             "name": "tracking",
             "baseName": "Tracking",
             "type": "Array<TrackingCategory>"
-        },
-        {
+        }        {
             "name": "taxAmount",
             "baseName": "TaxAmount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "isBlank",
             "baseName": "IsBlank",
             "type": "boolean"

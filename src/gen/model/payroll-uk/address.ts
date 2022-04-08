@@ -28,23 +28,19 @@ export class Address {
             "name": "addressLine1",
             "baseName": "addressLine1",
             "type": "string"
-        },
-        {
+        }        {
             "name": "addressLine2",
             "baseName": "addressLine2",
             "type": "string"
-        },
-        {
+        }        {
             "name": "city",
             "baseName": "city",
             "type": "string"
-        },
-        {
+        }        {
             "name": "postCode",
             "baseName": "postCode",
             "type": "string"
-        },
-        {
+        }        {
             "name": "countryName",
             "baseName": "countryName",
             "type": "string"

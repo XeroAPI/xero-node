@@ -14,8 +14,7 @@ export class BalanceSheetAccountGroup {
             "name": "accountTypes",
             "baseName": "accountTypes",
             "type": "Array<BalanceSheetAccountType>"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "total",
             "type": "number"

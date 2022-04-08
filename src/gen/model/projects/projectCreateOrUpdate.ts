@@ -21,18 +21,15 @@ export class ProjectCreateOrUpdate {
             "name": "contactId",
             "baseName": "contactId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "estimateAmount",
             "baseName": "estimateAmount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "deadlineUtc",
             "baseName": "deadlineUtc",
             "type": "Date"

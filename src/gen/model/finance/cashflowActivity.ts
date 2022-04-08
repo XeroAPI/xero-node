@@ -18,13 +18,11 @@ export class CashflowActivity {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "total",
             "type": "number"
-        },
-        {
+        }        {
             "name": "cashflowTypes",
             "baseName": "cashflowTypes",
             "type": "Array<CashflowType>"

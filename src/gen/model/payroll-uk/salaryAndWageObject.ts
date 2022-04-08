@@ -14,13 +14,11 @@ export class SalaryAndWageObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "salaryAndWages",
             "baseName": "salaryAndWages",
             "type": "SalaryAndWage"

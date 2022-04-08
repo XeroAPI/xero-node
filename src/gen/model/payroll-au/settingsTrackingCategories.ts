@@ -15,8 +15,7 @@ export class SettingsTrackingCategories {
             "name": "employeeGroups",
             "baseName": "EmployeeGroups",
             "type": "SettingsTrackingCategoriesEmployeeGroups"
-        },
-        {
+        }        {
             "name": "timesheetCategories",
             "baseName": "TimesheetCategories",
             "type": "SettingsTrackingCategoriesTimesheetCategories"

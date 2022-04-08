@@ -16,8 +16,7 @@ export class LeaveAccrualLine {
             "name": "leaveTypeID",
             "baseName": "leaveTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "numberOfUnits",
             "type": "number"

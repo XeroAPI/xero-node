@@ -20,13 +20,11 @@ export class ProjectUser {
             "name": "userId",
             "baseName": "userId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
             "name": "email",
             "baseName": "email",
             "type": "string"

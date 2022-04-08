@@ -1,6 +1,6 @@
 
 export enum ResidencyStatus {
-    AUSTRALIANRESIDENT = <any> 'AUSTRALIANRESIDENT',
-    FOREIGNRESIDENT = <any> 'FOREIGNRESIDENT',
-    WORKINGHOLIDAYMAKER = <any> 'WORKINGHOLIDAYMAKER'
+    Australianresident = <any> 'AUSTRALIANRESIDENT',
+    Foreignresident = <any> 'FOREIGNRESIDENT',
+    Workingholidaymaker = <any> 'WORKINGHOLIDAYMAKER'
 }

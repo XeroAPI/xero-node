@@ -9,13 +9,17 @@ export class Product {
     */
     'name'?: string;
     /**
-    * The pricing model of the product: * FIXED: Customers are charged a fixed amount for each billing period * PER_SEAT: Customers are charged based on the number of units they purchase 
-    */
-    'type'?: Product.TypeEnum;
-    /**
     * The unit of the per seat product. e.g. \"user\", \"organisation\", \"SMS\", etc
     */
     'seatUnit'?: string;
+    /**
+    * The pricing model of the product: * FIXED: Customers are charged a fixed amount for each billing period * PER_SEAT: Customers are charged based on the number of units they purchase * METERED: Customers are charged per use of this product 
+    */
+    'type'?: Product.TypeEnum;
+    /**
+    * The unit of the usage product. e.g. \"user\", \"minutes\", \"SMS\", etc
+    */
+    'usageUnit'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -24,20 +28,21 @@ export class Product {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        },
-        {
+        }        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
+        }        {
+            "name": "seatUnit",
+            "baseName": "seatUnit",
+            "type": "string"
+        }        {
             "name": "type",
             "baseName": "type",
             "type": "Product.TypeEnum"
-        },
-        {
-            "name": "seatUnit",
-            "baseName": "seatUnit",
+        }        {
+            "name": "usageUnit",
+            "baseName": "usageUnit",
             "type": "string"
         }    ];
 
@@ -48,7 +53,8 @@ export class Product {
 
 export namespace Product {
     export enum TypeEnum {
-        FIXED = <any> 'FIXED',
-        PERSEAT = <any> 'PER_SEAT'
+        Fixed = <any> 'FIXED',
+        PerSeat = <any> 'PER_SEAT',
+        Metered = <any> 'METERED'
     }
 }

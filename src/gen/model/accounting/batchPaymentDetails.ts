@@ -31,23 +31,19 @@ export class BatchPaymentDetails {
             "name": "bankAccountNumber",
             "baseName": "BankAccountNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "bankAccountName",
             "baseName": "BankAccountName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "details",
             "baseName": "Details",
             "type": "string"
-        },
-        {
+        }        {
             "name": "code",
             "baseName": "Code",
             "type": "string"
-        },
-        {
+        }        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"

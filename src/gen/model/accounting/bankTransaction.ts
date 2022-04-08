@@ -90,108 +90,87 @@ export class BankTransaction {
             "name": "type",
             "baseName": "Type",
             "type": "BankTransaction.TypeEnum"
-        },
-        {
+        }        {
             "name": "contact",
             "baseName": "Contact",
             "type": "Contact"
-        },
-        {
+        }        {
             "name": "lineItems",
             "baseName": "LineItems",
             "type": "Array<LineItem>"
-        },
-        {
+        }        {
             "name": "bankAccount",
             "baseName": "BankAccount",
             "type": "Account"
-        },
-        {
+        }        {
             "name": "isReconciled",
             "baseName": "IsReconciled",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        },
-        {
+        }        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        },
-        {
+        }        {
             "name": "currencyCode",
             "baseName": "CurrencyCode",
             "type": "CurrencyCode"
-        },
-        {
+        }        {
             "name": "currencyRate",
             "baseName": "CurrencyRate",
             "type": "number"
-        },
-        {
+        }        {
             "name": "url",
             "baseName": "Url",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "BankTransaction.StatusEnum"
-        },
-        {
+        }        {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
             "type": "LineAmountTypes"
-        },
-        {
+        }        {
             "name": "subTotal",
             "baseName": "SubTotal",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalTax",
             "baseName": "TotalTax",
             "type": "number"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "Total",
             "type": "number"
-        },
-        {
+        }        {
             "name": "bankTransactionID",
             "baseName": "BankTransactionID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "prepaymentID",
             "baseName": "PrepaymentID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "overpaymentID",
             "baseName": "OverpaymentID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "statusAttributeString",
             "baseName": "StatusAttributeString",
             "type": "string"
-        },
-        {
+        }        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
@@ -204,18 +183,18 @@ export class BankTransaction {
 
 export namespace BankTransaction {
     export enum TypeEnum {
-        RECEIVE = <any> 'RECEIVE',
-        RECEIVEOVERPAYMENT = <any> 'RECEIVE-OVERPAYMENT',
-        RECEIVEPREPAYMENT = <any> 'RECEIVE-PREPAYMENT',
-        SPEND = <any> 'SPEND',
-        SPENDOVERPAYMENT = <any> 'SPEND-OVERPAYMENT',
-        SPENDPREPAYMENT = <any> 'SPEND-PREPAYMENT',
-        RECEIVETRANSFER = <any> 'RECEIVE-TRANSFER',
-        SPENDTRANSFER = <any> 'SPEND-TRANSFER'
+        Receive = <any> 'RECEIVE',
+        ReceiveOverpayment = <any> 'RECEIVE-OVERPAYMENT',
+        ReceivePrepayment = <any> 'RECEIVE-PREPAYMENT',
+        Spend = <any> 'SPEND',
+        SpendOverpayment = <any> 'SPEND-OVERPAYMENT',
+        SpendPrepayment = <any> 'SPEND-PREPAYMENT',
+        ReceiveTransfer = <any> 'RECEIVE-TRANSFER',
+        SpendTransfer = <any> 'SPEND-TRANSFER'
     }
     export enum StatusEnum {
-        AUTHORISED = <any> 'AUTHORISED',
-        DELETED = <any> 'DELETED',
-        VOIDED = <any> 'VOIDED'
+        Authorised = <any> 'AUTHORISED',
+        Deleted = <any> 'DELETED',
+        Voided = <any> 'VOIDED'
     }
 }

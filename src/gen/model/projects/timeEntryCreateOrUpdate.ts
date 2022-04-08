@@ -28,23 +28,19 @@ export class TimeEntryCreateOrUpdate {
             "name": "userId",
             "baseName": "userId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "taskId",
             "baseName": "taskId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "dateUtc",
             "baseName": "dateUtc",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "duration",
             "baseName": "duration",
             "type": "number"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "description",
             "type": "string"

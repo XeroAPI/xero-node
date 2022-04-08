@@ -74,88 +74,71 @@ export class Receipt {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        },
-        {
+        }        {
             "name": "contact",
             "baseName": "Contact",
             "type": "Contact"
-        },
-        {
+        }        {
             "name": "lineItems",
             "baseName": "LineItems",
             "type": "Array<LineItem>"
-        },
-        {
+        }        {
             "name": "user",
             "baseName": "User",
             "type": "User"
-        },
-        {
+        }        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        },
-        {
+        }        {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
             "type": "LineAmountTypes"
-        },
-        {
+        }        {
             "name": "subTotal",
             "baseName": "SubTotal",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalTax",
             "baseName": "TotalTax",
             "type": "number"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "Total",
             "type": "number"
-        },
-        {
+        }        {
             "name": "receiptID",
             "baseName": "ReceiptID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "Receipt.StatusEnum"
-        },
-        {
+        }        {
             "name": "receiptNumber",
             "baseName": "ReceiptNumber",
             "type": "string"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "url",
             "baseName": "Url",
             "type": "string"
-        },
-        {
+        }        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
-        },
-        {
+        }        {
             "name": "warnings",
             "baseName": "Warnings",
             "type": "Array<ValidationError>"
-        },
-        {
+        }        {
             "name": "attachments",
             "baseName": "Attachments",
             "type": "Array<Attachment>"
@@ -168,10 +151,10 @@ export class Receipt {
 
 export namespace Receipt {
     export enum StatusEnum {
-        DRAFT = <any> 'DRAFT',
-        SUBMITTED = <any> 'SUBMITTED',
-        AUTHORISED = <any> 'AUTHORISED',
-        DECLINED = <any> 'DECLINED',
-        VOIDED = <any> 'VOIDED'
+        Draft = <any> 'DRAFT',
+        Submitted = <any> 'SUBMITTED',
+        Authorised = <any> 'AUTHORISED',
+        Declined = <any> 'DECLINED',
+        Voided = <any> 'VOIDED'
     }
 }

@@ -24,18 +24,15 @@ export class LeavePeriod {
             "name": "periodStartDate",
             "baseName": "periodStartDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "periodEndDate",
             "baseName": "periodEndDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "numberOfUnits",
             "baseName": "numberOfUnits",
             "type": "number"
-        },
-        {
+        }        {
             "name": "periodStatus",
             "baseName": "periodStatus",
             "type": "LeavePeriod.PeriodStatusEnum"

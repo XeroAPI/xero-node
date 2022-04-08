@@ -54,58 +54,47 @@ export class PayRun {
             "name": "payRunID",
             "baseName": "payRunID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "payrollCalendarID",
             "baseName": "payrollCalendarID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "periodStartDate",
             "baseName": "periodStartDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "periodEndDate",
             "baseName": "periodEndDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "paymentDate",
             "baseName": "paymentDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "totalCost",
             "baseName": "totalCost",
             "type": "number"
-        },
-        {
+        }        {
             "name": "totalPay",
             "baseName": "totalPay",
             "type": "number"
-        },
-        {
+        }        {
             "name": "payRunStatus",
             "baseName": "payRunStatus",
             "type": "PayRun.PayRunStatusEnum"
-        },
-        {
+        }        {
             "name": "payRunType",
             "baseName": "payRunType",
             "type": "PayRun.PayRunTypeEnum"
-        },
-        {
+        }        {
             "name": "calendarType",
             "baseName": "calendarType",
             "type": "PayRun.CalendarTypeEnum"
-        },
-        {
+        }        {
             "name": "postedDateTime",
             "baseName": "postedDateTime",
             "type": "string"
-        },
-        {
+        }        {
             "name": "paySlips",
             "baseName": "paySlips",
             "type": "Array<Payslip>"

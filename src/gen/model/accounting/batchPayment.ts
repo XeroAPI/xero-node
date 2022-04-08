@@ -76,83 +76,67 @@ export class BatchPayment {
             "name": "account",
             "baseName": "Account",
             "type": "Account"
-        },
-        {
+        }        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        },
-        {
+        }        {
             "name": "particulars",
             "baseName": "Particulars",
             "type": "string"
-        },
-        {
+        }        {
             "name": "code",
             "baseName": "Code",
             "type": "string"
-        },
-        {
+        }        {
             "name": "details",
             "baseName": "Details",
             "type": "string"
-        },
-        {
+        }        {
             "name": "narrative",
             "baseName": "Narrative",
             "type": "string"
-        },
-        {
+        }        {
             "name": "batchPaymentID",
             "baseName": "BatchPaymentID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "dateString",
             "baseName": "DateString",
             "type": "string"
-        },
-        {
+        }        {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        },
-        {
+        }        {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"
-        },
-        {
+        }        {
             "name": "payments",
             "baseName": "Payments",
             "type": "Array<Payment>"
-        },
-        {
+        }        {
             "name": "type",
             "baseName": "Type",
             "type": "BatchPayment.TypeEnum"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "BatchPayment.StatusEnum"
-        },
-        {
+        }        {
             "name": "totalAmount",
             "baseName": "TotalAmount",
             "type": "string"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "isReconciled",
             "baseName": "IsReconciled",
             "type": "string"
-        },
-        {
+        }        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
@@ -165,11 +149,11 @@ export class BatchPayment {
 
 export namespace BatchPayment {
     export enum TypeEnum {
-        PAYBATCH = <any> 'PAYBATCH',
-        RECBATCH = <any> 'RECBATCH'
+        Paybatch = <any> 'PAYBATCH',
+        Recbatch = <any> 'RECBATCH'
     }
     export enum StatusEnum {
-        AUTHORISED = <any> 'AUTHORISED',
-        DELETED = <any> 'DELETED'
+        Authorised = <any> 'AUTHORISED',
+        Deleted = <any> 'DELETED'
     }
 }

@@ -14,13 +14,11 @@ export class EmployeeStatutoryLeaveBalanceObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "leaveBalance",
             "baseName": "leaveBalance",
             "type": "EmployeeStatutoryLeaveBalance"

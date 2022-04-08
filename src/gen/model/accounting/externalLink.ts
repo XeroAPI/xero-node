@@ -17,13 +17,11 @@ export class ExternalLink {
             "name": "linkType",
             "baseName": "LinkType",
             "type": "ExternalLink.LinkTypeEnum"
-        },
-        {
+        }        {
             "name": "url",
             "baseName": "Url",
             "type": "string"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "Description",
             "type": "string"

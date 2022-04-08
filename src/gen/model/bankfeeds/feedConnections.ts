@@ -12,8 +12,7 @@ export class FeedConnections {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "items",
             "baseName": "items",
             "type": "Array<FeedConnection>"

@@ -16,8 +16,7 @@ export class SalesTrackingCategory {
             "name": "trackingCategoryName",
             "baseName": "TrackingCategoryName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "trackingOptionName",
             "baseName": "TrackingOptionName",
             "type": "string"

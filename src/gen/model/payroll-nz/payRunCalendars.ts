@@ -14,13 +14,11 @@ export class PayRunCalendars {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "payRunCalendars",
             "baseName": "payRunCalendars",
             "type": "Array<PayRunCalendar>"

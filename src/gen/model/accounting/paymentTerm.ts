@@ -11,8 +11,7 @@ export class PaymentTerm {
             "name": "bills",
             "baseName": "Bills",
             "type": "Bill"
-        },
-        {
+        }        {
             "name": "sales",
             "baseName": "Sales",
             "type": "Bill"

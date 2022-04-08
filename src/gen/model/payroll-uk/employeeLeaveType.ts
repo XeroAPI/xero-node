@@ -32,28 +32,23 @@ export class EmployeeLeaveType {
             "name": "leaveTypeID",
             "baseName": "leaveTypeID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "scheduleOfAccrual",
             "baseName": "scheduleOfAccrual",
             "type": "EmployeeLeaveType.ScheduleOfAccrualEnum"
-        },
-        {
+        }        {
             "name": "hoursAccruedAnnually",
             "baseName": "hoursAccruedAnnually",
             "type": "number"
-        },
-        {
+        }        {
             "name": "maximumToAccrue",
             "baseName": "maximumToAccrue",
             "type": "number"
-        },
-        {
+        }        {
             "name": "openingBalance",
             "baseName": "openingBalance",
             "type": "number"
-        },
-        {
+        }        {
             "name": "rateAccruedHourly",
             "baseName": "rateAccruedHourly",
             "type": "number"

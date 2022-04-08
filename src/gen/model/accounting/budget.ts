@@ -28,28 +28,23 @@ export class Budget {
             "name": "budgetID",
             "baseName": "BudgetID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "type",
             "baseName": "Type",
             "type": "Budget.TypeEnum"
-        },
-        {
+        }        {
             "name": "description",
             "baseName": "Description",
             "type": "string"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "budgetLines",
             "baseName": "BudgetLines",
             "type": "Array<BudgetLine>"
-        },
-        {
+        }        {
             "name": "tracking",
             "baseName": "Tracking",
             "type": "Array<TrackingCategory>"
@@ -62,7 +57,7 @@ export class Budget {
 
 export namespace Budget {
     export enum TypeEnum {
-        OVERALL = <any> 'OVERALL',
-        TRACKING = <any> 'TRACKING'
+        Overall = <any> 'OVERALL',
+        Tracking = <any> 'TRACKING'
     }
 }

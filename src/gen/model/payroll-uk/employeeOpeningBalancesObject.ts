@@ -14,13 +14,11 @@ export class EmployeeOpeningBalancesObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        },
-        {
+        }        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        },
-        {
+        }        {
             "name": "openingBalances",
             "baseName": "openingBalances",
             "type": "EmployeeOpeningBalances"

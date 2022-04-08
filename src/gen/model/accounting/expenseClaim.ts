@@ -53,58 +53,47 @@ export class ExpenseClaim {
             "name": "expenseClaimID",
             "baseName": "ExpenseClaimID",
             "type": "string"
-        },
-        {
+        }        {
             "name": "status",
             "baseName": "Status",
             "type": "ExpenseClaim.StatusEnum"
-        },
-        {
+        }        {
             "name": "payments",
             "baseName": "Payments",
             "type": "Array<Payment>"
-        },
-        {
+        }        {
             "name": "user",
             "baseName": "User",
             "type": "User"
-        },
-        {
+        }        {
             "name": "receipts",
             "baseName": "Receipts",
             "type": "Array<Receipt>"
-        },
-        {
+        }        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        },
-        {
+        }        {
             "name": "total",
             "baseName": "Total",
             "type": "number"
-        },
-        {
+        }        {
             "name": "amountDue",
             "baseName": "AmountDue",
             "type": "number"
-        },
-        {
+        }        {
             "name": "amountPaid",
             "baseName": "AmountPaid",
             "type": "number"
-        },
-        {
+        }        {
             "name": "paymentDueDate",
             "baseName": "PaymentDueDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "reportingDate",
             "baseName": "ReportingDate",
             "type": "string"
-        },
-        {
+        }        {
             "name": "receiptID",
             "baseName": "ReceiptID",
             "type": "string"
@@ -117,10 +106,10 @@ export class ExpenseClaim {
 
 export namespace ExpenseClaim {
     export enum StatusEnum {
-        SUBMITTED = <any> 'SUBMITTED',
-        AUTHORISED = <any> 'AUTHORISED',
-        PAID = <any> 'PAID',
-        VOIDED = <any> 'VOIDED',
-        DELETED = <any> 'DELETED'
+        Submitted = <any> 'SUBMITTED',
+        Authorised = <any> 'AUTHORISED',
+        Paid = <any> 'PAID',
+        Voided = <any> 'VOIDED',
+        Deleted = <any> 'DELETED'
     }
 }

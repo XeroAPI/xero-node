@@ -32,28 +32,23 @@ export class Deduction {
             "name": "deductionId",
             "baseName": "deductionId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "deductionName",
             "baseName": "deductionName",
             "type": "string"
-        },
-        {
+        }        {
             "name": "deductionCategory",
             "baseName": "deductionCategory",
             "type": "Deduction.DeductionCategoryEnum"
-        },
-        {
+        }        {
             "name": "liabilityAccountId",
             "baseName": "liabilityAccountId",
             "type": "string"
-        },
-        {
+        }        {
             "name": "currentRecord",
             "baseName": "currentRecord",
             "type": "boolean"
-        },
-        {
+        }        {
             "name": "standardAmount",
             "baseName": "standardAmount",
             "type": "number"
