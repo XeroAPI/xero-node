@@ -30,19 +30,23 @@ export class ModelError {
             "name": "resourceValidationErrors",
             "baseName": "resourceValidationErrors",
             "type": "Array<ResourceValidationErrorsElement>"
-        }        {
+        },
+        {
             "name": "fieldValidationErrors",
             "baseName": "fieldValidationErrors",
             "type": "Array<FieldValidationErrorsElement>"
-        }        {
+        },
+        {
             "name": "type",
             "baseName": "type",
             "type": "string"
-        }        {
+        },
+        {
             "name": "title",
             "baseName": "title",
             "type": "string"
-        }        {
+        },
+        {
             "name": "detail",
             "baseName": "detail",
             "type": "string"

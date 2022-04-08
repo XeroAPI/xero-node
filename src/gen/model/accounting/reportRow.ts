@@ -13,11 +13,13 @@ export class ReportRow {
             "name": "rowType",
             "baseName": "RowType",
             "type": "RowType"
-        }        {
+        },
+        {
             "name": "title",
             "baseName": "Title",
             "type": "string"
-        }        {
+        },
+        {
             "name": "cells",
             "baseName": "Cells",
             "type": "Array<ReportCell>"

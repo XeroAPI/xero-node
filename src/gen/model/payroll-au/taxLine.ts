@@ -30,23 +30,28 @@ export class TaxLine {
             "name": "payslipTaxLineID",
             "baseName": "PayslipTaxLineID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "taxTypeName",
             "baseName": "TaxTypeName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "description",
             "baseName": "Description",
             "type": "string"
-        }        {
+        },
+        {
             "name": "manualTaxType",
             "baseName": "ManualTaxType",
             "type": "ManualTaxType"
-        }        {
+        },
+        {
             "name": "liabilityAccount",
             "baseName": "LiabilityAccount",
             "type": "string"

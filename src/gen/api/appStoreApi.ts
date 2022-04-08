@@ -15,8 +15,8 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { ProblemDetails } from '../../model/appstore/problemDetails';
-import { Subscription } from '../../model/appstore/subscription';
+import { ProblemDetails } from '../model/appstore/problemDetails';
+import { Subscription } from '../model/appstore/subscription';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/appstore/models';
 import { OAuth } from '../model/appstore/models';
@@ -105,6 +105,7 @@ export class AppStoreApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();

@@ -22,15 +22,18 @@ export class Account {
             "name": "accountID",
             "baseName": "AccountID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "type",
             "baseName": "Type",
             "type": "AccountType"
-        }        {
+        },
+        {
             "name": "code",
             "baseName": "Code",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "Name",
             "type": "string"

@@ -25,15 +25,18 @@ export class BankStatementAccountingResponse {
             "name": "bankAccountId",
             "baseName": "bankAccountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "bankAccountName",
             "baseName": "bankAccountName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "bankAccountCurrencyCode",
             "baseName": "bankAccountCurrencyCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "statements",
             "baseName": "statements",
             "type": "Array<StatementResponse>"

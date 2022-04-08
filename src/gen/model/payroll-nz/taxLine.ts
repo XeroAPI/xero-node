@@ -28,19 +28,23 @@ export class TaxLine {
             "name": "taxLineID",
             "baseName": "taxLineID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "description",
             "baseName": "description",
             "type": "string"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "globalTaxTypeID",
             "baseName": "globalTaxTypeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "manualAdjustment",
             "baseName": "manualAdjustment",
             "type": "boolean"

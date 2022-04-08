@@ -21,15 +21,18 @@ export class Phone {
             "name": "phoneType",
             "baseName": "PhoneType",
             "type": "Phone.PhoneTypeEnum"
-        }        {
+        },
+        {
             "name": "phoneNumber",
             "baseName": "PhoneNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "phoneAreaCode",
             "baseName": "PhoneAreaCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "phoneCountryCode",
             "baseName": "PhoneCountryCode",
             "type": "string"
@@ -42,10 +45,10 @@ export class Phone {
 
 export namespace Phone {
     export enum PhoneTypeEnum {
-        Default = <any> 'DEFAULT',
-        Ddi = <any> 'DDI',
-        Mobile = <any> 'MOBILE',
-        Fax = <any> 'FAX',
-        Office = <any> 'OFFICE'
+        DEFAULT = <any> 'DEFAULT',
+        DDI = <any> 'DDI',
+        MOBILE = <any> 'MOBILE',
+        FAX = <any> 'FAX',
+        OFFICE = <any> 'OFFICE'
     }
 }

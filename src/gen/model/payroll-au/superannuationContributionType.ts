@@ -1,7 +1,7 @@
 
 export enum SuperannuationContributionType {
-    Sgc = <any> 'SGC',
-    Salarysacrifice = <any> 'SALARYSACRIFICE',
-    Employeradditional = <any> 'EMPLOYERADDITIONAL',
-    Employee = <any> 'EMPLOYEE'
+    SGC = <any> 'SGC',
+    SALARYSACRIFICE = <any> 'SALARYSACRIFICE',
+    EMPLOYERADDITIONAL = <any> 'EMPLOYERADDITIONAL',
+    EMPLOYEE = <any> 'EMPLOYEE'
 }

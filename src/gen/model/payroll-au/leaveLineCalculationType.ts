@@ -3,9 +3,9 @@
 * Calculation type for leave line for Opening Balance on Employee
 */
 export enum LeaveLineCalculationType {
-    Nocalculationrequired = <any> 'NOCALCULATIONREQUIRED',
-    Fixedamounteachperiod = <any> 'FIXEDAMOUNTEACHPERIOD',
-    Enterrateinpaytemplate = <any> 'ENTERRATEINPAYTEMPLATE',
-    Basedonordinaryearnings = <any> 'BASEDONORDINARYEARNINGS',
+    NOCALCULATIONREQUIRED = <any> 'NOCALCULATIONREQUIRED',
+    FIXEDAMOUNTEACHPERIOD = <any> 'FIXEDAMOUNTEACHPERIOD',
+    ENTERRATEINPAYTEMPLATE = <any> 'ENTERRATEINPAYTEMPLATE',
+    BASEDONORDINARYEARNINGS = <any> 'BASEDONORDINARYEARNINGS',
     Empty = <any> ''
 }

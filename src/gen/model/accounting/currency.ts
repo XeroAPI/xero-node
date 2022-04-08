@@ -14,7 +14,8 @@ export class Currency {
             "name": "code",
             "baseName": "Code",
             "type": "CurrencyCode"
-        }        {
+        },
+        {
             "name": "description",
             "baseName": "Description",
             "type": "string"

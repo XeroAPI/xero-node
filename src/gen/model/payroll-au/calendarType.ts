@@ -1,9 +1,9 @@
 
 export enum CalendarType {
-    Weekly = <any> 'WEEKLY',
-    Fortnightly = <any> 'FORTNIGHTLY',
-    Fourweekly = <any> 'FOURWEEKLY',
-    Monthly = <any> 'MONTHLY',
-    Twicemonthly = <any> 'TWICEMONTHLY',
-    Quarterly = <any> 'QUARTERLY'
+    WEEKLY = <any> 'WEEKLY',
+    FORTNIGHTLY = <any> 'FORTNIGHTLY',
+    FOURWEEKLY = <any> 'FOURWEEKLY',
+    MONTHLY = <any> 'MONTHLY',
+    TWICEMONTHLY = <any> 'TWICEMONTHLY',
+    QUARTERLY = <any> 'QUARTERLY'
 }

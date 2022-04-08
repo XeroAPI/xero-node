@@ -15,57 +15,57 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { Account } from '../../model/accounting/account';
-import { Accounts } from '../../model/accounting/accounts';
-import { Actions } from '../../model/accounting/actions';
-import { Allocations } from '../../model/accounting/allocations';
-import { Attachments } from '../../model/accounting/attachments';
-import { BankTransactions } from '../../model/accounting/bankTransactions';
-import { BankTransfers } from '../../model/accounting/bankTransfers';
-import { BatchPayments } from '../../model/accounting/batchPayments';
-import { BrandingThemes } from '../../model/accounting/brandingThemes';
-import { Budgets } from '../../model/accounting/budgets';
-import { CISOrgSettings } from '../../model/accounting/cISOrgSettings';
-import { CISSettings } from '../../model/accounting/cISSettings';
-import { ContactGroups } from '../../model/accounting/contactGroups';
-import { Contacts } from '../../model/accounting/contacts';
-import { CreditNotes } from '../../model/accounting/creditNotes';
-import { Currencies } from '../../model/accounting/currencies';
-import { Currency } from '../../model/accounting/currency';
-import { Employees } from '../../model/accounting/employees';
-import { ExpenseClaims } from '../../model/accounting/expenseClaims';
-import { HistoryRecords } from '../../model/accounting/historyRecords';
-import { ImportSummaryObject } from '../../model/accounting/importSummaryObject';
-import { InvoiceReminders } from '../../model/accounting/invoiceReminders';
-import { Invoices } from '../../model/accounting/invoices';
-import { Items } from '../../model/accounting/items';
-import { Journals } from '../../model/accounting/journals';
-import { LinkedTransaction } from '../../model/accounting/linkedTransaction';
-import { LinkedTransactions } from '../../model/accounting/linkedTransactions';
-import { ManualJournals } from '../../model/accounting/manualJournals';
-import { OnlineInvoices } from '../../model/accounting/onlineInvoices';
-import { Organisations } from '../../model/accounting/organisations';
-import { Overpayments } from '../../model/accounting/overpayments';
-import { Payment } from '../../model/accounting/payment';
-import { PaymentDelete } from '../../model/accounting/paymentDelete';
-import { PaymentService } from '../../model/accounting/paymentService';
-import { PaymentServices } from '../../model/accounting/paymentServices';
-import { Payments } from '../../model/accounting/payments';
-import { Prepayments } from '../../model/accounting/prepayments';
-import { PurchaseOrders } from '../../model/accounting/purchaseOrders';
-import { Quotes } from '../../model/accounting/quotes';
-import { Receipts } from '../../model/accounting/receipts';
-import { RepeatingInvoices } from '../../model/accounting/repeatingInvoices';
-import { ReportWithRows } from '../../model/accounting/reportWithRows';
-import { Reports } from '../../model/accounting/reports';
-import { RequestEmpty } from '../../model/accounting/requestEmpty';
-import { Setup } from '../../model/accounting/setup';
-import { TaxRates } from '../../model/accounting/taxRates';
-import { TrackingCategories } from '../../model/accounting/trackingCategories';
-import { TrackingCategory } from '../../model/accounting/trackingCategory';
-import { TrackingOption } from '../../model/accounting/trackingOption';
-import { TrackingOptions } from '../../model/accounting/trackingOptions';
-import { Users } from '../../model/accounting/users';
+import { Account } from '../model/accounting/account';
+import { Accounts } from '../model/accounting/accounts';
+import { Actions } from '../model/accounting/actions';
+import { Allocations } from '../model/accounting/allocations';
+import { Attachments } from '../model/accounting/attachments';
+import { BankTransactions } from '../model/accounting/bankTransactions';
+import { BankTransfers } from '../model/accounting/bankTransfers';
+import { BatchPayments } from '../model/accounting/batchPayments';
+import { BrandingThemes } from '../model/accounting/brandingThemes';
+import { Budgets } from '../model/accounting/budgets';
+import { CISOrgSettings } from '../model/accounting/cISOrgSettings';
+import { CISSettings } from '../model/accounting/cISSettings';
+import { ContactGroups } from '../model/accounting/contactGroups';
+import { Contacts } from '../model/accounting/contacts';
+import { CreditNotes } from '../model/accounting/creditNotes';
+import { Currencies } from '../model/accounting/currencies';
+import { Currency } from '../model/accounting/currency';
+import { Employees } from '../model/accounting/employees';
+import { ExpenseClaims } from '../model/accounting/expenseClaims';
+import { HistoryRecords } from '../model/accounting/historyRecords';
+import { ImportSummaryObject } from '../model/accounting/importSummaryObject';
+import { InvoiceReminders } from '../model/accounting/invoiceReminders';
+import { Invoices } from '../model/accounting/invoices';
+import { Items } from '../model/accounting/items';
+import { Journals } from '../model/accounting/journals';
+import { LinkedTransaction } from '../model/accounting/linkedTransaction';
+import { LinkedTransactions } from '../model/accounting/linkedTransactions';
+import { ManualJournals } from '../model/accounting/manualJournals';
+import { OnlineInvoices } from '../model/accounting/onlineInvoices';
+import { Organisations } from '../model/accounting/organisations';
+import { Overpayments } from '../model/accounting/overpayments';
+import { Payment } from '../model/accounting/payment';
+import { PaymentDelete } from '../model/accounting/paymentDelete';
+import { PaymentService } from '../model/accounting/paymentService';
+import { PaymentServices } from '../model/accounting/paymentServices';
+import { Payments } from '../model/accounting/payments';
+import { Prepayments } from '../model/accounting/prepayments';
+import { PurchaseOrders } from '../model/accounting/purchaseOrders';
+import { Quotes } from '../model/accounting/quotes';
+import { Receipts } from '../model/accounting/receipts';
+import { RepeatingInvoices } from '../model/accounting/repeatingInvoices';
+import { ReportWithRows } from '../model/accounting/reportWithRows';
+import { Reports } from '../model/accounting/reports';
+import { RequestEmpty } from '../model/accounting/requestEmpty';
+import { Setup } from '../model/accounting/setup';
+import { TaxRates } from '../model/accounting/taxRates';
+import { TrackingCategories } from '../model/accounting/trackingCategories';
+import { TrackingCategory } from '../model/accounting/trackingCategory';
+import { TrackingOption } from '../model/accounting/trackingOption';
+import { TrackingOptions } from '../model/accounting/trackingOptions';
+import { Users } from '../model/accounting/users';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/accounting/models';
 import { OAuth } from '../model/accounting/models';
@@ -160,6 +160,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(account, "Account")
         };
 
@@ -276,6 +277,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -372,6 +378,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -423,6 +434,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -497,6 +509,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
         };
 
@@ -561,6 +574,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(bankTransfers, "BankTransfers")
         };
 
@@ -676,6 +690,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -727,6 +746,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -796,6 +816,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(batchPayments, "BatchPayments")
         };
 
@@ -867,6 +888,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -938,6 +960,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(paymentService, "PaymentService")
         };
 
@@ -1053,6 +1076,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -1097,6 +1125,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(contactGroups, "ContactGroups")
         };
 
@@ -1168,6 +1197,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(contacts, "Contacts")
         };
 
@@ -1239,6 +1269,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -1308,6 +1339,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(contacts, "Contacts")
         };
 
@@ -1384,6 +1416,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(allocations, "Allocations")
         };
 
@@ -1505,6 +1538,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -1556,6 +1594,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -1630,6 +1669,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
         };
 
@@ -1694,6 +1734,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(currency, "Currency")
         };
 
@@ -1763,6 +1804,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employees, "Employees")
         };
 
@@ -1834,6 +1876,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -1898,6 +1941,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims")
         };
 
@@ -2019,6 +2063,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -2070,6 +2119,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -2144,6 +2194,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(invoices, "Invoices")
         };
 
@@ -2215,6 +2266,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -2289,6 +2341,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(items, "Items")
         };
 
@@ -2353,6 +2406,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(linkedTransaction, "LinkedTransaction")
         };
 
@@ -2469,6 +2523,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -2520,6 +2579,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -2589,6 +2649,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(manualJournals, "ManualJournals")
         };
 
@@ -2665,6 +2726,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(allocations, "Allocations")
         };
 
@@ -2736,6 +2798,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -2800,6 +2863,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payment, "Payment")
         };
 
@@ -2871,6 +2935,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -2935,6 +3000,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(paymentServices, "PaymentServices")
         };
 
@@ -3004,6 +3070,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payments, "Payments")
         };
 
@@ -3080,6 +3147,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(allocations, "Allocations")
         };
 
@@ -3151,6 +3219,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -3267,6 +3336,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -3318,6 +3392,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -3387,6 +3462,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
         };
 
@@ -3503,6 +3579,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -3554,6 +3635,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -3623,6 +3705,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(quotes, "Quotes")
         };
 
@@ -3692,6 +3775,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(receipts, "Receipts")
         };
 
@@ -3808,6 +3892,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -3859,6 +3948,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -3975,6 +4065,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -4026,6 +4121,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(historyRecords, "HistoryRecords")
         };
 
@@ -4090,6 +4186,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(taxRates, "TaxRates")
         };
 
@@ -4154,6 +4251,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(trackingCategory, "TrackingCategory")
         };
 
@@ -4225,6 +4323,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(trackingOption, "TrackingOption")
         };
 
@@ -4290,6 +4389,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4627,6 +4727,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(paymentDelete, "PaymentDelete")
         };
 
@@ -4692,6 +4793,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4763,6 +4865,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4899,6 +5002,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5140,6 +5244,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -5190,6 +5299,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5259,6 +5369,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5500,6 +5611,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -5560,6 +5676,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5624,6 +5741,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5688,6 +5806,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -5929,6 +6048,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -5974,6 +6098,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6043,6 +6168,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6107,6 +6233,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6176,6 +6303,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6240,6 +6368,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6304,6 +6433,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6361,6 +6491,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6435,6 +6566,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6507,6 +6639,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6571,6 +6704,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6812,6 +6946,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -6857,6 +6996,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6921,6 +7061,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -6985,6 +7126,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7052,6 +7194,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7116,6 +7259,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7210,6 +7354,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7279,6 +7424,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7585,6 +7731,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -7630,6 +7781,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7709,6 +7861,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7776,6 +7929,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7840,6 +7994,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7909,6 +8064,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -7973,6 +8129,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8037,6 +8194,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8106,6 +8264,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8175,6 +8334,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8481,6 +8641,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -8526,6 +8691,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8583,6 +8749,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8697,6 +8864,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8766,6 +8934,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8830,6 +8999,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8904,6 +9074,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -8968,6 +9139,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9037,6 +9209,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9101,6 +9274,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9188,6 +9362,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9252,6 +9427,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9493,6 +9669,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -9548,6 +9729,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9612,6 +9794,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9676,6 +9859,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9733,6 +9917,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9797,6 +9982,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9854,6 +10040,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9918,6 +10105,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -9982,6 +10170,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10061,6 +10250,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10125,6 +10315,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10189,6 +10380,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10246,6 +10438,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10320,6 +10513,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10384,6 +10578,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10448,6 +10643,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10527,6 +10723,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10591,6 +10788,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -10897,6 +11095,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -10942,6 +11145,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11006,6 +11210,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11090,6 +11295,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11154,6 +11360,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11460,6 +11667,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -11505,6 +11717,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11609,6 +11822,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11678,6 +11892,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -11919,6 +12134,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -11964,6 +12184,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12038,6 +12259,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12102,6 +12324,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12343,6 +12566,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -12388,6 +12616,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12455,6 +12684,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12537,6 +12767,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12619,6 +12850,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12711,6 +12943,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12778,6 +13011,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12850,6 +13084,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12912,6 +13147,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -12976,6 +13212,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13083,6 +13320,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13145,6 +13383,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13212,6 +13451,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13269,6 +13509,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13341,6 +13582,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13413,6 +13655,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13477,6 +13720,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13541,6 +13785,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13610,6 +13855,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -13673,6 +13919,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(setup, "Setup")
         };
 
@@ -13744,6 +13991,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(accounts, "Accounts")
         };
 
@@ -13860,6 +14108,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -13916,6 +14169,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
         };
 
@@ -14032,6 +14286,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14127,6 +14386,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14178,6 +14442,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(contacts, "Contacts")
         };
 
@@ -14293,6 +14558,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14344,6 +14614,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(contactGroups, "ContactGroups")
         };
 
@@ -14420,6 +14691,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
         };
 
@@ -14536,6 +14808,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14587,6 +14864,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims")
         };
 
@@ -14663,6 +14941,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(invoices, "Invoices")
         };
 
@@ -14779,6 +15058,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -14835,6 +15119,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(items, "Items")
         };
 
@@ -14906,6 +15191,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(linkedTransactions, "LinkedTransactions")
         };
 
@@ -14977,6 +15263,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(manualJournals, "ManualJournals")
         };
 
@@ -15093,6 +15380,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -15147,6 +15439,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(bankTransactions, "BankTransactions")
         };
 
@@ -15216,6 +15509,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(contacts, "Contacts")
         };
 
@@ -15290,6 +15584,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(creditNotes, "CreditNotes")
         };
 
@@ -15359,6 +15654,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employees, "Employees")
         };
 
@@ -15433,6 +15729,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(invoices, "Invoices")
         };
 
@@ -15507,6 +15804,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(items, "Items")
         };
 
@@ -15576,6 +15874,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(manualJournals, "ManualJournals")
         };
 
@@ -15645,6 +15944,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
         };
 
@@ -15714,6 +16014,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(quotes, "Quotes")
         };
 
@@ -15785,6 +16086,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders")
         };
 
@@ -15901,6 +16203,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -15952,6 +16259,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(quotes, "Quotes")
         };
 
@@ -16068,6 +16376,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -16124,6 +16437,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(receipts, "Receipts")
         };
 
@@ -16240,6 +16554,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -16336,6 +16655,11 @@ export class AccountingApi {
                     if (error) {
                         reject(error);
                     } else {
+                        try {
+                            body = JSON.parse(body)
+                        } catch (err) {
+                            console.log('JSON parse body failed')
+                        }
                         body = ObjectSerializer.deserialize(body, "Attachments");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
@@ -16380,6 +16704,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(taxRates, "TaxRates")
         };
 
@@ -16451,6 +16776,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(trackingCategory, "TrackingCategory")
         };
 
@@ -16529,6 +16855,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(trackingOption, "TrackingOption")
         };
 

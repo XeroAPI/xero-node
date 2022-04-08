@@ -24,15 +24,18 @@ export class LineItemResponse {
             "name": "accountId",
             "baseName": "accountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reportingCode",
             "baseName": "reportingCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "lineAmount",
             "baseName": "lineAmount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "accountType",
             "baseName": "accountType",
             "type": "string"

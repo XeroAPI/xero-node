@@ -1,5 +1,5 @@
 
 export enum SuperFundType {
-    Regulated = <any> 'REGULATED',
-    Smsf = <any> 'SMSF'
+    REGULATED = <any> 'REGULATED',
+    SMSF = <any> 'SMSF'
 }

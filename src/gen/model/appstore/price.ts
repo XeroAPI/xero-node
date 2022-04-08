@@ -20,11 +20,13 @@ export class Price {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "currency",
             "baseName": "currency",
             "type": "string"
-        }        {
+        },
+        {
             "name": "id",
             "baseName": "id",
             "type": "string"

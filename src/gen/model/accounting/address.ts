@@ -48,39 +48,48 @@ export class Address {
             "name": "addressType",
             "baseName": "AddressType",
             "type": "Address.AddressTypeEnum"
-        }        {
+        },
+        {
             "name": "addressLine1",
             "baseName": "AddressLine1",
             "type": "string"
-        }        {
+        },
+        {
             "name": "addressLine2",
             "baseName": "AddressLine2",
             "type": "string"
-        }        {
+        },
+        {
             "name": "addressLine3",
             "baseName": "AddressLine3",
             "type": "string"
-        }        {
+        },
+        {
             "name": "addressLine4",
             "baseName": "AddressLine4",
             "type": "string"
-        }        {
+        },
+        {
             "name": "city",
             "baseName": "City",
             "type": "string"
-        }        {
+        },
+        {
             "name": "region",
             "baseName": "Region",
             "type": "string"
-        }        {
+        },
+        {
             "name": "postalCode",
             "baseName": "PostalCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "country",
             "baseName": "Country",
             "type": "string"
-        }        {
+        },
+        {
             "name": "attentionTo",
             "baseName": "AttentionTo",
             "type": "string"
@@ -93,7 +102,7 @@ export class Address {
 
 export namespace Address {
     export enum AddressTypeEnum {
-        Pobox = <any> 'POBOX',
-        Street = <any> 'STREET'
+        POBOX = <any> 'POBOX',
+        STREET = <any> 'STREET'
     }
 }

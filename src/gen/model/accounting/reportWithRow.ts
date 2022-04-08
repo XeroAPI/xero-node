@@ -40,35 +40,43 @@ export class ReportWithRow {
             "name": "reportID",
             "baseName": "ReportID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reportName",
             "baseName": "ReportName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reportTitle",
             "baseName": "ReportTitle",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reportType",
             "baseName": "ReportType",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reportTitles",
             "baseName": "ReportTitles",
             "type": "Array<string>"
-        }        {
+        },
+        {
             "name": "reportDate",
             "baseName": "ReportDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "rows",
             "baseName": "Rows",
             "type": "Array<ReportRows>"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "fields",
             "baseName": "Fields",
             "type": "Array<ReportFields>"

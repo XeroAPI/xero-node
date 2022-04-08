@@ -14,11 +14,13 @@ export class EmployeeEarningsTemplates {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "earningTemplates",
             "baseName": "earningTemplates",
             "type": "Array<EarningsTemplate>"

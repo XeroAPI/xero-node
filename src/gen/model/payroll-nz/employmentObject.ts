@@ -14,11 +14,13 @@ export class EmploymentObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "employment",
             "baseName": "employment",
             "type": "Employment"

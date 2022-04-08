@@ -24,15 +24,18 @@ export class Employment {
             "name": "payrollCalendarID",
             "baseName": "payrollCalendarID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "employeeNumber",
             "baseName": "employeeNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "niCategory",
             "baseName": "niCategory",
             "type": "Employment.NiCategoryEnum"

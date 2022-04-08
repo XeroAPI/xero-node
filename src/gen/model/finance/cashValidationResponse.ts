@@ -22,19 +22,23 @@ export class CashValidationResponse {
             "name": "accountId",
             "baseName": "accountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "statementBalance",
             "baseName": "statementBalance",
             "type": "StatementBalanceResponse"
-        }        {
+        },
+        {
             "name": "statementBalanceDate",
             "baseName": "statementBalanceDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "bankStatement",
             "baseName": "bankStatement",
             "type": "BankStatementResponse"
-        }        {
+        },
+        {
             "name": "cashAccount",
             "baseName": "cashAccount",
             "type": "CashAccountResponse"

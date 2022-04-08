@@ -22,15 +22,18 @@ export class AccountUsageResponse {
             "name": "organisationId",
             "baseName": "organisationId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "startMonth",
             "baseName": "startMonth",
             "type": "string"
-        }        {
+        },
+        {
             "name": "endMonth",
             "baseName": "endMonth",
             "type": "string"
-        }        {
+        },
+        {
             "name": "accountUsage",
             "baseName": "accountUsage",
             "type": "Array<AccountUsage>"

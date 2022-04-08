@@ -14,7 +14,8 @@ export class PaymentMethod {
             "name": "paymentMethod",
             "baseName": "paymentMethod",
             "type": "PaymentMethod.PaymentMethodEnum"
-        }        {
+        },
+        {
             "name": "bankAccounts",
             "baseName": "bankAccounts",
             "type": "Array<BankAccount>"

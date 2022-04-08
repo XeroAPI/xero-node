@@ -1,8 +1,8 @@
 
 export enum EmploymentBasis {
-    Fulltime = <any> 'FULLTIME',
-    Parttime = <any> 'PARTTIME',
-    Casual = <any> 'CASUAL',
-    Labourhire = <any> 'LABOURHIRE',
-    Superincomestream = <any> 'SUPERINCOMESTREAM'
+    FULLTIME = <any> 'FULLTIME',
+    PARTTIME = <any> 'PARTTIME',
+    CASUAL = <any> 'CASUAL',
+    LABOURHIRE = <any> 'LABOURHIRE',
+    SUPERINCOMESTREAM = <any> 'SUPERINCOMESTREAM'
 }

@@ -22,15 +22,18 @@ export class TrialBalanceMovement {
             "name": "debits",
             "baseName": "debits",
             "type": "number"
-        }        {
+        },
+        {
             "name": "credits",
             "baseName": "credits",
             "type": "number"
-        }        {
+        },
+        {
             "name": "movement",
             "baseName": "movement",
             "type": "TrialBalanceEntry"
-        }        {
+        },
+        {
             "name": "signedMovement",
             "baseName": "signedMovement",
             "type": "number"

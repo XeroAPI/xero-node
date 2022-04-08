@@ -22,15 +22,18 @@ export class LeavePeriod {
             "name": "numberOfUnits",
             "baseName": "NumberOfUnits",
             "type": "number"
-        }        {
+        },
+        {
             "name": "payPeriodEndDate",
             "baseName": "PayPeriodEndDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "payPeriodStartDate",
             "baseName": "PayPeriodStartDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "leavePeriodStatus",
             "baseName": "LeavePeriodStatus",
             "type": "LeavePeriodStatus"

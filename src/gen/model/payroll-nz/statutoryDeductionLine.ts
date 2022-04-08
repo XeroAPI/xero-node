@@ -24,15 +24,18 @@ export class StatutoryDeductionLine {
             "name": "statutoryDeductionTypeID",
             "baseName": "statutoryDeductionTypeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "fixedAmount",
             "baseName": "fixedAmount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "manualAdjustment",
             "baseName": "manualAdjustment",
             "type": "boolean"

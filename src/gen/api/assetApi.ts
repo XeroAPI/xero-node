@@ -15,11 +15,11 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { Asset } from '../../model/assets/asset';
-import { AssetStatusQueryParam } from '../../model/assets/assetStatusQueryParam';
-import { AssetType } from '../../model/assets/assetType';
-import { Assets } from '../../model/assets/assets';
-import { Setting } from '../../model/assets/setting';
+import { Asset } from '../model/assets/asset';
+import { AssetStatusQueryParam } from '../model/assets/assetStatusQueryParam';
+import { AssetType } from '../model/assets/assetType';
+import { Assets } from '../model/assets/assets';
+import { Setting } from '../model/assets/setting';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/assets/models';
 import { OAuth } from '../model/assets/models';
@@ -114,6 +114,7 @@ export class AssetApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(asset, "Asset")
         };
 
@@ -173,6 +174,7 @@ export class AssetApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(assetType, "AssetType")
         };
 
@@ -238,6 +240,7 @@ export class AssetApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -295,6 +298,7 @@ export class AssetApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -444,6 +448,7 @@ export class AssetApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();

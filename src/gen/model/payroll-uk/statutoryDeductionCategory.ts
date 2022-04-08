@@ -16,5 +16,5 @@ export enum StatutoryDeductionCategory {
     TableBased = <any> 'TableBased',
     StudentLoan = <any> 'StudentLoan',
     VoluntaryStudentLoan = <any> 'VoluntaryStudentLoan',
-    UsChildSupport = <any> 'USChildSupport'
+    USChildSupport = <any> 'USChildSupport'
 }

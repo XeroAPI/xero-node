@@ -16,7 +16,8 @@ export class Action {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "Action.StatusEnum"
@@ -29,7 +30,7 @@ export class Action {
 
 export namespace Action {
     export enum StatusEnum {
-        Allowed = <any> 'ALLOWED',
-        NotAllowed = <any> 'NOT-ALLOWED'
+        ALLOWED = <any> 'ALLOWED',
+        NOTALLOWED = <any> 'NOT-ALLOWED'
     }
 }

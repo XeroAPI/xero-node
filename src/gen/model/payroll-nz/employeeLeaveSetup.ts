@@ -36,27 +36,33 @@ export class EmployeeLeaveSetup {
             "name": "includeHolidayPay",
             "baseName": "includeHolidayPay",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "holidayPayOpeningBalance",
             "baseName": "holidayPayOpeningBalance",
             "type": "number"
-        }        {
+        },
+        {
             "name": "annualLeaveOpeningBalance",
             "baseName": "annualLeaveOpeningBalance",
             "type": "number"
-        }        {
+        },
+        {
             "name": "negativeAnnualLeaveBalancePaidAmount",
             "baseName": "negativeAnnualLeaveBalancePaidAmount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "sickLeaveHoursToAccrueAnnually",
             "baseName": "sickLeaveHoursToAccrueAnnually",
             "type": "number"
-        }        {
+        },
+        {
             "name": "sickLeaveMaximumHoursToAccrue",
             "baseName": "sickLeaveMaximumHoursToAccrue",
             "type": "number"
-        }        {
+        },
+        {
             "name": "sickLeaveOpeningBalance",
             "baseName": "sickLeaveOpeningBalance",
             "type": "number"

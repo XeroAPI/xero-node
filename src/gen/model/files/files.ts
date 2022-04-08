@@ -13,15 +13,18 @@ export class Files {
             "name": "totalCount",
             "baseName": "TotalCount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "page",
             "baseName": "Page",
             "type": "number"
-        }        {
+        },
+        {
             "name": "perPage",
             "baseName": "PerPage",
             "type": "number"
-        }        {
+        },
+        {
             "name": "items",
             "baseName": "Items",
             "type": "Array<FileObject>"

@@ -14,11 +14,13 @@ export class LeaveTypeObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "leaveType",
             "baseName": "leaveType",
             "type": "LeaveType"

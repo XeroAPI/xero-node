@@ -15,15 +15,18 @@ export class ReportRows {
             "name": "rowType",
             "baseName": "RowType",
             "type": "RowType"
-        }        {
+        },
+        {
             "name": "title",
             "baseName": "Title",
             "type": "string"
-        }        {
+        },
+        {
             "name": "cells",
             "baseName": "Cells",
             "type": "Array<ReportCell>"
-        }        {
+        },
+        {
             "name": "rows",
             "baseName": "Rows",
             "type": "Array<ReportRow>"

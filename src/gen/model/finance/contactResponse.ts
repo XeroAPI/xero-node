@@ -16,7 +16,8 @@ export class ContactResponse {
             "name": "contactId",
             "baseName": "contactId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "contactName",
             "baseName": "contactName",
             "type": "string"

@@ -24,15 +24,18 @@ export class ContactTotalOther {
             "name": "totalOutstandingAged",
             "baseName": "totalOutstandingAged",
             "type": "number"
-        }        {
+        },
+        {
             "name": "totalVoided",
             "baseName": "totalVoided",
             "type": "number"
-        }        {
+        },
+        {
             "name": "totalCredited",
             "baseName": "totalCredited",
             "type": "number"
-        }        {
+        },
+        {
             "name": "transactionCount",
             "baseName": "transactionCount",
             "type": "number"

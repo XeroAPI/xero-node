@@ -42,35 +42,43 @@ export class EarningsLine {
             "name": "earningsRateID",
             "baseName": "EarningsRateID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "calculationType",
             "baseName": "CalculationType",
             "type": "EarningsRateCalculationType"
-        }        {
+        },
+        {
             "name": "annualSalary",
             "baseName": "AnnualSalary",
             "type": "number"
-        }        {
+        },
+        {
             "name": "numberOfUnitsPerWeek",
             "baseName": "NumberOfUnitsPerWeek",
             "type": "number"
-        }        {
+        },
+        {
             "name": "ratePerUnit",
             "baseName": "RatePerUnit",
             "type": "number"
-        }        {
+        },
+        {
             "name": "normalNumberOfUnits",
             "baseName": "NormalNumberOfUnits",
             "type": "number"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "numberOfUnits",
             "baseName": "NumberOfUnits",
             "type": "number"
-        }        {
+        },
+        {
             "name": "fixedAmount",
             "baseName": "FixedAmount",
             "type": "number"

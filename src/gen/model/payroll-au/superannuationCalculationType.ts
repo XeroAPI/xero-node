@@ -1,6 +1,6 @@
 
 export enum SuperannuationCalculationType {
-    Fixedamount = <any> 'FIXEDAMOUNT',
-    Percentageofearnings = <any> 'PERCENTAGEOFEARNINGS',
-    Statutory = <any> 'STATUTORY'
+    FIXEDAMOUNT = <any> 'FIXEDAMOUNT',
+    PERCENTAGEOFEARNINGS = <any> 'PERCENTAGEOFEARNINGS',
+    STATUTORY = <any> 'STATUTORY'
 }

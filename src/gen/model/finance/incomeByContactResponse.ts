@@ -28,27 +28,33 @@ export class IncomeByContactResponse {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "total",
             "baseName": "total",
             "type": "number"
-        }        {
+        },
+        {
             "name": "totalDetail",
             "baseName": "totalDetail",
             "type": "TotalDetail"
-        }        {
+        },
+        {
             "name": "totalOther",
             "baseName": "totalOther",
             "type": "TotalOther"
-        }        {
+        },
+        {
             "name": "contacts",
             "baseName": "contacts",
             "type": "Array<ContactDetail>"
-        }        {
+        },
+        {
             "name": "manualJournals",
             "baseName": "manualJournals",
             "type": "ManualJournalTotal"

@@ -117,111 +117,138 @@ export class PurchaseOrder {
             "name": "contact",
             "baseName": "Contact",
             "type": "Contact"
-        }        {
+        },
+        {
             "name": "lineItems",
             "baseName": "LineItems",
             "type": "Array<LineItem>"
-        }        {
+        },
+        {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        }        {
+        },
+        {
             "name": "deliveryDate",
             "baseName": "DeliveryDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
             "type": "LineAmountTypes"
-        }        {
+        },
+        {
             "name": "purchaseOrderNumber",
             "baseName": "PurchaseOrderNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        }        {
+        },
+        {
             "name": "brandingThemeID",
             "baseName": "BrandingThemeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "currencyCode",
             "baseName": "CurrencyCode",
             "type": "CurrencyCode"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "PurchaseOrder.StatusEnum"
-        }        {
+        },
+        {
             "name": "sentToContact",
             "baseName": "SentToContact",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "deliveryAddress",
             "baseName": "DeliveryAddress",
             "type": "string"
-        }        {
+        },
+        {
             "name": "attentionTo",
             "baseName": "AttentionTo",
             "type": "string"
-        }        {
+        },
+        {
             "name": "telephone",
             "baseName": "Telephone",
             "type": "string"
-        }        {
+        },
+        {
             "name": "deliveryInstructions",
             "baseName": "DeliveryInstructions",
             "type": "string"
-        }        {
+        },
+        {
             "name": "expectedArrivalDate",
             "baseName": "ExpectedArrivalDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "purchaseOrderID",
             "baseName": "PurchaseOrderID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "currencyRate",
             "baseName": "CurrencyRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "subTotal",
             "baseName": "SubTotal",
             "type": "number"
-        }        {
+        },
+        {
             "name": "totalTax",
             "baseName": "TotalTax",
             "type": "number"
-        }        {
+        },
+        {
             "name": "total",
             "baseName": "Total",
             "type": "number"
-        }        {
+        },
+        {
             "name": "totalDiscount",
             "baseName": "TotalDiscount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "statusAttributeString",
             "baseName": "StatusAttributeString",
             "type": "string"
-        }        {
+        },
+        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
-        }        {
+        },
+        {
             "name": "warnings",
             "baseName": "Warnings",
             "type": "Array<ValidationError>"
-        }        {
+        },
+        {
             "name": "attachments",
             "baseName": "Attachments",
             "type": "Array<Attachment>"
@@ -234,10 +261,10 @@ export class PurchaseOrder {
 
 export namespace PurchaseOrder {
     export enum StatusEnum {
-        Draft = <any> 'DRAFT',
-        Submitted = <any> 'SUBMITTED',
-        Authorised = <any> 'AUTHORISED',
-        Billed = <any> 'BILLED',
-        Deleted = <any> 'DELETED'
+        DRAFT = <any> 'DRAFT',
+        SUBMITTED = <any> 'SUBMITTED',
+        AUTHORISED = <any> 'AUTHORISED',
+        BILLED = <any> 'BILLED',
+        DELETED = <any> 'DELETED'
     }
 }

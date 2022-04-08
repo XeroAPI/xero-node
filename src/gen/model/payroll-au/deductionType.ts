@@ -41,35 +41,43 @@ export class DeductionType {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "accountCode",
             "baseName": "AccountCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reducesTax",
             "baseName": "ReducesTax",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "reducesSuper",
             "baseName": "ReducesSuper",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "isExemptFromW1",
             "baseName": "IsExemptFromW1",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "deductionTypeID",
             "baseName": "DeductionTypeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "deductionCategory",
             "baseName": "DeductionCategory",
             "type": "DeductionType.DeductionCategoryEnum"
-        }        {
+        },
+        {
             "name": "currentRecord",
             "baseName": "CurrentRecord",
             "type": "boolean"
@@ -82,8 +90,8 @@ export class DeductionType {
 
 export namespace DeductionType {
     export enum DeductionCategoryEnum {
-        None = <any> 'NONE',
-        Unionfees = <any> 'UNIONFEES',
-        Workplacegiving = <any> 'WORKPLACEGIVING'
+        NONE = <any> 'NONE',
+        UNIONFEES = <any> 'UNIONFEES',
+        WORKPLACEGIVING = <any> 'WORKPLACEGIVING'
     }
 }

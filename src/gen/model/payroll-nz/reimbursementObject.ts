@@ -14,11 +14,13 @@ export class ReimbursementObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "reimbursement",
             "baseName": "reimbursement",
             "type": "Reimbursement"

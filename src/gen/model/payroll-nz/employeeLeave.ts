@@ -37,27 +37,33 @@ export class EmployeeLeave {
             "name": "leaveID",
             "baseName": "leaveID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "leaveTypeID",
             "baseName": "leaveTypeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "description",
             "baseName": "description",
             "type": "string"
-        }        {
+        },
+        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "periods",
             "baseName": "periods",
             "type": "Array<LeavePeriod>"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "updatedDateUTC",
             "type": "Date"

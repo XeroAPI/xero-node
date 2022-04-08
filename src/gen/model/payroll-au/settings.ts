@@ -19,11 +19,13 @@ export class Settings {
             "name": "accounts",
             "baseName": "Accounts",
             "type": "Array<Account>"
-        }        {
+        },
+        {
             "name": "trackingCategories",
             "baseName": "TrackingCategories",
             "type": "SettingsTrackingCategories"
-        }        {
+        },
+        {
             "name": "daysInPayrollYear",
             "baseName": "DaysInPayrollYear",
             "type": "number"

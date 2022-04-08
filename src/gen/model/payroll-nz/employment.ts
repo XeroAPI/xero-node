@@ -20,11 +20,13 @@ export class Employment {
             "name": "payrollCalendarID",
             "baseName": "payrollCalendarID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "payRunCalendarID",
             "baseName": "payRunCalendarID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"

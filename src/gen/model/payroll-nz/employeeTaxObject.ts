@@ -14,11 +14,13 @@ export class EmployeeTaxObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "employeeTax",
             "baseName": "employeeTax",
             "type": "EmployeeTax"

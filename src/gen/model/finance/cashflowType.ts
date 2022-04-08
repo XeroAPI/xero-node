@@ -21,11 +21,13 @@ export class CashflowType {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "total",
             "baseName": "total",
             "type": "number"
-        }        {
+        },
+        {
             "name": "accounts",
             "baseName": "accounts",
             "type": "Array<CashflowAccount>"

@@ -14,11 +14,13 @@ export class PaymentMethodObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "paymentMethod",
             "baseName": "paymentMethod",
             "type": "PaymentMethod"

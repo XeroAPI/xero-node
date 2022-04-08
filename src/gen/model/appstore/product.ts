@@ -28,19 +28,23 @@ export class Product {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "seatUnit",
             "baseName": "seatUnit",
             "type": "string"
-        }        {
+        },
+        {
             "name": "type",
             "baseName": "type",
             "type": "Product.TypeEnum"
-        }        {
+        },
+        {
             "name": "usageUnit",
             "baseName": "usageUnit",
             "type": "string"
@@ -53,8 +57,8 @@ export class Product {
 
 export namespace Product {
     export enum TypeEnum {
-        Fixed = <any> 'FIXED',
-        PerSeat = <any> 'PER_SEAT',
-        Metered = <any> 'METERED'
+        FIXED = <any> 'FIXED',
+        PERSEAT = <any> 'PER_SEAT',
+        METERED = <any> 'METERED'
     }
 }

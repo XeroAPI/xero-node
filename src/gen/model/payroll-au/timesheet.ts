@@ -41,35 +41,43 @@ export class Timesheet {
             "name": "employeeID",
             "baseName": "EmployeeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "startDate",
             "baseName": "StartDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "endDate",
             "baseName": "EndDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "TimesheetStatus"
-        }        {
+        },
+        {
             "name": "hours",
             "baseName": "Hours",
             "type": "number"
-        }        {
+        },
+        {
             "name": "timesheetID",
             "baseName": "TimesheetID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "timesheetLines",
             "baseName": "TimesheetLines",
             "type": "Array<TimesheetLine>"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"

@@ -14,11 +14,13 @@ export class TrackingCategories {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "trackingCategories",
             "baseName": "trackingCategories",
             "type": "TrackingCategory"

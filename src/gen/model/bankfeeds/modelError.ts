@@ -27,15 +27,18 @@ export class ModelError {
             "name": "title",
             "baseName": "title",
             "type": "string"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "status",
             "type": "number"
-        }        {
+        },
+        {
             "name": "detail",
             "baseName": "detail",
             "type": "string"
-        }        {
+        },
+        {
             "name": "type",
             "baseName": "type",
             "type": "ModelError.TypeEnum"

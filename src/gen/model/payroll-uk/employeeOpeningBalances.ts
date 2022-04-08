@@ -32,23 +32,28 @@ export class EmployeeOpeningBalances {
             "name": "statutoryAdoptionPay",
             "baseName": "statutoryAdoptionPay",
             "type": "number"
-        }        {
+        },
+        {
             "name": "statutoryMaternityPay",
             "baseName": "statutoryMaternityPay",
             "type": "number"
-        }        {
+        },
+        {
             "name": "statutoryPaternityPay",
             "baseName": "statutoryPaternityPay",
             "type": "number"
-        }        {
+        },
+        {
             "name": "statutorySharedParentalPay",
             "baseName": "statutorySharedParentalPay",
             "type": "number"
-        }        {
+        },
+        {
             "name": "statutorySickPay",
             "baseName": "statutorySickPay",
             "type": "number"
-        }        {
+        },
+        {
             "name": "priorEmployeeNumber",
             "baseName": "priorEmployeeNumber",
             "type": "number"

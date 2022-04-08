@@ -25,15 +25,18 @@ export class Plan {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "status",
             "type": "Plan.StatusEnum"
-        }        {
+        },
+        {
             "name": "subscriptionItems",
             "baseName": "subscriptionItems",
             "type": "Array<SubscriptionItem>"
@@ -46,8 +49,8 @@ export class Plan {
 
 export namespace Plan {
     export enum StatusEnum {
-        Active = <any> 'ACTIVE',
-        Canceled = <any> 'CANCELED',
-        PendingActivation = <any> 'PENDING_ACTIVATION'
+        ACTIVE = <any> 'ACTIVE',
+        CANCELED = <any> 'CANCELED',
+        PENDINGACTIVATION = <any> 'PENDING_ACTIVATION'
     }
 }

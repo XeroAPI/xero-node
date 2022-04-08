@@ -16,7 +16,8 @@ export class StatementBalanceResponse {
             "name": "value",
             "baseName": "value",
             "type": "number"
-        }        {
+        },
+        {
             "name": "type",
             "baseName": "type",
             "type": "string"

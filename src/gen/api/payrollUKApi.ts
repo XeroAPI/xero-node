@@ -15,68 +15,68 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { Benefit } from '../../model/payroll-uk/benefit';
-import { BenefitObject } from '../../model/payroll-uk/benefitObject';
-import { Benefits } from '../../model/payroll-uk/benefits';
-import { Deduction } from '../../model/payroll-uk/deduction';
-import { DeductionObject } from '../../model/payroll-uk/deductionObject';
-import { Deductions } from '../../model/payroll-uk/deductions';
-import { EarningsOrderObject } from '../../model/payroll-uk/earningsOrderObject';
-import { EarningsOrders } from '../../model/payroll-uk/earningsOrders';
-import { EarningsRate } from '../../model/payroll-uk/earningsRate';
-import { EarningsRateObject } from '../../model/payroll-uk/earningsRateObject';
-import { EarningsRates } from '../../model/payroll-uk/earningsRates';
-import { EarningsTemplate } from '../../model/payroll-uk/earningsTemplate';
-import { EarningsTemplateObject } from '../../model/payroll-uk/earningsTemplateObject';
-import { Employee } from '../../model/payroll-uk/employee';
-import { EmployeeLeave } from '../../model/payroll-uk/employeeLeave';
-import { EmployeeLeaveBalances } from '../../model/payroll-uk/employeeLeaveBalances';
-import { EmployeeLeaveObject } from '../../model/payroll-uk/employeeLeaveObject';
-import { EmployeeLeaveType } from '../../model/payroll-uk/employeeLeaveType';
-import { EmployeeLeaveTypeObject } from '../../model/payroll-uk/employeeLeaveTypeObject';
-import { EmployeeLeaveTypes } from '../../model/payroll-uk/employeeLeaveTypes';
-import { EmployeeLeaves } from '../../model/payroll-uk/employeeLeaves';
-import { EmployeeObject } from '../../model/payroll-uk/employeeObject';
-import { EmployeeOpeningBalances } from '../../model/payroll-uk/employeeOpeningBalances';
-import { EmployeeOpeningBalancesObject } from '../../model/payroll-uk/employeeOpeningBalancesObject';
-import { EmployeePayTemplateObject } from '../../model/payroll-uk/employeePayTemplateObject';
-import { EmployeePayTemplates } from '../../model/payroll-uk/employeePayTemplates';
-import { EmployeeStatutoryLeaveBalanceObject } from '../../model/payroll-uk/employeeStatutoryLeaveBalanceObject';
-import { EmployeeStatutoryLeavesSummaries } from '../../model/payroll-uk/employeeStatutoryLeavesSummaries';
-import { EmployeeStatutorySickLeave } from '../../model/payroll-uk/employeeStatutorySickLeave';
-import { EmployeeStatutorySickLeaveObject } from '../../model/payroll-uk/employeeStatutorySickLeaveObject';
-import { EmployeeTaxObject } from '../../model/payroll-uk/employeeTaxObject';
-import { Employees } from '../../model/payroll-uk/employees';
-import { Employment } from '../../model/payroll-uk/employment';
-import { EmploymentObject } from '../../model/payroll-uk/employmentObject';
-import { LeavePeriods } from '../../model/payroll-uk/leavePeriods';
-import { LeaveType } from '../../model/payroll-uk/leaveType';
-import { LeaveTypeObject } from '../../model/payroll-uk/leaveTypeObject';
-import { LeaveTypes } from '../../model/payroll-uk/leaveTypes';
-import { PayRun } from '../../model/payroll-uk/payRun';
-import { PayRunCalendar } from '../../model/payroll-uk/payRunCalendar';
-import { PayRunCalendarObject } from '../../model/payroll-uk/payRunCalendarObject';
-import { PayRunCalendars } from '../../model/payroll-uk/payRunCalendars';
-import { PayRunObject } from '../../model/payroll-uk/payRunObject';
-import { PayRuns } from '../../model/payroll-uk/payRuns';
-import { PaymentMethod } from '../../model/payroll-uk/paymentMethod';
-import { PaymentMethodObject } from '../../model/payroll-uk/paymentMethodObject';
-import { PayslipObject } from '../../model/payroll-uk/payslipObject';
-import { Payslips } from '../../model/payroll-uk/payslips';
-import { Problem } from '../../model/payroll-uk/problem';
-import { Reimbursement } from '../../model/payroll-uk/reimbursement';
-import { ReimbursementObject } from '../../model/payroll-uk/reimbursementObject';
-import { Reimbursements } from '../../model/payroll-uk/reimbursements';
-import { SalaryAndWage } from '../../model/payroll-uk/salaryAndWage';
-import { SalaryAndWageObject } from '../../model/payroll-uk/salaryAndWageObject';
-import { SalaryAndWages } from '../../model/payroll-uk/salaryAndWages';
-import { Settings } from '../../model/payroll-uk/settings';
-import { Timesheet } from '../../model/payroll-uk/timesheet';
-import { TimesheetLine } from '../../model/payroll-uk/timesheetLine';
-import { TimesheetLineObject } from '../../model/payroll-uk/timesheetLineObject';
-import { TimesheetObject } from '../../model/payroll-uk/timesheetObject';
-import { Timesheets } from '../../model/payroll-uk/timesheets';
-import { TrackingCategories } from '../../model/payroll-uk/trackingCategories';
+import { Benefit } from '../model/payroll-uk/benefit';
+import { BenefitObject } from '../model/payroll-uk/benefitObject';
+import { Benefits } from '../model/payroll-uk/benefits';
+import { Deduction } from '../model/payroll-uk/deduction';
+import { DeductionObject } from '../model/payroll-uk/deductionObject';
+import { Deductions } from '../model/payroll-uk/deductions';
+import { EarningsOrderObject } from '../model/payroll-uk/earningsOrderObject';
+import { EarningsOrders } from '../model/payroll-uk/earningsOrders';
+import { EarningsRate } from '../model/payroll-uk/earningsRate';
+import { EarningsRateObject } from '../model/payroll-uk/earningsRateObject';
+import { EarningsRates } from '../model/payroll-uk/earningsRates';
+import { EarningsTemplate } from '../model/payroll-uk/earningsTemplate';
+import { EarningsTemplateObject } from '../model/payroll-uk/earningsTemplateObject';
+import { Employee } from '../model/payroll-uk/employee';
+import { EmployeeLeave } from '../model/payroll-uk/employeeLeave';
+import { EmployeeLeaveBalances } from '../model/payroll-uk/employeeLeaveBalances';
+import { EmployeeLeaveObject } from '../model/payroll-uk/employeeLeaveObject';
+import { EmployeeLeaveType } from '../model/payroll-uk/employeeLeaveType';
+import { EmployeeLeaveTypeObject } from '../model/payroll-uk/employeeLeaveTypeObject';
+import { EmployeeLeaveTypes } from '../model/payroll-uk/employeeLeaveTypes';
+import { EmployeeLeaves } from '../model/payroll-uk/employeeLeaves';
+import { EmployeeObject } from '../model/payroll-uk/employeeObject';
+import { EmployeeOpeningBalances } from '../model/payroll-uk/employeeOpeningBalances';
+import { EmployeeOpeningBalancesObject } from '../model/payroll-uk/employeeOpeningBalancesObject';
+import { EmployeePayTemplateObject } from '../model/payroll-uk/employeePayTemplateObject';
+import { EmployeePayTemplates } from '../model/payroll-uk/employeePayTemplates';
+import { EmployeeStatutoryLeaveBalanceObject } from '../model/payroll-uk/employeeStatutoryLeaveBalanceObject';
+import { EmployeeStatutoryLeavesSummaries } from '../model/payroll-uk/employeeStatutoryLeavesSummaries';
+import { EmployeeStatutorySickLeave } from '../model/payroll-uk/employeeStatutorySickLeave';
+import { EmployeeStatutorySickLeaveObject } from '../model/payroll-uk/employeeStatutorySickLeaveObject';
+import { EmployeeTaxObject } from '../model/payroll-uk/employeeTaxObject';
+import { Employees } from '../model/payroll-uk/employees';
+import { Employment } from '../model/payroll-uk/employment';
+import { EmploymentObject } from '../model/payroll-uk/employmentObject';
+import { LeavePeriods } from '../model/payroll-uk/leavePeriods';
+import { LeaveType } from '../model/payroll-uk/leaveType';
+import { LeaveTypeObject } from '../model/payroll-uk/leaveTypeObject';
+import { LeaveTypes } from '../model/payroll-uk/leaveTypes';
+import { PayRun } from '../model/payroll-uk/payRun';
+import { PayRunCalendar } from '../model/payroll-uk/payRunCalendar';
+import { PayRunCalendarObject } from '../model/payroll-uk/payRunCalendarObject';
+import { PayRunCalendars } from '../model/payroll-uk/payRunCalendars';
+import { PayRunObject } from '../model/payroll-uk/payRunObject';
+import { PayRuns } from '../model/payroll-uk/payRuns';
+import { PaymentMethod } from '../model/payroll-uk/paymentMethod';
+import { PaymentMethodObject } from '../model/payroll-uk/paymentMethodObject';
+import { PayslipObject } from '../model/payroll-uk/payslipObject';
+import { Payslips } from '../model/payroll-uk/payslips';
+import { Problem } from '../model/payroll-uk/problem';
+import { Reimbursement } from '../model/payroll-uk/reimbursement';
+import { ReimbursementObject } from '../model/payroll-uk/reimbursementObject';
+import { Reimbursements } from '../model/payroll-uk/reimbursements';
+import { SalaryAndWage } from '../model/payroll-uk/salaryAndWage';
+import { SalaryAndWageObject } from '../model/payroll-uk/salaryAndWageObject';
+import { SalaryAndWages } from '../model/payroll-uk/salaryAndWages';
+import { Settings } from '../model/payroll-uk/settings';
+import { Timesheet } from '../model/payroll-uk/timesheet';
+import { TimesheetLine } from '../model/payroll-uk/timesheetLine';
+import { TimesheetLineObject } from '../model/payroll-uk/timesheetLineObject';
+import { TimesheetObject } from '../model/payroll-uk/timesheetObject';
+import { Timesheets } from '../model/payroll-uk/timesheets';
+import { TrackingCategories } from '../model/payroll-uk/trackingCategories';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/payroll-uk/models';
 import { OAuth } from '../model/payroll-uk/models';
@@ -172,6 +172,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -235,6 +236,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(benefit, "Benefit")
         };
 
@@ -299,6 +301,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(deduction, "Deduction")
         };
 
@@ -363,6 +366,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(earningsRate, "EarningsRate")
         };
 
@@ -427,6 +431,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employee, "Employee")
         };
 
@@ -498,6 +503,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(earningsTemplate, "EarningsTemplate")
         };
 
@@ -569,6 +575,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeLeave, "EmployeeLeave")
         };
 
@@ -640,6 +647,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeLeaveType, "EmployeeLeaveType")
         };
 
@@ -711,6 +719,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeOpeningBalances, "EmployeeOpeningBalances")
         };
 
@@ -782,6 +791,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(paymentMethod, "PaymentMethod")
         };
 
@@ -853,6 +863,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(salaryAndWage, "SalaryAndWage")
         };
 
@@ -917,6 +928,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeStatutorySickLeave, "EmployeeStatutorySickLeave")
         };
 
@@ -988,6 +1000,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employment, "Employment")
         };
 
@@ -1052,6 +1065,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(leaveType, "LeaveType")
         };
 
@@ -1123,6 +1137,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(earningsTemplate, "Array<EarningsTemplate>")
         };
 
@@ -1187,6 +1202,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payRunCalendar, "PayRunCalendar")
         };
 
@@ -1251,6 +1267,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(reimbursement, "Reimbursement")
         };
 
@@ -1315,6 +1332,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timesheet, "Timesheet")
         };
 
@@ -1386,6 +1404,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timesheetLine, "TimesheetLine")
         };
 
@@ -1529,6 +1548,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1664,6 +1684,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1735,6 +1756,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1799,6 +1821,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1861,6 +1884,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1925,6 +1949,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1987,6 +2012,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2051,6 +2077,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2113,6 +2140,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2177,6 +2205,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2239,6 +2268,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2303,6 +2333,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2374,6 +2405,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2438,6 +2470,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2512,6 +2545,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2576,6 +2610,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2640,6 +2675,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2704,6 +2740,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2768,6 +2805,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2832,6 +2870,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2903,6 +2942,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2972,6 +3012,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3046,6 +3087,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3110,6 +3152,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3174,6 +3217,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3241,6 +3285,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3305,6 +3350,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3372,6 +3418,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3436,6 +3483,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3500,6 +3548,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3562,6 +3611,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3629,6 +3679,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3693,6 +3744,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3765,6 +3817,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3829,6 +3882,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3891,6 +3945,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3948,6 +4003,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4017,6 +4073,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4081,6 +4138,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4168,6 +4226,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4225,6 +4284,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4289,6 +4349,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4359,6 +4420,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employee, "Employee")
         };
 
@@ -4437,6 +4499,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(earningsTemplate, "EarningsTemplate")
         };
 
@@ -4515,6 +4578,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeLeave, "EmployeeLeave")
         };
 
@@ -4586,6 +4650,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeOpeningBalances, "EmployeeOpeningBalances")
         };
 
@@ -4664,6 +4729,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(salaryAndWage, "SalaryAndWage")
         };
 
@@ -4735,6 +4801,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payRun, "PayRun")
         };
 
@@ -4813,6 +4880,7 @@ export class PayrollUkApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timesheetLine, "TimesheetLine")
         };
 

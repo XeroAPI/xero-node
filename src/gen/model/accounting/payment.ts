@@ -103,103 +103,128 @@ export class Payment {
             "name": "invoice",
             "baseName": "Invoice",
             "type": "Invoice"
-        }        {
+        },
+        {
             "name": "creditNote",
             "baseName": "CreditNote",
             "type": "CreditNote"
-        }        {
+        },
+        {
             "name": "prepayment",
             "baseName": "Prepayment",
             "type": "Prepayment"
-        }        {
+        },
+        {
             "name": "overpayment",
             "baseName": "Overpayment",
             "type": "Overpayment"
-        }        {
+        },
+        {
             "name": "invoiceNumber",
             "baseName": "InvoiceNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "creditNoteNumber",
             "baseName": "CreditNoteNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "account",
             "baseName": "Account",
             "type": "Account"
-        }        {
+        },
+        {
             "name": "code",
             "baseName": "Code",
             "type": "string"
-        }        {
+        },
+        {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        }        {
+        },
+        {
             "name": "currencyRate",
             "baseName": "CurrencyRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "bankAmount",
             "baseName": "BankAmount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        }        {
+        },
+        {
             "name": "isReconciled",
             "baseName": "IsReconciled",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "Payment.StatusEnum"
-        }        {
+        },
+        {
             "name": "paymentType",
             "baseName": "PaymentType",
             "type": "Payment.PaymentTypeEnum"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "paymentID",
             "baseName": "PaymentID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "batchPaymentID",
             "baseName": "BatchPaymentID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "bankAccountNumber",
             "baseName": "BankAccountNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "particulars",
             "baseName": "Particulars",
             "type": "string"
-        }        {
+        },
+        {
             "name": "details",
             "baseName": "Details",
             "type": "string"
-        }        {
+        },
+        {
             "name": "hasAccount",
             "baseName": "HasAccount",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "hasValidationErrors",
             "baseName": "HasValidationErrors",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "statusAttributeString",
             "baseName": "StatusAttributeString",
             "type": "string"
-        }        {
+        },
+        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
@@ -212,17 +237,17 @@ export class Payment {
 
 export namespace Payment {
     export enum StatusEnum {
-        Authorised = <any> 'AUTHORISED',
-        Deleted = <any> 'DELETED'
+        AUTHORISED = <any> 'AUTHORISED',
+        DELETED = <any> 'DELETED'
     }
     export enum PaymentTypeEnum {
-        Accrecpayment = <any> 'ACCRECPAYMENT',
-        Accpaypayment = <any> 'ACCPAYPAYMENT',
-        Arcreditpayment = <any> 'ARCREDITPAYMENT',
-        Apcreditpayment = <any> 'APCREDITPAYMENT',
-        Aroverpaymentpayment = <any> 'AROVERPAYMENTPAYMENT',
-        Arprepaymentpayment = <any> 'ARPREPAYMENTPAYMENT',
-        Apprepaymentpayment = <any> 'APPREPAYMENTPAYMENT',
-        Apoverpaymentpayment = <any> 'APOVERPAYMENTPAYMENT'
+        ACCRECPAYMENT = <any> 'ACCRECPAYMENT',
+        ACCPAYPAYMENT = <any> 'ACCPAYPAYMENT',
+        ARCREDITPAYMENT = <any> 'ARCREDITPAYMENT',
+        APCREDITPAYMENT = <any> 'APCREDITPAYMENT',
+        AROVERPAYMENTPAYMENT = <any> 'AROVERPAYMENTPAYMENT',
+        ARPREPAYMENTPAYMENT = <any> 'ARPREPAYMENTPAYMENT',
+        APPREPAYMENTPAYMENT = <any> 'APPREPAYMENTPAYMENT',
+        APOVERPAYMENTPAYMENT = <any> 'APOVERPAYMENTPAYMENT'
     }
 }

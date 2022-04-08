@@ -19,7 +19,8 @@ export class SettingsTrackingCategoriesEmployeeGroups {
             "name": "trackingCategoryID",
             "baseName": "TrackingCategoryID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "trackingCategoryName",
             "baseName": "TrackingCategoryName",
             "type": "string"

@@ -36,31 +36,38 @@ export class Employee {
             "name": "employeeID",
             "baseName": "EmployeeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "Employee.StatusEnum"
-        }        {
+        },
+        {
             "name": "firstName",
             "baseName": "FirstName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "lastName",
             "baseName": "LastName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "externalLink",
             "baseName": "ExternalLink",
             "type": "ExternalLink"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "statusAttributeString",
             "baseName": "StatusAttributeString",
             "type": "string"
-        }        {
+        },
+        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
@@ -73,9 +80,9 @@ export class Employee {
 
 export namespace Employee {
     export enum StatusEnum {
-        Active = <any> 'ACTIVE',
-        Archived = <any> 'ARCHIVED',
-        Gdprrequest = <any> 'GDPRREQUEST',
-        Deleted = <any> 'DELETED'
+        ACTIVE = <any> 'ACTIVE',
+        ARCHIVED = <any> 'ARCHIVED',
+        GDPRREQUEST = <any> 'GDPRREQUEST',
+        DELETED = <any> 'DELETED'
     }
 }

@@ -32,23 +32,28 @@ export class BankAccount {
             "name": "statementText",
             "baseName": "StatementText",
             "type": "string"
-        }        {
+        },
+        {
             "name": "accountName",
             "baseName": "AccountName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "bSB",
             "baseName": "BSB",
             "type": "string"
-        }        {
+        },
+        {
             "name": "accountNumber",
             "baseName": "AccountNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "remainder",
             "baseName": "Remainder",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"

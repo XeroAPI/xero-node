@@ -24,15 +24,18 @@ export class Reimbursement {
             "name": "reimbursementID",
             "baseName": "reimbursementID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "accountID",
             "baseName": "accountID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "currentRecord",
             "baseName": "currentRecord",
             "type": "boolean"

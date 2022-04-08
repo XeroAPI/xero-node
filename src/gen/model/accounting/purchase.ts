@@ -24,15 +24,18 @@ export class Purchase {
             "name": "unitPrice",
             "baseName": "UnitPrice",
             "type": "number"
-        }        {
+        },
+        {
             "name": "accountCode",
             "baseName": "AccountCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "cOGSAccountCode",
             "baseName": "COGSAccountCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "taxType",
             "baseName": "TaxType",
             "type": "string"

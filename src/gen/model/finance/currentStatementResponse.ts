@@ -32,23 +32,28 @@ export class CurrentStatementResponse {
             "name": "startDate",
             "baseName": "startDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "startBalance",
             "baseName": "startBalance",
             "type": "number"
-        }        {
+        },
+        {
             "name": "endBalance",
             "baseName": "endBalance",
             "type": "number"
-        }        {
+        },
+        {
             "name": "importedDateTimeUtc",
             "baseName": "importedDateTimeUtc",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "importSourceType",
             "baseName": "importSourceType",
             "type": "string"

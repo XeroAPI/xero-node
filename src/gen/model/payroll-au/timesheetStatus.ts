@@ -1,8 +1,8 @@
 
 export enum TimesheetStatus {
-    Draft = <any> 'DRAFT',
-    Processed = <any> 'PROCESSED',
-    Approved = <any> 'APPROVED',
-    Rejected = <any> 'REJECTED',
-    Requested = <any> 'REQUESTED'
+    DRAFT = <any> 'DRAFT',
+    PROCESSED = <any> 'PROCESSED',
+    APPROVED = <any> 'APPROVED',
+    REJECTED = <any> 'REJECTED',
+    REQUESTED = <any> 'REQUESTED'
 }

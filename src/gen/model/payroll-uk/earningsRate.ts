@@ -48,39 +48,48 @@ export class EarningsRate {
             "name": "earningsRateID",
             "baseName": "earningsRateID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "earningsType",
             "baseName": "earningsType",
             "type": "EarningsRate.EarningsTypeEnum"
-        }        {
+        },
+        {
             "name": "rateType",
             "baseName": "rateType",
             "type": "EarningsRate.RateTypeEnum"
-        }        {
+        },
+        {
             "name": "typeOfUnits",
             "baseName": "typeOfUnits",
             "type": "string"
-        }        {
+        },
+        {
             "name": "currentRecord",
             "baseName": "currentRecord",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "expenseAccountID",
             "baseName": "expenseAccountID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "ratePerUnit",
             "baseName": "ratePerUnit",
             "type": "number"
-        }        {
+        },
+        {
             "name": "multipleOfOrdinaryEarningsRate",
             "baseName": "multipleOfOrdinaryEarningsRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "fixedAmount",
             "baseName": "fixedAmount",
             "type": "number"

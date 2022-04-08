@@ -16,15 +16,18 @@ export class PayItem {
             "name": "earningsRates",
             "baseName": "EarningsRates",
             "type": "Array<EarningsRate>"
-        }        {
+        },
+        {
             "name": "deductionTypes",
             "baseName": "DeductionTypes",
             "type": "Array<DeductionType>"
-        }        {
+        },
+        {
             "name": "leaveTypes",
             "baseName": "LeaveTypes",
             "type": "Array<LeaveType>"
-        }        {
+        },
+        {
             "name": "reimbursementTypes",
             "baseName": "ReimbursementTypes",
             "type": "Array<ReimbursementType>"

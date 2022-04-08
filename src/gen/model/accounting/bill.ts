@@ -14,7 +14,8 @@ export class Bill {
             "name": "day",
             "baseName": "Day",
             "type": "number"
-        }        {
+        },
+        {
             "name": "type",
             "baseName": "Type",
             "type": "PaymentTermType"

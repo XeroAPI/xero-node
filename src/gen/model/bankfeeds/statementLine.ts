@@ -45,35 +45,43 @@ export class StatementLine {
             "name": "postedDate",
             "baseName": "postedDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "description",
             "baseName": "description",
             "type": "string"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "creditDebitIndicator",
             "baseName": "creditDebitIndicator",
             "type": "CreditDebitIndicator"
-        }        {
+        },
+        {
             "name": "transactionId",
             "baseName": "transactionId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "payeeName",
             "baseName": "payeeName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reference",
             "baseName": "reference",
             "type": "string"
-        }        {
+        },
+        {
             "name": "chequeNumber",
             "baseName": "chequeNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "transactionType",
             "baseName": "transactionType",
             "type": "string"

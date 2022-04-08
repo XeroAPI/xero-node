@@ -16,7 +16,8 @@ export class CourtOrderLine {
             "name": "courtOrderTypeID",
             "baseName": "courtOrderTypeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"

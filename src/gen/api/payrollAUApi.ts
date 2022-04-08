@@ -15,27 +15,27 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { APIException } from '../../model/payroll-au/aPIException';
-import { Employee } from '../../model/payroll-au/employee';
-import { Employees } from '../../model/payroll-au/employees';
-import { LeaveApplication } from '../../model/payroll-au/leaveApplication';
-import { LeaveApplications } from '../../model/payroll-au/leaveApplications';
-import { PayItem } from '../../model/payroll-au/payItem';
-import { PayItems } from '../../model/payroll-au/payItems';
-import { PayRun } from '../../model/payroll-au/payRun';
-import { PayRuns } from '../../model/payroll-au/payRuns';
-import { PayrollCalendar } from '../../model/payroll-au/payrollCalendar';
-import { PayrollCalendars } from '../../model/payroll-au/payrollCalendars';
-import { PayslipLines } from '../../model/payroll-au/payslipLines';
-import { PayslipObject } from '../../model/payroll-au/payslipObject';
-import { Payslips } from '../../model/payroll-au/payslips';
-import { SettingsObject } from '../../model/payroll-au/settingsObject';
-import { SuperFund } from '../../model/payroll-au/superFund';
-import { SuperFundProducts } from '../../model/payroll-au/superFundProducts';
-import { SuperFunds } from '../../model/payroll-au/superFunds';
-import { Timesheet } from '../../model/payroll-au/timesheet';
-import { TimesheetObject } from '../../model/payroll-au/timesheetObject';
-import { Timesheets } from '../../model/payroll-au/timesheets';
+import { APIException } from '../model/payroll-au/aPIException';
+import { Employee } from '../model/payroll-au/employee';
+import { Employees } from '../model/payroll-au/employees';
+import { LeaveApplication } from '../model/payroll-au/leaveApplication';
+import { LeaveApplications } from '../model/payroll-au/leaveApplications';
+import { PayItem } from '../model/payroll-au/payItem';
+import { PayItems } from '../model/payroll-au/payItems';
+import { PayRun } from '../model/payroll-au/payRun';
+import { PayRuns } from '../model/payroll-au/payRuns';
+import { PayrollCalendar } from '../model/payroll-au/payrollCalendar';
+import { PayrollCalendars } from '../model/payroll-au/payrollCalendars';
+import { PayslipLines } from '../model/payroll-au/payslipLines';
+import { PayslipObject } from '../model/payroll-au/payslipObject';
+import { Payslips } from '../model/payroll-au/payslips';
+import { SettingsObject } from '../model/payroll-au/settingsObject';
+import { SuperFund } from '../model/payroll-au/superFund';
+import { SuperFundProducts } from '../model/payroll-au/superFundProducts';
+import { SuperFunds } from '../model/payroll-au/superFunds';
+import { Timesheet } from '../model/payroll-au/timesheet';
+import { TimesheetObject } from '../model/payroll-au/timesheetObject';
+import { Timesheets } from '../model/payroll-au/timesheets';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/payroll-au/models';
 import { OAuth } from '../model/payroll-au/models';
@@ -130,6 +130,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employee, "Array<Employee>")
         };
 
@@ -194,6 +195,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(leaveApplication, "Array<LeaveApplication>")
         };
 
@@ -258,6 +260,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payItem, "PayItem")
         };
 
@@ -322,6 +325,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payRun, "Array<PayRun>")
         };
 
@@ -386,6 +390,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payrollCalendar, "Array<PayrollCalendar>")
         };
 
@@ -450,6 +455,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(superFund, "Array<SuperFund>")
         };
 
@@ -514,6 +520,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timesheet, "Array<Timesheet>")
         };
 
@@ -579,6 +586,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -653,6 +661,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -717,6 +726,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -791,6 +801,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -865,6 +876,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -929,6 +941,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1003,6 +1016,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1067,6 +1081,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1141,6 +1156,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1205,6 +1221,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1262,6 +1279,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1326,6 +1344,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1393,6 +1412,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1467,6 +1487,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1531,6 +1552,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1605,6 +1627,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1670,6 +1693,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employee, "Array<Employee>")
         };
 
@@ -1741,6 +1765,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(leaveApplication, "Array<LeaveApplication>")
         };
 
@@ -1807,6 +1832,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payRun, "Array<PayRun>")
         };
 
@@ -1873,6 +1899,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payslipLines, "Array<PayslipLines>")
         };
 
@@ -1939,6 +1966,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(superFund, "Array<SuperFund>")
         };
 
@@ -2005,6 +2033,7 @@ export class PayrollAuApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timesheet, "Array<Timesheet>")
         };
 

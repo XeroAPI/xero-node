@@ -16,7 +16,8 @@ export class TrialBalanceEntry {
             "name": "value",
             "baseName": "value",
             "type": "number"
-        }        {
+        },
+        {
             "name": "entryType",
             "baseName": "entryType",
             "type": "string"

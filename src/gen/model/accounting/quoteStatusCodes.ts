@@ -3,10 +3,10 @@
 * The status of the quote.
 */
 export enum QuoteStatusCodes {
-    Draft = <any> 'DRAFT',
-    Sent = <any> 'SENT',
-    Declined = <any> 'DECLINED',
-    Accepted = <any> 'ACCEPTED',
-    Invoiced = <any> 'INVOICED',
-    Deleted = <any> 'DELETED'
+    DRAFT = <any> 'DRAFT',
+    SENT = <any> 'SENT',
+    DECLINED = <any> 'DECLINED',
+    ACCEPTED = <any> 'ACCEPTED',
+    INVOICED = <any> 'INVOICED',
+    DELETED = <any> 'DELETED'
 }

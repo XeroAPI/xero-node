@@ -28,19 +28,23 @@ export class User {
             "name": "id",
             "baseName": "Id",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "firstName",
             "baseName": "FirstName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "lastName",
             "baseName": "LastName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "fullName",
             "baseName": "FullName",
             "type": "string"

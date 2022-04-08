@@ -14,11 +14,13 @@ export class TimesheetLineObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "timesheetLine",
             "baseName": "timesheetLine",
             "type": "TimesheetLine"

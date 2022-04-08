@@ -16,15 +16,18 @@ export class BalanceSheetResponse {
             "name": "balanceDate",
             "baseName": "balanceDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "asset",
             "baseName": "asset",
             "type": "BalanceSheetAccountGroup"
-        }        {
+        },
+        {
             "name": "liability",
             "baseName": "liability",
             "type": "BalanceSheetAccountGroup"
-        }        {
+        },
+        {
             "name": "equity",
             "baseName": "equity",
             "type": "BalanceSheetAccountGroup"

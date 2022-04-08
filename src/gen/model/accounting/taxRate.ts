@@ -57,47 +57,58 @@ export class TaxRate {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "taxType",
             "baseName": "TaxType",
             "type": "string"
-        }        {
+        },
+        {
             "name": "taxComponents",
             "baseName": "TaxComponents",
             "type": "Array<TaxComponent>"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "TaxRate.StatusEnum"
-        }        {
+        },
+        {
             "name": "reportTaxType",
             "baseName": "ReportTaxType",
             "type": "TaxRate.ReportTaxTypeEnum"
-        }        {
+        },
+        {
             "name": "canApplyToAssets",
             "baseName": "CanApplyToAssets",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "canApplyToEquity",
             "baseName": "CanApplyToEquity",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "canApplyToExpenses",
             "baseName": "CanApplyToExpenses",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "canApplyToLiabilities",
             "baseName": "CanApplyToLiabilities",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "canApplyToRevenue",
             "baseName": "CanApplyToRevenue",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "displayTaxRate",
             "baseName": "DisplayTaxRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "effectiveRate",
             "baseName": "EffectiveRate",
             "type": "number"
@@ -110,85 +121,85 @@ export class TaxRate {
 
 export namespace TaxRate {
     export enum StatusEnum {
-        Active = <any> 'ACTIVE',
-        Deleted = <any> 'DELETED',
-        Archived = <any> 'ARCHIVED',
-        Pending = <any> 'PENDING'
+        ACTIVE = <any> 'ACTIVE',
+        DELETED = <any> 'DELETED',
+        ARCHIVED = <any> 'ARCHIVED',
+        PENDING = <any> 'PENDING'
     }
     export enum ReportTaxTypeEnum {
-        Avalara = <any> 'AVALARA',
-        Basexcluded = <any> 'BASEXCLUDED',
-        Capitalsalesoutput = <any> 'CAPITALSALESOUTPUT',
-        Capitalexpensesinput = <any> 'CAPITALEXPENSESINPUT',
-        Ecoutput = <any> 'ECOUTPUT',
-        Ecoutputservices = <any> 'ECOUTPUTSERVICES',
-        Ecinput = <any> 'ECINPUT',
-        Ecacquisitions = <any> 'ECACQUISITIONS',
-        Exemptexpenses = <any> 'EXEMPTEXPENSES',
-        Exemptinput = <any> 'EXEMPTINPUT',
-        Exemptoutput = <any> 'EXEMPTOUTPUT',
-        Gstonimports = <any> 'GSTONIMPORTS',
-        Input = <any> 'INPUT',
-        Inputtaxed = <any> 'INPUTTAXED',
-        Mosssales = <any> 'MOSSSALES',
-        None = <any> 'NONE',
-        Noneoutput = <any> 'NONEOUTPUT',
-        Output = <any> 'OUTPUT',
-        Purchasesinput = <any> 'PURCHASESINPUT',
-        Salesoutput = <any> 'SALESOUTPUT',
-        Exemptcapital = <any> 'EXEMPTCAPITAL',
-        Exemptexport = <any> 'EXEMPTEXPORT',
-        Capitalexinput = <any> 'CAPITALEXINPUT',
-        Gstoncapimports = <any> 'GSTONCAPIMPORTS',
-        Gstoncapitalimports = <any> 'GSTONCAPITALIMPORTS',
-        Reversecharges = <any> 'REVERSECHARGES',
-        Payments = <any> 'PAYMENTS',
-        Invoice = <any> 'INVOICE',
-        Cash = <any> 'CASH',
-        Accrual = <any> 'ACCRUAL',
-        Flatratecash = <any> 'FLATRATECASH',
-        Flatrateaccrual = <any> 'FLATRATEACCRUAL',
-        Accruals = <any> 'ACCRUALS',
-        Txca = <any> 'TXCA',
-        Srcas = <any> 'SRCAS',
-        Dsoutput = <any> 'DSOUTPUT',
-        Blinput2 = <any> 'BLINPUT2',
-        Epinput = <any> 'EPINPUT',
-        Iminput2 = <any> 'IMINPUT2',
-        Meinput = <any> 'MEINPUT',
-        Igdsinput2 = <any> 'IGDSINPUT2',
-        Esn33Output = <any> 'ESN33OUTPUT',
-        Opinput = <any> 'OPINPUT',
-        Osoutput = <any> 'OSOUTPUT',
-        Txn33Input = <any> 'TXN33INPUT',
-        Txessinput = <any> 'TXESSINPUT',
-        Txreinput = <any> 'TXREINPUT',
-        Txpetinput = <any> 'TXPETINPUT',
-        Nrinput = <any> 'NRINPUT',
-        Es33Output = <any> 'ES33OUTPUT',
-        Zeroratedinput = <any> 'ZERORATEDINPUT',
-        Zeroratedoutput = <any> 'ZERORATEDOUTPUT',
-        Drchargesupply = <any> 'DRCHARGESUPPLY',
-        Drcharge = <any> 'DRCHARGE',
-        Capinput = <any> 'CAPINPUT',
-        Capimports = <any> 'CAPIMPORTS',
-        Iminput = <any> 'IMINPUT',
-        Input2 = <any> 'INPUT2',
-        Ciuinput = <any> 'CIUINPUT',
-        Srinput = <any> 'SRINPUT',
-        Output2 = <any> 'OUTPUT2',
-        Sroutput = <any> 'SROUTPUT',
-        Capoutput = <any> 'CAPOUTPUT',
-        Sroutput2 = <any> 'SROUTPUT2',
-        Ciuoutput = <any> 'CIUOUTPUT',
-        Zroutput = <any> 'ZROUTPUT',
-        Zrexport = <any> 'ZREXPORT',
-        Acc28Plus = <any> 'ACC28PLUS',
-        Accupto28 = <any> 'ACCUPTO28',
-        Otheroutput = <any> 'OTHEROUTPUT',
-        Shoutput = <any> 'SHOUTPUT',
-        Zrinput = <any> 'ZRINPUT',
-        Baddebt = <any> 'BADDEBT',
-        Otherinput = <any> 'OTHERINPUT'
+        AVALARA = <any> 'AVALARA',
+        BASEXCLUDED = <any> 'BASEXCLUDED',
+        CAPITALSALESOUTPUT = <any> 'CAPITALSALESOUTPUT',
+        CAPITALEXPENSESINPUT = <any> 'CAPITALEXPENSESINPUT',
+        ECOUTPUT = <any> 'ECOUTPUT',
+        ECOUTPUTSERVICES = <any> 'ECOUTPUTSERVICES',
+        ECINPUT = <any> 'ECINPUT',
+        ECACQUISITIONS = <any> 'ECACQUISITIONS',
+        EXEMPTEXPENSES = <any> 'EXEMPTEXPENSES',
+        EXEMPTINPUT = <any> 'EXEMPTINPUT',
+        EXEMPTOUTPUT = <any> 'EXEMPTOUTPUT',
+        GSTONIMPORTS = <any> 'GSTONIMPORTS',
+        INPUT = <any> 'INPUT',
+        INPUTTAXED = <any> 'INPUTTAXED',
+        MOSSSALES = <any> 'MOSSSALES',
+        NONE = <any> 'NONE',
+        NONEOUTPUT = <any> 'NONEOUTPUT',
+        OUTPUT = <any> 'OUTPUT',
+        PURCHASESINPUT = <any> 'PURCHASESINPUT',
+        SALESOUTPUT = <any> 'SALESOUTPUT',
+        EXEMPTCAPITAL = <any> 'EXEMPTCAPITAL',
+        EXEMPTEXPORT = <any> 'EXEMPTEXPORT',
+        CAPITALEXINPUT = <any> 'CAPITALEXINPUT',
+        GSTONCAPIMPORTS = <any> 'GSTONCAPIMPORTS',
+        GSTONCAPITALIMPORTS = <any> 'GSTONCAPITALIMPORTS',
+        REVERSECHARGES = <any> 'REVERSECHARGES',
+        PAYMENTS = <any> 'PAYMENTS',
+        INVOICE = <any> 'INVOICE',
+        CASH = <any> 'CASH',
+        ACCRUAL = <any> 'ACCRUAL',
+        FLATRATECASH = <any> 'FLATRATECASH',
+        FLATRATEACCRUAL = <any> 'FLATRATEACCRUAL',
+        ACCRUALS = <any> 'ACCRUALS',
+        TXCA = <any> 'TXCA',
+        SRCAS = <any> 'SRCAS',
+        DSOUTPUT = <any> 'DSOUTPUT',
+        BLINPUT2 = <any> 'BLINPUT2',
+        EPINPUT = <any> 'EPINPUT',
+        IMINPUT2 = <any> 'IMINPUT2',
+        MEINPUT = <any> 'MEINPUT',
+        IGDSINPUT2 = <any> 'IGDSINPUT2',
+        ESN33OUTPUT = <any> 'ESN33OUTPUT',
+        OPINPUT = <any> 'OPINPUT',
+        OSOUTPUT = <any> 'OSOUTPUT',
+        TXN33INPUT = <any> 'TXN33INPUT',
+        TXESSINPUT = <any> 'TXESSINPUT',
+        TXREINPUT = <any> 'TXREINPUT',
+        TXPETINPUT = <any> 'TXPETINPUT',
+        NRINPUT = <any> 'NRINPUT',
+        ES33OUTPUT = <any> 'ES33OUTPUT',
+        ZERORATEDINPUT = <any> 'ZERORATEDINPUT',
+        ZERORATEDOUTPUT = <any> 'ZERORATEDOUTPUT',
+        DRCHARGESUPPLY = <any> 'DRCHARGESUPPLY',
+        DRCHARGE = <any> 'DRCHARGE',
+        CAPINPUT = <any> 'CAPINPUT',
+        CAPIMPORTS = <any> 'CAPIMPORTS',
+        IMINPUT = <any> 'IMINPUT',
+        INPUT2 = <any> 'INPUT2',
+        CIUINPUT = <any> 'CIUINPUT',
+        SRINPUT = <any> 'SRINPUT',
+        OUTPUT2 = <any> 'OUTPUT2',
+        SROUTPUT = <any> 'SROUTPUT',
+        CAPOUTPUT = <any> 'CAPOUTPUT',
+        SROUTPUT2 = <any> 'SROUTPUT2',
+        CIUOUTPUT = <any> 'CIUOUTPUT',
+        ZROUTPUT = <any> 'ZROUTPUT',
+        ZREXPORT = <any> 'ZREXPORT',
+        ACC28PLUS = <any> 'ACC28PLUS',
+        ACCUPTO28 = <any> 'ACCUPTO28',
+        OTHEROUTPUT = <any> 'OTHEROUTPUT',
+        SHOUTPUT = <any> 'SHOUTPUT',
+        ZRINPUT = <any> 'ZRINPUT',
+        BADDEBT = <any> 'BADDEBT',
+        OTHERINPUT = <any> 'OTHERINPUT'
     }
 }

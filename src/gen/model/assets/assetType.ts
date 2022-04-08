@@ -34,27 +34,33 @@ export class AssetType {
             "name": "assetTypeId",
             "baseName": "assetTypeId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "assetTypeName",
             "baseName": "assetTypeName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "fixedAssetAccountId",
             "baseName": "fixedAssetAccountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "depreciationExpenseAccountId",
             "baseName": "depreciationExpenseAccountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "accumulatedDepreciationAccountId",
             "baseName": "accumulatedDepreciationAccountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "bookDepreciationSetting",
             "baseName": "bookDepreciationSetting",
             "type": "BookDepreciationSetting"
-        }        {
+        },
+        {
             "name": "locks",
             "baseName": "locks",
             "type": "number"

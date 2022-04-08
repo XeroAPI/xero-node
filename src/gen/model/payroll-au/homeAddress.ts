@@ -30,23 +30,28 @@ export class HomeAddress {
             "name": "addressLine1",
             "baseName": "AddressLine1",
             "type": "string"
-        }        {
+        },
+        {
             "name": "addressLine2",
             "baseName": "AddressLine2",
             "type": "string"
-        }        {
+        },
+        {
             "name": "city",
             "baseName": "City",
             "type": "string"
-        }        {
+        },
+        {
             "name": "region",
             "baseName": "Region",
             "type": "State"
-        }        {
+        },
+        {
             "name": "postalCode",
             "baseName": "PostalCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "country",
             "baseName": "Country",
             "type": "string"

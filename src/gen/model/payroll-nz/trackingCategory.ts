@@ -16,7 +16,8 @@ export class TrackingCategory {
             "name": "employeeGroupsTrackingCategoryID",
             "baseName": "employeeGroupsTrackingCategoryID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "timesheetTrackingCategoryID",
             "baseName": "timesheetTrackingCategoryID",
             "type": "string"

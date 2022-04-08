@@ -15,10 +15,10 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { Association } from '../../model/files/association';
-import { FileObject } from '../../model/files/fileObject';
-import { Files } from '../../model/files/files';
-import { Folder } from '../../model/files/folder';
+import { Association } from '../model/files/association';
+import { FileObject } from '../model/files/fileObject';
+import { Files } from '../model/files/files';
+import { Folder } from '../model/files/folder';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/files/models';
 import { OAuth } from '../model/files/models';
@@ -115,6 +115,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(association, "Association")
         };
 
@@ -174,6 +175,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(folder, "Folder")
         };
 
@@ -505,6 +507,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -706,6 +709,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -770,6 +774,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -889,6 +894,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -954,6 +960,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(fileObject, "FileObject")
         };
 
@@ -1025,6 +1032,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(folder, "Folder")
         };
 
@@ -1115,6 +1123,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         localVarUseFormData = true;
@@ -1215,6 +1224,7 @@ export class FilesApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         localVarUseFormData = true;

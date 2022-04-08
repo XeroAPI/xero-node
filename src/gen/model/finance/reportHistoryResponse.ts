@@ -18,11 +18,13 @@ export class ReportHistoryResponse {
             "name": "organisationId",
             "baseName": "organisationId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reports",
             "baseName": "reports",
             "type": "Array<ReportHistoryModel>"

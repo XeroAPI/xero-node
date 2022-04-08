@@ -14,11 +14,13 @@ export class Reimbursements {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "reimbursements",
             "baseName": "reimbursements",
             "type": "Array<Reimbursement>"

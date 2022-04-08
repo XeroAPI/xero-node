@@ -1,13 +1,13 @@
 
 export enum AllowanceType {
-    Car = <any> 'CAR',
-    Transport = <any> 'TRANSPORT',
-    Laundry = <any> 'LAUNDRY',
-    Meals = <any> 'MEALS',
-    Travel = <any> 'TRAVEL',
-    Other = <any> 'OTHER',
-    Jobkeeper = <any> 'JOBKEEPER',
-    Tools = <any> 'TOOLS',
-    Tasks = <any> 'TASKS',
-    Qualifications = <any> 'QUALIFICATIONS'
+    CAR = <any> 'CAR',
+    TRANSPORT = <any> 'TRANSPORT',
+    LAUNDRY = <any> 'LAUNDRY',
+    MEALS = <any> 'MEALS',
+    TRAVEL = <any> 'TRAVEL',
+    OTHER = <any> 'OTHER',
+    JOBKEEPER = <any> 'JOBKEEPER',
+    TOOLS = <any> 'TOOLS',
+    TASKS = <any> 'TASKS',
+    QUALIFICATIONS = <any> 'QUALIFICATIONS'
 }

@@ -14,11 +14,13 @@ export class EmployeePayTemplates {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "payTemplate",
             "baseName": "payTemplate",
             "type": "EmployeePayTemplate"

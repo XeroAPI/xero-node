@@ -20,11 +20,13 @@ export class CISOrgSetting {
             "name": "cISContractorEnabled",
             "baseName": "CISContractorEnabled",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "cISSubContractorEnabled",
             "baseName": "CISSubContractorEnabled",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "rate",
             "baseName": "Rate",
             "type": "number"

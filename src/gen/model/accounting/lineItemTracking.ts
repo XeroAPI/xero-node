@@ -24,15 +24,18 @@ export class LineItemTracking {
             "name": "trackingCategoryID",
             "baseName": "TrackingCategoryID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "trackingOptionID",
             "baseName": "TrackingOptionID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "option",
             "baseName": "Option",
             "type": "string"

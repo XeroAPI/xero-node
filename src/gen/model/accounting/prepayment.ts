@@ -86,79 +86,98 @@ export class Prepayment {
             "name": "type",
             "baseName": "Type",
             "type": "Prepayment.TypeEnum"
-        }        {
+        },
+        {
             "name": "contact",
             "baseName": "Contact",
             "type": "Contact"
-        }        {
+        },
+        {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "Prepayment.StatusEnum"
-        }        {
+        },
+        {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
             "type": "LineAmountTypes"
-        }        {
+        },
+        {
             "name": "lineItems",
             "baseName": "LineItems",
             "type": "Array<LineItem>"
-        }        {
+        },
+        {
             "name": "subTotal",
             "baseName": "SubTotal",
             "type": "number"
-        }        {
+        },
+        {
             "name": "totalTax",
             "baseName": "TotalTax",
             "type": "number"
-        }        {
+        },
+        {
             "name": "total",
             "baseName": "Total",
             "type": "number"
-        }        {
+        },
+        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "currencyCode",
             "baseName": "CurrencyCode",
             "type": "CurrencyCode"
-        }        {
+        },
+        {
             "name": "prepaymentID",
             "baseName": "PrepaymentID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "currencyRate",
             "baseName": "CurrencyRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "remainingCredit",
             "baseName": "RemainingCredit",
             "type": "number"
-        }        {
+        },
+        {
             "name": "allocations",
             "baseName": "Allocations",
             "type": "Array<Allocation>"
-        }        {
+        },
+        {
             "name": "payments",
             "baseName": "Payments",
             "type": "Array<Payment>"
-        }        {
+        },
+        {
             "name": "appliedAmount",
             "baseName": "AppliedAmount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "attachments",
             "baseName": "Attachments",
             "type": "Array<Attachment>"
@@ -171,14 +190,14 @@ export class Prepayment {
 
 export namespace Prepayment {
     export enum TypeEnum {
-        ReceivePrepayment = <any> 'RECEIVE-PREPAYMENT',
-        SpendPrepayment = <any> 'SPEND-PREPAYMENT',
-        Arprepayment = <any> 'ARPREPAYMENT',
-        Apprepayment = <any> 'APPREPAYMENT'
+        RECEIVEPREPAYMENT = <any> 'RECEIVE-PREPAYMENT',
+        SPENDPREPAYMENT = <any> 'SPEND-PREPAYMENT',
+        ARPREPAYMENT = <any> 'ARPREPAYMENT',
+        APPREPAYMENT = <any> 'APPREPAYMENT'
     }
     export enum StatusEnum {
-        Authorised = <any> 'AUTHORISED',
-        Paid = <any> 'PAID',
-        Voided = <any> 'VOIDED'
+        AUTHORISED = <any> 'AUTHORISED',
+        PAID = <any> 'PAID',
+        VOIDED = <any> 'VOIDED'
     }
 }

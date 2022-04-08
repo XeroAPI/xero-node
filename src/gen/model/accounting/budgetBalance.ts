@@ -24,15 +24,18 @@ export class BudgetBalance {
             "name": "period",
             "baseName": "Period",
             "type": "string"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "unitAmount",
             "baseName": "UnitAmount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "notes",
             "baseName": "Notes",
             "type": "string"

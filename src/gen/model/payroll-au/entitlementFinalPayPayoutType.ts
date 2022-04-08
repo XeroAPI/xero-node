@@ -1,5 +1,5 @@
 
 export enum EntitlementFinalPayPayoutType {
-    Notpaidout = <any> 'NOTPAIDOUT',
-    Paidout = <any> 'PAIDOUT'
+    NOTPAIDOUT = <any> 'NOTPAIDOUT',
+    PAIDOUT = <any> 'PAIDOUT'
 }

@@ -126,119 +126,148 @@ export class CreditNote {
             "name": "type",
             "baseName": "Type",
             "type": "CreditNote.TypeEnum"
-        }        {
+        },
+        {
             "name": "contact",
             "baseName": "Contact",
             "type": "Contact"
-        }        {
+        },
+        {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        }        {
+        },
+        {
             "name": "dueDate",
             "baseName": "DueDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "CreditNote.StatusEnum"
-        }        {
+        },
+        {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
             "type": "LineAmountTypes"
-        }        {
+        },
+        {
             "name": "lineItems",
             "baseName": "LineItems",
             "type": "Array<LineItem>"
-        }        {
+        },
+        {
             "name": "subTotal",
             "baseName": "SubTotal",
             "type": "number"
-        }        {
+        },
+        {
             "name": "totalTax",
             "baseName": "TotalTax",
             "type": "number"
-        }        {
+        },
+        {
             "name": "total",
             "baseName": "Total",
             "type": "number"
-        }        {
+        },
+        {
             "name": "cISDeduction",
             "baseName": "CISDeduction",
             "type": "number"
-        }        {
+        },
+        {
             "name": "cISRate",
             "baseName": "CISRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "currencyCode",
             "baseName": "CurrencyCode",
             "type": "CurrencyCode"
-        }        {
+        },
+        {
             "name": "fullyPaidOnDate",
             "baseName": "FullyPaidOnDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "creditNoteID",
             "baseName": "CreditNoteID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "creditNoteNumber",
             "baseName": "CreditNoteNumber",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reference",
             "baseName": "Reference",
             "type": "string"
-        }        {
+        },
+        {
             "name": "sentToContact",
             "baseName": "SentToContact",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "currencyRate",
             "baseName": "CurrencyRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "remainingCredit",
             "baseName": "RemainingCredit",
             "type": "number"
-        }        {
+        },
+        {
             "name": "allocations",
             "baseName": "Allocations",
             "type": "Array<Allocation>"
-        }        {
+        },
+        {
             "name": "appliedAmount",
             "baseName": "AppliedAmount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "payments",
             "baseName": "Payments",
             "type": "Array<Payment>"
-        }        {
+        },
+        {
             "name": "brandingThemeID",
             "baseName": "BrandingThemeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "statusAttributeString",
             "baseName": "StatusAttributeString",
             "type": "string"
-        }        {
+        },
+        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "hasErrors",
             "baseName": "HasErrors",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
-        }        {
+        },
+        {
             "name": "warnings",
             "baseName": "Warnings",
             "type": "Array<ValidationError>"
@@ -251,15 +280,15 @@ export class CreditNote {
 
 export namespace CreditNote {
     export enum TypeEnum {
-        Accpaycredit = <any> 'ACCPAYCREDIT',
-        Accreccredit = <any> 'ACCRECCREDIT'
+        ACCPAYCREDIT = <any> 'ACCPAYCREDIT',
+        ACCRECCREDIT = <any> 'ACCRECCREDIT'
     }
     export enum StatusEnum {
-        Draft = <any> 'DRAFT',
-        Submitted = <any> 'SUBMITTED',
-        Deleted = <any> 'DELETED',
-        Authorised = <any> 'AUTHORISED',
-        Paid = <any> 'PAID',
-        Voided = <any> 'VOIDED'
+        DRAFT = <any> 'DRAFT',
+        SUBMITTED = <any> 'SUBMITTED',
+        DELETED = <any> 'DELETED',
+        AUTHORISED = <any> 'AUTHORISED',
+        PAID = <any> 'PAID',
+        VOIDED = <any> 'VOIDED'
     }
 }

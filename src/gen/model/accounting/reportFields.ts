@@ -11,11 +11,13 @@ export class ReportFields {
             "name": "fieldID",
             "baseName": "FieldID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "description",
             "baseName": "Description",
             "type": "string"
-        }        {
+        },
+        {
             "name": "value",
             "baseName": "Value",
             "type": "string"

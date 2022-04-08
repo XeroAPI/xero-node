@@ -14,11 +14,13 @@ export class StatutoryDeductions {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "statutoryDeductions",
             "baseName": "statutoryDeductions",
             "type": "Array<StatutoryDeduction>"

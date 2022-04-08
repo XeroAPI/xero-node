@@ -16,7 +16,8 @@ export class GrossEarningsHistory {
             "name": "daysPaid",
             "baseName": "daysPaid",
             "type": "number"
-        }        {
+        },
+        {
             "name": "unpaidWeeks",
             "baseName": "unpaidWeeks",
             "type": "number"

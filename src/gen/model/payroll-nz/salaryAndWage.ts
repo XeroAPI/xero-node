@@ -48,39 +48,48 @@ export class SalaryAndWage {
             "name": "salaryAndWagesID",
             "baseName": "salaryAndWagesID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "earningsRateID",
             "baseName": "earningsRateID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "numberOfUnitsPerWeek",
             "baseName": "numberOfUnitsPerWeek",
             "type": "number"
-        }        {
+        },
+        {
             "name": "ratePerUnit",
             "baseName": "ratePerUnit",
             "type": "number"
-        }        {
+        },
+        {
             "name": "numberOfUnitsPerDay",
             "baseName": "numberOfUnitsPerDay",
             "type": "number"
-        }        {
+        },
+        {
             "name": "daysPerWeek",
             "baseName": "daysPerWeek",
             "type": "number"
-        }        {
+        },
+        {
             "name": "effectiveFrom",
             "baseName": "effectiveFrom",
             "type": "string"
-        }        {
+        },
+        {
             "name": "annualSalary",
             "baseName": "annualSalary",
             "type": "number"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "status",
             "type": "SalaryAndWage.StatusEnum"
-        }        {
+        },
+        {
             "name": "paymentType",
             "baseName": "paymentType",
             "type": "SalaryAndWage.PaymentTypeEnum"

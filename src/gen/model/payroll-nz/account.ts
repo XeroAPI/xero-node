@@ -24,15 +24,18 @@ export class Account {
             "name": "accountID",
             "baseName": "accountID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "type",
             "baseName": "type",
             "type": "Account.TypeEnum"
-        }        {
+        },
+        {
             "name": "code",
             "baseName": "code",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string"
@@ -45,9 +48,9 @@ export class Account {
 
 export namespace Account {
     export enum TypeEnum {
-        Payeliability = <any> 'PAYELIABILITY',
-        Wagespayable = <any> 'WAGESPAYABLE',
-        Wagesexpense = <any> 'WAGESEXPENSE',
-        Bank = <any> 'BANK'
+        PAYELIABILITY = <any> 'PAYELIABILITY',
+        WAGESPAYABLE = <any> 'WAGESPAYABLE',
+        WAGESEXPENSE = <any> 'WAGESEXPENSE',
+        BANK = <any> 'BANK'
     }
 }

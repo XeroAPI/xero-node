@@ -15,17 +15,17 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { ChargeType } from '../../model/projects/chargeType';
-import { Project } from '../../model/projects/project';
-import { ProjectCreateOrUpdate } from '../../model/projects/projectCreateOrUpdate';
-import { ProjectPatch } from '../../model/projects/projectPatch';
-import { ProjectUsers } from '../../model/projects/projectUsers';
-import { Projects } from '../../model/projects/projects';
-import { Task } from '../../model/projects/task';
-import { Tasks } from '../../model/projects/tasks';
-import { TimeEntries } from '../../model/projects/timeEntries';
-import { TimeEntry } from '../../model/projects/timeEntry';
-import { TimeEntryCreateOrUpdate } from '../../model/projects/timeEntryCreateOrUpdate';
+import { ChargeType } from '../model/projects/chargeType';
+import { Project } from '../model/projects/project';
+import { ProjectCreateOrUpdate } from '../model/projects/projectCreateOrUpdate';
+import { ProjectPatch } from '../model/projects/projectPatch';
+import { ProjectUsers } from '../model/projects/projectUsers';
+import { Projects } from '../model/projects/projects';
+import { Task } from '../model/projects/task';
+import { Tasks } from '../model/projects/tasks';
+import { TimeEntries } from '../model/projects/timeEntries';
+import { TimeEntry } from '../model/projects/timeEntry';
+import { TimeEntryCreateOrUpdate } from '../model/projects/timeEntryCreateOrUpdate';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/projects/models';
 import { OAuth } from '../model/projects/models';
@@ -120,6 +120,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate")
         };
 
@@ -191,6 +192,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate")
         };
 
@@ -328,6 +330,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -395,6 +398,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -477,6 +481,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -548,6 +553,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -632,6 +638,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -746,6 +753,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -817,6 +825,7 @@ export class ProjectApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();

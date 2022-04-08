@@ -24,15 +24,18 @@ export class EmployeeOpeningBalance {
             "name": "periodEndDate",
             "baseName": "periodEndDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "daysPaid",
             "baseName": "daysPaid",
             "type": "number"
-        }        {
+        },
+        {
             "name": "unpaidWeeks",
             "baseName": "unpaidWeeks",
             "type": "number"
-        }        {
+        },
+        {
             "name": "grossEarnings",
             "baseName": "grossEarnings",
             "type": "number"

@@ -20,11 +20,13 @@ export class ReimbursementLine {
             "name": "reimbursementTypeID",
             "baseName": "reimbursementTypeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "description",
             "baseName": "description",
             "type": "string"
-        }        {
+        },
+        {
             "name": "amount",
             "baseName": "amount",
             "type": "number"

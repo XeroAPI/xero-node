@@ -3,6 +3,6 @@
 * Employee Status Types
 */
 export enum EmployeeStatus {
-    Active = <any> 'ACTIVE',
-    Terminated = <any> 'TERMINATED'
+    ACTIVE = <any> 'ACTIVE',
+    TERMINATED = <any> 'TERMINATED'
 }

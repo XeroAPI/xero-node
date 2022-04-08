@@ -82,75 +82,93 @@ export class Overpayment {
             "name": "type",
             "baseName": "Type",
             "type": "Overpayment.TypeEnum"
-        }        {
+        },
+        {
             "name": "contact",
             "baseName": "Contact",
             "type": "Contact"
-        }        {
+        },
+        {
             "name": "date",
             "baseName": "Date",
             "type": "string"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "Status",
             "type": "Overpayment.StatusEnum"
-        }        {
+        },
+        {
             "name": "lineAmountTypes",
             "baseName": "LineAmountTypes",
             "type": "LineAmountTypes"
-        }        {
+        },
+        {
             "name": "lineItems",
             "baseName": "LineItems",
             "type": "Array<LineItem>"
-        }        {
+        },
+        {
             "name": "subTotal",
             "baseName": "SubTotal",
             "type": "number"
-        }        {
+        },
+        {
             "name": "totalTax",
             "baseName": "TotalTax",
             "type": "number"
-        }        {
+        },
+        {
             "name": "total",
             "baseName": "Total",
             "type": "number"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "currencyCode",
             "baseName": "CurrencyCode",
             "type": "CurrencyCode"
-        }        {
+        },
+        {
             "name": "overpaymentID",
             "baseName": "OverpaymentID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "currencyRate",
             "baseName": "CurrencyRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "remainingCredit",
             "baseName": "RemainingCredit",
             "type": "number"
-        }        {
+        },
+        {
             "name": "allocations",
             "baseName": "Allocations",
             "type": "Array<Allocation>"
-        }        {
+        },
+        {
             "name": "appliedAmount",
             "baseName": "AppliedAmount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "payments",
             "baseName": "Payments",
             "type": "Array<Payment>"
-        }        {
+        },
+        {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "attachments",
             "baseName": "Attachments",
             "type": "Array<Attachment>"
@@ -163,13 +181,13 @@ export class Overpayment {
 
 export namespace Overpayment {
     export enum TypeEnum {
-        ReceiveOverpayment = <any> 'RECEIVE-OVERPAYMENT',
-        SpendOverpayment = <any> 'SPEND-OVERPAYMENT',
-        Aroverpayment = <any> 'AROVERPAYMENT'
+        RECEIVEOVERPAYMENT = <any> 'RECEIVE-OVERPAYMENT',
+        SPENDOVERPAYMENT = <any> 'SPEND-OVERPAYMENT',
+        AROVERPAYMENT = <any> 'AROVERPAYMENT'
     }
     export enum StatusEnum {
-        Authorised = <any> 'AUTHORISED',
-        Paid = <any> 'PAID',
-        Voided = <any> 'VOIDED'
+        AUTHORISED = <any> 'AUTHORISED',
+        PAID = <any> 'PAID',
+        VOIDED = <any> 'VOIDED'
     }
 }

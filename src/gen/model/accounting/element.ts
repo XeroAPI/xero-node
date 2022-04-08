@@ -23,31 +23,38 @@ export class Element {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
-        }        {
+        },
+        {
             "name": "batchPaymentID",
             "baseName": "BatchPaymentID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "bankTransactionID",
             "baseName": "BankTransactionID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "creditNoteID",
             "baseName": "CreditNoteID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "contactID",
             "baseName": "ContactID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "invoiceID",
             "baseName": "InvoiceID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "itemID",
             "baseName": "ItemID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "purchaseOrderID",
             "baseName": "PurchaseOrderID",
             "type": "string"

@@ -15,68 +15,68 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { Benefit } from '../../model/payroll-nz/benefit';
-import { Deduction } from '../../model/payroll-nz/deduction';
-import { DeductionObject } from '../../model/payroll-nz/deductionObject';
-import { Deductions } from '../../model/payroll-nz/deductions';
-import { EarningsRate } from '../../model/payroll-nz/earningsRate';
-import { EarningsRateObject } from '../../model/payroll-nz/earningsRateObject';
-import { EarningsRates } from '../../model/payroll-nz/earningsRates';
-import { EarningsTemplate } from '../../model/payroll-nz/earningsTemplate';
-import { EarningsTemplateObject } from '../../model/payroll-nz/earningsTemplateObject';
-import { Employee } from '../../model/payroll-nz/employee';
-import { EmployeeEarningsTemplates } from '../../model/payroll-nz/employeeEarningsTemplates';
-import { EmployeeLeave } from '../../model/payroll-nz/employeeLeave';
-import { EmployeeLeaveBalances } from '../../model/payroll-nz/employeeLeaveBalances';
-import { EmployeeLeaveObject } from '../../model/payroll-nz/employeeLeaveObject';
-import { EmployeeLeaveSetup } from '../../model/payroll-nz/employeeLeaveSetup';
-import { EmployeeLeaveSetupObject } from '../../model/payroll-nz/employeeLeaveSetupObject';
-import { EmployeeLeaveType } from '../../model/payroll-nz/employeeLeaveType';
-import { EmployeeLeaveTypeObject } from '../../model/payroll-nz/employeeLeaveTypeObject';
-import { EmployeeLeaveTypes } from '../../model/payroll-nz/employeeLeaveTypes';
-import { EmployeeLeaves } from '../../model/payroll-nz/employeeLeaves';
-import { EmployeeObject } from '../../model/payroll-nz/employeeObject';
-import { EmployeeOpeningBalance } from '../../model/payroll-nz/employeeOpeningBalance';
-import { EmployeeOpeningBalancesObject } from '../../model/payroll-nz/employeeOpeningBalancesObject';
-import { EmployeePayTemplates } from '../../model/payroll-nz/employeePayTemplates';
-import { EmployeeTax } from '../../model/payroll-nz/employeeTax';
-import { EmployeeTaxObject } from '../../model/payroll-nz/employeeTaxObject';
-import { Employees } from '../../model/payroll-nz/employees';
-import { Employment } from '../../model/payroll-nz/employment';
-import { EmploymentObject } from '../../model/payroll-nz/employmentObject';
-import { LeavePeriods } from '../../model/payroll-nz/leavePeriods';
-import { LeaveType } from '../../model/payroll-nz/leaveType';
-import { LeaveTypeObject } from '../../model/payroll-nz/leaveTypeObject';
-import { LeaveTypes } from '../../model/payroll-nz/leaveTypes';
-import { PayRun } from '../../model/payroll-nz/payRun';
-import { PayRunCalendar } from '../../model/payroll-nz/payRunCalendar';
-import { PayRunCalendarObject } from '../../model/payroll-nz/payRunCalendarObject';
-import { PayRunCalendars } from '../../model/payroll-nz/payRunCalendars';
-import { PayRunObject } from '../../model/payroll-nz/payRunObject';
-import { PayRuns } from '../../model/payroll-nz/payRuns';
-import { PaySlip } from '../../model/payroll-nz/paySlip';
-import { PaySlipObject } from '../../model/payroll-nz/paySlipObject';
-import { PaySlips } from '../../model/payroll-nz/paySlips';
-import { PaymentMethod } from '../../model/payroll-nz/paymentMethod';
-import { PaymentMethodObject } from '../../model/payroll-nz/paymentMethodObject';
-import { Problem } from '../../model/payroll-nz/problem';
-import { Reimbursement } from '../../model/payroll-nz/reimbursement';
-import { ReimbursementObject } from '../../model/payroll-nz/reimbursementObject';
-import { Reimbursements } from '../../model/payroll-nz/reimbursements';
-import { SalaryAndWage } from '../../model/payroll-nz/salaryAndWage';
-import { SalaryAndWageObject } from '../../model/payroll-nz/salaryAndWageObject';
-import { SalaryAndWages } from '../../model/payroll-nz/salaryAndWages';
-import { Settings } from '../../model/payroll-nz/settings';
-import { StatutoryDeductionObject } from '../../model/payroll-nz/statutoryDeductionObject';
-import { StatutoryDeductions } from '../../model/payroll-nz/statutoryDeductions';
-import { SuperannuationObject } from '../../model/payroll-nz/superannuationObject';
-import { Superannuations } from '../../model/payroll-nz/superannuations';
-import { Timesheet } from '../../model/payroll-nz/timesheet';
-import { TimesheetLine } from '../../model/payroll-nz/timesheetLine';
-import { TimesheetLineObject } from '../../model/payroll-nz/timesheetLineObject';
-import { TimesheetObject } from '../../model/payroll-nz/timesheetObject';
-import { Timesheets } from '../../model/payroll-nz/timesheets';
-import { TrackingCategories } from '../../model/payroll-nz/trackingCategories';
+import { Benefit } from '../model/payroll-nz/benefit';
+import { Deduction } from '../model/payroll-nz/deduction';
+import { DeductionObject } from '../model/payroll-nz/deductionObject';
+import { Deductions } from '../model/payroll-nz/deductions';
+import { EarningsRate } from '../model/payroll-nz/earningsRate';
+import { EarningsRateObject } from '../model/payroll-nz/earningsRateObject';
+import { EarningsRates } from '../model/payroll-nz/earningsRates';
+import { EarningsTemplate } from '../model/payroll-nz/earningsTemplate';
+import { EarningsTemplateObject } from '../model/payroll-nz/earningsTemplateObject';
+import { Employee } from '../model/payroll-nz/employee';
+import { EmployeeEarningsTemplates } from '../model/payroll-nz/employeeEarningsTemplates';
+import { EmployeeLeave } from '../model/payroll-nz/employeeLeave';
+import { EmployeeLeaveBalances } from '../model/payroll-nz/employeeLeaveBalances';
+import { EmployeeLeaveObject } from '../model/payroll-nz/employeeLeaveObject';
+import { EmployeeLeaveSetup } from '../model/payroll-nz/employeeLeaveSetup';
+import { EmployeeLeaveSetupObject } from '../model/payroll-nz/employeeLeaveSetupObject';
+import { EmployeeLeaveType } from '../model/payroll-nz/employeeLeaveType';
+import { EmployeeLeaveTypeObject } from '../model/payroll-nz/employeeLeaveTypeObject';
+import { EmployeeLeaveTypes } from '../model/payroll-nz/employeeLeaveTypes';
+import { EmployeeLeaves } from '../model/payroll-nz/employeeLeaves';
+import { EmployeeObject } from '../model/payroll-nz/employeeObject';
+import { EmployeeOpeningBalance } from '../model/payroll-nz/employeeOpeningBalance';
+import { EmployeeOpeningBalancesObject } from '../model/payroll-nz/employeeOpeningBalancesObject';
+import { EmployeePayTemplates } from '../model/payroll-nz/employeePayTemplates';
+import { EmployeeTax } from '../model/payroll-nz/employeeTax';
+import { EmployeeTaxObject } from '../model/payroll-nz/employeeTaxObject';
+import { Employees } from '../model/payroll-nz/employees';
+import { Employment } from '../model/payroll-nz/employment';
+import { EmploymentObject } from '../model/payroll-nz/employmentObject';
+import { LeavePeriods } from '../model/payroll-nz/leavePeriods';
+import { LeaveType } from '../model/payroll-nz/leaveType';
+import { LeaveTypeObject } from '../model/payroll-nz/leaveTypeObject';
+import { LeaveTypes } from '../model/payroll-nz/leaveTypes';
+import { PayRun } from '../model/payroll-nz/payRun';
+import { PayRunCalendar } from '../model/payroll-nz/payRunCalendar';
+import { PayRunCalendarObject } from '../model/payroll-nz/payRunCalendarObject';
+import { PayRunCalendars } from '../model/payroll-nz/payRunCalendars';
+import { PayRunObject } from '../model/payroll-nz/payRunObject';
+import { PayRuns } from '../model/payroll-nz/payRuns';
+import { PaySlip } from '../model/payroll-nz/paySlip';
+import { PaySlipObject } from '../model/payroll-nz/paySlipObject';
+import { PaySlips } from '../model/payroll-nz/paySlips';
+import { PaymentMethod } from '../model/payroll-nz/paymentMethod';
+import { PaymentMethodObject } from '../model/payroll-nz/paymentMethodObject';
+import { Problem } from '../model/payroll-nz/problem';
+import { Reimbursement } from '../model/payroll-nz/reimbursement';
+import { ReimbursementObject } from '../model/payroll-nz/reimbursementObject';
+import { Reimbursements } from '../model/payroll-nz/reimbursements';
+import { SalaryAndWage } from '../model/payroll-nz/salaryAndWage';
+import { SalaryAndWageObject } from '../model/payroll-nz/salaryAndWageObject';
+import { SalaryAndWages } from '../model/payroll-nz/salaryAndWages';
+import { Settings } from '../model/payroll-nz/settings';
+import { StatutoryDeductionObject } from '../model/payroll-nz/statutoryDeductionObject';
+import { StatutoryDeductions } from '../model/payroll-nz/statutoryDeductions';
+import { SuperannuationObject } from '../model/payroll-nz/superannuationObject';
+import { Superannuations } from '../model/payroll-nz/superannuations';
+import { Timesheet } from '../model/payroll-nz/timesheet';
+import { TimesheetLine } from '../model/payroll-nz/timesheetLine';
+import { TimesheetLineObject } from '../model/payroll-nz/timesheetLineObject';
+import { TimesheetObject } from '../model/payroll-nz/timesheetObject';
+import { Timesheets } from '../model/payroll-nz/timesheets';
+import { TrackingCategories } from '../model/payroll-nz/trackingCategories';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/payroll-nz/models';
 import { OAuth } from '../model/payroll-nz/models';
@@ -172,6 +172,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -235,6 +236,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(deduction, "Deduction")
         };
 
@@ -299,6 +301,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(earningsRate, "EarningsRate")
         };
 
@@ -363,6 +366,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employee, "Employee")
         };
 
@@ -434,6 +438,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(earningsTemplate, "EarningsTemplate")
         };
 
@@ -505,6 +510,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeLeave, "EmployeeLeave")
         };
 
@@ -576,6 +582,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeLeaveSetup, "EmployeeLeaveSetup")
         };
 
@@ -647,6 +654,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeLeaveType, "EmployeeLeaveType")
         };
 
@@ -718,6 +726,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeOpeningBalance, "Array<EmployeeOpeningBalance>")
         };
 
@@ -789,6 +798,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(paymentMethod, "PaymentMethod")
         };
 
@@ -860,6 +870,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(salaryAndWage, "SalaryAndWage")
         };
 
@@ -931,6 +942,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employment, "Employment")
         };
 
@@ -995,6 +1007,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(leaveType, "LeaveType")
         };
 
@@ -1066,6 +1079,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(earningsTemplate, "Array<EarningsTemplate>")
         };
 
@@ -1130,6 +1144,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payRun, "PayRun")
         };
 
@@ -1194,6 +1209,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payRunCalendar, "PayRunCalendar")
         };
 
@@ -1258,6 +1274,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(reimbursement, "Reimbursement")
         };
 
@@ -1322,6 +1339,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(benefit, "Benefit")
         };
 
@@ -1386,6 +1404,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timesheet, "Timesheet")
         };
 
@@ -1457,6 +1476,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timesheetLine, "TimesheetLine")
         };
 
@@ -1529,6 +1549,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1600,6 +1621,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1671,6 +1693,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1735,6 +1758,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1806,6 +1830,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1870,6 +1895,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1932,6 +1958,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1996,6 +2023,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2058,6 +2086,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2122,6 +2151,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2186,6 +2216,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2260,6 +2291,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2324,6 +2356,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2388,6 +2421,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2452,6 +2486,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2516,6 +2551,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2580,6 +2616,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2651,6 +2688,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2720,6 +2758,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2784,6 +2823,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2851,6 +2891,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2915,6 +2956,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2982,6 +3024,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3046,6 +3089,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3110,6 +3154,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3172,6 +3217,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3239,6 +3285,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3303,6 +3350,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3375,6 +3423,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3439,6 +3488,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3501,6 +3551,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3558,6 +3609,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3622,6 +3674,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3684,6 +3737,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3748,6 +3802,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3810,6 +3865,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3874,6 +3930,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3961,6 +4018,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4018,6 +4076,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4082,6 +4141,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4152,6 +4212,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employee, "Employee")
         };
 
@@ -4230,6 +4291,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(earningsTemplate, "EarningsTemplate")
         };
 
@@ -4308,6 +4370,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeLeave, "EmployeeLeave")
         };
 
@@ -4386,6 +4449,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(salaryAndWage, "SalaryAndWage")
         };
 
@@ -4457,6 +4521,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(employeeTax, "EmployeeTax")
         };
 
@@ -4528,6 +4593,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(payRun, "PayRun")
         };
 
@@ -4599,6 +4665,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(paySlip, "PaySlip")
         };
 
@@ -4677,6 +4744,7 @@ export class PayrollNzApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(timesheetLine, "TimesheetLine")
         };
 

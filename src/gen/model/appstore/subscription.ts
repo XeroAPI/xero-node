@@ -41,31 +41,38 @@ export class Subscription {
             "name": "currentPeriodEnd",
             "baseName": "currentPeriodEnd",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "endDate",
             "baseName": "endDate",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        }        {
+        },
+        {
             "name": "organisationId",
             "baseName": "organisationId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "plans",
             "baseName": "plans",
             "type": "Array<Plan>"
-        }        {
+        },
+        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "status",
             "type": "Subscription.StatusEnum"
-        }        {
+        },
+        {
             "name": "testMode",
             "baseName": "testMode",
             "type": "boolean"
@@ -78,8 +85,8 @@ export class Subscription {
 
 export namespace Subscription {
     export enum StatusEnum {
-        Active = <any> 'ACTIVE',
-        Canceled = <any> 'CANCELED',
-        PastDue = <any> 'PAST_DUE'
+        ACTIVE = <any> 'ACTIVE',
+        CANCELED = <any> 'CANCELED',
+        PASTDUE = <any> 'PAST_DUE'
     }
 }

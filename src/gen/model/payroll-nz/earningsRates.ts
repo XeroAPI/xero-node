@@ -14,11 +14,13 @@ export class EarningsRates {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "earningsRates",
             "baseName": "earningsRates",
             "type": "Array<EarningsRate>"

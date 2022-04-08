@@ -28,19 +28,23 @@ export class HistoryRecordResponse {
             "name": "changes",
             "baseName": "changes",
             "type": "string"
-        }        {
+        },
+        {
             "name": "dateUTCString",
             "baseName": "dateUTCString",
             "type": "string"
-        }        {
+        },
+        {
             "name": "dateUTC",
             "baseName": "dateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "user",
             "baseName": "user",
             "type": "string"
-        }        {
+        },
+        {
             "name": "details",
             "baseName": "details",
             "type": "string"

@@ -44,35 +44,43 @@ export class LeaveType {
             "name": "name",
             "baseName": "Name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "typeOfUnits",
             "baseName": "TypeOfUnits",
             "type": "string"
-        }        {
+        },
+        {
             "name": "leaveTypeID",
             "baseName": "LeaveTypeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "normalEntitlement",
             "baseName": "NormalEntitlement",
             "type": "number"
-        }        {
+        },
+        {
             "name": "leaveLoadingRate",
             "baseName": "LeaveLoadingRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "isPaidLeave",
             "baseName": "IsPaidLeave",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "showOnPayslip",
             "baseName": "ShowOnPayslip",
             "type": "boolean"
-        }        {
+        },
+        {
             "name": "currentRecord",
             "baseName": "CurrentRecord",
             "type": "boolean"

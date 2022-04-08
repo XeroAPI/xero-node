@@ -14,11 +14,13 @@ export class Deductions {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "deductions",
             "baseName": "deductions",
             "type": "Array<Deduction>"

@@ -40,31 +40,38 @@ export class BookDepreciationSetting {
             "name": "depreciationMethod",
             "baseName": "depreciationMethod",
             "type": "BookDepreciationSetting.DepreciationMethodEnum"
-        }        {
+        },
+        {
             "name": "averagingMethod",
             "baseName": "averagingMethod",
             "type": "BookDepreciationSetting.AveragingMethodEnum"
-        }        {
+        },
+        {
             "name": "depreciationRate",
             "baseName": "depreciationRate",
             "type": "number"
-        }        {
+        },
+        {
             "name": "effectiveLifeYears",
             "baseName": "effectiveLifeYears",
             "type": "number"
-        }        {
+        },
+        {
             "name": "depreciationCalculationMethod",
             "baseName": "depreciationCalculationMethod",
             "type": "BookDepreciationSetting.DepreciationCalculationMethodEnum"
-        }        {
+        },
+        {
             "name": "depreciableObjectId",
             "baseName": "depreciableObjectId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "depreciableObjectType",
             "baseName": "depreciableObjectType",
             "type": "string"
-        }        {
+        },
+        {
             "name": "bookEffectiveDateOfChangeId",
             "baseName": "bookEffectiveDateOfChangeId",
             "type": "string"

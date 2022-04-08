@@ -21,11 +21,13 @@ export class ConversionBalances {
             "name": "accountCode",
             "baseName": "AccountCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "balance",
             "baseName": "Balance",
             "type": "number"
-        }        {
+        },
+        {
             "name": "balanceDetails",
             "baseName": "BalanceDetails",
             "type": "Array<BalanceDetails>"

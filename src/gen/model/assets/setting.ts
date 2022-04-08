@@ -40,31 +40,38 @@ export class Setting {
             "name": "assetNumberPrefix",
             "baseName": "assetNumberPrefix",
             "type": "string"
-        }        {
+        },
+        {
             "name": "assetNumberSequence",
             "baseName": "assetNumberSequence",
             "type": "string"
-        }        {
+        },
+        {
             "name": "assetStartDate",
             "baseName": "assetStartDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "lastDepreciationDate",
             "baseName": "lastDepreciationDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "defaultGainOnDisposalAccountId",
             "baseName": "defaultGainOnDisposalAccountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "defaultLossOnDisposalAccountId",
             "baseName": "defaultLossOnDisposalAccountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "defaultCapitalGainOnDisposalAccountId",
             "baseName": "defaultCapitalGainOnDisposalAccountId",
             "type": "string"
-        }        {
+        },
+        {
             "name": "optInForTax",
             "baseName": "optInForTax",
             "type": "boolean"

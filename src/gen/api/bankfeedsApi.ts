@@ -15,10 +15,10 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { FeedConnection } from '../../model/bankfeeds/feedConnection';
-import { FeedConnections } from '../../model/bankfeeds/feedConnections';
-import { Statement } from '../../model/bankfeeds/statement';
-import { Statements } from '../../model/bankfeeds/statements';
+import { FeedConnection } from '../model/bankfeeds/feedConnection';
+import { FeedConnections } from '../model/bankfeeds/feedConnections';
+import { Statement } from '../model/bankfeeds/statement';
+import { Statements } from '../model/bankfeeds/statements';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/bankfeeds/models';
 import { OAuth } from '../model/bankfeeds/models';
@@ -113,6 +113,7 @@ export class BankFeedsApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(feedConnections, "FeedConnections")
         };
 
@@ -172,6 +173,7 @@ export class BankFeedsApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(statements, "Statements")
         };
 
@@ -236,6 +238,7 @@ export class BankFeedsApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
             body: ObjectSerializer.serialize(feedConnections, "FeedConnections")
         };
 
@@ -301,6 +304,7 @@ export class BankFeedsApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -368,6 +372,7 @@ export class BankFeedsApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -432,6 +437,7 @@ export class BankFeedsApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -503,6 +509,7 @@ export class BankFeedsApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();

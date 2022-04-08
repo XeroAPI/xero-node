@@ -12,15 +12,18 @@ export class Pagination {
             "name": "page",
             "baseName": "page",
             "type": "number"
-        }        {
+        },
+        {
             "name": "pageSize",
             "baseName": "pageSize",
             "type": "number"
-        }        {
+        },
+        {
             "name": "pageCount",
             "baseName": "pageCount",
             "type": "number"
-        }        {
+        },
+        {
             "name": "itemCount",
             "baseName": "itemCount",
             "type": "number"

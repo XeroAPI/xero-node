@@ -14,7 +14,8 @@ export class EmployeePayTemplate {
             "name": "employeeID",
             "baseName": "employeeID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "earningTemplates",
             "baseName": "earningTemplates",
             "type": "Array<EarningsTemplate>"

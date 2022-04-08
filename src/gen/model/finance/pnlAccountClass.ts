@@ -17,7 +17,8 @@ export class PnlAccountClass {
             "name": "total",
             "baseName": "total",
             "type": "number"
-        }        {
+        },
+        {
             "name": "accountTypes",
             "baseName": "accountTypes",
             "type": "Array<PnlAccountType>"

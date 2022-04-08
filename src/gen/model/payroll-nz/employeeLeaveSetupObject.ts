@@ -14,11 +14,13 @@ export class EmployeeLeaveSetupObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "leaveSetup",
             "baseName": "leaveSetup",
             "type": "EmployeeLeaveSetup"

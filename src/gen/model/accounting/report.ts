@@ -30,23 +30,28 @@ export class Report {
             "name": "reportName",
             "baseName": "ReportName",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reportType",
             "baseName": "ReportType",
             "type": "Report.ReportTypeEnum"
-        }        {
+        },
+        {
             "name": "reportTitle",
             "baseName": "ReportTitle",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reportDate",
             "baseName": "ReportDate",
             "type": "string"
-        }        {
+        },
+        {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "contacts",
             "baseName": "Contacts",
             "type": "Array<TenNinetyNineContact>"

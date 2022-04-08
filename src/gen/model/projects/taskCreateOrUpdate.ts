@@ -20,15 +20,18 @@ export class TaskCreateOrUpdate {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "rate",
             "baseName": "rate",
             "type": "Amount"
-        }        {
+        },
+        {
             "name": "chargeType",
             "baseName": "chargeType",
             "type": "ChargeType"
-        }        {
+        },
+        {
             "name": "estimateMinutes",
             "baseName": "estimateMinutes",
             "type": "number"

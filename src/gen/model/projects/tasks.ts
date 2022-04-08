@@ -12,7 +12,8 @@ export class Tasks {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "items",
             "baseName": "items",
             "type": "Array<Task>"

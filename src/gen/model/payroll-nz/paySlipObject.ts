@@ -14,11 +14,13 @@ export class PaySlipObject {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
-        }        {
+        },
+        {
             "name": "problem",
             "baseName": "problem",
             "type": "Problem"
-        }        {
+        },
+        {
             "name": "paySlip",
             "baseName": "paySlip",
             "type": "PaySlip"

@@ -36,31 +36,38 @@ export class SubscriptionItem {
             "name": "endDate",
             "baseName": "endDate",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        }        {
+        },
+        {
             "name": "price",
             "baseName": "price",
             "type": "Price"
-        }        {
+        },
+        {
             "name": "product",
             "baseName": "product",
             "type": "Product"
-        }        {
+        },
+        {
             "name": "quantity",
             "baseName": "quantity",
             "type": "number"
-        }        {
+        },
+        {
             "name": "startDate",
             "baseName": "startDate",
             "type": "Date"
-        }        {
+        },
+        {
             "name": "status",
             "baseName": "status",
             "type": "SubscriptionItem.StatusEnum"
-        }        {
+        },
+        {
             "name": "testMode",
             "baseName": "testMode",
             "type": "boolean"
@@ -73,8 +80,8 @@ export class SubscriptionItem {
 
 export namespace SubscriptionItem {
     export enum StatusEnum {
-        Active = <any> 'ACTIVE',
-        Canceled = <any> 'CANCELED',
-        PendingActivation = <any> 'PENDING_ACTIVATION'
+        ACTIVE = <any> 'ACTIVE',
+        CANCELED = <any> 'CANCELED',
+        PENDINGACTIVATION = <any> 'PENDING_ACTIVATION'
     }
 }

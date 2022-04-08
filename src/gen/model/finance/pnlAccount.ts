@@ -32,23 +32,28 @@ export class PnlAccount {
             "name": "accountID",
             "baseName": "accountID",
             "type": "string"
-        }        {
+        },
+        {
             "name": "accountType",
             "baseName": "accountType",
             "type": "string"
-        }        {
+        },
+        {
             "name": "code",
             "baseName": "code",
             "type": "string"
-        }        {
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        }        {
+        },
+        {
             "name": "reportingCode",
             "baseName": "reportingCode",
             "type": "string"
-        }        {
+        },
+        {
             "name": "total",
             "baseName": "total",
             "type": "number"

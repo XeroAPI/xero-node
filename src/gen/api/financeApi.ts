@@ -15,18 +15,18 @@ import http = require('http');
 import fs = require('fs');
 
 /* tslint:disable:no-unused-locals */
-import { AccountUsageResponse } from '../../model/finance/accountUsageResponse';
-import { BalanceSheetResponse } from '../../model/finance/balanceSheetResponse';
-import { BankStatementAccountingResponse } from '../../model/finance/bankStatementAccountingResponse';
-import { CashValidationResponse } from '../../model/finance/cashValidationResponse';
-import { CashflowResponse } from '../../model/finance/cashflowResponse';
-import { IncomeByContactResponse } from '../../model/finance/incomeByContactResponse';
-import { LockHistoryResponse } from '../../model/finance/lockHistoryResponse';
-import { Problem } from '../../model/finance/problem';
-import { ProfitAndLossResponse } from '../../model/finance/profitAndLossResponse';
-import { ReportHistoryResponse } from '../../model/finance/reportHistoryResponse';
-import { TrialBalanceResponse } from '../../model/finance/trialBalanceResponse';
-import { UserActivitiesResponse } from '../../model/finance/userActivitiesResponse';
+import { AccountUsageResponse } from '../model/finance/accountUsageResponse';
+import { BalanceSheetResponse } from '../model/finance/balanceSheetResponse';
+import { BankStatementAccountingResponse } from '../model/finance/bankStatementAccountingResponse';
+import { CashValidationResponse } from '../model/finance/cashValidationResponse';
+import { CashflowResponse } from '../model/finance/cashflowResponse';
+import { IncomeByContactResponse } from '../model/finance/incomeByContactResponse';
+import { LockHistoryResponse } from '../model/finance/lockHistoryResponse';
+import { Problem } from '../model/finance/problem';
+import { ProfitAndLossResponse } from '../model/finance/profitAndLossResponse';
+import { ReportHistoryResponse } from '../model/finance/reportHistoryResponse';
+import { TrialBalanceResponse } from '../model/finance/trialBalanceResponse';
+import { UserActivitiesResponse } from '../model/finance/userActivitiesResponse';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/finance/models';
 import { OAuth } from '../model/finance/models';
@@ -125,6 +125,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -187,6 +188,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -249,6 +251,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -311,6 +314,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -403,6 +407,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -537,6 +542,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -604,6 +610,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -681,6 +688,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -758,6 +766,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -825,6 +834,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();
@@ -887,6 +897,7 @@ export class FinanceApi {
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
+            json: true,
         };
 
         let authenticationPromise = Promise.resolve();

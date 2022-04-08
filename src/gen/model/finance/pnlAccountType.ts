@@ -21,11 +21,13 @@ export class PnlAccountType {
             "name": "total",
             "baseName": "total",
             "type": "number"
-        }        {
+        },
+        {
             "name": "title",
             "baseName": "title",
             "type": "string"
-        }        {
+        },
+        {
             "name": "accounts",
             "baseName": "accounts",
             "type": "Array<PnlAccount>"
