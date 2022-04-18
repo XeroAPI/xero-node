@@ -4,7 +4,9 @@ export * from '././balanceSheetAccountDetail';
 export * from '././balanceSheetAccountGroup';
 export * from '././balanceSheetAccountType';
 export * from '././balanceSheetResponse';
+export * from '././bankStatementAccountingResponse';
 export * from '././bankStatementResponse';
+export * from '././bankTransactionResponse';
 export * from '././cashAccountResponse';
 export * from '././cashBalance';
 export * from '././cashValidationResponse';
@@ -13,26 +15,35 @@ export * from '././cashflowActivity';
 export * from '././cashflowResponse';
 export * from '././cashflowType';
 export * from '././contactDetail';
+export * from '././contactResponse';
 export * from '././contactTotalDetail';
 export * from '././contactTotalOther';
+export * from '././creditNoteResponse';
 export * from '././currentStatementResponse';
 export * from '././dataSourceResponse';
 export * from '././historyRecordResponse';
 export * from '././incomeByContactResponse';
+export * from '././invoiceResponse';
+export * from '././lineItemResponse';
 export * from '././lockHistoryModel';
 export * from '././lockHistoryResponse';
 export * from '././manualJournalTotal';
+export * from '././overpaymentResponse';
+export * from '././paymentResponse';
 export * from '././pnlAccount';
 export * from '././pnlAccountClass';
 export * from '././pnlAccountType';
 export * from '././practiceResponse';
+export * from '././prepaymentResponse';
 export * from '././problem';
 export * from '././problemType';
 export * from '././profitAndLossResponse';
 export * from '././reportHistoryModel';
 export * from '././reportHistoryResponse';
 export * from '././statementBalanceResponse';
+export * from '././statementLineResponse';
 export * from '././statementLinesResponse';
+export * from '././statementResponse';
 export * from '././totalDetail';
 export * from '././totalOther';
 export * from '././trialBalanceAccount';
@@ -50,7 +61,9 @@ import { BalanceSheetAccountDetail } from '././balanceSheetAccountDetail';
 import { BalanceSheetAccountGroup } from '././balanceSheetAccountGroup';
 import { BalanceSheetAccountType } from '././balanceSheetAccountType';
 import { BalanceSheetResponse } from '././balanceSheetResponse';
+import { BankStatementAccountingResponse } from '././bankStatementAccountingResponse';
 import { BankStatementResponse } from '././bankStatementResponse';
+import { BankTransactionResponse } from '././bankTransactionResponse';
 import { CashAccountResponse } from '././cashAccountResponse';
 import { CashBalance } from '././cashBalance';
 import { CashValidationResponse } from '././cashValidationResponse';
@@ -59,26 +72,35 @@ import { CashflowActivity } from '././cashflowActivity';
 import { CashflowResponse } from '././cashflowResponse';
 import { CashflowType } from '././cashflowType';
 import { ContactDetail } from '././contactDetail';
+import { ContactResponse } from '././contactResponse';
 import { ContactTotalDetail } from '././contactTotalDetail';
 import { ContactTotalOther } from '././contactTotalOther';
+import { CreditNoteResponse } from '././creditNoteResponse';
 import { CurrentStatementResponse } from '././currentStatementResponse';
 import { DataSourceResponse } from '././dataSourceResponse';
 import { HistoryRecordResponse } from '././historyRecordResponse';
 import { IncomeByContactResponse } from '././incomeByContactResponse';
+import { InvoiceResponse } from '././invoiceResponse';
+import { LineItemResponse } from '././lineItemResponse';
 import { LockHistoryModel } from '././lockHistoryModel';
 import { LockHistoryResponse } from '././lockHistoryResponse';
 import { ManualJournalTotal } from '././manualJournalTotal';
+import { OverpaymentResponse } from '././overpaymentResponse';
+import { PaymentResponse } from '././paymentResponse';
 import { PnlAccount } from '././pnlAccount';
 import { PnlAccountClass } from '././pnlAccountClass';
 import { PnlAccountType } from '././pnlAccountType';
 import { PracticeResponse } from '././practiceResponse';
+import { PrepaymentResponse } from '././prepaymentResponse';
 import { Problem } from '././problem';
 import { ProblemType } from '././problemType';
 import { ProfitAndLossResponse } from '././profitAndLossResponse';
 import { ReportHistoryModel } from '././reportHistoryModel';
 import { ReportHistoryResponse } from '././reportHistoryResponse';
 import { StatementBalanceResponse } from '././statementBalanceResponse';
+import { StatementLineResponse } from '././statementLineResponse';
 import { StatementLinesResponse } from '././statementLinesResponse';
+import { StatementResponse } from '././statementResponse';
 import { TotalDetail } from '././totalDetail';
 import { TotalOther } from '././totalOther';
 import { TrialBalanceAccount } from '././trialBalanceAccount';
@@ -111,7 +133,9 @@ let typeMap: {[index: string]: any} = {
     "BalanceSheetAccountGroup": BalanceSheetAccountGroup,
     "BalanceSheetAccountType": BalanceSheetAccountType,
     "BalanceSheetResponse": BalanceSheetResponse,
+    "BankStatementAccountingResponse": BankStatementAccountingResponse,
     "BankStatementResponse": BankStatementResponse,
+    "BankTransactionResponse": BankTransactionResponse,
     "CashAccountResponse": CashAccountResponse,
     "CashBalance": CashBalance,
     "CashValidationResponse": CashValidationResponse,
@@ -120,25 +144,34 @@ let typeMap: {[index: string]: any} = {
     "CashflowResponse": CashflowResponse,
     "CashflowType": CashflowType,
     "ContactDetail": ContactDetail,
+    "ContactResponse": ContactResponse,
     "ContactTotalDetail": ContactTotalDetail,
     "ContactTotalOther": ContactTotalOther,
+    "CreditNoteResponse": CreditNoteResponse,
     "CurrentStatementResponse": CurrentStatementResponse,
     "DataSourceResponse": DataSourceResponse,
     "HistoryRecordResponse": HistoryRecordResponse,
     "IncomeByContactResponse": IncomeByContactResponse,
+    "InvoiceResponse": InvoiceResponse,
+    "LineItemResponse": LineItemResponse,
     "LockHistoryModel": LockHistoryModel,
     "LockHistoryResponse": LockHistoryResponse,
     "ManualJournalTotal": ManualJournalTotal,
+    "OverpaymentResponse": OverpaymentResponse,
+    "PaymentResponse": PaymentResponse,
     "PnlAccount": PnlAccount,
     "PnlAccountClass": PnlAccountClass,
     "PnlAccountType": PnlAccountType,
     "PracticeResponse": PracticeResponse,
+    "PrepaymentResponse": PrepaymentResponse,
     "Problem": Problem,
     "ProfitAndLossResponse": ProfitAndLossResponse,
     "ReportHistoryModel": ReportHistoryModel,
     "ReportHistoryResponse": ReportHistoryResponse,
     "StatementBalanceResponse": StatementBalanceResponse,
+    "StatementLineResponse": StatementLineResponse,
     "StatementLinesResponse": StatementLinesResponse,
+    "StatementResponse": StatementResponse,
     "TotalDetail": TotalDetail,
     "TotalOther": TotalOther,
     "TrialBalanceAccount": TrialBalanceAccount,

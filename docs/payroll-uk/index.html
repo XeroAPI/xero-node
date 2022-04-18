@@ -1599,6 +1599,10 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "National insurance number of the employee",
       "example" : "AB123456C"
+    },
+    "isOffPayrollWorker" : {
+      "type" : "boolean",
+      "description" : "Whether the employee is an off payroll worker"
     }
   },
   "description" : ""
@@ -3507,7 +3511,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollUk"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>4.18.0</li>
+              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>4.19.1</li>
               <li class="nav-header" data-group="PayrollUk"><a href="#api-PayrollUk">Methods</a></li>
               <li data-group="PayrollUk" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollUk-approveTimesheet">approveTimesheet</a>
@@ -4336,7 +4340,7 @@ Xero identifier for Tenant
       "schema" : {
         "$ref" : "#/components/schemas/Employee"
       },
-      "example" : "{ \"title\":\"Mr\", \"firstName\":\"Mike\", \"lastName\":\"Fancy\", \"dateOfBirth\":\"1999-01-01\", \"address\":{ \"addressLine1\":\"101 Green St\", \"city\":\"San Francisco\", \"postCode\":\"6TGR4F\", \"country\":\"UK\" }, \"email\":\"mike@starkindustries.com\", \"gender\":\"M\" }"
+      "example" : "{ \"title\":\"Mr\", \"firstName\":\"Mike\", \"lastName\":\"Fancy\", \"dateOfBirth\":\"1999-01-01T00:00:00\", \"gender\":\"M\", \"email\":\"mike@starkindustries.com\", \"isOffPayrollWorker\": false, \"address\": { \"addressLine1\": \"171 Midsummer\", \"city\": \"Milton Keyness\", \"postCode\": \"MK9 1EB\" } }"
     }
   },
   "required" : true
@@ -9837,7 +9841,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
-const filter = 'firstName==John,lastName==Smith';
+const filter = 'firstName==John,lastName==Smith,isOffPayrollWorker==false';
 const page = 5;
 
 try {
@@ -9912,7 +9916,7 @@ Xero identifier for Tenant
                 </span>
 
                     <div class="inner description marked">
-Filter by first name and/or lastname
+Filter by first name, lastname, and/or whether they are an off-payroll worker
                     </div>
             </div>
         </div>
@@ -12079,7 +12083,7 @@ Xero identifier for Tenant
       "schema" : {
         "$ref" : "#/components/schemas/Employee"
       },
-      "example" : "{ \"title\":\"Mr\", \"firstName\":\"Mike\", \"lastName\":\"Johnllsbkrhwopson\", \"dateOfBirth\":\"1999-01-01\", \"address\":{ \"addressLine1\":\"101 Green St\", \"city\":\"San Francisco\", \"postCode\":\"6TGR4F\", \"country\":\"UK\" }, \"email\":\"84044@starkindustries.com\", \"gender\":\"M\" }"
+      "example" : "{ \"title\": \"Mr.\", \"firstName\": \"TestDataUK\", \"lastName\": \"Tester\", \"dateOfBirth\": \"1992-11-22T00:00:00\", \"gender\": \"M\", \"email\": \"tester@gmail.com\", \"phoneNumber\": \"0400123456\", \"isOffPayrollWorker\": false, \"address\": { \"addressLine1\": \"171 Midsummer\", \"city\": \"Milton Keyness\", \"postCode\": \"MK9 1EB\" } }"
     }
   },
   "required" : true

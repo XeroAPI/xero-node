@@ -1058,6 +1058,34 @@ ul.nav-tabs {
   "additionalProperties" : false,
   "description" : ""
 };
+      defs["BankStatementAccountingResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "bankAccountId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of bank account",
+      "format" : "uuid"
+    },
+    "bankAccountName" : {
+      "type" : "string",
+      "description" : "Name of bank account"
+    },
+    "bankAccountCurrencyCode" : {
+      "type" : "string",
+      "description" : "Currency code of the bank account"
+    },
+    "statements" : {
+      "type" : "array",
+      "description" : "List of bank statements and linked accounting data for the requested period",
+      "items" : {
+        "$ref" : "#/components/schemas/StatementResponse"
+      }
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
       defs["BankStatementResponse"] = {
   "title" : "",
   "type" : "object",
@@ -1067,6 +1095,45 @@ ul.nav-tabs {
     },
     "currentStatement" : {
       "$ref" : "#/components/schemas/CurrentStatementResponse"
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
+      defs["BankTransactionResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "bankTransactionId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of transaction",
+      "format" : "uuid"
+    },
+    "batchPaymentId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of batch payment. Present if the transaction is part of a batch.",
+      "format" : "uuid"
+    },
+    "contact" : {
+      "$ref" : "#/components/schemas/ContactResponse"
+    },
+    "date" : {
+      "type" : "string",
+      "description" : "Date of transaction - YYYY-MM-DD",
+      "format" : "date"
+    },
+    "amount" : {
+      "type" : "number",
+      "description" : "Amount of transaction",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "lineItems" : {
+      "type" : "array",
+      "description" : "The LineItems element can contain any number of individual LineItem sub-elements. Not included in summary mode",
+      "items" : {
+        "$ref" : "#/components/schemas/LineItemResponse"
+      }
     }
   },
   "additionalProperties" : false,
@@ -1314,6 +1381,23 @@ ul.nav-tabs {
   "additionalProperties" : false,
   "description" : ""
 };
+      defs["ContactResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "contactId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of contact",
+      "format" : "uuid"
+    },
+    "contactName" : {
+      "type" : "string",
+      "description" : "Full name of contact/organisation"
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
       defs["ContactTotalDetail"] = {
   "title" : "",
   "type" : "object",
@@ -1366,6 +1450,35 @@ ul.nav-tabs {
       "type" : "integer",
       "description" : "Number of transactions for the contact.",
       "format" : "int32"
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
+      defs["CreditNoteResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "creditNoteId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of credit note",
+      "format" : "uuid"
+    },
+    "contact" : {
+      "$ref" : "#/components/schemas/ContactResponse"
+    },
+    "total" : {
+      "type" : "number",
+      "description" : "Total of Invoice tax inclusive (i.e. SubTotal + TotalTax); Not included in summary mode",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "lineItems" : {
+      "type" : "array",
+      "description" : "Not included in summary mode",
+      "items" : {
+        "$ref" : "#/components/schemas/LineItemResponse"
+      }
     }
   },
   "additionalProperties" : false,
@@ -1576,6 +1689,62 @@ ul.nav-tabs {
   "additionalProperties" : false,
   "description" : ""
 };
+      defs["InvoiceResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "invoiceId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of invoice",
+      "format" : "uuid"
+    },
+    "contact" : {
+      "$ref" : "#/components/schemas/ContactResponse"
+    },
+    "total" : {
+      "type" : "number",
+      "description" : "Total of Invoice tax inclusive (i.e. SubTotal + TotalTax); Not included in summary mode",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "lineItems" : {
+      "type" : "array",
+      "description" : "Not included in summary mode",
+      "items" : {
+        "$ref" : "#/components/schemas/LineItemResponse"
+      }
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
+      defs["LineItemResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "accountId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of account",
+      "format" : "uuid"
+    },
+    "reportingCode" : {
+      "type" : "string",
+      "description" : "Shown if set"
+    },
+    "lineAmount" : {
+      "type" : "number",
+      "description" : "Amount of line item",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "accountType" : {
+      "type" : "string",
+      "description" : "Account type"
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
       defs["LockHistoryModel"] = {
   "title" : "",
   "type" : "object",
@@ -1632,6 +1801,87 @@ ul.nav-tabs {
       "description" : "Total value of manual journals.",
       "format" : "double",
       "x-is-money" : true
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
+      defs["OverpaymentResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "overpaymentId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of overpayment",
+      "format" : "uuid"
+    },
+    "contact" : {
+      "$ref" : "#/components/schemas/ContactResponse"
+    },
+    "total" : {
+      "type" : "number",
+      "description" : "Total of Invoice tax inclusive (i.e. SubTotal + TotalTax); Not included in summary mode",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "lineItems" : {
+      "type" : "array",
+      "description" : "Not included in summary mode",
+      "items" : {
+        "$ref" : "#/components/schemas/LineItemResponse"
+      }
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
+      defs["PaymentResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "paymentId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of payment",
+      "format" : "uuid"
+    },
+    "batchPaymentId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of batch payment. Present if the payment was created as part of a batch.",
+      "format" : "uuid"
+    },
+    "date" : {
+      "type" : "string",
+      "description" : "Date the payment is being made (YYYY-MM-DD) e.g. 2009-09-06",
+      "format" : "date"
+    },
+    "amount" : {
+      "type" : "number",
+      "description" : "The amount of the payment",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "bankAmount" : {
+      "type" : "number",
+      "description" : "The bank amount of the payment",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "currencyRate" : {
+      "type" : "number",
+      "description" : "Exchange rate when payment is received. Only used for non base currency invoices and credit notes e.g. 0.7500",
+      "format" : "double"
+    },
+    "invoice" : {
+      "$ref" : "#/components/schemas/InvoiceResponse"
+    },
+    "creditNote" : {
+      "$ref" : "#/components/schemas/CreditNoteResponse"
+    },
+    "prepayment" : {
+      "$ref" : "#/components/schemas/PrepaymentResponse"
+    },
+    "overpayment" : {
+      "$ref" : "#/components/schemas/OverpaymentResponse"
     }
   },
   "additionalProperties" : false,
@@ -1748,6 +1998,35 @@ ul.nav-tabs {
   "additionalProperties" : false,
   "description" : ""
 };
+      defs["PrepaymentResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "prepaymentId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of prepayment",
+      "format" : "uuid"
+    },
+    "contact" : {
+      "$ref" : "#/components/schemas/ContactResponse"
+    },
+    "total" : {
+      "type" : "number",
+      "description" : "Total of Invoice tax inclusive (i.e. SubTotal + TotalTax); Not included in summary mode",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "lineItems" : {
+      "type" : "array",
+      "description" : "Not included in summary mode",
+      "items" : {
+        "$ref" : "#/components/schemas/LineItemResponse"
+      }
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
       defs["Problem"] = {
   "title" : "",
   "type" : "object",
@@ -1773,7 +2052,7 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "",
-  "enum" : [ "NotSet", "invalid-request", "invalid-application", "service-unavailable", "internal-error" ]
+  "enum" : [ "NotSet", "bank-account-not-found", "internal-error", "invalid-application", "invalid-request", "organisation-not-found", "organisation-offline", "request-timeout", "service-unavailable", "unauthorized" ]
 };
       defs["ProfitAndLossResponse"] = {
   "title" : "",
@@ -1863,6 +2142,77 @@ ul.nav-tabs {
     "type" : {
       "type" : "string",
       "description" : "The DEBIT or CREDIT status of the account. Cash accounts in credit have a negative balance."
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
+      defs["StatementLineResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "statementLineId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of statement line",
+      "format" : "uuid"
+    },
+    "postedDate" : {
+      "type" : "string",
+      "description" : "Date of when statement line was posted",
+      "format" : "date"
+    },
+    "reference" : {
+      "type" : "string",
+      "description" : "Reference description of statement line"
+    },
+    "notes" : {
+      "type" : "string",
+      "description" : "Notes description of statement line"
+    },
+    "chequeNo" : {
+      "type" : "string",
+      "description" : "Cheque number of statement line"
+    },
+    "amount" : {
+      "type" : "number",
+      "description" : "Amount of statement line",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "transactionDate" : {
+      "type" : "string",
+      "description" : "Transaction date of statement line",
+      "format" : "date"
+    },
+    "type" : {
+      "type" : "string",
+      "description" : "Type of statement line"
+    },
+    "isReconciled" : {
+      "type" : "boolean",
+      "description" : "Boolean to show if statement line is reconciled"
+    },
+    "isDuplicate" : {
+      "type" : "boolean",
+      "description" : "Boolean to show if statement line is duplicate"
+    },
+    "isDeleted" : {
+      "type" : "boolean",
+      "description" : "Boolean to show if statement line is deleted"
+    },
+    "payments" : {
+      "type" : "array",
+      "description" : "List of payments associated with reconciled statement lines",
+      "items" : {
+        "$ref" : "#/components/schemas/PaymentResponse"
+      }
+    },
+    "bankTransactions" : {
+      "type" : "array",
+      "description" : "List of bank transactions associated with reconciled statement lines",
+      "items" : {
+        "$ref" : "#/components/schemas/BankTransactionResponse"
+      }
     }
   },
   "additionalProperties" : false,
@@ -1964,6 +2314,45 @@ ul.nav-tabs {
       "description" : "Sum of the amounts of all statement lines where the amount is negative.",
       "format" : "double",
       "x-is-money" : true
+    }
+  },
+  "additionalProperties" : false,
+  "description" : ""
+};
+      defs["StatementResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "statementId" : {
+      "type" : "string",
+      "description" : "Xero Identifier of statement",
+      "format" : "uuid"
+    },
+    "startDate" : {
+      "type" : "string",
+      "description" : "Start date of statement",
+      "format" : "date"
+    },
+    "endDate" : {
+      "type" : "string",
+      "description" : "End date of statement",
+      "format" : "date"
+    },
+    "importedDateTimeUtc" : {
+      "type" : "string",
+      "description" : "Utc date time of when the statement was imported in Xero",
+      "format" : "date-time"
+    },
+    "importSource" : {
+      "type" : "string",
+      "description" : "Import source of statement (STMTIMPORTSRC/MANUAL, STMTIMPORTSRC/CSV, STMTIMPORTSRC/QIF, STMTIMPORTSRC/OFX, XeroApi)"
+    },
+    "statementLines" : {
+      "type" : "array",
+      "description" : "List of statement lines",
+      "items" : {
+        "$ref" : "#/components/schemas/StatementLineResponse"
+      }
     }
   },
   "additionalProperties" : false,
@@ -2318,7 +2707,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Finance"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Finance"><strong>VSN: </strong>4.18.0</li>
+              <li class="nav-header" data-group="Finance"><strong>VSN: </strong>4.19.1</li>
               <li class="nav-header" data-group="Finance"><a href="#api-Finance">Methods</a></li>
               <li data-group="Finance" data-name="getAccountingActivityAccountUsage" class="">
                 <a href="#api-Finance-getAccountingActivityAccountUsage">getAccountingActivityAccountUsage</a>
@@ -2331,6 +2720,9 @@ ul.nav-tabs {
               </li>
               <li data-group="Finance" data-name="getAccountingActivityUserActivities" class="">
                 <a href="#api-Finance-getAccountingActivityUserActivities">getAccountingActivityUserActivities</a>
+              </li>
+              <li data-group="Finance" data-name="getBankStatementAccounting" class="">
+                <a href="#api-Finance-getBankStatementAccounting">getBankStatementAccounting</a>
               </li>
               <li data-group="Finance" data-name="getCashValidation" class="">
                 <a href="#api-Finance-getCashValidation">getCashValidation</a>
@@ -2827,6 +3219,199 @@ Xero identifier for Tenant
 <p>If no parameter is provided, the month immediately previous to the current month will be used.</p>
 <p>Any user activities occurring within the specified month will be returned.</p>
 <p>Please be aware that there may be a delay of up to 3 days before a user activity is visible from this API.</p>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Finance-getBankStatementAccounting">
+                <article id="api-Finance-getBankStatementAccounting-0" data-group="User" data-name="getBankStatementAccounting" data-version="0">
+                  <div class="pull-left">
+                    <h1>getBankStatementAccounting</h1>
+                    <p>Get Bank Statement Accounting</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked">For lenders that prefer using bank statement data as the source of truth.  We provide a data point that will allow access to customer bank statements, plus for reconciled bank transactions the matching accounting, invoice and billing data as well.  As customers reconcile bank statements to invoices and bills, this transaction detail will provide valuable insight for lender's assessment measures.</p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/BankStatementsPlus/statements</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Finance-getBankStatementAccounting-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Finance-getBankStatementAccounting-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const bankAccountID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const fromDate = '2020-07-01';
+const toDate = '2021-06-30';
+const summaryOnly = true;
+
+try {
+  const response = await xero.accountingApi.getBankStatementAccounting(xeroTenantId, bankAccountID, fromDate, toDate,  summaryOnly);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>finance.bankstatementsplus.read</td>
+                      <td>Grant read-only access to bank statements accounting data</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBankStatementAccounting_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Query parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">BankAccountID<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBankStatementAccounting_bankAccountID">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+<p>string, GUID</p>
+<p>Bank account Id</p>
+
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">FromDate<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBankStatementAccounting_fromDate">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+<p>date, yyyy-MM-dd</p>
+<p>Specifies the start date of the query period.
+The maximum range of the query period is 12 months. If the specified query period is more than 12 months the request will be rejected.</p>
+
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">ToDate<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBankStatementAccounting_toDate">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+<p>date, yyyy-MM-dd</p>
+<p>Specifies the end date of the query period.
+If the end date is a future date, the request will be rejected.</p>
+
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">SummaryOnly</td>
+<td>
+
+
+    <div id="d2e199_getBankStatementAccounting_summaryOnly">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Boolean
+                </span>
+
+                    <div class="inner description marked">
+<p>boolean, true/false</p>
+<p>The default value is true if no parameter is provided.</p>
+<p>In summary mode, the response will exclude the computation-heavy LineItems fields from bank transaction, invoice, credit note, prepayment and overpayment data, making the API calls quicker and more efficient.</p>
 
                     </div>
             </div>

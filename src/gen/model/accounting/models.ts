@@ -67,6 +67,7 @@ export * from '././journalLine';
 export * from '././journals';
 export * from '././lineAmountTypes';
 export * from '././lineItem';
+export * from '././lineItemItem';
 export * from '././lineItemTracking';
 export * from '././linkedTransaction';
 export * from '././linkedTransactions';
@@ -200,6 +201,7 @@ import { JournalLine } from '././journalLine';
 import { Journals } from '././journals';
 import { LineAmountTypes } from '././lineAmountTypes';
 import { LineItem } from '././lineItem';
+import { LineItemItem } from '././lineItemItem';
 import { LineItemTracking } from '././lineItemTracking';
 import { LinkedTransaction } from '././linkedTransaction';
 import { LinkedTransactions } from '././linkedTransactions';
@@ -408,6 +410,7 @@ let typeMap: {[index: string]: any} = {
     "JournalLine": JournalLine,
     "Journals": Journals,
     "LineItem": LineItem,
+    "LineItemItem": LineItemItem,
     "LineItemTracking": LineItemTracking,
     "LinkedTransaction": LinkedTransaction,
     "LinkedTransactions": LinkedTransactions,
