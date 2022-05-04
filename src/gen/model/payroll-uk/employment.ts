@@ -51,10 +51,15 @@ export namespace Employment {
         A = <any> 'A',
         B = <any> 'B',
         C = <any> 'C',
+        F = <any> 'F',
         H = <any> 'H',
+        I = <any> 'I',
         J = <any> 'J',
+        L = <any> 'L',
         M = <any> 'M',
-        Z = <any> 'Z',
-        X = <any> 'X'
+        S = <any> 'S',
+        V = <any> 'V',
+        X = <any> 'X',
+        Z = <any> 'Z'
     }
 }

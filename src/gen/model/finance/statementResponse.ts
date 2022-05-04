@@ -18,9 +18,17 @@ export class StatementResponse {
     */
     'importedDateTimeUtc'?: Date;
     /**
-    * Import source of statement (STMTIMPORTSRC/MANUAL, STMTIMPORTSRC/CSV, STMTIMPORTSRC/QIF, STMTIMPORTSRC/OFX, XeroApi)
+    * Indicates the source of the statement data. Either imported from 1) direct bank feed OR 2) manual customer entry or upload. Manual import sources are STMTIMPORTSRC/MANUAL, STMTIMPORTSRC/CSV, STMTIMPORTSRC/OFX, Ofx or STMTIMPORTSRC/QIF. All other import sources are direct and, depending on the direct solution, may contain the name of the financial institution.
     */
     'importSource'?: string;
+    /**
+    * Opening balance sourced from imported bank statements (if supplied). Note, for manually uploaded statements, this balance is also manual and usually not supplied.
+    */
+    'startBalance'?: number;
+    /**
+    * Closing balance sourced from imported bank statements (if supplied). Note, for manually uploaded statements, this balance is also manual and usually not supplied.
+    */
+    'endBalance'?: number;
     /**
     * List of statement lines
     */
@@ -53,6 +61,16 @@ export class StatementResponse {
             "name": "importSource",
             "baseName": "importSource",
             "type": "string"
+        },
+        {
+            "name": "startBalance",
+            "baseName": "startBalance",
+            "type": "number"
+        },
+        {
+            "name": "endBalance",
+            "baseName": "endBalance",
+            "type": "number"
         },
         {
             "name": "statementLines",

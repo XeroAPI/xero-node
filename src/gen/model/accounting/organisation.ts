@@ -383,7 +383,8 @@ export namespace Organisation {
         PREMIUM100 = <any> 'PREMIUM_100',
         LEDGER = <any> 'LEDGER',
         GSTCASHBOOK = <any> 'GST_CASHBOOK',
-        NONGSTCASHBOOK = <any> 'NON_GST_CASHBOOK'
+        NONGSTCASHBOOK = <any> 'NON_GST_CASHBOOK',
+        ULTIMATE = <any> 'ULTIMATE'
     }
     export enum EditionEnum {
         BUSINESS = <any> 'BUSINESS',
