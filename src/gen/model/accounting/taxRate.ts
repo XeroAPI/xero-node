@@ -200,6 +200,13 @@ export namespace TaxRate {
         SHOUTPUT = <any> 'SHOUTPUT',
         ZRINPUT = <any> 'ZRINPUT',
         BADDEBT = <any> 'BADDEBT',
-        OTHERINPUT = <any> 'OTHERINPUT'
+        OTHERINPUT = <any> 'OTHERINPUT',
+        BADDEBTRELIEF = <any> 'BADDEBTRELIEF',
+        IGDSINPUT3 = <any> 'IGDSINPUT3',
+        SROVR = <any> 'SROVR',
+        TOURISTREFUND = <any> 'TOURISTREFUND',
+        TXRCN33INPUT = <any> 'TXRCN33INPUT',
+        TXRCREINPUT = <any> 'TXRCREINPUT',
+        TXRCESSINPUT = <any> 'TXRCESSINPUT'
     }
 }
