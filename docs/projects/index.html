@@ -1173,9 +1173,8 @@ ul.nav-tabs {
       "$ref" : "#/components/schemas/ChargeType"
     },
     "estimateMinutes" : {
-      "type" : "number",
-      "description" : "An estimated time to perform the task",
-      "format" : "double"
+      "type" : "integer",
+      "description" : "An estimated time to perform the task"
     },
     "projectId" : {
       "type" : "string",
@@ -1184,32 +1183,27 @@ ul.nav-tabs {
       "example" : "00000000-0000-0000-0000-000000000000"
     },
     "totalMinutes" : {
-      "type" : "number",
-      "description" : "Total minutes which have been logged against the task. Logged by assigning a time entry to a task",
-      "format" : "double"
+      "type" : "integer",
+      "description" : "Total minutes which have been logged against the task. Logged by assigning a time entry to a task"
     },
     "totalAmount" : {
       "$ref" : "#/components/schemas/Amount"
     },
     "minutesInvoiced" : {
-      "type" : "number",
-      "description" : "Minutes on this task which have been invoiced.",
-      "format" : "double"
+      "type" : "integer",
+      "description" : "Minutes on this task which have been invoiced."
     },
     "minutesToBeInvoiced" : {
-      "type" : "number",
-      "description" : "Minutes on this task which have not been invoiced.",
-      "format" : "double"
+      "type" : "integer",
+      "description" : "Minutes on this task which have not been invoiced."
     },
     "fixedMinutes" : {
-      "type" : "number",
-      "description" : "Minutes logged against this task if its charge type is `FIXED`.",
-      "format" : "double"
+      "type" : "integer",
+      "description" : "Minutes logged against this task if its charge type is `FIXED`."
     },
     "nonChargeableMinutes" : {
-      "type" : "number",
-      "description" : "Minutes logged against this task if its charge type is `NON_CHARGEABLE`.",
-      "format" : "double"
+      "type" : "integer",
+      "description" : "Minutes logged against this task if its charge type is `NON_CHARGEABLE`."
     },
     "amountToBeInvoiced" : {
       "$ref" : "#/components/schemas/Amount"
@@ -1246,7 +1240,7 @@ ul.nav-tabs {
     },
     "estimateMinutes" : {
       "type" : "integer",
-      "description" : "Estimated time to perform the task. EstimateMinutes has to be greater than 0 if provided."
+      "description" : "An estimated time to perform the task"
     }
   },
   "description" : "",
@@ -1469,13 +1463,19 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Project"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Project"><strong>VSN: </strong>4.20.1</li>
+              <li class="nav-header" data-group="Project"><strong>VSN: </strong>4.21.0</li>
               <li class="nav-header" data-group="Project"><a href="#api-Project">Methods</a></li>
               <li data-group="Project" data-name="createProject" class="">
                 <a href="#api-Project-createProject">createProject</a>
               </li>
+              <li data-group="Project" data-name="createTask" class="">
+                <a href="#api-Project-createTask">createTask</a>
+              </li>
               <li data-group="Project" data-name="createTimeEntry" class="">
                 <a href="#api-Project-createTimeEntry">createTimeEntry</a>
+              </li>
+              <li data-group="Project" data-name="deleteTask" class="">
+                <a href="#api-Project-deleteTask">deleteTask</a>
               </li>
               <li data-group="Project" data-name="deleteTimeEntry" class="">
                 <a href="#api-Project-deleteTimeEntry">deleteTimeEntry</a>
@@ -1506,6 +1506,9 @@ ul.nav-tabs {
               </li>
               <li data-group="Project" data-name="updateProject" class="">
                 <a href="#api-Project-updateProject">updateProject</a>
+              </li>
+              <li data-group="Project" data-name="updateTask" class="">
+                <a href="#api-Project-updateTask">updateTask</a>
               </li>
               <li data-group="Project" data-name="updateTimeEntry" class="">
                 <a href="#api-Project-updateTimeEntry">updateTimeEntry</a>
@@ -1635,6 +1638,156 @@ Create a new project with ProjectCreateOrUpdate object
         "$ref" : "#/components/schemas/ProjectCreateOrUpdate"
       },
       "example" : "{ \"contactId\": \"00000000-0000-0000-000-000000000000\", \"name\": \"New Kitchen\", \"deadlineUtc\": \"2019-12-10T12:59:59Z\", \"estimateAmount\": \"99.99\" }"
+    }
+  },
+  "required" : true
+}
+</script>
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Project-createTask">
+                <article id="api-Project-createTask-0" data-group="User" data-name="createTask" data-version="0">
+                  <div class="pull-left">
+                    <h1>createTask</h1>
+                    <p>Allows you to create a task</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked">Allows you to create a specific task</p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Projects/{projectId}/Tasks</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Project-createTask-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Project-createTask-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'xeroTenantId_example';
+const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+
+try {
+  const response = await xero.accountingApi.createTask(xeroTenantId, projectId, taskCreateOrUpdate);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>projects</td>
+                      <td>Grant read-write access to projects</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">projectId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_createTask_projectId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+You can create a task on a specified projectId
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_createTask_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Body parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">taskCreateOrUpdate <span style="color:red;">*</span></td>
+<td>
+<div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    TaskCreateOrUpdate
+                </span>
+
+                    <div class="inner description marked">
+The task object you are creating
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+<script type="application/ld+json">
+    {
+  "description" : "The task object you are creating",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/TaskCreateOrUpdate"
+      },
+      "example" : "{ \"status\": \"INPROGRESS\" }"
     }
   },
   "required" : true
@@ -1790,6 +1943,146 @@ The time entry object you are creating
   "required" : true
 }
 </script>
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Project-deleteTask">
+                <article id="api-Project-deleteTask-0" data-group="User" data-name="deleteTask" data-version="0">
+                  <div class="pull-left">
+                    <h1>deleteTask</h1>
+                    <p>Allows you to delete a task</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked">Allows you to delete a specific task</p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/Projects/{projectId}/Tasks/{taskId}</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Project-deleteTask-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Project-deleteTask-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'xeroTenantId_example';
+const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const taskId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+
+try {
+  const response = await xero.accountingApi.deleteTask(xeroTenantId, projectId, taskId);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>projects</td>
+                      <td>Grant read-write access to projects</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">projectId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteTask_projectId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+You can specify an individual project by appending the projectId to the endpoint
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">taskId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteTask_taskId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+You can specify an individual task by appending the id to the endpoint
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteTask_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                 </article>
               </div>
@@ -3530,6 +3823,182 @@ Request of type ProjectCreateOrUpdate
         "$ref" : "#/components/schemas/ProjectCreateOrUpdate"
       },
       "example" : "{ \"name\": \"New Kitchen\", \"deadlineUtc\": \"2017-04-23T18:25:43.511Z\", \"estimateAmount\": 99.99 }"
+    }
+  },
+  "required" : true
+}
+</script>
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Project-updateTask">
+                <article id="api-Project-updateTask-0" data-group="User" data-name="updateTask" data-version="0">
+                  <div class="pull-left">
+                    <h1>updateTask</h1>
+                    <p>Allows you to update a task</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked">Allows you to update a specific task</p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/Projects/{projectId}/Tasks/{taskId}</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Project-updateTask-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Project-updateTask-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'xeroTenantId_example';
+const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const taskId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+
+try {
+  const response = await xero.accountingApi.updateTask(xeroTenantId, projectId, taskId, taskCreateOrUpdate);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>projects</td>
+                      <td>Grant read-write access to projects</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">projectId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_updateTask_projectId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+You can specify an individual project by appending the projectId to the endpoint
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">taskId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_updateTask_taskId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+You can specify an individual task by appending the id to the endpoint
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_updateTask_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Body parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">taskCreateOrUpdate <span style="color:red;">*</span></td>
+<td>
+<div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    TaskCreateOrUpdate
+                </span>
+
+                    <div class="inner description marked">
+The task object you are updating
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+<script type="application/ld+json">
+    {
+  "description" : "The task object you are updating",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/TaskCreateOrUpdate"
+      }
     }
   },
   "required" : true
