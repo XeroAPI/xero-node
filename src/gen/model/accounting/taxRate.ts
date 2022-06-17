@@ -207,6 +207,7 @@ export namespace TaxRate {
         TOURISTREFUND = <any> 'TOURISTREFUND',
         TXRCN33INPUT = <any> 'TXRCN33INPUT',
         TXRCREINPUT = <any> 'TXRCREINPUT',
-        TXRCESSINPUT = <any> 'TXRCESSINPUT'
+        TXRCESSINPUT = <any> 'TXRCESSINPUT',
+        TXRCTSINPUT = <any> 'TXRCTSINPUT'
     }
 }

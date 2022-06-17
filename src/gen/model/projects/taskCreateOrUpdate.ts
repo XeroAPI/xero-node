@@ -9,7 +9,7 @@ export class TaskCreateOrUpdate {
     'rate': Amount;
     'chargeType': ChargeType;
     /**
-    * Estimated time to perform the task. EstimateMinutes has to be greater than 0 if provided.
+    * An estimated time to perform the task
     */
     'estimateMinutes'?: number;
 
