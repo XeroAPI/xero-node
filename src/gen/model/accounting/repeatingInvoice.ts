@@ -51,13 +51,29 @@ export class RepeatingInvoice {
     */
     'iD'?: string;
     /**
-    * boolean to indicate if an invoice has an attachment
+    * Boolean to indicate if an invoice has an attachment
     */
     'hasAttachments'?: boolean;
     /**
     * Displays array of attachments from the API
     */
     'attachments'?: Array<Attachment>;
+    /**
+    * Boolean to indicate whether the invoice has been approved for sending
+    */
+    'approvedForSending'?: boolean;
+    /**
+    * Boolean to indicate whether a copy is sent to sender\'s email
+    */
+    'sendCopy'?: boolean;
+    /**
+    * Boolean to indicate whether the invoice in the Xero app displays as \"sent\"
+    */
+    'markAsSent'?: boolean;
+    /**
+    * Boolean to indicate whether to include PDF attachment
+    */
+    'includePDF'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -141,6 +157,26 @@ export class RepeatingInvoice {
             "name": "attachments",
             "baseName": "Attachments",
             "type": "Array<Attachment>"
+        },
+        {
+            "name": "approvedForSending",
+            "baseName": "ApprovedForSending",
+            "type": "boolean"
+        },
+        {
+            "name": "sendCopy",
+            "baseName": "SendCopy",
+            "type": "boolean"
+        },
+        {
+            "name": "markAsSent",
+            "baseName": "MarkAsSent",
+            "type": "boolean"
+        },
+        {
+            "name": "includePDF",
+            "baseName": "IncludePDF",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
