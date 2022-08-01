@@ -55,6 +55,10 @@ export class TaxDeclaration {
     */
     'hasStudentStartupLoan'?: boolean;
     /**
+    * If the employee has any of the following loans or debts: Higher Education Loan Program (HELP/HECS), VET Student Loan (VSL), Financial Supplement (FS), Student Start-up Loan (SSL), or Trade Support Loan (TSL)
+    */
+    'hasLoanOrStudentDebt'?: boolean;
+    /**
     * Last modified timestamp
     */
     'updatedDateUTC'?: Date;
@@ -135,6 +139,11 @@ export class TaxDeclaration {
         {
             "name": "hasStudentStartupLoan",
             "baseName": "HasStudentStartupLoan",
+            "type": "boolean"
+        },
+        {
+            "name": "hasLoanOrStudentDebt",
+            "baseName": "HasLoanOrStudentDebt",
             "type": "boolean"
         },
         {
