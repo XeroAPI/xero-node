@@ -18,6 +18,8 @@ export * from '././bankTransactions';
 export * from '././bankTransfer';
 export * from '././bankTransfers';
 export * from '././batchPayment';
+export * from '././batchPaymentDelete';
+export * from '././batchPaymentDeleteByUrlParam';
 export * from '././batchPaymentDetails';
 export * from '././batchPayments';
 export * from '././bill';
@@ -152,6 +154,8 @@ import { BankTransactions } from '././bankTransactions';
 import { BankTransfer } from '././bankTransfer';
 import { BankTransfers } from '././bankTransfers';
 import { BatchPayment } from '././batchPayment';
+import { BatchPaymentDelete } from '././batchPaymentDelete';
+import { BatchPaymentDeleteByUrlParam } from '././batchPaymentDeleteByUrlParam';
 import { BatchPaymentDetails } from '././batchPaymentDetails';
 import { BatchPayments } from '././batchPayments';
 import { Bill } from '././bill';
@@ -364,6 +368,8 @@ let typeMap: {[index: string]: any} = {
     "BankTransfer": BankTransfer,
     "BankTransfers": BankTransfers,
     "BatchPayment": BatchPayment,
+    "BatchPaymentDelete": BatchPaymentDelete,
+    "BatchPaymentDeleteByUrlParam": BatchPaymentDeleteByUrlParam,
     "BatchPaymentDetails": BatchPaymentDetails,
     "BatchPayments": BatchPayments,
     "Bill": Bill,

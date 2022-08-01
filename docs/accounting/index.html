@@ -1670,6 +1670,43 @@ ul.nav-tabs {
     "url" : "http://developer.xero.com/documentation/api/BatchPayments/"
   }
 };
+      defs["BatchPaymentDelete"] = {
+  "title" : "",
+  "required" : [ "BatchPaymentID", "Status" ],
+  "type" : "object",
+  "properties" : {
+    "BatchPaymentID" : {
+      "type" : "string",
+      "description" : "The Xero generated unique identifier for the bank transaction (read-only)",
+      "format" : "uuid"
+    },
+    "Status" : {
+      "type" : "string",
+      "description" : "The status of the batch payment.",
+      "default" : "DELETED"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "http://developer.xero.com/documentation/api/accounting/batchpayments"
+  }
+};
+      defs["BatchPaymentDeleteByUrlParam"] = {
+  "title" : "",
+  "required" : [ "Status" ],
+  "type" : "object",
+  "properties" : {
+    "Status" : {
+      "type" : "string",
+      "description" : "The status of the batch payment.",
+      "default" : "DELETED"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "http://developer.xero.com/documentation/api/accounting/batchpayments"
+  }
+};
       defs["BatchPaymentDetails"] = {
   "title" : "",
   "properties" : {
@@ -6033,7 +6070,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.22.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.23.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -6205,6 +6242,12 @@ ul.nav-tabs {
               </li>
               <li data-group="Accounting" data-name="deleteAccount" class="">
                 <a href="#api-Accounting-deleteAccount">deleteAccount</a>
+              </li>
+              <li data-group="Accounting" data-name="deleteBatchPayment" class="">
+                <a href="#api-Accounting-deleteBatchPayment">deleteBatchPayment</a>
+              </li>
+              <li data-group="Accounting" data-name="deleteBatchPaymentByUrlParam" class="">
+                <a href="#api-Accounting-deleteBatchPaymentByUrlParam">deleteBatchPaymentByUrlParam</a>
               </li>
               <li data-group="Accounting" data-name="deleteContactGroupContact" class="">
                 <a href="#api-Accounting-deleteContactGroupContact">deleteContactGroupContact</a>
@@ -16015,6 +16058,276 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Accounting-deleteBatchPayment">
+                <article id="api-Accounting-deleteBatchPayment-0" data-group="User" data-name="deleteBatchPayment" data-version="0">
+                  <div class="pull-left">
+                    <h1>deleteBatchPayment</h1>
+                    <p>Updates a specific batch payment for invoices and credit notes</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/BatchPayments</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-deleteBatchPayment-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-deleteBatchPayment-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+
+const batchPaymentDelete: BatchPaymentDelete = { 
+  status: "DELETED"
+}; 
+  batchPaymentID: "00000000-0000-0000-0000-000000000000"
+}; 
+
+try {
+  const response = await xero.accountingApi.deleteBatchPayment(xeroTenantId, batchPaymentDelete);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteBatchPayment_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Body parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">batchPaymentDelete <span style="color:red;">*</span></td>
+<td>
+<div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    BatchPaymentDelete
+                </span>
+
+                    <div class="inner description marked">
+
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+<script type="application/ld+json">
+    {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/BatchPaymentDelete"
+      },
+      "example" : "{ \"BatchPaymentID\": \"9bf296e9-0748-4d29-a3dc-24dde1098030\", \"Status\":\"DELETED\" }"
+    }
+  },
+  "required" : true
+}
+</script>
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Accounting-deleteBatchPaymentByUrlParam">
+                <article id="api-Accounting-deleteBatchPaymentByUrlParam-0" data-group="User" data-name="deleteBatchPaymentByUrlParam" data-version="0">
+                  <div class="pull-left">
+                    <h1>deleteBatchPaymentByUrlParam</h1>
+                    <p>Updates a specific batch payment for invoices and credit notes</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/BatchPayments/{BatchPaymentID}</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-deleteBatchPaymentByUrlParam-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-deleteBatchPaymentByUrlParam-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const batchPaymentID = '00000000-0000-0000-0000-000000000000';
+
+try {
+  const response = await xero.accountingApi.deleteBatchPaymentByUrlParam(xeroTenantId, batchPaymentID, batchPaymentDeleteByUrlParam);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">BatchPaymentID<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteBatchPaymentByUrlParam_batchPaymentID">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Unique identifier for BatchPayment
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteBatchPaymentByUrlParam_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Body parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">batchPaymentDeleteByUrlParam <span style="color:red;">*</span></td>
+<td>
+<div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    BatchPaymentDeleteByUrlParam
+                </span>
+
+                    <div class="inner description marked">
+
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+<script type="application/ld+json">
+    {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/BatchPaymentDeleteByUrlParam"
+      },
+      "example" : "{ \"Status\":\"DELETED\" }"
+    }
+  },
+  "required" : true
+}
+</script>
                   </table>
                 </article>
               </div>
