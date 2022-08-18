@@ -519,8 +519,7 @@ export class ObjectSerializer {
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
             let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
+            for (let [index, date] of Object.entries(data)) {                  
                 transformedData.push(ObjectSerializer.serialize(date, subType));
             }
             if(subType === 'string') {
@@ -544,8 +543,7 @@ export class ObjectSerializer {
             // get the map for the correct type.
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             let instance: {[index: string]: any} = {};
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
+            for (let [index, attributeType] of Object.entries(attributeTypes)) {
                 instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type);
             }
             return instance;
