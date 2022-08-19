@@ -117,7 +117,7 @@ export class ObjectSerializer {
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             let instance: {[index: string]: any} = {};
             for (let [index, attributeType] of Object.entries(attributeTypes)) {
-                instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type);
+                instance[attributeType['baseName']] = ObjectSerializer.serialize(data[attributeType['name']], attributeType['type']);
             }
             return instance;
         }
