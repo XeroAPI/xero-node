@@ -579,8 +579,7 @@ export class ObjectSerializer {
             let transformedData: any[] = [];
             // Asset API returns string even for Array<Model>
             const dataFormatted = typeof data == 'string' ? JSON.parse(data) : data
-            for (let index in dataFormatted) {
-                let currentData = dataFormatted[index];
+            for (let [index, currentData] of Object.entries(dataFormatted)) {
                 transformedData.push(ObjectSerializer.deserialize(currentData, subType));
             }
             return transformedData;
@@ -596,9 +595,8 @@ export class ObjectSerializer {
             }
             let instance = new typeMap[type]();
             let attributeTypes = typeMap[type].getAttributeTypeMap();
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
-                instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type);
+            for (let [index, attributeType] of Object.entries(attributeTypes)) {
+                instance[attributeType['name']] = ObjectSerializer.deserialize(data[attributeType['baseName']], attributeType['type']);
             }
             return instance;
         }
