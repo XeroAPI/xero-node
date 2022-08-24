@@ -6070,7 +6070,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.23.1</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.24.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -21980,7 +21980,7 @@ const iDs = [&quot;00000000-0000-0000-0000-000000000000&quot;];
 const page = 1;
 const includeArchived = true;
 const summaryOnly = true;
-const searchTerm = 'searchTerm=Joe Bloggs';
+const searchTerm = 'Joe Bloggs';
 
 try {
   const response = await xero.accountingApi.getContacts(xeroTenantId, ifModifiedSince, where, order, iDs, page, includeArchived, summaryOnly, searchTerm);

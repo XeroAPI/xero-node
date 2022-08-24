@@ -23,6 +23,7 @@ export * from '././leaveAccrualLine';
 export * from '././leaveApplication';
 export * from '././leaveApplications';
 export * from '././leaveBalance';
+export * from '././leaveCategoryCode';
 export * from '././leaveEarningsLine';
 export * from '././leaveLine';
 export * from '././leaveLineCalculationType';
@@ -105,6 +106,7 @@ import { LeaveAccrualLine } from '././leaveAccrualLine';
 import { LeaveApplication } from '././leaveApplication';
 import { LeaveApplications } from '././leaveApplications';
 import { LeaveBalance } from '././leaveBalance';
+import { LeaveCategoryCode } from '././leaveCategoryCode';
 import { LeaveEarningsLine } from '././leaveEarningsLine';
 import { LeaveLine } from '././leaveLine';
 import { LeaveLineCalculationType } from '././leaveLineCalculationType';
@@ -187,6 +189,7 @@ let enumsMap: {[index: string]: any} = {
         "EmploymentBasis": EmploymentBasis,
         "EmploymentTerminationPaymentType": EmploymentTerminationPaymentType,
         "EntitlementFinalPayPayoutType": EntitlementFinalPayPayoutType,
+        "LeaveCategoryCode": LeaveCategoryCode,
         "LeaveLineCalculationType": LeaveLineCalculationType,
         "LeavePeriodStatus": LeavePeriodStatus,
         "LeaveTypeContributionType": LeaveTypeContributionType,

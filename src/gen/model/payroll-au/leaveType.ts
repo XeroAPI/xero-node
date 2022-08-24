@@ -1,3 +1,4 @@
+import { LeaveCategoryCode } from '././leaveCategoryCode';
 
 export class LeaveType {
     /**
@@ -36,6 +37,11 @@ export class LeaveType {
     * Is the current record
     */
     'currentRecord'?: boolean;
+    'leaveCategoryCode'?: LeaveCategoryCode;
+    /**
+    * Set this to indicate that the leave type is exempt from superannuation guarantee contribution
+    */
+    'sGCExempt'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -83,6 +89,16 @@ export class LeaveType {
         {
             "name": "currentRecord",
             "baseName": "CurrentRecord",
+            "type": "boolean"
+        },
+        {
+            "name": "leaveCategoryCode",
+            "baseName": "LeaveCategoryCode",
+            "type": "LeaveCategoryCode"
+        },
+        {
+            "name": "sGCExempt",
+            "baseName": "SGCExempt",
             "type": "boolean"
         }    ];
 
