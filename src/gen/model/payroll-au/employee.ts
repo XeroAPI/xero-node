@@ -40,7 +40,7 @@ export class Employee {
     */
     'email'?: string;
     /**
-    * The employee’s gender. See Employee Gender
+    * The employee’s gender. See Employee Gender
     */
     'gender'?: Employee.GenderEnum;
     /**

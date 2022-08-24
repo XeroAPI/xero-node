@@ -1294,7 +1294,7 @@ ul.nav-tabs {
     },
     "Gender" : {
       "type" : "string",
-      "description" : "The employee’s gender. See Employee Gender",
+      "description" : "The employee’s gender. See Employee Gender",
       "example" : "F",
       "enum" : [ "N", "M", "F", "I" ]
     },
@@ -1629,6 +1629,13 @@ ul.nav-tabs {
   },
   "description" : ""
 };
+      defs["LeaveCategoryCode"] = {
+  "title" : "",
+  "type" : "string",
+  "description" : "Code used to identify the Leave Category",
+  "example" : "ANNUALLEAVE",
+  "enum" : [ "ANNUALLEAVE", "LONGSERVICELEAVE", "PERSONALCARERSLEAVE", "ROSTEREDDAYOFF", "TIMEOFFINLIEU", "COMPASSIONATEANDBEREAVEMENTLEAVE", "STUDYLEAVE", "FAMILYANDDOMESTICVIOLENCELEAVE", "SPECIALPAIDLEAVE", "COMMUNITYSERVICELEAVE", "JURYDUTYLEAVE", "DEFENCERESERVELEAVE" ]
+};
       defs["LeaveEarningsLine"] = {
   "title" : "",
   "type" : "object",
@@ -1812,6 +1819,14 @@ ul.nav-tabs {
     "CurrentRecord" : {
       "type" : "boolean",
       "description" : "Is the current record",
+      "example" : true
+    },
+    "LeaveCategoryCode" : {
+      "$ref" : "#/components/schemas/LeaveCategoryCode"
+    },
+    "SGCExempt" : {
+      "type" : "boolean",
+      "description" : "Set this to indicate that the leave type is exempt from superannuation guarantee contribution",
       "example" : true
     }
   },
@@ -3260,7 +3275,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.23.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.24.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="createEmployee" class="">
                 <a href="#api-PayrollAu-createEmployee">createEmployee</a>

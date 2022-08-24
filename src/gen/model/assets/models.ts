@@ -104,8 +104,7 @@ export class ObjectSerializer {
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
             let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
+            for (let [index, date] of Object.entries(data)) {                  
                 transformedData.push(ObjectSerializer.serialize(date, subType));
             }
             if(subType === 'string') {
@@ -129,9 +128,8 @@ export class ObjectSerializer {
             // get the map for the correct type.
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             let instance: {[index: string]: any} = {};
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
-                instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type);
+            for (let [index, attributeType] of Object.entries(attributeTypes)) {
+                instance[attributeType['baseName']] = ObjectSerializer.serialize(data[attributeType['name']], attributeType['type']);
             }
             return instance;
         }
@@ -166,8 +164,7 @@ export class ObjectSerializer {
             let transformedData: any[] = [];
             // Asset API returns string even for Array<Model>
             const dataFormatted = typeof data == 'string' ? JSON.parse(data) : data
-            for (let index in dataFormatted) {
-                let currentData = dataFormatted[index];
+            for (let [index, currentData] of Object.entries(dataFormatted)) {
                 transformedData.push(ObjectSerializer.deserialize(currentData, subType));
             }
             return transformedData;
@@ -183,9 +180,8 @@ export class ObjectSerializer {
             }
             let instance = new typeMap[type]();
             let attributeTypes = typeMap[type].getAttributeTypeMap();
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
-                instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type);
+            for (let [index, attributeType] of Object.entries(attributeTypes)) {
+                instance[attributeType['name']] = ObjectSerializer.deserialize(data[attributeType['baseName']], attributeType['type']);
             }
             return instance;
         }
