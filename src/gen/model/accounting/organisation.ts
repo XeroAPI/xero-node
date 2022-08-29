@@ -384,7 +384,8 @@ export namespace Organisation {
         LEDGER = <any> 'LEDGER',
         GSTCASHBOOK = <any> 'GST_CASHBOOK',
         NONGSTCASHBOOK = <any> 'NON_GST_CASHBOOK',
-        ULTIMATE = <any> 'ULTIMATE'
+        ULTIMATE = <any> 'ULTIMATE',
+        LITE = <any> 'LITE'
     }
     export enum EditionEnum {
         BUSINESS = <any> 'BUSINESS',
