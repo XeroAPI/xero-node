@@ -6070,7 +6070,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.25.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.26.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -6323,6 +6323,9 @@ ul.nav-tabs {
               </li>
               <li data-group="Accounting" data-name="getBankTransfers" class="">
                 <a href="#api-Accounting-getBankTransfers">getBankTransfers</a>
+              </li>
+              <li data-group="Accounting" data-name="getBatchPayment" class="">
+                <a href="#api-Accounting-getBatchPayment">getBatchPayment</a>
               </li>
               <li data-group="Accounting" data-name="getBatchPaymentHistory" class="">
                 <a href="#api-Accounting-getBatchPaymentHistory">getBatchPaymentHistory</a>
@@ -19849,6 +19852,124 @@ Filter by an any element
 Order by an any element
                     </div>
             </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Accounting-getBatchPayment">
+                <article id="api-Accounting-getBatchPayment-0" data-group="User" data-name="getBatchPayment" data-version="0">
+                  <div class="pull-left">
+                    <h1>getBatchPayment</h1>
+                    <p>Retrieves a specific batch payment using a unique batch payment Id</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/BatchPayments/{BatchPaymentID}</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-getBatchPayment-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-getBatchPayment-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const batchPaymentID = '00000000-0000-0000-0000-000000000000';
+
+try {
+  const response = await xero.accountingApi.getBatchPayment(xeroTenantId, batchPaymentID);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                    <tr>
+                      <td>accounting.transactions.read</td>
+                      <td>Grant read-only access to invoices</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">BatchPaymentID<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBatchPayment_batchPaymentID">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Unique identifier for BatchPayment
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getBatchPayment_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
     </div>
 </td>
