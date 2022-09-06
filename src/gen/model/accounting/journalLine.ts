@@ -36,7 +36,7 @@ export class JournalLine {
     */
     'taxAmount'?: number;
     /**
-    * The tax type from TaxRates
+    * The tax type from taxRates
     */
     'taxType'?: string;
     /**
