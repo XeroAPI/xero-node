@@ -34,7 +34,7 @@ export class Account {
     'bankAccountType'?: Account.BankAccountTypeEnum;
     'currencyCode'?: CurrencyCode;
     /**
-    * The tax type from TaxRates
+    * The tax type from taxRates
     */
     'taxType'?: string;
     /**

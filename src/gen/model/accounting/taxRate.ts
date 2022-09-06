@@ -208,6 +208,13 @@ export namespace TaxRate {
         TXRCN33INPUT = <any> 'TXRCN33INPUT',
         TXRCREINPUT = <any> 'TXRCREINPUT',
         TXRCESSINPUT = <any> 'TXRCESSINPUT',
-        TXRCTSINPUT = <any> 'TXRCTSINPUT'
+        TXRCTSINPUT = <any> 'TXRCTSINPUT',
+        CAPEXINPUT = <any> 'CAPEXINPUT',
+        UNDEFINED = <any> 'UNDEFINED',
+        CAPEXOUTPUT = <any> 'CAPEXOUTPUT',
+        ZEROEXPOUTPUT = <any> 'ZEROEXPOUTPUT',
+        GOODSIMPORT = <any> 'GOODSIMPORT',
+        NONEINPUT = <any> 'NONEINPUT',
+        NOTREPORTED = <any> 'NOTREPORTED'
     }
 }
