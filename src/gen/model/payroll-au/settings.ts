@@ -11,6 +11,10 @@ export class Settings {
     * Number of days in the Payroll year
     */
     'daysInPayrollYear'?: number;
+    /**
+    * Indicates if the organisation has been enabled for STP Phase 2 editing of employees.
+    */
+    'employeesAreSTP2'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -29,6 +33,11 @@ export class Settings {
             "name": "daysInPayrollYear",
             "baseName": "DaysInPayrollYear",
             "type": "number"
+        },
+        {
+            "name": "employeesAreSTP2",
+            "baseName": "EmployeesAreSTP2",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {

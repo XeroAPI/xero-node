@@ -4,5 +4,6 @@ export enum EmploymentBasis {
     PARTTIME = <any> 'PARTTIME',
     CASUAL = <any> 'CASUAL',
     LABOURHIRE = <any> 'LABOURHIRE',
-    SUPERINCOMESTREAM = <any> 'SUPERINCOMESTREAM'
+    SUPERINCOMESTREAM = <any> 'SUPERINCOMESTREAM',
+    NONEMPLOYEE = <any> 'NONEMPLOYEE'
 }

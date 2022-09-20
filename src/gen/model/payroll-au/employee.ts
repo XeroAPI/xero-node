@@ -1,6 +1,9 @@
 import { BankAccount } from '././bankAccount';
+import { CountryOfResidence } from '././countryOfResidence';
 import { EmployeeStatus } from '././employeeStatus';
+import { EmploymentType } from '././employmentType';
 import { HomeAddress } from '././homeAddress';
+import { IncomeType } from '././incomeType';
 import { LeaveBalance } from '././leaveBalance';
 import { LeaveLine } from '././leaveLine';
 import { OpeningBalances } from '././openingBalances';
@@ -99,6 +102,13 @@ export class Employee {
     'payTemplate'?: PayTemplate;
     'openingBalances'?: OpeningBalances;
     'taxDeclaration'?: TaxDeclaration;
+    'incomeType'?: IncomeType;
+    'employmentType'?: EmploymentType;
+    'countryOfResidence'?: CountryOfResidence;
+    /**
+    * Indicates if the employee has been updated for STP Phase 2 compliance. Doesn\'t indicate that the employee is payable.
+    */
+    'isSTP2Qualified'?: boolean;
     'leaveBalances'?: Array<LeaveBalance>;
     'leaveLines'?: Array<LeaveLine>;
     'superMemberships'?: Array<SuperMembership>;
@@ -244,6 +254,26 @@ export class Employee {
             "name": "taxDeclaration",
             "baseName": "TaxDeclaration",
             "type": "TaxDeclaration"
+        },
+        {
+            "name": "incomeType",
+            "baseName": "IncomeType",
+            "type": "IncomeType"
+        },
+        {
+            "name": "employmentType",
+            "baseName": "EmploymentType",
+            "type": "EmploymentType"
+        },
+        {
+            "name": "countryOfResidence",
+            "baseName": "CountryOfResidence",
+            "type": "CountryOfResidence"
+        },
+        {
+            "name": "isSTP2Qualified",
+            "baseName": "IsSTP2Qualified",
+            "type": "boolean"
         },
         {
             "name": "leaveBalances",

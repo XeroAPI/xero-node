@@ -1,6 +1,9 @@
 import { EmploymentBasis } from '././employmentBasis';
 import { ResidencyStatus } from '././residencyStatus';
+import { SeniorMaritalStatus } from '././seniorMaritalStatus';
 import { TFNExemptionType } from '././tFNExemptionType';
+import { TaxScaleType } from '././taxScaleType';
+import { WorkCondition } from '././workCondition';
 
 export class TaxDeclaration {
     /**
@@ -14,10 +17,17 @@ export class TaxDeclaration {
     */
     'taxFileNumber'?: string;
     /**
+    * 11-digit Australian Business Number e.g 21006819692 or an empty string (\"\") to unset a previously set value. Only applicable, and mandatory if income type is NONEMPLOYEE.
+    */
+    'aBN'?: string;
+    /**
     * If the employee is Australian resident for tax purposes. e.g true or false
     */
     'australianResidentForTaxPurposes'?: boolean;
     'residencyStatus'?: ResidencyStatus;
+    'taxScaleType'?: TaxScaleType;
+    'workCondition'?: WorkCondition;
+    'seniorMaritalStatus'?: SeniorMaritalStatus;
     /**
     * If tax free threshold claimed. e.g true or false
     */
@@ -87,6 +97,11 @@ export class TaxDeclaration {
             "type": "string"
         },
         {
+            "name": "aBN",
+            "baseName": "ABN",
+            "type": "string"
+        },
+        {
             "name": "australianResidentForTaxPurposes",
             "baseName": "AustralianResidentForTaxPurposes",
             "type": "boolean"
@@ -95,6 +110,21 @@ export class TaxDeclaration {
             "name": "residencyStatus",
             "baseName": "ResidencyStatus",
             "type": "ResidencyStatus"
+        },
+        {
+            "name": "taxScaleType",
+            "baseName": "TaxScaleType",
+            "type": "TaxScaleType"
+        },
+        {
+            "name": "workCondition",
+            "baseName": "WorkCondition",
+            "type": "WorkCondition"
+        },
+        {
+            "name": "seniorMaritalStatus",
+            "baseName": "SeniorMaritalStatus",
+            "type": "SeniorMaritalStatus"
         },
         {
             "name": "taxFreeThresholdClaimed",

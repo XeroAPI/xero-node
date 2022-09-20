@@ -5,6 +5,7 @@ export * from '././allowanceCategory';
 export * from '././allowanceType';
 export * from '././bankAccount';
 export * from '././calendarType';
+export * from '././countryOfResidence';
 export * from '././deductionLine';
 export * from '././deductionType';
 export * from '././deductionTypeCalculationType';
@@ -17,8 +18,10 @@ export * from '././employeeStatus';
 export * from '././employees';
 export * from '././employmentBasis';
 export * from '././employmentTerminationPaymentType';
+export * from '././employmentType';
 export * from '././entitlementFinalPayPayoutType';
 export * from '././homeAddress';
+export * from '././incomeType';
 export * from '././leaveAccrualLine';
 export * from '././leaveApplication';
 export * from '././leaveApplications';
@@ -53,6 +56,7 @@ export * from '././reimbursementLine';
 export * from '././reimbursementLines';
 export * from '././reimbursementType';
 export * from '././residencyStatus';
+export * from '././seniorMaritalStatus';
 export * from '././settings';
 export * from '././settingsObject';
 export * from '././settingsTrackingCategories';
@@ -72,12 +76,14 @@ export * from '././superannuationLine';
 export * from '././tFNExemptionType';
 export * from '././taxDeclaration';
 export * from '././taxLine';
+export * from '././taxScaleType';
 export * from '././timesheet';
 export * from '././timesheetLine';
 export * from '././timesheetObject';
 export * from '././timesheetStatus';
 export * from '././timesheets';
 export * from '././validationError';
+export * from '././workCondition';
 
 import localVarRequest = require('request');
 
@@ -88,6 +94,7 @@ import { AllowanceCategory } from '././allowanceCategory';
 import { AllowanceType } from '././allowanceType';
 import { BankAccount } from '././bankAccount';
 import { CalendarType } from '././calendarType';
+import { CountryOfResidence } from '././countryOfResidence';
 import { DeductionLine } from '././deductionLine';
 import { DeductionType } from '././deductionType';
 import { DeductionTypeCalculationType } from '././deductionTypeCalculationType';
@@ -100,8 +107,10 @@ import { EmployeeStatus } from '././employeeStatus';
 import { Employees } from '././employees';
 import { EmploymentBasis } from '././employmentBasis';
 import { EmploymentTerminationPaymentType } from '././employmentTerminationPaymentType';
+import { EmploymentType } from '././employmentType';
 import { EntitlementFinalPayPayoutType } from '././entitlementFinalPayPayoutType';
 import { HomeAddress } from '././homeAddress';
+import { IncomeType } from '././incomeType';
 import { LeaveAccrualLine } from '././leaveAccrualLine';
 import { LeaveApplication } from '././leaveApplication';
 import { LeaveApplications } from '././leaveApplications';
@@ -136,6 +145,7 @@ import { ReimbursementLine } from '././reimbursementLine';
 import { ReimbursementLines } from '././reimbursementLines';
 import { ReimbursementType } from '././reimbursementType';
 import { ResidencyStatus } from '././residencyStatus';
+import { SeniorMaritalStatus } from '././seniorMaritalStatus';
 import { Settings } from '././settings';
 import { SettingsObject } from '././settingsObject';
 import { SettingsTrackingCategories } from '././settingsTrackingCategories';
@@ -155,12 +165,14 @@ import { SuperannuationLine } from '././superannuationLine';
 import { TFNExemptionType } from '././tFNExemptionType';
 import { TaxDeclaration } from '././taxDeclaration';
 import { TaxLine } from '././taxLine';
+import { TaxScaleType } from '././taxScaleType';
 import { Timesheet } from '././timesheet';
 import { TimesheetLine } from '././timesheetLine';
 import { TimesheetObject } from '././timesheetObject';
 import { TimesheetStatus } from '././timesheetStatus';
 import { Timesheets } from '././timesheets';
 import { ValidationError } from '././validationError';
+import { WorkCondition } from '././workCondition';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -179,6 +191,7 @@ let enumsMap: {[index: string]: any} = {
         "AllowanceCategory": AllowanceCategory,
         "AllowanceType": AllowanceType,
         "CalendarType": CalendarType,
+        "CountryOfResidence": CountryOfResidence,
         "DeductionType.DeductionCategoryEnum": DeductionType.DeductionCategoryEnum,
         "DeductionTypeCalculationType": DeductionTypeCalculationType,
         "EarningsRateCalculationType": EarningsRateCalculationType,
@@ -188,7 +201,9 @@ let enumsMap: {[index: string]: any} = {
         "EmployeeStatus": EmployeeStatus,
         "EmploymentBasis": EmploymentBasis,
         "EmploymentTerminationPaymentType": EmploymentTerminationPaymentType,
+        "EmploymentType": EmploymentType,
         "EntitlementFinalPayPayoutType": EntitlementFinalPayPayoutType,
+        "IncomeType": IncomeType,
         "LeaveCategoryCode": LeaveCategoryCode,
         "LeaveLineCalculationType": LeaveLineCalculationType,
         "LeavePeriodStatus": LeavePeriodStatus,
@@ -198,12 +213,15 @@ let enumsMap: {[index: string]: any} = {
         "PaymentFrequencyType": PaymentFrequencyType,
         "RateType": RateType,
         "ResidencyStatus": ResidencyStatus,
+        "SeniorMaritalStatus": SeniorMaritalStatus,
         "State": State,
         "SuperFundType": SuperFundType,
         "SuperannuationCalculationType": SuperannuationCalculationType,
         "SuperannuationContributionType": SuperannuationContributionType,
         "TFNExemptionType": TFNExemptionType,
+        "TaxScaleType": TaxScaleType,
         "TimesheetStatus": TimesheetStatus,
+        "WorkCondition": WorkCondition,
 }
 
 let typeMap: {[index: string]: any} = {
