@@ -112,7 +112,7 @@ It is recommended that you store this token set JSON in a datastore in relation 
 | access_token: | "xxx.yyy.zzz" | [Bearer token](https://oauth.net/2/jwt/) with a 30 minute expiration required for all API calls |
 | expires_in: | 1800 | Time in seconds till the token expires - 1800s is 30m |
 | refresh_token: | "XXXXXXX" | Alphanumeric string used to obtain a new Token Set w/ a fresh access_token - 60 day expiry |
-| scope: | "email profile openid accounting.transactions offline_access" | The Xero permissions that are embedded in the `access_token` |
+| scope: | ["email", "profile", "openid", "accounting.transactions", "offline_access"] | The Xero permissions that are embedded in the `access_token` |
 
 Example Token Set JSON:
 ```
@@ -122,7 +122,7 @@ Example Token Set JSON:
   "expires_in": 1800,
   "token_type": "Bearer",
   "refresh_token": "xxxxxxxxx",
-  "scope": "email profile openid accounting.transactions offline_access"
+  "scope": ["email", "profile", "openid", "accounting.transactions", "offline_access"]
 }
 ```
 
