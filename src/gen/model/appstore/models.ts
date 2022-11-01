@@ -1,18 +1,26 @@
+export * from '././createUsageRecord';
 export * from '././plan';
 export * from '././price';
 export * from '././problemDetails';
 export * from '././product';
 export * from '././subscription';
 export * from '././subscriptionItem';
+export * from '././updateUsageRecord';
+export * from '././usageRecord';
+export * from '././usageRecordsList';
 
 import localVarRequest = require('request');
 
+import { CreateUsageRecord } from '././createUsageRecord';
 import { Plan } from '././plan';
 import { Price } from '././price';
 import { ProblemDetails } from '././problemDetails';
 import { Product } from '././product';
 import { Subscription } from '././subscription';
 import { SubscriptionItem } from '././subscriptionItem';
+import { UpdateUsageRecord } from '././updateUsageRecord';
+import { UsageRecord } from '././usageRecord';
+import { UsageRecordsList } from '././usageRecordsList';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -34,12 +42,16 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+    "CreateUsageRecord": CreateUsageRecord,
     "Plan": Plan,
     "Price": Price,
     "ProblemDetails": ProblemDetails,
     "Product": Product,
     "Subscription": Subscription,
     "SubscriptionItem": SubscriptionItem,
+    "UpdateUsageRecord": UpdateUsageRecord,
+    "UsageRecord": UsageRecord,
+    "UsageRecordsList": UsageRecordsList,
 }
 
 export class ObjectSerializer {

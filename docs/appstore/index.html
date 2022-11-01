@@ -862,6 +862,24 @@ ul.nav-tabs {
     <script>
       // Script section to load models into a JS Var
       var defs = {}
+      defs["CreateUsageRecord"] = {
+  "title" : "",
+  "required" : [ "quantity", "timestamp" ],
+  "type" : "object",
+  "properties" : {
+    "quantity" : {
+      "type" : "integer",
+      "description" : "The initial quantity for the usage record. Must be a whole number that is greater than or equal to 0",
+      "format" : "int32"
+    },
+    "timestamp" : {
+      "type" : "string",
+      "description" : "DateTime in UTC of when the the product was consumed/used",
+      "format" : "date-time"
+    }
+  },
+  "description" : "Data transfer object for public create usage end point"
+};
       defs["Plan"] = {
   "title" : "",
   "required" : [ "id", "name", "status", "subscriptionItems" ],
@@ -1058,6 +1076,81 @@ ul.nav-tabs {
   },
   "description" : ""
 };
+      defs["UpdateUsageRecord"] = {
+  "title" : "",
+  "required" : [ "quantity" ],
+  "type" : "object",
+  "properties" : {
+    "quantity" : {
+      "type" : "integer",
+      "description" : "The new quantity for the usage record. Must be a whole number that is greater than or equal to 0",
+      "format" : "int32"
+    }
+  },
+  "description" : "Data transfer object for public update usage end point"
+};
+      defs["UsageRecord"] = {
+  "title" : "",
+  "required" : [ "pricePerUnit", "productId", "quantity", "recordedAt", "subscriptionId", "subscriptionItemId", "testMode", "usageRecordId" ],
+  "type" : "object",
+  "properties" : {
+    "quantity" : {
+      "type" : "integer",
+      "description" : "The quantity recorded",
+      "format" : "int32"
+    },
+    "subscriptionId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the Subscription.",
+      "format" : "guid"
+    },
+    "subscriptionItemId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the SubscriptionItem.",
+      "format" : "guid"
+    },
+    "testMode" : {
+      "type" : "boolean",
+      "description" : "If the subscription is a test subscription"
+    },
+    "recordedAt" : {
+      "type" : "string",
+      "description" : "The time when this usage was recorded in UTC",
+      "format" : "date-time"
+    },
+    "usageRecordId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the usageRecord.",
+      "format" : "guid"
+    },
+    "pricePerUnit" : {
+      "type" : "number",
+      "description" : "The price per unit",
+      "format" : "decimal"
+    },
+    "productId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the linked Product",
+      "format" : "guid"
+    }
+  },
+  "description" : ""
+};
+      defs["UsageRecordsList"] = {
+  "title" : "",
+  "required" : [ "usageRecords" ],
+  "type" : "object",
+  "properties" : {
+    "usageRecords" : {
+      "type" : "array",
+      "description" : "A collection of usage records",
+      "items" : {
+        "$ref" : "#/components/schemas/UsageRecord"
+      }
+    }
+  },
+  "description" : "Response to get usage record"
+};
       
       var errs = {};
       
@@ -1142,10 +1235,19 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="AppStore"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="AppStore"><strong>VSN: </strong>4.28.1</li>
+              <li class="nav-header" data-group="AppStore"><strong>VSN: </strong>4.29.0</li>
               <li class="nav-header" data-group="AppStore"><a href="#api-AppStore">Methods</a></li>
               <li data-group="AppStore" data-name="getSubscription" class="">
                 <a href="#api-AppStore-getSubscription">getSubscription</a>
+              </li>
+              <li data-group="AppStore" data-name="getUsageRecords" class="">
+                <a href="#api-AppStore-getUsageRecords">getUsageRecords</a>
+              </li>
+              <li data-group="AppStore" data-name="postUsageRecords" class="">
+                <a href="#api-AppStore-postUsageRecords">postUsageRecords</a>
+              </li>
+              <li data-group="AppStore" data-name="putUsageRecords" class="">
+                <a href="#api-AppStore-putUsageRecords">putUsageRecords</a>
               </li>
             </ul>
           </nav>
@@ -1243,6 +1345,407 @@ Unique identifier for Subscription object
 </td>
 </tr>
 
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-AppStore-getUsageRecords">
+                <article id="api-AppStore-getUsageRecords-0" data-group="User" data-name="getUsageRecords" data-version="0">
+                  <div class="pull-left">
+                    <h1>getUsageRecords</h1>
+                    <p>Gets all usage records related to the subscription</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/subscriptions/{subscriptionId}/usage-records</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-AppStore-getUsageRecords-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-AppStore-getUsageRecords-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const subscriptionId = '00000000-0000-0000-0000-000000000000';
+
+try {
+  const response = await xero.accountingApi.getUsageRecords(subscriptionId);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>marketplace.billing</td>
+                      <td>Grant read-only access to fixed assets</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">subscriptionId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getUsageRecords_subscriptionId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Unique identifier for Subscription object
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-AppStore-postUsageRecords">
+                <article id="api-AppStore-postUsageRecords-0" data-group="User" data-name="postUsageRecords" data-version="0">
+                  <div class="pull-left">
+                    <h1>postUsageRecords</h1>
+                    <p>Send metered usage belonging to this subscription and subscription item</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/subscriptions/{subscriptionId}/items/{subscriptionItemId}/usage-records</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-AppStore-postUsageRecords-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-AppStore-postUsageRecords-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const subscriptionId = '00000000-0000-0000-0000-000000000000';
+const subscriptionItemId = '00000000-0000-0000-0000-000000000000';
+
+try {
+  const response = await xero.accountingApi.postUsageRecords(subscriptionId, subscriptionItemId, createUsageRecord);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>marketplace.billing</td>
+                      <td>Grant read-only access to fixed assets</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">subscriptionId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_postUsageRecords_subscriptionId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Unique identifier for Subscription object
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">subscriptionItemId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_postUsageRecords_subscriptionItemId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+The unique identifier of the subscriptionItem
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Body parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">createUsageRecord <span style="color:red;">*</span></td>
+<td>
+<div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    CreateUsageRecord
+                </span>
+
+                    <div class="inner description marked">
+Contains the quantity for the usage record to create
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+<script type="application/ld+json">
+    {
+  "description" : "Contains the quantity for the usage record to create",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/CreateUsageRecord"
+      },
+      "example" : "{ \"timestamp\": \"2022-01-21T13:01:00Z\", \"quantity\": 10 }"
+    }
+  },
+  "required" : true
+}
+</script>
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-AppStore-putUsageRecords">
+                <article id="api-AppStore-putUsageRecords-0" data-group="User" data-name="putUsageRecords" data-version="0">
+                  <div class="pull-left">
+                    <h1>putUsageRecords</h1>
+                    <p>Update and existing metered usage belonging to this subscription and subscription item</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/subscriptions/{subscriptionId}/items/{subscriptionItemId}/usage-records/{usageRecordId}</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-AppStore-putUsageRecords-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-AppStore-putUsageRecords-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const subscriptionId = '00000000-0000-0000-0000-000000000000';
+const subscriptionItemId = '00000000-0000-0000-0000-000000000000';
+const usageRecordId = '00000000-0000-0000-0000-000000000000';
+
+try {
+  const response = await xero.accountingApi.putUsageRecords(subscriptionId, subscriptionItemId, usageRecordId, updateUsageRecord);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>marketplace.billing</td>
+                      <td>Grant read-only access to fixed assets</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">subscriptionId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_putUsageRecords_subscriptionId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Unique identifier for Subscription object
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">subscriptionItemId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_putUsageRecords_subscriptionItemId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+The unique identifier of the subscriptionItem
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">usageRecordId<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_putUsageRecords_usageRecordId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+The unique identifier of the usage record
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Body parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">updateUsageRecord <span style="color:red;">*</span></td>
+<td>
+<div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UpdateUsageRecord
+                </span>
+
+                    <div class="inner description marked">
+Contains the quantity for the usage record to update
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+<script type="application/ld+json">
+    {
+  "description" : "Contains the quantity for the usage record to update",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/UpdateUsageRecord"
+      },
+      "example" : "{ \"quantity\": 10 }"
+    }
+  },
+  "required" : true
+}
+</script>
                   </table>
                 </article>
               </div>
