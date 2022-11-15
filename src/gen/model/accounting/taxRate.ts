@@ -215,6 +215,9 @@ export namespace TaxRate {
         ZEROEXPOUTPUT = <any> 'ZEROEXPOUTPUT',
         GOODSIMPORT = <any> 'GOODSIMPORT',
         NONEINPUT = <any> 'NONEINPUT',
-        NOTREPORTED = <any> 'NOTREPORTED'
+        NOTREPORTED = <any> 'NOTREPORTED',
+        SROVRRS = <any> 'SROVRRS',
+        SROVRLVG = <any> 'SROVRLVG',
+        SRLVG = <any> 'SRLVG'
     }
 }
