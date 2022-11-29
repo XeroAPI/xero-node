@@ -1641,9 +1641,11 @@ ul.nav-tabs {
       "enum" : [ "AUTHORISED", "DELETED" ]
     },
     "TotalAmount" : {
-      "type" : "string",
+      "type" : "number",
       "description" : "The total of the payments that make up the batch (read-only)",
-      "readOnly" : true
+      "format" : "double",
+      "readOnly" : true,
+      "x-is-money" : true
     },
     "UpdatedDateUTC" : {
       "type" : "string",
@@ -1653,7 +1655,7 @@ ul.nav-tabs {
       "x-is-msdate-time" : true
     },
     "IsReconciled" : {
-      "type" : "string",
+      "type" : "boolean",
       "description" : "Booelan that tells you if the batch payment has been reconciled (read-only)",
       "readOnly" : true
     },

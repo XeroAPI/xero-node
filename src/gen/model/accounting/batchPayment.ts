@@ -55,7 +55,7 @@ export class BatchPayment {
     /**
     * The total of the payments that make up the batch (read-only)
     */
-    'totalAmount'?: string;
+    'totalAmount'?: number;
     /**
     * UTC timestamp of last update to the payment
     */
@@ -63,7 +63,7 @@ export class BatchPayment {
     /**
     * Booelan that tells you if the batch payment has been reconciled (read-only)
     */
-    'isReconciled'?: string;
+    'isReconciled'?: boolean;
     /**
     * Displays array of validation error messages from the API
     */
@@ -140,7 +140,7 @@ export class BatchPayment {
         {
             "name": "totalAmount",
             "baseName": "TotalAmount",
-            "type": "string"
+            "type": "number"
         },
         {
             "name": "updatedDateUTC",
@@ -150,7 +150,7 @@ export class BatchPayment {
         {
             "name": "isReconciled",
             "baseName": "IsReconciled",
-            "type": "string"
+            "type": "boolean"
         },
         {
             "name": "validationErrors",
