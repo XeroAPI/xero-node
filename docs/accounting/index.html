@@ -1641,9 +1641,11 @@ ul.nav-tabs {
       "enum" : [ "AUTHORISED", "DELETED" ]
     },
     "TotalAmount" : {
-      "type" : "string",
+      "type" : "number",
       "description" : "The total of the payments that make up the batch (read-only)",
-      "readOnly" : true
+      "format" : "double",
+      "readOnly" : true,
+      "x-is-money" : true
     },
     "UpdatedDateUTC" : {
       "type" : "string",
@@ -1653,7 +1655,7 @@ ul.nav-tabs {
       "x-is-msdate-time" : true
     },
     "IsReconciled" : {
-      "type" : "string",
+      "type" : "boolean",
       "description" : "Booelan that tells you if the batch payment has been reconciled (read-only)",
       "readOnly" : true
     },
@@ -4264,6 +4266,9 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "Number of invoice or credit note you are applying payment to e.g. INV-4003"
     },
+    "BatchPayment" : {
+      "$ref" : "#/components/schemas/BatchPayment"
+    },
     "Account" : {
       "$ref" : "#/components/schemas/Account"
     },
@@ -5621,7 +5626,7 @@ ul.nav-tabs {
     "ReportTaxType" : {
       "type" : "string",
       "description" : "See ReportTaxTypes",
-      "enum" : [ "AVALARA", "BASEXCLUDED", "CAPITALSALESOUTPUT", "CAPITALEXPENSESINPUT", "ECOUTPUT", "ECOUTPUTSERVICES", "ECINPUT", "ECACQUISITIONS", "EXEMPTEXPENSES", "EXEMPTINPUT", "EXEMPTOUTPUT", "GSTONIMPORTS", "INPUT", "INPUTTAXED", "MOSSSALES", "NONE", "NONEOUTPUT", "OUTPUT", "PURCHASESINPUT", "SALESOUTPUT", "EXEMPTCAPITAL", "EXEMPTEXPORT", "CAPITALEXINPUT", "GSTONCAPIMPORTS", "GSTONCAPITALIMPORTS", "REVERSECHARGES", "PAYMENTS", "INVOICE", "CASH", "ACCRUAL", "FLATRATECASH", "FLATRATEACCRUAL", "ACCRUALS", "TXCA", "SRCAS", "DSOUTPUT", "BLINPUT2", "EPINPUT", "IMINPUT2", "MEINPUT", "IGDSINPUT2", "ESN33OUTPUT", "OPINPUT", "OSOUTPUT", "TXN33INPUT", "TXESSINPUT", "TXREINPUT", "TXPETINPUT", "NRINPUT", "ES33OUTPUT", "ZERORATEDINPUT", "ZERORATEDOUTPUT", "DRCHARGESUPPLY", "DRCHARGE", "CAPINPUT", "CAPIMPORTS", "IMINPUT", "INPUT2", "CIUINPUT", "SRINPUT", "OUTPUT2", "SROUTPUT", "CAPOUTPUT", "SROUTPUT2", "CIUOUTPUT", "ZROUTPUT", "ZREXPORT", "ACC28PLUS", "ACCUPTO28", "OTHEROUTPUT", "SHOUTPUT", "ZRINPUT", "BADDEBT", "OTHERINPUT", "BADDEBTRELIEF", "IGDSINPUT3", "SROVR", "TOURISTREFUND", "TXRCN33INPUT", "TXRCREINPUT", "TXRCESSINPUT", "TXRCTSINPUT", "CAPEXINPUT", "UNDEFINED", "CAPEXOUTPUT", "ZEROEXPOUTPUT", "GOODSIMPORT", "NONEINPUT", "NOTREPORTED" ]
+      "enum" : [ "AVALARA", "BASEXCLUDED", "CAPITALSALESOUTPUT", "CAPITALEXPENSESINPUT", "ECOUTPUT", "ECOUTPUTSERVICES", "ECINPUT", "ECACQUISITIONS", "EXEMPTEXPENSES", "EXEMPTINPUT", "EXEMPTOUTPUT", "GSTONIMPORTS", "INPUT", "INPUTTAXED", "MOSSSALES", "NONE", "NONEOUTPUT", "OUTPUT", "PURCHASESINPUT", "SALESOUTPUT", "EXEMPTCAPITAL", "EXEMPTEXPORT", "CAPITALEXINPUT", "GSTONCAPIMPORTS", "GSTONCAPITALIMPORTS", "REVERSECHARGES", "PAYMENTS", "INVOICE", "CASH", "ACCRUAL", "FLATRATECASH", "FLATRATEACCRUAL", "ACCRUALS", "TXCA", "SRCAS", "DSOUTPUT", "BLINPUT2", "EPINPUT", "IMINPUT2", "MEINPUT", "IGDSINPUT2", "ESN33OUTPUT", "OPINPUT", "OSOUTPUT", "TXN33INPUT", "TXESSINPUT", "TXREINPUT", "TXPETINPUT", "NRINPUT", "ES33OUTPUT", "ZERORATEDINPUT", "ZERORATEDOUTPUT", "DRCHARGESUPPLY", "DRCHARGE", "CAPINPUT", "CAPIMPORTS", "IMINPUT", "INPUT2", "CIUINPUT", "SRINPUT", "OUTPUT2", "SROUTPUT", "CAPOUTPUT", "SROUTPUT2", "CIUOUTPUT", "ZROUTPUT", "ZREXPORT", "ACC28PLUS", "ACCUPTO28", "OTHEROUTPUT", "SHOUTPUT", "ZRINPUT", "BADDEBT", "OTHERINPUT", "BADDEBTRELIEF", "IGDSINPUT3", "SROVR", "TOURISTREFUND", "TXRCN33INPUT", "TXRCREINPUT", "TXRCESSINPUT", "TXRCTSINPUT", "CAPEXINPUT", "UNDEFINED", "CAPEXOUTPUT", "ZEROEXPOUTPUT", "GOODSIMPORT", "NONEINPUT", "NOTREPORTED", "SROVRRS", "SROVRLVG", "SRLVG" ]
     },
     "CanApplyToAssets" : {
       "type" : "boolean",
@@ -5686,7 +5691,7 @@ ul.nav-tabs {
   "title" : "",
   "type" : "string",
   "description" : "See Tax Types – can only be used on update calls",
-  "enum" : [ "OUTPUT", "INPUT", "CAPEXINPUT", "EXEMPTEXPORT", "EXEMPTEXPENSES", "EXEMPTCAPITAL", "EXEMPTOUTPUT", "INPUTTAXED", "BASEXCLUDED", "GSTONCAPIMPORTS", "GSTONIMPORTS", "NONE", "INPUT2", "ZERORATED", "OUTPUT2", "CAPEXINPUT2", "CAPEXOUTPUT", "CAPEXOUTPUT2", "CAPEXSRINPUT", "CAPEXSROUTPUT", "ECACQUISITIONS", "ECZRINPUT", "ECZROUTPUT", "ECZROUTPUTSERVICES", "EXEMPTINPUT", "REVERSECHARGES", "RRINPUT", "RROUTPUT", "SRINPUT", "SROUTPUT", "ZERORATEDINPUT", "ZERORATEDOUTPUT", "BLINPUT", "DSOUTPUT", "EPINPUT", "ES33OUTPUT", "ESN33OUTPUT", "IGDSINPUT2", "IMINPUT2", "MEINPUT", "NRINPUT", "OPINPUT", "OSOUTPUT", "TXESSINPUT", "TXN33INPUT", "TXPETINPUT", "TXREINPUT", "INPUT3", "INPUT4", "OUTPUT3", "OUTPUT4", "SROUTPUT2", "TXCA", "SRCAS", "BLINPUT2", "DRCHARGESUPPLY20", "DRCHARGE20", "DRCHARGESUPPLY5", "DRCHARGE5", "BADDEBTRELIEF", "IGDSINPUT3", "SROVR", "TOURISTREFUND", "TXRCN33INPUT", "TXRCREINPUT", "TXRCESSINPUT", "TXRCTSINPUT" ]
+  "enum" : [ "OUTPUT", "INPUT", "CAPEXINPUT", "EXEMPTEXPORT", "EXEMPTEXPENSES", "EXEMPTCAPITAL", "EXEMPTOUTPUT", "INPUTTAXED", "BASEXCLUDED", "GSTONCAPIMPORTS", "GSTONIMPORTS", "NONE", "INPUT2", "ZERORATED", "OUTPUT2", "CAPEXINPUT2", "CAPEXOUTPUT", "CAPEXOUTPUT2", "CAPEXSRINPUT", "CAPEXSROUTPUT", "ECACQUISITIONS", "ECZRINPUT", "ECZROUTPUT", "ECZROUTPUTSERVICES", "EXEMPTINPUT", "REVERSECHARGES", "RRINPUT", "RROUTPUT", "SRINPUT", "SROUTPUT", "ZERORATEDINPUT", "ZERORATEDOUTPUT", "BLINPUT", "DSOUTPUT", "EPINPUT", "ES33OUTPUT", "ESN33OUTPUT", "IGDSINPUT2", "IMINPUT2", "MEINPUT", "NRINPUT", "OPINPUT", "OSOUTPUT", "TXESSINPUT", "TXN33INPUT", "TXPETINPUT", "TXREINPUT", "INPUT3", "INPUT4", "OUTPUT3", "OUTPUT4", "SROUTPUT2", "TXCA", "SRCAS", "BLINPUT2", "DRCHARGESUPPLY20", "DRCHARGE20", "DRCHARGESUPPLY5", "DRCHARGE5", "BADDEBTRELIEF", "IGDSINPUT3", "SROVR", "TOURISTREFUND", "TXRCN33INPUT", "TXRCREINPUT", "TXRCESSINPUT", "TXRCTSINPUT", "OUTPUTY23", "DSOUTPUTY23", "INPUTY23", "IMINPUT2Y23", "IGDSINPUT2Y23", "TXPETINPUTY23", "TXESSINPUTY23", "TXN33INPUTY23", "TXREINPUTY23", "TXCAY23", "BADDEBTRELIEFY23", "IGDSINPUT3Y23", "SROVRRSY23", "SROVRLVGY23", "SRLVGY23" ]
 };
       defs["TenNinetyNineContact"] = {
   "title" : "",
@@ -6070,7 +6075,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.29.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.30.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -8474,8 +8479,12 @@ const paymentService: PaymentService = {
   payNowText: "Pay Now"
 }; 
 
+const paymentServices: PaymentServices = {  
+  paymentServices: [paymentService]
+}; 
+
 try {
-  const response = await xero.accountingApi.createBrandingThemePaymentServices(xeroTenantId, brandingThemeID, paymentService);
+  const response = await xero.accountingApi.createBrandingThemePaymentServices(xeroTenantId, brandingThemeID, paymentServices);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -8562,16 +8571,16 @@ Xero identifier for Tenant
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">paymentService <span style="color:red;">*</span></td>
+                    <tr><td style="width:150px;">paymentServices <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    PaymentService
+                    PaymentServices
                 </span>
 
                     <div class="inner description marked">
-PaymentService object in body of request
+PaymentServices array with PaymentService object in body of request
                     </div>
             </div>
                 <div class="inner required">
@@ -8580,13 +8589,13 @@ PaymentService object in body of request
         </div>
 <script type="application/ld+json">
     {
-  "description" : "PaymentService object in body of request",
+  "description" : "PaymentServices array with PaymentService object in body of request",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/PaymentService"
+        "$ref" : "#/components/schemas/PaymentServices"
       },
-      "example" : "{ \"PaymentServiceID\": \"00000000-0000-0000-0000-000000000000\", \"PaymentServiceName\": \"Payments Service\", \"PaymentServiceUrl\": \"https://www.paymentservice.com/\", \"PayNowText\": \"Pay Now\" }"
+      "example" : "{ \"PaymentServices\": [ { \"PaymentServiceID\": \"54b3b4f6-0443-4fba-bcd1-61ec0c35ca55\", \"PaymentServiceName\": \"PayUpNow\", \"PaymentServiceUrl\": \"https://www.payupnow.com/\", \"PaymentServiceType\": \"Custom\", \"PayNowText\": \"Time To Pay\" } ] }"
     }
   },
   "required" : true

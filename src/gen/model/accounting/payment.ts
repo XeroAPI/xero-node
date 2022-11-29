@@ -1,4 +1,5 @@
 import { Account } from '././account';
+import { BatchPayment } from '././batchPayment';
 import { CreditNote } from '././creditNote';
 import { Invoice } from '././invoice';
 import { Overpayment } from '././overpayment';
@@ -18,6 +19,7 @@ export class Payment {
     * Number of invoice or credit note you are applying payment to e.g. INV-4003
     */
     'creditNoteNumber'?: string;
+    'batchPayment'?: BatchPayment;
     'account'?: Account;
     /**
     * Code of account you are using to make the payment e.g. 001 (note- not all accounts have a code value)
@@ -128,6 +130,11 @@ export class Payment {
             "name": "creditNoteNumber",
             "baseName": "CreditNoteNumber",
             "type": "string"
+        },
+        {
+            "name": "batchPayment",
+            "baseName": "BatchPayment",
+            "type": "BatchPayment"
         },
         {
             "name": "account",
