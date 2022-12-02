@@ -12,7 +12,8 @@ export interface IXeroClientConfig {
   grantType?: string;
   scopes?: string[],
   state?: string,
-  httpTimeout?: number
+  httpTimeout?: number,
+  clockTolerance?: number 
 };
 
 export interface XeroIdToken {
@@ -89,8 +90,9 @@ export class XeroClient {
     if (this.config) {
       custom.setHttpOptionsDefaults({
         retry: {
-          maxRetryAfter: this.config.httpTimeout || 2500
-        }
+          maxRetryAfter: this.config.httpTimeout || 3500
+        },
+        timeout: this.config.httpTimeout || 3500
       })
 
       const issuer = await Issuer.discover('https://identity.xero.com');
@@ -100,7 +102,7 @@ export class XeroClient {
         redirect_uris: this.config.redirectUris,
       });
 
-      this.openIdClient[custom.clock_tolerance] = 5;
+      this.openIdClient[custom.clock_tolerance] = this.config.clockTolerance || 5;
     }
     return this;
   }
