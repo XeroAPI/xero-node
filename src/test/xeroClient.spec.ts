@@ -80,6 +80,18 @@ describe('the XeroClient', () => {
       expect(xeroClient.config.httpTimeout).toEqual(3000)
     });
 
+    it('allows for the configuration of the openid-client clock tolerance', async () => {
+      const xeroWithConfig = new XeroClient({
+        clientId: 'YOUR_CLIENT_ID',
+        clientSecret: 'YOUR_CLIENT_SECRET',
+        redirectUris: [`http://localhost:5000/callback`],
+        scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
+        clockTolerance: 10
+      });
+      const xeroClient = await xeroWithConfig.initialize()
+      expect(xeroClient.config?.clockTolerance).toEqual(10)
+    });
+
     it('allows for the configuration of the Xero Client for use of client credentials grant', async () => {
       const xeroCustomConnection = new XeroClient({
         clientId: 'YOUR_CLIENT_ID',

@@ -77,7 +77,8 @@ const xero = new XeroClient({
   redirectUris: [`http://localhost:${port}/callback`],
   scopes: 'openid profile email accounting.transactions offline_access'.split(" "),
   state: 'returnPage=my-sweet-dashboard', // custom params (optional)
-  httpTimeout: 3000 // ms (optional)
+  httpTimeout: 3000, // ms (optional)
+  clockTolerance: 10 // seconds (optional)
 });
 ```
 
@@ -234,7 +235,8 @@ const xero = new XeroClient({
   grantType: 'client_credentials', // only used for client_credentials auth flow
   scopes: 'openid profile email accounting.transactions offline_access'.split(" "), // not used for client_credentials auth flow
   state: 'returnPage=my-sweet-dashboard', // custom params (optional), not used for client_credentials auth flow
-  httpTimeout: 3000 // ms (optional)
+  httpTimeout: 3000, // ms (optional)
+  clockTolerance: 10 // seconds (optional)
 });
 
 xero.accountingApi
