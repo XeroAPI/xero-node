@@ -34,7 +34,7 @@ export enum BankFeedsApiApiKeys {
 
 export class BankFeedsApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.30.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.31.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
