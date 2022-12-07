@@ -875,7 +875,8 @@ ul.nav-tabs {
     "timestamp" : {
       "type" : "string",
       "description" : "DateTime in UTC of when the the product was consumed/used",
-      "format" : "date-time"
+      "format" : "date-time",
+      "x-is-datetime" : true
     }
   },
   "description" : "Data transfer object for public create usage end point"
@@ -993,12 +994,14 @@ ul.nav-tabs {
     "currentPeriodEnd" : {
       "type" : "string",
       "description" : "End of the current period that the subscription has been invoiced for.\n",
-      "format" : "date-time"
+      "format" : "date-time",
+      "x-is-datetime" : true
     },
     "endDate" : {
       "type" : "string",
       "description" : "If the subscription has been canceled, this is the date when the subscription ends. If null, the subscription is active and has not been cancelled",
-      "format" : "date-time"
+      "format" : "date-time",
+      "x-is-datetime" : true
     },
     "id" : {
       "type" : "string",
@@ -1020,7 +1023,8 @@ ul.nav-tabs {
     "startDate" : {
       "type" : "string",
       "description" : "Date when the subscription was first created.",
-      "format" : "date-time"
+      "format" : "date-time",
+      "x-is-datetime" : true
     },
     "status" : {
       "type" : "string",
@@ -1042,7 +1046,8 @@ ul.nav-tabs {
     "endDate" : {
       "type" : "string",
       "description" : "Date when the subscription to this product will end",
-      "format" : "date-time"
+      "format" : "date-time",
+      "x-is-datetime" : true
     },
     "id" : {
       "type" : "string",
@@ -1062,7 +1067,8 @@ ul.nav-tabs {
     "startDate" : {
       "type" : "string",
       "description" : "Date the subscription started, or will start. Note: this could be in\nthe future for downgrades or reduced number of seats that haven't taken effect yet.\n",
-      "format" : "date-time"
+      "format" : "date-time",
+      "x-is-datetime" : true
     },
     "status" : {
       "type" : "string",
@@ -1116,7 +1122,8 @@ ul.nav-tabs {
     "recordedAt" : {
       "type" : "string",
       "description" : "The time when this usage was recorded in UTC",
-      "format" : "date-time"
+      "format" : "date-time",
+      "x-is-datetime" : true
     },
     "usageRecordId" : {
       "type" : "string",
@@ -1235,7 +1242,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="AppStore"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="AppStore"><strong>VSN: </strong>4.31.0</li>
+              <li class="nav-header" data-group="AppStore"><strong>VSN: </strong>4.32.0</li>
               <li class="nav-header" data-group="AppStore"><a href="#api-AppStore">Methods</a></li>
               <li data-group="AppStore" data-name="getSubscription" class="">
                 <a href="#api-AppStore-getSubscription">getSubscription</a>
@@ -1567,7 +1574,7 @@ Contains the quantity for the usage record to create
       "schema" : {
         "$ref" : "#/components/schemas/CreateUsageRecord"
       },
-      "example" : "{ \"timestamp\": \"2022-01-21T13:01:00Z\", \"quantity\": 10 }"
+      "example" : "{ \"timestamp\": \"2022-01-21T13:01:00\", \"quantity\": 10 }"
     }
   },
   "required" : true

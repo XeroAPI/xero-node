@@ -11,6 +11,10 @@ export class StatementLineResponse {
     */
     'postedDate'?: string;
     /**
+    * Payee description of statement line
+    */
+    'payee'?: string;
+    /**
     * Reference description of statement line
     */
     'reference'?: string;
@@ -66,6 +70,11 @@ export class StatementLineResponse {
         {
             "name": "postedDate",
             "baseName": "postedDate",
+            "type": "string"
+        },
+        {
+            "name": "payee",
+            "baseName": "payee",
             "type": "string"
         },
         {
