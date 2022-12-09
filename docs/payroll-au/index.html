@@ -1182,6 +1182,16 @@ ul.nav-tabs {
       "description" : "Boolean to determine if the earnings rate is reportable or exempt from W1",
       "example" : false
     },
+    "AllowanceContributesToAnnualLeaveRate" : {
+      "type" : "boolean",
+      "description" : "Boolean to determine if the allowance earnings rate contributes towards annual leave rate. Only applicable if EarningsType is ALLOWANCE and RateType is RATEPERUNIT",
+      "example" : false
+    },
+    "AllowanceContributesToOvertimeRate" : {
+      "type" : "boolean",
+      "description" : "Boolean to determine if the allowance earnings rate contributes towards overtime allowance rate. Only applicable if EarningsType is ALLOWANCE and RateType is RATEPERUNIT",
+      "example" : false
+    },
     "EarningsType" : {
       "$ref" : "#/components/schemas/EarningsType"
     },
@@ -3860,7 +3870,7 @@ Xero identifier for Tenant
       "schema" : {
         "$ref" : "#/components/schemas/PayItem"
       },
-      "example" : "{ \"EarningsRates\": [ { \"Name\": \"MyRate\", \"AccountCode\": \"400\", \"TypeOfUnits\": \"4.00\", \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": false, \"EarningsType\": \"ORDINARYTIMEEARNINGS\", \"EarningsRateID\": \"1fa4e226-b711-46ba-a8a7-4344c9c5fb87\", \"RateType\": \"MULTIPLE\", \"RatePerUnit\": \"10.0\", \"Multiplier\": 1.5, \"Amount\": 5, \"EmploymentTerminationPaymentType\": \"O\" } ] }"
+      "example" : "{ \"EarningsRates\": [ { \"Name\": \"MyRate\", \"AccountCode\": \"400\", \"TypeOfUnits\": \"4.00\", \"IsExemptFromTax\": true, \"IsExemptFromSuper\": true, \"IsReportableAsW1\": false, \"AllowanceContributesToAnnualLeaveRate\": false, \"AllowanceContributesToOvertimeRate\": false, \"EarningsType\": \"ORDINARYTIMEEARNINGS\", \"EarningsRateID\": \"1fa4e226-b711-46ba-a8a7-4344c9c5fb87\", \"RateType\": \"MULTIPLE\", \"RatePerUnit\": \"10.0\", \"Multiplier\": 1.5, \"Amount\": 5, \"EmploymentTerminationPaymentType\": \"O\" } ] }"
     }
   },
   "required" : true
