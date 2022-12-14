@@ -103,7 +103,7 @@ export class EarningsRate {
 export namespace EarningsRate {
     export enum EarningsTypeEnum {
         Allowance = <any> 'Allowance',
-        Backpay = <any> 'Backpay',
+        BackPay = <any> 'BackPay',
         Bonus = <any> 'Bonus',
         Commission = <any> 'Commission',
         LumpSum = <any> 'LumpSum',

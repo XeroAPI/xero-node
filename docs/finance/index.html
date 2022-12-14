@@ -2161,6 +2161,10 @@ ul.nav-tabs {
       "description" : "Date of when statement line was posted",
       "format" : "date"
     },
+    "payee" : {
+      "type" : "string",
+      "description" : "Payee description of statement line"
+    },
     "reference" : {
       "type" : "string",
       "description" : "Reference description of statement line"
@@ -2349,13 +2353,25 @@ ul.nav-tabs {
     },
     "startBalance" : {
       "type" : "number",
-      "description" : "Opening balance sourced from imported bank statements (if supplied). Note, for manually uploaded statements, this balance is also manual and usually not supplied.",
+      "description" : "Opening balance sourced from imported bank statements (if supplied). Note, for manually uploaded statements, this balance is also manual and usually not supplied. Where not supplied, the value will be 0.",
       "format" : "double",
       "x-is-money" : true
     },
     "endBalance" : {
       "type" : "number",
-      "description" : "Closing balance sourced from imported bank statements (if supplied). Note, for manually uploaded statements, this balance is also manual and usually not supplied.",
+      "description" : "Closing balance sourced from imported bank statements (if supplied). Note, for manually uploaded statements, this balance is also manual and usually not supplied. Where not supplied, the value will be 0.",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "indicativeStartBalance" : {
+      "type" : "number",
+      "description" : "Opening statement balance calculated in Xero (= bank account conversion balance plus sum of imported bank statement lines). Note: If indicative statement balance doesn't match imported statement balance for the same date, either the conversion (opening at inception) balance in Xero is wrong or there's an error in the bank statement lines in Xero. Ref: https://central.xero.com/s/article/Compare-the-statement-balance-in-Xero-to-your-actual-bank-balance?userregion=true\n",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "indicativeEndBalance" : {
+      "type" : "number",
+      "description" : "Closing statement balance calculated in Xero (= bank account conversion balance plus sum of imported bank statement lines). Note: If indicative statement balance doesn't match imported statement balance for the same date, either the conversion (opening at inception) balance in Xero is wrong or there's an error in the bank statement lines in Xero. Ref: https://central.xero.com/s/article/Compare-the-statement-balance-in-Xero-to-your-actual-bank-balance?userregion=true \n",
       "format" : "double",
       "x-is-money" : true
     },
@@ -2719,7 +2735,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Finance"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Finance"><strong>VSN: </strong>4.31.0</li>
+              <li class="nav-header" data-group="Finance"><strong>VSN: </strong>4.32.0</li>
               <li class="nav-header" data-group="Finance"><a href="#api-Finance">Methods</a></li>
               <li data-group="Finance" data-name="getAccountingActivityAccountUsage" class="">
                 <a href="#api-Finance-getAccountingActivityAccountUsage">getAccountingActivityAccountUsage</a>

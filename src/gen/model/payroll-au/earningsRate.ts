@@ -29,6 +29,14 @@ export class EarningsRate {
     * Boolean to determine if the earnings rate is reportable or exempt from W1
     */
     'isReportableAsW1'?: boolean;
+    /**
+    * Boolean to determine if the allowance earnings rate contributes towards annual leave rate. Only applicable if EarningsType is ALLOWANCE and RateType is RATEPERUNIT
+    */
+    'allowanceContributesToAnnualLeaveRate'?: boolean;
+    /**
+    * Boolean to determine if the allowance earnings rate contributes towards overtime allowance rate. Only applicable if EarningsType is ALLOWANCE and RateType is RATEPERUNIT
+    */
+    'allowanceContributesToOvertimeRate'?: boolean;
     'earningsType'?: EarningsType;
     /**
     * Xero identifier
@@ -94,6 +102,16 @@ export class EarningsRate {
         {
             "name": "isReportableAsW1",
             "baseName": "IsReportableAsW1",
+            "type": "boolean"
+        },
+        {
+            "name": "allowanceContributesToAnnualLeaveRate",
+            "baseName": "AllowanceContributesToAnnualLeaveRate",
+            "type": "boolean"
+        },
+        {
+            "name": "allowanceContributesToOvertimeRate",
+            "baseName": "AllowanceContributesToOvertimeRate",
             "type": "boolean"
         },
         {
