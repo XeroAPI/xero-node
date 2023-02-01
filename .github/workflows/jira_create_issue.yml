@@ -1,34 +1,12 @@
+name: Create Issue in Jira
+
 on:
   issues:
     types:
       - opened
       - reopened
 
-name: Create Issue In Jira
-
 jobs:
   create_jira_issue:
-    name: Create Jira Issue
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@master
-
-    - name: Login
-      uses: atlassian/gajira-login@master
-      env:
-        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-    
-    - name: Create
-      id: create
-      uses: atlassian/gajira-create@v3
-      with:
-        project: PETOSS
-        issuetype: Task
-        summary: ${{ github.event.repository.name }} ${{ github.event.issue.number }} ${{ github.event.issue.title }}
-        description: ${{ github.event.issue.body }}
-
-    - name: Log created issue
-      run: echo "Issue ${{ steps.create.outputs.issue }} was created"
+    uses: XeroAPI/Xero-OpenAPI/.github/workflows/jira_create_issue.yml@master
+    secrets: inherit
