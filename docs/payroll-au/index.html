@@ -1606,6 +1606,9 @@ ul.nav-tabs {
       "description" : "The Description of the Leave",
       "example" : "My leave"
     },
+    "PayOutType" : {
+      "$ref" : "#/components/schemas/PayOutType"
+    },
     "LeavePeriods" : {
       "type" : "array",
       "items" : {
@@ -1702,6 +1705,9 @@ ul.nav-tabs {
       "format" : "double",
       "example" : 2.5,
       "x-is-money" : true
+    },
+    "PayOutType" : {
+      "$ref" : "#/components/schemas/PayOutType"
     }
   },
   "description" : ""
@@ -1931,6 +1937,52 @@ ul.nav-tabs {
       "items" : {
         "$ref" : "#/components/schemas/LeaveLine"
       }
+    },
+    "PaidLeaveEarningsLines" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/PaidLeaveEarningsLine"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["PaidLeaveEarningsLine"] = {
+  "title" : "",
+  "required" : [ "Amount", "LeaveTypeID" ],
+  "type" : "object",
+  "properties" : {
+    "LeaveTypeID" : {
+      "type" : "string",
+      "description" : "Xero leave type identifier",
+      "format" : "uuid",
+      "example" : "742998cb-7584-4ecf-aa88-d694f59c50f9"
+    },
+    "Amount" : {
+      "type" : "number",
+      "description" : "Paid leave amount",
+      "format" : "double",
+      "example" : 500.0,
+      "x-is-money" : true
+    },
+    "SGCAppliedLeaveLoadingAmount" : {
+      "type" : "number",
+      "description" : "The amount of leave loading applied for the leave type that is subject to Superannuation Guarantee Contributions. *Only applicable for Leave Types with Annual Leave Categories",
+      "format" : "double",
+      "example" : 50.0,
+      "x-is-money" : true
+    },
+    "SGCExemptedLeaveLoadingAmount" : {
+      "type" : "number",
+      "description" : "The amount of leave loading applied for the leave type that is exempt from Superannuation Guarantee Contributions. *Only applicable for Leave Types with Annual Leave Categories",
+      "format" : "double",
+      "example" : 60.0,
+      "x-is-money" : true
+    },
+    "ResetSTPCategorisation" : {
+      "type" : "boolean",
+      "description" : "Reset the STP categorisations for the leave type. *Only applicable for Leave Types with Annual Leave Categories",
+      "example" : true
     }
   },
   "description" : ""
@@ -1976,6 +2028,12 @@ ul.nav-tabs {
   },
   "description" : "",
   "x-isObjectArray" : true
+};
+      defs["PayOutType"] = {
+  "title" : "",
+  "type" : "string",
+  "description" : "How the requested leave will be paid out, e.g. cashed out.",
+  "enum" : [ "DEFAULT", "CASHED_OUT" ]
 };
       defs["PayRun"] = {
   "title" : "",
@@ -3355,7 +3413,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.32.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.33.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="createEmployee" class="">
                 <a href="#api-PayrollAu-createEmployee">createEmployee</a>

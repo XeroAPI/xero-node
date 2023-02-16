@@ -37,8 +37,10 @@ export * from '././leaveType';
 export * from '././leaveTypeContributionType';
 export * from '././manualTaxType';
 export * from '././openingBalances';
+export * from '././paidLeaveEarningsLine';
 export * from '././payItem';
 export * from '././payItems';
+export * from '././payOutType';
 export * from '././payRun';
 export * from '././payRunStatus';
 export * from '././payRuns';
@@ -126,8 +128,10 @@ import { LeaveType } from '././leaveType';
 import { LeaveTypeContributionType } from '././leaveTypeContributionType';
 import { ManualTaxType } from '././manualTaxType';
 import { OpeningBalances } from '././openingBalances';
+import { PaidLeaveEarningsLine } from '././paidLeaveEarningsLine';
 import { PayItem } from '././payItem';
 import { PayItems } from '././payItems';
+import { PayOutType } from '././payOutType';
 import { PayRun } from '././payRun';
 import { PayRunStatus } from '././payRunStatus';
 import { PayRuns } from '././payRuns';
@@ -209,6 +213,7 @@ let enumsMap: {[index: string]: any} = {
         "LeavePeriodStatus": LeavePeriodStatus,
         "LeaveTypeContributionType": LeaveTypeContributionType,
         "ManualTaxType": ManualTaxType,
+        "PayOutType": PayOutType,
         "PayRunStatus": PayRunStatus,
         "PaymentFrequencyType": PaymentFrequencyType,
         "RateType": RateType,
@@ -245,6 +250,7 @@ let typeMap: {[index: string]: any} = {
     "LeavePeriod": LeavePeriod,
     "LeaveType": LeaveType,
     "OpeningBalances": OpeningBalances,
+    "PaidLeaveEarningsLine": PaidLeaveEarningsLine,
     "PayItem": PayItem,
     "PayItems": PayItems,
     "PayRun": PayRun,

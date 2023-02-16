@@ -1,4 +1,5 @@
 import { LeavePeriod } from '././leavePeriod';
+import { PayOutType } from '././payOutType';
 import { ValidationError } from '././validationError';
 
 export class LeaveApplication {
@@ -30,6 +31,7 @@ export class LeaveApplication {
     * The Description of the Leave
     */
     'description'?: string;
+    'payOutType'?: PayOutType;
     'leavePeriods'?: Array<LeavePeriod>;
     /**
     * Last modified timestamp
@@ -77,6 +79,11 @@ export class LeaveApplication {
             "name": "description",
             "baseName": "Description",
             "type": "string"
+        },
+        {
+            "name": "payOutType",
+            "baseName": "PayOutType",
+            "type": "PayOutType"
         },
         {
             "name": "leavePeriods",

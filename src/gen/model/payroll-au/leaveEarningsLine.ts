@@ -1,3 +1,4 @@
+import { PayOutType } from '././payOutType';
 
 export class LeaveEarningsLine {
     /**
@@ -12,6 +13,7 @@ export class LeaveEarningsLine {
     * Earnings rate number of units.
     */
     'numberOfUnits'?: number;
+    'payOutType'?: PayOutType;
 
     static discriminator: string | undefined = undefined;
 
@@ -30,6 +32,11 @@ export class LeaveEarningsLine {
             "name": "numberOfUnits",
             "baseName": "NumberOfUnits",
             "type": "number"
+        },
+        {
+            "name": "payOutType",
+            "baseName": "PayOutType",
+            "type": "PayOutType"
         }    ];
 
     static getAttributeTypeMap() {

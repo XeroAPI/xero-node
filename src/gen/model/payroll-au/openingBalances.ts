@@ -1,6 +1,7 @@
 import { DeductionLine } from '././deductionLine';
 import { EarningsLine } from '././earningsLine';
 import { LeaveLine } from '././leaveLine';
+import { PaidLeaveEarningsLine } from '././paidLeaveEarningsLine';
 import { ReimbursementLine } from '././reimbursementLine';
 import { SuperLine } from '././superLine';
 
@@ -18,6 +19,7 @@ export class OpeningBalances {
     'superLines'?: Array<SuperLine>;
     'reimbursementLines'?: Array<ReimbursementLine>;
     'leaveLines'?: Array<LeaveLine>;
+    'paidLeaveEarningsLines'?: Array<PaidLeaveEarningsLine>;
 
     static discriminator: string | undefined = undefined;
 
@@ -56,6 +58,11 @@ export class OpeningBalances {
             "name": "leaveLines",
             "baseName": "LeaveLines",
             "type": "Array<LeaveLine>"
+        },
+        {
+            "name": "paidLeaveEarningsLines",
+            "baseName": "PaidLeaveEarningsLines",
+            "type": "Array<PaidLeaveEarningsLine>"
         }    ];
 
     static getAttributeTypeMap() {
