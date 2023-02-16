@@ -1156,7 +1156,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Files"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.32.0</li>
+              <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.33.0</li>
               <li class="nav-header" data-group="Files"><a href="#api-Files">Methods</a></li>
               <li data-group="Files" data-name="createFileAssociation" class="">
                 <a href="#api-Files-createFileAssociation">createFileAssociation</a>
@@ -1175,6 +1175,9 @@ ul.nav-tabs {
               </li>
               <li data-group="Files" data-name="getAssociationsByObject" class="">
                 <a href="#api-Files-getAssociationsByObject">getAssociationsByObject</a>
+              </li>
+              <li data-group="Files" data-name="getAssociationsCount" class="">
+                <a href="#api-Files-getAssociationsCount">getAssociationsCount</a>
               </li>
               <li data-group="Files" data-name="getFile" class="">
                 <a href="#api-Files-getFile">getFile</a>
@@ -1858,7 +1861,7 @@ Xero identifier for Tenant
                   <div class="pull-right"></div>
                   <div class="clearfix"></div>
                   <p></p>
-                  <p class="marked">By passing in the appropriate options,</p>
+                  <p class="marked">By passing in the appropriate options, you can retrieve an association</p>
                   <p></p>
                   <br />
                   <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Associations/{ObjectId}</span></code></pre>
@@ -1953,6 +1956,124 @@ Object id for single object
 
                     <div class="inner description marked">
 Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Files-getAssociationsCount">
+                <article id="api-Files-getAssociationsCount-0" data-group="User" data-name="getAssociationsCount" data-version="0">
+                  <div class="pull-left">
+                    <h1>getAssociationsCount</h1>
+                    <p>Retrieves a count of associations for a list of objects.</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked">By passing in the appropriate options, you can retrieve the association count for objects</p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Associations/Count</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Files-getAssociationsCount-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Files-getAssociationsCount-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const objectIds = [];
+
+try {
+  const response = await xero.accountingApi.getAssociationsCount(xeroTenantId, objectIds);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>files</td>
+                      <td>Grant read-write access to files and folders</td>
+                    </tr>
+                    
+                    <tr>
+                      <td>files.read</td>
+                      <td>Grant read-only access to files and folders</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getAssociationsCount_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Query parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">ObjectIds<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getAssociationsCount_objectIds">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    array[UUID]
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+A comma-separated list of object ids
                     </div>
             </div>
                 <div class="inner required">
