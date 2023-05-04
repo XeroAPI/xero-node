@@ -66,10 +66,10 @@ export enum TaxType {
     IGDSINPUT3 = <any> 'IGDSINPUT3',
     SROVR = <any> 'SROVR',
     TOURISTREFUND = <any> 'TOURISTREFUND',
-    TXRCN33INPUT = <any> 'TXRCN33INPUT',
-    TXRCREINPUT = <any> 'TXRCREINPUT',
-    TXRCESSINPUT = <any> 'TXRCESSINPUT',
-    TXRCTSINPUT = <any> 'TXRCTSINPUT',
+    TXRCN33 = <any> 'TXRCN33',
+    TXRCRE = <any> 'TXRCRE',
+    TXRCESS = <any> 'TXRCESS',
+    TXRCTS = <any> 'TXRCTS',
     OUTPUTY23 = <any> 'OUTPUTY23',
     DSOUTPUTY23 = <any> 'DSOUTPUTY23',
     INPUTY23 = <any> 'INPUTY23',
@@ -84,5 +84,9 @@ export enum TaxType {
     IGDSINPUT3Y23 = <any> 'IGDSINPUT3Y23',
     SROVRRSY23 = <any> 'SROVRRSY23',
     SROVRLVGY23 = <any> 'SROVRLVGY23',
-    SRLVGY23 = <any> 'SRLVGY23'
+    SRLVGY23 = <any> 'SRLVGY23',
+    TXRCN33Y23 = <any> 'TXRCN33Y23',
+    TXRCREY23 = <any> 'TXRCREY23',
+    TXRCESSY23 = <any> 'TXRCESSY23',
+    TXRCTSY23 = <any> 'TXRCTSY23'
 }
