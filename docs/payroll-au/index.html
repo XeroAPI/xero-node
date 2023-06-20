@@ -3413,8 +3413,11 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.34.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.35.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
+              <li data-group="PayrollAu" data-name="approveLeaveApplication" class="">
+                <a href="#api-PayrollAu-approveLeaveApplication">approveLeaveApplication</a>
+              </li>
               <li data-group="PayrollAu" data-name="createEmployee" class="">
                 <a href="#api-PayrollAu-createEmployee">createEmployee</a>
               </li>
@@ -3447,6 +3450,9 @@ ul.nav-tabs {
               </li>
               <li data-group="PayrollAu" data-name="getLeaveApplications" class="">
                 <a href="#api-PayrollAu-getLeaveApplications">getLeaveApplications</a>
+              </li>
+              <li data-group="PayrollAu" data-name="getLeaveApplicationsV2" class="">
+                <a href="#api-PayrollAu-getLeaveApplicationsV2">getLeaveApplicationsV2</a>
               </li>
               <li data-group="PayrollAu" data-name="getPayItems" class="">
                 <a href="#api-PayrollAu-getPayItems">getPayItems</a>
@@ -3484,6 +3490,9 @@ ul.nav-tabs {
               <li data-group="PayrollAu" data-name="getTimesheets" class="">
                 <a href="#api-PayrollAu-getTimesheets">getTimesheets</a>
               </li>
+              <li data-group="PayrollAu" data-name="rejectLeaveApplication" class="">
+                <a href="#api-PayrollAu-rejectLeaveApplication">rejectLeaveApplication</a>
+              </li>
               <li data-group="PayrollAu" data-name="updateEmployee" class="">
                 <a href="#api-PayrollAu-updateEmployee">updateEmployee</a>
               </li>
@@ -3520,6 +3529,119 @@ ul.nav-tabs {
           <div id="sections">
             <section id="api-PayrollAu">
               <h1>PayrollAu</h1>
+              <div id="api-PayrollAu-approveLeaveApplication">
+                <article id="api-PayrollAu-approveLeaveApplication-0" data-group="User" data-name="approveLeaveApplication" data-version="0">
+                  <div class="pull-left">
+                    <h1>approveLeaveApplication</h1>
+                    <p>Approve a requested leave application by a unique leave application id</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/LeaveApplications/{LeaveApplicationID}/approve</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-PayrollAu-approveLeaveApplication-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-PayrollAu-approveLeaveApplication-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'xeroTenantId_example';
+const leaveApplicationID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+
+try {
+  const response = await xero.accountingApi.approveLeaveApplication(xeroTenantId, leaveApplicationID);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">LeaveApplicationID<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_approveLeaveApplication_leaveApplicationID">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Leave Application id for single object
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_approveLeaveApplication_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
               <div id="api-PayrollAu-createEmployee">
                 <article id="api-PayrollAu-createEmployee-0" data-group="User" data-name="createEmployee" data-version="0">
                   <div class="pull-left">
@@ -5012,6 +5134,184 @@ Order by an any element
 
 
     <div id="d2e199_getLeaveApplications_page">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description marked">
+e.g. page=1 – Up to 100 objects will be returned in a single API call
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-PayrollAu-getLeaveApplicationsV2">
+                <article id="api-PayrollAu-getLeaveApplicationsV2-0" data-group="User" data-name="getLeaveApplicationsV2" data-version="0">
+                  <div class="pull-left">
+                    <h1>getLeaveApplicationsV2</h1>
+                    <p>Retrieves leave applications including leave requests</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/LeaveApplications/v2</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-PayrollAu-getLeaveApplicationsV2-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-PayrollAu-getLeaveApplicationsV2-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'xeroTenantId_example';
+const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
+const where = 'Status=="ACTIVE"';
+const order = 'EmailAddress%20DESC';
+const page = 56;
+
+try {
+  const response = await xero.accountingApi.getLeaveApplicationsV2(xeroTenantId, ifModifiedSince, where, order, page);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
+                    </tr>
+                    
+                    <tr>
+                      <td>payroll.employees.read</td>
+                      <td>Grant read-only access to payroll employees</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_getLeaveApplicationsV2_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">If-Modified-Since</td>
+<td>
+
+
+    <div id="d2e199_getLeaveApplicationsV2_ifModifiedSince">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Date
+                </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
+
+                    <div class="inner description marked">
+Only records created or modified since this timestamp will be returned
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Query parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">where</td>
+<td>
+
+
+    <div id="d2e199_getLeaveApplicationsV2_where">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Filter by an any element
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">order</td>
+<td>
+
+
+    <div id="d2e199_getLeaveApplicationsV2_order">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Order by an any element
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">page</td>
+<td>
+
+
+    <div id="d2e199_getLeaveApplicationsV2_page">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -6728,6 +7028,119 @@ e.g. page=1 – Up to 100 timesheets will be returned in a single API call
                 </article>
               </div>
               <hr>
+              <div id="api-PayrollAu-rejectLeaveApplication">
+                <article id="api-PayrollAu-rejectLeaveApplication-0" data-group="User" data-name="rejectLeaveApplication" data-version="0">
+                  <div class="pull-left">
+                    <h1>rejectLeaveApplication</h1>
+                    <p>Reject a leave application by a unique leave application id</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/LeaveApplications/{LeaveApplicationID}/reject</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-PayrollAu-rejectLeaveApplication-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-PayrollAu-rejectLeaveApplication-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'xeroTenantId_example';
+const leaveApplicationID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+
+try {
+  const response = await xero.accountingApi.rejectLeaveApplication(xeroTenantId, leaveApplicationID);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>payroll.employees</td>
+                      <td>Grant read-write access to payroll employees</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">LeaveApplicationID<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_rejectLeaveApplication_leaveApplicationID">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Leave Application id for single object
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">Xero-Tenant-Id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_rejectLeaveApplication_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
               <div id="api-PayrollAu-updateEmployee">
                 <article id="api-PayrollAu-updateEmployee-0" data-group="User" data-name="updateEmployee" data-version="0">
                   <div class="pull-left">
@@ -7043,7 +7456,7 @@ Xero identifier for Tenant
           "$ref" : "#/components/schemas/LeaveApplication"
         }
       },
-      "example" : "[ { \"EmployeeID\": \"cdfb8371-0b21-4b8a-8903-1024df6c391e\", \"LeaveTypeID\": \"184ea8f7-d143-46dd-bef3-0c60e1aa6fca\", \"StartDate\": \"/Date(1572559200000+0000)/\", \"EndDate\": \"/Date(1572645600000+0000)/\", \"Description\": \"My updated Description\" } ]"
+      "example" : "[ { \"EmployeeID\": \"cdfb8371-0b21-4b8a-8903-1024df6c391e\", \"LeaveApplicationID\": \"1d4cd583-0107-4386-936b-672eb3d1f624\", \"LeaveTypeID\": \"184ea8f7-d143-46dd-bef3-0c60e1aa6fca\", \"LeavePeriods\": [ { \"PayPeriodStartDate\": \"/Date(1572566400000+0000)/\", \"PayPeriodEndDate\": \"/Date(1573084800000+0000)/\", \"LeavePeriodStatus\": \"SCHEDULED\", \"NumberOfUnits\": 7.6 } ], \"Title\": \"vacation\", \"Description\": \"My updated Description\", \"StartDate\": \"/Date(1572559200000+0000)/\", \"EndDate\": \"/Date(1572645600000+0000)/\", \"PayOutType\": \"DEFAULT\" } ]"
     }
   },
   "required" : true

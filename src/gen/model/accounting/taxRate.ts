@@ -218,6 +218,11 @@ export namespace TaxRate {
         NOTREPORTED = <any> 'NOTREPORTED',
         SROVRRS = <any> 'SROVRRS',
         SROVRLVG = <any> 'SROVRLVG',
-        SRLVG = <any> 'SRLVG'
+        SRLVG = <any> 'SRLVG',
+        IM = <any> 'IM',
+        IMESS = <any> 'IMESS',
+        IMN33 = <any> 'IMN33',
+        IMRE = <any> 'IMRE',
+        BADDEBTRECOVERY = <any> 'BADDEBTRECOVERY'
     }
 }
