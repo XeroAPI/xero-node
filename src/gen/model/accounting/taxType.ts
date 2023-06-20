@@ -88,5 +88,15 @@ export enum TaxType {
     TXRCN33Y23 = <any> 'TXRCN33Y23',
     TXRCREY23 = <any> 'TXRCREY23',
     TXRCESSY23 = <any> 'TXRCESSY23',
-    TXRCTSY23 = <any> 'TXRCTSY23'
+    TXRCTSY23 = <any> 'TXRCTSY23',
+    IM = <any> 'IM',
+    IMY23 = <any> 'IMY23',
+    IMESS = <any> 'IMESS',
+    IMESSY23 = <any> 'IMESSY23',
+    IMN33 = <any> 'IMN33',
+    IMN33Y23 = <any> 'IMN33Y23',
+    IMRE = <any> 'IMRE',
+    IMREY23 = <any> 'IMREY23',
+    BADDEBTRECOVERY = <any> 'BADDEBTRECOVERY',
+    BADDEBTRECOVERYY23 = <any> 'BADDEBTRECOVERYY23'
 }
