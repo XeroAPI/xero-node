@@ -9,5 +9,6 @@ export enum ProblemType {
     OrganisationOffline = <any> 'organisation-offline',
     RequestTimeout = <any> 'request-timeout',
     ServiceUnavailable = <any> 'service-unavailable',
-    Unauthorized = <any> 'unauthorized'
+    Unauthorized = <any> 'unauthorized',
+    RateLimitError = <any> 'rate-limit-error'
 }

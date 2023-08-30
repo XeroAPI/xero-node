@@ -88,6 +88,18 @@ export class TenNinetyNineContact {
     * Contact contact id
     */
     'contactId'?: string;
+    /**
+    * Contact legal name
+    */
+    'legalName'?: string;
+    /**
+    * Contact business name
+    */
+    'businessName'?: string;
+    /**
+    * Contact federal tax classification
+    */
+    'federalTaxClassification'?: TenNinetyNineContact.FederalTaxClassificationEnum;
 
     static discriminator: string | undefined = undefined;
 
@@ -201,6 +213,21 @@ export class TenNinetyNineContact {
             "name": "contactId",
             "baseName": "ContactId",
             "type": "string"
+        },
+        {
+            "name": "legalName",
+            "baseName": "LegalName",
+            "type": "string"
+        },
+        {
+            "name": "businessName",
+            "baseName": "BusinessName",
+            "type": "string"
+        },
+        {
+            "name": "federalTaxClassification",
+            "baseName": "FederalTaxClassification",
+            "type": "TenNinetyNineContact.FederalTaxClassificationEnum"
         }    ];
 
     static getAttributeTypeMap() {
@@ -208,3 +235,14 @@ export class TenNinetyNineContact {
     }
 }
 
+export namespace TenNinetyNineContact {
+    export enum FederalTaxClassificationEnum {
+        SOLEPROPRIETOR = <any> 'SOLE_PROPRIETOR',
+        PARTNERSHIP = <any> 'PARTNERSHIP',
+        TRUSTORESTATE = <any> 'TRUST_OR_ESTATE',
+        NONPROFIT = <any> 'NONPROFIT',
+        CCORP = <any> 'C_CORP',
+        SCORP = <any> 'S_CORP',
+        OTHER = <any> 'OTHER'
+    }
+}

@@ -1269,7 +1269,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="BankFeeds"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="BankFeeds"><strong>VSN: </strong>4.35.0</li>
+              <li class="nav-header" data-group="BankFeeds"><strong>VSN: </strong>4.36.0</li>
               <li class="nav-header" data-group="BankFeeds"><a href="#api-BankFeeds">Methods</a></li>
               <li data-group="BankFeeds" data-name="createFeedConnections" class="">
                 <a href="#api-BankFeeds-createFeedConnections">createFeedConnections</a>
@@ -1336,9 +1336,10 @@ ul.nav-tabs {
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createFeedConnections(xeroTenantId, feedConnections);
+  const response = await xero.accountingApi.createFeedConnections(xeroTenantId, feedConnections, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1380,6 +1381,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createFeedConnections_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -1460,9 +1481,10 @@ Feed Connection(s) array object in the body
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createStatements(xeroTenantId,  statements);
+  const response = await xero.accountingApi.createStatements(xeroTenantId, idempotencyKey, statements);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1504,6 +1526,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createStatements_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -1620,9 +1662,10 @@ Statements array of objects in the body
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.deleteFeedConnections(xeroTenantId, feedConnections);
+  const response = await xero.accountingApi.deleteFeedConnections(xeroTenantId, feedConnections, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1664,6 +1707,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_deleteFeedConnections_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>

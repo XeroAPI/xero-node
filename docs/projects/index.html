@@ -1463,7 +1463,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Project"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Project"><strong>VSN: </strong>4.35.0</li>
+              <li class="nav-header" data-group="Project"><strong>VSN: </strong>4.36.0</li>
               <li class="nav-header" data-group="Project"><a href="#api-Project">Methods</a></li>
               <li data-group="Project" data-name="createProject" class="">
                 <a href="#api-Project-createProject">createProject</a>
@@ -1557,9 +1557,10 @@ ul.nav-tabs {
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createProject(xeroTenantId, projectCreateOrUpdate);
+  const response = await xero.accountingApi.createProject(xeroTenantId, projectCreateOrUpdate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1601,6 +1602,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createProject_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -1674,9 +1695,10 @@ Create a new project with ProjectCreateOrUpdate object
 
 const xeroTenantId = 'xeroTenantId_example';
 const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createTask(xeroTenantId, projectId, taskCreateOrUpdate);
+  const response = await xero.accountingApi.createTask(xeroTenantId, projectId, taskCreateOrUpdate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1756,6 +1778,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createTask_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -1824,9 +1866,10 @@ The task object you are creating
 
 const xeroTenantId = 'xeroTenantId_example';
 const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createTimeEntry(xeroTenantId, projectId, timeEntryCreateOrUpdate);
+  const response = await xero.accountingApi.createTimeEntry(xeroTenantId, projectId, timeEntryCreateOrUpdate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1901,6 +1944,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createTimeEntry_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -3559,9 +3622,10 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.patchProject(xeroTenantId, projectId, projectPatch);
+  const response = await xero.accountingApi.patchProject(xeroTenantId, projectId, projectPatch, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -3641,6 +3705,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_patchProject_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -3709,9 +3793,10 @@ Update the status of an existing Project
 
 const xeroTenantId = 'xeroTenantId_example';
 const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.updateProject(xeroTenantId, projectId, projectCreateOrUpdate);
+  const response = await xero.accountingApi.updateProject(xeroTenantId, projectId, projectCreateOrUpdate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -3791,6 +3876,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateProject_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -3860,9 +3965,10 @@ Request of type ProjectCreateOrUpdate
 const xeroTenantId = 'xeroTenantId_example';
 const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
 const taskId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.updateTask(xeroTenantId, projectId, taskId, taskCreateOrUpdate);
+  const response = await xero.accountingApi.updateTask(xeroTenantId, projectId, taskId, taskCreateOrUpdate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -3968,6 +4074,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateTask_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -4036,9 +4162,10 @@ The task object you are updating
 const xeroTenantId = 'xeroTenantId_example';
 const projectId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
 const timeEntryId = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.updateTimeEntry(xeroTenantId, projectId, timeEntryId, timeEntryCreateOrUpdate);
+  const response = await xero.accountingApi.updateTimeEntry(xeroTenantId, projectId, timeEntryId, timeEntryCreateOrUpdate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -4139,6 +4266,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateTimeEntry_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
