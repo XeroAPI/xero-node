@@ -53,10 +53,6 @@ export class Contact {
     */
     'emailAddress'?: string;
     /**
-    * Skype user name of contact
-    */
-    'skypeUserName'?: string;
-    /**
     * See contact persons
     */
     'contactPersons'?: Array<ContactPerson>;
@@ -221,11 +217,6 @@ export class Contact {
         {
             "name": "emailAddress",
             "baseName": "EmailAddress",
-            "type": "string"
-        },
-        {
-            "name": "skypeUserName",
-            "baseName": "SkypeUserName",
             "type": "string"
         },
         {

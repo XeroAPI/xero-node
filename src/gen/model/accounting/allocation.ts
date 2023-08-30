@@ -5,6 +5,10 @@ import { Prepayment } from '././prepayment';
 import { ValidationError } from '././validationError';
 
 export class Allocation {
+    /**
+    * Xero generated unique identifier
+    */
+    'allocationID'?: string;
     'invoice': Invoice;
     'overpayment'?: Overpayment;
     'prepayment'?: Prepayment;
@@ -18,6 +22,10 @@ export class Allocation {
     */
     'date': string;
     /**
+    * A flag that returns true when the allocation is succesfully deleted
+    */
+    'isDeleted'?: boolean;
+    /**
     * A string to indicate if a invoice status
     */
     'statusAttributeString'?: string;
@@ -29,6 +37,11 @@ export class Allocation {
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "allocationID",
+            "baseName": "AllocationID",
+            "type": "string"
+        },
         {
             "name": "invoice",
             "baseName": "Invoice",
@@ -58,6 +71,11 @@ export class Allocation {
             "name": "date",
             "baseName": "Date",
             "type": "string"
+        },
+        {
+            "name": "isDeleted",
+            "baseName": "IsDeleted",
+            "type": "boolean"
         },
         {
             "name": "statusAttributeString",

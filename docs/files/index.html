@@ -1156,7 +1156,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Files"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.35.0</li>
+              <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.36.0</li>
               <li class="nav-header" data-group="Files"><a href="#api-Files">Methods</a></li>
               <li data-group="Files" data-name="createFileAssociation" class="">
                 <a href="#api-Files-createFileAssociation">createFileAssociation</a>
@@ -1257,9 +1257,10 @@ ul.nav-tabs {
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const fileId = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createFileAssociation(xeroTenantId, fileId,  association);
+  const response = await xero.accountingApi.createFileAssociation(xeroTenantId, fileId, idempotencyKey, association);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1339,6 +1340,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createFileAssociation_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -1401,9 +1422,10 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createFolder(xeroTenantId,  folder);
+  const response = await xero.accountingApi.createFolder(xeroTenantId, idempotencyKey, folder);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1445,6 +1467,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createFolder_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -2937,9 +2979,10 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const fileId = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.updateFile(xeroTenantId, fileId,  fileObject);
+  const response = await xero.accountingApi.updateFile(xeroTenantId, fileId, idempotencyKey, fileObject);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -3019,6 +3062,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateFile_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -3082,9 +3145,10 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const folderId = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.updateFolder(xeroTenantId, folderId, folder);
+  const response = await xero.accountingApi.updateFolder(xeroTenantId, folderId, folder, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -3164,6 +3228,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateFolder_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -3233,10 +3317,11 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const body = BYTE_ARRAY_DATA_HERE;
 const name = 'name_example';
 const filename = 'filename_example';
+const idempotencyKey = 'KEY_VALUE';
 const mimeType = 'mimeType_example';
 
 try {
-  const response = await xero.accountingApi.uploadFile(xeroTenantId, body, name, filename,  mimeType, {
+  const response = await xero.accountingApi.uploadFile(xeroTenantId, body, name, filename, idempotencyKey, mimeType, {
     headers: {
       "Content-Type": contentType,
     }
@@ -3282,6 +3367,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_uploadFile_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -3420,10 +3525,11 @@ const folderId = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const body = BYTE_ARRAY_DATA_HERE;
 const name = 'name_example';
 const filename = 'filename_example';
+const idempotencyKey = 'KEY_VALUE';
 const mimeType = 'mimeType_example';
 
 try {
-  const response = await xero.accountingApi.uploadFileToFolder(xeroTenantId, folderId, body, name, filename,  mimeType, {
+  const response = await xero.accountingApi.uploadFileToFolder(xeroTenantId, folderId, body, name, filename, idempotencyKey, mimeType, {
     headers: {
       "Content-Type": contentType,
     }
@@ -3502,6 +3608,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_uploadFileToFolder_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>

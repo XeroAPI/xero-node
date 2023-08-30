@@ -342,6 +342,7 @@ let enumsMap: {[index: string]: any} = {
         "TaxRate.StatusEnum": TaxRate.StatusEnum,
         "TaxRate.ReportTaxTypeEnum": TaxRate.ReportTaxTypeEnum,
         "TaxType": TaxType,
+        "TenNinetyNineContact.FederalTaxClassificationEnum": TenNinetyNineContact.FederalTaxClassificationEnum,
         "TimeZone": TimeZone,
         "TrackingCategory.StatusEnum": TrackingCategory.StatusEnum,
         "TrackingOption.StatusEnum": TrackingOption.StatusEnum,

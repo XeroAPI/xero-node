@@ -3839,7 +3839,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollNz"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>4.35.0</li>
+              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>4.36.0</li>
               <li class="nav-header" data-group="PayrollNz"><a href="#api-PayrollNz">Methods</a></li>
               <li data-group="PayrollNz" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollNz-approveTimesheet">approveTimesheet</a>
@@ -4090,9 +4090,10 @@ ul.nav-tabs {
 
 const xeroTenantId = 'xeroTenantId_example';
 const timesheetID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.approveTimesheet(xeroTenantId, timesheetID);
+  const response = await xero.accountingApi.approveTimesheet(xeroTenantId, timesheetID, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -4172,6 +4173,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_approveTimesheet_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                 </article>
               </div>
@@ -4202,6 +4223,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 const deduction: Deduction = { 
   deductionName: "Deduction test",
@@ -4210,7 +4232,7 @@ const deduction: Deduction = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createDeduction(xeroTenantId, deduction);
+  const response = await xero.accountingApi.createDeduction(xeroTenantId, deduction, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -4252,6 +4274,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createDeduction_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -4323,6 +4365,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 const earningsRate: EarningsRate = { 
   earningsType: EarningsRate.EarningsTypeEnum.REGULAREARNINGS,
@@ -4331,7 +4374,7 @@ const earningsRate: EarningsRate = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEarningsRate(xeroTenantId, earningsRate);
+  const response = await xero.accountingApi.createEarningsRate(xeroTenantId, earningsRate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -4373,6 +4416,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEarningsRate_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -4444,6 +4507,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 const dateOfBirth = '2000-10-28'
 
 const address: Address = { 
@@ -4461,7 +4525,7 @@ const employee: Employee = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEmployee(xeroTenantId, employee);
+  const response = await xero.accountingApi.createEmployee(xeroTenantId, employee, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -4503,6 +4567,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployee_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -4575,6 +4659,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 const earningsTemplate: EarningsTemplate = { 
   payTemplateEarningID: "00000000-0000-0000-0000-000000000000",
@@ -4588,7 +4673,7 @@ const earningsTemplates = [];
 earningsTemplates.push(earningsTemplate)
 
 try {
-  const response = await xero.accountingApi.createEmployeeEarningsTemplate(xeroTenantId, employeeID, earningsTemplate);
+  const response = await xero.accountingApi.createEmployeeEarningsTemplate(xeroTenantId, employeeID, earningsTemplate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -4668,6 +4753,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployeeEarningsTemplate_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -4735,6 +4840,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-28'
 const endDate = '2020-10-30'
 
@@ -4745,7 +4851,7 @@ const employeeLeave: EmployeeLeave = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEmployeeLeave(xeroTenantId, employeeID, employeeLeave);
+  const response = await xero.accountingApi.createEmployeeLeave(xeroTenantId, employeeID, employeeLeave, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -4825,6 +4931,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployeeLeave_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -4892,6 +5018,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 const employeeLeaveSetup: EmployeeLeaveSetup = { 
   includeHolidayPay: false,
@@ -4903,7 +5030,7 @@ const employeeLeaveSetup: EmployeeLeaveSetup = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEmployeeLeaveSetup(xeroTenantId, employeeID, employeeLeaveSetup);
+  const response = await xero.accountingApi.createEmployeeLeaveSetup(xeroTenantId, employeeID, employeeLeaveSetup, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -4983,6 +5110,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployeeLeaveSetup_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -5050,6 +5197,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 const employeeLeaveType: EmployeeLeaveType = { 
   leaveTypeID: "00000000-0000-0000-0000-000000000000",
@@ -5058,7 +5206,7 @@ const employeeLeaveType: EmployeeLeaveType = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEmployeeLeaveType(xeroTenantId, employeeID, employeeLeaveType);
+  const response = await xero.accountingApi.createEmployeeLeaveType(xeroTenantId, employeeID, employeeLeaveType, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -5138,6 +5286,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployeeLeaveType_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -5205,6 +5373,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 const periodEndDate = '2020-10-30'
 
 const employeeOpeningBalance: EmployeeOpeningBalance = { 
@@ -5217,7 +5386,7 @@ const employeeOpeningBalances = [];
 employeeOpeningBalances.push(employeeOpeningBalance)
 
 try {
-  const response = await xero.accountingApi.createEmployeeOpeningBalances(xeroTenantId, employeeID, employeeOpeningBalance);
+  const response = await xero.accountingApi.createEmployeeOpeningBalances(xeroTenantId, employeeID, employeeOpeningBalance, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -5297,6 +5466,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployeeOpeningBalances_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -5364,6 +5553,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 const bankAccount: BankAccount = { 
   accountName: "Charlotte Danes",
@@ -5378,7 +5568,7 @@ const paymentMethod: PaymentMethod = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEmployeePaymentMethod(xeroTenantId, employeeID, paymentMethod);
+  const response = await xero.accountingApi.createEmployeePaymentMethod(xeroTenantId, employeeID, paymentMethod, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -5458,6 +5648,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployeePaymentMethod_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -5524,6 +5734,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 const salaryAndWage: SalaryAndWage = { 
   earningsRateID: "00000000-0000-0000-0000-000000000000",
@@ -5533,7 +5744,7 @@ const salaryAndWage: SalaryAndWage = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEmployeeSalaryAndWage(xeroTenantId, employeeID, salaryAndWage);
+  const response = await xero.accountingApi.createEmployeeSalaryAndWage(xeroTenantId, employeeID, salaryAndWage, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -5613,6 +5824,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployeeSalaryAndWage_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -5680,6 +5911,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-28'
 
 const employment: Employment = { 
@@ -5688,7 +5920,7 @@ const employment: Employment = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEmployment(xeroTenantId, employeeID, employment);
+  const response = await xero.accountingApi.createEmployment(xeroTenantId, employeeID, employment, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -5768,6 +6000,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createEmployment_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -5834,6 +6086,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 const leaveType: LeaveType = { 
   name: "LeaveType",
@@ -5842,7 +6095,7 @@ const leaveType: LeaveType = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createLeaveType(xeroTenantId, leaveType);
+  const response = await xero.accountingApi.createLeaveType(xeroTenantId, leaveType, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -5884,6 +6137,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createLeaveType_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -5956,6 +6229,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 
 const earningsTemplate: EarningsTemplate = { 
   payTemplateEarningID: "00000000-0000-0000-0000-000000000000",
@@ -5969,7 +6243,7 @@ const earningsTemplates = [];
 earningsTemplates.push(earningsTemplate)
 
 try {
-  const response = await xero.accountingApi.createMultipleEmployeeEarningsTemplate(xeroTenantId, employeeID, earningsTemplate);
+  const response = await xero.accountingApi.createMultipleEmployeeEarningsTemplate(xeroTenantId, employeeID, earningsTemplate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -6049,6 +6323,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createMultipleEmployeeEarningsTemplate_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -6115,6 +6409,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 const payRun: PayRun = { 
   payRunType: PayRun.PayRunTypeEnum.Scheduled,
@@ -6122,7 +6417,7 @@ const payRun: PayRun = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createPayRun(xeroTenantId, payRun);
+  const response = await xero.accountingApi.createPayRun(xeroTenantId, payRun, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -6164,6 +6459,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createPayRun_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -6235,6 +6550,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-28'
 const paymentDate = '2020-10-30'
 
@@ -6245,7 +6561,7 @@ const payRunCalendar: PayRunCalendar = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createPayRunCalendar(xeroTenantId, payRunCalendar);
+  const response = await xero.accountingApi.createPayRunCalendar(xeroTenantId, payRunCalendar, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -6287,6 +6603,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createPayRunCalendar_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -6358,6 +6694,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 const reimbursement: Reimbursement = { 
   name: "Test Reimbursement",
@@ -6368,7 +6705,7 @@ const reimbursement: Reimbursement = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createReimbursement(xeroTenantId, reimbursement);
+  const response = await xero.accountingApi.createReimbursement(xeroTenantId, reimbursement, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -6410,6 +6747,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createReimbursement_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -6481,6 +6838,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 
 const benefit: Benefit = { 
   category: Benefit.CategoryEnum.ComplyingFund,
@@ -6492,7 +6850,7 @@ const benefit: Benefit = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createSuperannuation(xeroTenantId, benefit);
+  const response = await xero.accountingApi.createSuperannuation(xeroTenantId, benefit, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -6534,6 +6892,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createSuperannuation_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -6605,6 +6983,7 @@ Xero identifier for Tenant
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'xeroTenantId_example';
+const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-28'
 const endDate = '2020-10-30'
 
@@ -6616,7 +6995,7 @@ const timesheet: Timesheet = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createTimesheet(xeroTenantId, timesheet);
+  const response = await xero.accountingApi.createTimesheet(xeroTenantId, timesheet, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -6658,6 +7037,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createTimesheet_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -6730,6 +7129,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const timesheetID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 const date = '2020-10-28'
 
 const timesheetLine: TimesheetLine = { 
@@ -6741,7 +7141,7 @@ const timesheetLine: TimesheetLine = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createTimesheetLine(xeroTenantId, timesheetID, timesheetLine);
+  const response = await xero.accountingApi.createTimesheetLine(xeroTenantId, timesheetID, timesheetLine, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -6816,6 +7216,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_createTimesheetLine_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
@@ -11744,9 +12164,10 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const timesheetID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.revertTimesheet(xeroTenantId, timesheetID);
+  const response = await xero.accountingApi.revertTimesheet(xeroTenantId, timesheetID, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -11826,6 +12247,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_revertTimesheet_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                 </article>
               </div>
@@ -11857,6 +12298,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 const dateOfBirth = '2000-10-28'
 
 const address: Address = { 
@@ -11874,7 +12316,7 @@ const employee: Employee = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeID, employee);
+  const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeID, employee, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -11954,6 +12396,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateEmployee_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -12022,6 +12484,7 @@ Xero identifier for Tenant
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const payTemplateEarningID = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+const idempotencyKey = 'KEY_VALUE';
 
 const earningsTemplate: EarningsTemplate = { 
   payTemplateEarningID: "00000000-0000-0000-0000-000000000000",
@@ -12035,7 +12498,7 @@ const earningsTemplates = [];
 earningsTemplates.push(earningsTemplate)
 
 try {
-  const response = await xero.accountingApi.updateEmployeeEarningsTemplate(xeroTenantId, employeeID, payTemplateEarningID, earningsTemplate);
+  const response = await xero.accountingApi.updateEmployeeEarningsTemplate(xeroTenantId, employeeID, payTemplateEarningID, earningsTemplate, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -12141,6 +12604,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateEmployeeEarningsTemplate_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -12209,6 +12692,7 @@ Xero identifier for Tenant
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const leaveID = 'c4be24e5-e840-4c92-9eaa-2d86cd596314';
+const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-28'
 const endDate = '2020-10-30'
 
@@ -12219,7 +12703,7 @@ const employeeLeave: EmployeeLeave = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateEmployeeLeave(xeroTenantId, employeeID, leaveID, employeeLeave);
+  const response = await xero.accountingApi.updateEmployeeLeave(xeroTenantId, employeeID, leaveID, employeeLeave, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -12325,6 +12809,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateEmployeeLeave_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -12393,6 +12897,7 @@ Xero identifier for Tenant
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const salaryAndWagesID = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+const idempotencyKey = 'KEY_VALUE';
 
 const salaryAndWage: SalaryAndWage = { 
   earningsRateID: "00000000-0000-0000-0000-000000000000",
@@ -12402,7 +12907,7 @@ const salaryAndWage: SalaryAndWage = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateEmployeeSalaryAndWage(xeroTenantId, employeeID, salaryAndWagesID, salaryAndWage);
+  const response = await xero.accountingApi.updateEmployeeSalaryAndWage(xeroTenantId, employeeID, salaryAndWagesID, salaryAndWage, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -12508,6 +13013,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateEmployeeSalaryAndWage_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -12575,6 +13100,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
+const idempotencyKey = 'KEY_VALUE';
 const studentLoanAsAt = '2020-10-30'
 
 const employeeTax: EmployeeTax = { 
@@ -12593,7 +13119,7 @@ const employeeTax: EmployeeTax = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateEmployeeTax(xeroTenantId, employeeID, employeeTax);
+  const response = await xero.accountingApi.updateEmployeeTax(xeroTenantId, employeeID, employeeTax, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -12673,6 +13199,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateEmployeeTax_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -12739,6 +13285,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const payRunID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-28'
 const paymentDate = '2020-10-30'
 
@@ -12749,7 +13296,7 @@ const payRunCalendar: PayRunCalendar = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updatePayRun(xeroTenantId, payRunID, payRun);
+  const response = await xero.accountingApi.updatePayRun(xeroTenantId, payRunID, payRun, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -12829,6 +13376,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updatePayRun_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -12896,6 +13463,7 @@ Xero identifier for Tenant
 
 const xeroTenantId = 'xeroTenantId_example';
 const paySlipID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 
 const earningsLine: EarningsLine = { 
   earningsLineID: "00000000-0000-0000-0000-000000000000",
@@ -12913,7 +13481,7 @@ const paySlip: PaySlip = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updatePaySlipLineItems(xeroTenantId, paySlipID, paySlip);
+  const response = await xero.accountingApi.updatePaySlipLineItems(xeroTenantId, paySlipID, paySlip, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -12993,6 +13561,26 @@ Xero identifier for Tenant
 </td>
 </tr>
 
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updatePaySlipLineItems_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
                   </table>
                   <div class="methodsubtabletitle">Body parameters</div>
                   <table id="methodsubtable">
@@ -13061,6 +13649,7 @@ Xero identifier for Tenant
 const xeroTenantId = 'xeroTenantId_example';
 const timesheetID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
 const timesheetLineID = '38400000-8cf0-11bd-b23e-10b96e4ef00d';
+const idempotencyKey = 'KEY_VALUE';
 const date = '2020-10-28'
 
 const timesheetLine: TimesheetLine = { 
@@ -13072,7 +13661,7 @@ const timesheetLine: TimesheetLine = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateTimesheetLine(xeroTenantId, timesheetID, timesheetLineID, timesheetLine);
+  const response = await xero.accountingApi.updateTimesheetLine(xeroTenantId, timesheetID, timesheetLineID, timesheetLine, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -13173,6 +13762,26 @@ Xero identifier for Tenant
                 <div class="inner required">
                     Required
                 </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_updateTimesheetLine_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
         </div>
     </div>
 </td>
