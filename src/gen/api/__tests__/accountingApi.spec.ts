@@ -29,7 +29,7 @@ const testInvoices = {
 		},
 	],
 };
-describe('gen.Model.accounting', () => {
+describe('gen.api.accountingApi', () => {
 	describe('updateOrCreateInvoices function', () => {
 		it('header will contain Idempotency-Key if call this with idempotencyKey params', async () => {
 			localVarRequest.mockRestore();

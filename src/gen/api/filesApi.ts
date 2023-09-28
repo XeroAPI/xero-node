@@ -106,8 +106,9 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-        localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        if( idempotencyKey ){
+            localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
+        }
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
