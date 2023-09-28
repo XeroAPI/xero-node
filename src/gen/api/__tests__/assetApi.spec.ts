@@ -30,6 +30,18 @@ const testAsset = {
     },
     "AccountingBookValue": 99.5
 };
+const testAssetType = {
+    "assetTypeName": "Machinery11004",
+    "fixedAssetAccountId": "3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82",
+    "depreciationExpenseAccountId": "d1602f69-f900-4616-8d34-90af393fa368",
+    "accumulatedDepreciationAccountId": "9195cadd-8645-41e6-9f67-7bcd421defe8",
+    "bookDepreciationSetting": {
+        "depreciationMethod": BookDepreciationSetting.DepreciationMethodEnum.DiminishingValue100,
+        "averagingMethod": BookDepreciationSetting.AveragingMethodEnum.ActualDays,
+        "depreciationRate": 0.05,
+        "depreciationCalculationMethod": BookDepreciationSetting.DepreciationCalculationMethodEnum.None,
+    }
+}
 describe('gen.api.assetApi', () => {
     describe('createAsset function', () => {
         it('header will contain Idempotency-Key if call this with idempotencyKey params', async () => {
@@ -40,6 +52,18 @@ describe('gen.api.assetApi', () => {
         it('header will not contain Idempotency-Key if call this without idempotencyKey params', async () => {
             restoreAndMockEmptyResponse(localVarRequest);
             await assetAPI.createAsset('test-xeroTenantId', testAsset, null);
+            expect(localVarRequest.mock.calls[0][0].headers.hasOwnProperty('Idempotency-Key')).toBe(false);
+        });
+    });
+    describe('createAssetType function', () => {
+        it('header will contain Idempotency-Key if call this with idempotencyKey params', async () => {
+            restoreAndMockEmptyResponse(localVarRequest);
+            await assetAPI.createAssetType('test-xeroTenantId', 'test-idempotencyKey', testAssetType);
+            expect(localVarRequest.mock.calls[0][0].headers.hasOwnProperty('Idempotency-Key')).toBe(true);
+        });
+        it('header will not contain Idempotency-Key if call this without idempotencyKey params', async () => {
+            restoreAndMockEmptyResponse(localVarRequest);
+            await assetAPI.createAssetType('test-xeroTenantId', null, testAssetType);
             expect(localVarRequest.mock.calls[0][0].headers.hasOwnProperty('Idempotency-Key')).toBe(false);
         });
     });
