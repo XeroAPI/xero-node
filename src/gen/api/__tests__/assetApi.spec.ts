@@ -1,6 +1,7 @@
 import {AssetApi} from '../assetApi';
 import {AssetStatus} from "../../model/assets/assetStatus";
 import {BookDepreciationSetting} from "../../model/assets/bookDepreciationSetting";
+import {restoreAndMockEmptyResponse} from "../../../test/utils/mockRequest";
 
 jest.mock('request');
 
@@ -32,18 +33,12 @@ const testAsset = {
 describe('gen.api.assetApi', () => {
     describe('createAsset function', () => {
         it('header will contain Idempotency-Key if call this with idempotencyKey params', async () => {
-            localVarRequest.mockRestore();
-            localVarRequest.mockImplementation((args, callback) => {
-                callback(null, {statusCode: 200}, {data: 'mock return data'});
-            });
+            restoreAndMockEmptyResponse(localVarRequest);
             await assetAPI.createAsset('test-xeroTenantId', testAsset, 'test-idempotencyKey');
             expect(localVarRequest.mock.calls[0][0].headers.hasOwnProperty('Idempotency-Key')).toBe(true);
         });
         it('header will not contain Idempotency-Key if call this without idempotencyKey params', async () => {
-            localVarRequest.mockRestore();
-            localVarRequest.mockImplementation((args, callback) => {
-                callback(null, {statusCode: 200}, {data: 'mock return data'});
-            });
+            restoreAndMockEmptyResponse(localVarRequest);
             await assetAPI.createAsset('test-xeroTenantId', testAsset, null);
             expect(localVarRequest.mock.calls[0][0].headers.hasOwnProperty('Idempotency-Key')).toBe(false);
         });
