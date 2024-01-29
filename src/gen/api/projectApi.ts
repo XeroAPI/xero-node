@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
 import http = require('http');
 import fs = require('fs');
 
@@ -29,6 +28,8 @@ import { TimeEntry } from '../model/projects/timeEntry';
 import { TimeEntryCreateOrUpdate } from '../model/projects/timeEntryCreateOrUpdate';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/projects/models';
+import { ApiError } from '../../model/ApiError';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { OAuth } from '../model/projects/models';
 
 let defaultBasePath = 'https://api.xero.com/projects.xro/2.0';
@@ -42,7 +43,7 @@ export enum ProjectApiApiKeys {
 
 export class ProjectApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.38.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.37.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -89,17 +90,21 @@ export class ProjectApi {
     }
 
     /**
-     * 
+     *
      * @summary Create one or more new projects
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectCreateOrUpdate Create a new project with ProjectCreateOrUpdate object
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
-    public async createProject (xeroTenantId: string, projectCreateOrUpdate: ProjectCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Project;  }> {
+     */
+    public async createProject (xeroTenantId: string, projectCreateOrUpdate: ProjectCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Project;  }> {
         const localVarPath = this.basePath + '/Projects';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -113,18 +118,17 @@ export class ProjectApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -134,24 +138,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Project;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Project");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Project;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Project");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -162,13 +170,17 @@ export class ProjectApi {
      * @param projectId You can create a task on a specified projectId
      * @param taskCreateOrUpdate The task object you are creating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
-    public async createTask (xeroTenantId: string, projectId: string, taskCreateOrUpdate: TaskCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Task;  }> {
+     */
+    public async createTask (xeroTenantId: string, projectId: string, taskCreateOrUpdate: TaskCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Task;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -187,18 +199,17 @@ export class ProjectApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(taskCreateOrUpdate, "TaskCreateOrUpdate")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(taskCreateOrUpdate, "TaskCreateOrUpdate"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -208,24 +219,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Task;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Task");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Task;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Task");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -236,13 +251,17 @@ export class ProjectApi {
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param timeEntryCreateOrUpdate The time entry object you are creating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
-    public async createTimeEntry (xeroTenantId: string, projectId: string, timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimeEntry;  }> {
+     */
+    public async createTimeEntry (xeroTenantId: string, projectId: string, timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimeEntry;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -261,18 +280,17 @@ export class ProjectApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -282,24 +300,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimeEntry;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimeEntry");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: TimeEntry;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "TimeEntry");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -309,14 +331,18 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param taskId You can specify an individual task by appending the id to the endpoint
-     */     
-    public async deleteTask (xeroTenantId: string, projectId: string, taskId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+     */
+    public async deleteTask (xeroTenantId: string, projectId: string, taskId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks/{taskId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
             .replace('{' + 'taskId' + '}', encodeURIComponent(String(taskId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -334,17 +360,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'DELETE',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -354,24 +380,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -381,14 +411,18 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param timeEntryId You can specify an individual task by appending the id to the endpoint
-     */     
-    public async deleteTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+     */
+    public async deleteTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
             .replace('{' + 'timeEntryId' + '}', encodeURIComponent(String(timeEntryId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -406,17 +440,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'DELETE',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -426,24 +460,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -452,13 +490,17 @@ export class ProjectApi {
      * @summary Retrieves a single project
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
-     */     
-    public async getProject (xeroTenantId: string, projectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Project;  }> {
+     */
+    public async getProject (xeroTenantId: string, projectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Project;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -471,17 +513,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -491,24 +533,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Project;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Project");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Project;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Project");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -518,12 +564,16 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param page set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
      * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-     */     
-    public async getProjectUsers (xeroTenantId: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ProjectUsers;  }> {
+     */
+    public async getProjectUsers (xeroTenantId: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ProjectUsers;  }> {
         const localVarPath = this.basePath + '/ProjectsUsers';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -539,17 +589,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -559,24 +609,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: ProjectUsers;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "ProjectUsers");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: ProjectUsers;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "ProjectUsers");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -589,12 +643,16 @@ export class ProjectApi {
      * @param states Filter for projects in a particular state (INPROGRESS or CLOSED)
      * @param page set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
      * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-     */     
-    public async getProjects (xeroTenantId: string, projectIds?: Array<string>, contactID?: string, states?: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Projects;  }> {
+     */
+    public async getProjects (xeroTenantId: string, projectIds?: Array<string>, contactID?: string, states?: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Projects;  }> {
         const localVarPath = this.basePath + '/Projects';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -622,17 +680,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -642,24 +700,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Projects;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Projects");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Projects;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Projects");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -669,14 +731,18 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param taskId You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID}
-     */     
-    public async getTask (xeroTenantId: string, projectId: string, taskId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Task;  }> {
+     */
+    public async getTask (xeroTenantId: string, projectId: string, taskId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Task;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks/{taskId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
             .replace('{' + 'taskId' + '}', encodeURIComponent(String(taskId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -694,17 +760,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -714,24 +780,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Task;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Task");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Task;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Task");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -743,14 +813,18 @@ export class ProjectApi {
      * @param page Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
      * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
      * @param taskIds Search for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds&#x3D;{taskID},{taskID}
-     * @param chargeType 
-     */     
-    public async getTasks (xeroTenantId: string, projectId: string, page?: number, pageSize?: number, taskIds?: string, chargeType?: ChargeType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Tasks;  }> {
+     * @param chargeType
+     */
+    public async getTasks (xeroTenantId: string, projectId: string, page?: number, pageSize?: number, taskIds?: string, chargeType?: ChargeType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Tasks;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -779,17 +853,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -799,24 +873,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Tasks;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Tasks");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Tasks;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Tasks");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -835,13 +913,17 @@ export class ProjectApi {
      * @param isChargeable Finds all time entries which relate to tasks with the charge type &#x60;TIME&#x60; or &#x60;FIXED&#x60;.
      * @param dateAfterUtc ISO 8601 UTC date. Finds all time entries on or after this date filtered on the &#x60;dateUtc&#x60; field.
      * @param dateBeforeUtc ISO 8601 UTC date. Finds all time entries on or before this date filtered on the &#x60;dateUtc&#x60; field.
-     */     
-    public async getTimeEntries (xeroTenantId: string, projectId: string, userId?: string, taskId?: string, invoiceId?: string, contactId?: string, page?: number, pageSize?: number, states?: Array<string>, isChargeable?: boolean, dateAfterUtc?: Date, dateBeforeUtc?: Date, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimeEntries;  }> {
+     */
+    public async getTimeEntries (xeroTenantId: string, projectId: string, userId?: string, taskId?: string, invoiceId?: string, contactId?: string, page?: number, pageSize?: number, states?: Array<string>, isChargeable?: boolean, dateAfterUtc?: Date, dateBeforeUtc?: Date, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimeEntries;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -894,17 +976,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -914,24 +996,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimeEntries;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimeEntries");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: TimeEntries;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "TimeEntries");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -941,14 +1027,18 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param timeEntryId You can specify an individual time entry by appending the id to the endpoint
-     */     
-    public async getTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimeEntry;  }> {
+     */
+    public async getTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimeEntry;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
             .replace('{' + 'timeEntryId' + '}', encodeURIComponent(String(timeEntryId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -966,17 +1056,17 @@ export class ProjectApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -986,24 +1076,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: TimeEntry;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "TimeEntry");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: TimeEntry;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "TimeEntry");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -1014,13 +1108,17 @@ export class ProjectApi {
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param projectPatch Update the status of an existing Project
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
-    public async patchProject (xeroTenantId: string, projectId: string, projectPatch: ProjectPatch, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+     */
+    public async patchProject (xeroTenantId: string, projectId: string, projectPatch: ProjectPatch, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -1039,18 +1137,17 @@ export class ProjectApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'PATCH',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(projectPatch, "ProjectPatch")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(projectPatch, "ProjectPatch"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1060,24 +1157,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -1088,13 +1189,17 @@ export class ProjectApi {
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param projectCreateOrUpdate Request of type ProjectCreateOrUpdate
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
-    public async updateProject (xeroTenantId: string, projectId: string, projectCreateOrUpdate: ProjectCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+     */
+    public async updateProject (xeroTenantId: string, projectId: string, projectCreateOrUpdate: ProjectCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -1113,18 +1218,17 @@ export class ProjectApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'PUT',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1134,24 +1238,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -1163,14 +1271,18 @@ export class ProjectApi {
      * @param taskId You can specify an individual task by appending the id to the endpoint
      * @param taskCreateOrUpdate The task object you are updating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
-    public async updateTask (xeroTenantId: string, projectId: string, taskId: string, taskCreateOrUpdate: TaskCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+     */
+    public async updateTask (xeroTenantId: string, projectId: string, taskId: string, taskCreateOrUpdate: TaskCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks/{taskId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
             .replace('{' + 'taskId' + '}', encodeURIComponent(String(taskId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -1194,18 +1306,17 @@ export class ProjectApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'PUT',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(taskCreateOrUpdate, "TaskCreateOrUpdate")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(taskCreateOrUpdate, "TaskCreateOrUpdate"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1215,24 +1326,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -1244,14 +1359,18 @@ export class ProjectApi {
      * @param timeEntryId You can specify an individual time entry by appending the id to the endpoint
      * @param timeEntryCreateOrUpdate The time entry object you are updating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
-    public async updateTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+     */
+    public async updateTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
             .replace('{' + 'timeEntryId' + '}', encodeURIComponent(String(timeEntryId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -1275,18 +1394,17 @@ export class ProjectApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'PUT',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1296,24 +1414,28 @@ export class ProjectApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }

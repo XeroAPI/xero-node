@@ -84,46 +84,46 @@ h={};g()}};typeof define==="function"&&define.amd&&define("google-code-prettify"
           smartLists: true,
           smartypants: false
         });
-      
+
         var textFile = null;
-      
+
         /// Function to be used to download a text json schema
         function makeTextFile(text) {
-      
+
           var data = new Blob([text], {type: 'text/plain'});
-      
+
           // If we are replacing a previously generated file we need to
           // manually revoke the object URL to avoid memory leaks.
           if (textFile !== null) {
             window.URL.revokeObjectURL(textFile);
           }
-      
+
           textFile = window.URL.createObjectURL(data);
-      
+
           var a = document.createElement("a");
           document.body.appendChild(a);
           a.style = "display: none";
           a.href = textFile;
           a.download = 'schema.txt';
           a.click();
-      
+
           return textFile;
         };
-      
+
         /// TODO: Implement resizing for expanding within iframe
         function callResize() {
           window.parent.postMessage('resize', "*");
         }
-      
+
         function processMarked() {
           $(".marked").each(function() {
             $(this).html(marked($(this).html()));
           });
         }
-      
+
         // Bootstrap Scrollspy
         $(this).scrollspy({ target: '#scrollingNav', offset: 18 });
-      
+
         // Content-Scroll on Navigation click.
         $('.sidenav').find('a').on('click', function(e) {
           e.preventDefault();
@@ -132,41 +132,41 @@ h={};g()}};typeof define==="function"&&define.amd&&define("google-code-prettify"
           $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 400);
           window.location.hash = $(this).attr('href');
         });
-      
+
         // Quickjump on Pageload to hash position.
         if(window.location.hash) {
           var id = window.location.hash;
           if ($(id).length > 0)
             $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 0);
           }
-      
-      
+
+
         function initDynamic() {
           // tabs
           $('.nav-tabs-examples a').click(function (e) {
             e.preventDefault();
             $(this).tab('show');
           });
-      
-      
+
+
           $('.nav-tabs-examples').find('a:first').tab('show');
-      
+
           // call scrollspy refresh method
           $(window).scrollspy('refresh');
         }
-      
+
         initDynamic();
-      
+
         // Pre- / Code-Format
         prettyPrint();
-      
+
         //Convert elements with "marked" class to markdown
         processMarked();
       });
     </script>
     <style type="text/css">
       @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
-      
+
 /*!
  * Bootstrap v2.3.2
  *
@@ -3329,9 +3329,9 @@ ul.nav-tabs {
   "description" : "",
   "enum" : [ "PROMOTIONAL", "THREELESSPERFORMANCESPERWEEK", "NONE" ]
 };
-      
+
       var errs = {};
-      
+
       function routeDocs(event) {
         var selectedOption = event.options[event.selectedIndex];
         location = selectedOption.dataset.url
@@ -3413,7 +3413,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.38.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.37.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="approveLeaveApplication" class="">
                 <a href="#api-PayrollAu-approveLeaveApplication">approveLeaveApplication</a>
@@ -3569,12 +3569,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -3692,19 +3692,19 @@ const xeroTenantId = 'xeroTenantId_example';
 const idempotencyKey = 'KEY_VALUE';
 const dateOfBirth = '2000-10-28'
 
-const homeAddress: HomeAddress = { 
+const homeAddress: HomeAddress = {
   addressLine1: "123 Test st",
   region: "VIC",
   postalCode: 3000,
   city: "Melbourne"
-}; 
+};
 
-const employee: Employee = { 
+const employee: Employee = {
   firstName: "Adam",
   lastName: "Adamson",
   dateOfBirth: dateOfBirth,
   homeAddress: homeAddress
-}; 
+};
 
 try {
   const response = await xero.accountingApi.createEmployee(xeroTenantId, employee, idempotencyKey);
@@ -3717,12 +3717,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -3847,13 +3847,13 @@ const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-28'
 const endDate = '2020-10-30'
 
-const leaveApplication: LeaveApplication = { 
+const leaveApplication: LeaveApplication = {
   employeeId: "00000000-0000-0000-0000-000000000000",
   leaveTypeId: "00000000-0000-0000-0000-000000000000",
   title: "Annual Leave",
   startDate: startDate,
   endDate: endDate
-}; 
+};
 
 try {
   const response = await xero.accountingApi.createLeaveApplication(xeroTenantId, leaveApplication, idempotencyKey);
@@ -3866,12 +3866,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -3994,47 +3994,47 @@ This allows you to safely retry requests without the risk of duplicate processin
 const xeroTenantId = 'xeroTenantId_example';
 const idempotencyKey = 'KEY_VALUE';
 
-const earningsRate: EarningsRate = { 
+const earningsRate: EarningsRate = {
   name: "Ordinary Hours 123",
   accountCode: "477",
   typeOfUnits: "Hours",
   isExemptFromTax: true,
   isExemptFromSuper: true,
   earningsType: EarningsType.OVERTIMEEARNINGS
-}; 
+};
 
-const deductionType: DeductionType = { 
+const deductionType: DeductionType = {
   name: "Union Fees",
   accountCode: "826",
   reducesTax: true,
   reducesSuper: true
-}; 
+};
 
-const leaveType: LeaveType = { 
+const leaveType: LeaveType = {
   name: "Annual Leave",
   typeOfUnits: "Hours",
   isPaidLeave: true,
   showOnPayslip: true
-}; 
+};
 
-const reimbursementType: ReimbursementType = { 
+const reimbursementType: ReimbursementType = {
   name: "Annual Leave",
   accountCode: "850"
-};   
+};
 const earningsRates = [];
-earningsRates.push(earningsRate,  
-const deductionTypes = [];  
+earningsRates.push(earningsRate,
+const deductionTypes = [];
 const leaveTypes = [];
-leaveTypes.push(leaveType)  
+leaveTypes.push(leaveType)
 const reimbursementTypes = [];
 reimbursementTypes.push(reimbursementType)
 
-const payItem: PayItem = { 
+const payItem: PayItem = {
   earningsRates: earningsRates,
   deductionTypes: deductionTypes,
   leaveTypes: leaveTypes,
   reimbursementTypes: reimbursementTypes
-}; 
+};
 
 try {
   const response = await xero.accountingApi.createPayItem(xeroTenantId, payItem, idempotencyKey);
@@ -4047,12 +4047,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -4172,9 +4172,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 const xeroTenantId = 'xeroTenantId_example';
 const idempotencyKey = 'KEY_VALUE';
 
-const payRun: PayRun = { 
+const payRun: PayRun = {
   payrollCalendarID: "00000000-0000-0000-0000-000000000000"
-}; 
+};
 
 try {
   const response = await xero.accountingApi.createPayRun(xeroTenantId, payRun, idempotencyKey);
@@ -4187,12 +4187,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.payruns</td>
                       <td>Grant read-write access to payroll payruns</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -4317,12 +4317,12 @@ const idempotencyKey = 'KEY_VALUE';
 const startDate = '2000-10-28'
 const paymentDate = '2000-10-30'
 
-const payrollCalendar: PayrollCalendar = { 
+const payrollCalendar: PayrollCalendar = {
   name: "Weekly",
   calendarType: CalendarType.WEEKLY,
   startDate: startDate,
   paymentDate: paymentDate
-};   
+};
 const payrollCalendars = [];
 payrollCalendars.push(payrollCalendar)
 
@@ -4337,12 +4337,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -4465,10 +4465,10 @@ This allows you to safely retry requests without the risk of duplicate processin
 const xeroTenantId = 'xeroTenantId_example';
 const idempotencyKey = 'KEY_VALUE';
 
-const superFund: SuperFund = { 
+const superFund: SuperFund = {
   type: SuperFundType.REGULATED,
   USI: "40022701955002"
-}; 
+};
 
 try {
   const response = await xero.accountingApi.createSuperfund(xeroTenantId, superFund, idempotencyKey);
@@ -4481,12 +4481,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -4611,12 +4611,12 @@ const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-23'
 const endDate = '2020-10-30'
 
-const timesheet: Timesheet = { 
+const timesheet: Timesheet = {
   employeeID: "00000000-0000-0000-0000-000000000000",
   startDate: startDate,
   endDate: endDate,
   status: TimesheetStatus.DRAFT
-}; 
+};
 
 try {
   const response = await xero.accountingApi.createTimesheet(xeroTenantId, timesheet, idempotencyKey);
@@ -4629,12 +4629,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.timesheets</td>
                       <td>Grant read-write access to payroll timesheets</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -4768,17 +4768,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.employees.read</td>
                       <td>Grant read-only access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -4889,17 +4889,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.employees.read</td>
                       <td>Grant read-only access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -5064,17 +5064,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.employees.read</td>
                       <td>Grant read-only access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -5185,17 +5185,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.employees.read</td>
                       <td>Grant read-only access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -5363,17 +5363,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.employees.read</td>
                       <td>Grant read-only access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -5541,17 +5541,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.settings.read</td>
                       <td>Grant read-only access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -5716,17 +5716,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.payruns</td>
                       <td>Grant read-write access to payroll payruns</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.payruns.read</td>
                       <td>Grant read-only access to payroll payruns</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -5837,17 +5837,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.payruns</td>
                       <td>Grant read-write access to payroll payruns</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.payruns.read</td>
                       <td>Grant read-only access to payroll payruns</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -6012,17 +6012,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.settings.read</td>
                       <td>Grant read-only access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -6133,17 +6133,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.settings.read</td>
                       <td>Grant read-only access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -6308,17 +6308,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.payslip</td>
                       <td>Grant read-write access to payroll payslips</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.payslip.read</td>
                       <td>Grant read-only access to payroll payslips</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -6425,17 +6425,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.settings.read</td>
                       <td>Grant read-only access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -6510,17 +6510,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.settings.read</td>
                       <td>Grant read-only access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -6629,17 +6629,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.settings.read</td>
                       <td>Grant read-only access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -6764,17 +6764,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.settings.read</td>
                       <td>Grant read-only access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -6939,17 +6939,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.timesheets</td>
                       <td>Grant read-write access to payroll timesheets</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.timesheets.read</td>
                       <td>Grant read-only access to payroll timesheets</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -7060,17 +7060,17 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.timesheets</td>
                       <td>Grant read-write access to payroll timesheets</td>
                     </tr>
-                    
+
                     <tr>
                       <td>payroll.timesheets.read</td>
                       <td>Grant read-only access to payroll timesheets</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Header parameters</div>
@@ -7236,12 +7236,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -7360,19 +7360,19 @@ const employeeID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const idempotencyKey = 'KEY_VALUE';
 const dateOfBirth = '2000-10-28'
 
-const homeAddress: HomeAddress = { 
+const homeAddress: HomeAddress = {
   addressLine1: "123 Test st",
   region: "VIC",
   postalCode: 3000,
   city: "Melbourne"
-}; 
+};
 
-const employee: Employee = { 
+const employee: Employee = {
   firstName: "Adam",
   lastName: "Adamson",
   dateOfBirth: dateOfBirth,
   homeAddress: homeAddress
-}; 
+};
 
 try {
   const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeID, idempotencyKey, employee);
@@ -7385,12 +7385,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -7545,13 +7545,13 @@ const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-28'
 const endDate = '2020-10-30'
 
-const leaveApplication: LeaveApplication = { 
+const leaveApplication: LeaveApplication = {
   employeeId: "00000000-0000-0000-0000-000000000000",
   leaveTypeId: "00000000-0000-0000-0000-000000000000",
   title: "Annual Leave",
   startDate: startDate,
   endDate: endDate
-}; 
+};
 
 try {
   const response = await xero.accountingApi.updateLeaveApplication(xeroTenantId, leaveApplicationID, leaveApplication, idempotencyKey);
@@ -7564,12 +7564,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.employees</td>
                       <td>Grant read-write access to payroll employees</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -7726,9 +7726,9 @@ const xeroTenantId = 'xeroTenantId_example';
 const payRunID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const idempotencyKey = 'KEY_VALUE';
 
-const payRun: PayRun = { 
+const payRun: PayRun = {
   payrollCalendarID: "00000000-0000-0000-0000-000000000000"
-}; 
+};
 
 try {
   const response = await xero.accountingApi.updatePayRun(xeroTenantId, payRunID, idempotencyKey, payRun);
@@ -7741,12 +7741,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.payruns</td>
                       <td>Grant read-write access to payroll payruns</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -7899,17 +7899,17 @@ const xeroTenantId = 'xeroTenantId_example';
 const payslipID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const idempotencyKey = 'KEY_VALUE';
 
-const earningsLine: EarningsLine = { 
+const earningsLine: EarningsLine = {
   earningsRateID: "00000000-0000-0000-0000-000000000000",
   ratePerUnit: 20,
   numberOfUnits: 1
-};   
+};
 const earningsLines = [];
 earningsLines.push(earningsLine)
 
-const payslipLine: PayslipLines = { 
+const payslipLine: PayslipLines = {
   earningsLines: earningsLines
-};   
+};
 const payslipLines = [];
 payslipLines.push(payslipLine)
 
@@ -7924,12 +7924,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.payslip</td>
                       <td>Grant read-write access to payroll payslips</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -8082,10 +8082,10 @@ const xeroTenantId = 'xeroTenantId_example';
 const superFundID = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const idempotencyKey = 'KEY_VALUE';
 
-const superFund: SuperFund = { 
+const superFund: SuperFund = {
   type: SuperFundType.REGULATED,
   USI: "40022701955002"
-}; 
+};
 
 try {
   const response = await xero.accountingApi.updateSuperfund(xeroTenantId, superFundID, idempotencyKey, superFund);
@@ -8098,12 +8098,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.settings</td>
                       <td>Grant read-write access to payroll settings</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -8258,12 +8258,12 @@ const idempotencyKey = 'KEY_VALUE';
 const startDate = '2020-10-23'
 const endDate = '2020-10-30'
 
-const timesheet: Timesheet = { 
+const timesheet: Timesheet = {
   employeeID: "00000000-0000-0000-0000-000000000000",
   startDate: startDate,
   endDate: endDate,
   status: TimesheetStatus.DRAFT
-}; 
+};
 
 try {
   const response = await xero.accountingApi.updateTimesheet(xeroTenantId, timesheetID, idempotencyKey, timesheet);
@@ -8276,12 +8276,12 @@ try {
                   </div>
                   <h2>Scopes</h2>
                   <table>
-                    
+
                     <tr>
                       <td>payroll.timesheets</td>
                       <td>Grant read-write access to payroll timesheets</td>
                     </tr>
-                    
+
                   </table>
                   <h2>Parameters</h2>
                   <div class="methodsubtabletitle">Path parameters</div>
@@ -8919,7 +8919,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
+
 	// load the styles
 	var content = __webpack_require__(3);
 	if(typeof content === 'string') content = [[module.id, content, '']];
@@ -8946,11 +8946,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports = module.exports = __webpack_require__(4)();
 	// imports
-	
-	
+
+
 	// module
 	exports.push([module.id, ".json-formatter-row {\n  font-family: monospace;\n}\n.json-formatter-row,\n.json-formatter-row a,\n.json-formatter-row a:hover {\n  color: black;\n  text-decoration: none;\n}\n.json-formatter-row .json-formatter-row {\n  margin-left: 1rem;\n}\n.json-formatter-row .json-formatter-children.json-formatter-empty {\n  opacity: 0.5;\n  margin-left: 1rem;\n}\n.json-formatter-row .json-formatter-children.json-formatter-empty:after {\n  display: none;\n}\n.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-object:after {\n  content: \"No properties\";\n}\n.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-array:after {\n  content: \"[]\";\n}\n.json-formatter-row .json-formatter-string {\n  color: green;\n  white-space: pre;\n  word-wrap: break-word;\n}\n.json-formatter-row .json-formatter-number {\n  color: blue;\n}\n.json-formatter-row .json-formatter-boolean {\n  color: red;\n}\n.json-formatter-row .json-formatter-null {\n  color: #855A00;\n}\n.json-formatter-row .json-formatter-undefined {\n  color: #ca0b69;\n}\n.json-formatter-row .json-formatter-function {\n  color: #FF20ED;\n}\n.json-formatter-row .json-formatter-date {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.json-formatter-row .json-formatter-url {\n  text-decoration: underline;\n  color: blue;\n  cursor: pointer;\n}\n.json-formatter-row .json-formatter-bracket {\n  color: blue;\n}\n.json-formatter-row .json-formatter-key {\n  color: #00008B;\n  cursor: pointer;\n  padding-right: 0.2rem;\n}\n.json-formatter-row .json-formatter-constructor-name {\n  cursor: pointer;\n}\n.json-formatter-row .json-formatter-toggler {\n  line-height: 1.2rem;\n  font-size: 0.7rem;\n  vertical-align: middle;\n  opacity: 0.6;\n  cursor: pointer;\n  padding-right: 0.2rem;\n}\n.json-formatter-row .json-formatter-toggler:after {\n  display: inline-block;\n  transition: transform 100ms ease-in;\n  content: \"\\25BA\";\n}\n.json-formatter-row > a > .json-formatter-preview-text {\n  opacity: 0;\n  transition: opacity 0.15s ease-in;\n  font-style: italic;\n}\n.json-formatter-row:hover > a > .json-formatter-preview-text {\n  opacity: 0.6;\n}\n.json-formatter-row.json-formatter-open > .json-formatter-toggler-link .json-formatter-toggler:after {\n  transform: rotate(90deg);\n}\n.json-formatter-row.json-formatter-open > .json-formatter-children:after {\n  display: inline-block;\n}\n.json-formatter-row.json-formatter-open > a > .json-formatter-preview-text {\n  display: none;\n}\n.json-formatter-row.json-formatter-open.json-formatter-empty:after {\n  display: block;\n}\n.json-formatter-dark.json-formatter-row {\n  font-family: monospace;\n}\n.json-formatter-dark.json-formatter-row,\n.json-formatter-dark.json-formatter-row a,\n.json-formatter-dark.json-formatter-row a:hover {\n  color: white;\n  text-decoration: none;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-row {\n  margin-left: 1rem;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-children.json-formatter-empty {\n  opacity: 0.5;\n  margin-left: 1rem;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-children.json-formatter-empty:after {\n  display: none;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-object:after {\n  content: \"No properties\";\n}\n.json-formatter-dark.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-array:after {\n  content: \"[]\";\n}\n.json-formatter-dark.json-formatter-row .json-formatter-string {\n  color: #31F031;\n  white-space: pre;\n  word-wrap: break-word;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-number {\n  color: #66C2FF;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-boolean {\n  color: #EC4242;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-null {\n  color: #EEC97D;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-undefined {\n  color: #ef8fbe;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-function {\n  color: #FD48CB;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-date {\n  background-color: rgba(255, 255, 255, 0.05);\n}\n.json-formatter-dark.json-formatter-row .json-formatter-url {\n  text-decoration: underline;\n  color: #027BFF;\n  cursor: pointer;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-bracket {\n  color: #9494FF;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-key {\n  color: #23A0DB;\n  cursor: pointer;\n  padding-right: 0.2rem;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-constructor-name {\n  cursor: pointer;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-toggler {\n  line-height: 1.2rem;\n  font-size: 0.7rem;\n  vertical-align: middle;\n  opacity: 0.6;\n  cursor: pointer;\n  padding-right: 0.2rem;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-toggler:after {\n  display: inline-block;\n  transition: transform 100ms ease-in;\n  content: \"\\25BA\";\n}\n.json-formatter-dark.json-formatter-row > a > .json-formatter-preview-text {\n  opacity: 0;\n  transition: opacity 0.15s ease-in;\n  font-style: italic;\n}\n.json-formatter-dark.json-formatter-row:hover > a > .json-formatter-preview-text {\n  opacity: 0.6;\n}\n.json-formatter-dark.json-formatter-row.json-formatter-open > .json-formatter-toggler-link .json-formatter-toggler:after {\n  transform: rotate(90deg);\n}\n.json-formatter-dark.json-formatter-row.json-formatter-open > .json-formatter-children:after {\n  display: inline-block;\n}\n.json-formatter-dark.json-formatter-row.json-formatter-open > a > .json-formatter-preview-text {\n  display: none;\n}\n.json-formatter-dark.json-formatter-row.json-formatter-open.json-formatter-empty:after {\n  display: block;\n}\n", "", {"version":3,"sources":["/./src/style.less","/./src/style.less"],"names":[],"mappings":"AA0GA;EA3FE,uBAAA;CCbD;ADcC;;;EACE,aAAA;EACA,sBAAA;CCVH;ADkGD;EApFI,kBAAA;CCXH;ADeG;EACE,aAAA;EACA,kBAAA;CCbL;ADeK;EAAU,cAAA;CCZf;ADaK;EAAgC,yBAAA;CCVrC;ADWK;EAA+B,cAAA;CCRpC;ADkFD;EArEI,aAAA;EACA,iBAAA;EACA,sBAAA;CCVH;AD6ED;EAjE2B,YAAA;CCT1B;AD0ED;EAhE4B,WAAA;CCP3B;ADuED;EA/DyB,eAAA;CCLxB;ADoED;EA9D8B,eAAA;CCH7B;ADiED;EA7D6B,eAAA;CCD5B;AD8DD;EA5DyB,sCAAA;CCCxB;AD2DD;EA1DI,2BAAA;EACA,YAAA;EACA,gBAAA;CCEH;ADsDD;EArD4B,YAAA;CCE3B;ADmDD;EAnDI,eAAA;EACA,gBAAA;EACA,sBAAA;CCGH;AD8CD;EA9CI,gBAAA;CCGH;AD2CD;EA1CI,oBAAA;EACA,kBAAA;EACA,uBAAA;EACA,aAAA;EACA,gBAAA;EACA,sBAAA;CCEH;ADAG;EACE,sBAAA;EACA,oCAAA;EACA,iBAAA;CCEL;AD8BD;EA1BI,WAAA;EACA,kCAAA;EACA,mBAAA;CCDH;ADGC;EACE,aAAA;CCDH;ADKC;EAEI,yBAAA;CCJL;ADEC;EAKI,sBAAA;CCJL;ADDC;EAQI,cAAA;CCJL;ADMG;EACE,eAAA;CCJL;ADeD;EAhGE,uBAAA;CCoFD;ADnFC;;;EACE,aAAA;EACA,sBAAA;CCuFH;ADMD;EAzFI,kBAAA;CCsFH;ADlFG;EACE,aAAA;EACA,kBAAA;CCoFL;ADlFK;EAAU,cAAA;CCqFf;ADpFK;EAAgC,yBAAA;CCuFrC;ADtFK;EAA+B,cAAA;CCyFpC;ADVD;EA1EI,eAAA;EACA,iBAAA;EACA,sBAAA;CCuFH;ADfD;EAtE2B,eAAA;CCwF1B;ADlBD;EArE4B,eAAA;CC0F3B;ADrBD;EApEyB,eAAA;CC4FxB;ADxBD;EAnE8B,eAAA;CC8F7B;AD3BD;EAlE6B,eAAA;CCgG5B;AD9BD;EAjEyB,4CAAA;CCkGxB;ADjCD;EA/DI,2BAAA;EACA,eAAA;EACA,gBAAA;CCmGH;ADtCD;EA1D4B,eAAA;CCmG3B;ADzCD;EAxDI,eAAA;EACA,gBAAA;EACA,sBAAA;CCoGH;AD9CD;EAnDI,gBAAA;CCoGH;ADjDD;EA/CI,oBAAA;EACA,kBAAA;EACA,uBAAA;EACA,aAAA;EACA,gBAAA;EACA,sBAAA;CCmGH;ADjGG;EACE,sBAAA;EACA,oCAAA;EACA,iBAAA;CCmGL;AD9DD;EA/BI,WAAA;EACA,kCAAA;EACA,mBAAA;CCgGH;AD9FC;EACE,aAAA;CCgGH;AD5FC;EAEI,yBAAA;CC6FL;AD/FC;EAKI,sBAAA;CC6FL;ADlGC;EAQI,cAAA;CC6FL;AD3FG;EACE,eAAA;CC6FL","file":"style.less","sourcesContent":[".theme(\n  @default-color: black,\n  @string-color: green,\n  @number-color: blue,\n  @boolean-color: red,\n  @null-color: #855A00,\n  @undefined-color: rgb(202, 11, 105),\n  @function-color: #FF20ED,\n  @rotate-time: 100ms,\n  @toggler-opacity: 0.6,\n  @toggler-color: #45376F,\n  @bracket-color: blue,\n  @key-color: #00008B,\n  @url-color: blue ){\n\n  font-family: monospace;\n  &, a, a:hover {\n    color: @default-color;\n    text-decoration: none;\n  }\n\n  .json-formatter-row {\n    margin-left: 1rem;\n  }\n\n  .json-formatter-children {\n    &.json-formatter-empty {\n      opacity: 0.5;\n      margin-left: 1rem;\n\n      &:after { display: none; }\n      &.json-formatter-object:after { content: \"No properties\"; }\n      &.json-formatter-array:after { content: \"[]\"; }\n    }\n  }\n\n  .json-formatter-string {\n    color: @string-color;\n    white-space: pre;\n    word-wrap: break-word;\n  }\n  .json-formatter-number { color: @number-color; }\n  .json-formatter-boolean { color: @boolean-color; }\n  .json-formatter-null { color: @null-color; }\n  .json-formatter-undefined { color: @undefined-color; }\n  .json-formatter-function { color: @function-color; }\n  .json-formatter-date { background-color: fade(@default-color, 5%); }\n  .json-formatter-url {\n    text-decoration: underline;\n    color: @url-color;\n    cursor: pointer;\n  }\n\n  .json-formatter-bracket { color: @bracket-color; }\n  .json-formatter-key {\n    color: @key-color;\n    cursor: pointer;\n    padding-right: 0.2rem;\n  }\n  .json-formatter-constructor-name {\n    cursor: pointer;\n  }\n\n  .json-formatter-toggler {\n    line-height: 1.2rem;\n    font-size: 0.7rem;\n    vertical-align: middle;\n    opacity: @toggler-opacity;\n    cursor: pointer;\n    padding-right: 0.2rem;\n\n    &:after {\n      display: inline-block;\n      transition: transform @rotate-time ease-in;\n      content: \"►\";\n    }\n  }\n\n  // Inline preview on hover (optional)\n  > a > .json-formatter-preview-text {\n    opacity: 0;\n    transition: opacity .15s ease-in;\n    font-style: italic;\n  }\n  &:hover > a > .json-formatter-preview-text {\n    opacity: 0.6;\n  }\n\n  // Open state\n  &.json-formatter-open {\n    > .json-formatter-toggler-link .json-formatter-toggler:after{\n      transform: rotate(90deg);\n    }\n    > .json-formatter-children:after {\n      display: inline-block;\n    }\n    > a > .json-formatter-preview-text {\n      display: none;\n    }\n    &.json-formatter-empty:after {\n      display: block;\n    }\n  }\n}\n\n// Default theme\n.json-formatter-row {\n  .theme();\n}\n\n// Dark theme\n.json-formatter-dark.json-formatter-row {\n  .theme(\n    @default-color: white,\n    @string-color: #31F031,\n    @number-color: #66C2FF,\n    @boolean-color: #EC4242,\n    @null-color: #EEC97D,\n    @undefined-color: rgb(239, 143, 190),\n    @function-color: #FD48CB,\n    @rotate-time: 100ms,\n    @toggler-opacity: 0.6,\n    @toggler-color: #45376F,\n    @bracket-color: #9494FF,\n    @key-color: #23A0DB,\n    @url-color: #027BFF);\n}\n",".json-formatter-row {\n  font-family: monospace;\n}\n.json-formatter-row,\n.json-formatter-row a,\n.json-formatter-row a:hover {\n  color: black;\n  text-decoration: none;\n}\n.json-formatter-row .json-formatter-row {\n  margin-left: 1rem;\n}\n.json-formatter-row .json-formatter-children.json-formatter-empty {\n  opacity: 0.5;\n  margin-left: 1rem;\n}\n.json-formatter-row .json-formatter-children.json-formatter-empty:after {\n  display: none;\n}\n.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-object:after {\n  content: \"No properties\";\n}\n.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-array:after {\n  content: \"[]\";\n}\n.json-formatter-row .json-formatter-string {\n  color: green;\n  white-space: pre;\n  word-wrap: break-word;\n}\n.json-formatter-row .json-formatter-number {\n  color: blue;\n}\n.json-formatter-row .json-formatter-boolean {\n  color: red;\n}\n.json-formatter-row .json-formatter-null {\n  color: #855A00;\n}\n.json-formatter-row .json-formatter-undefined {\n  color: #ca0b69;\n}\n.json-formatter-row .json-formatter-function {\n  color: #FF20ED;\n}\n.json-formatter-row .json-formatter-date {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.json-formatter-row .json-formatter-url {\n  text-decoration: underline;\n  color: blue;\n  cursor: pointer;\n}\n.json-formatter-row .json-formatter-bracket {\n  color: blue;\n}\n.json-formatter-row .json-formatter-key {\n  color: #00008B;\n  cursor: pointer;\n  padding-right: 0.2rem;\n}\n.json-formatter-row .json-formatter-constructor-name {\n  cursor: pointer;\n}\n.json-formatter-row .json-formatter-toggler {\n  line-height: 1.2rem;\n  font-size: 0.7rem;\n  vertical-align: middle;\n  opacity: 0.6;\n  cursor: pointer;\n  padding-right: 0.2rem;\n}\n.json-formatter-row .json-formatter-toggler:after {\n  display: inline-block;\n  transition: transform 100ms ease-in;\n  content: \"►\";\n}\n.json-formatter-row > a > .json-formatter-preview-text {\n  opacity: 0;\n  transition: opacity 0.15s ease-in;\n  font-style: italic;\n}\n.json-formatter-row:hover > a > .json-formatter-preview-text {\n  opacity: 0.6;\n}\n.json-formatter-row.json-formatter-open > .json-formatter-toggler-link .json-formatter-toggler:after {\n  transform: rotate(90deg);\n}\n.json-formatter-row.json-formatter-open > .json-formatter-children:after {\n  display: inline-block;\n}\n.json-formatter-row.json-formatter-open > a > .json-formatter-preview-text {\n  display: none;\n}\n.json-formatter-row.json-formatter-open.json-formatter-empty:after {\n  display: block;\n}\n.json-formatter-dark.json-formatter-row {\n  font-family: monospace;\n}\n.json-formatter-dark.json-formatter-row,\n.json-formatter-dark.json-formatter-row a,\n.json-formatter-dark.json-formatter-row a:hover {\n  color: white;\n  text-decoration: none;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-row {\n  margin-left: 1rem;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-children.json-formatter-empty {\n  opacity: 0.5;\n  margin-left: 1rem;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-children.json-formatter-empty:after {\n  display: none;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-object:after {\n  content: \"No properties\";\n}\n.json-formatter-dark.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-array:after {\n  content: \"[]\";\n}\n.json-formatter-dark.json-formatter-row .json-formatter-string {\n  color: #31F031;\n  white-space: pre;\n  word-wrap: break-word;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-number {\n  color: #66C2FF;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-boolean {\n  color: #EC4242;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-null {\n  color: #EEC97D;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-undefined {\n  color: #ef8fbe;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-function {\n  color: #FD48CB;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-date {\n  background-color: rgba(255, 255, 255, 0.05);\n}\n.json-formatter-dark.json-formatter-row .json-formatter-url {\n  text-decoration: underline;\n  color: #027BFF;\n  cursor: pointer;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-bracket {\n  color: #9494FF;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-key {\n  color: #23A0DB;\n  cursor: pointer;\n  padding-right: 0.2rem;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-constructor-name {\n  cursor: pointer;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-toggler {\n  line-height: 1.2rem;\n  font-size: 0.7rem;\n  vertical-align: middle;\n  opacity: 0.6;\n  cursor: pointer;\n  padding-right: 0.2rem;\n}\n.json-formatter-dark.json-formatter-row .json-formatter-toggler:after {\n  display: inline-block;\n  transition: transform 100ms ease-in;\n  content: \"►\";\n}\n.json-formatter-dark.json-formatter-row > a > .json-formatter-preview-text {\n  opacity: 0;\n  transition: opacity 0.15s ease-in;\n  font-style: italic;\n}\n.json-formatter-dark.json-formatter-row:hover > a > .json-formatter-preview-text {\n  opacity: 0.6;\n}\n.json-formatter-dark.json-formatter-row.json-formatter-open > .json-formatter-toggler-link .json-formatter-toggler:after {\n  transform: rotate(90deg);\n}\n.json-formatter-dark.json-formatter-row.json-formatter-open > .json-formatter-children:after {\n  display: inline-block;\n}\n.json-formatter-dark.json-formatter-row.json-formatter-open > a > .json-formatter-preview-text {\n  display: none;\n}\n.json-formatter-dark.json-formatter-row.json-formatter-open.json-formatter-empty:after {\n  display: block;\n}\n"],"sourceRoot":"webpack://"}]);
-	
+
 	// exports
 
 
@@ -8965,7 +8965,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// css base code, injected by the css-loader
 	module.exports = function() {
 		var list = [];
-	
+
 		// return the list of modules as css string
 		list.toString = function toString() {
 			var result = [];
@@ -8979,7 +8979,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 			return result.join("");
 		};
-	
+
 		// import a list of modules into the list
 		list.i = function(modules, mediaQuery) {
 			if(typeof modules === "string")
@@ -9035,23 +9035,23 @@ return /******/ (function(modules) { // webpackBootstrap
 		singletonElement = null,
 		singletonCounter = 0,
 		styleElementsInsertedAtTop = [];
-	
+
 	module.exports = function(list, options) {
 		if(false) {
 			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
 		}
-	
+
 		options = options || {};
 		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 		// tags it will allow on a page
 		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-	
+
 		// By default, add <style> tags to the bottom of <head>.
 		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-	
+
 		var styles = listToStyles(list);
 		addStylesToDom(styles, options);
-	
+
 		return function update(newList) {
 			var mayRemove = [];
 			for(var i = 0; i < styles.length; i++) {
@@ -9074,7 +9074,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 		};
 	}
-	
+
 	function addStylesToDom(styles, options) {
 		for(var i = 0; i < styles.length; i++) {
 			var item = styles[i];
@@ -9096,7 +9096,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 		}
 	}
-	
+
 	function listToStyles(list) {
 		var styles = [];
 		var newStyles = {};
@@ -9114,7 +9114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		}
 		return styles;
 	}
-	
+
 	function insertStyleElement(options, styleElement) {
 		var head = getHeadElement();
 		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
@@ -9133,7 +9133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
 		}
 	}
-	
+
 	function removeStyleElement(styleElement) {
 		styleElement.parentNode.removeChild(styleElement);
 		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
@@ -9141,24 +9141,24 @@ return /******/ (function(modules) { // webpackBootstrap
 			styleElementsInsertedAtTop.splice(idx, 1);
 		}
 	}
-	
+
 	function createStyleElement(options) {
 		var styleElement = document.createElement("style");
 		styleElement.type = "text/css";
 		insertStyleElement(options, styleElement);
 		return styleElement;
 	}
-	
+
 	function createLinkElement(options) {
 		var linkElement = document.createElement("link");
 		linkElement.rel = "stylesheet";
 		insertStyleElement(options, linkElement);
 		return linkElement;
 	}
-	
+
 	function addStyle(obj, options) {
 		var styleElement, update, remove;
-	
+
 		if (options.singleton) {
 			var styleIndex = singletonCounter++;
 			styleElement = singletonElement || (singletonElement = createStyleElement(options));
@@ -9184,9 +9184,9 @@ return /******/ (function(modules) { // webpackBootstrap
 				removeStyleElement(styleElement);
 			};
 		}
-	
+
 		update(obj);
-	
+
 		return function updateStyle(newObj) {
 			if(newObj) {
 				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
@@ -9197,19 +9197,19 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 		};
 	}
-	
+
 	var replaceText = (function () {
 		var textStore = [];
-	
+
 		return function (index, replacement) {
 			textStore[index] = replacement;
 			return textStore.filter(Boolean).join('\n');
 		};
 	})();
-	
+
 	function applyToSingletonTag(styleElement, index, remove, obj) {
 		var css = remove ? "" : obj.css;
-	
+
 		if (styleElement.styleSheet) {
 			styleElement.styleSheet.cssText = replaceText(index, css);
 		} else {
@@ -9223,15 +9223,15 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 		}
 	}
-	
+
 	function applyToTag(styleElement, obj) {
 		var css = obj.css;
 		var media = obj.media;
-	
+
 		if(media) {
 			styleElement.setAttribute("media", media)
 		}
-	
+
 		if(styleElement.styleSheet) {
 			styleElement.styleSheet.cssText = css;
 		} else {
@@ -9241,22 +9241,22 @@ return /******/ (function(modules) { // webpackBootstrap
 			styleElement.appendChild(document.createTextNode(css));
 		}
 	}
-	
+
 	function updateLink(linkElement, obj) {
 		var css = obj.css;
 		var sourceMap = obj.sourceMap;
-	
+
 		if(sourceMap) {
             // https://developer.mozilla.org/en/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
 			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
 		}
-	
+
 		var blob = new Blob([css], { type: "text/css" });
-	
+
 		var oldSrc = linkElement.href;
-	
+
 		linkElement.href = URL.createObjectURL(blob);
-	
+
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}

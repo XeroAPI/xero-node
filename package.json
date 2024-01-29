@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "openid-client": "^4.9.1",
-    "request": "^2.88.0"
+    "axios": "^1.6.5"
   }
 }
