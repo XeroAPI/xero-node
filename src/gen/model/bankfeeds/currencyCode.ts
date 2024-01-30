@@ -165,6 +165,5 @@ export enum CurrencyCode {
     ZAR = <any> 'ZAR',
     ZMW = <any> 'ZMW',
     ZMK = <any> 'ZMK',
-    ZWD = <any> 'ZWD',
-    Empty = <any> ''
+    ZWD = <any> 'ZWD'
 }

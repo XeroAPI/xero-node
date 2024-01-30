@@ -223,6 +223,7 @@ export namespace TaxRate {
         IMESS = <any> 'IMESS',
         IMN33 = <any> 'IMN33',
         IMRE = <any> 'IMRE',
-        BADDEBTRECOVERY = <any> 'BADDEBTRECOVERY'
+        BADDEBTRECOVERY = <any> 'BADDEBTRECOVERY',
+        USSALESTAX = <any> 'USSALESTAX'
     }
 }
