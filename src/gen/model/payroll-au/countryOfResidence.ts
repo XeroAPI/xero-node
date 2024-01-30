@@ -1,6 +1,6 @@
 
 /**
-* Country of residence as a valid ISO 3166-1 alpha-2 country code e.g. \"AU\", \"NZ\", \"CA\" or an empty string (\"\") to unset a previously set value. Only applicable, and mandatory if income type is WORKINGHOLIDAYMAKER.
+* Country of residence as a valid ISO 3166-1 alpha-2 country code e.g. \"AU\", \"NZ\", \"CA\". Only applicable, and mandatory if income type is WORKINGHOLIDAYMAKER.
 */
 export enum CountryOfResidence {
     AF = <any> 'AF',
@@ -252,6 +252,5 @@ export enum CountryOfResidence {
     BQ = <any> 'BQ',
     CW = <any> 'CW',
     SX = <any> 'SX',
-    SS = <any> 'SS',
-    Empty = <any> ''
+    SS = <any> 'SS'
 }

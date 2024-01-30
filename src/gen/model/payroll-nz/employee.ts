@@ -54,6 +54,10 @@ export class Employee {
     * UTC timestamp when the employee was created in Xero
     */
     'createdDateUTC'?: Date;
+    /**
+    * Employee\'s job title
+    */
+    'jobTitle'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -127,6 +131,11 @@ export class Employee {
             "name": "createdDateUTC",
             "baseName": "createdDateUTC",
             "type": "Date"
+        },
+        {
+            "name": "jobTitle",
+            "baseName": "jobTitle",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
