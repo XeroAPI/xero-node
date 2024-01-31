@@ -87,7 +87,7 @@ export class BankFeedsApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param feedConnections Feed Connection(s) array object in the body
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async createFeedConnections (xeroTenantId: string, feedConnections: FeedConnections, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnections;  }> {
         const localVarPath = this.basePath + '/FeedConnections';
         let localVarQueryParameters: any = {};
@@ -156,12 +156,12 @@ export class BankFeedsApi {
         });
     }
     /**
-     *
+     * 
      * @summary Creates one or more new statements
      * @param xeroTenantId Xero identifier for Tenant
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param statements Statements array of objects in the body
-     */
+     */     
     public async createStatements (xeroTenantId: string, idempotencyKey?: string, statements?: Statements, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Statements;  }> {
         const localVarPath = this.basePath + '/Statements';
         let localVarQueryParameters: any = {};
@@ -231,7 +231,7 @@ export class BankFeedsApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param feedConnections Feed Connections array object in the body
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async deleteFeedConnections (xeroTenantId: string, feedConnections: FeedConnections, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnections;  }> {
         const localVarPath = this.basePath + '/FeedConnections/DeleteRequests';
         let localVarQueryParameters: any = {};
@@ -304,7 +304,7 @@ export class BankFeedsApi {
      * @summary Retrieve single feed connection based on a unique id provided
      * @param xeroTenantId Xero identifier for Tenant
      * @param id Unique identifier for retrieving single object
-     */
+     */     
     public async getFeedConnection (xeroTenantId: string, id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnection;  }> {
         const localVarPath = this.basePath + '/FeedConnections/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
@@ -378,7 +378,7 @@ export class BankFeedsApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 10. Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?page&#x3D;1 to get the second set of the records. When page value is not a number or a negative number, by default, the first set of records is returned.
      * @param pageSize Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?pageSize&#x3D;100 to specify page size of 100.
-     */
+     */     
     public async getFeedConnections (xeroTenantId: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnections;  }> {
         const localVarPath = this.basePath + '/FeedConnections';
         let localVarQueryParameters: any = {};
@@ -453,7 +453,7 @@ export class BankFeedsApi {
      * @summary Retrieve single statement based on unique id provided
      * @param xeroTenantId Xero identifier for Tenant
      * @param statementId statement id for single object
-     */
+     */     
     public async getStatement (xeroTenantId: string, statementId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Statement;  }> {
         const localVarPath = this.basePath + '/Statements/{statementId}'
             .replace('{' + 'statementId' + '}', encodeURIComponent(String(statementId)));
@@ -527,9 +527,9 @@ export class BankFeedsApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param page unique id for single object
      * @param pageSize Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/Statements?pageSize&#x3D;100 to specify page size of 100.
-     * @param xeroApplicationId
-     * @param xeroUserId
-     */
+     * @param xeroApplicationId 
+     * @param xeroUserId 
+     */     
     public async getStatements (xeroTenantId: string, page?: number, pageSize?: number, xeroApplicationId?: string, xeroUserId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Statements;  }> {
         const localVarPath = this.basePath + '/Statements';
         let localVarQueryParameters: any = {};

@@ -88,7 +88,7 @@ export class AssetApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param asset Fixed asset you are creating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async createAsset (xeroTenantId: string, asset: Asset, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Asset;  }> {
         const localVarPath = this.basePath + '/Assets';
         let localVarQueryParameters: any = {};
@@ -162,7 +162,7 @@ export class AssetApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param assetType Asset type to add
-     */
+     */     
     public async createAssetType (xeroTenantId: string, idempotencyKey?: string, assetType?: AssetType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: AssetType;  }> {
         const localVarPath = this.basePath + '/AssetTypes';
         let localVarQueryParameters: any = {};
@@ -226,11 +226,11 @@ export class AssetApi {
         });
     }
     /**
-     * By passing in the appropriate asset id, you can search for a specific fixed asset in the system
+     * By passing in the appropriate asset id, you can search for a specific fixed asset in the system 
      * @summary Retrieves fixed asset by id
      * @param xeroTenantId Xero identifier for Tenant
      * @param id fixed asset id for single object
-     */
+     */     
     public async getAssetById (xeroTenantId: string, id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Asset;  }> {
         const localVarPath = this.basePath + '/Assets/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
@@ -302,7 +302,7 @@ export class AssetApi {
      * By passing in the appropriate options, you can search for available fixed asset types in the system
      * @summary searches fixed asset settings
      * @param xeroTenantId Xero identifier for Tenant
-     */
+     */     
     public async getAssetSettings (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Setting;  }> {
         const localVarPath = this.basePath + '/Settings';
         let localVarQueryParameters: any = {};
@@ -368,7 +368,7 @@ export class AssetApi {
      * By passing in the appropriate options, you can search for available fixed asset types in the system
      * @summary searches fixed asset types
      * @param xeroTenantId Xero identifier for Tenant
-     */
+     */     
     public async getAssetTypes (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Array<AssetType>;  }> {
         const localVarPath = this.basePath + '/AssetTypes';
         let localVarQueryParameters: any = {};
@@ -440,7 +440,7 @@ export class AssetApi {
      * @param orderBy Requests can be ordered by AssetType, AssetName, AssetNumber, PurchaseDate and PurchasePrice. If the asset status is DISPOSED it also allows DisposalDate and DisposalPrice.
      * @param sortDirection ASC or DESC
      * @param filterBy A string that can be used to filter the list to only return assets containing the text. Checks it against the AssetName, AssetNumber, Description and AssetTypeName fields.
-     */
+     */     
     public async getAssets (xeroTenantId: string, status: AssetStatusQueryParam, page?: number, pageSize?: number, orderBy?: 'AssetType' | 'AssetName' | 'AssetNumber' | 'PurchaseDate' | 'PurchasePrice' | 'DisposalDate' | 'DisposalPrice', sortDirection?: 'asc' | 'desc', filterBy?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Assets;  }> {
         const localVarPath = this.basePath + '/Assets';
         let localVarQueryParameters: any = {};

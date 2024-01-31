@@ -43,7 +43,7 @@ export enum ProjectApiApiKeys {
 
 export class ProjectApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.37.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.38.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -90,12 +90,12 @@ export class ProjectApi {
     }
 
     /**
-     *
+     * 
      * @summary Create one or more new projects
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectCreateOrUpdate Create a new project with ProjectCreateOrUpdate object
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async createProject (xeroTenantId: string, projectCreateOrUpdate: ProjectCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Project;  }> {
         const localVarPath = this.basePath + '/Projects';
         let localVarQueryParameters: any = {};
@@ -170,7 +170,7 @@ export class ProjectApi {
      * @param projectId You can create a task on a specified projectId
      * @param taskCreateOrUpdate The task object you are creating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async createTask (xeroTenantId: string, projectId: string, taskCreateOrUpdate: TaskCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Task;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
@@ -251,7 +251,7 @@ export class ProjectApi {
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param timeEntryCreateOrUpdate The time entry object you are creating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async createTimeEntry (xeroTenantId: string, projectId: string, timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimeEntry;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
@@ -331,7 +331,7 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param taskId You can specify an individual task by appending the id to the endpoint
-     */
+     */     
     public async deleteTask (xeroTenantId: string, projectId: string, taskId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks/{taskId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
@@ -411,7 +411,7 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param timeEntryId You can specify an individual task by appending the id to the endpoint
-     */
+     */     
     public async deleteTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
@@ -490,7 +490,7 @@ export class ProjectApi {
      * @summary Retrieves a single project
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
-     */
+     */     
     public async getProject (xeroTenantId: string, projectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Project;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
@@ -564,7 +564,7 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param page set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
      * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-     */
+     */     
     public async getProjectUsers (xeroTenantId: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ProjectUsers;  }> {
         const localVarPath = this.basePath + '/ProjectsUsers';
         let localVarQueryParameters: any = {};
@@ -643,7 +643,7 @@ export class ProjectApi {
      * @param states Filter for projects in a particular state (INPROGRESS or CLOSED)
      * @param page set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
      * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
-     */
+     */     
     public async getProjects (xeroTenantId: string, projectIds?: Array<string>, contactID?: string, states?: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Projects;  }> {
         const localVarPath = this.basePath + '/Projects';
         let localVarQueryParameters: any = {};
@@ -731,7 +731,7 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param taskId You can specify an individual task by appending the taskId to the endpoint, i.e. GET https://.../tasks/{taskID}
-     */
+     */     
     public async getTask (xeroTenantId: string, projectId: string, taskId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Task;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks/{taskId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
@@ -813,8 +813,8 @@ export class ProjectApi {
      * @param page Set to 1 by default. The requested number of the page in paged response - Must be a number greater than 0.
      * @param pageSize Optional, it is set to 50 by default. The number of items to return per page in a paged response - Must be a number between 1 and 500.
      * @param taskIds Search for all tasks that match a comma separated list of taskIds, i.e. GET https://.../tasks?taskIds&#x3D;{taskID},{taskID}
-     * @param chargeType
-     */
+     * @param chargeType 
+     */     
     public async getTasks (xeroTenantId: string, projectId: string, page?: number, pageSize?: number, taskIds?: string, chargeType?: ChargeType, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Tasks;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
@@ -913,7 +913,7 @@ export class ProjectApi {
      * @param isChargeable Finds all time entries which relate to tasks with the charge type &#x60;TIME&#x60; or &#x60;FIXED&#x60;.
      * @param dateAfterUtc ISO 8601 UTC date. Finds all time entries on or after this date filtered on the &#x60;dateUtc&#x60; field.
      * @param dateBeforeUtc ISO 8601 UTC date. Finds all time entries on or before this date filtered on the &#x60;dateUtc&#x60; field.
-     */
+     */     
     public async getTimeEntries (xeroTenantId: string, projectId: string, userId?: string, taskId?: string, invoiceId?: string, contactId?: string, page?: number, pageSize?: number, states?: Array<string>, isChargeable?: boolean, dateAfterUtc?: Date, dateBeforeUtc?: Date, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimeEntries;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
@@ -1027,7 +1027,7 @@ export class ProjectApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param timeEntryId You can specify an individual time entry by appending the id to the endpoint
-     */
+     */     
     public async getTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimeEntry;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
@@ -1108,7 +1108,7 @@ export class ProjectApi {
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param projectPatch Update the status of an existing Project
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async patchProject (xeroTenantId: string, projectId: string, projectPatch: ProjectPatch, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
@@ -1189,7 +1189,7 @@ export class ProjectApi {
      * @param projectId You can specify an individual project by appending the projectId to the endpoint
      * @param projectCreateOrUpdate Request of type ProjectCreateOrUpdate
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async updateProject (xeroTenantId: string, projectId: string, projectCreateOrUpdate: ProjectCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)));
@@ -1271,7 +1271,7 @@ export class ProjectApi {
      * @param taskId You can specify an individual task by appending the id to the endpoint
      * @param taskCreateOrUpdate The task object you are updating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async updateTask (xeroTenantId: string, projectId: string, taskId: string, taskCreateOrUpdate: TaskCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Tasks/{taskId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))
@@ -1359,7 +1359,7 @@ export class ProjectApi {
      * @param timeEntryId You can specify an individual time entry by appending the id to the endpoint
      * @param timeEntryCreateOrUpdate The time entry object you are updating
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async updateTimeEntry (xeroTenantId: string, projectId: string, timeEntryId: string, timeEntryCreateOrUpdate: TimeEntryCreateOrUpdate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Projects/{projectId}/Time/{timeEntryId}'
             .replace('{' + 'projectId' + '}', encodeURIComponent(String(projectId)))

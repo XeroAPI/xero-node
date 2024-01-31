@@ -87,8 +87,8 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     * @param association
-     */
+     * @param association 
+     */     
     public async createFileAssociation (xeroTenantId: string, fileId: string, idempotencyKey?: string, association?: Association, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Association;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}/Associations'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
@@ -162,8 +162,8 @@ export class FilesApi {
      * @summary Creates a new folder
      * @param xeroTenantId Xero identifier for Tenant
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     * @param folder
-     */
+     * @param folder 
+     */     
     public async createFolder (xeroTenantId: string, idempotencyKey?: string, folder?: Folder, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Folder;  }> {
         const localVarPath = this.basePath + '/Folders';
         let localVarQueryParameters: any = {};
@@ -231,7 +231,7 @@ export class FilesApi {
      * @summary Deletes a specific file
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
-     */
+     */     
     public async deleteFile (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
@@ -304,7 +304,7 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
      * @param objectId Object id for single object
-     */
+     */     
     public async deleteFileAssociation (xeroTenantId: string, fileId: string, objectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}/Associations/{ObjectId}'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)))
@@ -382,7 +382,7 @@ export class FilesApi {
      * @summary Deletes a folder
      * @param xeroTenantId Xero identifier for Tenant
      * @param folderId Folder id for single object
-     */
+     */     
     public async deleteFolder (xeroTenantId: string, folderId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Folders/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
@@ -458,7 +458,7 @@ export class FilesApi {
      * @param page number of records to skip for pagination
      * @param sort values to sort by
      * @param direction direction to sort by
-     */
+     */     
     public async getAssociationsByObject (xeroTenantId: string, objectId: string, pagesize?: number, page?: number, sort?: 'Name' | 'CreatedDateUTC', direction?: 'ASC' | 'DESC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Array<Association>;  }> {
         const localVarPath = this.basePath + '/Associations/{ObjectId}'
             .replace('{' + 'ObjectId' + '}', encodeURIComponent(String(objectId)));
@@ -547,7 +547,7 @@ export class FilesApi {
      * @summary Retrieves a count of associations for a list of objects.
      * @param xeroTenantId Xero identifier for Tenant
      * @param objectIds A comma-separated list of object ids
-     */
+     */     
     public async getAssociationsCount (xeroTenantId: string, objectIds: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: object;  }> {
         const localVarPath = this.basePath + '/Associations/Count';
         let localVarQueryParameters: any = {};
@@ -619,11 +619,11 @@ export class FilesApi {
         });
     }
     /**
-     *
+     * 
      * @summary Retrieves a file by a unique file ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
-     */
+     */     
     public async getFile (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
@@ -692,11 +692,11 @@ export class FilesApi {
         });
     }
     /**
-     * By passing in the appropriate options,
+     * By passing in the appropriate options,  
      * @summary Retrieves a specific file associations
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
-     */
+     */     
     public async getFileAssociations (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Array<Association>;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}/Associations'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
@@ -769,7 +769,7 @@ export class FilesApi {
      * @summary Retrieves the content of a specific file
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
-     */
+     */     
     public async getFileContent (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}/Content'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
@@ -838,13 +838,13 @@ export class FilesApi {
         });
     }
     /**
-     *
+     * 
      * @summary Retrieves files
      * @param xeroTenantId Xero identifier for Tenant
      * @param pagesize pass an optional page size value
      * @param page number of records to skip for pagination
      * @param sort values to sort by
-     */
+     */     
     public async getFiles (xeroTenantId: string, pagesize?: number, page?: number, sort?: 'Name' | 'Size' | 'CreatedDateUTC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Files;  }> {
         const localVarPath = this.basePath + '/Files';
         let localVarQueryParameters: any = {};
@@ -923,7 +923,7 @@ export class FilesApi {
      * @summary Retrieves specific folder by using a unique folder ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param folderId Folder id for single object
-     */
+     */     
     public async getFolder (xeroTenantId: string, folderId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Folder;  }> {
         const localVarPath = this.basePath + '/Folders/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
@@ -996,7 +996,7 @@ export class FilesApi {
      * @summary Retrieves folders
      * @param xeroTenantId Xero identifier for Tenant
      * @param sort values to sort by
-     */
+     */     
     public async getFolders (xeroTenantId: string, sort?: 'Name' | 'Size' | 'CreatedDateUTC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Array<Folder>;  }> {
         const localVarPath = this.basePath + '/Folders';
         let localVarQueryParameters: any = {};
@@ -1066,7 +1066,7 @@ export class FilesApi {
      * Search for the user inbox
      * @summary Retrieves inbox folder
      * @param xeroTenantId Xero identifier for Tenant
-     */
+     */     
     public async getInbox (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Folder;  }> {
         const localVarPath = this.basePath + '/Inbox';
         let localVarQueryParameters: any = {};
@@ -1134,8 +1134,8 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     * @param fileObject
-     */
+     * @param fileObject 
+     */     
     public async updateFile (xeroTenantId: string, fileId: string, idempotencyKey?: string, fileObject?: FileObject, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
@@ -1209,9 +1209,9 @@ export class FilesApi {
      * @summary Updates an existing folder
      * @param xeroTenantId Xero identifier for Tenant
      * @param folderId Folder id for single object
-     * @param folder
+     * @param folder 
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */
+     */     
     public async updateFolder (xeroTenantId: string, folderId: string, folder: Folder, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Folder;  }> {
         const localVarPath = this.basePath + '/Folders/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
@@ -1286,15 +1286,15 @@ export class FilesApi {
         });
     }
     /**
-     *
+     * 
      * @summary Uploads a File to the inbox
      * @param xeroTenantId Xero identifier for Tenant
-     * @param body
+     * @param body 
      * @param name exact name of the file you are uploading
-     * @param filename
+     * @param filename 
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     * @param mimeType
-     */
+     * @param mimeType 
+     */     
     public async uploadFile (xeroTenantId: string, body: fs.ReadStream, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files';
         let localVarQueryParameters: any = {};
@@ -1390,16 +1390,16 @@ export class FilesApi {
         });
     }
     /**
-     *
+     * 
      * @summary Uploads a File to a specific folder
      * @param xeroTenantId Xero identifier for Tenant
      * @param folderId pass required folder id to save file to specific folder
-     * @param body
+     * @param body 
      * @param name exact name of the file you are uploading
-     * @param filename
+     * @param filename 
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     * @param mimeType
-     */
+     * @param mimeType 
+     */     
     public async uploadFileToFolder (xeroTenantId: string, folderId: string, body: fs.ReadStream, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
