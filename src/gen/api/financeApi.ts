@@ -104,7 +104,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -179,7 +180,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -250,7 +252,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -321,7 +324,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -395,7 +399,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -495,7 +500,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -574,7 +580,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -646,7 +653,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -724,7 +732,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -810,7 +819,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -894,7 +904,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -969,7 +980,8 @@ export class FinanceApi {
         let acceptHeadersFromSpec = [
                 "application/json"
             ];
-		const responseTypeOption = !acceptHeadersFromSpec.includes("application/json") ? "arraybuffer" : "json";
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
