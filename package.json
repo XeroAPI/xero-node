@@ -17,7 +17,7 @@
   "devDependencies": {
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.21",
-    "@types/request": "^2.48.4",
+    "@types/axios": "^0.14.0",
     "jest": "^24.9.0",
     "open": "^6.4.0",
     "prompt": "^1.0.0",

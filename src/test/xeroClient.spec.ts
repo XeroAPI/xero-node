@@ -32,7 +32,7 @@ describe('the XeroClient', () => {
       .get('/connections')
       .reply(200, connectionsResponse);
 
-    sinon.stub(xero, 'tokenRequest').returns({ body: JSON.stringify(refreshedTokenSet) });
+    sinon.stub(xero, 'tokenRequest').returns({ body: refreshedTokenSet });
 
     disconnect = nock('https://api.xero.com')
       .delete(`/connections/${connectionsResponse[0].tenantId}`)
