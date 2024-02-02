@@ -1,6 +1,7 @@
 import { Client, Issuer, TokenSet, TokenSetParameters, custom } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
+const axios = require('axios');
 import http = require('http');
 
 export { TokenSet, TokenSetParameters } from 'openid-client';
@@ -13,7 +14,7 @@ export interface IXeroClientConfig {
   scopes?: string[],
   state?: string,
   httpTimeout?: number,
-  clockTolerance?: number 
+  clockTolerance?: number
 };
 
 export interface XeroIdToken {
@@ -189,7 +190,7 @@ export class XeroClient {
 
   public async refreshWithRefreshToken(clientId, clientSecret, refreshToken): Promise<TokenSet> {
     const result = await this.tokenRequest(clientId, clientSecret, { grant_type: 'refresh_token', refresh_token: refreshToken });
-    const tokenSet = JSON.parse(result.body);
+    const tokenSet = result.body;
     this._tokenSet = new TokenSet(tokenSet);
     this.setAccessToken();
     return this._tokenSet;
@@ -198,33 +199,33 @@ export class XeroClient {
   public async getClientCredentialsToken(): Promise<TokenSet> {
     const { clientId, clientSecret, grantType, scopes } = this.config;
     const result = await this.tokenRequest(clientId, clientSecret, { grant_type: grantType, scopes });
-    const tokenSet = JSON.parse(result.body);
+    const tokenSet = result.body;
     this._tokenSet = new TokenSet(tokenSet);
     this.setAccessToken();
     return this._tokenSet;
   }
 
-  private async tokenRequest(clientId, clientSecret, body): Promise<{ response: http.IncomingMessage; body: string }> {
-    return new Promise<{ response: http.IncomingMessage; body: string }>((resolve, reject) => {
-      request({
-        method: 'POST',
-        uri: 'https://identity.xero.com/connect/token',
-        headers: {
-          authorization: "Basic " + Buffer.from(clientId + ":" + clientSecret).toString('base64'),
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: this.encodeBody(body)
-      }, (error, response, body) => {
-        if (error) {
-          reject(error);
+  private async tokenRequest(clientId, clientSecret, body): Promise<{ response: http.IncomingMessage; body: TokenSet }> {
+    return new Promise<{ response: http.IncomingMessage; body: TokenSet }>(async (resolve, reject) => {
+      try {
+        const response = await axios({
+          method: 'POST',
+          url: 'https://identity.xero.com/connect/token',
+          headers: {
+            "Authorization": `Basic ${Buffer.from(clientId + ":" + clientSecret).toString('base64')}`,
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          data: this.encodeBody(body)
+        })
+        if (response.status && response.status >= 200 && response.status <= 299) {
+          resolve({ response: response, body: response.data });
         } else {
-          if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-            resolve({ response: response, body: body });
-          } else {
-            reject({ response: response, body: body });
-          }
+          reject({ response: response, body: response.data });
         }
-      });
+      }
+      catch (error) {
+        reject(error)
+      }
     });
   }
 
@@ -250,25 +251,23 @@ export class XeroClient {
   }
 
   private async queryApi(method, uri): Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }> {
-    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }>((resolve, reject) => {
-      request({
-        method,
-        uri,
-        auth: {
-          bearer: this._tokenSet.access_token
-        },
-        json: true
-      }, (error, response, body) => {
-        if (error) {
-          reject(error);
+    return new Promise<{ response: http.IncomingMessage; body: Array<{ id: string, tenantId: string, tenantName: string, tenantType: string, orgData: any }> }>(async (resolve, reject) => {
+      try {
+        const response = await axios({
+          method,
+          url: uri,
+          headers: { "Authorization": `Bearer ${this._tokenSet.access_token}` },
+          responseType: 'json'
+        })
+        if (response.status && response.status >= 200 && response.status <= 299) {
+          resolve({ response: response, body: response.data });
         } else {
-          if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-            resolve({ response: response, body: body });
-          } else {
-            reject({ response: response, body: body });
-          }
+          reject({ response: response, body: response.data });
         }
-      });
+      }
+      catch (error) {
+        reject(error)
+      }
     });
   }
 

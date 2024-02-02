@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
 import http = require('http');
 import fs = require('fs');
 
@@ -23,6 +22,8 @@ import { UsageRecord } from '../model/appstore/usageRecord';
 import { UsageRecordsList } from '../model/appstore/usageRecordsList';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/appstore/models';
+import { ApiError } from '../../model/ApiError';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { OAuth } from '../model/appstore/models';
 
 let defaultBasePath = 'https://api.xero.com/appstore/2.0';
@@ -36,7 +37,7 @@ export enum AppStoreApiApiKeys {
 
 export class AppStoreApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.38.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.39.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -87,29 +88,34 @@ export class AppStoreApi {
      * @summary Retrieves a subscription for a given subscriptionId
      * @param subscriptionId Unique identifier for Subscription object
      */     
-    public async getSubscription (subscriptionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Subscription;  }> {
+    public async getSubscription (subscriptionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Subscription;  }> {
         const localVarPath = this.basePath + '/subscriptions/{subscriptionId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'subscriptionId' is not null or undefined
         if (subscriptionId === null || subscriptionId === undefined) {
             throw new Error('Required parameter subscriptionId was null or undefined when calling getSubscription.');
         }
 
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -119,24 +125,28 @@ export class AppStoreApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Subscription;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Subscription");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Subscription;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Subscription");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -145,29 +155,34 @@ export class AppStoreApi {
      * @summary Gets all usage records related to the subscription
      * @param subscriptionId Unique identifier for Subscription object
      */     
-    public async getUsageRecords (subscriptionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UsageRecordsList;  }> {
+    public async getUsageRecords (subscriptionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: UsageRecordsList;  }> {
         const localVarPath = this.basePath + '/subscriptions/{subscriptionId}/usage-records'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'subscriptionId' is not null or undefined
         if (subscriptionId === null || subscriptionId === undefined) {
             throw new Error('Required parameter subscriptionId was null or undefined when calling getUsageRecords.');
         }
 
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -177,24 +192,28 @@ export class AppStoreApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: UsageRecordsList;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "UsageRecordsList");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: UsageRecordsList;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "UsageRecordsList");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -206,13 +225,18 @@ export class AppStoreApi {
      * @param createUsageRecord Contains the quantity for the usage record to create
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async postUsageRecords (subscriptionId: string, subscriptionItemId: string, createUsageRecord: CreateUsageRecord, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UsageRecord;  }> {
+    public async postUsageRecords (subscriptionId: string, subscriptionItemId: string, createUsageRecord: CreateUsageRecord, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: UsageRecord;  }> {
         const localVarPath = this.basePath + '/subscriptions/{subscriptionId}/items/{subscriptionItemId}/usage-records'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
             .replace('{' + 'subscriptionItemId' + '}', encodeURIComponent(String(subscriptionItemId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'subscriptionId' is not null or undefined
         if (subscriptionId === null || subscriptionId === undefined) {
@@ -230,18 +254,17 @@ export class AppStoreApi {
         }
 
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(createUsageRecord, "CreateUsageRecord")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(createUsageRecord, "CreateUsageRecord"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -251,24 +274,28 @@ export class AppStoreApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: UsageRecord;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "UsageRecord");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: UsageRecord;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "UsageRecord");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -281,7 +308,7 @@ export class AppStoreApi {
      * @param updateUsageRecord Contains the quantity for the usage record to update
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async putUsageRecords (subscriptionId: string, subscriptionItemId: string, usageRecordId: string, updateUsageRecord: UpdateUsageRecord, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UsageRecord;  }> {
+    public async putUsageRecords (subscriptionId: string, subscriptionItemId: string, usageRecordId: string, updateUsageRecord: UpdateUsageRecord, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: UsageRecord;  }> {
         const localVarPath = this.basePath + '/subscriptions/{subscriptionId}/items/{subscriptionItemId}/usage-records/{usageRecordId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
             .replace('{' + 'subscriptionItemId' + '}', encodeURIComponent(String(subscriptionItemId)))
@@ -289,6 +316,11 @@ export class AppStoreApi {
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'subscriptionId' is not null or undefined
         if (subscriptionId === null || subscriptionId === undefined) {
@@ -311,18 +343,17 @@ export class AppStoreApi {
         }
 
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'PUT',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(updateUsageRecord, "UpdateUsageRecord")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(updateUsageRecord, "UpdateUsageRecord"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -332,24 +363,28 @@ export class AppStoreApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: UsageRecord;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "UsageRecord");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: UsageRecord;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "UsageRecord");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }

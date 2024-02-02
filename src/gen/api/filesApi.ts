@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
 import http = require('http');
 import fs = require('fs');
 
@@ -21,6 +20,8 @@ import { Files } from '../model/files/files';
 import { Folder } from '../model/files/folder';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/files/models';
+import { ApiError } from '../../model/ApiError';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { OAuth } from '../model/files/models';
 
 let defaultBasePath = 'https://api.xero.com/files.xro/1.0';
@@ -34,7 +35,7 @@ export enum FilesApiApiKeys {
 
 export class FilesApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.38.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.39.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -88,12 +89,17 @@ export class FilesApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param association 
      */     
-    public async createFileAssociation (xeroTenantId: string, fileId: string, idempotencyKey?: string, association?: Association, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Association;  }> {
+    public async createFileAssociation (xeroTenantId: string, fileId: string, idempotencyKey?: string, association?: Association, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Association;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}/Associations'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -107,18 +113,17 @@ export class FilesApi {
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(association, "Association")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(association, "Association"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -128,24 +133,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Association;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Association");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Association;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Association");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -156,11 +165,16 @@ export class FilesApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param folder 
      */     
-    public async createFolder (xeroTenantId: string, idempotencyKey?: string, folder?: Folder, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Folder;  }> {
+    public async createFolder (xeroTenantId: string, idempotencyKey?: string, folder?: Folder, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Folder;  }> {
         const localVarPath = this.basePath + '/Folders';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -169,18 +183,17 @@ export class FilesApi {
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(folder, "Folder")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(folder, "Folder"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -190,24 +203,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Folder;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Folder");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Folder;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Folder");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -217,12 +234,16 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
      */     
-    public async deleteFile (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async deleteFile (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -235,17 +256,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'DELETE',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -255,24 +276,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -283,13 +308,17 @@ export class FilesApi {
      * @param fileId File id for single object
      * @param objectId Object id for single object
      */     
-    public async deleteFileAssociation (xeroTenantId: string, fileId: string, objectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async deleteFileAssociation (xeroTenantId: string, fileId: string, objectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}/Associations/{ObjectId}'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)))
             .replace('{' + 'ObjectId' + '}', encodeURIComponent(String(objectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -307,17 +336,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'DELETE',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -327,24 +356,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -354,12 +387,16 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param folderId Folder id for single object
      */     
-    public async deleteFolder (xeroTenantId: string, folderId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async deleteFolder (xeroTenantId: string, folderId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Folders/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -372,17 +409,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'DELETE',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -392,24 +429,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
+            return new Promise<{ response: AxiosResponse; body?: any;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
 
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -423,12 +464,17 @@ export class FilesApi {
      * @param sort values to sort by
      * @param direction direction to sort by
      */     
-    public async getAssociationsByObject (xeroTenantId: string, objectId: string, pagesize?: number, page?: number, sort?: 'Name' | 'CreatedDateUTC', direction?: 'ASC' | 'DESC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Association>;  }> {
+    public async getAssociationsByObject (xeroTenantId: string, objectId: string, pagesize?: number, page?: number, sort?: 'Name' | 'CreatedDateUTC', direction?: 'ASC' | 'DESC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Array<Association>;  }> {
         const localVarPath = this.basePath + '/Associations/{ObjectId}'
             .replace('{' + 'ObjectId' + '}', encodeURIComponent(String(objectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -457,16 +503,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -476,24 +523,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Array<Association>;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Array<Association>");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Array<Association>;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Array<Association>");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -503,11 +554,16 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param objectIds A comma-separated list of object ids
      */     
-    public async getAssociationsCount (xeroTenantId: string, objectIds: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+    public async getAssociationsCount (xeroTenantId: string, objectIds: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: object;  }> {
         const localVarPath = this.basePath + '/Associations/Count';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -524,16 +580,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -543,24 +600,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: object;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "object");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: object;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "object");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -570,12 +631,17 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
      */     
-    public async getFile (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileObject;  }> {
+    public async getFile (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -588,17 +654,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -608,24 +674,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FileObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "FileObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: FileObject;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "FileObject");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -635,12 +705,17 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
      */     
-    public async getFileAssociations (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Association>;  }> {
+    public async getFileAssociations (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Array<Association>;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}/Associations'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -653,16 +728,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -672,24 +748,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Array<Association>;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Array<Association>");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Array<Association>;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Array<Association>");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -699,12 +779,17 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param fileId File id for single object
      */     
-    public async getFileContent (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
+    public async getFileContent (xeroTenantId: string, fileId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}/Content'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/octet-stream"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -717,17 +802,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            encoding: null,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -737,24 +822,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Buffer;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Buffer");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Buffer;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Buffer");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -766,11 +855,16 @@ export class FilesApi {
      * @param page number of records to skip for pagination
      * @param sort values to sort by
      */     
-    public async getFiles (xeroTenantId: string, pagesize?: number, page?: number, sort?: 'Name' | 'Size' | 'CreatedDateUTC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Files;  }> {
+    public async getFiles (xeroTenantId: string, pagesize?: number, page?: number, sort?: 'Name' | 'Size' | 'CreatedDateUTC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Files;  }> {
         const localVarPath = this.basePath + '/Files';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -790,17 +884,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -810,24 +904,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Files;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Files");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Files;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Files");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -837,12 +935,17 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param folderId Folder id for single object
      */     
-    public async getFolder (xeroTenantId: string, folderId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Folder;  }> {
+    public async getFolder (xeroTenantId: string, folderId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Folder;  }> {
         const localVarPath = this.basePath + '/Folders/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -855,17 +958,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -875,24 +978,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Folder;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Folder");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Folder;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Folder");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -902,11 +1009,16 @@ export class FilesApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param sort values to sort by
      */     
-    public async getFolders (xeroTenantId: string, sort?: 'Name' | 'Size' | 'CreatedDateUTC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Array<Folder>;  }> {
+    public async getFolders (xeroTenantId: string, sort?: 'Name' | 'Size' | 'CreatedDateUTC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Array<Folder>;  }> {
         const localVarPath = this.basePath + '/Folders';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -918,16 +1030,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -937,24 +1050,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Array<Folder>;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Array<Folder>");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Array<Folder>;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Array<Folder>");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -963,11 +1080,16 @@ export class FilesApi {
      * @summary Retrieves inbox folder
      * @param xeroTenantId Xero identifier for Tenant
      */     
-    public async getInbox (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Folder;  }> {
+    public async getInbox (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Folder;  }> {
         const localVarPath = this.basePath + '/Inbox';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -975,17 +1097,17 @@ export class FilesApi {
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -995,24 +1117,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Folder;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Folder");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Folder;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Folder");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -1024,12 +1150,17 @@ export class FilesApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param fileObject 
      */     
-    public async updateFile (xeroTenantId: string, fileId: string, idempotencyKey?: string, fileObject?: FileObject, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileObject;  }> {
+    public async updateFile (xeroTenantId: string, fileId: string, idempotencyKey?: string, fileObject?: FileObject, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FileId}'
             .replace('{' + 'FileId' + '}', encodeURIComponent(String(fileId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -1043,18 +1174,17 @@ export class FilesApi {
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'PUT',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(fileObject, "FileObject")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(fileObject, "FileObject"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1064,24 +1194,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FileObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "FileObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: FileObject;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "FileObject");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -1093,12 +1227,17 @@ export class FilesApi {
      * @param folder 
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateFolder (xeroTenantId: string, folderId: string, folder: Folder, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Folder;  }> {
+    public async updateFolder (xeroTenantId: string, folderId: string, folder: Folder, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Folder;  }> {
         const localVarPath = this.basePath + '/Folders/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -1117,18 +1256,17 @@ export class FilesApi {
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'PUT',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(folder, "Folder")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(folder, "Folder"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1138,24 +1276,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Folder;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Folder");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Folder;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Folder");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -1169,11 +1311,16 @@ export class FilesApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param mimeType 
      */     
-    public async uploadFile (xeroTenantId: string, body: fs.ReadStream, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileObject;  }> {
+    public async uploadFile (xeroTenantId: string, body: fs.ReadStream, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -1198,7 +1345,7 @@ export class FilesApi {
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
         if (body !== undefined) {
@@ -1214,13 +1361,13 @@ export class FilesApi {
             localVarFormParams['mimeType'] = ObjectSerializer.serialize(mimeType, "string");
         }
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         localVarUseFormData = true;
@@ -1234,24 +1381,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FileObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "FileObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: FileObject;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "FileObject");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -1266,12 +1417,17 @@ export class FilesApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param mimeType 
      */     
-    public async uploadFileToFolder (xeroTenantId: string, folderId: string, body: fs.ReadStream, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileObject;  }> {
+    public async uploadFileToFolder (xeroTenantId: string, folderId: string, body: fs.ReadStream, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -1301,7 +1457,7 @@ export class FilesApi {
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
         if (body !== undefined) {
@@ -1317,13 +1473,13 @@ export class FilesApi {
             localVarFormParams['mimeType'] = ObjectSerializer.serialize(mimeType, "string");
         }
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         localVarUseFormData = true;
@@ -1337,24 +1493,28 @@ export class FilesApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FileObject;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "FileObject");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: FileObject;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "FileObject");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }

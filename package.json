@@ -1,6 +1,6 @@
 {
   "name": "xero-node",
-  "version": "4.38.0",
+  "version": "4.39.0",
   "description": "Xero NodeJS OAuth 2.0 client for xero-node",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
   "devDependencies": {
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.21",
-    "@types/request": "^2.48.4",
+    "@types/axios": "^0.14.0",
     "jest": "^24.9.0",
     "open": "^6.4.0",
     "prompt": "^1.0.0",
@@ -27,7 +27,7 @@
     "sinon": "^9.0.0"
   },
   "dependencies": {
-    "openid-client": "^4.9.1",
-    "request": "^2.88.0"
+    "axios": "^1.6.5",
+    "openid-client": "^4.9.1"
   }
 }

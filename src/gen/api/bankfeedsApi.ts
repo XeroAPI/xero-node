@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
 import http = require('http');
 import fs = require('fs');
 
@@ -21,6 +20,8 @@ import { Statement } from '../model/bankfeeds/statement';
 import { Statements } from '../model/bankfeeds/statements';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/bankfeeds/models';
+import { ApiError } from '../../model/ApiError';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { OAuth } from '../model/bankfeeds/models';
 
 let defaultBasePath = 'https://api.xero.com/bankfeeds.xro/1.0';
@@ -34,7 +35,7 @@ export enum BankFeedsApiApiKeys {
 
 export class BankFeedsApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.38.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.39.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -87,11 +88,16 @@ export class BankFeedsApi {
      * @param feedConnections Feed Connection(s) array object in the body
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createFeedConnections (xeroTenantId: string, feedConnections: FeedConnections, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FeedConnections;  }> {
+    public async createFeedConnections (xeroTenantId: string, feedConnections: FeedConnections, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnections;  }> {
         const localVarPath = this.basePath + '/FeedConnections';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -105,18 +111,17 @@ export class BankFeedsApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(feedConnections, "FeedConnections")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(feedConnections, "FeedConnections"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -126,24 +131,28 @@ export class BankFeedsApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FeedConnections;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "FeedConnections");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: FeedConnections;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "FeedConnections");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -154,11 +163,17 @@ export class BankFeedsApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param statements Statements array of objects in the body
      */     
-    public async createStatements (xeroTenantId: string, idempotencyKey?: string, statements?: Statements, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Statements;  }> {
+    public async createStatements (xeroTenantId: string, idempotencyKey?: string, statements?: Statements, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Statements;  }> {
         const localVarPath = this.basePath + '/Statements';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json",
+                "application/problem+json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -167,18 +182,17 @@ export class BankFeedsApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(statements, "Statements")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(statements, "Statements"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -188,24 +202,28 @@ export class BankFeedsApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Statements;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Statements");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Statements;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Statements");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -216,11 +234,16 @@ export class BankFeedsApi {
      * @param feedConnections Feed Connections array object in the body
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async deleteFeedConnections (xeroTenantId: string, feedConnections: FeedConnections, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FeedConnections;  }> {
+    public async deleteFeedConnections (xeroTenantId: string, feedConnections: FeedConnections, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnections;  }> {
         const localVarPath = this.basePath + '/FeedConnections/DeleteRequests';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -234,18 +257,17 @@ export class BankFeedsApi {
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'POST',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(feedConnections, "FeedConnections")
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: ObjectSerializer.serialize(feedConnections, "FeedConnections"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -255,24 +277,28 @@ export class BankFeedsApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FeedConnections;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "FeedConnections");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: FeedConnections;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "FeedConnections");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -282,12 +308,17 @@ export class BankFeedsApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param id Unique identifier for retrieving single object
      */     
-    public async getFeedConnection (xeroTenantId: string, id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FeedConnection;  }> {
+    public async getFeedConnection (xeroTenantId: string, id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnection;  }> {
         const localVarPath = this.basePath + '/FeedConnections/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -300,17 +331,17 @@ export class BankFeedsApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -320,24 +351,28 @@ export class BankFeedsApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FeedConnection;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "FeedConnection");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: FeedConnection;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "FeedConnection");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -348,11 +383,16 @@ export class BankFeedsApi {
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 10. Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?page&#x3D;1 to get the second set of the records. When page value is not a number or a negative number, by default, the first set of records is returned.
      * @param pageSize Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?pageSize&#x3D;100 to specify page size of 100.
      */     
-    public async getFeedConnections (xeroTenantId: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FeedConnections;  }> {
+    public async getFeedConnections (xeroTenantId: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnections;  }> {
         const localVarPath = this.basePath + '/FeedConnections';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -368,17 +408,17 @@ export class BankFeedsApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -388,24 +428,28 @@ export class BankFeedsApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FeedConnections;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "FeedConnections");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: FeedConnections;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "FeedConnections");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -415,12 +459,17 @@ export class BankFeedsApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param statementId statement id for single object
      */     
-    public async getStatement (xeroTenantId: string, statementId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Statement;  }> {
+    public async getStatement (xeroTenantId: string, statementId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Statement;  }> {
         const localVarPath = this.basePath + '/Statements/{statementId}'
             .replace('{' + 'statementId' + '}', encodeURIComponent(String(statementId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -433,17 +482,17 @@ export class BankFeedsApi {
         }
 
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -453,24 +502,28 @@ export class BankFeedsApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Statement;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Statement");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Statement;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Statement");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }
@@ -483,11 +536,17 @@ export class BankFeedsApi {
      * @param xeroApplicationId 
      * @param xeroUserId 
      */     
-    public async getStatements (xeroTenantId: string, page?: number, pageSize?: number, xeroApplicationId?: string, xeroUserId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Statements;  }> {
+    public async getStatements (xeroTenantId: string, page?: number, pageSize?: number, xeroApplicationId?: string, xeroUserId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Statements;  }> {
         const localVarPath = this.basePath + '/Statements';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
+        let acceptHeadersFromSpec = [
+                "application/json",
+                "application/problem+json"
+            ];
+        const isBufferType = acceptHeadersFromSpec.includes("application/pdf")|| acceptHeadersFromSpec.includes("application/octet-stream") || acceptHeadersFromSpec.includes("application/jpg");
+		const responseTypeOption = isBufferType ? "arraybuffer" : "json";
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
@@ -505,17 +564,17 @@ export class BankFeedsApi {
         localVarHeaderParams['Xero-Tenant-Id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Xero-Application-Id'] = ObjectSerializer.serialize(xeroApplicationId, "string");
         localVarHeaderParams['Xero-User-Id'] = ObjectSerializer.serialize(xeroUserId, "string");
-
+        localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
         (<any>Object).assign(localVarHeaderParams, options.headers);
         let localVarUseFormData = false;
 
-        let localVarRequestOptions: localVarRequest.Options = {
+        let localVarRequestOptions: AxiosRequestConfig = {
             method: 'GET',
-            qs: localVarQueryParameters,
+            params: localVarQueryParameters,
             headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
+            url: localVarPath,
+            responseType: responseTypeOption,
+            data: {},
         };
 
         let authenticationPromise = Promise.resolve();
@@ -525,24 +584,28 @@ export class BankFeedsApi {
         return authenticationPromise.then(() => {
             if (Object.keys(localVarFormParams).length) {
                 if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                    (<any>localVarRequestOptions).data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'Content-Type': 'multipart/form-data' };
                 } else {
-                    localVarRequestOptions.form = localVarFormParams;
+                    localVarRequestOptions.data = localVarFormParams;
+                    localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: Statements;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "Statements");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+            return new Promise<{ response: AxiosResponse; body: Statements;  }>(async (resolve, reject) => {
+            let body = null
+            try {
+                const response = await axios(localVarRequestOptions)
+                         body = ObjectSerializer.deserialize(response.data, "Statements");
+                        if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject({ response: response, body: body });
                         }
-                    }
-                });
+                }
+                catch(error) {
+                     const errorResponse = new ApiError(error)
+					 reject(JSON.stringify(errorResponse.generateError()))
+                }
             });
         });
     }

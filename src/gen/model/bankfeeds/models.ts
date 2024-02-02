@@ -10,9 +10,7 @@ export * from '././startBalance';
 export * from '././statement';
 export * from '././statementLine';
 export * from '././statements';
-
-import localVarRequest = require('request');
-
+import { AxiosRequestConfig } from 'axios';
 import { CountryCode } from '././countryCode';
 import { CreditDebitIndicator } from '././creditDebitIndicator';
 import { CurrencyCode } from '././currencyCode';
@@ -193,14 +191,14 @@ export interface Authentication {
     /**
     * Apply authentication settings to header and query params.
     */
-    applyToRequest(requestOptions: localVarRequest.Options): Promise<void> | void;
+    applyToRequest(requestOptions: AxiosRequestConfig): Promise<void> | void;
 }
 
 export class HttpBasicAuth implements Authentication {
     public username: string = '';
     public password: string = '';
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
+    applyToRequest(requestOptions: AxiosRequestConfig): void {
         requestOptions.auth = {
             username: this.username, password: this.password
         }
@@ -213,9 +211,9 @@ export class ApiKeyAuth implements Authentication {
     constructor(private location: string, private paramName: string) {
     }
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
+    applyToRequest(requestOptions: AxiosRequestConfig): void {
         if (this.location == "query") {
-            (<any>requestOptions.qs)[this.paramName] = this.apiKey;
+            (<any>requestOptions.params)[this.paramName] = this.apiKey;
         } else if (this.location == "header" && requestOptions && requestOptions.headers) {
             requestOptions.headers[this.paramName] = this.apiKey;
         }
@@ -225,7 +223,7 @@ export class ApiKeyAuth implements Authentication {
 export class OAuth implements Authentication {
     public accessToken: string = '';
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
+    applyToRequest(requestOptions: AxiosRequestConfig): void {
         if (requestOptions && requestOptions.headers) {
             requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
         }
@@ -236,7 +234,7 @@ export class VoidAuth implements Authentication {
     public username: string = '';
     public password: string = '';
 
-    applyToRequest(_: localVarRequest.Options): void {
+    applyToRequest(_): void {
         // Do nothing
     }
 }
