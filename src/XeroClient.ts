@@ -7,7 +7,7 @@ import http = require('http');
 export { TokenSet, TokenSetParameters } from 'openid-client';
 
 export interface IXeroClientConfig {
-	clientId: string,
+  clientId: string,
 	clientSecret: string,
 	redirectUris?: string[],
 	grantType?: string;
