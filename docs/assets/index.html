@@ -1393,7 +1393,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Asset"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Asset"><strong>VSN: </strong>4.39.0</li>
+              <li class="nav-header" data-group="Asset"><strong>VSN: </strong>5.0.0</li>
               <li class="nav-header" data-group="Asset"><a href="#api-Asset">Methods</a></li>
               <li data-group="Asset" data-name="createAsset" class="">
                 <a href="#api-Asset-createAsset">createAsset</a>
@@ -1618,7 +1618,7 @@ const assetType: AssetType = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createAssetType(xeroTenantId, idempotencyKey, assetType);
+  const response = await xero.accountingApi.createAssetType(xeroTenantId, assetType, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1692,7 +1692,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">assetType </td>
+                    <tr><td style="width:150px;">assetType <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -1704,6 +1704,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 Asset type to add
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -1715,7 +1718,8 @@ Asset type to add
       },
       "example" : "{ \"assetTypeName\":\"Machinery11004\", \"fixedAssetAccountId\":\"3d8d063a-c148-4bb8-8b3c-a5e2ad3b1e82\", \"depreciationExpenseAccountId\":\"d1602f69-f900-4616-8d34-90af393fa368\", \"accumulatedDepreciationAccountId\":\"9195cadd-8645-41e6-9f67-7bcd421defe8\", \"bookDepreciationSetting\":{ \"depreciationMethod\":\"DiminishingValue100\", \"averagingMethod\":\"ActualDays\", \"depreciationRate\":0.05, \"depreciationCalculationMethod\":\"None\" } }"
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>

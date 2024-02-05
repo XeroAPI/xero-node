@@ -3413,7 +3413,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>4.39.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>5.0.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="approveLeaveApplication" class="">
                 <a href="#api-PayrollAu-approveLeaveApplication">approveLeaveApplication</a>
@@ -7375,7 +7375,7 @@ const employee: Employee = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeID, idempotencyKey, employee);
+  const response = await xero.accountingApi.updateEmployee(xeroTenantId, employeeID, employee, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -7482,7 +7482,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">employee </td>
+                    <tr><td style="width:150px;">employee <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -7494,6 +7494,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -7507,7 +7510,8 @@ This allows you to safely retry requests without the risk of duplicate processin
       },
       "example" : "[ { \"MiddleNames\": \"Frank\" } ]"
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>
@@ -7731,7 +7735,7 @@ const payRun: PayRun = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updatePayRun(xeroTenantId, payRunID, idempotencyKey, payRun);
+  const response = await xero.accountingApi.updatePayRun(xeroTenantId, payRunID, payRun, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -7838,7 +7842,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">payRun </td>
+                    <tr><td style="width:150px;">payRun <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -7850,6 +7854,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -7863,7 +7870,8 @@ This allows you to safely retry requests without the risk of duplicate processin
         }
       }
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>
@@ -7914,7 +7922,7 @@ const payslipLines = [];
 payslipLines.push(payslipLine)
 
 try {
-  const response = await xero.accountingApi.updatePayslip(xeroTenantId, payslipID, idempotencyKey, payslipLines);
+  const response = await xero.accountingApi.updatePayslip(xeroTenantId, payslipID, payslipLines, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -8021,7 +8029,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">payslipLines </td>
+                    <tr><td style="width:150px;">payslipLines <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -8033,6 +8041,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -8046,7 +8057,8 @@ This allows you to safely retry requests without the risk of duplicate processin
       },
       "example" : "{ \"Payslip\": { \"EmployeeID\": \"cdfb8371-0b21-4b8a-8903-1024df6c391e\", \"DeductionLines\": [ { \"DeductionTypeID\": \"727af5e8-b347-4ae7-85fc-9b82266d0aec\", \"CalculationType\": \"FIXEDAMOUNT\", \"NumberOfUnits\": 10 } ] } }"
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>
@@ -8088,7 +8100,7 @@ const superFund: SuperFund = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateSuperfund(xeroTenantId, superFundID, idempotencyKey, superFund);
+  const response = await xero.accountingApi.updateSuperfund(xeroTenantId, superFundID, superFund, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -8195,7 +8207,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">superFund </td>
+                    <tr><td style="width:150px;">superFund <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -8207,6 +8219,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -8220,7 +8235,8 @@ This allows you to safely retry requests without the risk of duplicate processin
       },
       "example" : " [ { \"Type\":\"REGULATED\", \"Name\":\"Nice23534\" } ]"
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>
@@ -8266,7 +8282,7 @@ const timesheet: Timesheet = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateTimesheet(xeroTenantId, timesheetID, idempotencyKey, timesheet);
+  const response = await xero.accountingApi.updateTimesheet(xeroTenantId, timesheetID, timesheet, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -8373,7 +8389,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">timesheet </td>
+                    <tr><td style="width:150px;">timesheet <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -8385,6 +8401,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -8398,7 +8417,8 @@ This allows you to safely retry requests without the risk of duplicate processin
       },
       "example" : "[ { \"EmployeeID\":\"b34e89ff-770d-4099-b7e5-f968767118bc\", \"StartDate\":\"/Date(1573171200000+0000)/\", \"EndDate\":\"/Date(1573689600000+0000)/\", \"Status\":\"APPROVED\", \"Hours\":22.0, \"TimesheetID\":\"a7eb0a79-8511-4ee7-b473-3a25f28abcb9\", \"TimesheetLines\":[ { \"EarningsRateID\":\"ab874dfb-ab09-4c91-954e-43acf6fc23b4\", \"TrackingItemID\":\"af5e9ce2-2349-4136-be99-3561b189f473\", \"NumberOfUnits\":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ], \"UpdatedDateUTC\":\"/Date(1573516185127+0000)/\" } ] } ]"
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>

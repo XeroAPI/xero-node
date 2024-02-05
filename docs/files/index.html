@@ -1156,7 +1156,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Files"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Files"><strong>VSN: </strong>4.39.0</li>
+              <li class="nav-header" data-group="Files"><strong>VSN: </strong>5.0.0</li>
               <li class="nav-header" data-group="Files"><a href="#api-Files">Methods</a></li>
               <li data-group="Files" data-name="createFileAssociation" class="">
                 <a href="#api-Files-createFileAssociation">createFileAssociation</a>
@@ -1260,7 +1260,7 @@ const fileId = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createFileAssociation(xeroTenantId, fileId, idempotencyKey, association);
+  const response = await xero.accountingApi.createFileAssociation(xeroTenantId, fileId, association, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1367,7 +1367,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">association </td>
+                    <tr><td style="width:150px;">association <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -1379,6 +1379,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -1389,7 +1392,8 @@ This allows you to safely retry requests without the risk of duplicate processin
       },
       "example" : "{ \"ObjectId\": \"1270bf7c-5d18-473a-9231-1e36c4bd33ed\", \"ObjectGroup\": \"Contact\", \"ObjectType\": \"Business\" }"
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>
@@ -1425,7 +1429,7 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createFolder(xeroTenantId, idempotencyKey, folder);
+  const response = await xero.accountingApi.createFolder(xeroTenantId, folder, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1499,7 +1503,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">folder </td>
+                    <tr><td style="width:150px;">folder <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -1511,6 +1515,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -1521,7 +1528,8 @@ This allows you to safely retry requests without the risk of duplicate processin
       },
       "example" : "{ \"Name\": \"My Docs\" }"
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>
@@ -3073,7 +3081,7 @@ const fileId = '4ff1e5cc-9835-40d5-bb18-09fdb118db9c';
 const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.updateFile(xeroTenantId, fileId, idempotencyKey, fileObject);
+  const response = await xero.accountingApi.updateFile(xeroTenantId, fileId, fileObject, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -3180,7 +3188,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">fileObject </td>
+                    <tr><td style="width:150px;">fileObject <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -3192,6 +3200,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -3202,7 +3213,8 @@ This allows you to safely retry requests without the risk of duplicate processin
       },
       "example" : "{ \"FolderId\": \"bf924975-7097-46f2-a143-1ecfbab3c8c3\" }"
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>
