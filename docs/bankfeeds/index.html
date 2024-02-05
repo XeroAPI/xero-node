@@ -1269,7 +1269,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="BankFeeds"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="BankFeeds"><strong>VSN: </strong>4.39.0</li>
+              <li class="nav-header" data-group="BankFeeds"><strong>VSN: </strong>5.0.0</li>
               <li class="nav-header" data-group="BankFeeds"><a href="#api-BankFeeds">Methods</a></li>
               <li data-group="BankFeeds" data-name="createFeedConnections" class="">
                 <a href="#api-BankFeeds-createFeedConnections">createFeedConnections</a>
@@ -1484,7 +1484,7 @@ const xeroTenantId = 'xeroTenantId_example';
 const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createStatements(xeroTenantId, idempotencyKey, statements);
+  const response = await xero.accountingApi.createStatements(xeroTenantId, statements, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -1558,7 +1558,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                       <th width="150px">Name</th>
                       <th>Description</th>
                     </tr>
-                    <tr><td style="width:150px;">statements </td>
+                    <tr><td style="width:150px;">statements <span style="color:red;">*</span></td>
 <td>
 <div class="json-schema-view">
             <div class="primitive">
@@ -1570,6 +1570,9 @@ This allows you to safely retry requests without the risk of duplicate processin
 Statements array of objects in the body
                     </div>
             </div>
+                <div class="inner required">
+                    Required
+                </div>
         </div>
 <script type="application/ld+json">
     {
@@ -1629,7 +1632,8 @@ Statements array of objects in the body
         } ]
       }
     }
-  }
+  },
+  "required" : true
 }
 </script>
                   </table>

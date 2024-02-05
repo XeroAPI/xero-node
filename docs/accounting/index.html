@@ -6094,7 +6094,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>4.39.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>5.0.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -7579,9 +7579,9 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 
 const contact: Contact = { 
   contactID: "00000000-0000-0000-0000-000000000000"
@@ -7612,7 +7612,7 @@ const bankTransactions: BankTransactions = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createBankTransactions(xeroTenantId, bankTransactions, idempotencyKey, summarizeErrors, unitdp);
+  const response = await xero.accountingApi.createBankTransactions(xeroTenantId, bankTransactions,  summarizeErrors, unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -9597,8 +9597,8 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 
 const phone: Phone = { 
   phoneNumber: "555-1212",
@@ -9618,7 +9618,7 @@ const contacts: Contacts = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createContacts(xeroTenantId, contacts, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createContacts(xeroTenantId, contacts,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -9780,8 +9780,8 @@ If false return 200 OK and mix of successfully created objects and any with vali
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const creditNoteID = '00000000-0000-0000-0000-000000000000';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const currDate = '2020-12-10'
 
 const invoice: Invoice = { 
@@ -9799,7 +9799,7 @@ const allocations: Allocations = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createCreditNoteAllocation(xeroTenantId, creditNoteID, allocations, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createCreditNoteAllocation(xeroTenantId, creditNoteID, allocations,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -9995,8 +9995,8 @@ If false return 200 OK and mix of successfully created objects and any with vali
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const creditNoteID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
-const idempotencyKey = 'KEY_VALUE';
 const includeOnline = true;
+const idempotencyKey = 'KEY_VALUE';
 const path = require("path");
 const mime = require("mime-types");
 const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
@@ -10004,7 +10004,7 @@ const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
 const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createCreditNoteAttachmentByFileName(xeroTenantId, creditNoteID, fileName, body, idempotencyKey, includeOnline, {
+  const response = await xero.accountingApi.createCreditNoteAttachmentByFileName(xeroTenantId, creditNoteID, fileName, body,  includeOnline,idempotencyKey, {
     headers: {
       "Content-Type": contentType,
     }
@@ -10404,9 +10404,9 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 const currDate = '2020-12-10'
 
 const contact: Contact = { 
@@ -10434,7 +10434,7 @@ const creditNotes: CreditNotes = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createCreditNotes(xeroTenantId, creditNotes, idempotencyKey, summarizeErrors, unitdp);
+  const response = await xero.accountingApi.createCreditNotes(xeroTenantId, creditNotes,  summarizeErrors, unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -10757,8 +10757,8 @@ Currency object in the body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 
 const employee: Employee = { 
   firstName: "Nick",
@@ -10770,7 +10770,7 @@ const employees: Employees = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createEmployees(xeroTenantId, employees, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createEmployees(xeroTenantId, employees,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -11271,8 +11271,8 @@ ExpenseClaims with array of ExpenseClaim object in body of request
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const invoiceID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
-const idempotencyKey = 'KEY_VALUE';
 const includeOnline = true;
+const idempotencyKey = 'KEY_VALUE';
 const path = require("path");
 const mime = require("mime-types");
 const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
@@ -11280,7 +11280,7 @@ const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
 const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createInvoiceAttachmentByFileName(xeroTenantId, invoiceID, fileName, body, idempotencyKey, includeOnline, {
+  const response = await xero.accountingApi.createInvoiceAttachmentByFileName(xeroTenantId, invoiceID, fileName, body,  includeOnline,idempotencyKey, {
     headers: {
       "Content-Type": contentType,
     }
@@ -11680,9 +11680,9 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'
 const dueDateValue = '2020-10-28'
 
@@ -11722,7 +11722,7 @@ const invoices: Invoices = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createInvoices(xeroTenantId, invoices, idempotencyKey, summarizeErrors, unitdp);
+  const response = await xero.accountingApi.createInvoices(xeroTenantId, invoices,  summarizeErrors, unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -12082,9 +12082,9 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 
 const purchaseDetails: Purchase = { 
   cOGSAccountCode: "500"
@@ -12103,7 +12103,7 @@ const items: Items = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createItems(xeroTenantId, items, idempotencyKey, summarizeErrors, unitdp);
+  const response = await xero.accountingApi.createItems(xeroTenantId, items,  summarizeErrors, unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -12809,8 +12809,8 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'  
 const manualJournalLines = [];
 
@@ -12839,7 +12839,7 @@ const manualJournals: ManualJournals = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createManualJournals(xeroTenantId, manualJournals, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createManualJournals(xeroTenantId, manualJournals,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -13001,8 +13001,8 @@ If false return 200 OK and mix of successfully created objects and any with vali
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const overpaymentID = '00000000-0000-0000-0000-000000000000';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const currDate = '2020-12-10'
 
 const invoice: Invoice = { 
@@ -13020,7 +13020,7 @@ const allocations: Allocations = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createOverpaymentAllocations(xeroTenantId, overpaymentID, allocations, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createOverpaymentAllocations(xeroTenantId, overpaymentID, allocations,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -13876,8 +13876,8 @@ PaymentServices array with PaymentService object in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'
 
 const invoice: Invoice = { 
@@ -13900,7 +13900,7 @@ const payments: Payments = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createPayments(xeroTenantId, payments, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createPayments(xeroTenantId, payments,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -14062,8 +14062,8 @@ If false return 200 OK and mix of successfully created objects and any with vali
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const prepaymentID = '00000000-0000-0000-0000-000000000000';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const currDate = '2020-12-10'
 
 const invoice: Invoice = { 
@@ -14081,7 +14081,7 @@ const allocations: Allocations = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createPrepaymentAllocations(xeroTenantId, prepaymentID, allocations, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createPrepaymentAllocations(xeroTenantId, prepaymentID, allocations,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -14837,8 +14837,8 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
@@ -14865,7 +14865,7 @@ const purchaseOrders: PurchaseOrders = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createPurchaseOrders(xeroTenantId, purchaseOrders, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createPurchaseOrders(xeroTenantId, purchaseOrders,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -15409,8 +15409,8 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
@@ -15437,7 +15437,7 @@ const quotes: Quotes = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createQuotes(xeroTenantId, quotes, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createQuotes(xeroTenantId, quotes,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -15598,8 +15598,8 @@ If false return 200 OK and mix of successfully created objects and any with vali
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 
 const contact: Contact = { 
   contactID: "00000000-0000-0000-0000-000000000000"
@@ -15631,7 +15631,7 @@ const receipts: Receipts = {
 }; 
 
 try {
-  const response = await xero.accountingApi.createReceipt(xeroTenantId, receipts, idempotencyKey, unitdp);
+  const response = await xero.accountingApi.createReceipt(xeroTenantId, receipts,  unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -16558,11 +16558,11 @@ HistoryRecords containing an array of HistoryRecord objects in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.createRepeatingInvoices(xeroTenantId, repeatingInvoices, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.createRepeatingInvoices(xeroTenantId, repeatingInvoices,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -37947,8 +37947,8 @@ Byte array of file in body of request
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const bankTransactionID = '00000000-0000-0000-0000-000000000000';
-const idempotencyKey = 'KEY_VALUE';
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 
 const contact: Contact = { 
   contactID: "00000000-0000-0000-0000-000000000000"
@@ -37980,7 +37980,7 @@ const bankTransactions: BankTransactions = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateBankTransaction(xeroTenantId, bankTransactionID, bankTransactions, idempotencyKey, unitdp);
+  const response = await xero.accountingApi.updateBankTransaction(xeroTenantId, bankTransactionID, bankTransactions,  unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -39145,8 +39145,8 @@ an array of Contact groups with Name of specific group to update
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const creditNoteID = '00000000-0000-0000-0000-000000000000';
-const idempotencyKey = 'KEY_VALUE';
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 const currDate = '2020-12-10'
 
 const contact: Contact = { 
@@ -39176,7 +39176,7 @@ const creditNotes: CreditNotes = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateCreditNote(xeroTenantId, creditNoteID, creditNotes, idempotencyKey, unitdp);
+  const response = await xero.accountingApi.updateCreditNote(xeroTenantId, creditNoteID, creditNotes,  unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -39767,8 +39767,8 @@ This allows you to safely retry requests without the risk of duplicate processin
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const invoiceID = '00000000-0000-0000-0000-000000000000';
-const idempotencyKey = 'KEY_VALUE';
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 
 const invoice: Invoice = { 
   reference: "I am Iron man"
@@ -39779,7 +39779,7 @@ const invoices: Invoices = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateInvoice(xeroTenantId, invoiceID, invoices, idempotencyKey, unitdp);
+  const response = await xero.accountingApi.updateInvoice(xeroTenantId, invoiceID, invoices,  unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -40177,8 +40177,8 @@ Byte array of file in body of request
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const itemID = '00000000-0000-0000-0000-000000000000';
-const idempotencyKey = 'KEY_VALUE';
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 
 const item: Item = { 
   code: "ItemCode123",
@@ -40190,7 +40190,7 @@ const items: Items = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateItem(xeroTenantId, itemID, items, idempotencyKey, unitdp);
+  const response = await xero.accountingApi.updateItem(xeroTenantId, itemID, items,  unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -40962,9 +40962,9 @@ Byte array of file in body of request
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 
 const contact: Contact = { 
   contactID: "00000000-0000-0000-0000-000000000000"
@@ -40995,7 +40995,7 @@ const bankTransactions: BankTransactions = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreateBankTransactions(xeroTenantId, bankTransactions, idempotencyKey, summarizeErrors, unitdp);
+  const response = await xero.accountingApi.updateOrCreateBankTransactions(xeroTenantId, bankTransactions,  summarizeErrors, unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -41175,8 +41175,8 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 
 const phone: Phone = { 
   phoneNumber: "555-1212",
@@ -41196,7 +41196,7 @@ const contacts: Contacts = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreateContacts(xeroTenantId, contacts, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.updateOrCreateContacts(xeroTenantId, contacts,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -41356,9 +41356,9 @@ If false return 200 OK and mix of successfully created objects and any with vali
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 const currDate = '2020-12-10'
 
 const contact: Contact = { 
@@ -41386,7 +41386,7 @@ const creditNotes: CreditNotes = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreateCreditNotes(xeroTenantId, creditNotes, idempotencyKey, summarizeErrors, unitdp);
+  const response = await xero.accountingApi.updateOrCreateCreditNotes(xeroTenantId, creditNotes,  summarizeErrors, unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -41567,8 +41567,8 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 
 const employee: Employee = { 
   firstName: "Nick",
@@ -41580,7 +41580,7 @@ const employees: Employees = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreateEmployees(xeroTenantId, employees, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.updateOrCreateEmployees(xeroTenantId, employees,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -41741,9 +41741,9 @@ If false return 200 OK and mix of successfully created objects and any with vali
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'
 const dueDateValue = '2020-10-28'
 
@@ -41775,7 +41775,7 @@ const invoices: Invoices = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreateInvoices(xeroTenantId, invoices, idempotencyKey, summarizeErrors, unitdp);
+  const response = await xero.accountingApi.updateOrCreateInvoices(xeroTenantId, invoices,  summarizeErrors, unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -41955,9 +41955,9 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 
 const item: Item = { 
   code: "abcXYZ123",
@@ -41970,7 +41970,7 @@ const items: Items = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreateItems(xeroTenantId, items, idempotencyKey, summarizeErrors, unitdp);
+  const response = await xero.accountingApi.updateOrCreateItems(xeroTenantId, items,  summarizeErrors, unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -42150,8 +42150,8 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'  
 const manualJournalLines = [];
 
@@ -42180,7 +42180,7 @@ const manualJournals: ManualJournals = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreateManualJournals(xeroTenantId, manualJournals, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.updateOrCreateManualJournals(xeroTenantId, manualJournals,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -42341,8 +42341,8 @@ If false return 200 OK and mix of successfully created objects and any with vali
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
@@ -42369,7 +42369,7 @@ const purchaseOrders: PurchaseOrders = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreatePurchaseOrders(xeroTenantId, purchaseOrders, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.updateOrCreatePurchaseOrders(xeroTenantId, purchaseOrders,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -42529,8 +42529,8 @@ If false return 200 OK and mix of successfully created objects and any with vali
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'
 
 const contact: Contact = { 
@@ -42557,7 +42557,7 @@ const quotes: Quotes = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateOrCreateQuotes(xeroTenantId, quotes, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.updateOrCreateQuotes(xeroTenantId, quotes,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -42717,11 +42717,11 @@ If false return 200 OK and mix of successfully created objects and any with vali
                       <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
-const idempotencyKey = 'KEY_VALUE';
 const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
 
 try {
-  const response = await xero.accountingApi.updateOrCreateRepeatingInvoices(xeroTenantId, repeatingInvoices, idempotencyKey, summarizeErrors);
+  const response = await xero.accountingApi.updateOrCreateRepeatingInvoices(xeroTenantId, repeatingInvoices,  summarizeErrors,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -43654,8 +43654,8 @@ Byte array of file in body of request
 
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const receiptID = '00000000-0000-0000-0000-000000000000';
-const idempotencyKey = 'KEY_VALUE';
 const unitdp = 4;
+const idempotencyKey = 'KEY_VALUE';
 const dateValue = '2020-10-10'
 
 const user: User = { 
@@ -43673,7 +43673,7 @@ const receipts: Receipts = {
 }; 
 
 try {
-  const response = await xero.accountingApi.updateReceipt(xeroTenantId, receiptID, receipts, idempotencyKey, unitdp);
+  const response = await xero.accountingApi.updateReceipt(xeroTenantId, receiptID, receipts,  unitdp,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
