@@ -1,6 +1,5 @@
 import { Client, Issuer, TokenSet, TokenSetParameters, custom } from 'openid-client';
 import * as xero from './gen/api';
-import request = require('request');
 const axios = require('axios');
 import http = require('http');
 
