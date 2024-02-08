@@ -30,6 +30,7 @@ import { TimeEntryCreateOrUpdate } from '../model/projects/timeEntryCreateOrUpda
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/projects/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Readable } from "stream";
 import { OAuth } from '../model/projects/models';
 
 let defaultBasePath = 'https://api.xero.com/projects.xro/2.0';
@@ -43,7 +44,7 @@ export enum ProjectApiApiKeys {
 
 export class ProjectApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 

@@ -22,6 +22,7 @@ import { Folder } from '../model/files/folder';
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/files/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Readable } from "stream";
 import { OAuth } from '../model/files/models';
 
 let defaultBasePath = 'https://api.xero.com/files.xro/1.0';
@@ -35,7 +36,7 @@ export enum FilesApiApiKeys {
 
 export class FilesApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -1326,7 +1327,7 @@ export class FilesApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param mimeType 
      */     
-    public async uploadFile (xeroTenantId: string, body: fs.ReadStream, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
+    public async uploadFile (xeroTenantId: string, body: fs.ReadStream | Readable, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -1432,7 +1433,7 @@ export class FilesApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      * @param mimeType 
      */     
-    public async uploadFileToFolder (xeroTenantId: string, folderId: string, body: fs.ReadStream, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
+    public async uploadFileToFolder (xeroTenantId: string, folderId: string, body: fs.ReadStream | Readable, name: string, filename: string, idempotencyKey?: string, mimeType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FileObject;  }> {
         const localVarPath = this.basePath + '/Files/{FolderId}'
             .replace('{' + 'FolderId' + '}', encodeURIComponent(String(folderId)));
         let localVarQueryParameters: any = {};

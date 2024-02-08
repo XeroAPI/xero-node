@@ -39,6 +39,7 @@ import { Timesheets } from '../model/payroll-au/timesheets';
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/payroll-au/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Readable } from "stream";
 import { OAuth } from '../model/payroll-au/models';
 
 let defaultBasePath = 'https://api.xero.com/payroll.xro/1.0';
@@ -52,7 +53,7 @@ export enum PayrollAuApiApiKeys {
 
 export class PayrollAuApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 

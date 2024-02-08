@@ -22,6 +22,7 @@ import { Statements } from '../model/bankfeeds/statements';
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/bankfeeds/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Readable } from "stream";
 import { OAuth } from '../model/bankfeeds/models';
 
 let defaultBasePath = 'https://api.xero.com/bankfeeds.xro/1.0';
@@ -35,7 +36,7 @@ export enum BankFeedsApiApiKeys {
 
 export class BankFeedsApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 

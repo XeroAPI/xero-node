@@ -23,6 +23,7 @@ import { Setting } from '../model/assets/setting';
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/assets/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Readable } from "stream";
 import { OAuth } from '../model/assets/models';
 
 let defaultBasePath = 'https://api.xero.com/assets.xro/1.0';
@@ -36,7 +37,7 @@ export enum AssetApiApiKeys {
 
 export class AssetApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 

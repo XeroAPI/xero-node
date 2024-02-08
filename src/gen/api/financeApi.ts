@@ -30,6 +30,7 @@ import { UserActivitiesResponse } from '../model/finance/userActivitiesResponse'
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/finance/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Readable } from "stream";
 import { OAuth } from '../model/finance/models';
 
 let defaultBasePath = 'https://api.xero.com/finance.xro/1.0';
@@ -43,7 +44,7 @@ export enum FinanceApiApiKeys {
 
 export class FinanceApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 

@@ -24,6 +24,7 @@ import { UsageRecordsList } from '../model/appstore/usageRecordsList';
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/appstore/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Readable } from "stream";
 import { OAuth } from '../model/appstore/models';
 
 let defaultBasePath = 'https://api.xero.com/appstore/2.0';
@@ -37,7 +38,7 @@ export enum AppStoreApiApiKeys {
 
 export class AppStoreApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
