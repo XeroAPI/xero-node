@@ -84,7 +84,7 @@ export enum AccountingApiApiKeys {
 
 export class AccountingApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.1'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-5.0.2'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -131,12 +131,12 @@ export class AccountingApi {
     }
 
     /**
-     * 
+     *
      * @summary Creates a new chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
      * @param account Account object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createAccount (xeroTenantId: string, account: Account, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts';
         let localVarQueryParameters: any = {};
@@ -206,14 +206,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an attachment on a specific account
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
@@ -282,8 +282,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -318,14 +318,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an attachment for a specific bank transaction by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{FileName}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
@@ -394,8 +394,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -430,13 +430,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific bank transactions
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBankTransactionHistoryRecord (xeroTenantId: string, bankTransactionID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/History'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -512,14 +512,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates one or more spent or received money transaction
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactions BankTransactions with an array of BankTransaction objects in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBankTransactions (xeroTenantId: string, bankTransactions: BankTransactions, summarizeErrors?: boolean, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions';
         let localVarQueryParameters: any = {};
@@ -597,12 +597,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a bank transfer
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransfers BankTransfers with array of BankTransfer objects in request body
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBankTransfer (xeroTenantId: string, bankTransfers: BankTransfers, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankTransfers;  }> {
         const localVarPath = this.basePath + '/BankTransfers';
         let localVarQueryParameters: any = {};
@@ -672,13 +672,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{FileName}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
@@ -747,8 +747,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -783,13 +783,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific bank transfer
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBankTransferHistoryRecord (xeroTenantId: string, bankTransferID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/History'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)));
@@ -865,13 +865,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates one or many batch payments for invoices
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPayments BatchPayments with an array of Payments in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBatchPayment (xeroTenantId: string, batchPayments: BatchPayments, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BatchPayments;  }> {
         const localVarPath = this.basePath + '/BatchPayments';
         let localVarQueryParameters: any = {};
@@ -945,13 +945,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific batch payment
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPaymentID Unique identifier for BatchPayment
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBatchPaymentHistoryRecord (xeroTenantId: string, batchPaymentID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BatchPayments/{BatchPaymentID}/History'
             .replace('{' + 'BatchPaymentID' + '}', encodeURIComponent(String(batchPaymentID)));
@@ -1027,13 +1027,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new custom payment service for a specific branding theme
      * @param xeroTenantId Xero identifier for Tenant
      * @param brandingThemeID Unique identifier for a Branding Theme
      * @param paymentServices PaymentServices array with PaymentService object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createBrandingThemePaymentServices (xeroTenantId: string, brandingThemeID: string, paymentServices: PaymentServices, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaymentServices;  }> {
         const localVarPath = this.basePath + '/BrandingThemes/{BrandingThemeID}/PaymentServices'
             .replace('{' + 'BrandingThemeID' + '}', encodeURIComponent(String(brandingThemeID)));
@@ -1109,13 +1109,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{FileName}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
@@ -1184,8 +1184,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -1220,12 +1220,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a contact group
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroups ContactGroups with an array of names in request body
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createContactGroup (xeroTenantId: string, contactGroups: ContactGroups, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ContactGroups;  }> {
         const localVarPath = this.basePath + '/ContactGroups';
         let localVarQueryParameters: any = {};
@@ -1295,13 +1295,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates contacts to a specific contact group
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
      * @param contacts Contacts with array of contacts specifying the ContactID to be added to ContactGroup in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createContactGroupContacts (xeroTenantId: string, contactGroupID: string, contacts: Contacts, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}/Contacts'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)));
@@ -1377,13 +1377,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new history record for a specific contact
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createContactHistory (xeroTenantId: string, contactID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/History'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -1459,13 +1459,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates multiple contacts (bulk) in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contacts Contacts with an array of Contact objects to create in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createContacts (xeroTenantId: string, contacts: Contacts, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts';
         let localVarQueryParameters: any = {};
@@ -1539,14 +1539,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates allocation for a specific credit note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param allocations Allocations with array of Allocation object in body of request.
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createCreditNoteAllocation (xeroTenantId: string, creditNoteID: string, allocations: Allocations, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Allocations;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Allocations'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -1626,7 +1626,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an attachment for a specific credit note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
@@ -1634,7 +1634,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param includeOnline Allows an attachment to be seen by the end customer within their online invoice
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: fs.ReadStream, includeOnline?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
@@ -1707,8 +1707,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -1743,13 +1743,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history records of a specific credit note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createCreditNoteHistory (xeroTenantId: string, creditNoteID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/History'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -1825,14 +1825,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new credit note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNotes Credit Notes with array of CreditNote object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createCreditNotes (xeroTenantId: string, creditNotes: CreditNotes, summarizeErrors?: boolean, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: CreditNotes;  }> {
         const localVarPath = this.basePath + '/CreditNotes';
         let localVarQueryParameters: any = {};
@@ -1910,12 +1910,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Create a new currency for a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param currency Currency object in the body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createCurrency (xeroTenantId: string, currency: Currency, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Currencies;  }> {
         const localVarPath = this.basePath + '/Currencies';
         let localVarQueryParameters: any = {};
@@ -1985,13 +1985,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates new employees used in Xero payrun
      * @param xeroTenantId Xero identifier for Tenant
      * @param employees Employees with array of Employee object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployees (xeroTenantId: string, employees: Employees, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
@@ -2065,13 +2065,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific expense claim
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaimID Unique identifier for a ExpenseClaim
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createExpenseClaimHistory (xeroTenantId: string, expenseClaimID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims/{ExpenseClaimID}/History'
             .replace('{' + 'ExpenseClaimID' + '}', encodeURIComponent(String(expenseClaimID)));
@@ -2147,12 +2147,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates expense claims
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaims ExpenseClaims with array of ExpenseClaim object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createExpenseClaims (xeroTenantId: string, expenseClaims: ExpenseClaims, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ExpenseClaims;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims';
         let localVarQueryParameters: any = {};
@@ -2222,7 +2222,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an attachment for a specific invoice or purchase bill by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
@@ -2230,7 +2230,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param includeOnline Allows an attachment to be seen by the end customer within their online invoice
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream, includeOnline?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
@@ -2303,8 +2303,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -2339,13 +2339,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createInvoiceHistory (xeroTenantId: string, invoiceID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/History'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -2421,14 +2421,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates one or more sales invoices or purchase bills
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoices Invoices with an array of invoice objects in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createInvoices (xeroTenantId: string, invoices: Invoices, summarizeErrors?: boolean, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices';
         let localVarQueryParameters: any = {};
@@ -2506,13 +2506,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific item
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createItemHistory (xeroTenantId: string, itemID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}/History'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -2588,14 +2588,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates one or more items
      * @param xeroTenantId Xero identifier for Tenant
      * @param items Items with an array of Item objects in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createItems (xeroTenantId: string, items: Items, summarizeErrors?: boolean, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Items;  }> {
         const localVarPath = this.basePath + '/Items';
         let localVarQueryParameters: any = {};
@@ -2673,12 +2673,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates linked transactions (billable expenses)
      * @param xeroTenantId Xero identifier for Tenant
      * @param linkedTransaction LinkedTransaction object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createLinkedTransaction (xeroTenantId: string, linkedTransaction: LinkedTransaction, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions';
         let localVarQueryParameters: any = {};
@@ -2748,14 +2748,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a specific attachment for a specific manual journal by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{FileName}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
@@ -2824,8 +2824,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -2860,13 +2860,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific manual journal
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createManualJournalHistoryRecord (xeroTenantId: string, manualJournalID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/History'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)));
@@ -2942,13 +2942,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates one or more manual journals
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournals ManualJournals array with ManualJournal object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createManualJournals (xeroTenantId: string, manualJournals: ManualJournals, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals';
         let localVarQueryParameters: any = {};
@@ -3022,14 +3022,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a single allocation for a specific overpayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
      * @param allocations Allocations array with Allocation object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createOverpaymentAllocations (xeroTenantId: string, overpaymentID: string, allocations: Allocations, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Allocations;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/Allocations'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
@@ -3109,13 +3109,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific overpayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createOverpaymentHistory (xeroTenantId: string, overpaymentID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/History'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
@@ -3191,12 +3191,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a single payment for invoice or credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param payment Request body with a single Payment object
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPayment (xeroTenantId: string, payment: Payment, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments';
         let localVarQueryParameters: any = {};
@@ -3266,13 +3266,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific payment
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentID Unique identifier for a Payment
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPaymentHistory (xeroTenantId: string, paymentID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Payments/{PaymentID}/History'
             .replace('{' + 'PaymentID' + '}', encodeURIComponent(String(paymentID)));
@@ -3348,12 +3348,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a payment service
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentServices PaymentServices array with PaymentService object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPaymentService (xeroTenantId: string, paymentServices: PaymentServices, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaymentServices;  }> {
         const localVarPath = this.basePath + '/PaymentServices';
         let localVarQueryParameters: any = {};
@@ -3423,13 +3423,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates multiple payments for invoices or credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param payments Payments array with Payment object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPayments (xeroTenantId: string, payments: Payments, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments';
         let localVarQueryParameters: any = {};
@@ -3503,14 +3503,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Allows you to create an Allocation for prepayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID Unique identifier for a PrePayment
      * @param allocations Allocations with an array of Allocation object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPrepaymentAllocations (xeroTenantId: string, prepaymentID: string, allocations: Allocations, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Allocations;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}/Allocations'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)));
@@ -3590,13 +3590,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific prepayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID Unique identifier for a PrePayment
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPrepaymentHistory (xeroTenantId: string, prepaymentID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}/History'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)));
@@ -3672,14 +3672,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates attachment for a specific purchase order
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPurchaseOrderAttachmentByFileName (xeroTenantId: string, purchaseOrderID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/Attachments/{FileName}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)))
@@ -3748,8 +3748,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -3784,13 +3784,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific purchase orders
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPurchaseOrderHistory (xeroTenantId: string, purchaseOrderID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/History'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -3866,13 +3866,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates one or more purchase orders
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrders PurchaseOrders with an array of PurchaseOrder object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPurchaseOrders (xeroTenantId: string, purchaseOrders: PurchaseOrders, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders';
         let localVarQueryParameters: any = {};
@@ -3946,14 +3946,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates attachment for a specific quote
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createQuoteAttachmentByFileName (xeroTenantId: string, quoteID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/Attachments/{FileName}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)))
@@ -4022,8 +4022,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -4058,13 +4058,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific quote
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createQuoteHistory (xeroTenantId: string, quoteID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/History'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
@@ -4140,13 +4140,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Create one or more quotes
      * @param xeroTenantId Xero identifier for Tenant
      * @param quotes Quotes with an array of Quote object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createQuotes (xeroTenantId: string, quotes: Quotes, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Quotes;  }> {
         const localVarPath = this.basePath + '/Quotes';
         let localVarQueryParameters: any = {};
@@ -4220,13 +4220,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates draft expense claim receipts for any user
      * @param xeroTenantId Xero identifier for Tenant
      * @param receipts Receipts with an array of Receipt object in body of request
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createReceipt (xeroTenantId: string, receipts: Receipts, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts';
         let localVarQueryParameters: any = {};
@@ -4300,14 +4300,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an attachment on a specific expense claim receipts by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{FileName}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
@@ -4376,8 +4376,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -4412,13 +4412,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a history record for a specific receipt
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createReceiptHistory (xeroTenantId: string, receiptID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/History'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -4494,14 +4494,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an attachment from a specific repeating invoices by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
@@ -4570,8 +4570,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -4606,13 +4606,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a  history record for a specific repeating invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param historyRecords HistoryRecords containing an array of HistoryRecord objects in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createRepeatingInvoiceHistory (xeroTenantId: string, repeatingInvoiceID: string, historyRecords: HistoryRecords, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/History'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -4688,13 +4688,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates one or more repeating invoice templates
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoices RepeatingInvoices with an array of repeating invoice objects in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createRepeatingInvoices (xeroTenantId: string, repeatingInvoices: RepeatingInvoices, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: RepeatingInvoices;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices';
         let localVarQueryParameters: any = {};
@@ -4768,12 +4768,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates one or more tax rates
      * @param xeroTenantId Xero identifier for Tenant
      * @param taxRates TaxRates array with TaxRate object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createTaxRates (xeroTenantId: string, taxRates: TaxRates, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TaxRates;  }> {
         const localVarPath = this.basePath + '/TaxRates';
         let localVarQueryParameters: any = {};
@@ -4843,12 +4843,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Create tracking categories
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategory TrackingCategory object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createTrackingCategory (xeroTenantId: string, trackingCategory: TrackingCategory, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories';
         let localVarQueryParameters: any = {};
@@ -4918,13 +4918,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates options for a specific tracking category
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
      * @param trackingOption TrackingOption object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createTrackingOptions (xeroTenantId: string, trackingCategoryID: string, trackingOption: TrackingOption, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingOptions;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}/Options'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)));
@@ -5000,11 +5000,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
-     */     
+     */
     public async deleteAccount (xeroTenantId: string, accountID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)));
@@ -5074,12 +5074,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific batch payment for invoices and credit notes
      * @param xeroTenantId Xero identifier for Tenant
-     * @param batchPaymentDelete 
+     * @param batchPaymentDelete
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async deleteBatchPayment (xeroTenantId: string, batchPaymentDelete: BatchPaymentDelete, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BatchPayments;  }> {
         const localVarPath = this.basePath + '/BatchPayments';
         let localVarQueryParameters: any = {};
@@ -5149,13 +5149,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific batch payment for invoices and credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPaymentID Unique identifier for BatchPayment
-     * @param batchPaymentDeleteByUrlParam 
+     * @param batchPaymentDeleteByUrlParam
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async deleteBatchPaymentByUrlParam (xeroTenantId: string, batchPaymentID: string, batchPaymentDeleteByUrlParam: BatchPaymentDeleteByUrlParam, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BatchPayments;  }> {
         const localVarPath = this.basePath + '/BatchPayments/{BatchPaymentID}'
             .replace('{' + 'BatchPaymentID' + '}', encodeURIComponent(String(batchPaymentID)));
@@ -5231,12 +5231,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a specific contact from a contact group using a unique contact Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
      * @param contactID Unique identifier for a Contact
-     */     
+     */
     public async deleteContactGroupContact (xeroTenantId: string, contactGroupID: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}/Contacts/{ContactID}'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)))
@@ -5312,11 +5312,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes all contacts from a specific contact group
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
-     */     
+     */
     public async deleteContactGroupContacts (xeroTenantId: string, contactGroupID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}/Contacts'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)));
@@ -5385,12 +5385,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes an Allocation from a Credit Note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param allocationID Unique identifier for Allocation object
-     */     
+     */
     public async deleteCreditNoteAllocations (xeroTenantId: string, creditNoteID: string, allocationID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Allocation;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Allocations/{AllocationID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
@@ -5466,11 +5466,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a specific item
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
-     */     
+     */
     public async deleteItem (xeroTenantId: string, itemID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -5540,11 +5540,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a specific linked transactions (billable expenses)
      * @param xeroTenantId Xero identifier for Tenant
      * @param linkedTransactionID Unique identifier for a LinkedTransaction
-     */     
+     */
     public async deleteLinkedTransaction (xeroTenantId: string, linkedTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions/{LinkedTransactionID}'
             .replace('{' + 'LinkedTransactionID' + '}', encodeURIComponent(String(linkedTransactionID)));
@@ -5614,12 +5614,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes an Allocation from an overpayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
      * @param allocationID Unique identifier for Allocation object
-     */     
+     */
     public async deleteOverpaymentAllocations (xeroTenantId: string, overpaymentID: string, allocationID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Allocation;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/Allocations/{AllocationID}'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)))
@@ -5695,13 +5695,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific payment for invoices and credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentID Unique identifier for a Payment
-     * @param paymentDelete 
+     * @param paymentDelete
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async deletePayment (xeroTenantId: string, paymentID: string, paymentDelete: PaymentDelete, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments/{PaymentID}'
             .replace('{' + 'PaymentID' + '}', encodeURIComponent(String(paymentID)));
@@ -5777,12 +5777,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes an Allocation from a Prepayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID Unique identifier for a PrePayment
      * @param allocationID Unique identifier for Allocation object
-     */     
+     */
     public async deletePrepaymentAllocations (xeroTenantId: string, prepaymentID: string, allocationID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Allocation;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}/Allocations/{AllocationID}'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)))
@@ -5858,11 +5858,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a specific tracking category
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
-     */     
+     */
     public async deleteTrackingCategory (xeroTenantId: string, trackingCategoryID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)));
@@ -5932,12 +5932,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a specific option for a specific tracking category
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
      * @param trackingOptionID Unique identifier for a Tracking Option
-     */     
+     */
     public async deleteTrackingOptions (xeroTenantId: string, trackingCategoryID: string, trackingOptionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingOptions;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}/Options/{TrackingOptionID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)))
@@ -6013,13 +6013,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Sends a copy of a specific invoice to related contact via email
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     * @param requestEmpty 
+     * @param requestEmpty
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async emailInvoice (xeroTenantId: string, invoiceID: string, requestEmpty: RequestEmpty, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body?: any;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Email'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -6095,11 +6095,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a single chart of accounts by using a unique account Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
-     */     
+     */
     public async getAccount (xeroTenantId: string, accountID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)));
@@ -6169,13 +6169,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves an attachment for a specific account by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
@@ -6257,13 +6257,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific account using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getAccountAttachmentById (xeroTenantId: string, accountID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{AttachmentID}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
@@ -6345,11 +6345,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments for a specific accounts by using a unique account Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
-     */     
+     */
     public async getAccountAttachments (xeroTenantId: string, accountID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)));
@@ -6424,13 +6424,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves the full chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getAccounts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts';
         let localVarQueryParameters: any = {};
@@ -6503,12 +6503,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a single spent or received money transaction by using a unique bank transaction Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getBankTransaction (xeroTenantId: string, bankTransactionID: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -6582,13 +6582,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific bank transaction by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{FileName}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
@@ -6670,13 +6670,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves specific attachments from a specific BankTransaction using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getBankTransactionAttachmentById (xeroTenantId: string, bankTransactionID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{AttachmentID}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
@@ -6758,11 +6758,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves any attachments from a specific bank transactions
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     */     
+     */
     public async getBankTransactionAttachments (xeroTenantId: string, bankTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -6837,7 +6837,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves any spent or received money transactions
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
@@ -6845,7 +6845,7 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page Up to 100 bank transactions will be returned in a single API call with line items details
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getBankTransactions (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions';
         let localVarQueryParameters: any = {};
@@ -6926,11 +6926,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history from a specific bank transaction using a unique bank transaction Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     */     
+     */
     public async getBankTransactionsHistory (xeroTenantId: string, bankTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/History'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -7000,11 +7000,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves specific bank transfers by using a unique bank transfer Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     */     
+     */
     public async getBankTransfer (xeroTenantId: string, bankTransferID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankTransfers;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)));
@@ -7074,13 +7074,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment on a specific bank transfer by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{FileName}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
@@ -7162,13 +7162,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific bank transfer using a unique attachment ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getBankTransferAttachmentById (xeroTenantId: string, bankTransferID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{AttachmentID}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
@@ -7250,11 +7250,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments from a specific bank transfer
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     */     
+     */
     public async getBankTransferAttachments (xeroTenantId: string, bankTransferID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)));
@@ -7329,11 +7329,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history from a specific bank transfer using a unique bank transfer Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
-     */     
+     */
     public async getBankTransferHistory (xeroTenantId: string, bankTransferID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/History'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)));
@@ -7403,13 +7403,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves all bank transfers
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getBankTransfers (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankTransfers;  }> {
         const localVarPath = this.basePath + '/BankTransfers';
         let localVarQueryParameters: any = {};
@@ -7482,11 +7482,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific batch payment using a unique batch payment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPaymentID Unique identifier for BatchPayment
-     */     
+     */
     public async getBatchPayment (xeroTenantId: string, batchPaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BatchPayments;  }> {
         const localVarPath = this.basePath + '/BatchPayments/{BatchPaymentID}'
             .replace('{' + 'BatchPaymentID' + '}', encodeURIComponent(String(batchPaymentID)));
@@ -7556,11 +7556,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history from a specific batch payment
      * @param xeroTenantId Xero identifier for Tenant
      * @param batchPaymentID Unique identifier for BatchPayment
-     */     
+     */
     public async getBatchPaymentHistory (xeroTenantId: string, batchPaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/BatchPayments/{BatchPaymentID}/History'
             .replace('{' + 'BatchPaymentID' + '}', encodeURIComponent(String(batchPaymentID)));
@@ -7630,13 +7630,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves either one or many batch payments for invoices
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getBatchPayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BatchPayments;  }> {
         const localVarPath = this.basePath + '/BatchPayments';
         let localVarQueryParameters: any = {};
@@ -7709,11 +7709,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific branding theme using a unique branding theme Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param brandingThemeID Unique identifier for a Branding Theme
-     */     
+     */
     public async getBrandingTheme (xeroTenantId: string, brandingThemeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BrandingThemes;  }> {
         const localVarPath = this.basePath + '/BrandingThemes/{BrandingThemeID}'
             .replace('{' + 'BrandingThemeID' + '}', encodeURIComponent(String(brandingThemeID)));
@@ -7783,11 +7783,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves the payment services for a specific branding theme
      * @param xeroTenantId Xero identifier for Tenant
      * @param brandingThemeID Unique identifier for a Branding Theme
-     */     
+     */
     public async getBrandingThemePaymentServices (xeroTenantId: string, brandingThemeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaymentServices;  }> {
         const localVarPath = this.basePath + '/BrandingThemes/{BrandingThemeID}/PaymentServices'
             .replace('{' + 'BrandingThemeID' + '}', encodeURIComponent(String(brandingThemeID)));
@@ -7857,10 +7857,10 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves all the branding themes
      * @param xeroTenantId Xero identifier for Tenant
-     */     
+     */
     public async getBrandingThemes (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BrandingThemes;  }> {
         const localVarPath = this.basePath + '/BrandingThemes';
         let localVarQueryParameters: any = {};
@@ -7924,13 +7924,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific budget, which includes budget lines
      * @param xeroTenantId Xero identifier for Tenant
      * @param budgetID Unique identifier for Budgets
      * @param dateTo Filter by start date
      * @param dateFrom Filter by end date
-     */     
+     */
     public async getBudget (xeroTenantId: string, budgetID: string, dateTo?: string, dateFrom?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Budgets;  }> {
         const localVarPath = this.basePath + '/Budgets/{BudgetID}'
             .replace('{' + 'BudgetID' + '}', encodeURIComponent(String(budgetID)));
@@ -8008,13 +8008,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieve a list of budgets
      * @param xeroTenantId Xero identifier for Tenant
      * @param iDs Filter by BudgetID. Allows you to retrieve a specific individual budget.
      * @param dateTo Filter by start date
      * @param dateFrom Filter by end date
-     */     
+     */
     public async getBudgets (xeroTenantId: string, iDs?: Array<string>, dateTo?: string, dateFrom?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Budgets;  }> {
         const localVarPath = this.basePath + '/Budgets';
         let localVarQueryParameters: any = {};
@@ -8090,11 +8090,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific contacts in a Xero organisation using a unique contact Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     */     
+     */
     public async getContact (xeroTenantId: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -8164,13 +8164,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific contact by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{FileName}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
@@ -8252,13 +8252,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific contact using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getContactAttachmentById (xeroTenantId: string, contactID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{AttachmentID}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
@@ -8340,11 +8340,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments for a specific contact in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     */     
+     */
     public async getContactAttachments (xeroTenantId: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -8419,11 +8419,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific contact by contact number in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactNumber This field is read only on the Xero contact screen, used to identify contacts in external systems (max length &#x3D; 50).
-     */     
+     */
     public async getContactByContactNumber (xeroTenantId: string, contactNumber: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactNumber}'
             .replace('{' + 'ContactNumber' + '}', encodeURIComponent(String(contactNumber)));
@@ -8493,11 +8493,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves CIS settings for a specific contact in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     */     
+     */
     public async getContactCISSettings (xeroTenantId: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: CISSettings;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/CISSettings'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -8567,11 +8567,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific contact group by using a unique contact group Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
-     */     
+     */
     public async getContactGroup (xeroTenantId: string, contactGroupID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ContactGroups;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)));
@@ -8641,12 +8641,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves the contact Id and name of each contact group
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getContactGroups (xeroTenantId: string, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ContactGroups;  }> {
         const localVarPath = this.basePath + '/ContactGroups';
         let localVarQueryParameters: any = {};
@@ -8718,11 +8718,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history records for a specific contact
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
-     */     
+     */
     public async getContactHistory (xeroTenantId: string, contactID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/History'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -8792,7 +8792,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves all contacts in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
@@ -8803,7 +8803,7 @@ export class AccountingApi {
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
      * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
      * @param searchTerm Search parameter that performs a case-insensitive text search across the Name, FirstName, LastName, ContactNumber and EmailAddress fields.
-     */     
+     */
     public async getContacts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, page?: number, includeArchived?: boolean, summaryOnly?: boolean, searchTerm?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts';
         let localVarQueryParameters: any = {};
@@ -8896,12 +8896,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific credit note using a unique credit note Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getCreditNote (xeroTenantId: string, creditNoteID: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: CreditNotes;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -8975,11 +8975,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves credit notes as PDF files
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     */     
+     */
     public async getCreditNoteAsPdf (xeroTenantId: string, creditNoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -9049,13 +9049,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment on a specific credit note by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
@@ -9137,13 +9137,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific credit note using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getCreditNoteAttachmentById (xeroTenantId: string, creditNoteID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{AttachmentID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
@@ -9225,11 +9225,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments for a specific credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     */     
+     */
     public async getCreditNoteAttachments (xeroTenantId: string, creditNoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -9304,11 +9304,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history records of a specific credit note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
-     */     
+     */
     public async getCreditNoteHistory (xeroTenantId: string, creditNoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/History'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -9378,7 +9378,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves any credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
@@ -9386,7 +9386,7 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 credit notes will be returned in a single API call with line items shown for each credit note
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getCreditNotes (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: CreditNotes;  }> {
         const localVarPath = this.basePath + '/CreditNotes';
         let localVarQueryParameters: any = {};
@@ -9467,12 +9467,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves currencies for your Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getCurrencies (xeroTenantId: string, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Currencies;  }> {
         const localVarPath = this.basePath + '/Currencies';
         let localVarQueryParameters: any = {};
@@ -9544,11 +9544,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific employee used in Xero payrun using a unique employee Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Unique identifier for a Employee
-     */     
+     */
     public async getEmployee (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -9618,13 +9618,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves employees used in Xero payrun
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getEmployees (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
@@ -9697,11 +9697,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific expense claim using a unique expense claim Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaimID Unique identifier for a ExpenseClaim
-     */     
+     */
     public async getExpenseClaim (xeroTenantId: string, expenseClaimID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ExpenseClaims;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims/{ExpenseClaimID}'
             .replace('{' + 'ExpenseClaimID' + '}', encodeURIComponent(String(expenseClaimID)));
@@ -9771,11 +9771,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history records of a specific expense claim
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaimID Unique identifier for a ExpenseClaim
-     */     
+     */
     public async getExpenseClaimHistory (xeroTenantId: string, expenseClaimID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims/{ExpenseClaimID}/History'
             .replace('{' + 'ExpenseClaimID' + '}', encodeURIComponent(String(expenseClaimID)));
@@ -9845,13 +9845,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves expense claims
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getExpenseClaims (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ExpenseClaims;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims';
         let localVarQueryParameters: any = {};
@@ -9924,12 +9924,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific sales invoice or purchase bill using a unique invoice Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getInvoice (xeroTenantId: string, invoiceID: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -10003,11 +10003,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves invoices or purchase bills as PDF files
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     */     
+     */
     public async getInvoiceAsPdf (xeroTenantId: string, invoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -10077,13 +10077,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves an attachment from a specific invoice or purchase bill by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
@@ -10165,13 +10165,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific invoices or purchase bills by using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getInvoiceAttachmentById (xeroTenantId: string, invoiceID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{AttachmentID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
@@ -10253,11 +10253,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments for a specific invoice or purchase bill
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     */     
+     */
     public async getInvoiceAttachments (xeroTenantId: string, invoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -10332,11 +10332,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history records for a specific invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     */     
+     */
     public async getInvoiceHistory (xeroTenantId: string, invoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/History'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -10406,10 +10406,10 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves invoice reminder settings
      * @param xeroTenantId Xero identifier for Tenant
-     */     
+     */
     public async getInvoiceReminders (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: InvoiceReminders;  }> {
         const localVarPath = this.basePath + '/InvoiceReminders/Settings';
         let localVarQueryParameters: any = {};
@@ -10473,7 +10473,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves sales invoices or purchase bills
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
@@ -10488,7 +10488,7 @@ export class AccountingApi {
      * @param createdByMyApp When set to true you\&#39;ll only retrieve Invoices created by your app
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
-     */     
+     */
     public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, summaryOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices';
         let localVarQueryParameters: any = {};
@@ -10597,12 +10597,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific item using a unique item Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getItem (xeroTenantId: string, itemID: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Items;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -10676,11 +10676,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history for a specific item
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
-     */     
+     */
     public async getItemHistory (xeroTenantId: string, itemID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}/History'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -10750,14 +10750,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves items
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getItems (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Items;  }> {
         const localVarPath = this.basePath + '/Items';
         let localVarQueryParameters: any = {};
@@ -10834,11 +10834,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific journal using a unique journal Id.
      * @param xeroTenantId Xero identifier for Tenant
      * @param journalID Unique identifier for a Journal
-     */     
+     */
     public async getJournal (xeroTenantId: string, journalID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Journals;  }> {
         const localVarPath = this.basePath + '/Journals/{JournalID}'
             .replace('{' + 'JournalID' + '}', encodeURIComponent(String(journalID)));
@@ -10908,11 +10908,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific journal using a unique journal number.
      * @param xeroTenantId Xero identifier for Tenant
      * @param journalNumber Number of a Journal
-     */     
+     */
     public async getJournalByNumber (xeroTenantId: string, journalNumber: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Journals;  }> {
         const localVarPath = this.basePath + '/Journals/{JournalNumber}'
             .replace('{' + 'JournalNumber' + '}', encodeURIComponent(String(journalNumber)));
@@ -10982,13 +10982,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves journals
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param offset Offset by a specified journal number. e.g. journals with a JournalNumber greater than the offset will be returned
      * @param paymentsOnly Filter to retrieve journals on a cash basis. Journals are returned on an accrual basis by default.
-     */     
+     */
     public async getJournals (xeroTenantId: string, ifModifiedSince?: Date, offset?: number, paymentsOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Journals;  }> {
         const localVarPath = this.basePath + '/Journals';
         let localVarQueryParameters: any = {};
@@ -11061,11 +11061,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific linked transaction (billable expenses) using a unique linked transaction Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param linkedTransactionID Unique identifier for a LinkedTransaction
-     */     
+     */
     public async getLinkedTransaction (xeroTenantId: string, linkedTransactionID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions/{LinkedTransactionID}'
             .replace('{' + 'LinkedTransactionID' + '}', encodeURIComponent(String(linkedTransactionID)));
@@ -11135,7 +11135,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves linked transactions (billable expenses)
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Up to 100 linked transactions will be returned in a single API call. Use the page parameter to specify the page to be returned e.g. page&#x3D;1.
@@ -11144,7 +11144,7 @@ export class AccountingApi {
      * @param contactID Filter by the ContactID. Get all the linked transactions that have been assigned to a particular customer.
      * @param status Filter by the combination of ContactID and Status. Get  the linked transactions associated to a  customer and with a status
      * @param targetTransactionID Filter by the TargetTransactionID. Get all the linked transactions allocated to a particular ACCREC invoice
-     */     
+     */
     public async getLinkedTransactions (xeroTenantId: string, page?: number, linkedTransactionID?: string, sourceTransactionID?: string, contactID?: string, status?: string, targetTransactionID?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions';
         let localVarQueryParameters: any = {};
@@ -11232,11 +11232,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific manual journal
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     */     
+     */
     public async getManualJournal (xeroTenantId: string, manualJournalID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)));
@@ -11306,13 +11306,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific manual journal by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{FileName}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
@@ -11394,13 +11394,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Allows you to retrieve a specific attachment from a specific manual journal using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getManualJournalAttachmentById (xeroTenantId: string, manualJournalID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{AttachmentID}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
@@ -11482,11 +11482,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachment for a specific manual journal
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     */     
+     */
     public async getManualJournalAttachments (xeroTenantId: string, manualJournalID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)));
@@ -11561,14 +11561,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves manual journals
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 manual journals will be returned in a single API call with line items shown for each overpayment
-     */     
+     */
     public async getManualJournals (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals';
         let localVarQueryParameters: any = {};
@@ -11645,11 +11645,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history for a specific manual journal
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     */     
+     */
     public async getManualJournalsHistory (xeroTenantId: string, manualJournalID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/History'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)));
@@ -11719,11 +11719,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a URL to an online invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     */     
+     */
     public async getOnlineInvoice (xeroTenantId: string, invoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: OnlineInvoices;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/OnlineInvoice'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -11793,10 +11793,10 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a list of the key actions your app has permission to perform in the connected Xero organisation.
      * @param xeroTenantId Xero identifier for Tenant
-     */     
+     */
     public async getOrganisationActions (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Actions;  }> {
         const localVarPath = this.basePath + '/Organisation/Actions';
         let localVarQueryParameters: any = {};
@@ -11860,11 +11860,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves the CIS settings for the Xero organistaion.
      * @param xeroTenantId Xero identifier for Tenant
      * @param organisationID The unique Xero identifier for an organisation
-     */     
+     */
     public async getOrganisationCISSettings (xeroTenantId: string, organisationID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: CISOrgSettings;  }> {
         const localVarPath = this.basePath + '/Organisation/{OrganisationID}/CISSettings'
             .replace('{' + 'OrganisationID' + '}', encodeURIComponent(String(organisationID)));
@@ -11934,10 +11934,10 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves Xero organisation details
      * @param xeroTenantId Xero identifier for Tenant
-     */     
+     */
     public async getOrganisations (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Organisations;  }> {
         const localVarPath = this.basePath + '/Organisation';
         let localVarQueryParameters: any = {};
@@ -12001,11 +12001,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific overpayment using a unique overpayment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
-     */     
+     */
     public async getOverpayment (xeroTenantId: string, overpaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Overpayments;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
@@ -12075,11 +12075,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history records of a specific overpayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param overpaymentID Unique identifier for a Overpayment
-     */     
+     */
     public async getOverpaymentHistory (xeroTenantId: string, overpaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Overpayments/{OverpaymentID}/History'
             .replace('{' + 'OverpaymentID' + '}', encodeURIComponent(String(overpaymentID)));
@@ -12149,7 +12149,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves overpayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
@@ -12157,7 +12157,7 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 overpayments will be returned in a single API call with line items shown for each overpayment
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getOverpayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Overpayments;  }> {
         const localVarPath = this.basePath + '/Overpayments';
         let localVarQueryParameters: any = {};
@@ -12238,11 +12238,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific payment for invoices and credit notes using a unique payment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentID Unique identifier for a Payment
-     */     
+     */
     public async getPayment (xeroTenantId: string, paymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments/{PaymentID}'
             .replace('{' + 'PaymentID' + '}', encodeURIComponent(String(paymentID)));
@@ -12312,11 +12312,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history records of a specific payment
      * @param xeroTenantId Xero identifier for Tenant
      * @param paymentID Unique identifier for a Payment
-     */     
+     */
     public async getPaymentHistory (xeroTenantId: string, paymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Payments/{PaymentID}/History'
             .replace('{' + 'PaymentID' + '}', encodeURIComponent(String(paymentID)));
@@ -12386,10 +12386,10 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves payment services
      * @param xeroTenantId Xero identifier for Tenant
-     */     
+     */
     public async getPaymentServices (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaymentServices;  }> {
         const localVarPath = this.basePath + '/PaymentServices';
         let localVarQueryParameters: any = {};
@@ -12453,14 +12453,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves payments for invoices and credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page Up to 100 payments will be returned in a single API call
-     */     
+     */
     public async getPayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Payments;  }> {
         const localVarPath = this.basePath + '/Payments';
         let localVarQueryParameters: any = {};
@@ -12537,11 +12537,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Allows you to retrieve a specified prepayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID Unique identifier for a PrePayment
-     */     
+     */
     public async getPrepayment (xeroTenantId: string, prepaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Prepayments;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)));
@@ -12611,11 +12611,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history record for a specific prepayment
      * @param xeroTenantId Xero identifier for Tenant
      * @param prepaymentID Unique identifier for a PrePayment
-     */     
+     */
     public async getPrepaymentHistory (xeroTenantId: string, prepaymentID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Prepayments/{PrepaymentID}/History'
             .replace('{' + 'PrepaymentID' + '}', encodeURIComponent(String(prepaymentID)));
@@ -12685,7 +12685,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves prepayments
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
@@ -12693,7 +12693,7 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 prepayments will be returned in a single API call with line items shown for each overpayment
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getPrepayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Prepayments;  }> {
         const localVarPath = this.basePath + '/Prepayments';
         let localVarQueryParameters: any = {};
@@ -12774,11 +12774,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific purchase order using a unique purchase order Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
-     */     
+     */
     public async getPurchaseOrder (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -12848,11 +12848,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves specific purchase order as PDF files using a unique purchase order Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
-     */     
+     */
     public async getPurchaseOrderAsPdf (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -12922,13 +12922,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment for a specific purchase order by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getPurchaseOrderAttachmentByFileName (xeroTenantId: string, purchaseOrderID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/Attachments/{FileName}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)))
@@ -13010,13 +13010,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves specific attachment for a specific purchase order using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getPurchaseOrderAttachmentById (xeroTenantId: string, purchaseOrderID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/Attachments/{AttachmentID}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)))
@@ -13098,11 +13098,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments for a specific purchase order
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
-     */     
+     */
     public async getPurchaseOrderAttachments (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/Attachments'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -13177,11 +13177,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific purchase order using purchase order number
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderNumber Unique identifier for a PurchaseOrder
-     */     
+     */
     public async getPurchaseOrderByNumber (xeroTenantId: string, purchaseOrderNumber: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderNumber}'
             .replace('{' + 'PurchaseOrderNumber' + '}', encodeURIComponent(String(purchaseOrderNumber)));
@@ -13251,11 +13251,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history for a specific purchase order
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
-     */     
+     */
     public async getPurchaseOrderHistory (xeroTenantId: string, purchaseOrderID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/History'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -13325,7 +13325,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves purchase orders
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
@@ -13334,7 +13334,7 @@ export class AccountingApi {
      * @param dateTo Filter by purchase order date (e.g. GET https://.../PurchaseOrders?DateFrom&#x3D;2015-12-01&amp;DateTo&#x3D;2015-12-31
      * @param order Order by an any element
      * @param page To specify a page, append the page parameter to the URL e.g. ?page&#x3D;1. If there are 100 records in the response you will need to check if there is any more data by fetching the next page e.g ?page&#x3D;2 and continuing this process until no more results are returned.
-     */     
+     */
     public async getPurchaseOrders (xeroTenantId: string, ifModifiedSince?: Date, status?: 'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'BILLED' | 'DELETED', dateFrom?: string, dateTo?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders';
         let localVarQueryParameters: any = {};
@@ -13419,11 +13419,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific quote using a unique quote Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
-     */     
+     */
     public async getQuote (xeroTenantId: string, quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Quotes;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
@@ -13493,11 +13493,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific quote as a PDF file using a unique quote Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
-     */     
+     */
     public async getQuoteAsPdf (xeroTenantId: string, quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
@@ -13567,13 +13567,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific quote by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getQuoteAttachmentByFileName (xeroTenantId: string, quoteID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/Attachments/{FileName}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)))
@@ -13655,13 +13655,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific quote using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getQuoteAttachmentById (xeroTenantId: string, quoteID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/Attachments/{AttachmentID}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)))
@@ -13743,11 +13743,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments for a specific quote
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
-     */     
+     */
     public async getQuoteAttachments (xeroTenantId: string, quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/Attachments'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
@@ -13822,11 +13822,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history records of a specific quote
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
-     */     
+     */
     public async getQuoteHistory (xeroTenantId: string, quoteID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/History'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
@@ -13896,7 +13896,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves sales quotes
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
@@ -13909,7 +13909,7 @@ export class AccountingApi {
      * @param page e.g. page&#x3D;1 – Up to 100 Quotes will be returned in a single API call with line items shown for each quote
      * @param order Order by an any element
      * @param quoteNumber Filter by quote number (e.g. GET https://.../Quotes?QuoteNumber&#x3D;QU-0001)
-     */     
+     */
     public async getQuotes (xeroTenantId: string, ifModifiedSince?: Date, dateFrom?: string, dateTo?: string, expiryDateFrom?: string, expiryDateTo?: string, contactID?: string, status?: string, page?: number, order?: string, quoteNumber?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Quotes;  }> {
         const localVarPath = this.basePath + '/Quotes';
         let localVarQueryParameters: any = {};
@@ -14010,12 +14010,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific draft expense claim receipt by using a unique receipt Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getReceipt (xeroTenantId: string, receiptID: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -14089,13 +14089,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific expense claim receipts by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{FileName}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
@@ -14177,13 +14177,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachments from a specific expense claim receipts by using a unique attachment Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getReceiptAttachmentById (xeroTenantId: string, receiptID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{AttachmentID}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
@@ -14265,11 +14265,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments for a specific expense claim receipt
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     */     
+     */
     public async getReceiptAttachments (xeroTenantId: string, receiptID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -14344,11 +14344,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a history record for a specific receipt
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     */     
+     */
     public async getReceiptHistory (xeroTenantId: string, receiptID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/History'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -14418,14 +14418,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves draft expense claim receipts for any user
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-     */     
+     */
     public async getReceipts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts';
         let localVarQueryParameters: any = {};
@@ -14502,11 +14502,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific repeating invoice by using a unique repeating invoice Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     */     
+     */
     public async getRepeatingInvoice (xeroTenantId: string, repeatingInvoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: RepeatingInvoices;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -14576,13 +14576,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific repeating invoices by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param fileName Name of the attachment
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
@@ -14664,13 +14664,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific attachment from a specific repeating invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param attachmentID Unique identifier for Attachment object
      * @param contentType The mime type of the attachment file you are retrieving i.e image/jpg, application/pdf
-     */     
+     */
     public async getRepeatingInvoiceAttachmentById (xeroTenantId: string, repeatingInvoiceID: string, attachmentID: string, contentType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Buffer;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{AttachmentID}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
@@ -14752,11 +14752,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves attachments from a specific repeating invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     */     
+     */
     public async getRepeatingInvoiceAttachments (xeroTenantId: string, repeatingInvoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -14831,11 +14831,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves history record for a specific repeating invoice
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     */     
+     */
     public async getRepeatingInvoiceHistory (xeroTenantId: string, repeatingInvoiceID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: HistoryRecords;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/History'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -14905,12 +14905,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves repeating invoices
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getRepeatingInvoices (xeroTenantId: string, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: RepeatingInvoices;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices';
         let localVarQueryParameters: any = {};
@@ -14982,14 +14982,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves report for aged payables by contact
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactId Unique identifier for a Contact
      * @param date The date of the Aged Payables By Contact report
      * @param fromDate filter by the from date of the report e.g. 2021-02-01
      * @param toDate filter by the to date of the report e.g. 2021-02-28
-     */     
+     */
     public async getReportAgedPayablesByContact (xeroTenantId: string, contactId: string, date?: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/AgedPayablesByContact';
         let localVarQueryParameters: any = {};
@@ -15074,14 +15074,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves report for aged receivables by contact
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactId Unique identifier for a Contact
      * @param date The date of the Aged Receivables By Contact report
      * @param fromDate filter by the from date of the report e.g. 2021-02-01
      * @param toDate filter by the to date of the report e.g. 2021-02-28
-     */     
+     */
     public async getReportAgedReceivablesByContact (xeroTenantId: string, contactId: string, date?: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/AgedReceivablesByContact';
         let localVarQueryParameters: any = {};
@@ -15166,7 +15166,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves report for balancesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param date The date of the Balance Sheet report
@@ -15176,7 +15176,7 @@ export class AccountingApi {
      * @param trackingOptionID2 The tracking option 2 for the Balance Sheet report
      * @param standardLayout The standard layout boolean for the Balance Sheet report
      * @param paymentsOnly return a cash basis for the Balance Sheet report
-     */     
+     */
     public async getReportBalanceSheet (xeroTenantId: string, date?: string, periods?: number, timeframe?: 'MONTH' | 'QUARTER' | 'YEAR', trackingOptionID1?: string, trackingOptionID2?: string, standardLayout?: boolean, paymentsOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BalanceSheet';
         let localVarQueryParameters: any = {};
@@ -15268,12 +15268,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves report for bank summary
      * @param xeroTenantId Xero identifier for Tenant
      * @param fromDate filter by the from date of the report e.g. 2021-02-01
      * @param toDate filter by the to date of the report e.g. 2021-02-28
-     */     
+     */
     public async getReportBankSummary (xeroTenantId: string, fromDate?: string, toDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BankSummary';
         let localVarQueryParameters: any = {};
@@ -15345,13 +15345,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves report for budget summary
      * @param xeroTenantId Xero identifier for Tenant
      * @param date The date for the Bank Summary report e.g. 2018-03-31
      * @param periods The number of periods to compare (integer between 1 and 12)
      * @param timeframe The period size to compare to (1&#x3D;month, 3&#x3D;quarter, 12&#x3D;year)
-     */     
+     */
     public async getReportBudgetSummary (xeroTenantId: string, date?: string, periods?: number, timeframe?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/BudgetSummary';
         let localVarQueryParameters: any = {};
@@ -15427,11 +15427,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves report for executive summary
      * @param xeroTenantId Xero identifier for Tenant
      * @param date The date for the Bank Summary report e.g. 2018-03-31
-     */     
+     */
     public async getReportExecutiveSummary (xeroTenantId: string, date?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/ExecutiveSummary';
         let localVarQueryParameters: any = {};
@@ -15499,11 +15499,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific report using a unique ReportID
      * @param xeroTenantId Xero identifier for Tenant
      * @param reportID Unique identifier for a Report
-     */     
+     */
     public async getReportFromId (xeroTenantId: string, reportID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/{ReportID}'
             .replace('{' + 'ReportID' + '}', encodeURIComponent(String(reportID)));
@@ -15573,7 +15573,7 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves report for profit and loss
      * @param xeroTenantId Xero identifier for Tenant
      * @param fromDate filter by the from date of the report e.g. 2021-02-01
@@ -15586,7 +15586,7 @@ export class AccountingApi {
      * @param trackingOptionID2 The tracking option 2 for the ProfitAndLoss report
      * @param standardLayout Return the standard layout for the ProfitAndLoss report
      * @param paymentsOnly Return cash only basis for the ProfitAndLoss report
-     */     
+     */
     public async getReportProfitAndLoss (xeroTenantId: string, fromDate?: string, toDate?: string, periods?: number, timeframe?: 'MONTH' | 'QUARTER' | 'YEAR', trackingCategoryID?: string, trackingCategoryID2?: string, trackingOptionID?: string, trackingOptionID2?: string, standardLayout?: boolean, paymentsOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/ProfitAndLoss';
         let localVarQueryParameters: any = {};
@@ -15690,11 +15690,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieve reports for 1099
      * @param xeroTenantId Xero identifier for Tenant
      * @param reportYear The year of the 1099 report
-     */     
+     */
     public async getReportTenNinetyNine (xeroTenantId: string, reportYear?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Reports;  }> {
         const localVarPath = this.basePath + '/Reports/TenNinetyNine';
         let localVarQueryParameters: any = {};
@@ -15762,12 +15762,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves report for trial balance
      * @param xeroTenantId Xero identifier for Tenant
      * @param date The date for the Trial Balance report e.g. 2018-03-31
      * @param paymentsOnly Return cash only basis for the Trial Balance report
-     */     
+     */
     public async getReportTrialBalance (xeroTenantId: string, date?: string, paymentsOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports/TrialBalance';
         let localVarQueryParameters: any = {};
@@ -15839,10 +15839,10 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a list of the organistaions unique reports that require a uuid to fetch
      * @param xeroTenantId Xero identifier for Tenant
-     */     
+     */
     public async getReportsList (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReportWithRows;  }> {
         const localVarPath = this.basePath + '/Reports';
         let localVarQueryParameters: any = {};
@@ -15906,13 +15906,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves tax rates
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param taxType Filter by tax type
-     */     
+     */
     public async getTaxRates (xeroTenantId: string, where?: string, order?: string, taxType?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TaxRates;  }> {
         const localVarPath = this.basePath + '/TaxRates';
         let localVarQueryParameters: any = {};
@@ -15988,13 +15988,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves tracking categories and options
      * @param xeroTenantId Xero identifier for Tenant
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param includeArchived e.g. includeArchived&#x3D;true - Categories and options with a status of ARCHIVED will be included in the response
-     */     
+     */
     public async getTrackingCategories (xeroTenantId: string, where?: string, order?: string, includeArchived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories';
         let localVarQueryParameters: any = {};
@@ -16070,11 +16070,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves specific tracking categories and options using a unique tracking category Id
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
-     */     
+     */
     public async getTrackingCategory (xeroTenantId: string, trackingCategoryID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)));
@@ -16144,11 +16144,11 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific user
      * @param xeroTenantId Xero identifier for Tenant
      * @param userID Unique identifier for a User
-     */     
+     */
     public async getUser (xeroTenantId: string, userID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Users;  }> {
         const localVarPath = this.basePath + '/Users/{UserID}'
             .replace('{' + 'UserID' + '}', encodeURIComponent(String(userID)));
@@ -16218,13 +16218,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves users
      * @param xeroTenantId Xero identifier for Tenant
      * @param ifModifiedSince Only records created or modified since this timestamp will be returned
      * @param where Filter by an any element
      * @param order Order by an any element
-     */     
+     */
     public async getUsers (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Users;  }> {
         const localVarPath = this.basePath + '/Users';
         let localVarQueryParameters: any = {};
@@ -16297,12 +16297,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Sets the chart of accounts, the conversion date and conversion balances
      * @param xeroTenantId Xero identifier for Tenant
      * @param setup Object including an accounts array, a conversion balances array and a conversion date object in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async postSetup (xeroTenantId: string, setup: Setup, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ImportSummaryObject;  }> {
         const localVarPath = this.basePath + '/Setup';
         let localVarQueryParameters: any = {};
@@ -16372,13 +16372,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a chart of accounts
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
      * @param accounts Request of type Accounts array with one Account
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateAccount (xeroTenantId: string, accountID: string, accounts: Accounts, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Accounts;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)));
@@ -16454,14 +16454,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates attachment on a specific account by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param accountID Unique identifier for Account object
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
@@ -16530,8 +16530,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -16566,14 +16566,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a single spent or received money transaction
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
-     * @param bankTransactions 
+     * @param bankTransactions
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateBankTransaction (xeroTenantId: string, bankTransactionID: string, bankTransactions: BankTransactions, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)));
@@ -16653,14 +16653,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific attachment from a specific bank transaction by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransactionID Xero generated unique identifier for a bank transaction
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{FileName}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
@@ -16729,8 +16729,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -16765,13 +16765,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankTransferID Xero generated unique identifier for a bank transfer
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{FileName}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
@@ -16840,8 +16840,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -16876,13 +16876,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific contact in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
      * @param contacts an array of Contacts containing single Contact object with properties to update
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateContact (xeroTenantId: string, contactID: string, contacts: Contacts, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)));
@@ -16958,13 +16958,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactID Unique identifier for a Contact
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{FileName}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
@@ -17033,8 +17033,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -17069,13 +17069,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific contact group
      * @param xeroTenantId Xero identifier for Tenant
      * @param contactGroupID Unique identifier for a Contact Group
      * @param contactGroups an array of Contact groups with Name of specific group to update
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateContactGroup (xeroTenantId: string, contactGroupID: string, contactGroups: ContactGroups, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ContactGroups;  }> {
         const localVarPath = this.basePath + '/ContactGroups/{ContactGroupID}'
             .replace('{' + 'ContactGroupID' + '}', encodeURIComponent(String(contactGroupID)));
@@ -17151,14 +17151,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific credit note
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param creditNotes an array of Credit Notes containing credit note details to update
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateCreditNote (xeroTenantId: string, creditNoteID: string, creditNotes: CreditNotes, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: CreditNotes;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)));
@@ -17238,14 +17238,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates attachments on a specific credit note by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNoteID Unique identifier for a Credit Note
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
@@ -17314,8 +17314,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -17350,13 +17350,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific expense claims
      * @param xeroTenantId Xero identifier for Tenant
      * @param expenseClaimID Unique identifier for a ExpenseClaim
-     * @param expenseClaims 
+     * @param expenseClaims
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateExpenseClaim (xeroTenantId: string, expenseClaimID: string, expenseClaims: ExpenseClaims, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ExpenseClaims;  }> {
         const localVarPath = this.basePath + '/ExpenseClaims/{ExpenseClaimID}'
             .replace('{' + 'ExpenseClaimID' + '}', encodeURIComponent(String(expenseClaimID)));
@@ -17432,14 +17432,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific sales invoices or purchase bills
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
-     * @param invoices 
+     * @param invoices
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateInvoice (xeroTenantId: string, invoiceID: string, invoices: Invoices, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)));
@@ -17519,14 +17519,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates an attachment from a specific invoices or purchase bill by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param invoiceID Unique identifier for an Invoice
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
@@ -17595,8 +17595,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -17631,14 +17631,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific item
      * @param xeroTenantId Xero identifier for Tenant
      * @param itemID Unique identifier for an Item
-     * @param items 
+     * @param items
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateItem (xeroTenantId: string, itemID: string, items: Items, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Items;  }> {
         const localVarPath = this.basePath + '/Items/{ItemID}'
             .replace('{' + 'ItemID' + '}', encodeURIComponent(String(itemID)));
@@ -17718,13 +17718,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific linked transactions (billable expenses)
      * @param xeroTenantId Xero identifier for Tenant
      * @param linkedTransactionID Unique identifier for a LinkedTransaction
-     * @param linkedTransactions 
+     * @param linkedTransactions
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateLinkedTransaction (xeroTenantId: string, linkedTransactionID: string, linkedTransactions: LinkedTransactions, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: LinkedTransactions;  }> {
         const localVarPath = this.basePath + '/LinkedTransactions/{LinkedTransactionID}'
             .replace('{' + 'LinkedTransactionID' + '}', encodeURIComponent(String(linkedTransactionID)));
@@ -17800,13 +17800,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific manual journal
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
-     * @param manualJournals 
+     * @param manualJournals
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateManualJournal (xeroTenantId: string, manualJournalID: string, manualJournals: ManualJournals, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)));
@@ -17882,14 +17882,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific attachment from a specific manual journal by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournalID Unique identifier for a ManualJournal
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{FileName}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
@@ -17958,8 +17958,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -17994,14 +17994,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates or creates one or more spent or received money transaction
      * @param xeroTenantId Xero identifier for Tenant
-     * @param bankTransactions 
+     * @param bankTransactions
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateBankTransactions (xeroTenantId: string, bankTransactions: BankTransactions, summarizeErrors?: boolean, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankTransactions;  }> {
         const localVarPath = this.basePath + '/BankTransactions';
         let localVarQueryParameters: any = {};
@@ -18079,13 +18079,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates or creates one or more contacts in a Xero organisation
      * @param xeroTenantId Xero identifier for Tenant
-     * @param contacts 
+     * @param contacts
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateContacts (xeroTenantId: string, contacts: Contacts, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Contacts;  }> {
         const localVarPath = this.basePath + '/Contacts';
         let localVarQueryParameters: any = {};
@@ -18159,14 +18159,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates or creates one or more credit notes
      * @param xeroTenantId Xero identifier for Tenant
      * @param creditNotes an array of Credit Notes with a single CreditNote object.
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateCreditNotes (xeroTenantId: string, creditNotes: CreditNotes, summarizeErrors?: boolean, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: CreditNotes;  }> {
         const localVarPath = this.basePath + '/CreditNotes';
         let localVarQueryParameters: any = {};
@@ -18244,13 +18244,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a single new employees used in Xero payrun
      * @param xeroTenantId Xero identifier for Tenant
      * @param employees Employees with array of Employee object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateEmployees (xeroTenantId: string, employees: Employees, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
@@ -18324,14 +18324,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates or creates one or more sales invoices or purchase bills
      * @param xeroTenantId Xero identifier for Tenant
-     * @param invoices 
+     * @param invoices
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateInvoices (xeroTenantId: string, invoices: Invoices, summarizeErrors?: boolean, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Invoices;  }> {
         const localVarPath = this.basePath + '/Invoices';
         let localVarQueryParameters: any = {};
@@ -18409,14 +18409,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates or creates one or more items
      * @param xeroTenantId Xero identifier for Tenant
-     * @param items 
+     * @param items
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateItems (xeroTenantId: string, items: Items, summarizeErrors?: boolean, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Items;  }> {
         const localVarPath = this.basePath + '/Items';
         let localVarQueryParameters: any = {};
@@ -18494,13 +18494,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates or creates a single manual journal
      * @param xeroTenantId Xero identifier for Tenant
      * @param manualJournals ManualJournals array with ManualJournal object in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateManualJournals (xeroTenantId: string, manualJournals: ManualJournals, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ManualJournals;  }> {
         const localVarPath = this.basePath + '/ManualJournals';
         let localVarQueryParameters: any = {};
@@ -18574,13 +18574,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates or creates one or more purchase orders
      * @param xeroTenantId Xero identifier for Tenant
-     * @param purchaseOrders 
+     * @param purchaseOrders
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreatePurchaseOrders (xeroTenantId: string, purchaseOrders: PurchaseOrders, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders';
         let localVarQueryParameters: any = {};
@@ -18654,13 +18654,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates or creates one or more quotes
      * @param xeroTenantId Xero identifier for Tenant
-     * @param quotes 
+     * @param quotes
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateQuotes (xeroTenantId: string, quotes: Quotes, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Quotes;  }> {
         const localVarPath = this.basePath + '/Quotes';
         let localVarQueryParameters: any = {};
@@ -18734,13 +18734,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates or deletes one or more repeating invoice templates
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoices RepeatingInvoices with an array of repeating invoice objects in body of request
      * @param summarizeErrors If false return 200 OK and mix of successfully created objects and any with validation errors
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateOrCreateRepeatingInvoices (xeroTenantId: string, repeatingInvoices: RepeatingInvoices, summarizeErrors?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: RepeatingInvoices;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices';
         let localVarQueryParameters: any = {};
@@ -18814,13 +18814,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific purchase order
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
-     * @param purchaseOrders 
+     * @param purchaseOrders
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updatePurchaseOrder (xeroTenantId: string, purchaseOrderID: string, purchaseOrders: PurchaseOrders, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PurchaseOrders;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)));
@@ -18896,14 +18896,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific attachment for a specific purchase order by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param purchaseOrderID Unique identifier for an Purchase Order
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updatePurchaseOrderAttachmentByFileName (xeroTenantId: string, purchaseOrderID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/Attachments/{FileName}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)))
@@ -18972,8 +18972,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -19008,13 +19008,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific quote
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
-     * @param quotes 
+     * @param quotes
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateQuote (xeroTenantId: string, quoteID: string, quotes: Quotes, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Quotes;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)));
@@ -19090,14 +19090,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific attachment from a specific quote by filename
      * @param xeroTenantId Xero identifier for Tenant
      * @param quoteID Unique identifier for an Quote
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateQuoteAttachmentByFileName (xeroTenantId: string, quoteID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/Attachments/{FileName}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)))
@@ -19166,8 +19166,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -19202,14 +19202,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific draft expense claim receipts
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
-     * @param receipts 
+     * @param receipts
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateReceipt (xeroTenantId: string, receiptID: string, receipts: Receipts, unitdp?: number, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Receipts;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)));
@@ -19289,14 +19289,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific attachment on a specific expense claim receipts by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param receiptID Unique identifier for a Receipt
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{FileName}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
@@ -19365,8 +19365,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -19401,13 +19401,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a specific repeating invoice template
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
-     * @param repeatingInvoices 
+     * @param repeatingInvoices
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateRepeatingInvoice (xeroTenantId: string, repeatingInvoiceID: string, repeatingInvoices: RepeatingInvoices, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: RepeatingInvoices;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)));
@@ -19483,14 +19483,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific attachment from a specific repeating invoices by file name
      * @param xeroTenantId Xero identifier for Tenant
      * @param repeatingInvoiceID Unique identifier for a Repeating Invoice
      * @param fileName Name of the attachment
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: fs.ReadStream, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
@@ -19559,8 +19559,8 @@ export class AccountingApi {
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
                 const fileContents: any[] = [];
-                body.on('data', (chunk) => { 
-                    fileContents.push(chunk); 
+                body.on('data', (chunk) => {
+                    fileContents.push(chunk);
                 });
                 body.on('end', () => {
                     resolve(fileContents);
@@ -19595,12 +19595,12 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates tax rates
      * @param xeroTenantId Xero identifier for Tenant
-     * @param taxRates 
+     * @param taxRates
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateTaxRate (xeroTenantId: string, taxRates: TaxRates, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TaxRates;  }> {
         const localVarPath = this.basePath + '/TaxRates';
         let localVarQueryParameters: any = {};
@@ -19670,13 +19670,13 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific tracking category
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
-     * @param trackingCategory 
+     * @param trackingCategory
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateTrackingCategory (xeroTenantId: string, trackingCategoryID: string, trackingCategory: TrackingCategory, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)));
@@ -19752,14 +19752,14 @@ export class AccountingApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific option for a specific tracking category
      * @param xeroTenantId Xero identifier for Tenant
      * @param trackingCategoryID Unique identifier for a TrackingCategory
      * @param trackingOptionID Unique identifier for a Tracking Option
-     * @param trackingOption 
+     * @param trackingOption
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateTrackingOptions (xeroTenantId: string, trackingCategoryID: string, trackingOptionID: string, trackingOption: TrackingOption, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingOptions;  }> {
         const localVarPath = this.basePath + '/TrackingCategories/{TrackingCategoryID}/Options/{TrackingOptionID}'
             .replace('{' + 'TrackingCategoryID' + '}', encodeURIComponent(String(trackingCategoryID)))
