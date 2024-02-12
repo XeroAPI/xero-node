@@ -97,6 +97,10 @@ export class Payment {
     * Displays array of validation error messages from the API
     */
     'validationErrors'?: Array<ValidationError>;
+    /**
+    * Displays array of warning messages from the API
+    */
+    'warnings'?: Array<ValidationError>;
 
     static discriminator: string | undefined = undefined;
 
@@ -234,6 +238,11 @@ export class Payment {
         {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
+            "type": "Array<ValidationError>"
+        },
+        {
+            "name": "warnings",
+            "baseName": "Warnings",
             "type": "Array<ValidationError>"
         }    ];
 
