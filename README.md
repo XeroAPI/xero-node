@@ -51,7 +51,7 @@ Sample apps can get you started quickly with simple auth flows and advanced usag
 | [`custom-connections-starter`](https://github.com/XeroAPI/xero-node-custom-connections-starter) | Basic app showing Custom Connections - a Xero [premium option](https://developer.xero.com/documentation/guides/oauth2/custom-connections) for building M2M integrations to a single org | <img src="https://i.imgur.com/HoQHLuq.png" alt="drawing" width="300"/>
 | [`xero-node-sso-app`](https://github.com/XeroAPI/xero-node-sso-app) | App showing Xero Single Sign On - as well as basic setup and usage of the Xero App Store `appStoreApi.getSubscription` endpoint | <img src="https://i.imgur.com/4NGowZz.png" alt="drawing" width="300"/>
 | [`xero-node-sso-form`](https://github.com/XeroAPI/xero-node-sso-form) | App showing Sign up with Xero to Lead | <img src="https://raw.githubusercontent.com/XeroAPI/xero-node-sso-form/main/public/images/ssu-demo-screenshot.png" alt="drawing" width="300"/>
- 
+
 <hr>
 
 ## Xero Account Requirements
@@ -128,7 +128,7 @@ Example Token Set JSON:
 ```
 
 ---
-## Custom Connections 
+## Custom Connections
 
 Custom Connections are a Xero [premium option](https://developer.xero.com/documentation/oauth2/custom-connections) used for building M2M integrations to a single organisation. A custom connection uses OAuth2.0's [`client_credentials`](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) grant which eliminates the step of exchanging the temporary code for a token set.
 
@@ -154,9 +154,9 @@ Because Custom Connections are only valid for a single organisation you don't ne
 
 ---
 
-## App Store Subscriptions 
+## App Store Subscriptions
 
-If you are implementing subscriptions to participate in Xero's App Store you will need to setup [App Store subscriptions](https://developer.xero.com/documentation/guides/how-to-guides/xero-app-store-referrals/) endpoints.
+If you are implementing subscriptions to participate in Xero's App Store you will need to setup [App Store subscriptions](https://developer.xero.com/documentation/xero-app-store/app-partner-guides/xero-app-store-subscriptions) endpoints.
 
 When a plan is successfully purchased, the user is redirected back to the URL specified in the setup process. The Xero App Store appends the subscription Id to this URL so you can immediately determine what plan the user has subscribed to through the subscriptions API.
 
@@ -187,7 +187,7 @@ console.log(subscriptionRequest.body)
   id: '03bc74f2-1237-4477-b782-2dfb1a6d8b21',
   organisationId: '79e8b2e5-c63d-4dce-888f-e0f3e9eac647',
   plans: [
-    Plan {
+     {
       id: '6abc26f3-9390-4194-8b25-ce8b9942fda9',
       name: 'Small',
       status: 'ACTIVE',
@@ -203,7 +203,7 @@ console.log(subscriptionRequest.body)
           id: '9586421f-7325-4493-bac9-d93be06a6a38',
           name: '',
           type: 'FIXED'
-        },      
+        },
         startDate: 2021-08-02T20:08:58.772Z,
         testMode: true
 
@@ -418,7 +418,7 @@ Note that you should set the query param to undefined instead of null if you wis
 const purchaseOrders = xero.accountingApi.getPurchaseOrders(tenant.tenantId, null, null, '2021-01-01', '2021-04-25', null, 1);
 
 // http://api-oauth2.xero.com/api.xro/2.0/PurchaseOrders?Status=&DateFrom=2008-01-01&DateTo=2021-04-25&order=&page=1
-// "Status=&" is breaking the above query 
+// "Status=&" is breaking the above query
 // purchaseOrders will be an empty array
 
 const purchaseOrders = xero.accountingApi.getPurchaseOrders(tenant.tenantId, undefined, undefined, '2021-01-01', '2021-04-25', undefined, 1);
@@ -438,7 +438,7 @@ When xero.buildConsentUrl is called we call openid-client authorizationUrl metho
 RPError: state mismatch, expected user=1234, got: user=666
 ```
 ###  JWT Verification Using Xero-Node
-JWT verification of both the `access_token` and `id_token` are baked into the openid-client library we leverage. When `xero.apiCallback` is called, openid-client `validateJARM` is triggered which also invokes `validateJWT`. If openid-client fails to validate the JWT signature it will throw an error. 
+JWT verification of both the `access_token` and `id_token` are baked into the openid-client library we leverage. When `xero.apiCallback` is called, openid-client `validateJARM` is triggered which also invokes `validateJWT`. If openid-client fails to validate the JWT signature it will throw an error.
 
 ---
 ## Contributing
@@ -455,11 +455,11 @@ We do our best to keep OS industry `semver` standards, but we can make mistakes!
 
 ## Participating in Xero’s developer community
 
-This SDK is one of a number of SDK’s that the Xero Developer team builds and maintains. We are grateful for all the contributions that the community makes. 
+This SDK is one of a number of SDK’s that the Xero Developer team builds and maintains. We are grateful for all the contributions that the community makes.
 
 Here are a few things you should be aware of as a contributor:
 * Xero has adopted the Contributor Covenant [Code of Conduct](https://github.com/XeroAPI/xero-node/blob/master/CODE_OF_CONDUCT.md), we expect all contributors in our community to adhere to it
-* If you raise an issue then please make sure to fill out the github issue template, doing so helps us help you 
+* If you raise an issue then please make sure to fill out the github issue template, doing so helps us help you
 * You’re welcome to raise PRs. As our SDKs are generated we may use your code in the core SDK build instead of merging your code
 * We have a [contribution guide](https://github.com/XeroAPI/xero-node/blob/master/CONTRIBUTING.md) for you to follow when contributing to this SDK
 * Curious about how we generate our SDK’s? Have a [read of our process](https://devblog.xero.com/building-sdks-for-the-future-b79ff726dfd6) and have a look at our [OpenAPISpec](https://github.com/XeroAPI/Xero-OpenAPI)
