@@ -282,18 +282,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -398,18 +396,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -755,18 +751,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -1196,18 +1190,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -1723,18 +1715,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -2323,18 +2313,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -2848,18 +2836,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -3776,18 +3762,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -4054,18 +4038,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -4412,18 +4394,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -4610,18 +4590,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -16574,18 +16552,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -16777,18 +16753,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -16892,18 +16866,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -17089,18 +17061,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -17374,18 +17344,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -17659,18 +17627,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -18026,18 +17992,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -19044,18 +19008,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -19242,18 +19204,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -19445,18 +19405,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
@@ -19643,18 +19601,16 @@ export class AccountingApi {
             // Reads file stream as chunks so we can put it in body of request.
             // This collects the whole file into memory, which is why we do it _after_ authentication.
             return new Promise<any[]>((resolve, reject) => {
-               	let newBody;
-				const isBufferType = Buffer.isBuffer(body)
-				if(isBufferType) newBody = Readable.from(body)
-				else newBody = body
+               	let bodyStream;
+                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
                 const fileContents: any[] = [];
-                newBody.on('data', (chunk) => {
+                bodyStream.on('data', (chunk) => {
                     fileContents.push(chunk);
                 });
-                newBody.on('end', () => {
+                bodyStream.on('end', () => {
                     resolve(fileContents);
                 });
-                newBody.on('error', (err) => {
+                bodyStream.on('error', (err) => {
                     reject(err);
                 })
             });
