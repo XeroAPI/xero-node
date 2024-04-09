@@ -37,10 +37,10 @@ export class ApiError {
 		this.headers = axiosError.response.headers;
 		this.request = {
 			url: {
-				protocol: axiosError.request.protocol,
-				port: axiosError.request.agent.defaultPort,
-				host: axiosError.request.host,
-				path: axiosError.request.path,
+				protocol: axiosError.request?.protocol,
+				port: axiosError.request?.agent?.defaultPort || axiosError.request?.socket?.localPort,
+				host: axiosError.request?.host,
+				path: axiosError.request?.path,
 			},
 			headers: axiosError.request.getHeaders(),
 			method: axiosError.request.method
