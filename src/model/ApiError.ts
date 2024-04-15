@@ -1,49 +1,51 @@
+import { AxiosError, AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios'
+
 interface RequestUrl {
-	protocol: string
-	port: number
-	host: string
-	path: string
+	protocol?: string
+	port?: number
+	host?: string
+	path?: string
 }
 
 interface Request {
-	url: RequestUrl
-	headers: any
-	method: string
+	url?: RequestUrl
+	headers?: any
+	method?: string
 }
 
 interface Response {
-	statusCode: number,
-	body: any,
-	headers: any,
-	request: Request,
+	statusCode?: number,
+	body?: any,
+	headers?: any,
+	request?: Request,
 }
 
 interface ErrorResponse {
-	response: Response
-	body: any
+	response?: Response
+	body?: any
 }
 
 export class ApiError {
 
-	statusCode: number
-	body: any
-	headers: any
-	request: Request
+	statusCode?: number
+	body?: any
+	headers?: RawAxiosResponseHeaders | AxiosResponseHeaders
+	request?: Request
 
-	constructor(axiosError) {
+	constructor(axiosError: AxiosError) {
 
-        this.statusCode = axiosError.response.status;
-		this.body = axiosError.response.data;
-		this.headers = axiosError.response.headers;
+        this.statusCode = axiosError.response?.status;
+		this.body = axiosError.response?.data;
+		this.headers = axiosError.response?.headers;
 		this.request = {
 			url: {
 				protocol: axiosError.request?.protocol,
-				port: axiosError.request?.agent?.defaultPort || axiosError.request?.socket?.localPort,
+				port: axiosError.request?.socket?.localPort || axiosError.request?.agent?.defaultPort,
 				host: axiosError.request?.host,
 				path: axiosError.request?.path,
 			},
-			headers: axiosError.request.getHeaders(),
-			method: axiosError.request.method
+			headers: axiosError.request?.getHeaders(),
+			method: axiosError.request?.method
 		}
 	}
 
