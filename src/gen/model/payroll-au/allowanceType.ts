@@ -6,7 +6,6 @@ export enum AllowanceType {
     MEALS = <any> 'MEALS',
     TRAVEL = <any> 'TRAVEL',
     OTHER = <any> 'OTHER',
-    JOBKEEPER = <any> 'JOBKEEPER',
     TOOLS = <any> 'TOOLS',
     TASKS = <any> 'TASKS',
     QUALIFICATIONS = <any> 'QUALIFICATIONS'
