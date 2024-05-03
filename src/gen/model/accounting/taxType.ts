@@ -122,5 +122,8 @@ export enum TaxType {
     IMN33Y24 = <any> 'IMN33Y24',
     IMREY24 = <any> 'IMREY24',
     BADDEBTRECOVERYY24 = <any> 'BADDEBTRECOVERYY24',
-    OSOUTPUT2 = <any> 'OSOUTPUT2'
+    OSOUTPUT2 = <any> 'OSOUTPUT2',
+    BLINPUT3 = <any> 'BLINPUT3',
+    BLINPUT3Y23 = <any> 'BLINPUT3Y23',
+    BLINPUT3Y24 = <any> 'BLINPUT3Y24'
 }
