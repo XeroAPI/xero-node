@@ -38,7 +38,7 @@ export class ApiError {
 		this.request = {
 			url: {
 				protocol: axiosError.request.protocol,
-				port: axiosError.request.agent.defaultPort,
+				port: axiosError.request.agent?.defaultPort || axiosError.request.socket?.localPort,
 				host: axiosError.request.host,
 				path: axiosError.request.path,
 			},
