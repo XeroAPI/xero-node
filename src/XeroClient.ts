@@ -89,9 +89,6 @@ export class XeroClient {
   public async initialize(): Promise<XeroClient> {
     if (this.config) {
       custom.setHttpOptionsDefaults({
-        retry: {
-          maxRetryAfter: this.config.httpTimeout || 3500
-        },
         timeout: this.config.httpTimeout || 3500
       })
 
