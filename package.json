@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "axios": "^1.6.5",
-    "openid-client": "^4.9.1"
+    "openid-client": "5.6.5"
   }
 }
