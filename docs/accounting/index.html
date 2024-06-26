@@ -2860,6 +2860,267 @@ ul.nav-tabs {
     "url" : "http://developer.xero.com/documentation/api/organisation/"
   }
 };
+      defs["GetBankTransactionsResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "BankTransactions" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/BankTransactions"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["GetContactsResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "Contacts" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Contacts"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["GetCreditNotesResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "CreditNotes" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/CreditNotes"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["GetInvoicesResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "Invoices" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Invoices"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["GetManualJournalsResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "ManualJournals" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/ManualJournals"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["GetOverpaymentsResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "Overpayments" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Overpayments"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["GetPaymentsResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "Payments" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Payments"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["GetPrepaymentsResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "Prepayments" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Prepayments"
+      }
+    }
+  },
+  "description" : ""
+};
+      defs["GetPurchaseOrdersResponse"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Status" : {
+      "type" : "string"
+    },
+    "ProviderName" : {
+      "type" : "string"
+    },
+    "DateTimeUTC" : {
+      "type" : "string"
+    },
+    "PageInfo" : {
+      "$ref" : "#/components/schemas/PageInfo"
+    },
+    "PurchaseOrders" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/PurchaseOrders"
+      }
+    }
+  },
+  "description" : ""
+};
       defs["HistoryRecord"] = {
   "title" : "",
   "type" : "object",
@@ -4062,7 +4323,7 @@ ul.nav-tabs {
     "Class" : {
       "type" : "string",
       "description" : "Organisation Classes describe which plan the Xero organisation is on (e.g. DEMO, TRIAL, PREMIUM)",
-      "enum" : [ "DEMO", "TRIAL", "STARTER", "STANDARD", "PREMIUM", "PREMIUM_20", "PREMIUM_50", "PREMIUM_100", "LEDGER", "GST_CASHBOOK", "NON_GST_CASHBOOK", "ULTIMATE", "LITE" ]
+      "enum" : [ "DEMO", "TRIAL", "STARTER", "STANDARD", "PREMIUM", "PREMIUM_20", "PREMIUM_50", "PREMIUM_100", "LEDGER", "GST_CASHBOOK", "NON_GST_CASHBOOK", "ULTIMATE", "LITE", "IGNITE", "GROW", "COMPREHENSIVE" ]
     },
     "Edition" : {
       "type" : "string",
@@ -4247,6 +4508,25 @@ ul.nav-tabs {
   },
   "description" : "",
   "x-isObjectArray" : true
+};
+      defs["PageInfo"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "Page" : {
+      "type" : "integer"
+    },
+    "PageSize" : {
+      "type" : "integer"
+    },
+    "TotalPages" : {
+      "type" : "integer"
+    },
+    "TotalRows" : {
+      "type" : "integer"
+    }
+  },
+  "description" : "Pagination information"
 };
       defs["Payment"] = {
   "title" : "",
@@ -6101,7 +6381,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>6.0.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>8.0.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
