@@ -6877,8 +6877,9 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page Up to 100 bank transactions will be returned in a single API call with line items details
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
+     * @param pageSize Number of records to retrieve per page
      */     
-    public async getBankTransactions (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetBankTransactionsResponse;  }> {
+    public async getBankTransactions (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetBankTransactionsResponse;  }> {
         const localVarPath = this.basePath + '/BankTransactions';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -6908,6 +6909,10 @@ export class AccountingApi {
 
         if (unitdp !== undefined) {
             localVarQueryParameters['unitdp'] = ObjectSerializer.serialize(unitdp, "number");
+        }
+
+        if (pageSize !== undefined) {
+            localVarQueryParameters['pageSize'] = ObjectSerializer.serialize(pageSize, "number");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -8835,8 +8840,9 @@ export class AccountingApi {
      * @param includeArchived e.g. includeArchived&#x3D;true - Contacts with a status of ARCHIVED will be included in the response
      * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
      * @param searchTerm Search parameter that performs a case-insensitive text search across the Name, FirstName, LastName, ContactNumber and EmailAddress fields.
+     * @param pageSize Number of records to retrieve per page
      */     
-    public async getContacts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, page?: number, includeArchived?: boolean, summaryOnly?: boolean, searchTerm?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetContactsResponse;  }> {
+    public async getContacts (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, page?: number, includeArchived?: boolean, summaryOnly?: boolean, searchTerm?: string, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetContactsResponse;  }> {
         const localVarPath = this.basePath + '/Contacts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -8878,6 +8884,10 @@ export class AccountingApi {
 
         if (searchTerm !== undefined) {
             localVarQueryParameters['searchTerm'] = ObjectSerializer.serialize(searchTerm, "string");
+        }
+
+        if (pageSize !== undefined) {
+            localVarQueryParameters['pageSize'] = ObjectSerializer.serialize(pageSize, "number");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -9418,8 +9428,9 @@ export class AccountingApi {
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 credit notes will be returned in a single API call with line items shown for each credit note
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
+     * @param pageSize Number of records to retrieve per page
      */     
-    public async getCreditNotes (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetCreditNotesResponse;  }> {
+    public async getCreditNotes (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, unitdp?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetCreditNotesResponse;  }> {
         const localVarPath = this.basePath + '/CreditNotes';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -9449,6 +9460,10 @@ export class AccountingApi {
 
         if (unitdp !== undefined) {
             localVarQueryParameters['unitdp'] = ObjectSerializer.serialize(unitdp, "number");
+        }
+
+        if (pageSize !== undefined) {
+            localVarQueryParameters['pageSize'] = ObjectSerializer.serialize(pageSize, "number");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -10520,8 +10535,9 @@ export class AccountingApi {
      * @param createdByMyApp When set to true you\&#39;ll only retrieve Invoices created by your app
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
+     * @param pageSize Number of records to retrieve per page
      */     
-    public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, summaryOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetInvoicesResponse;  }> {
+    public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, summaryOnly?: boolean, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetInvoicesResponse;  }> {
         const localVarPath = this.basePath + '/Invoices';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10579,6 +10595,10 @@ export class AccountingApi {
 
         if (summaryOnly !== undefined) {
             localVarQueryParameters['summaryOnly'] = ObjectSerializer.serialize(summaryOnly, "boolean");
+        }
+
+        if (pageSize !== undefined) {
+            localVarQueryParameters['pageSize'] = ObjectSerializer.serialize(pageSize, "number");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -11600,8 +11620,9 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page e.g. page&#x3D;1 – Up to 100 manual journals will be returned in a single API call with line items shown for each overpayment
+     * @param pageSize Number of records to retrieve per page
      */     
-    public async getManualJournals (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetManualJournalsResponse;  }> {
+    public async getManualJournals (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetManualJournalsResponse;  }> {
         const localVarPath = this.basePath + '/ManualJournals';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11627,6 +11648,10 @@ export class AccountingApi {
 
         if (page !== undefined) {
             localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+        }
+
+        if (pageSize !== undefined) {
+            localVarQueryParameters['pageSize'] = ObjectSerializer.serialize(pageSize, "number");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -12492,8 +12517,9 @@ export class AccountingApi {
      * @param where Filter by an any element
      * @param order Order by an any element
      * @param page Up to 100 payments will be returned in a single API call
+     * @param pageSize Number of records to retrieve per page
      */     
-    public async getPayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetPaymentsResponse;  }> {
+    public async getPayments (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetPaymentsResponse;  }> {
         const localVarPath = this.basePath + '/Payments';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -12519,6 +12545,10 @@ export class AccountingApi {
 
         if (page !== undefined) {
             localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+        }
+
+        if (pageSize !== undefined) {
+            localVarQueryParameters['pageSize'] = ObjectSerializer.serialize(pageSize, "number");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -13366,8 +13396,9 @@ export class AccountingApi {
      * @param dateTo Filter by purchase order date (e.g. GET https://.../PurchaseOrders?DateFrom&#x3D;2015-12-01&amp;DateTo&#x3D;2015-12-31
      * @param order Order by an any element
      * @param page To specify a page, append the page parameter to the URL e.g. ?page&#x3D;1. If there are 100 records in the response you will need to check if there is any more data by fetching the next page e.g ?page&#x3D;2 and continuing this process until no more results are returned.
+     * @param pageSize Number of records to retrieve per page
      */     
-    public async getPurchaseOrders (xeroTenantId: string, ifModifiedSince?: Date, status?: 'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'BILLED' | 'DELETED', dateFrom?: string, dateTo?: string, order?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetPurchaseOrdersResponse;  }> {
+    public async getPurchaseOrders (xeroTenantId: string, ifModifiedSince?: Date, status?: 'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'BILLED' | 'DELETED', dateFrom?: string, dateTo?: string, order?: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetPurchaseOrdersResponse;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -13401,6 +13432,10 @@ export class AccountingApi {
 
         if (page !== undefined) {
             localVarQueryParameters['page'] = ObjectSerializer.serialize(page, "number");
+        }
+
+        if (pageSize !== undefined) {
+            localVarQueryParameters['pageSize'] = ObjectSerializer.serialize(pageSize, "number");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
