@@ -1,4 +1,4 @@
-import { Invoices } from '././invoices';
+import { Invoice } from '././invoice';
 import { PageInfo } from '././pageInfo';
 
 export class GetInvoicesResponse {
@@ -7,7 +7,7 @@ export class GetInvoicesResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'invoices'?: Array<Invoices>;
+    'invoices'?: Array<Invoice>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetInvoicesResponse {
         {
             "name": "invoices",
             "baseName": "Invoices",
-            "type": "Array<Invoices>"
+            "type": "Array<Invoice>"
         }    ];
 
     static getAttributeTypeMap() {
