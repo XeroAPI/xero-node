@@ -1,5 +1,5 @@
 import { PageInfo } from '././pageInfo';
-import { Prepayments } from '././prepayments';
+import { Prepayment } from '././prepayment';
 
 export class GetPrepaymentsResponse {
     'id'?: string;
@@ -7,7 +7,7 @@ export class GetPrepaymentsResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'prepayments'?: Array<Prepayments>;
+    'prepayments'?: Array<Prepayment>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetPrepaymentsResponse {
         {
             "name": "prepayments",
             "baseName": "Prepayments",
-            "type": "Array<Prepayments>"
+            "type": "Array<Prepayment>"
         }    ];
 
     static getAttributeTypeMap() {

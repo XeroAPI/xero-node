@@ -1,4 +1,4 @@
-import { CreditNotes } from '././creditNotes';
+import { CreditNote } from '././creditNote';
 import { PageInfo } from '././pageInfo';
 
 export class GetCreditNotesResponse {
@@ -7,7 +7,7 @@ export class GetCreditNotesResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'creditNotes'?: Array<CreditNotes>;
+    'creditNotes'?: Array<CreditNote>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetCreditNotesResponse {
         {
             "name": "creditNotes",
             "baseName": "CreditNotes",
-            "type": "Array<CreditNotes>"
+            "type": "Array<CreditNote>"
         }    ];
 
     static getAttributeTypeMap() {

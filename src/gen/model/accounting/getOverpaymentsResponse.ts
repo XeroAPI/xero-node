@@ -1,4 +1,4 @@
-import { Overpayments } from '././overpayments';
+import { Overpayment } from '././overpayment';
 import { PageInfo } from '././pageInfo';
 
 export class GetOverpaymentsResponse {
@@ -7,7 +7,7 @@ export class GetOverpaymentsResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'overpayments'?: Array<Overpayments>;
+    'overpayments'?: Array<Overpayment>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetOverpaymentsResponse {
         {
             "name": "overpayments",
             "baseName": "Overpayments",
-            "type": "Array<Overpayments>"
+            "type": "Array<Overpayment>"
         }    ];
 
     static getAttributeTypeMap() {

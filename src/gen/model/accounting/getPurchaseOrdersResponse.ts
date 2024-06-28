@@ -1,5 +1,5 @@
 import { PageInfo } from '././pageInfo';
-import { PurchaseOrders } from '././purchaseOrders';
+import { PurchaseOrder } from '././purchaseOrder';
 
 export class GetPurchaseOrdersResponse {
     'id'?: string;
@@ -7,7 +7,7 @@ export class GetPurchaseOrdersResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'purchaseOrders'?: Array<PurchaseOrders>;
+    'purchaseOrders'?: Array<PurchaseOrder>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetPurchaseOrdersResponse {
         {
             "name": "purchaseOrders",
             "baseName": "PurchaseOrders",
-            "type": "Array<PurchaseOrders>"
+            "type": "Array<PurchaseOrder>"
         }    ];
 
     static getAttributeTypeMap() {

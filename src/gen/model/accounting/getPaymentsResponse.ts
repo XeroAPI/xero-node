@@ -1,5 +1,5 @@
 import { PageInfo } from '././pageInfo';
-import { Payments } from '././payments';
+import { Payment } from '././payment';
 
 export class GetPaymentsResponse {
     'id'?: string;
@@ -7,7 +7,7 @@ export class GetPaymentsResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'payments'?: Array<Payments>;
+    'payments'?: Array<Payment>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetPaymentsResponse {
         {
             "name": "payments",
             "baseName": "Payments",
-            "type": "Array<Payments>"
+            "type": "Array<Payment>"
         }    ];
 
     static getAttributeTypeMap() {

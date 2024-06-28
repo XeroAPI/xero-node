@@ -1,4 +1,4 @@
-import { ManualJournals } from '././manualJournals';
+import { ManualJournal } from '././manualJournal';
 import { PageInfo } from '././pageInfo';
 
 export class GetManualJournalsResponse {
@@ -7,7 +7,7 @@ export class GetManualJournalsResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'manualJournals'?: Array<ManualJournals>;
+    'manualJournals'?: Array<ManualJournal>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetManualJournalsResponse {
         {
             "name": "manualJournals",
             "baseName": "ManualJournals",
-            "type": "Array<ManualJournals>"
+            "type": "Array<ManualJournal>"
         }    ];
 
     static getAttributeTypeMap() {

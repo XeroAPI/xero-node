@@ -1,4 +1,4 @@
-import { Contacts } from '././contacts';
+import { Contact } from '././contact';
 import { PageInfo } from '././pageInfo';
 
 export class GetContactsResponse {
@@ -7,7 +7,7 @@ export class GetContactsResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'contacts'?: Array<Contacts>;
+    'contacts'?: Array<Contact>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetContactsResponse {
         {
             "name": "contacts",
             "baseName": "Contacts",
-            "type": "Array<Contacts>"
+            "type": "Array<Contact>"
         }    ];
 
     static getAttributeTypeMap() {

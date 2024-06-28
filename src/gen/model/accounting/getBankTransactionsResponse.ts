@@ -1,4 +1,4 @@
-import { BankTransactions } from '././bankTransactions';
+import { BankTransaction } from '././bankTransaction';
 import { PageInfo } from '././pageInfo';
 
 export class GetBankTransactionsResponse {
@@ -7,7 +7,7 @@ export class GetBankTransactionsResponse {
     'providerName'?: string;
     'dateTimeUTC'?: string;
     'pageInfo'?: PageInfo;
-    'bankTransactions'?: Array<BankTransactions>;
+    'bankTransactions'?: Array<BankTransaction>;
 
     static discriminator: string | undefined = undefined;
 
@@ -40,7 +40,7 @@ export class GetBankTransactionsResponse {
         {
             "name": "bankTransactions",
             "baseName": "BankTransactions",
-            "type": "Array<BankTransactions>"
+            "type": "Array<BankTransaction>"
         }    ];
 
     static getAttributeTypeMap() {
