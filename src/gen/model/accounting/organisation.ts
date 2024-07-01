@@ -385,7 +385,10 @@ export namespace Organisation {
         GSTCASHBOOK = <any> 'GST_CASHBOOK',
         NONGSTCASHBOOK = <any> 'NON_GST_CASHBOOK',
         ULTIMATE = <any> 'ULTIMATE',
-        LITE = <any> 'LITE'
+        LITE = <any> 'LITE',
+        IGNITE = <any> 'IGNITE',
+        GROW = <any> 'GROW',
+        COMPREHENSIVE = <any> 'COMPREHENSIVE'
     }
     export enum EditionEnum {
         BUSINESS = <any> 'BUSINESS',
