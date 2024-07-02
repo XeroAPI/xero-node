@@ -94,7 +94,7 @@ export enum AccountingApiApiKeys {
 
 export class AccountingApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-8.0.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-8.1.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -305,16 +305,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -419,16 +415,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -774,16 +766,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -1213,16 +1201,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -1738,16 +1722,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -2336,16 +2316,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -2859,16 +2835,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -3785,16 +3757,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -4061,16 +4029,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -4417,16 +4381,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -4613,16 +4573,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -6436,11 +6392,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -6849,11 +6800,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -7346,11 +7292,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -8436,11 +8377,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -9326,11 +9262,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -10359,11 +10290,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -10536,8 +10462,9 @@ export class AccountingApi {
      * @param unitdp e.g. unitdp&#x3D;4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
      * @param summaryOnly Use summaryOnly&#x3D;true in GET Contacts and Invoices endpoint to retrieve a smaller version of the response object. This returns only lightweight fields, excluding computation-heavy fields from the response, making the API calls quick and efficient.
      * @param pageSize Number of records to retrieve per page
+     * @param searchTerm Search parameter that performs a case-insensitive text search across the fields e.g. InvoiceNumber, Reference.
      */     
-    public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, summaryOnly?: boolean, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetInvoicesResponse;  }> {
+    public async getInvoices (xeroTenantId: string, ifModifiedSince?: Date, where?: string, order?: string, iDs?: Array<string>, invoiceNumbers?: Array<string>, contactIDs?: Array<string>, statuses?: Array<string>, page?: number, includeArchived?: boolean, createdByMyApp?: boolean, unitdp?: number, summaryOnly?: boolean, pageSize?: number, searchTerm?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: GetInvoicesResponse;  }> {
         const localVarPath = this.basePath + '/Invoices';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10599,6 +10526,10 @@ export class AccountingApi {
 
         if (pageSize !== undefined) {
             localVarQueryParameters['pageSize'] = ObjectSerializer.serialize(pageSize, "number");
+        }
+
+        if (searchTerm !== undefined) {
+            localVarQueryParameters['searchTerm'] = ObjectSerializer.serialize(searchTerm, "string");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
@@ -11593,11 +11524,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -13219,11 +13145,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -13869,11 +13790,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -14391,11 +14307,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -14878,11 +14789,6 @@ export class AccountingApi {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -16679,16 +16585,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -16880,16 +16782,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -16993,16 +16891,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -17188,16 +17082,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -17471,16 +17361,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -17754,16 +17640,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -18119,16 +18001,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -19135,16 +19013,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -19331,16 +19205,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -19532,16 +19402,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
@@ -19728,16 +19594,12 @@ export class AccountingApi {
                 })
             });
         }).then((fileContents) => {
-            localVarRequestOptions.data = fileContents;
+            const file = Buffer.concat(fileContents);
+            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
                 const response = await axios(localVarRequestOptions)
-                        try {
-                            body = JSON.parse(response.data)
-                        } catch (err) {
-                            console.log('JSON parse body failed')
-                        }
                          body = ObjectSerializer.deserialize(response.data, "Attachments");
                         if (response.status && response.status >= 200 && response.status <= 299) {
                             resolve({ response: response, body: body });
