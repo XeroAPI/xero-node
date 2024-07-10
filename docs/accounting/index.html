@@ -1465,6 +1465,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "BankTransactions" : {
       "type" : "array",
       "items" : {
@@ -2320,6 +2323,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "Contacts" : {
       "type" : "array",
       "items" : {
@@ -2555,6 +2561,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "CreditNotes" : {
       "type" : "array",
       "items" : {
@@ -2859,267 +2868,6 @@ ul.nav-tabs {
   "externalDocs" : {
     "url" : "http://developer.xero.com/documentation/api/organisation/"
   }
-};
-      defs["GetBankTransactionsResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "BankTransactions" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/BankTransaction"
-      }
-    }
-  },
-  "description" : ""
-};
-      defs["GetContactsResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "Contacts" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/Contact"
-      }
-    }
-  },
-  "description" : ""
-};
-      defs["GetCreditNotesResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "CreditNotes" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/CreditNote"
-      }
-    }
-  },
-  "description" : ""
-};
-      defs["GetInvoicesResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "Invoices" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/Invoice"
-      }
-    }
-  },
-  "description" : ""
-};
-      defs["GetManualJournalsResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "ManualJournals" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/ManualJournal"
-      }
-    }
-  },
-  "description" : ""
-};
-      defs["GetOverpaymentsResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "Overpayments" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/Overpayment"
-      }
-    }
-  },
-  "description" : ""
-};
-      defs["GetPaymentsResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "Payments" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/Payment"
-      }
-    }
-  },
-  "description" : ""
-};
-      defs["GetPrepaymentsResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "Prepayments" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/Prepayment"
-      }
-    }
-  },
-  "description" : ""
-};
-      defs["GetPurchaseOrdersResponse"] = {
-  "title" : "",
-  "type" : "object",
-  "properties" : {
-    "Id" : {
-      "type" : "string"
-    },
-    "Status" : {
-      "type" : "string"
-    },
-    "ProviderName" : {
-      "type" : "string"
-    },
-    "DateTimeUTC" : {
-      "type" : "string"
-    },
-    "PageInfo" : {
-      "$ref" : "#/components/schemas/PageInfo"
-    },
-    "PurchaseOrders" : {
-      "minItems" : 1,
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/PurchaseOrder"
-      }
-    }
-  },
-  "description" : ""
 };
       defs["HistoryRecord"] = {
   "title" : "",
@@ -3529,6 +3277,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "Invoices" : {
       "type" : "array",
       "items" : {
@@ -4165,6 +3916,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "ManualJournals" : {
       "type" : "array",
       "items" : {
@@ -4499,6 +4253,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "Overpayments" : {
       "type" : "array",
       "items" : {
@@ -4509,24 +4266,24 @@ ul.nav-tabs {
   "description" : "",
   "x-isObjectArray" : true
 };
-      defs["PageInfo"] = {
+      defs["Pagination"] = {
   "title" : "",
   "type" : "object",
   "properties" : {
-    "Page" : {
+    "page" : {
       "type" : "integer"
     },
-    "PageSize" : {
+    "pageSize" : {
       "type" : "integer"
     },
-    "TotalPages" : {
+    "pageCount" : {
       "type" : "integer"
     },
-    "TotalRows" : {
+    "itemCount" : {
       "type" : "integer"
     }
   },
-  "description" : "Pagination information"
+  "description" : ""
 };
       defs["Payment"] = {
   "title" : "",
@@ -4764,6 +4521,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "Payments" : {
       "type" : "array",
       "items" : {
@@ -4929,6 +4689,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "Prepayments" : {
       "type" : "array",
       "items" : {
@@ -5128,6 +4891,9 @@ ul.nav-tabs {
   "title" : "",
   "type" : "object",
   "properties" : {
+    "pagination" : {
+      "$ref" : "#/components/schemas/Pagination"
+    },
     "PurchaseOrders" : {
       "type" : "array",
       "items" : {
@@ -30274,9 +30040,10 @@ const where = 'Status=="AUTHORISED"';
 const order = 'Status ASC';
 const page = 1;
 const unitdp = 4;
+const pageSize = 100;
 
 try {
-  const response = await xero.accountingApi.getOverpayments(xeroTenantId, ifModifiedSince, where, order, page, unitdp);
+  const response = await xero.accountingApi.getOverpayments(xeroTenantId, ifModifiedSince, where, order, page, unitdp, pageSize);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -30431,6 +30198,26 @@ e.g. page=1 – Up to 100 overpayments will be returned in a single API call wit
 
                     <div class="inner description marked">
 e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">pageSize</td>
+<td>
+
+
+    <div id="d2e199_getOverpayments_pageSize">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description marked">
+Number of records to retrieve per page
                     </div>
             </div>
         </div>
@@ -31223,9 +31010,10 @@ const where = 'Status=="AUTHORISED"';
 const order = 'Reference ASC';
 const page = 1;
 const unitdp = 4;
+const pageSize = 100;
 
 try {
-  const response = await xero.accountingApi.getPrepayments(xeroTenantId, ifModifiedSince, where, order, page, unitdp);
+  const response = await xero.accountingApi.getPrepayments(xeroTenantId, ifModifiedSince, where, order, page, unitdp, pageSize);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -31380,6 +31168,26 @@ e.g. page=1 – Up to 100 prepayments will be returned in a single API call with
 
                     <div class="inner description marked">
 e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">pageSize</td>
+<td>
+
+
+    <div id="d2e199_getPrepayments_pageSize">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description marked">
+Number of records to retrieve per page
                     </div>
             </div>
         </div>
