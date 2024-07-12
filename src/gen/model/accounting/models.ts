@@ -52,15 +52,6 @@ export * from '././employees';
 export * from '././expenseClaim';
 export * from '././expenseClaims';
 export * from '././externalLink';
-export * from '././getBankTransactionsResponse';
-export * from '././getContactsResponse';
-export * from '././getCreditNotesResponse';
-export * from '././getInvoicesResponse';
-export * from '././getManualJournalsResponse';
-export * from '././getOverpaymentsResponse';
-export * from '././getPaymentsResponse';
-export * from '././getPrepaymentsResponse';
-export * from '././getPurchaseOrdersResponse';
 export * from '././historyRecord';
 export * from '././historyRecords';
 export * from '././importSummary';
@@ -92,7 +83,7 @@ export * from '././organisation';
 export * from '././organisations';
 export * from '././overpayment';
 export * from '././overpayments';
-export * from '././pageInfo';
+export * from '././pagination';
 export * from '././payment';
 export * from '././paymentDelete';
 export * from '././paymentService';
@@ -196,15 +187,6 @@ import { Employees } from '././employees';
 import { ExpenseClaim } from '././expenseClaim';
 import { ExpenseClaims } from '././expenseClaims';
 import { ExternalLink } from '././externalLink';
-import { GetBankTransactionsResponse } from '././getBankTransactionsResponse';
-import { GetContactsResponse } from '././getContactsResponse';
-import { GetCreditNotesResponse } from '././getCreditNotesResponse';
-import { GetInvoicesResponse } from '././getInvoicesResponse';
-import { GetManualJournalsResponse } from '././getManualJournalsResponse';
-import { GetOverpaymentsResponse } from '././getOverpaymentsResponse';
-import { GetPaymentsResponse } from '././getPaymentsResponse';
-import { GetPrepaymentsResponse } from '././getPrepaymentsResponse';
-import { GetPurchaseOrdersResponse } from '././getPurchaseOrdersResponse';
 import { HistoryRecord } from '././historyRecord';
 import { HistoryRecords } from '././historyRecords';
 import { ImportSummary } from '././importSummary';
@@ -236,7 +218,7 @@ import { Organisation } from '././organisation';
 import { Organisations } from '././organisations';
 import { Overpayment } from '././overpayment';
 import { Overpayments } from '././overpayments';
-import { PageInfo } from '././pageInfo';
+import { Pagination } from '././pagination';
 import { Payment } from '././payment';
 import { PaymentDelete } from '././paymentDelete';
 import { PaymentService } from '././paymentService';
@@ -419,15 +401,6 @@ let typeMap: {[index: string]: any} = {
     "ExpenseClaim": ExpenseClaim,
     "ExpenseClaims": ExpenseClaims,
     "ExternalLink": ExternalLink,
-    "GetBankTransactionsResponse": GetBankTransactionsResponse,
-    "GetContactsResponse": GetContactsResponse,
-    "GetCreditNotesResponse": GetCreditNotesResponse,
-    "GetInvoicesResponse": GetInvoicesResponse,
-    "GetManualJournalsResponse": GetManualJournalsResponse,
-    "GetOverpaymentsResponse": GetOverpaymentsResponse,
-    "GetPaymentsResponse": GetPaymentsResponse,
-    "GetPrepaymentsResponse": GetPrepaymentsResponse,
-    "GetPurchaseOrdersResponse": GetPurchaseOrdersResponse,
     "HistoryRecord": HistoryRecord,
     "HistoryRecords": HistoryRecords,
     "ImportSummary": ImportSummary,
@@ -458,7 +431,7 @@ let typeMap: {[index: string]: any} = {
     "Organisations": Organisations,
     "Overpayment": Overpayment,
     "Overpayments": Overpayments,
-    "PageInfo": PageInfo,
+    "Pagination": Pagination,
     "Payment": Payment,
     "PaymentDelete": PaymentDelete,
     "PaymentService": PaymentService,

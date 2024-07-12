@@ -1,39 +1,36 @@
 
-/**
-* Pagination information
-*/
-export class PageInfo {
+export class Pagination {
     'page'?: number;
     'pageSize'?: number;
-    'totalPages'?: number;
-    'totalRows'?: number;
+    'pageCount'?: number;
+    'itemCount'?: number;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "page",
-            "baseName": "Page",
+            "baseName": "page",
             "type": "number"
         },
         {
             "name": "pageSize",
-            "baseName": "PageSize",
+            "baseName": "pageSize",
             "type": "number"
         },
         {
-            "name": "totalPages",
-            "baseName": "TotalPages",
+            "name": "pageCount",
+            "baseName": "pageCount",
             "type": "number"
         },
         {
-            "name": "totalRows",
-            "baseName": "TotalRows",
+            "name": "itemCount",
+            "baseName": "itemCount",
             "type": "number"
         }    ];
 
     static getAttributeTypeMap() {
-        return PageInfo.attributeTypeMap;
+        return Pagination.attributeTypeMap;
     }
 }
 
