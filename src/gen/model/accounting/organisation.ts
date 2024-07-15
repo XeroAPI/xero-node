@@ -386,6 +386,10 @@ export namespace Organisation {
         NONGSTCASHBOOK = <any> 'NON_GST_CASHBOOK',
         ULTIMATE = <any> 'ULTIMATE',
         LITE = <any> 'LITE',
+        ULTIMATE10 = <any> 'ULTIMATE_10',
+        ULTIMATE20 = <any> 'ULTIMATE_20',
+        ULTIMATE50 = <any> 'ULTIMATE_50',
+        ULTIMATE100 = <any> 'ULTIMATE_100',
         IGNITE = <any> 'IGNITE',
         GROW = <any> 'GROW',
         COMPREHENSIVE = <any> 'COMPREHENSIVE'
