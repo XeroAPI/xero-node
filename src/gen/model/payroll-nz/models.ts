@@ -44,6 +44,11 @@ export * from '././employeeStatutorySickLeaveObject';
 export * from '././employeeStatutorySickLeaves';
 export * from '././employeeTax';
 export * from '././employeeTaxObject';
+export * from '././employeeWorkingPattern';
+export * from '././employeeWorkingPatternWithWorkingWeeks';
+export * from '././employeeWorkingPatternWithWorkingWeeksObject';
+export * from '././employeeWorkingPatternWithWorkingWeeksRequest';
+export * from '././employeeWorkingPatternsObject';
 export * from '././employees';
 export * from '././employment';
 export * from '././employmentObject';
@@ -97,6 +102,7 @@ export * from '././timesheetObject';
 export * from '././timesheets';
 export * from '././trackingCategories';
 export * from '././trackingCategory';
+export * from '././workingWeek';
 import { AxiosRequestConfig } from 'axios';
 import { Account } from '././account';
 import { Accounts } from '././accounts';
@@ -144,6 +150,11 @@ import { EmployeeStatutorySickLeaveObject } from '././employeeStatutorySickLeave
 import { EmployeeStatutorySickLeaves } from '././employeeStatutorySickLeaves';
 import { EmployeeTax } from '././employeeTax';
 import { EmployeeTaxObject } from '././employeeTaxObject';
+import { EmployeeWorkingPattern } from '././employeeWorkingPattern';
+import { EmployeeWorkingPatternWithWorkingWeeks } from '././employeeWorkingPatternWithWorkingWeeks';
+import { EmployeeWorkingPatternWithWorkingWeeksObject } from '././employeeWorkingPatternWithWorkingWeeksObject';
+import { EmployeeWorkingPatternWithWorkingWeeksRequest } from '././employeeWorkingPatternWithWorkingWeeksRequest';
+import { EmployeeWorkingPatternsObject } from '././employeeWorkingPatternsObject';
 import { Employees } from '././employees';
 import { Employment } from '././employment';
 import { EmploymentObject } from '././employmentObject';
@@ -197,6 +208,7 @@ import { TimesheetObject } from '././timesheetObject';
 import { Timesheets } from '././timesheets';
 import { TrackingCategories } from '././trackingCategories';
 import { TrackingCategory } from '././trackingCategory';
+import { WorkingWeek } from '././workingWeek';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -237,6 +249,7 @@ let enumsMap: {[index: string]: any} = {
         "Reimbursement.StandardTypeOfUnitsEnum": Reimbursement.StandardTypeOfUnitsEnum,
         "SalaryAndWage.StatusEnum": SalaryAndWage.StatusEnum,
         "SalaryAndWage.PaymentTypeEnum": SalaryAndWage.PaymentTypeEnum,
+        "SalaryAndWage.WorkPatternTypeEnum": SalaryAndWage.WorkPatternTypeEnum,
         "StatutoryDeductionCategory": StatutoryDeductionCategory,
         "TaxCode": TaxCode,
         "TaxSettings.PeriodTypeEnum": TaxSettings.PeriodTypeEnum,
@@ -289,6 +302,11 @@ let typeMap: {[index: string]: any} = {
     "EmployeeStatutorySickLeaves": EmployeeStatutorySickLeaves,
     "EmployeeTax": EmployeeTax,
     "EmployeeTaxObject": EmployeeTaxObject,
+    "EmployeeWorkingPattern": EmployeeWorkingPattern,
+    "EmployeeWorkingPatternWithWorkingWeeks": EmployeeWorkingPatternWithWorkingWeeks,
+    "EmployeeWorkingPatternWithWorkingWeeksObject": EmployeeWorkingPatternWithWorkingWeeksObject,
+    "EmployeeWorkingPatternWithWorkingWeeksRequest": EmployeeWorkingPatternWithWorkingWeeksRequest,
+    "EmployeeWorkingPatternsObject": EmployeeWorkingPatternsObject,
     "Employees": Employees,
     "Employment": Employment,
     "EmploymentObject": EmploymentObject,
@@ -340,6 +358,7 @@ let typeMap: {[index: string]: any} = {
     "Timesheets": Timesheets,
     "TrackingCategories": TrackingCategories,
     "TrackingCategory": TrackingCategory,
+    "WorkingWeek": WorkingWeek,
 }
 
 export class ObjectSerializer {

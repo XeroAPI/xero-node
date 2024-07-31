@@ -58,6 +58,14 @@ export class Employee {
     * Employee\'s job title
     */
     'jobTitle'?: string;
+    /**
+    * Engagement type of the employee
+    */
+    'engagementType'?: string;
+    /**
+    * End date for an employee with a fixed-term engagement type
+    */
+    'fixedTermEndDate'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -135,6 +143,16 @@ export class Employee {
         {
             "name": "jobTitle",
             "baseName": "jobTitle",
+            "type": "string"
+        },
+        {
+            "name": "engagementType",
+            "baseName": "engagementType",
+            "type": "string"
+        },
+        {
+            "name": "fixedTermEndDate",
+            "baseName": "fixedTermEndDate",
             "type": "string"
         }    ];
 

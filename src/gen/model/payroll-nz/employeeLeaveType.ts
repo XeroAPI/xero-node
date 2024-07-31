@@ -40,6 +40,10 @@ export class EmployeeLeaveType {
     * Specific to Annual Leave. Annual leave balance in dollars
     */
     'annualLeaveTotalAmountPaid'?: number;
+    /**
+    * The date when an employee becomes entitled to their accrual.
+    */
+    'scheduleOfAccrualDate'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -93,6 +97,11 @@ export class EmployeeLeaveType {
             "name": "annualLeaveTotalAmountPaid",
             "baseName": "annualLeaveTotalAmountPaid",
             "type": "number"
+        },
+        {
+            "name": "scheduleOfAccrualDate",
+            "baseName": "scheduleOfAccrualDate",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

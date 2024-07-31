@@ -40,6 +40,10 @@ export class SalaryAndWage {
     * The type of the payment of the corresponding salary and wages
     */
     'paymentType': SalaryAndWage.PaymentTypeEnum;
+    /**
+    * The type of the Working Pattern of the corresponding salary and wages
+    */
+    'workPatternType'?: SalaryAndWage.WorkPatternTypeEnum;
 
     static discriminator: string | undefined = undefined;
 
@@ -93,6 +97,11 @@ export class SalaryAndWage {
             "name": "paymentType",
             "baseName": "paymentType",
             "type": "SalaryAndWage.PaymentTypeEnum"
+        },
+        {
+            "name": "workPatternType",
+            "baseName": "workPatternType",
+            "type": "SalaryAndWage.WorkPatternTypeEnum"
         }    ];
 
     static getAttributeTypeMap() {
@@ -109,5 +118,9 @@ export namespace SalaryAndWage {
     export enum PaymentTypeEnum {
         Salary = <any> 'Salary',
         Hourly = <any> 'Hourly'
+    }
+    export enum WorkPatternTypeEnum {
+        DaysAndHours = <any> 'DaysAndHours',
+        RegularWeek = <any> 'RegularWeek'
     }
 }

@@ -1,8 +1,13 @@
 import { Invoice } from '././invoice';
 import { Pagination } from '././pagination';
+import { ValidationError } from '././validationError';
 
 export class Invoices {
     'pagination'?: Pagination;
+    /**
+    * Displays array of warning messages from the API
+    */
+    'warnings'?: Array<ValidationError>;
     'invoices'?: Array<Invoice>;
 
     static discriminator: string | undefined = undefined;
@@ -12,6 +17,11 @@ export class Invoices {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
+        },
+        {
+            "name": "warnings",
+            "baseName": "Warnings",
+            "type": "Array<ValidationError>"
         },
         {
             "name": "invoices",

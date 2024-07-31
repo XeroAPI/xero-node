@@ -28,6 +28,14 @@ export class EmployeeLeaveSetup {
     * Initial sick leave balance. This will be positive unless they\'ve taken sick leave in advance
     */
     'sickLeaveOpeningBalance'?: number;
+    /**
+    * Set Schedule of Accrual Type for Sick Leave
+    */
+    'sickLeaveScheduleOfAccrual'?: string;
+    /**
+    * If Sick Leave Schedule of Accrual is \"OnAnniversaryDate\", this is the date when entitled to Sick Leave
+    */
+    'sickLeaveAnniversaryDate'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -66,6 +74,16 @@ export class EmployeeLeaveSetup {
             "name": "sickLeaveOpeningBalance",
             "baseName": "sickLeaveOpeningBalance",
             "type": "number"
+        },
+        {
+            "name": "sickLeaveScheduleOfAccrual",
+            "baseName": "SickLeaveScheduleOfAccrual",
+            "type": "string"
+        },
+        {
+            "name": "sickLeaveAnniversaryDate",
+            "baseName": "SickLeaveAnniversaryDate",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
