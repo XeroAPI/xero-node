@@ -1,8 +1,13 @@
 import { BankTransaction } from '././bankTransaction';
 import { Pagination } from '././pagination';
+import { ValidationError } from '././validationError';
 
 export class BankTransactions {
     'pagination'?: Pagination;
+    /**
+    * Displays array of warning messages from the API
+    */
+    'warnings'?: Array<ValidationError>;
     'bankTransactions'?: Array<BankTransaction>;
 
     static discriminator: string | undefined = undefined;
@@ -12,6 +17,11 @@ export class BankTransactions {
             "name": "pagination",
             "baseName": "pagination",
             "type": "Pagination"
+        },
+        {
+            "name": "warnings",
+            "baseName": "Warnings",
+            "type": "Array<ValidationError>"
         },
         {
             "name": "bankTransactions",
