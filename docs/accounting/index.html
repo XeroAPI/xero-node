@@ -2494,7 +2494,7 @@ ul.nav-tabs {
     },
     "SentToContact" : {
       "type" : "boolean",
-      "description" : "boolean to indicate if a credit note has been sent to a contact via  the Xero app (currently read only)",
+      "description" : "Boolean to set whether the credit note in the Xero app should be marked as “sent”. This can be set only on credit notes that have been approved",
       "readOnly" : true
     },
     "CurrencyRate" : {
@@ -6217,7 +6217,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>9.1.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>9.2.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -39737,7 +39737,7 @@ an array of Credit Notes containing credit note details to update
       "schema" : {
         "$ref" : "#/components/schemas/CreditNotes"
       },
-      "example" : "{ \"CreditNotes\": [ { \"Type\": \"ACCPAYCREDIT\", \"Contact\": { \"ContactID\": \"430fa14a-f945-44d3-9f97-5df5e28441b8\" }, \"Date\": \"2019-01-05\", \"Status\": \"AUTHORISED\", \"Reference\": \"HelloWorld\", \"LineItems\": [ { \"Description\": \"Foobar\", \"Quantity\": 2, \"UnitAmount\": 20, \"AccountCode\": \"400\" } ] } ] }"
+      "example" : "{ \"CreditNotes\": [ { \"Type\": \"ACCPAYCREDIT\", \"Contact\": { \"ContactID\": \"430fa14a-f945-44d3-9f97-5df5e28441b8\" }, \"Date\": \"2019-01-05\", \"Status\": \"AUTHORISED\", \"Reference\": \"HelloWorld\", \"SentToContact\": true, \"LineItems\": [ { \"Description\": \"Foobar\", \"Quantity\": 2, \"UnitAmount\": 20, \"AccountCode\": \"400\" } ] } ] }"
     }
   },
   "required" : true
