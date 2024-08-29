@@ -1,0 +1,12 @@
+********* Testing *************
+
+Build from OAS 5.0.0
+
+## What's Changed 2
+* Bugfix #679
+* Bugfix #686
+
+## Breaking Change
+* Removed PageInfo metadata object and added pagination metadata object for select Api.Accounting endpoints
+* Added ultimate sub plans for Api.Accounting
+
