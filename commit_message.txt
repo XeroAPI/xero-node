@@ -1,0 +1,13 @@
+Feat 551  | Commit issue (#300)
+
+********* Testing *************
+
+Build from OAS 5.0.0
+
+## What's Changed
+* Bugfix #679 | createInvoiceAttachmentByFileName Create attachment but not correct content file
+* Bugfix #686 | Attempt to parse object as JSON results in JSON parse body failed written to console
+
+## Breaking Change
+* Removed PageInfo metadata object and added pagination metadata object for select Api.Accounting endpoints
+* Added ultimate sub plans for Api.Accounting
