@@ -1,7 +1,7 @@
 {
   "name": "xero-node",
   "version": "10.99.0",
-  "description": "Xero NodeJS OAuth 2.0 client for xero-node testing the flow",
+  "description": "Xero NodeJS OAuth 2.0 client for xero-node testing the flow again testing",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Xero Platform Team",
