@@ -12,7 +12,6 @@
 			"options": {
 				"singleQuote": false,
 				"useTabs": false,
-				"endOfLine": "lf",
 				"tabWidth": 2
 			}
 		},
