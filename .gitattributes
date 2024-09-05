@@ -1,6 +1,6 @@
 
 # Enforce CRLF to all files by default
-*          text=auto eol=crlf
+*          #text=auto eol=crlf
 
 #
 # The above will handle all files NOT found below
@@ -11,11 +11,11 @@
 *.jpg      binary
 
 # Scripts
-*.sh       text eol=lf
+#*.sh       text eol=lf
 
 # Serialisation
-*.json     text eol=lf
-*.yml      text eol=lf
+# *.json     text eol=lf
+# *.yml      text eol=lf
 
 #
 # Exclude files from exporting
