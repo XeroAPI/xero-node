@@ -1,7 +1,7 @@
 root = true
 
 [*]
-# end_of_line = crlf
+end_of_line = lf
 indent_style = tab
 trim_trailing_whitespace = true
 insert_final_newline = true
@@ -10,4 +10,10 @@ insert_final_newline = true
 charset = utf-8
 indent_style = space
 indent_size = 2
-# end_of_line = lf
+end_of_line = lf
+
+[*.html]
+end_of_line = lf
+
+[*.ts]
+end_of_line = lf
