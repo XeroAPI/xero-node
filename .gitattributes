@@ -1,6 +1,8 @@
 
 # Enforce CRLF to all files by default
-# *          text=auto eol=crlf
+* text=auto eol=lf
+*.html text eol=lf
+*.ts text eol=lf
 
 #
 # The above will handle all files NOT found below
