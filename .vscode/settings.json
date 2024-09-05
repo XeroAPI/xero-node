@@ -1,5 +1,4 @@
 {
-  "files.eol": "\r\n",
   "editor.insertSpaces": false,
   "[json]": {
     "files.eol": "\n",
@@ -7,12 +6,10 @@
     "editor.tabSize": 2
   },
   "[yaml]": {
-    "files.eol": "\n",
     "editor.insertSpaces": true,
     "editor.tabSize": 2
   },
   "[shellscript]": {
-    "files.eol": "\n",
     "editor.insertSpaces": true,
     "editor.tabSize": 2
   },
