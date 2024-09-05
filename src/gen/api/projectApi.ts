@@ -44,7 +44,7 @@ export enum ProjectApiApiKeys {
 
 export class ProjectApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-9.2.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-9.4.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
