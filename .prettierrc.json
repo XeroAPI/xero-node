@@ -1,5 +1,6 @@
 {
 	"printWidth": 100,
+	"endOfLine": "lf",
 	"trailingComma": "es5",
 	"singleQuote": true,
 	"semi": true,
@@ -12,6 +13,7 @@
 			"options": {
 				"singleQuote": false,
 				"useTabs": false,
+				"endOfLine": "lf",
 				"tabWidth": 2
 			}
 		},
