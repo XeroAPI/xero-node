@@ -24,7 +24,7 @@ jobs:
 
             - name: Install dependencies
               run: npm ci
-              working-directory: xero-python
+              working-directory: xero-node
 
             - name: Run Build
               run: npm run build
