@@ -24,6 +24,10 @@ export class EmployeeLeaveType {
     * The number of hours added to the leave balance for every hour worked by the employee. This is normally 0, unless the scheduleOfAccrual chosen is \"OnHourWorked\"
     */
     'rateAccruedHourly'?: number;
+    /**
+    * The date when an employee becomes entitled to their accrual. Only applicable when scheduleOfAccrual is \"OnAnniversaryDate\"
+    */
+    'scheduleOfAccrualDate'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -57,6 +61,11 @@ export class EmployeeLeaveType {
             "name": "rateAccruedHourly",
             "baseName": "rateAccruedHourly",
             "type": "number"
+        },
+        {
+            "name": "scheduleOfAccrualDate",
+            "baseName": "scheduleOfAccrualDate",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
