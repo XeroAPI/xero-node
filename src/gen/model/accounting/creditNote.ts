@@ -1,6 +1,7 @@
 import { Allocation } from '././allocation';
 import { Contact } from '././contact';
 import { CurrencyCode } from '././currencyCode';
+import { InvoiceAddress } from '././invoiceAddress';
 import { LineAmountTypes } from '././lineAmountTypes';
 import { LineItem } from '././lineItem';
 import { Payment } from '././payment';
@@ -118,6 +119,10 @@ export class CreditNote {
     * Displays array of warning messages from the API
     */
     'warnings'?: Array<ValidationError>;
+    /**
+    * An array of addresses used to auto calculate sales tax
+    */
+    'invoiceAddresses'?: Array<InvoiceAddress>;
 
     static discriminator: string | undefined = undefined;
 
@@ -271,6 +276,11 @@ export class CreditNote {
             "name": "warnings",
             "baseName": "Warnings",
             "type": "Array<ValidationError>"
+        },
+        {
+            "name": "invoiceAddresses",
+            "baseName": "InvoiceAddresses",
+            "type": "Array<InvoiceAddress>"
         }    ];
 
     static getAttributeTypeMap() {

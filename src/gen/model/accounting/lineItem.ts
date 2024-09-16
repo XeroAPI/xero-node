@@ -1,5 +1,6 @@
 import { LineItemItem } from '././lineItemItem';
 import { LineItemTracking } from '././lineItemTracking';
+import { TaxBreakdownComponent } from '././taxBreakdownComponent';
 
 export class LineItem {
     /**
@@ -59,6 +60,18 @@ export class LineItem {
     * The Xero identifier for a Repeating Invoice
     */
     'repeatingInvoiceID'?: string;
+    /**
+    * The type of taxability
+    */
+    'taxability'?: LineItem.TaxabilityEnum;
+    /**
+    * The ID of the sales tax code
+    */
+    'salesTaxCodeId'?: number;
+    /**
+    * An array of tax components defined for this line item
+    */
+    'taxBreakdown'?: Array<TaxBreakdownComponent>;
 
     static discriminator: string | undefined = undefined;
 
@@ -137,6 +150,21 @@ export class LineItem {
             "name": "repeatingInvoiceID",
             "baseName": "RepeatingInvoiceID",
             "type": "string"
+        },
+        {
+            "name": "taxability",
+            "baseName": "Taxability",
+            "type": "LineItem.TaxabilityEnum"
+        },
+        {
+            "name": "salesTaxCodeId",
+            "baseName": "SalesTaxCodeId",
+            "type": "number"
+        },
+        {
+            "name": "taxBreakdown",
+            "baseName": "TaxBreakdown",
+            "type": "Array<TaxBreakdownComponent>"
         }    ];
 
     static getAttributeTypeMap() {
@@ -144,3 +172,12 @@ export class LineItem {
     }
 }
 
+export namespace LineItem {
+    export enum TaxabilityEnum {
+        TAXABLE = <any> 'TAXABLE',
+        NONTAXABLE = <any> 'NON_TAXABLE',
+        EXEMPT = <any> 'EXEMPT',
+        PARTTAXABLE = <any> 'PART_TAXABLE',
+        NOTAPPLICABLE = <any> 'NOT_APPLICABLE'
+    }
+}

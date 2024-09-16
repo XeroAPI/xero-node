@@ -1750,6 +1750,13 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "The number of hours added to the leave balance for every hour worked by the employee. This is normally 0, unless the scheduleOfAccrual chosen is \"OnHourWorked\"",
       "format" : "double"
+    },
+    "scheduleOfAccrualDate" : {
+      "type" : "string",
+      "description" : "The date when an employee becomes entitled to their accrual. Only applicable when scheduleOfAccrual is \"OnAnniversaryDate\"",
+      "format" : "date",
+      "example" : "2024-04-01",
+      "x-is-date" : true
     }
   },
   "description" : ""
@@ -3511,7 +3518,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollUk"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>9.2.0</li>
+              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>9.3.0</li>
               <li class="nav-header" data-group="PayrollUk"><a href="#api-PayrollUk">Methods</a></li>
               <li data-group="PayrollUk" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollUk-approveTimesheet">approveTimesheet</a>
@@ -4845,7 +4852,8 @@ const idempotencyKey = 'KEY_VALUE';
 const employeeLeaveType: EmployeeLeaveType = { 
   leaveTypeID: "00000000-0000-0000-0000-000000000000",
   scheduleOfAccrual: EmployeeLeaveType.ScheduleOfAccrualEnum.BeginningOfCalendarYear,
-  openingBalance: 5.25
+  openingBalance: 5.25,
+  scheduleOfAccrualDate: 2024-05-01
 }; 
 
 try {
