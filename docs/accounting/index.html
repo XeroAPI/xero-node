@@ -2564,6 +2564,13 @@ ul.nav-tabs {
       "items" : {
         "$ref" : "#/components/schemas/ValidationError"
       }
+    },
+    "InvoiceAddresses" : {
+      "type" : "array",
+      "description" : "An array of addresses used to auto calculate sales tax",
+      "items" : {
+        "$ref" : "#/components/schemas/InvoiceAddress"
+      }
     }
   },
   "description" : "",
@@ -3259,12 +3266,63 @@ ul.nav-tabs {
       "items" : {
         "$ref" : "#/components/schemas/ValidationError"
       }
+    },
+    "InvoiceAddresses" : {
+      "type" : "array",
+      "description" : "An array of addresses used to auto calculate sales tax",
+      "items" : {
+        "$ref" : "#/components/schemas/InvoiceAddress"
+      }
     }
   },
   "description" : "",
   "externalDocs" : {
     "url" : "http://developer.xero.com/documentation/api/invoices/"
   }
+};
+      defs["InvoiceAddress"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "InvoiceAddressType" : {
+      "type" : "string",
+      "description" : "Indicates whether the address is defined as origin (FROM) or destination (TO)",
+      "enum" : [ "FROM", "TO" ]
+    },
+    "AddressLine1" : {
+      "type" : "string",
+      "description" : "First line of a physical address"
+    },
+    "AddressLine2" : {
+      "type" : "string",
+      "description" : "Second line of a physical address"
+    },
+    "AddressLine3" : {
+      "type" : "string",
+      "description" : "Third line of a physical address"
+    },
+    "AddressLine4" : {
+      "type" : "string",
+      "description" : "Fourth line of a physical address"
+    },
+    "City" : {
+      "type" : "string",
+      "description" : "City of a physical address"
+    },
+    "Region" : {
+      "type" : "string",
+      "description" : "Region or state of a physical address"
+    },
+    "PostalCode" : {
+      "type" : "string",
+      "description" : "Postal code of a physical address"
+    },
+    "Country" : {
+      "type" : "string",
+      "description" : "Country of a physical address"
+    }
+  },
+  "description" : ""
 };
       defs["InvoiceReminder"] = {
   "title" : "",
@@ -3660,6 +3718,22 @@ ul.nav-tabs {
       "description" : "The Xero identifier for a Repeating Invoice",
       "format" : "uuid",
       "example" : "00000000-0000-0000-0000-000000000000"
+    },
+    "Taxability" : {
+      "type" : "string",
+      "description" : "The type of taxability",
+      "enum" : [ "TAXABLE", "NON_TAXABLE", "EXEMPT", "PART_TAXABLE", "NOT_APPLICABLE" ]
+    },
+    "SalesTaxCodeId" : {
+      "type" : "number",
+      "description" : "The ID of the sales tax code"
+    },
+    "TaxBreakdown" : {
+      "type" : "array",
+      "description" : "An array of tax components defined for this line item",
+      "items" : {
+        "$ref" : "#/components/schemas/TaxBreakdownComponent"
+      }
     }
   },
   "description" : "",
@@ -5699,6 +5773,55 @@ ul.nav-tabs {
   "externalDocs" : {
     "url" : "https://developer.xero.com/documentation/api-guides/conversions"
   }
+};
+      defs["TaxBreakdownComponent"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "TaxComponentId" : {
+      "type" : "string",
+      "description" : "The unique ID number of this component",
+      "format" : "uuid"
+    },
+    "Type" : {
+      "type" : "string",
+      "description" : "The type of the jurisdiction",
+      "enum" : [ "SYSGST/USCOUNTRY", "SYSGST/USSTATE", "SYSGST/USCOUNTY", "SYSGST/USCITY", "SYSGST/USSPECIAL" ]
+    },
+    "Name" : {
+      "type" : "string",
+      "description" : "The name of the jurisdiction"
+    },
+    "TaxPercentage" : {
+      "type" : "number",
+      "description" : "The percentage of the tax"
+    },
+    "TaxAmount" : {
+      "type" : "number",
+      "description" : "The amount of the tax"
+    },
+    "TaxableAmount" : {
+      "type" : "number",
+      "description" : "The amount that is taxable"
+    },
+    "NonTaxableAmount" : {
+      "type" : "number",
+      "description" : "The amount that is not taxable"
+    },
+    "ExemptAmount" : {
+      "type" : "number",
+      "description" : "The amount that is exempt"
+    },
+    "StateAssignedNo" : {
+      "type" : "string",
+      "description" : "The state assigned number of the jurisdiction"
+    },
+    "JurisdictionRegion" : {
+      "type" : "string",
+      "description" : "Name identifying the region within the country"
+    }
+  },
+  "description" : ""
 };
       defs["TaxComponent"] = {
   "title" : "",
