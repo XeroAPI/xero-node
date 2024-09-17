@@ -36,7 +36,7 @@ export enum FilesApiApiKeys {
 
 export class FilesApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-9.3.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-14.3.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
