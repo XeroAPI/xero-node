@@ -30,7 +30,7 @@ jobs:
         working-directory: xero-node
 
       - name: Login to npm
-        run: npm login --scope=@your-scope --registry=https://registry.npmjs.org/ <<< "manisht72x\n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\n$manish.tanwar@thoughtworks.com"
+        run: npm login --scope=@your-scope --registry=https://registry.npmjs.org/ <<< "manisht72x\n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\n$manish.tanwar@xero.com"
         working-directory: xero-node
 
       - name: Run Build
