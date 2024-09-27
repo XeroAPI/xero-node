@@ -29,6 +29,9 @@ jobs:
         run: npm run build
         working-directory: xero-node
 
+      - name: Debug NPM Token
+        run: echo ${{ secrets.NPM_TOKEN }}
+
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
