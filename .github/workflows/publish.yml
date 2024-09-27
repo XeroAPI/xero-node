@@ -29,16 +29,12 @@ jobs:
         run: npm ci
         working-directory: xero-node
 
-      - name: Login to npm
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-        working-directory: xero-node
-
       - name: Run Build
         run: npm run build
         working-directory: xero-node
 
       - name: Publish to npm
-        # env:
-        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --registry=https://registry.npmjs.org
         working-directory: xero-node
