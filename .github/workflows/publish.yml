@@ -29,16 +29,12 @@ jobs:
         run: npm ci
         working-directory: xero-node
 
-      - name: Login to npm
-        run: npm login --scope=@your-scope --registry=https://registry.npmjs.org/ <<< "manisht72x\n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\n$manish.tanwar@xero.com"
-        working-directory: xero-node
-
       - name: Run Build
         run: npm run build
         working-directory: xero-node
 
       - name: Publish to npm
-        # env:
-        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public
         working-directory: xero-node
