@@ -30,7 +30,7 @@ jobs:
         working-directory: xero-node
 
       - name: Login to npm
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        run: npm login --scope=@your-scope --registry=https://registry.npmjs.org/ <<< "manisht72x\n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\n$manish.tanwar@thoughtworks.com"
         working-directory: xero-node
 
       - name: Run Build
