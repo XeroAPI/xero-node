@@ -36,5 +36,5 @@ jobs:
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --registry=https://registry.npmjs.org
+        run: npm publish --access public --registry=https://registry.npmjs.org
         working-directory: xero-node
