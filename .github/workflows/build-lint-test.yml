@@ -27,6 +27,7 @@ jobs:
 
             - name: Check for vulnerabilities
               run: npm audit --exit-code
+              working-directory: xero-node
 
             - name: Run Build
               run: npm run build
