@@ -35,6 +35,6 @@ jobs:
 
       - name: Publish to npm
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public
         working-directory: xero-node
