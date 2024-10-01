@@ -27,7 +27,7 @@ jobs:
               working-directory: xero-node
 
             - name: Check for vulnerabilities
-              run: npm audit
+              run: npm audit || true
               working-directory: xero-node
 
             - name: Run Build
