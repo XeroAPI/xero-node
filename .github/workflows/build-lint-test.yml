@@ -21,9 +21,12 @@ jobs:
                 cache: 'npm'
                 cache-dependency-path: '**/package-lock.json'
 
-
             - name: Install dependencies
               run: npm ci
+              working-directory: xero-node
+
+            - name: Check for vulnerabilities
+              run: npm audit || true
               working-directory: xero-node
 
             - name: Run Build
