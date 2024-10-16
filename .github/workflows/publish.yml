@@ -67,7 +67,7 @@ jobs:
          path: xero-node
 
       - name: Send slack notification on failure
-        uses: ./xero-node/.github/actions/notification
+        uses: ./xero-node/.github/actions/notify-slack
         with:
           heading_text: "Publish job has failed, Please check the logs"
           alert_type: "danger"

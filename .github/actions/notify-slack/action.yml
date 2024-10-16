@@ -4,20 +4,24 @@ description: "Action to send slack payload to public-sdk-events channel"
 inputs:
   heading_text:
     required: true
+    description: "test"
   alert_type:
     required: true
+    description: "test"
   job_status:
     required: true
+    description: "test"
 
 runs:
   using: "composite"
 
   steps:
       - name: testing
+        shell: bash
         run: |
          echo ${{inputs.alert_type}}
          echo ${{inputs.heading_text}}
-         
+
     # - name: Send slack notification
     #   id: slack
     #   uses: slackapi/slack-github-action@v1.27.0
