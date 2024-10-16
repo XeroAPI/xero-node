@@ -44,12 +44,18 @@ jobs:
     if: success()
     steps:
       - name: Send slack notification on success
-        run: echo "Slack alert on success"
+        uses: ./xero-node/.github/actions/notify-slack
+        with:
+         heading_text: "Publish job has succeeded !"
+         alert_type: "good"
 
   notify-slack-on-failure:
     runs-on: ubuntu-latest
     needs: publish
     if: failure()
     steps:
-      - name: Send slack notification on failure
-        run: echo "Slack alert on failure"
+      - name: Send slack notification
+        uses: ./xero-node/.github/actions/notify-slack
+        with:
+          heading_text: "Publish job has failed, Please check the logs"
+          alert_type: "danger"
