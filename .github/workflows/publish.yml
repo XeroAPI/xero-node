@@ -56,6 +56,7 @@ jobs:
          heading_text: "Publish job has succeeded !"
          alert_type: "good"
          job_status: ${{job.status}}
+         job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
 
   notify-slack-on-failure:
     runs-on: ubuntu-latest
@@ -74,4 +75,4 @@ jobs:
           heading_text: "Publish job has failed, Please check the logs"
           alert_type: "danger"
           job_status: ${{job.status}}
-          job: ${{job}}
+          job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"

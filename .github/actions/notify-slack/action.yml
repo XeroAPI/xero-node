@@ -11,7 +11,7 @@ inputs:
   job_status:
     required: true
     description: "test"
-  job:
+  job_url:
     required: true
     description: "test"
 
@@ -27,7 +27,7 @@ runs:
          echo ${{inputs.job_status}}
          echo ${{github.repository}}
          echo ${{github.sha}}
-         echo ${{inputs.job}}
+         echo ${{inputs.job_url}}
 
     # - name: Send slack notification
     #   id: slack
