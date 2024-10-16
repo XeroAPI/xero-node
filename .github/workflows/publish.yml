@@ -38,22 +38,24 @@ jobs:
         run: npm publish
         working-directory: xero-node
 
-  # notify-slack-on-success:
-  #   runs-on: ubuntu-latest
-  #   needs: publish
-  #   if: success()
-  #   steps:
-  #     - name: Checkout xero-node repo
-  #       uses: actions/checkout@v4
-  #       with:
-  #         repository: XeroAPI/xero-node
+  notify-slack-on-success:
+    runs-on: ubuntu-latest
+    needs: publish
+    if: success()
+    steps:
+      - name: Checkout xero-node repo
+        uses: actions/checkout@v4
+        with:
+          repository: XeroAPI/xero-node
+          path: xero-node
 
-  #     - name: Send slack notification on success
-  #       uses: ./xero-node/.github/actions/notify-slack
-  #       with:
-  #        heading_text: "Publish job has succeeded !"
-  #        alert_type: "good"
-  #        job_status: ${{job.status}}
+
+      - name: Send slack notification on success
+        uses: ./xero-node/.github/actions/notify-slack
+        with:
+         heading_text: "Publish job has succeeded !"
+         alert_type: "good"
+         job_status: ${{job.status}}
 
   notify-slack-on-failure:
     runs-on: ubuntu-latest
@@ -72,3 +74,4 @@ jobs:
           heading_text: "Publish job has failed, Please check the logs"
           alert_type: "danger"
           job_status: ${{job.status}}
+          job: ${{job}}
