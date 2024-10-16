@@ -49,14 +49,12 @@ jobs:
           repository: XeroAPI/xero-node
           path: xero-node
 
-
       - name: Send slack notification on success
         uses: ./xero-node/.github/actions/notify-slack
         with:
          heading_text: "Publish job has succeeded !"
          alert_type: "good"
          job_status: ${{job.status}}
-         job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
 
   notify-slack-on-failure:
     runs-on: ubuntu-latest
@@ -72,7 +70,6 @@ jobs:
       - name: Send slack notification on failure
         uses: ./xero-node/.github/actions/notify-slack
         with:
-          heading_text: "Publish job has failed, Please check the logs"
+          heading_text: "Publish job has failed. Check the details here: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
           alert_type: "danger"
           job_status: ${{job.status}}
-          job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"

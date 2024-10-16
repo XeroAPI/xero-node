@@ -4,16 +4,13 @@ description: "Action to send slack payload to public-sdk-events channel"
 inputs:
   heading_text:
     required: true
-    description: "test"
+    description: "Heading of the slack payload"
   alert_type:
     required: true
-    description: "test"
+    description: "type of the slack alert"
   job_status:
     required: true
-    description: "test"
-  job_url:
-    required: true
-    description: "test"
+    description: "status of the job"
 
 runs:
   using: "composite"
@@ -27,7 +24,6 @@ runs:
          echo ${{inputs.job_status}}
          echo ${{github.repository}}
          echo ${{github.sha}}
-         echo ${{inputs.job_url}}
 
     # - name: Send slack notification
     #   id: slack
