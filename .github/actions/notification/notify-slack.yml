@@ -6,6 +6,8 @@ inputs:
     required: true
   alert_type:
     required: true
+  job_status:
+    required: true
 
 runs:
   using: "composite"
@@ -15,6 +17,7 @@ runs:
         run: |
          echo ${{inputs.alert_type}}
          echo ${{inputs.heading_text}}
+         
     # - name: Send slack notification
     #   id: slack
     #   uses: slackapi/slack-github-action@v1.27.0
@@ -35,8 +38,8 @@ runs:
     #                "short": true
     #              },
     #              {
-    #                "title": "Job",
-    #                "value": ""
+    #                "title": "Job Status",
+    #                "value": "${{inputs.job_status}}"
     #                "short": true
     #              },
     #              {
