@@ -30,7 +30,19 @@ jobs:
         working-directory: xero-node
 
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # env:
+        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish
         working-directory: xero-node
+
+  notify-slack:
+    runs-on: ubuntu-latest
+    needs: publish
+    steps:
+      - name: Send slack notification on sucess
+        if: success()
+        run: echo "Slack alert on success"
+
+      - name: Send slack notification on failure
+        if: failure()
+        run: echo "Slack alert on failure"
