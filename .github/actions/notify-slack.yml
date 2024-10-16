@@ -1,0 +1,46 @@
+name: slack-alert-action
+description: "Action to send slack payload to public-sdk-events channel"
+
+inputs:
+  heading_text:
+    required: true
+  alert_type:
+    required: true
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Send slack notification
+      id: slack
+      uses: slackapi/slack-github-action@v1.27.0
+      env:
+        SLACK_WEBHOOK_URL: ""
+      with:
+       payload: |
+        {
+          "channel": "#public-sdk-events",
+          "text": ${{inputs.heading_text}}
+          "attachments": [
+            {
+              "color": ${{inputs.alert_type}},
+              "fields": [
+                 {
+                   "title": "Repository",
+                   "value": "${{github.repository}}"
+                   "short": true
+                 },
+                 {
+                   "title": "Job",
+                   "value": ""
+                   "short": true
+                 },
+                 {
+                   "title": "commit",
+                   "value": "${{github.sha}}"
+                   "short": true
+                 },
+              ]
+            }
+          ]
+        }
