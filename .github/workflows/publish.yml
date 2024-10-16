@@ -2,6 +2,9 @@ name: Publish
 on:
   release:
     types: [published]
+  pull_request:
+    paths:
+      - '**'
 
 jobs:
   publish:
