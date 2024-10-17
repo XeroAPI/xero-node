@@ -55,6 +55,7 @@ jobs:
          heading_text: "Publish job has succeeded !"
          alert_type: "good"
          job_status: ${{job.status}}
+         XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
 
   notify-slack-on-failure:
     runs-on: ubuntu-latest
@@ -73,3 +74,4 @@ jobs:
           heading_text: "Publish job has failed. Check the details here: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
           alert_type: "danger"
           job_status: ${{job.status}}
+          XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}

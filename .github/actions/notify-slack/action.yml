@@ -11,6 +11,9 @@ inputs:
   job_status:
     required: true
     description: "status of the job"
+  XERO_SLACK_WEBHOOK_URL:
+    required: true
+    description: "webhook url for channel - public-sdk-events"
 
 runs:
   using: "composite"
@@ -25,36 +28,36 @@ runs:
          echo ${{github.repository}}
          echo ${{github.sha}}
 
-    # - name: Send slack notification
-    #   id: slack
-    #   uses: slackapi/slack-github-action@v1.27.0
-    #   env:
-    #     SLACK_WEBHOOK_URL: ""
-    #   with:
-    #    payload: |
-    #     {
-    #       "channel": "#public-sdk-events",
-    #       "text": ${{inputs.heading_text}}
-    #       "attachments": [
-    #         {
-    #           "color": ${{inputs.alert_type}},
-    #           "fields": [
-    #              {
-    #                "title": "Repository",
-    #                "value": "${{github.repository}}"
-    #                "short": true
-    #              },
-    #              {
-    #                "title": "Job Status",
-    #                "value": "${{inputs.job_status}}"
-    #                "short": true
-    #              },
-    #              {
-    #                "title": "commit",
-    #                "value": "${{github.sha}}"
-    #                "short": true
-    #              },
-    #           ]
-    #         }
-    #       ]
-    #     }
+      - name: Send slack notification
+        id: slack
+        uses: slackapi/slack-github-action@v1.27.0
+        env:
+          SLACK_WEBHOOK_URL: ${{inputs.XERO_SLACK_WEBHOOK_URL}}
+        with:
+         payload: |
+          {
+            "channel": "#public-sdk-events",
+            "text": ${{inputs.heading_text}}
+            "attachments": [
+              {
+                "color": ${{inputs.alert_type}},
+                "fields": [
+                  {
+                    "title": "Repository",
+                    "value": "${{github.repository}}"
+                    "short": true
+                  },
+                  {
+                    "title": "Job Status",
+                    "value": "${{inputs.job_status}}"
+                    "short": true
+                  },
+                  {
+                    "title": "commit",
+                    "value": "${{github.sha}}"
+                    "short": true
+                  },
+                ]
+              }
+            ]
+          }
