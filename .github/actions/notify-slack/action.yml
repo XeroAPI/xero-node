@@ -37,26 +37,26 @@ runs:
          payload: |
           {
             "channel": "#public-sdk-events",
-            "text": "${{inputs.heading_text}}"
+            "text": "${{inputs.heading_text}}",
             "attachments": [
               {
                 "color": "${{inputs.alert_type}}",
                 "fields": [
                   {
                     "title": "Repository",
-                    "value": "${{github.repository}}"
+                    "value": "${{github.repository}}",
                     "short": true
                   },
                   {
                     "title": "Job Status",
-                    "value": "${{inputs.job_status}}"
+                    "value": "${{inputs.job_status}}",
                     "short": true
                   },
                   {
                     "title": "commit",
-                    "value": "${{github.sha}}"
+                    "value": "${{github.sha}}",
                     "short": true
-                  },
+                  }
                 ]
               }
             ]
