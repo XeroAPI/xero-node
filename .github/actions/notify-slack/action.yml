@@ -14,6 +14,9 @@ inputs:
   XERO_SLACK_WEBHOOK_URL:
     required: true
     description: "webhook url for channel - public-sdk-events"
+  job_url:
+    required: false
+    description: "job event link"
 
 runs:
   using: "composite"
@@ -38,26 +41,16 @@ runs:
           {
             "channel": "#public-sdk-events",
             "text": "${{inputs.heading_text}}",
-            "attachments": [
+            "blocks": [
               {
-                "color": "${{inputs.alert_type}}",
+                "type": "section",
                 "fields": [
-                  {
-                    "title": "Repository",
-                    "value": "${{github.repository}}",
-                    "short": true
-                  },
-                  {
-                    "title": "Job Status",
-                    "value": "${{inputs.job_status}}",
-                    "short": true
-                  },
-                  {
-                    "title": "commit",
-                    "value": "${{github.sha}}",
-                    "short": true
-                  }
-                ]
+                    {
+                      "title": "Repository",
+                      "value": "${{github.repository}}",
+                      "short": true
+                    }
+                  ]
               }
             ]
           }

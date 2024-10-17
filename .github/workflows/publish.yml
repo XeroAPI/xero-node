@@ -71,7 +71,8 @@ jobs:
       - name: Send slack notification on failure
         uses: ./xero-node/.github/actions/notify-slack
         with:
-          heading_text: "Publish job has failed. Check the details here: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+          heading_text: "Publish job has failed !"
           alert_type: "danger"
           job_status: ${{job.status}}
           XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
+          job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
