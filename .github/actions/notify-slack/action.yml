@@ -43,14 +43,37 @@ runs:
         with:
          payload: |
           {
-            "text": "${{inputs.heading_text}}",
+            "text": "TESTING ---- ${{inputs.heading_text}}",
             "blocks": [
               {
                 "type": "section",
                 "text": {
-                  "text": "*Repository:* ${{inputs.repository_name}}",
-                  "type": "mrkdwn"
+                  "type": "mrkdwn",
+                  "text": "section 1 text"
                 }
+              },
+              {
+                "type": "actions",
+                "elements": [
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":github-actions: Pipeline",
+                      "emoji": true
+                    },
+                    "url": "${{inputs.job_url}}"
+                  },
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":github repo: ${{github.event.repository.name}}",
+                      "emoji": true
+                    },
+                    "url": "${{github.server_url}}/${{github.repository}}"
+                  }
+                ]
               }
             ]
           }
