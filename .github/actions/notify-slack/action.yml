@@ -43,7 +43,6 @@ runs:
         with:
          payload: |
           {
-            "channel": "#public-sdk-events",
             "text": "${{inputs.heading_text}}",
             "blocks": [
               {
