@@ -76,3 +76,4 @@ jobs:
           job_status: ${{job.status}}
           XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
           job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+          repository_name: ${{github.repository}}

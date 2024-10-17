@@ -17,6 +17,10 @@ inputs:
   job_url:
     required: false
     description: "job event link"
+  repository_name:
+    required: false
+    description: "repo name"
+
 
 runs:
   using: "composite"
@@ -44,13 +48,10 @@ runs:
             "blocks": [
               {
                 "type": "section",
-                "fields": [
-                    {
-                      "title": "Repository",
-                      "value": "${{github.repository}}",
-                      "short": true
-                    }
-                  ]
+                "text": {
+                  "text": "*Repository:* ${{inputs.repository_name}}",
+                  "type": "mrkdwn"
+                }
               }
             ]
           }
