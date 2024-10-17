@@ -20,6 +20,12 @@ inputs:
   repository_name:
     required: false
     description: "repo name"
+  bot_token:
+    required: true
+    description: "slack app token"
+  channel_id:
+    required: true
+    description: "channel id"
 
 
 runs:
@@ -39,8 +45,10 @@ runs:
         id: slack
         uses: slackapi/slack-github-action@v1.27.0
         env:
-          SLACK_WEBHOOK_URL: ${{inputs.XERO_SLACK_WEBHOOK_URL}}
+          # SLACK_WEBHOOK_URL: ${{inputs.XERO_SLACK_WEBHOOK_URL}}
+          SLACK_BOT_TOKEN: ${{inputs.bot_token}}
         with:
+         channel-id: ${{inputs.channel_id}}
          payload: |
           {
             "text": "TESTING ---- ${{inputs.heading_text}}",
