@@ -57,4 +57,5 @@ runs:
                   "text": "Publish job has failed"
                 }
               }
+            ]
           }
