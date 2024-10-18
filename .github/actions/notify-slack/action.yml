@@ -54,31 +54,7 @@ runs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "Publish jon has failed"
+                  "text": "Publish job has failed"
                 }
-              },
-              {
-                "type": "actions",
-                "elements": [
-                  {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "Check the event",
-                      "emoji": true
-                    },
-                    "url": "https://google.com"
-                  },
-                  {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": ":github repo: ${{github.event.repository.name}}",
-                      "emoji": true
-                    },
-                    "url": "https://google.com"
-                  }
-                ]
               }
-            ]
           }
