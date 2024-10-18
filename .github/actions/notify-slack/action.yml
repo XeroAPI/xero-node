@@ -3,16 +3,16 @@ description: "Action to send slack payload to public-sdk-events channel"
 
 inputs:
   heading_text:
-    required: true
+    required: false
     description: "Heading of the slack payload"
   alert_type:
-    required: true
+    required: false
     description: "type of the slack alert"
   job_status:
-    required: true
+    required: false
     description: "status of the job"
   XERO_SLACK_WEBHOOK_URL:
-    required: true
+    required: false
     description: "webhook url for channel - public-sdk-events"
   job_url:
     required: false
@@ -21,10 +21,10 @@ inputs:
     required: false
     description: "repo name"
   bot_token:
-    required: true
+    required: false
     description: "slack app token"
   channel_id:
-    required: true
+    required: false
     description: "channel id"
 
 
@@ -46,9 +46,7 @@ runs:
         uses: slackapi/slack-github-action@v1.27.0
         env:
           SLACK_WEBHOOK_URL: ${{inputs.XERO_SLACK_WEBHOOK_URL}}
-          # SLACK_BOT_TOKEN: ${{inputs.bot_token}}
         with:
-         channel-id: ${{inputs.channel_id}}
          payload: |
           {
             "blocks": [
