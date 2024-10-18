@@ -16,16 +16,16 @@ inputs:
     description: "webhook url for channel - public-sdk-events"
   job_url:
     required: true
-    description: "job event link"
+    description: "job run id link"
   button_type:
-   required: true
-   description: "color for the check logs button"
+    required: true
+    description: "color for the check logs button"
   package_version:
     required: true
     description: "released package version"
   repo_link:
-   required: true
-   description: "link of the repo"
+    required: true
+    description: "link of the repo"
 
 
 runs:

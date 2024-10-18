@@ -2,9 +2,6 @@ name: Publish
 on:
   release:
     types: [published]
-  pull_request:
-    paths:
-      - '**'
 
 jobs:
   publish:
@@ -48,8 +45,8 @@ jobs:
          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Publish to npm
-        # env:
-        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish
         working-directory: xero-node
 
