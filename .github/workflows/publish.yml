@@ -9,6 +9,11 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    outputs:
+      release_number: ${{steps.get_latest_release_number.outputs.release_tag}}
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout xero-node repo
         uses: actions/checkout@v4
@@ -32,6 +37,15 @@ jobs:
       #   run: npm run build
       #   working-directory: xero-node
 
+      - name: Fetch Latest release number
+        id: get_latest_release_number
+        run: |
+          latest_version=$(gh release view --json tagName --jq '.tagName')
+          echo "Latest release version is - $latest_version"
+          echo "::set-output name=release_tag::$latest_version"
+        env:
+         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
       - name: Publish to npm
         # env:
         #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -48,6 +62,9 @@ jobs:
         with:
           repository: XeroAPI/xero-node
           path: xero-node
+
+      - name: print release number
+        run: echo "release number - ${{needs.publish.outputs.release_number}}"
 
       - name: Send slack notification on success
         uses: ./xero-node/.github/actions/notify-slack

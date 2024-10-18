@@ -3,37 +3,29 @@ description: "Action to send slack payload to public-sdk-events channel"
 
 inputs:
   heading_text:
-    required: false
+    required: true
     description: "Heading of the slack payload"
   alert_type:
-    required: false
+    required: true
     description: "type of the slack alert"
   job_status:
-    required: false
+    required: true
     description: "status of the job"
   XERO_SLACK_WEBHOOK_URL:
-    required: false
+    required: true
     description: "webhook url for channel - public-sdk-events"
   job_url:
-    required: false
+    required: true
     description: "job event link"
   button_type:
-   required: false
-   description: "color for the logs button"
+   required: true
+   description: "color for the check logs button"
 
 
 runs:
   using: "composite"
 
   steps:
-      # - name: testing
-      #   shell: bash
-      #   run: |
-      #    echo ${{inputs.alert_type}}
-      #    echo ${{inputs.heading_text}}
-      #    echo ${{inputs.job_status}}
-      #    echo ${{github.repository}}
-      #    echo ${{github.sha}}
 
       - name: Send slack notification
         id: slack
@@ -79,10 +71,6 @@ runs:
                   {
                     "type": "mrkdwn",
                     "text": "*Status:*\n ${{inputs.job_status}}"
-                  },
-                  {
-                  "type": "mrkdwn",
-                  "text": "*Commit:*\n ${{github.sha}}"
                   }
                 ]
               },
