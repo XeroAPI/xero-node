@@ -67,7 +67,7 @@ runs:
                       "text": "Check the event",
                       "emoji": true
                     },
-                    "url": "${{inputs.job_url}}"
+                    "url": "https://google.com"
                   },
                   {
                     "type": "button",
@@ -76,7 +76,7 @@ runs:
                       "text": ":github repo: ${{github.event.repository.name}}",
                       "emoji": true
                     },
-                    "url": "${{github.server_url}}/${{github.repository}}"
+                    "url": "https://google.com"
                   }
                 ]
               }
