@@ -88,12 +88,15 @@ jobs:
          repository: XeroAPI/xero-node
          path: xero-node
 
-      - name: Send slack notification on failure
-        uses: ./xero-node/.github/actions/notify-slack
-        with:
-          heading_text: "Publish job has failed !"
-          alert_type: "alert"
-          job_status: "Failed"
-          XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
-          job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
-          button_type: "danger"
+      - name: print release number
+        run: echo "release number - ${{needs.publish.outputs.release_number}}"
+
+      # - name: Send slack notification on failure
+      #   uses: ./xero-node/.github/actions/notify-slack
+      #   with:
+      #     heading_text: "Publish job has failed !"
+      #     alert_type: "alert"
+      #     job_status: "Failed"
+      #     XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
+      #     job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+      #     button_type: "danger"
