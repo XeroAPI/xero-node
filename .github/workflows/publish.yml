@@ -53,12 +53,11 @@ jobs:
         uses: ./xero-node/.github/actions/notify-slack
         with:
          heading_text: "Publish job has succeeded !"
-         alert_type: "good"
+         alert_type: "thumbsup"
          job_status: ${{job.status}}
          XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
          job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
-        #  bot_token: ${{secrets.XERO_SLACK_BOT_TOKEN}}
-         channel_id: 'C07S29J583U'
+         button_type: "primary"
 
   notify-slack-on-failure:
     runs-on: ubuntu-latest
@@ -75,10 +74,8 @@ jobs:
         uses: ./xero-node/.github/actions/notify-slack
         with:
           heading_text: "Publish job has failed !"
-          alert_type: "danger"
+          alert_type: "alert"
           job_status: ${{job.status}}
           XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
           job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
-          repository_name: ${{github.repository}}
-          # bot_token: ${{secrets.SLACK_BOT_TOKEN}}
-          channel_id: 'C07S29J583U'
+          button_type: "danger"

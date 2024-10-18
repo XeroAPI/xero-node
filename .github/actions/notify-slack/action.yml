@@ -17,15 +17,9 @@ inputs:
   job_url:
     required: false
     description: "job event link"
-  repository_name:
-    required: false
-    description: "repo name"
-  bot_token:
-    required: false
-    description: "slack app token"
-  channel_id:
-    required: false
-    description: "channel id"
+  button_type:
+   required: false
+   description: "color for the logs button"
 
 
 runs:
@@ -47,32 +41,46 @@ runs:
         env:
           SLACK_WEBHOOK_URL: ${{inputs.XERO_SLACK_WEBHOOK_URL}}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          # SLACK_BOT_TOKEN: ${{inputs.bot_token}}
         with:
-        #  channel-id: ${{inputs.channel_id}}
          payload: |
           {
             "blocks": [
               {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "**${{inputs.heading_text}}**"
-                }
+                "type": "rich_text",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "type": "text",
+                        "text": "${{inputs.heading_text}}",
+                        "style": {
+                          "bold": true
+                        }
+                      },
+                      {
+                        "type": "emoji",
+                        "name": "${{inputs.alert_type}}"
+                      }
+                    ]
+                  }
+                ]
               },
               {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "Job status: **${{ job.status }}**"
-                }
+                "type": "divider"
               },
-              {
+             {
                 "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "PR: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                }
+                "fields": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Repository:* \n ${{github.server_url}}/${{github.repository}}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Status:*\n ${{inputs.job_status}}"
+                  }
+                ]
               },
               {
                 "type": "actions",
@@ -84,16 +92,8 @@ runs:
                       "text": "Check the logs",
                       "emoji": true
                   },
+                    "style": "${{inputs.button_type}}",
                     "url": "${{inputs.job_url}}"
-                  },
-                  {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "github repo: ${{github.event.repository.name}}",
-                      "emoji": true
-                    },
-                    "url": "${{github.server_url}}/${{github.repository}}"
                   }
                 ]
               }
