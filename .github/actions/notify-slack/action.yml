@@ -45,8 +45,10 @@ runs:
         id: slack
         uses: slackapi/slack-github-action@v1.27.0
         env:
-          SLACK_WEBHOOK_URL: ${{inputs.XERO_SLACK_WEBHOOK_URL}}
+          # SLACK_WEBHOOK_URL: ${{inputs.XERO_SLACK_WEBHOOK_URL}}
+          SLACK_BOT_TOKEN: ${{inputs.bot_token}}
         with:
+         channel-id: ${{inputs.channel_id}}
          payload: |
           {
             "blocks": [
