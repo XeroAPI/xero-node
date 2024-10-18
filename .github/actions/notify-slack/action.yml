@@ -59,6 +59,29 @@ runs:
                   "type": "mrkdwn",
                   "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
                 }
+              },
+              {
+                "type": "actions",
+                "elements": [
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Check the logs",
+                      "emoji": true
+                  },
+                    "url": "https://google.com"
+                  },
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":github repo: ${{github.event.repository.name}}",
+                      "emoji": true
+                    },
+                    "url": "https://google.com"
+                  }
+                ]
               }
             ]
           }
