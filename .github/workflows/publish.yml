@@ -80,5 +80,5 @@ jobs:
           XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
           job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
           repository_name: ${{github.repository}}
-          bot_token: ${{secrets.XERO_SLACK_BOT_TOKEN}}
+          bot_token: ${{secrets.SLACK_BOT_TOKEN}}
           channel_id: 'C07S29J583U'
