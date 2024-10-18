@@ -57,7 +57,21 @@ runs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  "text": "**${{inputs.heading_text}}**"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "Job status: **${{ job.status }}**"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "PR: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
                 }
               },
               {
@@ -70,16 +84,16 @@ runs:
                       "text": "Check the logs",
                       "emoji": true
                   },
-                    "url": "https://google.com"
+                    "url": "${{inputs.job_url}}"
                   },
                   {
                     "type": "button",
                     "text": {
                       "type": "plain_text",
-                      "text": ":github repo: ${{github.event.repository.name}}",
+                      "text": "github repo: ${{github.event.repository.name}}",
                       "emoji": true
                     },
-                    "url": "https://google.com"
+                    "url": "${{github.server_url}}/${{github.repository}}"
                   }
                 ]
               }
