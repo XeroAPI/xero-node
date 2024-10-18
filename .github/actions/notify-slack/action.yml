@@ -53,7 +53,7 @@ runs:
                     "elements": [
                       {
                         "type": "text",
-                        "text": "${{inputs.heading_text}}",
+                        "text": "${{inputs.heading_text}} ",
                         "style": {
                           "bold": true
                         }

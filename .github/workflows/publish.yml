@@ -54,7 +54,7 @@ jobs:
         with:
          heading_text: "Publish job has succeeded !"
          alert_type: "thumbsup"
-         job_status: ${{job.status}}
+         job_status: "Success"
          XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
          job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
          button_type: "primary"
@@ -75,7 +75,7 @@ jobs:
         with:
           heading_text: "Publish job has failed !"
           alert_type: "alert"
-          job_status: ${{job.status}}
+          job_status: "Failed"
           XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
           job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
           button_type: "danger"
