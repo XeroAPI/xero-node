@@ -51,7 +51,6 @@ runs:
          channel-id: ${{inputs.channel_id}}
          payload: |
           {
-            "text": "Testing the pipeline",
             "blocks": [
               {
                 "type": "section",
