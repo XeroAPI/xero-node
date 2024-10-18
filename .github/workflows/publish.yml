@@ -43,6 +43,7 @@ jobs:
           latest_version=$(gh release view --json tagName --jq '.tagName')
           echo "Latest release version is - $latest_version"
           echo "::set-output name=release_tag::$latest_version"
+        working-directory: xero-node
         env:
          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
