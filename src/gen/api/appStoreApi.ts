@@ -38,7 +38,7 @@ export enum AppStoreApiApiKeys {
 
 export class AppStoreApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-9.3.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-2222.3.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
