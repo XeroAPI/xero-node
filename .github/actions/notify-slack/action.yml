@@ -79,6 +79,10 @@ runs:
                   {
                     "type": "mrkdwn",
                     "text": "*Status:*\n ${{inputs.job_status}}"
+                  },
+                  {
+                  "type": "mrkdwn",
+                  "text": "*Commit:*\n ${{github.sha}}"
                   }
                 ]
               },
