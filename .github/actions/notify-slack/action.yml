@@ -54,7 +54,7 @@ runs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "${{inputs.heading_text}}"
+                  "text": "Publish jon has failed"
                 }
               },
               {
