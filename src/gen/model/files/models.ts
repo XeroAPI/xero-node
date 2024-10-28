@@ -18,6 +18,19 @@ import { ObjectType } from '././objectType';
 import { UploadObject } from '././uploadObject';
 import { User } from '././user';
 
+import * as fs from 'fs';
+import { Readable } from "stream";
+
+export interface RequestDetailedFile {
+    value: Buffer;
+    options?: {
+        filename?: string;
+        contentType?: string;
+    }
+}
+
+export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile | Readable;
+
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",
