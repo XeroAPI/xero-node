@@ -20,6 +20,19 @@ import { UpdateUsageRecord } from '././updateUsageRecord';
 import { UsageRecord } from '././usageRecord';
 import { UsageRecordsList } from '././usageRecordsList';
 
+import * as fs from 'fs';
+import { Readable } from "stream";
+
+export interface RequestDetailedFile {
+    value: Buffer;
+    options?: {
+        filename?: string;
+        contentType?: string;
+    }
+}
+
+export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile | Readable;
+
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",

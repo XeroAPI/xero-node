@@ -19,7 +19,7 @@ import { FeedConnections } from '../model/bankfeeds/feedConnections';
 import { Statement } from '../model/bankfeeds/statement';
 import { Statements } from '../model/bankfeeds/statements';
 
-import { ObjectSerializer, Authentication, VoidAuth } from '../model/bankfeeds/models';
+import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/bankfeeds/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";

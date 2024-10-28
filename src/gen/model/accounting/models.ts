@@ -272,6 +272,19 @@ import { User } from '././user';
 import { Users } from '././users';
 import { ValidationError } from '././validationError';
 
+import * as fs from 'fs';
+import { Readable } from "stream";
+
+export interface RequestDetailedFile {
+    value: Buffer;
+    options?: {
+        filename?: string;
+        contentType?: string;
+    }
+}
+
+export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile | Readable;
+
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",
