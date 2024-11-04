@@ -68,7 +68,7 @@ import { TrackingOption } from '../model/accounting/trackingOption';
 import { TrackingOptions } from '../model/accounting/trackingOptions';
 import { Users } from '../model/accounting/users';
 
-import { ObjectSerializer, Authentication, VoidAuth } from '../model/accounting/models';
+import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/accounting/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";
@@ -247,8 +247,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createAccountAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -278,26 +277,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -357,8 +336,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createBankTransactionAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -388,26 +366,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -708,8 +666,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createBankTransferAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -739,26 +696,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -1143,8 +1080,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createContactAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -1174,26 +1110,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -1660,8 +1576,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createCreditNoteAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         if (includeOnline !== undefined) {
             localVarQueryParameters['IncludeOnline'] = ObjectSerializer.serialize(includeOnline, "boolean");
         }
@@ -1695,26 +1610,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -2254,8 +2149,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createInvoiceAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         if (includeOnline !== undefined) {
             localVarQueryParameters['IncludeOnline'] = ObjectSerializer.serialize(includeOnline, "boolean");
         }
@@ -2289,26 +2183,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -2777,8 +2651,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createManualJournalAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -2808,26 +2681,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -3699,8 +3552,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createPurchaseOrderAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -3730,26 +3582,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -3971,8 +3803,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createQuoteAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -4002,26 +3833,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -4323,8 +4134,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createReceiptAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -4354,26 +4164,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -4515,8 +4305,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createRepeatingInvoiceAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -4546,26 +4335,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -16537,8 +16306,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateAccountAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -16568,26 +16336,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -16734,8 +16482,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateBankTransactionAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -16765,26 +16512,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -16843,8 +16570,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateBankTransferAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -16874,26 +16600,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -17034,8 +16740,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateContactAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -17065,26 +16770,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -17313,8 +16998,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateCreditNoteAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -17344,26 +17028,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -17592,8 +17256,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateInvoiceAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -17623,26 +17286,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -17953,8 +17596,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateManualJournalAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -17984,26 +17626,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -18965,8 +18587,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updatePurchaseOrderAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -18996,26 +18617,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -19157,8 +18758,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateQuoteAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -19188,26 +18788,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -19354,8 +18934,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateReceiptAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -19385,26 +18964,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {
@@ -19546,8 +19105,7 @@ export class AccountingApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateRepeatingInvoiceAttachmentByFileName.');
         }
-        this.binaryHeaders = {'Accept': 'application/json'};
-        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
+
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
         localVarHeaderParams['Idempotency-Key'] = ObjectSerializer.serialize(idempotencyKey, "string");
         localVarHeaderParams['Accept'] = acceptHeadersFromSpec.join();
@@ -19577,26 +19135,6 @@ export class AccountingApi {
                     localVarRequestOptions.headers = { ...localVarRequestOptions.headers, 'content-type': 'application/x-www-form-urlencoded' };
                 }
             }
-        }).then(() => {
-            // Reads file stream as chunks so we can put it in body of request.
-            // This collects the whole file into memory, which is why we do it _after_ authentication.
-            return new Promise<any[]>((resolve, reject) => {
-               	let bodyStream;
-                bodyStream = Buffer.isBuffer(body) ? Readable.from(body) : body
-                const fileContents: any[] = [];
-                bodyStream.on('data', (chunk) => {
-                    fileContents.push(chunk);
-                });
-                bodyStream.on('end', () => {
-                    resolve(fileContents);
-                });
-                bodyStream.on('error', (err) => {
-                    reject(err);
-                })
-            });
-        }).then((fileContents) => {
-            const file = Buffer.concat(fileContents);
-            localVarRequestOptions.data = file;
             return new Promise<{ response: AxiosResponse; body: Attachments;  }>(async (resolve, reject) => {
             let body = null
             try {

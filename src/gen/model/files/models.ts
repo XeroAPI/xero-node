@@ -18,6 +18,11 @@ import { ObjectType } from '././objectType';
 import { UploadObject } from '././uploadObject';
 import { User } from '././user';
 
+import * as fs from 'fs';
+import { Readable } from "stream";
+
+export type RequestFile = Buffer | fs.ReadStream | Readable;
+
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",
