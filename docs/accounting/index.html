@@ -7249,18 +7249,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const accountID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createAccountAttachmentByFileName(xeroTenantId, accountID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createAccountAttachmentByFileName(xeroTenantId, accountID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -7395,7 +7386,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -7413,7 +7404,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -7453,18 +7444,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const bankTransactionID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createBankTransactionAttachmentByFileName(xeroTenantId, bankTransactionID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createBankTransactionAttachmentByFileName(xeroTenantId, bankTransactionID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -7599,7 +7581,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -7617,7 +7599,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -8268,18 +8250,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const bankTransferID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createBankTransferAttachmentByFileName(xeroTenantId, bankTransferID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createBankTransferAttachmentByFileName(xeroTenantId, bankTransferID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -8414,7 +8387,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -8432,7 +8405,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -9247,18 +9220,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const contactID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createContactAttachmentByFileName(xeroTenantId, contactID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createContactAttachmentByFileName(xeroTenantId, contactID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -9393,7 +9357,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -9411,7 +9375,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -10433,18 +10397,9 @@ const creditNoteID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const includeOnline = true;
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createCreditNoteAttachmentByFileName(xeroTenantId, creditNoteID, fileName, body,  includeOnline,idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createCreditNoteAttachmentByFileName(xeroTenantId, creditNoteID, fileName, body,  includeOnline,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -10579,7 +10534,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -10597,7 +10552,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -11753,18 +11708,9 @@ const invoiceID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const includeOnline = true;
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createInvoiceAttachmentByFileName(xeroTenantId, invoiceID, fileName, body,  includeOnline,idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createInvoiceAttachmentByFileName(xeroTenantId, invoiceID, fileName, body,  includeOnline,idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -11899,7 +11845,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -11917,7 +11863,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -12951,18 +12897,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const manualJournalID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createManualJournalAttachmentByFileName(xeroTenantId, manualJournalID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createManualJournalAttachmentByFileName(xeroTenantId, manualJournalID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -13097,7 +13034,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -13115,7 +13052,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -15063,18 +15000,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const purchaseOrderID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createPurchaseOrderAttachmentByFileName(xeroTenantId, purchaseOrderID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createPurchaseOrderAttachmentByFileName(xeroTenantId, purchaseOrderID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -15209,7 +15137,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -15227,7 +15155,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -15652,18 +15580,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const quoteID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createQuoteAttachmentByFileName(xeroTenantId, quoteID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createQuoteAttachmentByFileName(xeroTenantId, quoteID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -15798,7 +15717,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -15816,7 +15735,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -16454,18 +16373,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const receiptID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createReceiptAttachmentByFileName(xeroTenantId, receiptID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createReceiptAttachmentByFileName(xeroTenantId, receiptID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -16600,7 +16510,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -16618,7 +16528,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -16841,18 +16751,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const repeatingInvoiceID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.createRepeatingInvoiceAttachmentByFileName(xeroTenantId, repeatingInvoiceID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.createRepeatingInvoiceAttachmentByFileName(xeroTenantId, repeatingInvoiceID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -16987,7 +16888,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -17005,7 +16906,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -38813,18 +38714,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const accountID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateAccountAttachmentByFileName(xeroTenantId, accountID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateAccountAttachmentByFileName(xeroTenantId, accountID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -38959,7 +38851,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -38977,7 +38869,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -39314,18 +39206,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const bankTransactionID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateBankTransactionAttachmentByFileName(xeroTenantId, bankTransactionID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateBankTransactionAttachmentByFileName(xeroTenantId, bankTransactionID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -39460,7 +39343,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -39478,7 +39361,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -39518,18 +39401,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const bankTransferID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateBankTransferAttachmentByFileName(xeroTenantId, bankTransferID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateBankTransferAttachmentByFileName(xeroTenantId, bankTransferID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -39664,7 +39538,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -39682,7 +39556,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -39907,18 +39781,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const contactID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateContactAttachmentByFileName(xeroTenantId, contactID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateContactAttachmentByFileName(xeroTenantId, contactID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -40053,7 +39918,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -40071,7 +39936,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -40537,18 +40402,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const creditNoteID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateCreditNoteAttachmentByFileName(xeroTenantId, creditNoteID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateCreditNoteAttachmentByFileName(xeroTenantId, creditNoteID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -40683,7 +40539,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -40701,7 +40557,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -41158,18 +41014,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const invoiceID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateInvoiceAttachmentByFileName(xeroTenantId, invoiceID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateInvoiceAttachmentByFileName(xeroTenantId, invoiceID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -41304,7 +41151,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -41322,7 +41169,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -41960,18 +41807,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const manualJournalID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateManualJournalAttachmentByFileName(xeroTenantId, manualJournalID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateManualJournalAttachmentByFileName(xeroTenantId, manualJournalID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -42106,7 +41944,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -42124,7 +41962,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -44432,18 +44270,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const purchaseOrderID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updatePurchaseOrderAttachmentByFileName(xeroTenantId, purchaseOrderID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updatePurchaseOrderAttachmentByFileName(xeroTenantId, purchaseOrderID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -44578,7 +44407,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -44596,7 +44425,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -44829,18 +44658,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const quoteID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateQuoteAttachmentByFileName(xeroTenantId, quoteID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateQuoteAttachmentByFileName(xeroTenantId, quoteID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -44975,7 +44795,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -44993,7 +44813,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -45254,18 +45074,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const receiptID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateReceiptAttachmentByFileName(xeroTenantId, receiptID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateReceiptAttachmentByFileName(xeroTenantId, receiptID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -45400,7 +45211,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -45418,7 +45229,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
@@ -45674,18 +45485,9 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const repeatingInvoiceID = '00000000-0000-0000-0000-000000000000';
 const fileName = 'xero-dev.jpg';
 const idempotencyKey = 'KEY_VALUE';
-const path = require("path");
-const mime = require("mime-types");
-const pathToUpload = path.resolve(__dirname, "../public/images/xero-dev.jpg"); // determine the path to your file
-const body = fs.createReadStream(pathToUpload); // {fs.ReadStream} read the file
-const contentType = mime.lookup(fileName);
 
 try {
-  const response = await xero.accountingApi.updateRepeatingInvoiceAttachmentByFileName(xeroTenantId, repeatingInvoiceID, fileName, body, idempotencyKey, {
-    headers: {
-      "Content-Type": contentType,
-    }
-  });
+  const response = await xero.accountingApi.updateRepeatingInvoiceAttachmentByFileName(xeroTenantId, repeatingInvoiceID, fileName, body, idempotencyKey);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -45820,7 +45622,7 @@ This allows you to safely retry requests without the risk of duplicate processin
 <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    byte[]
+                    File
                 </span>
 
                     <div class="inner description marked">
@@ -45838,7 +45640,7 @@ Byte array of file in body of request
     "application/octet-stream" : {
       "schema" : {
         "type" : "string",
-        "format" : "byte"
+        "format" : "binary"
       }
     }
   },
