@@ -27,15 +27,7 @@ import { Setting } from '././setting';
 import * as fs from 'fs';
 import { Readable } from "stream";
 
-export interface RequestDetailedFile {
-    value: Buffer;
-    options?: {
-        filename?: string;
-        contentType?: string;
-    }
-}
-
-export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile | Readable;
+export type RequestFile = Buffer | fs.ReadStream | Readable;
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
