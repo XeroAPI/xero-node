@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: Xero-Node SDK
+  description: "[Product] The xero-node SDK makes it easy for developers to access\
+    \ Xero&#39;s APIs in their JavaScript code, and build robust applications and\
+    \ software using small business &amp; general ledger accounting data."
+  x-cortex-tag: 8TADAt7cHWRszE7DZoTPwu
+  x-cortex-type: domain
+  x-cortex-slack:
+    channels:
+    - name: help-xero-openapi-github
+  x-cortex-groups:
+  - domain-type:product
+  - phase:sustained-release
+  x-cortex-oncall:
+    pagerduty:
+      id: null
+      type: SERVICE
+  x-cortex-owners:
+  - type: EMAIL
+    email: saxon.bruce@xero.com
+    inheritance: APPEND
