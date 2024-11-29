@@ -16,7 +16,3 @@ info:
     pagerduty:
       id: null
       type: SERVICE
-  x-cortex-owners:
-  - type: EMAIL
-    email: saxon.bruce@xero.com
-    inheritance: APPEND
