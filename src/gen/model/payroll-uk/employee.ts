@@ -8,20 +8,20 @@ export class Employee {
     /**
     * Title of the employee
     */
-    'title'?: string;
+    'title': string;
     /**
     * First name of employee
     */
-    'firstName'?: string;
+    'firstName': string;
     /**
     * Last name of employee
     */
-    'lastName'?: string;
+    'lastName': string;
     /**
     * Date of birth of the employee (YYYY-MM-DD)
     */
-    'dateOfBirth'?: string;
-    'address'?: Address;
+    'dateOfBirth': string;
+    'address': Address;
     /**
     * The email address for the employee
     */
@@ -29,7 +29,7 @@ export class Employee {
     /**
     * The employee’s gender
     */
-    'gender'?: Employee.GenderEnum;
+    'gender': Employee.GenderEnum;
     /**
     * Employee phone number
     */

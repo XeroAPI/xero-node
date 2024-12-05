@@ -12,16 +12,16 @@ export class Employee {
     /**
     * First name of employee
     */
-    'firstName'?: string;
+    'firstName': string;
     /**
     * Last name of employee
     */
-    'lastName'?: string;
+    'lastName': string;
     /**
     * Date of birth of the employee (YYYY-MM-DD)
     */
-    'dateOfBirth'?: string;
-    'address'?: Address;
+    'dateOfBirth': string;
+    'address': Address;
     /**
     * The email address for the employee
     */
