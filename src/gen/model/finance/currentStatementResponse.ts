@@ -21,7 +21,7 @@ export class CurrentStatementResponse {
     */
     'importedDateTimeUtc'?: Date;
     /**
-    * Looking at the most recent bank statement, this field indicates the source of the data (direct bank feed, indirect bank feed, file upload, or manual keying).
+    * Looking at the most recent bank statement, this field indicates the source of the data (direct bank feed, file upload, or manual keying).
     */
     'importSourceType'?: string;
 

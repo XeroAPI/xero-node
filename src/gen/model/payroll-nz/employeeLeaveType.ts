@@ -9,17 +9,29 @@ export class EmployeeLeaveType {
     */
     'scheduleOfAccrual'?: EmployeeLeaveType.ScheduleOfAccrualEnum;
     /**
-    * The number of hours accrued for the leave annually. This is 0 when the scheduleOfAccrual chosen is \"OnHourWorked\"
+    * Deprecated use UnitsAccruedAnnually
     */
     'hoursAccruedAnnually'?: number;
     /**
-    * The maximum number of hours that can be accrued for the leave
+    * The number of units accrued for the leave annually. This is 0 when the ScheduleOfAccrual chosen is \"NoAccruals\"
+    */
+    'unitsAccruedAnnually'?: number;
+    /**
+    * The type of units accrued for the leave annually
+    */
+    'typeOfUnitsToAccrue'?: string;
+    /**
+    * The maximum number of units that can be accrued for the leave
     */
     'maximumToAccrue'?: number;
     /**
-    * The initial number of hours assigned when the leave was added to the employee
+    * The initial number of units assigned when the leave was added to the employee
     */
     'openingBalance'?: number;
+    /**
+    * The type of units for the opening balance
+    */
+    'openingBalanceTypeOfUnits'?: string;
     /**
     * The number of hours added to the leave balance for every hour worked by the employee. This is normally 0, unless the scheduleOfAccrual chosen is \"OnHourWorked\"
     */
@@ -64,6 +76,16 @@ export class EmployeeLeaveType {
             "type": "number"
         },
         {
+            "name": "unitsAccruedAnnually",
+            "baseName": "UnitsAccruedAnnually",
+            "type": "number"
+        },
+        {
+            "name": "typeOfUnitsToAccrue",
+            "baseName": "typeOfUnitsToAccrue",
+            "type": "string"
+        },
+        {
             "name": "maximumToAccrue",
             "baseName": "maximumToAccrue",
             "type": "number"
@@ -72,6 +94,11 @@ export class EmployeeLeaveType {
             "name": "openingBalance",
             "baseName": "openingBalance",
             "type": "number"
+        },
+        {
+            "name": "openingBalanceTypeOfUnits",
+            "baseName": "openingBalanceTypeOfUnits",
+            "type": "string"
         },
         {
             "name": "rateAccruedHourly",

@@ -1517,7 +1517,7 @@ ul.nav-tabs {
     },
     "importSourceType" : {
       "type" : "string",
-      "description" : "Looking at the most recent bank statement, this field indicates the source of the data (direct bank feed, indirect bank feed, file upload, or manual keying)."
+      "description" : "Looking at the most recent bank statement, this field indicates the source of the data (direct bank feed, file upload, or manual keying)."
     }
   },
   "additionalProperties" : false,
@@ -1531,13 +1531,6 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Sum of the amounts of all statement lines where the source of the data was a direct bank feed in to Xero via an API integration.   This could be from a bank or aggregator.   This gives an indication on the certainty of correctness of the data.",
       "format" : "double",
-      "x-is-money" : true
-    },
-    "indirectBankFeed" : {
-      "type" : "number",
-      "description" : "No longer in use.",
-      "format" : "double",
-      "deprecated" : true,
       "x-is-money" : true
     },
     "fileUpload" : {
@@ -1558,13 +1551,6 @@ ul.nav-tabs {
       "format" : "double",
       "x-is-money" : true
     },
-    "indirectBankFeedPos" : {
-      "type" : "number",
-      "description" : "No longer in use.",
-      "format" : "double",
-      "deprecated" : true,
-      "x-is-money" : true
-    },
     "fileUploadPos" : {
       "type" : "number",
       "description" : "Sum of the amounts of all statement lines where the source of the data was a file manually uploaded in to Xero.   This gives an indication on the certainty of correctness of the data. Only positive transactions are included.",
@@ -1581,13 +1567,6 @@ ul.nav-tabs {
       "type" : "number",
       "description" : "Sum of the amounts of all statement lines where the source of the data was a direct bank feed in to Xero via an API integration.   This could be from a bank or aggregator.   This gives an indication on the certainty of correctness of the data.  Only negative transactions are included.",
       "format" : "double",
-      "x-is-money" : true
-    },
-    "indirectBankFeedNeg" : {
-      "type" : "number",
-      "description" : "No longer in use.",
-      "format" : "double",
-      "deprecated" : true,
       "x-is-money" : true
     },
     "fileUploadNeg" : {
@@ -2738,7 +2717,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Finance"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Finance"><strong>VSN: </strong>9.3.0</li>
+              <li class="nav-header" data-group="Finance"><strong>VSN: </strong>10.0.0</li>
               <li class="nav-header" data-group="Finance"><a href="#api-Finance">Methods</a></li>
               <li data-group="Finance" data-name="getAccountingActivityAccountUsage" class="">
                 <a href="#api-Finance-getAccountingActivityAccountUsage">getAccountingActivityAccountUsage</a>

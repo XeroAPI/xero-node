@@ -17,13 +17,21 @@ export class EmployeeLeaveSetup {
     */
     'negativeAnnualLeaveBalancePaidAmount'?: number;
     /**
-    * Number of hours accrued annually for sick leave. Multiply the number of days they\'re entitled to by the hours worked per day
+    * Deprecated use SickLeaveToAccrueAnnually
     */
     'sickLeaveHoursToAccrueAnnually'?: number;
     /**
-    * Maximum number of hours accrued annually for sick leave. Multiply the maximum days they can accrue by the hours worked per day
+    * Deprecated use SickLeaveMaximumToAccrue
     */
     'sickLeaveMaximumHoursToAccrue'?: number;
+    /**
+    * Number of units accrued annually for sick leave. The type of units is determined by the property \"TypeOfUnitsToAccrue\" on the \"Sick Leave\" leave type
+    */
+    'sickLeaveToAccrueAnnually'?: number;
+    /**
+    * Maximum number of units accrued annually for sick leave. The type of units is determined by the property \"TypeOfUnitsToAccrue\" on the \"Sick Leave\" leave type
+    */
+    'sickLeaveMaximumToAccrue'?: number;
     /**
     * Initial sick leave balance. This will be positive unless they\'ve taken sick leave in advance
     */
@@ -33,9 +41,13 @@ export class EmployeeLeaveSetup {
     */
     'sickLeaveScheduleOfAccrual'?: string;
     /**
-    * If Sick Leave Schedule of Accrual is \"OnAnniversaryDate\", this is the date when entitled to Sick Leave
+    * If Sick Leave Schedule of Accrual is \"OnAnniversaryDate\", this is the date when entitled to Sick Leave. When null the Employee\'s start date is used as the anniversary date
     */
     'sickLeaveAnniversaryDate'?: string;
+    /**
+    * The first date the employee will accrue Annual Leave. When null the Employee\'s start date is used as the anniversary date
+    */
+    'annualLeaveAnniversaryDate'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -71,6 +83,16 @@ export class EmployeeLeaveSetup {
             "type": "number"
         },
         {
+            "name": "sickLeaveToAccrueAnnually",
+            "baseName": "SickLeaveToAccrueAnnually",
+            "type": "number"
+        },
+        {
+            "name": "sickLeaveMaximumToAccrue",
+            "baseName": "SickLeaveMaximumToAccrue",
+            "type": "number"
+        },
+        {
             "name": "sickLeaveOpeningBalance",
             "baseName": "sickLeaveOpeningBalance",
             "type": "number"
@@ -83,6 +105,11 @@ export class EmployeeLeaveSetup {
         {
             "name": "sickLeaveAnniversaryDate",
             "baseName": "SickLeaveAnniversaryDate",
+            "type": "string"
+        },
+        {
+            "name": "annualLeaveAnniversaryDate",
+            "baseName": "AnnualLeaveAnniversaryDate",
             "type": "string"
         }    ];
 
