@@ -13,7 +13,19 @@ export class LeavePeriod {
     */
     'numberOfUnits'?: number;
     /**
-    * Period Status
+    * The number of units taken for the leave
+    */
+    'numberOfUnitsTaken'?: number;
+    /**
+    * The type of units paid for the leave
+    */
+    'typeOfUnits'?: string;
+    /**
+    * The type of units taken for the leave
+    */
+    'typeOfUnitsTaken'?: string;
+    /**
+    * Status of leave
     */
     'periodStatus'?: LeavePeriod.PeriodStatusEnum;
 
@@ -36,6 +48,21 @@ export class LeavePeriod {
             "type": "number"
         },
         {
+            "name": "numberOfUnitsTaken",
+            "baseName": "numberOfUnitsTaken",
+            "type": "number"
+        },
+        {
+            "name": "typeOfUnits",
+            "baseName": "typeOfUnits",
+            "type": "string"
+        },
+        {
+            "name": "typeOfUnitsTaken",
+            "baseName": "typeOfUnitsTaken",
+            "type": "string"
+        },
+        {
             "name": "periodStatus",
             "baseName": "periodStatus",
             "type": "LeavePeriod.PeriodStatusEnum"
@@ -49,6 +76,7 @@ export class LeavePeriod {
 export namespace LeavePeriod {
     export enum PeriodStatusEnum {
         Approved = <any> 'Approved',
-        Completed = <any> 'Completed'
+        Completed = <any> 'Completed',
+        Estimated = <any> 'Estimated'
     }
 }

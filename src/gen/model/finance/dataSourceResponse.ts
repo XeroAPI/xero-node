@@ -5,10 +5,6 @@ export class DataSourceResponse {
     */
     'directBankFeed'?: number;
     /**
-    * No longer in use.
-    */
-    'indirectBankFeed'?: number;
-    /**
     * Sum of the amounts of all statement lines where the source of the data was a file manually uploaded in to Xero.   This gives an indication on the certainty of correctness of the data.
     */
     'fileUpload'?: number;
@@ -21,10 +17,6 @@ export class DataSourceResponse {
     */
     'directBankFeedPos'?: number;
     /**
-    * No longer in use.
-    */
-    'indirectBankFeedPos'?: number;
-    /**
     * Sum of the amounts of all statement lines where the source of the data was a file manually uploaded in to Xero.   This gives an indication on the certainty of correctness of the data. Only positive transactions are included.
     */
     'fileUploadPos'?: number;
@@ -36,10 +28,6 @@ export class DataSourceResponse {
     * Sum of the amounts of all statement lines where the source of the data was a direct bank feed in to Xero via an API integration.   This could be from a bank or aggregator.   This gives an indication on the certainty of correctness of the data.  Only negative transactions are included.
     */
     'directBankFeedNeg'?: number;
-    /**
-    * No longer in use.
-    */
-    'indirectBankFeedNeg'?: number;
     /**
     * Sum of the amounts of all statement lines where the source of the data was a file manually uploaded in to Xero.   This gives an indication on the certainty of correctness of the data.  Only negative transactions are included.
     */
@@ -70,11 +58,6 @@ export class DataSourceResponse {
             "type": "number"
         },
         {
-            "name": "indirectBankFeed",
-            "baseName": "indirectBankFeed",
-            "type": "number"
-        },
-        {
             "name": "fileUpload",
             "baseName": "fileUpload",
             "type": "number"
@@ -90,11 +73,6 @@ export class DataSourceResponse {
             "type": "number"
         },
         {
-            "name": "indirectBankFeedPos",
-            "baseName": "indirectBankFeedPos",
-            "type": "number"
-        },
-        {
             "name": "fileUploadPos",
             "baseName": "fileUploadPos",
             "type": "number"
@@ -107,11 +85,6 @@ export class DataSourceResponse {
         {
             "name": "directBankFeedNeg",
             "baseName": "directBankFeedNeg",
-            "type": "number"
-        },
-        {
-            "name": "indirectBankFeedNeg",
-            "baseName": "indirectBankFeedNeg",
             "type": "number"
         },
         {
