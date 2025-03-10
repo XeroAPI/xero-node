@@ -24,6 +24,14 @@ export class LeaveType {
     * Shows whether the leave type is active or not
     */
     'isActive'?: boolean;
+    /**
+    * The type of units to be paid for the leave type
+    */
+    'typeOfUnits'?: string;
+    /**
+    * The type of units to be accrued for the leave type
+    */
+    'typeOfUnitsToAccrue'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -57,6 +65,16 @@ export class LeaveType {
             "name": "isActive",
             "baseName": "isActive",
             "type": "boolean"
+        },
+        {
+            "name": "typeOfUnits",
+            "baseName": "typeOfUnits",
+            "type": "string"
+        },
+        {
+            "name": "typeOfUnitsToAccrue",
+            "baseName": "typeOfUnitsToAccrue",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

@@ -1684,14 +1684,28 @@ ul.nav-tabs {
     },
     "sickLeaveHoursToAccrueAnnually" : {
       "type" : "number",
-      "description" : "Number of hours accrued annually for sick leave. Multiply the number of days they're entitled to by the hours worked per day",
+      "description" : "Deprecated use SickLeaveToAccrueAnnually",
       "format" : "double",
       "example" : 100.5,
       "x-is-money" : true
     },
     "sickLeaveMaximumHoursToAccrue" : {
       "type" : "number",
-      "description" : "Maximum number of hours accrued annually for sick leave. Multiply the maximum days they can accrue by the hours worked per day",
+      "description" : "Deprecated use SickLeaveMaximumToAccrue",
+      "format" : "double",
+      "example" : 200.5,
+      "x-is-money" : true
+    },
+    "SickLeaveToAccrueAnnually" : {
+      "type" : "number",
+      "description" : "Number of units accrued annually for sick leave. The type of units is determined by the property \"TypeOfUnitsToAccrue\" on the \"Sick Leave\" leave type",
+      "format" : "double",
+      "example" : 100.5,
+      "x-is-money" : true
+    },
+    "SickLeaveMaximumToAccrue" : {
+      "type" : "number",
+      "description" : "Maximum number of units accrued annually for sick leave. The type of units is determined by the property \"TypeOfUnitsToAccrue\" on the \"Sick Leave\" leave type",
       "format" : "double",
       "example" : 200.5,
       "x-is-money" : true
@@ -1710,7 +1724,14 @@ ul.nav-tabs {
     },
     "SickLeaveAnniversaryDate" : {
       "type" : "string",
-      "description" : "If Sick Leave Schedule of Accrual is \"OnAnniversaryDate\", this is the date when entitled to Sick Leave",
+      "description" : "If Sick Leave Schedule of Accrual is \"OnAnniversaryDate\", this is the date when entitled to Sick Leave. When null the Employee's start date is used as the anniversary date",
+      "format" : "date",
+      "example" : "2020-01-19",
+      "x-is-date" : true
+    },
+    "AnnualLeaveAnniversaryDate" : {
+      "type" : "string",
+      "description" : "The first date the employee will accrue Annual Leave. When null the Employee's start date is used as the anniversary date",
       "format" : "date",
       "example" : "2020-01-19",
       "x-is-date" : true
@@ -1750,21 +1771,35 @@ ul.nav-tabs {
     },
     "hoursAccruedAnnually" : {
       "type" : "number",
-      "description" : "The number of hours accrued for the leave annually. This is 0 when the scheduleOfAccrual chosen is \"OnHourWorked\"",
+      "description" : "Deprecated use UnitsAccruedAnnually",
       "format" : "double",
       "x-is-money" : true
     },
+    "UnitsAccruedAnnually" : {
+      "type" : "number",
+      "description" : "The number of units accrued for the leave annually. This is 0 when the ScheduleOfAccrual chosen is \"NoAccruals\"",
+      "format" : "double",
+      "x-is-money" : true
+    },
+    "typeOfUnitsToAccrue" : {
+      "type" : "string",
+      "description" : "The type of units accrued for the leave annually"
+    },
     "maximumToAccrue" : {
       "type" : "number",
-      "description" : "The maximum number of hours that can be accrued for the leave",
+      "description" : "The maximum number of units that can be accrued for the leave",
       "format" : "double",
       "x-is-money" : true
     },
     "openingBalance" : {
       "type" : "number",
-      "description" : "The initial number of hours assigned when the leave was added to the employee",
+      "description" : "The initial number of units assigned when the leave was added to the employee",
       "format" : "double",
       "x-is-money" : true
+    },
+    "openingBalanceTypeOfUnits" : {
+      "type" : "string",
+      "description" : "The type of units for the opening balance"
     },
     "rateAccruedHourly" : {
       "type" : "number",
@@ -2609,10 +2644,23 @@ ul.nav-tabs {
       "format" : "double",
       "x-is-money" : true
     },
+    "numberOfUnitsTaken" : {
+      "type" : "number",
+      "description" : "The number of units taken for the leave",
+      "format" : "double"
+    },
+    "typeOfUnits" : {
+      "type" : "string",
+      "description" : "The type of units paid for the leave"
+    },
+    "typeOfUnitsTaken" : {
+      "type" : "string",
+      "description" : "The type of units taken for the leave"
+    },
     "periodStatus" : {
       "type" : "string",
-      "description" : "Period Status",
-      "enum" : [ "Approved", "Completed" ]
+      "description" : "Status of leave",
+      "enum" : [ "Approved", "Completed", "Estimated" ]
     }
   },
   "description" : ""
@@ -2667,6 +2715,14 @@ ul.nav-tabs {
     "isActive" : {
       "type" : "boolean",
       "description" : "Shows whether the leave type is active or not"
+    },
+    "typeOfUnits" : {
+      "type" : "string",
+      "description" : "The type of units to be paid for the leave type"
+    },
+    "typeOfUnitsToAccrue" : {
+      "type" : "string",
+      "description" : "The type of units to be accrued for the leave type"
     }
   },
   "description" : ""
@@ -4032,7 +4088,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollNz"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>9.3.0</li>
+              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>10.0.0</li>
               <li class="nav-header" data-group="PayrollNz"><a href="#api-PayrollNz">Methods</a></li>
               <li data-group="PayrollNz" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollNz-approveTimesheet">approveTimesheet</a>
