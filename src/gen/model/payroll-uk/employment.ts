@@ -3,19 +3,19 @@ export class Employment {
     /**
     * Xero unique identifier for the payroll calendar of the employee
     */
-    'payrollCalendarID'?: string;
+    'payrollCalendarID': string;
     /**
     * Start date of the employment (YYYY-MM-DD)
     */
-    'startDate'?: string;
+    'startDate': string;
     /**
     * The employment number of the employee
     */
-    'employeeNumber'?: string;
+    'employeeNumber': string;
     /**
     * The NI Category of the employee
     */
-    'niCategory'?: Employment.NiCategoryEnum;
+    'niCategory': Employment.NiCategoryEnum;
 
     static discriminator: string | undefined = undefined;
 
