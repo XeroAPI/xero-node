@@ -125,6 +125,7 @@ export class AssetApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(asset, "Asset"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -200,6 +201,7 @@ export class AssetApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(assetType, "AssetType"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -274,6 +276,7 @@ export class AssetApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -341,6 +344,7 @@ export class AssetApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -408,6 +412,7 @@ export class AssetApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -510,6 +515,7 @@ export class AssetApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));

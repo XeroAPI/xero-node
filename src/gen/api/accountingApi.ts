@@ -173,6 +173,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(account, "Account"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -263,6 +264,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -373,6 +375,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -475,6 +478,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -560,6 +564,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(bankTransactions, "BankTransactions"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -635,6 +640,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(bankTransfers, "BankTransfers"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -724,6 +730,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -826,6 +833,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -906,6 +914,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(batchPayments, "BatchPayments"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -988,6 +997,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1070,6 +1080,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(paymentServices, "PaymentServices"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1159,6 +1170,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1254,6 +1266,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(contactGroups, "ContactGroups"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1336,6 +1349,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(contacts, "Contacts"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1418,6 +1432,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1498,6 +1513,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(contacts, "Contacts"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1585,6 +1601,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(allocations, "Allocations"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1680,6 +1697,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1782,6 +1800,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1867,6 +1886,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(creditNotes, "CreditNotes"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1942,6 +1962,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(currency, "Currency"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2022,6 +2043,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(employees, "Employees"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2104,6 +2126,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2179,6 +2202,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2274,6 +2298,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2376,6 +2401,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2461,6 +2487,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(invoices, "Invoices"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2543,6 +2570,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2628,6 +2656,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(items, "Items"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2703,6 +2732,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(linkedTransaction, "LinkedTransaction"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2793,6 +2823,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2895,6 +2926,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -2975,6 +3007,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(manualJournals, "ManualJournals"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3062,6 +3095,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(allocations, "Allocations"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3144,6 +3178,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3219,6 +3254,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(payment, "Payment"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3301,6 +3337,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3376,6 +3413,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(paymentServices, "PaymentServices"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3456,6 +3494,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(payments, "Payments"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3543,6 +3582,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(allocations, "Allocations"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3625,6 +3665,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3715,6 +3756,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3817,6 +3859,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3897,6 +3940,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -3987,6 +4031,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4089,6 +4134,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4169,6 +4215,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(quotes, "Quotes"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4249,6 +4296,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(receipts, "Receipts"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4339,6 +4387,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4441,6 +4490,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4531,6 +4581,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4633,6 +4684,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(historyRecords, "HistoryRecords"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4713,6 +4765,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(repeatingInvoices, "RepeatingInvoices"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4788,6 +4841,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(taxRates, "TaxRates"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4863,6 +4917,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(trackingCategory, "TrackingCategory"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -4945,6 +5000,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(trackingOption, "TrackingOption"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5019,6 +5075,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5094,6 +5151,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(batchPaymentDelete, "BatchPaymentDelete"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5176,6 +5234,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(batchPaymentDeleteByUrlParam, "BatchPaymentDeleteByUrlParam"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5257,6 +5316,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5330,6 +5390,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5411,6 +5472,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5485,6 +5547,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5559,6 +5622,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5640,6 +5704,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5722,6 +5787,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(paymentDelete, "PaymentDelete"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5803,6 +5869,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5877,6 +5944,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -5958,6 +6026,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6040,6 +6109,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(requestEmpty, "RequestEmpty"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6114,6 +6184,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6202,6 +6273,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6290,6 +6362,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6364,6 +6437,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6443,6 +6517,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6522,6 +6597,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6610,6 +6686,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6698,6 +6775,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6772,6 +6850,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6866,6 +6945,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -6940,6 +7020,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7014,6 +7095,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7102,6 +7184,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7190,6 +7273,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7264,6 +7348,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7338,6 +7423,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7417,6 +7503,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7491,6 +7578,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7565,6 +7653,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7644,6 +7733,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7718,6 +7808,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7792,6 +7883,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7859,6 +7951,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -7943,6 +8036,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8025,6 +8119,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8099,6 +8194,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8187,6 +8283,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8275,6 +8372,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8349,6 +8447,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8423,6 +8522,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8497,6 +8597,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8571,6 +8672,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8648,6 +8750,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8722,6 +8825,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8831,6 +8935,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8910,6 +9015,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -8984,6 +9090,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9072,6 +9179,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9160,6 +9268,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9234,6 +9343,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9308,6 +9418,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9402,6 +9513,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9479,6 +9591,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9553,6 +9666,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9632,6 +9746,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9706,6 +9821,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9780,6 +9896,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9859,6 +9976,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -9938,6 +10056,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10012,6 +10131,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10100,6 +10220,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10188,6 +10309,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10262,6 +10384,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10336,6 +10459,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10403,6 +10527,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10537,6 +10662,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10616,6 +10742,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10690,6 +10817,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10774,6 +10902,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10848,6 +10977,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -10922,6 +11052,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11001,6 +11132,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11075,6 +11207,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11172,6 +11305,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11246,6 +11380,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11334,6 +11469,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11422,6 +11558,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11496,6 +11633,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11585,6 +11723,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11659,6 +11798,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11733,6 +11873,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11800,6 +11941,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11874,6 +12016,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -11941,6 +12084,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12015,6 +12159,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12089,6 +12234,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12183,6 +12329,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12257,6 +12404,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12331,6 +12479,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12398,6 +12547,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12487,6 +12637,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12561,6 +12712,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12635,6 +12787,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12729,6 +12882,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12803,6 +12957,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12877,6 +13032,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -12965,6 +13121,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13053,6 +13210,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13127,6 +13285,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13201,6 +13360,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13275,6 +13435,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13374,6 +13535,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13448,6 +13610,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13522,6 +13685,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13610,6 +13774,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13698,6 +13863,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13772,6 +13938,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13846,6 +14013,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -13960,6 +14128,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14039,6 +14208,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14127,6 +14297,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14215,6 +14386,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14289,6 +14461,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14363,6 +14536,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14447,6 +14621,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14521,6 +14696,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14609,6 +14785,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14697,6 +14874,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14771,6 +14949,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14845,6 +15024,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -14922,6 +15102,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15014,6 +15195,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15106,6 +15288,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15208,6 +15391,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15285,6 +15469,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15367,6 +15552,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15439,6 +15625,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15513,6 +15700,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15630,6 +15818,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15702,6 +15891,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15779,6 +15969,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15846,6 +16037,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15920,6 +16112,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -15997,6 +16190,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16079,6 +16273,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16153,6 +16348,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16227,6 +16423,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16306,6 +16503,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16381,6 +16579,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(setup, "Setup"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16463,6 +16662,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(accounts, "Accounts"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16553,6 +16753,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16660,6 +16861,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(bankTransactions, "BankTransactions"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16750,6 +16952,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16859,6 +17062,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -16961,6 +17165,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(contacts, "Contacts"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17050,6 +17255,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17152,6 +17358,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(contactGroups, "ContactGroups"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17239,6 +17446,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(creditNotes, "CreditNotes"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17329,6 +17537,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17431,6 +17640,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(expenseClaims, "ExpenseClaims"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17518,6 +17728,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(invoices, "Invoices"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17608,6 +17819,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17715,6 +17927,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(items, "Items"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17797,6 +18010,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(linkedTransactions, "LinkedTransactions"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17879,6 +18093,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(manualJournals, "ManualJournals"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -17969,6 +18184,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18074,6 +18290,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(bankTransactions, "BankTransactions"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18154,6 +18371,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(contacts, "Contacts"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18239,6 +18457,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(creditNotes, "CreditNotes"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18319,6 +18538,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(employees, "Employees"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18404,6 +18624,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(invoices, "Invoices"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18489,6 +18710,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(items, "Items"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18569,6 +18791,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(manualJournals, "ManualJournals"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18649,6 +18872,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18729,6 +18953,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(quotes, "Quotes"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18809,6 +19034,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(repeatingInvoices, "RepeatingInvoices"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18891,6 +19117,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(purchaseOrders, "PurchaseOrders"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -18981,6 +19208,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19083,6 +19311,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(quotes, "Quotes"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19173,6 +19402,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19280,6 +19510,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(receipts, "Receipts"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19370,6 +19601,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19472,6 +19704,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(repeatingInvoices, "RepeatingInvoices"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19562,6 +19795,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(body, "string"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19657,6 +19891,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(taxRates, "TaxRates"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19739,6 +19974,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(trackingCategory, "TrackingCategory"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -19828,6 +20064,7 @@ export class AccountingApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(trackingOption, "TrackingOption"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));

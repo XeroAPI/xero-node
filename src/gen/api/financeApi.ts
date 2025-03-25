@@ -134,6 +134,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -206,6 +207,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -278,6 +280,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -350,6 +353,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -452,6 +456,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -534,6 +539,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -606,6 +612,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -683,6 +690,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -770,6 +778,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -857,6 +866,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -934,6 +944,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1006,6 +1017,7 @@ export class FinanceApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));

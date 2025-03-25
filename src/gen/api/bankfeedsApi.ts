@@ -124,6 +124,7 @@ export class BankFeedsApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(feedConnections, "FeedConnections"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -200,6 +201,7 @@ export class BankFeedsApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(statements, "Statements"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -275,6 +277,7 @@ export class BankFeedsApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(feedConnections, "FeedConnections"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -349,6 +352,7 @@ export class BankFeedsApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -426,6 +430,7 @@ export class BankFeedsApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -500,6 +505,7 @@ export class BankFeedsApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -582,6 +588,7 @@ export class BankFeedsApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));

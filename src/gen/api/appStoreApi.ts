@@ -118,6 +118,7 @@ export class AppStoreApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -185,6 +186,7 @@ export class AppStoreApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -267,6 +269,7 @@ export class AppStoreApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(createUsageRecord, "CreateUsageRecord"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -356,6 +359,7 @@ export class AppStoreApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(updateUsageRecord, "UpdateUsageRecord"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));

@@ -132,6 +132,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -214,6 +215,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(taskCreateOrUpdate, "TaskCreateOrUpdate"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -296,6 +298,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -377,6 +380,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -458,6 +462,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -532,6 +537,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -609,6 +615,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -701,6 +708,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -782,6 +790,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -876,6 +885,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1000,6 +1010,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1081,6 +1092,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: {},
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1163,6 +1175,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(projectPatch, "ProjectPatch"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1245,6 +1258,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(projectCreateOrUpdate, "ProjectCreateOrUpdate"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1334,6 +1348,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(taskCreateOrUpdate, "TaskCreateOrUpdate"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
@@ -1423,6 +1438,7 @@ export class ProjectApi {
             responseType: responseTypeOption,
             data: ObjectSerializer.serialize(timeEntryCreateOrUpdate, "TimeEntryCreateOrUpdate"),
         };
+        
 
         let authenticationPromise = Promise.resolve();
         authenticationPromise = authenticationPromise.then(() => this.authentications.OAuth2.applyToRequest(localVarRequestOptions));
