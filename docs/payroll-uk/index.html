@@ -1595,6 +1595,16 @@ ul.nav-tabs {
       "format" : "date-time",
       "x-is-datetime" : true
     },
+    "niCategory" : {
+      "$ref" : "#/components/schemas/NICategoryLetter"
+    },
+    "niCategories" : {
+      "type" : "array",
+      "description" : "The employee's NI categories",
+      "items" : {
+        "$ref" : "#/components/schemas/NICategory"
+      }
+    },
     "nationalInsuranceNumber" : {
       "type" : "string",
       "description" : "National insurance number of the employee",
@@ -2262,7 +2272,7 @@ ul.nav-tabs {
 };
       defs["Employment"] = {
   "title" : "",
-  "required" : [ "EmployeeNumber", "NICategory", "PayrollCalendarID", "StartDate" ],
+  "required" : [ "EmployeeNumber", "NICategories", "PayrollCalendarID", "StartDate" ],
   "type" : "object",
   "properties" : {
     "payrollCalendarID" : {
@@ -2282,10 +2292,14 @@ ul.nav-tabs {
       "example" : "7"
     },
     "niCategory" : {
-      "type" : "string",
-      "description" : "The NI Category of the employee",
-      "example" : "A",
-      "enum" : [ "A", "B", "C", "F", "H", "I", "J", "L", "M", "S", "V", "X", "Z" ]
+      "$ref" : "#/components/schemas/NICategoryLetter"
+    },
+    "niCategories" : {
+      "type" : "array",
+      "description" : "The employee's NI categories",
+      "items" : {
+        "$ref" : "#/components/schemas/NICategory"
+      }
     }
   },
   "description" : ""
@@ -2499,6 +2513,75 @@ ul.nav-tabs {
       "items" : {
         "$ref" : "#/components/schemas/LeaveType"
       }
+    }
+  },
+  "description" : ""
+};
+      defs["NICategory"] = {
+  "title" : "",
+  "required" : [ "niCategory", "workplacePostcode" ],
+  "type" : "object",
+  "properties" : {
+    "startDate" : {
+      "type" : "string",
+      "description" : "The start date of the NI category (YYYY-MM-DD)",
+      "format" : "date",
+      "example" : "2024-12-02",
+      "x-is-date" : true
+    },
+    "niCategory" : {
+      "$ref" : "#/components/schemas/NICategoryLetter"
+    },
+    "niCategoryID" : {
+      "type" : "number",
+      "description" : "Xero unique identifier for the NI category",
+      "example" : 15
+    },
+    "dateFirstEmployedAsCivilian" : {
+      "type" : "string",
+      "description" : "The date in which the employee was first employed as a civilian (YYYY-MM-DD)",
+      "format" : "date",
+      "example" : "2024-12-02",
+      "x-is-date" : true
+    },
+    "workplacePostcode" : {
+      "type" : "string",
+      "description" : "The workplace postcode",
+      "example" : "SW1A 1AA"
+    }
+  },
+  "description" : "",
+  "oneOf" : [ {
+    "$ref" : "#/components/schemas/NICategory_oneOf"
+  }, {
+    "$ref" : "#/components/schemas/NICategory_oneOf_1"
+  } ]
+};
+      defs["NICategoryLetter"] = {
+  "title" : "",
+  "type" : "string",
+  "description" : "The employee's NI Category letter.",
+  "example" : "I",
+  "enum" : [ "A", "B", "C", "D", "E", "F", "H", "I", "J", "K", "L", "M", "N", "S", "V", "X", "Z" ]
+};
+      defs["NICategory_oneOf"] = {
+  "title" : "",
+  "required" : [ "workplacePostcode" ],
+  "properties" : {
+    "niCategory" : {
+      "type" : "string",
+      "enum" : [ "F", "I", "L", "S", "N", "E", "D", "K" ]
+    }
+  },
+  "description" : ""
+};
+      defs["NICategory_oneOf_1"] = {
+  "title" : "",
+  "required" : [ "dateFirstEmployedAsCivilian" ],
+  "properties" : {
+    "niCategory" : {
+      "type" : "string",
+      "enum" : [ "V" ]
     }
   },
   "description" : ""
@@ -5715,6 +5798,8 @@ const employment: Employment = {
   startDate: startDate
 }; 
 
+const niCategories: NICategories = { 
+
 try {
   const response = await xero.accountingApi.createEmployment(xeroTenantId, employeeID, employment, idempotencyKey);
   console.log(response.body || response.response.statusCode)
@@ -5846,7 +5931,7 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Employment"
       },
-      "example" : "{ \"PayrollCalendarID\": \"216d80e6-af55-47b1-b718-9457c3f5d2fe\", \"StartDate\": \"2020-04-01\", \"EmployeeNumber\": \"123ABC\", \"NICategory\": \"A\" }"
+      "example" : "{ \"PayrollCalendarID\": \"216d80e6-af55-47b1-b718-9457c3f5d2fe\", \"StartDate\": \"2020-04-01\", \"NICategories\": [ { \"NICategory\": \"A\", \"StartDate\": \"2020-05-01\" } ], \"EmployeeNumber\": \"123ABC\" }"
     }
   },
   "required" : true
