@@ -124,7 +124,9 @@ export namespace EarningsRate {
         StatutorySickPayNonPensionable = <any> 'StatutorySickPayNonPensionable',
         TipsNonDirect = <any> 'TipsNonDirect',
         TipsDirect = <any> 'TipsDirect',
-        TerminationPay = <any> 'TerminationPay'
+        TerminationPay = <any> 'TerminationPay',
+        StatutoryNeonatalCarePay = <any> 'StatutoryNeonatalCarePay',
+        StatutoryNeonatalCarePayNonPensionable = <any> 'StatutoryNeonatalCarePayNonPensionable'
     }
     export enum RateTypeEnum {
         RatePerUnit = <any> 'RatePerUnit',
