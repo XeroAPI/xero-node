@@ -55,6 +55,10 @@ export * from '././leavePeriods';
 export * from '././leaveType';
 export * from '././leaveTypeObject';
 export * from '././leaveTypes';
+export * from '././nICategory';
+export * from '././nICategoryLetter';
+export * from '././nICategoryOneOf';
+export * from '././nICategoryOneOf1';
 export * from '././pagination';
 export * from '././payRun';
 export * from '././payRunCalendar';
@@ -146,6 +150,10 @@ import { LeavePeriods } from '././leavePeriods';
 import { LeaveType } from '././leaveType';
 import { LeaveTypeObject } from '././leaveTypeObject';
 import { LeaveTypes } from '././leaveTypes';
+import { NICategory } from '././nICategory';
+import { NICategoryLetter } from '././nICategoryLetter';
+import { NICategoryOneOf } from '././nICategoryOneOf';
+import { NICategoryOneOf1 } from '././nICategoryOneOf1';
 import { Pagination } from '././pagination';
 import { PayRun } from '././payRun';
 import { PayRunCalendar } from '././payRunCalendar';
@@ -207,8 +215,10 @@ let enumsMap: {[index: string]: any} = {
         "EmployeeStatutoryLeaveSummary.TypeEnum": EmployeeStatutoryLeaveSummary.TypeEnum,
         "EmployeeStatutoryLeaveSummary.StatusEnum": EmployeeStatutoryLeaveSummary.StatusEnum,
         "EmployeeStatutorySickLeave.EntitlementFailureReasonsEnum": EmployeeStatutorySickLeave.EntitlementFailureReasonsEnum,
-        "Employment.NiCategoryEnum": Employment.NiCategoryEnum,
         "LeavePeriod.PeriodStatusEnum": LeavePeriod.PeriodStatusEnum,
+        "NICategoryLetter": NICategoryLetter,
+        "NICategoryOneOf.NiCategoryEnum": NICategoryOneOf.NiCategoryEnum,
+        "NICategoryOneOf1.NiCategoryEnum": NICategoryOneOf1.NiCategoryEnum,
         "PayRun.PayRunStatusEnum": PayRun.PayRunStatusEnum,
         "PayRun.PayRunTypeEnum": PayRun.PayRunTypeEnum,
         "PayRun.CalendarTypeEnum": PayRun.CalendarTypeEnum,
@@ -279,6 +289,9 @@ let typeMap: {[index: string]: any} = {
     "LeaveType": LeaveType,
     "LeaveTypeObject": LeaveTypeObject,
     "LeaveTypes": LeaveTypes,
+    "NICategory": NICategory,
+    "NICategoryOneOf": NICategoryOneOf,
+    "NICategoryOneOf1": NICategoryOneOf1,
     "Pagination": Pagination,
     "PayRun": PayRun,
     "PayRunCalendar": PayRunCalendar,

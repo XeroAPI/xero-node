@@ -1,3 +1,5 @@
+import { NICategory } from '././nICategory';
+import { NICategoryLetter } from '././nICategoryLetter';
 
 export class Employment {
     /**
@@ -12,10 +14,11 @@ export class Employment {
     * The employment number of the employee
     */
     'employeeNumber'?: string;
+    'niCategory'?: NICategoryLetter;
     /**
-    * The NI Category of the employee
+    * The employee\'s NI categories
     */
-    'niCategory'?: Employment.NiCategoryEnum;
+    'niCategories'?: Array<NICategory>;
 
     static discriminator: string | undefined = undefined;
 
@@ -38,7 +41,12 @@ export class Employment {
         {
             "name": "niCategory",
             "baseName": "niCategory",
-            "type": "Employment.NiCategoryEnum"
+            "type": "NICategoryLetter"
+        },
+        {
+            "name": "niCategories",
+            "baseName": "niCategories",
+            "type": "Array<NICategory>"
         }    ];
 
     static getAttributeTypeMap() {
@@ -46,20 +54,3 @@ export class Employment {
     }
 }
 
-export namespace Employment {
-    export enum NiCategoryEnum {
-        A = <any> 'A',
-        B = <any> 'B',
-        C = <any> 'C',
-        F = <any> 'F',
-        H = <any> 'H',
-        I = <any> 'I',
-        J = <any> 'J',
-        L = <any> 'L',
-        M = <any> 'M',
-        S = <any> 'S',
-        V = <any> 'V',
-        X = <any> 'X',
-        Z = <any> 'Z'
-    }
-}
