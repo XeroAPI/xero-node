@@ -1,8 +1,7 @@
 name: Publish
 on:
-  # release:
-  #   types: [published]
-  push:
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -35,24 +34,21 @@ jobs:
         run: npm run build
         working-directory: xero-node
 
-      # - name: Fetch Latest release number
-      #   id: get_latest_release_number
-      #   run: |
-      #     latest_version=$(gh release view --json tagName --jq '.tagName')
-      #     echo "Latest release version is - $latest_version"
-      #     echo "::set-output name=release_tag::$latest_version"
-      #   working-directory: xero-node
-      #   env:
-      #    GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Fetch Latest release number
+        id: get_latest_release_number
+        run: |
+          latest_version=$(gh release view --json tagName --jq '.tagName')
+          echo "Latest release version is - $latest_version"
+          echo "::set-output name=release_tag::$latest_version"
+        working-directory: xero-node
+        env:
+         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      # - name: Publish to npm
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: npm publish
-      #   working-directory: xero-node
-
-      - name: Always Succeed
-        run: exit 0
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
+        working-directory: xero-node
 
   notify-slack-on-success:
     runs-on: ubuntu-latest
