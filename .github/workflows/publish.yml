@@ -53,6 +53,8 @@ jobs:
   notify-slack-on-success:
     runs-on: ubuntu-latest
     needs: publish
+    permissions:
+      contents: read
     if: success()
     steps:
       - name: Checkout xero-node repo
@@ -76,6 +78,8 @@ jobs:
   notify-slack-on-failure:
     runs-on: ubuntu-latest
     needs: publish
+    permissions:
+      contents: read
     if: failure()
     steps:
       - name: Checkout xero-node repo
