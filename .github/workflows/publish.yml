@@ -36,14 +36,6 @@ jobs:
         run: npm run build
         working-directory: xero-node
 
-      - name: checking dist
-        run: |
-         echo "checking current folders --"
-         ls -al
-         echo "viewing package json"
-         cat package.json
-
-
       # - name: Fetch Latest release number
       #   id: get_latest_release_number
       #   run: |
@@ -54,11 +46,11 @@ jobs:
       #   env:
       #    GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      # - name: Publish to npm
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: npm publish
-      #   working-directory: xero-node
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
+        working-directory: xero-node
 
   # notify-slack-on-success:
   #   runs-on: ubuntu-latest
