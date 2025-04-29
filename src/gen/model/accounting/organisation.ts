@@ -392,7 +392,8 @@ export namespace Organisation {
         ULTIMATE100 = <any> 'ULTIMATE_100',
         IGNITE = <any> 'IGNITE',
         GROW = <any> 'GROW',
-        COMPREHENSIVE = <any> 'COMPREHENSIVE'
+        COMPREHENSIVE = <any> 'COMPREHENSIVE',
+        SIMPLE = <any> 'SIMPLE'
     }
     export enum EditionEnum {
         BUSINESS = <any> 'BUSINESS',

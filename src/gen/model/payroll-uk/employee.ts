@@ -1,4 +1,6 @@
 import { Address } from '././address';
+import { NICategory } from '././nICategory';
+import { NICategoryLetter } from '././nICategoryLetter';
 
 export class Employee {
     /**
@@ -54,6 +56,11 @@ export class Employee {
     * UTC timestamp when the employee was created in Xero
     */
     'createdDateUTC'?: Date;
+    'niCategory'?: NICategoryLetter;
+    /**
+    * The employee\'s NI categories
+    */
+    'niCategories'?: Array<NICategory>;
     /**
     * National insurance number of the employee
     */
@@ -135,6 +142,16 @@ export class Employee {
             "name": "createdDateUTC",
             "baseName": "createdDateUTC",
             "type": "Date"
+        },
+        {
+            "name": "niCategory",
+            "baseName": "niCategory",
+            "type": "NICategoryLetter"
+        },
+        {
+            "name": "niCategories",
+            "baseName": "niCategories",
+            "type": "Array<NICategory>"
         },
         {
             "name": "nationalInsuranceNumber",
