@@ -5,11 +5,11 @@ export class Employment {
     /**
     * Xero unique identifier for the payroll calendar of the employee
     */
-    'payrollCalendarID': string;
+    'payrollCalendarID'?: string;
     /**
     * Start date of the employment (YYYY-MM-DD)
     */
-    'startDate': string;
+    'startDate'?: string;
     /**
     * The employment number of the employee
     */
