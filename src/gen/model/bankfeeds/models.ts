@@ -24,11 +24,6 @@ import { Statement } from '././statement';
 import { StatementLine } from '././statementLine';
 import { Statements } from '././statements';
 
-import * as fs from 'fs';
-import { Readable } from "stream";
-
-export type RequestFile = Buffer | fs.ReadStream | Readable;
-
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",
