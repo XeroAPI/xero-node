@@ -89,9 +89,8 @@ jobs:
             curl -X POST -H "Authorization: token ${{ steps.get_access_token.outputs.result }}" \
               -H "Accept: application/vnd.github.v3+json" \
               -H "Content-Type: application/json" \
-              https://api.github.com/repos/xero-internal/xeroapi-sdk-codegen/actions/workflows/notify-sdk-publish.yml/dispatches \
+              https://api.github.com/repos/xero-internal/xeroapi-sdk-codegen/actions/workflows/pr.yml/dispatches \
               -d '{
-                "ref": "deploytrack-changes",
                 "inputs": {
                   "status": "${{needs.publish.result}}"
                   }
