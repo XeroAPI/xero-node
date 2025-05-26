@@ -93,13 +93,7 @@ jobs:
               -d '{
                 "ref": "deploytrack-changes",
                 "inputs": {
-                  "pr_number": "${{ github.event.pull_request.number}}",
-                  "commit": "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}",
                   "status": "${{needs.publish.result}}"
-                  "kotahi_id": "en33e2794fb6cf8a35"
-                  "deployer": "xero-codegen-bot"
-                  "url": ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-                  "environment": "test"
                   }
                 }'
 
