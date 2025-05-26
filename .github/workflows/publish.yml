@@ -2,11 +2,9 @@ name: Publish
 on:
   # release:
   #   types: [published]
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - edited
+ push:
+  branches:
+    - '**'
 
 jobs:
   publish:
