@@ -86,14 +86,19 @@ jobs:
 
       - name: Notify codegen repo
         run: |
-            curl -X POST -H "Authorization: Bearer ${{ steps.get_access_token.outputs.result }}" \
+            curl -X POST -H "Authorization: token ${{ steps.get_access_token.outputs.result }}" \
               -H "Accept: application/vnd.github.v3+json" \
               -H "Content-Type: application/json" \
-              https://api.github.com/repos/xero-internal/xeroapi-sdk-codegen/dispatches \
+              https://api.github.com/repos/xero-internal/xeroapi-sdk-codegen/actions/workflows/notify-sdk-publish.yml/dispatches \
               -d '{
-                "event_type": "sdk-publish-status",
-                "client_payload": {
+                "ref": "deploy-track-pipeline-changes",
+                "inputs": {
+                  "commit": "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}",
                   "status": "${{needs.publish.result}}"
+                  "kotahi_id": "en33e2794fb6cf8a35"
+                  "deployer": "xero-codegen-bot"
+                  "url": ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+                  "environment": "test"
                   }
                 }'
 
