@@ -97,7 +97,7 @@ jobs:
                   "status": "${{needs.publish.result}}"
                   "kotahi_id": "en33e2794fb6cf8a35"
                   "deployer": "xero-codegen-bot"
-                  "url": ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+                  "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   "environment": "test"
                   }
                 }'
