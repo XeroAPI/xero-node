@@ -101,7 +101,7 @@ jobs:
                   "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
                   "environment": "test",
                   "sdk_type": "node",
-                  "cab_key": "CAB-5505"
+                  "cab_key": ${{ github.event.inputs.cab_id }}
                   }
                 }'
 
