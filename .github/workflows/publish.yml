@@ -1,7 +1,11 @@
 name: Publish
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+    inputs:
+      cab_id:
+        description: "CAB id for the change/release"
+        required: true
+        type: string
 
 jobs:
   publish:
