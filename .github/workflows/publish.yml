@@ -1,4 +1,4 @@
-name: Publish
+name: Publish & Release SDK
 on:
   workflow_dispatch:
     inputs:
