@@ -10,7 +10,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: protected-env
     outputs:
       release_number: ${{steps.get_latest_release_number.outputs.release_tag}}
     permissions:
@@ -23,37 +22,37 @@ jobs:
           repository: XeroAPI/xero-node
           path: xero-node
 
-      # - name: Set up Node environment
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
-      #     cache: 'npm'
-      #     cache-dependency-path: '**/package-lock.json'
-      #     registry-url: 'https://registry.npmjs.org'
+      - name: Set up Node environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+          registry-url: 'https://registry.npmjs.org'
 
-      # - name: Install dependencies
-      #   run: npm ci
-      #   working-directory: xero-node
+      - name: Install dependencies
+        run: npm ci
+        working-directory: xero-node
 
-      # - name: Run Build
-      #   run: npm run build
-      #   working-directory: xero-node
+      - name: Run Build
+        run: npm run build
+        working-directory: xero-node
 
-      # - name: Fetch Latest release number
-      #   id: get_latest_release_number
-      #   run: |
-      #     latest_version=$(gh release view --json tagName --jq '.tagName')
-      #     echo "Latest release version is - $latest_version"
-      #     echo "::set-output name=release_tag::$latest_version"
-      #   working-directory: xero-node
-      #   env:
-      #    GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Fetch Latest release number
+        id: get_latest_release_number
+        run: |
+          latest_version=$(gh release view --json tagName --jq '.tagName')
+          echo "Latest release version is - $latest_version"
+          echo "::set-output name=release_tag::$latest_version"
+        working-directory: xero-node
+        env:
+         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      # - name: Publish to npm
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: npm publish
-      #   working-directory: xero-node
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
+        working-directory: xero-node
 
   notify-codegen-repo:
     needs: publish
@@ -65,9 +64,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        # with:
-        #   repository: XeroAPI/xero-node
-        #   path: xero-node
+        with:
+          repository: XeroAPI/xero-node
+          path: xero-node
 
       - name: Install octokit dependencies
         run: npm i
@@ -105,52 +104,52 @@ jobs:
                   }
                 }'
 
-  # notify-slack-on-success:
-  #   runs-on: ubuntu-latest
-  #   needs: publish
-  #   permissions:
-  #     contents: read
-  #   if: success()
-  #   steps:
-  #     - name: Checkout xero-node repo
-  #       uses: actions/checkout@v4
-  #       with:
-  #         repository: XeroAPI/xero-node
-  #         path: xero-node
+  notify-slack-on-success:
+    runs-on: ubuntu-latest
+    needs: publish
+    permissions:
+      contents: read
+    if: success()
+    steps:
+      - name: Checkout xero-node repo
+        uses: actions/checkout@v4
+        with:
+          repository: XeroAPI/xero-node
+          path: xero-node
 
-  #     - name: Send slack notification on success
-  #       uses: ./xero-node/.github/actions/notify-slack
-  #       with:
-  #        heading_text: "Publish job has succeeded !"
-  #        alert_type: "thumbsup"
-  #        job_status: "Success"
-  #        XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
-  #        job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
-  #        button_type: "primary"
-  #        package_version: ${{needs.publish.outputs.release_number}}
-  #        repo_link: ${{github.server_url}}/${{github.repository}}
+      - name: Send slack notification on success
+        uses: ./xero-node/.github/actions/notify-slack
+        with:
+         heading_text: "Publish job has succeeded !"
+         alert_type: "thumbsup"
+         job_status: "Success"
+         XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
+         job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+         button_type: "primary"
+         package_version: ${{needs.publish.outputs.release_number}}
+         repo_link: ${{github.server_url}}/${{github.repository}}
 
-  # notify-slack-on-failure:
-  #   runs-on: ubuntu-latest
-  #   needs: publish
-  #   permissions:
-  #     contents: read
-  #   if: failure()
-  #   steps:
-  #     - name: Checkout xero-node repo
-  #       uses: actions/checkout@v4
-  #       with:
-  #        repository: XeroAPI/xero-node
-  #        path: xero-node
+  notify-slack-on-failure:
+    runs-on: ubuntu-latest
+    needs: publish
+    permissions:
+      contents: read
+    if: failure()
+    steps:
+      - name: Checkout xero-node repo
+        uses: actions/checkout@v4
+        with:
+         repository: XeroAPI/xero-node
+         path: xero-node
 
-  #     - name: Send slack notification on failure
-  #       uses: ./xero-node/.github/actions/notify-slack
-  #       with:
-  #         heading_text: "Publish job has failed !"
-  #         alert_type: "alert"
-  #         job_status: "Failed"
-  #         XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
-  #         job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
-  #         button_type: "danger"
-  #         package_version: ${{needs.publish.outputs.release_number}}
-  #         repo_link: ${{github.server_url}}/${{github.repository}}
+      - name: Send slack notification on failure
+        uses: ./xero-node/.github/actions/notify-slack
+        with:
+          heading_text: "Publish job has failed !"
+          alert_type: "alert"
+          job_status: "Failed"
+          XERO_SLACK_WEBHOOK_URL: ${{secrets.XERO_SLACK_WEBHOOK_URL}}
+          job_url: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+          button_type: "danger"
+          package_version: ${{needs.publish.outputs.release_number}}
+          repo_link: ${{github.server_url}}/${{github.repository}}
