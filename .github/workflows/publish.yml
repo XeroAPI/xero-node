@@ -55,56 +55,56 @@ jobs:
       #   run: npm publish
       #   working-directory: xero-node
 
-  notify-codegen-repo:
-    needs: publish
-    if: always()
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
+  # notify-codegen-repo:
+  #   needs: publish
+  #   if: always()
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #     pull-requests: write
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          repository: XeroAPI/xero-node
-          path: xero-node
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         repository: XeroAPI/xero-node
+  #         path: xero-node
 
-      - name: Install octokit dependencies
-        run: npm i
-        working-directory: ${{ github.workspace }}/.github/octokit
+  #     - name: Install octokit dependencies
+  #       run: npm i
+  #       working-directory: ${{ github.workspace }}/.github/octokit
 
-      - name: Get github app access token
-        id: get_access_token
-        env:
-          GITHUB_APP_ID: ${{ secrets.XERO_CODEGEN_BOT_APPLICATION_ID }}
-          GITHUB_APP_PRIVATE_KEY: ${{ secrets.XERO_CODEGEN_BOT_APPLICATION_KEY }}
-        uses: actions/github-script@v7
-        with:
-          result-encoding: string
-          script: |
-              const { getAccessToken } = await import('${{ github.workspace }}/.github/octokit/index.js')
-              const token = await getAccessToken()
-              return token
+  #     - name: Get github app access token
+  #       id: get_access_token
+  #       env:
+  #         GITHUB_APP_ID: ${{ secrets.XERO_CODEGEN_BOT_APPLICATION_ID }}
+  #         GITHUB_APP_PRIVATE_KEY: ${{ secrets.XERO_CODEGEN_BOT_APPLICATION_KEY }}
+  #       uses: actions/github-script@v7
+  #       with:
+  #         result-encoding: string
+  #         script: |
+  #             const { getAccessToken } = await import('${{ github.workspace }}/.github/octokit/index.js')
+  #             const token = await getAccessToken()
+  #             return token
 
-      - name: Notify codegen repo
-        run: |
-            curl -X POST -H "Authorization: token ${{ steps.get_access_token.outputs.result }}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              -H "Content-Type: application/json" \
-              https://api.github.com/repos/xero-internal/xeroapi-sdk-codegen/actions/workflows/notify-sdk-publish.yml/dispatches \
-              -d '{
-                "ref": "deploy-track-pipeline-changes",
-                "inputs": {
-                  "commit": "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}",
-                  "status": "${{needs.publish.result}}",
-                  "deployer": "xero-codegen-bot",
-                  "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
-                  "environment": "test",
-                  "sdk_type": "node",
-                  "cab_key": ${{ github.event.inputs.cab_id }}
-                  }
-                }'
+  #     - name: Notify codegen repo
+  #       run: |
+  #           curl -X POST -H "Authorization: token ${{ steps.get_access_token.outputs.result }}" \
+  #             -H "Accept: application/vnd.github.v3+json" \
+  #             -H "Content-Type: application/json" \
+  #             https://api.github.com/repos/xero-internal/xeroapi-sdk-codegen/actions/workflows/notify-sdk-publish.yml/dispatches \
+  #             -d '{
+  #               "ref": "deploy-track-pipeline-changes",
+  #               "inputs": {
+  #                 "commit": "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}",
+  #                 "status": "${{needs.publish.result}}",
+  #                 "deployer": "xero-codegen-bot",
+  #                 "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+  #                 "environment": "test",
+  #                 "sdk_type": "node",
+  #                 "cab_key": ${{ github.event.inputs.cab_id }}
+  #                 }
+  #               }'
 
   # notify-slack-on-success:
   #   runs-on: ubuntu-latest
