@@ -21,7 +21,7 @@ import { UpdateUsageRecord } from '../model/appstore/updateUsageRecord';
 import { UsageRecord } from '../model/appstore/usageRecord';
 import { UsageRecordsList } from '../model/appstore/usageRecordsList';
 
-import { ObjectSerializer, Authentication, VoidAuth } from '../model/appstore/models';
+import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/appstore/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";
