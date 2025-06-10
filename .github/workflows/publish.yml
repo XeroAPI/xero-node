@@ -83,7 +83,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-              const { getAccessToken } = await import('xero-node/.github/octokit/index.js')
+              const { getAccessToken } = await import('${{ github.workspace }}/xero-node/.github/octokit/index.js')
               const token = await getAccessToken()
               return token
 
