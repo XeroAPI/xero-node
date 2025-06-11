@@ -94,7 +94,7 @@ jobs:
               -H "Content-Type: application/json" \
               https://api.github.com/repos/xero-internal/xeroapi-sdk-codegen/actions/workflows/notify-sdk-publish.yml/dispatches \
               -d '{
-                "ref": "deploy-track-pipeline-changes",
+                "ref": "master",
                 "inputs": {
                   "commit": "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}",
                   "status": "${{needs.publish.result}}",
