@@ -1,0 +1,8 @@
+checks:
+- notify_deployment
+
+notify_deployment:
+  main:
+    slack:
+      room: "#public-sdk-events"
+      custom_title: "SDK Publish Alert"
