@@ -10,7 +10,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: protected-env
+    environment: prod
     outputs:
       release_number: ${{steps.get_latest_release_number.outputs.release_tag}}
     permissions:
