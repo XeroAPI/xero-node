@@ -865,8 +865,9 @@ export class FilesApi {
      * @param pagesize pass an optional page size value
      * @param page number of records to skip for pagination
      * @param sort values to sort by
+     * @param direction sort direction
      */     
-    public async getFiles (xeroTenantId: string, pagesize?: number, page?: number, sort?: 'Name' | 'Size' | 'CreatedDateUTC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Files;  }> {
+    public async getFiles (xeroTenantId: string, pagesize?: number, page?: number, sort?: 'Name' | 'Size' | 'CreatedDateUTC', direction?: 'ASC' | 'DESC', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Files;  }> {
         const localVarPath = this.basePath + '/Files';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -892,6 +893,10 @@ export class FilesApi {
 
         if (sort !== undefined) {
             localVarQueryParameters['sort'] = ObjectSerializer.serialize(sort, "'Name' | 'Size' | 'CreatedDateUTC'");
+        }
+
+        if (direction !== undefined) {
+            localVarQueryParameters['direction'] = ObjectSerializer.serialize(direction, "'ASC' | 'DESC'");
         }
 
         localVarHeaderParams['xero-tenant-id'] = ObjectSerializer.serialize(xeroTenantId, "string");
