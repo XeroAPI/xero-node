@@ -1171,7 +1171,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Files"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Files"><strong>VSN: </strong>11.2.0</li>
+              <li class="nav-header" data-group="Files"><strong>VSN: </strong>12.0.0</li>
               <li class="nav-header" data-group="Files"><a href="#api-Files">Methods</a></li>
               <li data-group="Files" data-name="createFileAssociation" class="">
                 <a href="#api-Files-createFileAssociation">createFileAssociation</a>
@@ -2626,10 +2626,11 @@ Xero identifier for Tenant
 const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const pagesize = 50;
 const page = 2;
-const sort = 'CreatedDateUTC DESC';
+const sort = 'CreatedDateUTC';
+const direction = 'ASC';
 
 try {
-  const response = await xero.accountingApi.getFiles(xeroTenantId,  pagesize, page, sort);
+  const response = await xero.accountingApi.getFiles(xeroTenantId,  pagesize, page, sort, direction);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -2741,6 +2742,26 @@ number of records to skip for pagination
 
                     <div class="inner description marked">
 values to sort by
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">direction</td>
+<td>
+
+
+    <div id="d2e199_getFiles_direction">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+sort direction
                     </div>
             </div>
         </div>
