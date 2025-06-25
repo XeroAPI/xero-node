@@ -13,7 +13,7 @@ export class Product {
     */
     'seatUnit'?: string;
     /**
-    * The pricing model of the product: * FIXED: Customers are charged a fixed amount for each billing period * PER_SEAT: Customers are charged based on the number of units they purchase * METERED: Customers are charged per use of this product 
+    * The pricing model of the product: * FIXED: Customers are charged a fixed amount for each billing period * PER_SEAT: Customers are charged based on the number of units they purchase * METERED: Customers are charged per use of this product * SIMPLE: Customers are charged on a fixed amount for each billing period with an optional add-on feature 
     */
     'type'?: Product.TypeEnum;
     /**
@@ -59,6 +59,7 @@ export namespace Product {
     export enum TypeEnum {
         FIXED = <any> 'FIXED',
         PERSEAT = <any> 'PER_SEAT',
-        METERED = <any> 'METERED'
+        METERED = <any> 'METERED',
+        SIMPLE = <any> 'SIMPLE'
     }
 }

@@ -1954,7 +1954,7 @@ ul.nav-tabs {
     "leaveType" : {
       "type" : "string",
       "description" : "The type of statutory leave",
-      "enum" : [ "Sick", "Adoption", "Maternity", "Paternity", "Sharedparental" ]
+      "enum" : [ "Sick", "Adoption", "Maternity", "Paternity", "Sharedparental", "Bereavement", "NeonatalCare" ]
     },
     "balanceRemaining" : {
       "type" : "number",
@@ -2002,7 +2002,7 @@ ul.nav-tabs {
     "type" : {
       "type" : "string",
       "description" : "The category of statutory leave",
-      "enum" : [ "Sick", "Adoption", "Maternity", "Paternity", "Sharedparental" ]
+      "enum" : [ "Sick", "Adoption", "Maternity", "Paternity", "Sharedparental", "Bereavement", "NeonatalCare" ]
     },
     "startDate" : {
       "type" : "string",
@@ -2272,7 +2272,7 @@ ul.nav-tabs {
 };
       defs["Employment"] = {
   "title" : "",
-  "required" : [ "employeeNumber", "niCategories", "payrollCalendarID", "startDate" ],
+  "required" : [ "EmployeeNumber", "NICategories", "PayrollCalendarID", "StartDate" ],
   "type" : "object",
   "properties" : {
     "payrollCalendarID" : {
@@ -3601,7 +3601,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollUk"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>11.1.0</li>
+              <li class="nav-header" data-group="PayrollUk"><strong>VSN: </strong>12.0.0</li>
               <li class="nav-header" data-group="PayrollUk"><a href="#api-PayrollUk">Methods</a></li>
               <li data-group="PayrollUk" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollUk-approveTimesheet">approveTimesheet</a>
@@ -4558,7 +4558,7 @@ This allows you to safely retry requests without the risk of duplicate processin
         "title" : "Mr",
         "firstName" : "Mike",
         "lastName" : "Fancy",
-        "dateOfBirth" : "1999-01-01T00:00:00Z",
+        "dateOfBirth" : "1999-01-01T00:00:00",
         "gender" : "M",
         "email" : "mike@starkindustries.com",
         "isOffPayrollWorker" : false,
@@ -6003,16 +6003,7 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Employment"
       },
-      "example" : {
-        "payrollCalendarID" : "cdfb8371-0b21-4b8a-8903-1024df6c391e",
-        "startDate" : "2024-04-01",
-        "niCategories" : [ {
-          "niCategory" : "I",
-          "startDate" : "2020-05-01",
-          "workplacePostcode" : "SW1A 1AA"
-        } ],
-        "employeeNumber" : "123ABC"
-      }
+      "example" : "{ \"PayrollCalendarID\": \"216d80e6-af55-47b1-b718-9457c3f5d2fe\", \"StartDate\": \"2020-04-01\", \"NICategories\": [ { \"NICategory\": \"A\", \"StartDate\": \"2020-05-01\" } ], \"EmployeeNumber\": \"123ABC\" }"
     }
   },
   "required" : true
@@ -12732,7 +12723,7 @@ This allows you to safely retry requests without the risk of duplicate processin
         "title" : "Mr.",
         "firstName" : "TestDataUK",
         "lastName" : "Tester",
-        "dateOfBirth" : "1992-11-22T00:00:00Z",
+        "dateOfBirth" : "1992-11-22T00:00:00",
         "gender" : "M",
         "email" : "tester@gmail.com",
         "phoneNumber" : "0400123456",
