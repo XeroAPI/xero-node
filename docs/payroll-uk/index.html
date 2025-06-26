@@ -2272,7 +2272,7 @@ ul.nav-tabs {
 };
       defs["Employment"] = {
   "title" : "",
-  "required" : [ "EmployeeNumber", "NICategories", "PayrollCalendarID", "StartDate" ],
+  "required" : [ "employeeNumber", "niCategories", "payrollCalendarID", "startDate" ],
   "type" : "object",
   "properties" : {
     "payrollCalendarID" : {
@@ -4558,7 +4558,7 @@ This allows you to safely retry requests without the risk of duplicate processin
         "title" : "Mr",
         "firstName" : "Mike",
         "lastName" : "Fancy",
-        "dateOfBirth" : "1999-01-01T00:00:00",
+        "dateOfBirth" : "1999-01-01T00:00:00Z",
         "gender" : "M",
         "email" : "mike@starkindustries.com",
         "isOffPayrollWorker" : false,
@@ -6003,7 +6003,16 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Employment"
       },
-      "example" : "{ \"PayrollCalendarID\": \"216d80e6-af55-47b1-b718-9457c3f5d2fe\", \"StartDate\": \"2020-04-01\", \"NICategories\": [ { \"NICategory\": \"A\", \"StartDate\": \"2020-05-01\" } ], \"EmployeeNumber\": \"123ABC\" }"
+      "example" : {
+        "payrollCalendarID" : "cdfb8371-0b21-4b8a-8903-1024df6c391e",
+        "startDate" : "2024-04-01",
+        "niCategories" : [ {
+          "niCategory" : "I",
+          "startDate" : "2020-05-01",
+          "workplacePostcode" : "SW1A 1AA"
+        } ],
+        "employeeNumber" : "123ABC"
+      }
     }
   },
   "required" : true
@@ -12723,7 +12732,7 @@ This allows you to safely retry requests without the risk of duplicate processin
         "title" : "Mr.",
         "firstName" : "TestDataUK",
         "lastName" : "Tester",
-        "dateOfBirth" : "1992-11-22T00:00:00",
+        "dateOfBirth" : "1992-11-22T00:00:00Z",
         "gender" : "M",
         "email" : "tester@gmail.com",
         "phoneNumber" : "0400123456",
