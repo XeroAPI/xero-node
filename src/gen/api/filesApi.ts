@@ -1352,7 +1352,8 @@ export class FilesApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling uploadFile.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         // verify required parameter 'name' is not null or undefined
         if (name === null || name === undefined) {
             throw new Error('Required parameter name was null or undefined when calling uploadFile.');
@@ -1463,7 +1464,8 @@ export class FilesApi {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling uploadFileToFolder.');
         }
-
+        this.binaryHeaders = {'Accept': 'application/json'};
+        (<any>Object).assign(localVarHeaderParams, this.binaryHeaders);
         // verify required parameter 'name' is not null or undefined
         if (name === null || name === undefined) {
             throw new Error('Required parameter name was null or undefined when calling uploadFileToFolder.');

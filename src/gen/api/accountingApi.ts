@@ -215,7 +215,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -261,7 +261,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -325,7 +325,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{FileName}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -371,7 +371,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -676,7 +676,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{FileName}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -722,7 +722,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1111,7 +1111,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{FileName}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -1157,7 +1157,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1628,7 +1628,7 @@ export class AccountingApi {
      * @param includeOnline Allows an attachment to be seen by the end customer within their online invoice
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: RequestFile, includeOnline?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , includeOnline?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -1678,7 +1678,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2222,7 +2222,7 @@ export class AccountingApi {
      * @param includeOnline Allows an attachment to be seen by the end customer within their online invoice
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: RequestFile, includeOnline?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , includeOnline?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -2272,7 +2272,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -2745,7 +2745,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{FileName}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -2791,7 +2791,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3667,7 +3667,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createPurchaseOrderAttachmentByFileName (xeroTenantId: string, purchaseOrderID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createPurchaseOrderAttachmentByFileName (xeroTenantId: string, purchaseOrderID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/Attachments/{FileName}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -3713,7 +3713,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -3939,7 +3939,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createQuoteAttachmentByFileName (xeroTenantId: string, quoteID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createQuoteAttachmentByFileName (xeroTenantId: string, quoteID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/Attachments/{FileName}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -3985,7 +3985,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4291,7 +4291,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{FileName}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -4337,7 +4337,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -4483,7 +4483,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async createRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async createRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -4529,7 +4529,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -16505,7 +16505,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateAccountAttachmentByFileName (xeroTenantId: string, accountID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Accounts/{AccountID}/Attachments/{FileName}'
             .replace('{' + 'AccountID' + '}', encodeURIComponent(String(accountID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -16551,7 +16551,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -16702,7 +16702,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateBankTransactionAttachmentByFileName (xeroTenantId: string, bankTransactionID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransactions/{BankTransactionID}/Attachments/{FileName}'
             .replace('{' + 'BankTransactionID' + '}', encodeURIComponent(String(bankTransactionID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -16748,7 +16748,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -16811,7 +16811,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateBankTransferAttachmentByFileName (xeroTenantId: string, bankTransferID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/BankTransfers/{BankTransferID}/Attachments/{FileName}'
             .replace('{' + 'BankTransferID' + '}', encodeURIComponent(String(bankTransferID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -16857,7 +16857,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -17002,7 +17002,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateContactAttachmentByFileName (xeroTenantId: string, contactID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Contacts/{ContactID}/Attachments/{FileName}'
             .replace('{' + 'ContactID' + '}', encodeURIComponent(String(contactID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -17048,7 +17048,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -17281,7 +17281,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateCreditNoteAttachmentByFileName (xeroTenantId: string, creditNoteID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/CreditNotes/{CreditNoteID}/Attachments/{FileName}'
             .replace('{' + 'CreditNoteID' + '}', encodeURIComponent(String(creditNoteID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -17327,7 +17327,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -17560,7 +17560,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -17606,7 +17606,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -17921,7 +17921,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateManualJournalAttachmentByFileName (xeroTenantId: string, manualJournalID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/ManualJournals/{ManualJournalID}/Attachments/{FileName}'
             .replace('{' + 'ManualJournalID' + '}', encodeURIComponent(String(manualJournalID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -17967,7 +17967,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -18933,7 +18933,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updatePurchaseOrderAttachmentByFileName (xeroTenantId: string, purchaseOrderID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updatePurchaseOrderAttachmentByFileName (xeroTenantId: string, purchaseOrderID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/PurchaseOrders/{PurchaseOrderID}/Attachments/{FileName}'
             .replace('{' + 'PurchaseOrderID' + '}', encodeURIComponent(String(purchaseOrderID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -18979,7 +18979,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -19125,7 +19125,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateQuoteAttachmentByFileName (xeroTenantId: string, quoteID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateQuoteAttachmentByFileName (xeroTenantId: string, quoteID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Quotes/{QuoteID}/Attachments/{FileName}'
             .replace('{' + 'QuoteID' + '}', encodeURIComponent(String(quoteID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -19171,7 +19171,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -19322,7 +19322,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateReceiptAttachmentByFileName (xeroTenantId: string, receiptID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/Receipts/{ReceiptID}/Attachments/{FileName}'
             .replace('{' + 'ReceiptID' + '}', encodeURIComponent(String(receiptID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -19368,7 +19368,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -19514,7 +19514,7 @@ export class AccountingApi {
      * @param body Byte array of file in body of request
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
-    public async updateRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: RequestFile, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+    public async updateRepeatingInvoiceAttachmentByFileName (xeroTenantId: string, repeatingInvoiceID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
         const localVarPath = this.basePath + '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}'
             .replace('{' + 'RepeatingInvoiceID' + '}', encodeURIComponent(String(repeatingInvoiceID)))
             .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
@@ -19560,7 +19560,7 @@ export class AccountingApi {
             headers: localVarHeaderParams,
             url: localVarPath,
             responseType: responseTypeOption,
-            data: ObjectSerializer.serialize(body, "RequestFile"),
+            data: ObjectSerializer.serialize(body, "string"),
         };
 
         let authenticationPromise = Promise.resolve();
