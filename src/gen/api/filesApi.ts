@@ -19,7 +19,7 @@ import { FileObject } from '../model/files/fileObject';
 import { Files } from '../model/files/files';
 import { Folder } from '../model/files/folder';
 
-import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/files/models';
+import { ObjectSerializer, Authentication, VoidAuth } from '../model/files/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";

@@ -80,7 +80,7 @@ import { TimesheetObject } from '../model/payroll-nz/timesheetObject';
 import { Timesheets } from '../model/payroll-nz/timesheets';
 import { TrackingCategories } from '../model/payroll-nz/trackingCategories';
 
-import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/payroll-nz/models';
+import { ObjectSerializer, Authentication, VoidAuth } from '../model/payroll-nz/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";

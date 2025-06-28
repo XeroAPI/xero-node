@@ -188,11 +188,6 @@ import { Timesheets } from '././timesheets';
 import { TrackingCategories } from '././trackingCategories';
 import { TrackingCategory } from '././trackingCategory';
 
-import * as fs from 'fs';
-import { Readable } from "stream";
-
-export type RequestFile = Buffer | fs.ReadStream | Readable;
-
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",

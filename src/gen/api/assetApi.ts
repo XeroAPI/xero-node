@@ -20,7 +20,7 @@ import { AssetType } from '../model/assets/assetType';
 import { Assets } from '../model/assets/assets';
 import { Setting } from '../model/assets/setting';
 
-import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/assets/models';
+import { ObjectSerializer, Authentication, VoidAuth } from '../model/assets/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";

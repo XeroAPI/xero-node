@@ -176,11 +176,6 @@ import { Timesheets } from '././timesheets';
 import { ValidationError } from '././validationError';
 import { WorkCondition } from '././workCondition';
 
-import * as fs from 'fs';
-import { Readable } from "stream";
-
-export type RequestFile = Buffer | fs.ReadStream | Readable;
-
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",

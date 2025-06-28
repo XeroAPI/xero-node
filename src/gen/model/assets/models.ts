@@ -24,11 +24,6 @@ import { Pagination } from '././pagination';
 import { ResourceValidationErrorsElement } from '././resourceValidationErrorsElement';
 import { Setting } from '././setting';
 
-import * as fs from 'fs';
-import { Readable } from "stream";
-
-export type RequestFile = Buffer | fs.ReadStream | Readable;
-
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",

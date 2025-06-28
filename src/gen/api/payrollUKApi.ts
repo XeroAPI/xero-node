@@ -77,7 +77,7 @@ import { TimesheetObject } from '../model/payroll-uk/timesheetObject';
 import { Timesheets } from '../model/payroll-uk/timesheets';
 import { TrackingCategories } from '../model/payroll-uk/trackingCategories';
 
-import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/payroll-uk/models';
+import { ObjectSerializer, Authentication, VoidAuth } from '../model/payroll-uk/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";

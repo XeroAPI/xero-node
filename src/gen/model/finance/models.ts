@@ -108,11 +108,6 @@ import { TrialBalanceResponse } from '././trialBalanceResponse';
 import { UserActivitiesResponse } from '././userActivitiesResponse';
 import { UserResponse } from '././userResponse';
 
-import * as fs from 'fs';
-import { Readable } from "stream";
-
-export type RequestFile = Buffer | fs.ReadStream | Readable;
-
 /* tslint:disable:no-unused-variable */
 let primitives = [
                     "string",

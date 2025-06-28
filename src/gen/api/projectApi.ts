@@ -27,7 +27,7 @@ import { TimeEntries } from '../model/projects/timeEntries';
 import { TimeEntry } from '../model/projects/timeEntry';
 import { TimeEntryCreateOrUpdate } from '../model/projects/timeEntryCreateOrUpdate';
 
-import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/projects/models';
+import { ObjectSerializer, Authentication, VoidAuth } from '../model/projects/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";

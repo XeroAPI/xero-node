@@ -68,7 +68,7 @@ import { TrackingOption } from '../model/accounting/trackingOption';
 import { TrackingOptions } from '../model/accounting/trackingOptions';
 import { Users } from '../model/accounting/users';
 
-import { ObjectSerializer, Authentication, VoidAuth, RequestFile } from '../model/accounting/models';
+import { ObjectSerializer, Authentication, VoidAuth } from '../model/accounting/models';
 import { ApiError } from '../../model/ApiError';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";
