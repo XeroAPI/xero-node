@@ -2104,6 +2104,11 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "Tax number of contact – this is also known as the ABN (Australia), GST Number (New Zealand), VAT Number (UK) or Tax ID Number (US and global) in the Xero UI depending on which regionalized version of Xero you are using (max length = 50)"
     },
+    "TaxNumberType" : {
+      "type" : "string",
+      "description" : "Identifier of the regional type of tax number, such as US, UK, or other regional tax identifiers",
+      "enum" : [ "SSN", "EIN", "ITIN", "ATIN" ]
+    },
     "AccountsReceivableTaxType" : {
       "type" : "string",
       "description" : "The tax type from TaxRates"
