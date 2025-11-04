@@ -65,6 +65,10 @@ export class Contact {
     */
     'taxNumber'?: string;
     /**
+    * Identifier of the regional type of tax number, such as US, UK, or other regional tax identifiers
+    */
+    'taxNumberType'?: Contact.TaxNumberTypeEnum;
+    /**
     * The tax type from TaxRates
     */
     'accountsReceivableTaxType'?: string;
@@ -235,6 +239,11 @@ export class Contact {
             "type": "string"
         },
         {
+            "name": "taxNumberType",
+            "baseName": "TaxNumberType",
+            "type": "Contact.TaxNumberTypeEnum"
+        },
+        {
             "name": "accountsReceivableTaxType",
             "baseName": "AccountsReceivableTaxType",
             "type": "string"
@@ -390,6 +399,12 @@ export namespace Contact {
         ACTIVE = <any> 'ACTIVE',
         ARCHIVED = <any> 'ARCHIVED',
         GDPRREQUEST = <any> 'GDPRREQUEST'
+    }
+    export enum TaxNumberTypeEnum {
+        SSN = <any> 'SSN',
+        EIN = <any> 'EIN',
+        ITIN = <any> 'ITIN',
+        ATIN = <any> 'ATIN'
     }
     export enum SalesDefaultLineAmountTypeEnum {
         INCLUSIVE = <any> 'INCLUSIVE',
