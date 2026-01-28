@@ -71,6 +71,10 @@ export class Overpayment {
     */
     'hasAttachments'?: boolean;
     /**
+    * An optional description for Overpayment
+    */
+    'reference'?: string;
+    /**
     * See Attachments
     */
     'attachments'?: Array<Attachment>;
@@ -167,6 +171,11 @@ export class Overpayment {
             "name": "hasAttachments",
             "baseName": "HasAttachments",
             "type": "boolean"
+        },
+        {
+            "name": "reference",
+            "baseName": "Reference",
+            "type": "string"
         },
         {
             "name": "attachments",

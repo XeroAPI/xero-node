@@ -17,14 +17,6 @@ export class EmployeeLeaveSetup {
     */
     'negativeAnnualLeaveBalancePaidAmount'?: number;
     /**
-    * Deprecated use SickLeaveToAccrueAnnually
-    */
-    'sickLeaveHoursToAccrueAnnually'?: number;
-    /**
-    * Deprecated use SickLeaveMaximumToAccrue
-    */
-    'sickLeaveMaximumHoursToAccrue'?: number;
-    /**
     * Number of units accrued annually for sick leave. The type of units is determined by the property \"TypeOfUnitsToAccrue\" on the \"Sick Leave\" leave type
     */
     'sickLeaveToAccrueAnnually'?: number;
@@ -70,16 +62,6 @@ export class EmployeeLeaveSetup {
         {
             "name": "negativeAnnualLeaveBalancePaidAmount",
             "baseName": "negativeAnnualLeaveBalancePaidAmount",
-            "type": "number"
-        },
-        {
-            "name": "sickLeaveHoursToAccrueAnnually",
-            "baseName": "sickLeaveHoursToAccrueAnnually",
-            "type": "number"
-        },
-        {
-            "name": "sickLeaveMaximumHoursToAccrue",
-            "baseName": "sickLeaveMaximumHoursToAccrue",
             "type": "number"
         },
         {

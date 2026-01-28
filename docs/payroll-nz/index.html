@@ -1682,20 +1682,6 @@ ul.nav-tabs {
       "example" : 10.0,
       "x-is-money" : true
     },
-    "sickLeaveHoursToAccrueAnnually" : {
-      "type" : "number",
-      "description" : "Deprecated use SickLeaveToAccrueAnnually",
-      "format" : "double",
-      "example" : 100.5,
-      "x-is-money" : true
-    },
-    "sickLeaveMaximumHoursToAccrue" : {
-      "type" : "number",
-      "description" : "Deprecated use SickLeaveMaximumToAccrue",
-      "format" : "double",
-      "example" : 200.5,
-      "x-is-money" : true
-    },
     "SickLeaveToAccrueAnnually" : {
       "type" : "number",
       "description" : "Number of units accrued annually for sick leave. The type of units is determined by the property \"TypeOfUnitsToAccrue\" on the \"Sick Leave\" leave type",
@@ -1769,13 +1755,7 @@ ul.nav-tabs {
       "description" : "The schedule of accrual",
       "enum" : [ "AnnuallyAfter6Months", "OnAnniversaryDate", "PercentageOfGrossEarnings", "NoAccruals" ]
     },
-    "hoursAccruedAnnually" : {
-      "type" : "number",
-      "description" : "Deprecated use UnitsAccruedAnnually",
-      "format" : "double",
-      "x-is-money" : true
-    },
-    "UnitsAccruedAnnually" : {
+    "unitsAccruedAnnually" : {
       "type" : "number",
       "description" : "The number of units accrued for the leave annually. This is 0 when the ScheduleOfAccrual chosen is \"NoAccruals\"",
       "format" : "double",
@@ -1803,7 +1783,7 @@ ul.nav-tabs {
     },
     "rateAccruedHourly" : {
       "type" : "number",
-      "description" : "The number of hours added to the leave balance for every hour worked by the employee. This is normally 0, unless the scheduleOfAccrual chosen is \"OnHourWorked\"",
+      "description" : "not supported in Payroll NZ",
       "format" : "double",
       "x-is-money" : true
     },
@@ -4088,7 +4068,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollNz"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>13.3.1</li>
+              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>13.4.0</li>
               <li class="nav-header" data-group="PayrollNz"><a href="#api-PayrollNz">Methods</a></li>
               <li data-group="PayrollNz" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollNz-approveTimesheet">approveTimesheet</a>
@@ -5317,8 +5297,6 @@ const employeeLeaveSetup: EmployeeLeaveSetup = {
   includeHolidayPay: false,
   holidayPayOpeningBalance: 10.5,
   annualLeaveOpeningBalance: 25.89,
-  sickLeaveHoursToAccrueAnnually: 100.0,
-  sickLeaveMaximumHoursToAccrue: 200.0,
   sickLeaveOpeningBalance: 10.5,
   sickLeaveToAccrueAnnually: 100.0,
   sickLeaveMaximumToAccrue: 200.0,
@@ -5461,7 +5439,6 @@ This allows you to safely retry requests without the risk of duplicate processin
       "example" : {
         "holidayPayOpeningBalance" : 10,
         "annualLeaveOpeningBalance" : 100,
-        "sickLeaveHoursToAccrueAnnually" : 20,
         "sickLeaveToAccrueAnnually" : 20,
         "sickLeaveOpeningBalance" : 10,
         "sickLeaveScheduleOfAccrual" : "OnAnniversaryDate",
@@ -5647,13 +5624,12 @@ This allows you to safely retry requests without the risk of duplicate processin
       "example" : {
         "leaveTypeID" : "35da97ae-05b9-427f-9a98-69157ba42cec",
         "scheduleOfAccrual" : "AnnuallyAfter6Months",
-        "hoursAccruedAnnually" : 10,
         "unitsAccruedAnnually" : 10,
         "typeOfUnitsToAccrue" : "Hours",
         "openingBalanceTypeOfUnits" : "Hours",
         "maximumToAccrue" : 80,
         "openingBalance" : 100,
-        "rateAccruedHourly" : 3.5
+        "rateAccruedHourly" : null
       }
     }
   },
