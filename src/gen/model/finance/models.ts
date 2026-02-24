@@ -1,5 +1,3 @@
-export * from '././accountUsage';
-export * from '././accountUsageResponse';
 export * from '././balanceSheetAccountDetail';
 export * from '././balanceSheetAccountGroup';
 export * from '././balanceSheetAccountType';
@@ -21,25 +19,19 @@ export * from '././contactTotalOther';
 export * from '././creditNoteResponse';
 export * from '././currentStatementResponse';
 export * from '././dataSourceResponse';
-export * from '././historyRecordResponse';
 export * from '././incomeByContactResponse';
 export * from '././invoiceResponse';
 export * from '././lineItemResponse';
-export * from '././lockHistoryModel';
-export * from '././lockHistoryResponse';
 export * from '././manualJournalTotal';
 export * from '././overpaymentResponse';
 export * from '././paymentResponse';
 export * from '././pnlAccount';
 export * from '././pnlAccountClass';
 export * from '././pnlAccountType';
-export * from '././practiceResponse';
 export * from '././prepaymentResponse';
 export * from '././problem';
 export * from '././problemType';
 export * from '././profitAndLossResponse';
-export * from '././reportHistoryModel';
-export * from '././reportHistoryResponse';
 export * from '././statementBalanceResponse';
 export * from '././statementLineResponse';
 export * from '././statementLinesResponse';
@@ -50,11 +42,7 @@ export * from '././trialBalanceAccount';
 export * from '././trialBalanceEntry';
 export * from '././trialBalanceMovement';
 export * from '././trialBalanceResponse';
-export * from '././userActivitiesResponse';
-export * from '././userResponse';
 import { AxiosRequestConfig } from 'axios';
-import { AccountUsage } from '././accountUsage';
-import { AccountUsageResponse } from '././accountUsageResponse';
 import { BalanceSheetAccountDetail } from '././balanceSheetAccountDetail';
 import { BalanceSheetAccountGroup } from '././balanceSheetAccountGroup';
 import { BalanceSheetAccountType } from '././balanceSheetAccountType';
@@ -76,25 +64,19 @@ import { ContactTotalOther } from '././contactTotalOther';
 import { CreditNoteResponse } from '././creditNoteResponse';
 import { CurrentStatementResponse } from '././currentStatementResponse';
 import { DataSourceResponse } from '././dataSourceResponse';
-import { HistoryRecordResponse } from '././historyRecordResponse';
 import { IncomeByContactResponse } from '././incomeByContactResponse';
 import { InvoiceResponse } from '././invoiceResponse';
 import { LineItemResponse } from '././lineItemResponse';
-import { LockHistoryModel } from '././lockHistoryModel';
-import { LockHistoryResponse } from '././lockHistoryResponse';
 import { ManualJournalTotal } from '././manualJournalTotal';
 import { OverpaymentResponse } from '././overpaymentResponse';
 import { PaymentResponse } from '././paymentResponse';
 import { PnlAccount } from '././pnlAccount';
 import { PnlAccountClass } from '././pnlAccountClass';
 import { PnlAccountType } from '././pnlAccountType';
-import { PracticeResponse } from '././practiceResponse';
 import { PrepaymentResponse } from '././prepaymentResponse';
 import { Problem } from '././problem';
 import { ProblemType } from '././problemType';
 import { ProfitAndLossResponse } from '././profitAndLossResponse';
-import { ReportHistoryModel } from '././reportHistoryModel';
-import { ReportHistoryResponse } from '././reportHistoryResponse';
 import { StatementBalanceResponse } from '././statementBalanceResponse';
 import { StatementLineResponse } from '././statementLineResponse';
 import { StatementLinesResponse } from '././statementLinesResponse';
@@ -105,8 +87,6 @@ import { TrialBalanceAccount } from '././trialBalanceAccount';
 import { TrialBalanceEntry } from '././trialBalanceEntry';
 import { TrialBalanceMovement } from '././trialBalanceMovement';
 import { TrialBalanceResponse } from '././trialBalanceResponse';
-import { UserActivitiesResponse } from '././userActivitiesResponse';
-import { UserResponse } from '././userResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -125,8 +105,6 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
-    "AccountUsage": AccountUsage,
-    "AccountUsageResponse": AccountUsageResponse,
     "BalanceSheetAccountDetail": BalanceSheetAccountDetail,
     "BalanceSheetAccountGroup": BalanceSheetAccountGroup,
     "BalanceSheetAccountType": BalanceSheetAccountType,
@@ -148,24 +126,18 @@ let typeMap: {[index: string]: any} = {
     "CreditNoteResponse": CreditNoteResponse,
     "CurrentStatementResponse": CurrentStatementResponse,
     "DataSourceResponse": DataSourceResponse,
-    "HistoryRecordResponse": HistoryRecordResponse,
     "IncomeByContactResponse": IncomeByContactResponse,
     "InvoiceResponse": InvoiceResponse,
     "LineItemResponse": LineItemResponse,
-    "LockHistoryModel": LockHistoryModel,
-    "LockHistoryResponse": LockHistoryResponse,
     "ManualJournalTotal": ManualJournalTotal,
     "OverpaymentResponse": OverpaymentResponse,
     "PaymentResponse": PaymentResponse,
     "PnlAccount": PnlAccount,
     "PnlAccountClass": PnlAccountClass,
     "PnlAccountType": PnlAccountType,
-    "PracticeResponse": PracticeResponse,
     "PrepaymentResponse": PrepaymentResponse,
     "Problem": Problem,
     "ProfitAndLossResponse": ProfitAndLossResponse,
-    "ReportHistoryModel": ReportHistoryModel,
-    "ReportHistoryResponse": ReportHistoryResponse,
     "StatementBalanceResponse": StatementBalanceResponse,
     "StatementLineResponse": StatementLineResponse,
     "StatementLinesResponse": StatementLinesResponse,
@@ -176,8 +148,6 @@ let typeMap: {[index: string]: any} = {
     "TrialBalanceEntry": TrialBalanceEntry,
     "TrialBalanceMovement": TrialBalanceMovement,
     "TrialBalanceResponse": TrialBalanceResponse,
-    "UserActivitiesResponse": UserActivitiesResponse,
-    "UserResponse": UserResponse,
 }
 
 export class ObjectSerializer {
