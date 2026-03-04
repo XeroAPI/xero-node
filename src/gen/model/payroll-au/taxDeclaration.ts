@@ -72,6 +72,10 @@ export class TaxDeclaration {
     * Last modified timestamp
     */
     'updatedDateUTC'?: Date;
+    /**
+    * Optional Boolean to determine if leave loading is considered as qualifying earnings for superannuation guarantee calculations
+    */
+    'includeLeaveLoadingInQualifyingEarnings'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -180,6 +184,11 @@ export class TaxDeclaration {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
+        },
+        {
+            "name": "includeLeaveLoadingInQualifyingEarnings",
+            "baseName": "IncludeLeaveLoadingInQualifyingEarnings",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
