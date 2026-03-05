@@ -15,6 +15,10 @@ export class LeaveLine {
     */
     'includeSuperannuationGuaranteeContribution'?: boolean;
     /**
+    * Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on superannuation settings
+    */
+    'isQualifyingEarnings'?: boolean;
+    /**
     * Number of units for leave line.
     */
     'numberOfUnits'?: number;
@@ -53,6 +57,11 @@ export class LeaveLine {
         {
             "name": "includeSuperannuationGuaranteeContribution",
             "baseName": "IncludeSuperannuationGuaranteeContribution",
+            "type": "boolean"
+        },
+        {
+            "name": "isQualifyingEarnings",
+            "baseName": "IsQualifyingEarnings",
             "type": "boolean"
         },
         {

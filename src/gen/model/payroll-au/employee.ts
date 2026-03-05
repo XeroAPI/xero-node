@@ -5,7 +5,6 @@ import { EmploymentType } from '././employmentType';
 import { HomeAddress } from '././homeAddress';
 import { IncomeType } from '././incomeType';
 import { LeaveBalance } from '././leaveBalance';
-import { LeaveLine } from '././leaveLine';
 import { OpeningBalances } from '././openingBalances';
 import { PayTemplate } from '././payTemplate';
 import { SuperMembership } from '././superMembership';
@@ -110,7 +109,6 @@ export class Employee {
     */
     'isSTP2Qualified'?: boolean;
     'leaveBalances'?: Array<LeaveBalance>;
-    'leaveLines'?: Array<LeaveLine>;
     'superMemberships'?: Array<SuperMembership>;
     'status'?: EmployeeStatus;
     /**
@@ -279,11 +277,6 @@ export class Employee {
             "name": "leaveBalances",
             "baseName": "LeaveBalances",
             "type": "Array<LeaveBalance>"
-        },
-        {
-            "name": "leaveLines",
-            "baseName": "LeaveLines",
-            "type": "Array<LeaveLine>"
         },
         {
             "name": "superMemberships",
