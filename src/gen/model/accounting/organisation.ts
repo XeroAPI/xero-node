@@ -317,18 +317,26 @@ export namespace Organisation {
     }
     export enum OrganisationTypeEnum {
         ACCOUNTINGPRACTICE = <any> 'ACCOUNTING_PRACTICE',
+        CCORPORATIONLLC = <any> 'CCORPORATIONLLC',
         COMPANY = <any> 'COMPANY',
         CHARITY = <any> 'CHARITY',
         CLUBORSOCIETY = <any> 'CLUB_OR_SOCIETY',
         INDIVIDUAL = <any> 'INDIVIDUAL',
+        LLC = <any> 'LLC',
         LOOKTHROUGHCOMPANY = <any> 'LOOK_THROUGH_COMPANY',
         NOTFORPROFIT = <any> 'NOT_FOR_PROFIT',
+        NOTLLC = <any> 'NOTLLC',
         PARTNERSHIP = <any> 'PARTNERSHIP',
+        PARTNERSHIPLLC = <any> 'PARTNERSHIPLLC',
+        PERSONAL = <any> 'PERSONAL',
         SCORPORATION = <any> 'S_CORPORATION',
+        SCORPORATIONLLC = <any> 'SCORPORATIONLLC',
         SELFMANAGEDSUPERANNUATIONFUND = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
+        SINGLEMEMBERLLC = <any> 'SINGLEMEMBERLLC',
         SOLETRADER = <any> 'SOLE_TRADER',
         SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
-        TRUST = <any> 'TRUST'
+        TRUST = <any> 'TRUST',
+        UNSPECIFIED = <any> 'UNSPECIFIED'
     }
     export enum SalesTaxBasisEnum {
         PAYMENTS = <any> 'PAYMENTS',
@@ -359,18 +367,26 @@ export namespace Organisation {
     }
     export enum OrganisationEntityTypeEnum {
         ACCOUNTINGPRACTICE = <any> 'ACCOUNTING_PRACTICE',
+        CCORPORATIONLLC = <any> 'CCORPORATIONLLC',
         COMPANY = <any> 'COMPANY',
         CHARITY = <any> 'CHARITY',
         CLUBORSOCIETY = <any> 'CLUB_OR_SOCIETY',
         INDIVIDUAL = <any> 'INDIVIDUAL',
+        LLC = <any> 'LLC',
         LOOKTHROUGHCOMPANY = <any> 'LOOK_THROUGH_COMPANY',
         NOTFORPROFIT = <any> 'NOT_FOR_PROFIT',
+        NOTLLC = <any> 'NOTLLC',
         PARTNERSHIP = <any> 'PARTNERSHIP',
+        PARTNERSHIPLLC = <any> 'PARTNERSHIPLLC',
+        PERSONAL = <any> 'PERSONAL',
         SCORPORATION = <any> 'S_CORPORATION',
+        SCORPORATIONLLC = <any> 'SCORPORATIONLLC',
         SELFMANAGEDSUPERANNUATIONFUND = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
+        SINGLEMEMBERLLC = <any> 'SINGLEMEMBERLLC',
         SOLETRADER = <any> 'SOLE_TRADER',
         SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
-        TRUST = <any> 'TRUST'
+        TRUST = <any> 'TRUST',
+        UNSPECIFIED = <any> 'UNSPECIFIED'
     }
     export enum ClassEnum {
         DEMO = <any> 'DEMO',
