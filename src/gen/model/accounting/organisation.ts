@@ -336,6 +336,16 @@ export namespace Organisation {
         SOLETRADER = <any> 'SOLE_TRADER',
         SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
         TRUST = <any> 'TRUST',
+<<<<<<< Updated upstream
+=======
+        PERSONAL = <any> 'PERSONAL',
+        SINGLEMEMBERLLC = <any> 'SINGLEMEMBERLLC',
+        CCORPORATIONLLC = <any> 'CCORPORATIONLLC',
+        PARTNERSHIPLLC = <any> 'PARTNERSHIPLLC',
+        SCORPORATIONLLC = <any> 'SCORPORATIONLLC',
+        LLC = <any> 'LLC',
+        NOTLLC = <any> 'NOTLLC',
+>>>>>>> Stashed changes
         UNSPECIFIED = <any> 'UNSPECIFIED'
     }
     export enum SalesTaxBasisEnum {
@@ -386,6 +396,16 @@ export namespace Organisation {
         SOLETRADER = <any> 'SOLE_TRADER',
         SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
         TRUST = <any> 'TRUST',
+<<<<<<< Updated upstream
+=======
+        PERSONAL = <any> 'PERSONAL',
+        SINGLEMEMBERLLC = <any> 'SINGLEMEMBERLLC',
+        CCORPORATIONLLC = <any> 'CCORPORATIONLLC',
+        PARTNERSHIPLLC = <any> 'PARTNERSHIPLLC',
+        SCORPORATIONLLC = <any> 'SCORPORATIONLLC',
+        LLC = <any> 'LLC',
+        NOTLLC = <any> 'NOTLLC',
+>>>>>>> Stashed changes
         UNSPECIFIED = <any> 'UNSPECIFIED'
     }
     export enum ClassEnum {
