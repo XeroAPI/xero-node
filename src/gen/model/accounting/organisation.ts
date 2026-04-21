@@ -328,7 +328,15 @@ export namespace Organisation {
         SELFMANAGEDSUPERANNUATIONFUND = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
         SOLETRADER = <any> 'SOLE_TRADER',
         SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
-        TRUST = <any> 'TRUST'
+        TRUST = <any> 'TRUST',
+        PERSONAL = <any> 'PERSONAL',
+        SINGLEMEMBERLLC = <any> 'SINGLEMEMBERLLC',
+        CCORPORATIONLLC = <any> 'CCORPORATIONLLC',
+        PARTNERSHIPLLC = <any> 'PARTNERSHIPLLC',
+        SCORPORATIONLLC = <any> 'SCORPORATIONLLC',
+        LLC = <any> 'LLC',
+        NOTLLC = <any> 'NOTLLC',
+        UNSPECIFIED = <any> 'UNSPECIFIED'
     }
     export enum SalesTaxBasisEnum {
         PAYMENTS = <any> 'PAYMENTS',
@@ -370,7 +378,15 @@ export namespace Organisation {
         SELFMANAGEDSUPERANNUATIONFUND = <any> 'SELF_MANAGED_SUPERANNUATION_FUND',
         SOLETRADER = <any> 'SOLE_TRADER',
         SUPERANNUATIONFUND = <any> 'SUPERANNUATION_FUND',
-        TRUST = <any> 'TRUST'
+        TRUST = <any> 'TRUST',
+        PERSONAL = <any> 'PERSONAL',
+        SINGLEMEMBERLLC = <any> 'SINGLEMEMBERLLC',
+        CCORPORATIONLLC = <any> 'CCORPORATIONLLC',
+        PARTNERSHIPLLC = <any> 'PARTNERSHIPLLC',
+        SCORPORATIONLLC = <any> 'SCORPORATIONLLC',
+        LLC = <any> 'LLC',
+        NOTLLC = <any> 'NOTLLC',
+        UNSPECIFIED = <any> 'UNSPECIFIED'
     }
     export enum ClassEnum {
         DEMO = <any> 'DEMO',
