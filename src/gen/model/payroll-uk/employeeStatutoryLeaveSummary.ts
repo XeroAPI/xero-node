@@ -81,7 +81,8 @@ export namespace EmployeeStatutoryLeaveSummary {
         Paternity = <any> 'Paternity',
         Sharedparental = <any> 'Sharedparental',
         Bereavement = <any> 'Bereavement',
-        NeonatalCare = <any> 'NeonatalCare'
+        NeonatalCare = <any> 'NeonatalCare',
+        BereavementNire = <any> 'BereavementNire'
     }
     export enum StatusEnum {
         Pending = <any> 'Pending',

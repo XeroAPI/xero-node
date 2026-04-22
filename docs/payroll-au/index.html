@@ -1182,6 +1182,11 @@ ul.nav-tabs {
       "description" : "Boolean to determine if the earnings rate is reportable or exempt from W1",
       "example" : false
     },
+    "IsQualifyingEarnings" : {
+      "type" : "boolean",
+      "description" : "Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on earnings type and superannuation settings",
+      "example" : true
+    },
     "AllowanceContributesToAnnualLeaveRate" : {
       "type" : "boolean",
       "description" : "Boolean to determine if the allowance earnings rate contributes towards annual leave rate. Only applicable if EarningsType is ALLOWANCE and RateType is RATEPERUNIT",
@@ -1417,12 +1422,6 @@ ul.nav-tabs {
       "type" : "array",
       "items" : {
         "$ref" : "#/components/schemas/LeaveBalance"
-      }
-    },
-    "LeaveLines" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/LeaveLine"
       }
     },
     "SuperMemberships" : {
@@ -1736,6 +1735,11 @@ ul.nav-tabs {
       "description" : "amount of leave line",
       "example" : true
     },
+    "IsQualifyingEarnings" : {
+      "type" : "boolean",
+      "description" : "Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on superannuation settings",
+      "example" : true
+    },
     "NumberOfUnits" : {
       "type" : "number",
       "description" : "Number of units for leave line.",
@@ -1877,6 +1881,11 @@ ul.nav-tabs {
       "type" : "boolean",
       "description" : "Set this to indicate that the leave type is exempt from superannuation guarantee contribution",
       "example" : true
+    },
+    "IsQualifyingEarnings" : {
+      "type" : "boolean",
+      "description" : "Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on earnings type and superannuation settings",
+      "example" : true
     }
   },
   "description" : ""
@@ -1892,6 +1901,26 @@ ul.nav-tabs {
   "type" : "string",
   "description" : "",
   "enum" : [ "PAYGMANUAL", "ETPOMANUAL", "ETPRMANUAL", "SCHEDULE5MANUAL", "SCHEDULE5STSLMANUAL", "SCHEDULE4MANUAL" ]
+};
+      defs["OpeningBalanceLeaveLine"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "LeaveTypeID" : {
+      "type" : "string",
+      "description" : "Xero leave type identifier",
+      "format" : "uuid",
+      "example" : "742998cb-7584-4ecf-aa88-d694f59c50f9"
+    },
+    "NumberOfUnits" : {
+      "type" : "number",
+      "description" : "Number of units for leave line.",
+      "format" : "double",
+      "example" : 2.5,
+      "x-is-money" : true
+    }
+  },
+  "description" : ""
 };
       defs["OpeningBalances"] = {
   "title" : "",
@@ -1935,7 +1964,7 @@ ul.nav-tabs {
     "LeaveLines" : {
       "type" : "array",
       "items" : {
-        "$ref" : "#/components/schemas/LeaveLine"
+        "$ref" : "#/components/schemas/OpeningBalanceLeaveLine"
       }
     },
     "PaidLeaveEarningsLines" : {
@@ -3137,6 +3166,11 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1583967733054+0000)/",
       "x-is-msdate-time" : true
+    },
+    "IncludeLeaveLoadingInQualifyingEarnings" : {
+      "type" : "boolean",
+      "description" : "Optional Boolean to determine if leave loading is considered as qualifying earnings for superannuation guarantee calculations",
+      "example" : true
     }
   },
   "description" : ""
@@ -3367,6 +3401,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-node/files/index.html" value="Files">Files</option>
           <option data-url="https://xeroapi.github.io/xero-node/projects/index.html" value="Project">Projects</option>
           <option data-url="https://xeroapi.github.io/xero-node/payroll-au/index.html" value="PayrollAu">Payroll (AU)</option>
+          <option data-url="https://xeroapi.github.io/xero-node/payroll-au-v2/index.html" value="PayrollAuV2">Payroll (AU) V2</option>
           <option data-url="https://xeroapi.github.io/xero-node/payroll-uk/index.html" value="PayrollUk">Payroll (UK)</option>
           <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
           <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="Bankfeeds">Bankfeeds</option>
@@ -3413,7 +3448,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>13.1.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>15.0.1</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="approveLeaveApplication" class="">
                 <a href="#api-PayrollAu-approveLeaveApplication">approveLeaveApplication</a>
@@ -4000,6 +4035,7 @@ const earningsRate: EarningsRate = {
   typeOfUnits: "Hours",
   isExemptFromTax: true,
   isExemptFromSuper: true,
+  isQualifyingEarnings: false,
   earningsType: EarningsType.OVERTIMEEARNINGS
 }; 
 
@@ -4139,9 +4175,10 @@ This allows you to safely retry requests without the risk of duplicate processin
           "Name" : "MyRate",
           "AccountCode" : "400",
           "TypeOfUnits" : "4.00",
-          "IsExemptFromTax" : true,
+          "IsExemptFromTax" : false,
           "IsExemptFromSuper" : true,
           "IsReportableAsW1" : false,
+          "IsQualifyingEarnings" : true,
           "AllowanceContributesToAnnualLeaveRate" : false,
           "AllowanceContributesToOvertimeRate" : false,
           "EarningsType" : "ORDINARYTIMEEARNINGS",

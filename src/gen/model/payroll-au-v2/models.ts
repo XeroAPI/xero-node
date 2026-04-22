@@ -1,92 +1,20 @@
-export * from '././balanceSheetAccountDetail';
-export * from '././balanceSheetAccountGroup';
-export * from '././balanceSheetAccountType';
-export * from '././balanceSheetResponse';
-export * from '././bankStatementAccountingResponse';
-export * from '././bankStatementResponse';
-export * from '././bankTransactionResponse';
-export * from '././cashAccountResponse';
-export * from '././cashBalance';
-export * from '././cashValidationResponse';
-export * from '././cashflowAccount';
-export * from '././cashflowActivity';
-export * from '././cashflowResponse';
-export * from '././cashflowType';
-export * from '././contactDetail';
-export * from '././contactResponse';
-export * from '././contactTotalDetail';
-export * from '././contactTotalOther';
-export * from '././creditNoteResponse';
-export * from '././currentStatementResponse';
-export * from '././dataSourceResponse';
-export * from '././incomeByContactResponse';
-export * from '././invoiceResponse';
-export * from '././lineItemResponse';
-export * from '././manualJournalTotal';
-export * from '././overpaymentResponse';
-export * from '././paymentResponse';
-export * from '././pnlAccount';
-export * from '././pnlAccountClass';
-export * from '././pnlAccountType';
-export * from '././prepaymentResponse';
+export * from '././invalidField';
+export * from '././pagination';
 export * from '././problem';
-export * from '././problemType';
-export * from '././profitAndLossResponse';
-export * from '././statementBalanceResponse';
-export * from '././statementLineResponse';
-export * from '././statementLinesResponse';
-export * from '././statementResponse';
-export * from '././totalDetail';
-export * from '././totalOther';
-export * from '././trialBalanceAccount';
-export * from '././trialBalanceEntry';
-export * from '././trialBalanceMovement';
-export * from '././trialBalanceResponse';
+export * from '././timesheet';
+export * from '././timesheetLine';
+export * from '././timesheetLineObject';
+export * from '././timesheetObject';
+export * from '././timesheets';
 import { AxiosRequestConfig } from 'axios';
-import { BalanceSheetAccountDetail } from '././balanceSheetAccountDetail';
-import { BalanceSheetAccountGroup } from '././balanceSheetAccountGroup';
-import { BalanceSheetAccountType } from '././balanceSheetAccountType';
-import { BalanceSheetResponse } from '././balanceSheetResponse';
-import { BankStatementAccountingResponse } from '././bankStatementAccountingResponse';
-import { BankStatementResponse } from '././bankStatementResponse';
-import { BankTransactionResponse } from '././bankTransactionResponse';
-import { CashAccountResponse } from '././cashAccountResponse';
-import { CashBalance } from '././cashBalance';
-import { CashValidationResponse } from '././cashValidationResponse';
-import { CashflowAccount } from '././cashflowAccount';
-import { CashflowActivity } from '././cashflowActivity';
-import { CashflowResponse } from '././cashflowResponse';
-import { CashflowType } from '././cashflowType';
-import { ContactDetail } from '././contactDetail';
-import { ContactResponse } from '././contactResponse';
-import { ContactTotalDetail } from '././contactTotalDetail';
-import { ContactTotalOther } from '././contactTotalOther';
-import { CreditNoteResponse } from '././creditNoteResponse';
-import { CurrentStatementResponse } from '././currentStatementResponse';
-import { DataSourceResponse } from '././dataSourceResponse';
-import { IncomeByContactResponse } from '././incomeByContactResponse';
-import { InvoiceResponse } from '././invoiceResponse';
-import { LineItemResponse } from '././lineItemResponse';
-import { ManualJournalTotal } from '././manualJournalTotal';
-import { OverpaymentResponse } from '././overpaymentResponse';
-import { PaymentResponse } from '././paymentResponse';
-import { PnlAccount } from '././pnlAccount';
-import { PnlAccountClass } from '././pnlAccountClass';
-import { PnlAccountType } from '././pnlAccountType';
-import { PrepaymentResponse } from '././prepaymentResponse';
+import { InvalidField } from '././invalidField';
+import { Pagination } from '././pagination';
 import { Problem } from '././problem';
-import { ProblemType } from '././problemType';
-import { ProfitAndLossResponse } from '././profitAndLossResponse';
-import { StatementBalanceResponse } from '././statementBalanceResponse';
-import { StatementLineResponse } from '././statementLineResponse';
-import { StatementLinesResponse } from '././statementLinesResponse';
-import { StatementResponse } from '././statementResponse';
-import { TotalDetail } from '././totalDetail';
-import { TotalOther } from '././totalOther';
-import { TrialBalanceAccount } from '././trialBalanceAccount';
-import { TrialBalanceEntry } from '././trialBalanceEntry';
-import { TrialBalanceMovement } from '././trialBalanceMovement';
-import { TrialBalanceResponse } from '././trialBalanceResponse';
+import { Timesheet } from '././timesheet';
+import { TimesheetLine } from '././timesheetLine';
+import { TimesheetLineObject } from '././timesheetLineObject';
+import { TimesheetObject } from '././timesheetObject';
+import { Timesheets } from '././timesheets';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -101,53 +29,18 @@ let primitives = [
                  ];
                  
 let enumsMap: {[index: string]: any} = {
-        "ProblemType": ProblemType,
+        "Timesheet.StatusEnum": Timesheet.StatusEnum,
 }
 
 let typeMap: {[index: string]: any} = {
-    "BalanceSheetAccountDetail": BalanceSheetAccountDetail,
-    "BalanceSheetAccountGroup": BalanceSheetAccountGroup,
-    "BalanceSheetAccountType": BalanceSheetAccountType,
-    "BalanceSheetResponse": BalanceSheetResponse,
-    "BankStatementAccountingResponse": BankStatementAccountingResponse,
-    "BankStatementResponse": BankStatementResponse,
-    "BankTransactionResponse": BankTransactionResponse,
-    "CashAccountResponse": CashAccountResponse,
-    "CashBalance": CashBalance,
-    "CashValidationResponse": CashValidationResponse,
-    "CashflowAccount": CashflowAccount,
-    "CashflowActivity": CashflowActivity,
-    "CashflowResponse": CashflowResponse,
-    "CashflowType": CashflowType,
-    "ContactDetail": ContactDetail,
-    "ContactResponse": ContactResponse,
-    "ContactTotalDetail": ContactTotalDetail,
-    "ContactTotalOther": ContactTotalOther,
-    "CreditNoteResponse": CreditNoteResponse,
-    "CurrentStatementResponse": CurrentStatementResponse,
-    "DataSourceResponse": DataSourceResponse,
-    "IncomeByContactResponse": IncomeByContactResponse,
-    "InvoiceResponse": InvoiceResponse,
-    "LineItemResponse": LineItemResponse,
-    "ManualJournalTotal": ManualJournalTotal,
-    "OverpaymentResponse": OverpaymentResponse,
-    "PaymentResponse": PaymentResponse,
-    "PnlAccount": PnlAccount,
-    "PnlAccountClass": PnlAccountClass,
-    "PnlAccountType": PnlAccountType,
-    "PrepaymentResponse": PrepaymentResponse,
+    "InvalidField": InvalidField,
+    "Pagination": Pagination,
     "Problem": Problem,
-    "ProfitAndLossResponse": ProfitAndLossResponse,
-    "StatementBalanceResponse": StatementBalanceResponse,
-    "StatementLineResponse": StatementLineResponse,
-    "StatementLinesResponse": StatementLinesResponse,
-    "StatementResponse": StatementResponse,
-    "TotalDetail": TotalDetail,
-    "TotalOther": TotalOther,
-    "TrialBalanceAccount": TrialBalanceAccount,
-    "TrialBalanceEntry": TrialBalanceEntry,
-    "TrialBalanceMovement": TrialBalanceMovement,
-    "TrialBalanceResponse": TrialBalanceResponse,
+    "Timesheet": Timesheet,
+    "TimesheetLine": TimesheetLine,
+    "TimesheetLineObject": TimesheetLineObject,
+    "TimesheetObject": TimesheetObject,
+    "Timesheets": Timesheets,
 }
 
 export class ObjectSerializer {

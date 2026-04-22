@@ -36,6 +36,7 @@ export * from '././leavePeriodStatus';
 export * from '././leaveType';
 export * from '././leaveTypeContributionType';
 export * from '././manualTaxType';
+export * from '././openingBalanceLeaveLine';
 export * from '././openingBalances';
 export * from '././paidLeaveEarningsLine';
 export * from '././payItem';
@@ -125,6 +126,7 @@ import { LeavePeriodStatus } from '././leavePeriodStatus';
 import { LeaveType } from '././leaveType';
 import { LeaveTypeContributionType } from '././leaveTypeContributionType';
 import { ManualTaxType } from '././manualTaxType';
+import { OpeningBalanceLeaveLine } from '././openingBalanceLeaveLine';
 import { OpeningBalances } from '././openingBalances';
 import { PaidLeaveEarningsLine } from '././paidLeaveEarningsLine';
 import { PayItem } from '././payItem';
@@ -247,6 +249,7 @@ let typeMap: {[index: string]: any} = {
     "LeaveLines": LeaveLines,
     "LeavePeriod": LeavePeriod,
     "LeaveType": LeaveType,
+    "OpeningBalanceLeaveLine": OpeningBalanceLeaveLine,
     "OpeningBalances": OpeningBalances,
     "PaidLeaveEarningsLine": PaidLeaveEarningsLine,
     "PayItem": PayItem,

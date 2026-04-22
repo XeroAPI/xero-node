@@ -6,11 +6,14 @@ export * from '././benefit';
 export * from '././benefitLine';
 export * from '././benefitObject';
 export * from '././benefits';
+export * from '././contractType';
+export * from '././contracts';
 export * from '././courtOrderLine';
 export * from '././deduction';
 export * from '././deductionLine';
 export * from '././deductionObject';
 export * from '././deductions';
+export * from '././developmentalRoleDetails';
 export * from '././earningsLine';
 export * from '././earningsOrder';
 export * from '././earningsOrderObject';
@@ -47,6 +50,7 @@ export * from '././employeeTaxObject';
 export * from '././employees';
 export * from '././employment';
 export * from '././employmentObject';
+export * from '././employmentStatus';
 export * from '././invalidField';
 export * from '././leaveAccrualLine';
 export * from '././leaveEarningsLine';
@@ -101,11 +105,14 @@ import { Benefit } from '././benefit';
 import { BenefitLine } from '././benefitLine';
 import { BenefitObject } from '././benefitObject';
 import { Benefits } from '././benefits';
+import { ContractType } from '././contractType';
+import { Contracts } from '././contracts';
 import { CourtOrderLine } from '././courtOrderLine';
 import { Deduction } from '././deduction';
 import { DeductionLine } from '././deductionLine';
 import { DeductionObject } from '././deductionObject';
 import { Deductions } from '././deductions';
+import { DevelopmentalRoleDetails } from '././developmentalRoleDetails';
 import { EarningsLine } from '././earningsLine';
 import { EarningsOrder } from '././earningsOrder';
 import { EarningsOrderObject } from '././earningsOrderObject';
@@ -142,6 +149,7 @@ import { EmployeeTaxObject } from '././employeeTaxObject';
 import { Employees } from '././employees';
 import { Employment } from '././employment';
 import { EmploymentObject } from '././employmentObject';
+import { EmploymentStatus } from '././employmentStatus';
 import { InvalidField } from '././invalidField';
 import { LeaveAccrualLine } from '././leaveAccrualLine';
 import { LeaveEarningsLine } from '././leaveEarningsLine';
@@ -204,6 +212,7 @@ let enumsMap: {[index: string]: any} = {
         "Account.TypeEnum": Account.TypeEnum,
         "Benefit.CategoryEnum": Benefit.CategoryEnum,
         "Benefit.CalculationTypeEnum": Benefit.CalculationTypeEnum,
+        "ContractType": ContractType,
         "Deduction.DeductionCategoryEnum": Deduction.DeductionCategoryEnum,
         "Deduction.CalculationTypeEnum": Deduction.CalculationTypeEnum,
         "EarningsRate.EarningsTypeEnum": EarningsRate.EarningsTypeEnum,
@@ -215,6 +224,7 @@ let enumsMap: {[index: string]: any} = {
         "EmployeeStatutoryLeaveSummary.TypeEnum": EmployeeStatutoryLeaveSummary.TypeEnum,
         "EmployeeStatutoryLeaveSummary.StatusEnum": EmployeeStatutoryLeaveSummary.StatusEnum,
         "EmployeeStatutorySickLeave.EntitlementFailureReasonsEnum": EmployeeStatutorySickLeave.EntitlementFailureReasonsEnum,
+        "EmploymentStatus": EmploymentStatus,
         "LeavePeriod.PeriodStatusEnum": LeavePeriod.PeriodStatusEnum,
         "NICategoryLetter": NICategoryLetter,
         "NICategoryOneOf.NiCategoryEnum": NICategoryOneOf.NiCategoryEnum,
@@ -240,11 +250,13 @@ let typeMap: {[index: string]: any} = {
     "BenefitLine": BenefitLine,
     "BenefitObject": BenefitObject,
     "Benefits": Benefits,
+    "Contracts": Contracts,
     "CourtOrderLine": CourtOrderLine,
     "Deduction": Deduction,
     "DeductionLine": DeductionLine,
     "DeductionObject": DeductionObject,
     "Deductions": Deductions,
+    "DevelopmentalRoleDetails": DevelopmentalRoleDetails,
     "EarningsLine": EarningsLine,
     "EarningsOrder": EarningsOrder,
     "EarningsOrderObject": EarningsOrderObject,

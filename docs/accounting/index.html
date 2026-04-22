@@ -2104,6 +2104,11 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "Tax number of contact – this is also known as the ABN (Australia), GST Number (New Zealand), VAT Number (UK) or Tax ID Number (US and global) in the Xero UI depending on which regionalized version of Xero you are using (max length = 50)"
     },
+    "TaxNumberType" : {
+      "type" : "string",
+      "description" : "Identifier of the regional type of tax number, such as US, UK, or other regional tax identifiers",
+      "enum" : [ "SSN", "EIN", "ITIN", "ATIN" ]
+    },
     "AccountsReceivableTaxType" : {
       "type" : "string",
       "description" : "The tax type from TaxRates"
@@ -4107,7 +4112,7 @@ ul.nav-tabs {
     "OrganisationType" : {
       "type" : "string",
       "description" : "Organisation Type",
-      "enum" : [ "ACCOUNTING_PRACTICE", "COMPANY", "CHARITY", "CLUB_OR_SOCIETY", "INDIVIDUAL", "LOOK_THROUGH_COMPANY", "NOT_FOR_PROFIT", "PARTNERSHIP", "S_CORPORATION", "SELF_MANAGED_SUPERANNUATION_FUND", "SOLE_TRADER", "SUPERANNUATION_FUND", "TRUST" ]
+      "enum" : [ "ACCOUNTING_PRACTICE", "COMPANY", "CHARITY", "CLUB_OR_SOCIETY", "INDIVIDUAL", "LOOK_THROUGH_COMPANY", "NOT_FOR_PROFIT", "PARTNERSHIP", "S_CORPORATION", "SELF_MANAGED_SUPERANNUATION_FUND", "SOLE_TRADER", "SUPERANNUATION_FUND", "TRUST", "PERSONAL", "SINGLEMEMBERLLC", "CCORPORATIONLLC", "PARTNERSHIPLLC", "SCORPORATIONLLC", "LLC", "NOTLLC", "UNSPECIFIED" ]
     },
     "BaseCurrency" : {
       "$ref" : "#/components/schemas/CurrencyCode"
@@ -4184,7 +4189,7 @@ ul.nav-tabs {
     "OrganisationEntityType" : {
       "type" : "string",
       "description" : "Organisation Entity Type",
-      "enum" : [ "ACCOUNTING_PRACTICE", "COMPANY", "CHARITY", "CLUB_OR_SOCIETY", "INDIVIDUAL", "LOOK_THROUGH_COMPANY", "NOT_FOR_PROFIT", "PARTNERSHIP", "S_CORPORATION", "SELF_MANAGED_SUPERANNUATION_FUND", "SOLE_TRADER", "SUPERANNUATION_FUND", "TRUST" ]
+      "enum" : [ "ACCOUNTING_PRACTICE", "COMPANY", "CHARITY", "CLUB_OR_SOCIETY", "INDIVIDUAL", "LOOK_THROUGH_COMPANY", "NOT_FOR_PROFIT", "PARTNERSHIP", "S_CORPORATION", "SELF_MANAGED_SUPERANNUATION_FUND", "SOLE_TRADER", "SUPERANNUATION_FUND", "TRUST", "PERSONAL", "SINGLEMEMBERLLC", "CCORPORATIONLLC", "PARTNERSHIPLLC", "SCORPORATIONLLC", "LLC", "NOTLLC", "UNSPECIFIED" ]
     },
     "ShortCode" : {
       "type" : "string",
@@ -4351,6 +4356,11 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : false,
       "default" : false
+    },
+    "Reference" : {
+      "type" : "string",
+      "description" : "An optional description for Overpayment",
+      "example" : "Ref for payment"
     },
     "Attachments" : {
       "type" : "array",
@@ -4746,6 +4756,11 @@ ul.nav-tabs {
     "Reference" : {
       "type" : "string",
       "description" : "Returns Invoice number field. Reference field isn't available.",
+      "readOnly" : true
+    },
+    "InvoiceNumber" : {
+      "type" : "string",
+      "description" : "Returns Invoice number for prepayment receive document only.",
       "readOnly" : true
     },
     "UpdatedDateUTC" : {
@@ -6294,6 +6309,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-node/files/index.html" value="Files">Files</option>
           <option data-url="https://xeroapi.github.io/xero-node/projects/index.html" value="Project">Projects</option>
           <option data-url="https://xeroapi.github.io/xero-node/payroll-au/index.html" value="PayrollAu">Payroll (AU)</option>
+          <option data-url="https://xeroapi.github.io/xero-node/payroll-au-v2/index.html" value="PayrollAuV2">Payroll (AU) V2</option>
           <option data-url="https://xeroapi.github.io/xero-node/payroll-uk/index.html" value="PayrollUk">Payroll (UK)</option>
           <option data-url="https://xeroapi.github.io/xero-node/payroll-nz/index.html" value="PayrollNz">Payroll (NZ)</option>
           <option data-url="https://xeroapi.github.io/xero-node/bankfeeds/index.html" value="Bankfeeds">Bankfeeds</option>
@@ -6340,7 +6356,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>13.1.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>15.0.1</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -23074,7 +23090,7 @@ try {
                     
                     <tr>
                       <td>accounting.budgets.read</td>
-                      <td></td>
+                      <td>Grant read-only access to read budgets</td>
                     </tr>
                     
                   </table>
@@ -23242,7 +23258,7 @@ try {
                     
                     <tr>
                       <td>accounting.budgets.read</td>
-                      <td></td>
+                      <td>Grant read-only access to read budgets</td>
                     </tr>
                     
                   </table>
@@ -30708,9 +30724,10 @@ const order = 'Status ASC';
 const page = 1;
 const unitdp = 4;
 const pageSize = 100;
+const references = [&quot;Ref1&quot;, &quot;Ref2&quot;];
 
 try {
-  const response = await xero.accountingApi.getOverpayments(xeroTenantId, ifModifiedSince, where, order, page, unitdp, pageSize);
+  const response = await xero.accountingApi.getOverpayments(xeroTenantId, ifModifiedSince, where, order, page, unitdp, pageSize, references);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -30885,6 +30902,26 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
 
                     <div class="inner description marked">
 Number of records to retrieve per page
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">References</td>
+<td>
+
+
+    <div id="d2e199_getOverpayments_references">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    array[String]
+                </span>
+
+                    <div class="inner description marked">
+Filter by a comma-separated list of References
                     </div>
             </div>
         </div>
@@ -31678,9 +31715,10 @@ const order = 'Reference ASC';
 const page = 1;
 const unitdp = 4;
 const pageSize = 100;
+const invoiceNumbers = [&quot;INV-001&quot;, &quot;INV-002&quot;];
 
 try {
-  const response = await xero.accountingApi.getPrepayments(xeroTenantId, ifModifiedSince, where, order, page, unitdp, pageSize);
+  const response = await xero.accountingApi.getPrepayments(xeroTenantId, ifModifiedSince, where, order, page, unitdp, pageSize, invoiceNumbers);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -31855,6 +31893,26 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
 
                     <div class="inner description marked">
 Number of records to retrieve per page
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">InvoiceNumbers</td>
+<td>
+
+
+    <div id="d2e199_getPrepayments_invoiceNumbers">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    array[String]
+                </span>
+
+                    <div class="inner description marked">
+Filter by a comma-separated list of InvoiceNumbers
                     </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import { Address } from '././address';
+import { Contracts } from '././contracts';
 import { NICategory } from '././nICategory';
 import { NICategoryLetter } from '././nICategoryLetter';
 
@@ -69,6 +70,10 @@ export class Employee {
     * Whether the employee is an off payroll worker
     */
     'isOffPayrollWorker'?: boolean;
+    /**
+    * The employee\'s contracts
+    */
+    'contracts'?: Array<Contracts>;
 
     static discriminator: string | undefined = undefined;
 
@@ -162,6 +167,11 @@ export class Employee {
             "name": "isOffPayrollWorker",
             "baseName": "isOffPayrollWorker",
             "type": "boolean"
+        },
+        {
+            "name": "contracts",
+            "baseName": "contracts",
+            "type": "Array<Contracts>"
         }    ];
 
     static getAttributeTypeMap() {

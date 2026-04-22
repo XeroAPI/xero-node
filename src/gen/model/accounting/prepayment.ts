@@ -42,6 +42,10 @@ export class Prepayment {
     */
     'reference'?: string;
     /**
+    * Returns Invoice number for prepayment receive document only.
+    */
+    'invoiceNumber'?: string;
+    /**
     * UTC timestamp of last update to the prepayment
     */
     'updatedDateUTC'?: Date;
@@ -130,6 +134,11 @@ export class Prepayment {
         {
             "name": "reference",
             "baseName": "Reference",
+            "type": "string"
+        },
+        {
+            "name": "invoiceNumber",
+            "baseName": "InvoiceNumber",
             "type": "string"
         },
         {

@@ -1,6 +1,6 @@
 
-# Enforce CRLF to all files by default
-*          text=auto eol=crlf
+# Enforce LF to all files by default
+*          text=auto eol=lf
 
 #
 # The above will handle all files NOT found below

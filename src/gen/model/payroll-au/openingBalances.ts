@@ -1,6 +1,6 @@
 import { DeductionLine } from '././deductionLine';
 import { EarningsLine } from '././earningsLine';
-import { LeaveLine } from '././leaveLine';
+import { OpeningBalanceLeaveLine } from '././openingBalanceLeaveLine';
 import { PaidLeaveEarningsLine } from '././paidLeaveEarningsLine';
 import { ReimbursementLine } from '././reimbursementLine';
 import { SuperLine } from '././superLine';
@@ -18,7 +18,7 @@ export class OpeningBalances {
     'deductionLines'?: Array<DeductionLine>;
     'superLines'?: Array<SuperLine>;
     'reimbursementLines'?: Array<ReimbursementLine>;
-    'leaveLines'?: Array<LeaveLine>;
+    'leaveLines'?: Array<OpeningBalanceLeaveLine>;
     'paidLeaveEarningsLines'?: Array<PaidLeaveEarningsLine>;
 
     static discriminator: string | undefined = undefined;
@@ -57,7 +57,7 @@ export class OpeningBalances {
         {
             "name": "leaveLines",
             "baseName": "LeaveLines",
-            "type": "Array<LeaveLine>"
+            "type": "Array<OpeningBalanceLeaveLine>"
         },
         {
             "name": "paidLeaveEarningsLines",

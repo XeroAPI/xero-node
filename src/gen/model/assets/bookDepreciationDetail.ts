@@ -28,6 +28,26 @@ export class BookDepreciationDetail {
     * All depreciation occurring in the current financial year.
     */
     'currentAccumDepreciationAmount'?: number;
+    /**
+    * (New Zealand Orgs Only) The portion of capital gain realised from the disposal of a fixed asset that is attributable to its business use.
+    */
+    'businessUseCapitalGain'?: number;
+    /**
+    * (New Zealand Orgs Only) Represents the gain or loss from the disposal of the business use portion of a fixed asset. This value records the financial result (profit or loss) related specifically to the asset’s business use.
+    */
+    'businessUseCurrentGainLoss'?: number;
+    /**
+    * (New Zealand Orgs Only) The portion of capital gain realised from the disposal of a fixed asset that is attributable to its private (non-business) use.
+    */
+    'privateUseCapitalGain'?: number;
+    /**
+    * (New Zealand Orgs Only) Represents the gain or loss from the disposal of the private use portion of a fixed asset. This value records the financial result (profit or loss) related specifically to the asset’s private use.
+    */
+    'privateUseCurrentGainLoss'?: number;
+    /**
+    * (New Zealand Orgs Only) The Investment Boost deduction percentage.
+    */
+    'initialDeductionPercentage'?: number;
 
     static discriminator: string | undefined = undefined;
 
@@ -65,6 +85,31 @@ export class BookDepreciationDetail {
         {
             "name": "currentAccumDepreciationAmount",
             "baseName": "currentAccumDepreciationAmount",
+            "type": "number"
+        },
+        {
+            "name": "businessUseCapitalGain",
+            "baseName": "businessUseCapitalGain",
+            "type": "number"
+        },
+        {
+            "name": "businessUseCurrentGainLoss",
+            "baseName": "businessUseCurrentGainLoss",
+            "type": "number"
+        },
+        {
+            "name": "privateUseCapitalGain",
+            "baseName": "privateUseCapitalGain",
+            "type": "number"
+        },
+        {
+            "name": "privateUseCurrentGainLoss",
+            "baseName": "privateUseCurrentGainLoss",
+            "type": "number"
+        },
+        {
+            "name": "initialDeductionPercentage",
+            "baseName": "initialDeductionPercentage",
             "type": "number"
         }    ];
 

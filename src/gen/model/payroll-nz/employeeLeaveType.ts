@@ -9,10 +9,6 @@ export class EmployeeLeaveType {
     */
     'scheduleOfAccrual'?: EmployeeLeaveType.ScheduleOfAccrualEnum;
     /**
-    * Deprecated use UnitsAccruedAnnually
-    */
-    'hoursAccruedAnnually'?: number;
-    /**
     * The number of units accrued for the leave annually. This is 0 when the ScheduleOfAccrual chosen is \"NoAccruals\"
     */
     'unitsAccruedAnnually'?: number;
@@ -33,7 +29,7 @@ export class EmployeeLeaveType {
     */
     'openingBalanceTypeOfUnits'?: string;
     /**
-    * The number of hours added to the leave balance for every hour worked by the employee. This is normally 0, unless the scheduleOfAccrual chosen is \"OnHourWorked\"
+    * not supported in Payroll NZ
     */
     'rateAccruedHourly'?: number;
     /**
@@ -71,13 +67,8 @@ export class EmployeeLeaveType {
             "type": "EmployeeLeaveType.ScheduleOfAccrualEnum"
         },
         {
-            "name": "hoursAccruedAnnually",
-            "baseName": "hoursAccruedAnnually",
-            "type": "number"
-        },
-        {
             "name": "unitsAccruedAnnually",
-            "baseName": "UnitsAccruedAnnually",
+            "baseName": "unitsAccruedAnnually",
             "type": "number"
         },
         {

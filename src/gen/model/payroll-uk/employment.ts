@@ -1,3 +1,4 @@
+import { Contracts } from '././contracts';
 import { NICategory } from '././nICategory';
 import { NICategoryLetter } from '././nICategoryLetter';
 
@@ -19,6 +20,10 @@ export class Employment {
     * The employee\'s NI categories
     */
     'niCategories': Array<NICategory>;
+    /**
+    * The employee\'s contracts
+    */
+    'contracts'?: Array<Contracts>;
 
     static discriminator: string | undefined = undefined;
 
@@ -47,6 +52,11 @@ export class Employment {
             "name": "niCategories",
             "baseName": "niCategories",
             "type": "Array<NICategory>"
+        },
+        {
+            "name": "contracts",
+            "baseName": "contracts",
+            "type": "Array<Contracts>"
         }    ];
 
     static getAttributeTypeMap() {
