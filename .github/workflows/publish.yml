@@ -57,8 +57,6 @@ jobs:
          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish ${{ inputs.dry_run && '--dry-run' || '' }}
         working-directory: xero-node
 
