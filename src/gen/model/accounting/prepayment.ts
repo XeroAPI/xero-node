@@ -55,6 +55,10 @@ export class Prepayment {
     */
     'prepaymentID'?: string;
     /**
+    * The unique identifier of the branding template applied to a receive prepayment
+    */
+    'brandingThemeID'?: string;
+    /**
     * The currency rate for a multicurrency prepayment. If no rate is specified, the XE.com day rate is used
     */
     'currencyRate'?: number;
@@ -154,6 +158,11 @@ export class Prepayment {
         {
             "name": "prepaymentID",
             "baseName": "PrepaymentID",
+            "type": "string"
+        },
+        {
+            "name": "brandingThemeID",
+            "baseName": "BrandingThemeID",
             "type": "string"
         },
         {

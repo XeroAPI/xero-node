@@ -881,6 +881,16 @@ ul.nav-tabs {
       "description" : "The size of the associated file in bytes. Note- The Size element is only returned when using /Associations/{ObjectId} endpoint.",
       "example" : 12357
     },
+    "CreatedDateUtc" : {
+      "type" : "string",
+      "description" : "The date the file was created (UTC). Note- The CreatedDateUtc element is only returned when using /Associations/{ObjectId} endpoint.",
+      "format" : "date-time"
+    },
+    "AssociationDateUtc" : {
+      "type" : "string",
+      "description" : "The date the file was associated with the object (UTC). Note- The AssociationDateUtc element is only returned when using /Associations/{ObjectId} endpoint.",
+      "format" : "date-time"
+    },
     "FileId" : {
       "type" : "string",
       "description" : "The unique identifier of the file",
