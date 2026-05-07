@@ -15,6 +15,14 @@ export class Association {
     */
     'size'?: number;
     /**
+    * The date the file was created (UTC). Note- The CreatedDateUtc element is only returned when using /Associations/{ObjectId} endpoint.
+    */
+    'createdDateUtc'?: Date;
+    /**
+    * The date the file was associated with the object (UTC). Note- The AssociationDateUtc element is only returned when using /Associations/{ObjectId} endpoint.
+    */
+    'associationDateUtc'?: Date;
+    /**
     * The unique identifier of the file
     */
     'fileId'?: string;
@@ -42,6 +50,16 @@ export class Association {
             "name": "size",
             "baseName": "Size",
             "type": "number"
+        },
+        {
+            "name": "createdDateUtc",
+            "baseName": "CreatedDateUtc",
+            "type": "Date"
+        },
+        {
+            "name": "associationDateUtc",
+            "baseName": "AssociationDateUtc",
+            "type": "Date"
         },
         {
             "name": "fileId",
