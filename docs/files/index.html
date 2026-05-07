@@ -881,6 +881,16 @@ ul.nav-tabs {
       "description" : "The size of the associated file in bytes. Note- The Size element is only returned when using /Associations/{ObjectId} endpoint.",
       "example" : 12357
     },
+    "CreatedDateUtc" : {
+      "type" : "string",
+      "description" : "The date the file was created (UTC). Note- The CreatedDateUtc element is only returned when using /Associations/{ObjectId} endpoint.",
+      "format" : "date-time"
+    },
+    "AssociationDateUtc" : {
+      "type" : "string",
+      "description" : "The date the file was associated with the object (UTC). Note- The AssociationDateUtc element is only returned when using /Associations/{ObjectId} endpoint.",
+      "format" : "date-time"
+    },
     "FileId" : {
       "type" : "string",
       "description" : "The unique identifier of the file",
@@ -1172,7 +1182,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Files"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Files"><strong>VSN: </strong>15.0.1</li>
+              <li class="nav-header" data-group="Files"><strong>VSN: </strong>16.0.0</li>
               <li class="nav-header" data-group="Files"><a href="#api-Files">Methods</a></li>
               <li data-group="Files" data-name="createFileAssociation" class="">
                 <a href="#api-Files-createFileAssociation">createFileAssociation</a>
