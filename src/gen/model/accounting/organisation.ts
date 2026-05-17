@@ -409,7 +409,8 @@ export namespace Organisation {
         IGNITE = <any> 'IGNITE',
         GROW = <any> 'GROW',
         COMPREHENSIVE = <any> 'COMPREHENSIVE',
-        SIMPLE = <any> 'SIMPLE'
+        SIMPLE = <any> 'SIMPLE',
+        BASICLITE = <any> 'BASICLITE'
     }
     export enum EditionEnum {
         BUSINESS = <any> 'BUSINESS',
