@@ -5,7 +5,7 @@ export class EmployeePayTemplate {
     * Unique identifier for the employee
     */
     'employeeID'?: string;
-    'earningTemplates'?: Array<EarningsTemplate>;
+    'earningTemplates': Array<EarningsTemplate>;
 
     static discriminator: string | undefined = undefined;
 
