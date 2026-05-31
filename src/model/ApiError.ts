@@ -31,19 +31,21 @@ export class ApiError {
 	request: Request
 
 	constructor(axiosError) {
+		const response = axiosError.response || {};
+		const request = axiosError.request || {};
 
-        this.statusCode = axiosError.response.status;
-		this.body = axiosError.response.data;
-		this.headers = axiosError.response.headers;
+		this.statusCode = response.status || 0;
+		this.body = response.data ?? axiosError.message;
+		this.headers = response.headers || {};
 		this.request = {
 			url: {
-				protocol: axiosError.request.protocol,
-				port: axiosError.request.agent?.defaultPort || axiosError.request.socket?.localPort,
-				host: axiosError.request.host,
-				path: axiosError.request.path,
+				protocol: request.protocol,
+				port: request.agent?.defaultPort || request.socket?.localPort,
+				host: request.host,
+				path: request.path,
 			},
-			headers: axiosError.request.getHeaders(),
-			method: axiosError.request.method
+			headers: typeof request.getHeaders === 'function' ? request.getHeaders() : {},
+			method: request.method
 		}
 	}
 
