@@ -1148,6 +1148,7 @@ ul.nav-tabs {
 };
       defs["EarningsRate"] = {
   "title" : "",
+  "required" : [ "IsQualifyingEarnings" ],
   "type" : "object",
   "properties" : {
     "Name" : {
@@ -1184,7 +1185,7 @@ ul.nav-tabs {
     },
     "IsQualifyingEarnings" : {
       "type" : "boolean",
-      "description" : "Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on earnings type and superannuation settings",
+      "description" : "Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations",
       "example" : true
     },
     "AllowanceContributesToAnnualLeaveRate" : {
@@ -1713,6 +1714,7 @@ ul.nav-tabs {
 };
       defs["LeaveLine"] = {
   "title" : "",
+  "required" : [ "IsQualifyingEarnings" ],
   "type" : "object",
   "properties" : {
     "LeaveTypeID" : {
@@ -1737,7 +1739,7 @@ ul.nav-tabs {
     },
     "IsQualifyingEarnings" : {
       "type" : "boolean",
-      "description" : "Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on superannuation settings",
+      "description" : "Boolean to determine if the leave line is considered as qualifying earnings for superannuation guarantee calculations",
       "example" : true
     },
     "NumberOfUnits" : {
@@ -1821,6 +1823,7 @@ ul.nav-tabs {
 };
       defs["LeaveType"] = {
   "title" : "",
+  "required" : [ "IsQualifyingEarnings" ],
   "type" : "object",
   "properties" : {
     "Name" : {
@@ -1884,7 +1887,7 @@ ul.nav-tabs {
     },
     "IsQualifyingEarnings" : {
       "type" : "boolean",
-      "description" : "Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on earnings type and superannuation settings",
+      "description" : "Boolean to determine if the leave type is considered as qualifying earnings for superannuation guarantee calculations",
       "example" : true
     }
   },
@@ -3169,7 +3172,7 @@ ul.nav-tabs {
     },
     "IncludeLeaveLoadingInQualifyingEarnings" : {
       "type" : "boolean",
-      "description" : "Optional Boolean to determine if leave loading is considered as qualifying earnings for superannuation guarantee calculations",
+      "description" : "Boolean to determine if leave loading is considered as qualifying earnings for superannuation guarantee calculations. Required when IncludeLeaveLoadingInSGC is specified in the payload",
       "example" : true
     }
   },
@@ -3448,7 +3451,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollAu"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>17.0.0</li>
+              <li class="nav-header" data-group="PayrollAu"><strong>VSN: </strong>18.0.0</li>
               <li class="nav-header" data-group="PayrollAu"><a href="#api-PayrollAu">Methods</a></li>
               <li data-group="PayrollAu" data-name="approveLeaveApplication" class="">
                 <a href="#api-PayrollAu-approveLeaveApplication">approveLeaveApplication</a>

@@ -43,9 +43,9 @@ export class LeaveType {
     */
     'sGCExempt'?: boolean;
     /**
-    * Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on earnings type and superannuation settings
+    * Boolean to determine if the leave type is considered as qualifying earnings for superannuation guarantee calculations
     */
-    'isQualifyingEarnings'?: boolean;
+    'isQualifyingEarnings': boolean;
 
     static discriminator: string | undefined = undefined;
 

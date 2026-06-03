@@ -30,9 +30,9 @@ export class EarningsRate {
     */
     'isReportableAsW1'?: boolean;
     /**
-    * Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on earnings type and superannuation settings
+    * Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations
     */
-    'isQualifyingEarnings'?: boolean;
+    'isQualifyingEarnings': boolean;
     /**
     * Boolean to determine if the allowance earnings rate contributes towards annual leave rate. Only applicable if EarningsType is ALLOWANCE and RateType is RATEPERUNIT
     */
