@@ -73,7 +73,7 @@ export class TaxDeclaration {
     */
     'updatedDateUTC'?: Date;
     /**
-    * Optional Boolean to determine if leave loading is considered as qualifying earnings for superannuation guarantee calculations
+    * Boolean to determine if leave loading is considered as qualifying earnings for superannuation guarantee calculations. Required when IncludeLeaveLoadingInSGC is specified in the payload
     */
     'includeLeaveLoadingInQualifyingEarnings'?: boolean;
 

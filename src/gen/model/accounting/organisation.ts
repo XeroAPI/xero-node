@@ -410,7 +410,8 @@ export namespace Organisation {
         GROW = <any> 'GROW',
         COMPREHENSIVE = <any> 'COMPREHENSIVE',
         SIMPLE = <any> 'SIMPLE',
-        BASICLITE = <any> 'BASICLITE'
+        BASICLITE = <any> 'BASICLITE',
+        ULTRA = <any> 'ULTRA'
     }
     export enum EditionEnum {
         BUSINESS = <any> 'BUSINESS',
