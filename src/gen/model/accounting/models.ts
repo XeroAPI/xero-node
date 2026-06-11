@@ -579,12 +579,7 @@ export class ObjectSerializer {
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
-            if (type === "string" && data.toString().substring(0, 6) === "/Date(") {
-                return this.deserializeDateFormats(type, data) // For MS dates that are of type 'string'
-            }
-            else {
-                return data;
-            }
+            return data;
         } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
