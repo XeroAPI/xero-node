@@ -160,7 +160,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -242,7 +242,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -324,7 +324,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -405,7 +405,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -486,7 +486,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -560,7 +560,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -637,7 +637,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -729,7 +729,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -810,7 +810,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -904,7 +904,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -1028,7 +1028,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -1109,7 +1109,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -1191,7 +1191,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -1273,7 +1273,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -1362,7 +1362,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
@@ -1451,7 +1451,7 @@ export class ProjectApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.toError())
                 }
             });
         });
