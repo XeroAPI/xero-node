@@ -487,6 +487,24 @@ let typeMap: {[index: string]: any} = {
 }
 
 export class ObjectSerializer {
+    private static getDeserializedValue(data: any, baseName: string) {
+        if (data == null) {
+            return undefined;
+        }
+
+        if (data[baseName] !== undefined) {
+            return data[baseName];
+        }
+
+        const idSuffixVariant = baseName.replace(/ID\b/g, "Id");
+
+        if (idSuffixVariant !== baseName && data[idSuffixVariant] !== undefined) {
+            return data[idSuffixVariant];
+        }
+
+        return undefined;
+    }
+
     public static findCorrectType(data: any, expectedType: string) {
         if (data == undefined) {
             return expectedType;
@@ -608,7 +626,10 @@ export class ObjectSerializer {
             let instance = new typeMap[type]();
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             for (let [index, attributeType] of Object.entries(attributeTypes)) {
-                instance[attributeType['name']] = ObjectSerializer.deserialize(data[attributeType['baseName']], attributeType['type']);
+                instance[attributeType['name']] = ObjectSerializer.deserialize(
+                    ObjectSerializer.getDeserializedValue(data, attributeType['baseName']),
+                    attributeType['type'],
+                );
             }
             return instance;
         }
