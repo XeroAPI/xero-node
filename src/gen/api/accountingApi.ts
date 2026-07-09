@@ -2142,9 +2142,10 @@ export class AccountingApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
     public async createInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , includeOnline?: boolean, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+        const normalizedFileName = String(fileName).trimEnd();
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
-            .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
+            .replace('{' + 'FileName' + '}', encodeURIComponent(normalizedFileName));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -17337,9 +17338,10 @@ export class AccountingApi {
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
      */     
     public async updateInvoiceAttachmentByFileName (xeroTenantId: string, invoiceID: string, fileName: string, body: fs.ReadStream | Readable | Buffer , idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Attachments;  }> {
+        const normalizedFileName = String(fileName).trimEnd();
         const localVarPath = this.basePath + '/Invoices/{InvoiceID}/Attachments/{FileName}'
             .replace('{' + 'InvoiceID' + '}', encodeURIComponent(String(invoiceID)))
-            .replace('{' + 'FileName' + '}', encodeURIComponent(String(fileName)));
+            .replace('{' + 'FileName' + '}', encodeURIComponent(normalizedFileName));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
