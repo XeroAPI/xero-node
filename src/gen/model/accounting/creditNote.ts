@@ -54,6 +54,10 @@ export class CreditNote {
     * UTC timestamp of last update to the credit note
     */
     'updatedDateUTC'?: Date;
+    /**
+    * UTC ISO-8601 formatted timestamp of last update to the credit note
+    */
+    'updatedDateUTCString'?: string;
     'currencyCode'?: CurrencyCode;
     /**
     * Date when credit note was fully paid(UTC format)
@@ -191,6 +195,11 @@ export class CreditNote {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
+        },
+        {
+            "name": "updatedDateUTCString",
+            "baseName": "UpdatedDateUTCString",
+            "type": "string"
         },
         {
             "name": "currencyCode",

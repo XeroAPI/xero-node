@@ -41,6 +41,10 @@ export class Overpayment {
     * UTC timestamp of last update to the overpayment
     */
     'updatedDateUTC'?: Date;
+    /**
+    * UTC ISO-8601 formatted timestamp of last update to the overpayment
+    */
+    'updatedDateUTCString'?: string;
     'currencyCode'?: CurrencyCode;
     /**
     * Xero generated unique identifier
@@ -131,6 +135,11 @@ export class Overpayment {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
+        },
+        {
+            "name": "updatedDateUTCString",
+            "baseName": "UpdatedDateUTCString",
+            "type": "string"
         },
         {
             "name": "currencyCode",

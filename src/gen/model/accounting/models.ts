@@ -16,7 +16,10 @@ export * from '././balances';
 export * from '././bankTransaction';
 export * from '././bankTransactions';
 export * from '././bankTransfer';
+export * from '././bankTransferDelete';
+export * from '././bankTransferDeleteByUrlParam';
 export * from '././bankTransfers';
+export * from '././bankTransfersDelete';
 export * from '././batchPayment';
 export * from '././batchPaymentDelete';
 export * from '././batchPaymentDeleteByUrlParam';
@@ -131,6 +134,7 @@ export * from '././trackingCategories';
 export * from '././trackingCategory';
 export * from '././trackingOption';
 export * from '././trackingOptions';
+export * from '././trackingReference';
 export * from '././user';
 export * from '././users';
 export * from '././validationError';
@@ -153,7 +157,10 @@ import { Balances } from '././balances';
 import { BankTransaction } from '././bankTransaction';
 import { BankTransactions } from '././bankTransactions';
 import { BankTransfer } from '././bankTransfer';
+import { BankTransferDelete } from '././bankTransferDelete';
+import { BankTransferDeleteByUrlParam } from '././bankTransferDeleteByUrlParam';
 import { BankTransfers } from '././bankTransfers';
+import { BankTransfersDelete } from '././bankTransfersDelete';
 import { BatchPayment } from '././batchPayment';
 import { BatchPaymentDelete } from '././batchPaymentDelete';
 import { BatchPaymentDeleteByUrlParam } from '././batchPaymentDeleteByUrlParam';
@@ -268,6 +275,7 @@ import { TrackingCategories } from '././trackingCategories';
 import { TrackingCategory } from '././trackingCategory';
 import { TrackingOption } from '././trackingOption';
 import { TrackingOptions } from '././trackingOptions';
+import { TrackingReference } from '././trackingReference';
 import { User } from '././user';
 import { Users } from '././users';
 import { ValidationError } from '././validationError';
@@ -295,6 +303,7 @@ let enumsMap: {[index: string]: any} = {
         "AddressForOrganisation.AddressTypeEnum": AddressForOrganisation.AddressTypeEnum,
         "BankTransaction.TypeEnum": BankTransaction.TypeEnum,
         "BankTransaction.StatusEnum": BankTransaction.StatusEnum,
+        "BankTransfer.StatusEnum": BankTransfer.StatusEnum,
         "BatchPayment.TypeEnum": BatchPayment.TypeEnum,
         "BatchPayment.StatusEnum": BatchPayment.StatusEnum,
         "BrandingTheme.TypeEnum": BrandingTheme.TypeEnum,
@@ -375,7 +384,10 @@ let typeMap: {[index: string]: any} = {
     "BankTransaction": BankTransaction,
     "BankTransactions": BankTransactions,
     "BankTransfer": BankTransfer,
+    "BankTransferDelete": BankTransferDelete,
+    "BankTransferDeleteByUrlParam": BankTransferDeleteByUrlParam,
     "BankTransfers": BankTransfers,
+    "BankTransfersDelete": BankTransfersDelete,
     "BatchPayment": BatchPayment,
     "BatchPaymentDelete": BatchPaymentDelete,
     "BatchPaymentDeleteByUrlParam": BatchPaymentDeleteByUrlParam,
@@ -481,6 +493,7 @@ let typeMap: {[index: string]: any} = {
     "TrackingCategory": TrackingCategory,
     "TrackingOption": TrackingOption,
     "TrackingOptions": TrackingOptions,
+    "TrackingReference": TrackingReference,
     "User": User,
     "Users": Users,
     "ValidationError": ValidationError,

@@ -135,9 +135,13 @@ export class Invoice {
     */
     'amountCredited'?: number;
     /**
-    * Last modified date UTC format
+    * UTC timestamp of last update to the invoice
     */
     'updatedDateUTC'?: Date;
+    /**
+    * UTC ISO-8601 formatted timestamp of last update to the invoice
+    */
+    'updatedDateUTCString'?: string;
     /**
     * Details of credit notes that have been applied to an invoice
     */
@@ -339,6 +343,11 @@ export class Invoice {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
+        },
+        {
+            "name": "updatedDateUTCString",
+            "baseName": "UpdatedDateUTCString",
+            "type": "string"
         },
         {
             "name": "creditNotes",

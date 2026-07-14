@@ -1562,12 +1562,69 @@ ul.nav-tabs {
       "example" : "/Date(1573755038314)/",
       "x-is-msdate-time" : true
     },
+    "Status" : {
+      "type" : "string",
+      "description" : "AUTHORISED or DELETED (read-only). New bank transfers will have a status of AUTHORISED.",
+      "readOnly" : true,
+      "enum" : [ "AUTHORISED", "DELETED" ]
+    },
+    "FromTracking" : {
+      "type" : "array",
+      "description" : "Optional Tracking Category for the source account – see Tracking. A bank transfer can have a maximum of 2 tracking categories per account.",
+      "items" : {
+        "$ref" : "#/components/schemas/TrackingReference"
+      }
+    },
+    "ToTracking" : {
+      "type" : "array",
+      "description" : "Optional Tracking Category for the destination account – see Tracking. A bank transfer can have a maximum of 2 tracking categories per account.",
+      "items" : {
+        "$ref" : "#/components/schemas/TrackingReference"
+      }
+    },
     "ValidationErrors" : {
       "type" : "array",
       "description" : "Displays array of validation error messages from the API",
       "items" : {
         "$ref" : "#/components/schemas/ValidationError"
       }
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "http://developer.xero.com/documentation/api/bank-transfers/"
+  }
+};
+      defs["BankTransferDelete"] = {
+  "title" : "",
+  "required" : [ "BankTransferID", "Status" ],
+  "type" : "object",
+  "properties" : {
+    "BankTransferID" : {
+      "type" : "string",
+      "description" : "The Xero identifier for a bank transfer",
+      "format" : "uuid"
+    },
+    "Status" : {
+      "type" : "string",
+      "description" : "The status of the bank transfer.",
+      "default" : "DELETED"
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "http://developer.xero.com/documentation/api/bank-transfers/"
+  }
+};
+      defs["BankTransferDeleteByUrlParam"] = {
+  "title" : "",
+  "required" : [ "Status" ],
+  "type" : "object",
+  "properties" : {
+    "Status" : {
+      "type" : "string",
+      "description" : "The status of the bank transfer.",
+      "default" : "DELETED"
     }
   },
   "description" : "",
@@ -1583,6 +1640,20 @@ ul.nav-tabs {
       "type" : "array",
       "items" : {
         "$ref" : "#/components/schemas/BankTransfer"
+      }
+    }
+  },
+  "description" : "",
+  "x-objectArrayKey" : "bank_transfers"
+};
+      defs["BankTransfersDelete"] = {
+  "title" : "",
+  "type" : "object",
+  "properties" : {
+    "BankTransfers" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/BankTransferDelete"
       }
     }
   },
@@ -2476,6 +2547,12 @@ ul.nav-tabs {
       "example" : "/Date(1573755038314)/",
       "x-is-msdate-time" : true
     },
+    "UpdatedDateUTCString" : {
+      "type" : "string",
+      "description" : "UTC ISO-8601 formatted timestamp of last update to the credit note",
+      "readOnly" : true,
+      "example" : "2019-11-14T18:10:38Z"
+    },
     "CurrencyCode" : {
       "$ref" : "#/components/schemas/CurrencyCode"
     },
@@ -3228,10 +3305,16 @@ ul.nav-tabs {
     },
     "UpdatedDateUTC" : {
       "type" : "string",
-      "description" : "Last modified date UTC format",
+      "description" : "UTC timestamp of last update to the invoice",
       "readOnly" : true,
       "example" : "/Date(1573755038314)/",
       "x-is-msdate-time" : true
+    },
+    "UpdatedDateUTCString" : {
+      "type" : "string",
+      "description" : "UTC ISO-8601 formatted timestamp of last update to the invoice",
+      "readOnly" : true,
+      "example" : "2019-11-14T18:10:38Z"
     },
     "CreditNotes" : {
       "type" : "array",
@@ -4310,6 +4393,12 @@ ul.nav-tabs {
       "example" : "/Date(1573755038314)/",
       "x-is-msdate-time" : true
     },
+    "UpdatedDateUTCString" : {
+      "type" : "string",
+      "description" : "UTC ISO-8601 formatted timestamp of last update to the overpayment",
+      "readOnly" : true,
+      "example" : "2019-11-14T18:10:38Z"
+    },
     "CurrencyCode" : {
       "$ref" : "#/components/schemas/CurrencyCode"
     },
@@ -4500,6 +4589,12 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1573755038314)/",
       "x-is-msdate-time" : true
+    },
+    "UpdatedDateUTCString" : {
+      "type" : "string",
+      "description" : "UTC ISO-8601 formatted timestamp of last update to the payment",
+      "readOnly" : true,
+      "example" : "2019-11-14T18:10:38Z"
     },
     "PaymentID" : {
       "type" : "string",
@@ -4769,6 +4864,12 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : "/Date(1573755038314)/",
       "x-is-msdate-time" : true
+    },
+    "UpdatedDateUTCString" : {
+      "type" : "string",
+      "description" : "UTC ISO-8601 formatted timestamp of last update to the prepayment",
+      "readOnly" : true,
+      "example" : "2019-11-14T18:10:38Z"
     },
     "CurrencyCode" : {
       "$ref" : "#/components/schemas/CurrencyCode"
@@ -6206,6 +6307,38 @@ ul.nav-tabs {
   "description" : "",
   "x-objectArrayKey" : "options"
 };
+      defs["TrackingReference"] = {
+  "title" : "",
+  "required" : [ "TrackingCategoryID", "TrackingOptionID" ],
+  "type" : "object",
+  "properties" : {
+    "TrackingCategoryID" : {
+      "type" : "string",
+      "description" : "The Xero identifier for a tracking category",
+      "format" : "uuid"
+    },
+    "TrackingOptionID" : {
+      "type" : "string",
+      "description" : "The Xero identifier for a tracking category option",
+      "format" : "uuid"
+    },
+    "Name" : {
+      "maxLength" : 100,
+      "type" : "string",
+      "description" : "The name of the tracking category",
+      "readOnly" : true
+    },
+    "Option" : {
+      "type" : "string",
+      "description" : "See Tracking Options",
+      "readOnly" : true
+    }
+  },
+  "description" : "",
+  "externalDocs" : {
+    "url" : "http://developer.xero.com/documentation/api/tracking-categories/"
+  }
+};
       defs["User"] = {
   "title" : "",
   "type" : "object",
@@ -6362,7 +6495,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>18.0.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>19.0.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -6531,6 +6664,12 @@ ul.nav-tabs {
               </li>
               <li data-group="Accounting" data-name="deleteAccount" class="">
                 <a href="#api-Accounting-deleteAccount">deleteAccount</a>
+              </li>
+              <li data-group="Accounting" data-name="deleteBankTransfer" class="">
+                <a href="#api-Accounting-deleteBankTransfer">deleteBankTransfer</a>
+              </li>
+              <li data-group="Accounting" data-name="deleteBankTransfers" class="">
+                <a href="#api-Accounting-deleteBankTransfers">deleteBankTransfers</a>
               </li>
               <li data-group="Accounting" data-name="deleteBatchPayment" class="">
                 <a href="#api-Accounting-deleteBatchPayment">deleteBatchPayment</a>
@@ -8237,7 +8376,15 @@ BankTransfers with array of BankTransfer objects in request body
           "Amount" : "50.00",
           "FromIsReconciled" : true,
           "ToIsReconciled" : true,
-          "Reference" : "Sub 098801"
+          "Reference" : "Sub 098801",
+          "FromTracking" : [ {
+            "TrackingCategoryID" : "e2f2f732-e92a-4f3a-9c4d-ee4da0182a13",
+            "TrackingOptionID" : "cd0a4b7e-3c6b-4b3c-8e2a-1f2d3c4b5a69"
+          } ],
+          "ToTracking" : [ {
+            "TrackingCategoryID" : "e2f2f732-e92a-4f3a-9c4d-ee4da0182a13",
+            "TrackingOptionID" : "9f8e7d6c-5b4a-3c2d-1e0f-a9b8c7d6e5f4"
+          } ]
         } ]
       }
     }
@@ -17820,6 +17967,364 @@ Xero identifier for Tenant
                 </article>
               </div>
               <hr>
+              <div id="api-Accounting-deleteBankTransfer">
+                <article id="api-Accounting-deleteBankTransfer-0" data-group="User" data-name="deleteBankTransfer" data-version="0">
+                  <div class="pull-left">
+                    <h1>deleteBankTransfer</h1>
+                    <p>Deletes a specific bank transfer</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/BankTransfers/{BankTransferID}</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-deleteBankTransfer-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-deleteBankTransfer-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const bankTransferID = '00000000-0000-0000-0000-000000000000';
+const idempotencyKey = 'KEY_VALUE';
+
+const bankTransferDeleteByUrlParam: BankTransferDeleteByUrlParam = { 
+  status: "DELETED"
+}; 
+
+try {
+  const response = await xero.accountingApi.deleteBankTransfer(xeroTenantId, bankTransferID, bankTransferDeleteByUrlParam, idempotencyKey);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Path parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">BankTransferID<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteBankTransfer_bankTransferID">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    UUID
+                </span>
+                    <span class="format">
+                        (uuid)
+                    </span>
+
+                    <div class="inner description marked">
+Xero generated unique identifier for a bank transfer
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteBankTransfer_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_deleteBankTransfer_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Body parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">bankTransferDeleteByUrlParam <span style="color:red;">*</span></td>
+<td>
+<div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    BankTransferDeleteByUrlParam
+                </span>
+
+                    <div class="inner description marked">
+
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+<script type="application/ld+json">
+    {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/BankTransferDeleteByUrlParam"
+      },
+      "example" : {
+        "Status" : "DELETED"
+      }
+    }
+  },
+  "required" : true
+}
+</script>
+                  </table>
+                </article>
+              </div>
+              <hr>
+              <div id="api-Accounting-deleteBankTransfers">
+                <article id="api-Accounting-deleteBankTransfers-0" data-group="User" data-name="deleteBankTransfers" data-version="0">
+                  <div class="pull-left">
+                    <h1>deleteBankTransfers</h1>
+                    <p>Deletes one or more bank transfers</p>
+                  </div>
+                  <div class="pull-right"></div>
+                  <div class="clearfix"></div>
+                  <p></p>
+                  <p class="marked"></p>
+                  <p></p>
+                  <br />
+                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/BankTransfers</span></code></pre>
+                  <p>
+                  <h3>Usage and SDK Samples</h3>
+                  </p>
+                  <ul class="nav nav-tabs nav-tabs-examples">
+                    <!-- *****REPLACE***** comment out the other languages <li> -->
+                    <li class=""><a href="#examples-Accounting-deleteBankTransfers-0-javascript">Node</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
+                    <div class="tab-pane" id="examples-Accounting-deleteBankTransfers-0-javascript">
+                      <pre class="prettyprint"><code class="language-javascript">await xero.setTokenSet(tokenSet);
+
+const xeroTenantId = 'YOUR_XERO_TENANT_ID';
+const summarizeErrors = true;
+const idempotencyKey = 'KEY_VALUE';
+
+const bankTransferDelete: BankTransferDelete = { 
+  bankTransferID: "00000000-0000-0000-0000-000000000000",
+  status: "DELETED"
+}; 
+
+const bankTransfers: BankTransfers = {  
+  bankTransfers: [bankTransferDelete]
+}; 
+
+try {
+  const response = await xero.accountingApi.deleteBankTransfers(xeroTenantId, bankTransfersDelete,  summarizeErrors,idempotencyKey);
+  console.log(response.body || response.response.statusCode)
+} catch (err) {
+  const error = JSON.stringify(err.response.body, null, 2)
+  console.log(`Status Code: ${err.response.statusCode} => ${error}`);
+}</code></pre>
+                    </div>
+                  </div>
+                  <h2>Scopes</h2>
+                  <table>
+                    
+                    <tr>
+                      <td>accounting.transactions</td>
+                      <td>Grant read-write access to bank transactions, credit notes, invoices, repeating invoices</td>
+                    </tr>
+                    
+                  </table>
+                  <h2>Parameters</h2>
+                  <div class="methodsubtabletitle">Header parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
+<td>
+
+
+    <div id="d2e199_deleteBankTransfers_xeroTenantId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Xero identifier for Tenant
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">Idempotency-Key</td>
+<td>
+
+
+    <div id="d2e199_deleteBankTransfers_idempotencyKey">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                  <div class="methodsubtabletitle">Body parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">bankTransfersDelete <span style="color:red;">*</span></td>
+<td>
+<div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    BankTransfersDelete
+                </span>
+
+                    <div class="inner description marked">
+BankTransfers with array of BankTransfer objects in request body
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+<script type="application/ld+json">
+    {
+  "description" : "BankTransfers with array of BankTransfer objects in request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/BankTransfersDelete"
+      },
+      "example" : {
+        "BankTransfers" : [ {
+          "BankTransferID" : "6221458a-ef7a-4d5f-9b1c-1b96ce03833c",
+          "Status" : "DELETED"
+        }, {
+          "BankTransferID" : "9f0153d5-617c-4903-887b-3875807aa27a",
+          "Status" : "DELETED"
+        } ]
+      }
+    }
+  },
+  "required" : true
+}
+</script>
+                  </table>
+                  <div class="methodsubtabletitle">Query parameters</div>
+                  <table id="methodsubtable">
+                    <tr>
+                      <th width="150px">Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr><td style="width:150px;">summarizeErrors</td>
+<td>
+
+
+    <div id="d2e199_deleteBankTransfers_summarizeErrors">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Boolean
+                </span>
+
+                    <div class="inner description marked">
+If false return 200 OK and mix of successfully created objects and any with validation errors
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                  </table>
+                </article>
+              </div>
+              <hr>
               <div id="api-Accounting-deleteBatchPayment">
                 <article id="api-Accounting-deleteBatchPayment-0" data-group="User" data-name="deleteBatchPayment" data-version="0">
                   <div class="pull-left">
@@ -22022,9 +22527,10 @@ const xeroTenantId = 'YOUR_XERO_TENANT_ID';
 const ifModifiedSince: Date = new Date("2020-02-06T12:17:43.202-08:00");
 const where = 'HasAttachments==true';
 const order = 'Amount ASC';
+const includeDeleted = true;
 
 try {
-  const response = await xero.accountingApi.getBankTransfers(xeroTenantId, ifModifiedSince, where, order);
+  const response = await xero.accountingApi.getBankTransfers(xeroTenantId, ifModifiedSince, where, order, includeDeleted);
   console.log(response.body || response.response.statusCode)
 } catch (err) {
   const error = JSON.stringify(err.response.body, null, 2)
@@ -22139,6 +22645,26 @@ Filter by an any element
 
                     <div class="inner description marked">
 Order by an any element
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">includeDeleted</td>
+<td>
+
+
+    <div id="d2e199_getBankTransfers_includeDeleted">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Boolean
+                </span>
+
+                    <div class="inner description marked">
+e.g. includeDeleted=true - Bank transfers with a status of DELETED will be included in the response
                     </div>
             </div>
         </div>

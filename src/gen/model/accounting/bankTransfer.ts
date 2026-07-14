@@ -1,4 +1,5 @@
 import { Account } from '././account';
+import { TrackingReference } from '././trackingReference';
 import { ValidationError } from '././validationError';
 
 export class BankTransfer {
@@ -48,6 +49,18 @@ export class BankTransfer {
     * UTC timestamp of creation date of bank transfer
     */
     'createdDateUTC'?: Date;
+    /**
+    * AUTHORISED or DELETED (read-only). New bank transfers will have a status of AUTHORISED.
+    */
+    'status'?: BankTransfer.StatusEnum;
+    /**
+    * Optional Tracking Category for the source account – see Tracking. A bank transfer can have a maximum of 2 tracking categories per account.
+    */
+    'fromTracking'?: Array<TrackingReference>;
+    /**
+    * Optional Tracking Category for the destination account – see Tracking. A bank transfer can have a maximum of 2 tracking categories per account.
+    */
+    'toTracking'?: Array<TrackingReference>;
     /**
     * Displays array of validation error messages from the API
     */
@@ -122,6 +135,21 @@ export class BankTransfer {
             "type": "Date"
         },
         {
+            "name": "status",
+            "baseName": "Status",
+            "type": "BankTransfer.StatusEnum"
+        },
+        {
+            "name": "fromTracking",
+            "baseName": "FromTracking",
+            "type": "Array<TrackingReference>"
+        },
+        {
+            "name": "toTracking",
+            "baseName": "ToTracking",
+            "type": "Array<TrackingReference>"
+        },
+        {
             "name": "validationErrors",
             "baseName": "ValidationErrors",
             "type": "Array<ValidationError>"
@@ -132,3 +160,9 @@ export class BankTransfer {
     }
 }
 
+export namespace BankTransfer {
+    export enum StatusEnum {
+        AUTHORISED = <any> 'AUTHORISED',
+        DELETED = <any> 'DELETED'
+    }
+}
