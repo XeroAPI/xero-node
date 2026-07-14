@@ -62,6 +62,10 @@ export class Payment {
     */
     'updatedDateUTC'?: Date;
     /**
+    * UTC ISO-8601 formatted timestamp of last update to the payment
+    */
+    'updatedDateUTCString'?: string;
+    /**
     * The Xero identifier for an Payment e.g. 297c2dc5-cc47-4afd-8ec8-74990b8761e9
     */
     'paymentID'?: string;
@@ -194,6 +198,11 @@ export class Payment {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
             "type": "Date"
+        },
+        {
+            "name": "updatedDateUTCString",
+            "baseName": "UpdatedDateUTCString",
+            "type": "string"
         },
         {
             "name": "paymentID",
