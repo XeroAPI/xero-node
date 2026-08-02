@@ -155,7 +155,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -230,7 +230,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -312,7 +312,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -386,7 +386,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -467,7 +467,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -541,7 +541,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -638,7 +638,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -714,7 +714,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -803,7 +803,7 @@ export class PayrollAuV2Api {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });

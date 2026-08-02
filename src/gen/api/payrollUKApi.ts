@@ -210,7 +210,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -285,7 +285,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -360,7 +360,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -435,7 +435,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -510,7 +510,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -592,7 +592,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -674,7 +674,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -756,7 +756,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -838,7 +838,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -920,7 +920,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1002,7 +1002,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1077,7 +1077,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1159,7 +1159,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1234,7 +1234,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1316,7 +1316,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1391,7 +1391,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1466,7 +1466,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1541,7 +1541,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1623,7 +1623,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1703,7 +1703,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1784,7 +1784,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1864,7 +1864,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -1938,7 +1938,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2019,7 +2019,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2093,7 +2093,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2165,7 +2165,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2239,7 +2239,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2311,7 +2311,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2385,7 +2385,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2457,7 +2457,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2531,7 +2531,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2603,7 +2603,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2677,7 +2677,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2758,7 +2758,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2832,7 +2832,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2916,7 +2916,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -2990,7 +2990,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3064,7 +3064,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3138,7 +3138,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3212,7 +3212,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3286,7 +3286,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3367,7 +3367,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3446,7 +3446,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3530,7 +3530,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3604,7 +3604,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3678,7 +3678,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3755,7 +3755,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3829,7 +3829,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3906,7 +3906,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -3980,7 +3980,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4054,7 +4054,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4126,7 +4126,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4203,7 +4203,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4277,7 +4277,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4359,7 +4359,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4433,7 +4433,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4505,7 +4505,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4572,7 +4572,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4651,7 +4651,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4725,7 +4725,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4822,7 +4822,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4889,7 +4889,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -4965,7 +4965,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -5047,7 +5047,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -5136,7 +5136,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -5225,7 +5225,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -5307,7 +5307,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -5396,7 +5396,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -5485,7 +5485,7 @@ export class PayrollUkApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
