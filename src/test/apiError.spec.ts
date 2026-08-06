@@ -1,7 +1,12 @@
 import { ApiError } from '../model/ApiError';
 
 describe('ApiError', () => {
-	it('handles axios errors without a response', () => {
+	it('removes sensitive headers from serialized generated errors', () => {
+		const authorization = 'Bearer access-token-that-must-not-leak';
+		const cookie = 'session=session-cookie-that-must-not-leak';
+		const proxyAuthorization = 'Basic proxy-credentials-that-must-not-leak';
+		const apiKey = 'api-key-that-must-not-leak';
+		const clientSecret = 'client-secret-that-must-not-leak';
 		const apiError = new ApiError({
 			message: 'Network Error',
 			request: {
@@ -12,13 +17,26 @@ describe('ApiError', () => {
 				host: 'api.xero.com',
 				path: '/api.xro/2.0/Invoices',
 				getHeaders: () => ({
-					authorization: 'Bearer token',
+					authorization,
+					Cookie: cookie,
+					'Proxy-Authorization': proxyAuthorization,
+					'X-API-Key': apiKey,
+					'X-Client-Secret': clientSecret,
+					Accept: 'application/json',
+					'X-Request-Id': 'request-id',
 				}),
 				method: 'GET',
 			},
 		});
 
-		expect(apiError.generateError()).toEqual({
+		const serializedError = JSON.stringify(apiError.generateError());
+
+		expect(serializedError).not.toContain(authorization);
+		expect(serializedError).not.toContain(cookie);
+		expect(serializedError).not.toContain(proxyAuthorization);
+		expect(serializedError).not.toContain(apiKey);
+		expect(serializedError).not.toContain(clientSecret);
+		expect(JSON.parse(serializedError)).toEqual({
 			response: {
 				statusCode: 0,
 				body: 'Network Error',
@@ -31,7 +49,8 @@ describe('ApiError', () => {
 						path: '/api.xro/2.0/Invoices',
 					},
 					headers: {
-						authorization: 'Bearer token',
+						Accept: 'application/json',
+						'X-Request-Id': 'request-id',
 					},
 					method: 'GET',
 				},
@@ -49,6 +68,8 @@ describe('ApiError', () => {
 				},
 				headers: {
 					'content-type': 'application/json',
+					'set-cookie': 'session=response-cookie-that-must-not-leak',
+					'X-Rate-Limit-Remaining': '59',
 				},
 			},
 			request: {
@@ -63,7 +84,10 @@ describe('ApiError', () => {
 			},
 		});
 
-		expect(apiError.generateError()).toEqual({
+		const serializedError = JSON.stringify(apiError.generateError());
+
+		expect(serializedError).not.toContain('response-cookie-that-must-not-leak');
+		expect(JSON.parse(serializedError)).toEqual({
 			response: {
 				statusCode: 401,
 				body: {
@@ -71,6 +95,7 @@ describe('ApiError', () => {
 				},
 				headers: {
 					'content-type': 'application/json',
+					'X-Rate-Limit-Remaining': '59',
 				},
 				request: {
 					url: {

@@ -23,6 +23,24 @@ interface ErrorResponse {
 	body: any
 }
 
+const SENSITIVE_HEADER_NAME = /authorization|cookie|api[-_]?key|token|secret|password/i;
+
+function sanitizeHeaders(headers: any): any {
+	const safeHeaders: any = {};
+
+	if (!headers || typeof headers !== 'object') {
+		return safeHeaders;
+	}
+
+	Object.keys(headers).forEach((headerName) => {
+		if (!SENSITIVE_HEADER_NAME.test(headerName)) {
+			safeHeaders[headerName] = headers[headerName];
+		}
+	});
+
+	return safeHeaders;
+}
+
 export class ApiError {
 
 	statusCode: number
@@ -36,7 +54,7 @@ export class ApiError {
 
 		this.statusCode = response.status || 0;
 		this.body = response.data ?? axiosError.message;
-		this.headers = response.headers || {};
+		this.headers = sanitizeHeaders(response.headers);
 		this.request = {
 			url: {
 				protocol: request.protocol,
@@ -44,7 +62,9 @@ export class ApiError {
 				host: request.host,
 				path: request.path,
 			},
-			headers: typeof request.getHeaders === 'function' ? request.getHeaders() : {},
+			headers: sanitizeHeaders(
+				typeof request.getHeaders === 'function' ? request.getHeaders() : undefined
+			),
 			method: request.method
 		}
 	}
