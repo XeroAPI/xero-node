@@ -41,9 +41,17 @@ export class Item {
     */
     'totalCostPool'?: number;
     /**
-    * The quantity of the item on hand
+    * The quantity of the item on hand. This will be 0 if `QuantityOnBackOrder` is greater than 0.
     */
     'quantityOnHand'?: number;
+    /**
+    * The quantity of the item available. This is equal to `QuantityOnHand` - `QuantityOnBackOrder`. This value will be negative if `QuantityOnBackOrder` is greater than 0.
+    */
+    'quantityAvailable'?: number;
+    /**
+    * The quantity of the item on backorder. This will be 0 if `QuantityOnHand` is greater than 0.
+    */
+    'quantityOnBackOrder'?: number;
     /**
     * Last modified date in UTC format
     */
@@ -122,6 +130,16 @@ export class Item {
         {
             "name": "quantityOnHand",
             "baseName": "QuantityOnHand",
+            "type": "number"
+        },
+        {
+            "name": "quantityAvailable",
+            "baseName": "QuantityAvailable",
+            "type": "number"
+        },
+        {
+            "name": "quantityOnBackOrder",
+            "baseName": "QuantityOnBackOrder",
             "type": "number"
         },
         {
