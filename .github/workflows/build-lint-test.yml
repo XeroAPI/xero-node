@@ -4,9 +4,13 @@ on:
     push:
     pull_request:
 
+permissions:
+    contents: read
+
 jobs:
     build-test-lint:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
 
         steps:
             - name: Checkout xero-node repo

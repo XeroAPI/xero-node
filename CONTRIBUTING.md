@@ -93,7 +93,8 @@ We are using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generat
 1. Fork and clone the repository
 1. Create a new branch: `git checkout -b my-branch-name`
 1. Make your change, add tests if needed
-1. Make sure the tests pass on your machine: `mvn test`
+1. Install the locked dependencies: `npm ci`
+1. Make sure the build and tests pass on your machine: `npm run build && npm test`
 1. Push to your fork and submit a pull request
 1. Pat your self on the back and wait for your pull request to be reviewed and merged.
 
