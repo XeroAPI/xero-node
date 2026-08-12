@@ -110,9 +110,16 @@ describe('the XeroClient', () => {
       expect(xeroClient).toHaveProperty('bankFeedsApi')
       expect(xeroClient).toHaveProperty('projectApi')
       expect(xeroClient).toHaveProperty('payrollAUApi')
+      expect(xeroClient).toHaveProperty('payrollAUV2Api')
       expect(xeroClient).toHaveProperty('payrollUKApi')
       expect(xeroClient).toHaveProperty('payrollNZApi')
       expect(xeroClient).toHaveProperty('appStoreApi')
+    });
+
+    it('propagates access tokens to Payroll AU v2', () => {
+      xero.setTokenSet(tokenSet)
+
+      expect((xero.payrollAUV2Api as any).authentications.OAuth2.accessToken).toEqual(tokenSet.access_token)
     });
 
     it('readTokenSet() returns the tokenSet', async () => {

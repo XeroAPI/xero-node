@@ -59,11 +59,25 @@ export class XeroClient {
     this.filesApi = new xero.FilesApi();
     this.projectApi = new xero.ProjectApi();
     this.payrollAUApi = new xero.PayrollAuApi();
+    this.payrollAUV2Api = new xero.PayrollAuV2Api();
     this.bankFeedsApi = new xero.BankFeedsApi();
     this.payrollUKApi = new xero.PayrollUkApi();
     this.payrollNZApi = new xero.PayrollNzApi();
     this.appStoreApi = new xero.AppStoreApi();
     this.financeApi = new xero.FinanceApi();
+    this.apiClients = [
+      this.accountingApi,
+      this.assetApi,
+      this.filesApi,
+      this.projectApi,
+      this.payrollAUApi,
+      this.payrollAUV2Api,
+      this.bankFeedsApi,
+      this.payrollUKApi,
+      this.payrollNZApi,
+      this.appStoreApi,
+      this.financeApi,
+    ];
   };
 
   private _tokenSet: TokenSet = new TokenSet;
@@ -74,11 +88,13 @@ export class XeroClient {
   readonly filesApi: xero.FilesApi;
   readonly projectApi: xero.ProjectApi;
   readonly payrollAUApi: xero.PayrollAuApi;
+  readonly payrollAUV2Api: xero.PayrollAuV2Api;
   readonly bankFeedsApi: xero.BankFeedsApi;
   readonly payrollUKApi: xero.PayrollUkApi;
   readonly payrollNZApi: xero.PayrollNzApi;
   readonly appStoreApi: xero.AppStoreApi;
   readonly financeApi: xero.FinanceApi;
+  private readonly apiClients: Array<{ accessToken: string }>;
 
   openIdClient: Client; // from openid-client
 
@@ -273,15 +289,8 @@ export class XeroClient {
       throw new Error('Access token is undefined!');
     }
 
-    this.accountingApi.accessToken = accessToken;
-    this.assetApi.accessToken = accessToken;
-    this.filesApi.accessToken = accessToken;
-    this.projectApi.accessToken = accessToken;
-    this.payrollAUApi.accessToken = accessToken;
-    this.bankFeedsApi.accessToken = accessToken;
-    this.payrollUKApi.accessToken = accessToken;
-    this.payrollNZApi.accessToken = accessToken;
-    this.appStoreApi.accessToken = accessToken;
-    this.financeApi.accessToken = accessToken;
+    this.apiClients.forEach(apiClient => {
+      apiClient.accessToken = accessToken;
+    });
   }
 }
