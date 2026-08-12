@@ -25,13 +25,14 @@ jobs:
       contents: read
     steps:
       - name: Checkout xero-node repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: XeroAPI/xero-node
+          ref: ${{ github.sha }}
           path: xero-node
 
       - name: Set up Node environment
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 24
           cache: 'npm'
@@ -73,13 +74,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: XeroAPI/xero-node
+          ref: ${{ github.sha }}
           path: xero-node
 
       - name: Install octokit dependencies
-        run: npm i
+        run: npm ci
         working-directory: xero-node/.github/octokit
 
       - name: Get github app access token
@@ -87,7 +89,7 @@ jobs:
         env:
           GITHUB_APP_ID: ${{ secrets.XERO_CODEGEN_BOT_APPLICATION_ID }}
           GITHUB_APP_PRIVATE_KEY: ${{ secrets.XERO_CODEGEN_BOT_APPLICATION_KEY }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
           result-encoding: string
           script: |
@@ -122,9 +124,10 @@ jobs:
     if: success()
     steps:
       - name: Checkout xero-node repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: XeroAPI/xero-node
+          ref: ${{ github.sha }}
           path: xero-node
 
       - name: Send slack notification on success
@@ -147,9 +150,10 @@ jobs:
     if: failure()
     steps:
       - name: Checkout xero-node repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
          repository: XeroAPI/xero-node
+         ref: ${{ github.sha }}
          path: xero-node
 
       - name: Send slack notification on failure
