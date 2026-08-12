@@ -20,12 +20,12 @@
     "nock": "^13.5.5",
     "open": "^10.1.0",
     "prompt": "^1.0.0",
-    "sinon": "^19.0.2",
-    "ts-jest": "^29.1.2",
+    "sinon": "^22.1.0",
+    "ts-jest": "^29.4.12",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "axios": "^1.7.7",
+    "axios": "^1.19.0",
     "openid-client": "^5.7.0"
   }
 }
