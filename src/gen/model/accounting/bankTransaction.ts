@@ -1,4 +1,5 @@
 import { Account } from '././account';
+import { BatchPayment } from '././batchPayment';
 import { Contact } from '././contact';
 import { CurrencyCode } from '././currencyCode';
 import { LineAmountTypes } from '././lineAmountTypes';
@@ -10,6 +11,7 @@ export class BankTransaction {
     * See Bank Transaction Types
     */
     'type': BankTransaction.TypeEnum;
+    'batchPayment'?: BatchPayment;
     'contact'?: Contact;
     /**
     * See LineItems
@@ -90,6 +92,11 @@ export class BankTransaction {
             "name": "type",
             "baseName": "Type",
             "type": "BankTransaction.TypeEnum"
+        },
+        {
+            "name": "batchPayment",
+            "baseName": "BatchPayment",
+            "type": "BatchPayment"
         },
         {
             "name": "contact",
