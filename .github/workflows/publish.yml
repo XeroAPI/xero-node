@@ -98,23 +98,35 @@ jobs:
               return token
 
       - name: Notify codegen repo
+        env:
+          CODEGEN_BOT_TOKEN: ${{ steps.get_access_token.outputs.result }}
+          COMMIT_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          PUBLISH_STATUS: ${{ needs.publish.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ORR_ID: ${{ github.event.inputs.orr_id }}
         run: |
-            curl -X POST -H "Authorization: token ${{ steps.get_access_token.outputs.result }}" \
+            payload=$(jq -n -c \
+              --arg commit "$COMMIT_SHA" \
+              --arg status "$PUBLISH_STATUS" \
+              --arg url "$RUN_URL" \
+              --arg cab_key "$ORR_ID" \
+              '{
+                "ref": "master",
+                "inputs": {
+                  "commit": $commit,
+                  "status": $status,
+                  "deployer": "xero-codegen-bot",
+                  "url": $url,
+                  "environment": "prod",
+                  "sdk_type": "node",
+                  "cab_key": $cab_key
+                  }
+                }')
+            curl -X POST -H "Authorization: token $CODEGEN_BOT_TOKEN" \
               -H "Accept: application/vnd.github.v3+json" \
               -H "Content-Type: application/json" \
               https://api.github.com/repos/xero-internal/xeroapi-sdk-codegen/actions/workflows/notify-sdk-publish.yml/dispatches \
-              -d '{
-                "ref": "master",
-                "inputs": {
-                  "commit": "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}",
-                  "status": "${{needs.publish.result}}",
-                  "deployer": "xero-codegen-bot",
-                  "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
-                  "environment": "prod",
-                  "sdk_type": "node",
-                  "cab_key": "${{ github.event.inputs.orr_id }}"
-                  }
-                }'
+              -d "$payload"
 
   notify-slack-on-success:
     runs-on: ubuntu-latest
