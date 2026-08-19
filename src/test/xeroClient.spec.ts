@@ -1,4 +1,5 @@
 import { XeroClient } from "../XeroClient";
+import * as xeroApis from "../gen/api";
 const tokenSetJson = require("./mocks/tokenSet.json");
 const refreshedTokenSetJson = require("./mocks/refreshedTokenSet.json");
 const connectionsResponse = require("./mocks/connectionsResponse.json");
@@ -120,6 +121,17 @@ describe('the XeroClient', () => {
       xero.setTokenSet(tokenSet)
 
       expect((xero.payrollAUV2Api as any).authentications.OAuth2.accessToken).toEqual(tokenSet.access_token)
+    });
+
+    it('propagates access tokens to every generated API client', () => {
+      xero.setTokenSet(tokenSet)
+
+      xeroApis.APIS.forEach(apiClass => {
+        const wiredClient: any = Object.values(xero).find(value => value instanceof apiClass)
+
+        expect(wiredClient).toBeDefined()
+        expect(wiredClient.authentications.OAuth2.accessToken).toEqual(tokenSet.access_token)
+      })
     });
 
     it('readTokenSet() returns the tokenSet', async () => {

@@ -65,19 +65,6 @@ export class XeroClient {
     this.payrollNZApi = new xero.PayrollNzApi();
     this.appStoreApi = new xero.AppStoreApi();
     this.financeApi = new xero.FinanceApi();
-    this.apiClients = [
-      this.accountingApi,
-      this.assetApi,
-      this.filesApi,
-      this.projectApi,
-      this.payrollAUApi,
-      this.payrollAUV2Api,
-      this.bankFeedsApi,
-      this.payrollUKApi,
-      this.payrollNZApi,
-      this.appStoreApi,
-      this.financeApi,
-    ];
   };
 
   private _tokenSet: TokenSet = new TokenSet;
@@ -94,7 +81,6 @@ export class XeroClient {
   readonly payrollNZApi: xero.PayrollNzApi;
   readonly appStoreApi: xero.AppStoreApi;
   readonly financeApi: xero.FinanceApi;
-  private readonly apiClients: Array<{ accessToken: string }>;
 
   openIdClient: Client; // from openid-client
 
@@ -281,6 +267,15 @@ export class XeroClient {
         reject(error)
       }
     });
+  }
+
+  // Derived from the clients built in the constructor and cross-checked against
+  // xero.APIS, the generated list of every API client class, so a newly wired
+  // client cannot be missed here.
+  private get apiClients(): Array<{ accessToken: string }> {
+    return Object.values(this).filter(
+      (value): value is { accessToken: string } => xero.APIS.some(apiClass => value instanceof apiClass)
+    );
   }
 
   private setAccessToken(): void {
