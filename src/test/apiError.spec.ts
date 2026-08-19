@@ -1,4 +1,6 @@
 import { ApiError } from '../model/ApiError';
+import { XeroClient } from '../XeroClient';
+import nock from 'nock';
 
 describe('ApiError', () => {
 	it('removes sensitive headers from serialized generated errors', () => {
@@ -112,5 +114,68 @@ describe('ApiError', () => {
 				error: 'invalid_token',
 			},
 		});
+	});
+});
+
+describe('ApiError integration with XeroClient', () => {
+	const clientId = 'client-id-that-must-not-leak';
+	const clientSecret = 'client-secret-that-must-not-leak';
+	const refreshToken = 'refresh-token-that-must-not-leak';
+	const accessToken = 'access-token-that-must-not-leak';
+
+	const buildClient = () => new XeroClient({
+		clientId,
+		clientSecret,
+		redirectUris: ['http://localhost:5000/callback'],
+		scopes: 'openid profile email offline_access'.split(' ')
+	});
+
+	const rejectionOf = (promise: Promise<any>): Promise<any> => promise.then(
+		() => { throw new Error('expected the request to reject'); },
+		(error) => error
+	);
+
+	afterEach(() => {
+		nock.cleanAll();
+	});
+
+	it('redacts the basic auth credentials and refresh token when the token request fails', async () => {
+		nock('https://identity.xero.com')
+			.post('/connect/token')
+			.reply(401, { error: 'invalid_grant' });
+
+		const rejection = await rejectionOf(
+			buildClient().refreshWithRefreshToken(clientId, clientSecret, refreshToken)
+		);
+
+		const serializedError = JSON.stringify(rejection);
+		const basicCredentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+
+		expect(serializedError).not.toContain(basicCredentials);
+		expect(serializedError).not.toContain(clientSecret);
+		expect(serializedError).not.toContain(refreshToken);
+		expect(JSON.parse(rejection).response.statusCode).toEqual(401);
+	});
+
+	it('redacts the bearer token when the connections query fails', async () => {
+		nock('https://api.xero.com')
+			.get('/connections')
+			.reply(401, { Title: 'Unauthorized' });
+
+		const client = buildClient();
+		client.setTokenSet({
+			access_token: accessToken,
+			refresh_token: refreshToken,
+			token_type: 'Bearer',
+			expires_at: 1231231234
+		});
+
+		const rejection = await rejectionOf(client.updateTenants());
+
+		const serializedError = JSON.stringify(rejection);
+
+		expect(serializedError).not.toContain(accessToken);
+		expect(serializedError).not.toContain(refreshToken);
+		expect(JSON.parse(rejection).response.statusCode).toEqual(401);
 	});
 });
