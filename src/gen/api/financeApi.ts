@@ -183,7 +183,7 @@ export class FinanceApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -265,7 +265,7 @@ export class FinanceApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -337,7 +337,7 @@ export class FinanceApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -414,7 +414,7 @@ export class FinanceApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -501,7 +501,7 @@ export class FinanceApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -588,7 +588,7 @@ export class FinanceApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -665,7 +665,7 @@ export class FinanceApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
@@ -737,7 +737,7 @@ export class FinanceApi {
                 }
                 catch(error) {
                      const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+					 reject(errorResponse.generateError())
                 }
             });
         });
