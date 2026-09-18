@@ -93,7 +93,7 @@ export enum PayrollUkApiApiKeys {
 
 export class PayrollUkApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-19.2.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-20.0.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
