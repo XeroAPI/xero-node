@@ -1,6 +1,6 @@
 import { Client, Issuer, TokenSet, TokenSetParameters, custom } from 'openid-client';
 import * as xero from './gen/api';
-import { redactError } from './model/ApiError';
+import { redactError, redactIdentityError } from './model/ApiError';
 const axios = require('axios');
 import http = require('http');
 
@@ -126,10 +126,14 @@ export class XeroClient {
     }
     const params = this.openIdClient.callbackParams(callbackUrl);
     const check = { state: this.config.state };
-    if (this.config.scopes.includes('openid')) {
-      this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
-    } else {
-      this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
+    try {
+      if (this.config.scopes.includes('openid')) {
+        this._tokenSet = await this.openIdClient.callback(this.config.redirectUris[0], params, check);
+      } else {
+        this._tokenSet = await this.openIdClient.oauthCallback(this.config.redirectUris[0], params, check);
+      }
+    } catch (error) {
+      throw redactIdentityError(error);
     }
     this.setAccessToken();
     return this._tokenSet;
@@ -154,7 +158,12 @@ export class XeroClient {
     if (!this._tokenSet) {
       throw new Error('tokenSet is not defined');
     }
-    const refreshedTokenSet = await this.openIdClient.refresh(this._tokenSet.refresh_token);
+    let refreshedTokenSet;
+    try {
+      refreshedTokenSet = await this.openIdClient.refresh(this._tokenSet.refresh_token);
+    } catch (error) {
+      throw redactIdentityError(error);
+    }
     this._tokenSet = new TokenSet(refreshedTokenSet);
     this.setAccessToken();
     return this._tokenSet;
@@ -164,7 +173,11 @@ export class XeroClient {
     if (!this._tokenSet) {
       throw new Error('tokenSet is not defined');
     }
-    await this.openIdClient.revoke(this._tokenSet.refresh_token);
+    try {
+      await this.openIdClient.revoke(this._tokenSet.refresh_token);
+    } catch (error) {
+      throw redactIdentityError(error);
+    }
     this._tokenSet = new TokenSet;
     this._tenants = [];
     return;
@@ -217,7 +230,7 @@ export class XeroClient {
         if (response.status && response.status >= 200 && response.status <= 299) {
           resolve({ response: response, body: response.data });
         } else {
-          reject({ response: response, body: response.data });
+          reject(redactError({ response: response, body: response.data }));
         }
       }
       catch (error) {
@@ -259,7 +272,7 @@ export class XeroClient {
         if (response.status && response.status >= 200 && response.status <= 299) {
           resolve({ response: response, body: response.data });
         } else {
-          reject({ response: response, body: response.data });
+          reject(redactError({ response: response, body: response.data }));
         }
       }
       catch (error) {
