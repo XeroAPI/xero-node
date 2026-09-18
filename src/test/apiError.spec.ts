@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as http from 'http';
 import * as path from 'path';
 import * as util from 'util';
-import { ApiError, redactError, redactHeaders } from '../model/ApiError';
+import { ApiError, redactError, redactHeaders, redactIdentityError } from '../model/ApiError';
 
 const axios = require('axios');
 
@@ -106,6 +106,34 @@ describe('redactError', () => {
 		expect(error.config).toEqual({ headers: { Accept: 'application/json' } });
 	});
 
+	it('handles a plain { response, body } rejection', () => {
+		const liveRequest = {
+			method: 'POST',
+			path: '/connect/token',
+			getHeaders: () => ({ authorization: 'Basic c2VjcmV0', host: 'identity.xero.com' }),
+		};
+		const error = {
+			response: {
+				status: 401,
+				config: { headers: { Authorization: 'Basic c2VjcmV0' }, data: 'grant_type=client_credentials' },
+				request: liveRequest,
+			},
+			body: { error: 'invalid_client' },
+		};
+
+		redactError(error);
+
+		expect(error.response.config).toEqual({ headers: {} });
+		expect(error.response.request).toEqual({
+			method: 'POST',
+			protocol: undefined,
+			host: undefined,
+			path: '/connect/token',
+			headers: { host: 'identity.xero.com' },
+		});
+		expect(JSON.stringify(error)).not.toContain('c2VjcmV0');
+	});
+
 	it('redacts a real axios error while keeping it usable', async () => {
 		const server = http.createServer((_request, response) => {
 			response.writeHead(401, { 'content-type': 'application/json' });
@@ -127,7 +155,7 @@ describe('redactError', () => {
 				},
 				data: `grant_type=refresh_token&refresh_token=${value}`,
 			});
-			fail('expected the request to be rejected');
+			throw new Error('expected the request to be rejected');
 		} catch (error) {
 			redactError(error);
 
@@ -136,10 +164,46 @@ describe('redactError', () => {
 
 			expect(error.response.status).toBe(401);
 			expect(error.response.data).toEqual({ error: 'invalid_client' });
+			expect(error.request.headers['content-type']).toBe('application/x-www-form-urlencoded');
 		} finally {
 			delete axios.defaults.headers.common['X-Api-Key'];
 			await new Promise<void>((resolve) => server.close(() => resolve()));
 		}
+	});
+});
+
+describe('redactIdentityError', () => {
+	it('replaces the live request on an identity error with a summary', () => {
+		const error: any = new Error('invalid_client');
+		Object.defineProperty(error, 'response', {
+			value: {
+				statusCode: 401,
+				body: { error: 'invalid_client' },
+				req: {
+					method: 'POST',
+					path: '/connect/token',
+					_header: 'POST /connect/token HTTP/1.1\r\nauthorization: Basic c2VjcmV0\r\n\r\n',
+					getHeaders: () => ({ authorization: 'Basic c2VjcmV0', accept: 'application/json' }),
+				},
+			},
+		});
+
+		redactIdentityError(error);
+
+		expect(error.response.statusCode).toBe(401);
+		expect(error.response.req).toEqual({
+			method: 'POST',
+			protocol: undefined,
+			host: undefined,
+			path: '/connect/token',
+			headers: { accept: 'application/json' },
+		});
+		expect(util.inspect(error, { depth: null, showHidden: true })).not.toContain('c2VjcmV0');
+	});
+
+	it('leaves errors without a live request alone', () => {
+		expect(redactIdentityError('boom')).toBe('boom');
+		expect(redactIdentityError({ message: 'x' })).toEqual({ message: 'x' });
 	});
 });
 

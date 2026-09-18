@@ -5,6 +5,7 @@ const connectionsResponse = require("./mocks/connectionsResponse.json");
 const getOrganisationResponse = require("./mocks/getOrganisationResponse.json");
 import nock from 'nock';
 import util from 'util';
+const axios = require('axios');
 import sinon from 'sinon';
 
 const xero = new XeroClient({
@@ -217,5 +218,74 @@ describe('XeroClient error redaction', () => {
 
     expect(error.response.status).toBe(401);
     expect(appears(error, accessToken)).toBe(false);
+  });
+
+  it('redacts a failed client credentials request when validateStatus is overridden', async () => {
+    nock('https://identity.xero.com').post('/connect/token').reply(401, { error: 'invalid_client' });
+    const client = new XeroClient({ clientId: 'id', clientSecret, grantType: 'client_credentials', scopes });
+    axios.defaults.validateStatus = () => true;
+
+    let error: any;
+    try { await client.getClientCredentialsToken(); } catch (e) { error = e; } finally { delete axios.defaults.validateStatus; }
+
+    expect(error.response.status).toBe(401);
+    expect(appears(error, clientSecret)).toBe(false);
+    expect(appears(error, Buffer.from(`id:${clientSecret}`).toString('base64'))).toBe(false);
+  });
+
+  describe('identity requests', () => {
+    const identityError = () => {
+      const error: any = new Error('invalid_client');
+      Object.defineProperty(error, 'response', {
+        value: {
+          statusCode: 401,
+          req: {
+            method: 'POST',
+            path: '/connect/token',
+            _header: `POST /connect/token HTTP/1.1\r\nauthorization: Basic ${Buffer.from(`id:${clientSecret}`).toString('base64')}\r\n\r\n`,
+            getHeaders: () => ({ authorization: `Basic ${Buffer.from(`id:${clientSecret}`).toString('base64')}` }),
+          },
+        },
+      });
+      return error;
+    };
+    const hidden = (value: any, needle: string) => util.inspect(value, { depth: null, showHidden: true }).includes(needle);
+
+    it('redacts a failed refresh', async () => {
+      const client = new XeroClient({ clientId: 'id', clientSecret, scopes });
+      client.setTokenSet({ access_token: accessToken, refresh_token: refreshToken, expires_in: 1800, token_type: 'Bearer' });
+      client.openIdClient = { refresh: async () => { throw identityError(); } } as any;
+
+      let error: any;
+      try { await client.refreshToken(); } catch (e) { error = e; }
+
+      expect(error.response.statusCode).toBe(401);
+      expect(hidden(error, clientSecret)).toBe(false);
+      expect(hidden(error, Buffer.from(`id:${clientSecret}`).toString('base64'))).toBe(false);
+    });
+
+    it('redacts a failed revoke', async () => {
+      const client = new XeroClient({ clientId: 'id', clientSecret, scopes });
+      client.setTokenSet({ access_token: accessToken, refresh_token: refreshToken, expires_in: 1800, token_type: 'Bearer' });
+      client.openIdClient = { revoke: async () => { throw identityError(); } } as any;
+
+      let error: any;
+      try { await client.revokeToken(); } catch (e) { error = e; }
+
+      expect(hidden(error, Buffer.from(`id:${clientSecret}`).toString('base64'))).toBe(false);
+    });
+
+    it('redacts a failed callback', async () => {
+      const client = new XeroClient({ clientId: 'id', clientSecret, redirectUris: ['http://localhost/cb'], scopes });
+      client.openIdClient = {
+        callbackParams: () => ({ code: 'abc' }),
+        oauthCallback: async () => { throw identityError(); },
+      } as any;
+
+      let error: any;
+      try { await client.apiCallback('http://localhost/cb?code=abc'); } catch (e) { error = e; }
+
+      expect(hidden(error, Buffer.from(`id:${clientSecret}`).toString('base64'))).toBe(false);
+    });
   });
 });

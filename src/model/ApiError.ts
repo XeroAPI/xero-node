@@ -36,23 +36,23 @@ const LOGGABLE_HEADERS = [
 	'xero-application-id',
 	'xero-tenant-id',
 	'xero-user-id',
-]
+];
 
 export function redactHeaders(headers: any): any {
-	const safe: any = {}
+	const safe: any = {};
 
 	Object.keys(headers || {}).forEach((name) => {
 		if (LOGGABLE_HEADERS.indexOf(name.toLowerCase()) !== -1) {
-			safe[name] = headers[name]
+			safe[name] = headers[name];
 		}
-	})
+	});
 
-	return safe
+	return safe;
 }
 
 function summariseRequest(request: any): any {
-	if (!request) {
-		return request
+	if (!request || typeof request !== 'object') {
+		return request;
 	}
 
 	return {
@@ -61,34 +61,51 @@ function summariseRequest(request: any): any {
 		host: request.host,
 		path: request.path,
 		headers: typeof request.getHeaders === 'function' ? redactHeaders(request.getHeaders()) : {},
+	};
+}
+
+function redactConfig(config: any): void {
+	if (!config || typeof config !== 'object') {
+		return;
 	}
+
+	if (config.headers) {
+		config.headers = redactHeaders(config.headers);
+	}
+
+	delete config.data;
+	delete config.auth;
 }
 
 export function redactError(error: any): any {
 	if (!error || typeof error !== 'object') {
-		return error
+		return error;
 	}
 
-	if (error.config) {
-		if (error.config.headers) {
-			error.config.headers = redactHeaders(error.config.headers)
-		}
+	const response = error.response && typeof error.response === 'object' ? error.response : undefined;
 
-		delete error.config.data
-		delete error.config.auth
-	}
+	redactConfig(error.config);
+	redactConfig(response && response.config);
 
-	const request = summariseRequest(error.request)
+	const request = summariseRequest(error.request || (response && response.request));
 
 	if ('request' in error) {
-		error.request = request
+		error.request = request;
 	}
 
-	if (error.response && typeof error.response === 'object' && 'request' in error.response) {
-		error.response.request = request
+	if (response && 'request' in response) {
+		response.request = request;
 	}
 
-	return error
+	return error;
+}
+
+export function redactIdentityError(error: any): any {
+	if (error && typeof error === 'object' && error.response && typeof error.response === 'object' && error.response.req) {
+		error.response.req = summariseRequest(error.response.req);
+	}
+
+	return error;
 }
 
 export class ApiError {
