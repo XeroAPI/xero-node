@@ -23,17 +23,33 @@ interface ErrorResponse {
 	body: any
 }
 
-const SENSITIVE_HEADERS = ['authorization', 'cookie', 'set-cookie', 'proxy-authorization']
+// The request headers that may appear on a rejected error. This is exactly the
+// set the SDK itself sends: the OpenAPI header parameters plus what axios and
+// Node add. Anything else, including headers supplied through options.headers
+// or axios defaults, is left out.
+const LOGGABLE_HEADERS = [
+	'accept',
+	'accept-encoding',
+	'content-length',
+	'content-type',
+	'host',
+	'idempotency-key',
+	'if-modified-since',
+	'user-agent',
+	'xero-application-id',
+	'xero-tenant-id',
+	'xero-user-id',
+]
 
 /**
- * Returns a copy of the given headers with the entries that should not be
- * logged or serialised removed.
+ * Returns a copy of the given headers containing only the entries that may be
+ * logged or serialised.
  */
 export function redactHeaders(headers: any): any {
 	const safe: any = {}
 
 	Object.keys(headers || {}).forEach((name) => {
-		if (SENSITIVE_HEADERS.indexOf(name.toLowerCase()) === -1) {
+		if (LOGGABLE_HEADERS.indexOf(name.toLowerCase()) !== -1) {
 			safe[name] = headers[name]
 		}
 	})

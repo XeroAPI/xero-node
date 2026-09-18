@@ -29,6 +29,20 @@ describe('redactHeaders', () => {
 		});
 	});
 
+	it('drops headers it does not know, including caller supplied ones', () => {
+		expect(
+			redactHeaders({
+				'x-api-key': 'k',
+				'X-Request-Id': 'r',
+				'content-type': 'application/json',
+				'Idempotency-Key': 'order-42',
+			})
+		).toEqual({
+			'content-type': 'application/json',
+			'Idempotency-Key': 'order-42',
+		});
+	});
+
 	it('handles a missing headers object', () => {
 		expect(redactHeaders(undefined)).toEqual({});
 	});
@@ -80,6 +94,7 @@ describe('redactError', () => {
 		await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
 		const { port } = server.address() as import('net').AddressInfo;
 		const value = 'should-be-redacted';
+		axios.defaults.headers.common['X-Api-Key'] = `global-${value}`;
 
 		try {
 			await axios({
@@ -103,6 +118,7 @@ describe('redactError', () => {
 			expect(error.response.status).toBe(401);
 			expect(error.response.data).toEqual({ error: 'invalid_client' });
 		} finally {
+			delete axios.defaults.headers.common['X-Api-Key'];
 			await new Promise<void>((resolve) => server.close(() => resolve()));
 		}
 	});
