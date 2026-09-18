@@ -23,6 +23,73 @@ interface ErrorResponse {
 	body: any
 }
 
+const SENSITIVE_HEADERS = ['authorization', 'cookie', 'set-cookie', 'proxy-authorization']
+
+/**
+ * Returns a copy of the given headers with the entries that should not be
+ * logged or serialised removed.
+ */
+export function redactHeaders(headers: any): any {
+	const safe: any = {}
+
+	Object.keys(headers || {}).forEach((name) => {
+		if (SENSITIVE_HEADERS.indexOf(name.toLowerCase()) === -1) {
+			safe[name] = headers[name]
+		}
+	})
+
+	return safe
+}
+
+/**
+ * A plain summary of an outbound request, used in place of the live Node
+ * ClientRequest on a rejected error.
+ */
+function summariseRequest(request: any): any {
+	if (!request) {
+		return request
+	}
+
+	return {
+		method: request.method,
+		protocol: request.protocol,
+		host: request.host,
+		path: request.path,
+		headers: typeof request.getHeaders === 'function' ? redactHeaders(request.getHeaders()) : {},
+	}
+}
+
+/**
+ * Reduces the request details on an axios error to what is safe to log or
+ * serialise, and returns the same error. The request config headers are
+ * filtered and `error.request` / `error.response.request` become a plain
+ * summary of the request.
+ *
+ * `error.response.status`, `error.response.data`, `error.message` and
+ * `error.code` are left as they are.
+ */
+export function redactError(error: any): any {
+	if (!error) {
+		return error
+	}
+
+	if (error.config?.headers) {
+		error.config.headers = redactHeaders(error.config.headers)
+	}
+
+	const request = summariseRequest(error.request)
+
+	if ('request' in error) {
+		error.request = request
+	}
+
+	if (error.response && 'request' in error.response) {
+		error.response.request = request
+	}
+
+	return error
+}
+
 export class ApiError {
 
 	statusCode: number
@@ -44,7 +111,7 @@ export class ApiError {
 				host: request.host,
 				path: request.path,
 			},
-			headers: typeof request.getHeaders === 'function' ? request.getHeaders() : {},
+			headers: typeof request.getHeaders === 'function' ? redactHeaders(request.getHeaders()) : {},
 			method: request.method
 		}
 	}
