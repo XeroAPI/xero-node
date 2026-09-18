@@ -1,4 +1,6 @@
+import * as fs from 'fs';
 import * as http from 'http';
+import * as path from 'path';
 import * as util from 'util';
 import { ApiError, redactError, redactHeaders } from '../model/ApiError';
 
@@ -85,6 +87,25 @@ describe('redactError', () => {
 		expect(redactError({ message: 'Network Error' })).toEqual({ message: 'Network Error' });
 	});
 
+	it('passes non-object rejections through untouched', () => {
+		expect(redactError('boom')).toBe('boom');
+		expect(redactError(42)).toBe(42);
+	});
+
+	it('drops the request body and the axios auth option', () => {
+		const error = {
+			config: {
+				headers: { Accept: 'application/json' },
+				data: 'grant_type=refresh_token&refresh_token=c2VjcmV0',
+				auth: { username: 'id', password: 'c2VjcmV0' },
+			},
+		};
+
+		redactError(error);
+
+		expect(error.config).toEqual({ headers: { Accept: 'application/json' } });
+	});
+
 	it('redacts a real axios error while keeping it usable', async () => {
 		const server = http.createServer((_request, response) => {
 			response.writeHead(401, { 'content-type': 'application/json' });
@@ -104,23 +125,47 @@ describe('redactError', () => {
 					Authorization: `Basic ${value}`,
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
-				data: 'grant_type=client_credentials',
+				data: `grant_type=refresh_token&refresh_token=${value}`,
 			});
 			fail('expected the request to be rejected');
 		} catch (error) {
 			redactError(error);
 
-			// serialised and inspected forms
 			expect(JSON.stringify(error)).not.toContain(value);
 			expect(util.inspect(error, { depth: null })).not.toContain(value);
 
-			// and the error is still useful to the caller
 			expect(error.response.status).toBe(401);
 			expect(error.response.data).toEqual({ error: 'invalid_client' });
 		} finally {
 			delete axios.defaults.headers.common['X-Api-Key'];
 			await new Promise<void>((resolve) => server.close(() => resolve()));
 		}
+	});
+});
+
+describe('redactHeaders against the generated code', () => {
+	it('keeps every header parameter the generated API methods set', () => {
+		const apiDir = path.join(__dirname, '..', 'gen', 'api');
+		const pattern = /localVarHeaderParams\['([^']+)'\]/g;
+		const names: string[] = [];
+
+		fs.readdirSync(apiDir)
+			.filter((file) => file.endsWith('.ts'))
+			.forEach((file) => {
+				const source = fs.readFileSync(path.join(apiDir, file), 'utf8');
+				let match = pattern.exec(source);
+				while (match) {
+					if (names.indexOf(match[1]) === -1) {
+						names.push(match[1]);
+					}
+					match = pattern.exec(source);
+				}
+			});
+
+		expect(names.length).toBeGreaterThan(0);
+		names.forEach((name) => {
+			expect(redactHeaders({ [name]: 'value' })).toEqual({ [name]: 'value' });
+		});
 	});
 });
 

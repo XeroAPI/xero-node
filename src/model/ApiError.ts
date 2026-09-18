@@ -23,15 +23,12 @@ interface ErrorResponse {
 	body: any
 }
 
-// The request headers that may appear on a rejected error. This is exactly the
-// set the SDK itself sends: the OpenAPI header parameters plus what axios and
-// Node add. Anything else, including headers supplied through options.headers
-// or axios defaults, is left out.
 const LOGGABLE_HEADERS = [
 	'accept',
 	'accept-encoding',
 	'content-length',
 	'content-type',
+	'contenttype',
 	'host',
 	'idempotency-key',
 	'if-modified-since',
@@ -41,10 +38,6 @@ const LOGGABLE_HEADERS = [
 	'xero-user-id',
 ]
 
-/**
- * Returns a copy of the given headers containing only the entries that may be
- * logged or serialised.
- */
 export function redactHeaders(headers: any): any {
 	const safe: any = {}
 
@@ -57,10 +50,6 @@ export function redactHeaders(headers: any): any {
 	return safe
 }
 
-/**
- * A plain summary of an outbound request, used in place of the live Node
- * ClientRequest on a rejected error.
- */
 function summariseRequest(request: any): any {
 	if (!request) {
 		return request
@@ -75,22 +64,18 @@ function summariseRequest(request: any): any {
 	}
 }
 
-/**
- * Reduces the request details on an axios error to what is safe to log or
- * serialise, and returns the same error. The request config headers are
- * filtered and `error.request` / `error.response.request` become a plain
- * summary of the request.
- *
- * `error.response.status`, `error.response.data`, `error.message` and
- * `error.code` are left as they are.
- */
 export function redactError(error: any): any {
-	if (!error) {
+	if (!error || typeof error !== 'object') {
 		return error
 	}
 
-	if (error.config?.headers) {
-		error.config.headers = redactHeaders(error.config.headers)
+	if (error.config) {
+		if (error.config.headers) {
+			error.config.headers = redactHeaders(error.config.headers)
+		}
+
+		delete error.config.data
+		delete error.config.auth
 	}
 
 	const request = summariseRequest(error.request)
@@ -99,7 +84,7 @@ export function redactError(error: any): any {
 		error.request = request
 	}
 
-	if (error.response && 'request' in error.response) {
+	if (error.response && typeof error.response === 'object' && 'request' in error.response) {
 		error.response.request = request
 	}
 
