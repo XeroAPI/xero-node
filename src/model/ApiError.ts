@@ -23,6 +23,74 @@ interface ErrorResponse {
 	body: any
 }
 
+const LOGGABLE_HEADERS = [
+	'accept',
+	'accept-encoding',
+	'content-length',
+	'content-type',
+	'contenttype',
+	'host',
+	'idempotency-key',
+	'if-modified-since',
+	'user-agent',
+	'xero-application-id',
+	'xero-tenant-id',
+	'xero-user-id',
+]
+
+export function redactHeaders(headers: any): any {
+	const safe: any = {}
+
+	Object.keys(headers || {}).forEach((name) => {
+		if (LOGGABLE_HEADERS.indexOf(name.toLowerCase()) !== -1) {
+			safe[name] = headers[name]
+		}
+	})
+
+	return safe
+}
+
+function summariseRequest(request: any): any {
+	if (!request) {
+		return request
+	}
+
+	return {
+		method: request.method,
+		protocol: request.protocol,
+		host: request.host,
+		path: request.path,
+		headers: typeof request.getHeaders === 'function' ? redactHeaders(request.getHeaders()) : {},
+	}
+}
+
+export function redactError(error: any): any {
+	if (!error || typeof error !== 'object') {
+		return error
+	}
+
+	if (error.config) {
+		if (error.config.headers) {
+			error.config.headers = redactHeaders(error.config.headers)
+		}
+
+		delete error.config.data
+		delete error.config.auth
+	}
+
+	const request = summariseRequest(error.request)
+
+	if ('request' in error) {
+		error.request = request
+	}
+
+	if (error.response && typeof error.response === 'object' && 'request' in error.response) {
+		error.response.request = request
+	}
+
+	return error
+}
+
 export class ApiError {
 
 	statusCode: number
@@ -44,7 +112,7 @@ export class ApiError {
 				host: request.host,
 				path: request.path,
 			},
-			headers: typeof request.getHeaders === 'function' ? request.getHeaders() : {},
+			headers: typeof request.getHeaders === 'function' ? redactHeaders(request.getHeaders()) : {},
 			method: request.method
 		}
 	}
