@@ -12,10 +12,11 @@ on:
         required: true
         type: boolean
         default: false
-      publish_tag:
-        description: "Publish to a specific tab, to not update latest"
+      publish_hotfix:
+        description: "Publish under a 'hotfix-<version>' dist-tag instead of 'latest', e.g. when patching an older major version"
         required: false
-        type: string
+        type: boolean
+        default: false
 
 jobs:
   publish:
@@ -61,7 +62,25 @@ jobs:
          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Publish to npm
-        run: npm publish ${{ inputs.dry_run && '--dry-run' || '' }} ${{ inputs.publish_tag && format('--tag={0}', inputs.publish_tag) || '' }}
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+          PUBLISH_HOTFIX: ${{ inputs.publish_hotfix }}
+        run: |
+          args=()
+          if [ "$DRY_RUN" = "true" ]; then
+            args+=(--dry-run)
+          fi
+          if [ "$PUBLISH_HOTFIX" = "true" ]; then
+            version=$(node -p "require('./package.json').version")
+            tag="hotfix-$version"
+            args+=(--tag "$tag")
+          fi
+          npm publish "${args[@]}"
+
+          if [ "$PUBLISH_HOTFIX" = "true" ] && [ "$DRY_RUN" != "true" ]; then
+            pkg_name=$(node -p "require('./package.json').name")
+            npm dist-tag rm "$pkg_name" "$tag"
+          fi
         working-directory: xero-node
 
   notify-codegen-repo:
