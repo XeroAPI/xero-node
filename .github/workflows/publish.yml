@@ -3,17 +3,17 @@ on:
   workflow_dispatch:
     inputs:
       orr_id:
-        description: "ORR id for the change/release"
+        description: ORR id for the change/release
         required: true
         type: string
         default: ORR-8317
       dry_run:
-        description: "Run the publish step in dry-run"
+        description: Run the publish step in dry-run
         required: true
         type: boolean
         default: false
       publish_hotfix:
-        description: "Publish under a 'hotfix-<version>' dist-tag instead of 'latest', e.g. when patching an older major version"
+        description: Publish a version without updating the `latest` tag
         required: false
         type: boolean
         default: false
@@ -71,16 +71,12 @@ jobs:
             args+=(--dry-run)
           fi
           if [ "$PUBLISH_HOTFIX" = "true" ]; then
-            version=$(node -p "require('./package.json').version")
-            tag="hotfix-$version"
+            major=$(node -p "require('./package.json').version.split('.')[0]")
+            tag="$major-hotfix"
             args+=(--tag "$tag")
           fi
           npm publish "${args[@]}"
 
-          if [ "$PUBLISH_HOTFIX" = "true" ] && [ "$DRY_RUN" != "true" ]; then
-            pkg_name=$(node -p "require('./package.json').name")
-            npm dist-tag rm "$pkg_name" "$tag"
-          fi
         working-directory: xero-node
 
   notify-codegen-repo:
