@@ -12,6 +12,10 @@ on:
         required: true
         type: boolean
         default: false
+      publish_tag:
+        description: "Publish to a specific tab, to not update latest"
+        required: false
+        type: string
 
 jobs:
   publish:
@@ -57,7 +61,7 @@ jobs:
          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Publish to npm
-        run: npm publish ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: npm publish ${{ inputs.dry_run && '--dry-run' || '' }} ${{ inputs.publish_tag && format('--tag={0}', inputs.publish_tag) || '' }}
         working-directory: xero-node
 
   notify-codegen-repo:
