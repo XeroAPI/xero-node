@@ -12,6 +12,15 @@ on:
         required: true
         type: boolean
         default: false
+      publish_hotfix:
+        description: "Publish a version without updating the `latest` tag"
+        required: false
+        type: boolean
+        default: false
+      checkout_ref:
+        description: "git ref to checkout and publish from (defaults to the ref the workflow runs against)"
+        required: false
+        type: string
 
 jobs:
   publish:
@@ -28,6 +37,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: XeroAPI/xero-node
+          ref: ${{ inputs.checkout_ref || github.sha }}
           path: xero-node
 
       - name: Set up Node environment
@@ -57,7 +67,21 @@ jobs:
          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Publish to npm
-        run: npm publish ${{ inputs.dry_run && '--dry-run' || '' }}
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+          PUBLISH_HOTFIX: ${{ inputs.publish_hotfix }}
+        run: |
+          args=()
+          if [ "$DRY_RUN" = "true" ]; then
+            args+=(--dry-run)
+          fi
+          if [ "$PUBLISH_HOTFIX" = "true" ]; then
+            major=$(node -p "require('./package.json').version.split('.')[0]")
+            tag="$major-hotfix"
+            args+=(--tag "$tag")
+          fi
+          npm publish "${args[@]}"
+
         working-directory: xero-node
 
   notify-codegen-repo:
@@ -101,7 +125,7 @@ jobs:
               -d '{
                 "ref": "master",
                 "inputs": {
-                  "commit": "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}",
+                  "commit": "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event.inputs.checkout_ref || github.sha }}",
                   "status": "${{needs.publish.result}}",
                   "deployer": "xero-codegen-bot",
                   "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
