@@ -40,7 +40,7 @@ export enum FinanceApiApiKeys {
 
 export class FinanceApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-17.0.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-17.1.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
