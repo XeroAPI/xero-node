@@ -38,7 +38,7 @@ export enum AppStoreApiApiKeys {
 
 export class AppStoreApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-18.0.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-18.1.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -85,10 +85,10 @@ export class AppStoreApi {
     }
 
     /**
-     * 
+     *
      * @summary Retrieves a subscription for a given subscriptionId
      * @param subscriptionId Unique identifier for Subscription object
-     */     
+     */
     public async getSubscription (subscriptionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Subscription;  }> {
         const localVarPath = this.basePath + '/subscriptions/{subscriptionId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)));
@@ -152,10 +152,10 @@ export class AppStoreApi {
         });
     }
     /**
-     * 
+     *
      * @summary Gets all usage records related to the subscription
      * @param subscriptionId Unique identifier for Subscription object
-     */     
+     */
     public async getUsageRecords (subscriptionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: UsageRecordsList;  }> {
         const localVarPath = this.basePath + '/subscriptions/{subscriptionId}/usage-records'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)));
@@ -219,13 +219,13 @@ export class AppStoreApi {
         });
     }
     /**
-     * 
+     *
      * @summary Send metered usage belonging to this subscription and subscription item
      * @param subscriptionId Unique identifier for Subscription object
      * @param subscriptionItemId The unique identifier of the subscriptionItem
      * @param createUsageRecord Contains the quantity for the usage record to create
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async postUsageRecords (subscriptionId: string, subscriptionItemId: string, createUsageRecord: CreateUsageRecord, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: UsageRecord;  }> {
         const localVarPath = this.basePath + '/subscriptions/{subscriptionId}/items/{subscriptionItemId}/usage-records'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
@@ -301,14 +301,14 @@ export class AppStoreApi {
         });
     }
     /**
-     * 
+     *
      * @summary Update and existing metered usage belonging to this subscription and subscription item
      * @param subscriptionId Unique identifier for Subscription object
      * @param subscriptionItemId The unique identifier of the subscriptionItem
      * @param usageRecordId The unique identifier of the usage record
      * @param updateUsageRecord Contains the quantity for the usage record to update
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async putUsageRecords (subscriptionId: string, subscriptionItemId: string, usageRecordId: string, updateUsageRecord: UpdateUsageRecord, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: UsageRecord;  }> {
         const localVarPath = this.basePath + '/subscriptions/{subscriptionId}/items/{subscriptionItemId}/usage-records/{usageRecordId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
