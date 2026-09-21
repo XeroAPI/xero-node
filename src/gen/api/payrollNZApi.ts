@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
+import localVarRequest = require('../lib/request');
 import http = require('http');
 import fs = require('fs');
 

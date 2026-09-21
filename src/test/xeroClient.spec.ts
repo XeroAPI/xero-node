@@ -167,3 +167,52 @@ describe('the XeroClient', () => {
     });
   })
 })
+
+describe('error redaction', () => {
+  const util = require('util');
+  const clientSecret = 'client-secret-should-be-redacted';
+  const refreshToken = 'refresh-token-should-be-redacted';
+  const accessToken = 'access-token-should-be-redacted';
+  const basic = Buffer.from(`id:${clientSecret}`).toString('base64');
+  const appears = (value: any, needle: string) => {
+    let json = '';
+    try { json = JSON.stringify(value); } catch (e) { json = ''; }
+    return json.indexOf(needle) !== -1
+      || util.inspect(value).indexOf(needle) !== -1
+      || util.inspect(value, { depth: null }).indexOf(needle) !== -1;
+  };
+
+  beforeAll(() => nock.disableNetConnect());
+  afterAll(() => nock.enableNetConnect());
+  afterEach(() => nock.cleanAll());
+
+  it('redacts a failed client credentials request', async () => {
+    nock('https://identity.xero.com').post('/connect/token').reply(401, { error: 'invalid_client' });
+    const client = new XeroClient({ clientId: 'id', clientSecret, grantType: 'client_credentials', scopes: ['accounting.transactions'] });
+    let error: any;
+    try { await client.getClientCredentialsToken(); } catch (e) { error = e; }
+    expect(error.response.statusCode).toBe(401);
+    expect(appears(error, clientSecret)).toBe(false);
+    expect(appears(error, basic)).toBe(false);
+  });
+
+  it('redacts a failed refresh request', async () => {
+    nock('https://identity.xero.com').post('/connect/token').reply(400, { error: 'invalid_grant' });
+    const client = new XeroClient({ clientId: 'id', clientSecret, scopes: ['accounting.transactions'] });
+    let error: any;
+    try { await client.refreshWithRefreshToken('id', clientSecret, refreshToken); } catch (e) { error = e; }
+    expect(error.response.statusCode).toBe(400);
+    expect(appears(error, refreshToken)).toBe(false);
+    expect(appears(error, basic)).toBe(false);
+  });
+
+  it('redacts a failed generated API request', async () => {
+    nock('https://api.xero.com').get(/.*/).reply(401, { Detail: 'AuthenticationUnsuccessful' });
+    const client = new XeroClient({ clientId: 'id', clientSecret, scopes: ['accounting.transactions'] });
+    client.setTokenSet({ access_token: accessToken, expires_in: 1800, token_type: 'Bearer' });
+    let error: any;
+    try { await client.accountingApi.getInvoices('tenant'); } catch (e) { error = e; }
+    expect(error.response.statusCode).toBe(401);
+    expect(appears(error, accessToken)).toBe(false);
+  });
+});
