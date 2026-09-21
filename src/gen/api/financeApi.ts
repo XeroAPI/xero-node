@@ -40,7 +40,7 @@ export enum FinanceApiApiKeys {
 
 export class FinanceApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-18.0.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-18.1.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -87,14 +87,14 @@ export class FinanceApi {
     }
 
     /**
-     * For lenders that prefer using bank statement data as the source of truth.  We provide a data point that will allow access to customer bank statements, plus for reconciled bank transactions the matching accounting, invoice and billing data as well.  As customers reconcile bank statements to invoices and bills, this transaction detail will provide valuable insight for lender\'s assessment measures. 
+     * For lenders that prefer using bank statement data as the source of truth.  We provide a data point that will allow access to customer bank statements, plus for reconciled bank transactions the matching accounting, invoice and billing data as well.  As customers reconcile bank statements to invoices and bills, this transaction detail will provide valuable insight for lender\'s assessment measures.
      * @summary Get Bank Statement Accounting
      * @param xeroTenantId Xero identifier for Tenant
      * @param bankAccountID string, GUID    Bank account Id
      * @param fromDate date, yyyy-MM-dd     Specifies the start date of the query period.   The maximum range of the query period is 12 months. If the specified query period is more than 12 months the request will be rejected.
      * @param toDate date, yyyy-MM-dd     Specifies the end date of the query period.   If the end date is a future date, the request will be rejected.
      * @param summaryOnly boolean, true/false    The default value is true if no parameter is provided.    In summary mode, the response will exclude the computation-heavy LineItems fields from bank transaction, invoice, credit note, prepayment and overpayment data, making the API calls quicker and more efficient.
-     */     
+     */
     public async getBankStatementAccounting (xeroTenantId: string, bankAccountID: string, fromDate: string, toDate: string, summaryOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BankStatementAccountingResponse;  }> {
         const localVarPath = this.basePath + '/BankStatementsPlus/statements';
         let localVarQueryParameters: any = {};
@@ -195,7 +195,7 @@ export class FinanceApi {
      * @param balanceDate date, yyyy-MM-dd     If no parameter is provided, the current date will be used.    The ‘balance date’ will return transactions based on the accounting date entered by the user.  Transactions before the balanceDate will be included.  The user has discretion as to which accounting period the transaction relates to.    The ‘balance date’  will control the latest maximum date of transactions included in the aggregate numbers.  Balance date does not affect the CurrentStatement object, as this will always return the most recent statement before asAtSystemDate (if specified)
      * @param asAtSystemDate date, yyyy-MM-dd     If no parameter is provided, the current date will be used.    The ‘as at’ date will return transactions based on the  creation date.  It reflects the date the transactions were entered into Xero, not the accounting date.  The ‘as at’ date can not be overridden by the user.  This can be used to estimate a ‘historical frequency of reconciliation’.    The ‘as at’ date will affect the current statement in the response, as any candidate statements created after this date will be filtered out.  Thus the current statement returned will be the most recent statement prior to the specified ‘as at’ date.  Be aware that neither the begin date, nor the balance date, will affect the current statement.    Note;  information is only presented when system architecture allows, meaning historical cash validation information will be an estimate. In addition, delete events are not aware of the ‘as at’ functionality in this endpoint, meaning that transactions deleted at the time the API is accessed will be considered to always have been deleted.
      * @param beginDate date, yyyy-MM-dd     If no parameter is provided, the aggregate results will be drawn from the user’s total history.    The ‘begin date’ will return transactions based on the accounting date entered by the user. Transactions after the beginDate will be included.  The user has discretion as to which accounting period the transaction relates to.
-     */     
+     */
     public async getCashValidation (xeroTenantId: string, balanceDate?: string, asAtSystemDate?: string, beginDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Array<CashValidationResponse>;  }> {
         const localVarPath = this.basePath + '/CashValidation';
         let localVarQueryParameters: any = {};
@@ -275,7 +275,7 @@ export class FinanceApi {
      * @summary Get Balance Sheet report
      * @param xeroTenantId Xero identifier for Tenant
      * @param balanceDate Specifies the date for balance sheet report.    Format yyyy-MM-dd. If no parameter is provided, the current date will be used.
-     */     
+     */
     public async getFinancialStatementBalanceSheet (xeroTenantId: string, balanceDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: BalanceSheetResponse;  }> {
         const localVarPath = this.basePath + '/FinancialStatements/BalanceSheet';
         let localVarQueryParameters: any = {};
@@ -348,7 +348,7 @@ export class FinanceApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param startDate Date e.g. yyyy-MM-dd    Specifies the start date for cash flow report.    If no parameter is provided, the date of 12 months before the end date will be used.
      * @param endDate Date e.g. yyyy-MM-dd    Specifies the end date for cash flow report.    If no parameter is provided, the current date will be used.
-     */     
+     */
     public async getFinancialStatementCashflow (xeroTenantId: string, startDate?: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: CashflowResponse;  }> {
         const localVarPath = this.basePath + '/FinancialStatements/Cashflow';
         let localVarQueryParameters: any = {};
@@ -427,7 +427,7 @@ export class FinanceApi {
      * @param includeManualJournals Specifies whether to include the manual journals in the report.                If no parameter is provided, manual journals will not be included.
      * @param startDate Date yyyy-MM-dd    Specifies the start date for the report.                If no parameter is provided, the date of 12 months before the end date will be used.                It is recommended to always specify both a start date and end date; While the initial range may be set to 12 months, this may need to be reduced for high volume organisations in order to improve latency.
      * @param endDate Date yyyy-MM-dd    Specifies the end date for the report.    If no parameter is provided, the current date will be used.                It is recommended to always specify both a start date and end date; While the initial range may be set to 12 months, this may need to be reduced for high volume organisations in order to improve latency.
-     */     
+     */
     public async getFinancialStatementContactsExpense (xeroTenantId: string, contactIds?: Array<string>, includeManualJournals?: boolean, startDate?: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: IncomeByContactResponse;  }> {
         const localVarPath = this.basePath + '/FinancialStatements/contacts/expense';
         let localVarQueryParameters: any = {};
@@ -514,7 +514,7 @@ export class FinanceApi {
      * @param includeManualJournals Specifies whether to include the manual journals in the report.                If no parameter is provided, manual journals will not be included.
      * @param startDate Date yyyy-MM-dd    Specifies the start date for the report.                If no parameter is provided, the date of 12 months before the end date will be used.                It is recommended to always specify both a start date and end date; While the initial range may be set to 12 months, this may need to be reduced for high volume organisations in order to improve latency.
      * @param endDate Date yyyy-MM-dd    Specifies the end date for the report.    If no parameter is provided, the current date will be used.                It is recommended to always specify both a start date and end date; While the initial range may be set to 12 months, this may need to be reduced for high volume organisations in order to improve latency.
-     */     
+     */
     public async getFinancialStatementContactsRevenue (xeroTenantId: string, contactIds?: Array<string>, includeManualJournals?: boolean, startDate?: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: IncomeByContactResponse;  }> {
         const localVarPath = this.basePath + '/FinancialStatements/contacts/revenue';
         let localVarQueryParameters: any = {};
@@ -599,7 +599,7 @@ export class FinanceApi {
      * @param xeroTenantId Xero identifier for Tenant
      * @param startDate Date e.g. yyyy-MM-dd    Specifies the start date for profit and loss report    If no parameter is provided, the date of 12 months before the end date will be used.
      * @param endDate Date e.g. yyyy-MM-dd    Specifies the end date for profit and loss report     If no parameter is provided, the current date will be used.
-     */     
+     */
     public async getFinancialStatementProfitAndLoss (xeroTenantId: string, startDate?: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ProfitAndLossResponse;  }> {
         const localVarPath = this.basePath + '/FinancialStatements/ProfitAndLoss';
         let localVarQueryParameters: any = {};
@@ -675,7 +675,7 @@ export class FinanceApi {
      * @summary Get Trial Balance report
      * @param xeroTenantId Xero identifier for Tenant
      * @param endDate Date e.g. yyyy-MM-dd     Specifies the end date for trial balance report     If no parameter is provided, the current date will be used.
-     */     
+     */
     public async getFinancialStatementTrialBalance (xeroTenantId: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrialBalanceResponse;  }> {
         const localVarPath = this.basePath + '/FinancialStatements/TrialBalance';
         let localVarQueryParameters: any = {};

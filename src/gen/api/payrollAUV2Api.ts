@@ -38,7 +38,7 @@ export enum PayrollAuV2ApiApiKeys {
 
 export class PayrollAuV2Api {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-18.0.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-18.1.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -85,12 +85,12 @@ export class PayrollAuV2Api {
     }
 
     /**
-     * 
+     *
      * @summary Approves a specific timesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async approveTimesheet (xeroTenantId: string, timesheetID: string, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Approve'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -161,12 +161,12 @@ export class PayrollAuV2Api {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new timesheet
      * @param xeroTenantId Xero identifier for Tenant
-     * @param timesheet 
+     * @param timesheet
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createTimesheet (xeroTenantId: string, timesheet: Timesheet, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetObject;  }> {
         const localVarPath = this.basePath + '/Timesheets';
         let localVarQueryParameters: any = {};
@@ -236,13 +236,13 @@ export class PayrollAuV2Api {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new timesheet line for a specific timesheet using a unique timesheet ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
-     * @param timesheetLine 
+     * @param timesheetLine
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLine: TimesheetLine, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetLineObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -318,11 +318,11 @@ export class PayrollAuV2Api {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a specific timesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
-     */     
+     */
     public async deleteTimesheet (xeroTenantId: string, timesheetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetLine;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -392,12 +392,12 @@ export class PayrollAuV2Api {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a specific timesheet line
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
      * @param timesheetLineID Identifier for the timesheet line
-     */     
+     */
     public async deleteTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLineID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetLine;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines/{TimesheetLineID}'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)))
@@ -473,11 +473,11 @@ export class PayrollAuV2Api {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieve a specific timesheet by using a unique timesheet ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
-     */     
+     */
     public async getTimesheet (xeroTenantId: string, timesheetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -547,7 +547,7 @@ export class PayrollAuV2Api {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves timesheets
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
@@ -556,7 +556,7 @@ export class PayrollAuV2Api {
      * @param startDate filter results by any timesheets with a startDate on or after the provided date
      * @param endDate filter results by any timesheets with a endDate on or before the provided date
      * @param sort sort the order of timesheets returned. The default is based on the timesheets createdDate, sorted oldest to newest. Currently, the only other option is to reverse the order based on the timesheets startDate, sorted newest to oldest.
-     */     
+     */
     public async getTimesheets (xeroTenantId: string, page?: number, filter?: string, status?: string, startDate?: string, endDate?: string, sort?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Timesheets;  }> {
         const localVarPath = this.basePath + '/Timesheets';
         let localVarQueryParameters: any = {};
@@ -644,12 +644,12 @@ export class PayrollAuV2Api {
         });
     }
     /**
-     * 
+     *
      * @summary Reverts a specific timesheet to draft
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async revertTimesheet (xeroTenantId: string, timesheetID: string, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/RevertToDraft'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -720,14 +720,14 @@ export class PayrollAuV2Api {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a specific timesheet line for a specific timesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
      * @param timesheetLineID Identifier for the timesheet line
-     * @param timesheetLine 
+     * @param timesheetLine
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLineID: string, timesheetLine: TimesheetLine, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetLineObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines/{TimesheetLineID}'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)))

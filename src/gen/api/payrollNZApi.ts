@@ -97,7 +97,7 @@ export enum PayrollNzApiApiKeys {
 
 export class PayrollNzApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-18.0.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-18.1.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
@@ -144,12 +144,12 @@ export class PayrollNzApi {
     }
 
     /**
-     * 
+     *
      * @summary Approves a timesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async approveTimesheet (xeroTenantId: string, timesheetID: string, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Approve'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -220,12 +220,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new deduction for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
-     * @param deduction 
+     * @param deduction
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createDeduction (xeroTenantId: string, deduction: Deduction, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: DeductionObject;  }> {
         const localVarPath = this.basePath + '/Deductions';
         let localVarQueryParameters: any = {};
@@ -295,12 +295,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new earnings rate
      * @param xeroTenantId Xero identifier for Tenant
-     * @param earningsRate 
+     * @param earningsRate
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEarningsRate (xeroTenantId: string, earningsRate: EarningsRate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EarningsRateObject;  }> {
         const localVarPath = this.basePath + '/EarningsRates';
         let localVarQueryParameters: any = {};
@@ -370,12 +370,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an employees
      * @param xeroTenantId Xero identifier for Tenant
-     * @param employee 
+     * @param employee
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployee (xeroTenantId: string, employee: Employee, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeObject;  }> {
         const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
@@ -445,13 +445,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates earnings template records for an employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param earningsTemplate 
+     * @param earningsTemplate
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployeeEarningsTemplate (xeroTenantId: string, employeeID: string, earningsTemplate: EarningsTemplate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EarningsTemplateObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplates/Earnings'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -527,13 +527,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates leave records for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param employeeLeave 
+     * @param employeeLeave
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployeeLeave (xeroTenantId: string, employeeID: string, employeeLeave: EmployeeLeave, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaveObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -609,13 +609,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a leave set-up for a specific employee. This is required before viewing, configuring and requesting leave for an employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param employeeLeaveSetup 
+     * @param employeeLeaveSetup
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployeeLeaveSetup (xeroTenantId: string, employeeID: string, employeeLeaveSetup: EmployeeLeaveSetup, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaveSetupObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeaveSetup'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -691,13 +691,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates leave type records for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param employeeLeaveType 
+     * @param employeeLeaveType
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployeeLeaveType (xeroTenantId: string, employeeID: string, employeeLeaveType: EmployeeLeaveType, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaveTypeObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeaveTypes'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -773,13 +773,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates opening balances for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param employeeOpeningBalance 
+     * @param employeeOpeningBalance
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployeeOpeningBalances (xeroTenantId: string, employeeID: string, employeeOpeningBalance: Array<EmployeeOpeningBalance>, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeOpeningBalancesObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/OpeningBalances'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -855,13 +855,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a payment method for an employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param paymentMethod 
+     * @param paymentMethod
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployeePaymentMethod (xeroTenantId: string, employeeID: string, paymentMethod: PaymentMethod, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaymentMethodObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/PaymentMethods'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -937,13 +937,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an employee salary and wage record
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param salaryAndWage 
+     * @param salaryAndWage
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployeeSalaryAndWage (xeroTenantId: string, employeeID: string, salaryAndWage: SalaryAndWage, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: SalaryAndWageObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -1019,13 +1019,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an employee working pattern
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param employeeWorkingPatternWithWorkingWeeksRequest 
+     * @param employeeWorkingPatternWithWorkingWeeksRequest
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployeeWorkingPattern (xeroTenantId: string, employeeID: string, employeeWorkingPatternWithWorkingWeeksRequest: EmployeeWorkingPatternWithWorkingWeeksRequest, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeWorkingPatternWithWorkingWeeksObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Working-Patterns'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -1101,13 +1101,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an employment detail for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param employment 
+     * @param employment
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createEmployment (xeroTenantId: string, employeeID: string, employment: Employment, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmploymentObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Employment'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -1183,12 +1183,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new leave type
      * @param xeroTenantId Xero identifier for Tenant
-     * @param leaveType 
+     * @param leaveType
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createLeaveType (xeroTenantId: string, leaveType: LeaveType, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: LeaveTypeObject;  }> {
         const localVarPath = this.basePath + '/LeaveTypes';
         let localVarQueryParameters: any = {};
@@ -1258,13 +1258,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates multiple employee earnings template records for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param earningsTemplate 
+     * @param earningsTemplate
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createMultipleEmployeeEarningsTemplate (xeroTenantId: string, employeeID: string, earningsTemplate: Array<EarningsTemplate>, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeEarningsTemplates;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplateEarnings'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -1340,12 +1340,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a pay run
      * @param xeroTenantId Xero identifier for Tenant
-     * @param payRun 
+     * @param payRun
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPayRun (xeroTenantId: string, payRun: PayRun, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PayRunObject;  }> {
         const localVarPath = this.basePath + '/PayRuns';
         let localVarQueryParameters: any = {};
@@ -1415,12 +1415,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new payrun calendar
      * @param xeroTenantId Xero identifier for Tenant
-     * @param payRunCalendar 
+     * @param payRunCalendar
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createPayRunCalendar (xeroTenantId: string, payRunCalendar: PayRunCalendar, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PayRunCalendarObject;  }> {
         const localVarPath = this.basePath + '/PayRunCalendars';
         let localVarQueryParameters: any = {};
@@ -1490,12 +1490,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new reimbursement
      * @param xeroTenantId Xero identifier for Tenant
-     * @param reimbursement 
+     * @param reimbursement
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createReimbursement (xeroTenantId: string, reimbursement: Reimbursement, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReimbursementObject;  }> {
         const localVarPath = this.basePath + '/Reimbursements';
         let localVarQueryParameters: any = {};
@@ -1565,12 +1565,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new superannuation
      * @param xeroTenantId Xero identifier for Tenant
-     * @param benefit 
+     * @param benefit
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createSuperannuation (xeroTenantId: string, benefit: Benefit, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: SuperannuationObject;  }> {
         const localVarPath = this.basePath + '/Superannuations';
         let localVarQueryParameters: any = {};
@@ -1640,12 +1640,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates a new timesheet
      * @param xeroTenantId Xero identifier for Tenant
-     * @param timesheet 
+     * @param timesheet
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createTimesheet (xeroTenantId: string, timesheet: Timesheet, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetObject;  }> {
         const localVarPath = this.basePath + '/Timesheets';
         let localVarQueryParameters: any = {};
@@ -1715,13 +1715,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Create a new timesheet line for a specific time sheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
-     * @param timesheetLine 
+     * @param timesheetLine
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async createTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLine: TimesheetLine, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetLineObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -1797,12 +1797,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes an employee\'s earnings template record
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param payTemplateEarningID Id for single pay template earnings object
-     */     
+     */
     public async deleteEmployeeEarningsTemplate (xeroTenantId: string, employeeID: string, payTemplateEarningID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EarningsTemplateObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplates/Earnings/{PayTemplateEarningID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -1878,12 +1878,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a leave record for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param leaveID Leave id for single object
-     */     
+     */
     public async deleteEmployeeLeave (xeroTenantId: string, employeeID: string, leaveID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaveObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave/{LeaveID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -1959,12 +1959,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes an employee\'s salary and wages record
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param salaryAndWagesID Id for single salary and wages object
-     */     
+     */
     public async deleteEmployeeSalaryAndWage (xeroTenantId: string, employeeID: string, salaryAndWagesID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: SalaryAndWageObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages/{SalaryAndWagesID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -2040,12 +2040,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary deletes employee\'s working patterns
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param employeeWorkingPatternID Employee working pattern id for single object
-     */     
+     */
     public async deleteEmployeeWorkingPattern (xeroTenantId: string, employeeID: string, employeeWorkingPatternID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaveObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Working-Patterns/{EmployeeWorkingPatternID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -2121,11 +2121,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a timesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
-     */     
+     */
     public async deleteTimesheet (xeroTenantId: string, timesheetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetLine;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -2195,12 +2195,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Deletes a timesheet line for a specific timesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
      * @param timesheetLineID Identifier for the timesheet line
-     */     
+     */
     public async deleteTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLineID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetLine;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines/{TimesheetLineID}'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)))
@@ -2276,11 +2276,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a single deduction by using a unique deduction ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param deductionId Identifier for the deduction
-     */     
+     */
     public async getDeduction (xeroTenantId: string, deductionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: DeductionObject;  }> {
         const localVarPath = this.basePath + '/Deductions/{deductionId}'
             .replace('{' + 'deductionId' + '}', encodeURIComponent(String(deductionId)));
@@ -2350,11 +2350,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves deductions for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getDeductions (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Deductions;  }> {
         const localVarPath = this.basePath + '/Deductions';
         let localVarQueryParameters: any = {};
@@ -2422,11 +2422,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific earnings rates by using a unique earnings rate id
      * @param xeroTenantId Xero identifier for Tenant
      * @param earningsRateID Identifier for the earnings rate
-     */     
+     */
     public async getEarningsRate (xeroTenantId: string, earningsRateID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EarningsRateObject;  }> {
         const localVarPath = this.basePath + '/EarningsRates/{EarningsRateID}'
             .replace('{' + 'EarningsRateID' + '}', encodeURIComponent(String(earningsRateID)));
@@ -2496,11 +2496,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves earnings rates
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getEarningsRates (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EarningsRates;  }> {
         const localVarPath = this.basePath + '/EarningsRates';
         let localVarQueryParameters: any = {};
@@ -2568,11 +2568,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves an employees using a unique employee ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployee (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -2642,11 +2642,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves leave balances for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployeeLeaveBalances (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaveBalances;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeaveBalances'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -2716,13 +2716,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves leave periods for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param startDate Filter by start date
      * @param endDate Filter by end date
-     */     
+     */
     public async getEmployeeLeavePeriods (xeroTenantId: string, employeeID: string, startDate?: string, endDate?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: LeavePeriods;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeavePeriods'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -2800,11 +2800,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves leave types for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployeeLeaveTypes (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaveTypes;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/LeaveTypes'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -2874,11 +2874,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves leave records for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployeeLeaves (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaves;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -2948,11 +2948,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves the opening balance for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployeeOpeningBalances (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeOpeningBalancesObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/OpeningBalances'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -3022,11 +3022,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves pay templates for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployeePayTemplates (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeePayTemplates;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplates'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -3096,11 +3096,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves available payment methods for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployeePaymentMethod (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaymentMethodObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/PaymentMethods'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -3170,12 +3170,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves an employee\'s salary and wages record by using a unique salary and wage ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param salaryAndWagesID Id for single pay template earnings object
-     */     
+     */
     public async getEmployeeSalaryAndWage (xeroTenantId: string, employeeID: string, salaryAndWagesID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: SalaryAndWages;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages/{SalaryAndWagesID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -3251,12 +3251,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves an employee\'s salary and wages
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getEmployeeSalaryAndWages (xeroTenantId: string, employeeID: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: SalaryAndWages;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -3330,11 +3330,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves tax records for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployeeTax (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeTaxObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Tax'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -3404,12 +3404,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves employee\'s working patterns
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param employeeWorkingPatternID Employee working pattern id for single object
-     */     
+     */
     public async getEmployeeWorkingPattern (xeroTenantId: string, employeeID: string, employeeWorkingPatternID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeWorkingPatternWithWorkingWeeksObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Working-Patterns/{EmployeeWorkingPatternID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -3485,11 +3485,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves employee\'s working patterns
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     */     
+     */
     public async getEmployeeWorkingPatterns (xeroTenantId: string, employeeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeWorkingPatternsObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Working-Patterns'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -3559,12 +3559,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves employees
      * @param xeroTenantId Xero identifier for Tenant
      * @param filter Filter by first name and/or lastname
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getEmployees (xeroTenantId: string, filter?: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Employees;  }> {
         const localVarPath = this.basePath + '/Employees';
         let localVarQueryParameters: any = {};
@@ -3636,11 +3636,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific leave type by using a unique leave type ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param leaveTypeID Identifier for the leave type
-     */     
+     */
     public async getLeaveType (xeroTenantId: string, leaveTypeID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: LeaveTypeObject;  }> {
         const localVarPath = this.basePath + '/LeaveTypes/{LeaveTypeID}'
             .replace('{' + 'LeaveTypeID' + '}', encodeURIComponent(String(leaveTypeID)));
@@ -3710,12 +3710,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves leave types
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      * @param activeOnly Filters leave types by active status. By default the API returns all leave types.
-     */     
+     */
     public async getLeaveTypes (xeroTenantId: string, page?: number, activeOnly?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: LeaveTypes;  }> {
         const localVarPath = this.basePath + '/LeaveTypes';
         let localVarQueryParameters: any = {};
@@ -3787,11 +3787,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific pay run by using a unique pay run ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param payRunID Identifier for the pay run
-     */     
+     */
     public async getPayRun (xeroTenantId: string, payRunID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PayRunObject;  }> {
         const localVarPath = this.basePath + '/PayRuns/{PayRunID}'
             .replace('{' + 'PayRunID' + '}', encodeURIComponent(String(payRunID)));
@@ -3861,11 +3861,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific payrun calendar by using a unique payroll calendar ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param payrollCalendarID Identifier for the payrun calendars
-     */     
+     */
     public async getPayRunCalendar (xeroTenantId: string, payrollCalendarID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PayRunCalendarObject;  }> {
         const localVarPath = this.basePath + '/PayRunCalendars/{PayrollCalendarID}'
             .replace('{' + 'PayrollCalendarID' + '}', encodeURIComponent(String(payrollCalendarID)));
@@ -3935,11 +3935,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves payrun calendars
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getPayRunCalendars (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PayRunCalendars;  }> {
         const localVarPath = this.basePath + '/PayRunCalendars';
         let localVarQueryParameters: any = {};
@@ -4007,12 +4007,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves pay runs
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
      * @param status By default get payruns will return all the payruns for an organization. You can add GET https://api.xero.com/payroll.xro/2.0/payRuns?statu&#x3D;{PayRunStatus} to filter the payruns by status.
-     */     
+     */
     public async getPayRuns (xeroTenantId: string, page?: number, status?: 'Draft' | 'Posted', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PayRuns;  }> {
         const localVarPath = this.basePath + '/PayRuns';
         let localVarQueryParameters: any = {};
@@ -4084,11 +4084,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific payslip by a unique pay slip ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param paySlipID Identifier for the payslip
-     */     
+     */
     public async getPaySlip (xeroTenantId: string, paySlipID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaySlipObject;  }> {
         const localVarPath = this.basePath + '/PaySlips/{PaySlipID}'
             .replace('{' + 'PaySlipID' + '}', encodeURIComponent(String(paySlipID)));
@@ -4158,12 +4158,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves payslips
      * @param xeroTenantId Xero identifier for Tenant
      * @param payRunID PayrunID which specifies the containing payrun of payslips to retrieve. By default, the API does not group payslips by payrun.
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getPaySlips (xeroTenantId: string, payRunID: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaySlips;  }> {
         const localVarPath = this.basePath + '/PaySlips';
         let localVarQueryParameters: any = {};
@@ -4240,11 +4240,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific reimbursement by using a unique reimbursement ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param reimbursementID Identifier for the reimbursement
-     */     
+     */
     public async getReimbursement (xeroTenantId: string, reimbursementID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: ReimbursementObject;  }> {
         const localVarPath = this.basePath + '/Reimbursements/{ReimbursementID}'
             .replace('{' + 'ReimbursementID' + '}', encodeURIComponent(String(reimbursementID)));
@@ -4314,11 +4314,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves reimbursements
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getReimbursements (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Reimbursements;  }> {
         const localVarPath = this.basePath + '/Reimbursements';
         let localVarQueryParameters: any = {};
@@ -4386,10 +4386,10 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves settings
      * @param xeroTenantId Xero identifier for Tenant
-     */     
+     */
     public async getSettings (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Settings;  }> {
         const localVarPath = this.basePath + '/Settings';
         let localVarQueryParameters: any = {};
@@ -4453,11 +4453,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific statutory deduction by using a unique statutory deductions id
      * @param xeroTenantId Xero identifier for Tenant
      * @param id Identifier for the statutory deduction
-     */     
+     */
     public async getStatutoryDeduction (xeroTenantId: string, id: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: StatutoryDeductionObject;  }> {
         const localVarPath = this.basePath + '/StatutoryDeductions/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
@@ -4527,11 +4527,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves statutory deductions
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getStatutoryDeductions (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: StatutoryDeductions;  }> {
         const localVarPath = this.basePath + '/StatutoryDeductions';
         let localVarQueryParameters: any = {};
@@ -4599,11 +4599,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific superannuation using a unique superannuation ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param superannuationID Identifier for the superannuation
-     */     
+     */
     public async getSuperannuation (xeroTenantId: string, superannuationID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: SuperannuationObject;  }> {
         const localVarPath = this.basePath + '/Superannuations/{SuperannuationID}'
             .replace('{' + 'SuperannuationID' + '}', encodeURIComponent(String(superannuationID)));
@@ -4673,11 +4673,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves superannuations
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
-     */     
+     */
     public async getSuperannuations (xeroTenantId: string, page?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Superannuations;  }> {
         const localVarPath = this.basePath + '/Superannuations';
         let localVarQueryParameters: any = {};
@@ -4745,11 +4745,11 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves a specific timesheet by using a unique timesheet ID
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
-     */     
+     */
     public async getTimesheet (xeroTenantId: string, timesheetID: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -4819,7 +4819,7 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves timesheets
      * @param xeroTenantId Xero identifier for Tenant
      * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 100.
@@ -4828,7 +4828,7 @@ export class PayrollNzApi {
      * @param startDate filter results by any timesheets with a startDate on or after the provided date
      * @param endDate filter results by any timesheets with a endDate on or before the provided date
      * @param sort sort the order of timesheets returned. The default is based on the timesheets createdDate, sorted oldest to newest. Currently, the only other option is to reverse the order based on the timesheets startDate, sorted newest to oldest.
-     */     
+     */
     public async getTimesheets (xeroTenantId: string, page?: number, filter?: string, status?: string, startDate?: string, endDate?: string, sort?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: Timesheets;  }> {
         const localVarPath = this.basePath + '/Timesheets';
         let localVarQueryParameters: any = {};
@@ -4916,10 +4916,10 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Retrieves tracking categories
      * @param xeroTenantId Xero identifier for Tenant
-     */     
+     */
     public async getTrackingCategories (xeroTenantId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TrackingCategories;  }> {
         const localVarPath = this.basePath + '/Settings/TrackingCategories';
         let localVarQueryParameters: any = {};
@@ -4983,12 +4983,12 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Reverts a timesheet to draft
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async revertTimesheet (xeroTenantId: string, timesheetID: string, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/RevertToDraft'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)));
@@ -5059,13 +5059,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates an existing employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param employee 
+     * @param employee
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateEmployee (xeroTenantId: string, employeeID: string, employee: Employee, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -5141,14 +5141,14 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates an earnings template records for an employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param payTemplateEarningID Id for single pay template earnings object
-     * @param earningsTemplate 
+     * @param earningsTemplate
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateEmployeeEarningsTemplate (xeroTenantId: string, employeeID: string, payTemplateEarningID: string, earningsTemplate: EarningsTemplate, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EarningsTemplateObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/PayTemplates/Earnings/{PayTemplateEarningID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -5230,14 +5230,14 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates leave records for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param leaveID Leave id for single object
-     * @param employeeLeave 
+     * @param employeeLeave
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateEmployeeLeave (xeroTenantId: string, employeeID: string, leaveID: string, employeeLeave: EmployeeLeave, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeLeaveObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Leave/{LeaveID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -5319,14 +5319,14 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates an employee\'s salary and wages record
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
      * @param salaryAndWagesID Id for single pay template earnings object
-     * @param salaryAndWage 
+     * @param salaryAndWage
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateEmployeeSalaryAndWage (xeroTenantId: string, employeeID: string, salaryAndWagesID: string, salaryAndWage: SalaryAndWage, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: SalaryAndWageObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/SalaryAndWages/{SalaryAndWagesID}'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)))
@@ -5408,13 +5408,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates the tax records for a specific employee
      * @param xeroTenantId Xero identifier for Tenant
      * @param employeeID Employee id for single object
-     * @param employeeTax 
+     * @param employeeTax
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateEmployeeTax (xeroTenantId: string, employeeID: string, employeeTax: EmployeeTax, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: EmployeeTaxObject;  }> {
         const localVarPath = this.basePath + '/Employees/{EmployeeID}/Tax'
             .replace('{' + 'EmployeeID' + '}', encodeURIComponent(String(employeeID)));
@@ -5490,13 +5490,13 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Creates an employee pay slip
      * @param xeroTenantId Xero identifier for Tenant
      * @param paySlipID Identifier for the payslip
-     * @param paySlip 
+     * @param paySlip
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updatePaySlipLineItems (xeroTenantId: string, paySlipID: string, paySlip: PaySlip, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: PaySlipObject;  }> {
         const localVarPath = this.basePath + '/PaySlips/{PaySlipID}'
             .replace('{' + 'PaySlipID' + '}', encodeURIComponent(String(paySlipID)));
@@ -5572,14 +5572,14 @@ export class PayrollNzApi {
         });
     }
     /**
-     * 
+     *
      * @summary Updates a timesheet line for a specific timesheet
      * @param xeroTenantId Xero identifier for Tenant
      * @param timesheetID Identifier for the timesheet
      * @param timesheetLineID Identifier for the timesheet line
-     * @param timesheetLine 
+     * @param timesheetLine
      * @param idempotencyKey This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-     */     
+     */
     public async updateTimesheetLine (xeroTenantId: string, timesheetID: string, timesheetLineID: string, timesheetLine: TimesheetLine, idempotencyKey?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: TimesheetLineObject;  }> {
         const localVarPath = this.basePath + '/Timesheets/{TimesheetID}/Lines/{TimesheetLineID}'
             .replace('{' + 'TimesheetID' + '}', encodeURIComponent(String(timesheetID)))
