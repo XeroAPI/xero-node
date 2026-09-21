@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
+import localVarRequest = require('../lib/request');
 import http = require('http');
 import fs = require('fs');
 
@@ -42,7 +42,7 @@ export enum ProjectApiApiKeys {
 
 export class ProjectApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-4.38.0'};
+    protected defaultHeaders : any = {'user-agent': 'xero-node-4.39.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 

@@ -1,6 +1,7 @@
 import { Client, Issuer, TokenSet, TokenSetParameters, custom } from 'openid-client';
 import * as xero from './gen/api';
 import request = require('request');
+import { redactError, redactResponse } from './model/redact';
 import http = require('http');
 
 export { TokenSet, TokenSetParameters } from 'openid-client';
@@ -216,12 +217,12 @@ export class XeroClient {
         body: this.encodeBody(body)
       }, (error, response, body) => {
         if (error) {
-          reject(error);
+          reject(redactError(error));
         } else {
           if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
             resolve({ response: response, body: body });
           } else {
-            reject({ response: response, body: body });
+            reject({ response: redactResponse(response), body: body });
           }
         }
       });
@@ -260,12 +261,12 @@ export class XeroClient {
         json: true
       }, (error, response, body) => {
         if (error) {
-          reject(error);
+          reject(redactError(error));
         } else {
           if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
             resolve({ response: response, body: body });
           } else {
-            reject({ response: response, body: body });
+            reject({ response: redactResponse(response), body: body });
           }
         }
       });
