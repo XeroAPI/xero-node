@@ -1,5 +1,6 @@
 import { Client, Issuer, TokenSet, TokenSetParameters, custom } from 'openid-client';
 import * as xero from './gen/api';
+import { redactError } from './model/ApiError';
 const axios = require('axios');
 import http = require('http');
 
@@ -223,7 +224,7 @@ export class XeroClient {
         }
       }
       catch (error) {
-        reject(error)
+        reject(redactError(error))
       }
     });
   }
@@ -265,7 +266,7 @@ export class XeroClient {
         }
       }
       catch (error) {
-        reject(error)
+        reject(redactError(error))
       }
     });
   }
