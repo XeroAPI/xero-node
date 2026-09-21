@@ -4,6 +4,7 @@ const refreshedTokenSetJson = require("./mocks/refreshedTokenSet.json");
 const connectionsResponse = require("./mocks/connectionsResponse.json");
 const getOrganisationResponse = require("./mocks/getOrganisationResponse.json");
 import nock from 'nock';
+import util from 'util';
 import sinon from 'sinon';
 
 const xero = new XeroClient({
@@ -167,3 +168,54 @@ describe('the XeroClient', () => {
     });
   })
 })
+
+describe('XeroClient error redaction', () => {
+  const clientSecret = 'client-secret-should-be-redacted';
+  const refreshToken = 'refresh-token-should-be-redacted';
+  const accessToken = 'access-token-should-be-redacted';
+  const scopes = ['accounting.transactions'];
+
+  const appears = (value: any, needle: string) =>
+    (typeof value === 'string' ? value : JSON.stringify(value)).includes(needle) ||
+    util.inspect(value, { depth: null }).includes(needle);
+
+  beforeAll(() => nock.disableNetConnect());
+  afterAll(() => nock.enableNetConnect());
+  afterEach(() => nock.cleanAll());
+
+  it('redacts a failed client credentials request', async () => {
+    nock('https://identity.xero.com').post('/connect/token').reply(401, { error: 'invalid_client' });
+    const client = new XeroClient({ clientId: 'id', clientSecret, grantType: 'client_credentials', scopes });
+
+    let error: any;
+    try { await client.getClientCredentialsToken(); } catch (e) { error = e; }
+
+    expect(error.response.status).toBe(401);
+    expect(appears(error, clientSecret)).toBe(false);
+    expect(appears(error, Buffer.from(`id:${clientSecret}`).toString('base64'))).toBe(false);
+  });
+
+  it('redacts a failed refresh request', async () => {
+    nock('https://identity.xero.com').post('/connect/token').reply(400, { error: 'invalid_grant' });
+    const client = new XeroClient({ clientId: 'id', clientSecret, scopes });
+
+    let error: any;
+    try { await client.refreshWithRefreshToken('id', clientSecret, refreshToken); } catch (e) { error = e; }
+
+    expect(error.response.status).toBe(400);
+    expect(appears(error, refreshToken)).toBe(false);
+    expect(appears(error, clientSecret)).toBe(false);
+  });
+
+  it('redacts a failed connections request', async () => {
+    nock('https://api.xero.com').get('/connections').reply(401, { Detail: 'AuthenticationUnsuccessful' });
+    const client = new XeroClient({ clientId: 'id', clientSecret, scopes });
+    client.setTokenSet({ access_token: accessToken, expires_in: 1800, token_type: 'Bearer' });
+
+    let error: any;
+    try { await client.updateTenants(false); } catch (e) { error = e; }
+
+    expect(error.response.status).toBe(401);
+    expect(appears(error, accessToken)).toBe(false);
+  });
+});
