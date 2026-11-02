@@ -11,7 +11,7 @@ export class EmployeeTax {
     */
     'specialTaxRatePercentage'?: number;
     /**
-    * Does the employee has a special student loan rate?
+    * Does the employee have a special student loan rate?
     */
     'hasSpecialStudentLoanRate'?: boolean;
     /**
@@ -19,7 +19,7 @@ export class EmployeeTax {
     */
     'specialStudentLoanRatePercentage'?: number;
     /**
-    * The employee eligibility for KiwiSaver.
+    * The employee eligibility for KiwiSaver. Deprecated, replaced by kiwiSaverStatus. Omit this field from POST requests.
     */
     'isEligibleForKiwiSaver'?: boolean;
     /**
@@ -30,6 +30,10 @@ export class EmployeeTax {
     * Contribution Option which can be \'MakeContributions\' \'OptOut\', \'OnAContributionsHoliday\', \'OnASavingsSuspension\', \'NotCurrentlyAKiwiSaverMember\' for employees without a KiwiSaver membership
     */
     'kiwiSaverContributions'?: EmployeeTax.KiwiSaverContributionsEnum;
+    /**
+    * KiwiSaver eligibility. Required in POST requests for all tax codes except WT and NSW.
+    */
+    'kiwiSaverStatus'?: EmployeeTax.KiwiSaverStatusEnum;
     /**
     * Employee Contribution percentage.
     */
@@ -62,6 +66,10 @@ export class EmployeeTax {
     * The date of the letter from IR.
     */
     'studentLoanAsAt'?: string;
+    /**
+    * Is the employee registered for GST? Required in POST requests when taxCode is WT.
+    */
+    'registeredForGST'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -107,6 +115,11 @@ export class EmployeeTax {
             "type": "EmployeeTax.KiwiSaverContributionsEnum"
         },
         {
+            "name": "kiwiSaverStatus",
+            "baseName": "kiwiSaverStatus",
+            "type": "EmployeeTax.KiwiSaverStatusEnum"
+        },
+        {
             "name": "kiwiSaverEmployeeContributionRatePercentage",
             "baseName": "kiwiSaverEmployeeContributionRatePercentage",
             "type": "number"
@@ -145,6 +158,11 @@ export class EmployeeTax {
             "name": "studentLoanAsAt",
             "baseName": "studentLoanAsAt",
             "type": "string"
+        },
+        {
+            "name": "registeredForGST",
+            "baseName": "registeredForGST",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
@@ -159,5 +177,13 @@ export namespace EmployeeTax {
         OnAContributionsHoliday = <any> 'OnAContributionsHoliday',
         OnASavingsSuspension = <any> 'OnASavingsSuspension',
         NotCurrentlyAKiwiSaverMember = <any> 'NotCurrentlyAKiwiSaverMember'
+    }
+    export enum KiwiSaverStatusEnum {
+        ActiveKiwiSaverMember = <any> 'ActiveKiwiSaverMember',
+        AutomaticallyEnrolledIntoKiwiSaver = <any> 'AutomaticallyEnrolledIntoKiwiSaver',
+        EmployedForLessThan28Days = <any> 'EmployedForLessThan28Days',
+        NotRequiredToBeAutomaticallyEnrolled = <any> 'NotRequiredToBeAutomaticallyEnrolled',
+        OptedIntoKiwiSaver = <any> 'OptedIntoKiwiSaver',
+        NotEligibleForKiwiSaver = <any> 'NotEligibleForKiwiSaver'
     }
 }

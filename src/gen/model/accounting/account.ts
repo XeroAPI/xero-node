@@ -70,6 +70,10 @@ export class Account {
     */
     'updatedDateUTC'?: Date;
     /**
+    * Created date UTC format. Only returned by GET Accounts and GET Accounts/{AccountID}, not on POST or PUT responses
+    */
+    'createdDateUTC'?: Date;
+    /**
     * Boolean – describes whether the account is shown in the watchlist widget on the dashboard
     */
     'addToWatchlist'?: boolean;
@@ -169,6 +173,11 @@ export class Account {
         {
             "name": "updatedDateUTC",
             "baseName": "UpdatedDateUTC",
+            "type": "Date"
+        },
+        {
+            "name": "createdDateUTC",
+            "baseName": "CreatedDateUTC",
             "type": "Date"
         },
         {

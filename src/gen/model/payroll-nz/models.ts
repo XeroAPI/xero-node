@@ -239,6 +239,7 @@ let enumsMap: {[index: string]: any} = {
         "EmployeeStatutoryLeaveSummary.StatusEnum": EmployeeStatutoryLeaveSummary.StatusEnum,
         "EmployeeStatutorySickLeave.EntitlementFailureReasonsEnum": EmployeeStatutorySickLeave.EntitlementFailureReasonsEnum,
         "EmployeeTax.KiwiSaverContributionsEnum": EmployeeTax.KiwiSaverContributionsEnum,
+        "EmployeeTax.KiwiSaverStatusEnum": EmployeeTax.KiwiSaverStatusEnum,
         "LeavePeriod.PeriodStatusEnum": LeavePeriod.PeriodStatusEnum,
         "PayRun.PayRunStatusEnum": PayRun.PayRunStatusEnum,
         "PayRun.PayRunTypeEnum": PayRun.PayRunTypeEnum,
