@@ -2234,7 +2234,7 @@ ul.nav-tabs {
     },
     "hasSpecialStudentLoanRate" : {
       "type" : "boolean",
-      "description" : "Does the employee has a special student loan rate?",
+      "description" : "Does the employee have a special student loan rate?",
       "example" : true
     },
     "specialStudentLoanRatePercentage" : {
@@ -2246,8 +2246,9 @@ ul.nav-tabs {
     },
     "isEligibleForKiwiSaver" : {
       "type" : "boolean",
-      "description" : "The employee eligibility for KiwiSaver.",
-      "example" : true
+      "description" : "The employee eligibility for KiwiSaver. Deprecated, replaced by kiwiSaverStatus. Omit this field from POST requests.",
+      "example" : true,
+      "deprecated" : true
     },
     "esctRatePercentage" : {
       "type" : "number",
@@ -2261,6 +2262,12 @@ ul.nav-tabs {
       "description" : "Contribution Option which can be 'MakeContributions' 'OptOut', 'OnAContributionsHoliday', 'OnASavingsSuspension', 'NotCurrentlyAKiwiSaverMember' for employees without a KiwiSaver membership",
       "example" : "MakeContributions",
       "enum" : [ "MakeContributions", "OptOut", "OnAContributionsHoliday", "OnASavingsSuspension", "NotCurrentlyAKiwiSaverMember" ]
+    },
+    "kiwiSaverStatus" : {
+      "type" : "string",
+      "description" : "KiwiSaver eligibility. Required in POST requests for all tax codes except WT and NSW.",
+      "example" : "ActiveKiwiSaverMember",
+      "enum" : [ "ActiveKiwiSaverMember", "AutomaticallyEnrolledIntoKiwiSaver", "EmployedForLessThan28Days", "NotRequiredToBeAutomaticallyEnrolled", "OptedIntoKiwiSaver", "NotEligibleForKiwiSaver" ]
     },
     "kiwiSaverEmployeeContributionRatePercentage" : {
       "type" : "number",
@@ -2312,6 +2319,11 @@ ul.nav-tabs {
       "description" : "The date of the letter from IR.",
       "format" : "date",
       "x-is-date" : true
+    },
+    "registeredForGST" : {
+      "type" : "boolean",
+      "description" : "Is the employee registered for GST? Required in POST requests when taxCode is WT.",
+      "example" : true
     }
   },
   "description" : ""
@@ -4069,7 +4081,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="PayrollNz"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>20.0.0</li>
+              <li class="nav-header" data-group="PayrollNz"><strong>VSN: </strong>20.1.0</li>
               <li class="nav-header" data-group="PayrollNz"><a href="#api-PayrollNz">Methods</a></li>
               <li data-group="PayrollNz" data-name="approveTimesheet" class="">
                 <a href="#api-PayrollNz-approveTimesheet">approveTimesheet</a>
@@ -14086,7 +14098,7 @@ This allows you to safely retry requests without the risk of duplicate processin
                   <div class="pull-right"></div>
                   <div class="clearfix"></div>
                   <p></p>
-                  <p class="marked"></p>
+                  <p class="marked">Replaces the entire EmployeeTax record. This is not a partial update. Any field omitted from the request is treated as null and overwrites the stored value. To change individual fields, GET the current record, merge your changes, remove deprecated fields such as isEligibleForKiwiSaver, and POST the complete object.</p>
                   <p></p>
                   <br />
                   <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Employees/{EmployeeID}/Tax</span></code></pre>
@@ -14111,9 +14123,9 @@ const employeeTax: EmployeeTax = {
   irdNumber: "111111111",
   hasSpecialStudentLoanRate: true,
   specialStudentLoanRatePercentage: 2,
-  isEligibleForKiwiSaver: true,
   esctRatePercentage: 17.5,
   kiwiSaverContributions: EmployeeTax.KiwiSaverContributionsEnum.MakeContributions,
+  kiwiSaverStatus: EmployeeTax.KiwiSaverStatusEnum.ActiveKiwiSaverMember,
   kiwiSaverEmployeeContributionRatePercentage: 4,
   kiwiSaverEmployerSalarySacrificeContributionRatePercentage: 2,
   taxCode: TaxCode.MSL,
@@ -14257,11 +14269,11 @@ This allows you to safely retry requests without the risk of duplicate processin
         "irdNumber" : "111111111",
         "taxCode" : "M",
         "esctRatePercentage" : 17.5,
-        "isEligibleForKiwiSaver" : true,
         "hasSpecialStudentLoanRate" : false,
         "specialStudentLoanRatePercentage" : null,
         "specialTaxRatePercentage" : null,
         "kiwiSaverContributions" : "MakeContributions",
+        "kiwiSaverStatus" : "ActiveKiwiSaverMember",
         "kiwiSaverOptOutDate" : null,
         "kiwiSaverContributionHolidayEndDate" : null,
         "kiwiSaverEmployeeContributionRatePercentage" : 3,
@@ -14269,7 +14281,8 @@ This allows you to safely retry requests without the risk of duplicate processin
         "kiwiSaverEmployerSalarySacrificeContributionRatePercentage" : 0,
         "hasStudentLoanBalance" : false,
         "studentLoanBalance" : null,
-        "studentLoanAsAt" : null
+        "studentLoanAsAt" : null,
+        "registeredForGST" : null
       }
     }
   },
