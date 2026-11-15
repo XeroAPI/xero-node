@@ -307,6 +307,7 @@ let enumsMap: {[index: string]: any} = {
         "BatchPayment.TypeEnum": BatchPayment.TypeEnum,
         "BatchPayment.StatusEnum": BatchPayment.StatusEnum,
         "BrandingTheme.TypeEnum": BrandingTheme.TypeEnum,
+        "Budget.CreatedInEnum": Budget.CreatedInEnum,
         "Budget.TypeEnum": Budget.TypeEnum,
         "Contact.ContactStatusEnum": Contact.ContactStatusEnum,
         "Contact.TaxNumberTypeEnum": Contact.TaxNumberTypeEnum,

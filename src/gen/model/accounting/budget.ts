@@ -7,6 +7,10 @@ export class Budget {
     */
     'budgetID'?: string;
     /**
+    * The tool used to create the budget
+    */
+    'createdIn'?: Budget.CreatedInEnum;
+    /**
     * Type of Budget. OVERALL or TRACKING
     */
     'type'?: Budget.TypeEnum;
@@ -28,6 +32,11 @@ export class Budget {
             "name": "budgetID",
             "baseName": "BudgetID",
             "type": "string"
+        },
+        {
+            "name": "createdIn",
+            "baseName": "CreatedIn",
+            "type": "Budget.CreatedInEnum"
         },
         {
             "name": "type",
@@ -61,6 +70,10 @@ export class Budget {
 }
 
 export namespace Budget {
+    export enum CreatedInEnum {
+        XEROANALYTICS = <any> 'XERO_ANALYTICS',
+        BUDGETSMANAGER = <any> 'BUDGETS_MANAGER'
+    }
     export enum TypeEnum {
         OVERALL = <any> 'OVERALL',
         TRACKING = <any> 'TRACKING'
