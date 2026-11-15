@@ -8,14 +8,6 @@ export class BudgetBalance {
     * LineItem Quantity
     */
     'amount'?: number;
-    /**
-    * Budgeted amount
-    */
-    'unitAmount'?: number;
-    /**
-    * Any footnotes associated with this balance
-    */
-    'notes'?: string;
 
     static discriminator: string | undefined = undefined;
 
@@ -29,16 +21,6 @@ export class BudgetBalance {
             "name": "amount",
             "baseName": "Amount",
             "type": "number"
-        },
-        {
-            "name": "unitAmount",
-            "baseName": "UnitAmount",
-            "type": "number"
-        },
-        {
-            "name": "notes",
-            "baseName": "Notes",
-            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

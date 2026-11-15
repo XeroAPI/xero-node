@@ -1936,6 +1936,11 @@ ul.nav-tabs {
       "description" : "Xero identifier",
       "format" : "uuid"
     },
+    "CreatedIn" : {
+      "type" : "string",
+      "description" : "The tool used to create the budget",
+      "enum" : [ "XERO_ANALYTICS", "BUDGETS_MANAGER" ]
+    },
     "Type" : {
       "type" : "string",
       "description" : "Type of Budget. OVERALL or TRACKING",
@@ -1985,17 +1990,6 @@ ul.nav-tabs {
       "description" : "LineItem Quantity",
       "format" : "double",
       "x-is-money" : true
-    },
-    "UnitAmount" : {
-      "type" : "number",
-      "description" : "Budgeted amount",
-      "format" : "double",
-      "x-is-money" : true
-    },
-    "Notes" : {
-      "maxLength" : 255,
-      "type" : "string",
-      "description" : "Any footnotes associated with this balance"
     }
   },
   "description" : ""
@@ -6482,6 +6476,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-node/appstore/index.html" value="AppStore">App Store</option>
           <option data-url="https://xeroapi.github.io/xero-node/finance/index.html" value="Finance">Finance</option>
           <option data-url="https://xeroapi.github.io/xero-node/account-data/index.html" value="AccountData">Account Data</option>
+          <option data-url="https://xeroapi.github.io/xero-node/bankfeeds-v2/index.html" value="FeedConnections">Bankfeeds V2</option>
         </select>
       </fieldset>
       <div class='api-set-wrapper'>
@@ -6523,7 +6518,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>20.2.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>20.3.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
