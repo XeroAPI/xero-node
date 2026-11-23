@@ -2,11 +2,6 @@ name: Publish & Release SDK
 on:
   workflow_dispatch:
     inputs:
-      orr_id:
-        description: "ORR id for the change/release"
-        required: true
-        type: string
-        default: ORR-8317
       dry_run:
         description: "Run the publish step in dry-run"
         required: true
@@ -130,8 +125,7 @@ jobs:
                   "deployer": "xero-codegen-bot",
                   "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
                   "environment": "prod",
-                  "sdk_type": "node",
-                  "cab_key": "${{ github.event.inputs.orr_id }}"
+                  "sdk_type": "node"
                   }
                 }'
 
